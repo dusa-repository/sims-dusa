@@ -1,6 +1,6 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div id="divPresentacion" apply="controlador.maestros.CCategoria">
+	<div id="divCategoria" apply="controlador.maestros.CCategoria">
 		<groupbox width="40em" mold="3d" title="Categoria">
 			<grid width="100%">
 				<columns visible="false">
@@ -11,13 +11,16 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Nombre:" />
-						<textbox id="txtNombreCategoria" hflex="1" />
+						<textbox id="txtNombreCategoria" hflex="1" maxlength="500"
+							tooltiptext="Ingrese el Nombre de la Categoria" multiline="true" />
 						<button id="btnBuscarCategoria" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 				</rows>
 			</grid>
+			<separator />
 			<div id="botoneraCategoria" />
+			<div id="catalogoCategoria" />
 		</groupbox>
 	</div>
 </zk>
