@@ -1,0 +1,29 @@
+<zk xmlns:h="native">
+
+
+<window title="${a}" closable="true">
+<zscript>
+	String variable = execution.getParameter("respuesta");
+	String a
+	= "";
+	if (variable == null)
+	a = "Iniciar Sesión";
+	else
+	a =
+	execution.getParameter("respuesta");
+</zscript>
+<hlayout>
+		<h:form id="f" name="f" action="j_spring_security_check"
+			method="POST" xmlns:h="native">
+			<textbox placeholder="Usuario" width="120px" style="margin-top:4px"
+				id="log_usuario" name="j_username" hflex="1" />
+			<textbox placeholder="Contraseña" width="120px" style="margin-top:4px"
+				id="log_clave" hflex="1" type="password" name="j_password" />
+			<button sclass="btn btn-primary" style="margin-left:10px"
+				type="submit" label="Entrar" />
+			<button sclass="btn btn-primary" style="margin-left:10px"
+				type="reset" label="Reset" />
+		</h:form>
+</hlayout>
+</window>
+</zk>

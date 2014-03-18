@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<http use-expressions="true">
+		<intercept-url pattern="/vistas/**" access="isAuthenticated()" />
+		<form-login login-page="/index.zul"
+			login-processing-url="/j_spring_security_check" default-target-url="/vistas/inicio.zul"
+			authentication-failure-url="/index.zul?respuesta=Usuario o Contraseña Incorrectos" />
+		<logout logout-success-url="/index.zul" />
+		<session-management>
+			<concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="true" />
+		</session-management>
+	</http>
+
+	<global-method-security secured-annotations="enabled" />
+
+	<beans:bean id='bCryptPasswordEncoder' class='org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder'/>
+
+	<authentication-manager>
+	<authentication-provider>
+		<password-encoder ref="bCryptPasswordEncoder" />
+		<jdbc-user-service data-source-ref="dataSource"
+
+			group-authorities-by-username-query="
+				select g.id, g.nombre, ga.nombre from grupo g, arbol ga, grupo_usuario gu 
+				where gu.usuario_id = (select id from usuario where nombre = ?) 
+ 				and g.id=gu.grupo_id and ga.id in 
+ 				(select aa.arbol_id from arbol_grupo aa where aa.grupo_id=gu.grupo_id)"
+
+			users-by-username-query="
+		      	select nombre, password, estatus 
+		      	from usuario where nombre=?"
+
+			authorities-by-username-query="
+				select u.nombre, g.nombre 
+				from usuario u, grupo g where u.id in (select us.usuario_id from grupo_usuario us) 
+				and u.nombre = ?" />
+
+	</authentication-provider>
+</authentication-manager>
+
+</beans:beans>
