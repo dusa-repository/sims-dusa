@@ -22,27 +22,37 @@
 
 	<beans:bean id='bCryptPasswordEncoder' class='org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder'/>
 
-	<authentication-manager>
+
+  <authentication-manager>
+    <authentication-provider>
+      <user-service>
+        <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+      </user-service>
+    </authentication-provider>
+  </authentication-manager>
+  
+        
+	<!-- <authentication-manager>
 	<authentication-provider>
 		<password-encoder ref="bCryptPasswordEncoder" />
 		<jdbc-user-service data-source-ref="dataSource"
 
 			group-authorities-by-username-query="
-				select g.id, g.nombre, ga.nombre from grupo g, arbol ga, grupo_usuario gu 
-				where gu.usuario_id = (select id from usuario where nombre = ?) 
- 				and g.id=gu.grupo_id and ga.id in 
- 				(select aa.arbol_id from arbol_grupo aa where aa.grupo_id=gu.grupo_id)"
+				select g.id_grupo, g.nombre, ga.nombre from grupo g, arbol ga, grupo_usuario gu 
+				where gu.id_usuario = (select id_usuario from usuario where login = ?) 
+ 				and g.id_grupo=gu.id_grupo and ga.id_arbol in 
+ 				(select aa.id_arbol from arbol_grupo aa where aa.id_grupo=gu.id_grupo)"
 
 			users-by-username-query="
-		      	select nombre, password, estatus 
-		      	from usuario where nombre=?"
+		      	select login, password, estatus 
+		      	from usuario where login=?"
 
 			authorities-by-username-query="
-				select u.nombre, g.nombre 
-				from usuario u, grupo g where u.id in (select us.usuario_id from grupo_usuario us) 
-				and u.nombre = ?" />
+				select u.login, g.nombre 
+				from usuario u, grupo g where u.id_usuario in (select us.id_usuario from grupo_usuario us) 
+				and u.login = ?" />
 
 	</authentication-provider>
-</authentication-manager>
+</authentication-manager> -->
 
 </beans:beans>
