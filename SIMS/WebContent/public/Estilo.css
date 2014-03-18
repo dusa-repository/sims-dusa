@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+.etiqueta {
+	font-weight: bold;
+	font-family: arial;
+	color: #555555;
+}
+
+.z-groupbox-3d {
+	background: #FFFFFF;
+}
+
+.btnBuscar {
+	font-size: 10px;
+	cursor: pointer;
+	width: 80px;
+	height: 30px;
+}

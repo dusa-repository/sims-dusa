@@ -167,7 +167,7 @@ public class CArbol extends CGenerico {
 		return root;
 	}
 
-	@Listen("onClick = #treeMenu")
+	@Listen("onClick = #arbolMenu")
 	public void selectedNode() {
 		String item = String.valueOf(arbolMenu.getSelectedItem().getValue());
 		if (arbolMenu.getSelectedItem().getLevel() > 0) {
