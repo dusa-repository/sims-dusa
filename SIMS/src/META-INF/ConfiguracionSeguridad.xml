@@ -21,20 +21,11 @@
 	<global-method-security secured-annotations="enabled" />
 
 	<beans:bean id='bCryptPasswordEncoder' class='org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder'/>
-
-
-  <authentication-manager>
-    <authentication-provider>
-      <user-service>
-        <user name="admin" password="admin" authorities="ROLE_ADMIN" />
-      </user-service>
-    </authentication-provider>
-  </authentication-manager>
   
         
-	<!-- <authentication-manager>
+	<authentication-manager>
 	<authentication-provider>
-		<password-encoder ref="bCryptPasswordEncoder" />
+		<!-- <password-encoder ref="bCryptPasswordEncoder" /> -->
 		<jdbc-user-service data-source-ref="dataSource"
 
 			group-authorities-by-username-query="
@@ -44,7 +35,7 @@
  				(select aa.id_arbol from arbol_grupo aa where aa.id_grupo=gu.id_grupo)"
 
 			users-by-username-query="
-		      	select login, password, estatus 
+		      	select login, password, estado_usuario 
 		      	from usuario where login=?"
 
 			authorities-by-username-query="
@@ -53,6 +44,6 @@
 				and u.login = ?" />
 
 	</authentication-provider>
-</authentication-manager> -->
+</authentication-manager>
 
 </beans:beans>
