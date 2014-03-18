@@ -1,13 +1,13 @@
 <?page id="mainPage" title="SIMS" contentType="text/html;charset=utf-8"?>
 <zk>
-	<style src="../public/css/Estilo.css" />
-	<style>
+	<style src="../public/Estilo.css" />
+<!-- 	<style>
 		.principal{ position:relative; min-width:1200px;
 		min-height:600px; }
 		.z-center
 		{background-image:url('/public/imagenes/otras/sigepp.png');}
-	</style>
-	<window sclass="principal" title="" border="0" height="100%"
+	</style> -->
+	<window title="" border="0" height="100%"
 		contentStyle="overflow:auto" apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
 			<north height="6em">
@@ -51,8 +51,8 @@
 			<center border="none">
 				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
 					<center border="none" flex="true" autoscroll="true">
-						<div align="center"
-							style="background-image: url('../public/imagenes/otras/sigepp.png'); background-repeat:no-repeat; width=100%">
+						<div align="center">
+						<!-- 	style="background-image: url('../public/imagenes/otras/sigepp.png'); background-repeat:no-repeat; width=100%"-->
 							<include id="contenido"></include>
 						</div>
 					</center>
@@ -67,7 +67,7 @@
 					</a>
 					<separator></separator>
 					<label style="padding-center:35%;"
-						value="© 2013 Elaborado por Strategy- All Rights Reserved. Terms Privacy">
+						value="© 2013 Elaborado por ------ All Rights Reserved. Terms Privacy">
 					</label>
 				</div>
 			</south>
