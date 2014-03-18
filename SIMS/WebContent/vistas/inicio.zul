@@ -1,15 +1,76 @@
+<?page id="mainPage" title="SIMS" contentType="text/html;charset=utf-8"?>
 <zk>
-<label style="color: red;margin-left:10px"
-								value="Usuario: ${desktop.execution.userPrincipal.name}" />
-							<a href="../j_spring_security_logout"
-								style="color: blue">
-								Cerrar Sesion
-							</a>
-<div id="inicio">
-
-<hbox>
-<label value="Nombre"></label>
-<textbox></textbox>
-</hbox>
-</div>
+	<style src="../public/css/Estilo.css" />
+	<style>
+		.principal{ position:relative; min-width:1200px;
+		min-height:600px; }
+		.z-center
+		{background-image:url('/public/imagenes/otras/sigepp.png');}
+	</style>
+	<window sclass="principal" title="" border="0" height="100%"
+		contentStyle="overflow:auto" apply="arbol.CArbol">
+		<borderlayout height="100%" style="background-color:#fff;">
+			<north height="6em">
+				<hbox hflex="1">
+					<image src="../public/imagenes/otras/bannerSIGEPP.gif"
+						height="6em" width="68em" />
+					<div align="center" width="100%">
+						<hbox>
+							<image id="imagenes" width="80px" height="85px" />
+							<vbox>
+								<separator />
+								<label style="color: red"
+									value="Usuario: ${desktop.execution.userPrincipal.name}" />
+								<a href="../j_spring_security_logout" style="color: blue">
+									<separator />
+									<label value="Cerrar Sesion" />
+								</a>
+								<a style="color: blue">
+									<separator />
+									<label id="lblEditarCuenta"
+										onClick='contenido.src="../vistas/seguridad/VEditarUsuario.zul"'
+										value="Editar Cuenta" />
+								</a>
+							</vbox>
+						</hbox>
+					</div>
+				</hbox>
+			</north>
+			<west title="Menú" size="25%" splittable="false" collapsible="true"
+				autoscroll="true">
+				<tree id="arbolMenu" width="99%">
+					<template name="model">
+						<treeitem context="menupopup">
+							<treerow>
+								<treecell label="${each.label}" />
+							</treerow>
+						</treeitem>
+					</template>
+				</tree>
+			</west>
+			<center border="none">
+				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
+					<center border="none" flex="true" autoscroll="true">
+						<div align="center"
+							style="background-image: url('../public/imagenes/otras/sigepp.png'); background-repeat:no-repeat; width=100%">
+							<include id="contenido"></include>
+						</div>
+					</center>
+				</borderlayout>
+			</center>
+			<south vflex="2" flex="true" border="0" height="3em"
+				collapsible="false">
+				<div align="center" sclass="footer">
+					<a href="../j_spring_security_logout">
+						<label value="INICIO">
+						</label>
+					</a>
+					<separator></separator>
+					<label style="padding-center:35%;"
+						value="© 2013 Elaborado por Strategy- All Rights Reserved. Terms Privacy">
+					</label>
+				</div>
+			</south>
+		</borderlayout>
+	</window>
 </zk>
