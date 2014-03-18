@@ -23,6 +23,9 @@ public class FormaTerapeutica implements Serializable {
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
+	@Column(name="hora_auditoria", length=10)
+	private String horaAuditoria;
+
 	@Column(length=500)
 	private String nombre;
 
@@ -35,6 +38,20 @@ public class FormaTerapeutica implements Serializable {
 
 	public FormaTerapeutica() {
 	}
+	
+	
+
+	public FormaTerapeutica(long idFormaTerapeutica, Timestamp fechaAuditoria,
+			String horaAuditoria, String nombre, String usuarioAuditoria) {
+		super();
+		this.idFormaTerapeutica = idFormaTerapeutica;
+		this.fechaAuditoria = fechaAuditoria;
+		this.horaAuditoria = horaAuditoria;
+		this.nombre = nombre;
+		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+
 
 	public long getIdFormaTerapeutica() {
 		return this.idFormaTerapeutica;
@@ -50,6 +67,14 @@ public class FormaTerapeutica implements Serializable {
 
 	public void setFechaAuditoria(Timestamp fechaAuditoria) {
 		this.fechaAuditoria = fechaAuditoria;
+	}
+
+	public String getHoraAuditoria() {
+		return this.horaAuditoria;
+	}
+
+	public void setHoraAuditoria(String horaAuditoria) {
+		this.horaAuditoria = horaAuditoria;
 	}
 
 	public String getNombre() {

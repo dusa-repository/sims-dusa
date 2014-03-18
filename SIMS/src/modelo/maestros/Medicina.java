@@ -38,6 +38,9 @@ public class Medicina implements Serializable {
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
+	@Column(name="hora_auditoria", length=10)
+	private String horaAuditoria;
+
 	@Column(length=1000)
 	private String indicaciones;
 
@@ -69,6 +72,34 @@ public class Medicina implements Serializable {
 
 	public Medicina() {
 	}
+	
+	
+
+	public Medicina(long idMedicina, String composicion,
+			String contraindicaciones, String denominacionGenerica,
+			String efectos, String embarazo, Timestamp fechaAuditoria,
+			String horaAuditoria, String indicaciones, String nombre,
+			String posologia, String precaucion, String usuarioAuditoria,
+			FormaTerapeutica formaTerapeutica, Laboratorio laboratorio) {
+		super();
+		this.idMedicina = idMedicina;
+		this.composicion = composicion;
+		this.contraindicaciones = contraindicaciones;
+		this.denominacionGenerica = denominacionGenerica;
+		this.efectos = efectos;
+		this.embarazo = embarazo;
+		this.fechaAuditoria = fechaAuditoria;
+		this.horaAuditoria = horaAuditoria;
+		this.indicaciones = indicaciones;
+		this.nombre = nombre;
+		this.posologia = posologia;
+		this.precaucion = precaucion;
+		this.usuarioAuditoria = usuarioAuditoria;
+		this.formaTerapeutica = formaTerapeutica;
+		this.laboratorio = laboratorio;
+	}
+
+
 
 	public long getIdMedicina() {
 		return this.idMedicina;
@@ -124,6 +155,14 @@ public class Medicina implements Serializable {
 
 	public void setFechaAuditoria(Timestamp fechaAuditoria) {
 		this.fechaAuditoria = fechaAuditoria;
+	}
+
+	public String getHoraAuditoria() {
+		return this.horaAuditoria;
+	}
+
+	public void setHoraAuditoria(String horaAuditoria) {
+		this.horaAuditoria = horaAuditoria;
 	}
 
 	public String getIndicaciones() {
