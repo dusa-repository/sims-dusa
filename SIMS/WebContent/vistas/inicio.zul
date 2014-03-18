@@ -1,0 +1,15 @@
+<zk>
+<label style="color: red;margin-left:10px"
+								value="Usuario: ${desktop.execution.userPrincipal.name}" />
+							<a href="../j_spring_security_logout"
+								style="color: blue">
+								Cerrar Sesion
+							</a>
+<div id="inicio">
+
+<hbox>
+<label value="Nombre"></label>
+<textbox></textbox>
+</hbox>
+</div>
+</zk>
