@@ -18,7 +18,6 @@ public abstract class Botonera extends Hbox {
 		this.appendChild(btnEliminar);
 		this.appendChild(btnLimpiar);
 		this.appendChild(btnSalir);
-		this.setStyle("width:100% ; height: 1em");
 		
 		btnGuardar
 				.setSrc("/public/imagenes/botones/guardar.png");
@@ -28,14 +27,21 @@ public abstract class Botonera extends Hbox {
 				.setSrc("/public/imagenes/botones/limpiar.png");
 		btnSalir.setSrc("/public/imagenes/botones/salir.png");
 		
+		btnGuardar.setLabel("Guardar");
+		btnEliminar.setLabel("Eliminar");
+		btnLimpiar.setLabel("Limpiar");
+		btnSalir.setLabel("Salir");
+		
 		btnGuardar.setTooltiptext("Guardar");
 		btnEliminar.setTooltiptext("Eliminar");
 		btnLimpiar.setTooltiptext("Limpiar");
 		btnSalir.setTooltiptext("Salir");
-//		btnGuardar.setStyle("background:#FFFFFF; border:solid #FF7925");
-//		btnEliminar.setStyle("background:#FFFFFF; border:solid #FF7925");
-//		btnLimpiar.setStyle("background:#FFFFFF; border:solid #FF7925");
-//		btnSalir.setStyle("background:#FFFFFF; border:solid #FF7925");
+		
+		btnEliminar.setSclass("btn");
+		btnLimpiar.setSclass("btn");
+		btnSalir.setSclass("btn");
+		btnGuardar.setSclass("btn");
+
 		btnGuardar.addEventListener(Events.ON_CLICK,
 				new EventListener<Event>() {
 					@Override
