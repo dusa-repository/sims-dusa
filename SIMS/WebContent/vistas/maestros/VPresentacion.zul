@@ -1,5 +1,4 @@
 <zk>
-	<style src="/public/Estilo.css" />
 	<div id="divPresentacion" apply="controlador.maestros.CPresentacion">
 		<groupbox width="40em" mold="3d" title="Presentacion">
 			<grid width="100%">
@@ -11,8 +10,8 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Nombre:" />
-						<textbox id="txtDescripcionMotivo" hflex="1" />
-						<button id="btnBuscarMotivo" class="btnBuscar" label="Buscar"
+						<textbox id="txtNombre" hflex="1" />
+						<button id="btnBuscarPresentacion" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 				</rows>
