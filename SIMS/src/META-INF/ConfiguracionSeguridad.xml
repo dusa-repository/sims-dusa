@@ -35,7 +35,7 @@
  				(select aa.id_arbol from arbol_grupo aa where aa.id_grupo=gu.id_grupo)"
 
 			users-by-username-query="
-		      	select login, password, estado_usuario 
+		      	select login, password, estado 
 		      	from usuario where login=?"
 
 			authorities-by-username-query="
