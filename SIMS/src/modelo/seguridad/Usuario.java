@@ -3,6 +3,7 @@ package modelo.seguridad;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 /**
@@ -84,6 +85,10 @@ public class Usuario implements Serializable {
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 
+	//bi-directional many-to-many association to Grupo
+	@ManyToMany(mappedBy="usuarios")
+	private Set<Grupo> grupos;
+
 	public Usuario() {
 	}
 	
@@ -94,7 +99,8 @@ public class Usuario implements Serializable {
 			String licenciaCm, long licenciaInpsasel, String licenciaMsds,
 			String login, String nombre, long numeroCitasDiarias,
 			String password, String sexo, String telefono,
-			long tiempoEstimadoEntreCitas, String usuarioAuditoria) {
+			long tiempoEstimadoEntreCitas, String usuarioAuditoria,
+			Set<Grupo> grupos) {
 		super();
 		this.idUsuario = idUsuario;
 		this.cedula = cedula;
@@ -119,7 +125,9 @@ public class Usuario implements Serializable {
 		this.telefono = telefono;
 		this.tiempoEstimadoEntreCitas = tiempoEstimadoEntreCitas;
 		this.usuarioAuditoria = usuarioAuditoria;
+		this.grupos = grupos;
 	}
+
 
 	public long getIdUsuario() {
 		return this.idUsuario;
@@ -303,6 +311,14 @@ public class Usuario implements Serializable {
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+	public Set<Grupo> getGrupos() {
+		return this.grupos;
+	}
+
+	public void setGrupos(Set<Grupo> grupos) {
+		this.grupos = grupos;
 	}
 
 }
