@@ -2,7 +2,6 @@ package modelo.seguridad;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
 
 
 /**
@@ -27,20 +26,15 @@ public class Arbol implements Serializable {
 	@Column(length=500)
 	private String url;
 
-	//bi-directional many-to-many association to Grupo
-	@ManyToMany
-	@JoinTable(
-		name="arbol_grupo"
-		, joinColumns={
-			@JoinColumn(name="id_arbol", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_grupo", nullable=false)
-			}
-		)
-	private Set<Grupo> grupos;
-
 	public Arbol() {
+	}
+	
+	public Arbol(long idArbol, String nombre, long padre, String url) {
+		super();
+		this.idArbol = idArbol;
+		this.nombre = nombre;
+		this.padre = padre;
+		this.url = url;
 	}
 
 	public long getIdArbol() {
@@ -73,14 +67,6 @@ public class Arbol implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	public Set<Grupo> getGrupos() {
-		return this.grupos;
-	}
-
-	public void setGrupos(Set<Grupo> grupos) {
-		this.grupos = grupos;
 	}
 
 }

@@ -3,7 +3,6 @@ package modelo.seguridad;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Set;
 
 
 /**
@@ -29,6 +28,8 @@ public class Usuario implements Serializable {
 	@Column(length=50)
 	private String email;
 
+	private boolean estado;
+
 	@Column(name="estado_usuario", length=50)
 	private String estadoUsuario;
 
@@ -37,6 +38,9 @@ public class Usuario implements Serializable {
 
 	@Column(length=50)
 	private String ficha;
+
+	@Column(name="hora_auditoria", length=10)
+	private String horaAuditoria;
 
 	@Column(name="id_especialidad")
 	private long idEspecialidad;
@@ -80,11 +84,41 @@ public class Usuario implements Serializable {
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 
-	//bi-directional many-to-many association to Grupo
-	@ManyToMany(mappedBy="usuarios")
-	private Set<Grupo> grupos;
-
 	public Usuario() {
+	}
+	
+	public Usuario(long idUsuario, String cedula, String direccion,
+			String email, boolean estado, String estadoUsuario,
+			Timestamp fechaAuditoria, String ficha, String horaAuditoria,
+			long idEspecialidad, long idUnidad, byte[] imagen,
+			String licenciaCm, long licenciaInpsasel, String licenciaMsds,
+			String login, String nombre, long numeroCitasDiarias,
+			String password, String sexo, String telefono,
+			long tiempoEstimadoEntreCitas, String usuarioAuditoria) {
+		super();
+		this.idUsuario = idUsuario;
+		this.cedula = cedula;
+		this.direccion = direccion;
+		this.email = email;
+		this.estado = estado;
+		this.estadoUsuario = estadoUsuario;
+		this.fechaAuditoria = fechaAuditoria;
+		this.ficha = ficha;
+		this.horaAuditoria = horaAuditoria;
+		this.idEspecialidad = idEspecialidad;
+		this.idUnidad = idUnidad;
+		this.imagen = imagen;
+		this.licenciaCm = licenciaCm;
+		this.licenciaInpsasel = licenciaInpsasel;
+		this.licenciaMsds = licenciaMsds;
+		this.login = login;
+		this.nombre = nombre;
+		this.numeroCitasDiarias = numeroCitasDiarias;
+		this.password = password;
+		this.sexo = sexo;
+		this.telefono = telefono;
+		this.tiempoEstimadoEntreCitas = tiempoEstimadoEntreCitas;
+		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
 	public long getIdUsuario() {
@@ -119,6 +153,14 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
+	public boolean getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 	public String getEstadoUsuario() {
 		return this.estadoUsuario;
 	}
@@ -141,6 +183,14 @@ public class Usuario implements Serializable {
 
 	public void setFicha(String ficha) {
 		this.ficha = ficha;
+	}
+
+	public String getHoraAuditoria() {
+		return this.horaAuditoria;
+	}
+
+	public void setHoraAuditoria(String horaAuditoria) {
+		this.horaAuditoria = horaAuditoria;
 	}
 
 	public long getIdEspecialidad() {
@@ -253,14 +303,6 @@ public class Usuario implements Serializable {
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
-	}
-
-	public Set<Grupo> getGrupos() {
-		return this.grupos;
-	}
-
-	public void setGrupos(Set<Grupo> grupos) {
-		this.grupos = grupos;
 	}
 
 }
