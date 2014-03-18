@@ -1,0 +1,50 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divDiagnostico" apply="controlador.maestros.CDiagnostico">
+		<groupbox width="40em" mold="3d" title="Diagnostico">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Codigo:" />
+						<textbox id="txtCodigoDiagnostico" hflex="1" maxlength="50"
+							tooltiptext="Ingrese el Codigo del Diagnostico" />
+						<button id="btnBuscarDiagnostico" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+
+					</row>
+
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox id="txtNombreDiagnostico" hflex="1" maxlength="500" class="multilinea"
+							tooltiptext="Ingrese el Nombre del Diagnostico" multiline="true" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Grupo:" />
+						<textbox id="txtGrupoDiagnostico" hflex="1" maxlength="50"
+							tooltiptext="Ingrese el Grupo del Diagnostico" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Categoria:" />
+						<combobox id="cmbCategoria" readonly="true" tabindex="1"
+							width="100%" tooltiptext="Seleccione una Categoria" placeholder="Seleccione una Categoria">
+							<template name="model">
+								<comboitem label="${each.nombre}" id="${each.idCategoria}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraDiagnostico" />
+			<div id="catalogoDiagnostico" />
+		</groupbox>
+	</div>
+</zk>
