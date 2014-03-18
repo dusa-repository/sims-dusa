@@ -2,6 +2,8 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -23,6 +25,9 @@ public class Categoria implements Serializable {
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
+	@Column(name="hora_auditoria", length=10)
+	private String horaAuditoria;
+
 	@Column(length=500)
 	private String nombre;
 
@@ -35,6 +40,18 @@ public class Categoria implements Serializable {
 
 	public Categoria() {
 	}
+	
+	public Categoria(long idCategoria, Timestamp fechaAuditoria,
+			String horaAuditoria, String nombre, String usuarioAuditoria) {
+		super();
+		this.idCategoria = idCategoria;
+		this.fechaAuditoria = fechaAuditoria;
+		this.horaAuditoria = horaAuditoria;
+		this.nombre = nombre;
+		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+
 
 	public long getIdCategoria() {
 		return this.idCategoria;
@@ -50,6 +67,14 @@ public class Categoria implements Serializable {
 
 	public void setFechaAuditoria(Timestamp fechaAuditoria) {
 		this.fechaAuditoria = fechaAuditoria;
+	}
+
+	public String getHoraAuditoria() {
+		return this.horaAuditoria;
+	}
+
+	public void setHoraAuditoria(String horaAuditoria) {
+		this.horaAuditoria = horaAuditoria;
 	}
 
 	public String getNombre() {

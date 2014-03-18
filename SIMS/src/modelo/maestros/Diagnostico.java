@@ -2,6 +2,8 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+
 import java.sql.Timestamp;
 
 
@@ -28,6 +30,9 @@ public class Diagnostico implements Serializable {
 	@Column(length=50)
 	private String grupo;
 
+	@Column(name="hora_auditoria", length=10)
+	private String horaAuditoria;
+
 	@Column(length=500)
 	private String nombre;
 
@@ -41,6 +46,22 @@ public class Diagnostico implements Serializable {
 
 	public Diagnostico() {
 	}
+	
+
+	public Diagnostico(long idDiagnostico, String codigo,
+			Timestamp fechaAuditoria, String grupo, String horaAuditoria,
+			String nombre, String usuarioAuditoria, Categoria categoria) {
+		super();
+		this.idDiagnostico = idDiagnostico;
+		this.codigo = codigo;
+		this.fechaAuditoria = fechaAuditoria;
+		this.grupo = grupo;
+		this.horaAuditoria = horaAuditoria;
+		this.nombre = nombre;
+		this.usuarioAuditoria = usuarioAuditoria;
+		this.categoria = categoria;
+	}
+
 
 	public long getIdDiagnostico() {
 		return this.idDiagnostico;
@@ -72,6 +93,14 @@ public class Diagnostico implements Serializable {
 
 	public void setGrupo(String grupo) {
 		this.grupo = grupo;
+	}
+
+	public String getHoraAuditoria() {
+		return this.horaAuditoria;
+	}
+
+	public void setHoraAuditoria(String horaAuditoria) {
+		this.horaAuditoria = horaAuditoria;
 	}
 
 	public String getNombre() {

@@ -25,11 +25,27 @@ public class Especialidad implements Serializable {
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
+	@Column(name="hora_auditoria", length=10)
+	private String horaAuditoria;
+
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 
 	public Especialidad() {
 	}
+	
+	public Especialidad(long idEspecialidad, String descripcion,
+			Timestamp fechaAuditoria, String horaAuditoria,
+			String usuarioAuditoria) {
+		super();
+		this.idEspecialidad = idEspecialidad;
+		this.descripcion = descripcion;
+		this.fechaAuditoria = fechaAuditoria;
+		this.horaAuditoria = horaAuditoria;
+		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+
 
 	public long getIdEspecialidad() {
 		return this.idEspecialidad;
@@ -53,6 +69,14 @@ public class Especialidad implements Serializable {
 
 	public void setFechaAuditoria(Timestamp fechaAuditoria) {
 		this.fechaAuditoria = fechaAuditoria;
+	}
+
+	public String getHoraAuditoria() {
+		return this.horaAuditoria;
+	}
+
+	public void setHoraAuditoria(String horaAuditoria) {
+		this.horaAuditoria = horaAuditoria;
 	}
 
 	public String getUsuarioAuditoria() {
