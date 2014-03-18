@@ -1,6 +1,7 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -59,6 +60,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			+ ":"
 			+ String.valueOf(calendario.get(Calendar.SECOND));
 	public java.util.Date fecha = new Date();
+	public Timestamp fechaHora = new Timestamp(fecha.getTime());
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
