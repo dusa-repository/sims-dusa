@@ -1,0 +1,23 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divPresentacion" apply="controlador.maestros.CCategoria">
+		<groupbox width="40em" mold="3d" title="Categoria">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox id="txtNombreCategoria" hflex="1" />
+						<button id="btnBuscarCategoria" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<div id="botoneraCategoria" />
+		</groupbox>
+	</div>
+</zk>
