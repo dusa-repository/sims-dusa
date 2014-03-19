@@ -1,14 +1,12 @@
-package modelo.maestros;
+package modelo.seguridad;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import modelo.seguridad.Usuario;
+
+import java.sql.Timestamp;
+import java.util.Set;
 
 
 /**
@@ -36,6 +34,10 @@ public class Especialidad implements Serializable {
 
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
+
+	//bi-directional many-to-one association to Usuario
+	@OneToMany(mappedBy="especialidad")
+	private Set<Usuario> usuarios;
 
 	public Especialidad() {
 	}
@@ -91,6 +93,28 @@ public class Especialidad implements Serializable {
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+	public Set<Usuario> getUsuarios() {
+		return this.usuarios;
+	}
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario addUsuario(Usuario usuario) {
+		getUsuarios().add(usuario);
+		usuario.setEspecialidad(this);
+
+		return usuario;
+	}
+
+	public Usuario removeUsuario(Usuario usuario) {
+		getUsuarios().remove(usuario);
+		usuario.setEspecialidad(null);
+
+		return usuario;
 	}
 
 }

@@ -1,17 +1,12 @@
 package modelo.seguridad;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Set;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import modelo.maestros.Unidad;
+import modelo.maestros.Especialidad;
+
+import java.sql.Timestamp;
 
 
 /**
@@ -51,12 +46,6 @@ public class Usuario implements Serializable {
 	@Column(name="hora_auditoria", length=10)
 	private String horaAuditoria;
 
-	@Column(name="id_especialidad")
-	private long idEspecialidad;
-
-	@Column(name="id_unidad")
-	private long idUnidad;
-
 	@Lob
 	private byte[] imagen;
 
@@ -93,22 +82,27 @@ public class Usuario implements Serializable {
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 
-	//bi-directional many-to-many association to Grupo
-	@ManyToMany(mappedBy="usuarios")
-	private Set<Grupo> grupos;
+	//bi-directional many-to-one association to Especialidad
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_especialidad")
+	private Especialidad especialidad;
+
+	//bi-directional many-to-one association to Unidad
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_unidad")
+	private Unidad unidad;
 
 	public Usuario() {
 	}
-	
+
 	public Usuario(long idUsuario, String cedula, String direccion,
 			String email, boolean estado, String estadoUsuario,
 			Timestamp fechaAuditoria, String ficha, String horaAuditoria,
-			long idEspecialidad, long idUnidad, byte[] imagen,
-			String licenciaCm, long licenciaInpsasel, String licenciaMsds,
-			String login, String nombre, long numeroCitasDiarias,
-			String password, String sexo, String telefono,
-			long tiempoEstimadoEntreCitas, String usuarioAuditoria,
-			Set<Grupo> grupos) {
+			byte[] imagen, String licenciaCm, long licenciaInpsasel,
+			String licenciaMsds, String login, String nombre,
+			long numeroCitasDiarias, String password, String sexo,
+			String telefono, long tiempoEstimadoEntreCitas,
+			String usuarioAuditoria, Especialidad especialidad, Unidad unidad) {
 		super();
 		this.idUsuario = idUsuario;
 		this.cedula = cedula;
@@ -119,8 +113,6 @@ public class Usuario implements Serializable {
 		this.fechaAuditoria = fechaAuditoria;
 		this.ficha = ficha;
 		this.horaAuditoria = horaAuditoria;
-		this.idEspecialidad = idEspecialidad;
-		this.idUnidad = idUnidad;
 		this.imagen = imagen;
 		this.licenciaCm = licenciaCm;
 		this.licenciaInpsasel = licenciaInpsasel;
@@ -133,8 +125,10 @@ public class Usuario implements Serializable {
 		this.telefono = telefono;
 		this.tiempoEstimadoEntreCitas = tiempoEstimadoEntreCitas;
 		this.usuarioAuditoria = usuarioAuditoria;
-		this.grupos = grupos;
+		this.especialidad = especialidad;
+		this.unidad = unidad;
 	}
+
 
 
 	public long getIdUsuario() {
@@ -207,22 +201,6 @@ public class Usuario implements Serializable {
 
 	public void setHoraAuditoria(String horaAuditoria) {
 		this.horaAuditoria = horaAuditoria;
-	}
-
-	public long getIdEspecialidad() {
-		return this.idEspecialidad;
-	}
-
-	public void setIdEspecialidad(long idEspecialidad) {
-		this.idEspecialidad = idEspecialidad;
-	}
-
-	public long getIdUnidad() {
-		return this.idUnidad;
-	}
-
-	public void setIdUnidad(long idUnidad) {
-		this.idUnidad = idUnidad;
 	}
 
 	public byte[] getImagen() {
@@ -321,12 +299,20 @@ public class Usuario implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public Set<Grupo> getGrupos() {
-		return this.grupos;
+	public Especialidad getEspecialidad() {
+		return this.especialidad;
 	}
 
-	public void setGrupos(Set<Grupo> grupos) {
-		this.grupos = grupos;
+	public void setEspecialidad(Especialidad especialidad) {
+		this.especialidad = especialidad;
+	}
+
+	public Unidad getUnidad() {
+		return this.unidad;
+	}
+
+	public void setUnidad(Unidad unidad) {
+		this.unidad = unidad;
 	}
 
 }
