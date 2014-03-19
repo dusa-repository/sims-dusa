@@ -3,6 +3,7 @@ package controlador.maestros;
 import java.util.List;
 
 import modelo.maestros.Categoria;
+import modelo.maestros.Diagnostico;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -67,17 +68,26 @@ public class CCategoria extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										Categoria categoria = new Categoria(id,
-												fechaHora, horaAuditoria,
-												txtNombreCategoria.getValue(),
-												nombreUsuarioSesion());
-										servicioCategoria.guardar(categoria);
-										limpiar();
-										Messagebox
-												.show("Categoria Eliminada exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
+										Categoria categoria = servicioCategoria
+												.buscar(id);
+										List<Diagnostico> diagnosticos = servicioDiagnostico
+												.buscarPorCategoria(categoria);
+										if (!diagnosticos.isEmpty()) {
+											Messagebox
+													.show("No se Puede Eliminar el Registro, se Utiliza en otra Entidad",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										} else {
+											servicioCategoria
+													.eliminar(categoria);
+											limpiar();
+											Messagebox
+													.show("Categoria Eliminada exitosamente",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										}
 									}
 								}
 							});

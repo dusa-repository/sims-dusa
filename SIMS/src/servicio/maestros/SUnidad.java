@@ -22,4 +22,12 @@ public class SUnidad {
 	public List<Unidad> buscarTodas() {
 		return interfaceUnidad.findAll();
 	}
+
+	public Unidad buscar(long id) {
+		return interfaceUnidad.findOne(id);
+	}
+
+	public void eliminar(Unidad unidad) {
+		interfaceUnidad.delete(unidad);
+	}
 }

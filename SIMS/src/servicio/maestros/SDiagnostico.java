@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfacedao.maestros.IDiagnosticoDAO;
 
+import modelo.maestros.Categoria;
 import modelo.maestros.Diagnostico;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,17 @@ public class SDiagnostico {
 
 	public void guardar(Diagnostico diagnostico) {
 		diagnosticoDAO.save(diagnostico);
+	}
+
+	public Diagnostico buscar(long id) {
+		return diagnosticoDAO.findOne(id);
+	}
+
+	public void eliminar(Diagnostico diagnostico) {
+		diagnosticoDAO.delete(diagnostico);
+	}
+
+	public List<Diagnostico> buscarPorCategoria(Categoria categoria) {
+		return diagnosticoDAO.findByCategoria(categoria);
 	}
 }

@@ -1,6 +1,10 @@
 package servicio.seguridad;
 
+import java.util.List;
+
 import interfacedao.seguridad.IUsuarioDAO;
+import modelo.maestros.Especialidad;
+import modelo.maestros.Unidad;
 import modelo.seguridad.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +41,14 @@ public class SUsuario {
 
 	public Usuario buscarUsuarioPorNombre(String nombre) {
 		return usuarioDAO.findByLogin(nombre);
+	}
+
+	public List<Usuario> buscarPorUnidad(Unidad unidad) {
+		return usuarioDAO.findByUnidad(unidad);
+	}
+
+	public List<Usuario> buscarPorEspecialidad(Especialidad especialidad) {
+		return usuarioDAO.findByEspecialidad(especialidad);
 	}
 
 //	public List<Usuario> buscarCualquierCampoContiene(String parte) {

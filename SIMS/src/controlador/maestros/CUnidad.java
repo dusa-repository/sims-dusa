@@ -3,6 +3,7 @@ package controlador.maestros;
 import java.util.List;
 
 import modelo.maestros.Unidad;
+import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -38,10 +39,8 @@ public class CUnidad extends CGenerico {
 			@Override
 			public void guardar() {
 				if (validar()) {
-					Unidad unidad = new Unidad(id, fechaHora,
-							horaAuditoria, txtNombreUnidad
-									.getValue(),
-							nombreUsuarioSesion());
+					Unidad unidad = new Unidad(id, fechaHora, horaAuditoria,
+							txtNombreUnidad.getValue(), nombreUsuarioSesion());
 					servicioUnidad.guardar(unidad);
 					limpiar();
 				}
@@ -68,17 +67,26 @@ public class CUnidad extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										Unidad unidad = new Unidad(id, fechaHora,
-												horaAuditoria, txtNombreUnidad
-														.getValue(),
-												nombreUsuarioSesion());
-										servicioUnidad.guardar(unidad);
-										limpiar();
-										Messagebox
-												.show("Categoria Eliminada exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
+										Unidad unidad = servicioUnidad
+												.buscar(id);
+										List<Usuario> usuarios = servicioUsuario
+												.buscarPorUnidad(unidad);
+										if (!usuarios.isEmpty()) {
+											Messagebox
+													.show("No se Puede Eliminar el Registro, se Utiliza en otra Entidad",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										} else {
+											servicioUnidad.eliminar(unidad);
+											limpiar();
+											Messagebox
+													.show("Categoria Eliminada exitosamente",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										}
+
 									}
 								}
 							});
@@ -98,34 +106,33 @@ public class CUnidad extends CGenerico {
 		} else
 			return true;
 	}
-	
+
 	/* Muestra el catalogo de las categorias */
 	@Listen("onClick = #btnBuscarUnidad")
 	public void mostrarCatalogo() {
 		List<Unidad> unidades = servicioUnidad.buscarTodas();
-		catalogo = new Catalogo<Unidad>(catalogoUnidad,
-				"Catalogo de Unidades", unidades, "Nombre") {
+		catalogo = new Catalogo<Unidad>(catalogoUnidad, "Catalogo de Unidades",
+				unidades, "Nombre") {
 
-					@Override
-					protected List<Unidad> buscar(String valor) {
-						// TODO Auto-generated method stub
-						return null;
-					}
+			@Override
+			protected List<Unidad> buscar(String valor) {
+				// TODO Auto-generated method stub
+				return null;
+			}
 
-					@Override
-					protected String[] crearRegistros(Unidad objeto) {
-						// TODO Auto-generated method stub
-						String[] registros = new String[1];
-						registros[0] = objeto.getNombre();
-						return registros;
-					}
+			@Override
+			protected String[] crearRegistros(Unidad objeto) {
+				// TODO Auto-generated method stub
+				String[] registros = new String[1];
+				registros[0] = objeto.getNombre();
+				return registros;
+			}
 
-			
 		};
 		catalogo.setParent(catalogoUnidad);
 		catalogo.doModal();
 	}
-	
+
 	/* Permite la seleccion de un item del catalogo */
 	@Listen("onSeleccion = #catalogoUnidad")
 	public void seleccinar() {

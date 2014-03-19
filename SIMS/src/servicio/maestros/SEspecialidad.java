@@ -22,4 +22,12 @@ public class SEspecialidad {
 	public List<Especialidad> buscarTodas() {
 		return especialidadDAO.findAll();
 	}
+
+	public Especialidad buscar(long id) {
+		return especialidadDAO.findOne(id);
+	}
+
+	public void eliminar(Especialidad especialidad) {
+		especialidadDAO.delete(especialidad);
+	}
 }
