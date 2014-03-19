@@ -1,4 +1,4 @@
-package modelo.seguridad;
+package modelo.maestros;
 
 import java.io.Serializable;
 import javax.persistence.*;

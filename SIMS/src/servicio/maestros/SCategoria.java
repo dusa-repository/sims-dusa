@@ -1,9 +1,8 @@
 package servicio.maestros;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import interfacedao.maestros.ICategoriaDAO;
+
+import java.util.List;
 
 import modelo.maestros.Categoria;
 

@@ -1,9 +1,11 @@
 package servicio.maestros;
 
-import java.util.List;
-
 import interfacedao.maestros.IMedicinaDAO;
 
+import java.util.List;
+
+import modelo.maestros.FormaTerapeutica;
+import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +32,19 @@ public class SMedicina {
 
 	public Medicina buscarPorNombre(String value) {
 		return medicinaDAO.findByNombre(value);
+	}
+
+	public List<Medicina> buscarPorLaboratorio(Laboratorio laboratorio) {
+		return medicinaDAO.findByLaboratorio(laboratorio);
+	}
+
+	public List<Medicina> buscarPorFormaTerapeutica(
+			FormaTerapeutica formaTerapeutica) {
+		return medicinaDAO.findByFormaTerapeutica(formaTerapeutica);
+	}
+
+	public void eliminar(Medicina medicina) {
+		medicinaDAO.delete(medicina);
+		
 	}
 }

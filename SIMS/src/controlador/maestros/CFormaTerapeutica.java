@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import modelo.maestros.FormaTerapeutica;
+import modelo.maestros.Laboratorio;
+import modelo.maestros.Medicina;
 
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -31,18 +34,20 @@ public class CFormaTerapeutica extends CGenerico {
 	private Button btnBuscarFormaTerapeutica;
 
 	Catalogo<FormaTerapeutica> catalogo;
+	long id=0;
 	
 	@Override
 	public void inicializar() throws IOException {
 		Botonera botonera = new Botonera() {
 			@Override
 			public void guardar() {
-
+	
 				if (validar()) {
 					String nombre = txtNombre.getValue();
-				
-					FormaTerapeutica formaTerapeutica = new FormaTerapeutica(0, fechaHora,
+					
+					FormaTerapeutica formaTerapeutica = new FormaTerapeutica(id, fechaHora,
 							horaAuditoria, nombre, nombreUsuarioSesion());
+
 					servicioFormaTerapeutica.guardar(formaTerapeutica);
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
@@ -55,6 +60,7 @@ public class CFormaTerapeutica extends CGenerico {
 			@Override
 			public void limpiar() {
 				txtNombre.setText("");
+				id=0;
 			}
 
 			@Override
@@ -64,6 +70,39 @@ public class CFormaTerapeutica extends CGenerico {
 
 			@Override
 			public void eliminar() {
+				
+				if (id != 0 && txtNombre.getText().compareTo("") != 0) {
+					Messagebox.show("¿Esta Seguro de Eliminar la Forma Terapeutica?",
+							"Alerta", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+										FormaTerapeutica formaTerapeutica = servicioFormaTerapeutica.buscar(id);
+										List<Medicina> medicinas = servicioMedicina.buscarPorFormaTerapeutica(formaTerapeutica);
+										if (!medicinas.isEmpty()) {
+											Messagebox
+													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										} else {
+											servicioFormaTerapeutica
+													.eliminar(formaTerapeutica);
+											limpiar();
+											Messagebox
+													.show("Registro Eliminado Exitosamente",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										}
+									}
+								}
+							});
+				} else
+					Messagebox.show("No ha Seleccionado Ningun Registro",
+							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 
 			}
 		};
@@ -107,5 +146,28 @@ public class CFormaTerapeutica extends CGenerico {
 			return false;
 		} else
 			return true;
+	}
+	
+	/* Busca si existe una forma terapeutica con el mismo nombre escrito */
+	@Listen("onChange = #txtNombre")
+	public void buscarPorNombre() {
+		FormaTerapeutica formaTerapeutica = servicioFormaTerapeutica.buscarPorNombre(txtNombre.getValue());
+		if(formaTerapeutica!=null)
+		llenarCampos(formaTerapeutica);
+	}
+
+	/* Selecciona una forma terapeutica del catalogo y llena los campos con la informacion */
+	@Listen("onSeleccion = #catalogoFormaTerapeutica")
+	public void seleccion() {
+		FormaTerapeutica formaTerapeutica = catalogo
+				.objetoSeleccionadoDelCatalogo();
+		llenarCampos(formaTerapeutica);
+		catalogo.setParent(null);
+	}
+	
+	/* LLena los campos del formulario dada una forma terapeutica */
+	public void llenarCampos(FormaTerapeutica formaTerapeutica) {
+		txtNombre.setValue(formaTerapeutica.getNombre());
+		id = formaTerapeutica.getIdFormaTerapeutica();
 	}
 }

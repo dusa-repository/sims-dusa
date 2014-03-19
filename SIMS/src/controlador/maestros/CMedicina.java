@@ -6,7 +6,9 @@ import java.util.List;
 import modelo.maestros.FormaTerapeutica;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
+import modelo.maestros.Presentacion;
 
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -55,7 +57,7 @@ public class CMedicina extends CGenerico {
 	private Textbox txtEmbarazo;
 
 	Catalogo<Medicina> catalogo;
-	long id =0;
+	long id = 0;
 
 	@Override
 	public void inicializar() throws IOException {
@@ -96,7 +98,6 @@ public class CMedicina extends CGenerico {
 							nombre, posologia, precauciones,
 							nombreUsuarioSesion(), formaTerapeutica,
 							laboratorio);
-
 					servicioMedicina.guardar(medicina);
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
@@ -122,7 +123,7 @@ public class CMedicina extends CGenerico {
 				txtPrecauciones.setText("");
 				txtContraindicaciones.setText("");
 				txtEmbarazo.setText("");
-				id=0;
+				id = 0;
 			}
 
 			@Override
@@ -132,7 +133,40 @@ public class CMedicina extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				
+
+				if (id != 0) {
+					Messagebox.show("¿Esta Seguro de Eliminar la Medicina?",
+							"Alerta", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+										Medicina medicina = servicioMedicina
+												.buscar(id);
+										List<Presentacion> presentaciones = servicioPresentacion
+												.buscarPorMedicina(medicina);
+										if (!presentaciones.isEmpty()) {
+											Messagebox
+													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										} else {
+											servicioMedicina.eliminar(medicina);
+											limpiar();
+											Messagebox
+													.show("Registro Eliminado Exitosamente",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										}
+									}
+								}
+							});
+				} else
+					Messagebox.show("No ha Seleccionado Ningun Registro",
+							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 
 			}
 		};
@@ -204,17 +238,21 @@ public class CMedicina extends CGenerico {
 		} else
 			return true;
 	}
-	
+
 	/* Busca si existe una medicina con el mismo nombre escrito */
 	@Listen("onChange = #txtNombre")
 	public void buscarPorNombre() {
-		Medicina medicina = servicioMedicina.buscarPorNombre(txtNombre.getValue());
-		if(medicina!=null)
-		llenarCampos(medicina);
-	
+		Medicina medicina = servicioMedicina.buscarPorNombre(txtNombre
+				.getValue());
+		if (medicina != null)
+			llenarCampos(medicina);
+
 	}
 
-	/* Selecciona una medicina del catalogo y llena los campos con la informacion */
+	/*
+	 * Selecciona una medicina del catalogo y llena los campos con la
+	 * informacion
+	 */
 	@Listen("onSeleccion = #catalogoMedicina")
 	public void seleccion() {
 
@@ -223,11 +261,12 @@ public class CMedicina extends CGenerico {
 		llenarCampos(medicinaSeleccionada);
 		catalogo.setParent(null);
 	}
-	
+
 	/* LLena los campos del formulario dada una medicina */
 	public void llenarCampos(Medicina medicina) {
 		cmbLaboratorio.setValue(medicina.getLaboratorio().getNombre());
-		cmbFormaTerapeutica.setValue(medicina.getFormaTerapeutica().getNombre());
+		cmbFormaTerapeutica
+				.setValue(medicina.getFormaTerapeutica().getNombre());
 		txtDenominacionGenerica.setValue(medicina.getDenominacionGenerica());
 		txtComposicion.setValue(medicina.getComposicion());
 		txtPosologia.setValue(medicina.getPosologia());

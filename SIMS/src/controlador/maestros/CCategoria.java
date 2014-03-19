@@ -62,7 +62,7 @@ public class CCategoria extends CGenerico {
 			public void eliminar() {
 				if (validar()) {
 					Messagebox.show("¿Desea Eliminar la Categoria?",
-							"Dialogo de confirmacion", Messagebox.OK
+							"Alerta", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
 								public void onEvent(Event evt)

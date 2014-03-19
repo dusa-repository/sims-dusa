@@ -1,9 +1,10 @@
 package servicio.maestros;
 
-import java.util.List;
-
 import interfacedao.maestros.IPresentacionDAO;
 
+import java.util.List;
+
+import modelo.maestros.Medicina;
 import modelo.maestros.Presentacion;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,18 @@ public class SPresentacion {
 	public Presentacion buscarPorNombre(String value) {
 	
 		return presentacionDAO.findByNombre(value);
+	}
+
+	public List<Presentacion> buscarPorMedicina(Medicina medicina) {
+		return presentacionDAO.findByMedicina(medicina);
+	}
+
+	public Presentacion buscar(long id) {
+		return presentacionDAO.findOne(id);
+	}
+
+	public void eliminar(Presentacion presentacion) {
+		presentacionDAO.delete(presentacion);
+		
 	}
 }

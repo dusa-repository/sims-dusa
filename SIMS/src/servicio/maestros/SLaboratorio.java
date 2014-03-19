@@ -1,8 +1,8 @@
 package servicio.maestros;
 
-import java.util.List;
-
 import interfacedao.maestros.ILaboratorioDAO;
+
+import java.util.List;
 
 import modelo.maestros.Laboratorio;
 
@@ -25,5 +25,13 @@ public class SLaboratorio {
 
 	public Laboratorio buscar(long idLaboratorio) {
 		return laboratorioDAO.findOne(idLaboratorio);
+	}
+
+	public Laboratorio buscarPorNombre(String value) {
+		return laboratorioDAO.findByNombre(value);
+	}
+
+	public void eliminar(Laboratorio laboratorio) {
+		laboratorioDAO.delete(laboratorio);
 	}
 }

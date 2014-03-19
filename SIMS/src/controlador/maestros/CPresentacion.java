@@ -6,6 +6,7 @@ import java.util.List;
 import modelo.maestros.Medicina;
 import modelo.maestros.Presentacion;
 
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -45,11 +46,13 @@ public class CPresentacion extends CGenerico {
 		Botonera botonera = new Botonera() {
 			@Override
 			public void guardar() {
-
+		
 				if (validar()) {
+				
 					String nombre = txtNombre.getValue();
 					long idMedicina = Long.valueOf(cmbMedicina.getSelectedItem().getId());
 					Medicina medicina = servicioMedicina.buscar(idMedicina);
+			
 					Presentacion presentacion = new Presentacion(id, fechaHora,
 							horaAuditoria, nombre, nombreUsuarioSesion(),
 							medicina);
@@ -78,7 +81,30 @@ public class CPresentacion extends CGenerico {
 
 			@Override
 			public void eliminar() {
-
+				
+				if (id != 0) {
+					Messagebox.show("¿Esta Seguro de Eliminar la Presentacion?",
+							"Alerta", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+										
+											Presentacion presentacion = servicioPresentacion.buscar(id);
+											servicioPresentacion.eliminar(presentacion);
+											limpiar();
+											Messagebox
+													.show("Registro Eliminado Exitosamente",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+									}
+								}
+							});
+				} else
+					Messagebox.show("No ha Seleccionado Ningun Registro",
+							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 			}
 		};
 		/* Dibuja el componente botonera en el div botoneraPresentacionr */
