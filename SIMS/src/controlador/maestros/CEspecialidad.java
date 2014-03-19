@@ -3,6 +3,7 @@ package controlador.maestros;
 import java.util.List;
 
 import modelo.maestros.Especialidad;
+import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -67,20 +68,26 @@ public class CEspecialidad extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										String nombre = txtDescripcionEspecialidad
-												.getValue();
-										Especialidad especialidad = new Especialidad(
-												id, nombre, fechaHora,
-												horaAuditoria,
-												nombreUsuarioSesion());
-										servicioEspecialidad
-												.guardar(especialidad);
-										limpiar();
-										Messagebox
-												.show("Especialidad Eliminada exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
+										Especialidad especialidad = servicioEspecialidad
+												.buscar(id);
+										List<Usuario> usuarios = servicioUsuario
+												.buscarPorEspecialidad(especialidad);
+										if (!usuarios.isEmpty()) {
+											Messagebox
+													.show("No se Puede Eliminar el Registro, se Utiliza en otra Entidad",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										} else {
+											servicioEspecialidad
+													.eliminar(especialidad);
+											limpiar();
+											Messagebox
+													.show("Especialidad Eliminada exitosamente",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+										}
 									}
 								}
 							});

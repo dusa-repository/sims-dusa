@@ -27,4 +27,8 @@ public class SCategoria {
 	public Categoria buscar(long id) {
 		return categoriaDAO.findOne(id);
 	}
+	
+	public void eliminar(Categoria categoria){
+		categoriaDAO.delete(categoria);
+	}
 }

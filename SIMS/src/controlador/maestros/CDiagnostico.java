@@ -52,6 +52,7 @@ public class CDiagnostico extends CGenerico {
 			@Override
 			public void salir() {
 				// TODO Auto-generated method stub
+				System.out.println(cmbCategoria.getSelectedItem().getIndex());
 				cerrarVentana(divDiagnostico);
 			}
 
@@ -62,6 +63,7 @@ public class CDiagnostico extends CGenerico {
 				txtCodigoDiagnostico.setValue("");
 				txtGrupoDiagnostico.setValue("");
 				cmbCategoria.setValue("");
+				cmbCategoria.setPlaceholder("Seleccione una Categoria");
 				id = 0;
 			}
 
@@ -80,6 +82,11 @@ public class CDiagnostico extends CGenerico {
 							categoria);
 					servicioDiagnostico.guardar(diagnostico);
 					limpiar();
+					Messagebox
+					.show("Diagnostico Registrado exitosamente",
+							"Informacion",
+							Messagebox.OK,
+							Messagebox.INFORMATION);
 				}
 			}
 
@@ -94,16 +101,8 @@ public class CDiagnostico extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										String nombre, codigo, grupo;
-										nombre = txtNombreDiagnostico.getValue();
-										codigo = txtCodigoDiagnostico.getValue();
-										grupo = txtGrupoDiagnostico.getValue();
-										Categoria categoria = servicioCategoria.buscar(Long
-												.parseLong(cmbCategoria.getSelectedItem().getId()));
-										Diagnostico diagnostico = new Diagnostico(id, codigo,
-												fechaHora, grupo, horaAuditoria, nombre, horaAuditoria,
-												categoria);
-										servicioDiagnostico.guardar(diagnostico);
+										Diagnostico diagnostico = servicioDiagnostico.buscar(id);
+										servicioDiagnostico.eliminar(diagnostico);
 										limpiar();
 										Messagebox
 												.show("Diagnostico Eliminada exitosamente",
