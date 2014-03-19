@@ -1,22 +1,26 @@
 <?page id="mainPage" title="SIMS" contentType="text/html;charset=utf-8"?>
 <zk>
 	<style src="../public/Estilo.css" />
-<!-- 	<style>
-		.principal{ position:relative; min-width:1200px;
-		min-height:600px; }
-		.z-center
-		{background-image:url('/public/imagenes/otras/sigepp.png');}
-	</style> -->
-	<window title="" border="0" height="100%"
-		contentStyle="overflow:auto" apply="arbol.CArbol">
+
+	<window title="" border="0" height="100%" contentStyle="overflow:auto"
+		apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
-			<north height="6em">
+
+			<north height="5em">
 				<hbox hflex="1">
-					<image src="../public/imagenes/otras/bannerSIGEPP.gif"
-						height="6em" width="68em" />
+					<image src="../public/imagenes/generales/banner.png" height="5em"
+						width="30em" />
+					<div align="rigth" width="38em">
+						<separator />
+						<separator />
+						<separator />
+						<hbox>
+							<label style="font-size:24px;color:blue" value="Sistema Integral Medico y de Seguridad" />
+						</hbox>
+					</div>
 					<div align="center" width="100%">
 						<hbox>
-							<image id="imagenes" width="80px" height="85px" />
+							<image id="imagenes" width="60px" height="55px" />
 							<vbox>
 								<separator />
 								<label style="color: red"
@@ -52,7 +56,6 @@
 				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
 					<center border="none" flex="true" autoscroll="true">
 						<div align="center">
-						<!-- 	style="background-image: url('../public/imagenes/otras/sigepp.png'); background-repeat:no-repeat; width=100%"-->
 							<include id="contenido"></include>
 						</div>
 					</center>

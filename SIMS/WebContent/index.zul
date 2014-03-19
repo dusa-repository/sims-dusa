@@ -1,29 +1,97 @@
-<zk xmlns:h="native">
+<zk>
+	<style src="public/Estilo.css" />
+	<style>
+		.z-groupbox-hr { background: #EFF5F5 }ç
+	</style>
+	<zscript>
+		String variable = execution.getParameter("respuesta");
+		String
+		a
+		= "";
+		if (variable == null)
+		a = "INICIAR SESION";
+		else
+		a =
+		execution.getParameter("respuesta");
+	</zscript>
+	<borderlayout height="100%"
+		style="background-image: url('public/imagenes/generales/fondo.png'); background-repeat:no-repeat;height=100%; width=100%">
 
+		<north border="none">
+			<div align="center">
+			</div>
+		</north>
+		<west border="none">
+			<borderlayout style="overflow-y:scroll;">
+				<center border="none">
+					<div align="center">
+					</div>
+				</center>
+			</borderlayout>
+		</west>
+		<east width="60%" border="none">
+			<vlayout>
+				<div height="240px" align="rigth">
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<label style="font-size:24px;color:blue;position:center"
+						value="Sistema Integral Medico y de Seguridad" />
+				</div>
+				<div align="center">
+					<groupbox width="25em" height="12em">
+						<caption label="${a}"
+							style="color:blue; font-size: 14px; font-weight:bold" />
+						<separator></separator>
+						<separator></separator>
+						<hlayout width="100%">
+							<h:form id="inicioSecion" action="j_spring_security_check"
+								method="POST" xmlns:h="native">
+								<hlayout width="100%">
 
-<window title="${a}" closable="true">
-<zscript>
-	String variable = execution.getParameter("respuesta");
-	String a
-	= "";
-	if (variable == null)
-	a = "Iniciar Sesión";
-	else
-	a =
-	execution.getParameter("respuesta");
-</zscript>
-<hlayout>
-		<h:form id="f" name="f" action="j_spring_security_check"
-			method="POST" xmlns:h="native">
-			<textbox placeholder="Usuario" width="120px" style="margin-top:4px"
-				id="log_usuario" name="j_username" hflex="1" />
-			<textbox placeholder="Contraseña" width="120px" style="margin-top:4px"
-				id="log_clave" hflex="1" type="password" name="j_password" />
-			<button sclass="btn btn-primary" style="margin-left:10px"
-				type="submit" label="Entrar" />
-			<button sclass="btn btn-primary" style="margin-left:10px"
-				type="reset" label="Reset" />
-		</h:form>
-</hlayout>
-</window>
+									<label class="etiqueta" height="20px" style="font-size:12px"
+										value="Nombre de Usuario :" />
+									<textbox placeholder="Usuario" height="18px" id="log_usuario"
+										name="j_username" hflex="1" />
+								</hlayout>
+								<separator></separator>
+								<hlayout width="100%">
+									<label class="etiqueta" height="20px" style="font-size:12px"
+										value="Contraseña :" />
+									<textbox placeholder="Contraseña" height="18px" id="log_clave"
+										hflex="1" type="password" name="j_password" />
+								</hlayout>
+								<separator></separator>
+								<separator></separator>
+								<separator></separator>
+								<hlayout width="100%">
+									<button type="submit" class="btn" label="Entrar"
+										image="/public/imagenes/botones/entrar.png" />
+								</hlayout>
+								<separator></separator>
+								<separator></separator>
+							</h:form>
+						</hlayout>
+						<hlayout width="100%">
+							<a href="">
+								<label id="lblOlvidoClave" sclass="pointer" value="¿Olvido su Contraseña?"
+									style="color:blue;margin-left:10px;font-weight:bold" />
+							</a>
+						</hlayout>
+					</groupbox>
+				</div>
+			</vlayout>
+		</east>
+		<south vflex="2" flex="true" border="0" height="3em"
+			collapsible="false">
+			<div align="center">
+				<separator></separator>
+				<label style="padding-center:35%;"
+					value="© 2013 Elaborado por ------- All Rights Reserved. Terms Privacy">
+				</label>
+			</div>
+		</south>
+	</borderlayout>
 </zk>
