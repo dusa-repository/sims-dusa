@@ -1,0 +1,24 @@
+<zk>
+	<div id="divLaboratorio" apply="controlador.maestros.CLaboratorio">
+		<groupbox width="40em" mold="3d" title="Laboratorio">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox class="multilinea" multiline="true" id="txtNombre" hflex="1" tooltiptext="Ingrese el Nombre del Laboratorio" />
+						<button id="btnBuscarLaboratorio" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator/>
+			<div id="botoneraLaboratorio" />
+			<div id="catalogoLaboratorio" />
+		</groupbox>
+	</div>
+</zk>
