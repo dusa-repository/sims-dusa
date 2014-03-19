@@ -1,8 +1,8 @@
 package servicio.maestros;
 
-import java.util.List;
-
 import interfacedao.maestros.IFormaTerapeuticaDAO;
+
+import java.util.List;
 
 import modelo.maestros.FormaTerapeutica;
 
@@ -27,5 +27,14 @@ public class SFormaTerapeutica {
 	public FormaTerapeutica buscar(long idFormaTerapeutica) {
 
 		return formaTerapeuticaDAO.findOne(idFormaTerapeutica);
+	}
+
+	public FormaTerapeutica buscarPorNombre(String value) {
+		return formaTerapeuticaDAO.findByNombre(value);
+	}
+
+	public void eliminar(FormaTerapeutica formaTerapeutica) {
+		formaTerapeuticaDAO.delete(formaTerapeutica);
+		
 	}
 }
