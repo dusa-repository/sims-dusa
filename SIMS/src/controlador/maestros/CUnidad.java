@@ -44,6 +44,9 @@ public class CUnidad extends CGenerico {
 							txtNombreUnidad.getValue(), nombreUsuarioSesion());
 					servicioUnidad.guardar(unidad);
 					limpiar();
+					Messagebox.show("Registro Guardado Exitosamente",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
 				}
 			}
 
@@ -60,10 +63,10 @@ public class CUnidad extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				if (id != 0) {
-					Messagebox.show("¿Desea Eliminar la Unidad?",
-							"Dialogo de confirmacion", Messagebox.OK
-									| Messagebox.CANCEL, Messagebox.QUESTION,
+				if (id != 0 && txtNombreUnidad.getText().compareTo("") == 0) {
+					Messagebox.show("¿Esta Seguro de Eliminar la Unidad?",
+							"Alerta", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
 								public void onEvent(Event evt)
 										throws InterruptedException {
@@ -74,7 +77,7 @@ public class CUnidad extends CGenerico {
 												.buscarPorUnidad(unidad);
 										if (!usuarios.isEmpty()) {
 											Messagebox
-													.show("No se Puede Eliminar el Registro, se Utiliza en otra Entidad",
+													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
 															"Informacion",
 															Messagebox.OK,
 															Messagebox.INFORMATION);
@@ -82,7 +85,7 @@ public class CUnidad extends CGenerico {
 											servicioUnidad.eliminar(unidad);
 											limpiar();
 											Messagebox
-													.show("Registro Eliminado exitosamente",
+													.show("Registro Eliminado Exitosamente",
 															"Informacion",
 															Messagebox.OK,
 															Messagebox.INFORMATION);
@@ -104,8 +107,8 @@ public class CUnidad extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreUnidad.getText().compareTo("") == 0) {
-			Messagebox.show("Debe completar todos los campos", "Error",
-					Messagebox.OK, Messagebox.ERROR);
+			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
 		} else
 			return true;

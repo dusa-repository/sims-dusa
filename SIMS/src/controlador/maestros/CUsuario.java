@@ -128,6 +128,8 @@ public class CUsuario extends CGenerico {
 			@Override
 			public void limpiar() {
 				// TODO Auto-generated method stub
+				ltbGruposAgregados.getItems().clear();
+				ltbGruposDisponibles.getItems().clear();
 				cmbEspecialidad.setValue("");
 				cmbUnidad.setValue("");
 				txtApellidoUsuario.setValue("");
@@ -172,8 +174,8 @@ public class CUsuario extends CGenerico {
 					Especialidad especialidad = servicioEspecialidad
 							.buscar(Long.parseLong(cmbEspecialidad
 									.getSelectedItem().getContext()));
-					Unidad unidad = servicioUnidad.buscar(Long
-							.parseLong(cmbUnidad.getSelectedItem()
+					Unidad unidad = servicioUnidad
+							.buscar(Long.parseLong(cmbUnidad.getSelectedItem()
 									.getContext()));
 					String cedula = txtCedulaUsuario.getValue();
 					String correo = txtCorreoUsuario.getValue();
@@ -215,7 +217,7 @@ public class CUsuario extends CGenerico {
 							gruposUsuario);
 					servicioUsuario.guardar(usuario);
 					limpiar();
-					Messagebox.show("Usuario Registrado exitosamente",
+					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
 				}
@@ -334,7 +336,7 @@ public class CUsuario extends CGenerico {
 	 */
 	@Listen("onClick = #pasar1")
 	public void moverDerecha() {
-//		gruposDisponibles = servicioGrupo.buscarTodos();
+		// gruposDisponibles = servicioGrupo.buscarTodos();
 		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 		List<Listitem> listItem = ltbGruposDisponibles.getItems();
 		if (listItem.size() != 0) {
@@ -365,7 +367,7 @@ public class CUsuario extends CGenerico {
 	 */
 	@Listen("onClick = #pasar2")
 	public void moverIzquierda() {
-//		gruposDisponibles = servicioGrupo.buscarTodos();
+		// gruposDisponibles = servicioGrupo.buscarTodos();
 		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 		List<Listitem> listItem2 = ltbGruposAgregados.getItems();
 		if (listItem2.size() != 0) {

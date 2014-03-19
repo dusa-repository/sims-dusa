@@ -83,7 +83,7 @@ public class CDiagnostico extends CGenerico {
 							horaAuditoria, categoria);
 					servicioDiagnostico.guardar(diagnostico);
 					limpiar();
-					Messagebox.show("Diagnostico Registrado exitosamente",
+					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
 				}
@@ -93,9 +93,9 @@ public class CDiagnostico extends CGenerico {
 			public void eliminar() {
 				// TODO Auto-generated method stub
 				if (id != 0) {
-					Messagebox.show("¿Desea Eliminar el Diagnostico?",
-							"Dialogo de confirmacion", Messagebox.OK
-									| Messagebox.CANCEL, Messagebox.QUESTION,
+					Messagebox.show("¿Esta Seguro de Eliminar el Diagnostico?",
+							"Alerta", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
 								public void onEvent(Event evt)
 										throws InterruptedException {
@@ -106,7 +106,7 @@ public class CDiagnostico extends CGenerico {
 												.eliminar(diagnostico);
 										limpiar();
 										Messagebox
-												.show("Diagnostico Eliminada exitosamente",
+												.show("Registro Eliminado Exitosamente",
 														"Informacion",
 														Messagebox.OK,
 														Messagebox.INFORMATION);
@@ -128,8 +128,8 @@ public class CDiagnostico extends CGenerico {
 				|| txtCodigoDiagnostico.getText().compareTo("") == 0
 				|| txtGrupoDiagnostico.getText().compareTo("") == 0
 				|| cmbCategoria.getText().compareTo("") == 0) {
-			Messagebox.show("Debe completar todos los campos", "Error",
-					Messagebox.OK, Messagebox.ERROR);
+			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
 		} else
 			return true;
