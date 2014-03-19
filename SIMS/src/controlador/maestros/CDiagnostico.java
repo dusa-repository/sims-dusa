@@ -53,7 +53,6 @@ public class CDiagnostico extends CGenerico {
 			@Override
 			public void salir() {
 				// TODO Auto-generated method stub
-				System.out.println(cmbCategoria.getSelectedItem().getIndex());
 				cerrarVentana(divDiagnostico);
 			}
 
@@ -78,7 +77,7 @@ public class CDiagnostico extends CGenerico {
 					grupo = txtGrupoDiagnostico.getValue();
 					Categoria categoria = servicioCategoria.buscar(Long
 							.parseLong(cmbCategoria.getSelectedItem()
-									.getDescription()));
+									.getContext()));
 					Diagnostico diagnostico = new Diagnostico(id, codigo,
 							fechaHora, grupo, horaAuditoria, nombre,
 							horaAuditoria, categoria);

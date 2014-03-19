@@ -37,22 +37,23 @@ public class CPresentacion extends CGenerico {
 	private Combobox cmbMedicina;
 
 	Catalogo<Presentacion> catalogo;
-	long id =0;
+	long id = 0;
 
 	@Override
 	public void inicializar() throws IOException {
-		
+
 		comboMedicina();
 		Botonera botonera = new Botonera() {
 			@Override
 			public void guardar() {
-		
+
 				if (validar()) {
-				
+
 					String nombre = txtNombre.getValue();
-					long idMedicina = Long.valueOf(cmbMedicina.getSelectedItem().getId());
+					long idMedicina = Long.valueOf(cmbMedicina
+							.getSelectedItem().getContext());
 					Medicina medicina = servicioMedicina.buscar(idMedicina);
-			
+
 					Presentacion presentacion = new Presentacion(id, fechaHora,
 							horaAuditoria, nombre, nombreUsuarioSesion(),
 							medicina);
@@ -60,18 +61,18 @@ public class CPresentacion extends CGenerico {
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
-					
+
 					limpiar();
 				}
 
 			}
 
 			@Override
-			public void limpiar() {			
+			public void limpiar() {
 				txtNombre.setText("");
 				cmbMedicina.setValue("");
 				cmbMedicina.setPlaceholder("Seleccione una Medicina");
-				id=0;
+				id = 0;
 			}
 
 			@Override
@@ -81,24 +82,27 @@ public class CPresentacion extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				
+
 				if (id != 0) {
-					Messagebox.show("¿Esta Seguro de Eliminar la Presentacion?",
+					Messagebox.show(
+							"¿Esta Seguro de Eliminar la Presentacion?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										
-											Presentacion presentacion = servicioPresentacion.buscar(id);
-											servicioPresentacion.eliminar(presentacion);
-											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+
+										Presentacion presentacion = servicioPresentacion
+												.buscar(id);
+										servicioPresentacion
+												.eliminar(presentacion);
+										limpiar();
+										Messagebox
+												.show("Registro Eliminado Exitosamente",
+														"Informacion",
+														Messagebox.OK,
+														Messagebox.INFORMATION);
 									}
 								}
 							});
@@ -116,7 +120,8 @@ public class CPresentacion extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		List<Presentacion> presentaciones = servicioPresentacion.buscarTodas();
 		catalogo = new Catalogo<Presentacion>(catalogoPresentacion,
-				"Catalogo de Presentaciones", presentaciones, "Nombre", "Medicina") {
+				"Catalogo de Presentaciones", presentaciones, "Nombre",
+				"Medicina") {
 
 			@Override
 			protected String[] crearRegistros(Presentacion presentacion) {
@@ -143,35 +148,38 @@ public class CPresentacion extends CGenerico {
 		cmbMedicina.setModel(new ListModelList<Medicina>(medicina));
 	}
 
-	/*Validaciones de pantalla para poder realizar el guardar*/
+	/* Validaciones de pantalla para poder realizar el guardar */
 	public boolean validar() {
 
-		if (cmbMedicina.getText().compareTo("")== 0
-				|| txtNombre.getText().compareTo("")==0) {
+		if (cmbMedicina.getText().compareTo("") == 0
+				|| txtNombre.getText().compareTo("") == 0) {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
 		} else
 			return true;
 	}
-	
+
 	/* Busca si existe una presentacion con el mismo nombre escrito */
 	@Listen("onChange = #txtNombre")
 	public void buscarPorNombre() {
-		Presentacion presentacion = servicioPresentacion.buscarPorNombre(txtNombre.getValue());
-		if(presentacion!=null)
-		llenarCampos(presentacion);
+		Presentacion presentacion = servicioPresentacion
+				.buscarPorNombre(txtNombre.getValue());
+		if (presentacion != null)
+			llenarCampos(presentacion);
 	}
 
-	/* Selecciona una presentacion del catalogo y llena los campos con la informacion */
+	/*
+	 * Selecciona una presentacion del catalogo y llena los campos con la
+	 * informacion
+	 */
 	@Listen("onSeleccion = #catalogoPresentacion")
 	public void seleccion() {
-		Presentacion presentacion = catalogo
-				.objetoSeleccionadoDelCatalogo();
+		Presentacion presentacion = catalogo.objetoSeleccionadoDelCatalogo();
 		llenarCampos(presentacion);
 		catalogo.setParent(null);
 	}
-	
+
 	/* LLena los campos del formulario dada una presentacion */
 	public void llenarCampos(Presentacion presentacion) {
 		txtNombre.setValue(presentacion.getNombre());
