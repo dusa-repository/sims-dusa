@@ -7,6 +7,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.InputEvent;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
@@ -20,26 +21,8 @@ import org.zkoss.zul.Separator;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-/**
- * 
- * Autor: Michell Lobo Revisado por: Michell Lobo Version: 1.0 Fecha Creacion:
- * 08/12/2013
- * 
- * ---------------------------- HISTORIAL DE MODIFICACIONES Autor: Michell Lobo
- * Revisado por: Michell Lobo Version: 1.1 Fecha Creacion: 02/02/2014 Especifica
- * por los campos que busca y se le queto lo transparente
- * 
- * 
- */
-
-// Por hacer:
-// - Que busque solo los activos
-
 public abstract class Catalogo<Clase> extends Window {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	Listbox lsbCatalogo;
 
@@ -47,7 +30,7 @@ public abstract class Catalogo<Clase> extends Window {
 			List<Clase> lista, String... campos) {
 		super(titulo, "2", true);
 		this.setId("cmpCatalogo");
-		this.setStyle("border:solid  #FF7925; background-header:#FF7925; background: #f4f2f2");
+		this.setStyle("background-header:#FF7925; background: #f4f2f2");
 		setWidth("60%");
 		crearLista(lista, campos);
 		lsbCatalogo.addEventListener(Events.ON_SELECT,
@@ -66,12 +49,10 @@ public abstract class Catalogo<Clase> extends Window {
 		final Textbox txtBuscar = new Textbox();
 		final Separator separador1 = new Separator();
 		final Separator separador2 = new Separator();
-		txtBuscar.setWidth("32em");
+		txtBuscar.setWidth("20em");
 		txtBuscar.setPlaceholder("Introduzca el criterio de busqueda");
-		final Label lblBuscarPor = new Label();
-		lblBuscar.setZclass("etiqueta");
-		lblBuscarPor.setZclass("etiqueta");
-		lblBuscar.setValue("Buscar por los campos: ");
+		final Combobox cmbBuscarPor = new Combobox();
+		cmbBuscarPor.setPlaceholder("Seleccione el Campo");
 		txtBuscar.addEventListener(Events.ON_CHANGING,
 				new EventListener<InputEvent>() {
 					@Override
@@ -104,21 +85,14 @@ public abstract class Catalogo<Clase> extends Window {
 				}
 			}
 		});
-		String lista2 = new String();
-		lista2 = lista2.concat("(");
-		if (campos.length != 1) {
-			for (int i = 0; i < (campos.length - 2); i++) {
-				lista2 = lista2.concat(campos[i] + ", ");
-			}
-			lista2 = lista2.concat(campos[campos.length - 2] + " y "
-					+ campos[campos.length - 1] + ")");
-		} else
-			lista2 = lista2.concat(campos[campos.length - 1]);
+		
+
 		this.appendChild(separador1);
-		this.appendChild(hbxBusqueda);
+		this.appendChild(hbxBusqueda);		
+		lblBuscar.setValue("Buscar Por :  ");
 		hbxBusqueda.appendChild(lblBuscar);
-		lblBuscarPor.setValue(lista2);
-		hbxBusqueda.appendChild(lblBuscarPor);
+		cmbBuscarPor.setModel(new ListModelList<String>(campos));
+		hbxBusqueda.appendChild(cmbBuscarPor);
 		hbxBusqueda.appendChild(txtBuscar);
 		this.appendChild(separador2);
 		this.appendChild(lsbCatalogo);

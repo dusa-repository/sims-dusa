@@ -10,9 +10,20 @@
 	background: #FFFFFF;
 }
 
+.z-groupbox-3d-hm {
+	background: #DDECFD;
+}
+
 .btn {
 	font-size: 10px;
 	cursor: pointer;
 	width: 85px;
 	height: 30px;
+}
+
+.multilinea {
+	height: 35px;
+}
+.multilineaTab {
+	height: 250px;
 }

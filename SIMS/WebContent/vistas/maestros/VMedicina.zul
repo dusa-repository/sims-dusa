@@ -1,0 +1,96 @@
+<zk>
+	<div id="divMedicina" apply="controlador.maestros.CMedicina">
+		<groupbox width="57em" mold="3d" title="Medicina">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="20%" />
+					<column label="" width="60%" />
+					<column label="" width="20%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox id="txtNombre" hflex="1"
+							tooltiptext="Ingrese el Nombre de la Medicina" />
+						<button id="btnBuscarMedicina" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Laboratorio:" />
+						<combobox tooltiptext="Seleccione un Laboratorio"
+							placeholder="Seleccione un Laboratorio" id="cmbLaboratorio"
+							readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" description="${each.idLaboratorio}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Forma Terapeutica:" />
+						<combobox tooltiptext="Seleccione una Forma Terapeutica"
+							placeholder="Seleccione una Forma Terapeutica" id="cmbFormaTerapeutica"
+							readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" description="${each.idFormaTerapeutica}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<tabbox id="taxMedicina" orient="horizontal">
+				<tabs id="tbsMedicina" width="10em">
+					<tab label="Denominacion Generica" id="tabDenominacionGenerica" />
+					<tab label="Composicion" id="tabComposicion" />
+					<tab label="Posologia" id="tabPosologia" />
+					<tab label="Indicaciones" id="tabIndicaciones" />
+					<tab label="Efectos" id="tabEfectos" />
+					<tab label="Precauciones" id="tabPrecauciones" />
+					<tab label="Contraindicaciones" id="tabContraindicaciones" />
+					<tab label="Embarazo" id="tabEmbarazo" />
+				</tabs>
+				<tabpanels>
+
+					<tabpanel>
+						<textbox class="multilineaTab" multiline="true"
+							id="txtDenominacionGenerica" hflex="1"
+							tooltiptext="Ingrese la Denominacion Generica" />
+					</tabpanel>
+					<tabpanel>
+						<textbox class="multilineaTab" multiline="true" id="txtComposicion"
+							hflex="1" tooltiptext="Ingrese la Composicion" />
+					</tabpanel>
+					<tabpanel>
+						<textbox class="multilineaTab" multiline="true" id="txtPosologia"
+							hflex="1" tooltiptext="Ingrese la Posologia" />
+					</tabpanel>
+					<tabpanel>
+						<textbox class="multilineaTab" multiline="true" id="txtIndicaciones"
+							hflex="1" tooltiptext="Ingrese las Indicaciones" />
+					</tabpanel>
+					<tabpanel>
+						<textbox class="multilineaTab" multiline="true" id="txtEfectos"
+							hflex="1" tooltiptext="Ingrese los Efectos" />
+					</tabpanel>
+					<tabpanel>
+						<textbox class="multilineaTab" multiline="true" id="txtPrecauciones"
+							hflex="1" tooltiptext="Ingrese las Precauciones" />
+					</tabpanel>
+					<tabpanel>
+						<textbox class="multilineaTab" multiline="true"
+							id="txtContraindicaciones" hflex="1" tooltiptext="Ingrese las Contraindicaciones" />
+					</tabpanel>
+					<tabpanel>
+						<textbox class="multilineaTab" multiline="true" id="txtEmbarazo"
+							hflex="1" tooltiptext="Ingrese las Indicaciones en caso de Embarazo" />
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<separator />
+			<div id="botoneraMedicina" />
+			<div id="catalogoMedicina" />
+		</groupbox>
+	</div>
+</zk>
