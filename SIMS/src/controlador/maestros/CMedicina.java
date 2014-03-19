@@ -83,12 +83,12 @@ public class CMedicina extends CGenerico {
 					String embarazo = txtEmbarazo.getValue();
 
 					long idLaboratorio = Long.valueOf(cmbLaboratorio
-							.getSelectedItem().getDescription());
+							.getSelectedItem().getContext());
 					Laboratorio laboratorio = servicioLaboratorio
 							.buscar(idLaboratorio);
 
 					long idFormaTerapeutica = Long.valueOf(cmbFormaTerapeutica
-							.getSelectedItem().getDescription());
+							.getSelectedItem().getContext());
 					FormaTerapeutica formaTerapeutica = servicioFormaTerapeutica
 							.buscar(idFormaTerapeutica);
 

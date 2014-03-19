@@ -21,7 +21,7 @@
 							placeholder="Seleccione un Laboratorio" id="cmbLaboratorio"
 							readonly="true" width="100%">
 							<template name="model">
-								<comboitem label="${each.nombre}" description="${each.idLaboratorio}" />
+								<comboitem label="${each.nombre}" context="${each.idLaboratorio}" />
 							</template>
 						</combobox>
 						<hbox />
@@ -32,7 +32,7 @@
 							placeholder="Seleccione una Forma Terapeutica" id="cmbFormaTerapeutica"
 							readonly="true" width="100%">
 							<template name="model">
-								<comboitem label="${each.nombre}" description="${each.idFormaTerapeutica}" />
+								<comboitem label="${each.nombre}" context="${each.idFormaTerapeutica}"/>
 							</template>
 						</combobox>
 						<hbox />

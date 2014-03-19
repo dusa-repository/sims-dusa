@@ -85,7 +85,7 @@
 										<combobox id="cmbUnidad" readonly="true" tabindex="1"
 											width="100%" tooltiptext="Seleccione una Unidad" placeholder="Seleccione una Unidad">
 											<template name="model">
-												<comboitem label="${each.nombre}" description="${each.idUnidad}" />
+												<comboitem label="${each.nombre}" context="${each.idUnidad}" />
 											</template>
 										</combobox>
 										<hbox />
@@ -110,7 +110,7 @@
 											placeholder="Seleccione una Especialidad">
 											<template name="model">
 												<comboitem label="${each.descripcion}"
-													description="${each.idEspecialidad}" />
+													context="${each.idEspecialidad}" />
 											</template>
 										</combobox>
 										<label class="etiqueta" value="Licencia CM:" />

@@ -171,10 +171,10 @@ public class CUsuario extends CGenerico {
 					System.out.println(gruposUsuario.size());
 					Especialidad especialidad = servicioEspecialidad
 							.buscar(Long.parseLong(cmbEspecialidad
-									.getSelectedItem().getDescription()));
+									.getSelectedItem().getContext()));
 					Unidad unidad = servicioUnidad.buscar(Long
 							.parseLong(cmbUnidad.getSelectedItem()
-									.getDescription()));
+									.getContext()));
 					String cedula = txtCedulaUsuario.getValue();
 					String correo = txtCorreoUsuario.getValue();
 					String direccion = txtDireccionUsuario.getValue();
