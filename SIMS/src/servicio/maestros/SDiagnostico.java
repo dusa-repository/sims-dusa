@@ -35,4 +35,8 @@ public class SDiagnostico {
 	public List<Diagnostico> buscarPorCategoria(Categoria categoria) {
 		return diagnosticoDAO.findByCategoria(categoria);
 	}
+
+	public Diagnostico buscarPorCodigo(String value) {
+		return diagnosticoDAO.findByCodigo(value);
+	}
 }

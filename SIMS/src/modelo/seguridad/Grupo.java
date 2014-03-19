@@ -38,29 +38,19 @@ public class Grupo implements Serializable {
 	private Set<Arbol> arbols;
 
 	//bi-directional many-to-many association to Usuario
-	@ManyToMany
-	@JoinTable(
-		name="grupo_usuario"
-		, joinColumns={
-			@JoinColumn(name="id_grupo", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_usuario", nullable=false)
-			}
-		)
+	@ManyToMany(mappedBy="grupos")
 	private Set<Usuario> usuarios;
 
 	public Grupo() {
 	}
 
 	public Grupo(long idGrupo, boolean estado, String nombre,
-			Set<Arbol> arbols, Set<Usuario> usuarios) {
+			Set<Arbol> arbols) {
 		super();
 		this.idGrupo = idGrupo;
 		this.estado = estado;
 		this.nombre = nombre;
 		this.arbols = arbols;
-		this.usuarios = usuarios;
 	}
 
 

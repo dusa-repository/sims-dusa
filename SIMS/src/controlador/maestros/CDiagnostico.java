@@ -5,6 +5,7 @@ import java.util.List;
 
 import modelo.maestros.Categoria;
 import modelo.maestros.Diagnostico;
+import modelo.maestros.FormaTerapeutica;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -76,16 +77,15 @@ public class CDiagnostico extends CGenerico {
 					codigo = txtCodigoDiagnostico.getValue();
 					grupo = txtGrupoDiagnostico.getValue();
 					Categoria categoria = servicioCategoria.buscar(Long
-							.parseLong(cmbCategoria.getSelectedItem().getId()));
+							.parseLong(cmbCategoria.getSelectedItem()
+									.getDescription()));
 					Diagnostico diagnostico = new Diagnostico(id, codigo,
-							fechaHora, grupo, horaAuditoria, nombre, horaAuditoria,
-							categoria);
+							fechaHora, grupo, horaAuditoria, nombre,
+							horaAuditoria, categoria);
 					servicioDiagnostico.guardar(diagnostico);
 					limpiar();
-					Messagebox
-					.show("Diagnostico Registrado exitosamente",
-							"Informacion",
-							Messagebox.OK,
+					Messagebox.show("Diagnostico Registrado exitosamente",
+							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
 				}
 			}
@@ -93,7 +93,7 @@ public class CDiagnostico extends CGenerico {
 			@Override
 			public void eliminar() {
 				// TODO Auto-generated method stub
-				if (validar()) {
+				if (id != 0) {
 					Messagebox.show("¿Desea Eliminar el Diagnostico?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
@@ -101,8 +101,10 @@ public class CDiagnostico extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										Diagnostico diagnostico = servicioDiagnostico.buscar(id);
-										servicioDiagnostico.eliminar(diagnostico);
+										Diagnostico diagnostico = servicioDiagnostico
+												.buscar(id);
+										servicioDiagnostico
+												.eliminar(diagnostico);
 										limpiar();
 										Messagebox
 												.show("Diagnostico Eliminada exitosamente",
@@ -112,6 +114,9 @@ public class CDiagnostico extends CGenerico {
 									}
 								}
 							});
+				} else {
+					Messagebox.show("No ha Seleccionado Ningun Registro",
+							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 				}
 			}
 		};
@@ -165,12 +170,26 @@ public class CDiagnostico extends CGenerico {
 	@Listen("onSeleccion = #catalogoDiagnostico")
 	public void seleccinar() {
 		Diagnostico diagnostico = catalogo.objetoSeleccionadoDelCatalogo();
+		llenarCampos(diagnostico);
+		catalogo.setParent(null);
+	}
+
+	/* Busca si existe un diagnostico con el mismo codigo escrito */
+	@Listen("onChange = #txtCodigoDiagnostico")
+	public void buscarPorNombre() {
+		Diagnostico diagnostico = servicioDiagnostico
+				.buscarPorCodigo(txtCodigoDiagnostico.getValue());
+		if (diagnostico != null)
+			llenarCampos(diagnostico);
+	}
+
+	/* LLena los campos del formulario dado un diagnostico */
+	private void llenarCampos(Diagnostico diagnostico) {
 		txtCodigoDiagnostico.setValue(diagnostico.getCodigo());
 		txtGrupoDiagnostico.setValue(diagnostico.getGrupo());
 		txtNombreDiagnostico.setValue(diagnostico.getNombre());
 		cmbCategoria.setValue(diagnostico.getCategoria().getNombre());
 		id = diagnostico.getIdDiagnostico();
-		catalogo.setParent(null);
 	}
 
 }

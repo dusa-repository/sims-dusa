@@ -2,6 +2,7 @@ package controlador.maestros;
 
 import java.util.List;
 
+import modelo.maestros.Categoria;
 import modelo.maestros.Unidad;
 import modelo.seguridad.Usuario;
 
@@ -59,7 +60,7 @@ public class CUnidad extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				if (validar()) {
+				if (id != 0) {
 					Messagebox.show("¿Desea Eliminar la Unidad?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
@@ -81,7 +82,7 @@ public class CUnidad extends CGenerico {
 											servicioUnidad.eliminar(unidad);
 											limpiar();
 											Messagebox
-													.show("Categoria Eliminada exitosamente",
+													.show("Registro Eliminado exitosamente",
 															"Informacion",
 															Messagebox.OK,
 															Messagebox.INFORMATION);
@@ -90,6 +91,9 @@ public class CUnidad extends CGenerico {
 									}
 								}
 							});
+				} else {
+					Messagebox.show("No ha Seleccionado Ningun Registro",
+							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 				}
 			}
 
@@ -137,8 +141,22 @@ public class CUnidad extends CGenerico {
 	@Listen("onSeleccion = #catalogoUnidad")
 	public void seleccinar() {
 		Unidad unidad = catalogo.objetoSeleccionadoDelCatalogo();
+		llenarCampos(unidad);
+		catalogo.setParent(null);
+	}
+
+	/* Busca si existe una unidad con el mismo nombre escrito */
+	@Listen("onChange = #txtNombreUnidad")
+	public void buscarPorNombre() {
+		Unidad unidad = servicioUnidad.buscarPorNombre(txtNombreUnidad
+				.getValue());
+		if (unidad != null)
+			llenarCampos(unidad);
+	}
+
+	/* LLena los campos del formulario dada una unidad */
+	private void llenarCampos(Unidad unidad) {
 		txtNombreUnidad.setValue(unidad.getNombre());
 		id = unidad.getIdUnidad();
-		catalogo.setParent(null);
 	}
 }

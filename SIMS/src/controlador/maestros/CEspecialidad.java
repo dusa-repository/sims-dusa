@@ -3,6 +3,7 @@ package controlador.maestros;
 import java.util.List;
 
 import modelo.maestros.Especialidad;
+import modelo.maestros.Unidad;
 import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.event.Event;
@@ -60,7 +61,7 @@ public class CEspecialidad extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				if (validar()) {
+				if (id != 0) {
 					Messagebox.show("¿Desea Eliminar la Especialidad?",
 							"Dialogo de confirmacion", Messagebox.OK
 									| Messagebox.CANCEL, Messagebox.QUESTION,
@@ -91,6 +92,9 @@ public class CEspecialidad extends CGenerico {
 									}
 								}
 							});
+				} else {
+					Messagebox.show("No ha Seleccionado Ningun Registro",
+							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 				}
 			}
 
@@ -138,8 +142,22 @@ public class CEspecialidad extends CGenerico {
 	@Listen("onSeleccion = #catalogoEspecialidad")
 	public void seleccinar() {
 		Especialidad especialidad = catalogo.objetoSeleccionadoDelCatalogo();
+		llenarCampos(especialidad);
+		catalogo.setParent(null);
+	}
+
+	/* Busca si existe una especialidad con el mismo nombre escrito */
+	@Listen("onChange = #txtDescripcionEspecialidad")
+	public void buscarPorNombre() {
+		Especialidad especialidad = servicioEspecialidad
+				.buscarPorDescripcion(txtDescripcionEspecialidad.getValue());
+		if (especialidad != null)
+			llenarCampos(especialidad);
+	}
+
+	/* LLena los campos del formulario dada una especialidad */
+	private void llenarCampos(Especialidad especialidad) {
 		txtDescripcionEspecialidad.setValue(especialidad.getDescripcion());
 		id = especialidad.getIdEspecialidad();
-		catalogo.setParent(null);
 	}
 }

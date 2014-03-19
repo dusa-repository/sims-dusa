@@ -30,4 +30,8 @@ public class SUnidad {
 	public void eliminar(Unidad unidad) {
 		interfaceUnidad.delete(unidad);
 	}
+
+	public Unidad buscarPorNombre(String value) {
+		return interfaceUnidad.findByNombre(value);
+	}
 }

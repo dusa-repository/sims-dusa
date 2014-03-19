@@ -1,5 +1,7 @@
 package arbol;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -7,12 +9,15 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -36,7 +41,7 @@ public class CArbol extends CGenerico {
 	@Wire
 	private Image imagenes;
 	TreeModel _model;
-	URL url = getClass().getResource("/configuracion/imgBien.jpg");
+	URL url = getClass().getResource("/controlador/maestros/usuario.png");
 	List<String> listmenu1 = new ArrayList<String>();
 
 	@Override
@@ -46,17 +51,17 @@ public class CArbol extends CGenerico {
 
 		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
 
-//		if (u.getImagen().toString() == "[]") {
-//			imagenes.setSrc("/configuracion/imgBien.jpg");
-//		} else {
-//			try {
-//				BufferedImage imag;
-//				imag = ImageIO.read(new ByteArrayInputStream(u.getImagen()));
-//				imagenes.setContent(imag);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
+		if (u.getImagen()==null) {
+			imagenes.setContent(new AImage(url));
+		} else {
+			try {
+				BufferedImage imag;
+				imag = ImageIO.read(new ByteArrayInputStream(u.getImagen()));
+				imagenes.setContent(imag);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		arbolMenu.setModel(getModel());
 
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
