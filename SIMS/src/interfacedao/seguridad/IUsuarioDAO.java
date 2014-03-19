@@ -23,4 +23,6 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 	List<Usuario> findByUnidad(Unidad unidad);
 
 	List<Usuario> findByEspecialidad(Especialidad especialidad);
+
+	Usuario findByCedula(String value);
 }

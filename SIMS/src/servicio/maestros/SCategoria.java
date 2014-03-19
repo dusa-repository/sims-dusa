@@ -30,4 +30,8 @@ public class SCategoria {
 	public void eliminar(Categoria categoria){
 		categoriaDAO.delete(categoria);
 	}
+
+	public Categoria buscarPorNombre(String value) {
+		return categoriaDAO.findByNombre(value);
+	}
 }

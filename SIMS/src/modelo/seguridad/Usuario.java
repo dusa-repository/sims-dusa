@@ -7,6 +7,7 @@ import modelo.maestros.Unidad;
 import modelo.maestros.Especialidad;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 /**
@@ -92,6 +93,18 @@ public class Usuario implements Serializable {
 	@JoinColumn(name="id_unidad")
 	private Unidad unidad;
 
+	@ManyToMany
+	@JoinTable(
+		name="grupo_usuario"
+		, joinColumns={
+			@JoinColumn(name="id_usuario", nullable=false)
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_grupo", nullable=false)
+			}
+		)
+	private Set<Grupo> grupos;
+	
 	public Usuario() {
 	}
 
@@ -102,7 +115,7 @@ public class Usuario implements Serializable {
 			String licenciaMsds, String login, String nombre,
 			long numeroCitasDiarias, String password, String sexo,
 			String telefono, long tiempoEstimadoEntreCitas,
-			String usuarioAuditoria, Especialidad especialidad, Unidad unidad) {
+			String usuarioAuditoria, Especialidad especialidad, Unidad unidad, Set<Grupo> grupos) {
 		super();
 		this.idUsuario = idUsuario;
 		this.cedula = cedula;
@@ -127,6 +140,7 @@ public class Usuario implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.especialidad = especialidad;
 		this.unidad = unidad;
+		this.grupos = grupos;
 	}
 
 
@@ -313,6 +327,14 @@ public class Usuario implements Serializable {
 
 	public void setUnidad(Unidad unidad) {
 		this.unidad = unidad;
+	}
+
+	public Set<Grupo> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(Set<Grupo> grupos) {
+		this.grupos = grupos;
 	}
 
 }

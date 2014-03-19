@@ -60,10 +60,10 @@ public class CCategoria extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				if (validar()) {
-					Messagebox.show("¿Desea Eliminar la Categoria?",
-							"Alerta", Messagebox.OK
-									| Messagebox.CANCEL, Messagebox.QUESTION,
+				if (id != 0) {
+					Messagebox.show("¿Desea Eliminar la Categoria?", "Alerta",
+							Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
 								public void onEvent(Event evt)
 										throws InterruptedException {
@@ -83,7 +83,7 @@ public class CCategoria extends CGenerico {
 													.eliminar(categoria);
 											limpiar();
 											Messagebox
-													.show("Categoria Eliminada exitosamente",
+													.show("Registro Eliminado exitosamente",
 															"Informacion",
 															Messagebox.OK,
 															Messagebox.INFORMATION);
@@ -91,6 +91,9 @@ public class CCategoria extends CGenerico {
 									}
 								}
 							});
+				} else {
+					Messagebox.show("No ha Seleccionado Ningun Registro",
+							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 				}
 			}
 
@@ -137,8 +140,22 @@ public class CCategoria extends CGenerico {
 	@Listen("onSeleccion = #catalogoCategoria")
 	public void seleccinar() {
 		Categoria categoria = catalogo.objetoSeleccionadoDelCatalogo();
+		llenarCampos(categoria);
+		catalogo.setParent(null);
+	}
+
+	/* Busca si existe una categoria con el mismo codigo escrito */
+	@Listen("onChange = #txtNombreCategoria")
+	public void buscarPorNombre() {
+		Categoria categoria = servicioCategoria
+				.buscarPorNombre(txtNombreCategoria.getValue());
+		if (categoria != null)
+			llenarCampos(categoria);
+	}
+
+	/* LLena los campos del formulario dada una categoria */
+	private void llenarCampos(Categoria categoria) {
 		txtNombreCategoria.setValue(categoria.getNombre());
 		id = categoria.getIdCategoria();
-		catalogo.setParent(null);
 	}
 }

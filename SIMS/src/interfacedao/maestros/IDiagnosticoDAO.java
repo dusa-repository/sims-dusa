@@ -11,4 +11,6 @@ public interface IDiagnosticoDAO extends JpaRepository<Diagnostico, Long> {
 
 	List<Diagnostico> findByCategoria(Categoria categoria);
 
+	Diagnostico findByCodigo(String value);
+
 }

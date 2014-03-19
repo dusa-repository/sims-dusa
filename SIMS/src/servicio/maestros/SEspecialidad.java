@@ -30,4 +30,8 @@ public class SEspecialidad {
 	public void eliminar(Especialidad especialidad) {
 		especialidadDAO.delete(especialidad);
 	}
+
+	public Especialidad buscarPorDescripcion(String value) {
+		return especialidadDAO.findByDescripcion(value);
+	}
 }
