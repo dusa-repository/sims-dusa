@@ -44,21 +44,17 @@ public class CDiagnostico extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		// TODO Auto-generated method stub
-		List<Categoria> categorias = servicioCategoria.buscarTodas();
-		cmbCategoria.setModel(new ListModelList<Categoria>(categorias));
 
+		comboCategoria();
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				// TODO Auto-generated method stub
 				cerrarVentana(divDiagnostico);
 			}
 
 			@Override
 			public void limpiar() {
-				// TODO Auto-generated method stub
 				txtNombreDiagnostico.setValue("");
 				txtCodigoDiagnostico.setValue("");
 				txtGrupoDiagnostico.setValue("");
@@ -69,7 +65,6 @@ public class CDiagnostico extends CGenerico {
 
 			@Override
 			public void guardar() {
-				// TODO Auto-generated method stub
 				if (validar()) {
 					String nombre, codigo, grupo;
 					nombre = txtNombreDiagnostico.getValue();
@@ -91,7 +86,6 @@ public class CDiagnostico extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				// TODO Auto-generated method stub
 				if (id != 0) {
 					Messagebox.show("¿Esta Seguro de Eliminar el Diagnostico?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
@@ -145,13 +139,11 @@ public class CDiagnostico extends CGenerico {
 
 			@Override
 			protected List<Diagnostico> buscar(String valor) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 
 			@Override
 			protected String[] crearRegistros(Diagnostico objeto) {
-				// TODO Auto-generated method stub
 				String[] registros = new String[4];
 				registros[0] = objeto.getCodigo();
 				registros[1] = objeto.getNombre();
@@ -163,6 +155,12 @@ public class CDiagnostico extends CGenerico {
 		};
 		catalogo.setParent(catalogoDiagnostico);
 		catalogo.doModal();
+	}
+
+	/* Llena el combo de Categorias */
+	public void comboCategoria() {
+		List<Categoria> categorias = servicioCategoria.buscarTodas();
+		cmbCategoria.setModel(new ListModelList<Categoria>(categorias));
 	}
 
 	/* Permite la seleccion de un item del catalogo */
@@ -190,5 +188,4 @@ public class CDiagnostico extends CGenerico {
 		cmbCategoria.setValue(diagnostico.getCategoria().getNombre());
 		id = diagnostico.getIdDiagnostico();
 	}
-
 }

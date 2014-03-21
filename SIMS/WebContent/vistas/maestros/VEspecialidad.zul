@@ -13,7 +13,7 @@
 						<label class="etiqueta" value="Nombre:" />
 						<textbox id="txtDescripcionEspecialidad" hflex="1"
 							maxlength="500" tooltiptext="Ingrese la Descripcion de la Especialidad"
-							multiline="true" />
+							multiline="true" class="multilinea" />
 						<button id="btnBuscarEspecialidad" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>

@@ -35,7 +35,7 @@ public class CUnidad extends CGenerico {
 
 	@Override
 	public void inicializar() {
-		// TODO Auto-generated method stub
+
 		Botonera botonera = new Botonera() {
 			@Override
 			public void guardar() {
@@ -63,7 +63,7 @@ public class CUnidad extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				if (id != 0 && txtNombreUnidad.getText().compareTo("") == 0) {
+				if (id != 0 && txtNombreUnidad.getText().compareTo("") != 0) {
 					Messagebox.show("¿Esta Seguro de Eliminar la Unidad?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
@@ -123,13 +123,11 @@ public class CUnidad extends CGenerico {
 
 			@Override
 			protected List<Unidad> buscar(String valor) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 
 			@Override
 			protected String[] crearRegistros(Unidad objeto) {
-				// TODO Auto-generated method stub
 				String[] registros = new String[1];
 				registros[0] = objeto.getNombre();
 				return registros;
