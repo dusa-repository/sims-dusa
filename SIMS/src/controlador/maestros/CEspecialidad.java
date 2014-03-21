@@ -35,8 +35,9 @@ public class CEspecialidad extends CGenerico {
 
 	@Override
 	public void inicializar() {
-		// TODO Auto-generated method stub
+
 		Botonera botonera = new Botonera() {
+
 			@Override
 			public void guardar() {
 				if (validar()) {
@@ -65,7 +66,7 @@ public class CEspecialidad extends CGenerico {
 			@Override
 			public void eliminar() {
 				if (id != 0
-						&& txtDescripcionEspecialidad.getText().compareTo("") == 0) {
+						&& txtDescripcionEspecialidad.getText().compareTo("") != 0) {
 					Messagebox.show(
 							"¿Esta Seguro de Eliminar la Especialidad?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
@@ -126,13 +127,11 @@ public class CEspecialidad extends CGenerico {
 
 			@Override
 			protected List<Especialidad> buscar(String valor) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 
 			@Override
 			protected String[] crearRegistros(Especialidad objeto) {
-				// TODO Auto-generated method stub
 				String[] registros = new String[1];
 				registros[0] = objeto.getDescripcion();
 				return registros;

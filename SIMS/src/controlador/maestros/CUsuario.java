@@ -34,6 +34,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Spinner;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
@@ -42,6 +43,14 @@ import componentes.Catalogo;
 public class CUsuario extends CGenerico {
 
 	private static final long serialVersionUID = 7879830599305337459L;
+	@Wire
+	private Button btnSiguientePestanna;
+	@Wire
+	private Button btnAnteriorPestanna;
+	@Wire
+	private Tab tabBasicos;
+	@Wire
+	private Tab tabUsuarios;
 	@Wire
 	private Div divUsuario;
 	@Wire
@@ -108,26 +117,23 @@ public class CUsuario extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		// TODO Auto-generated method stub
 		llenarCombos();
 		llenarListas(null);
 		try {
 			imagen.setContent(new AImage(url));
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				// TODO Auto-generated method stub
 				cerrarVentana(divUsuario);
 			}
 
 			@Override
 			public void limpiar() {
-				// TODO Auto-generated method stub
 				ltbGruposAgregados.getItems().clear();
 				ltbGruposDisponibles.getItems().clear();
 				cmbEspecialidad.setValue("");
@@ -152,7 +158,6 @@ public class CUsuario extends CGenerico {
 				try {
 					imagen.setContent(new AImage(url));
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				id = 0;
@@ -161,16 +166,13 @@ public class CUsuario extends CGenerico {
 
 			@Override
 			public void guardar() {
-				// TODO Auto-generated method stub
 				if (validar()) {
 					Set<Grupo> gruposUsuario = new HashSet<Grupo>();
 					for (int i = 0; i < ltbGruposAgregados.getItemCount(); i++) {
 						Grupo grupo = ltbGruposAgregados.getItems().get(i)
 								.getValue();
 						gruposUsuario.add(grupo);
-						System.out.println(grupo.getIdGrupo());
 					}
-					System.out.println(gruposUsuario.size());
 					Especialidad especialidad = servicioEspecialidad
 							.buscar(Long.parseLong(cmbEspecialidad
 									.getSelectedItem().getContext()));
@@ -203,7 +205,6 @@ public class CUsuario extends CGenerico {
 						try {
 							imagen.setContent(new AImage(url));
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 						imagenUsuario = imagen.getContent().getByteData();
@@ -312,7 +313,7 @@ public class CUsuario extends CGenerico {
 		ltbGruposDisponibles.setCheckmark(true);
 	}
 
-	/* LLena los combos asociados a la vista */
+	/* LLena los combos de unidad y especialidad de la vista */
 	public void llenarCombos() {
 		List<Unidad> unidades = servicioUnidad.buscarTodas();
 		cmbUnidad.setModel(new ListModelList<Unidad>(unidades));
@@ -367,7 +368,6 @@ public class CUsuario extends CGenerico {
 	 */
 	@Listen("onClick = #pasar2")
 	public void moverIzquierda() {
-		// gruposDisponibles = servicioGrupo.buscarTodos();
 		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 		List<Listitem> listItem2 = ltbGruposAgregados.getItems();
 		if (listItem2.size() != 0) {
@@ -401,13 +401,11 @@ public class CUsuario extends CGenerico {
 
 			@Override
 			protected List<Usuario> buscar(String valor) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 
 			@Override
 			protected String[] crearRegistros(Usuario objeto) {
-				// TODO Auto-generated method stub
 				String[] registros = new String[5];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
@@ -445,7 +443,6 @@ public class CUsuario extends CGenerico {
 	public void llenarCampos(Usuario usuario) {
 		cmbEspecialidad.setValue(usuario.getEspecialidad().getDescripcion());
 		cmbUnidad.setValue(usuario.getUnidad().getNombre());
-		// txtApellidoUsuario.setValue(usuario.getApellido());
 		txtCedulaUsuario.setValue(usuario.getCedula());
 		txtCorreoUsuario.setValue(usuario.getEmail());
 		txtDireccionUsuario.setValue(usuario.getDireccion());
@@ -471,11 +468,22 @@ public class CUsuario extends CGenerico {
 		try {
 			imag = ImageIO.read(new ByteArrayInputStream(usuario.getImagen()));
 			imagen.setContent(imag);
-		} catch (IOException e) { // TODO Auto-generated catch block
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		id = usuario.getIdUsuario();
 		llenarListas(usuario);
 	}
 
+	/* Abre la pestanna de datos de usuario */
+	@Listen("onClick = #btnSiguientePestanna")
+	public void siguientePestanna() {
+		tabUsuarios.setSelected(true);
+	}
+
+	/* Abre la pestanna de datos basicos */
+	@Listen("onClick = #btnAnteriorPestanna")
+	public void anteriorPestanna() {
+		tabBasicos.setSelected(true);
+	}
 }

@@ -16,44 +16,44 @@
 						<label class="etiqueta" value="Cedula:" />
 						<textbox id="txtCedulaUsuario" hflex="1" maxlength="8"
 							tooltiptext="Ingrese la Cedula del Usuario" />
-						<button id="btnBuscarUsuario" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<fileupload  image="/public/imagenes/botones/cargar.png" id="fudImagenUsuario" label="Foto">
+						</fileupload>
 
 						<label class="etiqueta" value="Ficha:" />
 						<textbox id="txtFichaUsuario" hflex="1" maxlength="50"
 							tooltiptext="Ingrese la Ficha del Usuario" />
-						<fileupload id="fudImagenUsuario" label="Cargar Foto">
-						</fileupload>
+						<button id="btnBuscarUsuario" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 
 					<row>
 						<label class="etiqueta" value="Nombre:" />
 						<textbox id="txtNombreUsuario" hflex="1" maxlength="500"
-							class="multilinea" tooltiptext="Ingrese el Nombre del Usuario"
-							multiline="true" />
-						<hbox />
+							tooltiptext="Ingrese el Nombre del Usuario" />
+						<image id="imagen" width="50px" height="50px" />
+
 						<label class="etiqueta" value="Apellido:" />
 						<textbox id="txtApellidoUsuario" hflex="1" maxlength="8"
 							tooltiptext="Ingrese el Apellido del Usuario" />
-						<image id="imagen" width="50px" height="50px" />
+						<hbox />
 					</row>
 				</rows>
 			</grid>
 			<separator />
 			<tabbox width="100%">
 				<tabs>
-					<tab label="Datos Basicos" />
-					<tab label="Datos de Usuario" />
+					<tab label="Datos Basicos" id="tabBasicos"/>
+					<tab label="Datos de Usuario" id="tabUsuarios" />
 				</tabs>
 				<tabpanels>
 					<tabpanel>
 						<groupbox width="100%" title="Datos Personales">
 							<grid width="100%">
 								<columns visible="false">
-									<column label="" width="25%" />
-									<column label="" width="25%" />
-									<column label="" width="25%" />
-									<column label="" width="25%" />
+									<column label="" width="20%" />
+									<column label="" width="30%" />
+									<column label="" width="20%" />
+									<column label="" width="30%" />
 								</columns>
 								<rows>
 
@@ -97,10 +97,10 @@
 						<groupbox width="100%" title="Datos Medicos">
 							<grid width="100%">
 								<columns visible="false">
-									<column label="" width="25%" />
-									<column label="" width="25%" />
-									<column label="" width="25%" />
-									<column label="" width="25%" />
+									<column label="" width="20%" />
+									<column label="" width="30%" />
+									<column label="" width="20%" />
+									<column label="" width="30%" />
 								</columns>
 								<rows>
 									<row>
@@ -109,8 +109,7 @@
 											tabindex="1" width="100%" tooltiptext="Seleccione una Especialidad"
 											placeholder="Seleccione una Especialidad">
 											<template name="model">
-												<comboitem label="${each.descripcion}"
-													context="${each.idEspecialidad}" />
+												<comboitem label="${each.descripcion}" context="${each.idEspecialidad}" />
 											</template>
 										</combobox>
 										<label class="etiqueta" value="Licencia CM:" />
@@ -135,6 +134,9 @@
 								</rows>
 							</grid>
 						</groupbox>
+						<div align="right" style="float: right;">
+							<button id="btnSiguientePestanna" label="Siguiente" image="/public/imagenes/botones/adelante.png" />
+						</div>
 					</tabpanel>
 					<tabpanel>
 						<grid width="100%">
@@ -163,7 +165,8 @@
 								</row>
 							</rows>
 						</grid>
-						<groupbox title="Seleccione los Grupos Correspondientes al Usuario">
+						<separator/>
+						<groupbox width="100%" title="Seleccione los Grupos Correspondientes al Usuario">
 							<hbox>
 								<listbox id="ltbGruposDisponibles" height="160px"
 									emptyMessage="No hay Grupos registrados">
@@ -175,13 +178,13 @@
 									</template>
 								</listbox>
 								<vbox>
-									<button id="pasar1" sclass="btn"
-										image="/public/imagenes/iconos/botonesAdicionales/adelante2.png"
-										tooltiptext="Agregar Grupos" width="35px" />
+									<button id="pasar1" 
+										image="/public/imagenes/botones/adelante.png" 
+										tooltiptext="Agregar Grupos" width="30px" />
 									<separator />
-									<button id="pasar2" sclass="btn"
-										image="/public/imagenes/iconos/botonesAdicionales/atras2.png"
-										tooltiptext="Quitar Grupos" width="35px" />
+									<button id="pasar2"
+										image="/public/imagenes/botones/atras.png" 
+										tooltiptext="Quitar Grupos" width="30px" />
 								</vbox>
 								<listbox id="ltbGruposAgregados" height="160px"
 									emptyMessage="No ha Seleccionado ningun Grupo" checkmark="true">
@@ -193,12 +196,18 @@
 									</template>
 								</listbox>
 							</hbox>
+
 						</groupbox>
+						<separator />
+						<div width="50%" align="left" style="float: left;" >
+							<button  label="Anterior"  id="btnAnteriorPestanna" image="/public/imagenes/botones/atras.png" />
+								
+						</div>
+					<div  id="botoneraUsuario" align="right" style="float: right;" />
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
-			<separator />
-			<div id="botoneraUsuario" />
+
 			<div id="catalogoUsuario" />
 		</groupbox>
 	</div>

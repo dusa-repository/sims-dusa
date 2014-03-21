@@ -12,7 +12,7 @@
 					<row>
 						<label class="etiqueta" value="Nombre:" />
 						<textbox id="txtNombreCategoria" hflex="1" maxlength="500"
-							tooltiptext="Ingrese el Nombre de la Categoria" multiline="true" />
+							tooltiptext="Ingrese el Nombre de la Categoria" multiline="true" class="multilinea" />
 						<button id="btnBuscarCategoria" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>

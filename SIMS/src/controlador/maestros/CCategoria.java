@@ -34,7 +34,6 @@ public class CCategoria extends CGenerico {
 
 	@Override
 	public void inicializar() {
-		// TODO Auto-generated method stub
 		Botonera botonera = new Botonera() {
 			@Override
 			public void guardar() {
@@ -63,7 +62,7 @@ public class CCategoria extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				if (id != 0 && txtNombreCategoria.getText().compareTo("") == 0) {
+				if (id != 0 && txtNombreCategoria.getText().compareTo("") != 0) {
 					Messagebox.show("¿Esta Seguro de Eliminar la Categoria?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
@@ -123,13 +122,11 @@ public class CCategoria extends CGenerico {
 
 			@Override
 			protected List<Categoria> buscar(String valor) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 
 			@Override
 			protected String[] crearRegistros(Categoria categoria) {
-				// TODO Auto-generated method stub
 				String[] registros = new String[1];
 				registros[0] = categoria.getNombre();
 				return registros;
