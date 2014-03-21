@@ -34,4 +34,8 @@ public class SCategoria {
 	public Categoria buscarPorNombre(String value) {
 		return categoriaDAO.findByNombre(value);
 	}
+
+	public List<Categoria> filtroNombre(String valor) {
+		return categoriaDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
 }

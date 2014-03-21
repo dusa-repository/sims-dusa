@@ -122,8 +122,11 @@ public class CUnidad extends CGenerico {
 				unidades, "Nombre") {
 
 			@Override
-			protected List<Unidad> buscar(String valor) {
-				return null;
+			protected List<Unidad> buscar(String valor,String combo) {
+				if(combo.equals("Nombre"))
+					return servicioUnidad.filtroNombre(valor);
+					else
+						return servicioUnidad.buscarTodas();
 			}
 
 			@Override

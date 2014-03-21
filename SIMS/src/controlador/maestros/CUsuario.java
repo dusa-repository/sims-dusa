@@ -400,8 +400,28 @@ public class CUsuario extends CGenerico {
 				"Correo", "Login") {
 
 			@Override
-			protected List<Usuario> buscar(String valor) {
-				return null;
+			protected List<Usuario> buscar(String valor,String combo) {
+				if(combo.equals("Cedula"))
+				return servicioUsuario.filtroCedula(valor);
+				else{
+					if(combo.equals("Ficha"))
+					return servicioUsuario.filtroFicha(valor);
+					else{
+						if(combo.equals("Nombre"))
+							return servicioUsuario.filtroNombre(valor);
+						else{
+							if(combo.equals("Correo"))
+								return servicioUsuario.filtroCorreo(valor);
+							else{
+								if(combo.equals("Login"))
+									return servicioUsuario.filtroLogin(valor);
+								else
+									return servicioUsuario.buscarTodos();
+							}
+								
+						}						
+				}
+			}
 			}
 
 			@Override

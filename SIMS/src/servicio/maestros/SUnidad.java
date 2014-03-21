@@ -34,4 +34,8 @@ public class SUnidad {
 	public Unidad buscarPorNombre(String value) {
 		return interfaceUnidad.findByNombre(value);
 	}
+
+	public List<Unidad> filtroNombre(String valor) {
+		return interfaceUnidad.findByNombreStartingWithAllIgnoreCase(valor);
+	}
 }

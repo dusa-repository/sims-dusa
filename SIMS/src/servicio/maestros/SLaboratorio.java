@@ -34,4 +34,8 @@ public class SLaboratorio {
 	public void eliminar(Laboratorio laboratorio) {
 		laboratorioDAO.delete(laboratorio);
 	}
+
+	public List<Laboratorio> filtroNombre(String valor) {
+		return laboratorioDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
 }

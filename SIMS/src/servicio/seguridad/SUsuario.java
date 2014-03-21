@@ -16,20 +16,7 @@ public class SUsuario {
 
 	@Autowired
 	private IUsuarioDAO usuarioDAO;
-
-	// public List<Usuario> buscarActivos() {
-	// List<Usuario> usuarios;
-	// usuarios = usuarioDAO.findByEstadoEliminacionTrue();
-	// return usuarios;
-	// }
-
-	// public List<Usuario> buscarOtrosUsuarios(
-	// ArrayList<String> cedulaTutoresEstudiantes) {
-	// List<Usuario> usuarios;
-	// usuarios = usuarioDAO.buscarOtrosUsuarios(cedulaTutoresEstudiantes);
-	// return usuarios;
-	// }
-
+	
 	@Transactional
 	public Usuario buscarUsuarioPorId(long codigo) {
 		Usuario usuario;
@@ -69,15 +56,24 @@ public class SUsuario {
 		usuarioDAO.delete(usuario);
 	}
 
-	// public List<Usuario> buscarCualquierCampoContiene(String parte) {
-	// List<Usuario> usuariosActivos = new ArrayList<Usuario>();
-	// List<Usuario> usuariosBuscados = new ArrayList<Usuario>();
-	// usuariosActivos = buscarActivos();
-	// usuariosBuscados = usuarioDAO.findByNombreStartingWithIgnoreCase(parte);
-	// usuariosBuscados.retainAll(usuariosActivos);
-	// if (parte.isEmpty())
-	// return usuariosActivos;
-	// else
-	// return usuariosBuscados;
-	// }
+	public List<Usuario> filtroCedula(String valor) {
+		return usuarioDAO.findByCedulaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Usuario> filtroFicha(String valor) {
+		return usuarioDAO.findByFichaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Usuario> filtroNombre(String valor) {
+		return usuarioDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Usuario> filtroCorreo(String valor) {
+		return usuarioDAO.findByEmailStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Usuario> filtroLogin(String valor) {
+		return usuarioDAO.findByLoginStartingWithAllIgnoreCase(valor);
+	}
+
 }

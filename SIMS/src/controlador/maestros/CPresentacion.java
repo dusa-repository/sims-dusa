@@ -132,10 +132,14 @@ public class CPresentacion extends CGenerico {
 			}
 
 			@Override
-			protected List<Presentacion> buscar(String valor) {
-				// return
-				// servicioPresentacion.buscarCualquierCampoContiene(valor);
-				return null;
+			protected List<Presentacion> buscar(String valor,String combo) {
+				if(combo.equals("Nombre"))
+				return servicioPresentacion.filtroNombre(valor);
+				else{
+					if(combo.equals("Medicina"))
+					return servicioPresentacion.filtroMedicina(valor);
+				}
+				return servicioPresentacion.buscarTodas();
 			}
 		};
 		catalogo.setParent(catalogoPresentacion);

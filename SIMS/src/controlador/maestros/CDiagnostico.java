@@ -138,8 +138,24 @@ public class CDiagnostico extends CGenerico {
 				"Grupo", "Categoria") {
 
 			@Override
-			protected List<Diagnostico> buscar(String valor) {
-				return null;
+			protected List<Diagnostico> buscar(String valor,String combo) {
+
+				if(combo.equals("Nombre"))
+				return servicioDiagnostico.filtroNombre(valor);
+				else{
+					if(combo.equals("Codigo"))
+					return servicioDiagnostico.filtroCodigo(valor);
+					else{
+						if(combo.equals("Grupo"))
+							return servicioDiagnostico.filtroGrupo(valor);
+						else{
+							if(combo.equals("Categoria"))
+								return servicioDiagnostico.filtroCategoria(valor);
+							else
+								return servicioDiagnostico.buscarTodas();
+						}						
+				}
+			}
 			}
 
 			@Override

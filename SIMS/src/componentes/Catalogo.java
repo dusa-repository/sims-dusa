@@ -57,7 +57,7 @@ public abstract class Catalogo<Clase> extends Window {
 				new EventListener<InputEvent>() {
 					@Override
 					public void onEvent(InputEvent e) throws Exception {
-						List<Clase> listaNueva = buscar(e.getValue());
+						List<Clase> listaNueva = buscar(e.getValue(), cmbBuscarPor.getValue());
 						lsbCatalogo.setModel(new ListModelList<Clase>(
 								listaNueva));
 					}
@@ -103,7 +103,7 @@ public abstract class Catalogo<Clase> extends Window {
 	 * busque, es decir que haga un filtro dentro del catalogo, ayudando asi al
 	 * usuario a encontrar el registro buscado con mayor facilidad
 	 */
-	protected abstract List<Clase> buscar(String valor);
+	protected abstract List<Clase> buscar(String valor, String combo);
 
 	/**
 	 * Metodo que permite por cada controlador indicar cuales son los registros

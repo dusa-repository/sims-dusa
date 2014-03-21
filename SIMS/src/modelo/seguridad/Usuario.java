@@ -3,6 +3,8 @@ package modelo.seguridad;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Type;
+
 import modelo.maestros.Unidad;
 import modelo.maestros.Especialidad;
 
@@ -33,6 +35,7 @@ public class Usuario implements Serializable {
 	@Column(length=50)
 	private String email;
 
+	@Type(type="org.hibernate.type.NumericBooleanType")
 	private boolean estado;
 
 	@Column(name="estado_usuario", length=50)

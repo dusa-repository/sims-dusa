@@ -13,4 +13,9 @@ public interface IPresentacionDAO extends JpaRepository<Presentacion, Long> {
 
 	List<Presentacion> findByMedicina(Medicina medicina);
 
+	List<Presentacion> findByNombreStartingWithAllIgnoreCase(String valor);
+
+	List<Presentacion> findByMedicinaNombreStartingWithAllIgnoreCase(
+			String valor);
+
 }

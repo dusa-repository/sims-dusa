@@ -19,7 +19,8 @@ public interface IArbolDAO extends JpaRepository<Arbol, Long> {
 	 @Query("select a from Arbol a where a.idArbol = ?1 order by a.idArbol")
 	public List<Arbol> buscar(ArrayList<Long> ids);
 
-	public List<Arbol> findByGrupos(Grupo grupo);
+	public List<Arbol> findByGruposArbol(Grupo grupo);
+
 		
 	
 }

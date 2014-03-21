@@ -39,4 +39,20 @@ public class SDiagnostico {
 	public Diagnostico buscarPorCodigo(String value) {
 		return diagnosticoDAO.findByCodigo(value);
 	}
+
+	public List<Diagnostico> filtroNombre(String valor) {
+		return diagnosticoDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Diagnostico> filtroCodigo(String valor) {
+		return diagnosticoDAO.findByCodigoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Diagnostico> filtroGrupo(String valor) {
+		return diagnosticoDAO.findByGrupoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Diagnostico> filtroCategoria(String valor) {
+		return diagnosticoDAO.findByCategoriaNombreStartingWithAllIgnoreCase(valor);
+	}
 }

@@ -16,4 +16,10 @@ public interface IMedicinaDAO extends JpaRepository<Medicina, Long> {
 
 	List<Medicina> findByFormaTerapeutica(FormaTerapeutica formaTerapeutica);
 
+	List<Medicina> findByNombreStartingWithAllIgnoreCase(String valor);
+
+	List<Medicina> findByLaboratorioNombreStartingWithAllIgnoreCase(String valor);
+
+	List<Medicina> findByPosologiaStartingWithAllIgnoreCase(String valor);
+
 }
