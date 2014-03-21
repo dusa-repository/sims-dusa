@@ -10,10 +10,12 @@ http://www.springframework.org/schema/data/jpa http://www.springframework.org/sc
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:postgresql://localhost:5432/sims" />
-		<property name="username" value="postgres" />
-		<property name="password" value="1234" />
+		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="url"
+			value="jdbc:sqlserver://localhost:50744;DatabaseName=dusa_sims" />
+		<!-- value="jdbc:sqlserver://172.23.20.72:1433;DatabaseName=dusa_sims" 
+			/> -->
+		<property name="username" value="client" />
+		<property name="password" value="123" />
 	</bean>
-
 </beans> 

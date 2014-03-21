@@ -124,10 +124,11 @@ public class CLaboratorio extends CGenerico {
 			}
 
 			@Override
-			protected List<Laboratorio> buscar(String valor) {
-				// return
-				// servicioPresentacion.buscarCualquierCampoContiene(valor);
-				return null;
+			protected List<Laboratorio> buscar(String valor,String combo) {
+				if(combo.equals("Nombre"))
+					return servicioLaboratorio.filtroNombre(valor);
+					else
+						return servicioLaboratorio.buscarTodos();
 			}
 		};
 		catalogo.setParent(catalogoLaboratorio);

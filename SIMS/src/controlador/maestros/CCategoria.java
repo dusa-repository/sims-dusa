@@ -121,8 +121,11 @@ public class CCategoria extends CGenerico {
 				"Catalogo de Categorias", categorias, "Nombre") {
 
 			@Override
-			protected List<Categoria> buscar(String valor) {
-				return null;
+			protected List<Categoria> buscar(String valor, String combo) {
+				if(combo.equals("Nombre"))
+				return servicioCategoria.filtroNombre(valor);
+				else
+					return servicioCategoria.buscarTodas();
 			}
 
 			@Override

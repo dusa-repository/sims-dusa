@@ -41,4 +41,12 @@ public class SPresentacion {
 		presentacionDAO.delete(presentacion);
 		
 	}
+
+	public List<Presentacion> filtroMedicina(String valor) {
+		return presentacionDAO.findByMedicinaNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Presentacion> filtroNombre(String valor) {
+		return presentacionDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
 }

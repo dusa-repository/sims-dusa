@@ -127,10 +127,11 @@ public class CFormaTerapeutica extends CGenerico {
 			}
 
 			@Override
-			protected List<FormaTerapeutica> buscar(String valor) {
-				// return
-				// servicioPresentacion.buscarCualquierCampoContiene(valor);
-				return null;
+			protected List<FormaTerapeutica> buscar(String valor,String combo) {
+				if(combo.equals("Nombre"))
+					return servicioFormaTerapeutica.filtroNombre(valor);
+					else
+						return servicioFormaTerapeutica.buscarTodos();
 			}
 		};
 		catalogo.setParent(catalogoFormaTerapeutica);

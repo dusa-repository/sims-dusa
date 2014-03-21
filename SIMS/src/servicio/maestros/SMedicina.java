@@ -18,7 +18,7 @@ public class SMedicina {
 	private IMedicinaDAO medicinaDAO;
 
 	public Medicina buscar(long idMedicina) {
-	
+
 		return medicinaDAO.findOne(idMedicina);
 	}
 
@@ -27,7 +27,7 @@ public class SMedicina {
 	}
 
 	public void guardar(Medicina medicina) {
-		medicinaDAO.save(medicina);		
+		medicinaDAO.save(medicina);
 	}
 
 	public Medicina buscarPorNombre(String value) {
@@ -45,6 +45,18 @@ public class SMedicina {
 
 	public void eliminar(Medicina medicina) {
 		medicinaDAO.delete(medicina);
-		
+	}
+
+	public List<Medicina> filtroNombre(String valor) {
+		return medicinaDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Medicina> filtroLaboratorio(String valor) {
+		return medicinaDAO
+				.findByLaboratorioNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Medicina> filtroPosologia(String valor) {
+		return medicinaDAO.findByPosologiaStartingWithAllIgnoreCase(valor);
 	}
 }

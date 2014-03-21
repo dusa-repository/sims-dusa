@@ -47,7 +47,7 @@ public class Arbol implements Serializable {
 			@JoinColumn(name="id_grupo", nullable=false)
 			}
 		)
-	private Set<Grupo> grupos;
+	private Set<Grupo> gruposArbol;
 
 	public Arbol() {
 	}
@@ -61,7 +61,7 @@ public class Arbol implements Serializable {
 		this.nombre = nombre;
 		this.padre = padre;
 		this.url = url;
-		this.grupos = grupos;
+		this.gruposArbol = grupos;
 	}
 
 
@@ -99,11 +99,11 @@ public class Arbol implements Serializable {
 	}
 
 	public Set<Grupo> getGrupos() {
-		return this.grupos;
+		return this.gruposArbol;
 	}
 
 	public void setGrupos(Set<Grupo> grupos) {
-		this.grupos = grupos;
+		this.gruposArbol = grupos;
 	}
 
 }

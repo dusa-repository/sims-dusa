@@ -123,11 +123,14 @@ public class CEspecialidad extends CGenerico {
 	public void mostrarCatalogo() {
 		List<Especialidad> especialidades = servicioEspecialidad.buscarTodas();
 		catalogo = new Catalogo<Especialidad>(catalogoEspecialidad,
-				"Catalogo de Categorias", especialidades, "Nombre") {
+				"Catalogo de Categorias", especialidades, "Descripcion") {
 
 			@Override
-			protected List<Especialidad> buscar(String valor) {
-				return null;
+			protected List<Especialidad> buscar(String valor,String combo) {
+				if(combo.equals("Descripcion"))
+				return servicioEspecialidad.filtroNombre(valor);
+				else
+				return servicioEspecialidad.buscarTodas();
 			}
 
 			@Override

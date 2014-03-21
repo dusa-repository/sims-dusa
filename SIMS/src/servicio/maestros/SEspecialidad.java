@@ -34,4 +34,8 @@ public class SEspecialidad {
 	public Especialidad buscarPorDescripcion(String value) {
 		return especialidadDAO.findByDescripcion(value);
 	}
+
+	public List<Especialidad> filtroNombre(String valor) {
+		return  especialidadDAO.findByDescripcionStartingWithAllIgnoreCase(valor);
+	}
 }

@@ -194,10 +194,20 @@ public class CMedicina extends CGenerico {
 			}
 
 			@Override
-			protected List<Medicina> buscar(String valor) {
-				// return
-				// servicioPresentacion.buscarCualquierCampoContiene(valor);
-				return null;
+			protected List<Medicina> buscar(String valor,String combo) {
+				if(combo.equals("Nombre"))
+				return servicioMedicina.filtroNombre(valor);
+				else{
+					if(combo.equals("Laboratorio"))
+					return servicioMedicina.filtroLaboratorio(valor);
+					else{
+						if(combo.equals("Posologia"))
+						return servicioMedicina.filtroPosologia(valor);
+						else
+							return servicioMedicina.buscarTodas();
+					}
+				}
+				
 			}
 		};
 		catalogo.setParent(catalogoMedicina);

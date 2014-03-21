@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 
 /**
  * The persistent class for the grupo database table.
@@ -28,13 +30,15 @@ public class Grupo implements Serializable {
 	@Column(name="id_grupo", unique=true, nullable=false)
 	private long idGrupo;
 
+
+	@Type(type="org.hibernate.type.NumericBooleanType")
 	private boolean estado;
 
 	@Column(length=500)
 	private String nombre;
 
 	//bi-directional many-to-many association to Arbol
-	@ManyToMany(mappedBy="grupos")
+	@ManyToMany(mappedBy="gruposArbol")
 	private Set<Arbol> arbols;
 
 	//bi-directional many-to-many association to Usuario
@@ -44,7 +48,7 @@ public class Grupo implements Serializable {
 	public Grupo() {
 	}
 
-	public Grupo(long idGrupo, boolean estado, String nombre,
+	public Grupo(long idGrupo,  boolean estado, String nombre,
 			Set<Arbol> arbols) {
 		super();
 		this.idGrupo = idGrupo;
@@ -63,7 +67,7 @@ public class Grupo implements Serializable {
 		this.idGrupo = idGrupo;
 	}
 
-	public boolean getEstado() {
+	public  boolean getEstado() {
 		return this.estado;
 	}
 

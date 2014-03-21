@@ -53,7 +53,7 @@ public class SArbol {
 
 	public List<Arbol> buscarporGrupo(Grupo grupo) {
 		List<Arbol> arboles;
-		arboles = arbolDAO.findByGrupos(grupo);
+		arboles = arbolDAO.findByGruposArbol(grupo);
 		return arboles;
 	}
 }

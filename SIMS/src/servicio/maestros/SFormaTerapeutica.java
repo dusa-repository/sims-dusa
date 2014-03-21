@@ -37,4 +37,8 @@ public class SFormaTerapeutica {
 		formaTerapeuticaDAO.delete(formaTerapeutica);
 		
 	}
+
+	public List<FormaTerapeutica> filtroNombre(String valor) {
+		return formaTerapeuticaDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
 }
