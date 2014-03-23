@@ -1,0 +1,167 @@
+package modelo.maestros;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.sql.Timestamp;
+
+
+/**
+ * The persistent class for the cita database table.
+ * 
+ */
+@Entity
+@Table(name="cita")
+public class Cita implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_cita", unique=true, nullable=false)
+	private long idCita;
+
+	@Column(length=50)
+	private String estado;
+
+	@Column(name="fecha_auditoria")
+	private Timestamp fechaAuditoria;
+
+	@Column(name="fecha_cita")
+	private Timestamp fechaCita;
+
+	@Column(name="fecha_creacion")
+	private Timestamp fechaCreacion;
+
+	@Column(name="hora_auditoria", length=10)
+	private String horaAuditoria;
+
+	@Column(name="id_usuario")
+	private long idUsuario;
+
+	@Column(length=10)
+	private String observacion;
+
+	@Column(name="usuario_auditoria", length=50)
+	private String usuarioAuditoria;
+
+	//bi-directional many-to-one association to MotivoCita
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_motivo_cita")
+	private MotivoCita motivoCita;
+
+	//bi-directional many-to-one association to Paciente
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_paciente")
+	private Paciente paciente;
+
+	public Cita() {
+	}
+	
+
+	public Cita(long idCita, String estado, Timestamp fechaAuditoria,
+			Timestamp fechaCita, Timestamp fechaCreacion, String horaAuditoria,
+			long idUsuario, String observacion, String usuarioAuditoria,
+			MotivoCita motivoCita, Paciente paciente) {
+		super();
+		this.idCita = idCita;
+		this.estado = estado;
+		this.fechaAuditoria = fechaAuditoria;
+		this.fechaCita = fechaCita;
+		this.fechaCreacion = fechaCreacion;
+		this.horaAuditoria = horaAuditoria;
+		this.idUsuario = idUsuario;
+		this.observacion = observacion;
+		this.usuarioAuditoria = usuarioAuditoria;
+		this.motivoCita = motivoCita;
+		this.paciente = paciente;
+	}
+
+
+	public long getIdCita() {
+		return this.idCita;
+	}
+
+	public void setIdCita(long idCita) {
+		this.idCita = idCita;
+	}
+
+	public String getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public Timestamp getFechaAuditoria() {
+		return this.fechaAuditoria;
+	}
+
+	public void setFechaAuditoria(Timestamp fechaAuditoria) {
+		this.fechaAuditoria = fechaAuditoria;
+	}
+
+	public Timestamp getFechaCita() {
+		return this.fechaCita;
+	}
+
+	public void setFechaCita(Timestamp fechaCita) {
+		this.fechaCita = fechaCita;
+	}
+
+	public Timestamp getFechaCreacion() {
+		return this.fechaCreacion;
+	}
+
+	public void setFechaCreacion(Timestamp fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public String getHoraAuditoria() {
+		return this.horaAuditoria;
+	}
+
+	public void setHoraAuditoria(String horaAuditoria) {
+		this.horaAuditoria = horaAuditoria;
+	}
+
+	public long getIdUsuario() {
+		return this.idUsuario;
+	}
+
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getObservacion() {
+		return this.observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+
+	public String getUsuarioAuditoria() {
+		return this.usuarioAuditoria;
+	}
+
+	public void setUsuarioAuditoria(String usuarioAuditoria) {
+		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+	public MotivoCita getMotivoCita() {
+		return this.motivoCita;
+	}
+
+	public void setMotivoCita(MotivoCita motivoCita) {
+		this.motivoCita = motivoCita;
+	}
+
+	public Paciente getPaciente() {
+		return this.paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+}
