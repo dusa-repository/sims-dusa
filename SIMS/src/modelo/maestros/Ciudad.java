@@ -3,7 +3,6 @@ package modelo.maestros;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Set;
 
 
 /**
@@ -32,30 +31,25 @@ public class Ciudad implements Serializable {
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 
-	//bi-directional many-to-one association to Consultorio
-	@OneToMany(mappedBy="ciudad")
-	private Set<Consultorio> consultorios;
-
-	//bi-directional many-to-one association to Empresa
-	@OneToMany(mappedBy="ciudad")
-	private Set<Empresa> empresas;
-
 	//bi-directional many-to-one association to Estado
-	@OneToMany(mappedBy="ciudad")
-	private Set<Estado> estados;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_estado")
+	private Estado estado;
 
 	public Ciudad() {
 	}
 	
-	
+
 	public Ciudad(long idCiudad, Timestamp fechaAuditoria,
-			String horaAuditoria, String nombre, String usuarioAuditoria) {
+			String horaAuditoria, String nombre, String usuarioAuditoria,
+			Estado estado) {
 		super();
 		this.idCiudad = idCiudad;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
 		this.usuarioAuditoria = usuarioAuditoria;
+		this.estado = estado;
 	}
 
 
@@ -99,70 +93,12 @@ public class Ciudad implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public Set<Consultorio> getConsultorios() {
-		return this.consultorios;
+	public Estado getEstado() {
+		return this.estado;
 	}
 
-	public void setConsultorios(Set<Consultorio> consultorios) {
-		this.consultorios = consultorios;
-	}
-
-	public Consultorio addConsultorio(Consultorio consultorio) {
-		getConsultorios().add(consultorio);
-		consultorio.setCiudad(this);
-
-		return consultorio;
-	}
-
-	public Consultorio removeConsultorio(Consultorio consultorio) {
-		getConsultorios().remove(consultorio);
-		consultorio.setCiudad(null);
-
-		return consultorio;
-	}
-
-	public Set<Empresa> getEmpresas() {
-		return this.empresas;
-	}
-
-	public void setEmpresas(Set<Empresa> empresas) {
-		this.empresas = empresas;
-	}
-
-	public Empresa addEmpresa(Empresa empresa) {
-		getEmpresas().add(empresa);
-		empresa.setCiudad(this);
-
-		return empresa;
-	}
-
-	public Empresa removeEmpresa(Empresa empresa) {
-		getEmpresas().remove(empresa);
-		empresa.setCiudad(null);
-
-		return empresa;
-	}
-
-	public Set<Estado> getEstados() {
-		return this.estados;
-	}
-
-	public void setEstados(Set<Estado> estados) {
-		this.estados = estados;
-	}
-
-	public Estado addEstado(Estado estado) {
-		getEstados().add(estado);
-		estado.setCiudad(this);
-
-		return estado;
-	}
-
-	public Estado removeEstado(Estado estado) {
-		getEstados().remove(estado);
-		estado.setCiudad(null);
-
-		return estado;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 }

@@ -3,6 +3,7 @@ package modelo.maestros;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 /**
@@ -32,24 +33,25 @@ public class Estado implements Serializable {
 	private String usuarioAuditoria;
 
 	//bi-directional many-to-one association to Ciudad
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_ciudad")
-	private Ciudad ciudad;
+	@OneToMany(mappedBy="estado")
+	private Set<Ciudad> ciudads;
 
 	public Estado() {
 	}
 	
+	
+
 	public Estado(long idEstado, Timestamp fechaAuditoria,
-			String horaAuditoria, String nombre, String usuarioAuditoria,
-			Ciudad ciudad) {
+			String horaAuditoria, String nombre, String usuarioAuditoria) {
 		super();
 		this.idEstado = idEstado;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
 		this.usuarioAuditoria = usuarioAuditoria;
-		this.ciudad = ciudad;
 	}
+
+
 
 	public long getIdEstado() {
 		return this.idEstado;
@@ -91,12 +93,26 @@ public class Estado implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public Ciudad getCiudad() {
-		return this.ciudad;
+	public Set<Ciudad> getCiudads() {
+		return this.ciudads;
 	}
 
-	public void setCiudad(Ciudad ciudad) {
-		this.ciudad = ciudad;
+	public void setCiudads(Set<Ciudad> ciudads) {
+		this.ciudads = ciudads;
+	}
+
+	public Ciudad addCiudad(Ciudad ciudad) {
+		getCiudads().add(ciudad);
+		ciudad.setEstado(this);
+
+		return ciudad;
+	}
+
+	public Ciudad removeCiudad(Ciudad ciudad) {
+		getCiudads().remove(ciudad);
+		ciudad.setEstado(null);
+
+		return ciudad;
 	}
 
 }
