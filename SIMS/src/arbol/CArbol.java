@@ -24,13 +24,16 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
+import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeModel;
 
 import controlador.maestros.CGenerico;
 
 public class CArbol extends CGenerico {
-	
+
 	private static final long serialVersionUID = 4640739858132196250L;
 	@Wire
 	private Tree arbolMenu;
@@ -43,7 +46,23 @@ public class CArbol extends CGenerico {
 	TreeModel _model;
 	URL url = getClass().getResource("/controlador/maestros/usuario.png");
 	List<String> listmenu1 = new ArrayList<String>();
+	// test
+	@Wire
+	private Tab tab;
+	@Wire
+	private Tabbox tabBox;
 
+	@Listen("onClick = #tab")
+	public void nueva() {
+		Tab newTab = new Tab("New Tab ");
+		newTab.setSelected(true);
+		Tabpanel newTabpanel = new Tabpanel();
+		newTabpanel.appendChild(new Label("New Tabpanel Text "));
+		tabBox.getTabs().insertBefore(newTab, tab);
+		newTabpanel.setParent(tabBox.getTabpanels());
+	}
+
+	// /test
 	@Override
 	public void inicializar() throws IOException {
 		Authentication auth = SecurityContextHolder.getContext()
@@ -51,7 +70,7 @@ public class CArbol extends CGenerico {
 
 		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
 
-		if (u.getImagen()==null) {
+		if (u.getImagen() == null) {
 			imagenes.setContent(new AImage(url));
 		} else {
 			try {
@@ -67,12 +86,16 @@ public class CArbol extends CGenerico {
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("Vistas");
 
+		if(tabs.size()!=0){
+			tabs.clear();
+		}
+		
 		if (map != null) {
 			if ((String) map.get("vista") != null) {
 				contenido.setSrc("/vistas/" + (String) map.get("vista")
 						+ ".zul");
 			}
-		}		
+		}
 	}
 
 	public TreeModel getModel() {
@@ -171,13 +194,34 @@ public class CArbol extends CGenerico {
 	@Listen("onClick = #arbolMenu")
 	public void selectedNode() {
 		String item = String.valueOf(arbolMenu.getSelectedItem().getValue());
+		boolean abrir = true;
+		Tab taba = new Tab();
 		if (arbolMenu.getSelectedItem().getLevel() > 0) {
 			Arbol arbolItem = servicioArbol.buscarPorNombreArbol(item);
-			if(!arbolItem.getUrl().equals("inicio")){
-			String ruta = "/vistas/" + arbolItem.getUrl() + ".zul";
-			contenido.setSrc(null);
-			contenido.setSrc(ruta);
+			if (!arbolItem.getUrl().equals("inicio")) {
+				for (int i = 0; i < tabs.size(); i++) {
+					if (tabs.get(i).getLabel().equals(arbolItem.getNombre())) {
+						abrir = false;
+						taba = tabs.get(i);
+					}
+				}
+				if (abrir) {
+					String ruta = "/vistas/" + arbolItem.getUrl() + ".zul";
+					contenido = new Include();
+					contenido.setSrc(null);
+					contenido.setSrc(ruta);
+
+					Tab newTab = new Tab(arbolItem.getNombre());
+					newTab.setSelected(true);
+					Tabpanel newTabpanel = new Tabpanel();
+					newTabpanel.appendChild(contenido);
+					tabBox.getTabs().insertBefore(newTab, tab);
+					newTabpanel.setParent(tabBox.getTabpanels());
+					tabs.add(newTab);
+				} else {
+					taba.setSelected(true);
+				}
 			}
 		}
-	}	
+	}
 }

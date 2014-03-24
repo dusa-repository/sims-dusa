@@ -129,7 +129,7 @@ public class CUsuario extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divUsuario);
+				cerrarVentana(divUsuario, "Usuario");
 			}
 
 			@Override

@@ -57,7 +57,7 @@ public class CCategoria extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divCategoria);
+				cerrarVentana(divCategoria, "Categoria");
 			}
 
 			@Override
