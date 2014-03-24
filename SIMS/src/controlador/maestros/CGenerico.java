@@ -17,11 +17,17 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Tab;
 
 import servicio.maestros.SCategoria;
+import servicio.maestros.SCiudad;
+import servicio.maestros.SConsultorio;
 import servicio.maestros.SDiagnostico;
+import servicio.maestros.SEmpresa;
 import servicio.maestros.SEspecialidad;
+import servicio.maestros.SEstado;
 import servicio.maestros.SFormaTerapeutica;
 import servicio.maestros.SLaboratorio;
 import servicio.maestros.SMedicina;
+import servicio.maestros.SMotivoCita;
+import servicio.maestros.SPaciente;
 import servicio.maestros.SPresentacion;
 import servicio.maestros.SUnidad;
 import servicio.seguridad.SArbol;
@@ -36,16 +42,28 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SArbol servicioArbol;
 	@WireVariable("SCategoria")
 	protected SCategoria servicioCategoria;
+	@WireVariable("SCiudad")
+	protected SCiudad servicioCiudad;
+	@WireVariable("SConsultorio")
+	protected SConsultorio servicioConsultorio;
 	@WireVariable("SDiagnostico")
 	protected SDiagnostico servicioDiagnostico;
+	@WireVariable("SEmpresa")
+	protected SEmpresa servicioEmpresa;
 	@WireVariable("SEspecialidad")
 	protected SEspecialidad servicioEspecialidad;
+	@WireVariable("SEstado")
+	protected SEstado servicioEstado;
 	@WireVariable("SFormaTerapeutica")
 	protected SFormaTerapeutica servicioFormaTerapeutica;
 	@WireVariable("SLaboratorio")
 	protected SLaboratorio servicioLaboratorio;
 	@WireVariable("SMedicina")
 	protected SMedicina servicioMedicina;
+	@WireVariable("SMotivoCita")
+	protected SMotivoCita servicioMotivoCita;
+	@WireVariable("SPaciente")
+	protected SPaciente servicioPaciente;
 	@WireVariable("SPresentacion")
 	protected SPresentacion servicioPresentacion;
 	@WireVariable("SUnidad")
@@ -77,6 +95,9 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		div.setVisible(false);
 		for(int i =0; i<tabs.size();i++){
 			if(tabs.get(i).getLabel().equals(id)){
+				if(i==(tabs.size()-1)&& tabs.size()>1){
+					tabs.get(i-1).setSelected(true);
+				}
 				tabs.get(i).onClose();
 				tabs.remove(i);
 			}
@@ -88,20 +109,5 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 				.getAuthentication();
 		return sesion.getName();
 	}
-
-	public void insertarTab(Tab tabb){
-		tabs.add(tabb);
-	}
-	
-//	public void cerrarTab(String id){
-//		System.out.println(tabs.size());
-//		for(int i =0; i<tabs.size();i++){
-//			if(tabs.get(i).getLabel().equals(id)){
-//				System.out.println("Entro");
-//				tabs.get(i).onClose();
-//				tabs.remove(i);
-//			}
-//		}
-//	}
 	
 }
