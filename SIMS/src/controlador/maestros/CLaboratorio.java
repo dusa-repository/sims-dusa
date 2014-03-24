@@ -3,8 +3,6 @@ package controlador.maestros;
 import java.io.IOException;
 import java.util.List;
 
-import modelo.maestros.Categoria;
-import modelo.maestros.Diagnostico;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 
@@ -64,7 +62,7 @@ public class CLaboratorio extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divLaboratorio);
+				cerrarVentana(divLaboratorio, "Laboratorio");
 			}
 
 			@Override

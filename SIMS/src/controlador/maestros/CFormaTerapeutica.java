@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import modelo.maestros.FormaTerapeutica;
-import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 
 import org.zkoss.zk.ui.event.Event;
@@ -65,7 +64,7 @@ public class CFormaTerapeutica extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divFormaTerapeutica);
+				cerrarVentana(divFormaTerapeutica, "Forma Terapeutica");
 			}
 
 			@Override

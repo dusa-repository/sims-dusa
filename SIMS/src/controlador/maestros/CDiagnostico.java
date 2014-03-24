@@ -5,7 +5,6 @@ import java.util.List;
 
 import modelo.maestros.Categoria;
 import modelo.maestros.Diagnostico;
-import modelo.maestros.FormaTerapeutica;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -50,7 +49,7 @@ public class CDiagnostico extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divDiagnostico);
+				cerrarVentana(divDiagnostico, "Diagnostico");
 			}
 
 			@Override

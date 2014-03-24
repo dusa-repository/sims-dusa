@@ -2,7 +2,6 @@ package controlador.maestros;
 
 import java.util.List;
 
-import modelo.maestros.Categoria;
 import modelo.maestros.Unidad;
 import modelo.seguridad.Usuario;
 
@@ -58,7 +57,7 @@ public class CUnidad extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divUnidad);
+				cerrarVentana(divUnidad, "Unidad");
 			}
 
 			@Override

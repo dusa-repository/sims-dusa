@@ -128,7 +128,7 @@ public class CMedicina extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divMedicina);
+				cerrarVentana(divMedicina, "Medicina");
 			}
 
 			@Override

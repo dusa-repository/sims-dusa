@@ -3,7 +3,6 @@ package controlador.maestros;
 import java.util.List;
 
 import modelo.maestros.Especialidad;
-import modelo.maestros.Unidad;
 import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.event.Event;
@@ -60,7 +59,7 @@ public class CEspecialidad extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divEspecialidad);
+				cerrarVentana(divEspecialidad, "Especialidad");
 			}
 
 			@Override

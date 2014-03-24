@@ -2,8 +2,10 @@ package controlador.maestros;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +14,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Tab;
 
 import servicio.maestros.SCategoria;
 import servicio.maestros.SDiagnostico;
@@ -51,7 +54,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SGrupo servicioGrupo;
 	@WireVariable("SUsuario")
 	protected SUsuario servicioUsuario;
-	
+	public static  List<Tab> tabs = new ArrayList<Tab>();
 	public final Calendar calendario = Calendar.getInstance();
 	public String horaAuditoria = String.valueOf(calendario
 			.get(Calendar.HOUR_OF_DAY))
@@ -70,8 +73,14 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 
 	public abstract void inicializar() throws IOException;
 
-	public void cerrarVentana(Div div) {
+	public void cerrarVentana(Div div, String id) {
 		div.setVisible(false);
+		for(int i =0; i<tabs.size();i++){
+			if(tabs.get(i).getLabel().equals(id)){
+				tabs.get(i).onClose();
+				tabs.remove(i);
+			}
+		}
 	}
 
 	public String nombreUsuarioSesion() {
@@ -79,4 +88,20 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 				.getAuthentication();
 		return sesion.getName();
 	}
+
+	public void insertarTab(Tab tabb){
+		tabs.add(tabb);
+	}
+	
+//	public void cerrarTab(String id){
+//		System.out.println(tabs.size());
+//		for(int i =0; i<tabs.size();i++){
+//			if(tabs.get(i).getLabel().equals(id)){
+//				System.out.println("Entro");
+//				tabs.get(i).onClose();
+//				tabs.remove(i);
+//			}
+//		}
+//	}
+	
 }

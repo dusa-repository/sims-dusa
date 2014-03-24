@@ -77,7 +77,7 @@ public class CPresentacion extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divPresentacion);
+				cerrarVentana(divPresentacion, "Presentacion");
 			}
 
 			@Override
