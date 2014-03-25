@@ -132,7 +132,7 @@ public class CMotivoCita extends CGenerico {
 
 			@Override
 			protected List<MotivoCita> buscar(String valor, String combo) {
-				if (combo.equals("Nombre"))
+				if (combo.equals("Descripcion"))
 					return servicioMotivoCita.filtroDescripcion(valor);
 				else
 					return servicioMotivoCita.buscarTodos();

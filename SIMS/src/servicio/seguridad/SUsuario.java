@@ -76,4 +76,12 @@ public class SUsuario {
 		return usuarioDAO.findByLoginStartingWithAllIgnoreCase(valor);
 	}
 
+	public List<Usuario> filtroApellido(String valor) {
+		return usuarioDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Usuario> filtroEspecialidad(String valor) {
+		return usuarioDAO.findByEspecialidadDescripcionStartingWithAllIgnoreCase(valor);
+	}
+
 }
