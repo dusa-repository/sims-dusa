@@ -1,8 +1,12 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
+import modelo.maestros.Cita;
+import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 
@@ -13,7 +17,9 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
@@ -67,42 +73,91 @@ public class CCita extends CGenerico {
 	private Listbox ltbCitas;
 
 	long id = 0;
+	long idDoctor = 0;
+	long idPaciente = 0;
 	Catalogo<Usuario> catalogo;
 	Catalogo<Paciente> catalogoPaciente;
-	
+
 	@Override
 	public void inicializar() throws IOException {
 
+		comboMotivo();
+
 		Botonera botonera = new Botonera() {
-			
+
 			@Override
 			public void salir() {
-				// TODO Auto-generated method stub
-				
+				cerrarVentana(divCita, "Cita");
+
 			}
-			
+
 			@Override
 			public void limpiar() {
-				// TODO Auto-generated method stub
-				
+				lblApellidoDoctor.setValue("");
+				lblNombreDoctor.setValue("");
+				lblCedulaDoctor.setValue("");
+				idDoctor = 0;
+				ltbCitas.getItems().clear();
+				limpiar2();
 			}
-			
+
 			@Override
 			public void guardar() {
-				// TODO Auto-generated method stub
-				
+				if (validar()) {
+					String observacion;
+					Date fechaCreacion;
+					observacion = txtObservacion.getValue();
+					fechaCreacion = dtbFechaCita.getValue();
+					Timestamp fechaCrea = new Timestamp(fechaCreacion.getTime());
+					String idMotivo = cmbMotivo.getSelectedItem().getContext();
+					MotivoCita motivo = servicioMotivoCita.buscar(Long
+							.parseLong(idMotivo));
+					Paciente paciente = servicioPaciente.buscar(idPaciente);
+					Usuario usuario = servicioUsuario
+							.buscarUsuarioPorId(idDoctor);
+					String estado = "";
+
+					Cita cita = new Cita(id, estado, fechaHora, fechaCrea,
+							fechaHora, horaAuditoria, usuario, observacion,
+							nombreUsuarioSesion(), motivo, paciente);
+
+					servicioCita.guardar(cita);
+					llenarListaCitas(usuario);
+					limpiar2();
+					Messagebox.show("Registro Guardado Exitosamente",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
+				}
+
 			}
-			
+
 			@Override
 			public void eliminar() {
-				// TODO Auto-generated method stub
-				
 			}
 		};
+		botonera.getChildren().get(1).setVisible(false);
 		botoneraCita.appendChild(botonera);
-		
+
 	}
-	
+
+	/*
+	 * Borra los datos referentes a la cita, brindando la opcion de seguir
+	 * agregando citas al doctor actual
+	 */
+	private void limpiar2() {
+		lblCedulaPaciente.setValue("");
+		lblNombrePaciente.setValue("");
+		lblApellidoPaciente.setValue("");
+		lblEmpresaPaciente.setValue("");
+		txtObservacion.setValue("");
+		dtbFechaCita.setValue(null);
+		cmbMotivo.setValue("");
+		cmbMotivo.setPlaceholder("Seleccione un Motivo");
+		id = 0;
+		idPaciente = 0;
+
+	}
+
 	/* Muestra un catalogo de Usuarios */
 	@Listen("onClick = #btnBuscarDoctor")
 	public void mostrarCatalogo() throws IOException {
@@ -112,23 +167,24 @@ public class CCita extends CGenerico {
 				"Especialidad") {
 
 			@Override
-			protected List<Usuario> buscar(String valor,String combo) {
-				if(combo.equals("Cedula"))
-				return servicioUsuario.filtroCedula(valor);
-				else{
-					if(combo.equals("Ficha"))
-					return servicioUsuario.filtroFicha(valor);
-					else{
-						if(combo.equals("Nombre"))
+			protected List<Usuario> buscar(String valor, String combo) {
+				if (combo.equals("Cedula"))
+					return servicioUsuario.filtroCedula(valor);
+				else {
+					if (combo.equals("Ficha"))
+						return servicioUsuario.filtroFicha(valor);
+					else {
+						if (combo.equals("Nombre"))
 							return servicioUsuario.filtroNombre(valor);
-						else{
-							if(combo.equals("Especialidad"))
-								return servicioUsuario.filtroEspecialidad(valor);
-								else
-									return servicioUsuario.buscarTodos();		
-						}						
+						else {
+							if (combo.equals("Especialidad"))
+								return servicioUsuario
+										.filtroEspecialidad(valor);
+							else
+								return servicioUsuario.buscarTodos();
+						}
+					}
 				}
-			}
 			}
 
 			@Override
@@ -145,7 +201,35 @@ public class CCita extends CGenerico {
 		catalogo.setParent(catalogoUsuarios);
 		catalogo.doModal();
 	}
-	
+
+	/* Permite la seleccion de un item del catalogo de doctores */
+	@Listen("onSeleccion = #catalogoUsuarios")
+	public void seleccionarDoctor() {
+		Usuario usuario = catalogo.objetoSeleccionadoDelCatalogo();
+		lblApellidoDoctor.setValue(usuario.getEspecialidad().getDescripcion());
+		lblNombreDoctor.setValue(usuario.getNombre());
+		lblCedulaDoctor.setValue(usuario.getCedula());
+		idDoctor = usuario.getIdUsuario();
+		llenarListaCitas(usuario);
+		limpiar2();
+		catalogo.setParent(null);
+	}
+
+	/* Llena la lista de citas segun un usuario determinado */
+	public void llenarListaCitas(Usuario usuario) {
+		List<Cita> citasDoctor = servicioCita.buscarPorUsuario(usuario);
+
+		for (int i = 0; i < citasDoctor.size(); i++) {
+
+			String nombre = citasDoctor.get(i).getPaciente().getPrimerNombre();
+			String apellido = citasDoctor.get(i).getPaciente()
+					.getPrimerApellido();
+			Paciente paciente = citasDoctor.get(i).getPaciente();
+			paciente.setHoraAuditoria(nombre + " " + apellido);
+		}
+		ltbCitas.setModel(new ListModelList<Cita>(citasDoctor));
+	}
+
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogoPaciente() throws IOException {
@@ -189,6 +273,38 @@ public class CCita extends CGenerico {
 		catalogoPaciente.setParent(divCatalogoPacientes);
 		catalogoPaciente.doModal();
 	}
+
+	/* Permite la seleccion de un item del catalogo de pacientes */
+	@Listen("onSeleccion = #divCatalogoPacientes")
+	public void seleccionarPaciente() {
+		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
+		lblCedulaPaciente.setValue(paciente.getCedula());
+		lblNombrePaciente.setValue(paciente.getPrimerNombre());
+		lblApellidoPaciente.setValue(paciente.getPrimerApellido());
+		lblEmpresaPaciente.setValue(paciente.getEmpresa().getNombre());
+		idPaciente = paciente.getIdPaciente();
+		catalogoPaciente.setParent(null);
+	}
+
+	/* Llena el combo de Motivos */
+	public void comboMotivo() {
+		List<MotivoCita> motivoCitas = servicioMotivoCita.buscarTodos();
+		cmbMotivo.setModel(new ListModelList<MotivoCita>(motivoCitas));
+	}
+
+	/* Permite validar que todos los campos esten completos */
+	public boolean validar() {
+		if (txtObservacion.getText().compareTo("") == 0
+				|| cmbMotivo.getText().compareTo("") == 0
+				|| dtbFechaCita.getText().compareTo("") == 0 || idDoctor == 0
+				|| idPaciente == 0) {
+			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
+			return false;
+		} else
+			return true;
+	}
+
 	/* Abre la pestanna de consultar citas */
 	@Listen("onClick = #btnSiguientePestanna")
 	public void siguientePestanna() {
@@ -200,4 +316,5 @@ public class CCita extends CGenerico {
 	public void anteriorPestanna() {
 		tabCita.setSelected(true);
 	}
+
 }

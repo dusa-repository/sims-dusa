@@ -19,9 +19,7 @@ public class SUsuario {
 	
 	@Transactional
 	public Usuario buscarUsuarioPorId(long codigo) {
-		Usuario usuario;
-		usuario = usuarioDAO.findOne(codigo);
-		return usuario;
+		return usuarioDAO.findOne(codigo);
 	}
 
 	public void guardar(Usuario usuario) {
