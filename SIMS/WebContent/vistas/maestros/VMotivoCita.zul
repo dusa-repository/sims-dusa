@@ -1,0 +1,26 @@
+<zk>
+	<div id="divMotivoCita" apply="controlador.maestros.CMotivoCita">
+		<groupbox width="40em" mold="3d" title="Motivo de Cita">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox maxlength="100" class="multilinea" multiline="true"
+							id="txtDescripcionMotivoCita" hflex="1"
+							tooltiptext="Ingrese la descripcion de Motivo" />
+						<button id="btnBuscarMotivoCita" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraMotivoCita" />
+			<div id="catalogoMotivoCita" />
+		</groupbox>
+	</div>
+</zk>
