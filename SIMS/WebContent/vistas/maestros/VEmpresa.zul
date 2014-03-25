@@ -27,13 +27,13 @@
 					<row>
 						<label class="etiqueta" value="Primer Telefono:" />
 						<textbox id="txtTelefono1Empresa" hflex="1" maxlength="20"
-							tooltiptext="Ingrese el Numero de telefono de la empresa" />
+							tooltiptext="Ingrese el Numero de telefono de la empresa (0426-9999999)" />
 						<hbox />
 					</row>
 					<row>
 						<label class="etiqueta" value="Segundo Telefono:" />
 						<textbox id="txtTelefono2Empresa" hflex="1" maxlength="20"
-							tooltiptext="Ingrese el Numero de telefono de la empresa" />
+							tooltiptext="Ingrese el Numero de telefono de la empresa (0426-9999999)" />
 						<hbox />
 					</row>
 					<row>
