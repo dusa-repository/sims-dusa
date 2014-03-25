@@ -1,6 +1,6 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div id="divCita" apply="controlador.maestros.CCita" width="80%">
+	<div id="divCita" apply="controlador.maestros.CCita" width="90%">
 		<groupbox width="100%" mold="3d" title="Cita">
 			<groupbox width="100%" title="Datos del Doctor">
 				<grid width="100%">
@@ -78,12 +78,12 @@
 								<rows>
 									<row>
 										<label class="etiqueta" value="Fecha Cita:" />
-										<datebox width="100%" id="dtbFechaCita" cols="8" />
+										<datebox  readonly="true" width="100%" id="dtbFechaCita" cols="8" />
 										<label class="etiqueta" value="Motivo" />
 										<combobox id="cmbMotivo" readonly="true" tabindex="1"
 											width="100%" tooltiptext="Seleccione un Motivo" placeholder="Seleccione un Motivo">
 											<template name="model">
-												<comboitem label="${each.descripcion}" context="${each.idMotivo}" />
+												<comboitem label="${each.descripcion}" context="${each.idMotivoCita}" />
 											</template>
 										</combobox>
 									</row>
@@ -110,26 +110,30 @@
 					<tabpanel>
 						<groupbox width="100%" title="Citas Asociadas al Doctor">
 							<hbox>
-								<listbox id="ltbCitas" height="200px" emptyMessage="No hay Citas registrados">
+								<listbox id="ltbCitas" height="300px" emptyMessage="No hay Citas registrados">
 									<listhead>
 										<listheader label="Paciente" sort="auto(paciente.primerNombre)"
 											width="25%" />
 										<listheader label="Empresa Paciente" sort="auto(paciente.empresa.nombre)"
-											width="25%" />
+											width="15%" />
 										<listheader label="Fecha" sort="auto(fechaCita)"
-											width="20%" />
+											width="15%" />
 										<listheader label="Motivo" sort="auto(motivoCita.descripcion)"
-											width="30%" />
+											width="23%" />
+											<listheader label="Observacion" sort="auto(observacion)"
+											width="22%" />
 									</listhead>
 									<template name="model">
 										<listitem>
-											<listcell label="${each.paciente.primerNombre}">
+											<listcell label="${each.paciente.horaAuditoria}">
 											</listcell>
 											<listcell label="${each.paciente.empresa.nombre}">
 											</listcell>
 											<listcell label="${each.fechaCita}">
 											</listcell>
 											<listcell label="${each.motivoCita.descripcion}">
+											</listcell>
+												<listcell label="${each.observacion}">
 											</listcell>
 										</listitem>
 									</template>

@@ -8,6 +8,7 @@ import interfacedao.transacciones.ICitaDAO;
 import modelo.maestros.Cita;
 import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
+import modelo.seguridad.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,14 @@ public class SCita {
 
 	public List<Cita> buscarPorPaciente(Paciente paciente) {
 		return citaDAO.findByPaciente(paciente);
+	}
+
+	public void guardar(Cita cita) {
+		citaDAO.save(cita);
+		
+	}
+
+	public List<Cita> buscarPorUsuario(Usuario usuario) {
+		return citaDAO.findByUsuario(usuario);
 	}
 }
