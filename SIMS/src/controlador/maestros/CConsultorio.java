@@ -20,6 +20,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Validador;
 
 public class CConsultorio extends CGenerico {
 
@@ -142,10 +143,55 @@ public class CConsultorio extends CGenerico {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
-		} else
-			return true;
+		} else {
+			if (!Validador.validarTelefono(txtTelefono1Consultorio.getValue())) {
+				Messagebox.show("Primer Telefono Invalido", "Informacion",
+						Messagebox.OK, Messagebox.INFORMATION);
+				return false;
+			} else {
+				if (!Validador.validarTelefono(txtTelefono2Consultorio.getValue())) {
+					Messagebox.show("Segundo Telefono Invalido", "Informacion",
+							Messagebox.OK, Messagebox.INFORMATION);
+					return false;
+				} else{
+					if (!Validador.validarCorreo(txtCorreoConsultorio.getValue())) {
+						Messagebox.show("Correo Invalido", "Informacion",
+								Messagebox.OK, Messagebox.INFORMATION);
+						return false;
+					} else
+						return true;
+				}
+			}
+		}
+	}
+	
+	/* Valida el numero telefonico */
+	@Listen("onChange = #txtTelefono1Consultorio")
+	public void validarTelefono() {
+		if (!Validador.validarTelefono(txtTelefono1Consultorio.getValue())) {
+			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
 	}
 
+	/* Valida el numero telefonico */
+	@Listen("onChange = #txtTelefono2Consultorio")
+	public void validarTelefono1() {
+		if (!Validador.validarTelefono(txtTelefono2Consultorio.getValue())) {
+			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+	}
+	
+	/* Valida el correo electronico */
+	@Listen("onChange = #txtCorreoConsultorio")
+	public void validarCorreo() {
+		if (!Validador.validarCorreo(txtCorreoConsultorio.getValue())) {
+			Messagebox.show("Correo Invalido", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+	}
+	
 	/* Llena el combo de Ciudades */
 	private void comboCiudad() {
 		List<Ciudad> ciudades = servicioCiudad.buscarTodas();

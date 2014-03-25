@@ -16,7 +16,8 @@
 						<label class="etiqueta" value="Cedula:" />
 						<textbox id="txtCedulaUsuario" hflex="1" maxlength="8"
 							tooltiptext="Ingrese la Cedula del Usuario" />
-						<fileupload  image="/public/imagenes/botones/cargar.png" id="fudImagenUsuario" label="Foto">
+						<fileupload image="/public/imagenes/botones/cargar.png"
+							id="fudImagenUsuario" label="Foto">
 						</fileupload>
 
 						<label class="etiqueta" value="Ficha:" />
@@ -42,7 +43,7 @@
 			<separator />
 			<tabbox width="100%">
 				<tabs>
-					<tab label="Datos Basicos" id="tabBasicos"/>
+					<tab label="Datos Basicos" id="tabBasicos" />
 					<tab label="Datos de Usuario" id="tabUsuarios" />
 				</tabs>
 				<tabpanels>
@@ -61,10 +62,10 @@
 									<row>
 										<label class="etiqueta" value="Telefono:" />
 										<textbox id="txtTelefonoUsuario" hflex="1" maxlength="50"
-											tooltiptext="Ingrese el Numero de Telefono del Usuario" />
+											tooltiptext="Ingrese el Numero de Telefono del Usuario (0426-9999999)" />
 										<label class="etiqueta" value="Correo:" />
 										<textbox id="txtCorreoUsuario" hflex="1" maxlength="50"
-											tooltiptext="Ingrese el Correo Electronico del Usuario" />
+											tooltiptext="Ingrese el Correo Electronico del Usuario (ejemplo@ejemplo.com)" />
 									</row>
 
 									<row>
@@ -127,7 +128,7 @@
 									<row>
 										<label class="etiqueta" value="Licencia INPSASEL:" />
 										<textbox id="txtLicenciaIUsuario" hflex="1" maxlength="50"
-											tooltiptext="Ingrese la Licencia INPSASEL del Usuario" />
+											tooltiptext="Ingrese la Licencia INPSASEL del Usuario (Solo Numeros)" />
 										<label class="etiqueta" value="Tiempo entre citas(min):" />
 										<spinner id="spnTiempoUsuario" tooltiptext="Ingrese el Tiempo entre Citas" />
 									</row>
@@ -135,7 +136,8 @@
 							</grid>
 						</groupbox>
 						<div align="right" style="float: right;">
-							<button id="btnSiguientePestanna" label="Siguiente" image="/public/imagenes/botones/adelante.png" />
+							<button id="btnSiguientePestanna" label="Siguiente"
+								image="/public/imagenes/botones/adelante.png" />
 						</div>
 					</tabpanel>
 					<tabpanel>
@@ -158,15 +160,16 @@
 								<row>
 									<label class="etiqueta" value="Password:" />
 									<textbox id="txtPasswordUsuario" hflex="1" maxlength="256"
-										tooltiptext="Ingrese la Contraseña del Usuario" />
+										tooltiptext="Ingrese la Contraseña del Usuario" type="password" />
 									<label class="etiqueta" value="Reescriba el Password:" />
 									<textbox id="txtPassword2Usuario" hflex="1" maxlength="256"
-										tooltiptext="Reescriba el Login del Usuario" />
+										tooltiptext="Reescriba el Login del Usuario" type="password" />
 								</row>
 							</rows>
 						</grid>
-						<separator/>
-						<groupbox width="100%" title="Seleccione los Grupos Correspondientes al Usuario">
+						<separator />
+						<groupbox width="100%"
+							title="Seleccione los Grupos Correspondientes al Usuario">
 							<hbox>
 								<listbox id="ltbGruposDisponibles" height="160px"
 									emptyMessage="No hay Grupos registrados">
@@ -178,12 +181,10 @@
 									</template>
 								</listbox>
 								<vbox>
-									<button id="pasar1" 
-										image="/public/imagenes/botones/adelante.png" 
+									<button id="pasar1" image="/public/imagenes/botones/adelante.png"
 										tooltiptext="Agregar Grupos" width="30px" />
 									<separator />
-									<button id="pasar2"
-										image="/public/imagenes/botones/atras.png" 
+									<button id="pasar2" image="/public/imagenes/botones/atras.png"
 										tooltiptext="Quitar Grupos" width="30px" />
 								</vbox>
 								<listbox id="ltbGruposAgregados" height="160px"
@@ -199,11 +200,12 @@
 
 						</groupbox>
 						<separator />
-						<div  align="left" style="float: right;" >
-							<button  label="Anterior"  id="btnAnteriorPestanna" image="/public/imagenes/botones/atras.png" />
-								
+						<div align="left" style="float: right;">
+							<button label="Anterior" id="btnAnteriorPestanna"
+								image="/public/imagenes/botones/atras.png" />
+
 						</div>
-					<div width="50%" id="botoneraUsuario" align="left" style="float: left;" />
+						<div width="50%" id="botoneraUsuario" align="left" style="float: left;" />
 					</tabpanel>
 				</tabpanels>
 			</tabbox>

@@ -23,6 +23,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Validador;
 
 public class CEmpresa extends CGenerico {
 
@@ -153,8 +154,20 @@ public class CEmpresa extends CGenerico {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
-		} else
-			return true;
+		} else {
+			if (!Validador.validarTelefono(txtTelefono1Empresa.getValue())) {
+				Messagebox.show("Primer Telefono Invalido", "Informacion",
+						Messagebox.OK, Messagebox.INFORMATION);
+				return false;
+			} else {
+				if (!Validador.validarTelefono(txtTelefono2Empresa.getValue())) {
+					Messagebox.show("Segundo Telefono Invalido", "Informacion",
+							Messagebox.OK, Messagebox.INFORMATION);
+					return false;
+				} else
+					return true;
+			}
+		}
 	}
 
 	/* Muestra el catalogo de las empresas */
@@ -206,6 +219,25 @@ public class CEmpresa extends CGenerico {
 		catalogo.doModal();
 	}
 
+	/* Valida el numero telefonico */
+	@Listen("onChange = #txtTelefono1Empresa")
+	public void validarTelefono() {
+		if (!Validador.validarTelefono(txtTelefono1Empresa.getValue())) {
+			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+	}
+
+	/* Valida el numero telefonico */
+	@Listen("onChange = #txtTelefono2Empresa")
+	public void validarTelefono1() {
+		if (!Validador.validarTelefono(txtTelefono2Empresa.getValue())) {
+			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+	}
+	
+	
 	/* Permite la seleccion de un item del catalogo */
 	@Listen("onSeleccion = #catalogoEmpresa")
 	public void seleccinar() {

@@ -25,19 +25,19 @@
 					<row>
 						<label class="etiqueta" value="Correo Electronico:" />
 						<textbox id="txtCorreoConsultorio" hflex="1" maxlength="1024"
-							tooltiptext="Ingrese el Correo del Consultorio" />
+							tooltiptext="Ingrese el Correo del Consultorio (ejemplo@ejemplo.com)" />
 						<hbox />
 					</row>
 					<row>
 						<label class="etiqueta" value="Primer Telefono:" />
 						<textbox id="txtTelefono1Consultorio" hflex="1" maxlength="20"
-							tooltiptext="Ingrese el Numero de telefono del Consultorio" />
+							tooltiptext="Ingrese el Numero de telefono del Consultorio (0426-9999999)" />
 						<hbox />
 					</row>
 					<row>
 						<label class="etiqueta" value="Segundo Telefono:" />
 						<textbox id="txtTelefono2Consultorio" hflex="1" maxlength="20"
-							tooltiptext="Ingrese el Numero de telefonol Consultorio" />
+							tooltiptext="Ingrese el Numero de telefonol Consultorio (0426-9999999)" />
 						<hbox />
 					</row>
 					<row>

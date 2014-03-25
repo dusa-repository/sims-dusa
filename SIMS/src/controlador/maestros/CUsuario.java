@@ -39,6 +39,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Validador;
 
 public class CUsuario extends CGenerico {
 
@@ -277,7 +278,87 @@ public class CUsuario extends CGenerico {
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
 		} else {
-			return true;
+			if (!Validador.validarCorreo(txtCorreoUsuario.getValue())) {
+				Messagebox.show("Correo Invalido", "Informacion",
+						Messagebox.OK, Messagebox.INFORMATION);
+				return false;
+			} else {
+				if (!Validador.validarTelefono(txtTelefonoUsuario.getValue())) {
+					Messagebox.show("Telefono Invalido", "Informacion",
+							Messagebox.OK, Messagebox.INFORMATION);
+					return false;
+				} else {
+					if (!Validador.validarNumero(txtCedulaUsuario.getValue())) {
+						Messagebox.show("Cedula Invalida", "Informacion",
+								Messagebox.OK, Messagebox.INFORMATION);
+						return false;
+					} else {
+						if (!Validador.validarNumero(txtLicenciaIUsuario
+								.getValue())) {
+							Messagebox.show("Licencia Invalida", "Informacion",
+									Messagebox.OK, Messagebox.INFORMATION);
+							return false;
+						} else {
+							if (!txtPasswordUsuario.getValue().equals(
+									txtPassword2Usuario.getValue())) {
+								Messagebox.show("No coinciden las contraseñas",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
+								return false;
+							} else
+								return true;
+						}
+					}
+				}
+
+			}
+		}
+	}
+
+	/* Valida que los passwords sean iguales */
+	@Listen("onChange = #txtPassword2Usuario")
+	public void validarPassword() {
+		if (!txtPasswordUsuario.getValue().equals(
+				txtPassword2Usuario.getValue())) {
+			Messagebox.show("No coinciden las contraseñas", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
+		}
+	}
+
+	/* Valida el numero telefonico */
+	@Listen("onChange = #txtTelefonoUsuario")
+	public void validarTelefono() {
+		if (!Validador.validarTelefono(txtTelefonoUsuario.getValue())) {
+			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+	}
+
+	/* Valida el correo electronico */
+	@Listen("onChange = #txtCorreoUsuario")
+	public void validarCorreo() {
+		if (!Validador.validarCorreo(txtCorreoUsuario.getValue())) {
+			Messagebox.show("Correo Invalido", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+	}
+	
+	/* Valida la cedula */
+	@Listen("onChange = #txtCedulaUsuario")
+	public void validarCedula() {
+		if (!Validador.validarNumero(txtCedulaUsuario.getValue())) {
+			Messagebox.show("Cedula Invalida", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
+		}
+	}
+	
+	/* Valida licencia de ipsasel */
+	@Listen("onChange = #txtLicenciaIUsuario")
+	public void validarLicencia() {
+		if (!Validador.validarNumero(txtLicenciaIUsuario
+				.getValue())) {
+			Messagebox.show("Licencia Invalida", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
 		}
 	}
 
@@ -400,28 +481,28 @@ public class CUsuario extends CGenerico {
 				"Correo", "Login") {
 
 			@Override
-			protected List<Usuario> buscar(String valor,String combo) {
-				if(combo.equals("Cedula"))
-				return servicioUsuario.filtroCedula(valor);
-				else{
-					if(combo.equals("Ficha"))
-					return servicioUsuario.filtroFicha(valor);
-					else{
-						if(combo.equals("Nombre"))
+			protected List<Usuario> buscar(String valor, String combo) {
+				if (combo.equals("Cedula"))
+					return servicioUsuario.filtroCedula(valor);
+				else {
+					if (combo.equals("Ficha"))
+						return servicioUsuario.filtroFicha(valor);
+					else {
+						if (combo.equals("Nombre"))
 							return servicioUsuario.filtroNombre(valor);
-						else{
-							if(combo.equals("Correo"))
+						else {
+							if (combo.equals("Correo"))
 								return servicioUsuario.filtroCorreo(valor);
-							else{
-								if(combo.equals("Login"))
+							else {
+								if (combo.equals("Login"))
 									return servicioUsuario.filtroLogin(valor);
 								else
 									return servicioUsuario.buscarTodos();
 							}
-								
-						}						
+
+						}
+					}
 				}
-			}
 			}
 
 			@Override
