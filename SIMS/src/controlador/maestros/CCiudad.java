@@ -142,14 +142,13 @@ public class CCiudad extends CGenerico {
 		List<Estado> estados = servicioEstado.buscarTodos();
 		cmbEstado.setModel(new ListModelList<Estado>(estados));
 	}
-	
+
 	/* Muestra un catalogo de ciudades */
 	@Listen("onClick = #btnBuscarCiudad")
 	public void mostrarCatalogo() throws IOException {
 		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
-		catalogo = new Catalogo<Ciudad>(catalogoCiudad,
-				"Catalogo de Ciudades", ciudades, "Nombre",
-				"Estado") {
+		catalogo = new Catalogo<Ciudad>(catalogoCiudad, "Catalogo de Ciudades",
+				ciudades, "Nombre", "Estado") {
 
 			@Override
 			protected String[] crearRegistros(Ciudad ciudad) {
@@ -160,12 +159,12 @@ public class CCiudad extends CGenerico {
 			}
 
 			@Override
-			protected List<Ciudad> buscar(String valor,String combo) {
-				if(combo.equals("Nombre"))
-				return servicioCiudad.filtroNombre(valor);
-				else{
-					if(combo.equals("Estado"))
-					return servicioCiudad.filtroEstado(valor);
+			protected List<Ciudad> buscar(String valor, String combo) {
+				if (combo.equals("Nombre"))
+					return servicioCiudad.filtroNombre(valor);
+				else {
+					if (combo.equals("Estado"))
+						return servicioCiudad.filtroEstado(valor);
 				}
 				return servicioCiudad.buscarTodas();
 			}
@@ -177,15 +176,20 @@ public class CCiudad extends CGenerico {
 	/* Busca si existe una ciudad con el mismo nombre escrito */
 	@Listen("onChange = #txtNombreCiudad")
 	public void buscarPorNombre() {
-		Ciudad ciudad = servicioCiudad
-				.buscarPorNombre(txtNombreCiudad.getValue());
+		Ciudad ciudad = servicioCiudad.buscarPorNombre(txtNombreCiudad
+				.getValue());
 		if (ciudad != null)
 			llenarCampos(ciudad);
 	}
 
+	/* Llena el combo de estado cada vez que se abre */
+	@Listen("onOpen = #cmbEstado")
+	public void llenarCombo() {
+		comboEstado();
+	}
+
 	/*
-	 * Selecciona una ciudad del catalogo y llena los campos con la
-	 * informacion
+	 * Selecciona una ciudad del catalogo y llena los campos con la informacion
 	 */
 	@Listen("onSeleccion = #catalogoCiudad")
 	public void seleccion() {
