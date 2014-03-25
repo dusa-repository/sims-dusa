@@ -1,0 +1,26 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divEstado" apply="controlador.maestros.CEstado">
+		<groupbox width="40em" mold="3d" title="Estado">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox id="txtNombreEstado" hflex="1" maxlength="500"
+							tooltiptext="Ingrese el Nombre del Estado" multiline="true" class="multilinea" />
+						<button id="btnBuscarEstado" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraEstado" />
+			<div id="catalogoEstado" />
+		</groupbox>
+	</div>
+</zk>

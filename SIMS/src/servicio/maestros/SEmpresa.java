@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfacedao.maestros.IEmpresaDAO;
 
+import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,41 @@ public class SEmpresa {
 
 	public Empresa buscar(long parseLong) {
 		return empresaDAO.findOne(parseLong);
+	}
+	
+	public List<Empresa> buscarPorCiudad(Ciudad ciudad) {
+		return empresaDAO.findByCiudad(ciudad);
+	}
+
+	public void guardar(Empresa empresa) {
+		empresaDAO.save(empresa);
+	}
+
+	public void eliminar(Empresa empresa) {
+		empresaDAO.delete(empresa);
+	}
+
+	public List<Empresa> filtroNombre(String valor) {
+		return empresaDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Empresa> filtroRif(String valor) {
+		return empresaDAO.findByRifStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Empresa> filtroDireccion(String valor) {
+		return empresaDAO.findByDireccionStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Empresa> filtroTelefono(String valor) {
+		return empresaDAO.findByTelefono1StartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Empresa> filtroCiudad(String valor) {
+		return empresaDAO.findByCiudadNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public Empresa buscarPorRif(String value) {
+		return empresaDAO.findByRif(value);
 	}
 }

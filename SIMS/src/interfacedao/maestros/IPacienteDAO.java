@@ -2,6 +2,7 @@ package interfacedao.maestros;
 
 import java.util.List;
 
+import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,5 +18,7 @@ public interface IPacienteDAO extends JpaRepository<Paciente, Long> {
 	List<Paciente> findByEmpresaNombreStartingWithAllIgnoreCase(String valor);
 
 	Paciente findByCedula(String value);
+
+	List<Paciente> findByEmpresa(Empresa empresa);
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfacedao.maestros.IPacienteDAO;
 
+import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,9 @@ public class SPaciente {
 	public void eliminar(Paciente paciente) {
 		pacienteDAO.delete(paciente);
 		
+	}
+
+	public List<Paciente> buscarPorEmpresa(Empresa empresa) {
+		return pacienteDAO.findByEmpresa(empresa);
 	}
 }

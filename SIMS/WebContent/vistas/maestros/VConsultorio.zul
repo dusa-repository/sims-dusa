@@ -1,0 +1,66 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divConsultorio" apply="controlador.maestros.CConsultorio">
+		<groupbox width="40em" mold="3d" title="Consultorio">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox id="txtNombreConsultorio" hflex="1" maxlength="500" class="multilinea"
+							tooltiptext="Ingrese el Nombre del Consultorio" multiline="true" />
+						<button id="btnBuscarConsultorio" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Descripcion:" />
+						<textbox id="txtDescripcionConsultorio" hflex="1" maxlength="1024" class="multilinea"
+							tooltiptext="Ingrese la Descripcion de la Consultorio" multiline="true" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Correo Electronico:" />
+						<textbox id="txtCorreoConsultorio" hflex="1" maxlength="1024"
+							tooltiptext="Ingrese el Correo del Consultorio" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Primer Telefono:" />
+						<textbox id="txtTelefono1Consultorio" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Numero de telefono del Consultorio" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Segundo Telefono:" />
+						<textbox id="txtTelefono2Consultorio" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Numero de telefonol Consultorio" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Direccion:" />
+						<textbox id="txtDireccionConsultorio" hflex="1" maxlength="1024" class="multilinea"
+							tooltiptext="Ingrese la Direccion de la Consultorio" multiline="true" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Ciudad:" />
+						<combobox id="cmbCiudadConsultorio" readonly="true" tabindex="1"
+							width="100%" tooltiptext="Seleccione una Ciudad" placeholder="Seleccione una Ciudad">
+							<template name="model">
+								<comboitem context="${each.idCiudad}" label="${each.nombre}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraConsultorio" />
+			<div id="catalogoConsultorio" />
+		</groupbox>
+	</div>
+</zk>
