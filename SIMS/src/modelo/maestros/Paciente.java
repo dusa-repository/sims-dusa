@@ -2,6 +2,9 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import modelo.seguridad.Usuario;
+
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -29,8 +32,11 @@ public class Paciente implements Serializable {
 	@Column(name="hora_auditoria", length=10)
 	private String horaAuditoria;
 
-	@Column(name="id_empresa")
-	private long idEmpresa;
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_empresa")
+	private Empresa empresa;
+	
 
 	@Column(name="primer_apellido", length=100)
 	private String primerApellido;
@@ -49,19 +55,21 @@ public class Paciente implements Serializable {
 	}
 	
 
+
 	public Paciente(long idPaciente, String cedula, Timestamp fechaAuditoria,
-			String horaAuditoria, long idEmpresa, String primerApellido,
+			String horaAuditoria, Empresa empresa, String primerApellido,
 			String primerNombre, String usuarioAuditoria) {
 		super();
 		this.idPaciente = idPaciente;
 		this.cedula = cedula;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
-		this.idEmpresa = idEmpresa;
+		this.empresa = empresa;
 		this.primerApellido = primerApellido;
 		this.primerNombre = primerNombre;
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
+
 
 
 	public long getIdPaciente() {
@@ -96,13 +104,16 @@ public class Paciente implements Serializable {
 		this.horaAuditoria = horaAuditoria;
 	}
 
-	public long getIdEmpresa() {
-		return this.idEmpresa;
+
+	public Empresa getEmpresa() {
+		return empresa;
 	}
 
-	public void setIdEmpresa(long idEmpresa) {
-		this.idEmpresa = idEmpresa;
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
+
+
 
 	public String getPrimerApellido() {
 		return this.primerApellido;
