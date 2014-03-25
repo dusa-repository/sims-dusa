@@ -10,24 +10,25 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Nombre:" />
-						<textbox class="multilinea" multiline="true" id="txtNombre" hflex="1" tooltiptext="Ingrese el Nombre de la Presentacion" />
+						<textbox maxlength="500" class="multilinea" multiline="true"
+							id="txtNombre" hflex="1" tooltiptext="Ingrese el Nombre de la Presentacion" />
 						<button id="btnBuscarPresentacion" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
-						<row>
+					<row>
 						<label class="etiqueta" value="Medicina:" />
-						<combobox tooltiptext="Seleccione una Medicina" placeholder="Seleccione una Medicina" id="cmbMedicina" readonly="true"
+						<combobox tooltiptext="Seleccione una Medicina"
+							placeholder="Seleccione una Medicina" id="cmbMedicina" readonly="true"
 							width="100%">
 							<template name="model">
-								<comboitem label="${each.nombre}"
-									context="${each.idMedicina}" />
+								<comboitem label="${each.nombre}" context="${each.idMedicina}" />
 							</template>
 						</combobox>
 						<hbox />
 					</row>
 				</rows>
 			</grid>
-			<separator/>
+			<separator />
 			<div id="botoneraPresentacion" />
 			<div id="catalogoPresentacion" />
 		</groupbox>

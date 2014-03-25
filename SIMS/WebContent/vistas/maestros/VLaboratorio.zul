@@ -10,7 +10,7 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Nombre:" />
-						<textbox class="multilinea" multiline="true" id="txtNombre" hflex="1" tooltiptext="Ingrese el Nombre del Laboratorio" />
+						<textbox maxlength="500" class="multilinea" multiline="true" id="txtNombre" hflex="1" tooltiptext="Ingrese el Nombre del Laboratorio" />
 						<button id="btnBuscarLaboratorio" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>

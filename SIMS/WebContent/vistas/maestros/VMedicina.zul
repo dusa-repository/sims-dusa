@@ -10,7 +10,7 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Nombre:" />
-						<textbox id="txtNombre" hflex="1"
+						<textbox maxlength="1000" id="txtNombre" hflex="1"
 							tooltiptext="Ingrese el Nombre de la Medicina" />
 						<button id="btnBuscarMedicina" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
@@ -32,7 +32,7 @@
 							placeholder="Seleccione una Forma Terapeutica" id="cmbFormaTerapeutica"
 							readonly="true" width="100%">
 							<template name="model">
-								<comboitem label="${each.nombre}" context="${each.idFormaTerapeutica}"/>
+								<comboitem label="${each.nombre}" context="${each.idFormaTerapeutica}" />
 							</template>
 						</combobox>
 						<hbox />
@@ -54,37 +54,38 @@
 				<tabpanels>
 
 					<tabpanel>
-						<textbox class="multilineaTab" multiline="true"
+						<textbox maxlength="1000" class="multilineaTab" multiline="true"
 							id="txtDenominacionGenerica" hflex="1"
 							tooltiptext="Ingrese la Denominacion Generica" />
 					</tabpanel>
 					<tabpanel>
-						<textbox class="multilineaTab" multiline="true" id="txtComposicion"
-							hflex="1" tooltiptext="Ingrese la Composicion" />
+						<textbox maxlength="1000" class="multilineaTab" multiline="true"
+							id="txtComposicion" hflex="1" tooltiptext="Ingrese la Composicion" />
 					</tabpanel>
 					<tabpanel>
-						<textbox class="multilineaTab" multiline="true" id="txtPosologia"
-							hflex="1" tooltiptext="Ingrese la Posologia" />
+						<textbox maxlength="1000" class="multilineaTab" multiline="true"
+							id="txtPosologia" hflex="1" tooltiptext="Ingrese la Posologia" />
 					</tabpanel>
 					<tabpanel>
-						<textbox class="multilineaTab" multiline="true" id="txtIndicaciones"
-							hflex="1" tooltiptext="Ingrese las Indicaciones" />
+						<textbox maxlength="1000" class="multilineaTab" multiline="true"
+							id="txtIndicaciones" hflex="1" tooltiptext="Ingrese las Indicaciones" />
 					</tabpanel>
 					<tabpanel>
-						<textbox class="multilineaTab" multiline="true" id="txtEfectos"
-							hflex="1" tooltiptext="Ingrese los Efectos" />
+						<textbox maxlength="1000" class="multilineaTab" multiline="true"
+							id="txtEfectos" hflex="1" tooltiptext="Ingrese los Efectos" />
 					</tabpanel>
 					<tabpanel>
-						<textbox class="multilineaTab" multiline="true" id="txtPrecauciones"
-							hflex="1" tooltiptext="Ingrese las Precauciones" />
+						<textbox maxlength="1000" class="multilineaTab" multiline="true"
+							id="txtPrecauciones" hflex="1" tooltiptext="Ingrese las Precauciones" />
 					</tabpanel>
 					<tabpanel>
-						<textbox class="multilineaTab" multiline="true"
+						<textbox maxlength="1000" class="multilineaTab" multiline="true"
 							id="txtContraindicaciones" hflex="1" tooltiptext="Ingrese las Contraindicaciones" />
 					</tabpanel>
 					<tabpanel>
-						<textbox class="multilineaTab" multiline="true" id="txtEmbarazo"
-							hflex="1" tooltiptext="Ingrese las Indicaciones en caso de Embarazo" />
+						<textbox maxlength="1000" class="multilineaTab" multiline="true"
+							id="txtEmbarazo" hflex="1"
+							tooltiptext="Ingrese las Indicaciones en caso de Embarazo" />
 					</tabpanel>
 				</tabpanels>
 			</tabbox>

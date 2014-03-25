@@ -1,0 +1,48 @@
+<zk>
+	<div id="divPaciente" apply="controlador.maestros.CPaciente">
+		<groupbox width="40em" mold="3d" title="Paciente">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Cedula:" />
+						<textbox maxlength="12" id="txtCedulaPaciente" hflex="1"
+							tooltiptext="Ingrese la Cedula del Paciente" />
+						<button id="btnBuscarPaciente" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Primer Nombre:" />
+						<textbox maxlength="100" id="txtNombre1Paciente" hflex="1"
+							tooltiptext="Ingrese el primer Nombre del Paciente" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Primer Apellido:" />
+						<textbox maxlength="100" id="txtApellido1Paciente" hflex="1"
+							tooltiptext="Ingrese el primer Apellido del Paciente" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Empresa:" />
+						<combobox tooltiptext="Seleccione una Empresa"
+							placeholder="Seleccione una Empresa" id="cmbEmpresa" readonly="true"
+							width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idEmpresa}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraPaciente" />
+			<div id="catalogoPaciente" />
+		</groupbox>
+	</div>
+</zk>
