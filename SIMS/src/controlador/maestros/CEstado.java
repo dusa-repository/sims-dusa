@@ -37,7 +37,7 @@ public class CEstado extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		// TODO Auto-generated method stub
+
 		Botonera botonera = new Botonera() {
 
 			@Override

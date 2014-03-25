@@ -11,6 +11,7 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import modelo.maestros.Ciudad;
 import modelo.maestros.Especialidad;
 import modelo.maestros.Unidad;
 import modelo.seguridad.Grupo;
@@ -118,7 +119,7 @@ public class CUsuario extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		llenarCombos();
+
 		llenarListas(null);
 		try {
 			imagen.setContent(new AImage(url));
@@ -394,16 +395,21 @@ public class CUsuario extends CGenerico {
 		ltbGruposDisponibles.setCheckmark(true);
 	}
 
-	/* LLena los combos de unidad y especialidad de la vista */
-	public void llenarCombos() {
+	/* Llena el combo de Unidades cada vez que se abre */
+	@Listen("onOpen = #cmbUnidad")
+	public void llenarComboUnidad(){
 		List<Unidad> unidades = servicioUnidad.buscarTodas();
 		cmbUnidad.setModel(new ListModelList<Unidad>(unidades));
+	}
+	
+	/* Llena el combo de Especialidades cada vez que se abre */
+	@Listen("onOpen = #cmbEspecialidad")
+	public void llenarComboEspecialidad(){
 		List<Especialidad> especialidades = servicioEspecialidad.buscarTodas();
 		cmbEspecialidad
 				.setModel(new ListModelList<Especialidad>(especialidades));
-
 	}
-
+	
 	/* Permite subir una imagen a la vista */
 	@Listen("onUpload = #fudImagenUsuario")
 	public void processMedia(UploadEvent event) {

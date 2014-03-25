@@ -45,8 +45,7 @@ public class CCiudad extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		// TODO Auto-generated method stub
-		comboEstado();
+
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -137,12 +136,6 @@ public class CCiudad extends CGenerico {
 			return true;
 	}
 
-	/* Llena el combo de estados */
-	public void comboEstado() {
-		List<Estado> estados = servicioEstado.buscarTodos();
-		cmbEstado.setModel(new ListModelList<Estado>(estados));
-	}
-
 	/* Muestra un catalogo de ciudades */
 	@Listen("onClick = #btnBuscarCiudad")
 	public void mostrarCatalogo() throws IOException {
@@ -185,7 +178,8 @@ public class CCiudad extends CGenerico {
 	/* Llena el combo de estado cada vez que se abre */
 	@Listen("onOpen = #cmbEstado")
 	public void llenarCombo() {
-		comboEstado();
+			List<Estado> estados = servicioEstado.buscarTodos();
+			cmbEstado.setModel(new ListModelList<Estado>(estados));
 	}
 
 	/*

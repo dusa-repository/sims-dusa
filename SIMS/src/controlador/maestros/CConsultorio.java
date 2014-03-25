@@ -52,8 +52,7 @@ public class CConsultorio extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		// TODO Auto-generated method stub
-		comboCiudad();
+
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -192,12 +191,13 @@ public class CConsultorio extends CGenerico {
 		}
 	}
 	
-	/* Llena el combo de Ciudades */
-	private void comboCiudad() {
+	/* Llena el combo de Ciudades cada vez que se abre */
+	@Listen("onOpen = #cmbCiudadConsultorio")
+	public void llenarComboCiudad(){
 		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
 		cmbCiudadConsultorio.setModel(new ListModelList<Ciudad>(ciudades));
 	}
-
+	
 	/* Muestra el catalogo de los consultorios */
 	@Listen("onClick = #btnBuscarConsultorio")
 	public void mostrarCatalogo() {
