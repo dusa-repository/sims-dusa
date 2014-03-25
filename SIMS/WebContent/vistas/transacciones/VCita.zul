@@ -1,0 +1,151 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divCita" apply="controlador.maestros.CCita" width="80%">
+		<groupbox width="100%" mold="3d" title="Cita">
+			<groupbox width="100%" title="Datos del Doctor">
+				<grid width="100%">
+					<columns visible="false">
+						<column label="" width="8%" />
+						<column label="" width="19%" />
+						<column label="" width="8%" />
+						<column label="" width="19%" />
+						<column label="" width="8%" />
+						<column label="" width="19%" />
+						<column label="" width="19%" />
+					</columns>
+					<rows>
+						<row>
+							<label class="etiqueta" value="Cedula:" />
+							<label id="lblCedulaDoctor" />
+							<label class="etiqueta" value="Nombre:" />
+							<label id="lblNombreDoctor" />
+							<label class="etiqueta" value="Apellido:" />
+							<label id="lblApellidoDoctor" />
+
+							<button id="btnBuscarDoctor" class="btn" label="Buscar Doctor"
+								tooltiptext="Catalogo de Doctores" width="100%"
+								image="/public/imagenes/botones/buscar.png" />
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			<separator />
+			<tabbox width="100%">
+				<tabs>
+					<tab label="Nueva Cita" id="tabCita" />
+					<tab label="Consultar Citas" id="tabConsultar" />
+				</tabs>
+				<tabpanels>
+					<tabpanel>
+						<groupbox width="100%" title="Datos de Paciente">
+							<grid width="100%">
+								<columns visible="false">
+									<column label="" width="10%" />
+									<column label="" width="30%" />
+									<column label="" width="10%" />
+									<column label="" width="30%" />
+									<column label="" width="20%" />
+								</columns>
+								<rows>
+									<row>
+										<label class="etiqueta" value="Cedula:" />
+										<label id="lblCedulaPaciente" />
+										<label class="etiqueta" value="Empresa:" />
+										<label id="lblEmpresaPaciente" />
+										<button id="btnBuscarPaciente" class="btn" label="Buscar Paciente"
+											tooltiptext="Catalogo de Pacientes" width="100%"
+											image="/public/imagenes/botones/buscar.png" />
+									</row>
+									<row>
+										<label class="etiqueta" value="Nombre:" />
+										<label id="lblNombrePaciente" />
+										<label class="etiqueta" value="Apellido:" />
+										<label id="lblApellidoPaciente" />
+										<hbox />
+									</row>
+								</rows>
+							</grid>
+							<separator />
+						</groupbox>
+						<groupbox width="100%" title="Datos de la Cita">
+							<grid width="100%">
+								<columns visible="false">
+									<column label="" width="18%" />
+									<column label="" width="30%" />
+									<column label="" width="17%" />
+									<column label="" width="35%" />
+								</columns>
+								<rows>
+									<row>
+										<label class="etiqueta" value="Fecha Cita:" />
+										<datebox width="100%" id="dtbFechaCita" cols="8" />
+										<label class="etiqueta" value="Motivo" />
+										<combobox id="cmbMotivo" readonly="true" tabindex="1"
+											width="100%" tooltiptext="Seleccione un Motivo" placeholder="Seleccione un Motivo">
+											<template name="model">
+												<comboitem label="${each.descripcion}" context="${each.idMotivo}" />
+											</template>
+										</combobox>
+									</row>
+									<row>
+										<label class="etiqueta" value="Observacion:" />
+										<textbox class="multilinea" id="txtObservacion" hflex="1"
+											maxlength="500" tooltiptext="Ingrese una Observacion de la Cita"
+											multiline="true" />
+										<hbox />
+										<hbox />
+									</row>
+								</rows>
+							</grid>
+							<separator />
+							<separator />
+							<separator />
+						</groupbox>
+						<div width="50%" id="botoneraCita" align="left" style="float: left;" />
+						<div align="right" style="float: right;">
+							<button id="btnSiguientePestanna" label="Siguiente"
+								image="/public/imagenes/botones/adelante.png" />
+						</div>
+					</tabpanel>
+					<tabpanel>
+						<groupbox width="100%" title="Citas Asociadas al Doctor">
+							<hbox>
+								<listbox id="ltbCitas" height="200px" emptyMessage="No hay Citas registrados">
+									<listhead>
+										<listheader label="Paciente" sort="auto(paciente.primerNombre)"
+											width="25%" />
+										<listheader label="Empresa Paciente" sort="auto(paciente.empresa.nombre)"
+											width="25%" />
+										<listheader label="Fecha" sort="auto(fechaCita)"
+											width="20%" />
+										<listheader label="Motivo" sort="auto(motivoCita.descripcion)"
+											width="30%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.paciente.primerNombre}">
+											</listcell>
+											<listcell label="${each.paciente.empresa.nombre}">
+											</listcell>
+											<listcell label="${each.fechaCita}">
+											</listcell>
+											<listcell label="${each.motivoCita.descripcion}">
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+							</hbox>
+						</groupbox>
+						<separator />
+						<div width="50%" align="left" style="float: left;">
+							<button label="Anterior" id="btnAnteriorPestanna"
+								image="/public/imagenes/botones/atras.png" />
+						</div>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<div id="catalogoUsuarios" />
+			<div id="divCatalogoPacientes" />
+		</groupbox>
+	</div>
+</zk>

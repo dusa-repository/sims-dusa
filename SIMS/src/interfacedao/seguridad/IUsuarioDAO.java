@@ -27,4 +27,7 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 	List<Usuario> findByLoginStartingWithAllIgnoreCase(String valor);
 
 	List<Usuario> findByEmailStartingWithAllIgnoreCase(String valor);
+
+	List<Usuario> findByEspecialidadDescripcionStartingWithAllIgnoreCase(
+			String valor);
 }

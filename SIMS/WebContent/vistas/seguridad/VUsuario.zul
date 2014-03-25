@@ -199,11 +199,11 @@
 
 						</groupbox>
 						<separator />
-						<div width="50%" align="left" style="float: left;" >
+						<div  align="left" style="float: right;" >
 							<button  label="Anterior"  id="btnAnteriorPestanna" image="/public/imagenes/botones/atras.png" />
 								
 						</div>
-					<div  id="botoneraUsuario" align="right" style="float: right;" />
+					<div width="50%" id="botoneraUsuario" align="left" style="float: left;" />
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
