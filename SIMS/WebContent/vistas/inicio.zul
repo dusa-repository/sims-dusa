@@ -15,22 +15,31 @@
 	<window title="" border="0" height="100%" contentStyle="overflow:auto"
 		apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
-
 			<north height="5em">
 				<hbox hflex="1">
-					<image src="../public/imagenes/generales/banner.png" height="5em"
-						width="30em" />
-					<div align="rigth" width="38em">
+					<vbox>
 						<separator />
+						<image src="../public/imagenes/generales/LogoDusa.png"
+							height="4em" width="15em" />
+					</vbox>
+					<div align="center" width="35em">
 						<separator />
 						<separator />
 						<hbox>
-							<label style="font-size:24px;color:blue" value="Sistema Integral Medico y de Seguridad" />
+							<label style="font-size:24px;color:#0404B4;font-weight: bold" value="Sistema Integral Medico y de Seguridad" />
 						</hbox>
 					</div>
+					<vbox>
+						<separator />
+						<image src="../public/imagenes/generales/banner.png" height="3em"
+							width="15em" />
+					</vbox>
 					<div align="center" width="100%">
 						<hbox>
-							<image id="imagenes" width="60px" height="55px" />
+							<vbox>
+								<separator />
+								<image id="imagenes" width="60px" height="55px" />
+							</vbox>
 							<vbox>
 								<separator />
 								<label style="color: red"
@@ -65,16 +74,20 @@
 			<center border="none">
 				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
 					<center border="none" flex="true" autoscroll="true">
-						<tabbox id="tabBox" hflex="1">
+						<tabbox
+							style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; width=100%"
+							id="tabBox" hflex="1">
 							<tabs>
 								<tab visible="false">Tab A</tab>
-								<tab id="tab" label="+" sclass="plusTab" visible = "false">
+								<tab id="tab" label="+" sclass="plusTab" visible="false">
 								</tab>
 							</tabs>
 							<tabpanels>
-								<tabpanel><include id="contenido"></include></tabpanel>
+								<tabpanel>
+									<include id="contenido"></include>
+								</tabpanel>
 							</tabpanels>
-							
+
 						</tabbox>
 					</center>
 				</borderlayout>

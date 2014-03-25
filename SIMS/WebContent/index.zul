@@ -31,13 +31,19 @@
 		</west>
 		<east width="60%" border="none">
 			<vlayout>
+				<div align="center">
+						<separator />
+					<separator />
+					<image src="/public/imagenes/generales/LogoDusa.png" height="4em"
+						width="15em" />
+				</div>
 				<div height="240px" align="rigth">
 					<separator />
 					<separator />
 					<separator />
 					<separator />
 					<separator />
-					<label style="font-size:24px;color:blue;position:center"
+					<label style="font-size:24px;color:#0404B4;font-weight: bold"
 						value="Sistema Integral Medico y de Seguridad" />
 				</div>
 				<div align="center">
