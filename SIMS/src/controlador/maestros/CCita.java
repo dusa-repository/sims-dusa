@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Cita;
+import modelo.maestros.Ciudad;
 import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
@@ -80,8 +81,6 @@ public class CCita extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
-		comboMotivo();
 
 		Botonera botonera = new Botonera() {
 
@@ -286,12 +285,13 @@ public class CCita extends CGenerico {
 		catalogoPaciente.setParent(null);
 	}
 
-	/* Llena el combo de Motivos */
-	public void comboMotivo() {
+	/* Llena el combo de Motivos cada vez que se abre */
+	@Listen("onOpen = #cmbMotivo")
+	public void llenarComboMotivo(){
 		List<MotivoCita> motivoCitas = servicioMotivoCita.buscarTodos();
 		cmbMotivo.setModel(new ListModelList<MotivoCita>(motivoCitas));
 	}
-
+	
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtObservacion.getText().compareTo("") == 0

@@ -3,6 +3,7 @@ package controlador.maestros;
 import java.io.IOException;
 import java.util.List;
 
+import modelo.maestros.Estado;
 import modelo.maestros.Medicina;
 import modelo.maestros.Presentacion;
 
@@ -42,7 +43,6 @@ public class CPresentacion extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 
-		comboMedicina();
 		Botonera botonera = new Botonera() {
 			@Override
 			public void guardar() {
@@ -146,11 +146,13 @@ public class CPresentacion extends CGenerico {
 		catalogo.doModal();
 	}
 
-	/* Llena el combo de medicinas */
-	public void comboMedicina() {
+	/* Llena el combo de medicinas cada vez que se abre */
+	@Listen("onOpen = #cmbMedicina")
+	public void llenaComboMedicina() {
 		List<Medicina> medicina = servicioMedicina.buscarTodas();
 		cmbMedicina.setModel(new ListModelList<Medicina>(medicina));
 	}
+
 
 	/* Validaciones de pantalla para poder realizar el guardar */
 	public boolean validar() {

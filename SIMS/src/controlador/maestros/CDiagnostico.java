@@ -5,6 +5,7 @@ import java.util.List;
 
 import modelo.maestros.Categoria;
 import modelo.maestros.Diagnostico;
+import modelo.maestros.Medicina;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -44,7 +45,6 @@ public class CDiagnostico extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 
-		comboCategoria();
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -172,8 +172,9 @@ public class CDiagnostico extends CGenerico {
 		catalogo.doModal();
 	}
 
-	/* Llena el combo de Categorias */
-	public void comboCategoria() {
+	/* Llena el combo de Categorias cada vez que se abre */
+	@Listen("onOpen = #cmbCategoria")
+	public void llenarComboCategoria() {
 		List<Categoria> categorias = servicioCategoria.buscarTodas();
 		cmbCategoria.setModel(new ListModelList<Categoria>(categorias));
 	}

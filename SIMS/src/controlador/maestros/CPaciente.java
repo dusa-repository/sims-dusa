@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import modelo.maestros.Cita;
+import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
 
@@ -46,8 +47,6 @@ public class CPaciente extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
-		comboEmpresa();
 
 		Botonera botonera = new Botonera() {
 
@@ -191,12 +190,13 @@ public class CPaciente extends CGenerico {
 		catalogo.doModal();
 	}
 
-	/* Llena el combo de Empresas */
-	public void comboEmpresa() {
+	/* Llena el combo de Empresas cada vez que se abre */
+	@Listen("onOpen = #cmbEmpresa")
+	public void llenarComboEmpresa(){
 		List<Empresa> empresas = servicioEmpresa.buscarTodas();
 		cmbEmpresa.setModel(new ListModelList<Empresa>(empresas));
 	}
-
+	
 	/* Permite la seleccion de un item del catalogo */
 	@Listen("onSeleccion = #catalogoPaciente")
 	public void seleccinar() {

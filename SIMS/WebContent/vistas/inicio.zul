@@ -1,15 +1,5 @@
 <?page id="mainPage" title="SIMS" contentType="text/html;charset=utf-8"?>
 <zk>
-	<style>
-		.plusTab .z-tab-text {
-		font-weight: bold; color: #9c9c9c;
-		}
-		.z-toolbarbutton-cnt, .z-toolbar-tabs {
-		padding: 0; text-align: center;
-		font-weight: bold; font-size: 14px;color:
-		#9c9c9c;
-		}
-	</style>
 	<style src="../public/Estilo.css" />
 
 	<window title="" border="0" height="100%" contentStyle="overflow:auto"
@@ -79,7 +69,7 @@
 							id="tabBox" hflex="1">
 							<tabs>
 								<tab visible="false">Tab A</tab>
-								<tab id="tab" label="+" sclass="plusTab" visible="false">
+								<tab id="tab" label="+" visible="false">
 								</tab>
 							</tabs>
 							<tabpanels>

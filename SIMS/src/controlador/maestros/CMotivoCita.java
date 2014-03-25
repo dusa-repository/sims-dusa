@@ -42,7 +42,7 @@ public class CMotivoCita extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divMotivoCita, "Motivo Cita");
+				cerrarVentana(divMotivoCita, "Motivo");
 
 			}
 

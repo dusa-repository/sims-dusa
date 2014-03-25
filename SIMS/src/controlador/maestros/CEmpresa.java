@@ -53,8 +53,8 @@ public class CEmpresa extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		// TODO Auto-generated method stub
-		comboCiudad();
+
+
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -137,8 +137,9 @@ public class CEmpresa extends CGenerico {
 		botoneraEmpresa.appendChild(botonera);
 	}
 
-	/* Llena el combo de Ciudades */
-	private void comboCiudad() {
+	/* Llena el combo de Ciudades cada vez que se abre */
+	@Listen("onOpen = #cmbCiudad")
+	public void llenarComboCiudad(){
 		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
 		cmbCiudad.setModel(new ListModelList<Ciudad>(ciudades));
 	}

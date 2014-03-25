@@ -16,6 +16,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
@@ -55,6 +56,22 @@ public class CMedicina extends CGenerico {
 	private Textbox txtContraindicaciones;
 	@Wire
 	private Textbox txtEmbarazo;
+	@Wire
+	private Tab tabDenominacionGenerica;
+	@Wire
+	private Tab tabComposicion;
+	@Wire
+	private Tab tabPosologia;
+	@Wire
+	private Tab tabIndicaciones;
+	@Wire
+	private Tab tabEfectos;
+	@Wire
+	private Tab tabPrecauciones;
+	@Wire
+	private Tab tabContraindicaciones;;
+	@Wire
+	private Tab tabEmbarazo;
 
 	Catalogo<Medicina> catalogo;
 	long id = 0;
@@ -62,9 +79,7 @@ public class CMedicina extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 
-		comboLaboratorios();
-		comboFormasTerapeuticas();
-
+		txtDenominacionGenerica.setFocus(true);
 		Botonera botonera = new Botonera() {
 			@Override
 			public void guardar() {
@@ -194,34 +209,36 @@ public class CMedicina extends CGenerico {
 			}
 
 			@Override
-			protected List<Medicina> buscar(String valor,String combo) {
-				if(combo.equals("Nombre"))
-				return servicioMedicina.filtroNombre(valor);
-				else{
-					if(combo.equals("Laboratorio"))
-					return servicioMedicina.filtroLaboratorio(valor);
-					else{
-						if(combo.equals("Posologia"))
-						return servicioMedicina.filtroPosologia(valor);
+			protected List<Medicina> buscar(String valor, String combo) {
+				if (combo.equals("Nombre"))
+					return servicioMedicina.filtroNombre(valor);
+				else {
+					if (combo.equals("Laboratorio"))
+						return servicioMedicina.filtroLaboratorio(valor);
+					else {
+						if (combo.equals("Posologia"))
+							return servicioMedicina.filtroPosologia(valor);
 						else
 							return servicioMedicina.buscarTodas();
 					}
 				}
-				
+
 			}
 		};
 		catalogo.setParent(catalogoMedicina);
 		catalogo.doModal();
 	}
 
-	/* Llena el combo de laboratorios */
-	public void comboLaboratorios() {
+	/* Llena el combo de laboratorios cada vez que se abre */
+	@Listen("onOpen = #cmbLaboratorio")
+	public void llenarComboLaboratorios() {
 		List<Laboratorio> laboratorios = servicioLaboratorio.buscarTodos();
 		cmbLaboratorio.setModel(new ListModelList<Laboratorio>(laboratorios));
 	}
 
-	/* Llena el combo de formas terapeuticas */
-	public void comboFormasTerapeuticas() {
+	/* Llena el combo de formas terapeuticas cada vez que se abre */
+	@Listen("onOpen = #cmbFormaTerapeutica")
+	public void llenarComboFormas() {
 		List<FormaTerapeutica> formasTerapeuticas = servicioFormaTerapeutica
 				.buscarTodos();
 		cmbFormaTerapeutica.setModel(new ListModelList<FormaTerapeutica>(
@@ -288,6 +305,48 @@ public class CMedicina extends CGenerico {
 		txtNombre.setValue(medicina.getNombre());
 
 		id = medicina.getIdMedicina();
+	}
+
+	/* Focus a la pestannas */
+
+	@Listen("onClick = #tabDenominacionGenerica")
+	public void pestanna1() {
+		txtDenominacionGenerica.setFocus(true);
+	}
+
+	@Listen("onClick = #tabComposicion")
+	public void pestanna2() {
+		txtComposicion.setFocus(true);
+	}
+
+	@Listen("onClick = #tabPosologia")
+	public void pestanna3() {
+		txtPosologia.setFocus(true);
+	}
+
+	@Listen("onClick = #tabIndicaciones")
+	public void pestanna4() {
+		txtIndicaciones.setFocus(true);
+	}
+
+	@Listen("onClick = #tabEfectos")
+	public void pestanna5() {
+		txtEfectos.setFocus(true);
+	}
+
+	@Listen("onClick = #tabPrecauciones")
+	public void pestanna6() {
+		txtPrecauciones.setFocus(true);
+	}
+
+	@Listen("onClick = #tabContraindicaciones")
+	public void pestanna7() {
+		txtContraindicaciones.setFocus(true);
+	}
+
+	@Listen("onClick = #tabEmbarazo")
+	public void pestanna8() {
+		txtEmbarazo.setFocus(true);
 	}
 
 }
