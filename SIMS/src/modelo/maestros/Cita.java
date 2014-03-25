@@ -2,6 +2,9 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import modelo.seguridad.Usuario;
+
 import java.sql.Timestamp;
 
 
@@ -34,8 +37,10 @@ public class Cita implements Serializable {
 	@Column(name="hora_auditoria", length=10)
 	private String horaAuditoria;
 
-	@Column(name="id_usuario")
-	private long idUsuario;
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_usuario")
+	private Usuario usuario;
 
 	@Column(length=10)
 	private String observacion;
@@ -49,17 +54,16 @@ public class Cita implements Serializable {
 	private MotivoCita motivoCita;
 
 	//bi-directional many-to-one association to Paciente
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_paciente")
+		@ManyToOne(fetch=FetchType.LAZY)
+		@JoinColumn(name="id_paciente")
 	private Paciente paciente;
 
 	public Cita() {
 	}
 	
-
 	public Cita(long idCita, String estado, Timestamp fechaAuditoria,
 			Timestamp fechaCita, Timestamp fechaCreacion, String horaAuditoria,
-			long idUsuario, String observacion, String usuarioAuditoria,
+			Usuario usuario, String observacion, String usuarioAuditoria,
 			MotivoCita motivoCita, Paciente paciente) {
 		super();
 		this.idCita = idCita;
@@ -68,7 +72,7 @@ public class Cita implements Serializable {
 		this.fechaCita = fechaCita;
 		this.fechaCreacion = fechaCreacion;
 		this.horaAuditoria = horaAuditoria;
-		this.idUsuario = idUsuario;
+		this.usuario = usuario;
 		this.observacion = observacion;
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.motivoCita = motivoCita;
@@ -124,12 +128,12 @@ public class Cita implements Serializable {
 		this.horaAuditoria = horaAuditoria;
 	}
 
-	public long getIdUsuario() {
-		return this.idUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getObservacion() {
