@@ -1,0 +1,62 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divEmpresa" apply="controlador.maestros.CEmpresa">
+		<groupbox width="40em" mold="3d" title="Empresa">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Rif:" />
+						<textbox id="txtRifEmpresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Rif de la Empresa" />
+						<button id="btnBuscarEmpresa" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+
+					</row>
+
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox id="txtNombreEmpresa" hflex="1" maxlength="500" class="multilinea"
+							tooltiptext="Ingrese el Nombre de la Empresa" multiline="true" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Primer Telefono:" />
+						<textbox id="txtTelefono1Empresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Numero de telefono de la empresa" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Segundo Telefono:" />
+						<textbox id="txtTelefono2Empresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Numero de telefono de la empresa" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Direccion:" />
+						<textbox id="txtDireccionEmpresa" hflex="1" maxlength="1024" class="multilinea"
+							tooltiptext="Ingrese la Direccion de la Empresa" multiline="true" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Ciudad:" />
+						<combobox id="cmbCiudad" readonly="true" tabindex="1"
+							width="100%" tooltiptext="Seleccione una Ciudad" placeholder="Seleccione una Ciudad">
+							<template name="model">
+								<comboitem context="${each.idCiudad}" label="${each.nombre}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraEmpresa" />
+			<div id="catalogoEmpresa" />
+		</groupbox>
+	</div>
+</zk>
