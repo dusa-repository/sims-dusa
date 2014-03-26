@@ -1,0 +1,7 @@
+<zk>
+	<session-config>
+		<device-type>ajax</device-type>
+		<timeout-message>Sesion Caducada, por favor Actualice el Navegador
+		</timeout-message>
+	</session-config>
+</zk>

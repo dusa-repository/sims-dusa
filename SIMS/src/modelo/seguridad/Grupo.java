@@ -38,7 +38,16 @@ public class Grupo implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-many association to Arbol
-	@ManyToMany(mappedBy="gruposArbol")
+	@ManyToMany
+	@JoinTable(
+		name="arbol_grupo"
+		, joinColumns={
+			@JoinColumn(name="id_grupo", nullable=false)
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_arbol", nullable=false)
+			}
+		)
 	private Set<Arbol> arbols;
 
 	//bi-directional many-to-many association to Usuario
