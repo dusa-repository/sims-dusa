@@ -67,6 +67,9 @@ public class Usuario implements Serializable {
 
 	@Column(length=500)
 	private String nombre;
+	
+	@Column(length=500)
+	private String apellido;
 
 	@Column(name="numero_citas_diarias")
 	private long numeroCitasDiarias;
@@ -115,7 +118,7 @@ public class Usuario implements Serializable {
 			String email, boolean estado, String estadoUsuario,
 			Timestamp fechaAuditoria, String ficha, String horaAuditoria,
 			byte[] imagen, String licenciaCm, long licenciaInpsasel,
-			String licenciaMsds, String login, String nombre,
+			String licenciaMsds, String login, String nombre, String apellido,
 			long numeroCitasDiarias, String password, String sexo,
 			String telefono, long tiempoEstimadoEntreCitas,
 			String usuarioAuditoria, Especialidad especialidad, Unidad unidad, Set<Grupo> grupos) {
@@ -135,6 +138,7 @@ public class Usuario implements Serializable {
 		this.licenciaMsds = licenciaMsds;
 		this.login = login;
 		this.nombre = nombre;
+		this.apellido = apellido;
 		this.numeroCitasDiarias = numeroCitasDiarias;
 		this.password = password;
 		this.sexo = sexo;
@@ -340,4 +344,11 @@ public class Usuario implements Serializable {
 		this.grupos = grupos;
 	}
 
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
 }

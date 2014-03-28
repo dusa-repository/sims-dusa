@@ -34,6 +34,6 @@ public class SCita {
 	}
 
 	public List<Cita> buscarPorUsuario(Usuario usuario) {
-		return citaDAO.findByUsuario(usuario);
+		return citaDAO.findByUsuarioAndEstado(usuario,"Pendiente");
 	}
 }

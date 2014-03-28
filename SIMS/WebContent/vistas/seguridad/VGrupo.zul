@@ -19,6 +19,8 @@
 					</row>
 				</rows>
 			</grid>
+			<separator />
+
 			<hbox width="100%">
 				<groupbox width="100%" title="Funcionalidades Disponibles">
 					<tree id="treeGrupo" width="99%">
@@ -42,6 +44,7 @@
 					</listbox>
 				</groupbox>
 			</hbox>
+			<separator />
 			<div id="botoneraGrupo" />
 			<div id="catalogoGrupo" />
 		</groupbox>

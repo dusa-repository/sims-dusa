@@ -32,9 +32,8 @@
 						<textbox id="txtNombreUsuario" hflex="1" maxlength="500"
 							tooltiptext="Ingrese el Nombre del Usuario" />
 						<image id="imagen" width="50px" height="50px" />
-
 						<label class="etiqueta" value="Apellido:" />
-						<textbox id="txtApellidoUsuario" hflex="1" maxlength="8"
+						<textbox id="txtApellidoUsuario" hflex="1" maxlength="500"
 							tooltiptext="Ingrese el Apellido del Usuario" />
 						<hbox />
 					</row>
@@ -57,8 +56,6 @@
 									<column label="" width="30%" />
 								</columns>
 								<rows>
-
-
 									<row>
 										<label class="etiqueta" value="Telefono:" />
 										<textbox id="txtTelefonoUsuario" hflex="1" maxlength="50"
@@ -67,7 +64,6 @@
 										<textbox id="txtCorreoUsuario" hflex="1" maxlength="50"
 											tooltiptext="Ingrese el Correo Electronico del Usuario (ejemplo@ejemplo.com)" />
 									</row>
-
 									<row>
 										<label class="etiqueta" value="Sexo:" />
 										<radiogroup id="rdbSexoUsuario">
@@ -134,6 +130,7 @@
 									</row>
 								</rows>
 							</grid>
+							<separator />
 						</groupbox>
 						<div align="right" style="float: right;">
 							<button id="btnSiguientePestanna" label="Siguiente"
@@ -156,7 +153,6 @@
 									<hbox />
 									<hbox />
 								</row>
-
 								<row>
 									<label class="etiqueta" value="Password:" />
 									<textbox id="txtPasswordUsuario" hflex="1" maxlength="256"
@@ -197,19 +193,17 @@
 									</template>
 								</listbox>
 							</hbox>
-
 						</groupbox>
+						<separator />
 						<separator />
 						<div align="left" style="float: right;">
 							<button label="Anterior" id="btnAnteriorPestanna"
 								image="/public/imagenes/botones/atras.png" />
-
 						</div>
 						<div width="50%" id="botoneraUsuario" align="left" style="float: left;" />
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
-
 			<div id="catalogoUsuario" />
 		</groupbox>
 	</div>

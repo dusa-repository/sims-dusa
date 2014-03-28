@@ -1,6 +1,6 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div id="divCita" apply="controlador.maestros.CCita" width="90%">
+	<div id="divCita" apply="controlador.maestros.CCita" width="95%">
 		<groupbox width="100%" mold="3d" title="Cita">
 			<groupbox width="100%" title="Datos del Doctor">
 				<grid width="100%">
@@ -78,7 +78,17 @@
 								<rows>
 									<row>
 										<label class="etiqueta" value="Fecha Cita:" />
-										<datebox  readonly="true" width="100%" id="dtbFechaCita" cols="8" />
+										<datebox readonly="true" width="100%" id="dtbFechaCita"
+											cols="8" />
+										<label class="etiqueta" value="Hora Cita:" />
+										<textbox id="txtHoraCita" hflex="1" maxlength="10"
+											tooltiptext="Ingrese la Hora de la Cita" />
+									</row>
+									<row>
+										<label class="etiqueta" value="Observacion:" />
+										<textbox class="multilinea" id="txtObservacion" hflex="1"
+											maxlength="500" tooltiptext="Ingrese una Observacion de la Cita"
+											multiline="true" />
 										<label class="etiqueta" value="Motivo" />
 										<combobox id="cmbMotivo" readonly="true" tabindex="1"
 											width="100%" tooltiptext="Seleccione un Motivo" placeholder="Seleccione un Motivo">
@@ -87,17 +97,8 @@
 											</template>
 										</combobox>
 									</row>
-									<row>
-										<label class="etiqueta" value="Observacion:" />
-										<textbox class="multilinea" id="txtObservacion" hflex="1"
-											maxlength="500" tooltiptext="Ingrese una Observacion de la Cita"
-											multiline="true" />
-										<hbox />
-										<hbox />
-									</row>
 								</rows>
 							</grid>
-							<separator />
 							<separator />
 							<separator />
 						</groupbox>
@@ -113,15 +114,16 @@
 								<listbox id="ltbCitas" height="300px" emptyMessage="No hay Citas registrados">
 									<listhead>
 										<listheader label="Paciente" sort="auto(paciente.primerNombre)"
-											width="25%" />
+											width="20%" />
 										<listheader label="Empresa Paciente" sort="auto(paciente.empresa.nombre)"
-											width="15%" />
+											width="13%" />
 										<listheader label="Fecha" sort="auto(fechaCita)"
-											width="15%" />
+											width="12%" />
 										<listheader label="Motivo" sort="auto(motivoCita.descripcion)"
-											width="23%" />
-											<listheader label="Observacion" sort="auto(observacion)"
-											width="22%" />
+											width="20%" />
+										<listheader label="Observacion" sort="auto(observacion)"
+											width="20%" />
+										<listheader label="Estado" width="15%" />
 									</listhead>
 									<template name="model">
 										<listitem>
@@ -133,13 +135,22 @@
 											</listcell>
 											<listcell label="${each.motivoCita.descripcion}">
 											</listcell>
-												<listcell label="${each.observacion}">
+											<listcell label="${each.observacion}">
+											</listcell>
+											<listcell>
+												<combobox value="${each.estado}" width="100%"
+													readonly="true">
+													<comboitem label="Cancelada" />
+													<comboitem label="Anulada" />
+													<comboitem label="Ejecutada" />
+												</combobox>
 											</listcell>
 										</listitem>
 									</template>
 								</listbox>
 							</hbox>
 						</groupbox>
+						<separator />
 						<separator />
 						<div width="50%" align="left" style="float: left;">
 							<button label="Anterior" id="btnAnteriorPestanna"
