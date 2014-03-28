@@ -14,4 +14,8 @@ public interface IGrupoDAO extends JpaRepository<Grupo, Long> {
 	public List<Grupo> findByEstadoTrue();
 
 	public List<Grupo> findByIdGrupoNotInAndEstadoTrue(List<Long> ids);
+
+	public Grupo findByNombre(String nombreGrupo);
+
+	public List<Grupo> findByNombreStartingWithAllIgnoreCase(String valor);
 }

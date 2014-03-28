@@ -14,24 +14,36 @@ import org.springframework.stereotype.Service;
 public class SGrupo {
 
 	@Autowired
-	private IGrupoDAO interfazGrupo;
+	private IGrupoDAO grupoDAO;
 	
 	public void guardarGrupo(Grupo grupo){
-		interfazGrupo.save(grupo);
+		grupoDAO.save(grupo);
 	}
 	
 	public List<Grupo> buscarTodos(){
-		return interfazGrupo.findByEstadoTrue();
+		return grupoDAO.findByEstadoTrue();
 	}
 	public Grupo buscarGrupo(long id){
-		return interfazGrupo.findOne(id);
+		return grupoDAO.findOne(id);
 	}
 	
 	public List<Grupo> buscarGruposDelUsuario(Usuario usuario){
-		return interfazGrupo.findByUsuarios(usuario);
+		return grupoDAO.findByUsuarios(usuario);
 	}
 	
 	public List<Grupo> buscarGruposDisponibles(List<Long> ids){
-		return interfazGrupo.findByIdGrupoNotInAndEstadoTrue(ids);
+		return grupoDAO.findByIdGrupoNotInAndEstadoTrue(ids);
+	}
+	
+	public Grupo buscarPorNombre(String nombreGrupo){
+		return grupoDAO.findByNombre(nombreGrupo);
+	}
+
+	public List<Grupo> filtroNombre(String valor) {
+		return grupoDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public void eliminar(Grupo grupo) {
+		grupoDAO.delete(grupo);
 	}
 }

@@ -46,23 +46,11 @@ public class CArbol extends CGenerico {
 	TreeModel _model;
 	URL url = getClass().getResource("/controlador/maestros/usuario.png");
 	List<String> listmenu1 = new ArrayList<String>();
-	// test
 	@Wire
 	private Tab tab;
 	@Wire
 	private Tabbox tabBox;
 
-	@Listen("onClick = #tab")
-	public void nueva() {
-		Tab newTab = new Tab("New Tab ");
-		newTab.setSelected(true);
-		Tabpanel newTabpanel = new Tabpanel();
-		newTabpanel.appendChild(new Label("New Tabpanel Text "));
-		tabBox.getTabs().insertBefore(newTab, tab);
-		newTabpanel.setParent(tabBox.getTabpanels());
-	}
-
-	// /test
 	@Override
 	public void inicializar() throws IOException {
 		Authentication auth = SecurityContextHolder.getContext()
@@ -86,10 +74,10 @@ public class CArbol extends CGenerico {
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("Vistas");
 
-		if(tabs.size()!=0){
+		if (tabs.size() != 0) {
 			tabs.clear();
 		}
-		
+
 		if (map != null) {
 			if ((String) map.get("vista") != null) {
 				contenido.setSrc("/vistas/" + (String) map.get("vista")
@@ -98,6 +86,7 @@ public class CArbol extends CGenerico {
 		}
 	}
 
+	/* Permite asignarle los nodos cargados con el metodo getFooRoot() al arbol */
 	public TreeModel getModel() {
 		if (_model == null) {
 			_model = new MArbol(getFooRoot());
@@ -105,6 +94,10 @@ public class CArbol extends CGenerico {
 		return _model;
 	}
 
+	/*
+	 * Permite obtener las funcionalidades asociadas al usuario en session y asi
+	 * crear un arbol estructurado, segun la distribucion de las mismas
+	 */
 	private Nodos getFooRoot() {
 
 		Nodos root = new Nodos(null, 0, "");
@@ -191,6 +184,10 @@ public class CArbol extends CGenerico {
 		return root;
 	}
 
+	/*
+	 * Permite seleccionar un elemento del arbol, mostrandolo en forma de
+	 * pestaña y su contenido es cargado en un div
+	 */
 	@Listen("onClick = #arbolMenu")
 	public void selectedNode() {
 		String item = String.valueOf(arbolMenu.getSelectedItem().getValue());
@@ -223,5 +220,32 @@ public class CArbol extends CGenerico {
 				}
 			}
 		}
+	}
+
+	/* Metodo que permite abrir la ventana de editar usuario en una pestaña */
+	@Listen("onClick = #lblEditarCuenta")
+	public void abrirEditarCuenta() {
+		boolean abrir = true;
+		Tab taba = new Tab();
+		for (int i = 0; i < tabs.size(); i++) {
+			if (tabs.get(i).getLabel().equals("Editar Usuario")) {
+				abrir = false;
+				taba = tabs.get(i);
+			}
+		}
+		if (abrir) {
+			String ruta = "/vistas/seguridad/VEditarUsuario.zul";
+			contenido = new Include();
+			contenido.setSrc(null);
+			contenido.setSrc(ruta);
+			Tab newTab = new Tab("Editar Usuario");
+			newTab.setSelected(true);
+			Tabpanel newTabpanel = new Tabpanel();
+			newTabpanel.appendChild(contenido);
+			tabBox.getTabs().insertBefore(newTab, tab);
+			newTabpanel.setParent(tabBox.getTabpanels());
+			tabs.add(newTab);
+		} else
+			taba.setSelected(true);
 	}
 }
