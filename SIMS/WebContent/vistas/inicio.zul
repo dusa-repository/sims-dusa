@@ -16,7 +16,8 @@
 						<separator />
 						<separator />
 						<hbox>
-							<label style="font-size:24px;color:#0404B4;font-weight: bold" value="Sistema Integral Medico y de Seguridad" />
+							<label style="font-size:24px;color:#0404B4;font-weight: bold"
+								value="Sistema Integral Medico y de Seguridad" />
 						</hbox>
 					</div>
 					<vbox>
@@ -40,9 +41,8 @@
 								</a>
 								<a style="color: blue">
 									<separator />
-									<label id="lblEditarCuenta"
-										onClick='contenido.src="../vistas/seguridad/VEditarUsuario.zul"'
-										value="Editar Cuenta" />
+									<label id="lblEditarCuenta" value="Editar Cuenta" />
+									<!-- onClick='contenido.src="../vistas/seguridad/VEditarUsuario.zul"' -->
 								</a>
 							</vbox>
 						</hbox>

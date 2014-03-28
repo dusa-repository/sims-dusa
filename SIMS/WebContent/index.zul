@@ -1,7 +1,7 @@
 <zk>
 	<style src="public/Estilo.css" />
 	<style>
-		.z-groupbox-hr { background: #EFF5F5 }ç
+		.z-groupbox-hr { background: #EFF5F5 }
 	</style>
 	<zscript>
 		String variable = execution.getParameter("respuesta");
@@ -14,6 +14,7 @@
 		a =
 		execution.getParameter("respuesta");
 	</zscript>
+	<window title="" border="0" height="100%" contentStyle="overflow:auto" apply="controlador.portal.CIndex">
 	<borderlayout height="100%"
 		style="background-image: url('public/imagenes/generales/fondo.png'); background-repeat:no-repeat;height=100%; width=100%">
 
@@ -32,7 +33,7 @@
 		<east width="60%" border="none">
 			<vlayout>
 				<div align="center">
-						<separator />
+					<separator />
 					<separator />
 					<image src="/public/imagenes/generales/LogoDusa.png" height="4em"
 						width="15em" />
@@ -53,7 +54,7 @@
 						<separator></separator>
 						<separator></separator>
 						<hlayout width="100%">
-							<h:form id="inicioSecion" action="j_spring_security_check"
+							<h:form id="inicioSesion" action="j_spring_security_check"
 								method="POST" xmlns:h="native">
 								<hlayout width="100%">
 
@@ -100,4 +101,5 @@
 			</div>
 		</south>
 	</borderlayout>
+	</window>
 </zk>

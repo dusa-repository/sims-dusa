@@ -89,7 +89,7 @@ public abstract class Botonera extends Hbox {
 	public abstract void salir();
 
 	/**
-	 * Metodo que permite la eliminacion logica de un registro siempre y cuando
+	 * Metodo que permite la eliminacion de un registro siempre y cuando
 	 * no este asociado a otra entidad
 	 */
 	public abstract void eliminar();
