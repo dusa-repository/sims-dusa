@@ -191,6 +191,7 @@ public class CUsuario extends CGenerico {
 					String login = txtLoginUsuario.getValue();
 					String password = txtPasswordUsuario.getValue();
 					String nombre = txtNombreUsuario.getValue();
+					String apellido = txtApellidoUsuario.getValue();
 					String telefono = txtTelefonoUsuario.getValue();
 					long citas = spnCitasUsuario.getValue();
 					long tiempo = spnTiempoUsuario.getValue();
@@ -215,7 +216,7 @@ public class CUsuario extends CGenerico {
 							correo, true, "estado", fechaHora, ficha, sexo,
 							imagenUsuario, licenciaC,
 							Long.parseLong(licenciaI), licenciaM, login,
-							nombre, citas, password, sexo, telefono, tiempo,
+							nombre,apellido, citas, password, sexo, telefono, tiempo,
 							nombreUsuarioSesion(), especialidad, unidad,
 							gruposUsuario);
 					servicioUsuario.guardar(usuario);

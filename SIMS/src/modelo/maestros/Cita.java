@@ -37,6 +37,9 @@ public class Cita implements Serializable {
 	@Column(name="hora_auditoria", length=10)
 	private String horaAuditoria;
 
+	@Column(name="hora_cita", length=10)
+	private String horaCita;
+	
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_usuario")
@@ -62,7 +65,7 @@ public class Cita implements Serializable {
 	}
 	
 	public Cita(long idCita, String estado, Timestamp fechaAuditoria,
-			Timestamp fechaCita, Timestamp fechaCreacion, String horaAuditoria,
+			Timestamp fechaCita, Timestamp fechaCreacion, String horaAuditoria,String horaCita,
 			Usuario usuario, String observacion, String usuarioAuditoria,
 			MotivoCita motivoCita, Paciente paciente) {
 		super();
@@ -77,6 +80,7 @@ public class Cita implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.motivoCita = motivoCita;
 		this.paciente = paciente;
+		this.horaCita=horaCita;
 	}
 
 
@@ -166,6 +170,14 @@ public class Cita implements Serializable {
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+
+	public String getHoraCita() {
+		return horaCita;
+	}
+
+	public void setHoraCita(String horaCita) {
+		this.horaCita = horaCita;
 	}
 
 }

@@ -67,6 +67,8 @@ public class CCita extends CGenerico {
 	@Wire
 	private Textbox txtObservacion;
 	@Wire
+	private Textbox txtHoraCita;
+	@Wire
 	private Combobox cmbMotivo;
 	@Wire
 	private Datebox dtbFechaCita;
@@ -114,11 +116,13 @@ public class CCita extends CGenerico {
 					Paciente paciente = servicioPaciente.buscar(idPaciente);
 					Usuario usuario = servicioUsuario
 							.buscarUsuarioPorId(idDoctor);
-					String estado = "";
+					String estado = "Pendiente";
+					String horaCita = txtHoraCita.getValue();
 
 					Cita cita = new Cita(id, estado, fechaHora, fechaCrea,
-							fechaHora, horaAuditoria, usuario, observacion,
-							nombreUsuarioSesion(), motivo, paciente);
+							fechaHora, horaAuditoria, horaCita, usuario,
+							observacion, nombreUsuarioSesion(), motivo,
+							paciente);
 
 					servicioCita.guardar(cita);
 					llenarListaCitas(usuario);
@@ -149,6 +153,7 @@ public class CCita extends CGenerico {
 		lblApellidoPaciente.setValue("");
 		lblEmpresaPaciente.setValue("");
 		txtObservacion.setValue("");
+		txtHoraCita.setValue("");
 		dtbFechaCita.setValue(null);
 		cmbMotivo.setValue("");
 		cmbMotivo.setPlaceholder("Seleccione un Motivo");
@@ -205,7 +210,7 @@ public class CCita extends CGenerico {
 	@Listen("onSeleccion = #catalogoUsuarios")
 	public void seleccionarDoctor() {
 		Usuario usuario = catalogo.objetoSeleccionadoDelCatalogo();
-		lblApellidoDoctor.setValue(usuario.getEspecialidad().getDescripcion());
+		lblApellidoDoctor.setValue(usuario.getApellido());
 		lblNombreDoctor.setValue(usuario.getNombre());
 		lblCedulaDoctor.setValue(usuario.getCedula());
 		idDoctor = usuario.getIdUsuario();
@@ -287,15 +292,16 @@ public class CCita extends CGenerico {
 
 	/* Llena el combo de Motivos cada vez que se abre */
 	@Listen("onOpen = #cmbMotivo")
-	public void llenarComboMotivo(){
+	public void llenarComboMotivo() {
 		List<MotivoCita> motivoCitas = servicioMotivoCita.buscarTodos();
 		cmbMotivo.setModel(new ListModelList<MotivoCita>(motivoCitas));
 	}
-	
+
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtObservacion.getText().compareTo("") == 0
 				|| cmbMotivo.getText().compareTo("") == 0
+				|| txtHoraCita.getText().compareTo("") == 0
 				|| dtbFechaCita.getText().compareTo("") == 0 || idDoctor == 0
 				|| idPaciente == 0) {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",

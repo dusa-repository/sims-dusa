@@ -17,6 +17,6 @@ public interface ICitaDAO extends JpaRepository<Cita, Long> {
 
 	List<Cita> findByPaciente(Paciente paciente);
 
-	List<Cita> findByUsuario(Usuario usuario);
+	List<Cita> findByUsuarioAndEstado(Usuario usuario, String string);
 
 }

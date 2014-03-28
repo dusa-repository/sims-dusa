@@ -115,11 +115,11 @@ public class CEditarUsuario extends CGenerico {
 						usuario.setPassword(password);
 						usuario.setImagen(imagenUsuario);
 						servicioUsuario.guardar(usuario);
-						Messagebox.show("Cuenta Editada con Exito", "Alerta",
+						Messagebox.show("Usuario Editado con Exito", "Informacion",
 								Messagebox.OK, Messagebox.INFORMATION);
 						limpiar();
 					} else {
-						Messagebox.show("Passwords No Coiniden", "Alerta",
+						Messagebox.show("Passwords No Coinciden", "Alerta",
 								Messagebox.OK, Messagebox.ERROR);
 					}
 				}
