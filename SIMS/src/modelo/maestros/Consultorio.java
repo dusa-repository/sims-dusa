@@ -19,7 +19,7 @@ public class Consultorio implements Serializable {
 	@Column(name="id_consultorio", unique=true, nullable=false)
 	private long idConsultorio;
 
-	@Column(name="correo_electronico", length=1024)
+	@Column(name="correo_electronico", length=50)
 	private String correoElectronico;
 
 	@Column(length=1024)
