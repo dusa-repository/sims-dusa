@@ -24,7 +24,7 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Tab;
 
-import servicio.maestros.SCategoria;
+import servicio.maestros.SCategoriaDiagnostico;
 import servicio.maestros.SCiudad;
 import servicio.maestros.SConsultorio;
 import servicio.maestros.SDiagnostico;
@@ -37,7 +37,7 @@ import servicio.maestros.SMedicina;
 import servicio.maestros.SMotivoCita;
 import servicio.maestros.SPaciente;
 import servicio.maestros.SPresentacion;
-import servicio.maestros.SUnidad;
+import servicio.maestros.SUnidadUsuario;
 import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
@@ -49,8 +49,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	private static final long serialVersionUID = -2264423023637489596L;
 	@WireVariable("SArbol")
 	protected SArbol servicioArbol;
-	@WireVariable("SCategoria")
-	protected SCategoria servicioCategoria;
+	@WireVariable("SCategoriaDiagnostico")
+	protected SCategoriaDiagnostico servicioCategoriaDiagnostico;
 	@WireVariable("SCiudad")
 	protected SCiudad servicioCiudad;
 	@WireVariable("SConsultorio")
@@ -75,8 +75,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SPaciente servicioPaciente;
 	@WireVariable("SPresentacion")
 	protected SPresentacion servicioPresentacion;
-	@WireVariable("SUnidad")
-	protected SUnidad servicioUnidad;
+	@WireVariable("SUnidadUsuario")
+	protected SUnidadUsuario servicioUnidadUsuario;
 	@WireVariable("SGrupo")
 	protected SGrupo servicioGrupo;
 	@WireVariable("SUsuario")

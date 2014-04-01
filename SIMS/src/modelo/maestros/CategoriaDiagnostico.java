@@ -18,14 +18,14 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="categoria")
-public class Categoria implements Serializable {
+@Table(name="categoria_diagnostico")
+public class CategoriaDiagnostico implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_categoria", unique=true, nullable=false)
-	private long idCategoria;
+	@Column(name="id_categoria_diagnostico", unique=true, nullable=false)
+	private long idCategoriaDiagnostico;
 
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
@@ -43,13 +43,13 @@ public class Categoria implements Serializable {
 	@OneToMany(mappedBy="categoria")
 	private Set<Diagnostico> diagnosticos;
 
-	public Categoria() {
+	public CategoriaDiagnostico() {
 	}
 	
-	public Categoria(long idCategoria, Timestamp fechaAuditoria,
+	public CategoriaDiagnostico(long idCategoria, Timestamp fechaAuditoria,
 			String horaAuditoria, String nombre, String usuarioAuditoria) {
 		super();
-		this.idCategoria = idCategoria;
+		this.idCategoriaDiagnostico = idCategoria;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
@@ -57,13 +57,12 @@ public class Categoria implements Serializable {
 	}
 
 
-
-	public long getIdCategoria() {
-		return this.idCategoria;
+	public long getIdCategoriaDiagnostico() {
+		return idCategoriaDiagnostico;
 	}
 
-	public void setIdCategoria(long idCategoria) {
-		this.idCategoria = idCategoria;
+	public void setIdCategoriaDiagnostico(long idCategoriaDiagnostico) {
+		this.idCategoriaDiagnostico = idCategoriaDiagnostico;
 	}
 
 	public Timestamp getFechaAuditoria() {

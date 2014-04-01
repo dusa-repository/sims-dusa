@@ -14,14 +14,14 @@ import java.util.Set;
  * 
  */
 @Entity
-@Table(name="unidad")
-public class Unidad implements Serializable {
+@Table(name="unidad_usuario")
+public class UnidadUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_unidad", unique=true, nullable=false)
-	private long idUnidad;
+	@Column(name="id_unidad_usuario", unique=true, nullable=false)
+	private long idUnidadUsuario;
 
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
@@ -39,27 +39,21 @@ public class Unidad implements Serializable {
 	@OneToMany(mappedBy="unidad")
 	private Set<Usuario> usuarios;
 
-	public Unidad() {
+	public UnidadUsuario() {
 	}
 	
 
-	public Unidad(long idUnidad, Timestamp fechaAuditoria,
+	public UnidadUsuario(long idUnidad, Timestamp fechaAuditoria,
 			String horaAuditoria, String nombre, String usuarioAuditoria) {
 		super();
-		this.idUnidad = idUnidad;
+		this.idUnidadUsuario = idUnidad;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public long getIdUnidad() {
-		return this.idUnidad;
-	}
 
-	public void setIdUnidad(long idUnidad) {
-		this.idUnidad = idUnidad;
-	}
 
 	public Timestamp getFechaAuditoria() {
 		return this.fechaAuditoria;
@@ -113,6 +107,16 @@ public class Unidad implements Serializable {
 		usuario.setUnidad(null);
 
 		return usuario;
+	}
+
+
+	public long getIdUnidadUsuario() {
+		return idUnidadUsuario;
+	}
+
+
+	public void setIdUnidadUsuario(long idUnidadUsuario) {
+		this.idUnidadUsuario = idUnidadUsuario;
 	}
 
 }

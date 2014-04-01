@@ -3,7 +3,7 @@ package controlador.maestros;
 import java.io.IOException;
 import java.util.List;
 
-import modelo.maestros.Categoria;
+import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Medicina;
 
@@ -69,7 +69,7 @@ public class CDiagnostico extends CGenerico {
 					nombre = txtNombreDiagnostico.getValue();
 					codigo = txtCodigoDiagnostico.getValue();
 					grupo = txtGrupoDiagnostico.getValue();
-					Categoria categoria = servicioCategoria.buscar(Long
+					CategoriaDiagnostico categoria = servicioCategoriaDiagnostico.buscar(Long
 							.parseLong(cmbCategoria.getSelectedItem()
 									.getContext()));
 					Diagnostico diagnostico = new Diagnostico(id, codigo,
@@ -175,8 +175,8 @@ public class CDiagnostico extends CGenerico {
 	/* Llena el combo de Categorias cada vez que se abre */
 	@Listen("onOpen = #cmbCategoria")
 	public void llenarComboCategoria() {
-		List<Categoria> categorias = servicioCategoria.buscarTodas();
-		cmbCategoria.setModel(new ListModelList<Categoria>(categorias));
+		List<CategoriaDiagnostico> categorias = servicioCategoriaDiagnostico.buscarTodas();
+		cmbCategoria.setModel(new ListModelList<CategoriaDiagnostico>(categorias));
 	}
 
 	/* Permite la seleccion de un item del catalogo */

@@ -53,7 +53,7 @@ public class CEditarUsuario extends CGenerico {
 	public void inicializar() throws IOException {
 		Usuario usuario = servicioUsuario
 				.buscarUsuarioPorNombre(nombreUsuarioSesion());
-		id = usuario.getIdUsuario();
+		id = Long.valueOf(usuario.getCedula());
 		txtNombreUsuarioEditar.setValue(usuario.getLogin());
 		if (usuario.getImagen() == null) {
 			imgUsuario.setContent(new AImage(url));
@@ -79,7 +79,7 @@ public class CEditarUsuario extends CGenerico {
 			public void limpiar() {
 				Usuario usuario = servicioUsuario
 						.buscarUsuarioPorNombre(nombreUsuarioSesion());
-				id = usuario.getIdUsuario();
+				id = Long.valueOf(usuario.getCedula());
 				txtNombreUsuarioEditar.setValue(usuario.getLogin());
 				txtClaveUsuarioConfirmar.setValue("");
 				txtClaveUsuarioNueva.setValue("");

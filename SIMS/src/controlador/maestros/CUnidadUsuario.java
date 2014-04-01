@@ -2,7 +2,7 @@ package controlador.maestros;
 
 import java.util.List;
 
-import modelo.maestros.Unidad;
+import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.event.Event;
@@ -16,21 +16,21 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 
-public class CUnidad extends CGenerico {
+public class CUnidadUsuario extends CGenerico {
 
 	private static final long serialVersionUID = -1573821851840127496L;
 	@Wire
-	private Div botoneraUnidad;
+	private Div botoneraUnidadUsuario;
 	@Wire
 	private Textbox txtNombreUnidad;
 	@Wire
 	private Button btnBuscarUnidad;
 	@Wire
-	private Div catalogoUnidad;
+	private Div catalogoUnidadUsuario;
 	@Wire
-	private Div divUnidad;
+	private Div divUnidadUsuario;
 	private long id = 0;
-	Catalogo<Unidad> catalogo;
+	Catalogo<UnidadUsuario> catalogo;
 
 	@Override
 	public void inicializar() {
@@ -39,9 +39,9 @@ public class CUnidad extends CGenerico {
 			@Override
 			public void guardar() {
 				if (validar()) {
-					Unidad unidad = new Unidad(id, fechaHora, horaAuditoria,
+					UnidadUsuario unidad = new UnidadUsuario(id, fechaHora, horaAuditoria,
 							txtNombreUnidad.getValue(), nombreUsuarioSesion());
-					servicioUnidad.guardar(unidad);
+					servicioUnidadUsuario.guardar(unidad);
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
@@ -57,7 +57,7 @@ public class CUnidad extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divUnidad, "Unidad");
+				cerrarVentana(divUnidadUsuario, "Unidad Usuario");
 			}
 
 			@Override
@@ -70,7 +70,7 @@ public class CUnidad extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										Unidad unidad = servicioUnidad
+										UnidadUsuario unidad = servicioUnidadUsuario
 												.buscar(id);
 										List<Usuario> usuarios = servicioUsuario
 												.buscarPorUnidad(unidad);
@@ -81,7 +81,7 @@ public class CUnidad extends CGenerico {
 															Messagebox.OK,
 															Messagebox.INFORMATION);
 										} else {
-											servicioUnidad.eliminar(unidad);
+											servicioUnidadUsuario.eliminar(unidad);
 											limpiar();
 											Messagebox
 													.show("Registro Eliminado Exitosamente",
@@ -100,7 +100,7 @@ public class CUnidad extends CGenerico {
 			}
 
 		};
-		botoneraUnidad.appendChild(botonera);
+		botoneraUnidadUsuario.appendChild(botonera);
 	}
 
 	/* Permite validar que todos los campos esten completos */
@@ -116,34 +116,34 @@ public class CUnidad extends CGenerico {
 	/* Muestra el catalogo de las categorias */
 	@Listen("onClick = #btnBuscarUnidad")
 	public void mostrarCatalogo() {
-		List<Unidad> unidades = servicioUnidad.buscarTodas();
-		catalogo = new Catalogo<Unidad>(catalogoUnidad, "Catalogo de Unidades",
+		List<UnidadUsuario> unidades = servicioUnidadUsuario.buscarTodas();
+		catalogo = new Catalogo<UnidadUsuario>(catalogoUnidadUsuario, "Catalogo de Unidades",
 				unidades, "Nombre") {
 
 			@Override
-			protected List<Unidad> buscar(String valor,String combo) {
+			protected List<UnidadUsuario> buscar(String valor,String combo) {
 				if(combo.equals("Nombre"))
-					return servicioUnidad.filtroNombre(valor);
+					return servicioUnidadUsuario.filtroNombre(valor);
 					else
-						return servicioUnidad.buscarTodas();
+						return servicioUnidadUsuario.buscarTodas();
 			}
 
 			@Override
-			protected String[] crearRegistros(Unidad objeto) {
+			protected String[] crearRegistros(UnidadUsuario objeto) {
 				String[] registros = new String[1];
 				registros[0] = objeto.getNombre();
 				return registros;
 			}
 
 		};
-		catalogo.setParent(catalogoUnidad);
+		catalogo.setParent(catalogoUnidadUsuario);
 		catalogo.doModal();
 	}
 
 	/* Permite la seleccion de un item del catalogo */
-	@Listen("onSeleccion = #catalogoUnidad")
+	@Listen("onSeleccion = #catalogoUnidadUsuario")
 	public void seleccinar() {
-		Unidad unidad = catalogo.objetoSeleccionadoDelCatalogo();
+		UnidadUsuario unidad = catalogo.objetoSeleccionadoDelCatalogo();
 		llenarCampos(unidad);
 		catalogo.setParent(null);
 	}
@@ -151,15 +151,15 @@ public class CUnidad extends CGenerico {
 	/* Busca si existe una unidad con el mismo nombre escrito */
 	@Listen("onChange = #txtNombreUnidad")
 	public void buscarPorNombre() {
-		Unidad unidad = servicioUnidad.buscarPorNombre(txtNombreUnidad
+		UnidadUsuario unidad = servicioUnidadUsuario.buscarPorNombre(txtNombreUnidad
 				.getValue());
 		if (unidad != null)
 			llenarCampos(unidad);
 	}
 
 	/* LLena los campos del formulario dada una unidad */
-	private void llenarCampos(Unidad unidad) {
+	private void llenarCampos(UnidadUsuario unidad) {
 		txtNombreUnidad.setValue(unidad.getNombre());
-		id = unidad.getIdUnidad();
+		id = unidad.getIdUnidadUsuario();
 	}
 }

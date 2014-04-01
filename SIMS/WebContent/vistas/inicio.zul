@@ -23,7 +23,7 @@
 					<vbox>
 						<separator />
 						<image src="../public/imagenes/generales/banner.png" height="3em"
-							width="15em" />
+							width="7em" />
 					</vbox>
 					<div align="center" width="100%">
 						<hbox>
@@ -91,7 +91,7 @@
 					</a>
 					<separator></separator>
 					<label style="padding-center:35%;"
-						value="© 2013 Elaborado por ------ All Rights Reserved. Terms Privacy">
+						value="© 2014 Elaborado por BIZAPP,C.A. All Rights Reserved. Terms Privacy">
 					</label>
 				</div>
 			</south>

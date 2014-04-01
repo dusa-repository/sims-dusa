@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.maestros.Ciudad;
 import modelo.maestros.Consultorio;
+import modelo.maestros.Empresa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -25,5 +26,7 @@ public interface IConsultorioDAO extends JpaRepository<Consultorio, Long> {
 	Consultorio findByNombre(String value);
 
 	List<Consultorio> findByCiudadNombreStartingWithAllIgnoreCase(String valor);
+
+	List<Consultorio> findByEmpresa(Empresa empresa);
 
 }

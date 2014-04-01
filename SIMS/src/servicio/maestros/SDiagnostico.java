@@ -4,7 +4,7 @@ import java.util.List;
 
 import interfacedao.maestros.IDiagnosticoDAO;
 
-import modelo.maestros.Categoria;
+import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class SDiagnostico {
 		diagnosticoDAO.delete(diagnostico);
 	}
 
-	public List<Diagnostico> buscarPorCategoria(Categoria categoria) {
+	public List<Diagnostico> buscarPorCategoria(CategoriaDiagnostico categoria) {
 		return diagnosticoDAO.findByCategoria(categoria);
 	}
 

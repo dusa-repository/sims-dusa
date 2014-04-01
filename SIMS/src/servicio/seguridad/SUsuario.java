@@ -4,7 +4,7 @@ import java.util.List;
 
 import interfacedao.seguridad.IUsuarioDAO;
 import modelo.maestros.Especialidad;
-import modelo.maestros.Unidad;
+import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class SUsuario {
 	}
 
 	@Transactional
-	public List<Usuario> buscarPorUnidad(Unidad unidad) {
+	public List<Usuario> buscarPorUnidad(UnidadUsuario unidad) {
 		return usuarioDAO.findByUnidad(unidad);
 	}
 
@@ -63,7 +63,7 @@ public class SUsuario {
 	}
 
 	public List<Usuario> filtroNombre(String valor) {
-		return usuarioDAO.findByNombreStartingWithAllIgnoreCase(valor);
+		return usuarioDAO.findByPrimerNombreStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Usuario> filtroCorreo(String valor) {
@@ -75,7 +75,7 @@ public class SUsuario {
 	}
 
 	public List<Usuario> filtroApellido(String valor) {
-		return usuarioDAO.findByNombreStartingWithAllIgnoreCase(valor);
+		return usuarioDAO.findByPrimerApellidoStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Usuario> filtroEspecialidad(String valor) {

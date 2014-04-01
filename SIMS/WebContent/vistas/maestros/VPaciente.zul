@@ -22,9 +22,21 @@
 						<hbox />
 					</row>
 					<row>
+						<label class="etiqueta" value="Segundo Nombre:" />
+						<textbox maxlength="100" id="txtNombre2Paciente" hflex="1"
+							tooltiptext="Ingrese el segundo Nombre del Paciente" />
+						<hbox />
+					</row>
+					<row>
 						<label class="etiqueta" value="Primer Apellido:" />
 						<textbox maxlength="100" id="txtApellido1Paciente" hflex="1"
 							tooltiptext="Ingrese el primer Apellido del Paciente" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Segundo Apellido:" />
+						<textbox maxlength="100" id="txtApellido2Paciente" hflex="1"
+							tooltiptext="Ingrese el segundo Apellido del Paciente" />
 						<hbox />
 					</row>
 					<row>

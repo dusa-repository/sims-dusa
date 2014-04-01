@@ -27,8 +27,8 @@
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Forma Terapeutica:" />
-						<combobox tooltiptext="Seleccione una Forma Terapeutica"
+						<label class="etiqueta" value="Forma Farmaceutica:" />
+						<combobox tooltiptext="Seleccione una Forma Farmaceutica"
 							placeholder="Seleccione una Forma Terapeutica" id="cmbFormaTerapeutica"
 							readonly="true" width="100%">
 							<template name="model">

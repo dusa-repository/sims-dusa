@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div id="divUnidad" apply="controlador.maestros.CUnidad">
-		<groupbox width="40em" mold="3d" title="Unidad">
+	<div id="divUnidadUsuario" apply="controlador.maestros.CUnidadUsuario">
+		<groupbox width="40em" mold="3d" title="Unidad Usuario">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />
@@ -19,8 +19,8 @@
 				</rows>
 			</grid>
 			<separator />
-			<div id="botoneraUnidad" />
-			<div id="catalogoUnidad" />
+			<div id="botoneraUnidadUsuario" />
+			<div id="catalogoUnidadUsuario" />
 		</groupbox>
 	</div>
 </zk>
