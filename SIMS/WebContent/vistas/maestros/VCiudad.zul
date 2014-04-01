@@ -10,24 +10,24 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Nombre:" />
-						<textbox class="multilinea" multiline="true" id="txtNombreCiudad" hflex="1" tooltiptext="Ingrese el Nombre de la Ciudad" />
+						<textbox class="multilinea" multiline="true" id="txtNombreCiudad"
+							hflex="1" tooltiptext="Ingrese el Nombre de la Ciudad"  maxlength="500" />
 						<button id="btnBuscarCiudad" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
-						<row>
+					<row>
 						<label class="etiqueta" value="Estado:" />
-						<combobox tooltiptext="Seleccione un Estado" placeholder="Seleccione un Estado" id="cmbEstado" readonly="true"
-							width="100%">
+						<combobox tooltiptext="Seleccione un Estado" placeholder="Seleccione un Estado"
+							id="cmbEstado" readonly="true" width="100%">
 							<template name="model">
-								<comboitem label="${each.nombre}"
-									context="${each.idEstado}" />
+								<comboitem label="${each.nombre}" context="${each.idEstado}" />
 							</template>
 						</combobox>
 						<hbox />
 					</row>
 				</rows>
 			</grid>
-			<separator/>
+			<separator />
 			<div id="botoneraCiudad" />
 			<div id="catalogoCiudad" />
 		</groupbox>

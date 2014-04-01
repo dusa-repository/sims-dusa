@@ -10,7 +10,7 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Nombre:" />
-						<textbox maxlength="100" class="multilinea" multiline="true"
+						<textbox maxlength="500" class="multilinea" multiline="true"
 							id="txtDescripcionMotivoCita" hflex="1"
 							tooltiptext="Ingrese la descripcion de Motivo" />
 						<button id="btnBuscarMotivoCita" class="btn" label="Buscar"

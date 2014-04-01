@@ -20,7 +20,7 @@ public class MotivoCita implements Serializable {
 	@Column(name="id_motivo_cita", unique=true, nullable=false)
 	private long idMotivoCita;
 
-	@Column(length=100)
+	@Column(length=500)
 	private String descripcion;
 
 	@Column(name="fecha_auditoria")
