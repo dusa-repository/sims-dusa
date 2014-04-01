@@ -36,6 +36,10 @@ public class CPaciente extends CGenerico {
 	@Wire
 	private Textbox txtApellido1Paciente;
 	@Wire
+	private Textbox txtNombre2Paciente;
+	@Wire
+	private Textbox txtApellido2Paciente;
+	@Wire
 	private Textbox txtCedulaPaciente;
 	@Wire
 	private Combobox cmbEmpresa;
@@ -61,6 +65,8 @@ public class CPaciente extends CGenerico {
 				txtNombre1Paciente.setValue("");
 				txtCedulaPaciente.setValue("");
 				txtApellido1Paciente.setValue("");
+				txtNombre2Paciente.setValue("");
+				txtApellido2Paciente.setValue("");
 				cmbEmpresa.setValue("");
 				cmbEmpresa.setPlaceholder("Seleccione una Empresa");
 				id = 0;
@@ -70,17 +76,19 @@ public class CPaciente extends CGenerico {
 			@Override
 			public void guardar() {
 				if (validar()) {
-					String nombre1, apellido1, cedula;
+					String nombre1, apellido1, cedula, nombre2, apellido2;
 					nombre1 = txtNombre1Paciente.getValue();
 					apellido1 = txtApellido1Paciente.getValue();
+					nombre2 = txtNombre2Paciente.getValue();
+					apellido2 = txtApellido2Paciente.getValue();
 					cedula = txtCedulaPaciente.getValue();
 					Empresa empresa = servicioEmpresa.buscar(Long
 							.parseLong(cmbEmpresa.getSelectedItem()
 									.getContext()));
 
-					Paciente paciente = new Paciente(id, cedula, fechaHora,
+					Paciente paciente = new Paciente(cedula, fechaHora,
 							horaAuditoria, empresa, apellido1, nombre1,
-							nombreUsuarioSesion());
+							apellido2, nombre2, nombreUsuarioSesion());
 
 					servicioPaciente.guardar(paciente);
 					limpiar();
@@ -138,6 +146,8 @@ public class CPaciente extends CGenerico {
 		if (txtApellido1Paciente.getText().compareTo("") == 0
 				|| txtNombre1Paciente.getText().compareTo("") == 0
 				|| txtCedulaPaciente.getText().compareTo("") == 0
+				|| txtNombre2Paciente.getText().compareTo("") == 0
+				|| txtApellido2Paciente.getText().compareTo("") == 0
 				|| cmbEmpresa.getText().compareTo("") == 0) {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
@@ -192,11 +202,11 @@ public class CPaciente extends CGenerico {
 
 	/* Llena el combo de Empresas cada vez que se abre */
 	@Listen("onOpen = #cmbEmpresa")
-	public void llenarComboEmpresa(){
+	public void llenarComboEmpresa() {
 		List<Empresa> empresas = servicioEmpresa.buscarTodas();
 		cmbEmpresa.setModel(new ListModelList<Empresa>(empresas));
 	}
-	
+
 	/* Permite la seleccion de un item del catalogo */
 	@Listen("onSeleccion = #catalogoPaciente")
 	public void seleccinar() {
@@ -219,8 +229,11 @@ public class CPaciente extends CGenerico {
 		txtCedulaPaciente.setValue(paciente.getCedula());
 		txtNombre1Paciente.setValue(paciente.getPrimerNombre());
 		txtApellido1Paciente.setValue(paciente.getPrimerApellido());
+		txtNombre2Paciente.setValue(paciente.getSegundoNombre());
+		txtApellido2Paciente.setValue(paciente.getSegundoApellido());
 		cmbEmpresa.setValue(paciente.getEmpresa().getNombre());
-		id = paciente.getIdPaciente();
+		txtCedulaPaciente.setDisabled(true);
+		id = Long.valueOf(paciente.getCedula());
 	}
 
 }

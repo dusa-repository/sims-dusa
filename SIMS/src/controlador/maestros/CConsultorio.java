@@ -47,6 +47,9 @@ public class CConsultorio extends CGenerico {
 	private Combobox cmbCiudadConsultorio;
 	@Wire
 	private Button btnBuscarConsultorio;
+	@Wire
+	private Combobox cmbEmpresa;
+	
 	long id = 0;
 	Catalogo<Consultorio> catalogo;
 
@@ -70,6 +73,8 @@ public class CConsultorio extends CGenerico {
 				txtTelefono2Consultorio.setValue("");
 				cmbCiudadConsultorio.setValue("");
 				cmbCiudadConsultorio.setPlaceholder("Seleccione una Ciudad");
+				cmbEmpresa.setValue("");
+				cmbEmpresa.setPlaceholder("Seleccione una Empresa");
 				id = 0;
 			}
 
@@ -86,10 +91,14 @@ public class CConsultorio extends CGenerico {
 					Ciudad ciudad = servicioCiudad.buscar(Long
 							.parseLong(cmbCiudadConsultorio.getSelectedItem()
 									.getContext()));
+					Empresa empresa = servicioEmpresa.buscar(Long
+							.parseLong(cmbEmpresa.getSelectedItem()
+									.getContext()));
+					
 					Consultorio consultorio = new Consultorio(id, correo,
 							descripcion, direccion, fechaHora, horaAuditoria,
 							nombre, telefono1, telefono2,
-							nombreUsuarioSesion(), ciudad);
+							nombreUsuarioSesion(), ciudad,empresa);
 					servicioConsultorio.guardar(consultorio);
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
@@ -138,7 +147,8 @@ public class CConsultorio extends CGenerico {
 				|| txtCorreoConsultorio.getText().compareTo("") == 0
 				|| txtTelefono1Consultorio.getText().compareTo("") == 0
 				|| txtTelefono2Consultorio.getText().compareTo("") == 0
-				|| cmbCiudadConsultorio.getText().compareTo("") == 0) {
+				|| cmbCiudadConsultorio.getText().compareTo("") == 0
+				|| cmbEmpresa.getText().compareTo("") == 0) {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
@@ -163,6 +173,14 @@ public class CConsultorio extends CGenerico {
 			}
 		}
 	}
+	
+	/* Llena el combo de Empresas cada vez que se abre */
+	@Listen("onOpen = #cmbEmpresa")
+	public void llenarComboEmpresa() {
+		List<Empresa> empresas = servicioEmpresa.buscarTodas();
+		cmbEmpresa.setModel(new ListModelList<Empresa>(empresas));
+	}
+
 	
 	/* Valida el numero telefonico */
 	@Listen("onChange = #txtTelefono1Consultorio")
@@ -281,6 +299,7 @@ public class CConsultorio extends CGenerico {
 		txtTelefono1Consultorio.setValue(consultorio.getTelefono1());
 		txtTelefono2Consultorio.setValue(consultorio.getTelefono2());
 		cmbCiudadConsultorio.setValue(consultorio.getCiudad().getNombre());
+		cmbEmpresa.setValue(consultorio.getEmpresa().getNombre());
 		id = consultorio.getIdConsultorio();
 	}
 

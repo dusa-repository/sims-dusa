@@ -3,8 +3,9 @@ package controlador.maestros;
 import java.io.IOException;
 import java.util.List;
 
-import modelo.maestros.Categoria;
+import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Ciudad;
+import modelo.maestros.Consultorio;
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Empresa;
 import modelo.maestros.Laboratorio;
@@ -111,7 +112,10 @@ public class CEmpresa extends CGenerico {
 												.buscar(id);
 										List<Paciente> pacientes = servicioPaciente
 												.buscarPorEmpresa(empresa);
-										if (!pacientes.isEmpty()) {
+										List<Consultorio> consultorios = servicioConsultorio
+												.buscarPorEmpresa(empresa);
+										
+										if (!pacientes.isEmpty() || !consultorios.isEmpty()) {
 											Messagebox
 													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
 															"Informacion",

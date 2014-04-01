@@ -64,4 +64,8 @@ public class SConsultorio {
 	public Consultorio buscarPorNombre(String value) {
 		return consultorioDAO.findByNombre(value);
 	}
+
+	public List<Consultorio> buscarPorEmpresa(Empresa empresa) {
+		return consultorioDAO.findByEmpresa(empresa);
+	}
 }

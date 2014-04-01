@@ -2,6 +2,7 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 
 
@@ -51,13 +52,19 @@ public class Consultorio implements Serializable {
 	@JoinColumn(name="id_ciudad")
 	private Ciudad ciudad;
 
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_empresa")
+	private Empresa empresa;
+
+	
 	public Consultorio() {
 	}
 	
 	public Consultorio(long idConsultorio, String correoElectronico,
 			String descripcion, String direccion, Timestamp fechaAuditoria,
 			String horaAuditoria, String nombre, String telefono1,
-			String telefono2, String usuarioAuditoria, Ciudad ciudad) {
+			String telefono2, String usuarioAuditoria, Ciudad ciudad, Empresa empresa) {
 		super();
 		this.idConsultorio = idConsultorio;
 		this.correoElectronico = correoElectronico;
@@ -70,6 +77,7 @@ public class Consultorio implements Serializable {
 		this.telefono2 = telefono2;
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.ciudad = ciudad;
+		this.empresa = empresa;
 	}
 
 	public long getIdConsultorio() {
@@ -158,6 +166,14 @@ public class Consultorio implements Serializable {
 
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 }

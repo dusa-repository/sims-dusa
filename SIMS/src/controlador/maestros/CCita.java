@@ -168,7 +168,7 @@ public class CCita extends CGenerico {
 		List<Usuario> usuarios = servicioUsuario.buscarTodos();
 		catalogo = new Catalogo<Usuario>(catalogoUsuarios,
 				"Catalogo de Doctores", usuarios, "Cedula", "Ficha", "Nombre",
-				"Especialidad") {
+				"Apellido", "Especialidad") {
 
 			@Override
 			protected List<Usuario> buscar(String valor, String combo) {
@@ -184,8 +184,14 @@ public class CCita extends CGenerico {
 							if (combo.equals("Especialidad"))
 								return servicioUsuario
 										.filtroEspecialidad(valor);
-							else
-								return servicioUsuario.buscarTodos();
+							else {
+								if (combo.equals("Apellido"))
+									return servicioUsuario
+											.filtroApellido(valor);
+								else
+									return servicioUsuario.buscarTodos();
+							}
+
 						}
 					}
 				}
@@ -193,11 +199,12 @@ public class CCita extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Usuario objeto) {
-				String[] registros = new String[4];
+				String[] registros = new String[5];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
-				registros[2] = objeto.getNombre();
-				registros[3] = objeto.getEspecialidad().getDescripcion();
+				registros[2] = objeto.getPrimerNombre();
+				registros[3] = objeto.getPrimerApellido();
+				registros[4] = objeto.getEspecialidad().getDescripcion();
 				return registros;
 			}
 
@@ -210,10 +217,10 @@ public class CCita extends CGenerico {
 	@Listen("onSeleccion = #catalogoUsuarios")
 	public void seleccionarDoctor() {
 		Usuario usuario = catalogo.objetoSeleccionadoDelCatalogo();
-		lblApellidoDoctor.setValue(usuario.getApellido());
-		lblNombreDoctor.setValue(usuario.getNombre());
+		lblApellidoDoctor.setValue(usuario.getPrimerApellido());
+		lblNombreDoctor.setValue(usuario.getPrimerNombre());
 		lblCedulaDoctor.setValue(usuario.getCedula());
-		idDoctor = usuario.getIdUsuario();
+		idDoctor = Long.valueOf(usuario.getCedula());
 		llenarListaCitas(usuario);
 		limpiar2();
 		catalogo.setParent(null);
@@ -286,7 +293,7 @@ public class CCita extends CGenerico {
 		lblNombrePaciente.setValue(paciente.getPrimerNombre());
 		lblApellidoPaciente.setValue(paciente.getPrimerApellido());
 		lblEmpresaPaciente.setValue(paciente.getEmpresa().getNombre());
-		idPaciente = paciente.getIdPaciente();
+		idPaciente = Long.valueOf(paciente.getCedula());
 		catalogoPaciente.setParent(null);
 	}
 

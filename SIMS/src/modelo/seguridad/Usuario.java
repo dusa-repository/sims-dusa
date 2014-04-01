@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 
-import modelo.maestros.Unidad;
+import modelo.maestros.UnidadUsuario;
 import modelo.maestros.Especialidad;
 
 import java.sql.Timestamp;
@@ -22,11 +22,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_usuario", unique=true, nullable=false)
-	private long idUsuario;
-
-	@Column(length=8)
+	@Column(name="id_usuario", length=8, unique=true, nullable=false)
 	private String cedula;
 
 	@Column(length=500)
@@ -64,12 +60,18 @@ public class Usuario implements Serializable {
 
 	@Column(length=50)
 	private String login;
-
-	@Column(length=500)
-	private String nombre;
 	
-	@Column(length=500)
-	private String apellido;
+	@Column(name="primer_apellido", length=100)
+	private String primerApellido;
+
+	@Column(name="primer_nombre", length=100)
+	private String primerNombre;
+	
+	@Column(name="segundo_apellido", length=100)
+	private String segundoApellido;
+
+	@Column(name="segundo_nombre", length=100)
+	private String segundoNombre;
 
 	@Column(name="numero_citas_diarias")
 	private long numeroCitasDiarias;
@@ -97,7 +99,7 @@ public class Usuario implements Serializable {
 	//bi-directional many-to-one association to Unidad
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_unidad")
-	private Unidad unidad;
+	private UnidadUsuario unidad;
 
 	@ManyToMany
 	@JoinTable(
@@ -114,16 +116,15 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(long idUsuario, String cedula, String direccion,
+	public Usuario(String cedula, String direccion,
 			String email, boolean estado, String estadoUsuario,
 			Timestamp fechaAuditoria, String ficha, String horaAuditoria,
 			byte[] imagen, String licenciaCm, long licenciaInpsasel,
-			String licenciaMsds, String login, String nombre, String apellido,
+			String licenciaMsds, String login, String nombre, String apellido,String segundoNombre, String segundoApellido,
 			long numeroCitasDiarias, String password, String sexo,
 			String telefono, long tiempoEstimadoEntreCitas,
-			String usuarioAuditoria, Especialidad especialidad, Unidad unidad, Set<Grupo> grupos) {
+			String usuarioAuditoria, Especialidad especialidad, UnidadUsuario unidad, Set<Grupo> grupos) {
 		super();
-		this.idUsuario = idUsuario;
 		this.cedula = cedula;
 		this.direccion = direccion;
 		this.email = email;
@@ -137,8 +138,10 @@ public class Usuario implements Serializable {
 		this.licenciaInpsasel = licenciaInpsasel;
 		this.licenciaMsds = licenciaMsds;
 		this.login = login;
-		this.nombre = nombre;
-		this.apellido = apellido;
+		this.primerNombre = nombre;
+		this.primerApellido = apellido;
+		this.segundoNombre = segundoNombre;
+		this.segundoApellido = segundoApellido;
 		this.numeroCitasDiarias = numeroCitasDiarias;
 		this.password = password;
 		this.sexo = sexo;
@@ -150,15 +153,6 @@ public class Usuario implements Serializable {
 		this.grupos = grupos;
 	}
 
-
-
-	public long getIdUsuario() {
-		return this.idUsuario;
-	}
-
-	public void setIdUsuario(long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 
 	public String getCedula() {
 		return this.cedula;
@@ -264,14 +258,6 @@ public class Usuario implements Serializable {
 		this.login = login;
 	}
 
-	public String getNombre() {
-		return this.nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public long getNumeroCitasDiarias() {
 		return this.numeroCitasDiarias;
 	}
@@ -328,11 +314,11 @@ public class Usuario implements Serializable {
 		this.especialidad = especialidad;
 	}
 
-	public Unidad getUnidad() {
+	public UnidadUsuario getUnidad() {
 		return this.unidad;
 	}
 
-	public void setUnidad(Unidad unidad) {
+	public void setUnidad(UnidadUsuario unidad) {
 		this.unidad = unidad;
 	}
 
@@ -344,11 +330,36 @@ public class Usuario implements Serializable {
 		this.grupos = grupos;
 	}
 
-	public String getApellido() {
-		return apellido;
+	public String getPrimerApellido() {
+		return primerApellido;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setPrimerApellido(String primerApellido) {
+		this.primerApellido = primerApellido;
 	}
+
+	public String getPrimerNombre() {
+		return primerNombre;
+	}
+
+	public void setPrimerNombre(String primerNombre) {
+		this.primerNombre = primerNombre;
+	}
+
+	public String getSegundoApellido() {
+		return segundoApellido;
+	}
+
+	public void setSegundoApellido(String segundoApellido) {
+		this.segundoApellido = segundoApellido;
+	}
+
+	public String getSegundoNombre() {
+		return segundoNombre;
+	}
+
+	public void setSegundoNombre(String segundoNombre) {
+		this.segundoNombre = segundoNombre;
+	}
+
 }

@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 
 import modelo.maestros.Ciudad;
 import modelo.maestros.Especialidad;
-import modelo.maestros.Unidad;
+import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
@@ -65,6 +65,10 @@ public class CUsuario extends CGenerico {
 	private Textbox txtCedulaUsuario;
 	@Wire
 	private Textbox txtApellidoUsuario;
+	@Wire
+	private Textbox txtNombre2Usuario;
+	@Wire
+	private Textbox txtApellido2Usuario;
 	@Wire
 	private Textbox txtFichaUsuario;
 	@Wire
@@ -141,6 +145,7 @@ public class CUsuario extends CGenerico {
 				cmbEspecialidad.setValue("");
 				cmbUnidad.setValue("");
 				txtApellidoUsuario.setValue("");
+				txtApellido2Usuario.setValue("");
 				txtCedulaUsuario.setValue("");
 				txtCorreoUsuario.setValue("");
 				txtDireccionUsuario.setValue("");
@@ -152,6 +157,7 @@ public class CUsuario extends CGenerico {
 				txtPasswordUsuario.setValue("");
 				txtPassword2Usuario.setValue("");
 				txtNombreUsuario.setValue("");
+				txtNombre2Usuario.setValue("");
 				txtTelefonoUsuario.setValue("");
 				spnCitasUsuario.setValue(null);
 				spnTiempoUsuario.setValue(null);
@@ -178,7 +184,7 @@ public class CUsuario extends CGenerico {
 					Especialidad especialidad = servicioEspecialidad
 							.buscar(Long.parseLong(cmbEspecialidad
 									.getSelectedItem().getContext()));
-					Unidad unidad = servicioUnidad
+					UnidadUsuario unidad = servicioUnidadUsuario
 							.buscar(Long.parseLong(cmbUnidad.getSelectedItem()
 									.getContext()));
 					String cedula = txtCedulaUsuario.getValue();
@@ -192,6 +198,8 @@ public class CUsuario extends CGenerico {
 					String password = txtPasswordUsuario.getValue();
 					String nombre = txtNombreUsuario.getValue();
 					String apellido = txtApellidoUsuario.getValue();
+					String nombre2 = txtNombre2Usuario.getValue();
+					String apellido2 = txtApellido2Usuario.getValue();
 					String telefono = txtTelefonoUsuario.getValue();
 					long citas = spnCitasUsuario.getValue();
 					long tiempo = spnTiempoUsuario.getValue();
@@ -212,11 +220,12 @@ public class CUsuario extends CGenerico {
 						}
 						imagenUsuario = imagen.getContent().getByteData();
 					}
-					Usuario usuario = new Usuario(id, cedula, direccion,
-							correo, true, "estado", fechaHora, ficha, sexo,
+					Usuario usuario = new Usuario(cedula, direccion, correo,
+							true, "estado", fechaHora, ficha, sexo,
 							imagenUsuario, licenciaC,
 							Long.parseLong(licenciaI), licenciaM, login,
-							nombre,apellido, citas, password, sexo, telefono, tiempo,
+							nombre, apellido, nombre2, apellido2, citas,
+							password, sexo, telefono, tiempo,
 							nombreUsuarioSesion(), especialidad, unidad,
 							gruposUsuario);
 					servicioUsuario.guardar(usuario);
@@ -344,23 +353,22 @@ public class CUsuario extends CGenerico {
 					Messagebox.INFORMATION);
 		}
 	}
-	
+
 	/* Valida la cedula */
 	@Listen("onChange = #txtCedulaUsuario")
 	public void validarCedula() {
 		if (!Validador.validarNumero(txtCedulaUsuario.getValue())) {
-			Messagebox.show("Cedula Invalida", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			Messagebox.show("Cedula Invalida", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
 		}
 	}
-	
+
 	/* Valida licencia de ipsasel */
 	@Listen("onChange = #txtLicenciaIUsuario")
 	public void validarLicencia() {
-		if (!Validador.validarNumero(txtLicenciaIUsuario
-				.getValue())) {
-			Messagebox.show("Licencia Invalida", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+		if (!Validador.validarNumero(txtLicenciaIUsuario.getValue())) {
+			Messagebox.show("Licencia Invalida", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
 		}
 	}
 
@@ -398,19 +406,19 @@ public class CUsuario extends CGenerico {
 
 	/* Llena el combo de Unidades cada vez que se abre */
 	@Listen("onOpen = #cmbUnidad")
-	public void llenarComboUnidad(){
-		List<Unidad> unidades = servicioUnidad.buscarTodas();
-		cmbUnidad.setModel(new ListModelList<Unidad>(unidades));
+	public void llenarComboUnidad() {
+		List<UnidadUsuario> unidades = servicioUnidadUsuario.buscarTodas();
+		cmbUnidad.setModel(new ListModelList<UnidadUsuario>(unidades));
 	}
-	
+
 	/* Llena el combo de Especialidades cada vez que se abre */
 	@Listen("onOpen = #cmbEspecialidad")
-	public void llenarComboEspecialidad(){
+	public void llenarComboEspecialidad() {
 		List<Especialidad> especialidades = servicioEspecialidad.buscarTodas();
 		cmbEspecialidad
 				.setModel(new ListModelList<Especialidad>(especialidades));
 	}
-	
+
 	/* Permite subir una imagen a la vista */
 	@Listen("onUpload = #fudImagenUsuario")
 	public void processMedia(UploadEvent event) {
@@ -485,7 +493,7 @@ public class CUsuario extends CGenerico {
 		List<Usuario> usuarios = servicioUsuario.buscarTodos();
 		catalogo = new Catalogo<Usuario>(catalogoUsuario,
 				"Catalogo de Usuarios", usuarios, "Cedula", "Ficha", "Nombre",
-				"Correo", "Login") {
+				"Apellido", "Login") {
 
 			@Override
 			protected List<Usuario> buscar(String valor, String combo) {
@@ -498,15 +506,15 @@ public class CUsuario extends CGenerico {
 						if (combo.equals("Nombre"))
 							return servicioUsuario.filtroNombre(valor);
 						else {
-							if (combo.equals("Correo"))
-								return servicioUsuario.filtroCorreo(valor);
-							else {
 								if (combo.equals("Login"))
 									return servicioUsuario.filtroLogin(valor);
-								else
-									return servicioUsuario.buscarTodos();
-							}
-
+								else {
+									if (combo.equals("Apellido"))
+										return servicioUsuario
+												.filtroApellido(valor);
+									else
+										return servicioUsuario.buscarTodos();
+								}
 						}
 					}
 				}
@@ -517,8 +525,8 @@ public class CUsuario extends CGenerico {
 				String[] registros = new String[5];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
-				registros[2] = objeto.getNombre();
-				registros[3] = objeto.getEmail();
+				registros[2] = objeto.getPrimerNombre();
+				registros[3] = objeto.getPrimerApellido();
 				registros[4] = objeto.getLogin();
 				return registros;
 			}
@@ -562,7 +570,10 @@ public class CUsuario extends CGenerico {
 		txtLoginUsuario.setValue(usuario.getLogin());
 		txtPasswordUsuario.setValue(usuario.getPassword());
 		txtPassword2Usuario.setValue(usuario.getPassword());
-		txtNombreUsuario.setValue(usuario.getNombre());
+		txtNombreUsuario.setValue(usuario.getPrimerNombre());
+		txtNombre2Usuario.setValue(usuario.getSegundoNombre());
+		txtApellidoUsuario.setValue(usuario.getPrimerApellido());
+		txtApellido2Usuario.setValue(usuario.getSegundoApellido());
 		txtTelefonoUsuario.setValue(usuario.getTelefono());
 		spnCitasUsuario.setValue((int) (long) usuario.getNumeroCitasDiarias());
 		spnTiempoUsuario.setValue((int) (long) usuario
@@ -579,7 +590,8 @@ public class CUsuario extends CGenerico {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		id = usuario.getIdUsuario();
+		txtCedulaUsuario.setDisabled(true);
+		id = Long.valueOf(usuario.getCedula());
 		llenarListas(usuario);
 	}
 

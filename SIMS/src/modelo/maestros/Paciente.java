@@ -19,11 +19,7 @@ public class Paciente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_paciente", unique=true, nullable=false)
-	private long idPaciente;
-
-	@Column(length=12)
+	@Column(name="id_paciente", length=12, unique=true, nullable=false)
 	private String cedula;
 
 	@Column(name="fecha_auditoria")
@@ -36,13 +32,18 @@ public class Paciente implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_empresa")
 	private Empresa empresa;
-	
 
 	@Column(name="primer_apellido", length=100)
 	private String primerApellido;
 
 	@Column(name="primer_nombre", length=100)
 	private String primerNombre;
+	
+	@Column(name="segundo_apellido", length=100)
+	private String segundoApellido;
+
+	@Column(name="segundo_nombre", length=100)
+	private String segundoNombre;
 
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
@@ -55,30 +56,22 @@ public class Paciente implements Serializable {
 	}
 	
 
-
-	public Paciente(long idPaciente, String cedula, Timestamp fechaAuditoria,
+	public Paciente(String cedula, Timestamp fechaAuditoria,
 			String horaAuditoria, Empresa empresa, String primerApellido,
-			String primerNombre, String usuarioAuditoria) {
+			String primerNombre,String segundoApellido,
+			String segundoNombre, String usuarioAuditoria) {
 		super();
-		this.idPaciente = idPaciente;
 		this.cedula = cedula;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.empresa = empresa;
 		this.primerApellido = primerApellido;
 		this.primerNombre = primerNombre;
+		this.segundoApellido = segundoApellido;
+		this.segundoNombre = segundoNombre;
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-
-
-	public long getIdPaciente() {
-		return this.idPaciente;
-	}
-
-	public void setIdPaciente(long idPaciente) {
-		this.idPaciente = idPaciente;
-	}
 
 	public String getCedula() {
 		return this.cedula;
@@ -159,6 +152,26 @@ public class Paciente implements Serializable {
 		cita.setPaciente(null);
 
 		return cita;
+	}
+
+
+	public String getSegundoApellido() {
+		return segundoApellido;
+	}
+
+
+	public void setSegundoApellido(String segundoApellido) {
+		this.segundoApellido = segundoApellido;
+	}
+
+
+	public String getSegundoNombre() {
+		return segundoNombre;
+	}
+
+
+	public void setSegundoNombre(String segundoNombre) {
+		this.segundoNombre = segundoNombre;
 	}
 
 }

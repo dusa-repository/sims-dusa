@@ -1,0 +1,15 @@
+package interfacedao.maestros;
+
+import java.util.List;
+
+import modelo.maestros.CategoriaDiagnostico;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ICategoriaDiagnosticoDAO extends JpaRepository<CategoriaDiagnostico, Long> {
+
+	CategoriaDiagnostico findByNombre(String value);
+
+	List<CategoriaDiagnostico> findByNombreStartingWithAllIgnoreCase(String valor);
+
+}

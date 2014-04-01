@@ -1,41 +1,41 @@
 package servicio.maestros;
 
-import interfacedao.maestros.IUnidadDAO;
+import interfacedao.maestros.IUnidadUsuarioDAO;
 
 import java.util.List;
 
-import modelo.maestros.Unidad;
+import modelo.maestros.UnidadUsuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("SUnidad")
-public class SUnidad {
+@Service("SUnidadUsuario")
+public class SUnidadUsuario {
 
 	@Autowired
-	private IUnidadDAO interfaceUnidad;
+	private IUnidadUsuarioDAO interfaceUnidad;
 
-	public void guardar(Unidad unidad) {
+	public void guardar(UnidadUsuario unidad) {
 		interfaceUnidad.save(unidad);
 	}
 
-	public List<Unidad> buscarTodas() {
+	public List<UnidadUsuario> buscarTodas() {
 		return interfaceUnidad.findAll();
 	}
 
-	public Unidad buscar(long id) {
+	public UnidadUsuario buscar(long id) {
 		return interfaceUnidad.findOne(id);
 	}
 
-	public void eliminar(Unidad unidad) {
+	public void eliminar(UnidadUsuario unidad) {
 		interfaceUnidad.delete(unidad);
 	}
 
-	public Unidad buscarPorNombre(String value) {
+	public UnidadUsuario buscarPorNombre(String value) {
 		return interfaceUnidad.findByNombre(value);
 	}
 
-	public List<Unidad> filtroNombre(String valor) {
+	public List<UnidadUsuario> filtroNombre(String valor) {
 		return interfaceUnidad.findByNombreStartingWithAllIgnoreCase(valor);
 	}
 }

@@ -49,7 +49,7 @@ public class Diagnostico implements Serializable {
 	//bi-directional many-to-one association to Categoria
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_categoria")
-	private Categoria categoria;
+	private CategoriaDiagnostico categoria;
 
 	public Diagnostico() {
 	}
@@ -57,7 +57,7 @@ public class Diagnostico implements Serializable {
 
 	public Diagnostico(long idDiagnostico, String codigo,
 			Timestamp fechaAuditoria, String grupo, String horaAuditoria,
-			String nombre, String usuarioAuditoria, Categoria categoria) {
+			String nombre, String usuarioAuditoria, CategoriaDiagnostico categoria) {
 		super();
 		this.idDiagnostico = idDiagnostico;
 		this.codigo = codigo;
@@ -126,11 +126,11 @@ public class Diagnostico implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public Categoria getCategoria() {
+	public CategoriaDiagnostico getCategoria() {
 		return this.categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(CategoriaDiagnostico categoria) {
 		this.categoria = categoria;
 	}
 
