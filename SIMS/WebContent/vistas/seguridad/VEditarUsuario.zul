@@ -33,6 +33,7 @@
 					</row>
 				</rows>
 			</grid>
+			<separator/>
 			<div id="botoneraEditarUsuario" />
 		</groupbox>
 	</div>
