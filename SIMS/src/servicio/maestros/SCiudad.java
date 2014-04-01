@@ -48,4 +48,8 @@ public class SCiudad {
 	public Ciudad buscarPorNombre(String value) {
 		return ciudadDAO.findByNombre(value);
 	}
+
+	public List<Ciudad> filtroPais(String valor) {
+		return ciudadDAO.findByEstadoPaisNombreStartingWithAllIgnoreCase(valor);
+	}
 }

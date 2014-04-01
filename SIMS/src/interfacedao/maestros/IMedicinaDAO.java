@@ -2,7 +2,7 @@ package interfacedao.maestros;
 
 import java.util.List;
 
-import modelo.maestros.FormaTerapeutica;
+import modelo.maestros.CategoriaMedicina;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 
@@ -14,12 +14,12 @@ public interface IMedicinaDAO extends JpaRepository<Medicina, Long> {
 
 	List<Medicina> findByLaboratorio(Laboratorio laboratorio);
 
-	List<Medicina> findByFormaTerapeutica(FormaTerapeutica formaTerapeutica);
-
 	List<Medicina> findByNombreStartingWithAllIgnoreCase(String valor);
 
 	List<Medicina> findByLaboratorioNombreStartingWithAllIgnoreCase(String valor);
 
 	List<Medicina> findByPosologiaStartingWithAllIgnoreCase(String valor);
+
+	List<Medicina> findByCategoriaMedicina(CategoriaMedicina categoriaMedicina);
 
 }

@@ -3,9 +3,8 @@ package controlador.maestros;
 import java.io.IOException;
 import java.util.List;
 
-import modelo.maestros.Estado;
 import modelo.maestros.Medicina;
-import modelo.maestros.Presentacion;
+import modelo.maestros.PresentacionComercial;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -20,7 +19,7 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 
-public class CPresentacion extends CGenerico {
+public class CPresentacionComercial extends CGenerico {
 
 	private static final long serialVersionUID = 6414734962746880324L;
 
@@ -37,7 +36,7 @@ public class CPresentacion extends CGenerico {
 	@Wire
 	private Combobox cmbMedicina;
 
-	Catalogo<Presentacion> catalogo;
+	Catalogo<PresentacionComercial> catalogo;
 	long id = 0;
 
 	@Override
@@ -54,7 +53,7 @@ public class CPresentacion extends CGenerico {
 							.getSelectedItem().getContext());
 					Medicina medicina = servicioMedicina.buscar(idMedicina);
 
-					Presentacion presentacion = new Presentacion(id, fechaHora,
+					PresentacionComercial presentacion = new PresentacionComercial(id, fechaHora,
 							horaAuditoria, nombre, nombreUsuarioSesion(),
 							medicina);
 					servicioPresentacion.guardar(presentacion);
@@ -77,7 +76,7 @@ public class CPresentacion extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divPresentacion, "Presentacion");
+				cerrarVentana(divPresentacion, "Presentacion Comercial");
 			}
 
 			@Override
@@ -93,7 +92,7 @@ public class CPresentacion extends CGenerico {
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
 
-										Presentacion presentacion = servicioPresentacion
+										PresentacionComercial presentacion = servicioPresentacion
 												.buscar(id);
 										servicioPresentacion
 												.eliminar(presentacion);
@@ -118,13 +117,13 @@ public class CPresentacion extends CGenerico {
 	/* Muestra un catalogo de presentaciones */
 	@Listen("onClick = #btnBuscarPresentacion")
 	public void mostrarCatalogo() throws IOException {
-		List<Presentacion> presentaciones = servicioPresentacion.buscarTodas();
-		catalogo = new Catalogo<Presentacion>(catalogoPresentacion,
+		List<PresentacionComercial> presentaciones = servicioPresentacion.buscarTodas();
+		catalogo = new Catalogo<PresentacionComercial>(catalogoPresentacion,
 				"Catalogo de Presentaciones", presentaciones, "Nombre",
 				"Medicina") {
 
 			@Override
-			protected String[] crearRegistros(Presentacion presentacion) {
+			protected String[] crearRegistros(PresentacionComercial presentacion) {
 				String[] registros = new String[2];
 				registros[0] = presentacion.getNombre();
 				registros[1] = presentacion.getMedicina().getNombre();
@@ -132,7 +131,7 @@ public class CPresentacion extends CGenerico {
 			}
 
 			@Override
-			protected List<Presentacion> buscar(String valor,String combo) {
+			protected List<PresentacionComercial> buscar(String valor,String combo) {
 				if(combo.equals("Nombre"))
 				return servicioPresentacion.filtroNombre(valor);
 				else{
@@ -169,7 +168,7 @@ public class CPresentacion extends CGenerico {
 	/* Busca si existe una presentacion con el mismo nombre escrito */
 	@Listen("onChange = #txtNombre")
 	public void buscarPorNombre() {
-		Presentacion presentacion = servicioPresentacion
+		PresentacionComercial presentacion = servicioPresentacion
 				.buscarPorNombre(txtNombre.getValue());
 		if (presentacion != null)
 			llenarCampos(presentacion);
@@ -181,13 +180,13 @@ public class CPresentacion extends CGenerico {
 	 */
 	@Listen("onSeleccion = #catalogoPresentacion")
 	public void seleccion() {
-		Presentacion presentacion = catalogo.objetoSeleccionadoDelCatalogo();
+		PresentacionComercial presentacion = catalogo.objetoSeleccionadoDelCatalogo();
 		llenarCampos(presentacion);
 		catalogo.setParent(null);
 	}
 
 	/* LLena los campos del formulario dada una presentacion */
-	public void llenarCampos(Presentacion presentacion) {
+	public void llenarCampos(PresentacionComercial presentacion) {
 		txtNombre.setValue(presentacion.getNombre());
 		cmbMedicina.setValue(presentacion.getMedicina().getNombre());
 		id = presentacion.getIdPresentacion();

@@ -1,0 +1,26 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divPresentacionMedicina" apply="controlador.maestros.CPresentacionMedicina">
+		<groupbox width="40em" mold="3d" title="Presentacion de Medicina">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox class="multilinea"  id="txtNombrePresentacionMedicina" hflex="1" maxlength="500"
+							tooltiptext="Ingrese el Nombre de la Presentacion de la Medicina" multiline="true" />
+						<button id="btnBuscarPresentacionMedicina" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraPresentacionMedicina" />
+			<div id="catalogoPresentacionMedicina" />
+		</groupbox>
+	</div>
+</zk>

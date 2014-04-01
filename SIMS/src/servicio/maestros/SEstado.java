@@ -5,6 +5,7 @@ import java.util.List;
 import interfacedao.maestros.IEstadoDAO;
 
 import modelo.maestros.Estado;
+import modelo.maestros.Pais;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,13 @@ public class SEstado {
 
 	public Estado buscarPorNombre(String value) {
 		return estadoDAO.findByNombre(value);
+	}
+
+	public List<Estado> buscarPorPais(Pais pais) {
+		return estadoDAO.findByPais(pais);
+	}
+
+	public List<Estado> filtroPais(String valor) {
+		return estadoDAO.findByPaisNombreStartingWithAllIgnoreCase(valor);
 	}
 }

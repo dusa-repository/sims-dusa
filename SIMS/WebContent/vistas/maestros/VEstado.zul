@@ -16,6 +16,16 @@
 						<button id="btnBuscarEstado" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
+					<row>
+						<label class="etiqueta" value="Pais:" />
+						<combobox tooltiptext="Seleccione un Pais" placeholder="Seleccione un Pais"
+							id="cmbPais" readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idPais}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
 				</rows>
 			</grid>
 			<separator />

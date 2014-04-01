@@ -4,7 +4,7 @@ import interfacedao.maestros.IMedicinaDAO;
 
 import java.util.List;
 
-import modelo.maestros.FormaTerapeutica;
+import modelo.maestros.CategoriaMedicina;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 
@@ -38,11 +38,6 @@ public class SMedicina {
 		return medicinaDAO.findByLaboratorio(laboratorio);
 	}
 
-	public List<Medicina> buscarPorFormaTerapeutica(
-			FormaTerapeutica formaTerapeutica) {
-		return medicinaDAO.findByFormaTerapeutica(formaTerapeutica);
-	}
-
 	public void eliminar(Medicina medicina) {
 		medicinaDAO.delete(medicina);
 	}
@@ -58,5 +53,9 @@ public class SMedicina {
 
 	public List<Medicina> filtroPosologia(String valor) {
 		return medicinaDAO.findByPosologiaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Medicina> buscarPorCategoria(CategoriaMedicina categoriaMedicina) {
+		return medicinaDAO.findByCategoriaMedicina(categoriaMedicina);
 	}
 }

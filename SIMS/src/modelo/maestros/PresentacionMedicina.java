@@ -2,30 +2,25 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-/**
- * The persistent class for the presentacion database table.
- * 
- */
 @Entity
-@Table(name="presentacion")
-public class Presentacion implements Serializable {
-	private static final long serialVersionUID = 1L;
+@Table(name="presentacion_medicina")
+public class PresentacionMedicina implements Serializable {
+
+	private static final long serialVersionUID = -7429324046034863678L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_presentacion", unique=true, nullable=false)
+	@Column(name="id_presentacion_medicina", unique=true, nullable=false)
 	private long idPresentacion;
 
 	@Column(name="fecha_auditoria")
@@ -39,31 +34,27 @@ public class Presentacion implements Serializable {
 
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
-
-	//bi-directional many-to-one association to Medicina
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_medicina")
-	private Medicina medicina;
-
-	public Presentacion() {
-	}
 	
-	public Presentacion(long idPresentacion, Timestamp fechaAuditoria,
-			String horaAuditoria, String nombre, String usuarioAuditoria,
-			Medicina medicina) {
+	@OneToMany(mappedBy="presentacionMedicina")
+	private Set<MedicinaPresentacionUnidad> medicinasPresentacion;
+
+	public PresentacionMedicina(long idPresentacion, Timestamp fechaAuditoria,
+			String horaAuditoria, String nombre, String usuarioAuditoria) {
 		super();
 		this.idPresentacion = idPresentacion;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
 		this.usuarioAuditoria = usuarioAuditoria;
-		this.medicina = medicina;
 	}
 
-
+	public PresentacionMedicina() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public long getIdPresentacion() {
-		return this.idPresentacion;
+		return idPresentacion;
 	}
 
 	public void setIdPresentacion(long idPresentacion) {
@@ -71,7 +62,7 @@ public class Presentacion implements Serializable {
 	}
 
 	public Timestamp getFechaAuditoria() {
-		return this.fechaAuditoria;
+		return fechaAuditoria;
 	}
 
 	public void setFechaAuditoria(Timestamp fechaAuditoria) {
@@ -79,7 +70,7 @@ public class Presentacion implements Serializable {
 	}
 
 	public String getHoraAuditoria() {
-		return this.horaAuditoria;
+		return horaAuditoria;
 	}
 
 	public void setHoraAuditoria(String horaAuditoria) {
@@ -87,7 +78,7 @@ public class Presentacion implements Serializable {
 	}
 
 	public String getNombre() {
-		return this.nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -95,19 +86,20 @@ public class Presentacion implements Serializable {
 	}
 
 	public String getUsuarioAuditoria() {
-		return this.usuarioAuditoria;
+		return usuarioAuditoria;
 	}
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public Medicina getMedicina() {
-		return this.medicina;
+	public Set<MedicinaPresentacionUnidad> getMedicinasPresentacion() {
+		return medicinasPresentacion;
 	}
 
-	public void setMedicina(Medicina medicina) {
-		this.medicina = medicina;
+	public void setMedicinasPresentacion(
+			Set<MedicinaPresentacionUnidad> medicinasPresentacion) {
+		this.medicinasPresentacion = medicinasPresentacion;
 	}
-
+		
 }

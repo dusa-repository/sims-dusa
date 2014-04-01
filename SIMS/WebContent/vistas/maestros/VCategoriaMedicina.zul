@@ -1,0 +1,26 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divCategoriaMedicina" apply="controlador.maestros.CCategoriaMedicina">
+		<groupbox width="40em" mold="3d" title="Categoria de Medicina">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox class="multilinea"  id="txtNombreCategoriaMedicina" hflex="1" maxlength="500"
+							tooltiptext="Ingrese el Nombre de la Categoria de la Medicina" multiline="true" />
+						<button id="btnBuscarCategoriaMedicina" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraCategoriaMedicina" />
+			<div id="catalogoCategoriaMedicina" />
+		</groupbox>
+	</div>
+</zk>

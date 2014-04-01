@@ -25,18 +25,22 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Tab;
 
 import servicio.maestros.SCategoriaDiagnostico;
+import servicio.maestros.SCategoriaMedicina;
 import servicio.maestros.SCiudad;
 import servicio.maestros.SConsultorio;
 import servicio.maestros.SDiagnostico;
 import servicio.maestros.SEmpresa;
 import servicio.maestros.SEspecialidad;
 import servicio.maestros.SEstado;
-import servicio.maestros.SFormaTerapeutica;
 import servicio.maestros.SLaboratorio;
 import servicio.maestros.SMedicina;
+import servicio.maestros.SMedicinaPresentacionUnidad;
 import servicio.maestros.SMotivoCita;
 import servicio.maestros.SPaciente;
-import servicio.maestros.SPresentacion;
+import servicio.maestros.SPais;
+import servicio.maestros.SPresentacionComercial;
+import servicio.maestros.SPresentacionMedicina;
+import servicio.maestros.SUnidadMedicina;
 import servicio.maestros.SUnidadUsuario;
 import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
@@ -51,6 +55,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SArbol servicioArbol;
 	@WireVariable("SCategoriaDiagnostico")
 	protected SCategoriaDiagnostico servicioCategoriaDiagnostico;
+	@WireVariable("SCategoriaMedicina")
+	protected SCategoriaMedicina servicioCategoriaMedicina;
+	@WireVariable("SCita")
+	protected SCita servicioCita;
 	@WireVariable("SCiudad")
 	protected SCiudad servicioCiudad;
 	@WireVariable("SConsultorio")
@@ -63,26 +71,30 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SEspecialidad servicioEspecialidad;
 	@WireVariable("SEstado")
 	protected SEstado servicioEstado;
-	@WireVariable("SFormaTerapeutica")
-	protected SFormaTerapeutica servicioFormaTerapeutica;
 	@WireVariable("SLaboratorio")
 	protected SLaboratorio servicioLaboratorio;
 	@WireVariable("SMedicina")
 	protected SMedicina servicioMedicina;
+	@WireVariable("SMedicinaPresentacionUnidad")
+	protected SMedicinaPresentacionUnidad servicioMedicinaPresentacionUnidad;
 	@WireVariable("SMotivoCita")
 	protected SMotivoCita servicioMotivoCita;
+	@WireVariable("SPais")
+	protected SPais servicioPais;
 	@WireVariable("SPaciente")
 	protected SPaciente servicioPaciente;
-	@WireVariable("SPresentacion")
-	protected SPresentacion servicioPresentacion;
+	@WireVariable("SPresentacionComercial")
+	protected SPresentacionComercial servicioPresentacion;
+	@WireVariable("SPresentacionMedicina")
+	protected SPresentacionMedicina servicioPresentacionMedicina;
 	@WireVariable("SUnidadUsuario")
 	protected SUnidadUsuario servicioUnidadUsuario;
+	@WireVariable("SUnidadMedicina")
+	protected SUnidadMedicina servicioUnidadMedicina;
 	@WireVariable("SGrupo")
 	protected SGrupo servicioGrupo;
 	@WireVariable("SUsuario")
 	protected SUsuario servicioUsuario;
-	@WireVariable("SCita")
-	protected SCita servicioCita;
 	
 	public static  List<Tab> tabs = new ArrayList<Tab>();
 	public final Calendar calendario = Calendar.getInstance();

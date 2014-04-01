@@ -3,10 +3,10 @@ package controlador.maestros;
 import java.io.IOException;
 import java.util.List;
 
-import modelo.maestros.FormaTerapeutica;
+import modelo.maestros.CategoriaMedicina;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
-import modelo.maestros.Presentacion;
+import modelo.maestros.PresentacionComercial;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -38,8 +38,6 @@ public class CMedicina extends CGenerico {
 	private Button btnBuscarMedicina;
 	@Wire
 	private Combobox cmbLaboratorio;
-	@Wire
-	private Combobox cmbFormaTerapeutica;
 	@Wire
 	private Textbox txtDenominacionGenerica;
 	@Wire
@@ -101,18 +99,12 @@ public class CMedicina extends CGenerico {
 							.getSelectedItem().getContext());
 					Laboratorio laboratorio = servicioLaboratorio
 							.buscar(idLaboratorio);
-
-					long idFormaTerapeutica = Long.valueOf(cmbFormaTerapeutica
-							.getSelectedItem().getContext());
-					FormaTerapeutica formaTerapeutica = servicioFormaTerapeutica
-							.buscar(idFormaTerapeutica);
-
+					CategoriaMedicina ca = null;
 					Medicina medicina = new Medicina(id, composicion,
 							contraindicaciones, denominacionGenerica, efectos,
 							embarazo, fechaHora, horaAuditoria, indicaciones,
 							nombre, posologia, precauciones,
-							nombreUsuarioSesion(), formaTerapeutica,
-							laboratorio);
+							nombreUsuarioSesion(), laboratorio, ca);
 					servicioMedicina.guardar(medicina);
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
@@ -126,10 +118,7 @@ public class CMedicina extends CGenerico {
 			public void limpiar() {
 				txtNombre.setText("");
 				cmbLaboratorio.setText("");
-				cmbFormaTerapeutica.setText("");
 				cmbLaboratorio.setPlaceholder("Seleccione un Laboratorio");
-				cmbFormaTerapeutica
-						.setPlaceholder("Seleccione una Forma Terapeutica");
 				txtDenominacionGenerica.setText("");
 				txtComposicion.setText("");
 				txtPosologia.setText("");
@@ -159,7 +148,7 @@ public class CMedicina extends CGenerico {
 									if (evt.getName().equals("onOK")) {
 										Medicina medicina = servicioMedicina
 												.buscar(id);
-										List<Presentacion> presentaciones = servicioPresentacion
+										List<PresentacionComercial> presentaciones = servicioPresentacion
 												.buscarPorMedicina(medicina);
 										if (!presentaciones.isEmpty()) {
 											Messagebox
@@ -236,15 +225,6 @@ public class CMedicina extends CGenerico {
 		cmbLaboratorio.setModel(new ListModelList<Laboratorio>(laboratorios));
 	}
 
-	/* Llena el combo de formas terapeuticas cada vez que se abre */
-	@Listen("onOpen = #cmbFormaTerapeutica")
-	public void llenarComboFormas() {
-		List<FormaTerapeutica> formasTerapeuticas = servicioFormaTerapeutica
-				.buscarTodos();
-		cmbFormaTerapeutica.setModel(new ListModelList<FormaTerapeutica>(
-				formasTerapeuticas));
-	}
-
 	/* Validaciones de pantalla para poder realizar el guardar */
 	public boolean validar() {
 
@@ -292,8 +272,6 @@ public class CMedicina extends CGenerico {
 	/* LLena los campos del formulario dada una medicina */
 	public void llenarCampos(Medicina medicina) {
 		cmbLaboratorio.setValue(medicina.getLaboratorio().getNombre());
-		cmbFormaTerapeutica
-				.setValue(medicina.getFormaTerapeutica().getNombre());
 		txtDenominacionGenerica.setValue(medicina.getDenominacionGenerica());
 		txtComposicion.setValue(medicina.getComposicion());
 		txtPosologia.setValue(medicina.getPosologia());

@@ -3,16 +3,17 @@ package controlador.maestros;
 import java.io.IOException;
 import java.util.List;
 
-import modelo.maestros.Categoria;
 import modelo.maestros.Ciudad;
-import modelo.maestros.Diagnostico;
 import modelo.maestros.Estado;
+import modelo.maestros.Pais;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -32,6 +33,8 @@ public class CEstado extends CGenerico {
 	private Div catalogoEstado;
 	@Wire
 	private Div divEstado;
+	@Wire
+	private Combobox cmbPais;
 	private long id = 0;
 	Catalogo<Estado> catalogo;
 
@@ -48,6 +51,8 @@ public class CEstado extends CGenerico {
 			@Override
 			public void limpiar() {
 				txtNombreEstado.setValue("");
+				cmbPais.setValue("");
+				cmbPais.setPlaceholder("Seleccione un Pais");
 				id = 0;
 			}
 
@@ -55,8 +60,10 @@ public class CEstado extends CGenerico {
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombreEstado.getValue();
+					Pais pais = servicioPais.buscar(Long.parseLong(cmbPais
+							.getSelectedItem().getContext()));
 					Estado estado = new Estado(id, fechaHora, horaAuditoria,
-							nombre, nombreUsuarioSesion());
+							nombre, nombreUsuarioSesion(), pais);
 					servicioEstado.guardar(estado);
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
@@ -108,7 +115,8 @@ public class CEstado extends CGenerico {
 
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (txtNombreEstado.getText().compareTo("") == 0) {
+		if (cmbPais.getText().compareTo("") == 0
+				|| txtNombreEstado.getText().compareTo("") == 0) {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
@@ -121,20 +129,25 @@ public class CEstado extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Estado> estados = servicioEstado.buscarTodos();
 		catalogo = new Catalogo<Estado>(catalogoEstado, "Catalogo de Estados",
-				estados, "Nombre") {
+				estados, "Nombre", "Pais") {
 
 			@Override
 			protected List<Estado> buscar(String valor, String combo) {
 				if (combo.equals("Nombre"))
 					return servicioEstado.filtroNombre(valor);
-				else
-					return estados;
+				else {
+					if (combo.equals("Pais"))
+						return servicioEstado.filtroPais(valor);
+					else
+						return estados;
+				}
 			}
 
 			@Override
 			protected String[] crearRegistros(Estado estado) {
-				String[] registros = new String[1];
+				String[] registros = new String[2];
 				registros[0] = estado.getNombre();
+				registros[1] = estado.getPais().getNombre();
 				return registros;
 			}
 		};
@@ -162,6 +175,14 @@ public class CEstado extends CGenerico {
 	/* LLena los campos del formulario dado un estado */
 	private void llenarCampos(Estado estado) {
 		txtNombreEstado.setValue(estado.getNombre());
+		cmbPais.setValue(estado.getPais().getNombre());
 		id = estado.getIdEstado();
+	}
+
+	/* Llena el combo de estado cada vez que se abre */
+	@Listen("onOpen = #cmbPais")
+	public void llenarCombo() {
+		List<Pais> paises = servicioPais.buscarTodos();
+		cmbPais.setModel(new ListModelList<Pais>(paises));
 	}
 }

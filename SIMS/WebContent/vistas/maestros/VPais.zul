@@ -1,0 +1,27 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divPais" apply="controlador.maestros.CPais">
+		<groupbox width="40em" mold="3d" title="Pais">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox class="multilinea" id="txtNombrePais" hflex="1"
+							maxlength="500" tooltiptext="Ingrese el Nombre del Pais"
+							multiline="true" />
+						<button id="btnBuscarPais" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraPais" />
+			<div id="catalogoPais" />
+		</groupbox>
+	</div>
+</zk>
