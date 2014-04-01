@@ -16,6 +16,17 @@
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
+						<label class="etiqueta" value="Categoria:" />
+						<combobox tooltiptext="Seleccione una Categoria"
+							placeholder="Seleccione una Categoria" id="cmbCategoria"
+							readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idCategoriaMedicina}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
+					<row>
 						<label class="etiqueta" value="Laboratorio:" />
 						<combobox tooltiptext="Seleccione un Laboratorio"
 							placeholder="Seleccione un Laboratorio" id="cmbLaboratorio"
@@ -26,66 +37,130 @@
 						</combobox>
 						<hbox />
 					</row>
-					<row>
-						<label class="etiqueta" value="Forma Farmaceutica:" />
-						<combobox tooltiptext="Seleccione una Forma Farmaceutica"
-							placeholder="Seleccione una Forma Terapeutica" id="cmbFormaTerapeutica"
-							readonly="true" width="100%">
-							<template name="model">
-								<comboitem label="${each.nombre}" context="${each.idFormaTerapeutica}" />
-							</template>
-						</combobox>
-						<hbox />
-					</row>
 				</rows>
 			</grid>
 			<separator />
-			<tabbox id="taxMedicina" orient="horizontal">
-				<tabs id="tbsMedicina" width="10em">
-					<tab label="Denominacion Generica" id="tabDenominacionGenerica" />
-					<tab label="Composicion" id="tabComposicion" />
-					<tab label="Posologia" id="tabPosologia" />
-					<tab label="Indicaciones" id="tabIndicaciones" />
-					<tab label="Efectos" id="tabEfectos" />
-					<tab label="Precauciones" id="tabPrecauciones" />
-					<tab label="Contraindicaciones" id="tabContraindicaciones" />
-					<tab label="Embarazo" id="tabEmbarazo" />
+			<tabbox id="taxMedicinaGeneral" orient="horizontal">
+				<tabs id="tbsMedicinaGeneral" width="10em">
+					<tab label="Especificaciones" id="tabEspecificaciones" />
+					<tab label="Presentaciones" id="tabPresentaciones" />
 				</tabs>
 				<tabpanels>
+					<tabpanel>
+						<tabbox id="taxMedicina" orient="horizontal">
+							<tabs id="tbsMedicina" width="10em">
+								<tab label="Denominacion Generica" id="tabDenominacionGenerica" />
+								<tab label="Composicion" id="tabComposicion" />
+								<tab label="Posologia" id="tabPosologia" />
+								<tab label="Indicaciones" id="tabIndicaciones" />
+								<tab label="Efectos" id="tabEfectos" />
+								<tab label="Precauciones" id="tabPrecauciones" />
+								<tab label="Contraindicaciones" id="tabContraindicaciones" />
+								<tab label="Embarazo" id="tabEmbarazo" />
+							</tabs>
+							<tabpanels>
+								<tabpanel>
+									<textbox maxlength="1000" class="multilineaTab"
+										multiline="true" id="txtDenominacionGenerica" hflex="1"
+										tooltiptext="Ingrese la Denominacion Generica" />
+								</tabpanel>
+								<tabpanel>
+									<textbox maxlength="1000" class="multilineaTab"
+										multiline="true" id="txtComposicion" hflex="1"
+										tooltiptext="Ingrese la Composicion" />
+								</tabpanel>
+								<tabpanel>
+									<textbox maxlength="1000" class="multilineaTab"
+										multiline="true" id="txtPosologia" hflex="1"
+										tooltiptext="Ingrese la Posologia" />
+								</tabpanel>
+								<tabpanel>
+									<textbox maxlength="1000" class="multilineaTab"
+										multiline="true" id="txtIndicaciones" hflex="1"
+										tooltiptext="Ingrese las Indicaciones" />
+								</tabpanel>
+								<tabpanel>
+									<textbox maxlength="1000" class="multilineaTab"
+										multiline="true" id="txtEfectos" hflex="1" tooltiptext="Ingrese los Efectos" />
+								</tabpanel>
+								<tabpanel>
+									<textbox maxlength="1000" class="multilineaTab"
+										multiline="true" id="txtPrecauciones" hflex="1"
+										tooltiptext="Ingrese las Precauciones" />
+								</tabpanel>
+								<tabpanel>
+									<textbox maxlength="1000" class="multilineaTab"
+										multiline="true" id="txtContraindicaciones" hflex="1"
+										tooltiptext="Ingrese las Contraindicaciones" />
+								</tabpanel>
+								<tabpanel>
+									<textbox maxlength="1000" class="multilineaTab"
+										multiline="true" id="txtEmbarazo" hflex="1"
+										tooltiptext="Ingrese las Indicaciones en caso de Embarazo" />
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+					</tabpanel>
+					<tabpanel>
+						<hbox>
+							<listbox id="listaPresentaciones" height="300px" width="220px"
+								emptyMessage="No hay Presentaciones Registradas">
+								<listhead>
+									<listheader label="Presentacion" width="80%" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell label="${each.nombre}">
+										</listcell>
+										<listcell>
+											<textbox width="98%" />
+										</listcell>
+										<listcell>
+											<combobox />
+										</listcell>
+										<listcell>
+											<spinner inplace="true" width="98%"
+												value="${each.idPresentacion}" visible="false" disabled="true" />
+										</listcell>
+									</listitem>
+								</template>
+							</listbox>
+							<vbox>
+								<button id="pasar1" image="/public/imagenes/botones/adelante.png"
+									tooltiptext="Agregar Presentacion" width="30px" />
+								<separator />
+								<button id="pasar2" image="/public/imagenes/botones/atras.png"
+									tooltiptext="Quitar Presentacion" width="30px" />
+							</vbox>
+							<listbox id="listaPresentacionesAgregadas" height="300px"
+								emptyMessage="No ha Seleccionado Ningúna Presentacion">
+								<listhead>
+									<listheader label="Presentacion" width="35%" />
+									<listheader label="Formula Terapeutica" width="32%" />
+									<listheader label="Unidad" width="33%" />
+									<listheader label="id" visible="false" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell label="${each.presentacionMedicina.nombre}">
+										</listcell>
+										<listcell>
+											<textbox width="98%" value="${each.valor}" />
+										</listcell>
+										<listcell>
+											<combobox id="cmbUnidadMedicina" readonly="true" tabindex="1"
+												width="100%" tooltiptext="Seleccione una Unidad"
+												placeholder="Seleccione una Unidad">
+												<template name="model">
+													<comboitem label="${each.nombre}" context="${each.idUnidadMedicina}" />
+												</template>
+											</combobox>
 
-					<tabpanel>
-						<textbox maxlength="1000" class="multilineaTab" multiline="true"
-							id="txtDenominacionGenerica" hflex="1"
-							tooltiptext="Ingrese la Denominacion Generica" />
-					</tabpanel>
-					<tabpanel>
-						<textbox maxlength="1000" class="multilineaTab" multiline="true"
-							id="txtComposicion" hflex="1" tooltiptext="Ingrese la Composicion" />
-					</tabpanel>
-					<tabpanel>
-						<textbox maxlength="1000" class="multilineaTab" multiline="true"
-							id="txtPosologia" hflex="1" tooltiptext="Ingrese la Posologia" />
-					</tabpanel>
-					<tabpanel>
-						<textbox maxlength="1000" class="multilineaTab" multiline="true"
-							id="txtIndicaciones" hflex="1" tooltiptext="Ingrese las Indicaciones" />
-					</tabpanel>
-					<tabpanel>
-						<textbox maxlength="1000" class="multilineaTab" multiline="true"
-							id="txtEfectos" hflex="1" tooltiptext="Ingrese los Efectos" />
-					</tabpanel>
-					<tabpanel>
-						<textbox maxlength="1000" class="multilineaTab" multiline="true"
-							id="txtPrecauciones" hflex="1" tooltiptext="Ingrese las Precauciones" />
-					</tabpanel>
-					<tabpanel>
-						<textbox maxlength="1000" class="multilineaTab" multiline="true"
-							id="txtContraindicaciones" hflex="1" tooltiptext="Ingrese las Contraindicaciones" />
-					</tabpanel>
-					<tabpanel>
-						<textbox maxlength="1000" class="multilineaTab" multiline="true"
-							id="txtEmbarazo" hflex="1"
-							tooltiptext="Ingrese las Indicaciones en caso de Embarazo" />
+										</listcell>
+									</listitem>
+								</template>
+							</listbox>
+						</hbox>
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
