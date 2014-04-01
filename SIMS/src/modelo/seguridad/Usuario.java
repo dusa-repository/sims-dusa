@@ -22,7 +22,7 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_usuario", length=8, unique=true, nullable=false)
+	@Column(name="id_usuario", length=12, unique=true, nullable=false)
 	private String cedula;
 
 	@Column(length=500)

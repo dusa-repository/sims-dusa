@@ -10,7 +10,7 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Nombre:" />
-						<textbox maxlength="1000" id="txtNombre" hflex="1"
+						<textbox maxlength="500" id="txtNombre" hflex="1"
 							tooltiptext="Ingrese el Nombre de la Medicina" />
 						<button id="btnBuscarMedicina" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />

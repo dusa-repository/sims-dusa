@@ -26,7 +26,7 @@
 					</row>
 					<row>
 						<label class="etiqueta" value="Correo Electronico:" />
-						<textbox id="txtCorreoConsultorio" hflex="1" maxlength="1024"
+						<textbox id="txtCorreoConsultorio" hflex="1" maxlength="50"
 							tooltiptext="Ingrese el Correo del Consultorio (ejemplo@ejemplo.com)" />
 						<hbox />
 					</row>

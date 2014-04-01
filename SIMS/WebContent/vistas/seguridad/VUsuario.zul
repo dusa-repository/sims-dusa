@@ -14,7 +14,7 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Cedula:" />
-						<textbox id="txtCedulaUsuario" hflex="1" maxlength="8"
+						<textbox id="txtCedulaUsuario" hflex="1" maxlength="12"
 							tooltiptext="Ingrese la Cedula del Usuario" />
 						<fileupload image="/public/imagenes/botones/cargar.png"
 							id="fudImagenUsuario" label="Foto">

@@ -45,7 +45,7 @@ public class Cita implements Serializable {
 	@JoinColumn(name="id_usuario")
 	private Usuario usuario;
 
-	@Column(length=10)
+	@Column(length=500)
 	private String observacion;
 
 	@Column(name="usuario_auditoria", length=50)

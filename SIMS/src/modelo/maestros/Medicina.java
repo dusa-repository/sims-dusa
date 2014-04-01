@@ -53,7 +53,7 @@ public class Medicina implements Serializable {
 	@Column(length = 1000)
 	private String indicaciones;
 
-	@Column(length = 1000)
+	@Column(length = 500)
 	private String nombre;
 
 	@Column(length = 1000)

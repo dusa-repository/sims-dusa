@@ -10,7 +10,7 @@
 				<rows>
 					<row>
 						<label value="Nombre de Usuario:" class="etiqueta" />
-						<textbox id="txtNombreUsuarioEditar" disabled="true" />
+						<textbox id="txtNombreUsuarioEditar" maxlength="50" disabled="true" />
 					</row>
 					<row>
 						<label value="Contraseña nueva:" class="etiqueta" />
