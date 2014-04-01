@@ -11,7 +11,6 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-import modelo.maestros.Ciudad;
 import modelo.maestros.Especialidad;
 import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Grupo;
@@ -506,15 +505,15 @@ public class CUsuario extends CGenerico {
 						if (combo.equals("Nombre"))
 							return servicioUsuario.filtroNombre(valor);
 						else {
-								if (combo.equals("Login"))
-									return servicioUsuario.filtroLogin(valor);
-								else {
-									if (combo.equals("Apellido"))
-										return servicioUsuario
-												.filtroApellido(valor);
-									else
-										return servicioUsuario.buscarTodos();
-								}
+							if (combo.equals("Login"))
+								return servicioUsuario.filtroLogin(valor);
+							else {
+								if (combo.equals("Apellido"))
+									return servicioUsuario
+											.filtroApellido(valor);
+								else
+									return servicioUsuario.buscarTodos();
+							}
 						}
 					}
 				}
@@ -584,11 +583,14 @@ public class CUsuario extends CGenerico {
 		else
 			rdoSexoMUsuario.setChecked(true);
 		BufferedImage imag;
-		try {
-			imag = ImageIO.read(new ByteArrayInputStream(usuario.getImagen()));
-			imagen.setContent(imag);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (usuario.getImagen() != null) {
+			try {
+				imag = ImageIO.read(new ByteArrayInputStream(usuario
+						.getImagen()));
+				imagen.setContent(imag);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		txtCedulaUsuario.setDisabled(true);
 		id = Long.valueOf(usuario.getCedula());

@@ -7,8 +7,6 @@ import modelo.maestros.Ciudad;
 import modelo.maestros.Consultorio;
 import modelo.maestros.Empresa;
 import modelo.maestros.Estado;
-import modelo.maestros.Medicina;
-import modelo.maestros.Presentacion;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -141,13 +139,14 @@ public class CCiudad extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
 		catalogo = new Catalogo<Ciudad>(catalogoCiudad, "Catalogo de Ciudades",
-				ciudades, "Nombre", "Estado") {
+				ciudades, "Nombre", "Estado", "Pais") {
 
 			@Override
 			protected String[] crearRegistros(Ciudad ciudad) {
-				String[] registros = new String[2];
+				String[] registros = new String[3];
 				registros[0] = ciudad.getNombre();
 				registros[1] = ciudad.getEstado().getNombre();
+				registros[2] = ciudad.getEstado().getPais().getNombre();
 				return registros;
 			}
 
@@ -158,8 +157,13 @@ public class CCiudad extends CGenerico {
 				else {
 					if (combo.equals("Estado"))
 						return servicioCiudad.filtroEstado(valor);
+					else {
+						if (combo.equals("Pais"))
+							return servicioCiudad.filtroPais(valor);
+						else
+							return servicioCiudad.buscarTodas();
+					}
 				}
-				return servicioCiudad.buscarTodas();
 			}
 		};
 		catalogo.setParent(catalogoCiudad);
@@ -178,8 +182,8 @@ public class CCiudad extends CGenerico {
 	/* Llena el combo de estado cada vez que se abre */
 	@Listen("onOpen = #cmbEstado")
 	public void llenarCombo() {
-			List<Estado> estados = servicioEstado.buscarTodos();
-			cmbEstado.setModel(new ListModelList<Estado>(estados));
+		List<Estado> estados = servicioEstado.buscarTodos();
+		cmbEstado.setModel(new ListModelList<Estado>(estados));
 	}
 
 	/*

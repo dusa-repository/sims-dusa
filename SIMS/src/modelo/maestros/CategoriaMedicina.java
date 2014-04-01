@@ -12,21 +12,18 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-/**
- * The persistent class for the forma_terapeutica database table.
- * 
- */
 @Entity
-@Table(name="forma_terapeutica")
-public class FormaTerapeutica implements Serializable {
-	private static final long serialVersionUID = 1L;
+@Table(name="categoria_medicina")
+public class CategoriaMedicina implements Serializable {
+
+	
+	private static final long serialVersionUID = 886955756424862318L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_forma_terapeutica", unique=true, nullable=false)
-	private long idFormaTerapeutica;
-
+	@Column(name="id_categoria_medicina", unique=true, nullable=false)
+	private long idCategoriaMedicina;
+	
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
@@ -39,37 +36,35 @@ public class FormaTerapeutica implements Serializable {
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 
-	//bi-directional many-to-one association to Medicina
-	@OneToMany(mappedBy="formaTerapeutica")
+	@OneToMany(mappedBy="categoriaMedicina")
 	private Set<Medicina> medicinas;
 
-	public FormaTerapeutica() {
-	}
-	
-	
-
-	public FormaTerapeutica(long idFormaTerapeutica, Timestamp fechaAuditoria,
-			String horaAuditoria, String nombre, String usuarioAuditoria) {
+	public CategoriaMedicina() {
 		super();
-		this.idFormaTerapeutica = idFormaTerapeutica;
+		// TODO Auto-generated constructor stub
+	}
+
+	public CategoriaMedicina(long idCategoriaMedicina,
+			Timestamp fechaAuditoria, String horaAuditoria, String nombre,
+			String usuarioAuditoria) {
+		super();
+		this.idCategoriaMedicina = idCategoriaMedicina;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-
-
-	public long getIdFormaTerapeutica() {
-		return this.idFormaTerapeutica;
+	public long getIdCategoriaMedicina() {
+		return idCategoriaMedicina;
 	}
 
-	public void setIdFormaTerapeutica(long idFormaTerapeutica) {
-		this.idFormaTerapeutica = idFormaTerapeutica;
+	public void setIdCategoriaMedicina(long idCategoriaMedicina) {
+		this.idCategoriaMedicina = idCategoriaMedicina;
 	}
 
 	public Timestamp getFechaAuditoria() {
-		return this.fechaAuditoria;
+		return fechaAuditoria;
 	}
 
 	public void setFechaAuditoria(Timestamp fechaAuditoria) {
@@ -77,7 +72,7 @@ public class FormaTerapeutica implements Serializable {
 	}
 
 	public String getHoraAuditoria() {
-		return this.horaAuditoria;
+		return horaAuditoria;
 	}
 
 	public void setHoraAuditoria(String horaAuditoria) {
@@ -85,7 +80,7 @@ public class FormaTerapeutica implements Serializable {
 	}
 
 	public String getNombre() {
-		return this.nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -93,7 +88,7 @@ public class FormaTerapeutica implements Serializable {
 	}
 
 	public String getUsuarioAuditoria() {
-		return this.usuarioAuditoria;
+		return usuarioAuditoria;
 	}
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
@@ -101,25 +96,11 @@ public class FormaTerapeutica implements Serializable {
 	}
 
 	public Set<Medicina> getMedicinas() {
-		return this.medicinas;
+		return medicinas;
 	}
 
 	public void setMedicinas(Set<Medicina> medicinas) {
 		this.medicinas = medicinas;
-	}
-
-	public Medicina addMedicina(Medicina medicina) {
-		getMedicinas().add(medicina);
-		medicina.setFormaTerapeutica(this);
-
-		return medicina;
-	}
-
-	public Medicina removeMedicina(Medicina medicina) {
-		getMedicinas().remove(medicina);
-		medicina.setFormaTerapeutica(null);
-
-		return medicina;
 	}
 
 }

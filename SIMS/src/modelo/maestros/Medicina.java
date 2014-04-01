@@ -15,82 +15,81 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
  * The persistent class for the medicina database table.
  * 
  */
 @Entity
-@Table(name="medicina")
+@Table(name = "medicina")
 public class Medicina implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_medicina", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_medicina", unique = true, nullable = false)
 	private long idMedicina;
 
-	@Column(length=1000)
+	@Column(length = 1000)
 	private String composicion;
 
-	@Column(length=1000)
+	@Column(length = 1000)
 	private String contraindicaciones;
 
-	@Column(name="denominacion_generica", length=1000)
+	@Column(name = "denominacion_generica", length = 1000)
 	private String denominacionGenerica;
 
-	@Column(length=1000)
+	@Column(length = 1000)
 	private String efectos;
 
-	@Column(length=1000)
+	@Column(length = 1000)
 	private String embarazo;
 
-	@Column(name="fecha_auditoria")
+	@Column(name = "fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
-	@Column(name="hora_auditoria", length=10)
+	@Column(name = "hora_auditoria", length = 10)
 	private String horaAuditoria;
 
-	@Column(length=1000)
+	@Column(length = 1000)
 	private String indicaciones;
 
-	@Column(length=1000)
+	@Column(length = 1000)
 	private String nombre;
 
-	@Column(length=1000)
+	@Column(length = 1000)
 	private String posologia;
 
-	@Column(length=1000)
+	@Column(length = 1000)
 	private String precaucion;
 
-	@Column(name="usuario_auditoria", length=50)
+	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
 
-	//bi-directional many-to-one association to FormaTerapeutica
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_forma_terapeutica")
-	private FormaTerapeutica formaTerapeutica;
-
-	//bi-directional many-to-one association to Laboratorio
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_laboratorio")
+	// bi-directional many-to-one association to Laboratorio
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_laboratorio")
 	private Laboratorio laboratorio;
 
-	//bi-directional many-to-one association to Presentacion
-	@OneToMany(mappedBy="medicina")
-	private Set<Presentacion> presentacions;
+	// bi-directional many-to-one association to Presentacion
+	@OneToMany(mappedBy = "medicina")
+	private Set<PresentacionComercial> presentacions;
+
+	@OneToMany(mappedBy = "medicina")
+	private Set<MedicinaPresentacionUnidad> medicinasPresentacion;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_categoria_medicina")
+	private CategoriaMedicina categoriaMedicina;
 
 	public Medicina() {
 	}
-	
-	
 
 	public Medicina(long idMedicina, String composicion,
 			String contraindicaciones, String denominacionGenerica,
 			String efectos, String embarazo, Timestamp fechaAuditoria,
 			String horaAuditoria, String indicaciones, String nombre,
 			String posologia, String precaucion, String usuarioAuditoria,
-			FormaTerapeutica formaTerapeutica, Laboratorio laboratorio) {
+			Laboratorio laboratorio, CategoriaMedicina categoriaMedicina) {
 		super();
 		this.idMedicina = idMedicina;
 		this.composicion = composicion;
@@ -105,11 +104,9 @@ public class Medicina implements Serializable {
 		this.posologia = posologia;
 		this.precaucion = precaucion;
 		this.usuarioAuditoria = usuarioAuditoria;
-		this.formaTerapeutica = formaTerapeutica;
 		this.laboratorio = laboratorio;
+		this.categoriaMedicina = categoriaMedicina;
 	}
-
-
 
 	public long getIdMedicina() {
 		return this.idMedicina;
@@ -215,14 +212,6 @@ public class Medicina implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public FormaTerapeutica getFormaTerapeutica() {
-		return this.formaTerapeutica;
-	}
-
-	public void setFormaTerapeutica(FormaTerapeutica formaTerapeutica) {
-		this.formaTerapeutica = formaTerapeutica;
-	}
-
 	public Laboratorio getLaboratorio() {
 		return this.laboratorio;
 	}
@@ -231,22 +220,41 @@ public class Medicina implements Serializable {
 		this.laboratorio = laboratorio;
 	}
 
-	public Set<Presentacion> getPresentacions() {
+	public Set<PresentacionComercial> getPresentacions() {
 		return this.presentacions;
 	}
 
-	public void setPresentacions(Set<Presentacion> presentacions) {
+	public void setPresentacions(Set<PresentacionComercial> presentacions) {
 		this.presentacions = presentacions;
 	}
 
-	public Presentacion addPresentacion(Presentacion presentacion) {
+	public Set<MedicinaPresentacionUnidad> getMedicinasPresentacion() {
+		return medicinasPresentacion;
+	}
+
+	public void setMedicinasPresentacion(
+			Set<MedicinaPresentacionUnidad> medicinasPresentacion) {
+		this.medicinasPresentacion = medicinasPresentacion;
+	}
+
+	public CategoriaMedicina getCategoriaMedicina() {
+		return categoriaMedicina;
+	}
+
+	public void setCategoriaMedicina(CategoriaMedicina categoriaMedicina) {
+		this.categoriaMedicina = categoriaMedicina;
+	}
+
+	public PresentacionComercial addPresentacion(
+			PresentacionComercial presentacion) {
 		getPresentacions().add(presentacion);
 		presentacion.setMedicina(this);
 
 		return presentacion;
 	}
 
-	public Presentacion removePresentacion(Presentacion presentacion) {
+	public PresentacionComercial removePresentacion(
+			PresentacionComercial presentacion) {
 		getPresentacions().remove(presentacion);
 		presentacion.setMedicina(null);
 

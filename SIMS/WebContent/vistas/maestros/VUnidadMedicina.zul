@@ -1,0 +1,26 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divUnidadMedicina" apply="controlador.maestros.CUnidadMedicina">
+		<groupbox width="40em" mold="3d" title="Unidad de Medicina">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox class="multilinea"  id="txtNombreUnidadMedicina" hflex="1" maxlength="500"
+							tooltiptext="Ingrese el Nombre de la Unidad de la Medicina" multiline="true" />
+						<button id="btnBuscarUnidadMedicina" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraUnidadMedicina" />
+			<div id="catalogoUnidadMedicina" />
+		</groupbox>
+	</div>
+</zk>

@@ -1,25 +1,32 @@
 package modelo.maestros;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
 import java.sql.Timestamp;
-import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
 /**
- * The persistent class for the estado database table.
+ * The persistent class for the presentacion database table.
  * 
  */
 @Entity
-@Table(name="estado")
-public class Estado implements Serializable {
+@Table(name="presentacion_comercial")
+public class PresentacionComercial implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_estado", unique=true, nullable=false)
-	private long idEstado;
+	@Column(name="id_presentacion_comercial", unique=true, nullable=false)
+	private long idPresentacion;
 
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
@@ -33,36 +40,34 @@ public class Estado implements Serializable {
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 
-	//bi-directional many-to-one association to Ciudad
-	@OneToMany(mappedBy="estado")
-	private Set<Ciudad> ciudads;
-
+	//bi-directional many-to-one association to Medicina
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_pais")
-	private Pais pais;
-	
-	public Estado() {
+	@JoinColumn(name="id_medicina")
+	private Medicina medicina;
+
+	public PresentacionComercial() {
 	}
 	
-	public Estado(long idEstado, Timestamp fechaAuditoria,
-			String horaAuditoria, String nombre, String usuarioAuditoria, Pais pais) {
+	public PresentacionComercial(long idPresentacion, Timestamp fechaAuditoria,
+			String horaAuditoria, String nombre, String usuarioAuditoria,
+			Medicina medicina) {
 		super();
-		this.idEstado = idEstado;
+		this.idPresentacion = idPresentacion;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
 		this.usuarioAuditoria = usuarioAuditoria;
-		this.pais = pais;
+		this.medicina = medicina;
 	}
 
 
 
-	public long getIdEstado() {
-		return this.idEstado;
+	public long getIdPresentacion() {
+		return this.idPresentacion;
 	}
 
-	public void setIdEstado(long idEstado) {
-		this.idEstado = idEstado;
+	public void setIdPresentacion(long idPresentacion) {
+		this.idPresentacion = idPresentacion;
 	}
 
 	public Timestamp getFechaAuditoria() {
@@ -97,38 +102,12 @@ public class Estado implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public Set<Ciudad> getCiudads() {
-		return this.ciudads;
+	public Medicina getMedicina() {
+		return this.medicina;
 	}
 
-	public void setCiudads(Set<Ciudad> ciudads) {
-		this.ciudads = ciudads;
-	}
-
-	public Pais getPais() {
-		return pais;
-	}
-
-
-
-	public void setPais(Pais pais) {
-		this.pais = pais;
-	}
-
-
-
-	public Ciudad addCiudad(Ciudad ciudad) {
-		getCiudads().add(ciudad);
-		ciudad.setEstado(this);
-
-		return ciudad;
-	}
-
-	public Ciudad removeCiudad(Ciudad ciudad) {
-		getCiudads().remove(ciudad);
-		ciudad.setEstado(null);
-
-		return ciudad;
+	public void setMedicina(Medicina medicina) {
+		this.medicina = medicina;
 	}
 
 }

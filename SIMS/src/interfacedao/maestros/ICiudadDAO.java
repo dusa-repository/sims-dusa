@@ -17,4 +17,6 @@ public interface ICiudadDAO extends JpaRepository<Ciudad, Long> {
 
 	Ciudad findByNombre(String value);
 
+	List<Ciudad> findByEstadoPaisNombreStartingWithAllIgnoreCase(String valor);
+
 }

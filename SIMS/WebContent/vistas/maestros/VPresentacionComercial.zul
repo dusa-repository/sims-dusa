@@ -1,6 +1,6 @@
 <zk>
-	<div id="divPresentacion" apply="controlador.maestros.CPresentacion">
-		<groupbox width="40em" mold="3d" title="Presentacion">
+	<div id="divPresentacion" apply="controlador.maestros.CPresentacionComercial">
+		<groupbox width="40em" mold="3d" title="Presentacion Comercial">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />
