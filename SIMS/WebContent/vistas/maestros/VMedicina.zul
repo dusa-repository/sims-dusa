@@ -113,10 +113,17 @@
 										<listcell label="${each.nombre}">
 										</listcell>
 										<listcell>
-											<textbox width="98%" />
+											<doublespinner constraint="min 0 max 10000"
+												tooltiptext="Ingrese la Formula Medica" step="0.1" format="#.##"
+												width="98%" />
 										</listcell>
 										<listcell>
-											<combobox />
+											<combobox model="${$composer.unidades}" width="100%"
+												readonly="true">
+												<template name="model">
+													<comboitem label="${each.nombre}" context="${each.idUnidad}" />
+												</template>
+											</combobox>
 										</listcell>
 										<listcell>
 											<spinner inplace="true" width="98%"
@@ -145,20 +152,21 @@
 										<listcell label="${each.presentacionMedicina.nombre}">
 										</listcell>
 										<listcell>
-											<textbox width="98%" value="${each.valor}" />
+											<doublespinner value="${each.valor}"
+												constraint="min 0 max 10000" tooltiptext="Ingrese la Formula Medica"
+												step="0.1" format="#.##" width="98%" />
 										</listcell>
 										<listcell>
-											<combobox id="cmbUnidadMedicina" readonly="true"
-												tabindex="1" width="100%" tooltiptext="Seleccione una Unidad"
-												placeholder="Seleccione una Unidad">
+											<combobox value="${each.unidadMedicina.nombre}"
+												model="${$composer.unidades}" width="100%" readonly="true">
 												<template name="model">
-													<comboitem label="${each.nombre}" context="${each.idUnidadMedicina}" />
+													<comboitem label="${each.nombre}" context="${each.idUnidad}" />
 												</template>
 											</combobox>
 										</listcell>
 										<listcell>
-											<spinner value="${each.presentacionMedicina.idpresentacion}" width="98%"
-												visible="false" disabled="true" />
+											<spinner value="${each.presentacionMedicina.idPresentacion}"
+												width="98%" visible="false" disabled="true" />
 										</listcell>
 									</listitem>
 								</template>

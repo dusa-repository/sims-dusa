@@ -22,7 +22,7 @@ public class UnidadMedicina implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_unidad_medicina", unique=true, nullable=false)
-	private long idUnidadMedicina;
+	private long idUnidad;
 	
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
@@ -42,7 +42,7 @@ public class UnidadMedicina implements Serializable {
 	public UnidadMedicina(long idUnidadMedicina, Timestamp fechaAuditoria,
 			String horaAuditoria, String nombre, String usuarioAuditoria) {
 		super();
-		this.idUnidadMedicina = idUnidadMedicina;
+		this.idUnidad = idUnidadMedicina;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
@@ -53,12 +53,12 @@ public class UnidadMedicina implements Serializable {
 		super();
 	}
 
-	public long getIdUnidadMedicina() {
-		return idUnidadMedicina;
+	public long getIdUnidad() {
+		return idUnidad;
 	}
 
-	public void setIdUnidadMedicina(long idUnidadMedicina) {
-		this.idUnidadMedicina = idUnidadMedicina;
+	public void setIdUnidad(long idUnidad) {
+		this.idUnidad = idUnidad;
 	}
 
 	public Timestamp getFechaAuditoria() {
