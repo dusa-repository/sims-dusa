@@ -6,6 +6,7 @@ import javax.persistence.*;
 import modelo.seguridad.Usuario;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -178,6 +179,12 @@ public class Cita implements Serializable {
 
 	public void setHoraCita(String horaCita) {
 		this.horaCita = horaCita;
+	}
+	
+	public String getFechaCitaString() {
+		String fechaCitaString = new SimpleDateFormat("dd/MM/yyyy")
+				.format(fechaCita);
+		return fechaCitaString;
 	}
 
 }

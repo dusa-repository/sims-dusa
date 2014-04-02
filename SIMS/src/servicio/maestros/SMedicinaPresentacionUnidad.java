@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfacedao.maestros.IMedicinaPresentacionUnidadDAO;
 
+import modelo.maestros.Medicina;
 import modelo.maestros.MedicinaPresentacionUnidad;
 import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.UnidadMedicina;
@@ -19,13 +20,17 @@ public class SMedicinaPresentacionUnidad {
 
 	public List<MedicinaPresentacionUnidad> buscarPorPresentacion(
 			PresentacionMedicina presentacionMedicina) {
-		// TODO Auto-generated method stub
 		return medicinaPresentacionUnidadDAO.findByPresentacionMedicina(presentacionMedicina);
 	}
 
 	public List<MedicinaPresentacionUnidad> buscarPorUnidad(
 			UnidadMedicina unidadMedicina) {
 		return medicinaPresentacionUnidadDAO.findByUnidadMedicina(unidadMedicina);
+	}
+
+	public List<MedicinaPresentacionUnidad> buscarPresentacionesUsadas(
+			Medicina medicina) {
+		return medicinaPresentacionUnidadDAO.findByMedicina(medicina);
 	}
 	
 	

@@ -17,9 +17,9 @@
 						<row>
 							<label class="etiqueta" value="Cedula:" />
 							<label id="lblCedulaDoctor" />
-							<label class="etiqueta" value="Nombre:" />
+							<label class="etiqueta" value="Nombres:" />
 							<label id="lblNombreDoctor" />
-							<label class="etiqueta" value="Apellido:" />
+							<label class="etiqueta" value="Apellidos:" />
 							<label id="lblApellidoDoctor" />
 
 							<button id="btnBuscarDoctor" class="btn" label="Buscar Doctor"
@@ -57,9 +57,9 @@
 											image="/public/imagenes/botones/buscar.png" />
 									</row>
 									<row>
-										<label class="etiqueta" value="Nombre:" />
+										<label class="etiqueta" value="Nombres:" />
 										<label id="lblNombrePaciente" />
-										<label class="etiqueta" value="Apellido:" />
+										<label class="etiqueta" value="Apellidos:" />
 										<label id="lblApellidoPaciente" />
 										<hbox />
 									</row>
@@ -105,25 +105,24 @@
 						<div width="50%" id="botoneraCita" align="left" style="float: left;" />
 						<div align="right" style="float: right;">
 							<button id="btnSiguientePestanna" label="Siguiente"
-								image="/public/imagenes/botones/adelante.png" />
+								image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
 						</div>
 					</tabpanel>
 					<tabpanel>
 						<groupbox width="100%" title="Citas Asociadas al Doctor">
 							<hbox>
-								<listbox id="ltbCitas" height="300px" emptyMessage="No hay Citas registrados">
+								<listbox id="ltbCitas" height="280px" emptyMessage="No hay Citas registrados">
 									<listhead>
 										<listheader label="Paciente" sort="auto(paciente.primerNombre)"
-											width="20%" />
+											width="23%" />
 										<listheader label="Empresa Paciente" sort="auto(paciente.empresa.nombre)"
-											width="13%" />
+											width="15%" />
 										<listheader label="Fecha" sort="auto(fechaCita)"
 											width="12%" />
 										<listheader label="Motivo" sort="auto(motivoCita.descripcion)"
-											width="20%" />
+											width="25%" />
 										<listheader label="Observacion" sort="auto(observacion)"
-											width="20%" />
-										<listheader label="Estado" width="15%" />
+											width="25%" />
 									</listhead>
 									<template name="model">
 										<listitem>
@@ -131,30 +130,29 @@
 											</listcell>
 											<listcell label="${each.paciente.empresa.nombre}">
 											</listcell>
-											<listcell label="${each.fechaCita}">
+											<listcell label="${each.getFechaCitaString()}">
 											</listcell>
 											<listcell label="${each.motivoCita.descripcion}">
 											</listcell>
 											<listcell label="${each.observacion}">
 											</listcell>
-											<listcell>
-												<combobox value="${each.estado}" width="100%"
-													readonly="true">
-													<comboitem label="Cancelada" />
-													<comboitem label="Anulada" />
-													<comboitem label="Ejecutada" />
-												</combobox>
-											</listcell>
 										</listitem>
 									</template>
 								</listbox>
 							</hbox>
+							<separator/>
+							<div align="center" >		
+								<button label="Cancelar Citas" id="btnCancelarCita"
+									image="/public/imagenes/botones/cancelar.png" tooltiptext="Cancelar Citas Seleccionadas" />
+								<button label="Anular Citas" id="btnAnularCita"
+									image="/public/imagenes/botones/anular.png" tooltiptext="Anular Citas Seleccionadas" />
+							</div>
 						</groupbox>
 						<separator />
 						<separator />
 						<div width="50%" align="left" style="float: left;">
 							<button label="Anterior" id="btnAnteriorPestanna"
-								image="/public/imagenes/botones/atras.png" />
+								image="/public/imagenes/botones/atras.png" tooltiptext="Pestaña Anterior" />
 						</div>
 					</tabpanel>
 				</tabpanels>

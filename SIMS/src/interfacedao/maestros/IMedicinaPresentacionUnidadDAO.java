@@ -2,6 +2,7 @@ package interfacedao.maestros;
 
 import java.util.List;
 
+import modelo.maestros.Medicina;
 import modelo.maestros.MedicinaPresentacionUnidad;
 import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.UnidadMedicina;
@@ -16,5 +17,7 @@ public interface IMedicinaPresentacionUnidadDAO extends JpaRepository<MedicinaPr
 
 	List<MedicinaPresentacionUnidad> findByUnidadMedicina(
 			UnidadMedicina unidadMedicina);
+
+	List<MedicinaPresentacionUnidad> findByMedicina(Medicina medicina);
 
 }

@@ -1,12 +1,16 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.maestros.CategoriaMedicina;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
+import modelo.maestros.MedicinaPresentacionUnidad;
 import modelo.maestros.PresentacionComercial;
+import modelo.maestros.PresentacionMedicina;
+import modelo.seguridad.Grupo;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -15,6 +19,8 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
@@ -38,6 +44,8 @@ public class CMedicina extends CGenerico {
 	private Button btnBuscarMedicina;
 	@Wire
 	private Combobox cmbLaboratorio;
+	@Wire
+	private Combobox cmbCategoria;
 	@Wire
 	private Textbox txtDenominacionGenerica;
 	@Wire
@@ -70,13 +78,20 @@ public class CMedicina extends CGenerico {
 	private Tab tabContraindicaciones;;
 	@Wire
 	private Tab tabEmbarazo;
+	@Wire
+	private Listbox ltbPresentaciones;
+	@Wire
+	private Listbox ltbPresentacionesAgregadas;
 
+	List<PresentacionMedicina> presentacionesDisponibles = new ArrayList<PresentacionMedicina>();
+	List<MedicinaPresentacionUnidad> presentacionesUsadas = new ArrayList<MedicinaPresentacionUnidad>();
 	Catalogo<Medicina> catalogo;
 	long id = 0;
 
 	@Override
 	public void inicializar() throws IOException {
 
+		llenarListaPresentaciones(null);
 		txtDenominacionGenerica.setFocus(true);
 		Botonera botonera = new Botonera() {
 			@Override
@@ -127,6 +142,8 @@ public class CMedicina extends CGenerico {
 				txtPrecauciones.setText("");
 				txtContraindicaciones.setText("");
 				txtEmbarazo.setText("");
+				ltbPresentaciones.getItems().clear();
+				ltbPresentacionesAgregadas.getItems().clear();
 				id = 0;
 			}
 
@@ -179,6 +196,35 @@ public class CMedicina extends CGenerico {
 
 	}
 
+	/* Llena la lista al iniciar con todas las presentaciones existentes */
+	private void llenarListaPresentaciones(Medicina medicina) {
+		if (medicina == null) {
+			presentacionesDisponibles = servicioPresentacionMedicina
+					.buscarTodas();
+			ltbPresentaciones.setModel(new ListModelList<PresentacionMedicina>(
+					presentacionesDisponibles));
+		} else {
+			presentacionesUsadas = servicioMedicinaPresentacionUnidad
+					.buscarPresentacionesUsadas(medicina);
+			ltbPresentacionesAgregadas
+					.setModel(new ListModelList<MedicinaPresentacionUnidad>(
+							presentacionesUsadas));
+			if (!presentacionesUsadas.isEmpty()) {
+				List<Long> ids = new ArrayList<Long>();
+				for (int i = 0; i < presentacionesUsadas.size(); i++) {
+					long id = presentacionesUsadas.get(i).getPresentacion()
+							.getIdPresentacion();
+					ids.add(id);
+				}
+				presentacionesDisponibles = servicioPresentacionMedicina
+						.buscarPresentacionesDisponibles(ids);
+				ltbPresentaciones
+						.setModel(new ListModelList<PresentacionMedicina>(
+								presentacionesDisponibles));
+			}
+		}
+	}
+
 	/* Muestra un catalogo de Medicinas */
 	@Listen("onClick = #btnBuscarMedicina")
 	public void mostrarCatalogo() throws IOException {
@@ -223,6 +269,14 @@ public class CMedicina extends CGenerico {
 	public void llenarComboLaboratorios() {
 		List<Laboratorio> laboratorios = servicioLaboratorio.buscarTodos();
 		cmbLaboratorio.setModel(new ListModelList<Laboratorio>(laboratorios));
+	}
+
+	/* Llena el combo de categorias cada vez que se abre */
+	@Listen("onOpen = #cmbCategoria")
+	public void llenarComboCategorias() {
+		List<CategoriaMedicina> categorias = servicioCategoriaMedicina
+				.buscarTodas();
+		cmbCategoria.setModel(new ListModelList<CategoriaMedicina>(categorias));
 	}
 
 	/* Validaciones de pantalla para poder realizar el guardar */
@@ -282,7 +336,36 @@ public class CMedicina extends CGenerico {
 		txtEmbarazo.setValue(medicina.getEmbarazo());
 		txtNombre.setValue(medicina.getNombre());
 
+		llenarListaPresentaciones(medicina);
 		id = medicina.getIdMedicina();
+	}
+	
+	/*
+	 * Permite mover uno o varios elementos seleccionados desde la lista de la
+	 * izquierda a la lista de la derecha
+	 */
+	@Listen("onClick = #pasar1")
+	public void moverDerecha() {
+		Listitem list1 = ltbPresentaciones.getSelectedItem();
+		if (list1 == null)
+			Messagebox.show("Seleccione un Item", "Alerta", Messagebox.OK,
+					Messagebox.EXCLAMATION);
+		else
+			list1.setParent(ltbPresentacionesAgregadas);
+	}
+
+	/*
+	 * Permite mover uno o varios elementos seleccionados desde la lista de la
+	 * derecha a la lista de la izquierda
+	 */
+	@Listen("onClick = #pasar2")
+	public void moverIzquierda() {
+		Listitem list2 = ltbPresentacionesAgregadas.getSelectedItem();
+		if (list2 == null)
+			Messagebox.show("Seleccione un Item", "Alerta", Messagebox.OK,
+					Messagebox.EXCLAMATION);
+		else
+			list2.setParent(ltbPresentaciones);
 	}
 
 	/* Focus a la pestannas */
