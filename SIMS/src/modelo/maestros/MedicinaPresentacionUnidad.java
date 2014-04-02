@@ -56,12 +56,12 @@ public class MedicinaPresentacionUnidad {
 		this.medicina = medicina;
 	}
 
-	public PresentacionMedicina getPresentacion() {
+	public PresentacionMedicina getPresentacionMedicina() {
 		return presentacionMedicina;
 	}
 
-	public void setPresentacion(PresentacionMedicina presentacion) {
-		this.presentacionMedicina = presentacion;
+	public void setPresentacionMedicina(PresentacionMedicina presentacionMedicina) {
+		this.presentacionMedicina = presentacionMedicina;
 	}
 
 	public UnidadMedicina getUnidadMedicina() {

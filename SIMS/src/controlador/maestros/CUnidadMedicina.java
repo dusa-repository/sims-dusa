@@ -158,6 +158,6 @@ public class CUnidadMedicina extends CGenerico{
 	/* LLena los campos del formulario dada una unidad */
 	private void llenarCampos(UnidadMedicina unidad) {
 		txtNombreUnidadMedicina.setValue(unidad.getNombre());
-		id = unidad.getIdUnidadMedicina();
+		id = unidad.getIdUnidad();
 	}
 }

@@ -7,6 +7,7 @@ import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface IMedicinaDAO extends JpaRepository<Medicina, Long> {
 
@@ -21,5 +22,8 @@ public interface IMedicinaDAO extends JpaRepository<Medicina, Long> {
 	List<Medicina> findByPosologiaStartingWithAllIgnoreCase(String valor);
 
 	List<Medicina> findByCategoriaMedicina(CategoriaMedicina categoriaMedicina);
+
+	@Query("select coalesce(max(medicina.idMedicina), '0') from Medicina medicina")
+	long findMaxIdMedicina();
 
 }

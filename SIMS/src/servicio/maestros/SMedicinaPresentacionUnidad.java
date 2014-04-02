@@ -32,6 +32,17 @@ public class SMedicinaPresentacionUnidad {
 			Medicina medicina) {
 		return medicinaPresentacionUnidadDAO.findByMedicina(medicina);
 	}
+
+	public void eliminar(
+			List<MedicinaPresentacionUnidad> medicinasPresentacionesUnidades) {
+		medicinaPresentacionUnidadDAO.delete(medicinasPresentacionesUnidades);
+		
+	}
+
+	public void guardar(
+			List<MedicinaPresentacionUnidad> listaMedicinasPresentacion) {
+		medicinaPresentacionUnidadDAO.save(listaMedicinasPresentacion);
+	}
 	
 	
 }

@@ -58,4 +58,12 @@ public class SMedicina {
 	public List<Medicina> buscarPorCategoria(CategoriaMedicina categoriaMedicina) {
 		return medicinaDAO.findByCategoriaMedicina(categoriaMedicina);
 	}
+
+	public Medicina buscarUltima() {
+		long id = medicinaDAO.findMaxIdMedicina();
+		if (id != 0)
+			return medicinaDAO.findOne(id);
+		else
+			return null;
+	}
 }
