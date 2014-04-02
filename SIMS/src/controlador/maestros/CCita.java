@@ -453,11 +453,11 @@ public class CCita extends CGenerico {
 						});
 			} else
 				Messagebox
-						.show("Seleccione al menos una Cita para Cancelar",
+						.show("Seleccione al menos una Cita para Anular",
 								"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 		} else
 			Messagebox.show(
-					"Actualmente No hay Citas para su Cancelacion",
+					"Actualmente No hay Citas para su Anulacion",
 					"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 	}
 
