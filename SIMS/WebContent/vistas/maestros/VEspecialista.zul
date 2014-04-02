@@ -1,0 +1,55 @@
+<zk>
+	<div id="divEspecialista" apply="controlador.maestros.CEspecialista">
+		<groupbox width="40em" mold="3d" title="Especialista">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Cedula:" />
+						<textbox maxlength="12" id="txtCedulaEspecialista" hflex="1"
+							tooltiptext="Ingrese la Cedula del Especialista" />
+						<button id="btnBuscarEspecialista" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox maxlength="100" id="txtNombreEspecialista" hflex="1"
+							tooltiptext="Ingrese el Nombre del Especialista" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Apellido:" />
+						<textbox maxlength="100" id="txtApellidoEspecialista"
+							hflex="1" tooltiptext="Ingrese el Apellido del Especialista" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Costo por Servicio:" />
+						<doublespinner id="dspCosto" value="0" constraint="min 0 max 100000000"
+							tooltiptext="Ingrese Costo por Servicio del Especialista" step="0.1"
+							format="#.##" width="98%" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Especialidad" />
+						<combobox tooltiptext="Seleccione una Especialidad"
+							placeholder="Seleccione una Especialidad" id="cmbEspecialidad"
+							readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.descripcion}" context="${each.idEspecialidad}" />
+							</template>
+						</combobox>
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraEspecialista" />
+			<div id="catalogoEspecialista" />
+		</groupbox>
+	</div>
+</zk>

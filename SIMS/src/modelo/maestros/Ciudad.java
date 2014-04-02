@@ -2,7 +2,9 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.sql.Timestamp;
+import java.util.Set;
 
 
 /**
@@ -36,6 +38,12 @@ public class Ciudad implements Serializable {
 	@JoinColumn(name="id_estado")
 	private Estado estado;
 
+	@OneToMany(mappedBy="ciudad")
+	private Set<ServicioExterno> serviciosExternos;
+	
+	@OneToMany(mappedBy="ciudad")
+	private Set<Consultorio> consultorios;
+	
 	public Ciudad() {
 	}
 	
@@ -99,6 +107,26 @@ public class Ciudad implements Serializable {
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+
+	public Set<ServicioExterno> getServiciosExternos() {
+		return serviciosExternos;
+	}
+
+
+	public void setServiciosExternos(Set<ServicioExterno> serviciosExternos) {
+		this.serviciosExternos = serviciosExternos;
+	}
+
+
+	public Set<Consultorio> getConsultorios() {
+		return consultorios;
+	}
+
+
+	public void setConsultorios(Set<Consultorio> consultorios) {
+		this.consultorios = consultorios;
 	}
 
 }
