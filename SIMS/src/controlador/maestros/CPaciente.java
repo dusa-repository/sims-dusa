@@ -20,6 +20,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Validador;
 
 public class CPaciente extends CGenerico {
 
@@ -152,8 +153,14 @@ public class CPaciente extends CGenerico {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
-		} else
-			return true;
+		} else {
+			if (!Validador.validarNumero(txtCedulaPaciente.getValue())) {
+				Messagebox.show("Cedula Invalida", "Informacion",
+						Messagebox.OK, Messagebox.INFORMATION);
+				return false;
+			} else
+				return true;
+		}
 	}
 
 	/* Muestra el catalogo de los Pacientes */
@@ -200,6 +207,15 @@ public class CPaciente extends CGenerico {
 		catalogo.doModal();
 	}
 
+	/* Valida la cedula */
+	@Listen("onChange = #txtCedulaPaciente")
+	public void validarCedula() {
+		if (!Validador.validarNumero(txtCedulaPaciente.getValue())) {
+			Messagebox.show("Cedula Invalida", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+	}
+	
 	/* Llena el combo de Empresas cada vez que se abre */
 	@Listen("onOpen = #cmbEmpresa")
 	public void llenarComboEmpresa() {

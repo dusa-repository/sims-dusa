@@ -31,6 +31,7 @@ import servicio.maestros.SConsultorio;
 import servicio.maestros.SDiagnostico;
 import servicio.maestros.SEmpresa;
 import servicio.maestros.SEspecialidad;
+import servicio.maestros.SEspecialista;
 import servicio.maestros.SEstado;
 import servicio.maestros.SLaboratorio;
 import servicio.maestros.SMedicina;
@@ -40,6 +41,7 @@ import servicio.maestros.SPaciente;
 import servicio.maestros.SPais;
 import servicio.maestros.SPresentacionComercial;
 import servicio.maestros.SPresentacionMedicina;
+import servicio.maestros.SServicioExterno;
 import servicio.maestros.SUnidadMedicina;
 import servicio.maestros.SUnidadUsuario;
 import servicio.seguridad.SArbol;
@@ -69,6 +71,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SEmpresa servicioEmpresa;
 	@WireVariable("SEspecialidad")
 	protected SEspecialidad servicioEspecialidad;
+	@WireVariable("SEspecialista")
+	protected SEspecialista servicioEspecialista;
 	@WireVariable("SEstado")
 	protected SEstado servicioEstado;
 	@WireVariable("SLaboratorio")
@@ -79,14 +83,16 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SMedicinaPresentacionUnidad servicioMedicinaPresentacionUnidad;
 	@WireVariable("SMotivoCita")
 	protected SMotivoCita servicioMotivoCita;
-	@WireVariable("SPais")
-	protected SPais servicioPais;
 	@WireVariable("SPaciente")
 	protected SPaciente servicioPaciente;
+	@WireVariable("SPais")
+	protected SPais servicioPais;
 	@WireVariable("SPresentacionComercial")
 	protected SPresentacionComercial servicioPresentacion;
 	@WireVariable("SPresentacionMedicina")
 	protected SPresentacionMedicina servicioPresentacionMedicina;
+	@WireVariable("SServicioExterno")
+	protected SServicioExterno servicioServicioExterno;
 	@WireVariable("SUnidadUsuario")
 	protected SUnidadUsuario servicioUnidadUsuario;
 	@WireVariable("SUnidadMedicina")

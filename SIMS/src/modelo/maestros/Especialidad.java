@@ -39,6 +39,9 @@ public class Especialidad implements Serializable {
 	@OneToMany(mappedBy="especialidad")
 	private Set<Usuario> usuarios;
 
+	@OneToMany(mappedBy="especialidad")
+	private Set<Especialista> especialistas;
+	
 	public Especialidad() {
 	}
 	
@@ -101,6 +104,14 @@ public class Especialidad implements Serializable {
 
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+
+	public Set<Especialista> getEspecialistas() {
+		return especialistas;
+	}
+
+	public void setEspecialistas(Set<Especialista> especialistas) {
+		this.especialistas = especialistas;
 	}
 
 	public Usuario addUsuario(Usuario usuario) {
