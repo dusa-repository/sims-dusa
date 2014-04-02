@@ -192,7 +192,7 @@ public class CMedicina extends CGenerico {
 				cmbLaboratorio.setText("");
 				cmbLaboratorio.setPlaceholder("Seleccione un Laboratorio");
 				cmbCategoria.setText("");
-				cmbCategoria.setPlaceholder("Seleccione un Laboratorio");
+				cmbCategoria.setPlaceholder("Seleccione una Categoria");
 				txtDenominacionGenerica.setText("");
 				txtComposicion.setText("");
 				txtPosologia.setText("");
@@ -405,6 +405,7 @@ public class CMedicina extends CGenerico {
 	/* LLena los campos del formulario dada una medicina */
 	public void llenarCampos(Medicina medicina) {
 		cmbLaboratorio.setValue(medicina.getLaboratorio().getNombre());
+		cmbCategoria.setValue(medicina.getCategoriaMedicina().getNombre());
 		txtDenominacionGenerica.setValue(medicina.getDenominacionGenerica());
 		txtComposicion.setValue(medicina.getComposicion());
 		txtPosologia.setValue(medicina.getPosologia());
@@ -451,12 +452,6 @@ public class CMedicina extends CGenerico {
 		ltbPresentacionesAgregadas.setCheckmark(false);
 		ltbPresentacionesAgregadas.setMultiple(true);
 		ltbPresentacionesAgregadas.setCheckmark(true);
-		// Listitem list1 = ltbPresentaciones.getSelectedItem();
-		// if (list1 == null)
-		// Messagebox.show("Seleccione un Item", "Alerta", Messagebox.OK,
-		// Messagebox.EXCLAMATION);
-		// else
-		// list1.setParent(ltbPresentacionesAgregadas);
 	}
 
 	/*
@@ -490,12 +485,6 @@ public class CMedicina extends CGenerico {
 		ltbPresentaciones.setCheckmark(false);
 		ltbPresentaciones.setMultiple(true);
 		ltbPresentaciones.setCheckmark(true);
-		// Listitem list2 = ltbPresentacionesAgregadas.getSelectedItem();
-		// if (list2 == null)
-		// Messagebox.show("Seleccione un Item", "Alerta", Messagebox.OK,
-		// Messagebox.EXCLAMATION);
-		// else
-		// list2.setParent(ltbPresentaciones);
 	}
 
 	/* Focus a la pestannas */
