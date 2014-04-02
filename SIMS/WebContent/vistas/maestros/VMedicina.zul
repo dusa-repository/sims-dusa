@@ -103,10 +103,10 @@
 					</tabpanel>
 					<tabpanel>
 						<hbox>
-							<listbox id="listaPresentaciones" height="300px" width="220px"
+							<listbox id="ltbPresentaciones" height="300px" width="220px"
 								emptyMessage="No hay Presentaciones Registradas">
 								<listhead>
-									<listheader label="Presentacion" width="80%" />
+									<listheader label="Presentacion" width="100%" />
 								</listhead>
 								<template name="model">
 									<listitem>
@@ -132,7 +132,7 @@
 								<button id="pasar2" image="/public/imagenes/botones/atras.png"
 									tooltiptext="Quitar Presentacion" width="30px" />
 							</vbox>
-							<listbox id="listaPresentacionesAgregadas" height="300px"
+							<listbox id="ltbPresentacionesAgregadas" height="300px"
 								emptyMessage="No ha Seleccionado Ningúna Presentacion">
 								<listhead>
 									<listheader label="Presentacion" width="35%" />
@@ -148,14 +148,17 @@
 											<textbox width="98%" value="${each.valor}" />
 										</listcell>
 										<listcell>
-											<combobox id="cmbUnidadMedicina" readonly="true" tabindex="1"
-												width="100%" tooltiptext="Seleccione una Unidad"
+											<combobox id="cmbUnidadMedicina" readonly="true"
+												tabindex="1" width="100%" tooltiptext="Seleccione una Unidad"
 												placeholder="Seleccione una Unidad">
 												<template name="model">
 													<comboitem label="${each.nombre}" context="${each.idUnidadMedicina}" />
 												</template>
 											</combobox>
-
+										</listcell>
+										<listcell>
+											<spinner value="${each.presentacionMedicina.idpresentacion}" width="98%"
+												visible="false" disabled="true" />
 										</listcell>
 									</listitem>
 								</template>

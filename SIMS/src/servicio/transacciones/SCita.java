@@ -32,8 +32,7 @@ public class SCita {
 		citaDAO.save(cita);
 		
 	}
-
-	public List<Cita> buscarPorUsuario(Usuario usuario) {
-		return citaDAO.findByUsuarioAndEstado(usuario,"Pendiente");
+	public List<Cita> buscarPorUsuarioYEstado(Usuario usuario, String estado) {
+		return citaDAO.findByUsuarioAndEstado(usuario,estado);
 	}
 }

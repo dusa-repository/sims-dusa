@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfacedao.maestros.IPresentacionMedicinaDAO;
 
+import modelo.maestros.Medicina;
 import modelo.maestros.PresentacionMedicina;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,10 @@ public class SPresentacionMedicina {
 
 	public PresentacionMedicina buscarPorNombre(String value) {
 		return presentacionMedicinaDAO.findByNombre(value);
+	}
+
+	public List<PresentacionMedicina> buscarPresentacionesDisponibles(
+			List<Long> ids) {
+		return presentacionMedicinaDAO.findByIdPresentacionNotIn(ids);
 	}
 }

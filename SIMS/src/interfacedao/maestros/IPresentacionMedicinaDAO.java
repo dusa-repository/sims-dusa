@@ -13,4 +13,6 @@ public interface IPresentacionMedicinaDAO extends JpaRepository<PresentacionMedi
 
 	PresentacionMedicina findByNombre(String value);
 
+	List<PresentacionMedicina> findByIdPresentacionNotIn(List<Long> ids);
+
 }
