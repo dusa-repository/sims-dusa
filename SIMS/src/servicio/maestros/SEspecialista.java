@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfacedao.maestros.IEspecialistaDAO;
 
+import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,10 @@ public class SEspecialista {
 
 	public List<Especialista> filtroEspecialidad(String valor) {
 		return especialistaDAO.findByEspecialidadDescripcionStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Especialista> buscarPorEspecialidad(Especialidad especialidad) {
+		return especialistaDAO.findByEspecialidad(especialidad);
 	}
 	
 }
