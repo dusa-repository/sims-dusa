@@ -33,6 +33,7 @@ import servicio.maestros.SEmpresa;
 import servicio.maestros.SEspecialidad;
 import servicio.maestros.SEspecialista;
 import servicio.maestros.SEstado;
+import servicio.maestros.SExamen;
 import servicio.maestros.SLaboratorio;
 import servicio.maestros.SMedicina;
 import servicio.maestros.SMedicinaPresentacionUnidad;
@@ -75,6 +76,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SEspecialista servicioEspecialista;
 	@WireVariable("SEstado")
 	protected SEstado servicioEstado;
+	@WireVariable("SExamen")
+	protected SExamen servicioExamen;
 	@WireVariable("SLaboratorio")
 	protected SLaboratorio servicioLaboratorio;
 	@WireVariable("SMedicina")

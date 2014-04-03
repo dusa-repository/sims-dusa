@@ -1,0 +1,58 @@
+<zk>
+	<div id="divExamen" apply="controlador.maestros.CExamen">
+		<groupbox width="40em" mold="3d" title="Examen">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox maxlength="500" id="txtNombreExamen" hflex="1"
+							tooltiptext="Ingrese el Nombre del Examen" class="multilinea" />
+						<button id="btnBuscarExamen" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Tipo:" />
+						<textbox maxlength="50" id="txtTipoExamen" hflex="1"
+							tooltiptext="Ingrese el Tipo del Examen" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Resultado:" />
+						<textbox maxlength="50" id="txtResultadoExamen" hflex="1"
+							tooltiptext="Ingrese el Resultado del Examen" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Costo:" />
+						<doublespinner id="dspCostoExamen" value="0"
+							constraint="min 0 max 100000000" tooltiptext="Ingrese el Costo del Examen"
+							step="0.1" format="#.##" width="98%" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Valor Minimo:" />
+						<doublespinner id="dspMinExamen" value="0"
+							constraint="min 0 max 100000000" tooltiptext="Ingrese el Valor Minimo del Examen"
+							step="0.1" format="#.##" width="98%" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Valor Maximo:" />
+						<doublespinner id="dspMaxExamen" value="0"
+							constraint="min 0 max 100000000" tooltiptext="Ingrese el Valor Maximo del Examen"
+							step="0.1" format="#.##" width="98%" />
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraExamen" />
+			<div id="catalogoExamen" />
+		</groupbox>
+	</div>
+</zk>

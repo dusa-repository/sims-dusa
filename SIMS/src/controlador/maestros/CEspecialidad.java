@@ -3,6 +3,7 @@ package controlador.maestros;
 import java.util.List;
 
 import modelo.maestros.Especialidad;
+import modelo.maestros.Especialista;
 import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.event.Event;
@@ -78,7 +79,9 @@ public class CEspecialidad extends CGenerico {
 												.buscar(id);
 										List<Usuario> usuarios = servicioUsuario
 												.buscarPorEspecialidad(especialidad);
-										if (!usuarios.isEmpty()) {
+										List<Especialista> especialistas = servicioEspecialista
+												.buscarPorEspecialidad(especialidad);
+										if (!usuarios.isEmpty() || !especialistas.isEmpty()) {
 											Messagebox
 													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
 															"Informacion",
