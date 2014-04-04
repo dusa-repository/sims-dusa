@@ -81,8 +81,8 @@
 										<datebox readonly="true" width="100%" id="dtbFechaCita"
 											cols="8" />
 										<label class="etiqueta" value="Hora Cita:" />
-										<textbox id="txtHoraCita" hflex="1" maxlength="10"
-											tooltiptext="Ingrese la Hora de la Cita" />
+										<timebox id="tmbHoraCita" hflex="1" format="a hh:mm:ss"
+											onCreate="self.value = new Date()" tooltiptext="Ingrese la Hora de la Cita" />
 									</row>
 									<row>
 										<label class="etiqueta" value="Observacion:" />
@@ -109,7 +109,19 @@
 						</div>
 					</tabpanel>
 					<tabpanel>
+
 						<groupbox width="100%" title="Citas Asociadas al Doctor">
+							<hbox>
+								<label class="etiqueta" id="lblBuscar" value="Buscar por: " />
+								<combobox id="cmbBuscador" readonly="true" tabindex="1"
+									width="100%" tooltiptext="Seleccione el Campo" placeholder="Seleccione el Campo">
+									<template name="model">
+										<comboitem label="${each}" />
+									</template>
+								</combobox>
+								<textbox id="txtBuscador"></textbox>
+							</hbox>
+							<separator />
 							<hbox>
 								<listbox id="ltbCitas" height="280px" emptyMessage="No hay Citas registrados">
 									<listhead>
@@ -139,14 +151,18 @@
 										</listitem>
 									</template>
 								</listbox>
+
+								<vbox>
+									<div align="center">
+										<separator height="80px" />
+										<button label="Cancelar Citas" id="btnCancelarCita"
+											image="/public/imagenes/botones/cancelar.png" tooltiptext="Cancelar Citas Seleccionadas" />
+										<separator />
+										<button label="Anular Citas" id="btnAnularCita"
+											image="/public/imagenes/botones/anular.png" tooltiptext="Anular Citas Seleccionadas" />
+									</div>
+								</vbox>
 							</hbox>
-							<separator/>
-							<div align="center" >		
-								<button label="Cancelar Citas" id="btnCancelarCita"
-									image="/public/imagenes/botones/cancelar.png" tooltiptext="Cancelar Citas Seleccionadas" />
-								<button label="Anular Citas" id="btnAnularCita"
-									image="/public/imagenes/botones/anular.png" tooltiptext="Anular Citas Seleccionadas" />
-							</div>
 						</groupbox>
 						<separator />
 						<separator />
