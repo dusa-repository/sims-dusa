@@ -47,6 +47,7 @@ public class CEspecialista extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
+		llenarComboEspecialidad();
 		Botonera botonera = new Botonera() {
 
 			@Override

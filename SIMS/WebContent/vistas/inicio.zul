@@ -61,11 +61,11 @@
 					</template>
 				</tree>
 			</west>
-			<center border="none">
+			<center border="none" >
 				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
 					<center border="none" flex="true" autoscroll="true">
 						<tabbox
-							style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; width=100%"
+							style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; width=93%"
 							id="tabBox" hflex="1">
 							<tabs>
 								<tab visible="false">Tab A</tab>
