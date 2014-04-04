@@ -1,0 +1,154 @@
+<zk>
+	<!-- apply="controlador.transacciones.CConsulta" -->
+	<div id="divConsulta" width="95%">
+		<groupbox width="100%" mold="3d" title="Historia Medica">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="20%" />
+					<column label="" width="20%" />
+					<column label="" width="20%" />
+					<column label="" width="20%" />
+					<column label="" width="20%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Buscar Cedula:" />
+						<textbox maxlength="500" id="txtNombre" hflex="1"
+							tooltiptext="Ingrese la Cedula del Paciente" />
+						<button id="btnBuscarPaciente" label="Buscar Paciente"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<button id="btnBuscarFamiliar" label="Buscar Familiar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<tabbox height="470px" id="taxConsulta" orient="horizontal">
+				<tabs id="tbsConsulta" width="9em">
+					<tab label="Identificacion" id="tabIdentificacion" />
+					<tab label="Antecedentes Medicos" id="tabAntecedentesMedicos" />
+					<tab label="Antecedentes Laborales" id="tabAntecedentesLaborales" />
+					<tab label="Consulta" id="tabConsulta" />
+				</tabs>
+				<tabpanels>
+					<tabpanel>
+						<groupbox width="100%" title="Datos Basicos">
+							<grid width="100%">
+								<columns visible="false">
+									<column label="" width="20%" />
+									<column label="" width="20%" />
+									<column label="" width="20%" />
+									<column label="" width="20%" />
+									<column label="" width="20%" />
+								</columns>
+								<rows>
+									<row>
+										<label class="etiqueta" value="Cedula:" />
+										<label id="lblCedula" />
+										<label class="etiqueta" value="Nombre:" />
+										<label id="lblNombre" />
+										<cell rowspan="2">
+											<vbox>
+												<image id="imagenPaciente"  width="60px" height="55px"  />
+											</vbox>
+										</cell>
+									</row>
+									<row>
+										<label class="etiqueta" value="Apellido:" />
+										<label id="lblApellido" />
+										<label class="etiqueta" value="Ficha:" />
+										<label id="lblFicha" />
+										<hbox />
+									</row>
+									<row>
+										<label class="etiqueta" value="Fecha Nacimiento:" />
+										<label id="lblFechaNac" />
+										<label class="etiqueta" value="Edad:" />
+										<label id="lblEdad" />
+										<hbox />
+									</row>
+									<row>
+										<label class="etiqueta" value="Sexo:" />
+										<label id="lblSexo" />
+										<label class="etiqueta" value="Grupo Sanguineo:" />
+										<label id="lblGrupoSanguineo" />
+										<hbox />
+									</row>
+									<row>
+										<label class="etiqueta" value="Pais de Nacimiento:" />
+										<label id="lblPaisNac" />
+										<label class="etiqueta" value="Cargo:" />
+										<label id="lblCargo" />
+										<hbox />
+									</row>
+									<row>
+										<label class="etiqueta" value="Empresa:" />
+										<label id="lblEmpresa" />
+										<label class="etiqueta" value="Profesion:" />
+										<label id="lblProfesion" />
+										<hbox />
+									</row>
+									<row>
+
+										<label class="etiqueta" value="Tipo Paciente:" />
+										<label id="lblTipoPaciente" />
+										<label class="etiqueta" value="Antiguedad:" />
+										<label id="lblAntiguedad" />
+										<hbox />
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+											<separator />
+						<tabbox height="480px" id="taxOtrosDatos" orient="horizontal">
+							<tabs id="tbsOtrosDatos" width="9em">
+								<tab label="Datos de Contacto" id="tabDatosContacto" />
+								<tab label="Carga Familiar" id="tabCargaFamiliar" />
+							</tabs>
+							<tabpanels>
+								<tabpanel>
+									<grid width="100%">
+										<columns visible="false">
+											<column label="" width="20%" />
+											<column label="" width="80%" />
+										</columns>
+										<rows>
+											<row>
+														<label class="etiqueta" value="Direccion:" />
+												<cell rowspan="2">
+													<vbox>
+														<label id="lblDireccion" />
+													</vbox>
+												</cell>
+											</row>
+											<row style="background-color:white;">
+												<hbox />
+												<hbox />
+											</row>
+											<row>
+												<label class="etiqueta" value="Telefono Fijo:" />
+												<label id="lblTlfFijo" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Telefono Celular:" />
+												<label id="lblTlfCelular" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Email:" />
+												<label id="lblEmail" />
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+								<tabpanel>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<div id="catalogoConsulta" />
+		</groupbox>
+	</div>
+</zk>
