@@ -19,4 +19,13 @@ public interface ICitaDAO extends JpaRepository<Cita, Long> {
 
 	List<Cita> findByUsuarioAndEstado(Usuario usuario, String string);
 
+	List<Cita> findByPacientePrimerNombreStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Cita> findByPacienteEmpresaNombreStartingWithAllIgnoreCase(String valor);
+
+	List<Cita> findByMotivoCitaDescripcionStartingWithAllIgnoreCase(String valor);
+
+	List<Cita> findByFechaCitaStartingWithAllIgnoreCase(String valor);
+
 }

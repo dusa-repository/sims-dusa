@@ -2,6 +2,9 @@ package controlador.maestros;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,8 +29,10 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Timebox;
 
 import componentes.Botonera;
+import componentes.Buscar;
 import componentes.Catalogo;
 
 public class CCita extends CGenerico {
@@ -70,7 +75,7 @@ public class CCita extends CGenerico {
 	@Wire
 	private Textbox txtObservacion;
 	@Wire
-	private Textbox txtHoraCita;
+	private Timebox tmbHoraCita;
 	@Wire
 	private Combobox cmbMotivo;
 	@Wire
@@ -81,16 +86,26 @@ public class CCita extends CGenerico {
 	private Button btnAnularCita;
 	@Wire
 	private Button btnCancelarCita;
-
+	DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	long id = 0;
 	long idDoctor = 0;
 	long idPaciente = 0;
 	Catalogo<Usuario> catalogo;
 	Catalogo<Paciente> catalogoPaciente;
 
+	Buscar<Cita> buscador;
+	List<Cita> citas = new ArrayList<Cita>();
+	@Wire
+	private Textbox txtBuscador;
+	@Wire
+	private Combobox cmbBuscador;
+	private String[] valores = { "Paciente", "Empresa", "Fecha", "Motivo" };
+
 	@Override
 	public void inicializar() throws IOException {
 
+		buscar();
+		llenarComboMotivo();
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -125,8 +140,8 @@ public class CCita extends CGenerico {
 					Usuario usuario = servicioUsuario.buscarPorCedula(String
 							.valueOf(idDoctor));
 					String estado = "Pendiente";
-					String horaCita = txtHoraCita.getValue();
-
+					Date hora = tmbHoraCita.getValue();
+					String horaCita = df.format(hora);
 					Cita cita = new Cita(id, estado, fechaHora, fechaCrea,
 							fechaHora, horaAuditoria, horaCita, usuario,
 							observacion, nombreUsuarioSesion(), motivo,
@@ -156,12 +171,13 @@ public class CCita extends CGenerico {
 	 * agregando citas al doctor actual
 	 */
 	private void limpiar2() {
+		Date dt = new Date();
 		lblCedulaPaciente.setValue("");
 		lblNombrePaciente.setValue("");
 		lblApellidoPaciente.setValue("");
 		lblEmpresaPaciente.setValue("");
 		txtObservacion.setValue("");
-		txtHoraCita.setValue("");
+		tmbHoraCita.setValue(dt);
 		dtbFechaCita.setValue(null);
 		cmbMotivo.setValue("");
 		cmbMotivo.setPlaceholder("Seleccione un Motivo");
@@ -231,7 +247,7 @@ public class CCita extends CGenerico {
 	public void llenarListaCitas(Usuario usuario) {
 		List<Cita> citasDoctor = servicioCita.buscarPorUsuarioYEstado(usuario,
 				"Pendiente");
-
+		citas = citasDoctor;
 		for (int i = 0; i < citasDoctor.size(); i++) {
 
 			String nombre = citasDoctor.get(i).getPaciente().getPrimerNombre();
@@ -250,7 +266,7 @@ public class CCita extends CGenerico {
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogoPaciente() throws IOException {
-		List<Paciente> pacientes = servicioPaciente.buscarTodos();
+		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
 				"Apellido", "Empresa") {
@@ -258,21 +274,17 @@ public class CCita extends CGenerico {
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
 
-				if (combo.equals("Nombre"))
+				switch (combo) {
+				case "Nombre":
 					return servicioPaciente.filtroNombre1(valor);
-				else {
-					if (combo.equals("Cedula"))
-						return servicioPaciente.filtroCedula(valor);
-					else {
-						if (combo.equals("Apellido"))
-							return servicioPaciente.filtroApellido1(valor);
-						else {
-							if (combo.equals("Empresa"))
-								return servicioPaciente.filtroEmpresa(valor);
-							else
-								return servicioPaciente.buscarTodos();
-						}
-					}
+				case "Cedula":
+					return servicioPaciente.filtroCedula(valor);
+				case "Apellido":
+					return servicioPaciente.filtroApellido1(valor);
+				case "Empresa":
+					return servicioPaciente.filtroEmpresa(valor);
+				default:
+					return pacientes;
 				}
 			}
 
@@ -316,7 +328,7 @@ public class CCita extends CGenerico {
 	public boolean validar() {
 		if (txtObservacion.getText().compareTo("") == 0
 				|| cmbMotivo.getText().compareTo("") == 0
-				|| txtHoraCita.getText().compareTo("") == 0
+				|| tmbHoraCita.getText().compareTo("") == 0
 				|| dtbFechaCita.getText().compareTo("") == 0 || idDoctor == 0
 				|| idPaciente == 0) {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
@@ -453,6 +465,39 @@ public class CCita extends CGenerico {
 		} else
 			Messagebox.show("Actualmente No hay Citas para su Anulacion",
 					"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+	}
+
+	public void buscar() {
+		cmbBuscador.setModel(new ListModelList<String>(valores));
+		buscador = new Buscar<Cita>(ltbCitas, txtBuscador) {
+
+			@Override
+			protected List<Cita> buscar(String valor) {
+				switch (cmbBuscador.getValue()) {
+				case "Paciente":
+					return recorrer(servicioCita.filtroPaciente(valor));
+				case "Empresa": 
+					return recorrer(servicioCita.filtroEmpresa(valor));
+				case "Fecha":
+					return recorrer(servicioCita.filtroFecha(valor));
+				case "Motivo":
+					return recorrer(servicioCita.filtroMotivo(valor));
+				default:
+					return citas;
+				}
+
+			}
+		};
+	}
+
+	public List<Cita> recorrer(List<Cita> lis) {
+		for (int i = 0; i < lis.size(); i++) {
+			String nombre = lis.get(i).getPaciente().getPrimerNombre();
+			String apellido = lis.get(i).getPaciente().getPrimerApellido();
+			Paciente paciente = lis.get(i).getPaciente();
+			paciente.setHoraAuditoria(nombre + " " + apellido);
+		}
+		return lis;
 	}
 
 }

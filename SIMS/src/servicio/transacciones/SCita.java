@@ -35,4 +35,20 @@ public class SCita {
 	public List<Cita> buscarPorUsuarioYEstado(Usuario usuario, String estado) {
 		return citaDAO.findByUsuarioAndEstado(usuario,estado);
 	}
+
+	public List<Cita> filtroPaciente(String valor) {
+		return citaDAO.findByPacientePrimerNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Cita> filtroEmpresa(String valor) {
+		return citaDAO.findByPacienteEmpresaNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Cita> filtroFecha(String valor) {
+		return citaDAO.findByFechaCitaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Cita> filtroMotivo(String valor) {
+		return citaDAO.findByMotivoCitaDescripcionStartingWithAllIgnoreCase(valor);
+	}
 }
