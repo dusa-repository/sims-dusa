@@ -42,6 +42,7 @@ public class CPresentacionComercial extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 
+		llenaComboMedicina();
 		Botonera botonera = new Botonera() {
 			@Override
 			public void guardar() {

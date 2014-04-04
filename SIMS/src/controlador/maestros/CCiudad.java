@@ -44,6 +44,7 @@ public class CCiudad extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 
+		llenarCombo();
 		Botonera botonera = new Botonera() {
 
 			@Override

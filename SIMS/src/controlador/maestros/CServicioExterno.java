@@ -50,11 +50,13 @@ public class CServicioExterno extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
+		
+		llenarComboCiudad();
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divServicioExterno, "Servicio Externo");
+				cerrarVentana(divServicioExterno, "Servicios Externos");
 			}
 
 			@Override

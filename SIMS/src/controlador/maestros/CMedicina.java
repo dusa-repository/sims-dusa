@@ -35,6 +35,14 @@ public class CMedicina extends CGenerico {
 	private static final long serialVersionUID = -6022315737961269719L;
 
 	@Wire
+	private Tab tabEspecificaciones;
+	@Wire
+	private Tab tabPresentaciones;
+	@Wire
+	private Button btnSiguientePestanna;
+	@Wire
+	private Button btnAnteriorPestanna;
+	@Wire
 	private Textbox txtNombre;
 	@Wire
 	private Div botoneraMedicina;
@@ -95,6 +103,8 @@ public class CMedicina extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 
+		llenarComboLaboratorios();
+		llenarComboCategorias();
 		llenarListaPresentaciones(null);
 		txtDenominacionGenerica.setFocus(true);
 		Botonera botonera = new Botonera() {
@@ -205,6 +215,8 @@ public class CMedicina extends CGenerico {
 				ltbPresentacionesAgregadas.getItems().clear();
 				id = 0;
 				llenarListaPresentaciones(null);
+				presentacionesDisponibles.clear();
+				presentacionesUsadas.clear();
 			}
 
 			@Override
@@ -527,6 +539,18 @@ public class CMedicina extends CGenerico {
 	@Listen("onClick = #tabEmbarazo")
 	public void pestanna8() {
 		txtEmbarazo.setFocus(true);
+	}
+	
+	/* Abre la pestanna de presentaciones */
+	@Listen("onClick = #btnSiguientePestanna")
+	public void siguientePestanna() {
+		tabPresentaciones.setSelected(true);
+	}
+
+	/* Abre la pestanna de especificaciones*/
+	@Listen("onClick = #btnAnteriorPestanna")
+	public void anteriorPestanna() {
+		tabEspecificaciones.setSelected(true);
 	}
 
 }

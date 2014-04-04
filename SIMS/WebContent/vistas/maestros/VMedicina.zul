@@ -100,6 +100,10 @@
 								</tabpanel>
 							</tabpanels>
 						</tabbox>
+						<div align="right" style="float: right;">
+							<button id="btnSiguientePestanna" label="Siguiente"
+								image="/public/imagenes/botones/adelante.png" />
+						</div>
 					</tabpanel>
 					<tabpanel>
 						<hbox>
@@ -172,11 +176,16 @@
 								</template>
 							</listbox>
 						</hbox>
+						<separator />
+						<div align="left" style="float: right;">
+							<button label="Anterior" id="btnAnteriorPestanna"
+								image="/public/imagenes/botones/atras.png" />
+						</div>
+						<div width="50%" id="botoneraMedicina" align="left" style="float: left;" />
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
 			<separator />
-			<div id="botoneraMedicina" />
 			<div id="catalogoMedicina" />
 		</groupbox>
 	</div>

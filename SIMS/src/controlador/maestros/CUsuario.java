@@ -122,6 +122,9 @@ public class CUsuario extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
+		
+		llenarComboUnidad();
+		llenarComboEspecialidad();
 
 		llenarListas(null);
 		try {
