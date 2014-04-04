@@ -23,8 +23,12 @@
 					</row>
 					<row>
 						<label class="etiqueta" value="Resultado:" />
-						<textbox maxlength="50" id="txtResultadoExamen" hflex="1"
-							tooltiptext="Ingrese el Resultado del Examen" />
+						<combobox id="cmbResultadoExamen" hflex="1"
+							tooltiptext="Ingrese el Resultado del Examen" readonly="true"
+							placeholder="Seleccione un Tipo de Resultado">
+							<comboitem label="Texto" />
+							<comboitem label="Numerico" />
+						</combobox>
 						<hbox />
 					</row>
 					<row>
