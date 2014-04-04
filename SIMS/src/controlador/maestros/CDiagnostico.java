@@ -69,9 +69,9 @@ public class CDiagnostico extends CGenerico {
 					nombre = txtNombreDiagnostico.getValue();
 					codigo = txtCodigoDiagnostico.getValue();
 					grupo = txtGrupoDiagnostico.getValue();
-					CategoriaDiagnostico categoria = servicioCategoriaDiagnostico.buscar(Long
-							.parseLong(cmbCategoria.getSelectedItem()
-									.getContext()));
+					CategoriaDiagnostico categoria = servicioCategoriaDiagnostico
+							.buscar(Long.parseLong(cmbCategoria
+									.getSelectedItem().getContext()));
 					Diagnostico diagnostico = new Diagnostico(id, codigo,
 							fechaHora, grupo, horaAuditoria, nombre,
 							horaAuditoria, categoria);
@@ -131,30 +131,28 @@ public class CDiagnostico extends CGenerico {
 	/* Muestra el catalogo de los diagnosticos */
 	@Listen("onClick = #btnBuscarDiagnostico")
 	public void mostrarCatalogo() {
-		List<Diagnostico> diagnosticos = servicioDiagnostico.buscarTodas();
+		final List<Diagnostico> diagnosticos = servicioDiagnostico
+				.buscarTodas();
 		catalogo = new Catalogo<Diagnostico>(catalogoDiagnostico,
 				"Catalogo de Diagnosticos", diagnosticos, "Codigo", "Nombre",
 				"Grupo", "Categoria") {
 
 			@Override
-			protected List<Diagnostico> buscar(String valor,String combo) {
+			protected List<Diagnostico> buscar(String valor, String combo) {
 
-				if(combo.equals("Nombre"))
-				return servicioDiagnostico.filtroNombre(valor);
-				else{
-					if(combo.equals("Codigo"))
+				switch (combo) {
+				case "Nombre":
+					return servicioDiagnostico.filtroNombre(valor);
+				case "Codigo":
 					return servicioDiagnostico.filtroCodigo(valor);
-					else{
-						if(combo.equals("Grupo"))
-							return servicioDiagnostico.filtroGrupo(valor);
-						else{
-							if(combo.equals("Categoria"))
-								return servicioDiagnostico.filtroCategoria(valor);
-							else
-								return servicioDiagnostico.buscarTodas();
-						}						
+				case "Grupo":
+					return servicioDiagnostico.filtroGrupo(valor);
+				case "Categoria":
+					return servicioDiagnostico.filtroCategoria(valor);
+				default:
+					return diagnosticos;
 				}
-			}
+
 			}
 
 			@Override
@@ -175,8 +173,10 @@ public class CDiagnostico extends CGenerico {
 	/* Llena el combo de Categorias cada vez que se abre */
 	@Listen("onOpen = #cmbCategoria")
 	public void llenarComboCategoria() {
-		List<CategoriaDiagnostico> categorias = servicioCategoriaDiagnostico.buscarTodas();
-		cmbCategoria.setModel(new ListModelList<CategoriaDiagnostico>(categorias));
+		List<CategoriaDiagnostico> categorias = servicioCategoriaDiagnostico
+				.buscarTodas();
+		cmbCategoria.setModel(new ListModelList<CategoriaDiagnostico>(
+				categorias));
 	}
 
 	/* Permite la seleccion de un item del catalogo */

@@ -11,7 +11,6 @@ import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 
-
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -121,8 +120,10 @@ public class CCita extends CGenerico {
 					String idMotivo = cmbMotivo.getSelectedItem().getContext();
 					MotivoCita motivo = servicioMotivoCita.buscar(Long
 							.parseLong(idMotivo));
-					Paciente paciente = servicioPaciente.buscarPorCedula(String.valueOf(idPaciente));
-					Usuario usuario = servicioUsuario.buscarPorCedula(String.valueOf(idDoctor));
+					Paciente paciente = servicioPaciente.buscarPorCedula(String
+							.valueOf(idPaciente));
+					Usuario usuario = servicioUsuario.buscarPorCedula(String
+							.valueOf(idDoctor));
 					String estado = "Pendiente";
 					String horaCita = txtHoraCita.getValue();
 
@@ -172,35 +173,26 @@ public class CCita extends CGenerico {
 	/* Muestra un catalogo de Usuarios */
 	@Listen("onClick = #btnBuscarDoctor")
 	public void mostrarCatalogo() throws IOException {
-		List<Usuario> usuarios = servicioUsuario.buscarTodos();
+		final List<Usuario> usuarios = servicioUsuario.buscarTodos();
 		catalogo = new Catalogo<Usuario>(catalogoUsuarios,
 				"Catalogo de Doctores", usuarios, "Cedula", "Ficha", "Nombre",
 				"Apellido", "Especialidad") {
 
 			@Override
 			protected List<Usuario> buscar(String valor, String combo) {
-				if (combo.equals("Cedula"))
+				switch (combo) {
+				case "Cedula":
 					return servicioUsuario.filtroCedula(valor);
-				else {
-					if (combo.equals("Ficha"))
-						return servicioUsuario.filtroFicha(valor);
-					else {
-						if (combo.equals("Nombre"))
-							return servicioUsuario.filtroNombre(valor);
-						else {
-							if (combo.equals("Especialidad"))
-								return servicioUsuario
-										.filtroEspecialidad(valor);
-							else {
-								if (combo.equals("Apellido"))
-									return servicioUsuario
-											.filtroApellido(valor);
-								else
-									return servicioUsuario.buscarTodos();
-							}
-
-						}
-					}
+				case "Ficha":
+					return servicioUsuario.filtroFicha(valor);
+				case "Nombre":
+					return servicioUsuario.filtroNombre(valor);
+				case "Especialidad":
+					return servicioUsuario.filtroEspecialidad(valor);
+				case "Apellido":
+					return servicioUsuario.filtroApellido(valor);
+				default:
+					return usuarios;
 				}
 			}
 
@@ -224,8 +216,10 @@ public class CCita extends CGenerico {
 	@Listen("onSeleccion = #catalogoUsuarios")
 	public void seleccionarDoctor() {
 		Usuario usuario = catalogo.objetoSeleccionadoDelCatalogo();
-		lblApellidoDoctor.setValue(usuario.getPrimerApellido()+" "+usuario.getSegundoApellido());
-		lblNombreDoctor.setValue(usuario.getPrimerNombre()+" "+usuario.getSegundoNombre());
+		lblApellidoDoctor.setValue(usuario.getPrimerApellido() + " "
+				+ usuario.getSegundoApellido());
+		lblNombreDoctor.setValue(usuario.getPrimerNombre() + " "
+				+ usuario.getSegundoNombre());
 		lblCedulaDoctor.setValue(usuario.getCedula());
 		idDoctor = Long.valueOf(usuario.getCedula());
 		llenarListaCitas(usuario);
@@ -235,7 +229,8 @@ public class CCita extends CGenerico {
 
 	/* Llena la lista de citas segun un usuario determinado */
 	public void llenarListaCitas(Usuario usuario) {
-		List<Cita> citasDoctor = servicioCita.buscarPorUsuarioYEstado(usuario,"Pendiente");
+		List<Cita> citasDoctor = servicioCita.buscarPorUsuarioYEstado(usuario,
+				"Pendiente");
 
 		for (int i = 0; i < citasDoctor.size(); i++) {
 
@@ -301,8 +296,10 @@ public class CCita extends CGenerico {
 	public void seleccionarPaciente() {
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
 		lblCedulaPaciente.setValue(paciente.getCedula());
-		lblNombrePaciente.setValue(paciente.getPrimerNombre()+" "+paciente.getSegundoNombre());
-		lblApellidoPaciente.setValue(paciente.getPrimerApellido()+" "+paciente.getSegundoApellido());
+		lblNombrePaciente.setValue(paciente.getPrimerNombre() + " "
+				+ paciente.getSegundoNombre());
+		lblApellidoPaciente.setValue(paciente.getPrimerApellido() + " "
+				+ paciente.getSegundoApellido());
 		lblEmpresaPaciente.setValue(paciente.getEmpresa().getNombre());
 		idPaciente = Long.valueOf(paciente.getCedula());
 		catalogoPaciente.setParent(null);
@@ -340,14 +337,14 @@ public class CCita extends CGenerico {
 	public void anteriorPestanna() {
 		tabCita.setSelected(true);
 	}
-	
+
 	/*
 	 * Se ejecuta al darle click al boton de cancelar en la pestanna de
 	 * consultar citas, cancela la cita seleccionada
 	 */
 	@Listen("onClick = #btnCancelarCita")
 	public void cancelarCita() {
-		Boolean hayCitas = false; 
+		Boolean hayCitas = false;
 		if (ltbCitas.getItemCount() != 0) {
 			final List<Listitem> list1 = ltbCitas.getItems();
 			for (int i = 0; i < list1.size(); i++) {
@@ -356,8 +353,7 @@ public class CCita extends CGenerico {
 			}
 			if (hayCitas) {
 				hayCitas = false;
-				Messagebox.show(
-						"¿Esta Seguro de Cancelar la(s) Citas(s)?",
+				Messagebox.show("¿Esta Seguro de Cancelar la(s) Citas(s)?",
 						"Alerta", Messagebox.OK | Messagebox.CANCEL,
 						Messagebox.QUESTION, new EventListener<Event>() {
 							public void onEvent(Event evt) {
@@ -377,37 +373,37 @@ public class CCita extends CGenerico {
 							private void respuestaOk() {
 								for (int i = 0; i < list1.size(); i++) {
 									if (list1.get(i).isSelected()) {
-										Cita cita = list1
-												.get(i).getValue();
+										Cita cita = list1.get(i).getValue();
 										cita.setEstado("Cancelada");
 										servicioCita.guardar(cita);
 									}
 								}
-								Usuario usuario = servicioUsuario.buscarPorCedula(String.valueOf(idDoctor));
+								Usuario usuario = servicioUsuario
+										.buscarPorCedula(String
+												.valueOf(idDoctor));
 								llenarListaCitas(usuario);
-								Messagebox
-										.show("Se ha(n) Cancelado la(s) Cita(s)",
-												"Informacion", Messagebox.OK,
-												Messagebox.INFORMATION);
+								Messagebox.show(
+										"Se ha(n) Cancelado la(s) Cita(s)",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 
 							}
 						});
 			} else
-				Messagebox
-						.show("Seleccione al menos una Cita para Cancelar",
-								"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+				Messagebox.show("Seleccione al menos una Cita para Cancelar",
+						"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 		} else
-			Messagebox.show(
-					"Actualmente No hay Citas para su Cancelacion",
+			Messagebox.show("Actualmente No hay Citas para su Cancelacion",
 					"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 	}
+
 	/*
 	 * Se ejecuta al darle click al boton de cancelar en la pestanna de
 	 * consultar citas, anula la cita seleccionada
 	 */
 	@Listen("onClick = #btnAnularCita")
 	public void anularCita() {
-		Boolean hayCitas = false; 
+		Boolean hayCitas = false;
 		if (ltbCitas.getItemCount() != 0) {
 			final List<Listitem> list1 = ltbCitas.getItems();
 			for (int i = 0; i < list1.size(); i++) {
@@ -416,8 +412,7 @@ public class CCita extends CGenerico {
 			}
 			if (hayCitas) {
 				hayCitas = false;
-				Messagebox.show(
-						"¿Esta Seguro de Anular la(s) Citas(s)?",
+				Messagebox.show("¿Esta Seguro de Anular la(s) Citas(s)?",
 						"Alerta", Messagebox.OK | Messagebox.CANCEL,
 						Messagebox.QUESTION, new EventListener<Event>() {
 							public void onEvent(Event evt) {
@@ -437,27 +432,26 @@ public class CCita extends CGenerico {
 							private void respuestaOk() {
 								for (int i = 0; i < list1.size(); i++) {
 									if (list1.get(i).isSelected()) {
-										Cita cita = list1
-												.get(i).getValue();
+										Cita cita = list1.get(i).getValue();
 										cita.setEstado("Anulada");
 										servicioCita.guardar(cita);
 									}
 								}
-								Usuario usuario = servicioUsuario.buscarPorCedula(String.valueOf(idDoctor));
+								Usuario usuario = servicioUsuario
+										.buscarPorCedula(String
+												.valueOf(idDoctor));
 								llenarListaCitas(usuario);
-								Messagebox
-										.show("Se ha(n) Anulado la(s) Cita(s)",
-												"Informacion", Messagebox.OK,
-												Messagebox.INFORMATION);
+								Messagebox.show(
+										"Se ha(n) Anulado la(s) Cita(s)",
+										"Informacion", Messagebox.OK,
+										Messagebox.INFORMATION);
 							}
 						});
 			} else
-				Messagebox
-						.show("Seleccione al menos una Cita para Anular",
-								"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+				Messagebox.show("Seleccione al menos una Cita para Anular",
+						"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 		} else
-			Messagebox.show(
-					"Actualmente No hay Citas para su Anulacion",
+			Messagebox.show("Actualmente No hay Citas para su Anulacion",
 					"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 	}
 

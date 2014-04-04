@@ -137,7 +137,7 @@ public class CCiudad extends CGenerico {
 	/* Muestra un catalogo de ciudades */
 	@Listen("onClick = #btnBuscarCiudad")
 	public void mostrarCatalogo() throws IOException {
-		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
+		final List<Ciudad> ciudades = servicioCiudad.buscarTodas();
 		catalogo = new Catalogo<Ciudad>(catalogoCiudad, "Catalogo de Ciudades",
 				ciudades, "Nombre", "Estado", "Pais") {
 
@@ -152,17 +152,16 @@ public class CCiudad extends CGenerico {
 
 			@Override
 			protected List<Ciudad> buscar(String valor, String combo) {
-				if (combo.equals("Nombre"))
+
+				switch (combo) {
+				case "Nombre":
 					return servicioCiudad.filtroNombre(valor);
-				else {
-					if (combo.equals("Estado"))
-						return servicioCiudad.filtroEstado(valor);
-					else {
-						if (combo.equals("Pais"))
-							return servicioCiudad.filtroPais(valor);
-						else
-							return servicioCiudad.buscarTodas();
-					}
+				case "Estado":
+					return servicioCiudad.filtroEstado(valor);
+				case "Pais":
+					return servicioCiudad.filtroPais(valor);
+				default:
+					return ciudades;
 				}
 			}
 		};
