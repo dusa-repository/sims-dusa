@@ -17,6 +17,7 @@ import modelo.seguridad.Usuario;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -29,6 +30,8 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeModel;
+
+import componentes.Validador;
 
 import controlador.maestros.CGenerico;
 
@@ -118,10 +121,12 @@ public class CArbol extends CGenerico {
 
 			Arbol arbol;
 			String nombre = authorities.get(k).toString();
-			arbol = servicioArbol.buscarPorNombreArbol(nombre);
+			if(Validador.validarNumero(nombre)){
+			arbol = servicioArbol.buscar(Long.parseLong(nombre));
 			if (arbol != null)
 				ids.add(arbol.getIdArbol());
 			arbole.add(arbol);
+			}
 		}
 
 		Collections.sort(ids);

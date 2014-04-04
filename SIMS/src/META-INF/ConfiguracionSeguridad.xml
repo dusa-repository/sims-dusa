@@ -29,7 +29,7 @@
 		<jdbc-user-service data-source-ref="dataSource"
 
 			group-authorities-by-username-query="
-				select g.id_grupo, g.nombre, ga.nombre from grupo g, arbol ga, grupo_usuario gu 
+				select g.id_grupo, g.nombre, ga.id_arbol from grupo g, arbol ga, grupo_usuario gu 
 				where gu.id_usuario = (select id_usuario from usuario where login = ?) 
  				and g.id_grupo=gu.id_grupo and ga.id_arbol in 
  				(select aa.id_arbol from arbol_grupo aa where aa.id_grupo=gu.id_grupo)"

@@ -49,7 +49,7 @@ public class CConsultorio extends CGenerico {
 	private Button btnBuscarConsultorio;
 	@Wire
 	private Combobox cmbEmpresa;
-	
+
 	long id = 0;
 	Catalogo<Consultorio> catalogo;
 
@@ -94,11 +94,11 @@ public class CConsultorio extends CGenerico {
 					Empresa empresa = servicioEmpresa.buscar(Long
 							.parseLong(cmbEmpresa.getSelectedItem()
 									.getContext()));
-					
+
 					Consultorio consultorio = new Consultorio(id, correo,
 							descripcion, direccion, fechaHora, horaAuditoria,
 							nombre, telefono1, telefono2,
-							nombreUsuarioSesion(), ciudad,empresa);
+							nombreUsuarioSesion(), ciudad, empresa);
 					servicioConsultorio.guardar(consultorio);
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
@@ -158,12 +158,14 @@ public class CConsultorio extends CGenerico {
 						Messagebox.OK, Messagebox.INFORMATION);
 				return false;
 			} else {
-				if (!Validador.validarTelefono(txtTelefono2Consultorio.getValue())) {
+				if (!Validador.validarTelefono(txtTelefono2Consultorio
+						.getValue())) {
 					Messagebox.show("Segundo Telefono Invalido", "Informacion",
 							Messagebox.OK, Messagebox.INFORMATION);
 					return false;
-				} else{
-					if (!Validador.validarCorreo(txtCorreoConsultorio.getValue())) {
+				} else {
+					if (!Validador.validarCorreo(txtCorreoConsultorio
+							.getValue())) {
 						Messagebox.show("Correo Invalido", "Informacion",
 								Messagebox.OK, Messagebox.INFORMATION);
 						return false;
@@ -173,7 +175,7 @@ public class CConsultorio extends CGenerico {
 			}
 		}
 	}
-	
+
 	/* Llena el combo de Empresas cada vez que se abre */
 	@Listen("onOpen = #cmbEmpresa")
 	public void llenarComboEmpresa() {
@@ -181,7 +183,6 @@ public class CConsultorio extends CGenerico {
 		cmbEmpresa.setModel(new ListModelList<Empresa>(empresas));
 	}
 
-	
 	/* Valida el numero telefonico */
 	@Listen("onChange = #txtTelefono1Consultorio")
 	public void validarTelefono() {
@@ -199,7 +200,7 @@ public class CConsultorio extends CGenerico {
 					Messagebox.INFORMATION);
 		}
 	}
-	
+
 	/* Valida el correo electronico */
 	@Listen("onChange = #txtCorreoConsultorio")
 	public void validarCorreo() {
@@ -208,14 +209,14 @@ public class CConsultorio extends CGenerico {
 					Messagebox.INFORMATION);
 		}
 	}
-	
+
 	/* Llena el combo de Ciudades cada vez que se abre */
 	@Listen("onOpen = #cmbCiudadConsultorio")
-	public void llenarComboCiudad(){
+	public void llenarComboCiudad() {
 		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
 		cmbCiudadConsultorio.setModel(new ListModelList<Ciudad>(ciudades));
 	}
-	
+
 	/* Muestra el catalogo de los consultorios */
 	@Listen("onClick = #btnBuscarConsultorio")
 	public void mostrarCatalogo() {
@@ -228,33 +229,23 @@ public class CConsultorio extends CGenerico {
 			@Override
 			protected List<Consultorio> buscar(String valor, String combo) {
 
-				if (combo.equals("Correo"))
+				switch (combo) {
+				case "Correo":
 					return servicioConsultorio.filtroCorreo(valor);
-				else {
-					if (combo.equals("Nombre"))
-						return servicioConsultorio.filtroNombre(valor);
-					else {
-						if (combo.equals("Direccion"))
-							return servicioConsultorio.filtroDireccion(valor);
-						else {
-							if (combo.equals("Telefono"))
-								return servicioConsultorio
-										.filtroTelefono(valor);
-							else {
-								if (combo.equals("Ciudad"))
-									return servicioConsultorio
-											.filtroCiudad(valor);
-								else {
-									if (combo.equals("Descripcion"))
-										return servicioConsultorio
-												.filtroDescripcion(valor);
-									else
-										return consultorios;
-								}
-							}
-						}
-					}
+				case "Nombre":
+					return servicioConsultorio.filtroNombre(valor);
+				case "Direccion":
+					return servicioConsultorio.filtroDireccion(valor);
+				case "Telefono":
+					return servicioConsultorio.filtroTelefono(valor);
+				case "Ciudad":
+					return servicioConsultorio.filtroCiudad(valor);
+				case "Descripcion":
+					return servicioConsultorio.filtroCiudad(valor);
+				default:
+					return consultorios;
 				}
+
 			}
 
 			@Override
@@ -273,7 +264,7 @@ public class CConsultorio extends CGenerico {
 		catalogo.setParent(catalogoConsultorio);
 		catalogo.doModal();
 	}
-	
+
 	/* Permite la seleccion de un item del catalogo */
 	@Listen("onSeleccion = #catalogoConsultorio")
 	public void seleccinar() {
@@ -285,7 +276,8 @@ public class CConsultorio extends CGenerico {
 	/* Busca si existe un consultorio con el mismo nombre escrito */
 	@Listen("onChange = #txtNombreConsultorio")
 	public void buscarPorNombre() {
-		Consultorio consultorio = servicioConsultorio.buscarPorNombre(txtNombreConsultorio.getValue());
+		Consultorio consultorio = servicioConsultorio
+				.buscarPorNombre(txtNombreConsultorio.getValue());
 		if (consultorio != null)
 			llenarCampos(consultorio);
 	}

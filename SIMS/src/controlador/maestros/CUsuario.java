@@ -489,33 +489,26 @@ public class CUsuario extends CGenerico {
 	/* Muestra un catalogo de Usuarios */
 	@Listen("onClick = #btnBuscarUsuario")
 	public void mostrarCatalogo() throws IOException {
-		List<Usuario> usuarios = servicioUsuario.buscarTodos();
+		final List<Usuario> usuarios = servicioUsuario.buscarTodos();
 		catalogo = new Catalogo<Usuario>(catalogoUsuario,
 				"Catalogo de Usuarios", usuarios, "Cedula", "Ficha", "Nombre",
 				"Apellido", "Login") {
 
 			@Override
 			protected List<Usuario> buscar(String valor, String combo) {
-				if (combo.equals("Cedula"))
+				switch (combo) {
+				case "Cedula":
 					return servicioUsuario.filtroCedula(valor);
-				else {
-					if (combo.equals("Ficha"))
-						return servicioUsuario.filtroFicha(valor);
-					else {
-						if (combo.equals("Nombre"))
-							return servicioUsuario.filtroNombre(valor);
-						else {
-							if (combo.equals("Login"))
-								return servicioUsuario.filtroLogin(valor);
-							else {
-								if (combo.equals("Apellido"))
-									return servicioUsuario
-											.filtroApellido(valor);
-								else
-									return servicioUsuario.buscarTodos();
-							}
-						}
-					}
+				case "Ficha":
+					return servicioUsuario.filtroFicha(valor);
+				case "Nombre":
+					return servicioUsuario.filtroNombre(valor);
+				case "Login":
+					return servicioUsuario.filtroLogin(valor);
+				case "Apellido":
+					return servicioUsuario.filtroApellido(valor);
+				default:
+					return usuarios;
 				}
 			}
 

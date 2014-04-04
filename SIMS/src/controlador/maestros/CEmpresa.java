@@ -55,7 +55,6 @@ public class CEmpresa extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 
-
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -114,8 +113,9 @@ public class CEmpresa extends CGenerico {
 												.buscarPorEmpresa(empresa);
 										List<Consultorio> consultorios = servicioConsultorio
 												.buscarPorEmpresa(empresa);
-										
-										if (!pacientes.isEmpty() || !consultorios.isEmpty()) {
+
+										if (!pacientes.isEmpty()
+												|| !consultorios.isEmpty()) {
 											Messagebox
 													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
 															"Informacion",
@@ -143,7 +143,7 @@ public class CEmpresa extends CGenerico {
 
 	/* Llena el combo de Ciudades cada vez que se abre */
 	@Listen("onOpen = #cmbCiudad")
-	public void llenarComboCiudad(){
+	public void llenarComboCiudad() {
 		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
 		cmbCiudad.setModel(new ListModelList<Ciudad>(ciudades));
 	}
@@ -186,26 +186,21 @@ public class CEmpresa extends CGenerico {
 			@Override
 			protected List<Empresa> buscar(String valor, String combo) {
 
-				if (combo.equals("Rif"))
+				switch (combo) {
+				case "Rif":
 					return servicioEmpresa.filtroRif(valor);
-				else {
-					if (combo.equals("Nombre"))
-						return servicioEmpresa.filtroNombre(valor);
-					else {
-						if (combo.equals("Direccion"))
-							return servicioEmpresa.filtroDireccion(valor);
-						else {
-							if (combo.equals("Telefono"))
-								return servicioEmpresa.filtroTelefono(valor);
-							else {
-								if (combo.equals("Ciudad"))
-									return servicioEmpresa.filtroCiudad(valor);
-								else
-									return empresas;
-							}
-						}
-					}
+				case "Nombre":
+					return servicioEmpresa.filtroNombre(valor);
+				case "Direccion":
+					return servicioEmpresa.filtroDireccion(valor);
+				case "Telefono":
+					return servicioEmpresa.filtroTelefono(valor);
+				case "Ciudad":
+					return servicioEmpresa.filtroCiudad(valor);
+				default:
+					return empresas;
 				}
+
 			}
 
 			@Override
@@ -241,8 +236,7 @@ public class CEmpresa extends CGenerico {
 					Messagebox.INFORMATION);
 		}
 	}
-	
-	
+
 	/* Permite la seleccion de un item del catalogo */
 	@Listen("onSeleccion = #catalogoEmpresa")
 	public void seleccinar() {

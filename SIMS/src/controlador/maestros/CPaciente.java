@@ -166,7 +166,7 @@ public class CPaciente extends CGenerico {
 	/* Muestra el catalogo de los Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogo() {
-		List<Paciente> pacientes = servicioPaciente.buscarTodos();
+		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
 		catalogo = new Catalogo<Paciente>(catalogoPaciente,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
 				"Apellido", "Empresa") {
@@ -174,21 +174,17 @@ public class CPaciente extends CGenerico {
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
 
-				if (combo.equals("Nombre"))
+				switch (combo) {
+				case "Nombre":
 					return servicioPaciente.filtroNombre1(valor);
-				else {
-					if (combo.equals("Cedula"))
-						return servicioPaciente.filtroCedula(valor);
-					else {
-						if (combo.equals("Apellido"))
-							return servicioPaciente.filtroApellido1(valor);
-						else {
-							if (combo.equals("Empresa"))
-								return servicioPaciente.filtroEmpresa(valor);
-							else
-								return servicioPaciente.buscarTodos();
-						}
-					}
+				case "Cedula":
+					return servicioPaciente.filtroCedula(valor);
+				case "Apellido":
+					return servicioPaciente.filtroApellido1(valor);
+				case "Empresa":
+					return servicioPaciente.filtroEmpresa(valor);
+				default:
+					return pacientes;
 				}
 			}
 
@@ -215,7 +211,7 @@ public class CPaciente extends CGenerico {
 					Messagebox.INFORMATION);
 		}
 	}
-	
+
 	/* Llena el combo de Empresas cada vez que se abre */
 	@Listen("onOpen = #cmbEmpresa")
 	public void llenarComboEmpresa() {
