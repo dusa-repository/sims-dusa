@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.Messagebox;
@@ -25,7 +26,7 @@ public class CExamen extends CGenerico {
 	@Wire
 	private Textbox txtTipoExamen;
 	@Wire
-	private Textbox txtResultadoExamen;
+	private Combobox cmbResultadoExamen;
 	@Wire
 	private Doublespinner dspCostoExamen;
 	@Wire
@@ -55,7 +56,8 @@ public class CExamen extends CGenerico {
 			@Override
 			public void limpiar() {
 				txtNombreExamen.setValue("");
-				txtResultadoExamen.setValue("");
+				cmbResultadoExamen.setValue("");
+				cmbResultadoExamen.setPlaceholder("Seleccione un Tipo de Resultado");
 				txtTipoExamen.setValue("");
 				dspCostoExamen.setValue(0.0);
 				dspMaxExamen.setValue(0.0);
@@ -67,8 +69,8 @@ public class CExamen extends CGenerico {
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombreExamen.getValue();
-					String tipo = txtNombreExamen.getValue();
-					String resultado = txtNombreExamen.getValue();
+					String tipo = txtTipoExamen.getValue();
+					String resultado = cmbResultadoExamen.getValue();
 					double costo = dspCostoExamen.getValue();
 					double minimo = dspMinExamen.getValue();
 					double maximo = dspMaxExamen.getValue();
@@ -118,7 +120,7 @@ public class CExamen extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreExamen.getText().compareTo("") == 0
-				|| txtResultadoExamen.getText().compareTo("") == 0
+				|| cmbResultadoExamen.getText().compareTo("") == 0
 				|| txtTipoExamen.getText().compareTo("") == 0
 				|| dspCostoExamen.getText().compareTo("") == 0
 				|| dspMaxExamen.getText().compareTo("") == 0
@@ -194,7 +196,7 @@ public class CExamen extends CGenerico {
 	/* LLena los campos del formulario dado un examen */
 	private void llenarCampos(Examen examen) {
 		txtNombreExamen.setValue(examen.getNombre());
-		txtResultadoExamen.setValue(examen.getResultado());
+		cmbResultadoExamen.setValue(examen.getResultado());
 		txtTipoExamen.setValue(examen.getTipo());
 		dspCostoExamen.setValue(examen.getCosto());
 		dspMaxExamen.setValue(examen.getMaximo());

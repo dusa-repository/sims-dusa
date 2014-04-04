@@ -35,7 +35,7 @@
 						<combobox id="cmbCategoria" readonly="true" tabindex="1"
 							width="100%" tooltiptext="Seleccione una Categoria" placeholder="Seleccione una Categoria">
 							<template name="model">
-								<comboitem context="${each.idCategoria}" label="${each.nombre}" />
+								<comboitem context="${each.idCategoriaDiagnostico}" label="${each.nombre}" />
 							</template>
 						</combobox>
 						<hbox />

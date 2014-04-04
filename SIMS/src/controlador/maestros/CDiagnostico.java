@@ -44,7 +44,7 @@ public class CDiagnostico extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
+		llenarComboCategoria();
 		Botonera botonera = new Botonera() {
 
 			@Override
