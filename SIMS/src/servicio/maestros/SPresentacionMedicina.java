@@ -44,4 +44,5 @@ public class SPresentacionMedicina {
 			List<Long> ids) {
 		return presentacionMedicinaDAO.findByIdPresentacionNotIn(ids);
 	}
+
 }

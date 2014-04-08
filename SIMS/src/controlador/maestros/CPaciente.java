@@ -7,6 +7,7 @@ import modelo.maestros.Cita;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -17,6 +18,8 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
@@ -47,6 +50,7 @@ public class CPaciente extends CGenerico {
 	@Wire
 	private Button btnBuscarPaciente;
 
+	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<Paciente> catalogo;
 
@@ -249,4 +253,10 @@ public class CPaciente extends CGenerico {
 		id = Long.valueOf(paciente.getCedula());
 	}
 
+	/* Abre la vista de Empresa*/
+	@Listen("onClick = #btnAbrirEmpresa")
+	public void abrirEmpresa(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Empresa");
+		cArbol.abrirVentanas(arbolItem);	
+	}
 }

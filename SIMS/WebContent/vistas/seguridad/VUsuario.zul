@@ -95,7 +95,8 @@
 												<comboitem label="${each.nombre}" context="${each.idUnidadUsuario}" />
 											</template>
 										</combobox>
-										<hbox />
+										<button id="btnAbrirUnidad" label=""
+											tooltiptext="Crear una Nueva Unidad" image="/public/imagenes/botones/agregar.png" />
 										<hbox />
 									</row>
 								</rows>
@@ -105,9 +106,10 @@
 							<grid width="100%">
 								<columns visible="false">
 									<column label="" width="20%" />
-									<column label="" width="30%" />
+									<column label="" width="26%" />
+									<column label="" width="8%" />
 									<column label="" width="20%" />
-									<column label="" width="30%" />
+									<column label="" width="26%" />
 								</columns>
 								<rows>
 									<row>
@@ -119,6 +121,8 @@
 												<comboitem label="${each.descripcion}" context="${each.idEspecialidad}" />
 											</template>
 										</combobox>
+										<button id="btnAbrirEspecialidad" label=""
+											tooltiptext="Crear una Nueva Especialidad" image="/public/imagenes/botones/agregar.png" />
 										<label class="etiqueta" value="Licencia CM:" />
 										<textbox id="txtLicenciaCUsuario" hflex="1" maxlength="50"
 											tooltiptext="Ingrese la licencia CM del Usuario" />
@@ -127,6 +131,7 @@
 										<label class="etiqueta" value="Licencia MSDS:" />
 										<textbox id="txtLicenciaMUsuario" hflex="1" maxlength="50"
 											tooltiptext="Ingrese la Licencia MSDS del Usuario" />
+										<hbox />
 										<label class="etiqueta" value="Numero de Citas Diarias:" />
 										<spinner id="spnCitasUsuario" tooltiptext="Ingrese la Cantidad de Citas Diarias" />
 									</row>
@@ -135,6 +140,7 @@
 										<label class="etiqueta" value="Licencia INPSASEL:" />
 										<textbox id="txtLicenciaIUsuario" hflex="1" maxlength="50"
 											tooltiptext="Ingrese la Licencia INPSASEL del Usuario (Solo Numeros)" />
+										<hbox />
 										<label class="etiqueta" value="Tiempo entre citas(min):" />
 										<spinner id="spnTiempoUsuario" tooltiptext="Ingrese el Tiempo entre Citas" />
 									</row>
@@ -176,6 +182,10 @@
 						<separator />
 						<groupbox width="100%"
 							title="Seleccione los Grupos Correspondientes al Usuario">
+							<vbox>
+								<button id="btnAbrirGrupo" label=""
+									tooltiptext="Crear un Nuevo Grupo" image="/public/imagenes/botones/agregar.png" />
+							</vbox>
 							<hbox>
 								<listbox id="ltbGruposDisponibles" height="160px"
 									emptyMessage="No hay Grupos registrados">

@@ -24,6 +24,8 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Tab;
 
+import arbol.CArbol;
+
 import servicio.maestros.SCategoriaDiagnostico;
 import servicio.maestros.SCategoriaMedicina;
 import servicio.maestros.SCiudad;
@@ -104,6 +106,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SGrupo servicioGrupo;
 	@WireVariable("SUsuario")
 	protected SUsuario servicioUsuario;
+	
+
 	
 	public static  List<Tab> tabs = new ArrayList<Tab>();
 	public final Calendar calendario = Calendar.getInstance();

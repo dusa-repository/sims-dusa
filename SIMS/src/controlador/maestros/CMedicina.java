@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.maestros.CategoriaMedicina;
+import modelo.maestros.Cita;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 import modelo.maestros.MedicinaPresentacionUnidad;
+import modelo.maestros.Paciente;
 import modelo.maestros.PresentacionComercial;
 import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.UnidadMedicina;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -27,7 +30,10 @@ import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
+import arbol.CArbol;
+
 import componentes.Botonera;
+import componentes.Buscar;
 import componentes.Catalogo;
 
 public class CMedicina extends CGenerico {
@@ -92,11 +98,14 @@ public class CMedicina extends CGenerico {
 	private Listbox ltbPresentaciones;
 	@Wire
 	private Listbox ltbPresentacionesAgregadas;
+	@Wire
+	private Textbox txtBuscadorPresentacion;
 
+	Buscar<PresentacionMedicina> buscador;
 	List<PresentacionMedicina> presentacionesDisponibles = new ArrayList<PresentacionMedicina>();
 	List<MedicinaPresentacionUnidad> presentacionesUsadas = new ArrayList<MedicinaPresentacionUnidad>();
 	ListModelList<UnidadMedicina> unidades;
-
+	private CArbol cArbol = new CArbol();
 	Catalogo<Medicina> catalogo;
 	long id = 0;
 
@@ -106,6 +115,7 @@ public class CMedicina extends CGenerico {
 		llenarComboLaboratorios();
 		llenarComboCategorias();
 		llenarListaPresentaciones(null);
+		buscar();
 		txtDenominacionGenerica.setFocus(true);
 		Botonera botonera = new Botonera() {
 			@Override
@@ -498,6 +508,26 @@ public class CMedicina extends CGenerico {
 		ltbPresentaciones.setMultiple(true);
 		ltbPresentaciones.setCheckmark(true);
 	}
+	
+
+	public void buscar() {
+		buscador = new Buscar<PresentacionMedicina>(ltbPresentaciones, txtBuscadorPresentacion) {
+
+			@Override
+			protected List<PresentacionMedicina> buscar(String valor) {	
+				List<PresentacionMedicina> presentacionesFiltradas = new ArrayList<PresentacionMedicina>();
+				List<PresentacionMedicina> presentaciones = servicioPresentacionMedicina.filtroNombre(valor);
+				for(int i=0;i<presentacionesDisponibles.size();i++){
+					PresentacionMedicina presentacion = presentacionesDisponibles.get(i);
+					for(int j=0;j<presentaciones.size();j++){
+						if(presentacion.getIdPresentacion()==presentaciones.get(j).getIdPresentacion())
+							presentacionesFiltradas.add(presentacion);
+					}
+				}
+				return presentacionesFiltradas;
+			}
+		};
+	}
 
 	/* Focus a la pestannas */
 
@@ -552,5 +582,25 @@ public class CMedicina extends CGenerico {
 	public void anteriorPestanna() {
 		tabEspecificaciones.setSelected(true);
 	}
+	
+	/* Abre la vista de Categoria*/
+	@Listen("onClick = #btnAbrirCategoria")
+	public void abrirCategoria(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Categoria Medicina");
+		cArbol.abrirVentanas(arbolItem);	
+	}
 
+	/* Abre la vista de Presentacion*/
+	@Listen("onClick = #btnAbrirPresentacion")
+	public void abrirPresentacion(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Presentacion Medicina");
+		cArbol.abrirVentanas(arbolItem);	
+	}
+	
+	/* Abre la vista de Laboratorio*/
+	@Listen("onClick = #btnAbrirLaboratorio")
+	public void abrirLaboratorio(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Laboratorio");
+		cArbol.abrirVentanas(arbolItem);	
+	}
 }

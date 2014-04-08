@@ -8,6 +8,7 @@ import modelo.maestros.Consultorio;
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
 import modelo.maestros.ServicioExterno;
+import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.event.Event;
@@ -19,6 +20,8 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import arbol.CArbol;
 
 import sun.usagetracker.UsageTrackerClient;
 
@@ -45,6 +48,8 @@ public class CServicioExterno extends CGenerico {
 	private Button btnBuscarServicioExterno;
 	@Wire
 	private Combobox cmbCiudadServicioExterno;
+
+	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<ServicioExterno> catalogo;
 
@@ -229,4 +234,10 @@ public class CServicioExterno extends CGenerico {
 		id = servicioExterno.getIdServicioExterno();
 	}
 
+	/* Abre la vista de Ciudad*/
+	@Listen("onClick = #btnAbrirCiudad")
+	public void abrirCiudad(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
+		cArbol.abrirVentanas(arbolItem);	
+	}
 }

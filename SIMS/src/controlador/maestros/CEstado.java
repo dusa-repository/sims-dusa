@@ -6,6 +6,7 @@ import java.util.List;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Estado;
 import modelo.maestros.Pais;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -16,6 +17,9 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
+
+import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
@@ -35,6 +39,8 @@ public class CEstado extends CGenerico {
 	private Div divEstado;
 	@Wire
 	private Combobox cmbPais;
+
+	private CArbol cArbol = new CArbol();
 	private long id = 0;
 	Catalogo<Estado> catalogo;
 
@@ -47,7 +53,7 @@ public class CEstado extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divEstado, "Estado");
+			cerrarVentana(divEstado, "Estado");
 			}
 
 			@Override
@@ -186,5 +192,12 @@ public class CEstado extends CGenerico {
 	public void llenarCombo() {
 		List<Pais> paises = servicioPais.buscarTodos();
 		cmbPais.setModel(new ListModelList<Pais>(paises));
+	}
+		
+	/* Abre la vista de Pais*/
+	@Listen("onClick = #btnAbrirPais")
+	public void abrirPais(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Pais");
+		cArbol.abrirVentanas(arbolItem);	
 	}
 }

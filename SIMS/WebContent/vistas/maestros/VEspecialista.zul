@@ -29,9 +29,9 @@
 					</row>
 					<row>
 						<label class="etiqueta" value="Costo por Servicio:" />
-						<doublespinner id="dspCosto" value="0" constraint="min 0 max 100000000"
-							tooltiptext="Ingrese Costo por Servicio del Especialista" step="0.1"
-							format="#.##" width="98%" />
+						<doublespinner id="dspCosto" value="0"
+							constraint="min 0 max 100000000" tooltiptext="Ingrese Costo por Servicio del Especialista"
+							step="0.1" format="#.##" width="98%" />
 						<hbox />
 					</row>
 					<row>
@@ -43,7 +43,8 @@
 								<comboitem label="${each.descripcion}" context="${each.idEspecialidad}" />
 							</template>
 						</combobox>
-						<hbox />
+						<button id="btnAbrirEspecialidad" label="" tooltiptext="Crear una Nueva Especialidad"
+							image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>

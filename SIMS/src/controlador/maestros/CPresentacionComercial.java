@@ -5,6 +5,7 @@ import java.util.List;
 
 import modelo.maestros.Medicina;
 import modelo.maestros.PresentacionComercial;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -15,6 +16,8 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
@@ -36,6 +39,7 @@ public class CPresentacionComercial extends CGenerico {
 	@Wire
 	private Combobox cmbMedicina;
 
+	private CArbol cArbol = new CArbol();
 	Catalogo<PresentacionComercial> catalogo;
 	long id = 0;
 
@@ -191,5 +195,12 @@ public class CPresentacionComercial extends CGenerico {
 		txtNombre.setValue(presentacion.getNombre());
 		cmbMedicina.setValue(presentacion.getMedicina().getNombre());
 		id = presentacion.getIdPresentacion();
+	}
+	
+	/* Abre la vista de Medicina*/
+	@Listen("onClick = #btnAbrirMedicina")
+	public void abrirMedicina(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Medicina");
+		cArbol.abrirVentanas(arbolItem);	
 	}
 }

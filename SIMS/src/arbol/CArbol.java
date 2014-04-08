@@ -22,6 +22,7 @@ import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
@@ -30,6 +31,7 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeModel;
+import org.zkoss.zul.West;
 
 import componentes.Validador;
 
@@ -53,6 +55,13 @@ public class CArbol extends CGenerico {
 	private Tab tab;
 	@Wire
 	private Tabbox tabBox;
+	@Wire
+	private West west;
+
+
+	private  static Tabbox tabBox2;
+	private static Include contenido2;
+	private static Tab tab2;
 
 	@Override
 	public void inicializar() throws IOException {
@@ -195,12 +204,17 @@ public class CArbol extends CGenerico {
 	 */
 	@Listen("onClick = #arbolMenu")
 	public void selectedNode() {
+		if(arbolMenu.getSelectedItem().getValue()!=null)
+		{
 		String item = String.valueOf(arbolMenu.getSelectedItem().getValue());
 		boolean abrir = true;
 		Tab taba = new Tab();
 		if (arbolMenu.getSelectedItem().getLevel() > 0) {
 			Arbol arbolItem = servicioArbol.buscarPorNombreArbol(item);
 			if (!arbolItem.getUrl().equals("inicio")) {
+				
+				if (String.valueOf(arbolMenu.getSelectedItem().getValue()).equals("Consulta")) 
+					west.setOpen(false);
 				for (int i = 0; i < tabs.size(); i++) {
 					if (tabs.get(i).getLabel().equals(arbolItem.getNombre())) {
 						abrir = false;
@@ -225,6 +239,41 @@ public class CArbol extends CGenerico {
 				}
 			}
 		}
+		}
+		tabBox2 = tabBox;
+		contenido2 = contenido;
+		tab2 = tab;
+	}
+
+
+	public void abrirVentanas(Arbol arbolItem) {
+		boolean abrir = true;
+		Tab taba = new Tab();
+		
+			if (!arbolItem.getUrl().equals("inicio")) {
+				for (int i = 0; i < tabs.size(); i++) {
+					if (tabs.get(i).getLabel().equals(arbolItem.getNombre())) {
+						abrir = false;
+						taba = tabs.get(i);
+					}
+				}
+				if (abrir) {
+					String ruta = "/vistas/" + arbolItem.getUrl() + ".zul";
+					contenido2 = new Include();
+					contenido2.setSrc(null);
+					contenido2.setSrc(ruta);
+
+					Tab newTab = new Tab(arbolItem.getNombre());
+					newTab.setSelected(true);
+					Tabpanel newTabpanel = new Tabpanel();
+					newTabpanel.appendChild(contenido2);
+					tabBox2.getTabs().insertBefore(newTab,tab2);
+					newTabpanel.setParent(tabBox2.getTabpanels());
+					tabs.add(newTab);
+				} else {
+					taba.setSelected(true);
+				}
+			}
 	}
 
 	/* Metodo que permite abrir la ventana de editar usuario en una pestaña */

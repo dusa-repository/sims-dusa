@@ -6,6 +6,7 @@ import java.util.List;
 import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Medicina;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -16,6 +17,8 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
@@ -39,6 +42,8 @@ public class CDiagnostico extends CGenerico {
 	private Combobox cmbCategoria;
 	@Wire
 	private Button btnBuscarDiagnostico;
+	
+	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<Diagnostico> catalogo;
 
@@ -203,5 +208,12 @@ public class CDiagnostico extends CGenerico {
 		txtNombreDiagnostico.setValue(diagnostico.getNombre());
 		cmbCategoria.setValue(diagnostico.getCategoria().getNombre());
 		id = diagnostico.getIdDiagnostico();
+	}
+	
+	/* Abre la vista de Categoria*/
+	@Listen("onClick = #btnAbrirCategoria")
+	public void abrirCategoria(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Categoria Diagnostico");
+		cArbol.abrirVentanas(arbolItem);	
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -16,6 +17,8 @@ import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
@@ -42,6 +45,8 @@ public class CEspecialista extends CGenerico {
 	private Button btnBuscarEspecialista;
 	@Wire
 	private Doublespinner dspCosto;
+	
+	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<Especialista> catalogo;
 
@@ -230,5 +235,12 @@ public class CEspecialista extends CGenerico {
 		cmbEspecialidad.setValue(especialista.getEspecialidad()
 				.getDescripcion());
 		id = Long.parseLong(especialista.getCedula());
+	}
+	
+	/* Abre la vista de Especialidad*/
+	@Listen("onClick = #btnAbrirEspecialidad")
+	public void abrirEspecialidad(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialidad");
+		cArbol.abrirVentanas(arbolItem);	
 	}
 }

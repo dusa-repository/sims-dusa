@@ -12,6 +12,7 @@ import modelo.maestros.Cita;
 import modelo.maestros.Ciudad;
 import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
+import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.event.Event;
@@ -30,6 +31,8 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
+
+import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Buscar;
@@ -93,6 +96,7 @@ public class CCita extends CGenerico {
 	Catalogo<Usuario> catalogo;
 	Catalogo<Paciente> catalogoPaciente;
 
+	private CArbol cArbol = new CArbol();
 	Buscar<Cita> buscador;
 	List<Cita> citas = new ArrayList<Cita>();
 	@Wire
@@ -500,4 +504,10 @@ public class CCita extends CGenerico {
 		return lis;
 	}
 
+	/* Abre la vista de Motivo*/
+	@Listen("onClick = #btnAbrirMotivo")
+	public void abrirMotivo(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Motivo");
+		cArbol.abrirVentanas(arbolItem);	
+	}
 }
