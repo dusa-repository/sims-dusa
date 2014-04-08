@@ -70,19 +70,22 @@
 						<groupbox width="100%" title="Datos de la Cita">
 							<grid width="100%">
 								<columns visible="false">
-									<column label="" width="18%" />
-									<column label="" width="30%" />
-									<column label="" width="17%" />
-									<column label="" width="35%" />
+									<column label="" width="15%" />
+									<column label="" width="33%" />
+									<column label="" width="14%" />
+									<column label="" width="40%" />
+									<column label="" width="8%" />
 								</columns>
 								<rows>
 									<row>
 										<label class="etiqueta" value="Fecha Cita:" />
-										<datebox readonly="true" width="100%" id="dtbFechaCita"
-											cols="8" />
+										<datebox readonly="true" width="140px" id="dtbFechaCita"
+											onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita"/>
 										<label class="etiqueta" value="Hora Cita:" />
 										<timebox id="tmbHoraCita" hflex="1" format="a hh:mm:ss"
-											onCreate="self.value = new Date()" tooltiptext="Ingrese la Hora de la Cita" />
+											onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita"
+											width="60px"/>
+										<hbox />
 									</row>
 									<row>
 										<label class="etiqueta" value="Observacion:" />
@@ -96,6 +99,8 @@
 												<comboitem label="${each.descripcion}" context="${each.idMotivoCita}" />
 											</template>
 										</combobox>
+										<button id="btnAbrirMotivo" label=""
+											tooltiptext="Crear un Nuevo Motivo" image="/public/imagenes/botones/agregar.png" />
 									</row>
 								</rows>
 							</grid>
@@ -109,7 +114,6 @@
 						</div>
 					</tabpanel>
 					<tabpanel>
-
 						<groupbox width="100%" title="Citas Asociadas al Doctor">
 							<hbox>
 								<label class="etiqueta" id="lblBuscar" value="Buscar por: " />
@@ -119,7 +123,8 @@
 										<comboitem label="${each}" />
 									</template>
 								</combobox>
-								<textbox id="txtBuscador"></textbox>
+								<textbox id="txtBuscador" width="200px"
+									tooltiptext="Ingrese el Criterio de Busqueda" placeholder="Ingrese el Criterio de Busqueda"></textbox>
 							</hbox>
 							<separator />
 							<hbox>

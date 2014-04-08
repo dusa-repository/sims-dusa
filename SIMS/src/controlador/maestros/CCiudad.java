@@ -7,6 +7,7 @@ import modelo.maestros.Ciudad;
 import modelo.maestros.Consultorio;
 import modelo.maestros.Empresa;
 import modelo.maestros.Estado;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -17,6 +18,8 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
@@ -37,7 +40,8 @@ public class CCiudad extends CGenerico {
 	private Button btnBuscarCiudad;
 	@Wire
 	private Combobox cmbEstado;
-
+	
+	private CArbol cArbol = new CArbol();
 	Catalogo<Ciudad> catalogo;
 	long id = 0;
 
@@ -202,4 +206,12 @@ public class CCiudad extends CGenerico {
 		cmbEstado.setValue(ciudad.getEstado().getNombre());
 		id = ciudad.getIdCiudad();
 	}
+	
+	/* Abre la vista de Estado*/
+	@Listen("onClick = #btnAbrirEstado")
+	public void abrirEstado(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Estado");
+		cArbol.abrirVentanas(arbolItem);	
+	}
+	
 }

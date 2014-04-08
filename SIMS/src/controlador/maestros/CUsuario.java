@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 
 import modelo.maestros.Especialidad;
 import modelo.maestros.UnidadUsuario;
+import modelo.seguridad.Arbol;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
@@ -36,6 +37,8 @@ import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
+
+import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
@@ -114,6 +117,8 @@ public class CUsuario extends CGenerico {
 	private Fileupload fudImagenUsuario;
 	@Wire
 	private Media media;
+	
+	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<Usuario> catalogo;
 	List<Grupo> gruposDisponibles = new ArrayList<Grupo>();
@@ -603,5 +608,26 @@ public class CUsuario extends CGenerico {
 	@Listen("onClick = #btnAnteriorPestanna")
 	public void anteriorPestanna() {
 		tabBasicos.setSelected(true);
+	}
+	
+	/* Abre la vista de Unidad*/
+	@Listen("onClick = #btnAbrirUnidad")
+	public void abrirUnidad(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Unidad Usuario");
+		cArbol.abrirVentanas(arbolItem);	
+	}
+
+	/* Abre la vista de Especialidad*/
+	@Listen("onClick = #btnAbrirEspecialidad")
+	public void abrirEspecialidad(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialidad");
+		cArbol.abrirVentanas(arbolItem);	
+	}
+	
+	/* Abre la vista de Grupos*/
+	@Listen("onClick = #btnAbrirGrupo")
+	public void abrirGrupo(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Grupo");
+		cArbol.abrirVentanas(arbolItem);	
 	}
 }

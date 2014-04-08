@@ -11,6 +11,7 @@ import modelo.maestros.Empresa;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 import modelo.maestros.Paciente;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -21,6 +22,8 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
@@ -49,6 +52,8 @@ public class CEmpresa extends CGenerico {
 	private Combobox cmbCiudad;
 	@Wire
 	private Button btnBuscarEmpresa;
+
+	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<Empresa> catalogo;
 
@@ -267,4 +272,10 @@ public class CEmpresa extends CGenerico {
 		id = empresa.getIdEmpresa();
 	}
 
+	/* Abre la vista de Ciudad*/
+	@Listen("onClick = #btnAbrirCiudad")
+	public void abrirCiudad(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
+		cArbol.abrirVentanas(arbolItem);	
+	}
 }

@@ -48,7 +48,8 @@
 								<comboitem label="${each.nombre}" context="${each.idEmpresa}" />
 							</template>
 						</combobox>
-						<hbox />
+						<button id="btnAbrirEmpresa" label=""
+							tooltiptext="Crear una Nueva Empresa" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>

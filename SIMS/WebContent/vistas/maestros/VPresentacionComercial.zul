@@ -24,7 +24,8 @@
 								<comboitem label="${each.nombre}" context="${each.idMedicina}" />
 							</template>
 						</combobox>
-						<hbox />
+						<button id="btnAbrirMedicina" label=""
+							tooltiptext="Crear una Nueva Medicina" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>

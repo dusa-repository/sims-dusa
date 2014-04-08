@@ -24,7 +24,8 @@
 								<comboitem label="${each.nombre}" context="${each.idCategoriaMedicina}" />
 							</template>
 						</combobox>
-						<hbox />
+						<button id="btnAbrirCategoria" label=""
+							tooltiptext="Crear una Nueva Categoria de Medicina" image="/public/imagenes/botones/agregar.png" />
 					</row>
 					<row>
 						<label class="etiqueta" value="Laboratorio:" />
@@ -35,7 +36,8 @@
 								<comboitem label="${each.nombre}" context="${each.idLaboratorio}" />
 							</template>
 						</combobox>
-						<hbox />
+						<button id="btnAbrirLaboratorio" label=""
+							tooltiptext="Crear un Nuevo Laboratorio" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>
@@ -106,8 +108,17 @@
 						</div>
 					</tabpanel>
 					<tabpanel>
+						<separator />
 						<hbox>
-							<listbox id="ltbPresentaciones" height="300px" width="220px"
+							<textbox tooltiptext="Ingrese el Nombre de la Presentacion" placeholder="Ingrese la Presentacion a Buscar"
+								width="195px" id="txtBuscadorPresentacion"></textbox>
+							<separator />
+							<button id="btnAbrirPresentacion" label=""
+								tooltiptext="Crear una Nueva Presentacion" image="/public/imagenes/botones/agregar.png" />
+						</hbox>
+						<separator />
+						<hbox>
+							<listbox id="ltbPresentaciones" height="280px" width="220px"
 								emptyMessage="No hay Presentaciones Registradas">
 								<listhead>
 									<listheader label="Presentacion" width="100%" />
@@ -143,7 +154,7 @@
 								<button id="pasar2" image="/public/imagenes/botones/atras.png"
 									tooltiptext="Quitar Presentacion" width="30px" />
 							</vbox>
-							<listbox id="ltbPresentacionesAgregadas" height="300px"
+							<listbox id="ltbPresentacionesAgregadas" height="280px"
 								emptyMessage="No ha Seleccionado Ningúna Presentacion">
 								<listhead>
 									<listheader label="Presentacion" width="35%" />

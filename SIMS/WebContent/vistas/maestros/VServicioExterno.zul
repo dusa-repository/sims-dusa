@@ -40,7 +40,8 @@
 								<comboitem context="${each.idCiudad}" label="${each.nombre}" />
 							</template>
 						</combobox>
-						<hbox />
+								<button id="btnAbrirCiudad" label="" tooltiptext="Crear una Nueva Ciudad"
+							image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>

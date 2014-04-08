@@ -12,7 +12,8 @@
 					<row>
 						<label class="etiqueta" value="Nombre:" />
 						<textbox id="txtNombreEstado" hflex="1" maxlength="500"
-							tooltiptext="Ingrese el Nombre del Estado" multiline="true" class="multilinea" />
+							tooltiptext="Ingrese el Nombre del Estado" multiline="true"
+							class="multilinea" />
 						<button id="btnBuscarEstado" class="btn" label="Buscar"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
@@ -24,7 +25,8 @@
 								<comboitem label="${each.nombre}" context="${each.idPais}" />
 							</template>
 						</combobox>
-						<hbox />
+						<button id="btnAbrirPais" label=""
+							tooltiptext="Crear un Nuevo Pais" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>

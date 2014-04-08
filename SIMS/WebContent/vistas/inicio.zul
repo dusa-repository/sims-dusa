@@ -32,15 +32,15 @@
 								<image id="imagenes" width="60px" height="55px" />
 							</vbox>
 							<vbox>
-										<separator />
+								<separator />
 								<label style="color: red"
 									value="Usuario: ${desktop.execution.userPrincipal.name}" />
 								<a href="../j_spring_security_logout" style="color: blue">
-										<space/>
+									<space />
 									<label value="Cerrar Sesion" />
 								</a>
 								<a style="color: blue">
-									<space/>
+									<space />
 									<label id="lblEditarCuenta" value="Editar Cuenta" />
 									<!-- onClick='contenido.src="../vistas/seguridad/VEditarUsuario.zul"' -->
 								</a>
@@ -49,8 +49,8 @@
 					</div>
 				</hbox>
 			</north>
-			<west title="Menú" size="20%" splittable="false" collapsible="true"
-				autoscroll="true">
+			<west title="Menú" id="west" size="20%" splittable="true"
+				collapsible="true" autoscroll="true">
 				<tree id="arbolMenu" width="99%">
 					<template name="model">
 						<treeitem context="menupopup">
@@ -61,7 +61,7 @@
 					</template>
 				</tree>
 			</west>
-			<center border="none" >
+			<center border="none">
 				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
 					<center border="none" flex="true" autoscroll="true">
 						<tabbox
