@@ -1,11 +1,15 @@
 package servicio.maestros;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import interfacedao.maestros.IEspecialistaDAO;
+import interfacedao.transacciones.IConsultaEspecialistaDAO;
 
 import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;
+import modelo.transacciones.Consulta;
+import modelo.transacciones.ConsultaEspecialista;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,8 @@ public class SEspecialista {
 
 	@Autowired
 	private IEspecialistaDAO especialistaDAO;
+	@Autowired
+	private IConsultaEspecialistaDAO consultaEspecialistaDAO;
 
 	public void guardar(Especialista especialista) {
 		especialistaDAO.save(especialista);
@@ -54,6 +60,19 @@ public class SEspecialista {
 
 	public List<Especialista> buscarPorEspecialidad(Especialidad especialidad) {
 		return especialistaDAO.findByEspecialidad(especialidad);
+	}
+
+	public List<Especialista> buscarDisponibles(Consulta consulta) {
+		List<ConsultaEspecialista> consultasEspecialista = consultaEspecialistaDAO.findByConsulta(consulta);
+		List<String> ids = new ArrayList<String>();
+		if(consultasEspecialista.isEmpty())
+			return especialistaDAO.findAll();
+		else{
+			for(int i=0; i<consultasEspecialista.size();i++){
+				ids.add(consultasEspecialista.get(i).getEspecialista().getCedula());
+			}
+			return especialistaDAO.findByCedulaNotIn(ids);
+		}
 	}
 	
 }

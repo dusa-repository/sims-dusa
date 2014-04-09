@@ -2,13 +2,17 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import modelo.transacciones.ConsultaExamen;
 
 @Entity
 @Table(name="examen")
@@ -48,6 +52,9 @@ public class Examen implements Serializable {
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 
+	@OneToMany(mappedBy = "examen")
+	private Set<ConsultaExamen> examenes;
+	
 	public Examen() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -148,6 +155,14 @@ public class Examen implements Serializable {
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+	public Set<ConsultaExamen> getExamenes() {
+		return examenes;
+	}
+
+	public void setExamenes(Set<ConsultaExamen> examenes) {
+		this.examenes = examenes;
 	}
 	
 }

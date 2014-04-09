@@ -22,4 +22,6 @@ public interface IEspecialistaDAO  extends JpaRepository<Especialista, String>{
 
 	List<Especialista> findByEspecialidad(Especialidad especialidad);
 
+	List<Especialista> findByCedulaNotIn(List<String> ids);
+
 }

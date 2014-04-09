@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.transacciones.ConsultaMedicina;
+
 /**
  * The persistent class for the medicina database table.
  * 
@@ -80,6 +82,9 @@ public class Medicina implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_categoria_medicina")
 	private CategoriaMedicina categoriaMedicina;
+	
+	@OneToMany(mappedBy = "medicina")
+	private Set<ConsultaMedicina> medicinas;
 
 	public Medicina() {
 	}
@@ -243,6 +248,14 @@ public class Medicina implements Serializable {
 
 	public void setCategoriaMedicina(CategoriaMedicina categoriaMedicina) {
 		this.categoriaMedicina = categoriaMedicina;
+	}
+
+	public Set<ConsultaMedicina> getMedicinas() {
+		return medicinas;
+	}
+
+	public void setMedicinas(Set<ConsultaMedicina> medicinas) {
+		this.medicinas = medicinas;
 	}
 
 	public PresentacionComercial addPresentacion(

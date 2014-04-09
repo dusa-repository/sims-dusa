@@ -22,4 +22,6 @@ public interface IExamenDAO extends JpaRepository<Examen, Long>{
 
 	Examen findByNombre(String value);
 
+	List<Examen> findByIdExamenNotIn(List<Long> ids);
+
 }

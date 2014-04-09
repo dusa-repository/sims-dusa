@@ -2,6 +2,7 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import modelo.transacciones.ConsultaServicioExterno;
 
 @Entity
 @Table(name="servicio_externo")
@@ -45,6 +49,9 @@ public class ServicioExterno implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_ciudad")
 	private Ciudad ciudad;
+	
+	@OneToMany(mappedBy = "servicioExterno")
+	private Set<ConsultaServicioExterno> servicios;
 	
 	public ServicioExterno() {
 		super();
@@ -127,6 +134,14 @@ public class ServicioExterno implements Serializable {
 
 	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
+	}
+
+	public Set<ConsultaServicioExterno> getServicios() {
+		return servicios;
+	}
+
+	public void setServicios(Set<ConsultaServicioExterno> servicios) {
+		this.servicios = servicios;
 	}
 	
 }

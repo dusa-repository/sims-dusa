@@ -1,10 +1,15 @@
 package servicio.maestros;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import interfacedao.maestros.IServicioExternoDAO;
+import interfacedao.transacciones.IConsultaServicioExternoDAO;
 
 import modelo.maestros.ServicioExterno;
+import modelo.transacciones.Consulta;
+import modelo.transacciones.ConsultaExamen;
+import modelo.transacciones.ConsultaServicioExterno;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,8 @@ public class SServicioExterno {
 
 	@Autowired
 	private IServicioExternoDAO servicioExternoDAO;
+	@Autowired
+	private IConsultaServicioExternoDAO consultaServicioExternoDAO;
 
 	public void guardar(ServicioExterno servicioExterno) {
 		servicioExternoDAO.save(servicioExterno);
@@ -49,5 +56,18 @@ public class SServicioExterno {
 
 	public List<ServicioExterno> filtroCiudad(String valor) {
 		return servicioExternoDAO.findByCiudadNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<ServicioExterno> buscarDisponibles(Consulta consulta) {
+		List<ConsultaServicioExterno> consultasServicios = consultaServicioExternoDAO.findByConsulta(consulta);
+		List<Long> ids = new ArrayList<Long>();
+		if(consultasServicios.isEmpty())
+			return servicioExternoDAO.findAll();
+		else{
+			for(int i=0; i<consultasServicios.size();i++){
+				ids.add(consultasServicios.get(i).getServicioExterno().getIdServicioExterno());
+			}
+			return servicioExternoDAO.findByIdServicioExternoNotIn(ids);
+		}
 	}
 }
