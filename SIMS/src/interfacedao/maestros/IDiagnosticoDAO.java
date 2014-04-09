@@ -4,8 +4,10 @@ import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
+import modelo.transacciones.Consulta;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface IDiagnosticoDAO extends JpaRepository<Diagnostico, Long> {
 
@@ -21,5 +23,7 @@ public interface IDiagnosticoDAO extends JpaRepository<Diagnostico, Long> {
 
 	List<Diagnostico> findByCategoriaNombreStartingWithAllIgnoreCase(
 			String valor);
+
+	List<Diagnostico> findByIdDiagnosticoNotIn(List<Long> ids);
 
 }

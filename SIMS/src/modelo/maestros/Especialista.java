@@ -2,6 +2,7 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import modelo.transacciones.ConsultaEspecialista;
 
 @Entity
 @Table(name = "especialista")
@@ -18,7 +22,7 @@ public class Especialista implements Serializable {
 	private static final long serialVersionUID = 5227934273608392500L;
 
 	@Id
-	@Column(name = "id_paciente", length = 12, unique = true, nullable = false)
+	@Column(name = "id_especialista", length = 12, unique = true, nullable = false)
 	private String cedula;
 
 	@Column(name = "apellido", length = 100)
@@ -43,6 +47,9 @@ public class Especialista implements Serializable {
 	@JoinColumn(name = "id_especialidad")
 	private Especialidad especialidad;
 
+	@OneToMany(mappedBy = "especialista")
+	private Set<ConsultaEspecialista> especialistas;
+	
 	public Especialista(String cedula, String apellido, String nombre,
 			double costo, Timestamp fechaAuditoria, String horaAuditoria,
 			String usuarioAuditoria, Especialidad especialidad) {
@@ -124,6 +131,14 @@ public class Especialista implements Serializable {
 
 	public void setEspecialidad(Especialidad especialidad) {
 		this.especialidad = especialidad;
+	}
+
+	public Set<ConsultaEspecialista> getEspecialistas() {
+		return especialistas;
+	}
+
+	public void setEspecialistas(Set<ConsultaEspecialista> especialistas) {
+		this.especialistas = especialistas;
 	}
 
 }

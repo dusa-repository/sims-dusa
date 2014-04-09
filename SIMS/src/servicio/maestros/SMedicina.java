@@ -1,12 +1,16 @@
 package servicio.maestros;
 
 import interfacedao.maestros.IMedicinaDAO;
+import interfacedao.transacciones.IConsultaMedicinaDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.maestros.CategoriaMedicina;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
+import modelo.transacciones.Consulta;
+import modelo.transacciones.ConsultaMedicina;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,8 @@ public class SMedicina {
 
 	@Autowired
 	private IMedicinaDAO medicinaDAO;
+	@Autowired
+	private IConsultaMedicinaDAO consultaMedicinaDAO;
 
 	public Medicina buscar(long idMedicina) {
 
@@ -65,5 +71,18 @@ public class SMedicina {
 			return medicinaDAO.findOne(id);
 		else
 			return null;
+	}
+
+	public List<Medicina> buscarDisponibles(Consulta consulta) {
+		List<ConsultaMedicina> consultasMedicina = consultaMedicinaDAO.findByConsulta(consulta);
+		List<Long> ids = new ArrayList<Long>();
+		if(consultasMedicina.isEmpty())
+			return medicinaDAO.findAll();
+		else{
+			for(int i=0; i<consultasMedicina.size();i++){
+				ids.add(consultasMedicina.get(i).getMedicina().getIdMedicina());
+			}
+			return medicinaDAO.findByIdMedicinaNotIn(ids);
+		}
 	}
 }

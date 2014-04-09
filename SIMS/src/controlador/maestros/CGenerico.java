@@ -51,6 +51,12 @@ import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 import servicio.transacciones.SCita;
+import servicio.transacciones.SConsulta;
+import servicio.transacciones.SConsultaDiagnostico;
+import servicio.transacciones.SConsultaEspecialista;
+import servicio.transacciones.SConsultaExamen;
+import servicio.transacciones.SConsultaMedicina;
+import servicio.transacciones.SConsultaServicioExterno;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public abstract class CGenerico extends SelectorComposer<Component> {
@@ -68,6 +74,18 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SCiudad servicioCiudad;
 	@WireVariable("SConsultorio")
 	protected SConsultorio servicioConsultorio;
+	@WireVariable("SConsulta")
+	protected SConsulta servicioConsulta;
+	@WireVariable("SConsultaDiagnostico")
+	protected SConsultaDiagnostico servicioConsultaDiagnostico;
+	@WireVariable("SConsultaEspecialista")
+	protected SConsultaEspecialista servicioConsultaEspecialista;
+	@WireVariable("SConsultaExamen")
+	protected SConsultaExamen servicioConsultaExamen;
+	@WireVariable("SConsultaMedicina")
+	protected SConsultaMedicina servicioConsultaMedicina;
+	@WireVariable("SConsultaServicioExterno")
+	protected SConsultaServicioExterno servicioConsultaServicioExterno;
 	@WireVariable("SDiagnostico")
 	protected SDiagnostico servicioDiagnostico;
 	@WireVariable("SEmpresa")

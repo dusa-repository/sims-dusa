@@ -19,4 +19,6 @@ public interface IServicioExternoDAO extends JpaRepository<ServicioExterno, Long
 	List<ServicioExterno> findByCiudadNombreStartingWithAllIgnoreCase(
 			String valor);
 
+	List<ServicioExterno> findByIdServicioExternoNotIn(List<Long> ids);
+
 }

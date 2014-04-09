@@ -1,7 +1,7 @@
 <zk>
 	<!-- -->
 	<div id="divConsulta" apply="controlador.transacciones.CConsulta"
-		width="97%">
+		sclass="font-size:s" width="97%">
 		<groupbox width="100%" mold="3d" title="Historia Medica">
 			<grid width="100%">
 				<columns visible="false">
@@ -30,6 +30,7 @@
 				<tabs id="tbsConsulta" width="9em">
 					<tab label="Identificacion" id="tabIdentificacion" />
 					<tab label="Consulta" id="tabConsulta" />
+					<tab label="Historial de Consultas" id="tabHistoriasMedicas" />
 					<tab label="Antecedentes Medicos" id="tabAntecedentesMedicos" />
 					<tab label="Antecedentes Laborales" id="tabAntecedentesLaborales" />
 				</tabs>
@@ -150,12 +151,12 @@
 					<tabpanel>
 						<grid width="100%">
 							<columns visible="false">
-								<column label="" width="12%" />
-								<column label="" width="16%" />
+								<column label="" width="11%" />
 								<column label="" width="13%" />
-								<column label="" width="10%" />
-								<column label="" width="19%" />
-								<column label="" width="27%" />
+								<column label="" width="11%" />
+								<column label="" width="8%" />
+								<column label="" width="20%" />
+								<column label="" width="37%" />
 							</columns>
 							<rows>
 								<row>
@@ -166,125 +167,204 @@
 									<textbox id="txtHoraConsulta" hflex="1" maxlength="10"
 										tooltiptext="Ingrese la Hora de la Consulta" />
 									<label class="etiqueta" value="Observacion de la Consulta:" />
-									<textbox class="multilinea" multiline="true" maxlength="500"
-										id="txtObservacion" hflex="1"
-										tooltiptext="Ingrese una Observacionn de la Consulta" />
+									<textbox multiline="true" maxlength="500" id="txtObservacion"
+										hflex="1" tooltiptext="Ingrese una Observacionn de la Consulta" />
 								</row>
 							</rows>
 						</grid>
 						<separator />
-						<tabbox height="480px" id="taxDetalleConsulta" orient="horizontal">
-							<tabs id="tbsDetalleConsulta" width="9em">
-								<tab label="Medicinas" id="tabMedicinas" />
-								<tab label="Diagnosticos" id="tabDiagnosticos" />
-								<tab label="Examenes" id="tabExamenes" />
-							</tabs>
-							<tabpanels>
-								<tabpanel>
+						<groupbox id="gpxResumen" title="Resumen de la Consulta"
+							open="true" mold="3d">
+							<hbox>
+								<listbox width="auto" id="ltbResumenMedicinas"
+									emptyMessage="No ha Agregado Medicinas" height="250px">
+									<listhead>
+										<listheader label="Medicinas" width="70%" />
+										<listheader label="Dosis" width="30%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.medicina.nombre}"></listcell>
+										</listitem>
+										<listitem>
+											<listcell label="${each.dosis}"></listcell>
+										</listitem>
+									</template>
+								</listbox>
+								<listbox width="auto" id="ltbResumenDiagnosticos"
+									emptyMessage="No ha Agregado Diagnosticos" height="250px">
+									<listhead>
+										<listheader label="Diagnosticos" width="50%" />
+										<listheader label="Observacion" width="50%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.diagnostico.nombre}"></listcell>
+										</listitem>
+										<listitem>
+											<listcell label="${each.observacion}"></listcell>
+										</listitem>
+									</template>
+								</listbox>
+								<listbox width="auto" id="ltbResumenExamenes"
+									emptyMessage="No ha Agregado Examenes" height="250px">
+									<listhead>
+										<listheader label="Examenes" width="50%" />
+										<listheader label="Observacion" width="50%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.examen.nombre}"></listcell>
+										</listitem>
+										<listitem>
+											<listcell label="${each.observacion}"></listcell>
+										</listitem>
+									</template>
+								</listbox>
+								<listbox width="auto" id="ltbResumenEspecialistas"
+									emptyMessage="No ha Agregado Especialistas" height="250px">
+									<listhead>
+										<listheader label="Especialistas" width="70%" />
+										<listheader label="Costo" width="30%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.especialista.nombre}"></listcell>
+										</listitem>
+										<listitem>
+											<listcell label="${each.costo}"></listcell>
+										</listitem>
+									</template>
+								</listbox>
+								<listbox width="auto" id="ltbResumenServicios"
+									emptyMessage="No ha Agregado Servicios Externos" height="250px">
+									<listhead>
+										<listheader label="Servicios Externos" width="70%" />
+										<listheader label="Costo" width="30%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.servicioExterno.nombre}"></listcell>
+										</listitem>
+										<listitem>
+											<listcell label="${each.costo}"></listcell>
+										</listitem>
+									</template>
+								</listbox>
+							</hbox>
+						</groupbox>
+						<groupbox id="gpxMedicina" title="Agregar Medicinas"
+							open="false" mold="3d">
+							<hbox>
+								<listbox id="ltbMedicinas" height="250px" width="220px"
+									emptyMessage="No hay Medicinas Registradas">
+									<listhead>
+										<listheader label="Medicina" width="100%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.nombre}">
+											</listcell>
+											<listcell>
+												<textbox width="98%" />
+											</listcell>
+											<listcell>
+												<spinner inplace="true" width="98%" value="${each.idMedicina}"
+													visible="false" disabled="true" />
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+								<vbox>
+									<button id="pasar1Medicina" image="/public/imagenes/botones/adelante.png"
+										tooltiptext="Agregar Medicina" width="30px" />
+									<separator />
+									<button id="pasar2Medicina" image="/public/imagenes/botones/atras.png"
+										tooltiptext="Quitar Medicina" width="30px" />
+								</vbox>
+								<listbox id="ltbMedicinasAgregadas" height="250px"
+									emptyMessage="No ha Seleccionado Ningúna Medicina">
+									<listhead>
+										<listheader label="Medicina" width="40%" />
+										<listheader label="Dosis" width="60%" />
+										<listheader label="id" visible="false" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.medicina.nombre}">
+											</listcell>
+											<listcell>
+												<textbox value="${each.dosis}" width="98%" />
+											</listcell>
+											<listcell>
+												<spinner value="${each.medicina.idMedicina}" width="98%"
+													visible="false" disabled="true" />
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+							</hbox>
+						</groupbox>
+						<groupbox id="gpxDiagnostico" title="Agregar Diagnosticos"
+							open="false" mold="3d">
+							<hbox>
+								<listbox id="ltbDiagnosticos" height="250px" width="220px"
+									emptyMessage="No hay Diagnosticos Registrados">
+									<listhead>
+										<listheader label="Diagnostico" width="100%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.nombre}">
+											</listcell>
+											<listcell>
+												<textbox width="98%" />
+											</listcell>
+											<listcell>
+												<spinner inplace="true" width="98%"
+													value="${each.idDiagnostico}" visible="false" disabled="true" />
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+								<vbox>
+									<button id="pasar1Diagnostico" image="/public/imagenes/botones/adelante.png"
+										tooltiptext="Agregar Diagnostico" width="30px" />
+									<separator />
+									<button id="pasar2Diagnostico" image="/public/imagenes/botones/atras.png"
+										tooltiptext="Quitar Diagnostico" width="30px" />
+								</vbox>
+								<listbox id="ltbDiagnosticosAgregados" height="250px"
+									emptyMessage="No ha Seleccionado Ningún Diagnostico">
+									<listhead>
+										<listheader label="Diagnostico" width="40%" />
+										<listheader label="Observacion" width="60%" />
+										<listheader label="id" visible="false" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.diagnostico.nombre}">
+											</listcell>
+											<listcell>
+												<textbox value="${each.observacion}" width="98%" />
+											</listcell>
+											<listcell>
+												<spinner value="${each.diagnostico.idDiagnostico}"
+													width="98%" visible="false" disabled="true" />
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+							</hbox>
+						</groupbox>
+						<!-- empieza -->
+						<groupbox id="gpxServicio" title="Agregar Servicios"
+							open="false" mold="3d">
+							<hbox>
+								<groupbox id="gpxExamen" title="Agregar Examenes" open="false"
+									mold="3d">
 									<hbox>
-										<listbox id="ltbMedicinas" height="300px" width="220px"
-											emptyMessage="No hay Medicinas Registradas">
-											<listhead>
-												<listheader label="Medicina" width="100%" />
-											</listhead>
-											<template name="model">
-												<listitem>
-													<listcell label="${each.nombre}">
-													</listcell>
-													<listcell>
-														<textbox width="98%" />
-													</listcell>
-													<listcell>
-														<spinner inplace="true" width="98%" value="${each.idMedicina}"
-															visible="false" disabled="true" />
-													</listcell>
-												</listitem>
-											</template>
-										</listbox>
-										<vbox>
-											<button id="pasar1" image="/public/imagenes/botones/adelante.png"
-												tooltiptext="Agregar Medicina" width="30px" />
-											<separator />
-											<button id="pasar2" image="/public/imagenes/botones/atras.png"
-												tooltiptext="Quitar Medicina" width="30px" />
-										</vbox>
-										<listbox id="ltbMedicinasAgregadas" height="300px"
-											emptyMessage="No ha Seleccionado Ningúna Medicina">
-											<listhead>
-												<listheader label="Medicina" width="40%" />
-												<listheader label="Dosis" width="60%" />
-												<listheader label="id" visible="false" />
-											</listhead>
-											<template name="model">
-												<listitem>
-													<listcell label="${each.medicina.nombre}">
-													</listcell>
-													<listcell>
-														<textbox value="${each.medicina.posologia}" width="98%" />
-													</listcell>
-													<listcell>
-														<spinner value="${each.medicina.idMedicina}"
-															width="98%" visible="false" disabled="true" />
-													</listcell>
-												</listitem>
-											</template>
-										</listbox>
-									</hbox>
-								</tabpanel>
-								<tabpanel>
-									<hbox>
-										<listbox id="ltbDiagnosticos" height="300px" width="220px"
-											emptyMessage="No hay Diagnosticos Registrados">
-											<listhead>
-												<listheader label="Diagnostico" width="100%" />
-											</listhead>
-											<template name="model">
-												<listitem>
-													<listcell label="${each.nombre}">
-													</listcell>
-													<listcell>
-														<textbox width="98%" />
-													</listcell>
-													<listcell>
-														<spinner inplace="true" width="98%"
-															value="${each.idDiagnostico}" visible="false" disabled="true" />
-													</listcell>
-												</listitem>
-											</template>
-										</listbox>
-										<vbox>
-											<button id="pasar11" image="/public/imagenes/botones/adelante.png"
-												tooltiptext="Agregar Diagnostico" width="30px" />
-											<separator />
-											<button id="pasar22" image="/public/imagenes/botones/atras.png"
-												tooltiptext="Quitar Diagnostico" width="30px" />
-										</vbox>
-										<listbox id="ltbDiagnosticosAgregados" height="300px"
-											emptyMessage="No ha Seleccionado Ningún Diagnostico">
-											<listhead>
-												<listheader label="Diagnostico" width="40%" />
-												<listheader label="Observacion" width="60%" />
-												<listheader label="id" visible="false" />
-											</listhead>
-											<template name="model">
-												<listitem>
-													<listcell label="${each.diagnostico.nombre}">
-													</listcell>
-													<listcell>
-														<textbox width="98%" />
-													</listcell>
-													<listcell>
-														<spinner value="${each.diagnostico.idDiagnostico}"
-															width="98%" visible="false" disabled="true" />
-													</listcell>
-												</listitem>
-											</template>
-										</listbox>
-									</hbox>
-								</tabpanel>
-								<tabpanel>
-									<hbox>
-										<listbox id="ltbExamenes" height="300px" width="220px"
+										<listbox id="ltbExamenes" height="220px" width="250px"
 											emptyMessage="No hay Examenes Registrados">
 											<listhead>
 												<listheader label="Examen" width="100%" />
@@ -304,14 +384,14 @@
 											</template>
 										</listbox>
 										<vbox>
-											<button id="pasar111" image="/public/imagenes/botones/adelante.png"
+											<button id="pasar1Examen" image="/public/imagenes/botones/adelante.png"
 												tooltiptext="Agregar Examen" width="30px" />
 											<separator />
-											<button id="pasar222" image="/public/imagenes/botones/atras.png"
+											<button id="pasar2Examen" image="/public/imagenes/botones/atras.png"
 												tooltiptext="Quitar Examen" width="30px" />
 										</vbox>
-										<listbox id="ltbExamenesAgregados" height="300px"
-											emptyMessage="No ha Seleccionado Ningún Examen">
+										<listbox id="ltbExamenesAgregados" height="220px"
+											width="350px" emptyMessage="No ha Seleccionado Ningún Examen">
 											<listhead>
 												<listheader label="Examen" width="40%" />
 												<listheader label="Observacion" width="60%" />
@@ -322,19 +402,155 @@
 													<listcell label="${each.examen.nombre}">
 													</listcell>
 													<listcell>
-														<textbox width="98%" />
+														<textbox value="${each.observacion}" width="98%" />
 													</listcell>
 													<listcell>
-														<spinner value="${each.dexamen.idExamen}" width="98%"
+														<spinner value="${each.examen.idExamen}" width="98%"
 															visible="false" disabled="true" />
 													</listcell>
 												</listitem>
 											</template>
 										</listbox>
 									</hbox>
-								</tabpanel>
-							</tabpanels>
-						</tabbox>
+								</groupbox>
+								<!-- termina primero -->
+								<groupbox id="gpxEspecialista" title="Agregar Especialistas"
+									open="false" mold="3d">
+									<hbox>
+										<listbox id="ltbEspecialistas" height="220px" width="250px"
+											emptyMessage="No hay Especialistas Registrados">
+											<listhead>
+												<listheader label="Especialista" width="100%" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell>
+														<textbox width="98%" />
+													</listcell>
+													<listcell>
+														<spinner inplace="true" width="98%" value="${each.cedula}"
+															visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<vbox>
+											<button id="pasar1Especialista" image="/public/imagenes/botones/adelante.png"
+												tooltiptext="Agregar Especialista" width="30px" />
+											<separator />
+											<button id="pasar2Especialista" image="/public/imagenes/botones/atras.png"
+												tooltiptext="Quitar Especialista" width="30px" />
+										</vbox>
+										<listbox id="ltbEspecialistasAgregados" height="220px"
+											width="350px" emptyMessage="No ha Seleccionado Ningún Especialista">
+											<listhead>
+												<listheader label="Especialista" width="40%" />
+												<listheader label="Costo" width="60%" />
+												<listheader label="id" visible="false" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.especialista.nombre}">
+													</listcell>
+													<listcell>
+														<doublespinner step="0.1" format="#.##"
+															constraint="min 0 max 100000000" value="${each.costo}"
+															width="98%" />
+													</listcell>
+													<listcell>
+														<spinner value="${each.especialista.cedula}"
+															width="98%" visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+									</hbox>
+								</groupbox>
+								<!-- termina segundo -->
+								<groupbox id="gpxServicioExterno" title="Agregar Servicios Externos"
+									open="false" mold="3d">
+									<hbox>
+										<listbox id="ltbServicioExterno" height="220px" width="250px"
+											emptyMessage="No hay Servicios Externos Registrados">
+											<listhead>
+												<listheader label="ServicioExterno" width="100%" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell>
+														<textbox width="98%" />
+													</listcell>
+													<listcell>
+														<spinner inplace="true" width="98%"
+															value="${each.idServicioExterno}" visible="false"
+															disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<vbox>
+											<button id="pasar1ServicioExterno" image="/public/imagenes/botones/adelante.png"
+												tooltiptext="Agregar ServicioExterno" width="30px" />
+											<separator />
+											<button id="pasar2ServicioExterno" image="/public/imagenes/botones/atras.png"
+												tooltiptext="Quitar ServicioExterno" width="30px" />
+										</vbox>
+										<listbox id="ltbServicioExternoAgregados" height="220px"
+											width="350px" emptyMessage="No ha Seleccionado Ningún Servicio Externo">
+											<listhead>
+												<listheader label="Servicio Externo" width="40%" />
+												<listheader label="Costo" width="60%" />
+												<listheader label="id" visible="false" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.servicioExterno.nombre}">
+													</listcell>
+													<listcell>
+														<doublespinner step="0.1" format="#.##"
+															constraint="min 0 max 100000000" value="${each.costo}"
+															width="98%" />
+													</listcell>
+													<listcell>
+														<spinner value="${each.servicioExterno.idServicioExterno}"
+															width="98%" visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+									</hbox>
+								</groupbox>
+							</hbox>
+						</groupbox>
+						<!-- termina -->
+					</tabpanel>
+					<tabpanel>
+						<hbox>
+							<listbox id="ltbConsultas" height="260px" width="auto"
+								emptyMessage="El Paciente no posee Consultas Registradas">
+								<listhead>
+									<listheader label="Fecha" width="30%" />
+									<listheader label="Observacion" width="70%" />
+									<listheader label="id" visible="false" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell label="${each.fechaConsulta}">
+										</listcell>
+										<listcell label="${each.observacion}">
+										</listcell>
+										<listcell>
+											<spinner value="${each.idConsulta}" width="98%"
+												visible="false" disabled="true" />
+										</listcell>
+									</listitem>
+								</template>
+							</listbox>
+						</hbox>
 					</tabpanel>
 				</tabpanels>
 			</tabbox>

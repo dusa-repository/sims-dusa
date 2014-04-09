@@ -7,6 +7,7 @@ import org.hibernate.annotations.Type;
 
 import modelo.maestros.UnidadUsuario;
 import modelo.maestros.Especialidad;
+import modelo.transacciones.Consulta;
 
 import java.sql.Timestamp;
 import java.util.Set;
@@ -112,6 +113,9 @@ public class Usuario implements Serializable {
 			}
 		)
 	private Set<Grupo> grupos;
+	
+	@OneToMany(mappedBy="usuario")
+	private Set<Consulta> consultas;
 	
 	public Usuario() {
 	}
@@ -360,6 +364,14 @@ public class Usuario implements Serializable {
 
 	public void setSegundoNombre(String segundoNombre) {
 		this.segundoNombre = segundoNombre;
+	}
+
+	public Set<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(Set<Consulta> consultas) {
+		this.consultas = consultas;
 	}
 
 }
