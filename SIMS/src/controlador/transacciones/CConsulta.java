@@ -1,10 +1,14 @@
 package controlador.transacciones;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialista;
@@ -29,6 +33,7 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.Groupbox;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -81,14 +86,6 @@ public class CConsulta extends CGenerico {
 	@Wire
 	private Textbox txtCedula;
 	@Wire
-	private Label lblNombre;
-	@Wire
-	private Label lblApellido;
-	@Wire
-	private Label lblEmpresa;
-	@Wire
-	private Label lblFicha;
-	@Wire
 	private Listbox ltbMedicinas;
 	@Wire
 	private Listbox ltbMedicinasAgregadas;
@@ -122,6 +119,79 @@ public class CConsulta extends CGenerico {
 	private Listbox ltbCargaFamiliar;
 	@Wire
 	private Listbox ltbConsultas;
+	//.---------------------------
+	@Wire
+	private Image imagenPaciente;
+	@Wire
+	private Label lblNombres;
+	@Wire
+	private Label lblCedula;
+	@Wire
+	private Label lblApellidos;
+	@Wire
+	private Label lblEmpresa;
+	@Wire
+	private Label lblFicha;
+	@Wire
+	private Label lblTrabajador;
+	@Wire
+	private Label lblFechaNac;
+	@Wire
+	private Label lblLugarNac;
+	@Wire
+	private Label lblAlergias;
+	@Wire
+	private Label lblAlergico;
+	@Wire
+	private Label lblLentes;
+	@Wire
+	private Label lblEdad;
+	@Wire
+	private Label lblSexo;
+	@Wire
+	private Label lblEstadoCivil;
+	@Wire
+	private Label lblGrupoSanguineo;
+	@Wire
+	private Label lblMano;
+	@Wire
+	private Label lblEstatura;
+	@Wire
+	private Label lblPeso;
+	@Wire
+	private Label lblDiscapacidad;
+	@Wire
+	private Label lblOrigen;
+	@Wire
+	private Label lblTipoDiscapacidad;
+	@Wire
+	private Label lblObservacionDiscapacidad;
+	@Wire
+	private Label lblCargo;
+	@Wire
+	private Label lblCiudad;
+	@Wire
+	private Label lblDireccion;
+	@Wire
+	private Label lblTelefono1;
+	@Wire
+	private Label lblTelefono2;
+	@Wire
+	private Label lblCorreo;
+	@Wire
+	private Label lblNombresE;
+	@Wire
+	private Label lblApellidosE;
+	@Wire
+	private Label lblParentesco;
+	@Wire
+	private Label lblTelefono1E;
+	@Wire
+	private Label lblTelefono2E;
+//	@Wire
+//	private Label lblParentescoFamiliar;
+
+	//-----------------------------
 
 	List<Listbox> listas = new ArrayList<Listbox>();
 
@@ -468,7 +538,7 @@ public class CConsulta extends CGenerico {
 		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
-				"Apellido", "Empresa") {
+				"Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -480,8 +550,8 @@ public class CConsulta extends CGenerico {
 					return servicioPaciente.filtroCedula(valor);
 				case "Apellido":
 					return servicioPaciente.filtroApellido1(valor);
-				case "Empresa":
-					return servicioPaciente.filtroEmpresa(valor);
+//				case "Empresa":
+//					return servicioPaciente.filtroEmpresa(valor);
 				default:
 					return pacientes;
 				}
@@ -489,11 +559,10 @@ public class CConsulta extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[4];
+				String[] registros = new String[3];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getPrimerNombre();
 				registros[2] = objeto.getPrimerApellido();
-				registros[3] = objeto.getEmpresa().getNombre();
 				return registros;
 			}
 
@@ -517,12 +586,84 @@ public class CConsulta extends CGenerico {
 	private void llenarCampos(Paciente paciente) {
 		// TODO Auto-generated method stub
 		txtCedula.setValue(paciente.getCedula());
-		lblNombre.setValue(paciente.getPrimerNombre() + " "
+		lblNombres.setValue(paciente.getPrimerNombre() + " "
 				+ paciente.getSegundoNombre());
-		lblApellido.setValue(paciente.getPrimerApellido() + " "
+		lblApellidos.setValue(paciente.getPrimerApellido() + " "
 				+ paciente.getSegundoApellido());
 		lblEmpresa.setValue(paciente.getEmpresa().getNombre());
-		txtCedula.setDisabled(true);
+		lblCedula.setValue(paciente.getCedula());
+
+		lblFicha.setValue(paciente.getFicha());
+		lblAlergias.setValue(paciente.getObservacionAlergias());
+		lblLugarNac.setValue(paciente.getLugarNacimiento());
+		lblSexo.setValue(paciente.getSexo());
+		lblEstadoCivil.setValue(paciente.getEstadoCivil());
+		lblGrupoSanguineo.setValue(paciente.getGrupoSanguineo());
+		lblMano.setValue(paciente.getMano());
+		lblOrigen.setValue(paciente.getOrigenDiscapacidad());
+		lblTipoDiscapacidad.setValue(paciente.getTipoDiscapacidad());
+		lblObservacionDiscapacidad.setValue(paciente.getObservacionDiscapacidad());
+		lblCargo.setValue(paciente.getCargo());
+		lblDireccion.setValue(paciente.getDireccion());
+		lblTelefono1.setValue(paciente.getTelefono1());
+		lblTelefono2.setValue(paciente.getTelefono2());
+		lblCorreo.setValue(paciente.getEmail());
+		lblNombresE.setValue(paciente.getNombresEmergencia());
+		lblApellidosE.setValue(paciente.getApellidosEmergencia());
+		lblTelefono1E.setValue(paciente.getTelefono1Emergencia());
+		lblTelefono2E.setValue(paciente.getTelefono2Emergencia());
+		lblParentesco.setValue(paciente.getParentescoEmergencia());
+//		lblParentescoFamiliar.setValue(paciente.getParentescoFamiliar());
+		lblEdad.setValue(String.valueOf(paciente.getEdad()));
+		lblEstatura.setValue(String.valueOf(paciente.getEstatura()));
+		lblPeso.setValue(String.valueOf(paciente.getPeso()));
+		lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
+
+		if (paciente.isAlergia())
+			lblAlergico.setValue("SI");
+		else
+			lblAlergico.setValue("NO");
+
+		if (paciente.isTrabajador())
+			lblTrabajador.setValue("SI");
+		else
+			lblTrabajador.setValue("NO");
+
+		if (paciente.isDiscapacidad())
+			lblDiscapacidad.setValue("SI");
+		else
+			lblDiscapacidad.setValue("NO");
+
+		if (paciente.isLentes())
+			lblLentes.setValue("SI");
+		else
+			lblLentes.setValue("NO");
+
+		BufferedImage imag;
+		if (paciente.getImagen() != null) {
+			imagenPaciente.setVisible(true);
+			try {
+				imag = ImageIO.read(new ByteArrayInputStream(paciente
+						.getImagen()));
+				imagenPaciente.setContent(imag);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else
+			imagenPaciente.setVisible(false);
+
+//		if (!paciente.isTrabajador()) {
+//			Paciente familiar = servicioPaciente.buscarPorCedula(paciente
+//					.getCedulaFamiliar());
+//			lblNombres.setValue(familiar.getPrimerNombre() + " "
+//					+ familiar.getSegundoNombre());
+//			lblApellidos.setValue(familiar.getPrimerApellido() + " "
+//					+ familiar.getSegundoApellido());
+//			lblFicha.setValue(familiar.getFicha());
+//			lblCedula.setValue(familiar.getCedula());
+//			cedTrabajador = familiar.getCedula();
+//			cmbParentescoFamiliar.setValue(familiar.getParentescoFamiliar());
+//		}
 	}
 
 	/* Permite la seleccion de un item del catalogo de pacientes */
