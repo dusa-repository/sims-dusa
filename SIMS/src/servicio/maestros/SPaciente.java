@@ -56,4 +56,5 @@ public class SPaciente {
 	public List<Paciente> buscarParientes(String valueOf) {
 		return pacienteDAO.findByCedulaFamiliar(valueOf);
 	}
+
 }
