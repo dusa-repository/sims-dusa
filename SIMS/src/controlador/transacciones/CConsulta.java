@@ -39,6 +39,8 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Radio;
+import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
@@ -55,6 +57,12 @@ public class CConsulta extends CGenerico {
 	private Datebox dtbFechaConsulta;
 	@Wire
 	private Timebox tmbHoraConsulta;
+	@Wire
+	private Radiogroup rdgMotivo;
+	@Wire
+	private Radio rdoAccidente;
+	@Wire
+	private Radio rdoOtro;
 	@Wire
 	private Textbox txtObservacion;
 	@Wire
@@ -251,17 +259,20 @@ public class CConsulta extends CGenerico {
 						servicioConsultaServicioExterno
 								.borrarServiciosDeConsulta(consulta);
 					}
-					Date hConsulta = tmbHoraConsulta.getValue();
+//					Date hConsulta = tmbHoraConsulta.getValue();
 					Date fechaCon = dtbFechaConsulta.getValue();
 					Timestamp fechaConsulta = new Timestamp(fechaCon.getTime());
-					String horaConsulta = df.format(hConsulta);
+//					String horaConsulta = df.format(hConsulta);
 					String observacion = txtObservacion.getValue();
 					Usuario usuario = null;
 					Paciente paciente = servicioPaciente
 							.buscarPorCedula(txtCedula.getValue());
+					boolean accidente = false;
+					if(rdoAccidente.isChecked())
+						accidente = true;
 					Consulta consulta = new Consulta(idConsulta, paciente,
-							usuario, fechaConsulta, horaConsulta, observacion,
-							horaAuditoria, fechaHora, nombreUsuarioSesion());
+							usuario, fechaConsulta, horaAuditoria, observacion,
+							horaAuditoria, fechaHora, nombreUsuarioSesion(), accidente);
 					servicioConsulta.guardar(consulta);
 					Consulta consultaDatos = new Consulta();
 					if (idConsulta != 0)
@@ -387,7 +398,7 @@ public class CConsulta extends CGenerico {
 			return false;
 		} else {
 			if (dtbFechaConsulta.getText().compareTo("") == 0
-					|| tmbHoraConsulta.getText().compareTo("") == 0
+//					|| tmbHoraConsulta.getText().compareTo("") == 0
 					|| txtObservacion.getText().compareTo("") == 0
 					|| cmbPrioridad.getText().compareTo("") == 0
 					|| dtbValido.getText().compareTo("") == 0) {
@@ -430,8 +441,18 @@ public class CConsulta extends CGenerico {
 													Messagebox.OK,
 													Messagebox.INFORMATION);
 									return false;
-								} else
-									return true;
+								} else{
+									if (!rdoAccidente.isChecked() && !rdoOtro
+											.isChecked()) {
+										Messagebox
+												.show("Debe Seleccionar un motivo de consulta",
+														"Informacion",
+														Messagebox.OK,
+														Messagebox.INFORMATION);
+										return false;
+									} else
+										return true;
+								}
 							}
 						}
 					}
