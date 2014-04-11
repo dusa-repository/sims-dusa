@@ -360,7 +360,7 @@ public class CPaciente extends CGenerico {
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
 										Paciente paciente = servicioPaciente
-												.buscar(id);
+												.buscarPorCedula(String.valueOf(id));
 										List<Cita> citas = servicioCita
 												.buscarPorPaciente(paciente);
 										if (!citas.isEmpty()) {

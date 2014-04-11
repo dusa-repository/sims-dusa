@@ -89,7 +89,6 @@ public class CCita extends CGenerico {
 	private Button btnAnularCita;
 	@Wire
 	private Button btnCancelarCita;
-	DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	long id = 0;
 	long idDoctor = 0;
 	long idPaciente = 0;

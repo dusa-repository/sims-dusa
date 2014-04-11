@@ -41,12 +41,7 @@ public class SPaciente {
 	}
 
 	public void guardar(Paciente paciente) {
-		pacienteDAO.save(paciente);
-		
-	}
-
-	public Paciente buscar(long id) {
-		return pacienteDAO.findOne(id);
+		pacienteDAO.save(paciente);		
 	}
 
 	public void eliminar(Paciente paciente) {
@@ -56,5 +51,9 @@ public class SPaciente {
 
 	public List<Paciente> buscarPorEmpresa(Empresa empresa) {
 		return pacienteDAO.findByEmpresa(empresa);
+	}
+
+	public List<Paciente> buscarParientes(String valueOf) {
+		return pacienteDAO.findByCedulaFamiliar(valueOf);
 	}
 }

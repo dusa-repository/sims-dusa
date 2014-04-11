@@ -7,7 +7,7 @@ import modelo.maestros.Paciente;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IPacienteDAO extends JpaRepository<Paciente, Long> {
+public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
 	List<Paciente> findByPrimerNombreStartingWithAllIgnoreCase(String valor);
 
@@ -20,5 +20,7 @@ public interface IPacienteDAO extends JpaRepository<Paciente, Long> {
 	Paciente findByCedula(String value);
 
 	List<Paciente> findByEmpresa(Empresa empresa);
+
+	List<Paciente> findByCedulaFamiliar(String valueOf);
 
 }
