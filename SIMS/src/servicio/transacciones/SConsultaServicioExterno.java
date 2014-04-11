@@ -19,4 +19,15 @@ public class SConsultaServicioExterno {
 	public List<ConsultaServicioExterno> buscarPorConsulta(Consulta consulta) {
 		return consultaServicioExternoDAO.findByConsulta(consulta);
 	}
+
+	public void borrarServiciosDeConsulta(Consulta consulta) {
+		List<ConsultaServicioExterno> lista = consultaServicioExternoDAO.findByConsulta(consulta);
+		if(!lista.isEmpty()){
+			consultaServicioExternoDAO.delete(lista);
+		}
+	}
+
+	public void guardar(List<ConsultaServicioExterno> listaServicioExterno) {
+		consultaServicioExternoDAO.save(listaServicioExterno);
+	}
 }

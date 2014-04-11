@@ -2,6 +2,8 @@ package controlador.maestros;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,6 +46,7 @@ import servicio.maestros.SPaciente;
 import servicio.maestros.SPais;
 import servicio.maestros.SPresentacionComercial;
 import servicio.maestros.SPresentacionMedicina;
+import servicio.maestros.SRecipe;
 import servicio.maestros.SServicioExterno;
 import servicio.maestros.SUnidadMedicina;
 import servicio.maestros.SUnidadUsuario;
@@ -114,6 +117,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SPresentacionComercial servicioPresentacion;
 	@WireVariable("SPresentacionMedicina")
 	protected SPresentacionMedicina servicioPresentacionMedicina;
+	@WireVariable("SRecipe")
+	protected SRecipe servicioRecipe;
 	@WireVariable("SServicioExterno")
 	protected SServicioExterno servicioServicioExterno;
 	@WireVariable("SUnidadUsuario")
@@ -128,6 +133,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 
 	
 	public static  List<Tab> tabs = new ArrayList<Tab>();
+	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	public final Calendar calendario = Calendar.getInstance();
 	public String horaAuditoria = String.valueOf(calendario
 			.get(Calendar.HOUR_OF_DAY))

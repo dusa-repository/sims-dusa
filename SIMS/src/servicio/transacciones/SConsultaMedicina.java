@@ -19,4 +19,15 @@ public class SConsultaMedicina {
 	public List<ConsultaMedicina> buscarPorConsulta(Consulta consulta) {
 		return consultaMedicinaDAO.findByConsulta(consulta);
 	}
+
+	public void borrarMedicinasDeConsulta(Consulta consulta) {
+		List<ConsultaMedicina> lista = consultaMedicinaDAO.findByConsulta(consulta);
+		if(!lista.isEmpty()){
+			consultaMedicinaDAO.delete(lista);
+		}
+	}
+
+	public void guardar(List<ConsultaMedicina> listaMedicina) {
+		consultaMedicinaDAO.save(listaMedicina);
+	}
 }

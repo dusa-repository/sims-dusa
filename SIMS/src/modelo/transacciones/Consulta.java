@@ -43,6 +43,9 @@ public class Consulta implements Serializable {
 	@Column(length = 500)
 	private String observacion;
 
+	@Column(name = "hora_consulta", length = 10)
+	private String horaConsulta;
+	
 	@Column(name = "hora_auditoria", length = 10)
 	private String horaAuditoria;
 
@@ -72,13 +75,14 @@ public class Consulta implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Consulta(long idConsulta, Paciente paciente, Usuario usuario, Timestamp fechaConsulta,
+	public Consulta(long idConsulta, Paciente paciente, Usuario usuario, Timestamp fechaConsulta, String horaConsulta,
 			String observacion, String horaAuditoria, Timestamp fechaAuditoria,
 			String usuarioAuditoria) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
 		this.fechaConsulta = fechaConsulta;
+		this.horaConsulta = horaConsulta;
 		this.observacion = observacion;
 		this.horaAuditoria = horaAuditoria;
 		this.fechaAuditoria = fechaAuditoria;
@@ -118,6 +122,14 @@ public class Consulta implements Serializable {
 
 	public void setFechaConsulta(Timestamp fechaConsulta) {
 		this.fechaConsulta = fechaConsulta;
+	}
+
+	public String getHoraConsulta() {
+		return horaConsulta;
+	}
+
+	public void setHoraConsulta(String horaConsulta) {
+		this.horaConsulta = horaConsulta;
 	}
 
 	public String getObservacion() {

@@ -1,8 +1,9 @@
 package servicio.transacciones;
 
+import interfacedao.transacciones.IConsultaDAO;
+
 import java.util.List;
 
-import interfacedao.transacciones.IConsultaDAO;
 import modelo.maestros.Paciente;
 import modelo.transacciones.Consulta;
 
@@ -21,5 +22,16 @@ public class SConsulta {
 
 	public List<Consulta> buscarPorPaciente(Paciente paciente) {
 		return consultaDAO.findByPaciente(paciente);
+	}
+
+	public void guardar(Consulta consulta) {
+		consultaDAO.save(consulta);
+	}
+
+	public Consulta buscarUltima() {
+		long id = consultaDAO.findMaxIdMedicina();
+		if (id != 0)
+			return consultaDAO.findOne(id);
+		return null;
 	}
 }

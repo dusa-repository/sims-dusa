@@ -19,4 +19,15 @@ public class SConsultaEspecialista {
 	public List<ConsultaEspecialista> buscarPorConsulta(Consulta consulta) {
 		return consultaEspecialistaDAO.findByConsulta(consulta);
 	}
+
+	public void borrarEspecialistasDeConsulta(Consulta consulta) {
+		List<ConsultaEspecialista> lista = consultaEspecialistaDAO.findByConsulta(consulta);
+		if(!lista.isEmpty()){
+			consultaEspecialistaDAO.delete(lista);
+		}
+	}
+
+	public void guardar(List<ConsultaEspecialista> listaConsultaEspecialista) {
+		consultaEspecialistaDAO.save(listaConsultaEspecialista);
+	}
 }
