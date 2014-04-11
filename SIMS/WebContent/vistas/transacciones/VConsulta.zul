@@ -1,9 +1,11 @@
 <zk>
-	<!-- -->
+	<style>
+		.z-groupbox-hr { background: #EFF5F5 }
+	</style>
 	<div id="divConsulta" apply="controlador.transacciones.CConsulta"
-		sclass="font-size:s" width="97%">
-		<groupbox width="100%" mold="3d" title="Historia Medica">
-			<grid width="100%">
+		sclass="font-size:s" width="auto">
+		<groupbox width="auto" mold="3d" title="Historia Medica">
+			<grid width="auto">
 				<columns visible="false">
 					<column label="" width="20%" />
 					<column label="" width="20%" />
@@ -26,8 +28,8 @@
 				</rows>
 			</grid>
 			<separator />
-			<tabbox height="450px" id="taxConsulta" orient="horizontal">
-				<tabs id="tbsConsulta" width="9em">
+			<tabbox  height="auto" id="taxConsulta" orient="horizontal">
+				<tabs id="tbsConsulta" width="auto">
 					<tab label="Identificacion" id="tabIdentificacion" />
 					<tab label="Consulta" id="tabConsulta" />
 					<tab label="Historial de Consultas" id="tabHistoriasMedicas" />
@@ -35,109 +37,193 @@
 				</tabs>
 				<tabpanels>
 					<tabpanel>
-						<groupbox width="100%" title="Datos Basicos">
-							<grid width="100%">
+						<groupbox width="auto" title="Datos Basicos">
+							<grid width="auto">
 								<columns visible="false">
-									<column label="" width="20%" />
-									<column label="" width="20%" />
-									<column label="" width="20%" />
-									<column label="" width="20%" />
-									<column label="" width="20%" />
+									<column label="" width="14%" />
+									<column label="" width="19%" />
+									<column label="" width="14%" />
+									<column label="" width="19%" />
+									<column label="" width="15%" />
+									<column label="" width="19%" />
 								</columns>
 								<rows>
 									<row>
-										<label class="etiqueta" value="Nombre:" />
-										<label id="lblNombre" />
-										<label class="etiqueta" value="Apellido:" />
-										<label id="lblApellido" />
-										<cell rowspan="2">
+										<cell colspan="2">
 											<vbox>
-												<image id="imagenPaciente" width="60px" height="55px" />
+												<label class="etiqueta" value="¿Es Trabajador de la Empresa?" />
 											</vbox>
 										</cell>
+										<label id="lblTrabajador" />
+										<hbox />
+										<hbox />
+										<hbox />
 									</row>
 									<row>
+										<label class="etiqueta" value="Cedula:" />
+										<label id="lblCedula" />
 										<label class="etiqueta" value="Ficha:" />
 										<label id="lblFicha" />
-										<label class="etiqueta" value="Pais de Nacimiento:" />
-										<label id="lblPaisNac" />
+										<cell rowspan="3">
+											<vbox>
+												<image id="imagenPaciente" width="80px" height="75px" />
+											</vbox>
+										</cell>
+										<hbox />
+									</row>
+									<row>
+										<label class="etiqueta" value="Nombres:" />
+										<label id="lblNombres" />
+										<label class="etiqueta" value="Apellidos:" />
+										<label id="lblApellidos" />
+										<hbox />
 										<hbox />
 									</row>
 									<row>
 										<label class="etiqueta" value="Fecha Nacimiento:" />
 										<label id="lblFechaNac" />
+										<label class="etiqueta" value="Lugar Nacimiento:" />
+										<cell colspan="1">
+											<vbox>
+												<label id="lblLugarNac" />
+											</vbox>
+										</cell>
+									</row>
+									<row>
 										<label class="etiqueta" value="Edad:" />
 										<label id="lblEdad" />
-										<hbox />
-									</row>
-									<row>
 										<label class="etiqueta" value="Sexo:" />
 										<label id="lblSexo" />
-										<label class="etiqueta" value="Grupo Sanguineo:" />
-										<label id="lblGrupoSanguineo" />
-										<hbox />
+										<label class="etiqueta" value="Estado Civil:" />
+										<label id="lblEstadoCivil" />
 									</row>
 									<row>
+										<label class="etiqueta" value="Grupo Sanguineo:" />
+										<label id="lblGrupoSanguineo" />
+										<label class="etiqueta" value="¿Es Alergico?" />
+										<cell colspan="4">
+											<space />
+											<label id="lblAlergico" />
+											<space />
+											<space />
+											<label class="etiqueta" value="Alergias:" />
+											<space />
+											<label id="lblAlergias" />
 
+										</cell>
+									</row>
+									<row>
+										<label class="etiqueta" value="Mano Dominante:" />
+										<label id="lblMano" />
+										<cell colspan="4">
+											<label class="etiqueta" value="Estatura:" />
+											<space />
+											<label id="lblEstatura" />
+											<space />
+											<space />
+											<label class="etiqueta" value="Peso:" />
+											<space />
+											<label id="lblPeso" />
+											<space />
+											<space />
+											<label class="etiqueta" value="¿Usa Lentes?" />
+											<space />
+											<label id="lblLentes" />
+										</cell>
+									</row>
+									<row>
+										<label class="etiqueta" value="¿Posee Discapacidad?" />
+										<cell colspan="5">
+											<label id="lblDiscapacidad" />
+											<space />
+											<label class="etiqueta" value="Origen:" />
+											<space />
+											<label id="lblOrigen" />
+											<space />
+											<space />
+											<label class="etiqueta" value="Tipo:" />
+											<space />
+											<label id="lblTipoDiscapacidad" />
+											<space />
+											<space />
+											<label class="etiqueta" value="Adicionales:" />
+											<space />
+											<label id="lblObservacionDiscapacidad" />
+										</cell>
+									</row>
+									<row id="rowCargoyEmpresa">
 										<label class="etiqueta" value="Cargo:" />
 										<label id="lblCargo" />
 										<label class="etiqueta" value="Empresa:" />
-										<label id="lblEmpresa" />
-										<hbox />
-									</row>
-									<row>
-										<label class="etiqueta" value="Profesion:" />
-										<label id="lblProfesion" />
-										<label class="etiqueta" value="Tipo Paciente:" />
-										<label id="lblTipoPaciente" />
-										<hbox />
-									</row>
-									<row>
-										<label class="etiqueta" value="Antiguedad:" />
-										<label id="lblAntiguedad" />
-										<hbox />
+										<cell colspan="2">
+											<vbox>
+												<label id="lblEmpresa" />
+											</vbox>
+										</cell>
 										<hbox />
 									</row>
 								</rows>
 							</grid>
 						</groupbox>
 						<separator />
-						<tabbox height="480px" id="taxOtrosDatos" orient="horizontal">
-							<tabs id="tbsOtrosDatos" width="9em">
+						<tabbox height="auto" id="taxOtrosDatos" orient="horizontal">
+							<tabs id="tbsOtrosDatos">
 								<tab label="Datos de Contacto" id="tabDatosContacto" />
 								<tab label="Carga Familiar" id="tabCargaFamiliar" />
 							</tabs>
 							<tabpanels>
 								<tabpanel>
-									<grid width="100%">
+									<grid width="auto">
 										<columns visible="false">
+											<column label="" width="13%" />
 											<column label="" width="20%" />
-											<column label="" width="80%" />
+											<column label="" width="13%" />
+											<column label="" width="20%" />
+											<column label="" width="13%" />
+											<column label="" width="21%" />
 										</columns>
 										<rows>
 											<row>
 												<label class="etiqueta" value="Direccion:" />
-												<cell rowspan="2">
-													<vbox>
+												<cell colspan="2">
+													<label class="etiqueta" value="Ciudad:" />
+													<space />
+													<label id="lblCiudad" />
+													<space />
+													<cell colspan="3">
 														<label id="lblDireccion" />
-													</vbox>
+													</cell>
 												</cell>
-											</row>
-											<row style="background-color:white;">
-												<hbox />
-												<hbox />
 											</row>
 											<row>
 												<label class="etiqueta" value="Telefono Fijo:" />
-												<label id="lblTlfFijo" />
-											</row>
-											<row>
+												<label id="lblTelefono1" />
 												<label class="etiqueta" value="Telefono Celular:" />
-												<label id="lblTlfCelular" />
+												<label id="lblTelefono2" />
+												<label class="etiqueta" value="Email:" />
+												<label id="lblCorreo" />
 											</row>
 											<row>
-												<label class="etiqueta" value="Email:" />
-												<label id="lblEmail" />
+												<cell colspan="6">
+													<label class="etiqueta"
+														value="En Caso de Emergencia, Comunicarse con:" />
+												</cell>
+											</row>
+											<row>
+												<label class="etiqueta" value="Nombres:" />
+												<label id="lblNombresE" />
+												<label class="etiqueta" value="Apellidos:" />
+												<label id="lblApellidosE" />
+												<label class="etiqueta" value="Parentesco:" />
+												<label id="lblParentesco" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Telefono Fijo:" />
+												<label id="lblTelefono1E" />
+												<label class="etiqueta" value="Telefono Celular:" />
+												<label id="lblTelefono2E" />
+												<hbox />
+												<hbox />
 											</row>
 										</rows>
 									</grid>
@@ -179,11 +265,11 @@
 								<row>
 									<label class="etiqueta" value="Fecha Consulta:" />
 									<datebox readonly="true" width="100%" id="dtbFechaConsulta"
-										 onCreate="self.value = new Date()" cols="8" />
+										onCreate="self.value = new Date()" cols="8" />
 									<label class="etiqueta" value="Hora Consulta:" />
 									<timebox id="tmbHoraConsulta" hflex="1" format="a hh:mm:ss"
-											onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita"
-											width="60px"/>
+										onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita"
+										width="60px" />
 									<label class="etiqueta" value="Observacion de la Consulta:" />
 									<textbox multiline="true" maxlength="500" id="txtObservacion"
 										hflex="1" tooltiptext="Ingrese una Observacionn de la Consulta" />
@@ -271,8 +357,10 @@
 								</listbox>
 							</hbox>
 						</groupbox>
-						<groupbox id="gpxMedicina" title="Agregar Medicinas"
-							open="false" mold="3d">
+						<!-- title="Agregar Medicinas" -->
+						<groupbox id="gpxMedicina" open="false">
+							<caption label="Agregar Medicinas"
+								style="color:blue; font-size: 12px; font-weight:bold" />
 							<hbox>
 								<listbox id="ltbMedicinas" height="250px" width="220px"
 									emptyMessage="No hay Medicinas Registradas">
@@ -356,8 +444,9 @@
 								</vbox>
 							</hbox>
 						</groupbox>
-						<groupbox id="gpxDiagnostico" title="Agregar Diagnosticos"
-							open="false" mold="3d">
+						<groupbox id="gpxDiagnostico" open="false">
+							<caption label="Agregar Diagnosticos"
+								style="color:blue; font-size: 12px; font-weight:bold" />
 							<hbox>
 								<listbox id="ltbDiagnosticos" height="250px" width="220px"
 									emptyMessage="No hay Diagnosticos Registrados">
@@ -411,11 +500,13 @@
 							</hbox>
 						</groupbox>
 						<!-- empieza -->
-						<groupbox id="gpxServicio" title="Agregar Servicios"
-							open="false" mold="3d">
+						<groupbox id="gpxServicio" open="false">
+							<caption label="Agregar Servicios"
+								style="color:blue; font-size: 12px; font-weight:bold" />
 							<hbox>
-								<groupbox id="gpxExamen" title="Agregar Examenes" open="false"
-									mold="3d">
+								<groupbox id="gpxExamen" title="Agregar Examenes" open="false">
+									<caption label="Agregar Examenes"
+										style="color:blue; font-size: 12px; font-weight:bold" />
 									<hbox>
 										<listbox id="ltbExamenes" height="220px" width="250px"
 											emptyMessage="No hay Examenes Registrados">
@@ -469,8 +560,9 @@
 									</hbox>
 								</groupbox>
 								<!-- termina primero -->
-								<groupbox id="gpxEspecialista" title="Agregar Especialistas"
-									open="false" mold="3d">
+								<groupbox id="gpxEspecialista" open="false">
+									<caption label="Agregar Especialistas"
+										style="color:blue; font-size: 12px; font-weight:bold" />
 									<hbox>
 										<listbox id="ltbEspecialistas" height="220px" width="250px"
 											emptyMessage="No hay Especialistas Registrados">
@@ -526,8 +618,9 @@
 									</hbox>
 								</groupbox>
 								<!-- termina segundo -->
-								<groupbox id="gpxServicioExterno" title="Agregar Servicios Externos"
-									open="false" mold="3d">
+								<groupbox id="gpxServicioExterno" open="false">
+									<caption label="Agregar Servicios Externos"
+										style="color:blue; font-size: 12px; font-weight:bold" />
 									<hbox>
 										<listbox id="ltbServicioExterno" height="220px" width="250px"
 											emptyMessage="No hay Servicios Externos Registrados">
