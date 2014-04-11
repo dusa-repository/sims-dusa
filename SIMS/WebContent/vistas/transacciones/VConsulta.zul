@@ -28,7 +28,7 @@
 				</rows>
 			</grid>
 			<separator />
-			<tabbox  height="auto" id="taxConsulta" orient="horizontal">
+			<tabbox height="auto" id="taxConsulta" orient="horizontal">
 				<tabs id="tbsConsulta" width="auto">
 					<tab label="Identificacion" id="tabIdentificacion" />
 					<tab label="Consulta" id="tabConsulta" />
@@ -169,7 +169,7 @@
 						<tabbox height="auto" id="taxOtrosDatos" orient="horizontal">
 							<tabs id="tbsOtrosDatos">
 								<tab label="Datos de Contacto" id="tabDatosContacto" />
-								<tab label="Carga Familiar" id="tabCargaFamiliar" />
+								<tab label="Carga Familiar" id="tabCarga"/>
 							</tabs>
 							<tabpanels>
 								<tabpanel>
@@ -240,7 +240,7 @@
 											<listitem>
 												<listcell label="${each.cedula}">
 												</listcell>
-												<listcell label="${each.horaAuditoria}">
+												<listcell label="${each.primerNombre}">
 												</listcell>
 												<listcell label="${each.parentescoFamiliar}">
 												</listcell>
@@ -271,10 +271,10 @@
 										onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la 
 										Cita" width="60px"/> -->
 									<radiogroup id="rdgMotivo">
-									<vbox>
-										<radio label="Accidente Laboral" value="accidente" id="rdoAccidente" />
-										<radio label="Otro" value="otro" id="rdoOtro" />
-									</vbox>
+										<vbox>
+											<radio label="Accidente Laboral" value="accidente" id="rdoAccidente" />
+											<radio label="Otro" value="otro" id="rdoOtro" />
+										</vbox>
 									</radiogroup>
 									<label class="etiqueta" value="Observacion de la Consulta:" />
 									<textbox multiline="true" maxlength="500" id="txtObservacion"
@@ -367,6 +367,7 @@
 						<groupbox id="gpxMedicina" open="false">
 							<caption label="Agregar Medicinas"
 								style="color:blue; font-size: 12px; font-weight:bold" />
+							<separator />
 							<hbox>
 								<listbox id="ltbMedicinas" height="250px" width="220px"
 									emptyMessage="No hay Medicinas Registradas">
@@ -425,11 +426,13 @@
 											<row>
 												<cell colspan="2">
 													<vbox>
-														<button id="btnAgregarMedicinas" image="/public/imagenes/botones/agregar.png"
-															tooltiptext="Agregar Medicinas" width="40px" />
+														<button label="Agregar Medicinas" id="btnAgregarMedicinas"
+															image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Medicinas"
+															width="70px" />
 													</vbox>
 												</cell>
 											</row>
+
 											<row>
 												<label value="Prioridad Recipe:" />
 												<combobox tooltiptext="Seleccione el Sexo"
@@ -445,6 +448,15 @@
 													constraint="no past,no empty" onCreate="self.value = new Date()"
 													tooltiptext="Indique la Fecha de Vencimiento del Recipe" />
 											</row>
+											<row>
+												<cell colspan="2">
+													<vbox>
+														<button label="Generar Recipe" id="btnGenerarRecipe"
+															image="/public/imagenes/botones/generar.png" tooltiptext="Generar Recipe"
+															width="60px" />
+													</vbox>
+												</cell>
+											</row>
 										</rows>
 									</grid>
 								</vbox>
@@ -453,6 +465,7 @@
 						<groupbox id="gpxDiagnostico" open="false">
 							<caption label="Agregar Diagnosticos"
 								style="color:blue; font-size: 12px; font-weight:bold" />
+							<separator />
 							<hbox>
 								<listbox id="ltbDiagnosticos" height="250px" width="220px"
 									emptyMessage="No hay Diagnosticos Registrados">
@@ -480,7 +493,7 @@
 									<button id="pasar2Diagnostico" image="/public/imagenes/botones/atras.png"
 										tooltiptext="Quitar Diagnostico" width="30px" />
 								</vbox>
-								<listbox id="ltbDiagnosticosAgregados" height="250px"
+								<listbox id="ltbDiagnosticosAgregados" width="650px" height="250px"
 									emptyMessage="No ha Seleccionado Ningún Diagnostico">
 									<listhead>
 										<listheader label="Diagnostico" width="40%" />
@@ -501,18 +514,22 @@
 										</listitem>
 									</template>
 								</listbox>
-								<button id="btnAgregarDiagnosticos" image="/public/imagenes/botones/agregar.png"
-									tooltiptext="Agregar Diagnosticos" width="50px" />
+								<button label="Agregar Diagnosticos" id="btnAgregarDiagnosticos"
+									image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Diagnosticos"
+									width="90px" />
+
 							</hbox>
 						</groupbox>
 						<!-- empieza -->
 						<groupbox id="gpxServicio" open="false">
 							<caption label="Agregar Servicios"
 								style="color:blue; font-size: 12px; font-weight:bold" />
+							<separator />
 							<hbox>
-								<groupbox id="gpxExamen" title="Agregar Examenes" open="false">
+								<groupbox id="gpxExamen" open="false">
 									<caption label="Agregar Examenes"
 										style="color:blue; font-size: 12px; font-weight:bold" />
+									<separator />
 									<hbox>
 										<listbox id="ltbExamenes" height="220px" width="250px"
 											emptyMessage="No hay Examenes Registrados">
@@ -561,14 +578,18 @@
 												</listitem>
 											</template>
 										</listbox>
-										<button id="btnAgregarExamenes" image="/public/imagenes/botones/agregar.png"
-											tooltiptext="Agregar Examenes" width="50px" />
+										<button  label="Agregar Examenes"  id="btnAgregarExamenes" image="/public/imagenes/botones/agregar.png"
+											tooltiptext="Agregar Examenes" width="70px" />
+										<button label="Generar Orden" id="btnGenerarOrden"
+											image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
+											width="60px" />
 									</hbox>
 								</groupbox>
 								<!-- termina primero -->
 								<groupbox id="gpxEspecialista" open="false">
 									<caption label="Agregar Especialistas"
 										style="color:blue; font-size: 12px; font-weight:bold" />
+									<separator />
 									<hbox>
 										<listbox id="ltbEspecialistas" height="220px" width="250px"
 											emptyMessage="No hay Especialistas Registrados">
@@ -619,14 +640,18 @@
 												</listitem>
 											</template>
 										</listbox>
-										<button id="btnAgregarEspecialistas" image="/public/imagenes/botones/agregar.png"
-											tooltiptext="Agregar Especialistas" width="50px" />
+										<button label="Agregar Especialistas"  id="btnAgregarEspecialistas" image="/public/imagenes/botones/agregar.png"
+											tooltiptext="Agregar Especialistas" width="90px" />
+														<button label="Generar Referencia" id="btnGenerarReferencia"
+											image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
+											width="70px" />
 									</hbox>
 								</groupbox>
 								<!-- termina segundo -->
 								<groupbox id="gpxServicioExterno" open="false">
 									<caption label="Agregar Servicios Externos"
 										style="color:blue; font-size: 12px; font-weight:bold" />
+									<separator />
 									<hbox>
 										<listbox id="ltbServicioExterno" height="220px" width="250px"
 											emptyMessage="No hay Servicios Externos Registrados">
@@ -678,13 +703,19 @@
 												</listitem>
 											</template>
 										</listbox>
-										<button id="btnAgregarServicios" image="/public/imagenes/botones/agregar.png"
-											tooltiptext="Agregar Servicios Externos" width="50px" />
+										<button label="Agregar Servicios" id="btnAgregarServicios" image="/public/imagenes/botones/agregar.png"
+											tooltiptext="Agregar Servicios Externos" width="70px" />
+																		<button label="Generar Orden" id="btnGenerarOrdenServicios"
+											image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
+											width="60px" />
 									</hbox>
 								</groupbox>
 							</hbox>
 						</groupbox>
 						<!-- termina -->
+						<separator/>
+								<separator/>
+								<div id="botoneraConsulta" />
 					</tabpanel>
 					<tabpanel>
 						<hbox>
@@ -770,7 +801,7 @@
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
-			<div id="botoneraConsulta" />
+	
 			<div id="divCatalogoPacientes" />
 		</groupbox>
 	</div>

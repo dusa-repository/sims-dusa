@@ -42,6 +42,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Spinner;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 
@@ -196,8 +197,8 @@ public class CConsulta extends CGenerico {
 	private Label lblTelefono1E;
 	@Wire
 	private Label lblTelefono2E;
-//	@Wire
-//	private Label lblParentescoFamiliar;
+	@Wire
+	private Tab tabCarga;
 
 	//-----------------------------
 
@@ -611,6 +612,7 @@ public class CConsulta extends CGenerico {
 				+ paciente.getSegundoNombre());
 		lblApellidos.setValue(paciente.getPrimerApellido() + " "
 				+ paciente.getSegundoApellido());
+		if(paciente.getEmpresa()!=null)
 		lblEmpresa.setValue(paciente.getEmpresa().getNombre());
 		lblCedula.setValue(paciente.getCedula());
 
@@ -673,18 +675,23 @@ public class CConsulta extends CGenerico {
 		} else
 			imagenPaciente.setVisible(false);
 
-//		if (!paciente.isTrabajador()) {
-//			Paciente familiar = servicioPaciente.buscarPorCedula(paciente
-//					.getCedulaFamiliar());
-//			lblNombres.setValue(familiar.getPrimerNombre() + " "
-//					+ familiar.getSegundoNombre());
-//			lblApellidos.setValue(familiar.getPrimerApellido() + " "
-//					+ familiar.getSegundoApellido());
-//			lblFicha.setValue(familiar.getFicha());
-//			lblCedula.setValue(familiar.getCedula());
-//			cedTrabajador = familiar.getCedula();
-//			cmbParentescoFamiliar.setValue(familiar.getParentescoFamiliar());
-//		}
+		if (paciente.isTrabajador()) {
+			List<Paciente> familiares = servicioPaciente.buscarParientes(paciente
+					.getCedula());
+			for (int i = 0; i < familiares.size(); i++) {
+
+				String nombre = familiares.get(i).getPrimerNombre();
+				String apellido = familiares.get(i).getPrimerApellido();
+				Paciente pacienteFor = familiares.get(i);
+				pacienteFor.setPrimerNombre(nombre + " " + apellido);
+			}
+			ltbCargaFamiliar
+			.setModel(new ListModelList<Paciente>(
+					familiares));
+		}
+		else
+			tabCarga.setVisible(false);
+			
 	}
 
 	/* Permite la seleccion de un item del catalogo de pacientes */
