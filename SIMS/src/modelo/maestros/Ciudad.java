@@ -43,7 +43,7 @@ public class Ciudad implements Serializable {
 	
 	@OneToMany(mappedBy="ciudad")
 	private Set<Consultorio> consultorios;
-	
+
 	public Ciudad() {
 	}
 	
