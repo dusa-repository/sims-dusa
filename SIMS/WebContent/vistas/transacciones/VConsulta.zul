@@ -257,8 +257,8 @@
 								<column label="" width="11%" />
 								<column label="" width="13%" />
 								<column label="" width="11%" />
-								<column label="" width="8%" />
-								<column label="" width="20%" />
+								<column label="" width="14%" />
+								<column label="" width="14%" />
 								<column label="" width="37%" />
 							</columns>
 							<rows>
@@ -266,10 +266,16 @@
 									<label class="etiqueta" value="Fecha Consulta:" />
 									<datebox readonly="true" width="100%" id="dtbFechaConsulta"
 										onCreate="self.value = new Date()" cols="8" />
-									<label class="etiqueta" value="Hora Consulta:" />
-									<timebox id="tmbHoraConsulta" hflex="1" format="a hh:mm:ss"
-										onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita"
-										width="60px" />
+									<label class="etiqueta" value="Motivo de consulta:" />
+									<!-- <timebox id="tmbHoraConsulta" hflex="1" format="a hh:mm:ss" 
+										onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la 
+										Cita" width="60px"/> -->
+									<radiogroup id="rdgMotivo">
+									<vbox>
+										<radio label="Accidente Laboral" value="accidente" id="rdoAccidente" />
+										<radio label="Otro" value="otro" id="rdoOtro" />
+									</vbox>
+									</radiogroup>
 									<label class="etiqueta" value="Observacion de la Consulta:" />
 									<textbox multiline="true" maxlength="500" id="txtObservacion"
 										hflex="1" tooltiptext="Ingrese una Observacionn de la Consulta" />

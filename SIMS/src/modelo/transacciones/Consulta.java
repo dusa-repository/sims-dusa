@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 
@@ -55,6 +57,10 @@ public class Consulta implements Serializable {
 	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
 	
+	@Column
+	@Type(type="org.hibernate.type.NumericBooleanType")
+	private boolean accidenteLaboral;
+	
 	@OneToMany(mappedBy = "consulta")
 	private Set<ConsultaDiagnostico> diagnosticos;
 	
@@ -77,7 +83,7 @@ public class Consulta implements Serializable {
 
 	public Consulta(long idConsulta, Paciente paciente, Usuario usuario, Timestamp fechaConsulta, String horaConsulta,
 			String observacion, String horaAuditoria, Timestamp fechaAuditoria,
-			String usuarioAuditoria) {
+			String usuarioAuditoria, boolean accidenteLaboral) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
@@ -88,6 +94,7 @@ public class Consulta implements Serializable {
 		this.fechaAuditoria = fechaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.usuario = usuario;
+		this.accidenteLaboral = accidenteLaboral;
 	}
 
 	
@@ -162,6 +169,14 @@ public class Consulta implements Serializable {
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+	public boolean isAccidenteLaboral() {
+		return accidenteLaboral;
+	}
+
+	public void setAccidenteLaboral(boolean accidenteLaboral) {
+		this.accidenteLaboral = accidenteLaboral;
 	}
 
 	public Set<ConsultaDiagnostico> getDiagnosticos() {
