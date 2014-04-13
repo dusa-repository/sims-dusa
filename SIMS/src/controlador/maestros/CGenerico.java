@@ -28,6 +28,8 @@ import org.zkoss.zul.Tab;
 
 import arbol.CArbol;
 
+import servicio.maestros.SAntecedente;
+import servicio.maestros.SAntecedenteTipo;
 import servicio.maestros.SCategoriaDiagnostico;
 import servicio.maestros.SCategoriaMedicina;
 import servicio.maestros.SCiudad;
@@ -65,6 +67,10 @@ import servicio.transacciones.SConsultaServicioExterno;
 public abstract class CGenerico extends SelectorComposer<Component> {
 
 	private static final long serialVersionUID = -2264423023637489596L;
+	@WireVariable("SAntecedente")
+	protected SAntecedente servicioAntecedente;
+	@WireVariable("SAntecedenteTipo")
+	protected SAntecedenteTipo servicioAntecedenteTipo;
 	@WireVariable("SArbol")
 	protected SArbol servicioArbol;
 	@WireVariable("SCategoriaDiagnostico")
