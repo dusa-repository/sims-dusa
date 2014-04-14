@@ -6,10 +6,13 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import modelo.maestros.Antecedente;
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialista;
 import modelo.maestros.Examen;
@@ -128,7 +131,11 @@ public class CConsulta extends CGenerico {
 	private Listbox ltbCargaFamiliar;
 	@Wire
 	private Listbox ltbConsultas;
-	//.---------------------------
+	@Wire
+	private Listbox ltbMedicos;
+	@Wire
+	private Listbox ltbLaborales;
+	// .---------------------------
 	@Wire
 	private Image imagenPaciente;
 	@Wire
@@ -199,8 +206,10 @@ public class CConsulta extends CGenerico {
 	private Label lblTelefono2E;
 	@Wire
 	private Tab tabCarga;
+	@Wire
+	private Tab tabLaborales;
 
-	//-----------------------------
+	// -----------------------------
 
 	List<Listbox> listas = new ArrayList<Listbox>();
 
@@ -230,18 +239,40 @@ public class CConsulta extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 
+		llenarAntecedentes();
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
 				cerrarVentana(divConsulta, "Consulta");
-
 			}
 
 			@Override
 			public void limpiar() {
 				// TODO Auto-generated method stub
-
+				idPaciente = 0;
+				idConsulta = 0;
+				limpiarListBox();
+				limpiarListas();
+				txtCedula.setValue("");
+				txtObservacion.setValue("");
+				rdoAccidente.setChecked(false);
+				rdoOtro.setChecked(false);
+				dtbFechaConsulta.setValue(fecha);
+				dtbValido.setValue(fecha);
+				cmbPrioridad.setValue("");
+				for (int i = 0; i < ltbLaborales.getItemCount(); i++) {
+					Listitem listItem = ltbLaborales.getItemAtIndex(i);
+					if (listItem.isSelected()) {
+						listItem.setSelected(false);
+					}
+				}
+				for (int i = 0; i < ltbMedicos.getItemCount(); i++) {
+					Listitem listItem = ltbMedicos.getItemAtIndex(i);
+					if (listItem.isSelected()) {
+						listItem.setSelected(false);
+					}
+				}
 			}
 
 			@Override
@@ -260,20 +291,21 @@ public class CConsulta extends CGenerico {
 						servicioConsultaServicioExterno
 								.borrarServiciosDeConsulta(consulta);
 					}
-//					Date hConsulta = tmbHoraConsulta.getValue();
+					// Date hConsulta = tmbHoraConsulta.getValue();
 					Date fechaCon = dtbFechaConsulta.getValue();
 					Timestamp fechaConsulta = new Timestamp(fechaCon.getTime());
-//					String horaConsulta = df.format(hConsulta);
+					// String horaConsulta = df.format(hConsulta);
 					String observacion = txtObservacion.getValue();
 					Usuario usuario = null;
 					Paciente paciente = servicioPaciente
 							.buscarPorCedula(txtCedula.getValue());
 					boolean accidente = false;
-					if(rdoAccidente.isChecked())
+					if (rdoAccidente.isChecked())
 						accidente = true;
 					Consulta consulta = new Consulta(idConsulta, paciente,
 							usuario, fechaConsulta, horaAuditoria, observacion,
-							horaAuditoria, fechaHora, nombreUsuarioSesion(), accidente);
+							horaAuditoria, fechaHora, nombreUsuarioSesion(),
+							accidente);
 					servicioConsulta.guardar(consulta);
 					Consulta consultaDatos = new Consulta();
 					if (idConsulta != 0)
@@ -285,6 +317,7 @@ public class CConsulta extends CGenerico {
 					guardarExamenes(consultaDatos);
 					guardarEspecialistas(consultaDatos);
 					guardarServicios(consultaDatos);
+					guardarAntecedentes(paciente);
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
@@ -295,13 +328,38 @@ public class CConsulta extends CGenerico {
 			@Override
 			public void eliminar() {
 				// TODO Auto-generated method stub
-
 			}
 		};
 
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraConsulta.appendChild(botonera);
 
+	}
+
+	public void guardarAntecedentes(Paciente paciente) {
+		Set<Antecedente> antecedentes = new HashSet<Antecedente>();
+		if (ltbLaborales.getItemCount() != 0) {
+			for (int i = 0; i < ltbLaborales.getItemCount(); i++) {
+				Listitem listItem = ltbLaborales.getItemAtIndex(i);
+				if (listItem.isSelected()) {
+					Antecedente antecendente = listItem.getValue();
+					antecedentes.add(antecendente);
+				}
+			}
+		}
+
+		if (ltbMedicos.getItemCount() != 0) {
+			for (int i = 0; i < ltbMedicos.getItemCount(); i++) {
+
+				Listitem listItem = ltbMedicos.getItemAtIndex(i);
+				if (listItem.isSelected()) {
+					Antecedente antecendente = listItem.getValue();
+					antecedentes.add(antecendente);
+				}
+			}
+		}
+		paciente.setAntecedentes(antecedentes);
+		servicioPaciente.guardar(paciente);
 	}
 
 	public void guardarServicios(Consulta consultaDatos) {
@@ -399,7 +457,7 @@ public class CConsulta extends CGenerico {
 			return false;
 		} else {
 			if (dtbFechaConsulta.getText().compareTo("") == 0
-//					|| tmbHoraConsulta.getText().compareTo("") == 0
+					// || tmbHoraConsulta.getText().compareTo("") == 0
 					|| txtObservacion.getText().compareTo("") == 0
 					|| cmbPrioridad.getText().compareTo("") == 0
 					|| dtbValido.getText().compareTo("") == 0) {
@@ -442,9 +500,9 @@ public class CConsulta extends CGenerico {
 													Messagebox.OK,
 													Messagebox.INFORMATION);
 									return false;
-								} else{
-									if (!rdoAccidente.isChecked() && !rdoOtro
-											.isChecked()) {
+								} else {
+									if (!rdoAccidente.isChecked()
+											&& !rdoOtro.isChecked()) {
 										Messagebox
 												.show("Debe Seleccionar un motivo de consulta",
 														"Informacion",
@@ -462,9 +520,25 @@ public class CConsulta extends CGenerico {
 		}
 	}
 
+	public void llenarAntecedentes() {
+		List<Antecedente> antecedentesLaborales = servicioAntecedente
+				.buscarLaborales();
+		ltbLaborales.setModel(new ListModelList<Antecedente>(
+				antecedentesLaborales));
+
+		List<Antecedente> antecedentesMedicos = servicioAntecedente
+				.buscarMedicos();
+		ltbMedicos
+				.setModel(new ListModelList<Antecedente>(antecedentesMedicos));
+
+		listasMultiples();
+	}
+
 	/* Llena la listas al iniciar con todo lo existente */
 	private void llenarListas() {
 		Consulta consulta = servicioConsulta.buscar(idConsulta);
+		Paciente paciente = servicioPaciente.buscarPorCedula(String
+				.valueOf(idPaciente));
 		List<Paciente> carga = servicioPaciente.buscarParientes(String
 				.valueOf(idPaciente));
 		ltbCargaFamiliar.setModel(new ListModelList<Paciente>(carga));
@@ -530,7 +604,44 @@ public class CConsulta extends CGenerico {
 				.setModel(new ListModelList<ConsultaServicioExterno>(
 						serviciosResumen));
 
+		List<Antecedente> laboralesPaciente = servicioAntecedente
+				.buscarLaboralesPaciente(paciente);
+
+		List<Antecedente> medicosPaciente = servicioAntecedente
+				.buscarMedicosPaciente(paciente);
+
 		listasMultiples();
+
+		if (!laboralesPaciente.isEmpty()) {
+			for (int i = 0; i < laboralesPaciente.size(); i++) {
+				long id = laboralesPaciente.get(i).getIdAntecedente();
+				for (int j = 0; j < ltbLaborales.getItemCount(); j++) {
+					Listitem listItem = ltbLaborales.getItemAtIndex(j);
+					long id2 = ((Spinner) ((listItem.getChildren().get(1)))
+							.getFirstChild()).getValue();
+					if (id == id2) {
+						listItem.setSelected(true);
+						j = ltbLaborales.getItemCount();
+					}
+				}
+			}
+		}
+
+		if (!medicosPaciente.isEmpty()) {
+			for (int i = 0; i < medicosPaciente.size(); i++) {
+				long id = medicosPaciente.get(i).getIdAntecedente();
+				for (int j = 0; j < ltbMedicos.getItemCount(); j++) {
+					Listitem listItem = ltbMedicos.getItemAtIndex(j);
+					long id2 = ((Spinner) ((listItem.getChildren().get(1)))
+							.getFirstChild()).getValue();
+					if (id == id2) {
+						listItem.setSelected(true);
+						j = ltbMedicos.getItemCount();
+					}
+				}
+			}
+		}
+
 	}
 
 	private void listasMultiples() {
@@ -545,6 +656,8 @@ public class CConsulta extends CGenerico {
 			listas.add(ltbMedicinasAgregadas);
 			listas.add(ltbServicioExterno);
 			listas.add(ltbServicioExternoAgregados);
+			listas.add(ltbLaborales);
+			listas.add(ltbMedicos);
 		}
 		for (int i = 0; i < listas.size(); i++) {
 			listas.get(i).setMultiple(false);
@@ -572,8 +685,8 @@ public class CConsulta extends CGenerico {
 					return servicioPaciente.filtroCedula(valor);
 				case "Apellido":
 					return servicioPaciente.filtroApellido1(valor);
-//				case "Empresa":
-//					return servicioPaciente.filtroEmpresa(valor);
+					// case "Empresa":
+					// return servicioPaciente.filtroEmpresa(valor);
 				default:
 					return pacientes;
 				}
@@ -599,6 +712,9 @@ public class CConsulta extends CGenerico {
 			Listitem listItem = ltbConsultas.getSelectedItem();
 			Consulta consulta = listItem.getValue();
 			idConsulta = consulta.getIdConsulta();
+			if(consulta.isAccidenteLaboral())
+				rdoAccidente.setChecked(true);
+			else rdoOtro.setChecked(true);
 			idPaciente = Long.parseLong(consulta.getPaciente().getCedula());
 			llenarCampos(consulta.getPaciente());
 			llenarListas();
@@ -612,10 +728,10 @@ public class CConsulta extends CGenerico {
 				+ paciente.getSegundoNombre());
 		lblApellidos.setValue(paciente.getPrimerApellido() + " "
 				+ paciente.getSegundoApellido());
-		if(paciente.getEmpresa()!=null)
-		lblEmpresa.setValue(paciente.getEmpresa().getNombre());
+		if (paciente.getEmpresa() != null)
+			lblEmpresa.setValue(paciente.getEmpresa().getNombre());
 		lblCedula.setValue(paciente.getCedula());
-
+		
 		lblFicha.setValue(paciente.getFicha());
 		lblAlergias.setValue(paciente.getObservacionAlergias());
 		lblLugarNac.setValue(paciente.getLugarNacimiento());
@@ -625,7 +741,8 @@ public class CConsulta extends CGenerico {
 		lblMano.setValue(paciente.getMano());
 		lblOrigen.setValue(paciente.getOrigenDiscapacidad());
 		lblTipoDiscapacidad.setValue(paciente.getTipoDiscapacidad());
-		lblObservacionDiscapacidad.setValue(paciente.getObservacionDiscapacidad());
+		lblObservacionDiscapacidad.setValue(paciente
+				.getObservacionDiscapacidad());
 		lblCargo.setValue(paciente.getCargo());
 		lblDireccion.setValue(paciente.getDireccion());
 		lblTelefono1.setValue(paciente.getTelefono1());
@@ -636,11 +753,11 @@ public class CConsulta extends CGenerico {
 		lblTelefono1E.setValue(paciente.getTelefono1Emergencia());
 		lblTelefono2E.setValue(paciente.getTelefono2Emergencia());
 		lblParentesco.setValue(paciente.getParentescoEmergencia());
-//		lblParentescoFamiliar.setValue(paciente.getParentescoFamiliar());
+		// lblParentescoFamiliar.setValue(paciente.getParentescoFamiliar());
 		lblEdad.setValue(String.valueOf(paciente.getEdad()));
 		lblEstatura.setValue(String.valueOf(paciente.getEstatura()));
 		lblPeso.setValue(String.valueOf(paciente.getPeso()));
-		lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
+		// lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
 
 		if (paciente.isAlergia())
 			lblAlergico.setValue("SI");
@@ -676,8 +793,8 @@ public class CConsulta extends CGenerico {
 			imagenPaciente.setVisible(false);
 
 		if (paciente.isTrabajador()) {
-			List<Paciente> familiares = servicioPaciente.buscarParientes(paciente
-					.getCedula());
+			List<Paciente> familiares = servicioPaciente
+					.buscarParientes(paciente.getCedula());
 			for (int i = 0; i < familiares.size(); i++) {
 
 				String nombre = familiares.get(i).getPrimerNombre();
@@ -685,13 +802,11 @@ public class CConsulta extends CGenerico {
 				Paciente pacienteFor = familiares.get(i);
 				pacienteFor.setPrimerNombre(nombre + " " + apellido);
 			}
-			ltbCargaFamiliar
-			.setModel(new ListModelList<Paciente>(
-					familiares));
-		}
-		else
+			ltbCargaFamiliar.setModel(new ListModelList<Paciente>(familiares));
+		} else{
 			tabCarga.setVisible(false);
-			
+			tabLaborales.setVisible(false);
+		}
 	}
 
 	/* Permite la seleccion de un item del catalogo de pacientes */
@@ -1101,6 +1216,36 @@ public class CConsulta extends CGenerico {
 			return false;
 		else
 			return true;
+	}
+
+	public void limpiarListas() {
+		List<List<?>> limpiador = new ArrayList<List<?>>();
+		limpiador.add(diagnosticosAgregados);
+		limpiador.add(diagnosticosDisponibles);
+		limpiador.add(diagnosticosResumen);
+		limpiador.add(especialistasAgregados);
+		limpiador.add(especialistasDisponibles);
+		limpiador.add(especialistasResumen);
+		limpiador.add(examenesAgregado);
+		limpiador.add(examenesDisponibles);
+		limpiador.add(examenesResumen);
+		limpiador.add(medicinasAgregadas);
+		limpiador.add(medicinasDisponibles);
+		limpiador.add(medicinasResumen);
+		limpiador.add(serviciosAgregados);
+		limpiador.add(serviciosDisponibles);
+		limpiador.add(serviciosResumen);
+		for (int q = 0; q < limpiador.size(); q++) {
+			limpiador.get(q).clear();
+		}
+	}
+
+	public void limpiarListBox() {
+		for (int i = 0; i < listas.size(); i++) {
+			if (!listas.get(i).equals(ltbLaborales)
+					|| !listas.get(i).equals(ltbMedicos))
+				listas.get(i).getItems().clear();
+		}
 	}
 
 	@Listen("onClick = #gpxResumen")
