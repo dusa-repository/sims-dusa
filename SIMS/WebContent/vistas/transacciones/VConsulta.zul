@@ -20,8 +20,6 @@
 							tooltiptext="Ingrese la Cedula del Paciente" />
 						<button id="btnBuscarPaciente" label="Buscar Paciente"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
-						<!-- <button id="btnBuscarFamiliar" label="Buscar Familiar" tooltiptext="Catalogo" 
-							image="/public/imagenes/botones/buscar.png" /> -->
 						<hbox />
 						<hbox />
 					</row>
@@ -169,7 +167,7 @@
 						<tabbox height="auto" id="taxOtrosDatos" orient="horizontal">
 							<tabs id="tbsOtrosDatos">
 								<tab label="Datos de Contacto" id="tabDatosContacto" />
-								<tab label="Carga Familiar" id="tabCarga"/>
+								<tab label="Carga Familiar" id="tabCarga" />
 							</tabs>
 							<tabpanels>
 								<tabpanel>
@@ -493,8 +491,8 @@
 									<button id="pasar2Diagnostico" image="/public/imagenes/botones/atras.png"
 										tooltiptext="Quitar Diagnostico" width="30px" />
 								</vbox>
-								<listbox id="ltbDiagnosticosAgregados" width="650px" height="250px"
-									emptyMessage="No ha Seleccionado Ningún Diagnostico">
+								<listbox id="ltbDiagnosticosAgregados" width="650px"
+									height="250px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
 									<listhead>
 										<listheader label="Diagnostico" width="40%" />
 										<listheader label="Observacion" width="60%" />
@@ -578,8 +576,9 @@
 												</listitem>
 											</template>
 										</listbox>
-										<button  label="Agregar Examenes"  id="btnAgregarExamenes" image="/public/imagenes/botones/agregar.png"
-											tooltiptext="Agregar Examenes" width="70px" />
+										<button label="Agregar Examenes" id="btnAgregarExamenes"
+											image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Examenes"
+											width="70px" />
 										<button label="Generar Orden" id="btnGenerarOrden"
 											image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
 											width="60px" />
@@ -640,9 +639,10 @@
 												</listitem>
 											</template>
 										</listbox>
-										<button label="Agregar Especialistas"  id="btnAgregarEspecialistas" image="/public/imagenes/botones/agregar.png"
-											tooltiptext="Agregar Especialistas" width="90px" />
-														<button label="Generar Referencia" id="btnGenerarReferencia"
+										<button label="Agregar Especialistas" id="btnAgregarEspecialistas"
+											image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Especialistas"
+											width="90px" />
+										<button label="Generar Referencia" id="btnGenerarReferencia"
 											image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
 											width="70px" />
 									</hbox>
@@ -703,9 +703,10 @@
 												</listitem>
 											</template>
 										</listbox>
-										<button label="Agregar Servicios" id="btnAgregarServicios" image="/public/imagenes/botones/agregar.png"
-											tooltiptext="Agregar Servicios Externos" width="70px" />
-																		<button label="Generar Orden" id="btnGenerarOrdenServicios"
+										<button label="Agregar Servicios" id="btnAgregarServicios"
+											image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Servicios Externos"
+											width="70px" />
+										<button label="Generar Orden" id="btnGenerarOrdenServicios"
 											image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
 											width="60px" />
 									</hbox>
@@ -713,9 +714,9 @@
 							</hbox>
 						</groupbox>
 						<!-- termina -->
-						<separator/>
-								<separator/>
-								<div id="botoneraConsulta" />
+						<separator />
+						<separator />
+						<div id="botoneraConsulta" />
 					</tabpanel>
 					<tabpanel>
 						<hbox>
@@ -753,19 +754,17 @@
 										<listbox id="ltbMedicos" height="260px" width="auto"
 											emptyMessage="El Paciente no posee Antecedentes Medicos">
 											<listhead>
-												<listheader label="Fecha" width="30%" />
-												<listheader label="Observacion" width="70%" />
+												<listheader label="Nombre" width="100%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.fechaConsulta}">
-													</listcell>
-													<listcell label="${each.observacion}">
+													<listcell label="${each.nombre}">
 													</listcell>
 													<listcell>
-														<spinner value="${each.idConsulta}" width="98%"
-															visible="false" disabled="true" />
+														<spinner inplace="true" width="98%"
+															value="${each.idAntecedente}" visible="false"
+															disabled="true" />
 													</listcell>
 												</listitem>
 											</template>
@@ -777,19 +776,17 @@
 										<listbox id="ltbLaborales" height="260px" width="auto"
 											emptyMessage="El Paciente no posee Antecedentes Laborales">
 											<listhead>
-												<listheader label="Fecha" width="30%" />
-												<listheader label="Observacion" width="70%" />
+												<listheader label="Nombre" width="100%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.fechaConsulta}">
-													</listcell>
-													<listcell label="${each.observacion}">
+													<listcell label="${each.nombre}">
 													</listcell>
 													<listcell>
-														<spinner value="${each.idConsulta}" width="98%"
-															visible="false" disabled="true" />
+														<spinner inplace="true" width="98%"
+															value="${each.idAntecedente}" visible="false"
+															disabled="true" />
 													</listcell>
 												</listitem>
 											</template>
@@ -801,7 +798,7 @@
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
-	
+
 			<div id="divCatalogoPacientes" />
 		</groupbox>
 	</div>
