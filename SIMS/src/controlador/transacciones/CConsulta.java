@@ -257,10 +257,10 @@ public class CConsulta extends CGenerico {
 	List<ServicioExterno> serviciosDisponibles = new ArrayList<ServicioExterno>();
 	List<ConsultaServicioExterno> serviciosAgregados = new ArrayList<ConsultaServicioExterno>();
 	List<ConsultaServicioExterno> serviciosResumen = new ArrayList<ConsultaServicioExterno>();
-	
+
 	long idPaciente = 0;
 	long idConsulta = 0;
-	
+
 	Catalogo<Paciente> catalogoPaciente;
 
 	GroupsModel<Antecedente, Object, Antecedente> model;
@@ -272,12 +272,12 @@ public class CConsulta extends CGenerico {
 	Buscar<Examen> buscarExamen;
 	Buscar<Especialista> buscarEspecialista;
 	Buscar<ServicioExterno> buscarServicio;
-	
+
 	private CArbol cArbol = new CArbol();
-	
+
 	@Override
 	public void inicializar() throws IOException {
-				
+
 		listasMultiples();
 		buscadorMedicina();
 		buscadorDiagnostico();
@@ -293,6 +293,7 @@ public class CConsulta extends CGenerico {
 			@Override
 			public void limpiar() {
 				limpiarCampos();
+				
 			}
 
 			@Override
@@ -356,15 +357,18 @@ public class CConsulta extends CGenerico {
 	}
 
 	private void buscadorEspecialista() {
-		buscarEspecialista = new Buscar<Especialista>(ltbEspecialistas, txtBuscadorEspecialista) {
+		buscarEspecialista = new Buscar<Especialista>(ltbEspecialistas,
+				txtBuscadorEspecialista) {
 			@Override
-			protected List<Especialista> buscar(String valor) {	
+			protected List<Especialista> buscar(String valor) {
 				List<Especialista> presentacionesFiltradas = new ArrayList<Especialista>();
-				List<Especialista> presentaciones = servicioEspecialista.filtroNombre(valor);
-				for(int i=0;i<especialistasDisponibles.size();i++){
+				List<Especialista> presentaciones = servicioEspecialista
+						.filtroNombre(valor);
+				for (int i = 0; i < especialistasDisponibles.size(); i++) {
 					Especialista especialista = especialistasDisponibles.get(i);
-					for(int j=0;j<presentaciones.size();j++){
-						if(especialista.getCedula().equals(presentaciones.get(j).getCedula()))
+					for (int j = 0; j < presentaciones.size(); j++) {
+						if (especialista.getCedula().equals(
+								presentaciones.get(j).getCedula()))
 							presentacionesFiltradas.add(especialista);
 					}
 				}
@@ -377,13 +381,14 @@ public class CConsulta extends CGenerico {
 		buscarExamen = new Buscar<Examen>(ltbExamenes, txtBuscadorExamen) {
 
 			@Override
-			protected List<Examen> buscar(String valor) {	
+			protected List<Examen> buscar(String valor) {
 				List<Examen> examenesFiltradas = new ArrayList<Examen>();
 				List<Examen> examenes = servicioExamen.filtroNombre(valor);
-				for(int i=0;i<examenesDisponibles.size();i++){
+				for (int i = 0; i < examenesDisponibles.size(); i++) {
 					Examen examen = examenesDisponibles.get(i);
-					for(int j=0;j<examenes.size();j++){
-						if(examen.getIdExamen()==examenes.get(j).getIdExamen())
+					for (int j = 0; j < examenes.size(); j++) {
+						if (examen.getIdExamen() == examenes.get(j)
+								.getIdExamen())
 							examenesFiltradas.add(examen);
 					}
 				}
@@ -393,16 +398,19 @@ public class CConsulta extends CGenerico {
 	}
 
 	private void buscadorServicio() {
-		buscarServicio = new Buscar<ServicioExterno>(ltbServicioExterno, txtBuscadorServicioExterno) {
+		buscarServicio = new Buscar<ServicioExterno>(ltbServicioExterno,
+				txtBuscadorServicioExterno) {
 
 			@Override
-			protected List<ServicioExterno> buscar(String valor) {	
+			protected List<ServicioExterno> buscar(String valor) {
 				List<ServicioExterno> serviciosFiltradas = new ArrayList<ServicioExterno>();
-				List<ServicioExterno> servicios = servicioServicioExterno.filtroNombre(valor);
-				for(int i=0;i<serviciosDisponibles.size();i++){
+				List<ServicioExterno> servicios = servicioServicioExterno
+						.filtroNombre(valor);
+				for (int i = 0; i < serviciosDisponibles.size(); i++) {
 					ServicioExterno servicio = serviciosDisponibles.get(i);
-					for(int j=0;j<servicios.size();j++){
-						if(servicio.getIdServicioExterno()==servicios.get(j).getIdServicioExterno())
+					for (int j = 0; j < servicios.size(); j++) {
+						if (servicio.getIdServicioExterno() == servicios.get(j)
+								.getIdServicioExterno())
 							serviciosFiltradas.add(servicio);
 					}
 				}
@@ -412,16 +420,19 @@ public class CConsulta extends CGenerico {
 	}
 
 	private void buscadorDiagnostico() {
-		buscarDiagnostico = new Buscar<Diagnostico>(ltbDiagnosticos, txtBuscadorDiagnostico) {
+		buscarDiagnostico = new Buscar<Diagnostico>(ltbDiagnosticos,
+				txtBuscadorDiagnostico) {
 
 			@Override
-			protected List<Diagnostico> buscar(String valor) {	
+			protected List<Diagnostico> buscar(String valor) {
 				List<Diagnostico> diagnosticosFiltradas = new ArrayList<Diagnostico>();
-				List<Diagnostico> diagnosticos = servicioDiagnostico.filtroNombre(valor);
-				for(int i=0;i<diagnosticosDisponibles.size();i++){
+				List<Diagnostico> diagnosticos = servicioDiagnostico
+						.filtroNombre(valor);
+				for (int i = 0; i < diagnosticosDisponibles.size(); i++) {
 					Diagnostico diagnostico = diagnosticosDisponibles.get(i);
-					for(int j=0;j<diagnosticos.size();j++){
-						if(diagnostico.getIdDiagnostico()==diagnosticos.get(j).getIdDiagnostico())
+					for (int j = 0; j < diagnosticos.size(); j++) {
+						if (diagnostico.getIdDiagnostico() == diagnosticos.get(
+								j).getIdDiagnostico())
 							diagnosticosFiltradas.add(diagnostico);
 					}
 				}
@@ -434,13 +445,14 @@ public class CConsulta extends CGenerico {
 		buscarMedicina = new Buscar<Medicina>(ltbMedicinas, txtBuscadorMedicina) {
 
 			@Override
-			protected List<Medicina> buscar(String valor) {	
+			protected List<Medicina> buscar(String valor) {
 				List<Medicina> medicinasFiltradas = new ArrayList<Medicina>();
 				List<Medicina> medicinas = servicioMedicina.filtroNombre(valor);
-				for(int i=0;i<medicinasDisponibles.size();i++){
+				for (int i = 0; i < medicinasDisponibles.size(); i++) {
 					Medicina medicina = medicinasDisponibles.get(i);
-					for(int j=0;j<medicinas.size();j++){
-						if(medicina.getIdMedicina()==medicinas.get(j).getIdMedicina())
+					for (int j = 0; j < medicinas.size(); j++) {
+						if (medicina.getIdMedicina() == medicinas.get(j)
+								.getIdMedicina())
 							medicinasFiltradas.add(medicina);
 					}
 				}
@@ -525,7 +537,7 @@ public class CConsulta extends CGenerico {
 							.getNombre());
 					list2.setParent(arg0);
 					arg0.setCheckable(false);
-					arg0.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
+					arg0.setStyle("font-weight:bold; color:black");
 				}
 			}
 		};
@@ -831,6 +843,7 @@ public class CConsulta extends CGenerico {
 
 	private void listasMultiples() {
 		if (listas.isEmpty()) {
+			listas.add(ltbConsultas);
 			listas.add(ltbDiagnosticos);
 			listas.add(ltbDiagnosticosAgregados);
 			listas.add(ltbEspecialistas);
@@ -845,10 +858,12 @@ public class CConsulta extends CGenerico {
 			listas.add(ltbMedicos);
 		}
 		for (int i = 0; i < listas.size(); i++) {
+			if(!listas.get(i).getId().equals("ltbConsultas")){
 			listas.get(i).setMultiple(false);
 			listas.get(i).setCheckmark(false);
 			listas.get(i).setMultiple(true);
 			listas.get(i).setCheckmark(true);
+			}
 		}
 	}
 
@@ -908,6 +923,7 @@ public class CConsulta extends CGenerico {
 	public void seleccionarConsulta() {
 		if (ltbConsultas.getItemCount() != 0) {
 			Listitem listItem = ltbConsultas.getSelectedItem();
+			if(listItem!=null){
 			Consulta consulta = listItem.getValue();
 			idConsulta = consulta.getIdConsulta();
 			if (consulta.isAccidenteLaboral())
@@ -917,6 +933,7 @@ public class CConsulta extends CGenerico {
 			idPaciente = Long.parseLong(consulta.getPaciente().getCedula());
 			llenarCampos(consulta.getPaciente());
 			llenarListas();
+			}
 		}
 	}
 
@@ -930,7 +947,7 @@ public class CConsulta extends CGenerico {
 		if (paciente.getEmpresa() != null)
 			lblEmpresa.setValue(paciente.getEmpresa().getNombre());
 		lblCedula.setValue(paciente.getCedula());
-
+		lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
 		lblFicha.setValue(paciente.getFicha());
 		lblAlergias.setValue(paciente.getObservacionAlergias());
 		lblLugarNac.setValue(paciente.getLugarNacimiento());
@@ -1279,6 +1296,7 @@ public class CConsulta extends CGenerico {
 			}
 			ltbResumenMedicinas.setModel(new ListModelList<ConsultaMedicina>(
 					medicinasResumen));
+			System.out.println(medicinasAgregadas.size());
 		}
 		medicinasResumen.clear();
 		if (falta)
@@ -1440,12 +1458,12 @@ public class CConsulta extends CGenerico {
 		}
 	}
 
-
 	public void limpiarCampos() {
 		idPaciente = 0;
 		idConsulta = 0;
 		limpiarListBox();
 		limpiarListas();
+		llenarListas();
 		txtCedula.setValue("");
 		txtObservacion.setValue("");
 		rdoAccidente.setChecked(false);
@@ -1465,8 +1483,41 @@ public class CConsulta extends CGenerico {
 				listItem.setSelected(false);
 			}
 		}
+		lblNombres.setValue("");
+		lblCedula.setValue("");
+		lblApellidos.setValue("");
+		lblEmpresa.setValue("");
+		imagenPaciente.setVisible(false);
+		lblFicha.setValue("");
+		lblAlergico.setValue("");
+		lblLugarNac.setValue("");
+		lblSexo.setValue("");
+		lblEstadoCivil.setValue("");
+		lblGrupoSanguineo.setValue("");
+		lblMano.setValue("");
+		lblOrigen.setValue("");
+		lblTipoDiscapacidad.setValue("");
+		lblObservacionDiscapacidad.setValue("");
+		lblCargo.setValue("");
+		lblDireccion.setValue("");
+		lblTelefono1.setValue("");
+		lblTelefono2.setValue("");
+		lblCorreo.setValue("");
+		lblNombresE.setValue("");
+		lblApellidosE.setValue("");
+		lblTelefono1E.setValue("");
+		lblTelefono2E.setValue("");
+		lblParentesco.setValue("");
+		lblPeso.setValue("");
+		lblEdad.setValue("");
+		lblEstatura.setValue("");
+		lblCiudad.setValue("");
+		lblAlergias.setValue("");
+		lblTrabajador.setValue("");
+		lblDiscapacidad.setValue("");
+		lblLentes.setValue("");
 	}
-	
+
 	@Listen("onClick = #gpxResumen")
 	public void abrirResumen() {
 		gpxResumen.setOpen(true);
@@ -1543,34 +1594,53 @@ public class CConsulta extends CGenerico {
 		gpxServicio.setOpen(true);
 		gpxServicioExterno.setOpen(true);
 	}
-	
+
 	@Listen("onClick = #btnAbrirExamen")
-	public void divExamen(){		
+	public void divExamen() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Examen");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
 	}
 
 	@Listen("onClick = #btnAbrirDiagnostico")
-	public void divDiagnostico(){		
+	public void divDiagnostico() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Diagnostico");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
 	}
-	
+
 	@Listen("onClick = #btnAbrirEspecialista")
-	public void divEspecialista(){		
+	public void divEspecialista() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialista");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
 	}
-	
+
 	@Listen("onClick = #btnAbrirServicioExterno")
-	public void divServicio(){		
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Servicios Externos");
-		cArbol.abrirVentanas(arbolItem);	
+	public void divServicio() {
+		Arbol arbolItem = servicioArbol
+				.buscarPorNombreArbol("Servicios Externos");
+		cArbol.abrirVentanas(arbolItem);
 	}
-	
+
 	@Listen("onClick = #btnAbrirMedicina")
-	public void divMedicina(){		
+	public void divMedicina() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Medicina");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
+	}
+
+	@Listen("onOK = #txtCedula")
+	public void buscarCedula() {
+		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedula
+				.getValue());
+		if (paciente != null) {
+			llenarCampos(paciente);
+			idPaciente = Long.valueOf(paciente.getCedula());
+			List<Consulta> consultas = servicioConsulta
+					.buscarPorPaciente(paciente);
+			ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
+			llenarListas();
+		} else {
+			limpiarCampos();
+			Messagebox.show("Cedula Incorrecta", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
 	}
 }
