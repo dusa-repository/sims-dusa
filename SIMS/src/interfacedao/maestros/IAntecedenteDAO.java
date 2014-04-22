@@ -10,16 +10,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IAntecedenteDAO extends JpaRepository<Antecedente, Long> {
 
-	List<Antecedente> findByAntecedenteTipoTipoTrueOrderByAntecedenteTipoNombreAsc();
-
-	List<Antecedente> findByAntecedenteTipoTipoFalseOrderByAntecedenteTipoNombreAsc();
-
-	List<Antecedente> findByPacientesAndAntecedenteTipoTipoTrueOrderByAntecedenteTipoNombreAsc(
-			Paciente paciente);
-
-	List<Antecedente> findByPacientesAndAntecedenteTipoTipoFalseOrderByAntecedenteTipoNombreAsc(
-			Paciente paciente);
-
 	List<Antecedente> findByNombreStartingWithAllIgnoreCase(String valor);
 
 	Antecedente findByNombre(String value);
@@ -28,5 +18,12 @@ public interface IAntecedenteDAO extends JpaRepository<Antecedente, Long> {
 
 	List<Antecedente> findByAntecedenteTipoNombreStartingWithAllIgnoreCase(
 			String valor);
+
+	List<Antecedente> findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc(
+			String string);
+
+	List<Antecedente> findByPacientesAndAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc(
+			Paciente paciente, String string);
+
 
 }
