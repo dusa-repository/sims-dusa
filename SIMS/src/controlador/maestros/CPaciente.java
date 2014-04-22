@@ -688,7 +688,6 @@ public class CPaciente extends CGenerico {
 		txtApellido1Paciente.setValue(paciente.getPrimerApellido());
 		txtNombre2Paciente.setValue(paciente.getSegundoNombre());
 		txtApellido2Paciente.setValue(paciente.getSegundoApellido());
-		cmbEmpresa.setValue(paciente.getEmpresa().getNombre());
 		txtCedulaPaciente.setDisabled(true);
 		id = Long.valueOf(paciente.getCedula());
 
@@ -725,6 +724,7 @@ public class CPaciente extends CGenerico {
 
 		if (paciente.isTrabajador())
 		{
+			cmbEmpresa.setValue(paciente.getEmpresa().getNombre());
 			rdoTrabajador.setChecked(true);
 			rdoTrabajador.setDisabled(true);
 			esTrabajador();
