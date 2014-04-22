@@ -13,7 +13,7 @@
 						<textbox class="multilinea" multiline="true" id="txtNombreCiudad"
 							hflex="1" tooltiptext="Ingrese el Nombre de la Ciudad" maxlength="500" />
 						<button id="btnBuscarCiudad" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+							tooltiptext="Catalogo Ciudades" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
 						<label class="etiqueta" value="Estado:" />

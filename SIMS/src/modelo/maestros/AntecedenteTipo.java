@@ -29,8 +29,7 @@ public class AntecedenteTipo implements Serializable {
 	private String nombre;
 	
 	@Column
-	@Type(type="org.hibernate.type.NumericBooleanType")
-	private boolean tipo;
+	private String tipo;
 	
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
@@ -49,7 +48,7 @@ public class AntecedenteTipo implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public AntecedenteTipo(long idAntecedenteTipo, String nombre, boolean tipo,
+	public AntecedenteTipo(long idAntecedenteTipo, String nombre, String tipo,
 			Timestamp fechaAuditoria, String horaAuditoria,
 			String usuarioAuditoria) {
 		super();
@@ -77,13 +76,6 @@ public class AntecedenteTipo implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public boolean isTipo() {
-		return tipo;
-	}
-
-	public void setTipo(boolean tipo) {
-		this.tipo = tipo;
-	}
 
 	public Timestamp getFechaAuditoria() {
 		return fechaAuditoria;
@@ -115,6 +107,14 @@ public class AntecedenteTipo implements Serializable {
 
 	public void setAntecedentes(Set<Antecedente> antecedentes) {
 		this.antecedentes = antecedentes;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	

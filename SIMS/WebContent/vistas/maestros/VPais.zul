@@ -15,7 +15,7 @@
 							maxlength="500" tooltiptext="Ingrese el Nombre del Pais"
 							multiline="true" />
 						<button id="btnBuscarPais" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+							tooltiptext="Catalogo Paises" image="/public/imagenes/botones/buscar.png" />
 					</row>
 				</rows>
 			</grid>
