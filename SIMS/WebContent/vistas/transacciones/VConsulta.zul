@@ -35,38 +35,31 @@
 				</tabs>
 				<tabpanels>
 					<tabpanel>
-						<groupbox width="auto" title="Datos Basicos">
+						<groupbox width="auto" title="">
+							<caption label="Datos Basicos"
+								style="color:blue; font-size: 12px; font-weight:bold" />
 							<grid width="auto">
 								<columns visible="false">
-									<column label="" width="14%" />
-									<column label="" width="19%" />
-									<column label="" width="14%" />
-									<column label="" width="19%" />
+									<column label="" width="12%" />
 									<column label="" width="15%" />
-									<column label="" width="19%" />
+									<column label="" width="12%" />
+									<column label="" width="15%" />
+									<column label="" width="13%" />
+									<column label="" width="15%" />
+									<column label="" width="8%" />
+									<column label="" width="10%" />
 								</columns>
 								<rows>
 									<row>
-										<cell colspan="2">
-											<vbox>
-												<label class="etiqueta" value="¿Es Trabajador de la Empresa?" />
-											</vbox>
-										</cell>
+										<!-- <cell colspan="2"> <vbox> <label class="etiqueta" value="¿Es 
+											Trabajador?" /> </vbox> </cell> -->
+										<label class="etiqueta" value="¿Es Trabajador?" />
 										<label id="lblTrabajador" />
-										<hbox />
-										<hbox />
-										<hbox />
-									</row>
-									<row>
 										<label class="etiqueta" value="Cedula:" />
 										<label id="lblCedula" />
 										<label class="etiqueta" value="Ficha:" />
 										<label id="lblFicha" />
-										<cell rowspan="3">
-											<vbox>
-												<image id="imagenPaciente" width="80px" height="75px" />
-											</vbox>
-										</cell>
+										<hbox />
 										<hbox />
 									</row>
 									<row>
@@ -74,77 +67,104 @@
 										<label id="lblNombres" />
 										<label class="etiqueta" value="Apellidos:" />
 										<label id="lblApellidos" />
-										<hbox />
-										<hbox />
-									</row>
-									<row>
 										<label class="etiqueta" value="Fecha Nacimiento:" />
 										<label id="lblFechaNac" />
+										<hbox />
+										<cell rowspan="3">
+											<vbox>
+												<image id="imagenPaciente" width="80px" height="75px" />
+											</vbox>
+										</cell>
+
+									</row>
+									<row>
 										<label class="etiqueta" value="Lugar Nacimiento:" />
 										<cell colspan="1">
 											<vbox>
 												<label id="lblLugarNac" />
 											</vbox>
 										</cell>
-									</row>
-									<row>
 										<label class="etiqueta" value="Edad:" />
 										<label id="lblEdad" />
 										<label class="etiqueta" value="Sexo:" />
 										<label id="lblSexo" />
+										<hbox />
+										<hbox />
+									</row>
+									<row>
 										<label class="etiqueta" value="Estado Civil:" />
 										<label id="lblEstadoCivil" />
-									</row>
-									<row>
 										<label class="etiqueta" value="Grupo Sanguineo:" />
 										<label id="lblGrupoSanguineo" />
-										<label class="etiqueta" value="¿Es Alergico?" />
-										<cell colspan="4">
-											<space />
-											<label id="lblAlergico" />
-											<space />
-											<space />
-											<label class="etiqueta" value="Alergias:" />
-											<space />
-											<label id="lblAlergias" />
-
-										</cell>
-									</row>
-									<row>
 										<label class="etiqueta" value="Mano Dominante:" />
 										<label id="lblMano" />
-										<cell colspan="4">
+										<hbox />
+										<hbox />
+
+									</row>
+									<row>
+										<cell colspan="3">
 											<label class="etiqueta" value="Estatura:" />
+											<space />
 											<space />
 											<label id="lblEstatura" />
 											<space />
 											<space />
 											<label class="etiqueta" value="Peso:" />
 											<space />
+											<space />
 											<label id="lblPeso" />
 											<space />
 											<space />
 											<label class="etiqueta" value="¿Usa Lentes?" />
 											<space />
+											<space />
 											<label id="lblLentes" />
 										</cell>
+										<cell colspan="5">
+											<label class="etiqueta" value="¿Es Alergico?" />
+											<space />
+											<space />
+											<space />
+											<label id="lblAlergico" />
+											<space />
+											<space />
+											<label class="etiqueta" value="Alergias:" />
+											<space />
+											<space />
+											<label id="lblAlergias" />
+										</cell>
+
 									</row>
 									<row>
-										<label class="etiqueta" value="¿Posee Discapacidad?" />
-										<cell colspan="5">
+										<cell colspan="8">
+											<label class="etiqueta" value="¿Posee Discapacidad?" />
+											<space />
+											<space />
+											<space />
 											<label id="lblDiscapacidad" />
 											<space />
+											<space />
+											<space />
 											<label class="etiqueta" value="Origen:" />
+											<space />
+											<space />
 											<space />
 											<label id="lblOrigen" />
 											<space />
 											<space />
+											<space />
 											<label class="etiqueta" value="Tipo:" />
+											<space />
+											<space />
 											<space />
 											<label id="lblTipoDiscapacidad" />
 											<space />
 											<space />
+											<space />
 											<label class="etiqueta" value="Adicionales:" />
+											<space />
+											<space />
 											<space />
 											<label id="lblObservacionDiscapacidad" />
 										</cell>
@@ -159,10 +179,16 @@
 											</vbox>
 										</cell>
 										<hbox />
+										<hbox />
+										<hbox />
 									</row>
 								</rows>
 							</grid>
 						</groupbox>
+						<div align="right" style="float: right;">
+							<button id="btnSiguientePestanna" label="Siguiente"
+								image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
+						</div>
 						<separator />
 						<tabbox height="auto" id="taxOtrosDatos" orient="horizontal">
 							<tabs id="tbsOtrosDatos">
@@ -173,37 +199,36 @@
 								<tabpanel>
 									<grid width="auto">
 										<columns visible="false">
+											<column label="" width="8%" />
 											<column label="" width="13%" />
-											<column label="" width="20%" />
-											<column label="" width="13%" />
-											<column label="" width="20%" />
-											<column label="" width="13%" />
-											<column label="" width="21%" />
+											<column label="" width="6%" />
+											<column label="" width="15%" />
+											<column label="" width="8%" />
+											<column label="" width="15%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
 										</columns>
 										<rows>
 											<row>
 												<label class="etiqueta" value="Direccion:" />
+												<label id="lblCiudad" />
 												<cell colspan="2">
-													<label class="etiqueta" value="Ciudad:" />
-													<space />
-													<label id="lblCiudad" />
-													<space />
-													<cell colspan="3">
-														<label id="lblDireccion" />
-													</cell>
+													<label id="lblDireccion" />
 												</cell>
-											</row>
-											<row>
 												<label class="etiqueta" value="Telefono Fijo:" />
 												<label id="lblTelefono1" />
-												<label class="etiqueta" value="Telefono Celular:" />
+												<label class="etiqueta" value="Telefono Novil:" />
 												<label id="lblTelefono2" />
 												<label class="etiqueta" value="Email:" />
 												<label id="lblCorreo" />
 											</row>
 											<row>
-												<cell colspan="6">
-													<label class="etiqueta"
+											</row>
+											<row>
+												<cell colspan="10">
+													<label style="color:blue; font-size: 12px" class="etiqueta"
 														value="En Caso de Emergencia, Comunicarse con:" />
 												</cell>
 											</row>
@@ -214,14 +239,10 @@
 												<label id="lblApellidosE" />
 												<label class="etiqueta" value="Parentesco:" />
 												<label id="lblParentesco" />
-											</row>
-											<row>
 												<label class="etiqueta" value="Telefono Fijo:" />
 												<label id="lblTelefono1E" />
 												<label class="etiqueta" value="Telefono Celular:" />
 												<label id="lblTelefono2E" />
-												<hbox />
-												<hbox />
 											</row>
 										</rows>
 									</grid>
@@ -441,7 +462,7 @@
 
 											<row>
 												<label value="Prioridad Recipe:" />
-												<combobox tooltiptext="Seleccione el Sexo"
+												<combobox tooltiptext="Seleccione la Prioridad"
 													placeholder="Seleccione la Prioridad" id="cmbPrioridad"
 													width="100%" readonly="true">
 													<comboitem label="Urgente" />
@@ -816,7 +837,6 @@
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
-
 			<div id="divCatalogoPacientes" />
 		</groupbox>
 	</div>

@@ -38,6 +38,7 @@ import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Spinner;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -50,6 +51,10 @@ public class CPaciente extends CGenerico {
 
 	private static final long serialVersionUID = -8967604751368729529L;
 
+	@Wire
+	private Tab tabDatosBasicos;
+	@Wire
+	private Tab tabDatosContacto;
 	@Wire
 	private Button btnBuscarPaciente;
 	@Wire
@@ -237,6 +242,10 @@ public class CPaciente extends CGenerico {
 				cmbCiudad.setValue("Seleccione una Ciudad");
 				rdoSiAlergico.setValue(null);
 				rdoNoAlergico.setValue(null);
+				lblApellidos.setValue("");
+				lblCedula.setValue("");
+				lblFicha.setValue("");
+				lblNombres.setValue("");
 
 				rdoTrabajador.setValue(null);
 				rdoFamiliar.setValue(null);
@@ -794,4 +803,18 @@ public class CPaciente extends CGenerico {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
 		cArbol.abrirVentanas(arbolItem);
 	}
+	
+
+	/* Abre la pestanna de Datos contacto*/
+	@Listen("onClick = #btnSiguientePestanna")
+	public void siguientePestanna() {
+		tabDatosContacto.setSelected(true);
+	}
+
+	/* Abre la pestanna de datos basicos*/
+	@Listen("onClick = #btnAnteriorPestanna")
+	public void anteriorPestanna() {
+		tabDatosBasicos.setSelected(true);
+	}
+
 }
