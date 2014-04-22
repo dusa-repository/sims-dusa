@@ -18,19 +18,19 @@ public class SAntecedente {
 	private IAntecedenteDAO	antecedenteDAO;
 
 	public List<Antecedente> buscarLaborales() {
-		return antecedenteDAO.findByAntecedenteTipoTipoTrueOrderByAntecedenteTipoNombreAsc();
+		return antecedenteDAO.findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc("Laboral");
 	}
 
 	public List<Antecedente> buscarMedicos() {
-		return antecedenteDAO.findByAntecedenteTipoTipoFalseOrderByAntecedenteTipoNombreAsc();
+		return antecedenteDAO.findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc("Medico");
 	}
 
 	public List<Antecedente> buscarLaboralesPaciente(Paciente paciente) {
-		return antecedenteDAO.findByPacientesAndAntecedenteTipoTipoTrueOrderByAntecedenteTipoNombreAsc(paciente);
+		return antecedenteDAO.findByPacientesAndAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc(paciente, "Laboral");
 	}
 
 	public List<Antecedente> buscarMedicosPaciente(Paciente paciente) {
-		return antecedenteDAO.findByPacientesAndAntecedenteTipoTipoFalseOrderByAntecedenteTipoNombreAsc(paciente);
+		return antecedenteDAO.findByPacientesAndAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc(paciente, "Medico");
 	}
 
 	public void guardar(Antecedente antecedente) {

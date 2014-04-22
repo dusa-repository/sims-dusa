@@ -5,21 +5,27 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
 
 import modelo.maestros.Antecedente;
+import modelo.maestros.AntecedenteTipo;
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialista;
 import modelo.maestros.Examen;
 import modelo.maestros.Medicina;
 import modelo.maestros.Paciente;
+import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.Recipe;
 import modelo.maestros.ServicioExterno;
+import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
@@ -36,20 +42,27 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.Groupbox;
+import org.zkoss.zul.GroupsModel;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.ListitemRenderer;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
+import org.zkoss.zul.SimpleGroupsModel;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 
+import arbol.CArbol;
+
 import componentes.Botonera;
+import componentes.Buscar;
 import componentes.Catalogo;
 
 import controlador.maestros.CGenerico;
@@ -68,7 +81,19 @@ public class CConsulta extends CGenerico {
 	@Wire
 	private Radio rdoOtro;
 	@Wire
+	private Textbox txtBuscadorExamen;
+	@Wire
+	private Textbox txtBuscadorEspecialista;
+	@Wire
+	private Textbox txtBuscadorMedicina;
+	@Wire
+	private Textbox txtBuscadorServicioExterno;
+	@Wire
+	private Textbox txtBuscadorDiagnostico;
+	@Wire
 	private Textbox txtObservacion;
+	@Wire
+	private Textbox txtCedula;
 	@Wire
 	private Combobox cmbPrioridad;
 	@Wire
@@ -88,6 +113,10 @@ public class CConsulta extends CGenerico {
 	@Wire
 	private Groupbox gpxServicioExterno;
 	@Wire
+	private Groupbox gpxMedicos;
+	@Wire
+	private Groupbox gpxLaborales;
+	@Wire
 	private Div botoneraConsulta;
 	@Wire
 	private Button btnBuscarPaciente;
@@ -95,8 +124,6 @@ public class CConsulta extends CGenerico {
 	private Div divCatalogoPacientes;
 	@Wire
 	private Div divConsulta;
-	@Wire
-	private Textbox txtCedula;
 	@Wire
 	private Listbox ltbMedicinas;
 	@Wire
@@ -206,8 +233,6 @@ public class CConsulta extends CGenerico {
 	private Label lblTelefono2E;
 	@Wire
 	private Tab tabCarga;
-	@Wire
-	private Tab tabLaborales;
 
 	// -----------------------------
 
@@ -232,16 +257,34 @@ public class CConsulta extends CGenerico {
 	List<ServicioExterno> serviciosDisponibles = new ArrayList<ServicioExterno>();
 	List<ConsultaServicioExterno> serviciosAgregados = new ArrayList<ConsultaServicioExterno>();
 	List<ConsultaServicioExterno> serviciosResumen = new ArrayList<ConsultaServicioExterno>();
+	
 	long idPaciente = 0;
 	long idConsulta = 0;
+	
 	Catalogo<Paciente> catalogoPaciente;
 
+	GroupsModel<Antecedente, Object, Antecedente> model;
+	GroupsModel<Antecedente, Object, Antecedente> modelo;
+	ListitemRenderer renderer;
+
+	Buscar<Medicina> buscarMedicina;
+	Buscar<Diagnostico> buscarDiagnostico;
+	Buscar<Examen> buscarExamen;
+	Buscar<Especialista> buscarEspecialista;
+	Buscar<ServicioExterno> buscarServicio;
+	
+	private CArbol cArbol = new CArbol();
+	
 	@Override
 	public void inicializar() throws IOException {
-
-		llenarAntecedentes();
+				
+		listasMultiples();
+		buscadorMedicina();
+		buscadorDiagnostico();
+		buscadorServicio();
+		buscadorExamen();
+		buscadorEspecialista();
 		Botonera botonera = new Botonera() {
-
 			@Override
 			public void salir() {
 				cerrarVentana(divConsulta, "Consulta");
@@ -249,30 +292,7 @@ public class CConsulta extends CGenerico {
 
 			@Override
 			public void limpiar() {
-				// TODO Auto-generated method stub
-				idPaciente = 0;
-				idConsulta = 0;
-				limpiarListBox();
-				limpiarListas();
-				txtCedula.setValue("");
-				txtObservacion.setValue("");
-				rdoAccidente.setChecked(false);
-				rdoOtro.setChecked(false);
-				dtbFechaConsulta.setValue(fecha);
-				dtbValido.setValue(fecha);
-				cmbPrioridad.setValue("");
-				for (int i = 0; i < ltbLaborales.getItemCount(); i++) {
-					Listitem listItem = ltbLaborales.getItemAtIndex(i);
-					if (listItem.isSelected()) {
-						listItem.setSelected(false);
-					}
-				}
-				for (int i = 0; i < ltbMedicos.getItemCount(); i++) {
-					Listitem listItem = ltbMedicos.getItemAtIndex(i);
-					if (listItem.isSelected()) {
-						listItem.setSelected(false);
-					}
-				}
+				limpiarCampos();
 			}
 
 			@Override
@@ -327,7 +347,6 @@ public class CConsulta extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				// TODO Auto-generated method stub
 			}
 		};
 
@@ -336,12 +355,189 @@ public class CConsulta extends CGenerico {
 
 	}
 
+	private void buscadorEspecialista() {
+		buscarEspecialista = new Buscar<Especialista>(ltbEspecialistas, txtBuscadorEspecialista) {
+			@Override
+			protected List<Especialista> buscar(String valor) {	
+				List<Especialista> presentacionesFiltradas = new ArrayList<Especialista>();
+				List<Especialista> presentaciones = servicioEspecialista.filtroNombre(valor);
+				for(int i=0;i<especialistasDisponibles.size();i++){
+					Especialista especialista = especialistasDisponibles.get(i);
+					for(int j=0;j<presentaciones.size();j++){
+						if(especialista.getCedula().equals(presentaciones.get(j).getCedula()))
+							presentacionesFiltradas.add(especialista);
+					}
+				}
+				return presentacionesFiltradas;
+			}
+		};
+	}
+
+	private void buscadorExamen() {
+		buscarExamen = new Buscar<Examen>(ltbExamenes, txtBuscadorExamen) {
+
+			@Override
+			protected List<Examen> buscar(String valor) {	
+				List<Examen> examenesFiltradas = new ArrayList<Examen>();
+				List<Examen> examenes = servicioExamen.filtroNombre(valor);
+				for(int i=0;i<examenesDisponibles.size();i++){
+					Examen examen = examenesDisponibles.get(i);
+					for(int j=0;j<examenes.size();j++){
+						if(examen.getIdExamen()==examenes.get(j).getIdExamen())
+							examenesFiltradas.add(examen);
+					}
+				}
+				return examenesFiltradas;
+			}
+		};
+	}
+
+	private void buscadorServicio() {
+		buscarServicio = new Buscar<ServicioExterno>(ltbServicioExterno, txtBuscadorServicioExterno) {
+
+			@Override
+			protected List<ServicioExterno> buscar(String valor) {	
+				List<ServicioExterno> serviciosFiltradas = new ArrayList<ServicioExterno>();
+				List<ServicioExterno> servicios = servicioServicioExterno.filtroNombre(valor);
+				for(int i=0;i<serviciosDisponibles.size();i++){
+					ServicioExterno servicio = serviciosDisponibles.get(i);
+					for(int j=0;j<servicios.size();j++){
+						if(servicio.getIdServicioExterno()==servicios.get(j).getIdServicioExterno())
+							serviciosFiltradas.add(servicio);
+					}
+				}
+				return serviciosFiltradas;
+			}
+		};
+	}
+
+	private void buscadorDiagnostico() {
+		buscarDiagnostico = new Buscar<Diagnostico>(ltbDiagnosticos, txtBuscadorDiagnostico) {
+
+			@Override
+			protected List<Diagnostico> buscar(String valor) {	
+				List<Diagnostico> diagnosticosFiltradas = new ArrayList<Diagnostico>();
+				List<Diagnostico> diagnosticos = servicioDiagnostico.filtroNombre(valor);
+				for(int i=0;i<diagnosticosDisponibles.size();i++){
+					Diagnostico diagnostico = diagnosticosDisponibles.get(i);
+					for(int j=0;j<diagnosticos.size();j++){
+						if(diagnostico.getIdDiagnostico()==diagnosticos.get(j).getIdDiagnostico())
+							diagnosticosFiltradas.add(diagnostico);
+					}
+				}
+				return diagnosticosFiltradas;
+			}
+		};
+	}
+
+	private void buscadorMedicina() {
+		buscarMedicina = new Buscar<Medicina>(ltbMedicinas, txtBuscadorMedicina) {
+
+			@Override
+			protected List<Medicina> buscar(String valor) {	
+				List<Medicina> medicinasFiltradas = new ArrayList<Medicina>();
+				List<Medicina> medicinas = servicioMedicina.filtroNombre(valor);
+				for(int i=0;i<medicinasDisponibles.size();i++){
+					Medicina medicina = medicinasDisponibles.get(i);
+					for(int j=0;j<medicinas.size();j++){
+						if(medicina.getIdMedicina()==medicinas.get(j).getIdMedicina())
+							medicinasFiltradas.add(medicina);
+					}
+				}
+				return medicinasFiltradas;
+			}
+		};
+	}
+
+	public GroupsModel getModel() {
+		List<Antecedente> antecedentesLaborales = servicioAntecedente
+				.buscarLaborales();
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Antecedente> tipos = new ArrayList<Antecedente>();
+		List<List<Antecedente>> ante = new ArrayList<List<Antecedente>>();
+		map = listasModelo(antecedentesLaborales);
+		tipos = (List<Antecedente>) map.get("Tipos");
+		ante = (List<List<Antecedente>>) map.get("ListaDoble");
+		model = new SimpleGroupsModel<Antecedente, Antecedente, Antecedente, Antecedente>(
+				ante, tipos);
+		return model;
+	}
+
+	public GroupsModel getModelo() {
+		List<Antecedente> antecedentesMedicos = servicioAntecedente
+				.buscarMedicos();
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Antecedente> tipos = new ArrayList<Antecedente>();
+		List<List<Antecedente>> ante = new ArrayList<List<Antecedente>>();
+		map = listasModelo(antecedentesMedicos);
+		tipos = (List<Antecedente>) map.get("Tipos");
+		ante = (List<List<Antecedente>>) map.get("ListaDoble");
+		modelo = new SimpleGroupsModel<Antecedente, Antecedente, Antecedente, Antecedente>(
+				ante, tipos);
+		return modelo;
+	}
+
+	public Map<String, Object> listasModelo(List<Antecedente> antecedentes) {
+		List<Antecedente> tipos = new ArrayList<Antecedente>();
+		List<List<Antecedente>> ante = new ArrayList<List<Antecedente>>();
+		long id = 0;
+		for (int i = 0; i < antecedentes.size(); i++) {
+			long id2 = antecedentes.get(i).getAntecedenteTipo()
+					.getIdAntecedenteTipo();
+			if (id2 != id) {
+				id = id2;
+				tipos.add(antecedentes.get(i));
+				List<Antecedente> lista = new ArrayList<Antecedente>();
+				ante.add(lista);
+			}
+		}
+		for (int i = 0; i < tipos.size(); i++) {
+			long a = tipos.get(i).getAntecedenteTipo().getIdAntecedenteTipo();
+			for (int j = 0; j < antecedentes.size(); j++) {
+				if (a == antecedentes.get(j).getAntecedenteTipo()
+						.getIdAntecedenteTipo()) {
+					ante.get(i).add(antecedentes.get(j));
+				}
+			}
+		}
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("Tipos", tipos);
+		map.put("ListaDoble", ante);
+		return map;
+	}
+
+	public ListitemRenderer getRenderer() {
+		renderer = new ListitemRenderer<Antecedente>() {
+			long id = 0;
+
+			@Override
+			public void render(Listitem arg0, Antecedente arg1, int arg2)
+					throws Exception {
+				if (id == arg1.getAntecedenteTipo().getIdAntecedenteTipo()) {
+					arg0.setValue(arg1);
+					arg0.setContext(String.valueOf(arg1.getIdAntecedente()));
+					Listcell list2 = new Listcell(arg1.getNombre());
+					list2.setParent(arg0);
+				} else {
+					id = arg1.getAntecedenteTipo().getIdAntecedenteTipo();
+					arg0.setValue(arg1.getAntecedenteTipo());
+					Listcell list2 = new Listcell(arg1.getAntecedenteTipo()
+							.getNombre());
+					list2.setParent(arg0);
+					arg0.setCheckable(false);
+					arg0.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
+				}
+			}
+		};
+		return renderer;
+	}
+
 	public void guardarAntecedentes(Paciente paciente) {
 		Set<Antecedente> antecedentes = new HashSet<Antecedente>();
 		if (ltbLaborales.getItemCount() != 0) {
 			for (int i = 0; i < ltbLaborales.getItemCount(); i++) {
 				Listitem listItem = ltbLaborales.getItemAtIndex(i);
-				if (listItem.isSelected()) {
+				if (listItem.isSelected() && listItem.getContext() != null) {
 					Antecedente antecendente = listItem.getValue();
 					antecedentes.add(antecendente);
 				}
@@ -350,9 +546,8 @@ public class CConsulta extends CGenerico {
 
 		if (ltbMedicos.getItemCount() != 0) {
 			for (int i = 0; i < ltbMedicos.getItemCount(); i++) {
-
 				Listitem listItem = ltbMedicos.getItemAtIndex(i);
-				if (listItem.isSelected()) {
+				if (listItem.isSelected() && listItem.getContext() != null) {
 					Antecedente antecendente = listItem.getValue();
 					antecedentes.add(antecendente);
 				}
@@ -520,20 +715,6 @@ public class CConsulta extends CGenerico {
 		}
 	}
 
-	public void llenarAntecedentes() {
-		List<Antecedente> antecedentesLaborales = servicioAntecedente
-				.buscarLaborales();
-		ltbLaborales.setModel(new ListModelList<Antecedente>(
-				antecedentesLaborales));
-
-		List<Antecedente> antecedentesMedicos = servicioAntecedente
-				.buscarMedicos();
-		ltbMedicos
-				.setModel(new ListModelList<Antecedente>(antecedentesMedicos));
-
-		listasMultiples();
-	}
-
 	/* Llena la listas al iniciar con todo lo existente */
 	private void llenarListas() {
 		Consulta consulta = servicioConsulta.buscar(idConsulta);
@@ -617,11 +798,13 @@ public class CConsulta extends CGenerico {
 				long id = laboralesPaciente.get(i).getIdAntecedente();
 				for (int j = 0; j < ltbLaborales.getItemCount(); j++) {
 					Listitem listItem = ltbLaborales.getItemAtIndex(j);
-					long id2 = ((Spinner) ((listItem.getChildren().get(1)))
-							.getFirstChild()).getValue();
-					if (id == id2) {
-						listItem.setSelected(true);
-						j = ltbLaborales.getItemCount();
+					if (listItem.getContext() != null) {
+						Antecedente a = listItem.getValue();
+						long id2 = a.getIdAntecedente();
+						if (id == id2) {
+							listItem.setSelected(true);
+							j = ltbLaborales.getItemCount();
+						}
 					}
 				}
 			}
@@ -632,11 +815,13 @@ public class CConsulta extends CGenerico {
 				long id = medicosPaciente.get(i).getIdAntecedente();
 				for (int j = 0; j < ltbMedicos.getItemCount(); j++) {
 					Listitem listItem = ltbMedicos.getItemAtIndex(j);
-					long id2 = ((Spinner) ((listItem.getChildren().get(1)))
-							.getFirstChild()).getValue();
-					if (id == id2) {
-						listItem.setSelected(true);
-						j = ltbMedicos.getItemCount();
+					if (listItem.getContext() != null) {
+						Antecedente a = listItem.getValue();
+						long id2 = a.getIdAntecedente();
+						if (id == id2) {
+							listItem.setSelected(true);
+							j = ltbMedicos.getItemCount();
+						}
 					}
 				}
 			}
@@ -706,15 +891,29 @@ public class CConsulta extends CGenerico {
 		catalogoPaciente.doModal();
 	}
 
+	/* Permite la seleccion de un item del catalogo de pacientes */
+	@Listen("onSeleccion = #divCatalogoPacientes")
+	public void seleccionarPaciente() {
+		limpiarCampos();
+		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
+		llenarCampos(paciente);
+		idPaciente = Long.valueOf(paciente.getCedula());
+		List<Consulta> consultas = servicioConsulta.buscarPorPaciente(paciente);
+		ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
+		llenarListas();
+		catalogoPaciente.setParent(null);
+	}
+
 	@Listen("onClick = #ltbConsultas")
 	public void seleccionarConsulta() {
 		if (ltbConsultas.getItemCount() != 0) {
 			Listitem listItem = ltbConsultas.getSelectedItem();
 			Consulta consulta = listItem.getValue();
 			idConsulta = consulta.getIdConsulta();
-			if(consulta.isAccidenteLaboral())
+			if (consulta.isAccidenteLaboral())
 				rdoAccidente.setChecked(true);
-			else rdoOtro.setChecked(true);
+			else
+				rdoOtro.setChecked(true);
 			idPaciente = Long.parseLong(consulta.getPaciente().getCedula());
 			llenarCampos(consulta.getPaciente());
 			llenarListas();
@@ -731,7 +930,7 @@ public class CConsulta extends CGenerico {
 		if (paciente.getEmpresa() != null)
 			lblEmpresa.setValue(paciente.getEmpresa().getNombre());
 		lblCedula.setValue(paciente.getCedula());
-		
+
 		lblFicha.setValue(paciente.getFicha());
 		lblAlergias.setValue(paciente.getObservacionAlergias());
 		lblLugarNac.setValue(paciente.getLugarNacimiento());
@@ -803,22 +1002,12 @@ public class CConsulta extends CGenerico {
 				pacienteFor.setPrimerNombre(nombre + " " + apellido);
 			}
 			ltbCargaFamiliar.setModel(new ListModelList<Paciente>(familiares));
-		} else{
+			tabCarga.setVisible(true);
+			gpxLaborales.setVisible(true);
+		} else {
 			tabCarga.setVisible(false);
-			tabLaborales.setVisible(false);
+			gpxLaborales.setVisible(false);
 		}
-	}
-
-	/* Permite la seleccion de un item del catalogo de pacientes */
-	@Listen("onSeleccion = #divCatalogoPacientes")
-	public void seleccionarPaciente() {
-		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
-		llenarCampos(paciente);
-		idPaciente = Long.valueOf(paciente.getCedula());
-		List<Consulta> consultas = servicioConsulta.buscarPorPaciente(paciente);
-		ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
-		llenarListas();
-		catalogoPaciente.setParent(null);
 	}
 
 	@Listen("onClick = #pasar1Medicina")
@@ -1242,12 +1431,42 @@ public class CConsulta extends CGenerico {
 
 	public void limpiarListBox() {
 		for (int i = 0; i < listas.size(); i++) {
-			if (!listas.get(i).equals(ltbLaborales)
-					|| !listas.get(i).equals(ltbMedicos))
-				listas.get(i).getItems().clear();
+			if (!listas.get(i).getId().equals("ltbLaborales")) {
+				if (!listas.get(i).getId().equals("ltbMedicos")) {
+					listas.get(i).getItems().clear();
+				}
+
+			}
 		}
 	}
 
+
+	public void limpiarCampos() {
+		idPaciente = 0;
+		idConsulta = 0;
+		limpiarListBox();
+		limpiarListas();
+		txtCedula.setValue("");
+		txtObservacion.setValue("");
+		rdoAccidente.setChecked(false);
+		rdoOtro.setChecked(false);
+		dtbFechaConsulta.setValue(fecha);
+		dtbValido.setValue(fecha);
+		cmbPrioridad.setValue("");
+		for (int i = 0; i < ltbLaborales.getItemCount(); i++) {
+			Listitem listItem = ltbLaborales.getItemAtIndex(i);
+			if (listItem.isSelected() && listItem.getContext() != null) {
+				listItem.setSelected(false);
+			}
+		}
+		for (int i = 0; i < ltbMedicos.getItemCount(); i++) {
+			Listitem listItem = ltbMedicos.getItemAtIndex(i);
+			if (listItem.isSelected() && listItem.getContext() != null) {
+				listItem.setSelected(false);
+			}
+		}
+	}
+	
 	@Listen("onClick = #gpxResumen")
 	public void abrirResumen() {
 		gpxResumen.setOpen(true);
@@ -1324,5 +1543,34 @@ public class CConsulta extends CGenerico {
 		gpxServicio.setOpen(true);
 		gpxServicioExterno.setOpen(true);
 	}
+	
+	@Listen("onClick = #btnAbrirExamen")
+	public void divExamen(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Examen");
+		cArbol.abrirVentanas(arbolItem);	
+	}
 
+	@Listen("onClick = #btnAbrirDiagnostico")
+	public void divDiagnostico(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Diagnostico");
+		cArbol.abrirVentanas(arbolItem);	
+	}
+	
+	@Listen("onClick = #btnAbrirEspecialista")
+	public void divEspecialista(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialista");
+		cArbol.abrirVentanas(arbolItem);	
+	}
+	
+	@Listen("onClick = #btnAbrirServicioExterno")
+	public void divServicio(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Servicios Externos");
+		cArbol.abrirVentanas(arbolItem);	
+	}
+	
+	@Listen("onClick = #btnAbrirMedicina")
+	public void divMedicina(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Medicina");
+		cArbol.abrirVentanas(arbolItem);	
+	}
 }
