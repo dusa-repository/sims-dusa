@@ -1,0 +1,214 @@
+package controlador.maestros;
+
+import java.io.IOException;
+import java.util.List;
+
+import modelo.maestros.Antecedente;
+import modelo.maestros.AntecedenteTipo;
+import modelo.maestros.Ciudad;
+import modelo.maestros.Consultorio;
+import modelo.maestros.Empresa;
+import modelo.maestros.Estado;
+import modelo.seguridad.Arbol;
+
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.select.annotation.Listen;
+import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Div;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
+
+import arbol.CArbol;
+
+import componentes.Botonera;
+import componentes.Catalogo;
+
+public class CAntecedente extends CGenerico {
+
+
+	@Wire
+	private Textbox txtNombreAntecedente;
+	@Wire
+	private Div botoneraAntecedente;
+	@Wire
+	private Div catalogoAntecedente;
+	@Wire
+	private Div divAntecedente;
+	@Wire
+	private Button btnBuscarAntecedente;
+	@Wire
+	private Combobox cmbTipoAntecedente;
+	
+	private CArbol cArbol = new CArbol();
+	Catalogo<Antecedente> catalogo;
+	long id = 0;
+
+	@Override
+	public void inicializar() throws IOException {
+
+		llenarCombo();
+		Botonera botonera = new Botonera() {
+
+			@Override
+			public void salir() {
+				cerrarVentana(divAntecedente, "Antecedente");
+			}
+
+			@Override
+			public void limpiar() {
+				txtNombreAntecedente.setText("");
+				cmbTipoAntecedente.setValue("");
+				cmbTipoAntecedente.setPlaceholder("Seleccione una Clasificacion");
+				id = 0;
+			}
+
+			@Override
+			public void guardar() {
+				if (validar()) {
+					String nombre = txtNombreAntecedente.getValue();
+					long idAntecedenteTipo = Long.valueOf(cmbTipoAntecedente.getSelectedItem()
+							.getContext());
+					AntecedenteTipo antecedenteTipo = servicioAntecedenteTipo.buscar(idAntecedenteTipo);
+					Antecedente antecedente = new Antecedente(id, nombre, antecedenteTipo,fechaHora, horaAuditoria,
+							 nombreUsuarioSesion());
+					servicioAntecedente.guardar(antecedente);
+					Messagebox.show("Registro Guardado Exitosamente",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
+
+					limpiar();
+				}
+
+			}
+
+			@Override
+			public void eliminar() {
+				if (id != 0) {
+					Messagebox.show("¿Esta Seguro de Eliminar el Antecedente?",
+							"Alerta", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+										Antecedente antecedente = servicioAntecedente
+												.buscar(id);
+//										List<Paciente> empresas = servicioEmpresa
+//												.buscarPorAntecedente(antecedente);
+		
+								//		if (!empresas.isEmpty()) {
+											Messagebox
+													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
+															"Informacion",
+															Messagebox.OK,
+															Messagebox.INFORMATION);
+									//	} 
+//										else {
+//											servicioAntecedente.eliminar(antecedente);
+//											limpiar();
+//											Messagebox
+//													.show("Registro Eliminado Exitosamente",
+//															"Informacion",
+//															Messagebox.OK,
+//															Messagebox.INFORMATION);
+//										}
+									}
+								}
+							});
+				} else {
+					Messagebox.show("No ha Seleccionado Ningun Registro",
+							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+				}
+			}
+		};
+		botoneraAntecedente.appendChild(botonera);
+	}
+
+	/* Validaciones de pantalla para poder realizar el guardar */
+	public boolean validar() {
+
+		if (cmbTipoAntecedente.getText().compareTo("") == 0
+				|| txtNombreAntecedente.getText().compareTo("") == 0) {
+			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
+			return false;
+		} else
+			return true;
+	}
+
+	/* Muestra un catalogo de antecedentees */
+	@Listen("onClick = #btnBuscarAntecedente")
+	public void mostrarCatalogo() throws IOException {
+		final List<Antecedente> antecedentes = servicioAntecedente.buscarTodos();
+		catalogo = new Catalogo<Antecedente>(catalogoAntecedente, "Catalogo de Antecedentes",
+				antecedentes, "Nombre", "Clasificacion") {
+
+			@Override
+			protected String[] crearRegistros(Antecedente antecedente) {
+				String[] registros = new String[2];
+				registros[0] = antecedente.getNombre();
+				registros[1] = antecedente.getAntecedenteTipo().getNombre();
+				return registros;
+			}
+
+			@Override
+			protected List<Antecedente> buscar(String valor, String combo) {
+
+				switch (combo) {
+				case "Nombre":
+					return servicioAntecedente.filtroNombre(valor);
+				case "Clasificacion":
+					return servicioAntecedente.filtroAntecedenteTipo(valor);
+				default:
+					return antecedentes;
+				}
+			}
+		};
+		catalogo.setParent(catalogoAntecedente);
+		catalogo.doModal();
+	}
+
+	/* Busca si existe una antecedente con el mismo nombre escrito */
+	@Listen("onChange = #txtNombreAntecedente")
+	public void buscarPorNombre() {
+		Antecedente antecedente = servicioAntecedente.buscarPorNombre(txtNombreAntecedente
+				.getValue());
+		if (antecedente != null)
+			llenarCampos(antecedente);
+	}
+
+	/* Llena el combo de antecedenteTipo cada vez que se abre */
+	@Listen("onOpen = #cmbTipoAntecedente")
+	public void llenarCombo() {
+		List<AntecedenteTipo> antecedenteTipos = servicioAntecedenteTipo.buscarTodos();
+		cmbTipoAntecedente.setModel(new ListModelList<AntecedenteTipo>(antecedenteTipos));
+	}
+
+	/*
+	 * Selecciona una antecedente del catalogo y llena los campos con la informacion
+	 */
+	@Listen("onSeleccion = #catalogoAntecedente")
+	public void seleccion() {
+		Antecedente antecedente = catalogo.objetoSeleccionadoDelCatalogo();
+		llenarCampos(antecedente);
+		catalogo.setParent(null);
+	}
+
+	/* LLena los campos del formulario dada una antecedente */
+	public void llenarCampos(Antecedente antecedente) {
+		txtNombreAntecedente.setValue(antecedente.getNombre());
+		cmbTipoAntecedente.setValue(antecedente.getAntecedenteTipo().getNombre());
+		id = antecedente.getIdAntecedente();
+	}
+	
+	/* Abre la vista de AntecedenteTipo*/
+	@Listen("onClick = #btnAbrirTipoAntecedente")
+	public void abrirAntecedenteTipo(){		
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Clasificacion de Antecedente");
+		cArbol.abrirVentanas(arbolItem);	
+	}
+	
+}

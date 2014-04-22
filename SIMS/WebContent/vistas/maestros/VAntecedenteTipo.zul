@@ -1,0 +1,34 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divAntecedenteTipo" apply="controlador.maestros.CAntecedenteTipo">
+		<groupbox width="40em" mold="3d" title="Clasificacion de Antecedentes">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox class="multilinea" id="txtNombreAntecedenteTipo"
+							hflex="1" maxlength="500" tooltiptext="Ingrese la Clasificacion"
+							multiline="true" />
+						<button id="btnBuscarAntecedenteTipo" class="btn" label="Buscar"
+							tooltiptext="Catalogo Clasificaciones" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Tipo de Antecedente:" />
+						<radiogroup id="rdgAntecedenteTipo">
+							<radio label="Medicos" value="Medicos" id="rdoMedico" />
+							<radio label="Laborales" value="Laborales" id="rdoLaboral" />
+						</radiogroup>
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraAntecedenteTipo" />
+			<div id="catalogoAntecedenteTipo" />
+		</groupbox>
+	</div>
+</zk>
