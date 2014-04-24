@@ -27,3 +27,17 @@
 .multilineaTab {
 	height: 250px;
 }
+.z-loading {
+	background-color: #DDECFD;
+	border: 1px outset #A0A0A0;
+	font-weight: bold;
+	font-size: 18px;
+	cursor: wait;
+	width: 250px;
+	height: 45px;
+}
+
+.z-loading-indicator {
+	color: gray;
+	border: 0 none;
+}

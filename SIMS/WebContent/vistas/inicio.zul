@@ -1,7 +1,7 @@
 <?page id="mainPage" title="SIMS" contentType="text/html;charset=utf-8"?>
 <zk>
 	<style src="../public/Estilo.css" />
-
+	<script src="/public/progress.js" />
 	<window title="" border="0" height="100%" contentStyle="overflow:auto"
 		apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
@@ -51,7 +51,7 @@
 			</north>
 			<west title="Menú" id="west" size="20%" splittable="true"
 				collapsible="true" autoscroll="true">
-				<tree id="arbolMenu" width="99%">
+				<tree id="arbolMenu" width="99%" zclass="z-vfiletree">
 					<template name="model">
 						<treeitem context="menupopup">
 							<treerow>
@@ -64,8 +64,7 @@
 			<center border="none">
 				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
 					<center border="none" flex="true" autoscroll="true">
-						<tabbox
-						width="auto"
+						<tabbox width="auto"
 							style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
 							id="tabBox" hflex="1">
 							<tabs>
