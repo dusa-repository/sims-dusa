@@ -117,7 +117,7 @@ public class CUsuario extends CGenerico {
 	private Fileupload fudImagenUsuario;
 	@Wire
 	private Media media;
-	
+
 	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<Usuario> catalogo;
@@ -127,7 +127,7 @@ public class CUsuario extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		
+
 		llenarComboUnidad();
 		llenarComboEspecialidad();
 
@@ -278,6 +278,8 @@ public class CUsuario extends CGenerico {
 	/* Validaciones de pantalla para poder realizar el guardar */
 	public boolean validar() {
 		if (txtApellidoUsuario.getText().compareTo("") == 0
+				|| txtApellido2Usuario.getText().compareTo("") == 0
+				|| txtNombre2Usuario.getText().compareTo("") == 0
 				|| txtCedulaUsuario.getText().compareTo("") == 0
 				|| txtCorreoUsuario.getText().compareTo("") == 0
 				|| txtDireccionUsuario.getText().compareTo("") == 0
@@ -609,25 +611,25 @@ public class CUsuario extends CGenerico {
 	public void anteriorPestanna() {
 		tabBasicos.setSelected(true);
 	}
-	
-	/* Abre la vista de Unidad*/
+
+	/* Abre la vista de Unidad */
 	@Listen("onClick = #btnAbrirUnidad")
-	public void abrirUnidad(){		
+	public void abrirUnidad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Unidad Usuario");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
 	}
 
-	/* Abre la vista de Especialidad*/
+	/* Abre la vista de Especialidad */
 	@Listen("onClick = #btnAbrirEspecialidad")
-	public void abrirEspecialidad(){		
+	public void abrirEspecialidad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialidad");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
 	}
-	
-	/* Abre la vista de Grupos*/
+
+	/* Abre la vista de Grupos */
 	@Listen("onClick = #btnAbrirGrupo")
-	public void abrirGrupo(){		
+	public void abrirGrupo() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Grupo");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
 	}
 }
