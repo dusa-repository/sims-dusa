@@ -6,37 +6,33 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import modelo.seguridad.Arbol;
-import modelo.seguridad.Grupo;
+import modelo.transacciones.Consulta;
 
 @Entity
-@Table(name="antecedente")
-public class Antecedente implements Serializable {
+@Table(name="accidente")
+public class Accidente implements Serializable {
 
-	private static final long serialVersionUID = -4907136060149868068L;
+	private static final long serialVersionUID = -5155885529457324266L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_antecedente", unique=true, nullable=false)
-	private long idAntecedente;
+	@Column(name="id_accidente", unique=true, nullable=false)
+	private long idAccidente;
 	
 	@Column(length=100)
 	private String nombre;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_antecedente_tipo")
-	private AntecedenteTipo antecedenteTipo;
+	@Column(length=100)
+	private String tipo;
+	
+	@OneToMany(mappedBy="accidente")
+	private Set<Consulta> consultas;
 	
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
@@ -46,33 +42,30 @@ public class Antecedente implements Serializable {
 
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
-	
-	@OneToMany(mappedBy="antecedente")
-	private Set<PacienteAntecedente> antecedentesPacientes;
 
-	public Antecedente() {
+	public Accidente() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Antecedente(long idAntecedente, String nombre,
-			AntecedenteTipo antecedenteTipo, Timestamp fechaAuditoria,
-			String horaAuditoria, String usuarioAuditoria) {
+	public Accidente(long idAccidente, String nombre, String tipo,
+			Timestamp fechaAuditoria, String horaAuditoria,
+			String usuarioAuditoria) {
 		super();
-		this.idAntecedente = idAntecedente;
+		this.idAccidente = idAccidente;
 		this.nombre = nombre;
-		this.antecedenteTipo = antecedenteTipo;
+		this.tipo = tipo;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public long getIdAntecedente() {
-		return idAntecedente;
+	public long getIdAccidente() {
+		return idAccidente;
 	}
 
-	public void setIdAntecedente(long idAntecedente) {
-		this.idAntecedente = idAntecedente;
+	public void setIdAccidente(long idAccidente) {
+		this.idAccidente = idAccidente;
 	}
 
 	public String getNombre() {
@@ -83,12 +76,20 @@ public class Antecedente implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public AntecedenteTipo getAntecedenteTipo() {
-		return antecedenteTipo;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setAntecedenteTipo(AntecedenteTipo antecedenteTipo) {
-		this.antecedenteTipo = antecedenteTipo;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public Set<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(Set<Consulta> consultas) {
+		this.consultas = consultas;
 	}
 
 	public Timestamp getFechaAuditoria() {
@@ -114,14 +115,6 @@ public class Antecedente implements Serializable {
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
-
-	public Set<PacienteAntecedente> getAntecedentesPacientes() {
-		return antecedentesPacientes;
-	}
-
-	public void setAntecedentesPacientes(
-			Set<PacienteAntecedente> antecedentesPacientes) {
-		this.antecedentesPacientes = antecedentesPacientes;
-	}	
+	
 	
 }

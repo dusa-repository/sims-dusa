@@ -22,8 +22,4 @@ public interface IAntecedenteDAO extends JpaRepository<Antecedente, Long> {
 	List<Antecedente> findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc(
 			String string);
 
-	List<Antecedente> findByPacientesAndAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc(
-			Paciente paciente, String string);
-
-
 }
