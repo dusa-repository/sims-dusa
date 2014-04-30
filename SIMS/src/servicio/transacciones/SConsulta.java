@@ -34,4 +34,8 @@ public class SConsulta {
 			return consultaDAO.findOne(id);
 		return null;
 	}
+
+	public List<Consulta> buscarPorAccidente(Paciente paciente) {
+		return consultaDAO.findByPacienteAndAccidenteNotNull(paciente);
+	}
 }

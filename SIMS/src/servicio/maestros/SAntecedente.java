@@ -1,12 +1,15 @@
 package servicio.maestros;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import interfacedao.maestros.IAntecedenteDAO;
+import interfacedao.maestros.IPacienteAntecedenteDAO;
 
 import modelo.maestros.Antecedente;
 import modelo.maestros.AntecedenteTipo;
 import modelo.maestros.Paciente;
+import modelo.maestros.PacienteAntecedente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,27 +18,21 @@ import org.springframework.stereotype.Service;
 public class SAntecedente {
 
 	@Autowired
-	private IAntecedenteDAO	antecedenteDAO;
+	private IAntecedenteDAO antecedenteDAO;
 
 	public List<Antecedente> buscarLaborales() {
-		return antecedenteDAO.findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc("Laboral");
+		return antecedenteDAO
+				.findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc("Laboral");
 	}
 
 	public List<Antecedente> buscarMedicos() {
-		return antecedenteDAO.findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc("Medico");
-	}
-
-	public List<Antecedente> buscarLaboralesPaciente(Paciente paciente) {
-		return antecedenteDAO.findByPacientesAndAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc(paciente, "Laboral");
-	}
-
-	public List<Antecedente> buscarMedicosPaciente(Paciente paciente) {
-		return antecedenteDAO.findByPacientesAndAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc(paciente, "Medico");
+		return antecedenteDAO
+				.findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc("Medico");
 	}
 
 	public void guardar(Antecedente antecedente) {
 		antecedenteDAO.save(antecedente);
-		
+
 	}
 
 	public Antecedente buscar(long id) {
@@ -51,7 +48,8 @@ public class SAntecedente {
 	}
 
 	public List<Antecedente> filtroAntecedenteTipo(String valor) {
-		return antecedenteDAO.findByAntecedenteTipoNombreStartingWithAllIgnoreCase(valor);
+		return antecedenteDAO
+				.findByAntecedenteTipoNombreStartingWithAllIgnoreCase(valor);
 	}
 
 	public Antecedente buscarPorNombre(String value) {

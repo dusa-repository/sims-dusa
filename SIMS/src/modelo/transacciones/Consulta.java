@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import modelo.maestros.Accidente;
+import modelo.maestros.AntecedenteTipo;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 
@@ -39,11 +41,21 @@ public class Consulta implements Serializable {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_accidente")
+	private Accidente accidente;
+	
 	@Column(name = "fecha_consulta")
 	private Timestamp fechaConsulta;
 
 	@Column(length = 500)
-	private String observacion;
+	private String motivoConsulta;
+	
+	@Column(length = 500)
+	private String enfermedadActual;
+	
+	@Column(length = 50)
+	private String tipoConsulta;
 
 	@Column(name = "hora_consulta", length = 10)
 	private String horaConsulta;
@@ -76,25 +88,32 @@ public class Consulta implements Serializable {
 	@OneToMany(mappedBy = "consulta")
 	private Set<ConsultaServicioExterno> servicios;
 
+	@Column(name = "consulta_asociada")
+	private long consultaAsociada;
+	
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Consulta(long idConsulta, Paciente paciente, Usuario usuario, Timestamp fechaConsulta, String horaConsulta,
-			String observacion, String horaAuditoria, Timestamp fechaAuditoria,
-			String usuarioAuditoria, boolean accidenteLaboral) {
+	public Consulta(long idConsulta, Paciente paciente, Usuario usuario, Accidente accidente, Timestamp fechaConsulta, String horaConsulta,
+			String horaAuditoria, Timestamp fechaAuditoria,
+			String usuarioAuditoria, boolean accidenteLaboral, String motivo, String tipo, String enfermedad, long consultaAsociada) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
 		this.fechaConsulta = fechaConsulta;
 		this.horaConsulta = horaConsulta;
-		this.observacion = observacion;
 		this.horaAuditoria = horaAuditoria;
 		this.fechaAuditoria = fechaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.usuario = usuario;
 		this.accidenteLaboral = accidenteLaboral;
+		this.accidente = accidente;
+		this.motivoConsulta = motivo;
+		this.enfermedadActual = enfermedad;
+		this.tipoConsulta = tipo;
+		this.consultaAsociada = consultaAsociada;
 	}
 
 	
@@ -138,15 +157,6 @@ public class Consulta implements Serializable {
 	public void setHoraConsulta(String horaConsulta) {
 		this.horaConsulta = horaConsulta;
 	}
-
-	public String getObservacion() {
-		return observacion;
-	}
-
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
-	}
-
 	public String getHoraAuditoria() {
 		return horaAuditoria;
 	}
@@ -217,6 +227,46 @@ public class Consulta implements Serializable {
 
 	public void setServicios(Set<ConsultaServicioExterno> servicios) {
 		this.servicios = servicios;
+	}
+
+	public Accidente getAccidente() {
+		return accidente;
+	}
+
+	public void setAccidente(Accidente accidente) {
+		this.accidente = accidente;
+	}
+
+	public String getMotivoConsulta() {
+		return motivoConsulta;
+	}
+
+	public void setMotivoConsulta(String motivoConsulta) {
+		this.motivoConsulta = motivoConsulta;
+	}
+
+	public String getEnfermedadActual() {
+		return enfermedadActual;
+	}
+
+	public void setEnfermedadActual(String enfermedadActual) {
+		this.enfermedadActual = enfermedadActual;
+	}
+
+	public String getTipoConsulta() {
+		return tipoConsulta;
+	}
+
+	public void setTipoConsulta(String tipoConsulta) {
+		this.tipoConsulta = tipoConsulta;
+	}
+
+	public long getConsultaAsociada() {
+		return consultaAsociada;
+	}
+
+	public void setConsultaAsociada(long consultaAsociada) {
+		this.consultaAsociada = consultaAsociada;
 	}
 	
 	

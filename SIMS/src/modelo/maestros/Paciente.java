@@ -160,17 +160,8 @@ public class Paciente implements Serializable {
 	@JoinColumn(name="id_ciudad")
 	private Ciudad ciudadVivienda;
 
-	@ManyToMany
-	@JoinTable(
-		name="paciente_antecedente"
-		, joinColumns={
-			@JoinColumn(name="id_paciente", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_antecedente", nullable=false)
-			}
-		)
-	private Set<Antecedente> antecedentes;
+	@OneToMany(mappedBy="paciente")
+	private Set<PacienteAntecedente> antecedentesPacientes;
 	
 	public Paciente() {
 	}
@@ -593,12 +584,14 @@ public class Paciente implements Serializable {
 		this.ciudadVivienda = ciudadVivienda;
 	}
 
-	public Set<Antecedente> getAntecedentes() {
-		return antecedentes;
+	public Set<PacienteAntecedente> getAntecedentesPacientes() {
+		return antecedentesPacientes;
 	}
 
-	public void setAntecedentes(Set<Antecedente> antecedentes) {
-		this.antecedentes = antecedentes;
+	public void setAntecedentesPacientes(
+			Set<PacienteAntecedente> antecedentesPacientes) {
+		this.antecedentesPacientes = antecedentesPacientes;
 	}
+
 
 }
