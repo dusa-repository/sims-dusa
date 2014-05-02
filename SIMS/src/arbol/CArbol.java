@@ -204,7 +204,7 @@ public class CArbol extends CGenerico {
 	 */
 	@Listen("onClick = #arbolMenu")
 	public void selectedNode() {
-		if(arbolMenu.getSelectedItem().getValue()!=null)
+		if(arbolMenu.getSelectedItem()!=null)
 		{
 		String item = String.valueOf(arbolMenu.getSelectedItem().getValue());
 		boolean abrir = true;

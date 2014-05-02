@@ -2,6 +2,7 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import modelo.transacciones.ConsultaExamen;
+import modelo.transacciones.ConsultaServicioExterno;
 
 @Entity
 @Table(name="proveedor")
@@ -46,7 +51,9 @@ public class Proveedor implements Serializable {
 	@JoinColumn(name="id_ciudad")
 	private Ciudad ciudad;
 	
-
+	@OneToMany(mappedBy = "proveedor")
+	private Set<ConsultaExamen> servicios;
+	
 	public Proveedor() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -130,7 +137,12 @@ public class Proveedor implements Serializable {
 		this.ciudad = ciudad;
 	}
 
+	public Set<ConsultaExamen> getServicios() {
+		return servicios;
+	}
 
-
+	public void setServicios(Set<ConsultaExamen> servicios) {
+		this.servicios = servicios;
+	}
 
 }

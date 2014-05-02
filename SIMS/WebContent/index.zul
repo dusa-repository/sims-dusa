@@ -92,7 +92,7 @@
 				</div>
 			</vlayout>
 		</east>
-		<south vflex="2" flex="true" border="0" height="3em"
+		<south vflex="2" border="0" height="3em"
 			collapsible="false">
 			<div align="center">
 				<separator></separator>

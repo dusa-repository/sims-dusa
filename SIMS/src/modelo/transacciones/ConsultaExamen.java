@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import modelo.maestros.Examen;
+import modelo.maestros.Proveedor;
 import modelo.pk.ConsultaExamenId;
 
 @Entity
@@ -27,6 +28,10 @@ public class ConsultaExamen {
 	@JoinColumn(name = "id_examen", referencedColumnName = "id_examen")
 	private Examen examen;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
+	private Proveedor proveedor;
+	
 	@Column(length=100)
 	private String observacion;
 
@@ -35,11 +40,12 @@ public class ConsultaExamen {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ConsultaExamen(Consulta consulta, Examen examen, String observacion) {
+	public ConsultaExamen(Consulta consulta, Examen examen, String observacion, Proveedor p) {
 		super();
 		this.consulta = consulta;
 		this.examen = examen;
 		this.observacion = observacion;
+		this.proveedor = p;
 	}
 
 	public Consulta getConsulta() {
@@ -64,6 +70,14 @@ public class ConsultaExamen {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
 	}
 	
 	
