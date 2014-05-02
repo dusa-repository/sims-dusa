@@ -63,7 +63,7 @@
 			</west>
 			<center border="none">
 				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
-					<center border="none" flex="true" autoscroll="true">
+					<center border="none" autoscroll="true">
 						<tabbox width="auto"
 							style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
 							id="tabBox" hflex="1">
@@ -82,7 +82,7 @@
 					</center>
 				</borderlayout>
 			</center>
-			<south vflex="2" flex="true" border="0" height="2em"
+			<south vflex="2" border="0" height="2em"
 				collapsible="false">
 				<div align="center" sclass="footer">
 					<a href="../j_spring_security_logout">

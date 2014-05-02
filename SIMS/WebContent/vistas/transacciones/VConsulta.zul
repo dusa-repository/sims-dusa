@@ -641,7 +641,7 @@
 										</hbox>
 									</groupbox>
 									<!-- empieza servicios -->
-									<groupbox id="gpxServicio" open="false">
+									<groupbox id="gpxServicio" open="false" width="100%">
 										<caption label="Agregar Servicios"
 											style="color:blue; font-size: 12px; font-weight:bold" />
 										<separator />
@@ -650,7 +650,7 @@
 												<caption label="Agregar Examenes"
 													style="color:blue; font-size: 12px; font-weight:bold" />
 												<separator />
-												<hbox>
+												<hbox align="center" pack="center">
 													<textbox tooltiptext="Ingrese el Nombre del Examen"
 														placeholder="Ingrese el Examen a Buscar" width="195px"
 														id="txtBuscadorExamen"></textbox>
@@ -659,7 +659,7 @@
 														tooltiptext="Crear un Nuevo Examen" image="/public/imagenes/botones/agregar.png" />
 												</hbox>
 												<hbox>
-													<listbox id="ltbExamenes" height="220px" width="250px"
+													<listbox id="ltbExamenes" height="220px" width="300px"
 														emptyMessage="No hay Examenes Registrados">
 														<listhead>
 															<listheader label="Examen" width="100%" />
@@ -686,7 +686,7 @@
 															tooltiptext="Quitar Examen" width="30px" />
 													</vbox>
 													<listbox id="ltbExamenesAgregados" height="220px"
-														width="350px" emptyMessage="No ha Seleccionado Ningún Examen">
+														width="470px" emptyMessage="No ha Seleccionado Ningún Examen">
 														<listhead>
 															<listheader label="Examen" width="40%" />
 															<listheader label="Observacion" width="60%" />
@@ -706,12 +706,40 @@
 															</listitem>
 														</template>
 													</listbox>
-													<button label="Agregar Examenes" id="btnAgregarExamenes"
-														image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Examenes"
-														width="70px" />
-													<button label="Generar Orden" id="btnGenerarOrden"
-														image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
-														width="60px" />
+													<hbox width="60%">
+														<grid width="auto">
+															<columns visible="false">
+																<column label="" width="50%" />
+																<column label="" width="50%" />
+															</columns>
+															<rows>
+																<row>
+																	<button label="Agregar Examenes" id="btnAgregarExamenes"
+																		image="/public/imagenes/botones/agregar.png" orient="vertical"
+																		tooltiptext="Agregar Examenes" style="font-size: 10px"
+																		width="50px" height="50px" />
+																	<box />
+																</row>
+																<row>
+																	<label value="Laboratorio encargado de examenes:" />
+																	<combobox tooltiptext="Seleccione un Laboratorio"
+																		model="${$composer.proveedores}" placeholder="Seleccione un Laboratorio"
+																		id="cmbProveedor" readonly="true" width="100%">
+																		<template name="model">
+																			<comboitem label="${each.nombre}" context="${each.idProveedor}" />
+																		</template>
+																	</combobox>
+																</row>
+																<row>
+																	<button label="Generar Orden" id="btnGenerarOrden"
+																		orient="vertical" image="/public/imagenes/botones/generar.png"
+																		tooltiptext="Generar Orden" style="font-size: 10px"
+																		width="50px" height="55px" />
+																	<box />
+																</row>
+															</rows>
+														</grid>
+													</hbox>
 												</hbox>
 											</groupbox>
 											<!-- termina primero -->
@@ -729,7 +757,7 @@
 												</hbox>
 												<hbox>
 													<listbox id="ltbEspecialistas" height="220px"
-														width="250px" emptyMessage="No hay Especialistas Registrados">
+														width="300px" emptyMessage="No hay Especialistas Registrados">
 														<listhead>
 															<listheader label="Especialista" width="100%" />
 														</listhead>
@@ -755,7 +783,7 @@
 															tooltiptext="Quitar Especialista" width="30px" />
 													</vbox>
 													<listbox id="ltbEspecialistasAgregados" height="220px"
-														width="350px" emptyMessage="No ha Seleccionado Ningún Especialista">
+														width="470px" emptyMessage="No ha Seleccionado Ningún Especialista">
 														<listhead>
 															<listheader label="Especialista" width="40%" />
 															<listheader label="Costo" width="60%" />
@@ -777,12 +805,28 @@
 															</listitem>
 														</template>
 													</listbox>
-													<button label="Agregar Especialistas" id="btnAgregarEspecialistas"
-														image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Especialistas"
-														width="90px" />
-													<button label="Generar Referencia" id="btnGenerarReferencia"
-														image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
-														width="70px" />
+													<hbox width="30%">
+														<grid width="auto">
+															<columns visible="false">
+																<column label="" width="100%" />
+															</columns>
+															<rows>
+																<row>
+																	<button label="Agregar Especialistas" id="btnAgregarEspecialistas"
+																		image="/public/imagenes/botones/agregar.png"
+																		tooltiptext="Agregar Especialistas" style="font-size: 10px"
+																		orient="vertical" width="50px" height="50px" />
+																</row>
+																<row>
+																	<button label="Generar Referencia" id="btnGenerarReferencia"
+																		image="/public/imagenes/botones/generar.png"
+																		tooltiptext="Generar Orden" style="font-size: 10px"
+																		orient="vertical" width="50px" height="55px" />
+																	<box />
+																</row>
+															</rows>
+														</grid>
+													</hbox>
 												</hbox>
 											</groupbox>
 											<!-- termina segundo -->
@@ -800,7 +844,7 @@
 												</hbox>
 												<hbox>
 													<listbox id="ltbServicioExterno" height="220px"
-														width="250px" emptyMessage="No hay Estudios Externos Registrados">
+														width="300px" emptyMessage="No hay Estudios Externos Registrados">
 														<listhead>
 															<listheader label="Estudio Externo" width="100%" />
 														</listhead>
@@ -810,6 +854,15 @@
 																</listcell>
 																<listcell>
 																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<combobox tooltiptext="Seleccione un Centro"
+																		model="${$composer.proveedores}" placeholder="Seleccione un Centro"
+																		readonly="true" width="100%">
+																		<template name="model">
+																			<comboitem label="${each.nombre}" context="${each.idProveedor}" />
+																		</template>
+																	</combobox>
 																</listcell>
 																<listcell>
 																	<spinner inplace="true" width="98%"
@@ -827,10 +880,11 @@
 															tooltiptext="Quitar Estudio Externo" width="30px" />
 													</vbox>
 													<listbox id="ltbServicioExternoAgregados" height="220px"
-														width="350px" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
+														width="470px" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
 														<listhead>
 															<listheader label="Estudio Externo" width="40%" />
-															<listheader label="Costo" width="60%" />
+															<listheader label="Costo" width="20%" />
+															<listheader label="Centro" width="40%" />
 															<listheader label="id" visible="false" />
 														</listhead>
 														<template name="model">
@@ -843,18 +897,43 @@
 																		width="98%" />
 																</listcell>
 																<listcell>
+																	<combobox tooltiptext="Seleccione un Centro"
+																		model="${$composer.proveedores}" placeholder="Seleccione un Centro"
+																		readonly="true" width="100%">
+																		<template name="model">
+																			<comboitem label="${each.nombre}" context="${each.idProveedor}" />
+																		</template>
+																	</combobox>
+																</listcell>
+																<listcell>
 																	<spinner value="${each.servicioExterno.idServicioExterno}"
 																		width="98%" visible="false" disabled="true" />
 																</listcell>
 															</listitem>
 														</template>
 													</listbox>
-													<button label="Agregar Servicios" id="btnAgregarServicios"
-														image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Estudios Externos"
-														width="70px" />
-													<button label="Generar Orden" id="btnGenerarOrdenServicios"
-														image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
-														width="60px" />
+													<hbox width="30%">
+														<grid width="auto">
+															<columns visible="false">
+																<column label="" width="100%" />
+															</columns>
+															<rows>
+																<row>
+																	<button label="Agregar Servicios" id="btnAgregarServicios"
+																		image="/public/imagenes/botones/agregar.png"
+																		tooltiptext="Agregar Estudios Externos" style="font-size: 10px"
+																		orient="vertical" width="50px" height="50px" />
+																</row>
+																<row>
+																	<button label="Generar Orden" id="btnGenerarOrdenServicios"
+																		image="/public/imagenes/botones/generar.png"
+																		tooltiptext="Generar Orden" style="font-size: 10px"
+																		orient="vertical" width="50px" height="55px" />
+																	<box />
+																</row>
+															</rows>
+														</grid>
+													</hbox>
 												</hbox>
 											</groupbox>
 										</hbox>
