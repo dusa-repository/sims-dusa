@@ -54,6 +54,12 @@ public class Proveedor implements Serializable {
 	@OneToMany(mappedBy = "proveedor")
 	private Set<ConsultaExamen> servicios;
 	
+	@OneToMany(mappedBy = "proveedor")
+	private Set<ProveedorExamen> proveedoresExamenes;
+	
+	@OneToMany(mappedBy = "proveedor")
+	private Set<ProveedorServicio> proveedoresServicios;
+	
 	public Proveedor() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -143,6 +149,22 @@ public class Proveedor implements Serializable {
 
 	public void setServicios(Set<ConsultaExamen> servicios) {
 		this.servicios = servicios;
+	}
+
+	public Set<ProveedorExamen> getProveedoresExamenes() {
+		return proveedoresExamenes;
+	}
+
+	public void setProveedoresExamenes(Set<ProveedorExamen> proveedoresExamenes) {
+		this.proveedoresExamenes = proveedoresExamenes;
+	}
+
+	public Set<ProveedorServicio> getProveedoresServicios() {
+		return proveedoresServicios;
+	}
+
+	public void setProveedoresServicios(Set<ProveedorServicio> proveedoresServicios) {
+		this.proveedoresServicios = proveedoresServicios;
 	}
 
 }

@@ -53,6 +53,9 @@ public class ServicioExterno implements Serializable {
 	@OneToMany(mappedBy = "servicioExterno")
 	private Set<ConsultaServicioExterno> servicios;
 	
+	@OneToMany(mappedBy = "servicioExterno")
+	private Set<ProveedorServicio> proveedoresServicios;
+	
 	public ServicioExterno() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -142,6 +145,14 @@ public class ServicioExterno implements Serializable {
 
 	public void setServicios(Set<ConsultaServicioExterno> servicios) {
 		this.servicios = servicios;
+	}
+
+	public Set<ProveedorServicio> getProveedoresServicios() {
+		return proveedoresServicios;
+	}
+
+	public void setProveedoresServicios(Set<ProveedorServicio> proveedoresServicios) {
+		this.proveedoresServicios = proveedoresServicios;
 	}
 	
 }
