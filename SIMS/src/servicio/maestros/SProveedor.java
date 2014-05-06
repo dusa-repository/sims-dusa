@@ -1,11 +1,16 @@
 package servicio.maestros;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import interfacedao.maestros.IAntecedenteDAO;
 import interfacedao.maestros.IProveedorDAO;
+import interfacedao.maestros.IProveedorServicioDAO;
 
 import modelo.maestros.Proveedor;
+import modelo.maestros.ProveedorServicio;
+import modelo.maestros.ServicioExterno;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 		@Autowired
 		private IProveedorDAO	proveedorDAO;
+		@Autowired
+		private IProveedorServicioDAO proveedorServicioDAO;
 
 		public void guardar(Proveedor proveedor) {
 			proveedorDAO.save(proveedor);
@@ -52,6 +59,16 @@ import org.springframework.stereotype.Service;
 
 		public Proveedor buscarPorNombre(String value) {
 			return  proveedorDAO.findByNombre(value);
+		}
+
+		public List<Proveedor> buscarPorServicio(
+				ServicioExterno servicio) {
+			List<ProveedorServicio> proveedoresServicio = proveedorServicioDAO.findByServicioExterno(servicio);
+			List<Proveedor> proveedores = new ArrayList<Proveedor>();
+			for (int i = 0; i < proveedoresServicio.size(); i++) {
+				proveedores.add(proveedoresServicio.get(i).getProveedor());
+			}
+			return proveedores;
 		}
 
 }

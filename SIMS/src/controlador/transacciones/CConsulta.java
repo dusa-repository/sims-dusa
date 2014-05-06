@@ -38,6 +38,7 @@ import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaMedicina;
 import modelo.transacciones.ConsultaServicioExterno;
 
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -79,8 +80,6 @@ public class CConsulta extends CGenerico {
 	private static final long serialVersionUID = -6277014704105198573L;
 	@Wire
 	private Datebox dtbFechaConsulta;
-	@Wire
-	private Timebox tmbHoraConsulta;
 	@Wire
 	private Textbox txtBuscadorExamen;
 	@Wire
@@ -254,6 +253,8 @@ public class CConsulta extends CGenerico {
 	private Label lblConsulta;
 	@Wire
 	private Label lblTipoDiagnostico;
+	@Wire
+	private Div botoneraConsultaGeneral;
 	ListModelList<Proveedor> proveedores;
 	// -----------------------------
 
@@ -386,8 +387,33 @@ public class CConsulta extends CGenerico {
 		};
 
 		botonera.getChildren().get(1).setVisible(false);
+		botonera.getChildren().get(2).setVisible(false);
+		botonera.getChildren().get(3).setVisible(false);
 		botoneraConsulta.appendChild(botonera);
 
+		Botonera botoneraGeneral = new Botonera() {
+			
+			@Override
+			public void salir() {
+				cerrarVentana(divConsulta, "Consulta");
+			}
+
+			@Override
+			public void limpiar() {
+				limpiarCampos();
+			}
+			
+			@Override
+			public void guardar() {
+			}
+			
+			@Override
+			public void eliminar() {
+			}
+		};
+		botoneraGeneral.getChildren().get(0).setVisible(false);
+		botoneraGeneral.getChildren().get(1).setVisible(false);
+		botoneraConsultaGeneral.appendChild(botoneraGeneral);
 	}
 
 	private void buscadorEspecialista() {
@@ -635,8 +661,11 @@ public class CConsulta extends CGenerico {
 					.buscar(id);
 			double valor = ((Doublespinner) ((listItem.getChildren().get(1)))
 					.getFirstChild()).getValue();
+			String idProveedor = ((Combobox) ((listItem.getChildren().get(2)))
+					.getFirstChild()).getSelectedItem().getContext();
+			Proveedor proveedor = servicioProveedor.buscar(Long.parseLong(idProveedor));
 			ConsultaServicioExterno consultaServicio = new ConsultaServicioExterno(
-					consultaDatos, servicioExterno, valor);
+					consultaDatos, servicioExterno, proveedor, valor);
 			listaServicioExterno.add(consultaServicio);
 		}
 		servicioConsultaServicioExterno.guardar(listaServicioExterno);
@@ -670,8 +699,10 @@ public class CConsulta extends CGenerico {
 			Examen examen = servicioExamen.buscar(idExamen);
 			String valor = ((Textbox) ((listItem.getChildren().get(1)))
 					.getFirstChild()).getValue();
+			//buscar precio del servicio externo
+			double precio = 0;
 			ConsultaExamen consultaExamen = new ConsultaExamen(consultaDatos,
-					examen, valor,proveedor);
+					examen, valor,proveedor, precio);
 			listaConsultaExamen.add(consultaExamen);
 		}
 		servicioConsultaExamen.guardar(listaConsultaExamen);
@@ -895,6 +926,13 @@ public class CConsulta extends CGenerico {
 
 		especialistasDisponibles = servicioEspecialista
 				.buscarDisponibles(consulta);
+		for (int i = 0; i < especialistasDisponibles.size(); i++) {
+
+			String nombre = especialistasDisponibles.get(i).getNombre();
+			String apellido = especialistasDisponibles.get(i).getApellido();
+			Especialista especialista = especialistasDisponibles.get(i);
+			especialista.setNombre(nombre + " " + apellido);
+		}
 		ltbEspecialistas.setModel(new ListModelList<Especialista>(
 				especialistasDisponibles));
 		especialistasAgregados = servicioConsultaEspecialista
@@ -1318,6 +1356,7 @@ public class CConsulta extends CGenerico {
 					especialistasDisponibles.remove(especialista);
 					ConsultaEspecialista consultaEspecialista = new ConsultaEspecialista();
 					consultaEspecialista.setEspecialista(especialista);
+					consultaEspecialista.setCosto(especialista.getCosto());
 					especialistasAgregados.add(consultaEspecialista);
 					ltbEspecialistasAgregados
 							.setModel(new ListModelList<ConsultaEspecialista>(

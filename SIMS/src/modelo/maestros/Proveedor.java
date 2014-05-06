@@ -55,6 +55,9 @@ public class Proveedor implements Serializable {
 	private Set<ConsultaExamen> servicios;
 	
 	@OneToMany(mappedBy = "proveedor")
+	private Set<ConsultaServicioExterno> serviciosExternos;
+	
+	@OneToMany(mappedBy = "proveedor")
 	private Set<ProveedorExamen> proveedoresExamenes;
 	
 	@OneToMany(mappedBy = "proveedor")
@@ -165,6 +168,14 @@ public class Proveedor implements Serializable {
 
 	public void setProveedoresServicios(Set<ProveedorServicio> proveedoresServicios) {
 		this.proveedoresServicios = proveedoresServicios;
+	}
+
+	public Set<ConsultaServicioExterno> getServiciosExternos() {
+		return serviciosExternos;
+	}
+
+	public void setServiciosExternos(Set<ConsultaServicioExterno> serviciosExternos) {
+		this.serviciosExternos = serviciosExternos;
 	}
 
 }
