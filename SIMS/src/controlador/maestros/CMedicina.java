@@ -137,7 +137,7 @@ public class CMedicina extends CGenerico {
 								.getValue();
 						if (String.valueOf(idPresentacion) == ""
 								|| id == ""
-								|| String.valueOf(valor) == "")
+								||valor == 0)
 							campoNulo = true;
 						else {
 							id = ((Combobox) ((listItem.getChildren().get(2)))
@@ -180,7 +180,11 @@ public class CMedicina extends CGenerico {
 								indicaciones, nombre, posologia, precauciones,
 								nombreUsuarioSesion(), laboratorio, ca);
 						servicioMedicina.guardar(medicina);
+						if (id != 0)
+							medicina = servicioMedicina.buscar(id);
+						else
 						medicina = servicioMedicina.buscarUltima();
+						
 						List<MedicinaPresentacionUnidad> medicinasPresentacionesUnidades = servicioMedicinaPresentacionUnidad
 								.buscarPresentacionesUsadas(medicina);
 						if (!medicinasPresentacionesUnidades.isEmpty())
