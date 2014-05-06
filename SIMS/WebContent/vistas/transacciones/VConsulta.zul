@@ -375,12 +375,15 @@
 											<listbox width="auto" id="ltbResumenExamenes" height="250px"
 												emptyMessage="No ha Seleccionado Ningún Examen">
 												<listhead>
-													<listheader label="Examen" width="50%" />
+													<listheader label="Examen" width="30%" />
+													<listheader label="Costo" width="20%" />
 													<listheader label="Observacion" width="50%" />
 												</listhead>
 												<template name="model">
 													<listitem>
 														<listcell label="${each.examen.nombre}">
+														</listcell>
+														<listcell label="${each.costo}">
 														</listcell>
 														<listcell label="${each.observacion}">
 														</listcell>
@@ -403,14 +406,17 @@
 												</template>
 											</listbox>
 											<listbox id="ltbResumenServicios" height="250px"
-												width="auto" emptyMessage="No ha Seleccionado Ningún Servicio Externo">
+												width="auto" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
 												<listhead>
-													<listheader label="Servicio Externo" width="70%" />
-													<listheader label="Costo" width="30%" />
+													<listheader label="Estudio Externo" width="42%" />													
+													<listheader label="Centro" width="40%" />
+													<listheader label="Costo" width="18%" />
 												</listhead>
 												<template name="model">
 													<listitem>
 														<listcell label="${each.servicioExterno.nombre}">
+														</listcell>
+														<listcell label="${each.proveedor.nombre}">
 														</listcell>
 														<listcell label="${each.costo}">
 														</listcell>
@@ -759,14 +765,17 @@
 													<listbox id="ltbEspecialistas" height="220px"
 														width="300px" emptyMessage="No hay Especialistas Registrados">
 														<listhead>
-															<listheader label="Especialista" width="100%" />
+															<listheader label="Especialista" width="70%" />
+															<listheader label="Costo Servicio" width="30%" />
 														</listhead>
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
 																</listcell>
 																<listcell>
-																	<textbox width="98%" />
+																	<doublespinner step="0.1" format="#.##"
+																		constraint="min 0 max 100000000" value="${each.costo}"
+																		width="98%" readonly="true" buttonVisible="false"/>
 																</listcell>
 																<listcell>
 																	<spinner inplace="true" width="98%" value="${each.cedula}"
@@ -796,7 +805,7 @@
 																<listcell>
 																	<doublespinner step="0.1" format="#.##"
 																		constraint="min 0 max 100000000" value="${each.costo}"
-																		width="98%" />
+																		width="98%" readonly="true" buttonVisible="false"/>
 																</listcell>
 																<listcell>
 																	<spinner value="${each.especialista.cedula}"
@@ -1007,6 +1016,7 @@
 				</tabpanels>
 			</tabbox>
 			<div id="divCatalogoPacientes" />
+			<div id="botoneraConsultaGeneral"/>
 		</groupbox>
 	</div>
 </zk>

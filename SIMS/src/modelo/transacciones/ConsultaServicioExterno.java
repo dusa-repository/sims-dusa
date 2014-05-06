@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import modelo.maestros.Proveedor;
 import modelo.maestros.ServicioExterno;
 import modelo.pk.ConsultaServicioExternoId;
 
@@ -27,6 +28,10 @@ public class ConsultaServicioExterno {
 	@JoinColumn(name = "id_servicio_externo", referencedColumnName = "id_servicio_externo")
 	private ServicioExterno servicioExterno;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
+	private Proveedor proveedor;
+	
 	@Column(name="costo")
 	private double costo;
 
@@ -36,11 +41,12 @@ public class ConsultaServicioExterno {
 	}
 
 	public ConsultaServicioExterno(Consulta consulta,
-			ServicioExterno servicioExterno, double costo) {
+			ServicioExterno servicioExterno, Proveedor pro, double costo) {
 		super();
 		this.consulta = consulta;
 		this.servicioExterno = servicioExterno;
 		this.costo = costo;
+		this.proveedor = pro;
 	}
 
 	public Consulta getConsulta() {
@@ -65,6 +71,14 @@ public class ConsultaServicioExterno {
 
 	public void setCosto(double costo) {
 		this.costo = costo;
+	}
+
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
 	}
 	
 	

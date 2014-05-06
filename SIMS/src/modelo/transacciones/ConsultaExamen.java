@@ -34,18 +34,22 @@ public class ConsultaExamen {
 	
 	@Column(length=100)
 	private String observacion;
+	
+	@Column(name="costo")
+	private double costo;
 
 	public ConsultaExamen() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ConsultaExamen(Consulta consulta, Examen examen, String observacion, Proveedor p) {
+	public ConsultaExamen(Consulta consulta, Examen examen, String observacion, Proveedor p, double d) {
 		super();
 		this.consulta = consulta;
 		this.examen = examen;
 		this.observacion = observacion;
 		this.proveedor = p;
+		this.costo = d;
 	}
 
 	public Consulta getConsulta() {
@@ -78,6 +82,14 @@ public class ConsultaExamen {
 
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
+	}
+
+	public double getCosto() {
+		return costo;
+	}
+
+	public void setCosto(double costo) {
+		this.costo = costo;
 	}
 	
 	
