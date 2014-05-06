@@ -1,10 +1,19 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.maestros.Ciudad;
+import modelo.maestros.Examen;
+import modelo.maestros.Medicina;
+import modelo.maestros.MedicinaPresentacionUnidad;
+import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.Proveedor;
+import modelo.maestros.ProveedorExamen;
+import modelo.maestros.ProveedorServicio;
+import modelo.maestros.ServicioExterno;
+import modelo.maestros.UnidadMedicina;
 import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.event.Event;
@@ -13,19 +22,34 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Spinner;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
 
 import componentes.Botonera;
+import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Validador;
 
 public class CProveedor extends CGenerico {
 
 	private static final long serialVersionUID = -6178756189105805846L;
+
+	@Wire
+	private Listbox ltbEstudios;
+	@Wire
+	private Listbox ltbEstudiosAgregados;
+	@Wire
+	private Listbox ltbExamen;
+	@Wire
+	private Listbox ltbExamenesAgregados;
 	@Wire
 	private Div divProveedor;
 	@Wire
@@ -42,15 +66,34 @@ public class CProveedor extends CGenerico {
 	private Button btnBuscarProveedor;
 	@Wire
 	private Combobox cmbCiudadProveedor;
+	@Wire
+	private Textbox txtBuscadorEstudio;
+	@Wire
+	private Textbox txtBuscadorExamen;
+	@Wire
+	private Tab tabEstudios;
+	@Wire
+	private Tab tabExamenes;
 
 	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<Proveedor> catalogo;
 
+	Buscar<Examen> buscadorExamen;
+	Buscar<ServicioExterno> buscadorEstudio;
+	List<Examen> examenesDisponibles = new ArrayList<Examen>();
+	List<ProveedorExamen> examenesUsados = new ArrayList<ProveedorExamen>();
+	List<ServicioExterno> estudiosDisponibles = new ArrayList<ServicioExterno>();
+	List<ProveedorServicio> estudiosUsados = new ArrayList<ProveedorServicio>();
+
 	@Override
 	public void inicializar() throws IOException {
-		
+
 		llenarComboCiudad();
+		llenarListaExamenes(null);
+		llenarListaEstudios(null);
+		buscarExamen();
+		buscarEstudio();
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -64,37 +107,124 @@ public class CProveedor extends CGenerico {
 				txtNombreProveedor.setValue("");
 				txtTelefonoProveedor.setValue("");
 				cmbCiudadProveedor.setValue("");
-				cmbCiudadProveedor
-						.setPlaceholder("Seleccione una Ciudad");
+				cmbCiudadProveedor.setPlaceholder("Seleccione una Ciudad");
 				id = 0;
+				ltbEstudios.getItems().clear();
+				ltbEstudiosAgregados.getItems().clear();
+				llenarListaEstudios(null);
+				estudiosDisponibles.clear();
+				estudiosUsados.clear();
+				ltbExamen.getItems().clear();
+				ltbExamenesAgregados.getItems().clear();
+				llenarListaExamenes(null);
+				examenesDisponibles.clear();
+				examenesUsados.clear();
 			}
 
 			@Override
 			public void guardar() {
 				if (validar()) {
-					String nombre, direccion, telefono;
-					nombre = txtNombreProveedor.getValue();
-					direccion = txtDireccionProveedor.getValue();
-					telefono = txtTelefonoProveedor.getValue();
-					Ciudad ciudad = servicioCiudad.buscar(Long
-							.parseLong(cmbCiudadProveedor
-									.getSelectedItem().getContext()));
-					Proveedor proveedor = new Proveedor(id,
-							direccion, nombre, telefono, fechaHora,
-							horaAuditoria, nombreUsuarioSesion(), ciudad);
-					servicioProveedor.guardar(proveedor);
-					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					List<ProveedorServicio> listaEstudios = new ArrayList<ProveedorServicio>();
+					List<ProveedorExamen> listaExamen = new ArrayList<ProveedorExamen>();
+
+					/* Verifica los estudios asociados */
+					boolean campoNuloEstudio = false;
+					for (int i = 0; i < ltbEstudiosAgregados.getItemCount(); i++) {
+						Listitem listItem = ltbEstudiosAgregados
+								.getItemAtIndex(i);
+						double costo = ((Doublespinner) ((listItem
+								.getChildren().get(1))).getFirstChild())
+								.getValue();
+						long idEstudio = ((Spinner) ((listItem.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						if (String.valueOf(idEstudio) == ""
+								|| costo == 0.0)
+						{
+							campoNuloEstudio = true;
+						}
+						else {
+							ServicioExterno servicioExterno = servicioServicioExterno
+									.buscar(idEstudio);
+							ProveedorServicio proveedorServicio = new ProveedorServicio(
+									null, servicioExterno, costo);
+							listaEstudios.add(proveedorServicio);
+						}
+					}
+
+					/* Verifica los examenes asociados */
+					boolean campoNuloExamen = false;
+					for (int i = 0; i < ltbExamenesAgregados.getItemCount(); i++) {
+						Listitem listItem = ltbExamenesAgregados
+								.getItemAtIndex(i);
+						double costo = ((Doublespinner) ((listItem
+								.getChildren().get(1))).getFirstChild())
+								.getValue();
+						long idExamen = ((Spinner) ((listItem.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						if (String.valueOf(idExamen) == ""
+								|| costo == 0)
+						{
+							campoNuloExamen = true;
+						}
+						else {
+							Examen examen = servicioExamen.buscar(idExamen);
+							ProveedorExamen proveedorExamen = new ProveedorExamen(
+									null, examen, costo);
+							listaExamen.add(proveedorExamen);
+						}
+					}
+					if (!campoNuloEstudio && !campoNuloExamen) {
+						String nombre, direccion, telefono;
+						nombre = txtNombreProveedor.getValue();
+						direccion = txtDireccionProveedor.getValue();
+						telefono = txtTelefonoProveedor.getValue();
+						Ciudad ciudad = servicioCiudad.buscar(Long
+								.parseLong(cmbCiudadProveedor.getSelectedItem()
+										.getContext()));
+						Proveedor proveedor = new Proveedor(id, direccion,
+								nombre, telefono, fechaHora, horaAuditoria,
+								nombreUsuarioSesion(), ciudad);
+						servicioProveedor.guardar(proveedor);
+
+						if (id != 0)
+							proveedor = servicioProveedor.buscar(id);
+						else
+							proveedor = servicioProveedor.buscarUltimo();
+
+						List<ProveedorServicio> estudios = servicioProveedorServicio
+								.buscarEstudiosUsados(proveedor);
+						if (!estudios.isEmpty())
+							servicioProveedorServicio
+									.eliminar(estudios);
+						for (int i = 0; i <listaEstudios.size(); i++) {
+							listaEstudios.get(i).setProveedor(proveedor);
+						}
+						servicioProveedorServicio.guardar(listaEstudios);
+						
+						List<ProveedorExamen> examenes = servicioProveedorExamen.buscarExamenesUsados(proveedor);
+						if (!examenes.isEmpty())
+							servicioProveedorExamen
+									.eliminar(examenes);
+						for (int i = 0; i <listaExamen.size(); i++) {
+							listaExamen.get(i).setProveedor(proveedor);
+						}
+						servicioProveedorExamen.guardar(listaExamen);
+						
+						limpiar();
+						Messagebox.show("Registro Guardado Exitosamente",
+								"Informacion", Messagebox.OK,
+								Messagebox.INFORMATION);
+					} else
+						Messagebox.show(
+								"Debe Llenar Todos los Campos de la Listas",
+								"Error", Messagebox.OK, Messagebox.ERROR);
 				}
 			}
 
 			@Override
 			public void eliminar() {
 				if (id != 0) {
-					Messagebox.show(
-							"¿Esta Seguro de Eliminar el Proveedor?",
+					Messagebox.show("¿Esta Seguro de Eliminar el Proveedor?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -103,8 +233,7 @@ public class CProveedor extends CGenerico {
 									if (evt.getName().equals("onOK")) {
 										Proveedor proveedor = servicioProveedor
 												.buscar(id);
-										servicioProveedor
-												.eliminar(proveedor);
+										servicioProveedor.eliminar(proveedor);
 										limpiar();
 										Messagebox
 												.show("Registro Eliminado Exitosamente",
@@ -140,8 +269,7 @@ public class CProveedor extends CGenerico {
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
 		} else {
-			if (!Validador.validarTelefono(txtTelefonoProveedor
-					.getValue())) {
+			if (!Validador.validarTelefono(txtTelefonoProveedor.getValue())) {
 				Messagebox.show("Telefono Invalido", "Informacion",
 						Messagebox.OK, Messagebox.INFORMATION);
 				return false;
@@ -153,10 +281,9 @@ public class CProveedor extends CGenerico {
 	/* Muestra el catalogo de los servicios externos */
 	@Listen("onClick = #btnBuscarProveedor")
 	public void mostrarCatalogo() {
-		final List<Proveedor> proveedores = servicioProveedor
-				.buscarTodos();
+		final List<Proveedor> proveedores = servicioProveedor.buscarTodos();
 		catalogo = new Catalogo<Proveedor>(catalogoProveedor,
-				"Catalogo de Servicios Externos",proveedores, "Nombre",
+				"Catalogo de Servicios Externos", proveedores, "Nombre",
 				"Direccion", "Telefono", "Ciudad") {
 
 			@Override
@@ -203,8 +330,7 @@ public class CProveedor extends CGenerico {
 	/* Permite la seleccion de un item del catalogo */
 	@Listen("onSeleccion = #catalogoProveedor")
 	public void seleccinar() {
-		Proveedor proveedor = catalogo
-				.objetoSeleccionadoDelCatalogo();
+		Proveedor proveedor = catalogo.objetoSeleccionadoDelCatalogo();
 		llenarCampos(proveedor);
 		catalogo.setParent(null);
 	}
@@ -223,18 +349,279 @@ public class CProveedor extends CGenerico {
 		txtDireccionProveedor.setValue(proveedor.getDireccion());
 		txtNombreProveedor.setValue(proveedor.getNombre());
 		txtTelefonoProveedor.setValue(proveedor.getTelefono());
-		cmbCiudadProveedor.setValue(proveedor.getCiudad()
-				.getNombre());
+		cmbCiudadProveedor.setValue(proveedor.getCiudad().getNombre());
+		llenarListaEstudios(proveedor);
+		llenarListaExamenes(proveedor);
 		id = proveedor.getIdProveedor();
 	}
 
-	/* Abre la vista de Ciudad*/
+	/* Abre la vista de Ciudad */
 	@Listen("onClick = #btnAbrirCiudad")
-	public void abrirCiudad(){		
+	public void abrirCiudad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
+	}
+
+	/* Cosas relacionadas con los grid */
+	/* Llena la lista al iniciar con todas las presentaciones existentes */
+	private void llenarListaEstudios(Proveedor proveedor) {
+		if (proveedor == null) {
+			estudiosDisponibles = servicioServicioExterno.buscarTodas();
+			ltbEstudios.setModel(new ListModelList<ServicioExterno>(
+					estudiosDisponibles));
+		} else {
+			estudiosUsados = servicioProveedorServicio
+					.buscarEstudiosUsados(proveedor);
+			ltbEstudiosAgregados.setModel(new ListModelList<ProveedorServicio>(
+					estudiosUsados));
+			if (!estudiosUsados.isEmpty()) {
+				List<Long> ids = new ArrayList<Long>();
+				for (int i = 0; i < estudiosUsados.size(); i++) {
+					long id = estudiosUsados.get(i).getServicioExterno()
+							.getIdServicioExterno();
+					ids.add(id);
+				}
+				estudiosDisponibles = servicioServicioExterno
+						.buscarEstudiosDisponibles(ids);
+				ltbEstudios.setModel(new ListModelList<ServicioExterno>(
+						estudiosDisponibles));
+			}
+		}
+		ltbEstudiosAgregados.setMultiple(false);
+		ltbEstudiosAgregados.setCheckmark(false);
+		ltbEstudiosAgregados.setMultiple(true);
+		ltbEstudiosAgregados.setCheckmark(true);
+
+		ltbEstudios.setMultiple(false);
+		ltbEstudios.setCheckmark(false);
+		ltbEstudios.setMultiple(true);
+		ltbEstudios.setCheckmark(true);
+	}
+
+	/* Llena la lista al iniciar con todas las presentaciones existentes */
+	private void llenarListaExamenes(Proveedor proveedor) {
+		if (proveedor == null) {
+			examenesDisponibles = servicioExamen.buscarTodos();
+			ltbExamen.setModel(new ListModelList<Examen>(examenesDisponibles));
+		} else {
+			examenesUsados = servicioProveedorExamen
+					.buscarExamenesUsados(proveedor);
+			ltbExamenesAgregados.setModel(new ListModelList<ProveedorExamen>(
+					examenesUsados));
+			if (!examenesUsados.isEmpty()) {
+				List<Long> ids = new ArrayList<Long>();
+				for (int i = 0; i < examenesUsados.size(); i++) {
+					long id = examenesUsados.get(i).getExamen().getIdExamen();
+					ids.add(id);
+				}
+				examenesDisponibles = servicioExamen
+						.buscarExamenesDisponibles(ids);
+				ltbExamen.setModel(new ListModelList<Examen>(
+						examenesDisponibles));
+			}
+		}
+		ltbExamenesAgregados.setMultiple(false);
+		ltbExamenesAgregados.setCheckmark(false);
+		ltbExamenesAgregados.setMultiple(true);
+		ltbExamenesAgregados.setCheckmark(true);
+
+		ltbExamen.setMultiple(false);
+		ltbExamen.setCheckmark(false);
+		ltbExamen.setMultiple(true);
+		ltbExamen.setCheckmark(true);
+	}
+
+	/*
+	 * Permite mover uno o varios elementos seleccionados desde la lista de la
+	 * izquierda a la lista de la derecha (ESTUDIO)
+	 */
+	@Listen("onClick = #pasar1")
+	public void moverDerecha() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem = ltbEstudios.getItems();
+		if (listItem.size() != 0) {
+			for (int i = 0; i < listItem.size(); i++) {
+				if (listItem.get(i).isSelected()) {
+					ServicioExterno servicio = listItem.get(i).getValue();
+					estudiosDisponibles.remove(servicio);
+					ProveedorServicio proveedorServicio = new ProveedorServicio();
+					proveedorServicio.setServicioExterno(servicio);
+					estudiosUsados.add(proveedorServicio);
+					ltbEstudiosAgregados
+							.setModel(new ListModelList<ProveedorServicio>(
+									estudiosUsados));
+					listitemEliminar.add(listItem.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbEstudios.removeItemAt(listitemEliminar.get(i).getIndex());
+		}
+		ltbEstudiosAgregados.setMultiple(false);
+		ltbEstudiosAgregados.setCheckmark(false);
+		ltbEstudiosAgregados.setMultiple(true);
+		ltbEstudiosAgregados.setCheckmark(true);
+	}
+
+	/*
+	 * Permite mover uno o varios elementos seleccionados desde la lista de la
+	 * derecha a la lista de la izquierda
+	 */
+	@Listen("onClick = #pasar2")
+	public void moverIzquierda() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem2 = ltbEstudiosAgregados.getItems();
+		if (listItem2.size() != 0) {
+			for (int i = 0; i < listItem2.size(); i++) {
+				if (listItem2.get(i).isSelected()) {
+					ProveedorServicio proveedorServicio = listItem2.get(i)
+							.getValue();
+					estudiosUsados.remove(proveedorServicio);
+					estudiosDisponibles.add(proveedorServicio
+							.getServicioExterno());
+					ltbEstudios.setModel(new ListModelList<ServicioExterno>(
+							estudiosDisponibles));
+					listitemEliminar.add(listItem2.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbEstudiosAgregados.removeItemAt(listitemEliminar.get(i)
+					.getIndex());
+		}
+		ltbEstudios.setMultiple(false);
+		ltbEstudios.setCheckmark(false);
+		ltbEstudios.setMultiple(true);
+		ltbEstudios.setCheckmark(true);
+	}
+
+	public void buscarEstudio() {
+		buscadorEstudio = new Buscar<ServicioExterno>(ltbEstudios,
+				txtBuscadorEstudio) {
+			@Override
+			protected List<ServicioExterno> buscar(String valor) {
+				List<ServicioExterno> estudiosFiltrados = new ArrayList<ServicioExterno>();
+				List<ServicioExterno> estudios = servicioServicioExterno
+						.filtroNombre(valor);
+				for (int i = 0; i < estudiosDisponibles.size(); i++) {
+					ServicioExterno estudio = estudiosDisponibles.get(i);
+					for (int j = 0; j < estudios.size(); j++) {
+						if (estudio.getIdServicioExterno() == estudios.get(j)
+								.getIdServicioExterno())
+							estudiosFiltrados.add(estudio);
+					}
+				}
+				return estudiosFiltrados;
+			}
+		};
+	}
+
+	/*
+	 * Permite mover uno o varios elementos seleccionados desde la lista de la
+	 * izquierda a la lista de la derecha (EXAMEN)
+	 */
+	@Listen("onClick = #pasar11")
+	public void moverDerecha2() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem = ltbExamen.getItems();
+		if (listItem.size() != 0) {
+			for (int i = 0; i < listItem.size(); i++) {
+				if (listItem.get(i).isSelected()) {
+					Examen examen = listItem.get(i).getValue();
+					examenesDisponibles.remove(examen);
+					ProveedorExamen proveedorExamen = new ProveedorExamen();
+					proveedorExamen.setExamen(examen);
+					examenesUsados.add(proveedorExamen);
+					ltbExamenesAgregados
+							.setModel(new ListModelList<ProveedorExamen>(
+									examenesUsados));
+					listitemEliminar.add(listItem.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbExamen.removeItemAt(listitemEliminar.get(i).getIndex());
+		}
+		ltbExamenesAgregados.setMultiple(false);
+		ltbExamenesAgregados.setCheckmark(false);
+		ltbExamenesAgregados.setMultiple(true);
+		ltbExamenesAgregados.setCheckmark(true);
+	}
+
+	/*
+	 * Permite mover uno o varios elementos seleccionados desde la lista de la
+	 * derecha a la lista de la izquierda
+	 */
+	@Listen("onClick = #pasar22")
+	public void moverIzquierda2() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem2 = ltbExamenesAgregados.getItems();
+		if (listItem2.size() != 0) {
+			for (int i = 0; i < listItem2.size(); i++) {
+				if (listItem2.get(i).isSelected()) {
+					ProveedorExamen proveedorExamen = listItem2.get(i)
+							.getValue();
+					examenesUsados.remove(proveedorExamen);
+					examenesDisponibles.add(proveedorExamen.getExamen());
+					ltbExamen.setModel(new ListModelList<Examen>(
+							examenesDisponibles));
+					listitemEliminar.add(listItem2.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbExamenesAgregados.removeItemAt(listitemEliminar.get(i)
+					.getIndex());
+		}
+		ltbExamen.setMultiple(false);
+		ltbExamen.setCheckmark(false);
+		ltbExamen.setMultiple(true);
+		ltbExamen.setCheckmark(true);
+	}
+
+	public void buscarExamen() {
+		buscadorExamen = new Buscar<Examen>(ltbExamen, txtBuscadorExamen) {
+			@Override
+			protected List<Examen> buscar(String valor) {
+				List<Examen> examenesFiltrados = new ArrayList<Examen>();
+				List<Examen> examenes = servicioExamen.filtroNombre(valor);
+				for (int i = 0; i < examenesDisponibles.size(); i++) {
+					Examen examen = examenesDisponibles.get(i);
+					for (int j = 0; j < examenes.size(); j++) {
+						if (examen.getIdExamen() == examenes.get(j)
+								.getIdExamen())
+							examenesFiltrados.add(examen);
+					}
+				}
+				return examenesFiltrados;
+			}
+		};
+	}
+
+	/* Abre la vista de Estudios */
+	@Listen("onClick = #btnAbrirEstudio")
+	public void abrirEstudio() {
+		Arbol arbolItem = servicioArbol
+				.buscarPorNombreArbol("Servicios Externos");
+		cArbol.abrirVentanas(arbolItem);
+	}
+
+	/* Abre la vista de Examenes */
+	@Listen("onClick = #btnAbrirExamen")
+	public void abrirExamen() {
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Examen");
+		cArbol.abrirVentanas(arbolItem);
+	}
+
+	/* Abre la pestanna de examenes */
+	@Listen("onClick = #btnSiguientePestanna")
+	public void siguientePestanna() {
+		tabExamenes.setSelected(true);
+	}
+
+	/* Abre la pestanna de estudios */
+	@Listen("onClick = #btnAnteriorPestanna")
+	public void anteriorPestanna() {
+		tabEstudios.setSelected(true);
 	}
 }
-
-
-

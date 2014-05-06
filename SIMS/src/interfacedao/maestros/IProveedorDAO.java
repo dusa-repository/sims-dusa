@@ -6,6 +6,7 @@ import java.util.List;
 import modelo.maestros.Proveedor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 	public interface IProveedorDAO extends JpaRepository<Proveedor, Long> {
 
@@ -18,4 +19,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 		List<Proveedor> findByCiudadNombreStartingWithAllIgnoreCase(String valor);
 
 		Proveedor findByNombre(String value);
+
+		@Query("select coalesce(max(p.idProveedor), '0') from Proveedor p")
+		long findMaxIdProveedor();
 }

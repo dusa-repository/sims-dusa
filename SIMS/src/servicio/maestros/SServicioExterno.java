@@ -70,4 +70,8 @@ public class SServicioExterno {
 			return servicioExternoDAO.findByIdServicioExternoNotIn(ids);
 		}
 	}
+
+	public List<ServicioExterno> buscarEstudiosDisponibles(List<Long> ids) {
+		return servicioExternoDAO.findByIdServicioExternoNotIn(ids);
+	}
 }

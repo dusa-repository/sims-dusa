@@ -71,4 +71,13 @@ import org.springframework.stereotype.Service;
 			return proveedores;
 		}
 
+		public Proveedor buscarUltimo() {
+			long id = proveedorDAO.findMaxIdProveedor();
+			if (id != 0)
+				return proveedorDAO.findOne(id);
+			else
+				return null;
+			
+		}
+
 }

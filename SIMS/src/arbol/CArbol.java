@@ -248,8 +248,7 @@ public class CArbol extends CGenerico {
 
 	public void abrirVentanas(Arbol arbolItem) {
 		boolean abrir = true;
-		Tab taba = new Tab();
-		
+		Tab taba = new Tab();	
 			if (!arbolItem.getUrl().equals("inicio")) {
 				for (int i = 0; i < tabs.size(); i++) {
 					if (tabs.get(i).getLabel().equals(arbolItem.getNombre())) {
