@@ -51,6 +51,8 @@ import servicio.maestros.SPais;
 import servicio.maestros.SPresentacionComercial;
 import servicio.maestros.SPresentacionMedicina;
 import servicio.maestros.SProveedor;
+import servicio.maestros.SProveedorExamen;
+import servicio.maestros.SProveedorServicio;
 import servicio.maestros.SRecipe;
 import servicio.maestros.SServicioExterno;
 import servicio.maestros.SUnidadMedicina;
@@ -130,6 +132,12 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SPresentacionComercial servicioPresentacion;
 	@WireVariable("SPresentacionMedicina")
 	protected SPresentacionMedicina servicioPresentacionMedicina;
+	@WireVariable("SProveedor")
+	protected SProveedor servicioProveedor;
+	@WireVariable("SProveedorExamen")
+	protected SProveedorExamen servicioProveedorExamen;
+	@WireVariable("SProveedorServicio")
+	protected SProveedorServicio servicioProveedorServicio;
 	@WireVariable("SRecipe")
 	protected SRecipe servicioRecipe;
 	@WireVariable("SServicioExterno")
@@ -142,8 +150,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SGrupo servicioGrupo;
 	@WireVariable("SUsuario")
 	protected SUsuario servicioUsuario;
-	@WireVariable("SProveedor")
-	protected SProveedor servicioProveedor;
 	
 
 	
