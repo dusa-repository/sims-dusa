@@ -78,4 +78,8 @@ public class SExamen {
 			return examenDAO.findByIdExamenNotIn(ids);
 		}
 	}
+
+	public List<Examen> buscarExamenesDisponibles(List<Long> ids) {
+		return examenDAO.findByIdExamenNotIn(ids);
+	}
 }
