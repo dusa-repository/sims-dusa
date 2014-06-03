@@ -39,6 +39,7 @@ import modelo.transacciones.ConsultaMedicina;
 import modelo.transacciones.ConsultaServicioExterno;
 
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -98,18 +99,6 @@ public class CConsulta extends CGenerico {
 	private Datebox dtbValido;
 	@Wire
 	private Groupbox gpxResumen;
-	@Wire
-	private Groupbox gpxMedicina;
-	@Wire
-	private Groupbox gpxDiagnostico;
-	@Wire
-	private Groupbox gpxServicio;
-	@Wire
-	private Groupbox gpxExamen;
-	@Wire
-	private Groupbox gpxEspecialista;
-	@Wire
-	private Groupbox gpxServicioExterno;
 	@Wire
 	private Groupbox gpxMedicos;
 	@Wire
@@ -1696,83 +1685,6 @@ public class CConsulta extends CGenerico {
 		lblLentes.setValue("");
 	}
 
-	@Listen("onClick = #gpxResumen")
-	public void abrirResumen() {
-		gpxResumen.setOpen(true);
-		gpxDiagnostico.setOpen(false);
-		gpxEspecialista.setOpen(false);
-		gpxExamen.setOpen(false);
-		gpxMedicina.setOpen(false);
-		gpxServicio.setOpen(false);
-		gpxServicioExterno.setOpen(false);
-	}
-
-	@Listen("onClick = #gpxMedicina")
-	public void abrirMedicina() {
-		gpxResumen.setOpen(false);
-		gpxDiagnostico.setOpen(false);
-		gpxEspecialista.setOpen(false);
-		gpxExamen.setOpen(false);
-		gpxMedicina.setOpen(true);
-		gpxServicio.setOpen(false);
-		gpxServicioExterno.setOpen(false);
-	}
-
-	@Listen("onClick = #gpxDiagnostico")
-	public void abrirDiagnostico() {
-		gpxResumen.setOpen(false);
-		gpxDiagnostico.setOpen(true);
-		gpxEspecialista.setOpen(false);
-		gpxExamen.setOpen(false);
-		gpxMedicina.setOpen(false);
-		gpxServicio.setOpen(false);
-		gpxServicioExterno.setOpen(false);
-	}
-
-	@Listen("onClick = #gpxServicio")
-	public void abrirServicio() {
-		gpxResumen.setOpen(false);
-		gpxDiagnostico.setOpen(false);
-		gpxEspecialista.setOpen(false);
-		gpxExamen.setOpen(false);
-		gpxMedicina.setOpen(false);
-		gpxServicio.setOpen(true);
-		gpxServicioExterno.setOpen(false);
-	}
-
-	@Listen("onClick = #gpxExamen")
-	public void abrirExamen() {
-		gpxResumen.setOpen(false);
-		gpxDiagnostico.setOpen(false);
-		gpxEspecialista.setOpen(false);
-		gpxExamen.setOpen(true);
-		gpxMedicina.setOpen(false);
-		gpxServicio.setOpen(true);
-		gpxServicioExterno.setOpen(false);
-	}
-
-	@Listen("onClick = #gpxEspecialista")
-	public void abrirEspecialista() {
-		gpxResumen.setOpen(false);
-		gpxDiagnostico.setOpen(false);
-		gpxEspecialista.setOpen(true);
-		gpxExamen.setOpen(false);
-		gpxMedicina.setOpen(false);
-		gpxServicio.setOpen(true);
-		gpxServicioExterno.setOpen(false);
-	}
-
-	@Listen("onClick = #gpxServicioExterno")
-	public void abrirServicioE() {
-		gpxResumen.setOpen(false);
-		gpxDiagnostico.setOpen(false);
-		gpxEspecialista.setOpen(false);
-		gpxExamen.setOpen(false);
-		gpxMedicina.setOpen(false);
-		gpxServicio.setOpen(true);
-		gpxServicioExterno.setOpen(true);
-	}
-
 	@Listen("onClick = #btnAbrirExamen")
 	public void divExamen() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Examen");
@@ -1888,5 +1800,11 @@ public class CConsulta extends CGenerico {
 		proveedores = new ListModelList<Proveedor>(
 				servicioProveedor.buscarTodos());
 		return proveedores;
+	}
+
+	@Listen("onSelect = #ltbServicioExternoAgregados > template > listitem > listcell")
+	public void click(MouseEvent event) {
+	    System.out.println("hola");
+	    System.out.println(event.getName());
 	}
 }
