@@ -185,10 +185,6 @@
 								</rows>
 							</grid>
 						</groupbox>
-						<div align="right" style="float: right;">
-							<button id="btnSiguientePestanna" label="Siguiente"
-								image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
-						</div>
 						<separator />
 						<tabbox height="auto" id="taxOtrosDatos" orient="horizontal">
 							<tabs id="tbsOtrosDatos">
@@ -271,7 +267,6 @@
 						</tabbox>
 					</tabpanel>
 					<tabpanel>
-
 						<grid width="100%">
 							<columns visible="false">
 								<column label="" width="16%" />
@@ -311,11 +306,16 @@
 						<tabbox height="auto" id="taxDatosConsulta" orient="horizontal">
 							<tabs>
 								<tab label="Registro de Consulta" id="tabRegistro" />
-								<tab label="Plan de Accion" id="tabAccino" />
+								<tab label="Diagnosticos" id="tabDiagnosticos" />
+								<tab label="Medicinas" id="tabMedicinas" />
+								<tab label="Examenes" id="tabExamenes" />
+								<tab label="Especialistas" id="tabEspecialistas" />
+								<tab label="Estudios Externos" id="tabEstudios" />
+								<tab label="Resumen" id="tabResumen" />
 							</tabs>
 							<tabpanels>
 								<tabpanel>
-									<grid width="100%">
+									<grid width="100%" style="border:false;">
 										<columns visible="false">
 											<column label="" width="15%" />
 											<column label="" width="35%" />
@@ -325,11 +325,11 @@
 										<rows>
 											<row>
 												<label class="etiqueta" value="Motivo de la Consulta:" />
-												<textbox maxlength="1000" class="multilineaTab"
+												<textbox maxlength="1000" class="multilinea"
 													multiline="true" id="txtMotivo" hflex="1"
 													tooltiptext="Ingrese el Motivo de la Consulta" />
 												<label class="etiqueta" value="Enfermedad Actual:" />
-												<textbox maxlength="1000" class="multilineaTab"
+												<textbox maxlength="1000" class="multilinea"
 													multiline="true" id="txtEnfermedad" hflex="1"
 													tooltiptext="Ingrese la Enfermedad Actual Observada" />
 											</row>
@@ -338,9 +338,520 @@
 									<label value="Examen Fisico"></label>
 								</tabpanel>
 								<tabpanel>
+									<!--Diagnosticos -->
 									<separator />
-									<groupbox id="gpxResumen" title="Resumen de la Consulta"
-										open="true" mold="3d">
+									<hbox>
+										<textbox tooltiptext="Ingrese el Nombre del Diagnostico"
+											placeholder="Ingrese el Diagnostico a Buscar" width="195px"
+											id="txtBuscadorDiagnostico"></textbox>
+										<separator />
+										<button id="btnAbrirDiagnostico" label=""
+											tooltiptext="Crear un Nuevo Diagnostico" image="/public/imagenes/botones/agregar.png" />
+									</hbox>
+									<hbox>
+										<listbox id="ltbDiagnosticos" height="250px" width="280px"
+											emptyMessage="No hay Diagnosticos Registrados">
+											<listhead>
+												<listheader label="Diagnostico" width="100%" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell>
+														<textbox width="98%" />
+													</listcell>
+													<listcell>
+														<spinner inplace="true" width="98%"
+															value="${each.idDiagnostico}" visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<vbox>
+											<button id="pasar1Diagnostico" image="/public/imagenes/botones/adelante.png"
+												tooltiptext="Agregar Diagnostico" width="30px" />
+											<separator />
+											<button id="pasar2Diagnostico" image="/public/imagenes/botones/atras.png"
+												tooltiptext="Quitar Diagnostico" width="30px" />
+										</vbox>
+										<listbox id="ltbDiagnosticosAgregados" width="550px"
+											height="250px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
+											<listhead>
+												<listheader label="Diagnostico" width="40%" />
+												<listheader label="Observacion" width="60%" />
+												<listheader label="id" visible="false" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.diagnostico.nombre}">
+													</listcell>
+													<listcell>
+														<textbox value="${each.observacion}" width="98%" />
+													</listcell>
+													<listcell>
+														<spinner value="${each.diagnostico.idDiagnostico}"
+															width="98%" visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<vbox>
+											<grid width="100%">
+												<columns visible="false">
+													<column label="" width="50%" />
+													<column label="" width="50%" />
+												</columns>
+												<rows>
+													<row>
+														<label id="lblTipoDiagnostico" value="Tipo de Diagnostico:" />
+														<combobox tooltiptext="Seleccione el Tipo de Diagnostico"
+															placeholder="Seleccione el Tipo" id="cmbTipoDiagnostio"
+															width="100%" readonly="true">
+															<comboitem label="Accidente Comun" />
+															<comboitem label="Accidente Laboral" />
+															<comboitem label="Enfermedad Comun" />
+															<comboitem label="Enfermedad Laboral" />
+															<comboitem label="Otro" />
+														</combobox>
+														<!-- <combobox tooltiptext="Seleccione un Accidente" placeholder="Seleccione 
+															un Accidente" id="cmbAccidente" readonly="true" width="100%"> <template name="model"> 
+															<comboitem label="${each.nombre}" context="${each.idAccidente}" /> </template> 
+															</combobox> -->
+													</row>
+													<row>
+														<label id="lblAccidente" value="Accidente:" />
+														<combobox tooltiptext="Seleccione un Accidente"
+															placeholder="Seleccione un Accidente" id="cmbAccidente"
+															readonly="true" width="100%">
+															<template name="model">
+																<comboitem label="${each.nombre}" context="${each.idAccidente}" />
+															</template>
+														</combobox>
+													</row>
+													<row>
+														<label id="lblConsulta" value="Consulta Asociada al Control:" />
+														<combobox tooltiptext="Seleccione un Estado"
+															placeholder="Seleccione una Consulta" id="cmbConsulta"
+															readonly="true" width="100%">
+															<template name="model">
+																<comboitem description="${each.fechaConsulta}"
+																	label="${each.accidente.nombre}" context="${each.idConsulta}" />
+															</template>
+														</combobox>
+													</row>
+													<row>
+														<cell colspan="2">
+															<vbox>
+																<button label="Agregar Diagnosticos" id="btnAgregarDiagnosticos"
+																	image="/public/imagenes/botones/agregar.png"
+																	tooltiptext="Agregar Diagnosticos" width="200px" />
+															</vbox>
+														</cell>
+													</row>
+												</rows>
+											</grid>
+										</vbox>
+									</hbox>
+								</tabpanel>
+								<tabpanel>
+									<!-- title="Agregar Medicinas" -->
+									<separator />
+									<hbox>
+										<textbox tooltiptext="Ingrese el Nombre de la Medicina"
+											placeholder="Ingrese la Medicina a Buscar" width="195px"
+											id="txtBuscadorMedicina"></textbox>
+										<separator />
+										<button id="btnAbrirMedicina" label=""
+											tooltiptext="Crear una Nueva Medicina" image="/public/imagenes/botones/agregar.png" />
+									</hbox>
+									<hbox>
+										<listbox id="ltbMedicinas" height="250px" width="280px"
+											emptyMessage="No hay Medicinas Registradas">
+											<listhead>
+												<listheader label="Medicina" width="100%" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell>
+														<textbox width="98%" />
+													</listcell>
+													<listcell>
+														<spinner inplace="true" width="98%" value="${each.idMedicina}"
+															visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<vbox>
+											<button id="pasar1Medicina" image="/public/imagenes/botones/adelante.png"
+												tooltiptext="Agregar Medicina" width="30px" />
+											<separator />
+											<button id="pasar2Medicina" image="/public/imagenes/botones/atras.png"
+												tooltiptext="Quitar Medicina" width="30px" />
+										</vbox>
+										<listbox id="ltbMedicinasAgregadas" height="250px"
+											width="550px" emptyMessage="No ha Seleccionado Ningúna Medicina">
+											<listhead>
+												<listheader label="Medicina" width="40%" />
+												<listheader label="Dosis" width="60%" />
+												<listheader label="id" visible="false" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.medicina.nombre}">
+													</listcell>
+													<listcell>
+														<textbox value="${each.dosis}" width="98%" />
+													</listcell>
+													<listcell>
+														<spinner value="${each.medicina.idMedicina}"
+															width="98%" visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<vbox>
+											<grid width="100%">
+												<columns visible="false">
+													<column label="" width="50%" />
+													<column label="" width="50%" />
+												</columns>
+												<rows>
+													<row>
+														<cell colspan="2">
+															<vbox>
+																<button label="Agregar Medicinas" id="btnAgregarMedicinas"
+																	image="/public/imagenes/botones/agregar.png"
+																	tooltiptext="Agregar Medicinas" width="200px" />
+															</vbox>
+														</cell>
+													</row>
+
+													<row>
+														<label value="Prioridad Recipe:" />
+														<combobox tooltiptext="Seleccione la Prioridad"
+															placeholder="Seleccione la Prioridad" id="cmbPrioridad"
+															width="100%" readonly="true">
+															<comboitem label="Urgente" />
+															<comboitem label="Normal" />
+														</combobox>
+													</row>
+													<row>
+														<label value="Recipe Valido hasta:" />
+														<datebox readonly="true" width="100%" id="dtbValido"
+															constraint="no past,no empty" onCreate="self.value = new Date()"
+															tooltiptext="Indique la Fecha de Vencimiento del Recipe" />
+													</row>
+													<row>
+														<cell colspan="2">
+															<vbox>
+																<button label="Generar Recipe" id="btnGenerarRecipe"
+																	image="/public/imagenes/botones/generar.png"
+																	tooltiptext="Generar Recipe" width="200px" />
+															</vbox>
+														</cell>
+													</row>
+												</rows>
+											</grid>
+										</vbox>
+									</hbox>
+								</tabpanel>
+								<tabpanel>
+									<separator />
+									<hbox align="center" pack="center">
+										<textbox tooltiptext="Ingrese el Nombre del Examen"
+											placeholder="Ingrese el Examen a Buscar" width="195px"
+											id="txtBuscadorExamen"></textbox>
+										<separator />
+										<button id="btnAbrirExamen" label=""
+											tooltiptext="Crear un Nuevo Examen" image="/public/imagenes/botones/agregar.png" />
+									</hbox>
+									<hbox>
+										<listbox id="ltbExamenes" height="250px" width="280px"
+											emptyMessage="No hay Examenes Registrados">
+											<listhead>
+												<listheader label="Examen" width="100%" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell>
+														<textbox width="98%" />
+													</listcell>
+													<listcell>
+														<spinner inplace="true" width="98%" value="${each.idExamen}"
+															visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<vbox>
+											<button id="pasar1Examen" image="/public/imagenes/botones/adelante.png"
+												tooltiptext="Agregar Examen" width="30px" />
+											<separator />
+											<button id="pasar2Examen" image="/public/imagenes/botones/atras.png"
+												tooltiptext="Quitar Examen" width="30px" />
+										</vbox>
+										<listbox id="ltbExamenesAgregados" height="250px"
+											width="550px" emptyMessage="No ha Seleccionado Ningún Examen">
+											<listhead>
+												<listheader label="Examen" width="40%" />
+												<listheader label="Observacion" width="60%" />
+												<listheader label="id" visible="false" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.examen.nombre}">
+													</listcell>
+													<listcell>
+														<textbox value="${each.observacion}" width="98%" />
+													</listcell>
+													<listcell>
+														<spinner value="${each.examen.idExamen}" width="98%"
+															visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<hbox width="100%">
+											<grid width="100%">
+												<columns visible="false">
+													<column label="" width="50%" />
+													<column label="" width="50%" />
+												</columns>
+												<rows>
+													<row>
+														<cell colspan="2">
+															<vbox>
+																<button label="Agregar Examenes" id="btnAgregarExamenes"
+																	image="/public/imagenes/botones/agregar.png"
+																	tooltiptext="Agregar Examenes" width="200px" />
+															</vbox>
+														</cell>
+													</row>
+													<row>
+														<label value="Laboratorio encargado de examenes:" />
+														<combobox tooltiptext="Seleccione un Laboratorio"
+															model="${$composer.proveedores}" placeholder="Seleccione un Laboratorio"
+															id="cmbProveedor" readonly="true" width="100%">
+															<template name="model">
+																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
+															</template>
+														</combobox>
+													</row>
+													<row>
+														<cell colspan="2">
+															<vbox>
+																<button label="Generar Orden" id="btnGenerarOrden"
+																	image="/public/imagenes/botones/generar.png"
+																	tooltiptext="Generar Orden" width="200px" />
+															</vbox>
+														</cell>
+													</row>
+												</rows>
+											</grid>
+										</hbox>
+									</hbox>
+								</tabpanel>
+								<tabpanel>
+									<separator />
+									<hbox>
+										<textbox tooltiptext="Ingrese el Nombre del Especialista"
+											placeholder="Ingrese el Especialista a Buscar" width="195px"
+											id="txtBuscadorEspecialista"></textbox>
+										<separator />
+										<button id="btnAbrirEspecialista" label=""
+											tooltiptext="Crear un Nuevo Especialista" image="/public/imagenes/botones/agregar.png" />
+									</hbox>
+									<hbox>
+										<listbox id="ltbEspecialistas" height="250px" width="280px"
+											emptyMessage="No hay Especialistas Registrados">
+											<listhead>
+												<listheader label="Especialista" width="70%" />
+												<listheader label="Costo Servicio" width="30%" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell>
+														<doublespinner step="0.1" format="#.##"
+															constraint="min 0 max 100000000" value="${each.costo}"
+															width="98%" readonly="true" buttonVisible="false" />
+													</listcell>
+													<listcell>
+														<spinner inplace="true" width="98%" value="${each.cedula}"
+															visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<vbox>
+											<button id="pasar1Especialista" image="/public/imagenes/botones/adelante.png"
+												tooltiptext="Agregar Especialista" width="30px" />
+											<separator />
+											<button id="pasar2Especialista" image="/public/imagenes/botones/atras.png"
+												tooltiptext="Quitar Especialista" width="30px" />
+										</vbox>
+										<listbox id="ltbEspecialistasAgregados" height="250px"
+											width="550px" emptyMessage="No ha Seleccionado Ningún Especialista">
+											<listhead>
+												<listheader label="Especialista" width="40%" />
+												<listheader label="Costo" width="60%" />
+												<listheader label="id" visible="false" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.especialista.nombre}">
+													</listcell>
+													<listcell>
+														<doublespinner step="0.1" format="#.##"
+															constraint="min 0 max 100000000" value="${each.costo}"
+															width="98%" readonly="true" buttonVisible="false" />
+													</listcell>
+													<listcell>
+														<spinner value="${each.especialista.cedula}"
+															width="98%" visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<hbox width="100%">
+											<grid width="auto">
+												<columns visible="false">
+													<column label="" width="100%" />
+												</columns>
+												<rows>
+													<row>
+														<vbox>
+															<button label="Agregar Especialistas" id="btnAgregarEspecialistas"
+																image="/public/imagenes/botones/agregar.png"
+																tooltiptext="Agregar Especialistas" width="200px" />
+														</vbox>
+													</row>
+													<row>
+														<vbox>
+															<button label="Generar Referencia" id="btnGenerarReferencia"
+																image="/public/imagenes/botones/generar.png"
+																tooltiptext="Generar Orden" width="200px" />
+														</vbox>
+													</row>
+												</rows>
+											</grid>
+										</hbox>
+									</hbox>
+								</tabpanel>
+								<tabpanel>
+									<separator />
+									<hbox>
+										<textbox tooltiptext="Ingrese el Nombre del Estudio Externo"
+											placeholder="Ingrese el Estudio Externo a Buscar" width="195px"
+											id="txtBuscadorServicioExterno"></textbox>
+										<separator />
+										<button id="btnAbrirServicioExterno" label=""
+											tooltiptext="Crear un Nuevo Estudio Externo" image="/public/imagenes/botones/agregar.png" />
+									</hbox>
+									<hbox>
+										<listbox id="ltbServicioExterno" height="250px" width="280px"
+											emptyMessage="No hay Estudios Externos Registrados">
+											<listhead>
+												<listheader label="Estudio Externo" width="100%" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell>
+														<textbox width="98%" />
+													</listcell>
+													<listcell>
+														<combobox tooltiptext="Seleccione un Centro"
+															model="${$composer.proveedores}" placeholder="Seleccione un Centro"
+															readonly="true" width="100%">
+															<template name="model">
+																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
+															</template>
+														</combobox>
+													</listcell>
+													<listcell>
+														<spinner inplace="true" width="98%"
+															value="${each.idServicioExterno}" visible="false"
+															disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<vbox>
+											<button id="pasar1ServicioExterno" image="/public/imagenes/botones/adelante.png"
+												tooltiptext="Agregar Estudio Externo" width="30px" />
+											<separator />
+											<button id="pasar2ServicioExterno" image="/public/imagenes/botones/atras.png"
+												tooltiptext="Quitar Estudio Externo" width="30px" />
+										</vbox>
+										<listbox id="ltbServicioExternoAgregados" height="250px"
+											width="550px" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
+											<listhead>
+												<listheader label="Estudio Externo" width="40%" />
+												<listheader label="Costo" width="20%" />
+												<listheader label="Centro" width="40%" />
+												<listheader label="id" visible="false" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.servicioExterno.nombre}">
+													</listcell>
+													<listcell>
+														<doublespinner step="0.1" format="#.##"
+															constraint="min 0 max 100000000" value="${each.costo}"
+															width="98%" />
+													</listcell>
+													<listcell>
+														<combobox tooltiptext="Seleccione un Centro"
+															model="${$composer.proveedores}" placeholder="Seleccione un Centro"
+															readonly="true" width="100%">
+															<template name="model">
+																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
+															</template>
+														</combobox>
+													</listcell>
+													<listcell>
+														<spinner value="${each.servicioExterno.idServicioExterno}"
+															width="98%" visible="false" disabled="true" />
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+										<hbox width="100%">
+											<grid width="auto">
+												<columns visible="false">
+													<column label="" width="100%" />
+												</columns>
+												<rows>
+													<row>
+														<button label="Agregar Servicios" id="btnAgregarServicios"
+															image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Estudios Externos"
+															width="200px" />
+													</row>
+													<row>
+														<button label="Generar Orden" id="btnGenerarOrdenServicios"
+															image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
+															width="200px" />
+														<box />
+													</row>
+												</rows>
+											</grid>
+										</hbox>
+									</hbox>
+								</tabpanel>
+								<tabpanel>
+									<separator />
+									<groupbox id="gpxResumen" open="true">
+										<caption label="Resumen de la Consulta"
+											style="color:blue; font-size: 12px; font-weight:bold" />
 										<hbox>
 											<listbox width="auto" id="ltbResumenDiagnosticos"
 												height="250px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
@@ -408,7 +919,7 @@
 											<listbox id="ltbResumenServicios" height="250px"
 												width="auto" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
 												<listhead>
-													<listheader label="Estudio Externo" width="42%" />													
+													<listheader label="Estudio Externo" width="42%" />
 													<listheader label="Centro" width="40%" />
 													<listheader label="Costo" width="18%" />
 												</listhead>
@@ -425,531 +936,10 @@
 											</listbox>
 										</hbox>
 									</groupbox>
-									<!--Diagnosticos -->
-									<groupbox id="gpxDiagnostico" open="false">
-										<caption label="Agregar Diagnosticos"
-											style="color:blue; font-size: 12px; font-weight:bold" />
-										<separator />
-										<hbox>
-											<textbox tooltiptext="Ingrese el Nombre del Diagnostico"
-												placeholder="Ingrese la Diagnostico a Buscar" width="195px"
-												id="txtBuscadorDiagnostico"></textbox>
-											<separator />
-											<button id="btnAbrirDiagnostico" label=""
-												tooltiptext="Crear un Nuevo Diagnostico" image="/public/imagenes/botones/agregar.png" />
-										</hbox>
-										<hbox>
-											<listbox id="ltbDiagnosticos" height="250px" width="280px"
-												emptyMessage="No hay Diagnosticos Registrados">
-												<listhead>
-													<listheader label="Diagnostico" width="100%" />
-												</listhead>
-												<template name="model">
-													<listitem>
-														<listcell label="${each.nombre}">
-														</listcell>
-														<listcell>
-															<textbox width="98%" />
-														</listcell>
-														<listcell>
-															<spinner inplace="true" width="98%"
-																value="${each.idDiagnostico}" visible="false" disabled="true" />
-														</listcell>
-													</listitem>
-												</template>
-											</listbox>
-											<vbox>
-												<button id="pasar1Diagnostico" image="/public/imagenes/botones/adelante.png"
-													tooltiptext="Agregar Diagnostico" width="30px" />
-												<separator />
-												<button id="pasar2Diagnostico" image="/public/imagenes/botones/atras.png"
-													tooltiptext="Quitar Diagnostico" width="30px" />
-											</vbox>
-											<listbox id="ltbDiagnosticosAgregados" width="600px"
-												height="250px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
-												<listhead>
-													<listheader label="Diagnostico" width="40%" />
-													<listheader label="Observacion" width="60%" />
-													<listheader label="id" visible="false" />
-												</listhead>
-												<template name="model">
-													<listitem>
-														<listcell label="${each.diagnostico.nombre}">
-														</listcell>
-														<listcell>
-															<textbox value="${each.observacion}" width="98%" />
-														</listcell>
-														<listcell>
-															<spinner value="${each.diagnostico.idDiagnostico}"
-																width="98%" visible="false" disabled="true" />
-														</listcell>
-													</listitem>
-												</template>
-											</listbox>
-											<vbox>
-												<grid width="100%">
-													<columns visible="false">
-														<column label="" width="20%" />
-														<column label="" width="40%" />
-														<column label="" width="40%" />
-													</columns>
-													<rows>
-														<row>
-															<label id="lblTipoDiagnostico" value="Tipo de Diagnostico:" />
-															<combobox tooltiptext="Seleccione el Tipo de Diagnostico"
-																placeholder="Seleccione el Tipo" id="cmbTipoDiagnostio"
-																width="100%" readonly="true">
-																<comboitem label="Accidente Comun" />
-																<comboitem label="Accidente Laboral" />
-																<comboitem label="Enfermedad Comun" />
-																<comboitem label="Enfermedad Laboral" />
-																<comboitem label="Otro" />
-															</combobox>
-															<combobox tooltiptext="Seleccione un Accidente"
-																placeholder="Seleccione un Accidente" id="cmbAccidente"
-																readonly="true" width="100%">
-																<template name="model">
-																	<comboitem label="${each.nombre}" context="${each.idAccidente}" />
-																</template>
-															</combobox>
-														</row>
-														<row>
-															<label id="lblConsulta" value="Consulta Asociada al Control:" />
-															<combobox tooltiptext="Seleccione un Estado"
-																placeholder="Seleccione una Consulta" id="cmbConsulta"
-																readonly="true" width="100%">
-																<template name="model">
-																	<comboitem description="${each.fechaConsulta}"
-																		label="${each.accidente.nombre}" context="${each.idConsulta}" />
-																</template>
-															</combobox>
-															<hbox />
-														</row>
-														<row>
-
-															<hbox />
-															<button label="Agregar Diagnosticos" id="btnAgregarDiagnosticos"
-																image="/public/imagenes/botones/agregar.png"
-																tooltiptext="Agregar Diagnosticos" width="100px" />
-															<hbox />
-														</row>
-													</rows>
-												</grid>
-											</vbox>
-
-										</hbox>
-									</groupbox>
-									<!-- title="Agregar Medicinas" -->
-									<groupbox id="gpxMedicina" open="false">
-										<caption label="Agregar Medicinas"
-											style="color:blue; font-size: 12px; font-weight:bold" />
-										<separator />
-										<hbox>
-											<textbox tooltiptext="Ingrese el Nombre de la Medicina"
-												placeholder="Ingrese la Medicina a Buscar" width="195px"
-												id="txtBuscadorMedicina"></textbox>
-											<separator />
-											<button id="btnAbrirMedicina" label=""
-												tooltiptext="Crear una Nueva Medicina" image="/public/imagenes/botones/agregar.png" />
-										</hbox>
-										<hbox>
-											<listbox id="ltbMedicinas" height="250px" width="220px"
-												emptyMessage="No hay Medicinas Registradas">
-												<listhead>
-													<listheader label="Medicina" width="100%" />
-												</listhead>
-												<template name="model">
-													<listitem>
-														<listcell label="${each.nombre}">
-														</listcell>
-														<listcell>
-															<textbox width="98%" />
-														</listcell>
-														<listcell>
-															<spinner inplace="true" width="98%"
-																value="${each.idMedicina}" visible="false" disabled="true" />
-														</listcell>
-													</listitem>
-												</template>
-											</listbox>
-											<vbox>
-												<button id="pasar1Medicina" image="/public/imagenes/botones/adelante.png"
-													tooltiptext="Agregar Medicina" width="30px" />
-												<separator />
-												<button id="pasar2Medicina" image="/public/imagenes/botones/atras.png"
-													tooltiptext="Quitar Medicina" width="30px" />
-											</vbox>
-											<listbox id="ltbMedicinasAgregadas" height="250px"
-												emptyMessage="No ha Seleccionado Ningúna Medicina">
-												<listhead>
-													<listheader label="Medicina" width="40%" />
-													<listheader label="Dosis" width="60%" />
-													<listheader label="id" visible="false" />
-												</listhead>
-												<template name="model">
-													<listitem>
-														<listcell label="${each.medicina.nombre}">
-														</listcell>
-														<listcell>
-															<textbox value="${each.dosis}" width="98%" />
-														</listcell>
-														<listcell>
-															<spinner value="${each.medicina.idMedicina}"
-																width="98%" visible="false" disabled="true" />
-														</listcell>
-													</listitem>
-												</template>
-											</listbox>
-											<vbox>
-												<grid width="200px">
-													<columns visible="false">
-														<column label="" width="50%" />
-														<column label="" width="50%" />
-													</columns>
-													<rows>
-														<row>
-															<cell colspan="2">
-																<vbox>
-																	<button label="Agregar Medicinas" id="btnAgregarMedicinas"
-																		image="/public/imagenes/botones/agregar.png"
-																		tooltiptext="Agregar Medicinas" width="70px" />
-																</vbox>
-															</cell>
-														</row>
-
-														<row>
-															<label value="Prioridad Recipe:" />
-															<combobox tooltiptext="Seleccione la Prioridad"
-																placeholder="Seleccione la Prioridad" id="cmbPrioridad"
-																width="100%" readonly="true">
-																<comboitem label="Urgente" />
-																<comboitem label="Normal" />
-															</combobox>
-														</row>
-														<row>
-															<label value="Recipe Valido hasta:" />
-															<datebox readonly="true" width="100%" id="dtbValido"
-																constraint="no past,no empty" onCreate="self.value = new Date()"
-																tooltiptext="Indique la Fecha de Vencimiento del Recipe" />
-														</row>
-														<row>
-															<cell colspan="2">
-																<vbox>
-																	<button label="Generar Recipe" id="btnGenerarRecipe"
-																		image="/public/imagenes/botones/generar.png"
-																		tooltiptext="Generar Recipe" width="60px" />
-																</vbox>
-															</cell>
-														</row>
-													</rows>
-												</grid>
-											</vbox>
-										</hbox>
-									</groupbox>
-									<!-- empieza servicios -->
-									<groupbox id="gpxServicio" open="false" width="100%">
-										<caption label="Agregar Servicios"
-											style="color:blue; font-size: 12px; font-weight:bold" />
-										<separator />
-										<hbox>
-											<groupbox id="gpxExamen" open="false">
-												<caption label="Agregar Examenes"
-													style="color:blue; font-size: 12px; font-weight:bold" />
-												<separator />
-												<hbox align="center" pack="center">
-													<textbox tooltiptext="Ingrese el Nombre del Examen"
-														placeholder="Ingrese el Examen a Buscar" width="195px"
-														id="txtBuscadorExamen"></textbox>
-													<separator />
-													<button id="btnAbrirExamen" label=""
-														tooltiptext="Crear un Nuevo Examen" image="/public/imagenes/botones/agregar.png" />
-												</hbox>
-												<hbox>
-													<listbox id="ltbExamenes" height="220px" width="300px"
-														emptyMessage="No hay Examenes Registrados">
-														<listhead>
-															<listheader label="Examen" width="100%" />
-														</listhead>
-														<template name="model">
-															<listitem>
-																<listcell label="${each.nombre}">
-																</listcell>
-																<listcell>
-																	<textbox width="98%" />
-																</listcell>
-																<listcell>
-																	<spinner inplace="true" width="98%"
-																		value="${each.idExamen}" visible="false" disabled="true" />
-																</listcell>
-															</listitem>
-														</template>
-													</listbox>
-													<vbox>
-														<button id="pasar1Examen" image="/public/imagenes/botones/adelante.png"
-															tooltiptext="Agregar Examen" width="30px" />
-														<separator />
-														<button id="pasar2Examen" image="/public/imagenes/botones/atras.png"
-															tooltiptext="Quitar Examen" width="30px" />
-													</vbox>
-													<listbox id="ltbExamenesAgregados" height="220px"
-														width="470px" emptyMessage="No ha Seleccionado Ningún Examen">
-														<listhead>
-															<listheader label="Examen" width="40%" />
-															<listheader label="Observacion" width="60%" />
-															<listheader label="id" visible="false" />
-														</listhead>
-														<template name="model">
-															<listitem>
-																<listcell label="${each.examen.nombre}">
-																</listcell>
-																<listcell>
-																	<textbox value="${each.observacion}" width="98%" />
-																</listcell>
-																<listcell>
-																	<spinner value="${each.examen.idExamen}" width="98%"
-																		visible="false" disabled="true" />
-																</listcell>
-															</listitem>
-														</template>
-													</listbox>
-													<hbox width="60%">
-														<grid width="auto">
-															<columns visible="false">
-																<column label="" width="50%" />
-																<column label="" width="50%" />
-															</columns>
-															<rows>
-																<row>
-																	<button label="Agregar Examenes" id="btnAgregarExamenes"
-																		image="/public/imagenes/botones/agregar.png" orient="vertical"
-																		tooltiptext="Agregar Examenes" style="font-size: 10px"
-																		width="50px" height="50px" />
-																	<box />
-																</row>
-																<row>
-																	<label value="Laboratorio encargado de examenes:" />
-																	<combobox tooltiptext="Seleccione un Laboratorio"
-																		model="${$composer.proveedores}" placeholder="Seleccione un Laboratorio"
-																		id="cmbProveedor" readonly="true" width="100%">
-																		<template name="model">
-																			<comboitem label="${each.nombre}" context="${each.idProveedor}" />
-																		</template>
-																	</combobox>
-																</row>
-																<row>
-																	<button label="Generar Orden" id="btnGenerarOrden"
-																		orient="vertical" image="/public/imagenes/botones/generar.png"
-																		tooltiptext="Generar Orden" style="font-size: 10px"
-																		width="50px" height="55px" />
-																	<box />
-																</row>
-															</rows>
-														</grid>
-													</hbox>
-												</hbox>
-											</groupbox>
-											<!-- termina primero -->
-											<groupbox id="gpxEspecialista" open="false">
-												<caption label="Agregar Especialistas"
-													style="color:blue; font-size: 12px; font-weight:bold" />
-												<separator />
-												<hbox>
-													<textbox tooltiptext="Ingrese el Nombre del Especialista"
-														placeholder="Ingrese el Especialista a Buscar" width="195px"
-														id="txtBuscadorEspecialista"></textbox>
-													<separator />
-													<button id="btnAbrirEspecialista" label=""
-														tooltiptext="Crear un Nuevo Especialista" image="/public/imagenes/botones/agregar.png" />
-												</hbox>
-												<hbox>
-													<listbox id="ltbEspecialistas" height="220px"
-														width="300px" emptyMessage="No hay Especialistas Registrados">
-														<listhead>
-															<listheader label="Especialista" width="70%" />
-															<listheader label="Costo Servicio" width="30%" />
-														</listhead>
-														<template name="model">
-															<listitem>
-																<listcell label="${each.nombre}">
-																</listcell>
-																<listcell>
-																	<doublespinner step="0.1" format="#.##"
-																		constraint="min 0 max 100000000" value="${each.costo}"
-																		width="98%" readonly="true" buttonVisible="false"/>
-																</listcell>
-																<listcell>
-																	<spinner inplace="true" width="98%" value="${each.cedula}"
-																		visible="false" disabled="true" />
-																</listcell>
-															</listitem>
-														</template>
-													</listbox>
-													<vbox>
-														<button id="pasar1Especialista" image="/public/imagenes/botones/adelante.png"
-															tooltiptext="Agregar Especialista" width="30px" />
-														<separator />
-														<button id="pasar2Especialista" image="/public/imagenes/botones/atras.png"
-															tooltiptext="Quitar Especialista" width="30px" />
-													</vbox>
-													<listbox id="ltbEspecialistasAgregados" height="220px"
-														width="470px" emptyMessage="No ha Seleccionado Ningún Especialista">
-														<listhead>
-															<listheader label="Especialista" width="40%" />
-															<listheader label="Costo" width="60%" />
-															<listheader label="id" visible="false" />
-														</listhead>
-														<template name="model">
-															<listitem>
-																<listcell label="${each.especialista.nombre}">
-																</listcell>
-																<listcell>
-																	<doublespinner step="0.1" format="#.##"
-																		constraint="min 0 max 100000000" value="${each.costo}"
-																		width="98%" readonly="true" buttonVisible="false"/>
-																</listcell>
-																<listcell>
-																	<spinner value="${each.especialista.cedula}"
-																		width="98%" visible="false" disabled="true" />
-																</listcell>
-															</listitem>
-														</template>
-													</listbox>
-													<hbox width="30%">
-														<grid width="auto">
-															<columns visible="false">
-																<column label="" width="100%" />
-															</columns>
-															<rows>
-																<row>
-																	<button label="Agregar Especialistas" id="btnAgregarEspecialistas"
-																		image="/public/imagenes/botones/agregar.png"
-																		tooltiptext="Agregar Especialistas" style="font-size: 10px"
-																		orient="vertical" width="50px" height="50px" />
-																</row>
-																<row>
-																	<button label="Generar Referencia" id="btnGenerarReferencia"
-																		image="/public/imagenes/botones/generar.png"
-																		tooltiptext="Generar Orden" style="font-size: 10px"
-																		orient="vertical" width="50px" height="55px" />
-																	<box />
-																</row>
-															</rows>
-														</grid>
-													</hbox>
-												</hbox>
-											</groupbox>
-											<!-- termina segundo -->
-											<groupbox id="gpxServicioExterno" open="false">
-												<caption label="Agregar Estudios Externos"
-													style="color:blue; font-size: 12px; font-weight:bold" />
-												<separator />
-												<hbox>
-													<textbox tooltiptext="Ingrese el Nombre del Estudio Externo"
-														placeholder="Ingrese el Estudio Externo a Buscar" width="195px"
-														id="txtBuscadorServicioExterno"></textbox>
-													<separator />
-													<button id="btnAbrirServicioExterno" label=""
-														tooltiptext="Crear un Nuevo Estudio Externo" image="/public/imagenes/botones/agregar.png" />
-												</hbox>
-												<hbox>
-													<listbox id="ltbServicioExterno" height="220px"
-														width="300px" emptyMessage="No hay Estudios Externos Registrados">
-														<listhead>
-															<listheader label="Estudio Externo" width="100%" />
-														</listhead>
-														<template name="model">
-															<listitem>
-																<listcell label="${each.nombre}">
-																</listcell>
-																<listcell>
-																	<textbox width="98%" />
-																</listcell>
-																<listcell>
-																	<combobox tooltiptext="Seleccione un Centro"
-																		model="${$composer.proveedores}" placeholder="Seleccione un Centro"
-																		readonly="true" width="100%">
-																		<template name="model">
-																			<comboitem label="${each.nombre}" context="${each.idProveedor}" />
-																		</template>
-																	</combobox>
-																</listcell>
-																<listcell>
-																	<spinner inplace="true" width="98%"
-																		value="${each.idServicioExterno}" visible="false"
-																		disabled="true" />
-																</listcell>
-															</listitem>
-														</template>
-													</listbox>
-													<vbox>
-														<button id="pasar1ServicioExterno" image="/public/imagenes/botones/adelante.png"
-															tooltiptext="Agregar Estudio Externo" width="30px" />
-														<separator />
-														<button id="pasar2ServicioExterno" image="/public/imagenes/botones/atras.png"
-															tooltiptext="Quitar Estudio Externo" width="30px" />
-													</vbox>
-													<listbox id="ltbServicioExternoAgregados" height="220px"
-														width="470px" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
-														<listhead>
-															<listheader label="Estudio Externo" width="40%" />
-															<listheader label="Costo" width="20%" />
-															<listheader label="Centro" width="40%" />
-															<listheader label="id" visible="false" />
-														</listhead>
-														<template name="model">
-															<listitem>
-																<listcell label="${each.servicioExterno.nombre}">
-																</listcell>
-																<listcell>
-																	<doublespinner step="0.1" format="#.##"
-																		constraint="min 0 max 100000000" value="${each.costo}"
-																		width="98%" />
-																</listcell>
-																<listcell>
-																	<combobox tooltiptext="Seleccione un Centro"
-																		model="${$composer.proveedores}" placeholder="Seleccione un Centro"
-																		readonly="true" width="100%">
-																		<template name="model">
-																			<comboitem label="${each.nombre}" context="${each.idProveedor}" />
-																		</template>
-																	</combobox>
-																</listcell>
-																<listcell>
-																	<spinner value="${each.servicioExterno.idServicioExterno}"
-																		width="98%" visible="false" disabled="true" />
-																</listcell>
-															</listitem>
-														</template>
-													</listbox>
-													<hbox width="30%">
-														<grid width="auto">
-															<columns visible="false">
-																<column label="" width="100%" />
-															</columns>
-															<rows>
-																<row>
-																	<button label="Agregar Servicios" id="btnAgregarServicios"
-																		image="/public/imagenes/botones/agregar.png"
-																		tooltiptext="Agregar Estudios Externos" style="font-size: 10px"
-																		orient="vertical" width="50px" height="50px" />
-																</row>
-																<row>
-																	<button label="Generar Orden" id="btnGenerarOrdenServicios"
-																		image="/public/imagenes/botones/generar.png"
-																		tooltiptext="Generar Orden" style="font-size: 10px"
-																		orient="vertical" width="50px" height="55px" />
-																	<box />
-																</row>
-															</rows>
-														</grid>
-													</hbox>
-												</hbox>
-											</groupbox>
-										</hbox>
-									</groupbox>
-									<!-- termina -->
-									<separator />
-									<separator />
+									<!-- <groupbox id="gpxServicio" open="false" width="100%"> <caption 
+										label="Agregar Servicios" style="color:blue; font-size: 12px; font-weight:bold" 
+										/> <separator /> <hbox> termina primero termina segundo termina <separator 
+										/> <separator /> -->
 								</tabpanel>
 							</tabpanels>
 						</tabbox>
@@ -1016,7 +1006,7 @@
 				</tabpanels>
 			</tabbox>
 			<div id="divCatalogoPacientes" />
-			<div id="botoneraConsultaGeneral"/>
+			<div id="botoneraConsultaGeneral" />
 		</groupbox>
 	</div>
 </zk>

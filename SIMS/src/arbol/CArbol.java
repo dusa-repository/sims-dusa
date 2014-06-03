@@ -20,6 +20,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.zkoss.image.AImage;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -210,7 +213,7 @@ public class CArbol extends CGenerico {
 		boolean abrir = true;
 		Tab taba = new Tab();
 		if (arbolMenu.getSelectedItem().getLevel() > 0) {
-			Arbol arbolItem = servicioArbol.buscarPorNombreArbol(item);
+			final Arbol arbolItem = servicioArbol.buscarPorNombreArbol(item);
 			if (!arbolItem.getUrl().equals("inicio")) {
 				
 				if (String.valueOf(arbolMenu.getSelectedItem().getValue()).equals("Consulta")) 
@@ -226,8 +229,24 @@ public class CArbol extends CGenerico {
 					contenido = new Include();
 					contenido.setSrc(null);
 					contenido.setSrc(ruta);
-
 					Tab newTab = new Tab(arbolItem.getNombre());
+					newTab.setClosable(true);
+					newTab.addEventListener(Events.ON_CLOSE,
+							new EventListener<Event>() {
+								@Override
+								public void onEvent(Event arg0) throws Exception {
+									for (int i = 0; i < tabs.size(); i++) {
+										if (tabs.get(i).getLabel().equals(arbolItem.getNombre())) {
+											if (i == (tabs.size() - 1) && tabs.size() > 1) {
+												tabs.get(i - 1).setSelected(true);
+											}
+											
+											tabs.get(i).close();
+											tabs.remove(i);
+										}
+									}
+								}
+							});
 					newTab.setSelected(true);
 					Tabpanel newTabpanel = new Tabpanel();
 					newTabpanel.appendChild(contenido);
