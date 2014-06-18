@@ -63,6 +63,9 @@ public class Proveedor implements Serializable {
 	@OneToMany(mappedBy = "proveedor")
 	private Set<ProveedorServicio> proveedoresServicios;
 	
+	@Column(name="costo")
+	private Double costo;
+	
 	public Proveedor() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -70,7 +73,7 @@ public class Proveedor implements Serializable {
 
 	public Proveedor(long idProveedor, String direccion, String nombre,
 			String telefono, Timestamp fechaAuditoria, String horaAuditoria,
-			String usuarioAuditoria, Ciudad ciudad) {
+			String usuarioAuditoria, Ciudad ciudad, Double costo) {
 		super();
 		this.idProveedor = idProveedor;
 		this.direccion = direccion;
@@ -80,6 +83,7 @@ public class Proveedor implements Serializable {
 		this.horaAuditoria = horaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.ciudad = ciudad;
+		this.costo = costo;
 	}
 
 	public long getIdProveedor() {
@@ -176,6 +180,14 @@ public class Proveedor implements Serializable {
 
 	public void setServiciosExternos(Set<ConsultaServicioExterno> serviciosExternos) {
 		this.serviciosExternos = serviciosExternos;
+	}
+
+	public Double getCosto() {
+		return costo;
+	}
+
+	public void setCosto(Double costo) {
+		this.costo = costo;
 	}
 
 }
