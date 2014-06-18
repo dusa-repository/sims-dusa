@@ -181,9 +181,10 @@ public class CProveedor extends CGenerico {
 						Ciudad ciudad = servicioCiudad.buscar(Long
 								.parseLong(cmbCiudadProveedor.getSelectedItem()
 										.getContext()));
+						Double costo = 0.0;
 						Proveedor proveedor = new Proveedor(id, direccion,
 								nombre, telefono, fechaHora, horaAuditoria,
-								nombreUsuarioSesion(), ciudad);
+								nombreUsuarioSesion(), ciudad, costo);
 						servicioProveedor.guardar(proveedor);
 
 						if (id != 0)
