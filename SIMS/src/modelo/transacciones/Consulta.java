@@ -36,30 +36,30 @@ public class Consulta implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente")
 	private Paciente paciente;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_accidente")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_accidente")
 	private Accidente accidente;
-	
+
 	@Column(name = "fecha_consulta")
 	private Timestamp fechaConsulta;
 
 	@Column(length = 500)
 	private String motivoConsulta;
-	
+
 	@Column(length = 500)
 	private String enfermedadActual;
-	
+
 	@Column(length = 50)
 	private String tipoConsulta;
 
 	@Column(name = "hora_consulta", length = 10)
 	private String horaConsulta;
-	
+
 	@Column(name = "hora_auditoria", length = 10)
 	private String horaAuditoria;
 
@@ -68,37 +68,119 @@ public class Consulta implements Serializable {
 
 	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
-	
+
 	@Column
-	@Type(type="org.hibernate.type.NumericBooleanType")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean accidenteLaboral;
-	
+
 	@OneToMany(mappedBy = "consulta")
 	private Set<ConsultaDiagnostico> diagnosticos;
-	
+
 	@OneToMany(mappedBy = "consulta")
 	private Set<ConsultaEspecialista> especialistas;
-	
+
 	@OneToMany(mappedBy = "consulta")
 	private Set<ConsultaExamen> examenes;
-	
+
 	@OneToMany(mappedBy = "consulta")
 	private Set<ConsultaMedicina> medicinas;
-	
+
 	@OneToMany(mappedBy = "consulta")
 	private Set<ConsultaServicioExterno> servicios;
 
+	@OneToMany(mappedBy = "consulta")
+	private Set<ConsultaParteCuerpo> partes;
+
 	@Column(name = "consulta_asociada")
 	private long consultaAsociada;
-	
+
+	@Column(name = "estatura")
+	private Double estatura;
+
+	@Column(name = "peso")
+	private Double peso;
+
+	@Column(name = "perimetro_ombligo")
+	private Double perimetroOmbligo;
+
+	@Column(name = "perimetro_plena")
+	private Double perimetroPlena;
+
+	@Column(name = "perimetro_forzada")
+	private Double perimetroForzada;
+
+	@Column(name = "frecuencia")
+	private Integer frecuencia;
+
+	@Column(name = "frecuencia_reposo")
+	private Integer frecuenciaReposo;
+
+	@Column(name = "frecuencia_esfuerzo")
+	private Integer frecuenciaEsfuerzo;
+
+	@Column(name = "frecuencia_post")
+	private Integer frecuenciaPost;
+
+	@Column(name = "sistolica_primera")
+	private Integer sistolicaPrimera;
+
+	@Column(name = "sistolica_segunda")
+	private Integer sistolicaSegunda;
+
+	@Column(name = "sistolica_tercera")
+	private Integer sistolicaTercera;
+
+	@Column(name = "extra_reposo")
+	private Integer extraReposo;
+
+	@Column(name = "extra_esfuerzo")
+	private Integer extraEsfuerzo;
+
+	@Column(name = "extra_post")
+	private Integer extraPost;
+
+	@Column(name = "diastolica_primera")
+	private Integer diastolicaPrimera;
+
+	@Column(name = "diastolica_segunda")
+	private Integer diastolicaSegunda;
+
+	@Column(name = "diastolica_tercera")
+	private Integer diastolicaTercera;
+
+	@Column(name = "ritmico")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean ritmico;
+
+	@Column(name = "ritmico_reposo")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean ritmicoReposo;
+
+	@Column(name = "ritmico_esfuerzo")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean ritmicoEsfuerzo;
+
+	@Column(name = "ritmico_post")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean ritmicoPost;
+
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Consulta(long idConsulta, Paciente paciente, Usuario usuario, Accidente accidente, Timestamp fechaConsulta, String horaConsulta,
+	public Consulta(long idConsulta, Paciente paciente, Usuario usuario,
+			Accidente accidente, Timestamp fechaConsulta, String horaConsulta,
 			String horaAuditoria, Timestamp fechaAuditoria,
-			String usuarioAuditoria, boolean accidenteLaboral, String motivo, String tipo, String enfermedad, long consultaAsociada) {
+			String usuarioAuditoria, boolean accidenteLaboral, String motivo,
+			String tipo, String enfermedad, long consultaAsociada,
+			Double estatura, Double peso, Double perimetroOmbligo, Double perimetroPlena,
+			Double perimetroForzada, Integer frecuencia, Integer frecuenciaR,
+			Integer frecuenciaE, Integer frecuenciaP, Integer sistolica1,
+			Integer sistolica2, Integer sistolica3, Integer diastolica1,
+			Integer diastolica2, Integer diastolica3, Integer extra1,
+			Integer extra2, Integer extra3, Boolean ritmico, Boolean ritmico1,
+			Boolean ritmico2, Boolean ritmico3) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
@@ -114,9 +196,29 @@ public class Consulta implements Serializable {
 		this.enfermedadActual = enfermedad;
 		this.tipoConsulta = tipo;
 		this.consultaAsociada = consultaAsociada;
+		this.diastolicaPrimera = diastolica1;
+		this.diastolicaSegunda = diastolica2;
+		this.diastolicaTercera = diastolica3;
+		this.estatura = estatura;
+		this.extraReposo = extra1;
+		this.extraEsfuerzo = extra2;
+		this.extraPost = extra3;
+		this.frecuencia = frecuencia;
+		this.frecuenciaReposo = frecuenciaR;
+		this.frecuenciaEsfuerzo = frecuenciaE;
+		this.frecuenciaPost = frecuenciaP;
+		this.perimetroForzada = perimetroForzada;
+		this.perimetroOmbligo = perimetroOmbligo;
+		this.perimetroPlena = perimetroPlena;
+		this.peso = peso;
+		this.ritmico = ritmico;
+		this.ritmicoReposo = ritmico1;
+		this.ritmicoEsfuerzo = ritmico2;
+		this.ritmicoPost = ritmico3;
+		this.sistolicaPrimera = sistolica1;
+		this.sistolicaSegunda = sistolica2;
+		this.sistolicaTercera = sistolica3;
 	}
-
-	
 
 	public long getIdConsulta() {
 		return idConsulta;
@@ -157,6 +259,7 @@ public class Consulta implements Serializable {
 	public void setHoraConsulta(String horaConsulta) {
 		this.horaConsulta = horaConsulta;
 	}
+
 	public String getHoraAuditoria() {
 		return horaAuditoria;
 	}
@@ -268,6 +371,189 @@ public class Consulta implements Serializable {
 	public void setConsultaAsociada(long consultaAsociada) {
 		this.consultaAsociada = consultaAsociada;
 	}
-	
-	
+
+	public Set<ConsultaParteCuerpo> getPartes() {
+		return partes;
+	}
+
+	public void setPartes(Set<ConsultaParteCuerpo> partes) {
+		this.partes = partes;
+	}
+
+	public Double getEstatura() {
+		return estatura;
+	}
+
+	public void setEstatura(Double estatura) {
+		this.estatura = estatura;
+	}
+
+	public Double getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Double peso) {
+		this.peso = peso;
+	}
+
+	public Double getPerimetroOmbligo() {
+		return perimetroOmbligo;
+	}
+
+	public void setPerimetroOmbligo(Double perimetroOmbligo) {
+		this.perimetroOmbligo = perimetroOmbligo;
+	}
+
+	public Double getPerimetroPlena() {
+		return perimetroPlena;
+	}
+
+	public void setPerimetroPlena(Double perimetroPlena) {
+		this.perimetroPlena = perimetroPlena;
+	}
+
+	public Double getPerimetroForzada() {
+		return perimetroForzada;
+	}
+
+	public void setPerimetroForzada(Double perimetroForzada) {
+		this.perimetroForzada = perimetroForzada;
+	}
+
+	public Integer getFrecuencia() {
+		return frecuencia;
+	}
+
+	public void setFrecuencia(Integer frecuencia) {
+		this.frecuencia = frecuencia;
+	}
+
+	public Integer getFrecuenciaReposo() {
+		return frecuenciaReposo;
+	}
+
+	public void setFrecuenciaReposo(Integer frecuenciaReposo) {
+		this.frecuenciaReposo = frecuenciaReposo;
+	}
+
+	public Integer getFrecuenciaEsfuerzo() {
+		return frecuenciaEsfuerzo;
+	}
+
+	public void setFrecuenciaEsfuerzo(Integer frecuenciaEsfuerzo) {
+		this.frecuenciaEsfuerzo = frecuenciaEsfuerzo;
+	}
+
+	public Integer getFrecuenciaPost() {
+		return frecuenciaPost;
+	}
+
+	public void setFrecuenciaPost(Integer frecuenciaPost) {
+		this.frecuenciaPost = frecuenciaPost;
+	}
+
+	public Integer getSistolicaPrimera() {
+		return sistolicaPrimera;
+	}
+
+	public void setSistolicaPrimera(Integer sistolicaPrimera) {
+		this.sistolicaPrimera = sistolicaPrimera;
+	}
+
+	public Integer getSistolicaSegunda() {
+		return sistolicaSegunda;
+	}
+
+	public void setSistolicaSegunda(Integer sistolicaSegunda) {
+		this.sistolicaSegunda = sistolicaSegunda;
+	}
+
+	public Integer getSistolicaTercera() {
+		return sistolicaTercera;
+	}
+
+	public void setSistolicaTercera(Integer sistolicaTercera) {
+		this.sistolicaTercera = sistolicaTercera;
+	}
+
+	public Integer getExtraReposo() {
+		return extraReposo;
+	}
+
+	public void setExtraReposo(Integer extraReposo) {
+		this.extraReposo = extraReposo;
+	}
+
+	public Integer getExtraEsfuerzo() {
+		return extraEsfuerzo;
+	}
+
+	public void setExtraEsfuerzo(Integer extraEsfuerzo) {
+		this.extraEsfuerzo = extraEsfuerzo;
+	}
+
+	public Integer getExtraPost() {
+		return extraPost;
+	}
+
+	public void setExtraPost(Integer extraPost) {
+		this.extraPost = extraPost;
+	}
+
+	public Integer getDiastolicaPrimera() {
+		return diastolicaPrimera;
+	}
+
+	public void setDiastolicaPrimera(Integer diastolicaPrimera) {
+		this.diastolicaPrimera = diastolicaPrimera;
+	}
+
+	public Integer getDiastolicaSegunda() {
+		return diastolicaSegunda;
+	}
+
+	public void setDiastolicaSegunda(Integer diastolicaSegunda) {
+		this.diastolicaSegunda = diastolicaSegunda;
+	}
+
+	public Integer getDiastolicaTercera() {
+		return diastolicaTercera;
+	}
+
+	public void setDiastolicaTercera(Integer diastolicaTercera) {
+		this.diastolicaTercera = diastolicaTercera;
+	}
+
+	public Boolean getRitmico() {
+		return ritmico;
+	}
+
+	public void setRitmico(Boolean ritmico) {
+		this.ritmico = ritmico;
+	}
+
+	public Boolean getRitmicoReposo() {
+		return ritmicoReposo;
+	}
+
+	public void setRitmicoReposo(Boolean ritmicoReposo) {
+		this.ritmicoReposo = ritmicoReposo;
+	}
+
+	public Boolean getRitmicoEsfuerzo() {
+		return ritmicoEsfuerzo;
+	}
+
+	public void setRitmicoEsfuerzo(Boolean ritmicoEsfuerzo) {
+		this.ritmicoEsfuerzo = ritmicoEsfuerzo;
+	}
+
+	public Boolean getRitmicoPost() {
+		return ritmicoPost;
+	}
+
+	public void setRitmicoPost(Boolean ritmicoPost) {
+		this.ritmicoPost = ritmicoPost;
+	}
+
 }
