@@ -6,6 +6,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.Type;
 
 import modelo.seguridad.Usuario;
+import modelo.transacciones.Historia;
 
 import java.sql.Timestamp;
 import java.util.Set;
@@ -162,6 +163,9 @@ public class Paciente implements Serializable {
 
 	@OneToMany(mappedBy="paciente")
 	private Set<PacienteAntecedente> antecedentesPacientes;
+	
+	@OneToOne(mappedBy = "paciente")
+	private Historia historia;
 	
 	public Paciente() {
 	}
@@ -591,6 +595,14 @@ public class Paciente implements Serializable {
 	public void setAntecedentesPacientes(
 			Set<PacienteAntecedente> antecedentesPacientes) {
 		this.antecedentesPacientes = antecedentesPacientes;
+	}
+
+	public Historia getHistoria() {
+		return historia;
+	}
+
+	public void setHistoria(Historia historia) {
+		this.historia = historia;
 	}
 
 

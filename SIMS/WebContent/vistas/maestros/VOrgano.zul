@@ -1,0 +1,27 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divOrgano" apply="controlador.maestros.COrgano">
+		<groupbox width="40em" mold="3d" title="Organo">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox class="multilinea" id="txtNombre" hflex="1"
+							maxlength="500" tooltiptext="Ingrese el Nombre del Organo"
+							multiline="true" />
+						<button id="btnBuscarOrgano" class="btn" label="Buscar"
+							tooltiptext="Catalogo Organos" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraOrgano" />
+			<div id="catalogoOrgano" />
+		</groupbox>
+	</div>
+</zk>

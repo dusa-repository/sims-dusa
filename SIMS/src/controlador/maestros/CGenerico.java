@@ -41,6 +41,7 @@ import servicio.maestros.SEspecialidad;
 import servicio.maestros.SEspecialista;
 import servicio.maestros.SEstado;
 import servicio.maestros.SExamen;
+import servicio.maestros.SIntervencion;
 import servicio.maestros.SLaboratorio;
 import servicio.maestros.SMedicina;
 import servicio.maestros.SMedicinaPresentacionUnidad;
@@ -48,6 +49,7 @@ import servicio.maestros.SMotivoCita;
 import servicio.maestros.SPaciente;
 import servicio.maestros.SPacienteAntecedente;
 import servicio.maestros.SPais;
+import servicio.maestros.SParteCuerpo;
 import servicio.maestros.SPresentacionComercial;
 import servicio.maestros.SPresentacionMedicina;
 import servicio.maestros.SProveedor;
@@ -57,6 +59,7 @@ import servicio.maestros.SRecipe;
 import servicio.maestros.SServicioExterno;
 import servicio.maestros.SUnidadMedicina;
 import servicio.maestros.SUnidadUsuario;
+import servicio.maestros.SVacuna;
 import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
@@ -66,7 +69,12 @@ import servicio.transacciones.SConsultaDiagnostico;
 import servicio.transacciones.SConsultaEspecialista;
 import servicio.transacciones.SConsultaExamen;
 import servicio.transacciones.SConsultaMedicina;
+import servicio.transacciones.SConsultaParteCuerpo;
 import servicio.transacciones.SConsultaServicioExterno;
+import servicio.transacciones.SHistoria;
+import servicio.transacciones.SHistoriaAccidente;
+import servicio.transacciones.SHistoriaIntervencion;
+import servicio.transacciones.SHistoriaVacuna;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public abstract class CGenerico extends SelectorComposer<Component> {
@@ -92,6 +100,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SConsultorio servicioConsultorio;
 	@WireVariable("SConsulta")
 	protected SConsulta servicioConsulta;
+	@WireVariable("SConsultaParteCuerpo")
+	protected SConsultaParteCuerpo servicioConsultaParteCuerpo;
 	@WireVariable("SConsultaDiagnostico")
 	protected SConsultaDiagnostico servicioConsultaDiagnostico;
 	@WireVariable("SConsultaEspecialista")
@@ -114,6 +124,16 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SEstado servicioEstado;
 	@WireVariable("SExamen")
 	protected SExamen servicioExamen;
+	@WireVariable("SHistoria")
+	protected SHistoria servicioHistoria;
+	@WireVariable("SHistoriaAccidente")
+	protected SHistoriaAccidente servicioHistoriaAccidente;
+	@WireVariable("SHistoriaIntervencion")
+	protected SHistoriaIntervencion servicioHistoriaIntervencion;
+	@WireVariable("SHistoriaVacuna")
+	protected SHistoriaVacuna servicioHistoriaVacuna;
+	@WireVariable("SIntervencion")
+	protected SIntervencion servicioIntervencion;
 	@WireVariable("SLaboratorio")
 	protected SLaboratorio servicioLaboratorio;
 	@WireVariable("SMedicina")
@@ -128,6 +148,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SPacienteAntecedente servicioPacienteAntecedente;
 	@WireVariable("SPais")
 	protected SPais servicioPais;
+	@WireVariable("SParteCuerpo")
+	protected SParteCuerpo servicioParteCuerpo;
 	@WireVariable("SPresentacionComercial")
 	protected SPresentacionComercial servicioPresentacion;
 	@WireVariable("SPresentacionMedicina")
@@ -150,6 +172,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SGrupo servicioGrupo;
 	@WireVariable("SUsuario")
 	protected SUsuario servicioUsuario;
+	@WireVariable("SVacuna")
+	protected SVacuna servicioVacuna;
 	
 
 	

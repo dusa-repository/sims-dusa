@@ -29,6 +29,11 @@ public class SAntecedente {
 		return antecedenteDAO
 				.findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc("Medico");
 	}
+	
+	public List<Antecedente> buscarFamiliares() {
+		return antecedenteDAO
+				.findByAntecedenteTipoTipoOrderByAntecedenteTipoNombreAsc("Familiar");
+	}
 
 	public void guardar(Antecedente antecedente) {
 		antecedenteDAO.save(antecedente);

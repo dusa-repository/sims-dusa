@@ -12,29 +12,22 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaServicioExterno;
-import modelo.transacciones.HistoriaAccidente;
+import modelo.transacciones.HistoriaIntervencion;
 
 @Entity
-@Table(name="accidente")
-public class Accidente implements Serializable {
+@Table(name="intervencion")
+public class Intervencion implements Serializable {
 
-	private static final long serialVersionUID = -5155885529457324266L;
+	private static final long serialVersionUID = 2784782575138871908L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_accidente", unique=true, nullable=false)
-	private long idAccidente;
+	@Column(name="id_intervencion", unique=true, nullable=false)
+	private long idIntervencion;
 	
-	@Column(length=100)
+	@Column(length=500)
 	private String nombre;
-	
-	@Column(length=100)
-	private String tipo;
-	
-	@OneToMany(mappedBy="accidente")
-	private Set<Consulta> consultas;
 	
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
@@ -44,33 +37,32 @@ public class Accidente implements Serializable {
 
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
-
-	@OneToMany(mappedBy = "accidente")
-	private Set<HistoriaAccidente> historias;
 	
-	public Accidente() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	@OneToMany(mappedBy = "intervencion")
+	private Set<HistoriaIntervencion> historias;
 
-	public Accidente(long idAccidente, String nombre, String tipo,
+	public Intervencion(long idIntervencion, String nombre,
 			Timestamp fechaAuditoria, String horaAuditoria,
 			String usuarioAuditoria) {
 		super();
-		this.idAccidente = idAccidente;
+		this.idIntervencion = idIntervencion;
 		this.nombre = nombre;
-		this.tipo = tipo;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public long getIdAccidente() {
-		return idAccidente;
+	public Intervencion() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setIdAccidente(long idAccidente) {
-		this.idAccidente = idAccidente;
+	public long getIdIntervencion() {
+		return idIntervencion;
+	}
+
+	public void setIdIntervencion(long idIntervencion) {
+		this.idIntervencion = idIntervencion;
 	}
 
 	public String getNombre() {
@@ -79,22 +71,6 @@ public class Accidente implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public Set<Consulta> getConsultas() {
-		return consultas;
-	}
-
-	public void setConsultas(Set<Consulta> consultas) {
-		this.consultas = consultas;
 	}
 
 	public Timestamp getFechaAuditoria() {
@@ -121,13 +97,14 @@ public class Accidente implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public Set<HistoriaAccidente> getHistorias() {
+	public Set<HistoriaIntervencion> getHistorias() {
 		return historias;
 	}
 
-	public void setHistorias(Set<HistoriaAccidente> historias) {
+	public void setHistorias(Set<HistoriaIntervencion> historias) {
 		this.historias = historias;
 	}
+	
 	
 	
 }

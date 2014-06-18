@@ -31,7 +31,7 @@
 					<tab label="Identificacion" id="tabIdentificacion" />
 					<tab label="Consulta" id="tabConsulta" />
 					<tab label="Historial de Consultas" id="tabHistoriasMedicas" />
-					<tab label="Antecedentes" id="tabAntecedentes" />
+					<tab label="Historia Medica" id="tabAntecedentes" />
 				</tabs>
 				<tabpanels>
 					<tabpanel>
@@ -333,9 +333,154 @@
 													multiline="true" id="txtEnfermedad" hflex="1"
 													tooltiptext="Ingrese la Enfermedad Actual Observada" />
 											</row>
+											<row>
+												<hbox />
+												<hbox>
+													<label class="etiqueta" value="Estatura(mts):" />
+													<doublespinner id="spnEstatura" hflex="1"
+														tooltiptext="Ingrese la estatura del paciente" step="1"
+														format="#.##" constraint="min 0 max 100000" />
+													<space />
+													<space />
+													<label class="etiqueta" value="Peso (kgs):" />
+													<doublespinner id="spnPeso" hflex="1"
+														tooltiptext="Ingrese el peso del Paciente" step="1"
+														format="#.##" constraint="min 0 max 100000" />
+												</hbox>
+												<label class="etiqueta" value="Indice Masa Corporal:" />
+												<label class="etiqueta" id="lblIndice" />
+											</row>
+											<row>
+												<label class="etiqueta"
+													value="Perimetro del torax al nivel del apendice:" />
+												<hbox>
+													<label class="etiqueta" value="Inspiracion Plena(cms):" />
+													<doublespinner id="spnPlena" hflex="1" step="1" format="#.#"
+														constraint="min 0 max 100000" />
+													<label class="etiqueta" value="Inspiracion Forzada(cms):" />
+													<doublespinner id="spnForzada" hflex="1" step="1" format="#.#"
+														constraint="min 0 max 100000" />
+												</hbox>
+												<label class="etiqueta"
+													value="Perimetro del abdomen a nivel del ombligo:" />
+												<doublespinner id="spnOmbligo" step="1"
+													format="#.#" constraint="min 0 max 100000" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Frecuencia cardiaca:" />
+												<spinner id="spnCardiaca" step="1" format="#.#"
+													constraint="min 0 max 100000" />
+												<label class="etiqueta" value="¿Es ritmico?" />
+												<radiogroup id="rdgRitmico">
+													<radio label="SI" value="si" id="rdoSiRitmico" />
+													<radio label="NO" value="no" id="rdoNoRitmico" />
+												</radiogroup>
+											</row>
+											<row>
+												<label class="etiqueta" value="Pulso en prueba de esfuerzo" />
+												<hbox hflex="1" vflex="1" align="center" pack="center"
+													widths="33%,33%,34%">
+													<label hflex="1" class="etiqueta" value="En Reposo" />
+													<label class="etiqueta" value="En Esfuerzo" />
+													<label class="etiqueta" value="PostEsfuerzo" />
+												</hbox>
+												<label class="etiqueta" value="Presion Arterial" />
+												<hbox hflex="1" vflex="1" align="center" pack="center"
+													widths="33%,33%,34%">
+													<label hflex="1" class="etiqueta" value="1era" />
+													<label hflex="1" class="etiqueta" value="2da" />
+													<label hflex="1" class="etiqueta" value="3era" />
+												</hbox>
+											</row>
+											<row>
+												<label class="etiqueta" value="Frecuencia minuto" />
+												<hbox hflex="1" vflex="1" align="center" pack="center"
+													widths="33%,33%,34%">
+													<spinner hflex="1" id="frecuencia11" step="1" format="#"
+														constraint="min 0 max 100000" />
+													<spinner hflex="1" id="frecuencia12" step="1" format="#"
+														constraint="min 0 max 100000" />
+													<spinner hflex="1" id="frecuencia13" step="1" format="#"
+														constraint="min 0 max 100000" />
+												</hbox>
+												<label class="etiqueta" value="Sistolica" />
+												<hbox hflex="1" vflex="1" align="center" pack="center"
+													widths="33%,33%,34%">
+													<spinner hflex="1" id="s11" step="1" format="#"
+														constraint="min 0 max 100000" />
+													<spinner hflex="1" id="s12" step="1" format="#"
+														constraint="min 0 max 100000" />
+													<spinner hflex="1" id="s13" step="1" format="#"
+														constraint="min 0 max 100000" />
+												</hbox>
+											</row>
+											<row>
+												<label class="etiqueta" value="¿Es Ritmico?" />
+												<hbox hflex="1" vflex="1" align="center" pack="center"
+													widths="33%,33%,34%">
+													<radiogroup id="rdgRitmicoF1">
+														<radio label="SI" value="si" id="rdoSiRitmicoF1" />
+														<radio label="NO" value="no" id="rdoNoRitmicoF1" />
+													</radiogroup>
+													<radiogroup id="rdgRitmicoF2">
+														<radio label="SI" value="si" id="rdoSiRitmicoF2" />
+														<radio label="NO" value="no" id="rdoNoRitmicoF2" />
+													</radiogroup>
+													<radiogroup id="rdgRitmicoF3">
+														<radio label="SI" value="si" id="rdoSiRitmicoF3" />
+														<radio label="NO" value="no" id="rdoNoRitmicoF3" />
+													</radiogroup>
+												</hbox>
+												<label class="etiqueta" value="Diastolica" />
+												<hbox hflex="1" vflex="1" align="center" pack="center"
+													widths="33%,33%,34%">
+													<spinner hflex="1" id="d11" step="1" format="#"
+														constraint="min 0 max 100000" />
+													<spinner hflex="1" id="d12" step="1" format="#"
+														constraint="min 0 max 100000" />
+													<spinner hflex="1" id="d13" step="1" format="#"
+														constraint="min 0 max 100000" />
+												</hbox>
+											</row>
+											<row>
+												<label class="etiqueta" value="Extrasistoles por minuto" />
+												<hbox hflex="1" vflex="1" align="center" pack="center"
+													widths="33%,33%,34%">
+													<spinner hflex="1" id="ex11" step="1" format="#"
+														constraint="min 0 max 100000" />
+													<spinner hflex="1" id="ex12" step="1" format="#"
+														constraint="min 0 max 100000" />
+													<spinner hflex="1" id="ex13" step="1" format="#"
+														constraint="min 0 max 100000" />
+												</hbox>
+												<hbox />
+												<hbox />
+											</row>
 										</rows>
 									</grid>
-									<label value="Examen Fisico"></label>
+									<separator />
+									<groupbox id="gpxExamenFisico" closable="false" open="true">
+										<caption label="Examen Fisico"
+											style="color:blue; font-size: 12px; font-weight:bold" />
+										<listbox id="ltbExamenFisico" model="${$composer.modelFisico}"
+											height="120px" width="100%" emptyMessage="No hay sistemas fisicos registrados">
+											<listhead>
+												<listheader label="Nombre" width="30%" />
+												<listheader label="Observacion" width="70%" />
+											</listhead>
+											<template name="model">
+												<listitem>
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell>
+														<textbox maxlength="100" width="100%"
+															placeholder="Ingrese la observacion"
+															tooltiptext="Ingrese la observacion que resulto luego de realizar el examen de esta parte del cuerpo"></textbox>
+													</listcell>
+												</listitem>
+											</template>
+										</listbox>
+									</groupbox>
 								</tabpanel>
 								<tabpanel>
 									<!--Diagnosticos -->
@@ -970,38 +1115,843 @@
 						</hbox>
 					</tabpanel>
 					<tabpanel>
-						<hbox>
-							<groupbox id="gpxMedicos" open="true" width="100%">
-								<caption label="Antecedentes Medicos"
-									style="color:blue; font-size: 12px; font-weight:bold" />
-								<hbox>
-									<listbox id="ltbMedicos" model="${$composer.modelo}"
-										height="350px" width="100%"
-										emptyMessage="El Paciente no posee Antecedentes Medicos"
-										itemRenderer="${$composer.renderer}">
-										<listhead>
-											<listheader label="Nombre" width="40%" />
-											<listheader label="Observacion" width="60%" />
-										</listhead>
-									</listbox>
-								</hbox>
-							</groupbox>
-							<groupbox id="gpxLaborales" open="true" width="100%">
-								<caption label="Antecedentes Laborales"
-									style="color:blue; font-size: 12px; font-weight:bold" />
-								<hbox>
-									<listbox id="ltbLaborales" model="${$composer.model}"
-										height="350px" width="100%"
-										emptyMessage="El Paciente no posee Antecedentes Laborales"
-										itemRenderer="${$composer.renderer}">
-										<listhead>
-											<listheader label="Nombre" width="40%" />
-											<listheader label="Observacion" width="60%" />
-										</listhead>
-									</listbox>
-								</hbox>
-							</groupbox>
-						</hbox>
+						<tabbox height="auto" id="taxHistoria" orient="horizontal">
+							<tabs id="tbsHistoria" width="auto">
+								<tab label="Habitos" id="tabHabitos" />
+								<tab label="Antecedentes parte I" id="tabIAntecedentesI" />
+								<tab label="Antecedentes parte II" id="tabIAntecedentesII" />
+								<tab label="¿Paciente Mujer?" id="tabMujer" />
+							</tabs>
+							<tabpanels>
+								<tabpanel>
+									<hbox>
+										<vbox>
+											<groupbox id="gpxVarios" closable="false" open="true"
+												width="100%">
+												<caption label="Alimenticios y Deportes"
+													style="color:blue; font-size: 12px; font-weight:bold" />
+												<grid width="100%">
+													<columns visible="false">
+														<column label="" width="25%" />
+														<column label="" width="25%" />
+														<column label="" width="20%" />
+														<column label="" width="30%" />
+													</columns>
+													<rows>
+														<row>
+															<label class="etiqueta" value="¿Ha variado su peso el ultimo año?" />
+															<radiogroup id="rdgPeso">
+																<radio label="SI" value="si" id="rdoSiPeso" />
+																<radio label="NO" value="no" id="rdoNoPeso" />
+															</radiogroup>
+															<label class="etiqueta" value="¿Cuanto?" />
+															<textbox maxlength="50" id="txtCantidadPeso"
+																hflex="1" tooltiptext="Ingrese la variacion del peso del paciente" />
+														</row>
+														<row>
+															<label class="etiqueta" value="Causas de la variacion" />
+															<textbox maxlength="100" id="txtCausasPeso"
+																hflex="1"
+																tooltiptext="Ingrese las razones por las que el peso del paciente ha variado" />
+															<label class="etiqueta" value="¿Toma Cafe?" />
+															<radiogroup id="rdgCafe">
+																<radio label="SI" value="si" id="rdoSiCafe" />
+																<radio label="NO" value="no" id="rdoNoCafe" />
+															</radiogroup>
+														</row>
+														<row>
+															<label class="etiqueta" value="¿Cuantas Tazas al dia?" />
+															<spinner value="0" id="spnCantidadCafe" step="1"
+																format="#" constraint="min 0 max 100000" width="98%" />
+															<label class="etiqueta" value="¿Tiene Dificultad para dormir?" />
+															<radiogroup id="rdgDormilon">
+																<radio label="SI" value="si" id="rdoSiDuerme" />
+																<radio label="NO" value="no" id="rdoNoDuerme" />
+															</radiogroup>
+														</row>
+														<row>
+															<label class="etiqueta" value="Si no toma cafe¿Le duele la cabeza?" />
+															<radiogroup id="rdgCabeza">
+																<radio label="SI" value="si" id="rdoSiCabeza" />
+																<radio label="NO" value="no" id="rdoNoCabeza" />
+															</radiogroup>
+															<box />
+															<box />
+														</row>
+														<row>
+															<label class="etiqueta"
+																value="¿Realiza regularmente actividad fisica?" />
+															<radiogroup id="rdgFisica">
+																<radio label="SI" value="si" id="rdoSiFisica" />
+																<radio label="NO" value="no" id="rdoNoFisica" />
+															</radiogroup>
+															<label class="etiqueta" value="¿De que tipo?" />
+															<textbox maxlength="100" id="txtTipoFisica"
+																hflex="1"
+																tooltiptext="Ingrese el tipo de Actividad fisica que realiza el paciente" />
+														</row>
+														<row>
+															<label class="etiqueta" value="Frecuencia en la semana" />
+															<textbox maxlength="100" id="txtFrecuenciaFisica"
+																hflex="1"
+																tooltiptext="Ingrese la frecuencia en la que el paciente realiza actividades fisicas" />
+															<label class="etiqueta" value="Tiempo por sesion" />
+															<textbox maxlength="100" id="txtTiempoFisica"
+																hflex="1"
+																tooltiptext="Ingrese el tiempo que emplea el paciente por cada sesion de actividades fisicas" />
+														</row>
+														<row>
+															<label class="etiqueta" value="¿Realiza alguna actividad Extra?" />
+															<radiogroup id="rdgExtra">
+																<radio label="SI" value="si" id="rdoSiExtra" />
+																<radio label="NO" value="no" id="rdoNoExtra" />
+															</radiogroup>
+															<label class="etiqueta" value="¿Cual?" />
+															<combobox
+																tooltiptext="Seleccione el Tipo de Actividad Extra que realiza el Paciente"
+																placeholder="Seleccione" id="cmbExtra" width="98%"
+																readonly="true">
+																<comboitem label="Deportes" />
+																<comboitem label="Manualidades" />
+																<comboitem label="Actividades en el Hogar" />
+																<comboitem label="Otro" />
+															</combobox>
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+
+											<groupbox id="gpxTabaquino" closable="false" open="true"
+												width="100%">
+												<caption label="Tabaquinos"
+													style="color:blue; font-size: 12px; font-weight:bold" />
+												<grid width="100%">
+													<columns visible="false">
+														<column label="" width="25%" />
+														<column label="" width="25%" />
+														<column label="" width="20%" />
+														<column label="" width="30%" />
+													</columns>
+													<rows>
+														<row>
+															<label class="etiqueta" value="¿Ha probado el cigarro alguna vez?" />
+															<radiogroup id="rdgCigarro">
+																<radio label="SI" value="si" id="rdoSiCigarro" />
+																<radio label="NO" value="no" id="rdoNoCigarro" />
+															</radiogroup>
+															<label class="etiqueta" value="¿Fuma Actualmente?" />
+															<radiogroup id="rdgFumaActualmente">
+																<radio label="SI" value="si" id="rdoSiFumaActualmente" />
+																<radio label="NO" value="no" id="rdoNoFumaActualmente" />
+															</radiogroup>
+														</row>
+														<row>
+															<label class="etiqueta" value="Numero de Cigarros que Fuma o Fumaba" />
+															<spinner value="0" id="spnNumeroCigarro" step="1"
+																format="#" constraint="min 0 max 1000" width="98%" />
+															<label class="etiqueta" value="Fecha en que Culmino a Fumar" />
+															<datebox readonly="true" width="100%"
+																id="dtbFechaFinCigarro" onCreate="self.value = new Date()" />
+														</row>
+														<row>
+															<label class="etiqueta" value="Fecha en que Inicio a Fumar" />
+															<datebox readonly="true" width="100%"
+																id="dtbFechaInicioCigarro" onCreate="self.value = new Date()" />
+															<label class="etiqueta" value="Razon por la que empezo a fumar:" />
+															<textbox maxlength="100" id="txtRazonCigarro"
+																hflex="1"
+																tooltiptext="Ingrese el motivo por el cual el paciente comenzo a fumar" />
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+
+										</vbox>
+										<vbox>
+											<groupbox id="gpxAlcohol" closable="false" open="true"
+												width="100%">
+												<caption label="Alcoholico"
+													style="color:blue; font-size: 12px; font-weight:bold" />
+												<grid width="100%">
+													<columns visible="false">
+														<column label="" width="25%" />
+														<column label="" width="25%" />
+														<column label="" width="20%" />
+														<column label="" width="30%" />
+													</columns>
+													<rows>
+														<row>
+															<label class="etiqueta" value="¿Ha consumido alcohol alguna vez?" />
+															<radiogroup id="rdgAlcohol">
+																<radio label="SI" value="si" id="rdoSiAlcohol" />
+																<radio label="NO" value="no" id="rdoNoAlcohol" />
+															</radiogroup>
+															<label class="etiqueta"
+																value="¿En el ultimo mes ha consumido Alcohol?" />
+															<radiogroup id="rdgMesAlcohol">
+																<radio label="SI" value="si" id="rdoSiMesAlcohol" />
+																<radio label="NO" value="no" id="rdoNoMesAlcohol" />
+															</radiogroup>
+														</row>
+														<row>
+															<label class="etiqueta" value="Frecuencia con la que bebe" />
+															<radiogroup id="rdgFrecuenciaAlcohol">
+																<radio label="DIARIA" value="diaria"
+																	id="rdoDFrecuenciaAlcohol" />
+																<radio label="SEMANAL" value="semanal"
+																	id="rdoSFrecuenciaAlcohol" />
+																<radio label="QUINCENAL" value="quincenal"
+																	id="rdoQFrecuenciaAlcohol" />
+																<radio label="MENSUAL" value="mensual"
+																	id="rdoMFrecuenciaAlcohol" />
+															</radiogroup>
+															<label class="etiqueta" value="Tipo de Bebida:" />
+															<textbox maxlength="50" id="txtTipoAlcohol"
+																hflex="1"
+																tooltiptext="Ingrese el tipo de bebida que consume el paciente" />
+														</row>
+														<row>
+															<label class="etiqueta" value="Cantidad que bebe (ml)" />
+															<spinner value="0" id="spnCantidadAlcohol" step="1"
+																format="#" constraint="min 0 max 100000" width="98%" />
+															<label class="etiqueta" value="¿LLega al estado de embriaguez?" />
+															<radiogroup id="rdgBorracho">
+																<radio label="SI" value="si" id="rdoSiBorracho" />
+																<radio label="NO" value="no" id="rdoNoBorracho" />
+															</radiogroup>
+														</row>
+														<row>
+															<label class="etiqueta"
+																value="¿A sufrido accidentes por el Alcohol?" />
+															<radiogroup id="rdgAccidenteAlcohol">
+																<radio label="SI" value="si" id="rdoSiAccidenteAlcohol" />
+																<radio label="NO" value="no" id="rdoNoAccidenteAlcohol" />
+															</radiogroup>
+															<box />
+															<box />
+														</row>
+														<row>
+															<label class="etiqueta"
+																value="¿Ha recibido tratamiento para el consumo de alcohol?" />
+															<radiogroup id="rdgTratamientoAlcohol">
+																<radio label="SI" value="si" id="rdoSiTratamientoAlcohol" />
+																<radio label="NO" value="no" id="rdoNoTratamientoAlcohol" />
+															</radiogroup>
+															<label class="etiqueta"
+																value="¿Ha asistido o asiste a instituciones de rehabilitacion?" />
+															<radiogroup id="rdgRehabilitacionAlcohol">
+																<radio label="SI" value="si"
+																	id="rdoSiRehabilitacionAlcohol" />
+																<radio label="NO" value="no"
+																	id="rdoNoRehabilitacionAlcohol" />
+															</radiogroup>
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+
+											<groupbox id="gpxDrogas" closable="false" open="true"
+												width="100%">
+												<caption label="Drogas"
+													style="color:blue; font-size: 12px; font-weight:bold" />
+												<grid width="100%">
+													<columns visible="false">
+														<column label="" width="25%" />
+														<column label="" width="25%" />
+														<column label="" width="20%" />
+														<column label="" width="30%" />
+													</columns>
+													<rows>
+														<row>
+															<label class="etiqueta"
+																value="¿Ha consumido drogas alguna vez? (Cocaina, Extasis, Marihuana, etc)" />
+															<radiogroup id="rdgDrogas">
+																<radio label="SI" value="si" id="rdoSiDrogas" />
+																<radio label="NO" value="no" id="rdoNoDrogas" />
+															</radiogroup>
+															<label class="etiqueta"
+																value="Indique, Tipo, frecuencia, Cantidad y ultima vez" />
+															<textbox class="multilinea" maxlength="250"
+																id="txtExplicacionDrogas" hflex="1" multiline="true"
+																tooltiptext="Indique la descripcion de las drogas que utiliza el paciente, nombrando la frecuencia, el tipo, cantidad y la ultima vez que la consumio" />
+														</row>
+														<row>
+															<label class="etiqueta"
+																value="¿Ha recibido tratamiento para el consumo de drogas?" />
+															<radiogroup id="rdgTratamientoDrogas">
+																<radio label="SI" value="si" id="rdoSiTratamientoDrogas" />
+																<radio label="NO" value="no" id="rdoNoTratamientoDrogas" />
+															</radiogroup>
+															<label class="etiqueta"
+																value="¿Ha asistido o asiste a instituciones de rehabilitacion?" />
+															<radiogroup id="rdgRehabilitacion">
+																<radio label="SI" value="si" id="rdoSiRehabilitacion" />
+																<radio label="NO" value="no" id="rdoNoRehabilitacion" />
+															</radiogroup>
+														</row>
+														<row>
+															<label class="etiqueta" value="¿Consume algun tipo de Medicamento?" />
+															<radiogroup id="rdgMedicamentoDrogas">
+																<radio label="SI" value="si" id="rdoSiMedicamentoDrogas" />
+																<radio label="NO" value="no" id="rdoNoMedicamentoDrogas" />
+															</radiogroup>
+															<label class="etiqueta" value="¿Cual?" />
+															<textbox maxlength="100" id="txtMedicamentoDroga"
+																hflex="1" tooltiptext="Ingrese el medicamento que consume el paciente" />
+														</row>
+														<row>
+															<label class="etiqueta" value="Desde cuando" />
+															<datebox readonly="true" width="100%"
+																id="dtbFechaMedicamento" onCreate="self.value = new Date()" />
+															<label class="etiqueta" value="Cantidad:" />
+															<textbox maxlength="100" id="txtCantidadMedicamento"
+																hflex="1"
+																tooltiptext="Ingrese la cantidad de medicamento que consume el paciente" />
+														</row>
+													</rows>
+												</grid>
+											</groupbox>
+										</vbox>
+									</hbox>
+								</tabpanel>
+								<tabpanel>
+									<groupbox id="gpxPersonales" closable="false" open="true"
+										width="100%">
+										<caption label="Antecedentes Personales"
+											style="color:blue; font-size: 12px; font-weight:bold" />
+										<grid width="100%">
+											<columns visible="false">
+												<column label="" width="25%" />
+												<column label="" width="5%" />
+												<column label="" width="25%" />
+												<column label="" width="45%" />
+											</columns>
+											<rows>
+												<row>
+													<label class="etiqueta" value="¿Padece de Alguna enfermedad?" />
+													<radiogroup id="rdgEnfermedad">
+														<radio label="SI" value="si" id="rdoSiEnfermedad" />
+														<radio label="NO" value="no" id="rdoNoEnfermedad" />
+													</radiogroup>
+													<label class="etiqueta" value="Cual:" />
+													<textbox maxlength="100" id="txtAlgunaEnfermedad"
+														hflex="1"
+														tooltiptext="Ingrese la Enfermedad, de ser el caso, que posee del Paciente" />
+												</row>
+												<row>
+													<label class="etiqueta"
+														value="¿Ha consultado un medico en el ultimo año?" />
+													<radiogroup id="rdgMedico">
+														<radio label="SI" value="si" id="rdoSiMedico" />
+														<radio label="NO" value="no" id="rdoNoMedico" />
+													</radiogroup>
+													<label class="etiqueta" value="¿Ha recibido algun tratamiento?" />
+													<radiogroup id="rdgTratamiento">
+														<radio label="SI" value="si" id="rdoSiTratamiento" />
+														<radio label="NO" value="no" id="rdoNoTratamiento" />
+													</radiogroup>
+												</row>
+												<row>
+													<label class="etiqueta" value="¿Ha recibio Transfusiones de sangre?" />
+													<radiogroup id="rdgTransfusiones">
+														<radio label="SI" value="si" id="rdoSiTransfusiones" />
+														<radio label="NO" value="no" id="rdoNoTransfusiones" />
+													</radiogroup>
+													<label class="etiqueta"
+														value="¿Ha consultado por alguna enfermedad infecciosa o ETS?" />
+													<radiogroup id="rdgETS">
+														<radio label="SI" value="si" id="rdoSiETS" />
+														<radio label="NO" value="no" id="rdoNoETS" />
+													</radiogroup>
+												</row>
+												<row>
+													<label class="etiqueta" value="¿Se ha realizado pruebas de VIH?" />
+													<radiogroup id="rdgVIH">
+														<radio label="SI" value="si" id="rdoSiVIH" />
+														<radio label="NO" value="no" id="rdoNoVIH" />
+													</radiogroup>
+													<label class="etiqueta" value="¿Cual fue el resultado?" />
+													<textbox maxlength="100" id="txtVIH" hflex="1"
+														tooltiptext="Ingrese el resultado del examen de VIH, de ser el caso" />
+												</row>
+											</rows>
+										</grid>
+									</groupbox>
+									<hbox>
+										<groupbox id="gpxMedicos" closable="false" open="true"
+											width="100%">
+											<caption label="Antecedentes Medicos"
+												style="color:blue; font-size: 12px; font-weight:bold" />
+											<hbox>
+												<listbox id="ltbMedicos" model="${$composer.modelo}"
+													height="350px" width="100%"
+													emptyMessage="El Paciente no posee Antecedentes Medicos"
+													itemRenderer="${$composer.renderer}">
+													<listhead>
+														<listheader label="Nombre" width="40%" />
+														<listheader label="Observacion" width="60%" />
+													</listhead>
+												</listbox>
+											</hbox>
+										</groupbox>
+										<groupbox id="gpxLaborales" closable="false" open="true"
+											width="100%">
+											<caption label="Antecedentes Laborales"
+												style="color:blue; font-size: 12px; font-weight:bold" />
+											<hbox>
+												<listbox id="ltbLaborales" model="${$composer.model}"
+													height="350px" width="100%"
+													emptyMessage="El Paciente no posee Antecedentes Laborales"
+													itemRenderer="${$composer.renderer}">
+													<listhead>
+														<listheader label="Nombre" width="40%" />
+														<listheader label="Observacion" width="60%" />
+													</listhead>
+												</listbox>
+											</hbox>
+										</groupbox>
+										<groupbox id="gpxFamiliares" closable="false" open="true"
+											width="100%">
+											<caption label="Antecedentes Familiares"
+												style="color:blue; font-size: 12px; font-weight:bold" />
+											<hbox>
+												<listbox id="ltbFamiliares" model="${$composer.modelFamiliares}"
+													height="350px" width="100%"
+													emptyMessage="El Paciente no posee Antecedentes Familiares"
+													itemRenderer="${$composer.renderer}">
+													<listhead>
+														<listheader label="Nombre" width="40%" />
+														<listheader label="Observacion" width="60%" />
+													</listhead>
+												</listbox>
+											</hbox>
+										</groupbox>
+									</hbox>
+								</tabpanel>
+								<tabpanel>
+									<tabbox height="auto" id="taxAccidentes" orient="horizontal">
+										<tabs width="auto">
+											<tab label="Accidentes Laborales" />
+											<tab label="Accidentes Comunes" />
+											<tab label="Intervenciones" />
+											<tab label="Vacunas Recibidas" />
+										</tabs>
+										<tabpanels>
+											<tabpanel>
+												<hbox widths="32%,3%,65%">
+													<listbox id="ltbAccidentesLaborales" height="250px"
+														width="100%" emptyMessage="No hay Accidentes Laborales Registrados">
+														<listhead>
+															<listheader label="Accidente Laboral" width="100%" />
+														</listhead>
+														<template name="model">
+															<listitem>
+																<listcell label="${each.nombre}">
+																</listcell>
+																<listcell>
+																	<datebox width="98%" onCreate="self.value = new Date()" />
+																</listcell>
+																<listcell>
+																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<spinner width="98%" step="1" />
+																</listcell>
+																<listcell>
+																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<spinner inplace="true" width="98%"
+																		value="${each.idAccidente}" visible="false" disabled="true" />
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+													<vbox align="center" pack="center">
+														<button id="pasar1AccidentesLaborales" image="/public/imagenes/botones/adelante.png"
+															tooltiptext="Agregar AccidentesLaborales" width="30px" />
+														<separator />
+														<button id="pasar2AccidentesLaborales" image="/public/imagenes/botones/atras.png"
+															tooltiptext="Quitar AccidentesLaborales" width="30px" />
+													</vbox>
+													<listbox id="ltbAccidentesLaboralesAgregados"
+														height="250px" width="100%"
+														emptyMessage="No ha Seleccionado Ningún Accidente Laboral">
+														<listhead>
+															<listheader label="Accidente" width="30%" />
+															<listheader label="Fecha" width="10%" />
+															<listheader label="Lugar" width="15%" />
+															<listheader label="Tipo Lesion" width="15%" />
+															<listheader label="Dias Reposo" width="10%" />
+															<listheader label="Secuelas" width="20%" />
+															<listheader label="id" visible="false" />
+														</listhead>
+														<template name="model">
+															<listitem>
+																<listcell label="${each.accidente.nombre}">
+																</listcell>
+																<listcell>
+																	<datebox readonly="true" value="${each.fecha}"
+																		width="98%" />
+																</listcell>
+																<listcell>
+																	<textbox value="${each.lugar}" width="98%"></textbox>
+																</listcell>
+																<listcell>
+																	<textbox value="${each.tipoLesion}" width="98%"></textbox>
+																</listcell>
+																<listcell>
+																	<spinner value="${each.diasReposo}" width="98%"
+																		step="1" />
+																</listcell>
+																<listcell>
+																	<textbox value="${each.secuelas}" width="98%"></textbox>
+																</listcell>
+																<listcell>
+																	<spinner value="${each.accidente.idAccidente}"
+																		width="98%" visible="false" disabled="true" />
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+												</hbox>
+											</tabpanel>
+											<tabpanel>
+												<hbox widths="32%,3%,65%">
+													<listbox id="ltbAccidentesComunes" height="250px"
+														width="100%" emptyMessage="No hay Accidentes Comunes Registrados">
+														<listhead>
+															<listheader label="Accidente Comun" width="100%" />
+														</listhead>
+														<template name="model">
+															<listitem>
+																<listcell label="${each.nombre}">
+																</listcell>
+																<listcell>
+																	<datebox width="98%" onCreate="self.value = new Date()" />
+																</listcell>
+																<listcell>
+																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<spinner width="98%" step="1" />
+																</listcell>
+																<listcell>
+																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<spinner inplace="true" width="98%"
+																		value="${each.idAccidente}" visible="false" disabled="true" />
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+													<vbox align="center" pack="center">
+														<button id="pasar1AccidentesComunes" image="/public/imagenes/botones/adelante.png"
+															tooltiptext="Agregar Accidentes Comunes" width="30px" />
+														<separator />
+														<button id="pasar2AccidentesComunes" image="/public/imagenes/botones/atras.png"
+															tooltiptext="Quitar Accidentes Comunes" width="30px" />
+													</vbox>
+													<listbox id="ltbAccidentesComunesAgregados" height="250px"
+														width="100%" emptyMessage="No ha Seleccionado Ningún Accidente Comun">
+														<listhead>
+															<listheader label="Accidente" width="30%" />
+															<listheader label="Fecha" width="10%" />
+															<listheader label="Lugar" width="15%" />
+															<listheader label="Tipo Lesion" width="15%" />
+															<listheader label="Dias Reposo" width="10%" />
+															<listheader label="Secuelas" width="20%" />
+															<listheader label="id" visible="false" />
+														</listhead>
+														<template name="model">
+															<listitem>
+																<listcell label="${each.accidente.nombre}">
+																</listcell>
+																<listcell>
+																	<datebox readonly="true" value="${each.fecha}"
+																		width="98%" />
+																</listcell>
+																<listcell>
+																	<textbox value="${each.lugar}" width="98%"></textbox>
+																</listcell>
+																<listcell>
+																	<textbox value="${each.tipoLesion}" width="98%"></textbox>
+																</listcell>
+																<listcell>
+																	<spinner value="${each.diasReposo}" width="98%"
+																		step="1" />
+																</listcell>
+																<listcell>
+																	<textbox value="${each.secuelas}" width="98%"></textbox>
+																</listcell>
+																<listcell>
+																	<spinner value="${each.accidente.idAccidente}"
+																		width="98%" visible="false" disabled="true" />
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+												</hbox>
+											</tabpanel>
+											<tabpanel>
+												<hbox widths="32%,3%,65%">
+													<listbox id="ltbIntervenciones" height="250px"
+														width="100%" emptyMessage="No hay Intervenciones Registradas">
+														<listhead>
+															<listheader label="Intervencion" width="100%" />
+														</listhead>
+														<template name="model">
+															<listitem>
+																<listcell label="${each.nombre}">
+																</listcell>
+																<listcell>
+																	<datebox width="98%" onCreate="self.value = new Date()" />
+																</listcell>
+																<listcell>
+																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<spinner width="98%" step="1" />
+																</listcell>
+																<listcell>
+																	<textbox width="98%" />
+																</listcell>
+																<listcell>
+																	<spinner inplace="true" width="98%"
+																		value="${each.idIntervencion}" visible="false"
+																		disabled="true" />
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+													<vbox align="center" pack="center">
+														<button id="pasar1Intervenciones" image="/public/imagenes/botones/adelante.png"
+															tooltiptext="Agregar Intervenciones" width="30px" />
+														<separator />
+														<button id="pasar2Intervenciones" image="/public/imagenes/botones/atras.png"
+															tooltiptext="Quitar Intervenciones" width="30px" />
+													</vbox>
+													<listbox id="ltbIntervencionesAgregadas" height="250px"
+														width="100%" emptyMessage="No ha Seleccionado Ningúna Intervencion">
+														<listhead>
+															<listheader label="Intervencion" width="30%" />
+															<listheader label="Fecha" width="10%" />
+															<listheader label="Motivo" width="15%" />
+															<listheader label="Diagnostico" width="15%" />
+															<listheader label="Dias Reposo" width="10%" />
+															<listheader label="Secuelas" width="20%" />
+															<listheader label="id" visible="false" />
+														</listhead>
+														<template name="model">
+															<listitem>
+																<listcell label="${each.intervencion.nombre}">
+																</listcell>
+																<listcell>
+																	<datebox readonly="true" value="${each.fecha}"
+																		width="98%" />
+																</listcell>
+																<listcell>
+																	<textbox value="${each.motivo}" width="98%"></textbox>
+																</listcell>
+																<listcell>
+																	<textbox value="${each.diagnostico}" width="98%"></textbox>
+																</listcell>
+																<listcell>
+																	<spinner value="${each.reposo}" width="98%"
+																		step="1" />
+																</listcell>
+																<listcell>
+																	<textbox value="${each.secuela}" width="98%"></textbox>
+																</listcell>
+																<listcell>
+																	<spinner value="${each.intervencion.idIntervencion}"
+																		width="98%" visible="false" disabled="true" />
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+												</hbox>
+											</tabpanel>
+											<tabpanel>
+												<listbox id="ltbVacunas" model="${$composer.modelVacunas}"
+													height="350px" width="100%"
+													emptyMessage="El Paciente no posee Vacunas Recibidas">
+													<listhead>
+														<listheader label="Nombre" width="70%" />
+														<listheader label="Fecha" width="40%" />
+													</listhead>
+													<template name="model">
+														<listitem>
+															<listcell label="${each.nombre}">
+															</listcell>
+															<listcell>
+																<datebox readonly="true" width="100%"
+																	onCreate="self.value = new Date()" />
+															</listcell>
+														</listitem>
+													</template>
+												</listbox>
+											</tabpanel>
+										</tabpanels>
+									</tabbox>
+								</tabpanel>
+								<tabpanel>
+									<grid width="100%">
+										<columns visible="false">
+											<column label="" width="35%" />
+											<column label="" width="15%" />
+											<column label="" width="35%" />
+											<column label="" width="15%" />
+										</columns>
+										<rows>
+											<row>
+												<label class="etiqueta" value="¿Flujo Vaginal Normal?" />
+												<radiogroup id="rdgFlujo">
+													<radio label="SI" value="si" id="rdoSiFlujo" />
+													<radio label="NO" value="no" id="rdoNoFlujo" />
+												</radiogroup>
+												<label class="etiqueta"
+													value="¿Secrecion en los pezones fuera de embarazo?" />
+												<radiogroup id="rdgPezones">
+													<radio label="SI" value="si" id="rdoSiPezones" />
+													<radio label="NO" value="no" id="rdoNoPezones" />
+												</radiogroup>
+											</row>
+											<row>
+												<label class="etiqueta"
+													value="¿Periodo Menstrual Doloroso, Abundate, Regular?" />
+												<radiogroup id="rdgMenstrual">
+													<radio label="SI" value="si" id="rdoSiMenstrual" />
+													<radio label="NO" value="no" id="rdoNoMenstrual" />
+												</radiogroup>
+												<label class="etiqueta" value="¿Tumoracion endurecimiento en senos?" />
+												<radiogroup id="rdgEndurecimiento">
+													<radio label="SI" value="si" id="rdoSiEndurecimiento" />
+													<radio label="NO" value="no" id="rdoNoEndurecimiento" />
+												</radiogroup>
+											</row>
+											<row>
+												<label class="etiqueta" value="¿Infeccion en senos?" />
+												<radiogroup id="rdgInfeccion">
+													<radio label="SI" value="si" id="rdoSiInfeccion" />
+													<radio label="NO" value="no" id="rdoNoInfeccion" />
+												</radiogroup>
+												<label class="etiqueta" value="¿Anticonceptivos Orales?" />
+												<radiogroup id="rdgAnticonceptivos">
+													<radio label="SI" value="si" id="rdoSiAnticonceptivos" />
+													<radio label="NO" value="no" id="rdoNoAnticonceptivos" />
+												</radiogroup>
+											</row>
+											<row>
+												<label class="etiqueta" value="¿Dolor durante Relaciones Sexuales?" />
+												<radiogroup id="rdgDolor">
+													<radio label="SI" value="si" id="rdoSiDolor" />
+													<radio label="NO" value="no" id="rdoNoDolor" />
+												</radiogroup>
+												<label class="etiqueta" value="¿Esterilizacion Quirurgica?" />
+												<radiogroup id="rdgEsterilizacion">
+													<radio label="SI" value="si" id="rdoSiEsterilizacion" />
+													<radio label="NO" value="no" id="rdoNoEsterilizacion" />
+												</radiogroup>
+											</row>
+											<row>
+												<label class="etiqueta" value="¿Dispositivo Intra-Uterino?" />
+												<radiogroup id="rdgIntra">
+													<radio label="SI" value="si" id="rdoSiIntra" />
+													<radio label="NO" value="no" id="rdoNoIntra" />
+												</radiogroup>
+												<hbox />
+												<hbox />
+											</row>
+											<row>
+												<label class="etiqueta" value="Edad de Desarrollo" />
+												<spinner value="0" id="spnEdadDesarrollo" step="1"
+													format="#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Fecha Ultima Menstruacion" />
+												<datebox readonly="true" width="100%" id="dtbFechaUltima"
+													onCreate="self.value = new Date()" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Numero de embarazos" />
+												<spinner value="0" id="spnEmbarazos" step="1"
+													format="#" constraint="min 0 max 100000" width="98%" />
+												<hbox>
+													<label class="etiqueta" value="Partos" />
+													<spinner value="0" id="spnPartos" step="1" format="#"
+														constraint="min 0 max 100000" width="100%" />
+													<space />
+													<space />
+													<space />
+													<space />
+													<space />
+													<space />
+													<space />
+													<space />
+													<label class="etiqueta" value="Cesareas" />
+													<spinner value="0" id="spnCesareas" step="1"
+														format="#" constraint="min 0 max 100000" width="100%" />
+												</hbox>
+												<hbox>
+													<label class="etiqueta" value="Abortos" />
+													<spinner value="0" id="spnAbortos" step="1" format="#"
+														constraint="min 0 max 100000" width="100%" />
+												</hbox>
+											</row>
+											<row>
+												<label class="etiqueta" value="Fecha Ultima Citologia" />
+												<datebox readonly="true" width="100%" id="dtbFechaUltimaCito"
+													onCreate="self.value = new Date()" />
+												<label class="etiqueta" value="¿Ovarios Poliquisticos?" />
+												<radiogroup id="rdgOvarios">
+													<radio label="SI" value="si" id="rdoSiOvarios" />
+													<radio label="NO" value="no" id="rdoNoOvarios" />
+												</radiogroup>
+											</row>
+											<row>
+												<label class="etiqueta" value="¿Esta Embarazada?" />
+												<radiogroup id="rdgEmbarazada">
+													<radio label="SI" value="si" id="rdoSiEmbarazada" />
+													<radio label="NO" value="no" id="rdoNoEmbarazada" />
+												</radiogroup>
+												<label class="etiqueta" value="Semanas de Gestacion" />
+												<spinner value="0" id="spnGestacion" step="1"
+													format="#" constraint="min 0 max 100000" width="98%" />
+											</row>
+											<row>
+												<label class="etiqueta" value="¿Ha realizado Eco Mamario?" />
+												<radiogroup id="rdgEco">
+													<radio label="SI" value="si" id="rdoSiEco" />
+													<radio label="NO" value="no" id="rdoNoEco" />
+												</radiogroup>
+												<label class="etiqueta" value="Resultado" />
+												<textbox maxlength="500" id="txtResultadoEco" hflex="1"
+													tooltiptext="Ingrese el resultado del Eco Mamario" />
+											</row>
+											<row>
+												<label class="etiqueta" value="¿Ha realizado Mamografia?" />
+												<radiogroup id="rdgMamografia">
+													<radio label="SI" value="si" id="rdoSiMamografia" />
+													<radio label="NO" value="no" id="rdoNoMamografia" />
+												</radiogroup>
+												<label class="etiqueta" value="Resultado" />
+												<textbox maxlength="500" id="txtResultadoMamografia"
+													hflex="1" tooltiptext="Ingrese el resultado de la Mamografia" />
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
