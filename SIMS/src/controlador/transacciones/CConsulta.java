@@ -59,6 +59,7 @@ import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.GroupsModel;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -857,7 +858,7 @@ public class CConsulta extends CGenerico {
 			}
 		};
 	}
-
+	
 	private void buscadorMedicina() {
 		buscarMedicina = new Buscar<Medicina>(ltbMedicinas, txtBuscadorMedicina) {
 
@@ -1664,7 +1665,7 @@ public class CConsulta extends CGenerico {
 			cmbTipoDiagnostio.setVisible(true);
 			cmbTipoDiagnostio.setValue("Otro");
 		}
-		if(!mostrar && consulta.getAccidente() != null){
+		if (!mostrar && consulta.getAccidente() != null) {
 			cmbTipoConsulta.setValue("Curativa");
 		}
 		txtMotivo.setValue(consulta.getMotivoConsulta());
@@ -2420,7 +2421,7 @@ public class CConsulta extends CGenerico {
 		cmbTipoPreventiva.setValue("");
 		cmbTipoPreventiva.setVisible(false);
 	}
-	
+
 	public void limpiarCampos() {
 		idPaciente = 0;
 		idConsulta = 0;
@@ -2685,6 +2686,10 @@ public class CConsulta extends CGenerico {
 			rdoSiVIH.setChecked(false);
 		if (rdoNoVIH.isChecked())
 			rdoNoVIH.setChecked(false);
+		if(rdgFrecuenciaAlcohol.getSelectedItem() != null){
+			Radio radio =rdgFrecuenciaAlcohol.getSelectedItem();
+			radio.setChecked(false);
+		}
 		spnAbortos.setValue(0);
 		spnCantidadAlcohol.setValue(0);
 		spnCantidadCafe.setValue(0);
@@ -3014,9 +3019,9 @@ public class CConsulta extends CGenerico {
 		Timestamp fechaUltimaCitologia = new Timestamp(fechaUltimaC.getTime());
 		String actividadExtra = cmbExtra.getValue();
 		String frecuenciaAlcohol = "";
-		// if (rdgFrecuenciaAlcohol.getSelectedItem() != null)
-		// frecuenciaAlcohol = rdgFrecuenciaAlcohol.getSelectedItem()
-		// .getLabel();
+		if (rdgFrecuenciaAlcohol.getSelectedItem() != null)
+			frecuenciaAlcohol = rdgFrecuenciaAlcohol.getSelectedItem()
+					.getLabel();
 		Historia historiaGuardada = new Historia(idHistoria, paciente,
 				valorPeso, cantidadPeso, causasPeso, cafe, tazas, dormilon,
 				cabeza, fisica, tipoFisica, frecuenciaFisica, tiempoFisica,
@@ -3357,10 +3362,27 @@ public class CConsulta extends CGenerico {
 		dtbFechaUltima.setValue(historia.getUltimaMenstruacion());
 		dtbFechaUltimaCito.setValue(historia.getUltimaCitologia());
 		cmbExtra.setValue(historia.getTipoExtra());
-		String frecuenciaAlcohol = "";
-		// if (rdgFrecuenciaAlcohol.getSelectedItem() != null)
-		// frecuenciaAlcohol = rdgFrecuenciaAlcohol.getSelectedItem()
-		// .getLabel();
+		Radio radio = new Radio();
+		switch (historia.getAlcoholFrecuencia()) {
+		case "DIARIA":
+			radio = (Radio) rdgFrecuenciaAlcohol.getChildren().get(0);
+			radio.setChecked(true);
+			break;
+		case "SEMANAL":
+			radio = (Radio) rdgFrecuenciaAlcohol.getChildren().get(1);
+			radio.setChecked(true);
+			break;
+		case "QUINCENAL":
+			radio = (Radio) rdgFrecuenciaAlcohol.getChildren().get(2);
+			radio.setChecked(true);
+			break;
+		case "MENSUAL":
+			radio = (Radio) rdgFrecuenciaAlcohol.getChildren().get(3);
+			radio.setChecked(true);
+			break;
+		default:
+			break;
+		}
 	}
 
 	@Listen("onChange = #spnEstatura, #spnPeso")
