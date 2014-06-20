@@ -1,13 +1,17 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
+import modelo.maestros.Especialista;
 import modelo.maestros.Medicina;
 import modelo.seguridad.Arbol;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -15,6 +19,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -22,6 +27,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import controlador.transacciones.CConsulta;
 
 public class CDiagnostico extends CGenerico {
 
@@ -42,13 +48,28 @@ public class CDiagnostico extends CGenerico {
 	private Combobox cmbCategoria;
 	@Wire
 	private Button btnBuscarDiagnostico;
-	
+
 	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<Diagnostico> catalogo;
+	private boolean consulta = false;
+	private CConsulta cConsulta = new CConsulta();
+	List<Diagnostico> diagnosticoConsulta = new ArrayList<Diagnostico>();
+	Listbox listaConsulta;
 
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		if (map != null) {
+			if (map.get("id") != null) {
+				consulta = true;
+				diagnosticoConsulta = (List<Diagnostico>) map.get("lista");
+				listaConsulta = (Listbox) map.get("listbox");
+				map.clear();
+				map = null;
+			}
+		}
 		llenarComboCategoria();
 		Botonera botonera = new Botonera() {
 
@@ -81,6 +102,16 @@ public class CDiagnostico extends CGenerico {
 							fechaHora, grupo, horaAuditoria, nombre,
 							horaAuditoria, categoria);
 					servicioDiagnostico.guardar(diagnostico);
+					if (consulta) {
+						if (id != 0)
+							diagnostico = servicioDiagnostico.buscar(id);
+						else {
+							diagnostico = servicioDiagnostico.buscarUltimo();
+							diagnosticoConsulta.add(diagnostico);
+						}
+						cConsulta.recibirDiagnostico(diagnosticoConsulta,
+								listaConsulta);
+					}
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
@@ -209,11 +240,12 @@ public class CDiagnostico extends CGenerico {
 		cmbCategoria.setValue(diagnostico.getCategoria().getNombre());
 		id = diagnostico.getIdDiagnostico();
 	}
-	
-	/* Abre la vista de Categoria*/
+
+	/* Abre la vista de Categoria */
 	@Listen("onClick = #btnAbrirCategoria")
-	public void abrirCategoria(){		
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Categoria Diagnostico");
-		cArbol.abrirVentanas(arbolItem);	
+	public void abrirCategoria() {
+		Arbol arbolItem = servicioArbol
+				.buscarPorNombreArbol("Categoria Diagnostico");
+		cArbol.abrirVentanas(arbolItem);
 	}
 }

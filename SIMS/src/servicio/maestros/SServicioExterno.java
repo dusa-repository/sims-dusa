@@ -74,4 +74,11 @@ public class SServicioExterno {
 	public List<ServicioExterno> buscarEstudiosDisponibles(List<Long> ids) {
 		return servicioExternoDAO.findByIdServicioExternoNotIn(ids);
 	}
+
+	public ServicioExterno buscarUltimo() {
+		long id = servicioExternoDAO.findMaxIdServicio();
+		if (id != 0)
+			return servicioExternoDAO.findOne(id);
+		return null;
+	}
 }

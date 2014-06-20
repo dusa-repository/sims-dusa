@@ -1,16 +1,20 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Ciudad;
 import modelo.maestros.Consultorio;
 import modelo.maestros.Empresa;
+import modelo.maestros.Examen;
 import modelo.maestros.Paciente;
 import modelo.maestros.ServicioExterno;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -18,6 +22,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -28,6 +33,7 @@ import sun.usagetracker.UsageTrackerClient;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Validador;
+import controlador.transacciones.CConsulta;
 
 public class CServicioExterno extends CGenerico {
 
@@ -52,10 +58,24 @@ public class CServicioExterno extends CGenerico {
 	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<ServicioExterno> catalogo;
-
+	private boolean consulta = false;
+	private CConsulta cConsulta = new CConsulta();
+	List<ServicioExterno> servicioConsulta = new ArrayList<ServicioExterno>();
+	Listbox listaConsulta;
+	
 	@Override
 	public void inicializar() throws IOException {
-		
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		if (map != null) {
+			if (map.get("id") != null) {
+				consulta = true;
+				servicioConsulta = (List<ServicioExterno>) map.get("lista");
+				listaConsulta = (Listbox) map.get("listbox");
+				map.clear();
+				map = null;
+			}
+		}
 		llenarComboCiudad();
 		Botonera botonera = new Botonera() {
 
@@ -89,6 +109,16 @@ public class CServicioExterno extends CGenerico {
 							direccion, nombre, telefono, fechaHora,
 							horaAuditoria, nombreUsuarioSesion(), ciudad);
 					servicioServicioExterno.guardar(servicioExterno);
+					if (consulta) {
+						if (id != 0)
+							servicioExterno = servicioServicioExterno.buscar(id);
+						else {
+							servicioExterno = servicioServicioExterno.buscarUltimo();
+							servicioConsulta.add(servicioExterno);
+						}
+						cConsulta.recibirServicio(servicioConsulta,
+								listaConsulta);
+					}
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,

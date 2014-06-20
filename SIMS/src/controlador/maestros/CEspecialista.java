@@ -1,12 +1,15 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;
 import modelo.seguridad.Arbol;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -15,6 +18,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -23,6 +27,7 @@ import arbol.CArbol;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Validador;
+import controlador.transacciones.CConsulta;
 
 public class CEspecialista extends CGenerico {
 
@@ -45,13 +50,27 @@ public class CEspecialista extends CGenerico {
 	private Button btnBuscarEspecialista;
 	@Wire
 	private Doublespinner dspCosto;
-	
+
 	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<Especialista> catalogo;
-
+	private boolean consulta = false;
+	private CConsulta cConsulta = new CConsulta();
+	List<Especialista> especialistaConsulta = new ArrayList<Especialista>();
+	Listbox listaConsulta;
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		if (map != null) {
+			if (map.get("id") != null) {
+				consulta = true;
+				especialistaConsulta = (List<Especialista>) map.get("lista");
+				listaConsulta = (Listbox) map.get("listbox");
+				map.clear();
+				map = null;
+			}
+		}
 		llenarComboEspecialidad();
 		Botonera botonera = new Botonera() {
 
@@ -86,6 +105,12 @@ public class CEspecialista extends CGenerico {
 							apellido, nombre, costoServicio, fechaHora,
 							horaAuditoria, nombreUsuarioSesion(), especialidad);
 					servicioEspecialista.guardar(especialista);
+					if (consulta) {
+						especialista = servicioEspecialista.buscar(cedula);
+						especialista.setNombre(especialista.getNombre()+" "+especialista.getApellido());
+						especialistaConsulta.add(especialista);
+						cConsulta.recibir(especialistaConsulta, listaConsulta);
+					}
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
@@ -236,11 +261,11 @@ public class CEspecialista extends CGenerico {
 				.getDescripcion());
 		id = Long.parseLong(especialista.getCedula());
 	}
-	
-	/* Abre la vista de Especialidad*/
+
+	/* Abre la vista de Especialidad */
 	@Listen("onClick = #btnAbrirEspecialidad")
-	public void abrirEspecialidad(){		
+	public void abrirEspecialidad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialidad");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
 	}
 }

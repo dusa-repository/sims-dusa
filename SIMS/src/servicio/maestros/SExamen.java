@@ -82,4 +82,11 @@ public class SExamen {
 	public List<Examen> buscarExamenesDisponibles(List<Long> ids) {
 		return examenDAO.findByIdExamenNotIn(ids);
 	}
+
+	public Examen buscarUltimo() {
+		long id = examenDAO.findMaxIdExamen();
+		if (id != 0)
+			return examenDAO.findOne(id);
+		return null;
+	}
 }

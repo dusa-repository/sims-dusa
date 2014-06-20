@@ -26,4 +26,7 @@ public interface IDiagnosticoDAO extends JpaRepository<Diagnostico, Long> {
 
 	List<Diagnostico> findByIdDiagnosticoNotIn(List<Long> ids);
 
+	@Query("select coalesce(max(consulta.idDiagnostico), '0') from Diagnostico consulta")
+	long findMaxIdDiagnostico();
+
 }

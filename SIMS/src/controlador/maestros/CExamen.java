@@ -1,10 +1,14 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import modelo.maestros.Diagnostico;
 import modelo.maestros.Examen;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -12,11 +16,13 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import controlador.transacciones.CConsulta;
 
 public class CExamen extends CGenerico {
 
@@ -43,9 +49,24 @@ public class CExamen extends CGenerico {
 	private Div catalogoExamen;
 	private long id = 0;
 	Catalogo<Examen> catalogo;
+	private boolean consulta = false;
+	private CConsulta cConsulta = new CConsulta();
+	List<Examen> examenConsulta = new ArrayList<Examen>();
+	Listbox listaConsulta;
 
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		if (map != null) {
+			if (map.get("id") != null) {
+				consulta = true;
+				examenConsulta = (List<Examen>) map.get("lista");
+				listaConsulta = (Listbox) map.get("listbox");
+				map.clear();
+				map = null;
+			}
+		}
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -78,6 +99,16 @@ public class CExamen extends CGenerico {
 							costo, minimo, maximo, fechaHora, horaAuditoria,
 							nombreUsuarioSesion());
 					servicioExamen.guardar(examen);
+					if (consulta) {
+						if (id != 0)
+							examen = servicioExamen.buscar(id);
+						else {
+							examen = servicioExamen.buscarUltimo();
+							examenConsulta.add(examen);
+						}
+						cConsulta.recibirExamen(examenConsulta,
+								listaConsulta);
+					}
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
