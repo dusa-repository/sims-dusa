@@ -5,6 +5,7 @@ import java.util.List;
 import modelo.maestros.Examen;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface IExamenDAO extends JpaRepository<Examen, Long>{
 
@@ -23,5 +24,8 @@ public interface IExamenDAO extends JpaRepository<Examen, Long>{
 	Examen findByNombre(String value);
 
 	List<Examen> findByIdExamenNotIn(List<Long> ids);
+
+	@Query("select coalesce(max(consulta.idExamen), '0') from Examen consulta")
+	long findMaxIdExamen();
 
 }

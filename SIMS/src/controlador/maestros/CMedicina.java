@@ -2,10 +2,12 @@ package controlador.maestros;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.CategoriaMedicina;
 import modelo.maestros.Cita;
+import modelo.maestros.Examen;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 import modelo.maestros.MedicinaPresentacionUnidad;
@@ -15,6 +17,7 @@ import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.UnidadMedicina;
 import modelo.seguridad.Arbol;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -35,6 +38,7 @@ import arbol.CArbol;
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
+import controlador.transacciones.CConsulta;
 
 public class CMedicina extends CGenerico {
 
@@ -108,10 +112,24 @@ public class CMedicina extends CGenerico {
 	private CArbol cArbol = new CArbol();
 	Catalogo<Medicina> catalogo;
 	long id = 0;
-
+	private boolean consulta = false;
+	private CConsulta cConsulta = new CConsulta();
+	List<Medicina> medicinaConsulta = new ArrayList<Medicina>();
+	Listbox listaConsulta;
+	
 	@Override
 	public void inicializar() throws IOException {
-
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		if (map != null) {
+			if (map.get("id") != null) {
+				consulta = true;
+				medicinaConsulta = (List<Medicina>) map.get("lista");
+				listaConsulta = (Listbox) map.get("listbox");
+				map.clear();
+				map = null;
+			}
+		}
 		llenarComboLaboratorios();
 		llenarComboCategorias();
 		llenarListaPresentaciones(null);
@@ -196,6 +214,12 @@ public class CMedicina extends CGenerico {
 						}
 						servicioMedicinaPresentacionUnidad
 								.guardar(listaMedicinasPresentacion);
+						if (consulta) {
+							if (id == 0)
+								medicinaConsulta.add(medicina);
+							cConsulta.recibirMedicina(medicinaConsulta,
+									listaConsulta);
+						}
 						Messagebox.show("Registro Guardado Exitosamente",
 								"Informacion", Messagebox.OK,
 								Messagebox.INFORMATION);

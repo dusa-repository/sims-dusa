@@ -47,6 +47,7 @@ import modelo.transacciones.HistoriaIntervencion;
 import modelo.transacciones.HistoriaVacuna;
 
 import org.zkoss.bind.annotation.Command;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.MouseEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -83,6 +84,7 @@ import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 
+import controlador.maestros.CEspecialista;
 import controlador.maestros.CGenerico;
 
 public class CConsulta extends CGenerico {
@@ -2723,24 +2725,44 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onClick = #btnAbrirExamen")
 	public void divExamen() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "consulta");
+		map.put("lista", examenesDisponibles);
+		map.put("listbox", ltbExamenes);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Examen");
 		cArbol.abrirVentanas(arbolItem);
 	}
 
 	@Listen("onClick = #btnAbrirDiagnostico")
 	public void divDiagnostico() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "consulta");
+		map.put("lista", diagnosticosDisponibles);
+		map.put("listbox", ltbDiagnosticos);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Diagnostico");
 		cArbol.abrirVentanas(arbolItem);
 	}
 
 	@Listen("onClick = #btnAbrirEspecialista")
 	public void divEspecialista() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "consulta");
+		map.put("lista", especialistasDisponibles);
+		map.put("listbox", ltbEspecialistas);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialista");
 		cArbol.abrirVentanas(arbolItem);
 	}
 
 	@Listen("onClick = #btnAbrirServicioExterno")
 	public void divServicio() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "consulta");
+		map.put("lista", serviciosDisponibles);
+		map.put("listbox", ltbServicioExterno);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol
 				.buscarPorNombreArbol("Servicios Externos");
 		cArbol.abrirVentanas(arbolItem);
@@ -2748,6 +2770,11 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onClick = #btnAbrirMedicina")
 	public void divMedicina() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "consulta");
+		map.put("lista", medicinasDisponibles);
+		map.put("listbox", ltbMedicinas);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Medicina");
 		cArbol.abrirVentanas(arbolItem);
 	}
@@ -3430,6 +3457,56 @@ public class CConsulta extends CGenerico {
 			}
 		}
 		return cambio;
+	}
+	
+	public void recibir(List<Especialista> lista, Listbox l){
+		ltbEspecialistas = l;
+		especialistasDisponibles= lista;
+		ltbEspecialistas.setModel(new ListModelList<Especialista>(especialistasDisponibles));
+		ltbEspecialistas.setMultiple(false);
+		ltbEspecialistas.setCheckmark(false);
+		ltbEspecialistas.setMultiple(true);
+		ltbEspecialistas.setCheckmark(true);
+	}
+	
+	public void recibirMedicina(List<Medicina> lista, Listbox l){
+		ltbMedicinas = l;
+		medicinasDisponibles= lista;
+		ltbMedicinas.setModel(new ListModelList<Medicina>(medicinasDisponibles));
+		ltbMedicinas.setMultiple(false);
+		ltbMedicinas.setCheckmark(false);
+		ltbMedicinas.setMultiple(true);
+		ltbMedicinas.setCheckmark(true);
+	}
+	
+	public void recibirDiagnostico(List<Diagnostico> lista, Listbox l){
+		ltbDiagnosticos = l;
+		diagnosticosDisponibles= lista;
+		ltbDiagnosticos.setModel(new ListModelList<Diagnostico>(diagnosticosDisponibles));
+		ltbDiagnosticos.setMultiple(false);
+		ltbDiagnosticos.setCheckmark(false);
+		ltbDiagnosticos.setMultiple(true);
+		ltbDiagnosticos.setCheckmark(true);
+	}
+
+	public void recibirExamen(List<Examen> lista, Listbox l){
+		 ltbExamenes= l;
+		 examenesDisponibles= lista;
+		 ltbExamenes.setModel(new ListModelList<Examen>(examenesDisponibles));
+		 ltbExamenes.setMultiple(false);
+		 ltbExamenes.setCheckmark(false);
+		 ltbExamenes.setMultiple(true);
+		 ltbExamenes.setCheckmark(true);
+	}
+
+	public void recibirServicio(List<ServicioExterno> lista, Listbox l){
+		ltbServicioExterno = l;
+		serviciosDisponibles= lista;
+		ltbServicioExterno.setModel(new ListModelList<ServicioExterno>(serviciosDisponibles));
+		ltbServicioExterno.setMultiple(false);
+		ltbServicioExterno.setCheckmark(false);
+		ltbServicioExterno.setMultiple(true);
+		ltbServicioExterno.setCheckmark(true);
 	}
 
 }

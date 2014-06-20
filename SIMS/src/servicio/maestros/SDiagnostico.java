@@ -75,4 +75,11 @@ public class SDiagnostico {
 			return diagnosticoDAO.findByIdDiagnosticoNotIn(ids);
 		}
 	}
+
+	public Diagnostico buscarUltimo() {
+		long id = diagnosticoDAO.findMaxIdDiagnostico();
+		if (id != 0)
+			return diagnosticoDAO.findOne(id);
+		return null;
+	}
 }

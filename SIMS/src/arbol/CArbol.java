@@ -265,7 +265,7 @@ public class CArbol extends CGenerico {
 	}
 
 
-	public void abrirVentanas(Arbol arbolItem) {
+	public void abrirVentanas(final Arbol arbolItem) {
 		boolean abrir = true;
 		Tab taba = new Tab();	
 			if (!arbolItem.getUrl().equals("inicio")) {
@@ -282,6 +282,23 @@ public class CArbol extends CGenerico {
 					contenido2.setSrc(ruta);
 
 					Tab newTab = new Tab(arbolItem.getNombre());
+					newTab.setClosable(true);
+					newTab.addEventListener(Events.ON_CLOSE,
+							new EventListener<Event>() {
+								@Override
+								public void onEvent(Event arg0) throws Exception {
+									for (int i = 0; i < tabs.size(); i++) {
+										if (tabs.get(i).getLabel().equals(arbolItem.getNombre())) {
+											if (i == (tabs.size() - 1) && tabs.size() > 1) {
+												tabs.get(i - 1).setSelected(true);
+											}
+											
+											tabs.get(i).close();
+											tabs.remove(i);
+										}
+									}
+								}
+							});
 					newTab.setSelected(true);
 					Tabpanel newTabpanel = new Tabpanel();
 					newTabpanel.appendChild(contenido2);
