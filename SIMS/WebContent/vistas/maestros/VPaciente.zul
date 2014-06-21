@@ -35,8 +35,16 @@
 								</row>
 								<row>
 									<label class="etiqueta" value="Cedula:" />
-									<textbox maxlength="12" id="txtCedulaPaciente" hflex="1"
-										tooltiptext="Ingrese la Cedula del Paciente" />
+									<cell colspan="1">
+										<hbox>
+											<radiogroup>
+												<radio label="V" value="Venezolano" id="rdoV" />
+												<radio label="E" value="Extranjero" id="rdoE" />
+											</radiogroup>
+											<textbox maxlength="12" id="txtCedulaPaciente" hflex="1"
+												tooltiptext="Ingrese la Cedula del Paciente" />
+										</hbox>
+									</cell>
 									<label class="etiqueta" value="Ficha:" />
 									<textbox maxlength="50" id="txtFichaPaciente" hflex="1"
 										tooltiptext="Ingrese la Ficha del Paciente" />
@@ -85,7 +93,7 @@
 								<row>
 									<label class="etiqueta" value="Edad:" />
 									<spinner tooltiptext="Indique la Edad" id="spnEdad"
-										width="100px" constraint="min 0 max 130" />
+										width="98%" constraint="min 0 max 130" />
 									<label class="etiqueta" value="Sexo:" />
 									<combobox tooltiptext="Seleccione el Sexo"
 										placeholder="Seleccione el Sexo" id="cmbSexo" width="100%"
@@ -104,6 +112,24 @@
 										<comboitem label="Divorciado" />
 										<comboitem label="Otro" />
 									</combobox>
+								</row>
+								<row>
+									<label class="etiqueta" value="Nivel Educativo:" />
+									<combobox tooltiptext="Seleccione el Nivel Educativo"
+										placeholder="Seleccione el Nivel Educativo" id="cmbNivelEducativo"
+										width="100%" readonly="true">
+										<comboitem label="Iletrado" />
+										<comboitem label="Primaria" />
+										<comboitem label="Secundaria" />
+										<comboitem label="Tecnica" />
+										<comboitem label="Superior" />
+									</combobox>
+									<label class="etiqueta" value="Fecha Ingreso:" />
+									<datebox readonly="true" width="140px" id="dtbFechaIngreso"
+										onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Ingreso" />
+									<label class="etiqueta" value="Carga Familiar:" />
+									<spinner tooltiptext="Indique la Cantidad" id="spnCarga"
+										width="98%" constraint="min 0 max 100" />
 								</row>
 								<row>
 									<label class="etiqueta" value="Grupo Sanguineo:" />
@@ -143,23 +169,21 @@
 										<comboitem label="Derecho" />
 										<comboitem label="Zurdo" />
 									</combobox>
-									<cell colspan="4">
-										<label class="etiqueta" value="Estatura:" />
-										<space />
-										<doublespinner tooltiptext="Indique la Estatura"
-											id="dspEstatura" width="100px" constraint="min 0 max 300"
-											step="0.1" format="#.##" value="0" />
-										<space />
-										<space />
-										<label class="etiqueta" value="Peso:" />
-										<space />
-										<doublespinner tooltiptext="Indique el Peso" id="dspPeso"
-											width="100px" constraint="min 0 max 500" step="0.1" format="#.##"
-											value="0" />
-										<space />
-										<space />
+									<cell colspan="3">
+										<hbox>
+											<label class="etiqueta" value="Estatura:" />
+											<doublespinner tooltiptext="Indique la Estatura"
+												id="dspEstatura" hflex="1"  width="90px"
+												constraint="min 0 max 300" step="0.1" format="#.##" value="0" />
+											<space />
+											<label class="etiqueta" value="Peso:" />
+											<doublespinner hflex="1" 
+												tooltiptext="Indique el Peso" id="dspPeso" width="90px"
+												constraint="min 0 max 500" step="0.1" format="#.##" value="0" />
+										</hbox>
+									</cell>
+									<cell colspan="1">
 										<label class="etiqueta" value="¿Usa Lentes?" />
-										<space />
 										<radiogroup id="rdgLentes">
 											<radio label="SI" value="lentes" id="rdoSiLentes" />
 											<radio label="NO" value="no lentes" id="rdoNoLentes" />
@@ -201,7 +225,7 @@
 										<space />
 										<label class="etiqueta" value="Otra(s):" />
 										<space />
-										<textbox id="txtOtras" width="250px" maxlength="500"
+										<textbox id="txtOtras" width="200px" maxlength="500"
 											tooltiptext="Ingrese Otros Datos de Discapacidad" multiline="true" />
 									</cell>
 								</row>
@@ -223,6 +247,36 @@
 									</cell>
 									<button id="btnAbrirEmpresa" label=""
 										tooltiptext="Crear una Nueva Empresa" image="/public/imagenes/botones/agregar.png" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Profesion:" />
+									<textbox maxlength="100" id="txtProfesion"
+										tooltiptext="Ingrese la Profesion del Paciente" />
+									<label class="etiqueta" value="Turno:" />
+									<combobox tooltiptext="Seleccione un Turno"
+										placeholder="Seleccione un Turno" id="cmbTurno" readonly="true">
+										<comboitem label="Jornada Completa" />
+										<comboitem label="Jornada Parcial" />
+										<comboitem label="Turno Fijo Mañanas" />
+										<comboitem label="Turno Fijo Tardes" />
+										<comboitem label="Turno Fijo Noches" />
+										<comboitem label="Turno Rotativo" />
+										<comboitem label="Turno Mixto" />
+									</combobox>
+									<label class="etiqueta" value="N° Registro INPSASEL:" />
+									<textbox maxlength="100" id="txtNroInpsasel"
+										tooltiptext="Ingrese el N° Registro INPSASEL" />
+								</row>
+								<row>
+								<label class="etiqueta" value="Inscripcion ante el IVSS (FORMATO 14.02):" />
+									<datebox readonly="true" id="dtbInscripcionIVSS"
+										onCreate="self.value = new Date()" tooltiptext="Indique la Inscripcion ante el IVSS" />
+									<label class="etiqueta" value="Retiro de IVSS (FORMATO 14.03): " />
+									<textbox maxlength="100" id="txtRetiroIVSS"
+										tooltiptext="Ingrese el Retiro de IVSS (FORMATO 14.03)" />					
+									<label class="etiqueta" value="Fecha de Egreso:" />
+									<datebox readonly="true" id="dtbFechaEgreso"
+										onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Egreso" />
 								</row>
 							</rows>
 						</grid>

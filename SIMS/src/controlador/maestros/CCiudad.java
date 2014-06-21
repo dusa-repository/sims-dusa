@@ -94,13 +94,10 @@ public class CCiudad extends CGenerico {
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
 										Ciudad ciudad = servicioCiudad
-												.buscar(id);
-										List<Empresa> empresas = servicioEmpresa
-												.buscarPorCiudad(ciudad);
+												.buscar(id);										
 										List<Consultorio> consultorios = servicioConsultorio
 												.buscarPorCiudad(ciudad);
-										if (!empresas.isEmpty()
-												|| !consultorios.isEmpty()) {
+										if (!consultorios.isEmpty()) {
 											Messagebox
 													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
 															"Informacion",

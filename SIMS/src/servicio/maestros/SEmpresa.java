@@ -23,10 +23,6 @@ public class SEmpresa {
 	public Empresa buscar(long parseLong) {
 		return empresaDAO.findOne(parseLong);
 	}
-	
-	public List<Empresa> buscarPorCiudad(Ciudad ciudad) {
-		return empresaDAO.findByCiudad(ciudad);
-	}
 
 	public void guardar(Empresa empresa) {
 		empresaDAO.save(empresa);
@@ -44,17 +40,14 @@ public class SEmpresa {
 		return empresaDAO.findByRifStartingWithAllIgnoreCase(valor);
 	}
 
-	public List<Empresa> filtroDireccion(String valor) {
-		return empresaDAO.findByDireccionStartingWithAllIgnoreCase(valor);
+	public List<Empresa> filtroDireccionCentro(String valor) {
+		return empresaDAO.findByDireccionCentroStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Empresa> filtroTelefono(String valor) {
-		return empresaDAO.findByTelefono1StartingWithAllIgnoreCase(valor);
+		return empresaDAO.findByTelefonoStartingWithAllIgnoreCase(valor);
 	}
 
-	public List<Empresa> filtroCiudad(String valor) {
-		return empresaDAO.findByCiudadNombreStartingWithAllIgnoreCase(valor);
-	}
 
 	public Empresa buscarPorRif(String value) {
 		return empresaDAO.findByRif(value);

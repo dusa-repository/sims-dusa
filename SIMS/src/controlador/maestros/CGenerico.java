@@ -63,6 +63,8 @@ import servicio.maestros.SVacuna;
 import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
+import servicio.sha.SArea;
+import servicio.sha.SClasificacionAccidente;
 import servicio.transacciones.SCita;
 import servicio.transacciones.SConsulta;
 import servicio.transacciones.SConsultaDiagnostico;
@@ -174,7 +176,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SUsuario servicioUsuario;
 	@WireVariable("SVacuna")
 	protected SVacuna servicioVacuna;
-	
+	@WireVariable("SArea")
+	protected SArea servicioArea;
+	@WireVariable("SClasificacionAccidente")
+	protected SClasificacionAccidente servicioClasificacionAccidente;
 
 	
 	public static  List<Tab> tabs = new ArrayList<Tab>();
