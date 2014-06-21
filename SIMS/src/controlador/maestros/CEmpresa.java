@@ -1,6 +1,8 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
@@ -18,9 +20,11 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -39,19 +43,75 @@ public class CEmpresa extends CGenerico {
 	@Wire
 	private Div catalogoEmpresa;
 	@Wire
+	private Button btnBuscarEmpresa;
+	@Wire
 	private Textbox txtNombreEmpresa;
 	@Wire
-	private Textbox txtTelefono1Empresa;
-	@Wire
-	private Textbox txtTelefono2Empresa;
-	@Wire
-	private Textbox txtDireccionEmpresa;
+	private Textbox txtDireccionCentro;
 	@Wire
 	private Textbox txtRifEmpresa;
 	@Wire
-	private Combobox cmbCiudad;
+	private Textbox txtTelefonoEmpresa;
 	@Wire
-	private Button btnBuscarEmpresa;
+	private Textbox txtRazon;
+	@Wire
+	private Textbox txtDireccionRazon;
+	@Wire
+	private Textbox txtNilEmpresa;
+	@Wire
+	private Textbox txtNroIvssEmpresa;
+	@Wire
+	private Textbox txtCodigoCiiuEmpresa;
+	@Wire
+	private Textbox txtActividadEconomica;
+	@Wire
+	private Textbox txtCorreo;
+	@Wire
+	private Textbox txtRegistroMercantil;
+	@Wire
+	private Datebox dtbFechaRegistro;
+	@Wire
+	private Textbox txtBajoNroEmpresa;
+	@Wire
+	private Textbox txtTomoEmpresa;
+	@Wire
+	private Textbox txtRepresentanteEmpresa;
+	@Wire
+	private Textbox txtCedulaRepresentante;
+	@Wire
+	private Textbox txtTelefonoRepresentante;
+	@Wire
+	private Textbox txtCargo;
+	@Wire
+	private Datebox dtbFechaActualizacion;
+	@Wire
+	private Textbox txtBajoNro2Empresa;
+	@Wire
+	private Textbox txtTomo2Empresa;
+	@Wire
+	private Textbox txtRepresentante2Empresa;
+	@Wire
+	private Textbox txtCedula2Representante;
+	@Wire
+	private Textbox txtTelefono2Representante;
+	@Wire
+	private Textbox txtCargo2;
+	@Wire
+	private Spinner spnNroTrabajadores;
+	@Wire
+	private Spinner spnHombres;
+	@Wire
+	private Spinner spnMujeres;
+	@Wire
+	private Spinner spnAdolescentes;
+	@Wire
+	private Spinner spnAprendices;
+	@Wire
+	private Spinner spnLopcymat;
+	@Wire
+	private Spinner spnConapdis;
+	@Wire
+	private Spinner spnExtranjeros;
 
 	private CArbol cArbol = new CArbol();
 	long id = 0;
@@ -59,8 +119,6 @@ public class CEmpresa extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		
-		llenarComboCiudad();
 
 		Botonera botonera = new Botonera() {
 
@@ -71,31 +129,147 @@ public class CEmpresa extends CGenerico {
 
 			@Override
 			public void limpiar() {
-				txtDireccionEmpresa.setValue("");
+				txtDireccionCentro.setValue("");
 				txtNombreEmpresa.setValue("");
 				txtRifEmpresa.setValue("");
-				txtTelefono1Empresa.setValue("");
-				txtTelefono2Empresa.setValue("");
-				cmbCiudad.setValue("");
-				cmbCiudad.setPlaceholder("Seleccione una Ciudad");
+				txtTelefonoEmpresa.setValue("");
+				txtTelefonoRepresentante.setValue("");
+				txtRazon.setValue("");
+				txtDireccionRazon.setValue("");
+				txtNilEmpresa.setValue("");
+				txtNroIvssEmpresa.setValue("");
+				txtCodigoCiiuEmpresa.setValue("");
+				txtActividadEconomica.setValue("");
+				txtCorreo.setValue("");
+				txtRegistroMercantil.setValue("");
+				dtbFechaRegistro.setValue(null);
+				txtBajoNroEmpresa.setValue("");
+				txtTomoEmpresa.setValue("");
+				txtRepresentanteEmpresa.setValue("");
+				txtCedulaRepresentante.setValue("");
+				txtCargo.setValue("");
+				dtbFechaActualizacion.setValue(null);
+				txtBajoNro2Empresa.setValue("");
+				txtTomo2Empresa.setValue("");
+				txtRepresentante2Empresa.setValue("");
+				txtCedula2Representante.setValue("");
+				txtTelefono2Representante.setValue("");
+				txtCargo2.setValue("");
+				spnNroTrabajadores.setValue(0);
+				spnHombres.setValue(0);
+				spnMujeres.setValue(0);
+				spnAdolescentes.setValue(0);
+				spnAprendices.setValue(0);
+				spnLopcymat.setValue(0);
+				spnConapdis.setValue(0);
+				spnExtranjeros.setValue(0);
 				id = 0;
 			}
 
 			@Override
 			public void guardar() {
 				if (validar()) {
-					String nombre, rif, direccion, telefono1, telefono2, correo;
+					String nombre, rif, direccion, telefono, telefonoRepresentante, correo, telefono2Representante, razon, direccionRazon, nil, nroIvss, codigoCiiu, actividadEconomica, registroMercantil, bajoNro, tomo, representante, cedula, cargo, bajoNro2, tomo2, representante2, cedula2, cargo2;
+					Timestamp fechaRegistro, fechaActualizacion;
+					Integer hombres, mujeres, adolescentes, aprendices, lopcymat, conapdis, extranjeros, nroTrabajadores;
+
 					nombre = txtNombreEmpresa.getValue();
 					rif = txtRifEmpresa.getValue();
-					direccion = txtDireccionEmpresa.getValue();
-					telefono1 = txtTelefono1Empresa.getValue();
-					telefono2 = txtTelefono2Empresa.getValue();
-					Ciudad ciudad = servicioCiudad
-							.buscar(Long.parseLong(cmbCiudad.getSelectedItem()
-									.getContext()));
-					Empresa empresa = new Empresa(id, direccion, fechaHora,
-							horaAuditoria, nombre, rif, telefono1, telefono2,
-							nombreUsuarioSesion(), ciudad);
+					direccion = txtDireccionCentro.getValue();
+
+					Empresa empresa = new Empresa(id, nombre, rif, direccion,
+							fechaHora, horaAuditoria, nombreUsuarioSesion());
+
+					telefono = txtTelefonoEmpresa.getValue();
+					razon = txtRazon.getValue();
+					direccionRazon = txtDireccionRazon.getValue();
+					nil = txtNilEmpresa.getValue();
+					nroIvss = txtNroIvssEmpresa.getValue();
+					codigoCiiu = txtCodigoCiiuEmpresa.getValue();
+					actividadEconomica = txtActividadEconomica.getValue();
+					correo = txtCorreo.getValue();
+					registroMercantil = txtRegistroMercantil.getValue();
+					bajoNro = txtBajoNroEmpresa.getValue();
+					tomo = txtTomoEmpresa.getValue();
+					representante = txtRepresentanteEmpresa.getValue();
+					cedula = txtCedulaRepresentante.getValue();
+					telefonoRepresentante = txtTelefonoRepresentante.getValue();
+					cargo = txtCargo.getValue();
+		
+					bajoNro2 = txtBajoNro2Empresa.getValue();
+					tomo2 = txtTomo2Empresa.getValue();
+					representante2 = txtRepresentante2Empresa.getValue();
+					cedula2 = txtCedula2Representante.getValue();
+					telefono2Representante = txtTelefono2Representante
+							.getValue();
+					cargo2 = txtCargo2.getValue();
+					if (spnNroTrabajadores.getValue() != null) {
+						nroTrabajadores = spnNroTrabajadores.getValue();
+						empresa.setNroTrabajadores(nroTrabajadores);
+					}
+					if (spnHombres.getValue() != null) {
+						hombres = spnHombres.getValue();
+						empresa.setHombres(hombres);
+					}
+					if (spnMujeres.getValue() != null) {
+						mujeres = spnMujeres.getValue();
+						empresa.setMujeres(mujeres);
+					}
+					if (spnAdolescentes.getValue() != null) {
+						adolescentes = spnAdolescentes.getValue();
+						empresa.setAdolescentes(adolescentes);
+					}
+					if (spnAprendices.getValue() != null) {
+						aprendices = spnAprendices.getValue();
+						empresa.setAprendices(aprendices);
+					}
+					if (spnLopcymat.getValue() != null) {
+						lopcymat = spnLopcymat.getValue();
+						empresa.setLopcymat(lopcymat);
+					}
+					if (spnConapdis.getValue() != null) {
+						conapdis = spnConapdis.getValue();
+						empresa.setConapdis(conapdis);
+					}
+					if (spnExtranjeros.getValue() != null) {
+						extranjeros = spnExtranjeros.getValue();
+						empresa.setExtranjeros(extranjeros);
+					}
+					if(dtbFechaRegistro.getText().compareTo("")!=0)
+					{
+						fechaRegistro = new Timestamp(dtbFechaRegistro.getValue()
+								.getTime());
+						empresa.setFechaRegistro(fechaRegistro);
+					}
+					if(dtbFechaActualizacion.getText().compareTo("")!=0)
+					{
+					fechaActualizacion = new Timestamp(dtbFechaActualizacion
+							.getValue().getTime());
+					empresa.setFechaActualizacion(fechaActualizacion);
+					}
+
+					empresa.setTelefono(telefono);
+					empresa.setRazon(razon);
+					empresa.setDireccionRazon(direccionRazon);
+					empresa.setNil(nil);
+					empresa.setNroIvss(nroIvss);
+					empresa.setCodigoCiiu(codigoCiiu);
+					empresa.setActividadEconomica(actividadEconomica);
+					empresa.setCorreo(correo);
+					empresa.setRegistroMercantil(registroMercantil);				
+					empresa.setBajoNroEmpresa(bajoNro);
+					empresa.setTomoEmpresa(tomo);
+					empresa.setRepresentanteEmpresa(representante);
+					empresa.setCedulaRepresentante(cedula);
+					empresa.setTelefonoRepresentante(telefonoRepresentante);
+					empresa.setCargo(cargo);
+					empresa.setBajoNro2Empresa(bajoNro2);
+					empresa.setTomo2Empresa(tomo2);
+					empresa.setRepresentante2Empresa(representante2);
+					empresa.setCedula2Representante(cedula2);
+					empresa.setTelefono2Representante(telefono2Representante);
+					empresa.setCargo2(cargo2);
+
 					servicioEmpresa.guardar(empresa);
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
@@ -148,36 +322,38 @@ public class CEmpresa extends CGenerico {
 		botoneraEmpresa.appendChild(botonera);
 	}
 
-	/* Llena el combo de Ciudades cada vez que se abre */
-	@Listen("onOpen = #cmbCiudad")
-	public void llenarComboCiudad() {
-		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
-		cmbCiudad.setModel(new ListModelList<Ciudad>(ciudades));
-	}
-
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (txtDireccionEmpresa.getText().compareTo("") == 0
+		if (txtDireccionCentro.getText().compareTo("") == 0
 				|| txtNombreEmpresa.getText().compareTo("") == 0
-				|| txtRifEmpresa.getText().compareTo("") == 0
-				|| txtTelefono1Empresa.getText().compareTo("") == 0
-				|| txtTelefono2Empresa.getText().compareTo("") == 0
-				|| cmbCiudad.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+				|| txtRifEmpresa.getText().compareTo("") == 0) {
+			Messagebox.show("Debe Llenar Todos los Campos Requeridos",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 			return false;
 		} else {
-			if (!Validador.validarTelefono(txtTelefono1Empresa.getValue())) {
-				Messagebox.show("Primer Telefono Invalido", "Informacion",
-						Messagebox.OK, Messagebox.INFORMATION);
-				return false;
-			} else {
-				if (!Validador.validarTelefono(txtTelefono2Empresa.getValue())) {
-					Messagebox.show("Segundo Telefono Invalido", "Informacion",
-							Messagebox.OK, Messagebox.INFORMATION);
+				if (txtTelefonoEmpresa.getText().compareTo("") != 0  && !Validador.validarTelefono(txtTelefonoEmpresa.getValue())) {
+					Messagebox.show("Telefono de la Empresa Invalido",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
 					return false;
-				} else
-					return true;
+			} else {
+				if (txtTelefonoRepresentante.getText().compareTo("") != 0 && !Validador.validarTelefono(txtTelefonoRepresentante.getValue())) {
+						Messagebox.show("Telefono del Representante Invalido",
+								"Informacion", Messagebox.OK,
+								Messagebox.INFORMATION);
+						return false;
+				} else {
+						if (txtTelefono2Representante.getText().compareTo("") != 0  && !Validador
+								.validarTelefono(txtTelefono2Representante
+										.getValue())) {
+							Messagebox.show(
+									"Telefono del Representante Invalido",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
+							return false;
+					} else
+						return true;
+				}
 			}
 		}
 	}
@@ -187,8 +363,7 @@ public class CEmpresa extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Empresa> empresas = servicioEmpresa.buscarTodas();
 		catalogo = new Catalogo<Empresa>(catalogoEmpresa,
-				"Catalogo de Empresas", empresas, "Rif", "Nombre", "Direccion",
-				"Telefono", "Ciudad") {
+				"Catalogo de Empresas", empresas, "Rif", "Nombre", "Direccion") {
 
 			@Override
 			protected List<Empresa> buscar(String valor, String combo) {
@@ -199,11 +374,7 @@ public class CEmpresa extends CGenerico {
 				case "Nombre":
 					return servicioEmpresa.filtroNombre(valor);
 				case "Direccion":
-					return servicioEmpresa.filtroDireccion(valor);
-				case "Telefono":
-					return servicioEmpresa.filtroTelefono(valor);
-				case "Ciudad":
-					return servicioEmpresa.filtroCiudad(valor);
+					return servicioEmpresa.filtroDireccionCentro(valor);
 				default:
 					return empresas;
 				}
@@ -212,12 +383,10 @@ public class CEmpresa extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Empresa objeto) {
-				String[] registros = new String[5];
+				String[] registros = new String[3];
 				registros[0] = objeto.getRif();
 				registros[1] = objeto.getNombre();
-				registros[2] = objeto.getDireccion();
-				registros[3] = objeto.getTelefono1();
-				registros[4] = objeto.getCiudad().getNombre();
+				registros[2] = objeto.getDireccionCentro();
 				return registros;
 			}
 
@@ -227,18 +396,27 @@ public class CEmpresa extends CGenerico {
 	}
 
 	/* Valida el numero telefonico */
-	@Listen("onChange = #txtTelefono1Empresa")
+	@Listen("onChange = #txtTelefonoEmpresa")
 	public void validarTelefono() {
-		if (!Validador.validarTelefono(txtTelefono1Empresa.getValue())) {
+		if (!Validador.validarTelefono(txtTelefonoEmpresa.getValue())) {
 			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
 					Messagebox.INFORMATION);
 		}
 	}
 
 	/* Valida el numero telefonico */
-	@Listen("onChange = #txtTelefono2Empresa")
+	@Listen("onChange = #txtTelefonoRepresentante")
 	public void validarTelefono1() {
-		if (!Validador.validarTelefono(txtTelefono2Empresa.getValue())) {
+		if (!Validador.validarTelefono(txtTelefonoRepresentante.getValue())) {
+			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
+					Messagebox.INFORMATION);
+		}
+	}
+
+	/* Valida el numero telefonico */
+	@Listen("onChange = #txtTelefono2Representante")
+	public void validarTelefono2() {
+		if (!Validador.validarTelefono(txtTelefono2Representante.getValue())) {
 			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
 					Messagebox.INFORMATION);
 		}
@@ -264,18 +442,65 @@ public class CEmpresa extends CGenerico {
 	/* LLena los campos del formulario dado una empresa */
 	private void llenarCampos(Empresa empresa) {
 		txtRifEmpresa.setValue(empresa.getRif());
-		txtDireccionEmpresa.setValue(empresa.getDireccion());
+		txtDireccionCentro.setValue(empresa.getDireccionCentro());
 		txtNombreEmpresa.setValue(empresa.getNombre());
-		txtTelefono1Empresa.setValue(empresa.getTelefono1());
-		txtTelefono2Empresa.setValue(empresa.getTelefono2());
-		cmbCiudad.setValue(empresa.getCiudad().getNombre());
+		txtTelefonoEmpresa.setValue(empresa.getTelefono());
+		txtRazon.setValue(empresa.getRazon());
+		txtDireccionRazon.setValue(empresa.getDireccionRazon());
+		txtNilEmpresa.setValue(empresa.getNil());
+		txtNroIvssEmpresa.setValue(empresa.getNroIvss());
+		txtCodigoCiiuEmpresa.setValue(empresa.getCodigoCiiu());
+		txtActividadEconomica.setValue(empresa.getActividadEconomica());
+		txtCorreo.setValue(empresa.getCorreo());
+		txtRegistroMercantil.setValue(empresa.getRegistroMercantil());
+		txtBajoNroEmpresa.setValue(empresa.getBajoNroEmpresa());
+		txtTomoEmpresa.setValue(empresa.getTomoEmpresa());
+		txtRepresentanteEmpresa.setValue(empresa.getRepresentanteEmpresa());
+		txtCedulaRepresentante.setValue(empresa.getCedulaRepresentante());
+		txtTelefonoRepresentante.setValue(empresa.getTelefonoRepresentante());
+		txtCargo.setValue(empresa.getCargo());
+		txtBajoNro2Empresa.setValue(empresa.getBajoNro2Empresa());
+		txtTomo2Empresa.setValue(empresa.getTomo2Empresa());
+		txtRepresentante2Empresa.setValue(empresa.getRepresentante2Empresa());
+		txtCedula2Representante.setValue(empresa.getCedula2Representante());
+		txtTelefono2Representante.setValue(empresa.getTelefono2Representante());
+		txtCargo2.setValue(empresa.getCargo2());
+		if (empresa.getFechaRegistro() != null)
+		dtbFechaRegistro.setValue(empresa.getFechaRegistro());
+		if (empresa.getFechaActualizacion() != null)
+		dtbFechaActualizacion.setValue(empresa.getFechaActualizacion());
+		if (empresa.getNroTrabajadores() != null)
+			spnNroTrabajadores.setValue(empresa.getNroTrabajadores());
+		if (empresa.getHombres() != null)
+			spnHombres.setValue(empresa.getHombres());
+		if (empresa.getMujeres() != null)
+			spnMujeres.setValue(empresa.getMujeres());
+		if (empresa.getAdolescentes() != null)
+			spnAdolescentes.setValue(empresa.getAdolescentes());
+		if (empresa.getAprendices() != null)
+			spnAprendices.setValue(empresa.getAprendices());
+		if (empresa.getLopcymat() != null)
+			spnLopcymat.setValue(empresa.getLopcymat());
+		if (empresa.getConapdis() != null)
+			spnConapdis.setValue(empresa.getConapdis());
+		if (empresa.getExtranjeros() != null)
+			spnExtranjeros.setValue(empresa.getExtranjeros());
 		id = empresa.getIdEmpresa();
 	}
 
-	/* Abre la vista de Ciudad*/
+	/* Abre la vista de Ciudad */
 	@Listen("onClick = #btnAbrirCiudad")
-	public void abrirCiudad(){		
+	public void abrirCiudad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem);
+	}
+
+	/* Metodo que valida el formmato del correo ingresado */
+	@Listen("onChange = #txtCorreo")
+	public void validarCorreo() throws IOException {
+		if (Validador.validarCorreo(txtCorreo.getValue()) == false) {
+			Messagebox.show("Correo Electronico Invalido", "Alerta",
+					Messagebox.OK, Messagebox.EXCLAMATION);
+		}
 	}
 }

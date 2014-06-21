@@ -5,7 +5,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 
-import modelo.seguridad.Usuario;
 import modelo.transacciones.Historia;
 
 import java.sql.Timestamp;
@@ -146,6 +145,39 @@ public class Paciente implements Serializable {
 	
 	@Column(length=15)
 	private String parentescoFamiliar;
+	
+	//
+	@Column(length=15)
+	private String nacionalidad;
+	
+	@Column(name="nivel_educativo")
+	private String nivelEducativo;
+	
+	@Column
+	private String profesion;
+	
+	@Column(name="retiro_ivss")
+	private String retiroIVSS;
+	
+	@Column
+	private String turno;
+	
+	@Column(name="nro_inpsasel")
+	private String NroInpsasel;
+	
+	@Column(name="fecha_ingreso")
+	private Timestamp fechaIngreso;
+
+	@Column(name="fecha_egreso")
+	private Timestamp fechaEgreso;
+	
+	@Column(name="fecha_inscripcion_ivss")
+	private Timestamp fechaInscripcionIVSS;
+	
+	@Column(length=100)
+	private int carga;
+	
+	//
 	
 	//bi-directional many-to-one association to Cita
 	@OneToMany(mappedBy="paciente")
@@ -597,7 +629,87 @@ public class Paciente implements Serializable {
 		this.antecedentesPacientes = antecedentesPacientes;
 	}
 
-	public Historia getHistoria() {
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
+
+	public String getNivelEducativo() {
+		return nivelEducativo;
+	}
+
+	public void setNivelEducativo(String nivelEducativo) {
+		this.nivelEducativo = nivelEducativo;
+	}
+
+	public String getProfesion() {
+		return profesion;
+	}
+
+	public void setProfesion(String profesion) {
+		this.profesion = profesion;
+	}
+
+	public String getRetiroIVSS() {
+		return retiroIVSS;
+	}
+
+	public void setRetiroIVSS(String retiroIVSS) {
+		this.retiroIVSS = retiroIVSS;
+	}
+
+	public String getTurno() {
+		return turno;
+	}
+
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+
+	public String getNroInpsasel() {
+		return NroInpsasel;
+	}
+
+	public void setNroInpsasel(String nroInpsasel) {
+		NroInpsasel = nroInpsasel;
+	}
+
+	public Timestamp getFechaIngreso() {
+		return fechaIngreso;
+	}
+
+	public void setFechaIngreso(Timestamp fechaIngreso) {
+		this.fechaIngreso = fechaIngreso;
+	}
+
+	public Timestamp getFechaEgreso() {
+		return fechaEgreso;
+	}
+
+	public void setFechaEgreso(Timestamp fechaEgreso) {
+		this.fechaEgreso = fechaEgreso;
+	}
+
+	public Timestamp getFechaInscripcionIVSS() {
+		return fechaInscripcionIVSS;
+	}
+
+	public void setFechaInscripcionIVSS(Timestamp fechaInscripcionIVSS) {
+		this.fechaInscripcionIVSS = fechaInscripcionIVSS;
+	}
+
+	public int getCarga() {
+		return carga;
+	}
+
+	public void setCarga(int carga) {
+		this.carga = carga;
+	}
+
+public Historia getHistoria() {
 		return historia;
 	}
 

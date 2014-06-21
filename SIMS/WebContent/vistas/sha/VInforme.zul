@@ -1,0 +1,2363 @@
+<zk>
+	<script src="/public/progress.js" />
+	<div id="divInforme" apply="controlador.sha.CInforme" width="auto">
+		<groupbox width="auto" mold="3d" title="Informe">
+			<!-- <grid width="auto"> <columns visible="false"> <column label="" width="15%" 
+				/> <column label="" width="30%" /> <column label="" width="3%" /> <column 
+				label="" width="52%" /> </columns> <rows> <row> <label class="etiqueta" value="Ir 
+				a la Seccion:" /> <combobox tooltiptext="Seleccione una Seccion" placeholder="Seleccione 
+				la Seccion" id="cmbSeccion" width="100%" readonly="true"> <comboitem label="Seccion 
+				1 y 2" /> <comboitem label="Seccion 3 y 4" /> <comboitem label="Seccion 5" 
+				/> <comboitem label="Seccion 6 y 7" /> <comboitem label="Seccion 8" /> <comboitem 
+				label="Seccion 9" /> </combobox> <image class="imgAyuda" width="100%" height="100%" 
+				style="cursor: help" tooltip="seccion" src="/public/imagenes/botones/signoInterrogacion.png" 
+				/> <hbox /> </row> </rows> </grid> -->
+			<separator />
+			<tabbox height="auto" width="auto" id="taxSecciones" orient="horizontal">
+				<tabs>
+					<tab tooltip="seccion" label="Seccion 1 y 2" id="tab1y2" />
+					<tab tooltip="seccion" label="Seccion 3" id="tab3" />
+					<tab tooltip="seccion" label="Seccion 4" id="tab4" />
+					<tab tooltip="seccion" label="Seccion 5" id="tab5" />
+					<tab tooltip="seccion" label="Seccion 6 y 7" id="tab6y7" />
+					<tab tooltip="seccion" label="Seccion 8" id="tab8" />
+					<tab tooltip="seccion" label="Seccion 9" id="tab9" />
+				</tabs>
+				<tabpanels>
+					<tabpanel>
+						<separator />
+						<hbox>
+							<label class="etiqueta"
+								value="CÓDIGO  DECLARACIÓN DEL ACCIDENTE ANTE EL INPSASEL:" />
+							<textbox multiline="true" width="400px" id="txt1"
+								tooltiptext="Ingrese el Codigo" />
+						</hbox>
+						<separator />
+						<label class="etiqueta" value="INVESTIGACION DEL ACCIDENTE" />
+						<separator />
+						<grid width="auto">
+							<columns>
+								<column label="Apellidos y Nombres" width="20%" />
+								<column label="Cedula de Identidad" width="20%" />
+								<column label="Condicion" width="20%" />
+								<column label="N° Registro INPSASEL" width="20%" />
+								<column label="" width="20%" />
+							</columns>
+							<rows>
+								<row>
+									<cell colspan="5">
+										<separator />
+										<label class="etiqueta"
+											value="Responsables de la Investigacion del Accidente:" />
+										<separator />
+									</cell>
+								</row>
+								<row>
+									<label id="lbl211" />
+									<label id="lbl212" />
+									<label id="lbl213" />
+									<label id="lbl214" />
+									<button id="btnBuscar21" class="btn" label="Buscar"
+										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+								</row>
+								<row>
+									<label id="lbl221" />
+									<label id="lbl222" />
+									<label id="lbl223" />
+									<label id="lbl224" />
+									<button id="btnBuscar22" class="btn" label="Buscar"
+										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+								</row>
+								<row>
+									<label id="lbl231" />
+									<label id="lbl232" />
+									<label id="lbl233" />
+									<label id="lbl234" />
+									<button id="btnBuscar23" class="btn" label="Buscar"
+										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+								</row>
+								<row>
+									<cell colspan="5">
+										<separator />
+										<label class="etiqueta"
+											value="Otras Personas que Intervienen en el Proceso de Investigacion" />
+										<separator />
+									</cell>
+								</row>
+								<row>
+									<label id="lbl241" />
+									<label id="lbl242" />
+									<label id="lbl243" />
+									<label id="lbl244" />
+									<button id="btnBuscar24" class="btn" label="Buscar"
+										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+								</row>
+								<row>
+									<label id="lbl251" />
+									<label id="lbl252" />
+									<label id="lbl253" />
+									<label id="lbl254" />
+									<button id="btnBuscar25" class="btn" label="Buscar"
+										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+								</row>
+								<row>
+									<label id="lbl261" />
+									<label id="lbl262" />
+									<label id="lbl263" />
+									<label id="lbl264" />
+									<button id="btnBuscar26" class="btn" label="Buscar"
+										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+								</row>
+							</rows>
+						</grid>
+						<separator />
+						<div align="right">
+							<button id="btnSiguiente1" label="Siguiente"
+								image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
+						</div>
+					</tabpanel>
+					<tabpanel>
+						<separator />
+						<grid width="100%">
+							<columns visible="false">
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+							</columns>
+							<rows>
+								<row>
+									<cell colspan="8">
+										<separator />
+										<label class="etiqueta"
+											value="DATOS DE LA EMPRESA PARA LA CUAL LABORA / LABORABA LA/EL TRABAJADORA / TABAJADOR - ACCIDENTADO / ACCIDENTADA " />
+										<separator />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="Razon Social:" />
+									<cell colspan="2">
+										<label id="lbl31" />
+									</cell>
+									<label class="etiqueta" value="Centro de Trabajo:" />
+									<cell colspan="2">
+										<label id="lbl32" />
+									</cell>
+									<button id="btnBuscar3" class="btn" label="Buscar"
+										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<hbox />
+								</row>
+								<row>
+									<cell colspan="2">
+										<label class="etiqueta" value="Direccion del Centro de Trabajo:" />
+									</cell>
+									<cell colspan="6">
+										<label id="lbl33" />
+									</cell>
+								</row>
+								<row>
+									<cell colspan="2">
+										<label class="etiqueta" value="Direccion Fiscal de la Razon Social:" />
+									</cell>
+									<cell colspan="6">
+										<label id="lbl34" />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="Rif:" />
+									<label id="lbl35" />
+									<label class="etiqueta" value="NIL:" />
+									<label id="lbl36" />
+									<label class="etiqueta" value="N° PatronalL IVSS:" />
+									<label id="lbl37" />
+									<label class="etiqueta" value="Codigo CIIU:" />
+									<label id="lbl39" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Actividad Economica:" />
+									<cell colspan="2">
+										<label id="lbl38" />
+									</cell>
+									<label class="etiqueta" value="Telefono/Fax:" />
+									<label id="lbl310" />
+									<label class="etiqueta" value="Email:" />
+									<label id="lbl311" />
+									<hbox />
+								</row>
+								<row>
+									<cell colspan="2">
+										<label class="etiqueta" value="Registro Mercantil:" />
+									</cell>
+									<cell colspan="6">
+										<label id="lbl312" />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="En Fecha:" />
+									<label id="lbl313" />
+									<label class="etiqueta" value="Bajo Nro.:" />
+									<label id="lbl314" />
+									<label class="etiqueta" value="Tomo:" />
+									<label id="lbl315" />
+									<label class="etiqueta" value="Representante Legal/Apoderado:" />
+									<label id="lbl316" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Cedula:" />
+									<label id="lbl317" />
+									<label class="etiqueta" value="Telefono:" />
+									<label id="lbl318" />
+									<label class="etiqueta" value="Cargo:" />
+									<cell colspan="2">
+										<label id="lbl319" />
+									</cell>
+									<hbox />
+								</row>
+								<row>
+									<label class="etiqueta" value="Ultima Actualizacion En Fecha:" />
+									<label id="lbl320" />
+									<label class="etiqueta" value="Bajo Nro.:" />
+									<label id="lbl321" />
+									<label class="etiqueta" value="Tomo:" />
+									<label id="lbl322" />
+									<label class="etiqueta" value="Representante Legal/Apoderado:" />
+									<label id="lbl323" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Cedula:" />
+									<label id="lbl324" />
+									<label class="etiqueta" value="Telefono:" />
+									<label id="lbl325" />
+									<label class="etiqueta" value="Cargo:" />
+									<cell colspan="2">
+										<label id="lbl326" />
+									</cell>
+									<hbox />
+								</row>
+								<row>
+									<cell colspan="3">
+										<label class="etiqueta"
+											value="N° de Trabajadores de la Empresa, Segun Nomina:" />
+									</cell>
+									<label id="lbl327" />
+									<hbox />
+									<hbox />
+									<hbox />
+									<hbox />
+								</row>
+								<row>
+									<label class="etiqueta" value="Hombres:" />
+									<label id="lbl328" />
+									<label class="etiqueta" value="Mujeres:" />
+									<label id="lbl329" />
+									<label class="etiqueta" value="Adolescentes:" />
+									<label id="lbl330" />
+									<label class="etiqueta" value="Aprendices:" />
+									<label id="lbl331" />
+								</row>
+								<row>
+									<cell colspan="2">
+										<label class="etiqueta" value="Trabajadores con Discapacidad LOPCYMAT:" />
+									</cell>
+									<label id="lbl332" />
+									<cell colspan="2">
+										<label class="etiqueta" value="Trabajadores con Discapacidad (CONAPDIS):" />
+									</cell>
+									<label id="lbl333" />
+									<label class="etiqueta" value="Extranjeros/Exranjeras:" />
+									<label id="lbl334" />
+								</row>
+							</rows>
+						</grid>
+						<separator />
+						<hbox>
+							<div align="left">
+								<button id="btnAtras2" label="Atras"
+									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
+							</div>
+							<space width="910px" />
+							<div align="right">
+								<button id="btnSiguiente2" label="Siguiente"
+									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
+							</div>
+						</hbox>
+					</tabpanel>
+					<tabpanel>
+						<grid width="100%">
+							<columns visible="false">
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+							</columns>
+							<rows>
+								<row>
+									<cell colspan="8">
+										<separator />
+										<label class="etiqueta" value="DATOS DE LA EMPRESA BENEFICIARIA" />
+										<separator />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="Razon Social:" />
+									<cell colspan="2">
+										<label id="lbl41" />
+									</cell>
+									<label class="etiqueta" value="Centro de Trabajo:" />
+									<cell colspan="2">
+										<label id="lbl42" />
+									</cell>
+									<button id="btnBuscar4" class="btn" label="Buscar"
+										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<hbox />
+								</row>
+								<row>
+									<cell colspan="2">
+										<label class="etiqueta" value="Direccion del Centro de Trabajo:" />
+									</cell>
+									<cell colspan="6">
+										<label id="lbl43" />
+									</cell>
+								</row>
+								<row>
+									<cell colspan="2">
+										<label class="etiqueta" value="Direccion Fiscal de la Razon Social:" />
+									</cell>
+									<cell colspan="6">
+										<label id="lbl44" />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="Rif:" />
+									<label id="lbl45" />
+									<label class="etiqueta" value="NIL:" />
+									<label id="lbl46" />
+									<label class="etiqueta" value="N° PatronalL IVSS:" />
+									<label id="lbl47" />
+									<label class="etiqueta" value="Codigo CIIU:" />
+									<label id="lbl49" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Actividad Economica:" />
+									<cell colspan="2">
+										<label id="lbl48" />
+									</cell>
+									<label class="etiqueta" value="Telefono/Fax:" />
+									<label id="lbl410" />
+									<label class="etiqueta" value="Email:" />
+									<label id="lbl411" />
+									<hbox />
+								</row>
+								<row>
+									<cell colspan="2">
+										<label class="etiqueta" value="Registro Mercantil:" />
+									</cell>
+									<cell colspan="6">
+										<label id="lbl412" />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="En Fecha:" />
+									<label id="lbl413" />
+									<label class="etiqueta" value="Bajo Nro.:" />
+									<label id="lbl414" />
+									<label class="etiqueta" value="Tomo:" />
+									<label id="lbl415" />
+									<label class="etiqueta" value="Representante Legal/Apoderado:" />
+									<label id="lbl416" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Cedula:" />
+									<label id="lbl417" />
+									<label class="etiqueta" value="Telefono:" />
+									<label id="lbl418" />
+									<label class="etiqueta" value="Cargo:" />
+									<cell colspan="2">
+										<label id="lbl419" />
+									</cell>
+									<hbox />
+								</row>
+								<row>
+									<label class="etiqueta" value="Ultima Actualizacion En Fecha:" />
+									<label id="lbl420" />
+									<label class="etiqueta" value="Bajo Nro.:" />
+									<label id="lbl421" />
+									<label class="etiqueta" value="Tomo:" />
+									<label id="lbl422" />
+									<label class="etiqueta" value="Representante Legal/Apoderado:" />
+									<label id="lbl423" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Cedula:" />
+									<label id="lbl424" />
+									<label class="etiqueta" value="Telefono:" />
+									<label id="lbl425" />
+									<label class="etiqueta" value="Cargo:" />
+									<cell colspan="2">
+										<label id="lbl426" />
+									</cell>
+									<hbox />
+								</row>
+								<row>
+									<cell colspan="3">
+										<label class="etiqueta"
+											value="N° de Trabajadores de la Empresa, Segun Nomina:" />
+									</cell>
+									<label id="lbl427" />
+									<hbox />
+									<hbox />
+									<hbox />
+									<hbox />
+								</row>
+								<row>
+									<label class="etiqueta" value="Hombres:" />
+									<label id="lbl428" />
+									<label class="etiqueta" value="Mujeres:" />
+									<label id="lbl429" />
+									<label class="etiqueta" value="Adolescentes:" />
+									<label id="lbl430" />
+									<label class="etiqueta" value="Aprendices:" />
+									<label id="lbl431" />
+								</row>
+								<row>
+									<cell colspan="2">
+										<label class="etiqueta" value="Trabajadores con Discapacidad LOPCYMAT:" />
+									</cell>
+									<label id="lbl432" />
+									<cell colspan="2">
+										<label class="etiqueta" value="Trabajadores con Discapacidad (CONAPDIS):" />
+									</cell>
+									<label id="lbl433" />
+									<label class="etiqueta" value="Extranjeros/Exranjeras:" />
+									<label id="lbl434" />
+								</row>
+							</rows>
+						</grid>
+						<separator />
+						<hbox>
+							<div align="left">
+								<button id="btnAtras3" label="Atras"
+									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
+							</div>
+							<space width="910px" />
+							<div align="right">
+								<button id="btnSiguiente3" label="Siguiente"
+									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
+							</div>
+						</hbox>
+					</tabpanel>
+					<tabpanel>
+						<separator />
+						<grid width="auto">
+							<columns>
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+							</columns>
+							<rows>
+								<row>
+									<cell colspan="8">
+										<separator />
+										<label class="etiqueta"
+											value="DATOS DEL TRABAJADOR / TRABAJADORA - ACCIDENTADO / ACCIDENTADA" />
+										<separator />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="Apellidos:" />
+									<label id="lbl51" />
+									<label class="etiqueta" value="Nombres:" />
+									<label id="lbl52" />
+									<label class="etiqueta" value="Cedula de Identidad:" />
+									<cell colspan="2">
+										<label id="lbl53" />
+										<label class="etiqueta" value="Nacionalidad:" />
+										<label id="lbl54" />
+									</cell>
+									<button id="btnBuscar5" class="btn" label="Buscar"
+										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Sexo:" />
+									<label id="lbl55" />
+									<label class="etiqueta" value="Edad:" />
+									<label id="lbl56" />
+									<label class="etiqueta" value="Fecha de Nacimiento:" />
+									<label id="lbl57" />
+									<label class="etiqueta" value="Estado Civil:" />
+									<label id="lbl59" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Lugar de Nacimiento:" />
+									<cell colspan="3">
+										<label id="lbl58" />
+									</cell>
+									<label class="etiqueta" value="Mano:" />
+									<label id="lbl510" />
+									<label class="etiqueta" value="Nivel Educativo:" />
+									<label id="lbl511" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Fecha de Ingreso:" />
+									<label id="lbl512" />
+									<label class="etiqueta" value="Inscripcion ante el IVSS (FORMATO 14.02):" />
+									<label id="lbl513" />
+									<label class="etiqueta" value="Retiro del IVSS (FORMATO 14.03):" />
+									<label id="lbl514" />
+									<label class="etiqueta" value="Fecha de Egreso:" />
+									<label id="lbl515" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Direccion de Habitacion:" />
+									<cell colspan="3">
+										<label id="lbl516" />
+									</cell>
+									<label class="etiqueta" value="Ciudad:" />
+									<label id="lbl517" />
+									<label class="etiqueta" value="Telefono de Hab.:" />
+									<label id="lbl518" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Telefono Cel.:" />
+									<label id="lbl519" />
+									<label class="etiqueta" value="Persona de Contacto:" />
+									<label id="lbl520" />
+									<label class="etiqueta" value="Telefono de Contacto:" />
+									<label id="lbl521" />
+									<label class="etiqueta" value="Carga Familiar:" />
+									<label id="lbl522" />
+								</row>
+								<row align="center">
+									<radiogroup id="rdg523">
+										<label class="etiqueta" value="CONDICIÓN LABORAL ACTUAL :" />
+										<separator />
+										<vbox>
+											<radio label="Trabajando" id="rdo5231"
+												tooltiptext="Marque para indicar la Condicion" />
+											<radio label="Reposo" id="rdo5232"
+												tooltiptext="Marque para indicar la Condicion" />
+											<radio label="Retirado" id="rdo5233"
+												tooltiptext="Marque para indicar la Condicion" />
+											<radio label="Despedido" id="rdo5234"
+												tooltiptext="Marque para indicar la Condicion" />
+											<radio label="Reubicado" id="rdo5235"
+												tooltiptext="Marque para indicar la Condicion" />
+											<radio label="Otro (Indique)" id="rdo5236"
+												tooltiptext="Marque para indicar la Condicion" />
+											<textbox id="txt5236" />
+										</vbox>
+									</radiogroup>
+									<cell align="center" colspan="2">
+										<radiogroup id="rdg524">
+											<label class="etiqueta" value="TIPO DE JORNADA/TURNO:" />
+											<separator />
+											<separator />
+											<vbox>
+												<radio label="Jornada Completa" id="rdo5241"
+													tooltiptext="Marque para indicar jornada/turno" />
+												<radio label="Jornada Parcial" id="rdo5242"
+													tooltiptext="Marque para indicar jornada/turno" />
+												<radio label="Turno Fijo Mañanas" id="rdo5243"
+													tooltiptext="Marque para indicar jornada/turno" />
+												<radio label="Turno Fijo Tardes" id="rdo5244"
+													tooltiptext="Marque para indicar jornada/turno" />
+												<radio label="Turno Fijo Noches" id="rdo5245"
+													tooltiptext="Marque para indicar jornada/turno" />
+												<radio label="Turno Rotativo" id="rdo5246"
+													tooltiptext="Marque para indicar jornada/turno" />
+												<radio label="Turno Mixto" id="rdo5247"
+													tooltiptext="Marque para indicar jornada/turno" />
+												<separator />
+												<separator />
+											</vbox>
+										</radiogroup>
+									</cell>
+									<cell align="center" colspan="2">
+										<radiogroup id="rdg525">
+											<vbox>
+												<label class="etiqueta" value="TIPO DE CONTRATO:" />
+												<radio label="Fijo Nomina" id="rdo5251"
+													tooltiptext="Marque para indicar el tipo de contrato" />
+												<radio label="Contrato Tiempo Determinado" id="rdo5252"
+													tooltiptext="Marque para indicar el tipo de contrato" />
+												<radio label="Contrato Obra Determinada" id="rdo5253"
+													tooltiptext="Marque para indicar el tipo de contrato" />
+												<radio label="Contrato Destajo" id="rdo5254"
+													tooltiptext="Marque para indicar el tipo de contrato" />
+												<radio label="Aprendiz" id="rdo5255"
+													tooltiptext="Marque para indicar el tipo de contrato" />
+												<radio label="Ocasional" id="rdo5256"
+													tooltiptext="Marque para indicar el tipo de contrato" />
+												<radio label="Otra (Indique)" id="rdo5257"
+													tooltiptext="Marque para indicar el tipo de contrato" />
+												<textbox id="txt5257" />
+											</vbox>
+										</radiogroup>
+									</cell>
+									<cell align="center" colspan="2">
+										<radiogroup id="rdg526">
+											<vbox>
+												<label class="etiqueta" value="TIPOS DE SALARIO:" />
+												<separator />
+												<separator />
+												<radio label="Por unidad de Tiempo" id="rdo5261"
+													tooltiptext="Marque para indicar el tipo de salario" />
+												<separator />
+												<radio label="Por unidad de Obra" id="rdo5262"
+													tooltiptext="Marque para indicar el tipo de salario" />
+												<separator />
+												<radio label="Por pieza o a Destajo" id="rdo5263"
+													tooltiptext="Marque para indicar el tipo de salario" />
+												<separator />
+												<radio label="Por Tarea" id="rdo5264"
+													tooltiptext="Marque para indicar el tipo de salario" />
+												<separator />
+												<radio label="Por Productividad" id="rdo5265"
+													tooltiptext="Marque para indicar el tipo de salario" />
+												<separator />
+												<separator />
+											</vbox>
+										</radiogroup>
+									</cell>
+									<radiogroup id="rdg527">
+										<vbox>
+											<label class="etiqueta" value="FRECUENCIA DE PAGO:" />
+											<separator />
+											<radio label="Diario" id="rdo5271"
+												tooltiptext="Marque para indicar la frecuencia de pago" />
+											<separator />
+											<radio label="Semanal" id="rdo5272"
+												tooltiptext="Marque para indicar la frecuencia de pago" />
+											<separator />
+											<radio label="Quincenal" id="rdo5273"
+												tooltiptext="Marque para indicar la frecuencia de pago" />
+											<separator />
+											<radio label="Mensual" id="rdo5274"
+												tooltiptext="Marque para indicar la frecuencia de pago" />
+											<separator />
+											<radio label="Otro (Indique)" id="rdo5275"
+												tooltiptext="Marque para indicar la frecuencia de pagoo" />
+											<textbox id="txt5275" />
+										</vbox>
+									</radiogroup>
+								</row>
+							</rows>
+						</grid>
+						<separator />
+						<hbox>
+							<div align="left">
+								<button id="btnAtras4" label="Atras"
+									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
+							</div>
+							<space width="910px" />
+							<div align="right">
+								<button id="btnSiguiente4" label="Siguiente"
+									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
+							</div>
+						</hbox>
+					</tabpanel>
+					<tabpanel>
+						<separator />
+						<grid width="auto">
+							<columns>
+								<column label="" width="12%" />
+								<column label="" width="12%" />
+								<column label="" width="12%" />
+								<column label="" width="12%" />
+								<column label="" width="13%" />
+								<column label="" width="13%" />
+								<column label="" width="13%" />
+								<column label="" width="13%" />
+							</columns>
+							<rows>
+								<row>
+									<cell colspan="8">
+										<separator />
+										<label class="etiqueta" value="DATOS RELATIVOS AL ACCIDENTE" />
+										<separator />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="Fecha del Accidente:" />
+									<datebox readonly="true" id="dtb61" onCreate="self.value = new Date()"
+										tooltiptext="Indique la Fecha del Accidente" />
+									<label class="etiqueta" value="Dia de la Semana:" />
+									<combobox tooltiptext="Seleccione el Dia" placeholder="Seleccione el Dia"
+										id="cmb62" width="100%" readonly="true">
+										<comboitem label="Lunes" />
+										<comboitem label="Martes" />
+										<comboitem label="Miercoles" />
+										<comboitem label="Jueves" />
+										<comboitem label="Viernes" />
+										<comboitem label="Sabado" />
+										<comboitem label="Domingo" />
+									</combobox>
+									<label class="etiqueta" value="Hora Ocurrencia:" />
+									<timebox hflex="1" vflex="1" id="tmb63" format="a hh:mm:ss"
+										onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Ocurrencia" />
+									<label class="etiqueta" value="Horario de la Jornada del Trabajador/a:" />
+									<textbox id="txt64"
+										tooltiptext="Ingrese el Horario del traajador/a el dia del Accidente" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Horas laboradas al momento del Accidente:" />
+									<textbox id="txt65"
+										tooltiptext="Indique las Horas laboradas al momento del Accidente" />
+									<label class="etiqueta" value="Lugar o Area donde Ocurrio el Accidente:" />
+									<cell colspan="2">
+										<textbox multiline="true" id="txt66" width="99%"
+											tooltiptext="Indique el Lugar o Area donde Ocurrio el Accidente" />
+									</cell>
+									<label class="etiqueta" value="Clasificacion del Accidente:" />
+									<cell colspan="2">
+										<combobox tooltiptext="Seleccione una Clasificacion"
+											placeholder="Seleccione una Clasificacion" id="cmb67"
+											readonly="true" width="100%">
+											<template name="model">
+												<comboitem description="${each.nombre}" label="${each.nombre}"
+													context="${each.idClasificacionAccidente}" />
+											</template>
+										</combobox>
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="Tipo de Accidente:" />
+									<cell colspan="2">
+										<textbox multiline="true" id="txt671" width="99%"
+											tooltiptext="Indique el Tipo de Accidente" />
+									</cell>
+									<label class="etiqueta" value="Agente Causal del Accidente:" />
+									<cell colspan="2">
+										<textbox multiline="true" id="txt672" width="99%"
+											tooltiptext="Indique el Agente Causal del Accidente" />
+									</cell>
+									<label class="etiqueta" value="Agente Causal de la Lesion:" />
+									<textbox multiline="true" id="txt673"
+										tooltiptext="Indique el Agente Causal de la Lesion" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Parte del Cuerpo Lesionada:" />
+									<textbox multiline="true" id="txt674"
+										tooltiptext="Indique la Parte del Cuerpo Lesionada" />
+									<label class="etiqueta" value="Naturaleza de la Lesion:" />
+									<textbox multiline="true" id="txt675"
+										tooltiptext="Indique la Naturaleza de la Lesion" />
+									<label class="etiqueta" value="Gravedad de la Lesion:" />
+									<combobox tooltiptext="Seleccione la Gravedad de la Lesion"
+										placeholder="Seleccione la Gravedad" id="cmb676" width="100%"
+										readonly="true">
+										<comboitem label="Leve" />
+										<comboitem label="Moderado" />
+										<comboitem label="Grave" />
+										<comboitem label="Muy Grave" />
+										<comboitem label="Mortal" />
+									</combobox>
+									<label class="etiqueta" value="¿Auxilio inmediato Recibido?" />
+									<radiogroup id="rdg677">
+										<radio label="SI" id="rdo6771" tooltiptext="Marque para Afirmar" />
+										<radio label="NO" id="rdo6772" tooltiptext="Marque para Negar" />
+									</radiogroup>
+								</row>
+								<row>
+									<label class="etiqueta" value="¿Traslado a centro Asistencial?" />
+									<radiogroup id="rdg678">
+										<radio label="SI" id="rdo6781" tooltiptext="Marque para Afirmar" />
+										<radio label="NO" id="rdo6782" tooltiptext="Marque para Negar" />
+									</radiogroup>
+									<label class="etiqueta" value="¿Cual?" />
+									<textbox multiline="true" id="txt678"
+										tooltiptext="Indique la Naturaleza de la Lesion" />
+									<label class="etiqueta" value="Tipo" />
+									<radiogroup id="rdg679">
+										<radio label="Publico" id="rdo6791"
+											tooltiptext="Marque en el Caso de ser Publico" />
+										<radio label="Privado" id="rdo6792"
+											tooltiptext="Marque en el Caso de ser Privado" />
+									</radiogroup>
+									<label class="etiqueta" value="Tiempo de Reposo:" />
+									<textbox multiline="true" id="txt6710"
+										tooltiptext="Indique el Tiempo de Reposo" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Puesto de Trabajo que Ocupaba:" />
+									<cell colspan="2">
+										<textbox multiline="true" id="txt6711" width="99%"
+											tooltiptext="Indique el Puesto de Trabajo que Ocupaba al Momento del Accidente" />
+									</cell>
+									<label class="etiqueta" value="Tiempo en el Puesto de Trabajo:" />
+									<textbox multiline="true" id="txt6712"
+										tooltiptext="Indique el Tiempo en el Puesto de Trabajo" />
+									<label class="etiqueta" value="Departamento / Area" />
+									<cell colspan="2">
+										<combobox tooltiptext="Seleccione un Area"
+											placeholder="Seleccione un Area" id="cmb6713" readonly="true"
+											width="100%">
+											<template name="model">
+												<comboitem description="${each.nombre}" label="${each.nombre}"
+													context="${each.idArea}" />
+											</template>
+										</combobox>
+									</cell>
+								</row>
+								<row>
+									<cell colspan="8">
+										<label class="etiqueta"
+											value="Descripcion Especifica del Accidente: (QUE, PORQUE, COMO, CUANDO, DONDE.):" />
+									</cell>
+								</row>
+								<row>
+									<cell colspan="8">
+										<textbox multiline="true" id="txt6714" height="50px"
+											width="99%" tooltiptext="Indique la Descripcion" />
+									</cell>
+								</row>
+								<row>
+									<cell colspan="8">
+										<separator />
+										<label class="etiqueta" value="PROCESO DE TRABAJO" />
+										<separator />
+									</cell>
+								</row>
+								<row>
+									<cell colspan="8">
+										<label class="etiqueta"
+											value="Descripcion Especifica de la Forma en que se Utilizaba la Materia Prima al Momento de la Ocurrencia del Accidente" />
+									</cell>
+								</row>
+								<row>
+									<cell colspan="8">
+										<textbox multiline="true" id="txt711" height="50px"
+											width="99%" tooltiptext="Indique la Descripcion" />
+									</cell>
+								</row>
+							</rows>
+						</grid>
+						<separator />
+						<hbox>
+							<div align="left">
+								<button id="btnAtras5" label="Atras"
+									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
+							</div>
+							<space width="910px" />
+							<div align="right">
+								<button id="btnSiguiente5" label="Siguiente"
+									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
+							</div>
+						</hbox>
+					</tabpanel>
+					<tabpanel>
+						<separator />
+						<hbox>
+							<label class="etiqueta" value="PROCESOS PELIGROSOS" />
+						</hbox>
+						<separator />
+						<tabbox height="auto" width="auto" id="taxSeccion8" orient="horizontal">
+							<tabs>
+								<tab label="Objeto de Trabajo" id="tab81" />
+								<tab label="Medios de Trabajo" id="tab82" />
+								<tab label="Descripcion de la Tarea o Actividad" id="tab83" />
+								<tab label="Organizacion y Division del Trabajo" id="tab84" />
+							</tabs>
+							<tabpanels>
+								<tabpanel>
+									<separator />
+									<grid width="auto">
+										<columns>
+											<column label="" width="35%" />
+											<column label="" width="15%" />
+											<column label="" width="35%" />
+											<column label="" width="15%" />
+										</columns>
+										<rows>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="Descripcion Especifica de la  Forma en que se Utilizaba la Materia Prima al Momento de la  Ocurrencia del Accidente:" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt811" height="50px"
+														width="99%" tooltiptext="Indique la Descripcion" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="Materia Prima/ Sustancia / Productos /Sujeto:" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="¿Qué Materia Prima, Sustancia, Producto o Sujeto Estaba Utilizando el Trabajador al Momento de la Ocurrencia del Accidente? en el Caso de Existir Sujeto, Indíquese" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt812" height="50px"
+														width="99%" tooltiptext="Indique la Descripcion" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="Materia Prima/ Sustancia / Productos /Sujeto:" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="¿Describa Cuales son las Características de la  Materia Prima, Sustancia, Producto o Sujeto, del Proceso de Trabajo que Ejecutaba el Trabajador o Trabajadora  al Momento de la Ocurrencia del Accidente?" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt813" height="50px"
+														width="99%" tooltiptext="Indique la Descripcion" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Era Habitual la Utilización o Presencia de Esa Materia Prima / Sustancia / Producto/ Sujeto Para el Desarrollo del Proceso Productivo?" />
+													<radiogroup id="rdg814">
+														<vbox>
+															<radio label="SI" id="rdo8141" tooltiptext="Marque para Afirmar" />
+															<radio label="NO (Pasar a Siguiente Pregunta)" id="rdo8142"
+																tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Por qué se Estaba Manipulando Esa  Materia Prima / Sustancia / Producto / Sujeto que no Era de Uso Habitual?" />
+													<radiogroup id="rdg815">
+														<vbox>
+															<radio label="Porque la Habitual Estaba Agotada"
+																id="rdo8151" tooltiptext="Marque para Responder" />
+															<radio label="Otros (Especifique)" id="rdo8152"
+																tooltiptext="Marque para Responder" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt815" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="OBSERVACIONES" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt816" height="50px"
+														width="99%" tooltiptext="Indique las Observaciones" />
+												</cell>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+								<tabpanel>
+									<separator />
+									<grid width="auto">
+										<columns>
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+										</columns>
+										<rows>
+											<row>
+												<cell colspan="4">
+													<label class="etiqueta" value="INSTALACIONES:" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="Descripción Especifica de las Instalaciones en las que Ocurrió el Accidente" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt821" height="50px"
+														width="99%" tooltiptext="Indique la Descripcion" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="¿Existía Alguna de las Siguientes Condiciones en las Instalaciones donde Ocurrió el Accidente?" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<listbox id="ltb822" height="50px">
+														<template name="model">
+															<listitem>
+																<listcell label="${each.nombre}">
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="EQUIPOS DE TRABAJO (Maquinarias, Equipos, Instrumentos, Herramientas, Sustancias, Etc.)" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="Descripción Específica de las Maquinarias, Equipos, Instrumentos, Herramientas, Sustancias que se Emplean en el Momento en el Que Ocurrió el Accidente:" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt823" height="50px"
+														width="99%" tooltiptext="Indique la Descripcion" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Estuvo Involucrado Algún Equipo, Maquina o Herramienta con  la Ocurrencia del Accidente?" />
+													<radiogroup id="rdg824">
+														<vbox>
+															<radio label="NO" id="rdo8242" tooltiptext="Marque para Negar" />
+															<radio label="SI (Indique Cual)" id="rdo8241"
+																tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt8241" />
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Quién Manipulaba el Equipo, Maquina o Herramienta?" />
+													<radiogroup id="rdg825">
+														<vbox>
+															<radio label="El Trabajador o Trabajadora Accidentado"
+																id="rdo8251" tooltiptext="Marque para Responder" />
+															<radio label="Otro Trabajador o Trabajadora" id="rdo8252"
+																tooltiptext="Marque para Responder" />
+															<radio label="Otros (Especifique)" id="rdo8253"
+																tooltiptext="Marque para Responder" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt8253" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿El Trabajador Recibió Formación o Capacitación Teórica Practica para la Utilización del Equipo, Maquina o Herramienta Empleada en la Tarea?" />
+													<radiogroup id="rdg826">
+														<vbox>
+															<radio label="NO" id="rdo8261" tooltiptext="Marque para Negar" />
+															<radio label="SI" id="rdo8262" tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿El Equipo, Maquina o Herramienta  Utilizado por el Trabajador Era el Adecuado Para el Desarrollo de la Tarea (El que se Utiliza Normalmente para esa Tarea)?" />
+													<radiogroup id="rdg827">
+														<vbox>
+															<radio label="NO" id="rdo8271" tooltiptext="Marque para Negar" />
+															<radio label="SI" id="rdo8272" tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<label class="etiqueta"
+														value="¿Por qué no se  Utilizaba el Equipo, Maquina o Herramienta Adecuada?" />
+													<separator />
+													<radiogroup id="rdg828">
+														<hbox>
+															<radio label="Inexistencia del/la  Mismo/a" id="rdo8281"
+																tooltiptext="Marque para Responder" />
+															<radio label="Lo Estaba Utilizando otra Persona."
+																id="rdo8282" tooltiptext="Marque para Responder" />
+															<radio label="Deteriorado/a o en mal Estado" id="rdo8283"
+																tooltiptext="Marque para Responder" />
+															<radio label="Otros (Especifique):" id="rdo8284"
+																tooltiptext="Marque para Responder" />
+														</hbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<separator />
+													<label class="etiqueta"
+														value="¿Existía Alguna de las Siguientes Condiciones en los Equipos Maquinas o Herramientas?" />
+													<listbox id="ltb829" height="50px">
+														<template name="model">
+															<listitem>
+																<listcell label="${each.nombre}">
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+												</cell>
+												<cell colspan="2">
+													<separator />
+													<label class="etiqueta"
+														value="¿Cuál de las Siguientes Condiciones Asociadas con  las Instalaciones Y/O los Materiales Utilizados para la Ejecución del Proceso de Trabajo Existían para el Momento de la Ocurrencia del Accidente?" />
+													<listbox id="ltb8210" height="50px">
+														<template name="model">
+															<listitem>
+																<listcell label="${each.nombre}">
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿El Empleador o Empleadora Realizó los Estudios Pertinentes del  Puesto de Trabajo para Adaptar los Métodos de Trabajo Así como las Máquinas, Herramientas y Útiles Utilizados en el Proceso de Trabajo a las Características Psicológicas, Cognitivas, Culturales Y Antropométricas de los Trabajadores Y Trabajadoras?" />
+													<radiogroup id="rdg8211">
+														<vbox>
+															<radio label="NO" id="rdo82111" tooltiptext="Marque para Negar" />
+															<radio label="SI (Indique Cual)" id="rdo82112"
+																tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt8211" />
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿El Empleador o Empleadora Implantó los Cambios Requeridos tanto en los Puestos de Trabajo Existentes como al Momento de Introducir Nuevas Maquinarias, Tecnologías o Métodos de Organización del Trabajo a Fin de Lograr que la Concepción del Puesto de Trabajo Permita el Desarrollo de una Relación Armoniosa entre el Trabajador o la Trabajadora y su Entorno Laboral?" />
+													<radiogroup id="rdg8212">
+														<vbox>
+															<radio label="NO" id="rdo82121" tooltiptext="Marque para Negar" />
+															<radio label="SI (Indique Cual)" id="rdo82122"
+																tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt8212" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="AMBIENTE  DE TRABAJO" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<label class="etiqueta"
+														value="¿Cuál o Cuáles de las Siguientes Condiciones del Ambiente de Trabajo Estaban Presentes al Momento de la Ocurrencia del Accidente?" />
+													<listbox id="ltb8213" height="50px">
+														<template name="model">
+															<listitem>
+																<listcell label="${each.nombre}">
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
+												</cell>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+								<tabpanel>
+									<separator />
+									<grid width="auto">
+										<columns>
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+										</columns>
+										<rows>
+											<row>
+												<cell colspan="4">
+													<label class="etiqueta"
+														value="TAREA: (Actividad que Realizaba la Persona Accidentada)" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="Descripción Específica de la/s Tarea/s o Actividad/es que se Realizaba/n  al Momento de la Ocurrencia  del Accidente:" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt831" height="50px"
+														width="99%" tooltiptext="Indique la Descripcion" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿La Trabajadora o Trabajador Ejecutaba una Actividad Asociada  Directamente A sus Funciones de Trabajo?" />
+													<radiogroup id="rdg832">
+														<vbox>
+															<radio label="NO" id="rdo8321" tooltiptext="Marque para Negar" />
+															<radio label="SI" id="rdo8322" tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Existía Procedimiento Seguro de Trabajo Para la Ejecución de la Tarea?" />
+													<radiogroup id="rdg833">
+														<vbox>
+															<radio label="NO" id="rdo8331" tooltiptext="Marque para Negar" />
+															<radio label="SI" id="rdo8332" tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿La Tarea se Realizaba Ajustada a  los Procedimientos Seguros de Trabajo?" />
+													<radiogroup id="rdg834">
+														<vbox>
+															<radio label="SI" id="rdo8341" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo8342" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Por Qué la Persona Accidentada no Realizaba la Tarea de Acuerdo a los Procedimientos Seguros de Trabajo?" />
+													<radiogroup id="rdg835">
+														<vbox>
+															<radio label="Desconocia la Forma Habitual de Realizarla"
+																id="rdo8351" tooltiptext="Marque para Responder" />
+															<radio
+																label="Habia Recibido Instrucciones para Realizarla de esa Manera."
+																id="rdo8352" tooltiptext="Marque para Responder" />
+															<radio label="Otros (Especifique)" id="rdo8353"
+																tooltiptext="Marque para Responder" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt835" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Con que Frecuencia Ejecutaba esta Tarea?" />
+													<radiogroup id="rdg836">
+														<vbox>
+															<radio label="Era la Primera Vez" id="rdo8361"
+																tooltiptext="Marque para Responder" />
+															<radio label="De manera Esporadica" id="rdo8362"
+																tooltiptext="Marque para Responder" />
+															<radio label="Frecuentemente (Especifique)" id="rdo8363"
+																tooltiptext="Marque para Responder" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt836" />
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Había Recibido por Parte de la Empresa los Procedimientos Seguros de Trabajo o Instrucciones Sobre cómo Realizar la Tarea?" />
+													<radiogroup id="rdg837">
+														<vbox>
+															<radio label="SI" id="rdo8371" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo8372" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta" value="¿Qué Tipo de Instrucciones?" />
+													<radiogroup id="rdg838">
+														<vbox>
+															<radio label="Escritas" id="rdo8381" tooltiptext="Marque para Responder" />
+															<radio label="Verbales" id="rdo8382" tooltiptext="Marque para Responder" />
+															<radio label="Ambas" id="rdo8383" tooltiptext="Marque para Responder" />
+															<radio label="Otras (Especifique)" id="rdo8384"
+																tooltiptext="Marque para Responder" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt838" />
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta" value="¿De quién Recibió las Instrucciones?" />
+													<radiogroup id="rdg839">
+														<vbox>
+															<radio label="Del Empleador" id="rdo8391"
+																tooltiptext="Marque para Responder" />
+															<radio label="Del Supervisor" id="rdo8392"
+																tooltiptext="Marque para Responder" />
+															<radio label="De Otros (Especifique)" id="rdo8393"
+																tooltiptext="Marque para Responder" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt839" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Existía Análisis de los Procesos Peligrosos y Acciones Sobre la Fuente para Determinar si se Ameritaba el Uso de Equipos Adecuados de Protección Personal?" />
+													<radiogroup id="rdg8310">
+														<vbox>
+															<radio label="SI" id="rdo83101" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo83102" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Se Dotó Oportunamente al Trabajador de los Epp Adecuados para Minimizar la Exposición a los Procesos Peligrosos Presentes en el Ambiente Laboral?" />
+													<radiogroup id="rdg8311">
+														<vbox>
+															<radio label="SI, ¿Cuales?" id="rdo83111"
+																tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo83112" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt8311" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Se Capacitó al Trabajador para la Utilización Adecuada de los Epp?" />
+													<radiogroup id="rdg8312">
+														<vbox>
+															<radio label="NO" id="rdo83121" tooltiptext="Marque para Negar" />
+															<radio label="SI, ¿Con que Frecuencia?" id="rdo83122"
+																tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt8312" />
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Existía Supervisión sobre la Utilización Correcta de los Epp?" />
+													<radiogroup id="rdg8313">
+														<vbox>
+															<radio label="SI" id="rdo83131" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo83132" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="OBSERVACIONES" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt8314" height="50px"
+														width="99%" tooltiptext="Indique las Observaciones" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<label class="etiqueta" value="MOMENTO EN EL QUE SUCEDIÓ EL ACCIDENTE" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="¿En que Momento se Estaba Realizando la Tarea? " />
+													<separator />
+													<radiogroup id="rdg8315">
+														<hbox>
+															<radio label="Al Incio de la Jornada" id="rdo83151"
+																tooltiptext="Marque para Responder" />
+															<radio label="En el Intermedio de la Jornada" id="rdo83152"
+																tooltiptext="Marque para Responder" />
+															<radio label="Al Final de la Jornada" id="rdo83153"
+																tooltiptext="Marque para Responder" />
+															<radio label="Durante una Pausa en el Proceso del Trabajo"
+																id="rdo83154" tooltiptext="Marque para Responder" />
+															<radio label="Despues de una Pausa del Proceso de Trabajo"
+																id="rdo83155" tooltiptext="Marque para Responder" />
+															<radio label="Durante el Tiempo de Descanso" id="rdo83156"
+																tooltiptext="Marque para Responder" />
+															<radio label="Horas Extras" id="rdo83157"
+																tooltiptext="Marque para Responder" />
+															<radio label="Doblando un  Turno" id="rdo83158"
+																tooltiptext="Marque para Responder" />
+															<radio label="Otros (Indique)" id="rdo83159"
+																tooltiptext="Marque para Responder" />
+														</hbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt8315" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="OBSERVACIONES" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt8316" height="50px"
+														width="99%" tooltiptext="Indique las Observaciones" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="PARA SER LLENADO SI EL TRABAJO QUE REALIZABA EL TRABAJADOR / TRABAJADORA NO ERA PARTE DE SU FUNCIONES" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿El Trabajador / Trabajadora estaba Realizando una Actividad de Salvamento o Análoga al Momento del Accidente?" />
+													<radiogroup id="rdg83171">
+														<vbox>
+															<radio label="SI" id="rdo831711" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo831712" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿La Activad de Salvamento o Análoga, Guarda Relación con el Trabajo?" />
+													<radiogroup id="rdg83172">
+														<vbox>
+															<radio label="SI" id="rdo831721" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo831722" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿El Trabajador / Trabajadora se Desplazaba desde o Hacia el Centro de Trabajo o Hacia el Lugar donde Realizaría la Actividad Laboral?" />
+													<radiogroup id="rdg83173">
+														<vbox>
+															<radio label="SI" id="rdo831731" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo831732" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿En el Expediente del Trabajador/Trabajadora Reposa Información sobre las Rutas Habituales?" />
+													<radiogroup id="rdg83174">
+														<vbox>
+															<radio label="SI" id="rdo831741" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo831742" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Existe Coincidencia Topográfica y Cronológica entre el Recorrido Asociado al Accidente y Alguna de las Rutas Habituales?" />
+													<radiogroup id="rdg83175">
+														<vbox>
+															<radio label="SI" id="rdo831751" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo831752" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Acudió el Trabajador / Trabajadora a Algún Centro Asistencial?" />
+													<radiogroup id="rdg83176">
+														<vbox>
+															<radio label="NO" id="rdo831761" tooltiptext="Marque para Negar" />
+															<radio label="SI, ¿Cual?" id="rdo831762"
+																tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt83176" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿El Trabajador / Trabajadora Estaba Cumpliendo con Funciones Relacionadas con su Cargo Electivo en una Organización Sindical, Al Momento del Accidente?" />
+													<radiogroup id="rdg83177">
+														<vbox>
+															<radio label="SI" id="rdo831771" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo831772" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿El Trabajado o Trabajadora Estaba Desplazándose Hacia o Desde el Lugar Donde se Ejercitan las Funciones Relacionadas con su Cargo Electivo en una Organización Sindical al Momento del Accidente?" />
+													<radiogroup id="rdg83178">
+														<vbox>
+															<radio label="SI" id="rdo831781" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo831782" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Existe Coincidencia Topográfica y Cronológica Entre el Recorrido Asociado al Accidente y el Vinculado al Desplazamiento Hacia o Desde el Lugar Donde se Ejercitan las Funciones Relacionadas con su Cargo Electivo?" />
+													<radiogroup id="rdg83179">
+														<vbox>
+															<radio label="SI" id="rdo831791" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo831792" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+								<tabpanel>
+
+									<separator />
+									<grid width="auto">
+										<columns>
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+										</columns>
+										<rows>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Cuál es el Lugar o Puesto de Trabajo Habitual del Trabajador / Trabajadora?" />
+													<textbox multiline="true" id="txt841" />
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Para el Momento del Accidente, la Tarea se Realizaba en el Lugar o Puesto Habitual de Trabajo?" />
+													<radiogroup id="rdg842">
+														<vbox>
+															<radio label="SI" id="rdo8421" tooltiptext="Marque para Afirmar" />
+															<radio label="NO,Indique Donde" id="rdo8422"
+																tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt842" />
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Porque no Realizaba la Tarea en el Lugar Habitual?" />
+													<radiogroup id="rdg843">
+														<vbox>
+															<radio
+																label="Habia Recibido Instrucciones de Realizarla en Otro Lugar"
+																id="rdo8431" tooltiptext="Marque para Afirmar" />
+															<radio label="Otros (Especifique)" id="rdo8432"
+																tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt843" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="¿Cuál de las Siguientes Condiciones Relacionadas con la Organización del Trabajo Estaba Presente?" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="---------NO SE HACER ESTA LISTA =P----------------" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="OTROS (Especifique)" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt844" height="50px"
+														width="99%" tooltiptext="Indique" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="¿Cuántas Horas Extras Laboro el Trabajador en los Periodos Indicados a Continuación?" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta" value="El Dia del Accidente:" />
+													<textbox id="txt8451" />
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="Las tres Últimas Semanas Antes del Accidente:" />
+													<textbox id="txt8452" />
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="El Último Trimestre Antes del Accidente:" />
+													<textbox id="txt8453" />
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta" value="El Ultimo  Año Antes del Accidente:" />
+													<textbox id="txt8454" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="OBSERVACION" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt846" height="50px"
+														width="99%" tooltiptext="Indique las Observaciones" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="¿Cuál de las Siguientes Condiciones Relacionadas con Factores Disergonómicos Estaban Presente al Momento del Accidente?" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="---------NO SE HACER ESTA LISTA =P----------------" />
+												</cell>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+					</tabpanel>
+					<tabpanel>
+						<separator />
+						<hbox>
+							<label class="etiqueta"
+								value="DATOS DE LA GESTIÓN DE SEGURIDAD Y SALUD EN EL TRABAJO DE LA EMPRESA" />
+						</hbox>
+						<separator />
+						<tabbox height="auto" width="auto" id="taxSeccion9" orient="horizontal">
+							<tabs>
+								<tab label="Delegadas o Delegados de Prevencion" id="tab91" />
+								<tab label="Comite de Seguridad y Salud Laboral (CSSL)" id="tab92" />
+								<tab label="Servicio de Seguridad y Salud en el Trabajo (SSST)"
+									id="tab93" />
+								<tab label="Programa de Seguridad y Salud en el Trabajo" id="tab94" />
+							</tabs>
+							<tabpanels>
+								<tabpanel>
+									<separator />
+									<grid width="auto">
+										<columns>
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+										</columns>
+										<rows>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Existían Delegadas o Delegados de Prevención Debidamente Registrados Ante INPSASEL para el Momento de la Ocurrencia del Accidente?" />
+													<radiogroup id="rdg911">
+														<vbox>
+															<radio label="SI" id="rdo9111" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9112" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Las Delegadas o Los Delegados de Prevención Tuvieron Conocimiento sobre la Ocurrencia del Accidente?" />
+													<radiogroup id="rdg912">
+														<vbox>
+															<radio label="SI" id="rdo9121" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9122" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Las  Delegadas o Delegados de Prevención   Habían  Realizado Demandas Al Empleador o Empleadora sobre la Adopción de Medidas de Carácter Preventivo y para las Mejoras de  los Niveles de Protección de la Seguridad y Salud  de Trabajadoras y Trabajadores?" />
+													<radiogroup id="rdg913">
+														<vbox>
+															<radio label="SI" id="rdo9131" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9132" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Actualmente Existen Delegadas o Delegados de Prevención?" />
+													<radiogroup id="rdg914">
+														<vbox>
+															<radio label="NO" id="rdo9141" tooltiptext="Marque para Negar" />
+															<radio label="SI, ¿Cuantos?" id="rdo9142"
+																tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt914" />
+												</cell>
+												<cell colspan="1">
+													<vbox>
+														<label class="etiqueta" value="Fecha de Elección:" />
+														<datebox readonly="true" width="140px" id="dtb915"
+															onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Elección:" />
+													</vbox>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Se Encuentran DEBIDAMENTE Registrados ante el INPSASEL?" />
+													<radiogroup id="rdg916">
+														<vbox>
+															<radio label="SI" id="rdo9161" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9162" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Las Delegadas o Delegados de Prevención Han Recibido por Parte del Patrón/a, Capacitación En Materia de SST?" />
+													<radiogroup id="rdg917">
+														<vbox>
+															<radio label="NO" id="rdo9171" tooltiptext="Marque para Negar" />
+															<radio label="SI, ¿Cuantos?" id="rdo9172"
+																tooltiptext="Marque para Afirmar" />
+														</vbox>
+													</radiogroup>
+													<textbox multiline="true" id="txt917" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="La Empresa Facilita los Medios para que los Delegados o las Delegadas de Prevención Presenten sus Informes Ante el INPSASEL:" />
+													<radiogroup id="rdg918">
+														<vbox>
+															<radio label="SI" id="rdo9181" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9182" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="De ser  Si,  Especifique  de que Manera, De  ser  No, Especifique Por Qué?:" />
+													<textbox multiline="true" id="txt919" width="99%"
+														tooltiptext="Indique" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="OBSERVACIONES" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt9110" height="50px"
+														width="99%" tooltiptext="Indique las Observaciones" />
+												</cell>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+								<tabpanel>
+									<separator />
+									<grid width="auto">
+										<columns>
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+										</columns>
+										<rows>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Estaba Constituido Y Debidamente Registrado Ante El INPSASEL El CSSL para el Momento de la Ocurrencia del Accidente?" />
+													<radiogroup id="rdg921">
+														<hbox>
+															<radio label="SI" id="rdo9211" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9212" tooltiptext="Marque para Negar" />
+														</hbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="3">
+													<hbox>
+														<label class="etiqueta" value="Fecha de Constitucion:" />
+														<datebox readonly="true" width="140px" id="dtb922"
+															onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Constitucion" />
+													</hbox>
+													<separator />
+													<hbox>
+														<label class="etiqueta" value="N° De Registro:" />
+														<textbox multiline="true" id="txt923" />
+													</hbox>
+													<separator />
+													<hbox>
+														<label class="etiqueta" value="Fecha ultima Actualizacion:" />
+														<datebox readonly="true" width="140px" id="dtb924"
+															onCreate="self.value = new Date()" tooltiptext="Indique ultima Fecha de Actualizacion" />
+													</hbox>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="Las  Demandas   al Empleador o Empleadora por parte de los Delegados o las Delegadas  de Prevención Fueron Atendidas por El CSSL?" />
+													<radiogroup id="rdg925">
+														<vbox>
+															<radio label="SI" id="rdo9251" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9252" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿El CSSL  Había Denunciado las Condiciones Inseguras y el Incumplimiento de los Acuerdos Logrados en su Seno?" />
+													<radiogroup id="rdg926">
+														<vbox>
+															<radio label="SI" id="rdo9261" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9262" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿El CSSL  Había Realizado Inspección Previa en  el Puesto de Trabajo Antes de la  Ocurrencia   del Accidente?" />
+													<radiogroup id="rdg927">
+														<vbox>
+															<radio label="SI" id="rdo9271" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9272" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta" value="¿Actualmente está Constituido el CSSL?" />
+													<radiogroup id="rdg928">
+														<vbox>
+															<radio label="SI" id="rdo9281" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9282" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Se Encuentra Debidamente Registrado Ante el INPSASEL?" />
+													<radiogroup id="rdg929">
+														<vbox>
+															<radio label="SI" id="rdo9291" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9292" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Realiza sus Reuniones Mensuales Ordinarias?" />
+													<radiogroup id="rdg9210">
+														<vbox>
+															<radio label="SI" id="rdo92101" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo92102" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Presenta su Informe los Primeros Cinco Días de cada mes Ante el INPSASEL?" />
+													<radiogroup id="rdg9211">
+														<vbox>
+															<radio label="SI" id="rdo92111" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo92112" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta" value="De  ser  No, Especifique Por Qué? " />
+													<textbox multiline="true" id="txt9212" width="99%"
+														tooltiptext="Indique" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="OBSERVACIONES" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt9213" height="50px"
+														width="99%" tooltiptext="Indique las Observaciones" />
+												</cell>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+								<tabpanel>
+									<separator />
+									<grid width="auto">
+										<columns>
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+										</columns>
+										<rows>
+											<row>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Estaba Conformado y Debidamente Registrado ante el INPSASEL el SSST para el Momento de la Ocurrencia del Accidente?" />
+													<radiogroup id="rdg931">
+														<hbox>
+															<radio label="SI" id="rdo9311" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9312" tooltiptext="Marque para Negar" />
+														</hbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="3">
+													<hbox>
+														<label class="etiqueta" value="Fecha de Registro Ante el INPSASEL?:" />
+														<datebox readonly="true" width="140px" id="dtb932"
+															onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Registro Ante el INPSASEL" />
+													</hbox>
+													<separator />
+													<hbox>
+														<label class="etiqueta" value="N° de Registro Ante el INPSASEL?:" />
+														<textbox multiline="true" id="txt933" />
+													</hbox>
+													<separator />
+													<hbox>
+														<label class="etiqueta" value="Tipo de Servicio" />
+														<radiogroup id="rdg934">
+															<hbox>
+																<radio label="Propio" id="rdo9341" tooltiptext="Marque para Responder" />
+																<radio label="Mancomunado" id="rdo9342"
+																	tooltiptext="Marque para Responder" />
+															</hbox>
+														</radiogroup>
+													</hbox>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿El SSST Reportó al INPSASEL  el Accidente  Ocurrido?" />
+													<radiogroup id="rdg935">
+														<vbox>
+															<radio label="SI" id="rdo9351" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9352" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta" value="¿El SSST Investigó el Accidente?" />
+													<radiogroup id="rdg936">
+														<vbox>
+															<radio label="SI" id="rdo9361" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9362" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿El SSST Prestó Atención a la /El Trabajadora/o  Accidentada/o?" />
+													<radiogroup id="rdg937">
+														<vbox>
+															<radio label="SI" id="rdo9371" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9372" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta" value="¿Existe Actualmente el SSST?" />
+													<radiogroup id="rdg938">
+														<vbox>
+															<radio label="SI" id="rdo9381" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9382" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Se Encuentra Debidamente Registrado ante el INPSASEL?" />
+													<radiogroup id="rdg939">
+														<vbox>
+															<radio label="SI" id="rdo9391" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9392" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<vbox>
+														<label class="etiqueta" value="Fecha de Registro Ante el INPSASEL:" />
+														<datebox readonly="true" width="140px" id="dtb9310"
+															onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Registro Ante el INPSASEL" />
+													</vbox>
+												</cell>
+												<cell colspan="1">
+													<hbox>
+														<label class="etiqueta" value="N° de Registro Ante el INPSASEL?:" />
+														<textbox multiline="true" id="txt9311" />
+													</hbox>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta" value="Tipo de Servicio:" />
+													<radiogroup id="rdg9312">
+														<vbox>
+															<radio label="Propio" id="rdo93121" tooltiptext="Marque para Responder" />
+															<radio label="Mancomunado" id="rdo93122"
+																tooltiptext="Marque para Responder" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="3">
+													<hbox>
+														<label class="etiqueta" value="Turnos del  Servicio:" />
+														<radiogroup id="rdg9313">
+															<hbox>
+																<radio label="Mañana" id="rdo93131" tooltiptext="Marque para Responder" />
+																<radio label="Tarde" id="rdo93132" tooltiptext="Marque para Responder" />
+																<radio label="Noche" id="rdo93133" tooltiptext="Marque para Responder" />
+																<radio label="Mixto" id="rdo93134" tooltiptext="Marque para Responder" />
+																<radio label="Todos" id="rdo93135" tooltiptext="Marque para Responder" />
+															</hbox>
+														</radiogroup>
+													</hbox>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta"
+														value="PERSONAL QUE INTEGRA EL SERVICIO DE SEGURIDAD Y SALUD EN EL TRABAJO" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<grid width="auto">
+														<columns>
+															<column label="Apellidos y Nombres" width="15%" />
+															<column label="Cedula de Identidad" width="15%" />
+															<column label="Profesion" width="15%" />
+															<column label="Cargo" width="15%" />
+															<column label="Turno de Trabajo" width="15%" />
+															<column label="N° Registro INPSASEL" width="15%" />
+															<column label="" width="10%" />
+														</columns>
+														<rows>
+															<row>
+																<label id="lbl931411" />
+																<label id="lbl931412" />
+																<label id="lbl931413" />
+																<label id="lbl931414" />
+																<label id="lbl931415" />
+																<label id="lbl931416" />
+																<button id="btnBuscar93141" class="btn" label="Buscar"
+																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+															</row>
+															<row>
+																<label id="lbl931421" />
+																<label id="lbl931422" />
+																<label id="lbl931423" />
+																<label id="lbl931424" />
+																<label id="lbl931425" />
+																<label id="lbl931426" />
+																<button id="btnBuscar93142" class="btn" label="Buscar"
+																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+															</row>
+															<row>
+																<label id="lbl931431" />
+																<label id="lbl931432" />
+																<label id="lbl931433" />
+																<label id="lbl931434" />
+																<label id="lbl931435" />
+																<label id="lbl931436" />
+																<button id="btnBuscar93143" class="btn" label="Buscar"
+																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+															</row>
+															<row>
+																<label id="lbl931441" />
+																<label id="lbl931442" />
+																<label id="lbl931443" />
+																<label id="lbl931444" />
+																<label id="lbl931445" />
+																<label id="lbl931446" />
+																<button id="btnBuscar93144" class="btn" label="Buscar"
+																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+															</row>
+															<row>
+																<label id="lbl931451" />
+																<label id="lbl931452" />
+																<label id="lbl931453" />
+																<label id="lbl931454" />
+																<label id="lbl931455" />
+																<label id="lbl931456" />
+																<button id="btnBuscar93145" class="btn" label="Buscar"
+																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+															</row>
+															<row>
+																<label id="lbl931461" />
+																<label id="lbl931462" />
+																<label id="lbl931463" />
+																<label id="lbl931464" />
+																<label id="lbl931465" />
+																<label id="lbl931466" />
+																<button id="btnBuscar93146" class="btn" label="Buscar"
+																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+															</row>
+														</rows>
+													</grid>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="OBSERVACIONES" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt9315" height="50px"
+														width="99%" tooltiptext="Indique las Observaciones" />
+												</cell>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+								<tabpanel>
+									<separator />
+									<grid width="auto">
+										<columns>
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+										</columns>
+										<rows>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Existía el Programa de Seguridad y Salud en el Trabajo para el Momento de la Ocurrencia del Accidente?" />
+													<radiogroup id="rdg941">
+														<vbox>
+															<radio label="SI" id="rdo9411" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9412" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Fue Elaborado por el Servicio con la Participación Efectiva de  los Trabajadores y Trabajadoras?" />
+													<radiogroup id="rdg942">
+														<vbox>
+															<radio label="SI" id="rdo9421" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9422" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Fue Presentado Ante el Comité de Seguridad y Salud de la Empresa?" />
+													<radiogroup id="rdg943">
+														<vbox>
+															<radio label="SI" id="rdo9431" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9432" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Estaba Adaptado a Lo Estipulado en la Norma Técnica (NT-001-08)?" />
+													<radiogroup id="rdg944">
+														<vbox>
+															<radio label="SI" id="rdo9441" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9442" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Fue Presentado Ante El INPSASEL Para su Aprobación y Registro?" />
+													<radiogroup id="rdg945">
+														<vbox>
+															<radio label="SI" id="rdo9451" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9452" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Se Implementaba para el Momento de la Ocurrencia del Accidente?" />
+													<radiogroup id="rdg946">
+														<vbox>
+															<radio label="SI" id="rdo9461" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9462" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Existe Actualmente el Programa de Seguridad y Salud en el Trabajo?" />
+													<radiogroup id="rdg947">
+														<vbox>
+															<radio label="SI" id="rdo9471" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9472" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Está Adaptado a lo Estipulado en la Norma Técnica (NT-001-08)?" />
+													<radiogroup id="rdg948">
+														<vbox>
+															<radio label="SI" id="rdo9481" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9482" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="¿Fue Presentado Ante el Comité de Seguridad y Salud de la Empresa?" />
+													<radiogroup id="rdg949">
+														<vbox>
+															<radio label="SI" id="rdo9491" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo9492" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Se Encuentra Debidamente Registrado ante el INPSASEL?" />
+													<radiogroup id="rdg9410">
+														<vbox>
+															<radio label="SI" id="rdo94101" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo94102" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+												<cell colspan="1">
+													<vbox>
+														<label class="etiqueta" value="¿Fecha de Registro Ante el INPSASEL?" />
+														<datebox readonly="true" width="140px" id="dtb9411"
+															onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Registro Ante el INPSASEL" />
+													</vbox>
+												</cell>
+												<cell colspan="1">
+													<hbox>
+														<label class="etiqueta" value="N° de Registro Ante el INPSASEL?:" />
+														<textbox multiline="true" id="txt9412" />
+													</hbox>
+												</cell>
+												<cell colspan="1">
+													<label class="etiqueta"
+														value="¿Se Encuentra Actualmente en Ejecucion?" />
+													<radiogroup id="rdg9413">
+														<vbox>
+															<radio label="SI" id="rdo94131" tooltiptext="Marque para Afirmar" />
+															<radio label="NO" id="rdo94132" tooltiptext="Marque para Negar" />
+														</vbox>
+													</radiogroup>
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<separator />
+													<label class="etiqueta" value="OBSERVACIONES" />
+												</cell>
+											</row>
+											<row>
+												<cell colspan="4">
+													<textbox multiline="true" id="txt9414" height="50px"
+														width="99%" tooltiptext="Indique las Observaciones" />
+												</cell>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<separator />
+			<div id="botoneraInforme" />
+		</groupbox>
+		<popup id="seccion" width="350px">
+			<label class="inicioAyuda" value="Secciones:" />
+			<separator />
+			<label value="1: Codigo de Declaracion del Accidente" />
+			<separator />
+			<label value="2: Investigacion del Accidente" />
+			<separator />
+			<label value="3: Empresa donde labora el accidentado" />
+			<separator />
+			<label value="4: Empresa Beneficiaria" />
+			<separator />
+			<label value="5: Trabajador Accidentado" />
+			<separator />
+			<label value="6: Datos del Accidente" />
+			<separator />
+			<label value="7: Proceso de Trabajo" />
+			<separator />
+			<label value="8: Procesos Peligrosos" />
+			<separator />
+			<label value="9: Gestion de Seguridad Y Salud en el Trabajo" />
+		</popup>
+	</div>
+</zk>

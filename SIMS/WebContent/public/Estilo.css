@@ -5,7 +5,9 @@
 	font-family: arial;
 	color: #555555;
 }
-
+.z-textbox {
+		width: 99%;
+}
 .z-groupbox-3d {
 	background: #FFFFFF;
 }
@@ -23,10 +25,13 @@
 
 .multilinea {
 	height: 35px;
+
 }
+
 .multilineaTab {
 	height: 250px;
 }
+
 .z-loading {
 	background-color: #DDECFD;
 	border: 1px outset #A0A0A0;

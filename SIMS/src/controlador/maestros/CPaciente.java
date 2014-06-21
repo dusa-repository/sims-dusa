@@ -173,6 +173,29 @@ public class CPaciente extends CGenerico {
 	private Label lblNombres;
 	@Wire
 	private Label lblApellidos;
+	//
+	@Wire
+	private Textbox txtProfesion;
+	@Wire
+	private Combobox cmbNivelEducativo;
+	@Wire
+	private Spinner spnCarga;
+	@Wire
+	private Datebox dtbFechaIngreso;
+	@Wire
+	private Radio rdoV;
+	@Wire
+	private Radio rdoE;
+	@Wire
+	private Textbox txtNroInpsasel;
+	@Wire
+	private Combobox cmbTurno;
+	@Wire
+	private Datebox dtbInscripcionIVSS;
+	@Wire
+	private Textbox txtRetiroIVSS;
+	@Wire
+	private Datebox dtbFechaEgreso;
 
 	URL url = getClass().getResource("usuario.png");
 	private CArbol cArbol = new CArbol();
@@ -247,6 +270,18 @@ public class CPaciente extends CGenerico {
 				lblFicha.setValue("");
 				lblNombres.setValue("");
 
+				txtNroInpsasel.setValue("");
+				txtProfesion.setValue("");
+				txtRetiroIVSS.setValue("");
+				cmbNivelEducativo.setValue("");
+				cmbNivelEducativo.setValue("Seleccione un Nivel");
+				cmbTurno.setValue("");
+				cmbTurno.setValue("Seleccione un Turno");
+				spnCarga.setValue(0);
+				dtbFechaEgreso.setValue(null);
+				dtbFechaIngreso.setValue(null);
+				dtbInscripcionIVSS.setValue(null);
+
 				rdoTrabajador.setValue(null);
 				rdoFamiliar.setValue(null);
 
@@ -255,9 +290,12 @@ public class CPaciente extends CGenerico {
 
 				rdoSiLentes.setValue(null);
 				rdoNoLentes.setValue(null);
-				
+
 				rdoTrabajador.setDisabled(false);
 				rdoFamiliar.setDisabled(false);
+
+				rdoE.setDisabled(false);
+				rdoV.setDisabled(false);
 			}
 
 			@Override
@@ -277,11 +315,29 @@ public class CPaciente extends CGenerico {
 						imagen = imagenPaciente.getContent().getByteData();
 					}
 
-					String nombre1, apellido1, cedula, nombre2, apellido2, ficha, detalleAlergia, lugarNac, sexo, estadoCivil, grupoSanguineo, mano, origen, tipoDiscapacidad, otrasDiscapacidad, cargo, direccion, telefono1, telefono2, correo, nombresE, apellidosE, telefono1E, telefono2E, parentescoE, parentescoFamiliar;
-					int edad;
+					String profesion, nacionalidad, nivelEducativo, turno, retiroIVSS, nroInpsasel, nombre1, apellido1, cedula, nombre2, apellido2, ficha, detalleAlergia, lugarNac, sexo, estadoCivil, grupoSanguineo, mano, origen, tipoDiscapacidad, otrasDiscapacidad, cargo, direccion, telefono1, telefono2, correo, nombresE, apellidosE, telefono1E, telefono2E, parentescoE, parentescoFamiliar;
+					int edad, carga;
 					boolean trabajador = false, alergia = false, discapacidad = false, lentes = false;
 					double estatura, peso;
 
+					Timestamp fechaIngreso = new Timestamp(dtbFechaIngreso
+							.getValue().getTime());
+					Timestamp fechaEgreso = new Timestamp(dtbFechaEgreso
+							.getValue().getTime());
+					Timestamp fechaInscripcion = new Timestamp(
+							dtbInscripcionIVSS.getValue().getTime());
+
+					if (rdoV.isChecked())
+						nacionalidad = "V";
+					else
+						nacionalidad = "E";
+					profesion = txtProfesion.getValue();
+					nivelEducativo = cmbNivelEducativo.getValue();
+					turno = cmbTurno.getValue();
+					retiroIVSS = txtRetiroIVSS.getValue();
+					nroInpsasel = txtNroInpsasel.getValue();
+					carga = spnCarga.getValue();
+					
 					nombre1 = txtNombre1Paciente.getValue();
 					apellido1 = txtApellido1Paciente.getValue();
 					nombre2 = txtNombre2Paciente.getValue();
@@ -349,6 +405,17 @@ public class CPaciente extends CGenerico {
 							telefono2E, cedulaFamiliar, parentescoFamiliar,
 							empresa, ciudad);
 
+					paciente.setNacionalidad(nacionalidad);
+					paciente.setCarga(carga);
+					paciente.setNivelEducativo(nivelEducativo);
+					paciente.setProfesion(profesion);
+					paciente.setNroInpsasel(nroInpsasel);
+					paciente.setRetiroIVSS(retiroIVSS);
+					paciente.setFechaIngreso(fechaIngreso);
+					paciente.setFechaInscripcionIVSS(fechaInscripcion);
+					paciente.setFechaEgreso(fechaEgreso);
+					paciente.setTurno(turno);
+					
 					servicioPaciente.guardar(paciente);
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
@@ -369,7 +436,8 @@ public class CPaciente extends CGenerico {
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
 										Paciente paciente = servicioPaciente
-												.buscarPorCedula(String.valueOf(id));
+												.buscarPorCedula(String
+														.valueOf(id));
 										List<Cita> citas = servicioCita
 												.buscarPorPaciente(paciente);
 										if (!citas.isEmpty()) {
@@ -411,6 +479,7 @@ public class CPaciente extends CGenerico {
 				|| txtFichaPaciente.getText().compareTo("") == 0
 				|| dtbFechaNac.getText().compareTo("") == 0
 				|| spnEdad.getValue() == 0
+				|| spnCarga.getValue() == null
 				|| cmbEstadoCivil.getText().compareTo("") == 0
 				|| cmbGrupoSanguineo.getText().compareTo("") == 0
 				|| cmbMano.getText().compareTo("") == 0
@@ -426,6 +495,7 @@ public class CPaciente extends CGenerico {
 				|| txtTelefono2Emergencia.getText().compareTo("") == 0
 				|| cmbParentescoEmergencia.getText().compareTo("") == 0
 				|| (!rdoSiAlergico.isChecked() && !rdoNoAlergico.isChecked())
+				|| (!rdoE.isChecked() && !rdoV.isChecked())
 				|| (!rdoFamiliar.isChecked() && !rdoTrabajador.isChecked())
 				|| (!rdoNoDiscapacidad.isChecked() && !rdoSiDiscapacidad
 						.isChecked())
@@ -725,21 +795,33 @@ public class CPaciente extends CGenerico {
 		dspEstatura.setValue(paciente.getEstatura());
 		dspPeso.setValue(paciente.getPeso());
 		cmbCiudad.setValue(paciente.getCiudadVivienda().getNombre());
-
+		
+		spnCarga.setValue(paciente.getCarga());
+		txtNroInpsasel.setValue(paciente.getNroInpsasel());
+		txtProfesion.setValue(paciente.getProfesion());
+		txtRetiroIVSS.setValue(paciente.getRetiroIVSS());
+		cmbNivelEducativo.setValue(paciente.getNivelEducativo());
+		cmbTurno.setValue(paciente.getTurno());
+		dtbFechaEgreso.setValue(paciente.getFechaEgreso());
+		dtbFechaIngreso.setValue(paciente.getFechaIngreso());
+		dtbInscripcionIVSS.setValue(paciente.getFechaInscripcionIVSS());			
+		
+		if (paciente.getNacionalidad().equals("V"))
+			rdoV.setChecked(true);
+		else
+			rdoE.setChecked(true);
+		
 		if (paciente.isAlergia())
 			rdoSiAlergico.setChecked(true);
 		else
 			rdoNoAlergico.setChecked(true);
 
-		if (paciente.isTrabajador())
-		{
+		if (paciente.isTrabajador()) {
 			cmbEmpresa.setValue(paciente.getEmpresa().getNombre());
 			rdoTrabajador.setChecked(true);
 			rdoTrabajador.setDisabled(true);
 			esTrabajador();
-		}
-		else
-		{
+		} else {
 			rdoFamiliar.setChecked(true);
 			rdoFamiliar.setDisabled(true);
 			esFamiliar();
@@ -803,15 +885,14 @@ public class CPaciente extends CGenerico {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
 		cArbol.abrirVentanas(arbolItem);
 	}
-	
 
-	/* Abre la pestanna de Datos contacto*/
+	/* Abre la pestanna de Datos contacto */
 	@Listen("onClick = #btnSiguientePestanna")
 	public void siguientePestanna() {
 		tabDatosContacto.setSelected(true);
 	}
 
-	/* Abre la pestanna de datos basicos*/
+	/* Abre la pestanna de datos basicos */
 	@Listen("onClick = #btnAnteriorPestanna")
 	public void anteriorPestanna() {
 		tabDatosBasicos.setSelected(true);

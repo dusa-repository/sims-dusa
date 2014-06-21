@@ -1,0 +1,26 @@
+<zk>
+	<script src="/public/progress.js" />
+		<div id="divArea" apply="controlador.sha.CArea">
+			<groupbox width="42em" mold="3d" title="Area">
+				<grid width="100%">
+					<columns visible="false">
+						<column label="" width="22%" />
+						<column label="" width="62%" />
+						<column label="" width="16%" />
+					</columns>
+					<rows>
+						<row>
+							<label class="etiqueta" value="Nombre:" />
+							<textbox id="txtNombreArea" hflex="1" maxlength="100"
+								tooltiptext="Ingrese el Nombre del Area" />
+							<button id="btnBuscarArea" class="btn" label="Buscar"
+								tooltiptext="Catalogo de Areas" image="/public/imagenes/botones/buscar.png" />
+						</row>
+					</rows>
+				</grid>
+				<separator />
+				<div id="botoneraArea" />
+				<div id="catalogoArea" />
+			</groupbox>
+		</div>
+</zk>

@@ -1,57 +1,199 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divEmpresa" apply="controlador.maestros.CEmpresa">
-		<groupbox width="40em" mold="3d" title="Empresa">
+		<groupbox width="70em" mold="3d" title="Empresa">
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="25%" />
-					<column label="" width="45%" />
-					<column label="" width="30%" />
+					<column label="" width="12%" />
+					<column label="" width="13%" />
+					<column label="" width="12%" />
+					<column label="" width="13%" />
+					<column label="" width="12%" />
+					<column label="" width="13%" />
+					<column label="" width="12%" />
+					<column label="" width="13%" />
 				</columns>
 				<rows>
+					<row>
+						<label class="etiqueta" value="Razon Social:" />
+								<cell colspan="2">
+						<textbox id="txtRazon" hflex="1" maxlength="500"
+							tooltiptext="Ingrese la Razon Social de la Empresa" multiline="true" />
+							</cell>
+						<label class="etiqueta" value="Centro de Trabajo:" />
+								<cell colspan="2">
+						<textbox id="txtNombreEmpresa" hflex="1" maxlength="500"
+							tooltiptext="Ingrese el Centro de Trabajo de la Empresa"
+							multiline="true" />
+							</cell>
+						<button id="btnBuscarEmpresa" class="btn" label="Buscar"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<hbox />
+					</row>
+					<row>
+						<cell colspan="2">
+							<label class="etiqueta" value="Direccion del Centro de Trabajo:" />
+						</cell>
+						<cell colspan="6">
+							<textbox id="txtDireccionCentro" hflex="1" maxlength="1024"
+								tooltiptext="Ingrese la Direccion del Centro de Trabajo de la Empresa"
+								multiline="true" />
+						</cell>
+					</row>
+					<row>
+						<cell colspan="2">
+							<label class="etiqueta" value="Direccion Fiscal de la Razon Social:" />
+						</cell>
+						<cell colspan="6">
+							<textbox id="txtDireccionRazon" hflex="1" maxlength="1024"
+								tooltiptext="Ingrese la Direccion Fiscal de la Razon Social"
+								multiline="true" />
+						</cell>
+					</row>
 					<row>
 						<label class="etiqueta" value="Rif:" />
 						<textbox id="txtRifEmpresa" hflex="1" maxlength="20"
 							tooltiptext="Ingrese el Rif de la Empresa" />
-						<button id="btnBuscarEmpresa" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
-
+						<label class="etiqueta" value="NIL:" />
+						<textbox id="txtNilEmpresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el NIL de la Empresa" />
+						<label class="etiqueta" value="N° PatronalL IVSS:" />
+						<textbox id="txtNroIvssEmpresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el N° PatronalL IVSS de la Empresa" />
+						<label class="etiqueta" value="Codigo CIIU:" />
+						<textbox id="txtCodigoCiiuEmpresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Codigo CIIU de la Empresa" />
 					</row>
-
 					<row>
-						<label class="etiqueta" value="Nombre:" />
-						<textbox id="txtNombreEmpresa" hflex="1" maxlength="500" class="multilinea"
-							tooltiptext="Ingrese el Nombre de la Empresa" multiline="true" />
-						<hbox />
-					</row>
-					<row>
-						<label class="etiqueta" value="Primer Telefono:" />
-						<textbox id="txtTelefono1Empresa" hflex="1" maxlength="20"
+						<label class="etiqueta" value="Actividad Economica:" />
+						<cell colspan="2">
+							<textbox multiline="true" id="txtActividadEconomica"
+								hflex="1" maxlength="500"
+								tooltiptext="Ingrese la Actividad Economica de la Empresa" />
+						</cell>
+						<label class="etiqueta" value="Telefono/Fax:" />
+						<textbox id="txtTelefonoEmpresa" hflex="1" maxlength="20"
 							tooltiptext="Ingrese el Numero de telefono de la empresa (0426-9999999)" />
+						<label class="etiqueta" value="Email:" />
+						<textbox id="txtCorreo" width="180px"
+							tooltiptext="Ingrese el Correo Electronico (ejemplo@ejemplo.com)"
+							maxlength="50" />
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Segundo Telefono:" />
-						<textbox id="txtTelefono2Empresa" hflex="1" maxlength="20"
-							tooltiptext="Ingrese el Numero de telefono de la empresa (0426-9999999)" />
+						<cell colspan="2">
+							<label class="etiqueta" value="Registro Mercantil:" />
+						</cell>
+						<cell colspan="6">
+							<textbox id="txtRegistroMercantil" hflex="1" maxlength="1024"
+								tooltiptext="Ingrese el Registro Mercantil" multiline="true" />
+						</cell>
+					</row>
+					<row>
+						<label class="etiqueta" value="En Fecha:" />
+						<datebox readonly="true" id="dtbFechaRegistro" onCreate="self.value = new Date()"
+							tooltiptext="Indique la Fecha del Registro Mercantil" />
+						<label class="etiqueta" value="Bajo Nro.:" />
+						<textbox id="txtBajoNroEmpresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Nro del Registro Mercantil de la Empresa" />
+						<label class="etiqueta" value="Tomo:" />
+						<textbox id="txtTomoEmpresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Tomo del Registro Mercantil de la Empresa" />
+						<label class="etiqueta" value="Representante Legal/Apoderado:" />
+						<textbox id="txtRepresentanteEmpresa" hflex="1" maxlength="100"
+							tooltiptext="Ingrese el Representante Legal/Apoderado de la Empresa" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Cedula:" />
+						<textbox id="txtCedulaRepresentante" hflex="1" maxlength="20"
+							tooltiptext="Ingrese la Cedula del Representante de la Empresa" />
+						<label class="etiqueta" value="Telefono:" />
+						<textbox id="txtTelefonoRepresentante" hflex="1"
+							maxlength="20"
+							tooltiptext="Ingrese el Numero de telefono del Representante de la empresa (0426-9999999)" />
+						<label class="etiqueta" value="Cargo:" />
+						<cell colspan="2">
+							<textbox multiline="true" maxlength="100" id="txtCargo"
+								tooltiptext="Ingrese el Cargo del Representante" />
+						</cell>
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Direccion:" />
-						<textbox id="txtDireccionEmpresa" hflex="1" maxlength="1024" class="multilinea"
-							tooltiptext="Ingrese la Direccion de la Empresa" multiline="true" />
+						<label class="etiqueta" value="Ultima Actualizacion En Fecha:" />
+						<datebox readonly="true" id="dtbFechaActualizacion"
+							onCreate="self.value = new Date()"
+							tooltiptext="Indique la Fecha de la Ultima Actualizacion del Registro Mercantil" />
+						<label class="etiqueta" value="Bajo Nro.:" />
+						<textbox id="txtBajoNro2Empresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Nro del Registro Mercantil de la Empresa" />
+						<label class="etiqueta" value="Tomo:" />
+						<textbox id="txtTomo2Empresa" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Tomo del Registro Mercantil de la Empresa" />
+						<label class="etiqueta" value="Representante Legal/Apoderado:" />
+						<textbox id="txtRepresentante2Empresa" hflex="1"
+							maxlength="100"
+							tooltiptext="Ingrese el Representante Legal/Apoderado de la Empresa" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Cedula:" />
+						<textbox id="txtCedula2Representante" hflex="1" maxlength="20"
+							tooltiptext="Ingrese la Cedula del Representante de la Empresa" />
+						<label class="etiqueta" value="Telefono:" />
+						<textbox id="txtTelefono2Representante" hflex="1"
+							maxlength="20"
+							tooltiptext="Ingrese el Numero de telefono del Representante de la empresa (0426-9999999)" />
+						<label class="etiqueta" value="Cargo:" />
+						<cell colspan="2">
+							<textbox multiline="true" maxlength="100" id="txtCargo2"
+								tooltiptext="Ingrese el Cargo del Representante" />
+						</cell>
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Ciudad:" />
-						<combobox id="cmbCiudad" readonly="true" tabindex="1"
-							width="100%" tooltiptext="Seleccione una Ciudad" placeholder="Seleccione una Ciudad">
-							<template name="model">
-								<comboitem context="${each.idCiudad}" label="${each.nombre}" />
-							</template>
-						</combobox>
-								<button id="btnAbrirCiudad" label="" tooltiptext="Crear una Nueva Ciudad"
-							image="/public/imagenes/botones/agregar.png" />
+						<cell colspan="3">
+							<label class="etiqueta"
+								value="N° de Trabajadores de la Empresa, Segun Nomina:" />
+						</cell>
+						<spinner
+							tooltiptext="Indique el N° de Trabajadores de la Empresa, Segun Nomina"
+							id="spnNroTrabajadores" width="98%" constraint="min 0" value="0" />
+						<hbox />
+						<hbox />
+						<hbox />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Hombres:" />
+						<spinner tooltiptext="Indique la Cantidad de Hombres de la Empresa"
+							id="spnHombres" width="98%" constraint="min 0" value="0"  />
+						<label class="etiqueta" value="Mujeres:" />
+						<spinner tooltiptext="Indique la Cantidad de Mujeres de la Empresa"
+							id="spnMujeres" width="98%" constraint="min 0" value="0" />
+						<label class="etiqueta" value="Adolescentes:" />
+						<spinner tooltiptext="Indique la Cantidad de Adolescentes de la Empresa"
+							id="spnAdolescentes" width="98%" constraint="min 0"  value="0" />
+						<label class="etiqueta" value="Aprendices:" />
+						<spinner tooltiptext="Indique la Cantidad de Aprendices de la Empresa"
+							id="spnAprendices" width="98%" constraint="min 0" value="0" />
+					</row>
+					<row>
+						<cell colspan="2">
+							<label class="etiqueta" value="Trabajadores con Discapacidad LOPCYMAT:" />
+						</cell>
+						<spinner
+							tooltiptext="Indique la Cantidad de Trabajadores con Discapacidad LOPCYMAT de la Empresa"
+							id="spnLopcymat" width="98%" constraint="min 0" value="0"  />
+						<cell colspan="2">
+							<label class="etiqueta" value="Trabajadores con Discapacidad (CONAPDIS):" />
+						</cell>
+						<spinner
+							tooltiptext="Indique la Cantidad de Trabajadores con Discapacidad (CONAPDIS): de la Empresa"
+							id="spnConapdis" width="98%" constraint="min 0" value="0" />
+						<label class="etiqueta" value="Extranjeros/Exranjeras:" />
+						<spinner
+							tooltiptext="Indique la Cantidad de Extranjeros/Exranjeras de la Empresa"
+							id="spnExtranjeros" width="98%" constraint="min 0" value="0" />
+
 					</row>
 				</rows>
 			</grid>
