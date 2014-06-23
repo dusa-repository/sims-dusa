@@ -15,4 +15,9 @@ public interface IProveedorServicioDAO extends JpaRepository<ProveedorServicio, 
 
 	List<ProveedorServicio> findByProveedor(Proveedor proveedor);
 
+	ProveedorServicio findByProveedorIdProveedorAndServicioExternoIdServicioExterno(
+			long parseLong, long id);
+
+	List<ProveedorServicio> findByServicioExternoIdServicioExterno(long id);
+
 }

@@ -337,9 +337,9 @@
 												<hbox />
 												<hbox>
 													<label class="etiqueta" value="Estatura(mts):" />
-													<doublespinner value="0" id="spnEstatura" hflex="1"
-														tooltiptext="Ingrese la estatura del paciente" step="1"
-														format="#.##" constraint="min 0 max 100000" />
+													<doublespinner value="0" id="spnEstatura"
+														hflex="1" tooltiptext="Ingrese la estatura del paciente"
+														step="1" format="#.##" constraint="min 0 max 100000" />
 													<space />
 													<space />
 													<label class="etiqueta" value="Peso (kgs):" />
@@ -355,11 +355,11 @@
 													value="Perimetro del torax al nivel del apendice:" />
 												<hbox>
 													<label class="etiqueta" value="Inspiracion Plena(cms):" />
-													<doublespinner value="0" id="spnPlena" hflex="1" step="1" format="#.#"
-														constraint="min 0 max 100000" />
+													<doublespinner value="0" id="spnPlena" hflex="1"
+														step="1" format="#.#" constraint="min 0 max 100000" />
 													<label class="etiqueta" value="Inspiracion Forzada(cms):" />
-													<doublespinner value="0" id="spnForzada" hflex="1" step="1" format="#.#"
-														constraint="min 0 max 100000" />
+													<doublespinner value="0" id="spnForzada"
+														hflex="1" step="1" format="#.#" constraint="min 0 max 100000" />
 												</hbox>
 												<label class="etiqueta"
 													value="Perimetro del abdomen a nivel del ombligo:" />
@@ -396,22 +396,22 @@
 												<label class="etiqueta" value="Frecuencia minuto" />
 												<hbox hflex="1" vflex="1" align="center" pack="center"
 													widths="33%,33%,34%">
-													<spinner value="0" hflex="1" id="frecuencia11" step="1" format="#"
-														constraint="min 0 max 100000" />
-													<spinner value="0"  hflex="1" id="frecuencia12" step="1" format="#"
-														constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="frecuencia13" step="1" format="#"
-														constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="frecuencia11"
+														step="1" format="#" constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="frecuencia12"
+														step="1" format="#" constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="frecuencia13"
+														step="1" format="#" constraint="min 0 max 100000" />
 												</hbox>
 												<label class="etiqueta" value="Sistolica" />
 												<hbox hflex="1" vflex="1" align="center" pack="center"
 													widths="33%,33%,34%">
-													<spinner value="0" hflex="1" id="s11" step="1" format="#"
-														constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="s12" step="1" format="#"
-														constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="s13" step="1" format="#"
-														constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="s11" step="1"
+														format="#" constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="s12" step="1"
+														format="#" constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="s13" step="1"
+														format="#" constraint="min 0 max 100000" />
 												</hbox>
 											</row>
 											<row>
@@ -434,24 +434,24 @@
 												<label class="etiqueta" value="Diastolica" />
 												<hbox hflex="1" vflex="1" align="center" pack="center"
 													widths="33%,33%,34%">
-													<spinner value="0" hflex="1" id="d11" step="1" format="#"
-														constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="d12" step="1" format="#"
-														constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="d13" step="1" format="#"
-														constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="d11" step="1"
+														format="#" constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="d12" step="1"
+														format="#" constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="d13" step="1"
+														format="#" constraint="min 0 max 100000" />
 												</hbox>
 											</row>
 											<row>
 												<label class="etiqueta" value="Extrasistoles por minuto" />
 												<hbox hflex="1" vflex="1" align="center" pack="center"
 													widths="33%,33%,34%">
-													<spinner value="0" hflex="1" id="ex11" step="1" format="#"
-														constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="ex12" step="1" format="#"
-														constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="ex13" step="1" format="#"
-														constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="ex11" step="1"
+														format="#" constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="ex12" step="1"
+														format="#" constraint="min 0 max 100000" />
+													<spinner value="0" hflex="1" id="ex13" step="1"
+														format="#" constraint="min 0 max 100000" />
 												</hbox>
 												<hbox />
 												<hbox />
@@ -575,7 +575,8 @@
 														</combobox>
 													</row>
 													<row>
-														<label visible="false" id="lblConsulta" value="Consulta Asociada al Control:" />
+														<label visible="false" id="lblConsulta"
+															value="Consulta Asociada al Control:" />
 														<combobox visible="false" tooltiptext="Seleccione un Estado"
 															placeholder="Seleccione una Consulta" id="cmbConsulta"
 															readonly="true" width="100%">
@@ -913,9 +914,9 @@
 														<textbox width="98%" />
 													</listcell>
 													<listcell>
-														<combobox onChange='$composer.cambio' tooltiptext="Seleccione un Centro"
-															model="${$composer.proveedores}" placeholder="Seleccione un Centro"
-															readonly="true" width="100%">
+														<combobox onSelect='$composer.cambio'
+															tooltiptext="Seleccione un Centro" model="${$composer.proveedores}"
+															placeholder="Seleccione un Centro" readonly="true" width="100%">
 															<template name="model">
 																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
 															</template>
@@ -954,9 +955,9 @@
 															width="98%" />
 													</listcell>
 													<listcell>
-														<combobox onSelect='$composer.cambio' tooltiptext="Seleccione un Centro"
-															model="${$composer.proveedores}" placeholder="Seleccione un Centro"
-															readonly="true" width="100%">
+														<combobox onSelect='$composer.cambio'
+															tooltiptext="Seleccione un Centro" model="${$composer.proveedores}"
+															placeholder="Seleccione un Centro" readonly="true" width="100%">
 															<template name="model">
 																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
 															</template>
