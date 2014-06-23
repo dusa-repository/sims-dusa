@@ -28,6 +28,7 @@ import modelo.maestros.PacienteAntecedente;
 import modelo.maestros.ParteCuerpo;
 import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.Proveedor;
+import modelo.maestros.ProveedorServicio;
 import modelo.maestros.Recipe;
 import modelo.maestros.ServicioExterno;
 import modelo.maestros.UnidadMedicina;
@@ -860,7 +861,7 @@ public class CConsulta extends CGenerico {
 			}
 		};
 	}
-	
+
 	private void buscadorMedicina() {
 		buscarMedicina = new Buscar<Medicina>(ltbMedicinas, txtBuscadorMedicina) {
 
@@ -2688,8 +2689,8 @@ public class CConsulta extends CGenerico {
 			rdoSiVIH.setChecked(false);
 		if (rdoNoVIH.isChecked())
 			rdoNoVIH.setChecked(false);
-		if(rdgFrecuenciaAlcohol.getSelectedItem() != null){
-			Radio radio =rdgFrecuenciaAlcohol.getSelectedItem();
+		if (rdgFrecuenciaAlcohol.getSelectedItem() != null) {
+			Radio radio = rdgFrecuenciaAlcohol.getSelectedItem();
 			radio.setChecked(false);
 		}
 		spnAbortos.setValue(0);
@@ -3447,62 +3448,87 @@ public class CConsulta extends CGenerico {
 			for (int i = 0; i < ltbServicioExternoAgregados.getItemCount(); i++) {
 				Listitem listItem = ltbServicioExternoAgregados
 						.getItemAtIndex(i);
-				String proveedor = ((Combobox) ((listItem.getChildren().get(2)))
-						.getFirstChild()).getSelectedItem().getContext();
-				Proveedor provee = servicioProveedor.buscar(Long
-						.parseLong(proveedor));
-				double precioUnitario = provee.getCosto();
-				((Doublespinner) ((listItem.getChildren().get(1)))
-						.getFirstChild()).setValue(precioUnitario);
+				if (listItem != null) {
+					if (((Combobox) ((listItem.getChildren().get(2)))
+							.getFirstChild()).getSelectedItem() != null) {
+						String proveedor = ((Combobox) ((listItem.getChildren()
+								.get(2))).getFirstChild()).getSelectedItem()
+								.getContext();
+						long id = ((Spinner) ((listItem.getChildren().get(3)))
+								.getFirstChild()).getValue();
+						ProveedorServicio proveedorServicio = servicioProveedorServicio
+								.buscarPorCodigoDeAmbos(
+										Long.parseLong(proveedor), id);
+						if (proveedorServicio != null) {
+							double precioUnitario = proveedorServicio
+									.getCosto();
+							((Doublespinner) ((listItem.getChildren().get(1)))
+									.getFirstChild()).setValue(precioUnitario);
+						} else {
+							Messagebox
+									.show("Este proveedor no posee este estudio asignado, por favor seleccione otro o remuevalo de la lista",
+											"Informacion", Messagebox.OK,
+											Messagebox.INFORMATION);
+							((Doublespinner) ((listItem.getChildren().get(1)))
+									.getFirstChild()).setValue((double) 0);
+							((Combobox) ((listItem.getChildren().get(2)))
+									.getFirstChild()).setFocus(true);
+						}
+					}
+				}
 			}
 		}
 		return cambio;
 	}
-	
-	public void recibir(List<Especialista> lista, Listbox l){
+
+	public void recibir(List<Especialista> lista, Listbox l) {
 		ltbEspecialistas = l;
-		especialistasDisponibles= lista;
-		ltbEspecialistas.setModel(new ListModelList<Especialista>(especialistasDisponibles));
+		especialistasDisponibles = lista;
+		ltbEspecialistas.setModel(new ListModelList<Especialista>(
+				especialistasDisponibles));
 		ltbEspecialistas.setMultiple(false);
 		ltbEspecialistas.setCheckmark(false);
 		ltbEspecialistas.setMultiple(true);
 		ltbEspecialistas.setCheckmark(true);
 	}
-	
-	public void recibirMedicina(List<Medicina> lista, Listbox l){
+
+	public void recibirMedicina(List<Medicina> lista, Listbox l) {
 		ltbMedicinas = l;
-		medicinasDisponibles= lista;
-		ltbMedicinas.setModel(new ListModelList<Medicina>(medicinasDisponibles));
+		medicinasDisponibles = lista;
+		ltbMedicinas
+				.setModel(new ListModelList<Medicina>(medicinasDisponibles));
 		ltbMedicinas.setMultiple(false);
 		ltbMedicinas.setCheckmark(false);
 		ltbMedicinas.setMultiple(true);
 		ltbMedicinas.setCheckmark(true);
 	}
-	
-	public void recibirDiagnostico(List<Diagnostico> lista, Listbox l){
+
+	public void recibirDiagnostico(List<Diagnostico> lista, Listbox l) {
 		ltbDiagnosticos = l;
-		diagnosticosDisponibles= lista;
-		ltbDiagnosticos.setModel(new ListModelList<Diagnostico>(diagnosticosDisponibles));
+		diagnosticosDisponibles = lista;
+		ltbDiagnosticos.setModel(new ListModelList<Diagnostico>(
+				diagnosticosDisponibles));
 		ltbDiagnosticos.setMultiple(false);
 		ltbDiagnosticos.setCheckmark(false);
 		ltbDiagnosticos.setMultiple(true);
 		ltbDiagnosticos.setCheckmark(true);
 	}
 
-	public void recibirExamen(List<Examen> lista, Listbox l){
-		 ltbExamenes= l;
-		 examenesDisponibles= lista;
-		 ltbExamenes.setModel(new ListModelList<Examen>(examenesDisponibles));
-		 ltbExamenes.setMultiple(false);
-		 ltbExamenes.setCheckmark(false);
-		 ltbExamenes.setMultiple(true);
-		 ltbExamenes.setCheckmark(true);
+	public void recibirExamen(List<Examen> lista, Listbox l) {
+		ltbExamenes = l;
+		examenesDisponibles = lista;
+		ltbExamenes.setModel(new ListModelList<Examen>(examenesDisponibles));
+		ltbExamenes.setMultiple(false);
+		ltbExamenes.setCheckmark(false);
+		ltbExamenes.setMultiple(true);
+		ltbExamenes.setCheckmark(true);
 	}
 
-	public void recibirServicio(List<ServicioExterno> lista, Listbox l){
+	public void recibirServicio(List<ServicioExterno> lista, Listbox l) {
 		ltbServicioExterno = l;
-		serviciosDisponibles= lista;
-		ltbServicioExterno.setModel(new ListModelList<ServicioExterno>(serviciosDisponibles));
+		serviciosDisponibles = lista;
+		ltbServicioExterno.setModel(new ListModelList<ServicioExterno>(
+				serviciosDisponibles));
 		ltbServicioExterno.setMultiple(false);
 		ltbServicioExterno.setCheckmark(false);
 		ltbServicioExterno.setMultiple(true);
