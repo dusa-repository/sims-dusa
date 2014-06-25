@@ -1955,6 +1955,9 @@
 								</tabpanel>
 							</tabpanels>
 						</tabbox>
+						<button id="btnGuardarHistoria" label="Guardar Historia"
+							sclass="btn" image="/public/imagenes/botones/guardar.png"
+							visible="false" />
 					</tabpanel>
 				</tabpanels>
 			</tabbox>

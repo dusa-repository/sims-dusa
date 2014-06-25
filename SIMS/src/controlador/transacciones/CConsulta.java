@@ -541,6 +541,8 @@ public class CConsulta extends CGenerico {
 	// --------------------------
 	@Wire
 	private Div botoneraConsultaGeneral;
+	@Wire
+	private Button btnGuardarHistoria;
 
 	// -----------------------------
 
@@ -974,7 +976,8 @@ public class CConsulta extends CGenerico {
 							.getNombre());
 					list2.setParent(arg0);
 					arg0.setCheckable(false);
-					arg0.setStyle("font-weight:bold; color:black");
+					list2.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
+					arg0.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
 				}
 
 				Listcell list3 = new Listcell();
@@ -983,8 +986,12 @@ public class CConsulta extends CGenerico {
 				tex.setWidth("100%");
 				tex.setParent(list3);
 				list3.setParent(arg0);
-				if (tipoAntecedente)
+
+				if (tipoAntecedente) {
 					list3.setVisible(false);
+					list3.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
+					arg0.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
+				}
 
 			}
 		};
@@ -1548,6 +1555,15 @@ public class CConsulta extends CGenerico {
 		}
 	}
 
+	@Listen("onClick = #btnGuardarHistoria")
+	public void botonHistoria() {
+		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedula
+				.getValue());
+		guardarHistoria(paciente);
+		Messagebox.show("Registro Guardado Exitosamente", "Informacion",
+				Messagebox.OK, Messagebox.INFORMATION);
+	}
+
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogoPaciente() throws IOException {
@@ -1717,8 +1733,10 @@ public class CConsulta extends CGenerico {
 	private void llenarCampos(Paciente paciente) {
 		// TODO Auto-generated method stub
 		Historia historia = paciente.getHistoria();
-		if (historia != null)
+		if (historia != null) {
+			btnGuardarHistoria.setVisible(true);
 			llenarCamposHistoria(historia);
+		}
 		txtCedula.setValue(paciente.getCedula());
 		lblNombres.setValue(paciente.getPrimerNombre() + " "
 				+ paciente.getSegundoNombre());
@@ -2426,6 +2444,7 @@ public class CConsulta extends CGenerico {
 	}
 
 	public void limpiarCampos() {
+		btnGuardarHistoria.setVisible(false);
 		idPaciente = 0;
 		idConsulta = 0;
 		limpiarListBox();
