@@ -65,6 +65,7 @@ import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 import servicio.sha.SArea;
 import servicio.sha.SClasificacionAccidente;
+import servicio.sha.SCondicion;
 import servicio.transacciones.SCita;
 import servicio.transacciones.SConsulta;
 import servicio.transacciones.SConsultaDiagnostico;
@@ -98,6 +99,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SCita servicioCita;
 	@WireVariable("SCiudad")
 	protected SCiudad servicioCiudad;
+	@WireVariable("SCondicion")
+	protected SCondicion servicioCondicion;
 	@WireVariable("SConsultorio")
 	protected SConsultorio servicioConsultorio;
 	@WireVariable("SConsulta")
@@ -181,7 +184,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	@WireVariable("SClasificacionAccidente")
 	protected SClasificacionAccidente servicioClasificacionAccidente;
 
-	
+	protected DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	public static  List<Tab> tabs = new ArrayList<Tab>();
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	public final Calendar calendario = Calendar.getInstance();

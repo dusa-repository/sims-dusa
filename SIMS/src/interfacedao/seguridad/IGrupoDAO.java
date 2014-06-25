@@ -6,6 +6,7 @@ import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface IGrupoDAO extends JpaRepository<Grupo, Long> {
 	
@@ -18,4 +19,7 @@ public interface IGrupoDAO extends JpaRepository<Grupo, Long> {
 	public Grupo findByNombre(String nombreGrupo);
 
 	public List<Grupo> findByNombreStartingWithAllIgnoreCase(String valor);
+
+	@Query("select coalesce(max(consulta.idGrupo), '0') from Grupo consulta")
+	public long findMaxIdExamen();
 }

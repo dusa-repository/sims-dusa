@@ -46,4 +46,11 @@ public class SGrupo {
 	public void eliminar(Grupo grupo) {
 		grupoDAO.delete(grupo);
 	}
+
+	public Grupo buscarUltimo() {
+		long id = grupoDAO.findMaxIdExamen();
+		if (id != 0)
+			return grupoDAO.findOne(id);
+		return null;
+	}
 }

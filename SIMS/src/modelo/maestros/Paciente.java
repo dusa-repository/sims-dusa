@@ -68,7 +68,7 @@ public class Paciente implements Serializable {
 	private String estadoCivil;
 
 	@Column(length=130)
-	private int edad;
+	private Integer edad;
 	
 	@Column(length=3, name="grupo_sanguineo")
 	private String grupoSanguineo;
@@ -80,10 +80,10 @@ public class Paciente implements Serializable {
 	private String mano;
 	
 	@Column
-	private double estatura;
+	private Double estatura;
 	
 	@Column
-	private double peso;
+	private Double peso;
 	
 	@Column(length=10, name="origen_discapacidad")
 	private String origenDiscapacidad;
@@ -175,7 +175,7 @@ public class Paciente implements Serializable {
 	private Timestamp fechaInscripcionIVSS;
 	
 	@Column(length=100)
-	private int carga;
+	private Integer carga;
 	
 	//
 	
@@ -444,11 +444,11 @@ public class Paciente implements Serializable {
 		this.estadoCivil = estadoCivil;
 	}
 
-	public int getEdad() {
+	public Integer getEdad() {
 		return edad;
 	}
 
-	public void setEdad(int edad) {
+	public void setEdad(Integer edad) {
 		this.edad = edad;
 	}
 
@@ -476,19 +476,19 @@ public class Paciente implements Serializable {
 		this.mano = mano;
 	}
 
-	public double getEstatura() {
+	public Double getEstatura() {
 		return estatura;
 	}
 
-	public void setEstatura(double estatura) {
+	public void setEstatura(Double estatura) {
 		this.estatura = estatura;
 	}
 
-	public double getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(double peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 
@@ -701,11 +701,11 @@ public class Paciente implements Serializable {
 		this.fechaInscripcionIVSS = fechaInscripcionIVSS;
 	}
 
-	public int getCarga() {
+	public Integer getCarga() {
 		return carga;
 	}
 
-	public void setCarga(int carga) {
+	public void setCarga(Integer carga) {
 		this.carga = carga;
 	}
 

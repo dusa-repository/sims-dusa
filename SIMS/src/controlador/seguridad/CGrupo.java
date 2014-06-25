@@ -4,14 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import modelo.maestros.Examen;
+import modelo.maestros.PresentacionMedicina;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Grupo;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -34,6 +38,8 @@ import componentes.Botonera;
 import componentes.Catalogo;
 
 import controlador.maestros.CGenerico;
+import controlador.maestros.CMedicina;
+import controlador.maestros.CUsuario;
 
 public class CGrupo extends CGenerico {
 
@@ -56,12 +62,28 @@ public class CGrupo extends CGenerico {
 
 	private static final long serialVersionUID = 3771289676166008495L;
 
+	private boolean usuario = false;
+	private CUsuario cUsuario = new CUsuario();
+	List<Grupo> grupoUsuario = new ArrayList<Grupo>();
+	Listbox listas;
+	
 	@Override
 	public void inicializar() throws IOException {
 		treeGrupo.setModel(getModel());
 		treeGrupo.setCheckmark(true);
 		treeGrupo.setMultiple(true);
 		ltbFuncionalidadesSeleccionados.getItems().clear();
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		if (map != null) {
+			if (map.get("id") != null) {
+				usuario = true;
+				grupoUsuario = (List<Grupo>) map.get("lista");
+				listas = (Listbox) map.get("listbox");
+				map.clear();
+				map = null;
+			}
+		}
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -102,6 +124,16 @@ public class CGrupo extends CGenerico {
 						String nombre = txtNombreGrupo.getValue();
 						Grupo grupo1 = new Grupo(id, estatus, nombre, arboles);
 						servicioGrupo.guardarGrupo(grupo1);
+						if (usuario) {
+							if (id != 0)
+								grupo1 = servicioGrupo.buscarGrupo(id);
+							else {
+								grupo1 = servicioGrupo.buscarUltimo();
+								grupoUsuario.add(grupo1);
+							}
+							cUsuario.recibirGrupo(grupoUsuario,
+									listas);
+						}
 						Messagebox.show("Registro Guardado Exitosamente",
 								"Informacion", Messagebox.OK,
 								Messagebox.INFORMATION);

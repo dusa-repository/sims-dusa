@@ -337,7 +337,7 @@ public class CPaciente extends CGenerico {
 					retiroIVSS = txtRetiroIVSS.getValue();
 					nroInpsasel = txtNroInpsasel.getValue();
 					carga = spnCarga.getValue();
-					
+
 					nombre1 = txtNombre1Paciente.getValue();
 					apellido1 = txtApellido1Paciente.getValue();
 					nombre2 = txtNombre2Paciente.getValue();
@@ -415,7 +415,7 @@ public class CPaciente extends CGenerico {
 					paciente.setFechaInscripcionIVSS(fechaInscripcion);
 					paciente.setFechaEgreso(fechaEgreso);
 					paciente.setTurno(turno);
-					
+
 					servicioPaciente.guardar(paciente);
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
@@ -795,7 +795,7 @@ public class CPaciente extends CGenerico {
 		dspEstatura.setValue(paciente.getEstatura());
 		dspPeso.setValue(paciente.getPeso());
 		cmbCiudad.setValue(paciente.getCiudadVivienda().getNombre());
-		
+
 		spnCarga.setValue(paciente.getCarga());
 		txtNroInpsasel.setValue(paciente.getNroInpsasel());
 		txtProfesion.setValue(paciente.getProfesion());
@@ -804,13 +804,15 @@ public class CPaciente extends CGenerico {
 		cmbTurno.setValue(paciente.getTurno());
 		dtbFechaEgreso.setValue(paciente.getFechaEgreso());
 		dtbFechaIngreso.setValue(paciente.getFechaIngreso());
-		dtbInscripcionIVSS.setValue(paciente.getFechaInscripcionIVSS());			
-		
-		if (paciente.getNacionalidad().equals("V"))
-			rdoV.setChecked(true);
-		else
-			rdoE.setChecked(true);
-		
+		dtbInscripcionIVSS.setValue(paciente.getFechaInscripcionIVSS());
+
+		if (paciente.getNacionalidad() != null) {
+			if (paciente.getNacionalidad().equals("V"))
+				rdoV.setChecked(true);
+			else
+				rdoE.setChecked(true);
+		}
+
 		if (paciente.isAlergia())
 			rdoSiAlergico.setChecked(true);
 		else

@@ -14,6 +14,7 @@ import modelo.maestros.MedicinaPresentacionUnidad;
 import modelo.maestros.Paciente;
 import modelo.maestros.PresentacionComercial;
 import modelo.maestros.PresentacionMedicina;
+import modelo.maestros.ServicioExterno;
 import modelo.maestros.UnidadMedicina;
 import modelo.seguridad.Arbol;
 
@@ -620,7 +621,12 @@ public class CMedicina extends CGenerico {
 
 	/* Abre la vista de Presentacion*/
 	@Listen("onClick = #btnAbrirPresentacion")
-	public void abrirPresentacion(){		
+	public void abrirPresentacion(){
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "medicina");
+		map.put("lista", presentacionesDisponibles);
+		map.put("listbox", ltbPresentaciones);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Presentacion Medicina");
 		cArbol.abrirVentanas(arbolItem);	
 	}
@@ -630,5 +636,16 @@ public class CMedicina extends CGenerico {
 	public void abrirLaboratorio(){		
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Laboratorio");
 		cArbol.abrirVentanas(arbolItem);	
+	}
+	
+	public void recibirPresentacion(List<PresentacionMedicina> lista, Listbox l) {
+		ltbPresentaciones = l;
+		presentacionesDisponibles = lista;
+		ltbPresentaciones.setModel(new ListModelList<PresentacionMedicina>(
+				presentacionesDisponibles));
+		ltbPresentaciones.setMultiple(false);
+		ltbPresentaciones.setCheckmark(false);
+		ltbPresentaciones.setMultiple(true);
+		ltbPresentaciones.setCheckmark(true);
 	}
 }

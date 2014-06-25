@@ -1013,7 +1013,7 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<listbox id="ltb822" height="50px">
+													<listbox model="${$composer.condiciones}" id="ltb822" height="50px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -1118,7 +1118,7 @@
 													<separator />
 													<label class="etiqueta"
 														value="¿Existía Alguna de las Siguientes Condiciones en los Equipos Maquinas o Herramientas?" />
-													<listbox id="ltb829" height="50px">
+													<listbox model="${$composer.condiciones}" id="ltb829" height="50px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -1131,7 +1131,7 @@
 													<separator />
 													<label class="etiqueta"
 														value="¿Cuál de las Siguientes Condiciones Asociadas con  las Instalaciones Y/O los Materiales Utilizados para la Ejecución del Proceso de Trabajo Existían para el Momento de la Ocurrencia del Accidente?" />
-													<listbox id="ltb8210" height="50px">
+													<listbox model="${$composer.condiciones}" id="ltb8210" height="50px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -1177,7 +1177,7 @@
 												<cell colspan="4">
 													<label class="etiqueta"
 														value="¿Cuál o Cuáles de las Siguientes Condiciones del Ambiente de Trabajo Estaban Presentes al Momento de la Ocurrencia del Accidente?" />
-													<listbox id="ltb8213" height="50px">
+													<listbox model="${$composer.condiciones}" id="ltb8213" height="50px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -1594,9 +1594,14 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
-													<label class="etiqueta"
-														value="---------NO SE HACER ESTA LISTA =P----------------" />
+													<listbox model="${$composer.condiciones}" id="ltb84" height="50px">
+														<template name="model">
+															<listitem>
+																<listcell label="${each.nombre}">
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
 												</cell>
 											</row>
 											<row>
@@ -1659,9 +1664,14 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
-													<label class="etiqueta"
-														value="---------NO SE HACER ESTA LISTA =P----------------" />
+													<listbox model="${$composer.condiciones}" id="ltb841" height="50px">
+														<template name="model">
+															<listitem>
+																<listcell label="${each.nombre}">
+																</listcell>
+															</listitem>
+														</template>
+													</listbox>
 												</cell>
 											</row>
 										</rows>
@@ -2335,8 +2345,10 @@
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
-			<separator />
+			<separator />			
 			<div id="botoneraInforme" />
+			<div id="catalogoPaciente" />
+			<div id="catalogoEmpresa" />
 		</groupbox>
 		<popup id="seccion" width="350px">
 			<label class="inicioAyuda" value="Secciones:" />

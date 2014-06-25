@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 import javax.imageio.ImageIO;
 
 import modelo.maestros.Especialidad;
+import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Grupo;
@@ -19,6 +21,7 @@ import modelo.seguridad.Usuario;
 
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -629,7 +632,23 @@ public class CUsuario extends CGenerico {
 	/* Abre la vista de Grupos */
 	@Listen("onClick = #btnAbrirGrupo")
 	public void abrirGrupo() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "medicina");
+		map.put("lista", gruposDisponibles);
+		map.put("listbox", ltbGruposDisponibles);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Grupo");
 		cArbol.abrirVentanas(arbolItem);
+	}
+	
+	public void recibirGrupo(List<Grupo> lista, Listbox l) {
+		ltbGruposDisponibles = l;
+		gruposDisponibles = lista;
+		ltbGruposDisponibles.setModel(new ListModelList<Grupo>(
+				gruposDisponibles));
+		ltbGruposDisponibles.setMultiple(false);
+		ltbGruposDisponibles.setCheckmark(false);
+		ltbGruposDisponibles.setMultiple(true);
+		ltbGruposDisponibles.setCheckmark(true);
 	}
 }

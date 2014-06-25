@@ -1,21 +1,27 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import modelo.maestros.Examen;
 import modelo.maestros.MedicinaPresentacionUnidad;
 import modelo.maestros.PresentacionMedicina;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import controlador.transacciones.CConsulta;
 
 public class CPresentacionMedicina extends CGenerico {
 
@@ -33,8 +39,24 @@ public class CPresentacionMedicina extends CGenerico {
 	private long id = 0;
 	Catalogo<PresentacionMedicina> catalogo;
 
+	private boolean medicina = false;
+	private CMedicina cMedicina = new CMedicina();
+	List<PresentacionMedicina> listaPresentacion = new ArrayList<PresentacionMedicina>();
+	Listbox lista;
+	
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		if (map != null) {
+			if (map.get("id") != null) {
+				medicina = true;
+				listaPresentacion = (List<PresentacionMedicina>) map.get("lista");
+				lista = (Listbox) map.get("listbox");
+				map.clear();
+				map = null;
+			}
+		}
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -56,6 +78,16 @@ public class CPresentacionMedicina extends CGenerico {
 							txtNombrePresentacionMedicina.getValue(),
 							nombreUsuarioSesion());
 					servicioPresentacionMedicina.guardar(presentacionMedicina);
+					if (medicina) {
+						if (id != 0)
+							presentacionMedicina = servicioPresentacionMedicina.buscar(id);
+						else {
+							presentacionMedicina = servicioPresentacionMedicina.buscarUltimo();
+							listaPresentacion.add(presentacionMedicina);
+						}
+						cMedicina.recibirPresentacion(listaPresentacion,
+								lista);
+					}
 					limpiar();
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
