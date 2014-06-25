@@ -45,4 +45,11 @@ public class SPresentacionMedicina {
 		return presentacionMedicinaDAO.findByIdPresentacionNotIn(ids);
 	}
 
+	public PresentacionMedicina buscarUltimo() {
+		long id = presentacionMedicinaDAO.findMaxIdExamen();
+		if (id != 0)
+			return presentacionMedicinaDAO.findOne(id);
+		return null;
+	}
+
 }
