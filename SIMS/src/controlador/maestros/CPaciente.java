@@ -320,11 +320,20 @@ public class CPaciente extends CGenerico {
 					boolean trabajador = false, alergia = false, discapacidad = false, lentes = false;
 					double estatura, peso;
 
-					Timestamp fechaIngreso = new Timestamp(dtbFechaIngreso
+					Timestamp fechaIngreso = null;
+					Timestamp fechaEgreso = null;
+					Timestamp fechaInscripcion = null;
+					
+					if(dtbFechaIngreso.getValue()!=null)
+					fechaIngreso = new Timestamp(dtbFechaIngreso
 							.getValue().getTime());
-					Timestamp fechaEgreso = new Timestamp(dtbFechaEgreso
+					
+					if(dtbFechaEgreso.getValue()!=null)
+					fechaEgreso = new Timestamp(dtbFechaEgreso
 							.getValue().getTime());
-					Timestamp fechaInscripcion = new Timestamp(
+					
+					if(dtbInscripcionIVSS.getValue()!=null)
+					fechaInscripcion = new Timestamp(
 							dtbInscripcionIVSS.getValue().getTime());
 
 					if (rdoV.isChecked())
@@ -769,7 +778,6 @@ public class CPaciente extends CGenerico {
 		txtApellido2Paciente.setValue(paciente.getSegundoApellido());
 		txtCedulaPaciente.setDisabled(true);
 		id = Long.valueOf(paciente.getCedula());
-
 		txtFichaPaciente.setValue(paciente.getFicha());
 		txtAlergia.setValue(paciente.getObservacionAlergias());
 		txtLugarNacimiento.setValue(paciente.getLugarNacimiento());
@@ -821,13 +829,13 @@ public class CPaciente extends CGenerico {
 		if (paciente.isTrabajador()) {
 			cmbEmpresa.setValue(paciente.getEmpresa().getNombre());
 			rdoTrabajador.setChecked(true);
-			rdoTrabajador.setDisabled(true);
 			esTrabajador();
 		} else {
 			rdoFamiliar.setChecked(true);
-			rdoFamiliar.setDisabled(true);
 			esFamiliar();
 		}
+		rdoTrabajador.setDisabled(true);
+		rdoFamiliar.setDisabled(true);
 
 		if (paciente.isDiscapacidad())
 			rdoSiDiscapacidad.setChecked(true);

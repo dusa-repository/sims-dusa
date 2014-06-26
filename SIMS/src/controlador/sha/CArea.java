@@ -108,7 +108,7 @@ public class CArea extends CGenerico {
 
 			}
 		};
-		 botonera.getChildren().get(1).setVisible(false);
+
 		 botoneraArea.appendChild(botonera);
 	}
 

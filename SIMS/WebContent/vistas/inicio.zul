@@ -63,9 +63,8 @@
 			</west>
 			<center border="none">
 				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
-					<center border="none" autoscroll="true">
+					<center style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; " border="none" autoscroll="true">
 						<tabbox width="auto"
-							style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
 							id="tabBox" hflex="1">
 							<tabs>
 								<tab visible="false">Tab A</tab>

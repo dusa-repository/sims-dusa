@@ -463,7 +463,7 @@
 										<caption label="Examen Fisico"
 											style="color:blue; font-size: 12px; font-weight:bold" />
 										<listbox id="ltbExamenFisico" model="${$composer.modelFisico}"
-											height="120px" width="100%" emptyMessage="No hay sistemas fisicos registrados">
+											height="150px" width="100%" emptyMessage="No hay sistemas fisicos registrados">
 											<listhead>
 												<listheader label="Nombre" width="30%" />
 												<listheader label="Observacion" width="70%" />

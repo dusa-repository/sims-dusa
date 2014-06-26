@@ -115,7 +115,6 @@ public class CClasificacionAccidente extends CGenerico {
 			}
 		};
 
-		botonera.getChildren().get(1).setVisible(false);
 		botoneraClasificacionAccidente.appendChild(botonera);
 	}
 
