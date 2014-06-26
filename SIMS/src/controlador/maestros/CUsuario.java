@@ -157,6 +157,7 @@ public class CUsuario extends CGenerico {
 				txtApellidoUsuario.setValue("");
 				txtApellido2Usuario.setValue("");
 				txtCedulaUsuario.setValue("");
+				txtCedulaUsuario.setDisabled(false);
 				txtCorreoUsuario.setValue("");
 				txtDireccionUsuario.setValue("");
 				txtFichaUsuario.setValue("");
