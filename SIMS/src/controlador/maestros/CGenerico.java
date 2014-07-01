@@ -31,6 +31,7 @@ import arbol.CArbol;
 import servicio.maestros.SAccidente;
 import servicio.maestros.SAntecedente;
 import servicio.maestros.SAntecedenteTipo;
+import servicio.maestros.SCargo;
 import servicio.maestros.SCategoriaDiagnostico;
 import servicio.maestros.SCategoriaMedicina;
 import servicio.maestros.SCiudad;
@@ -91,6 +92,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SAntecedenteTipo servicioAntecedenteTipo;
 	@WireVariable("SArbol")
 	protected SArbol servicioArbol;
+	@WireVariable("SCargo")
+	protected SCargo servicioCargo;
 	@WireVariable("SCategoriaDiagnostico")
 	protected SCategoriaDiagnostico servicioCategoriaDiagnostico;
 	@WireVariable("SCategoriaMedicina")

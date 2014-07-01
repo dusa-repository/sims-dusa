@@ -43,4 +43,9 @@ public class SAccidente {
 			return accidenteDAO.findByTipoAndIdAccidenteNotIn(string,ids);
 		}
 	}
+
+	public List<Accidente> filtroNombre(String valor, String tipo) {
+		// TODO Auto-generated method stub
+		return accidenteDAO.findByNombreStartingWithAndTipoAllIgnoreCase(valor, tipo);
+	}
 }

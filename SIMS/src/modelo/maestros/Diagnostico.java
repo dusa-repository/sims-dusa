@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 import modelo.transacciones.ConsultaDiagnostico;
 
 
@@ -55,6 +57,10 @@ public class Diagnostico implements Serializable {
 	@JoinColumn(name="id_categoria")
 	private CategoriaDiagnostico categoria;
 
+	@Column(name = "epi")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean epi;
+	
 	@OneToMany(mappedBy = "diagnostico")
 	private Set<ConsultaDiagnostico> diagnosticos;
 	
@@ -64,7 +70,7 @@ public class Diagnostico implements Serializable {
 
 	public Diagnostico(long idDiagnostico, String codigo,
 			Timestamp fechaAuditoria, String grupo, String horaAuditoria,
-			String nombre, String usuarioAuditoria, CategoriaDiagnostico categoria) {
+			String nombre, String usuarioAuditoria, CategoriaDiagnostico categoria, Boolean epi) {
 		super();
 		this.idDiagnostico = idDiagnostico;
 		this.codigo = codigo;
@@ -74,6 +80,7 @@ public class Diagnostico implements Serializable {
 		this.nombre = nombre;
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.categoria = categoria;
+		this.epi = epi;
 	}
 
 
@@ -149,6 +156,16 @@ public class Diagnostico implements Serializable {
 
 	public void setDiagnosticos(Set<ConsultaDiagnostico> diagnosticos) {
 		this.diagnosticos = diagnosticos;
+	}
+
+
+	public Boolean getEpi() {
+		return epi;
+	}
+
+
+	public void setEpi(Boolean epi) {
+		this.epi = epi;
 	}
 
 }

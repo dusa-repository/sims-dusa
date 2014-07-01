@@ -7,11 +7,14 @@
 		<groupbox width="auto" mold="3d" title="Historia Medica">
 			<grid width="auto">
 				<columns visible="false">
-					<column label="" width="20%" />
-					<column label="" width="20%" />
-					<column label="" width="20%" />
-					<column label="" width="20%" />
-					<column label="" width="20%" />
+					<column label="" width="12.5%" />
+					<column label="" width="12.5%" />
+					<column label="" width="12.5%" />
+					<column label="" width="12.5%" />
+					<column label="" width="12.5%" />
+					<column label="" width="12.5%%" />
+					<column label="" width="12.5%" />
+					<column label="" width="12.5%" />
 				</columns>
 				<rows>
 					<row>
@@ -21,7 +24,10 @@
 						<button id="btnBuscarPaciente" label="Buscar Paciente"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 						<hbox />
-						<hbox />
+						<label class="etiqueta" value="Cargo:" />
+						<label class="etiqueta" id="lblCargo1" />
+						<label class="etiqueta" value="Area:" />
+						<label class="etiqueta" id="lblArea" />
 					</row>
 				</rows>
 			</grid>
@@ -287,18 +293,36 @@
 										readonly="true">
 										<comboitem label="Preventiva" />
 										<comboitem label="Curativa" />
-										<comboitem label="Control" />
 									</combobox>
 									<label visible="false" id="lblPreventiva" class="etiqueta"
 										value="Tipo de Consulta Preventiva:" />
 									<combobox tooltiptext="Seleccione el Tipo de Consulta Preventiva"
 										placeholder="Seleccione el Tipo" id="cmbTipoPreventiva" width="100%"
 										readonly="true" visible="false">
-										<comboitem label="Pre-Ingreso" />
-										<comboitem label="Pre-Vacacional" />
-										<comboitem label="Post-Vacacional" />
-										<comboitem label="Egreso" />
+										<template name="model">
+											<comboitem label="${each}" />
+										</template>
 									</combobox>
+								</row>
+								<row id="rowPromocion" visible="false">
+									<label class="etiqueta" value="Cargo Pretendido:" />
+									<combobox tooltiptext="Seleccione el Cargo Pretendido"
+										placeholder="Seleccione el Tipo" id="cmbCargo" width="100%"
+										readonly="true">
+										<template name="model">
+											<comboitem label="${each.nombre}" context="${each.idCargo}" />
+										</template>
+									</combobox>
+									<label class="etiqueta" value="Area Pretendida:" />
+									<combobox tooltiptext="Seleccione el area Pretendida"
+										placeholder="Seleccione el Tipo" id="cmbArea" width="100%"
+										readonly="true">
+										<template name="model">
+											<comboitem label="${each.nombre}" context="${each.idArea}" />
+										</template>
+									</combobox>
+									<hbox />
+									<hbox />
 								</row>
 							</rows>
 						</grid>
@@ -323,6 +347,14 @@
 											<column label="" width="35%" />
 										</columns>
 										<rows>
+											<row id="row" visible="false">
+												<label class="etiqueta" value="Examenes Pre-Empleo:" />
+												<cell colspan="3">
+													<textbox maxlength="1000" class="multilinea"
+														multiline="true" id="txtExamenPreempleo" hflex="1"
+														tooltiptext="Ingrese el Motivo de la Consulta" />
+												</cell>
+											</row>
 											<row>
 												<label class="etiqueta" value="Motivo de la Consulta:" />
 												<textbox maxlength="1000" class="multilinea"
@@ -493,8 +525,8 @@
 										<button id="btnAbrirDiagnostico" label=""
 											tooltiptext="Crear un Nuevo Diagnostico" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
-									<hbox>
-										<listbox id="ltbDiagnosticos" height="250px" width="280px"
+									<hbox widths="25%,5%,50%,20">
+										<listbox id="ltbDiagnosticos" height="250px" width="100%"
 											emptyMessage="No hay Diagnosticos Registrados">
 											<listhead>
 												<listheader label="Diagnostico" width="100%" />
@@ -502,6 +534,16 @@
 											<template name="model">
 												<listitem>
 													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell>
+														<combobox tooltiptext="Seleccione el Tipo de Diagnostico"
+															placeholder="Seleccione el Tipo" width="98%" readonly="true">
+															<comboitem label="Accidente Laboral" />
+															<comboitem label="Accidente Comun" />
+															<comboitem label="Enfermedad Laboral" />
+															<comboitem label="Enfermedad Comun" />
+															<comboitem label="Otro" />
+														</combobox>
 													</listcell>
 													<listcell>
 														<textbox width="98%" />
@@ -520,16 +562,28 @@
 											<button id="pasar2Diagnostico" image="/public/imagenes/botones/atras.png"
 												tooltiptext="Quitar Diagnostico" width="30px" />
 										</vbox>
-										<listbox id="ltbDiagnosticosAgregados" width="550px"
+										<listbox id="ltbDiagnosticosAgregados" width="100%"
 											height="250px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
 											<listhead>
-												<listheader label="Diagnostico" width="40%" />
-												<listheader label="Observacion" width="60%" />
+												<listheader label="Diagnostico" width="35%" />
+												<listheader label="Tipo" width="25%" />
+												<listheader label="Observacion" width="45%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
 												<listitem>
 													<listcell label="${each.diagnostico.nombre}">
+													</listcell>
+													<listcell>
+														<combobox onSelect='$composer.ventana(self)' value="${each.tipo}"
+															tooltiptext="Seleccione el Tipo de Diagnostico"
+															placeholder="Seleccione el Tipo" width="98%" readonly="true">
+															<comboitem label="Accidente Laboral" />
+															<comboitem label="Accidente Comun" />
+															<comboitem label="Enfermedad Laboral" />
+															<comboitem label="Enfermedad Comun" />
+															<comboitem label="Otro" />
+														</combobox>
 													</listcell>
 													<listcell>
 														<textbox value="${each.observacion}" width="98%" />
@@ -541,7 +595,7 @@
 												</listitem>
 											</template>
 										</listbox>
-										<vbox>
+										<vbox width="100%">
 											<grid width="100%">
 												<columns visible="false">
 													<column label="" width="50%" />
@@ -549,30 +603,18 @@
 												</columns>
 												<rows>
 													<row>
-														<label id="lblTipoDiagnostico" value="Tipo de Diagnostico:" />
-														<combobox tooltiptext="Seleccione el Tipo de Diagnostico"
-															placeholder="Seleccione el Tipo" id="cmbTipoDiagnostio"
-															width="100%" readonly="true">
-															<comboitem label="Accidente Comun" />
-															<comboitem label="Accidente Laboral" />
-															<comboitem label="Enfermedad Comun" />
-															<comboitem label="Enfermedad Laboral" />
-															<comboitem label="Otro" />
-														</combobox>
-														<!-- <combobox tooltiptext="Seleccione un Accidente" placeholder="Seleccione 
-															un Accidente" id="cmbAccidente" readonly="true" width="100%"> <template name="model"> 
-															<comboitem label="${each.nombre}" context="${each.idAccidente}" /> </template> 
-															</combobox> -->
+														<label class="etiqueta" value="¿Amerita Reposo?" />
+														<radiogroup id="rdgReposo">
+															<radio label="SI" value="si" id="rdoSiReposo" />
+															<radio label="NO" value="no" id="rdoNoReposo" />
+														</radiogroup>
 													</row>
 													<row>
-														<label visible="false" id="lblAccidente" value="Accidente:" />
-														<combobox visible="false" tooltiptext="Seleccione un Accidente"
-															placeholder="Seleccione un Accidente" id="cmbAccidente"
-															readonly="true" width="100%">
-															<template name="model">
-																<comboitem label="${each.nombre}" context="${each.idAccidente}" />
-															</template>
-														</combobox>
+														<label class="etiqueta" value="¿Esta apto para el empleo?" />
+														<radiogroup id="rdgApto">
+															<radio label="SI" value="si" id="rdoSiApto" />
+															<radio label="NO" value="no" id="rdoNoApto" />
+														</radiogroup>
 													</row>
 													<row>
 														<label visible="false" id="lblConsulta"
@@ -1120,12 +1162,447 @@
 					<tabpanel>
 						<tabbox height="auto" id="taxHistoria" orient="horizontal">
 							<tabs id="tbsHistoria" width="auto">
+								<tab label="Control Bucal y Medidas" id="tabDiente" />
 								<tab label="Habitos" id="tabHabitos" />
 								<tab label="Antecedentes parte I" id="tabIAntecedentesI" />
 								<tab label="Antecedentes parte II" id="tabIAntecedentesII" />
 								<tab label="¿Paciente Mujer?" id="tabMujer" />
 							</tabs>
 							<tabpanels>
+								<tabpanel>
+									<groupbox id="gpxDiente" closable="false" open="true"
+										width="100%">
+										<caption label="Odontograma"
+											style="color:blue; font-size: 12px; font-weight:bold" />
+										<grid width="100%">
+											<columns visible="false">
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+												<column label="" width="6.25%" />
+											</columns>
+											<rows>
+												<row>
+													<hbox />
+													<hbox />
+													<cell align="center" colspan="2">
+														<label class="etiqueta" value="Derecha" />
+													</cell>
+													<hbox />
+													<hbox />
+													<cell align="center" colspan="4">
+														<label class="etiqueta" value="Dentadura Superior" />
+													</cell>
+													<hbox />
+													<hbox />
+													<cell align="center" colspan="2">
+														<label class="etiqueta" value="Izquierda" />
+													</cell>
+													<hbox />
+													<hbox />
+												</row>
+												<row>
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<cell align="center" colspan="4">
+														<label class="etiqueta" value="Dientes Frontales" />
+													</cell>
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+												</row>
+												<row>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente1" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente2" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente3" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente4" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente5" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente6" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente7" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente8" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente9" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente10" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente11" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente12" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente13" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente14" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente15" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente16" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+												</row>
+												<row>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente17" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente18" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente19" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente20" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente21" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente22" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente23" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente24" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente25" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente26" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente27" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente28" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente29" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente30" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente31" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+													<combobox value="Normal" tooltiptext="Seleccione tipo"
+														id="cmbDiente32" readonly="true" width="100%"
+														model="${$composer.dientes}">
+														<template name="model">
+															<comboitem label="${each}" />
+														</template>
+													</combobox>
+												</row>
+												<row>
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<cell align="center" colspan="4">
+														<label class="etiqueta" value="Dientes Frontales" />
+													</cell>
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+												</row>
+												<row>
+													<hbox />
+													<hbox />
+													<cell align="center" colspan="2">
+														<label class="etiqueta" value="Derecha" />
+													</cell>
+													<hbox />
+													<hbox />
+													<cell align="center" colspan="4">
+														<label class="etiqueta" value="Dentadura Inferior" />
+													</cell>
+													<hbox />
+													<hbox />
+													<cell align="center" colspan="2">
+														<label class="etiqueta" value="Izquierda" />
+													</cell>
+													<hbox />
+													<hbox />
+												</row>
+												<row>
+													<cell colspan="3">
+														<label class="etiqueta" value="Numero del Odontologo" />
+													</cell>
+													<cell colspan="5">
+														<textbox maxlength="100" id="txtTelefonoDoc"
+															hflex="1" tooltiptext="Ingrese el numero Telefonico del doctor" />
+													</cell>
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+													<hbox />
+												</row>
+											</rows>
+										</grid>
+									</groupbox>
+									<groupbox id="gpxOjo" closable="false" open="true"
+										width="100%">
+										<caption label="Medidas (cms)"
+											style="color:blue; font-size: 12px; font-weight:bold" />
+										<grid width="100%">
+											<columns visible="false">
+												<column label="" width="16.6%" />
+												<column label="" width="16.6%" />
+												<column label="" width="16.6%" />
+												<column label="" width="16.6%" />
+												<column label="" width="16.6%" />
+												<column label="" width="17%" />
+											</columns>
+											<rows>
+												<row>
+													<label class="etiqueta" value="Lectura con carta Snell" />
+													<combobox
+														tooltiptext="Seleccione el Nivel de visión respecto a la fila en la Gráfica de Snell observada en el Paciente"
+														placeholder="Seleccione" id="cmbCarta" width="98%"
+														readonly="true">
+														<comboitem label="20/10" />
+														<comboitem label="20/12" />
+														<comboitem label="20/15" />
+														<comboitem label="20/20" />
+														<comboitem label="20/25" />
+														<comboitem label="20/30" />
+														<comboitem label="20/35" />
+														<comboitem label="20/40" />
+														<comboitem label="20/50" />
+														<comboitem label="20/70" />
+														<comboitem label="20/100" />
+														<comboitem label="20/200" />
+													</combobox>
+													<hbox />
+													<hbox />
+													<label class="etiqueta" value="¿Vision de Colores?" />
+													<radiogroup id="rdgColores">
+														<radio label="SI" value="si" id="rdoSiColores" />
+														<radio label="NO" value="no" id="rdoNoColores" />
+													</radiogroup>
+												</row>
+												<row>
+													<label class="etiqueta" value="Altura de Hombro" />
+													<doublespinner value="0" id="spnAlturaHombro"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+													<label class="etiqueta" value="Anchura de Hombro" />
+													<doublespinner value="0" id="spnAnchuraHombro"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+													<label class="etiqueta" value="Altura de Codo" />
+													<doublespinner value="0" id="spnAlturaCodo"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												</row>
+												<row>
+													<label class="etiqueta" value="Long Miembro Superior Izquierdo" />
+													<doublespinner value="0" id="spnLongIzquierdo"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+													<label class="etiqueta" value="Long Miembro Superior Derecho" />
+													<doublespinner value="0" id="spnLongDerecho"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+													<label class="etiqueta" value="Altura Poplitea" />
+													<doublespinner value="0" id="spnPoplitea"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												</row>
+												<row>
+													<label class="etiqueta" value="Altura silla ojo" />
+													<doublespinner value="0" id="spnSillaOjo"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+													<label class="etiqueta" value="Altura codo silla" />
+													<doublespinner value="0" id="spnCodoSilla"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+													<label class="etiqueta" value="Circunferencia Abdominal" />
+													<doublespinner value="0" id="spnCircunferenciaA"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												</row>
+												<row>
+													<label class="etiqueta" value="Distancia Mano Piso" />
+													<doublespinner value="0" id="spnManoPiso"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+													<label class="etiqueta" value="Circunferencia de Cadera" />
+													<doublespinner value="0" id="spnCircunferenciaC"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+													<label class="etiqueta" value="Indice cadera Abdominal" />
+													<doublespinner value="0" id="spnCaderaAbdominal"
+														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												</row>
+											</rows>
+										</grid>
+									</groupbox>
+								</tabpanel>
 								<tabpanel>
 									<hbox>
 										<vbox>
@@ -1541,6 +2018,14 @@
 										</tabs>
 										<tabpanels>
 											<tabpanel>
+												<hbox>
+													<textbox tooltiptext="Ingrese el Nombre del Accidente"
+														placeholder="Ingrese el Accidente a Buscar" width="195px"
+														id="txtBuscadorAccidenteLaboral"></textbox>
+													<separator />
+													<button id="btnAbrirAccidenteLaboral" label=""
+														tooltiptext="Crear un Nuevo Accidente" image="/public/imagenes/botones/agregar.png" />
+												</hbox>
 												<hbox widths="32%,3%,65%">
 													<listbox id="ltbAccidentesLaborales" height="250px"
 														width="100%" emptyMessage="No hay Accidentes Laborales Registrados">
@@ -1623,6 +2108,14 @@
 												</hbox>
 											</tabpanel>
 											<tabpanel>
+												<hbox>
+													<textbox tooltiptext="Ingrese el Nombre del Accidente"
+														placeholder="Ingrese el Accidente a Buscar" width="195px"
+														id="txtBuscadorAccidenteComun"></textbox>
+													<separator />
+													<button id="btnAbrirAccidenteComun" label=""
+														tooltiptext="Crear un Nuevo Accidente" image="/public/imagenes/botones/agregar.png" />
+												</hbox>
 												<hbox widths="32%,3%,65%">
 													<listbox id="ltbAccidentesComunes" height="250px"
 														width="100%" emptyMessage="No hay Accidentes Comunes Registrados">
@@ -1704,6 +2197,14 @@
 												</hbox>
 											</tabpanel>
 											<tabpanel>
+												<hbox>
+													<textbox tooltiptext="Ingrese el Nombre de la Intervencion"
+														placeholder="Ingrese la Intervencion a Buscar" width="195px"
+														id="txtBuscadorIntervencion"></textbox>
+													<separator />
+													<button id="btnAbrirIntervencion" label=""
+														tooltiptext="Crear una Nueva Intervencion" image="/public/imagenes/botones/agregar.png" />
+												</hbox>
 												<hbox widths="32%,3%,65%">
 													<listbox id="ltbIntervenciones" height="250px"
 														width="100%" emptyMessage="No hay Intervenciones Registradas">

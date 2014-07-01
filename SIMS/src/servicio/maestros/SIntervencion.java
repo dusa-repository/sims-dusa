@@ -58,4 +58,11 @@ public class SIntervencion {
 	public Intervencion buscarPorNombre(String value) {
 		return intervencionDAO.findByNombre(value);
 	}
+
+	public Intervencion buscarUltimo() {
+		long id = intervencionDAO.findMaxIdIntervencion();
+		if (id != 0)
+			return intervencionDAO.findOne(id);
+		return null;
+	}
 }

@@ -28,6 +28,9 @@ public class ConsultaDiagnostico {
 	private Diagnostico diagnostico;
 	
 	@Column(length=100)
+	private String tipo;
+	
+	@Column(length=100)
 	private String observacion;
 
 	public ConsultaDiagnostico() {
@@ -35,12 +38,13 @@ public class ConsultaDiagnostico {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ConsultaDiagnostico(Consulta consulta, Diagnostico diagnostico,
+	public ConsultaDiagnostico(Consulta consulta, Diagnostico diagnostico, String tipo,
 			String observacion) {
 		super();
 		this.consulta = consulta;
 		this.diagnostico = diagnostico;
 		this.observacion = observacion;
+		this.tipo = tipo;
 	}
 
 	public Consulta getConsulta() {
@@ -65,6 +69,14 @@ public class ConsultaDiagnostico {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }
