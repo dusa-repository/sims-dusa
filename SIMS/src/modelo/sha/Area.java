@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.maestros.Paciente;
+import modelo.transacciones.Consulta;
+
 @Entity
 @Table(name="area")
 public class Area implements Serializable {
@@ -27,7 +30,16 @@ public class Area implements Serializable {
 	@Column(length=100)
 	private String nombre;
 	
+	
+	@OneToMany(mappedBy = "area")
+	private Set<Consulta> consultas;
+	
+	@OneToMany(mappedBy = "areaDeseada")
+	private Set<Consulta> consultasDeseadas;
 
+	@OneToMany(mappedBy = "area")
+	private Set<Paciente> pacientes;
+	
 	public Area() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -53,6 +65,30 @@ public class Area implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public Set<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(Set<Consulta> consultas) {
+		this.consultas = consultas;
+	}
+
+	public Set<Consulta> getConsultasDeseadas() {
+		return consultasDeseadas;
+	}
+
+	public void setConsultasDeseadas(Set<Consulta> consultasDeseadas) {
+		this.consultasDeseadas = consultasDeseadas;
+	}
+
+	public Set<Paciente> getPacientes() {
+		return pacientes;
+	}
+
+	public void setPacientes(Set<Paciente> pacientes) {
+		this.pacientes = pacientes;
 	}
 
 	

@@ -32,6 +32,15 @@
 						<hbox />
 					</row>
 					<row>
+						<label class="etiqueta"
+							value="¿Tipo EPI?" />
+						<radiogroup id="rdgEpi">
+							<radio label="SI" value="si" id="rdoSiEpi" />
+							<radio label="NO" value="no" id="rdoNoEpi" />
+						</radiogroup>
+						<hbox />
+					</row>
+					<row>
 						<label class="etiqueta" value="Categoria:" />
 						<combobox id="cmbCategoria" readonly="true" tabindex="1"
 							width="100%" tooltiptext="Seleccione una Categoria" placeholder="Seleccione una Categoria">
@@ -40,8 +49,8 @@
 									label="${each.nombre}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirCategoria" label="" tooltiptext="Crear una Nueva Categoria de Diagnostico"
-							image="/public/imagenes/botones/agregar.png" />
+						<button id="btnAbrirCategoria" label=""
+							tooltiptext="Crear una Nueva Categoria de Diagnostico" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>

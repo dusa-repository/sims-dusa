@@ -29,249 +29,249 @@ public class Historia implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_historia", unique = true, nullable = false)
 	private long idHistoria;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
 	private Paciente paciente;
-	
+
 	@Column
-	@Type(type="org.hibernate.type.NumericBooleanType")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean varioPeso;
-	
-	@Column(name="cantidad_peso", length = 50)
+
+	@Column(name = "cantidad_peso", length = 50)
 	private String pesoCambiado;
-	
-	@Column(name="razon_peso", length = 100)
+
+	@Column(name = "razon_peso", length = 100)
 	private String pesoCausa;
-	
-	@Column(name="toma_cafe")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "toma_cafe")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean cafe;
-	
-	@Column(name="tazas_cafe")
+
+	@Column(name = "tazas_cafe")
 	private Integer cantidadCafe;
-	
-	@Column(name="dificultad_dormir")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "dificultad_dormir")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean dificultadDormir;
-	
-	@Column(name="dolor_cafe")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "dolor_cafe")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean dolorCafe;
-	
-	@Column(name="actividad_fisica")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "actividad_fisica")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean actividadFisica;
-	
-	@Column(name="actividad_tipo", length = 100)
+
+	@Column(name = "actividad_tipo", length = 100)
 	private String actividadTipo;
-	
-	@Column(name="actividad_frecuencia", length = 100)
+
+	@Column(name = "actividad_frecuencia", length = 100)
 	private String actividadFrecuencia;
-	
-	@Column(name="actividad_tiempo", length = 100)
+
+	@Column(name = "actividad_tiempo", length = 100)
 	private String actividadTiempo;
-	
-	@Column(name="actividad_extra")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "actividad_extra")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean actividadExtra;
-	
-	@Column(name="tipo_extra", length = 50)
+
+	@Column(name = "tipo_extra", length = 50)
 	private String tipoExtra;
-	
-	@Column(name="cigarro_consume")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "cigarro_consume")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean cigarroConsume;
-	
-	@Column(name="cigarro_actual")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "cigarro_actual")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean cigarroActual;
-	
-	@Column(name="cigarro_cantidad")
+
+	@Column(name = "cigarro_cantidad")
 	private Integer cigarroCantidad;
-	
+
 	@Column(name = "cigarro_inicio")
 	private Timestamp cigarroInicio;
-	
+
 	@Column(name = "cigarro_fin")
 	private Timestamp cigarroFin;
-	
-	@Column(name="cigarro_razon", length = 50)
+
+	@Column(name = "cigarro_razon", length = 50)
 	private String cigarroRazon;
-	
-	@Column(name="alcohol_consume")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "alcohol_consume")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean alcoholConsume;
-	
-	@Column(name="alcohol_actual")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "alcohol_actual")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean alcoholActual;
-	
-	@Column(name="alcohol_frecuencia", length = 50)
+
+	@Column(name = "alcohol_frecuencia", length = 50)
 	private String alcoholFrecuencia;
-	
-	@Column(name="alcohol_tipo", length = 50)
+
+	@Column(name = "alcohol_tipo", length = 50)
 	private String alcoholTipo;
-	
-	@Column(name="alcohol_cantidad")
+
+	@Column(name = "alcohol_cantidad")
 	private Integer alcoholCantidad;
-	
-	@Column(name="alcohol_embriagado")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "alcohol_embriagado")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean alcoholEmbriagado;
-	
-	@Column(name="alcohol_tratamiento")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "alcohol_tratamiento")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean alcoholTratamiento;
-	
-	@Column(name="alcohol_rehabilitacion")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "alcohol_rehabilitacion")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean alcoholRehabilitacion;
-	
-	@Column(name="alcohol_accidente")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "alcohol_accidente")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean alcoholAccidente;
-	
-	@Column(name="droga_consume")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "droga_consume")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean drogaConsume;
-	
-	@Column(name="droga_explicacion", length = 250)
+
+	@Column(name = "droga_explicacion", length = 250)
 	private String drogaExplicacion;
-	
-	@Column(name="droga_tratamiento")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "droga_tratamiento")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean drogaTratamiento;
-	
-	@Column(name="droga_rehabilitacion")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "droga_rehabilitacion")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean drogaRehabilitacion;
-	
-	@Column(name="medicamento_consume")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "medicamento_consume")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean medicamentoConsume;
-	
-	@Column(name="medicamento_tipo", length = 100)
+
+	@Column(name = "medicamento_tipo", length = 100)
 	private String medicamentoTipo;
-	
+
 	@Column(name = "medicamento_inicio")
 	private Timestamp medicamentoInicio;
-	
-	@Column(name="medicamento_cantidad", length = 100)
+
+	@Column(name = "medicamento_cantidad", length = 100)
 	private String medicamentoCantidad;
-	
-	@Column(name="enfermedad_posee")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "enfermedad_posee")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean enfermedadPosee;
-	
-	@Column(name="enfermedad", length = 100)
+
+	@Column(name = "enfermedad", length = 100)
 	private String enfermedad;
-	
-	@Column(name="medico")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "medico")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean medico;
-	
-	@Column(name="tratamiento")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "tratamiento")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean tratamiento;
-	
-	@Column(name="transfusion")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "transfusion")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean transfusion;
-	
-	@Column(name="ets")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "ets")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ets;
-	
-	@Column(name="vih")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "vih")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean vih;
-	
-	@Column(name="vih_resultado", length = 100)
+
+	@Column(name = "vih_resultado", length = 100)
 	private String vihResultado;
-	
-	@Column(name="flujo")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "flujo")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean flujo;
-	
-	@Column(name="secrecion")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "secrecion")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean secrecion;
-	
-	@Column(name="dolor")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "dolor")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean dolor;
-	
-	@Column(name="endurecimiento")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "endurecimiento")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean endurecimiento;
-	
-	@Column(name="infeccion")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "infeccion")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean infeccion;
-	
-	@Column(name="anticonceptivo")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "anticonceptivo")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean anticonceptivo;
-	
-	@Column(name="dolor_relacion")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "dolor_relacion")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean dolorRelacion;
-	
-	@Column(name="esterilizacion")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "esterilizacion")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean esterilizacion;
-	
-	@Column(name="aparato")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "aparato")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean aparato;
-	
-	@Column(name="edad_desarrollo")
+
+	@Column(name = "edad_desarrollo")
 	private Integer edadDesarrollo;
-	
+
 	@Column(name = "fecha_mestruacion")
 	private Timestamp ultimaMenstruacion;
-	
-	@Column(name="numero_embarazo")
+
+	@Column(name = "numero_embarazo")
 	private Integer numeroEmbarazos;
-	
-	@Column(name="numero_parto")
+
+	@Column(name = "numero_parto")
 	private Integer numeroPartos;
-	
-	@Column(name="numero_cesarea")
+
+	@Column(name = "numero_cesarea")
 	private Integer numeroCesareas;
-	
-	@Column(name="numero_aborto")
+
+	@Column(name = "numero_aborto")
 	private Integer numeroAbortos;
-	
+
 	@Column(name = "fecha_citologia")
 	private Timestamp ultimaCitologia;
-	
-	@Column(name="poliquistico")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "poliquistico")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean poliquistico;
-	
-	@Column(name="embarazo")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "embarazo")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean embarazo;
-	
-	@Column(name="embarazo_semana")
+
+	@Column(name = "embarazo_semana")
 	private Integer embarazoSemanas;
-	
-	@Column(name="eco")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "eco")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean eco;
-	
-	@Column(name="eco_resultado", length = 100)
+
+	@Column(name = "eco_resultado", length = 100)
 	private String ecoResultado;
-	
-	@Column(name="mamografia")
-	@Type(type="org.hibernate.type.NumericBooleanType")
+
+	@Column(name = "mamografia")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean mamografia;
-	
-	@Column(name="mamografia_resultado", length = 100)
+
+	@Column(name = "mamografia_resultado", length = 100)
 	private String mamografiaResultado;
-	
+
 	@Column(name = "hora_auditoria", length = 10)
 	private String horaAuditoria;
 
@@ -280,13 +280,155 @@ public class Historia implements Serializable {
 
 	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
-	
+
+	@Column(name = "dientea", length = 10)
+	private String dientea;
+
+	@Column(name = "dienteb", length = 10)
+	private String dienteb;
+
+	@Column(name = "dientec", length = 10)
+	private String dientec;
+
+	@Column(name = "diented", length = 10)
+	private String diented;
+
+	@Column(name = "dientee", length = 10)
+	private String dientee;
+
+	@Column(name = "dientef", length = 10)
+	private String dientef;
+
+	@Column(name = "dienteg", length = 10)
+	private String dienteg;
+
+	@Column(name = "dienteh", length = 10)
+	private String dienteh;
+
+	@Column(name = "dientei", length = 10)
+	private String dientei;
+
+	@Column(name = "dientej", length = 10)
+	private String dientej;
+
+	@Column(name = "dientek", length = 10)
+	private String dientek;
+
+	@Column(name = "dientel", length = 10)
+	private String dientel;
+
+	@Column(name = "dientem", length = 10)
+	private String dientem;
+
+	@Column(name = "dienten", length = 10)
+	private String dienten;
+
+	@Column(name = "dienteo", length = 10)
+	private String dienteo;
+
+	@Column(name = "dientep", length = 10)
+	private String dientep;
+
+	@Column(name = "dienteq", length = 10)
+	private String dienteq;
+
+	@Column(name = "dienter", length = 10)
+	private String dienter;
+
+	@Column(name = "dientes", length = 10)
+	private String dientes;
+
+	@Column(name = "dientet", length = 10)
+	private String dientet;
+
+	@Column(name = "dienteu", length = 10)
+	private String dienteu;
+
+	@Column(name = "dientev", length = 10)
+	private String dientev;
+
+	@Column(name = "dientew", length = 10)
+	private String dientew;
+
+	@Column(name = "dientex", length = 10)
+	private String dientex;
+
+	@Column(name = "dientey", length = 10)
+	private String dientey;
+
+	@Column(name = "dientez", length = 10)
+	private String dientez;
+
+	@Column(name = "dientezf", length = 10)
+	private String dientezf;
+
+	@Column(name = "dienteza", length = 10)
+	private String dienteza;
+
+	@Column(name = "dientezb", length = 10)
+	private String dientezb;
+
+	@Column(name = "dientezc", length = 10)
+	private String dientezc;
+
+	@Column(name = "dientezd", length = 10)
+	private String dientezd;
+
+	@Column(name = "dienteze", length = 10)
+	private String dienteze;
+
+	@Column(name = "carta", length = 10)
+	private String carta;
+
+	@Column(name = "vision_color")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean visionColor;
+
+	@Column(name = "telefono_odontologo", length = 50)
+	private String telefonoOdontologo;
+
+	@Column(name = "altura_hombro")
+	private Double alturaHombro;
+
+	@Column(name = "anchura_hombro")
+	private Double anchuraHombro;
+
+	@Column(name = "altura_codo")
+	private Double alturaCodo;
+
+	@Column(name = "miembro_izquierdo")
+	private Double miembroIzquierdo;
+
+	@Column(name = "miembro_derecho")
+	private Double miembroDerecho;
+
+	@Column(name = "altura_poplitea")
+	private Double alturaPoplitea;
+
+	@Column(name = "altura_ojo")
+	private Double alturaOjo;
+
+	@Column(name = "altura_codo_silla")
+	private Double alturaCodoSilla;
+
+	@Column(name = "circunferencia_abdominal")
+	private Double circunferenciaAbdominal;
+
+	@Column(name = "circunferencia_cadera")
+	private Double circunferenciaCadera;
+
+	@Column(name = "distancia_mano")
+	private Double manoPiso;
+
+	@Column(name = "indice_cadera")
+	private Double indiceCadera;
+
 	@OneToMany(mappedBy = "historia")
 	private Set<HistoriaVacuna> historiasVacunas;
-	
+
 	@OneToMany(mappedBy = "historia")
 	private Set<HistoriaIntervencion> historiasIntervenciones;
-	
+
 	@OneToMany(mappedBy = "historia")
 	private Set<HistoriaAccidente> historiasAccidentes;
 
@@ -324,7 +466,21 @@ public class Historia implements Serializable {
 			Integer embarazoSemanas, Boolean eco, String ecoResultado,
 			Boolean mamografia, String mamografiaResultado,
 			String horaAuditoria, Timestamp fechaAuditoria,
-			String usuarioAuditoria) {
+			String usuarioAuditoria, String dientea, String dienteb,
+			String dientec, String diented, String dientee, String dientef,
+			String dienteg, String dienteh, String dientei, String dientej,
+			String dientek, String dientel, String dientem, String dienten,
+			String dienteo, String dientep, String dienteq, String dienter,
+			String dientes, String dientet, String dienteu, String dientev,
+			String dientew, String dientex, String dientey, String dientez,
+			String dienteza, String dientezb, String dientezc, String dientezd,
+			String dienteze, String dientezf, String carta,
+			Boolean visionColores, String telefonodontologo,
+			Double alturaHombro, Double anchuraHombro, Double alturaCodo,
+			Double izquierdo, Double derecho, Double alturaPoplitea,
+			Double alturaOjo, Double alturaCodoSilla,
+			Double circunferenciaAbdominal, Double circunferenciaCadera,
+			Double manoPiso, Double indiceCadera) {
 		super();
 		this.idHistoria = idHistoria;
 		this.paciente = paciente;
@@ -398,8 +554,55 @@ public class Historia implements Serializable {
 		this.horaAuditoria = horaAuditoria;
 		this.fechaAuditoria = fechaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
+		this.carta = carta;
+		this.miembroDerecho = derecho;
+		this.miembroIzquierdo = izquierdo;
+		this.telefonoOdontologo = telefonodontologo;
+		this.alturaCodo = alturaCodo;
+		this.alturaHombro = alturaHombro;
+		this.alturaCodoSilla = alturaCodoSilla;
+		this.alturaOjo = alturaOjo;
+		this.alturaPoplitea = alturaPoplitea;
+		this.anchuraHombro = anchuraHombro;
+		this.manoPiso = manoPiso;
+		this.circunferenciaAbdominal = circunferenciaAbdominal;
+		this.circunferenciaCadera = circunferenciaCadera;
+		this.indiceCadera = indiceCadera;
+		this.dientea = dientea;
+		this.dienteb = dienteb;
+		this.dientec = dientec;
+		this.diented = diented;
+		this.dientee = dientee;
+		this.dientef = dientef;
+		this.dienteg = dienteg;
+		this.dienteh = dienteh;
+		this.dientei = dientei;
+		this.dientej = dientej;
+		this.dientek = dientek;
+		this.dientel = dientel;
+		this.dientem = dientem;
+		this.dienten = dienten;
+		this.dienteo = dienteo;
+		this.dientep = dientep;
+		this.dienteq = dienteq;
+		this.dienter = dienter;
+		this.dientes = dientes;
+		this.dientet = dientet;
+		this.dienteu = dienteu;
+		this.dientev = dientev;
+		this.dientew = dientew;
+		this.dientex = dientex;
+		this.dientey = dientey;
+		this.dientez = dientez;
+		this.dienteza = dienteza;
+		this.dientezb = dientezb;
+		this.dientezc = dientezc;
+		this.dientezd = dientezd;
+		this.dienteze = dienteze;
+		this.dientezf = dientezf;
+		this.visionColor = visionColores;
 	}
-	
+
 	public long getIdHistoria() {
 		return idHistoria;
 	}
@@ -997,7 +1200,385 @@ public class Historia implements Serializable {
 		return historiasAccidentes;
 	}
 
-	public void setHistoriasAccidentes(Set<HistoriaAccidente> historiasAccidentes) {
+	public void setHistoriasAccidentes(
+			Set<HistoriaAccidente> historiasAccidentes) {
 		this.historiasAccidentes = historiasAccidentes;
 	}
+
+	public String getDientea() {
+		return dientea;
+	}
+
+	public void setDientea(String dientea) {
+		this.dientea = dientea;
+	}
+
+	public String getDienteb() {
+		return dienteb;
+	}
+
+	public void setDienteb(String dienteb) {
+		this.dienteb = dienteb;
+	}
+
+	public String getDientec() {
+		return dientec;
+	}
+
+	public void setDientec(String dientec) {
+		this.dientec = dientec;
+	}
+
+	public String getDiented() {
+		return diented;
+	}
+
+	public void setDiented(String diented) {
+		this.diented = diented;
+	}
+
+	public String getDientee() {
+		return dientee;
+	}
+
+	public void setDientee(String dientee) {
+		this.dientee = dientee;
+	}
+
+	public String getDientef() {
+		return dientef;
+	}
+
+	public void setDientef(String dientef) {
+		this.dientef = dientef;
+	}
+
+	public String getDienteg() {
+		return dienteg;
+	}
+
+	public void setDienteg(String dienteg) {
+		this.dienteg = dienteg;
+	}
+
+	public String getDienteh() {
+		return dienteh;
+	}
+
+	public void setDienteh(String dienteh) {
+		this.dienteh = dienteh;
+	}
+
+	public String getDientei() {
+		return dientei;
+	}
+
+	public void setDientei(String dientei) {
+		this.dientei = dientei;
+	}
+
+	public String getDientej() {
+		return dientej;
+	}
+
+	public void setDientej(String dientej) {
+		this.dientej = dientej;
+	}
+
+	public String getDientek() {
+		return dientek;
+	}
+
+	public void setDientek(String dientek) {
+		this.dientek = dientek;
+	}
+
+	public String getDientel() {
+		return dientel;
+	}
+
+	public void setDientel(String dientel) {
+		this.dientel = dientel;
+	}
+
+	public String getDientem() {
+		return dientem;
+	}
+
+	public void setDientem(String dientem) {
+		this.dientem = dientem;
+	}
+
+	public String getDienten() {
+		return dienten;
+	}
+
+	public void setDienten(String dienten) {
+		this.dienten = dienten;
+	}
+
+	public String getDienteo() {
+		return dienteo;
+	}
+
+	public void setDienteo(String dienteo) {
+		this.dienteo = dienteo;
+	}
+
+	public String getDientep() {
+		return dientep;
+	}
+
+	public void setDientep(String dientep) {
+		this.dientep = dientep;
+	}
+
+	public String getDienteq() {
+		return dienteq;
+	}
+
+	public void setDienteq(String dienteq) {
+		this.dienteq = dienteq;
+	}
+
+	public String getDienter() {
+		return dienter;
+	}
+
+	public void setDienter(String dienter) {
+		this.dienter = dienter;
+	}
+
+	public String getDientes() {
+		return dientes;
+	}
+
+	public void setDientes(String dientes) {
+		this.dientes = dientes;
+	}
+
+	public String getDientet() {
+		return dientet;
+	}
+
+	public void setDientet(String dientet) {
+		this.dientet = dientet;
+	}
+
+	public String getDienteu() {
+		return dienteu;
+	}
+
+	public void setDienteu(String dienteu) {
+		this.dienteu = dienteu;
+	}
+
+	public String getDientev() {
+		return dientev;
+	}
+
+	public void setDientev(String dientev) {
+		this.dientev = dientev;
+	}
+
+	public String getDientew() {
+		return dientew;
+	}
+
+	public void setDientew(String dientew) {
+		this.dientew = dientew;
+	}
+
+	public String getDientex() {
+		return dientex;
+	}
+
+	public void setDientex(String dientex) {
+		this.dientex = dientex;
+	}
+
+	public String getDientey() {
+		return dientey;
+	}
+
+	public void setDientey(String dientey) {
+		this.dientey = dientey;
+	}
+
+	public String getDientez() {
+		return dientez;
+	}
+
+	public void setDientez(String dientez) {
+		this.dientez = dientez;
+	}
+
+	public String getDientezf() {
+		return dientezf;
+	}
+
+	public void setDientezf(String dientezf) {
+		this.dientezf = dientezf;
+	}
+
+	public String getDienteza() {
+		return dienteza;
+	}
+
+	public void setDienteza(String dienteza) {
+		this.dienteza = dienteza;
+	}
+
+	public String getDientezb() {
+		return dientezb;
+	}
+
+	public void setDientezb(String dientezb) {
+		this.dientezb = dientezb;
+	}
+
+	public String getDientezc() {
+		return dientezc;
+	}
+
+	public void setDientezc(String dientezc) {
+		this.dientezc = dientezc;
+	}
+
+	public String getDientezd() {
+		return dientezd;
+	}
+
+	public void setDientezd(String dientezd) {
+		this.dientezd = dientezd;
+	}
+
+	public String getDienteze() {
+		return dienteze;
+	}
+
+	public void setDienteze(String dienteze) {
+		this.dienteze = dienteze;
+	}
+
+	public String getCarta() {
+		return carta;
+	}
+
+	public void setCarta(String carta) {
+		this.carta = carta;
+	}
+
+	public String getTelefonoOdontologo() {
+		return telefonoOdontologo;
+	}
+
+	public void setTelefonoOdontologo(String telefonoOdontologo) {
+		this.telefonoOdontologo = telefonoOdontologo;
+	}
+
+	public Double getAlturaHombro() {
+		return alturaHombro;
+	}
+
+	public void setAlturaHombro(Double alturaHombro) {
+		this.alturaHombro = alturaHombro;
+	}
+
+	public Double getAnchuraHombro() {
+		return anchuraHombro;
+	}
+
+	public void setAnchuraHombro(Double anchuraHombro) {
+		this.anchuraHombro = anchuraHombro;
+	}
+
+	public Double getAlturaCodo() {
+		return alturaCodo;
+	}
+
+	public void setAlturaCodo(Double alturaCodo) {
+		this.alturaCodo = alturaCodo;
+	}
+
+	public Double getMiembroIzquierdo() {
+		return miembroIzquierdo;
+	}
+
+	public void setMiembroIzquierdo(Double miembroIzquierdo) {
+		this.miembroIzquierdo = miembroIzquierdo;
+	}
+
+	public Double getMiembroDerecho() {
+		return miembroDerecho;
+	}
+
+	public void setMiembroDerecho(Double miembroDerecho) {
+		this.miembroDerecho = miembroDerecho;
+	}
+
+	public Double getAlturaPoplitea() {
+		return alturaPoplitea;
+	}
+
+	public void setAlturaPoplitea(Double alturaPoplitea) {
+		this.alturaPoplitea = alturaPoplitea;
+	}
+
+	public Double getAlturaOjo() {
+		return alturaOjo;
+	}
+
+	public void setAlturaOjo(Double alturaOjo) {
+		this.alturaOjo = alturaOjo;
+	}
+
+	public Double getAlturaCodoSilla() {
+		return alturaCodoSilla;
+	}
+
+	public void setAlturaCodoSilla(Double alturaCodoSilla) {
+		this.alturaCodoSilla = alturaCodoSilla;
+	}
+
+	public Double getCircunferenciaAbdominal() {
+		return circunferenciaAbdominal;
+	}
+
+	public void setCircunferenciaAbdominal(Double circunferenciaAbdominal) {
+		this.circunferenciaAbdominal = circunferenciaAbdominal;
+	}
+
+	public Double getCircunferenciaCadera() {
+		return circunferenciaCadera;
+	}
+
+	public void setCircunferenciaCadera(Double circunferenciaCadera) {
+		this.circunferenciaCadera = circunferenciaCadera;
+	}
+
+	public Double getManoPiso() {
+		return manoPiso;
+	}
+
+	public void setManoPiso(Double manoPiso) {
+		this.manoPiso = manoPiso;
+	}
+
+	public Double getIndiceCadera() {
+		return indiceCadera;
+	}
+
+	public void setIndiceCadera(Double indiceCadera) {
+		this.indiceCadera = indiceCadera;
+	}
+
+	public Boolean getVisionColor() {
+		return visionColor;
+	}
+
+	public void setVisionColor(Boolean visionColor) {
+		this.visionColor = visionColor;
+	}
+
 }

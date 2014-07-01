@@ -412,7 +412,7 @@ public class CPaciente extends CGenerico {
 							cargo, direccion, correo, telefono1, telefono2,
 							nombresE, apellidosE, parentescoE, telefono1E,
 							telefono2E, cedulaFamiliar, parentescoFamiliar,
-							empresa, ciudad);
+							empresa, ciudad, null, null);
 
 					paciente.setNacionalidad(nacionalidad);
 					paciente.setCarga(carga);

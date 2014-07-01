@@ -12,4 +12,6 @@ public interface IAccidenteDAO extends JpaRepository<Accidente, Long> {
 
 	List<Accidente> findByTipoAndIdAccidenteNotIn(String string, List<Long> ids);
 
+	List<Accidente> findByNombreStartingWithAndTipoAllIgnoreCase(String valor, String tipo);
+
 }

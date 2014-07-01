@@ -1,0 +1,45 @@
+<zk>
+	<window width="40em" id="wdwRegistro"
+		apply="controlador.transacciones.CAccidenteDetalle">
+		<div>
+			<groupbox width="100%" mold="3d" title="Detalle de Accidente">
+				<grid width="100%">
+					<columns visible="false">
+						<column label="" width="25%" />
+						<column label="" width="45%" />
+						<column label="" width="30%" />
+					</columns>
+					<rows>
+						<row>
+							<label class="etiqueta" value="Diagnostico:" />
+							<label class="etiqueta" id="lblDiagnostio" />
+							<hbox/>
+						</row>
+						<row>
+							<label class="etiqueta" value="Lugar del Accidente:" />
+							<textbox class="multilinea" id="txtLugar" hflex="1"
+								maxlength="100" tooltiptext="Ingrese la Clasificacion"
+								multiline="true" />
+							<hbox />
+						</row>
+						<row>
+							<label class="etiqueta" value="Fecha del Accidente:" />
+							<datebox readonly="true" width="100%" id="dtbFecha"
+								onCreate="self.value = new Date()" />
+							<hbox />
+						</row>
+						<row>
+							<label class="etiqueta" value="Motivo del Accidente:" />
+							<textbox class="multilinea" id="txtRazon" hflex="1"
+								maxlength="100" tooltiptext="Ingrese la Clasificacion"
+								multiline="true" />
+							<hbox />
+						</row>
+					</rows>
+				</grid>
+				<separator />
+				<div id="botoneraDetalle" />
+			</groupbox>
+		</div>
+	</window>
+</zk>

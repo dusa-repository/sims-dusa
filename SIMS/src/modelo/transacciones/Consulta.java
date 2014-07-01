@@ -19,8 +19,10 @@ import org.hibernate.annotations.Type;
 
 import modelo.maestros.Accidente;
 import modelo.maestros.AntecedenteTipo;
+import modelo.maestros.Cargo;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
+import modelo.sha.Area;
 
 @Entity
 @Table(name = "consulta")
@@ -54,7 +56,7 @@ public class Consulta implements Serializable {
 	@Column(length = 500)
 	private String enfermedadActual;
 
-	@Column(length = 50)
+	@Column(length = 100)
 	private String tipoConsulta;
 
 	@Column(name = "hora_consulta", length = 10)
@@ -164,6 +166,36 @@ public class Consulta implements Serializable {
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ritmicoPost;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_cargo")
+	private Cargo cargo;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_cargo_deseado", referencedColumnName = "id_cargo")
+	private Cargo cargoDeseado;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_area")
+	private Area area;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_area_deseada", referencedColumnName = "id_area")
+	private Area areaDeseada;
+
+	@Column(name = "apto")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean apto;
+
+	@Column(name = "reposo")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean reposo;
+
+	@Column(name = "tipo_consulta_secundaria", length = 100)
+	private String tipoConsultaSecundaria;
+	
+	@Column(name = "examen_preempleo", length = 1000)
+	private String examenPreempleo;
+
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -174,13 +206,15 @@ public class Consulta implements Serializable {
 			String horaAuditoria, Timestamp fechaAuditoria,
 			String usuarioAuditoria, boolean accidenteLaboral, String motivo,
 			String tipo, String enfermedad, long consultaAsociada,
-			Double estatura, Double peso, Double perimetroOmbligo, Double perimetroPlena,
-			Double perimetroForzada, Integer frecuencia, Integer frecuenciaR,
-			Integer frecuenciaE, Integer frecuenciaP, Integer sistolica1,
-			Integer sistolica2, Integer sistolica3, Integer diastolica1,
-			Integer diastolica2, Integer diastolica3, Integer extra1,
-			Integer extra2, Integer extra3, Boolean ritmico, Boolean ritmico1,
-			Boolean ritmico2, Boolean ritmico3) {
+			Double estatura, Double peso, Double perimetroOmbligo,
+			Double perimetroPlena, Double perimetroForzada, Integer frecuencia,
+			Integer frecuenciaR, Integer frecuenciaE, Integer frecuenciaP,
+			Integer sistolica1, Integer sistolica2, Integer sistolica3,
+			Integer diastolica1, Integer diastolica2, Integer diastolica3,
+			Integer extra1, Integer extra2, Integer extra3, Boolean ritmico,
+			Boolean ritmico1, Boolean ritmico2, Boolean ritmico3, Cargo cargo,
+			Cargo cargoDeseado, Area area, Area areaDeseada, boolean apto,
+			boolean reposo, String tipoConsultaSecundaria, String examenPre) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
@@ -218,6 +252,14 @@ public class Consulta implements Serializable {
 		this.sistolicaPrimera = sistolica1;
 		this.sistolicaSegunda = sistolica2;
 		this.sistolicaTercera = sistolica3;
+		this.cargo = cargo;
+		this.cargoDeseado = cargoDeseado;
+		this.area = area;
+		this.areaDeseada = areaDeseada;
+		this.reposo = reposo;
+		this.apto = apto;
+		this.tipoConsultaSecundaria = tipoConsultaSecundaria;
+		this.examenPreempleo = examenPre;
 	}
 
 	public long getIdConsulta() {
@@ -556,4 +598,68 @@ public class Consulta implements Serializable {
 		this.ritmicoPost = ritmicoPost;
 	}
 
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	public Cargo getCargoDeseado() {
+		return cargoDeseado;
+	}
+
+	public void setCargoDeseado(Cargo cargoDeseado) {
+		this.cargoDeseado = cargoDeseado;
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
+	}
+
+	public Area getAreaDeseada() {
+		return areaDeseada;
+	}
+
+	public void setAreaDeseada(Area areaDeseada) {
+		this.areaDeseada = areaDeseada;
+	}
+
+	public Boolean getApto() {
+		return apto;
+	}
+
+	public void setApto(Boolean apto) {
+		this.apto = apto;
+	}
+
+	public Boolean getReposo() {
+		return reposo;
+	}
+
+	public void setReposo(Boolean reposo) {
+		this.reposo = reposo;
+	}
+
+	public String getTipoConsultaSecundaria() {
+		return tipoConsultaSecundaria;
+	}
+
+	public void setTipoConsultaSecundaria(String tipoConsultaSecundaria) {
+		this.tipoConsultaSecundaria = tipoConsultaSecundaria;
+	}
+
+	public String getExamenPreempleo() {
+		return examenPreempleo;
+	}
+
+	public void setExamenPreempleo(String examenPreempleo) {
+		this.examenPreempleo = examenPreempleo;
+	}
+	
 }

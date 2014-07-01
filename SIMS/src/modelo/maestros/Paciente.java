@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
 
+import modelo.sha.Area;
 import modelo.transacciones.Historia;
 
 import java.sql.Timestamp;
@@ -199,6 +200,14 @@ public class Paciente implements Serializable {
 	@OneToOne(mappedBy = "paciente")
 	private Historia historia;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_cargo")
+	private Cargo cargoReal;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_area")
+	private Area area;
+	
 	public Paciente() {
 	}
 
@@ -216,7 +225,7 @@ public class Paciente implements Serializable {
 			String apellidosEmergencia, String parentescoEmergencia,
 			String telefono1Emergencia, String telefono2Emergencia,
 			String cedulaFamiliar, String parentescoFamiliar,
-			Empresa empresa, Ciudad ciudadVivienda) {
+			Empresa empresa, Ciudad ciudadVivienda, Cargo cargoa, Area area) {
 		super();
 		this.cedula = cedula;
 		this.ficha = ficha;
@@ -259,6 +268,8 @@ public class Paciente implements Serializable {
 		this.parentescoFamiliar = parentescoFamiliar;
 		this.empresa = empresa;
 		this.ciudadVivienda = ciudadVivienda;
+		this.cargoReal = cargoa;
+		this.area = area;
 	}
 
 	public String getCedula() {
@@ -715,6 +726,22 @@ public Historia getHistoria() {
 
 	public void setHistoria(Historia historia) {
 		this.historia = historia;
+	}
+
+	public Cargo getCargoReal() {
+		return cargoReal;
+	}
+
+	public void setCargoReal(Cargo cargoReal) {
+		this.cargoReal = cargoReal;
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
 	}
 
 

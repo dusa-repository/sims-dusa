@@ -21,6 +21,7 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Radio;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -48,6 +49,10 @@ public class CDiagnostico extends CGenerico {
 	private Combobox cmbCategoria;
 	@Wire
 	private Button btnBuscarDiagnostico;
+	@Wire
+	private Radio rdoSiEpi;
+	@Wire
+	private Radio rdoNoEpi;
 
 	private CArbol cArbol = new CArbol();
 	long id = 0;
@@ -85,6 +90,10 @@ public class CDiagnostico extends CGenerico {
 				txtGrupoDiagnostico.setValue("");
 				cmbCategoria.setValue("");
 				cmbCategoria.setPlaceholder("Seleccione una Categoria");
+				if (rdoNoEpi.isChecked())
+					rdoNoEpi.setChecked(false);
+				if (rdoSiEpi.isChecked())
+					rdoSiEpi.setChecked(false);
 				id = 0;
 			}
 
@@ -95,12 +104,15 @@ public class CDiagnostico extends CGenerico {
 					nombre = txtNombreDiagnostico.getValue();
 					codigo = txtCodigoDiagnostico.getValue();
 					grupo = txtGrupoDiagnostico.getValue();
+					Boolean epi = false;
+					if (rdoSiEpi.isChecked())
+						epi = true;
 					CategoriaDiagnostico categoria = servicioCategoriaDiagnostico
 							.buscar(Long.parseLong(cmbCategoria
 									.getSelectedItem().getContext()));
 					Diagnostico diagnostico = new Diagnostico(id, codigo,
 							fechaHora, grupo, horaAuditoria, nombre,
-							horaAuditoria, categoria);
+							horaAuditoria, categoria, epi);
 					servicioDiagnostico.guardar(diagnostico);
 					if (consulta) {
 						if (id != 0)
@@ -156,7 +168,8 @@ public class CDiagnostico extends CGenerico {
 		if (txtNombreDiagnostico.getText().compareTo("") == 0
 				|| txtCodigoDiagnostico.getText().compareTo("") == 0
 				|| txtGrupoDiagnostico.getText().compareTo("") == 0
-				|| cmbCategoria.getText().compareTo("") == 0) {
+				|| cmbCategoria.getText().compareTo("") == 0
+				|| (!rdoNoEpi.isChecked() && !rdoSiEpi.isChecked())) {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
@@ -238,6 +251,13 @@ public class CDiagnostico extends CGenerico {
 		txtGrupoDiagnostico.setValue(diagnostico.getGrupo());
 		txtNombreDiagnostico.setValue(diagnostico.getNombre());
 		cmbCategoria.setValue(diagnostico.getCategoria().getNombre());
+		if (diagnostico.getEpi() != null) {
+			Boolean epi = diagnostico.getEpi();
+			if (epi)
+				rdoSiEpi.setChecked(true);
+			else
+				rdoNoEpi.setChecked(true);
+		}
 		id = diagnostico.getIdDiagnostico();
 	}
 
