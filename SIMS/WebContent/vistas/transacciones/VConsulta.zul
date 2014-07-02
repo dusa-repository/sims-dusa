@@ -549,6 +549,10 @@
 														<textbox width="98%" />
 													</listcell>
 													<listcell>
+														<button label="Ver" autodisable="true" vflex="1"
+															hflex="1" visible="false" />
+													</listcell>
+													<listcell>
 														<spinner inplace="true" width="98%"
 															value="${each.idDiagnostico}" visible="false" disabled="true" />
 													</listcell>
@@ -567,7 +571,8 @@
 											<listhead>
 												<listheader label="Diagnostico" width="35%" />
 												<listheader label="Tipo" width="25%" />
-												<listheader label="Observacion" width="45%" />
+												<listheader label="Observacion" width="40%" />
+												<listheader label=" " width="5%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
@@ -575,8 +580,8 @@
 													<listcell label="${each.diagnostico.nombre}">
 													</listcell>
 													<listcell>
-														<combobox onSelect='$composer.ventana(self)' value="${each.tipo}"
-															tooltiptext="Seleccione el Tipo de Diagnostico"
+														<combobox onSelect='$composer.ventana(self)'
+															value="${each.tipo}" tooltiptext="Seleccione el Tipo de Diagnostico"
 															placeholder="Seleccione el Tipo" width="98%" readonly="true">
 															<comboitem label="Accidente Laboral" />
 															<comboitem label="Accidente Comun" />
@@ -587,6 +592,11 @@
 													</listcell>
 													<listcell>
 														<textbox value="${each.observacion}" width="98%" />
+													</listcell>
+													<listcell>
+														<button label="Ver" autodisable="true"
+															onClick="$composer.ventanaBoton(self)" height="70%"
+															hflex="1" vflex="1" visible="false" />
 													</listcell>
 													<listcell>
 														<spinner value="${each.diagnostico.idDiagnostico}"
@@ -609,6 +619,11 @@
 															<radio label="NO" value="no" id="rdoNoReposo" />
 														</radiogroup>
 													</row>
+													<row id="rowReposo" visible="false">
+														<label class="etiqueta" value="Dias de Reposo:" />
+														<spinner value="0" id="spnReposo" step="1"
+															constraint="min 0 max 100000" />
+													</row>
 													<row>
 														<label class="etiqueta" value="¿Esta apto para el empleo?" />
 														<radiogroup id="rdgApto">
@@ -629,13 +644,12 @@
 														</combobox>
 													</row>
 													<row>
-														<cell colspan="2">
-															<vbox>
-																<button label="Agregar Diagnosticos" id="btnAgregarDiagnosticos"
-																	image="/public/imagenes/botones/agregar.png"
-																	tooltiptext="Agregar Diagnosticos" width="200px" />
-															</vbox>
-														</cell>
+														<button label="Agregar" id="btnAgregarDiagnosticos"
+															image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Diagnosticos"
+															vflex="1" hflex="1" />
+														<button visible="false" label="Generar Reposo" id="btnGenerarReposo"
+															image="/public/imagenes/botones/agregar.png" tooltiptext="Generar Reposo"
+															vflex="1" hflex="1" />
 													</row>
 												</rows>
 											</grid>

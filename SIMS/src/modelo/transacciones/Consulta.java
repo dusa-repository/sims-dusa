@@ -196,6 +196,9 @@ public class Consulta implements Serializable {
 	@Column(name = "examen_preempleo", length = 1000)
 	private String examenPreempleo;
 
+	@Column(name = "dias_reposo")
+	private Integer diasReposo;
+	
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -214,7 +217,7 @@ public class Consulta implements Serializable {
 			Integer extra1, Integer extra2, Integer extra3, Boolean ritmico,
 			Boolean ritmico1, Boolean ritmico2, Boolean ritmico3, Cargo cargo,
 			Cargo cargoDeseado, Area area, Area areaDeseada, boolean apto,
-			boolean reposo, String tipoConsultaSecundaria, String examenPre) {
+			boolean reposo, String tipoConsultaSecundaria, String examenPre, Integer dias) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
@@ -260,6 +263,7 @@ public class Consulta implements Serializable {
 		this.apto = apto;
 		this.tipoConsultaSecundaria = tipoConsultaSecundaria;
 		this.examenPreempleo = examenPre;
+		this.diasReposo = dias;
 	}
 
 	public long getIdConsulta() {
@@ -660,6 +664,14 @@ public class Consulta implements Serializable {
 
 	public void setExamenPreempleo(String examenPreempleo) {
 		this.examenPreempleo = examenPreempleo;
+	}
+
+	public Integer getDiasReposo() {
+		return diasReposo;
+	}
+
+	public void setDiasReposo(Integer diasReposo) {
+		this.diasReposo = diasReposo;
 	}
 	
 }
