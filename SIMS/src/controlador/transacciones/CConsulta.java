@@ -15,6 +15,7 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import modelo.generico.DetalleAccidente;
 import modelo.maestros.Accidente;
 import modelo.maestros.Antecedente;
 import modelo.maestros.AntecedenteTipo;
@@ -657,6 +658,12 @@ public class CConsulta extends CGenerico {
 	private Combobox cmbCargo;
 	@Wire
 	private Combobox cmbArea;
+	@Wire
+	private Spinner spnReposo;
+	@Wire
+	private Row rowReposo;
+	@Wire
+	private Button btnGenerarReposo;
 	//
 	@Wire
 	private Div botoneraConsultaGeneral;
@@ -730,6 +737,8 @@ public class CConsulta extends CGenerico {
 			"Post-Vacacional", "Egreso", "Cambio de Puesto", "Promocion",
 			"Reintegro" };
 	private String[] consultaCurativa = { "Primera", "Control" };
+
+	private List<DetalleAccidente> listaDetalle = new ArrayList<DetalleAccidente>();
 
 	@Override
 	public void inicializar() throws IOException {
@@ -869,7 +878,7 @@ public class CConsulta extends CGenerico {
 								.parseLong(cmbArea.getSelectedItem()
 										.getContext()));
 					}
-
+					int dias = spnReposo.getValue();
 					Consulta consulta = new Consulta(idConsulta, paciente,
 							usuario, accidenteL, fechaConsulta, horaAuditoria,
 							horaAuditoria, fechaHora, nombreUsuarioSesion(),
@@ -881,7 +890,7 @@ public class CConsulta extends CGenerico {
 							extra2, extra3, ritmico, ritmico1, ritmico2,
 							ritmico3, paciente.getCargoReal(), cargoDeseado,
 							paciente.getArea(), areaDeseado, apto, reposo,
-							tipoSecundaria, examenesPre);
+							tipoSecundaria, examenesPre,dias);
 					servicioConsulta.guardar(consulta);
 					Consulta consultaDatos = new Consulta();
 					if (idConsulta != 0)
@@ -1355,7 +1364,7 @@ public class CConsulta extends CGenerico {
 		List<ConsultaDiagnostico> listaDiagnostico = new ArrayList<ConsultaDiagnostico>();
 		for (int i = 0; i < ltbDiagnosticosAgregados.getItemCount(); i++) {
 			Listitem listItem = ltbDiagnosticosAgregados.getItemAtIndex(i);
-			Integer idDiagnostico = ((Spinner) ((listItem.getChildren().get(3)))
+			Integer idDiagnostico = ((Spinner) ((listItem.getChildren().get(4)))
 					.getFirstChild()).getValue();
 			Diagnostico diagnostico = servicioDiagnostico.buscar(idDiagnostico);
 			String tipo = ((Combobox) ((listItem.getChildren().get(1)))
@@ -3950,59 +3959,56 @@ public class CConsulta extends CGenerico {
 		}
 	}
 
+	@Listen("onCheck = #rdoSiReposo")
+	public void checkSi() {
+		rowReposo.setVisible(true);
+		btnGenerarReposo.setVisible(true);
+	}
+
+	@Listen("onCheck = #rdoNoReposo")
+	public void checkNo() {
+		rowReposo.setVisible(false);
+		spnReposo.setValue(0);
+		btnGenerarReposo.setVisible(false);
+	}
+
 	// VENTANA DE ACCIDENTE
 
 	public void ventana(Combobox a) {
-		Spinner spin = (Spinner) a.getParent().getParent().getChildren().get(3)
+		Spinner spin = (Spinner) a.getParent().getParent().getChildren().get(4)
 				.getFirstChild();
+		long diagnositco = spin.getValue();
 		System.out.println("idDiag" + spin.getValue());
-		System.out.println("idConsulta" + idConsulta);
+		Button boton = (Button) a.getParent().getParent().getChildren().get(3)
+				.getFirstChild();
 		if (a.getValue().equals("Accidente Laboral")
-				|| a.getValue().equals("Accidente Comun")) {
-			// Arbol arbolItem = servicioArbol
-			// .buscarPorNombreArbol("Registro Accidente");
-			// cArbol.abrirVentanas(arbolItem);
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("idConsulta", idConsulta);
-			map.put("idDiagnostico", Long.valueOf(spin.getValue()));
-			Sessions.getCurrent().setAttribute("consulta", map);
-			Window window = (Window) Executions.createComponents(
-					"/vistas/transacciones/VRegistroAccidente.zul", null, map);
-			window.doModal();
-
-		}
+				|| a.getValue().equals("Accidente Comun")) {// Arbol arbolItem =
+															// servicioArbol.buscarPorNombreArbol("Registro Accidente");cArbol.abrirVentanas(arbolItem);
+			abrirVentana(diagnositco);
+			boton.setVisible(true);
+		} else
+			boton.setVisible(false);
 	}
 
-	public void getVentana(Combobox combo) {
-		System.out.println(combo.getValue());
-		System.out.println(combo.getSelectedItem());
-		System.out.println("Entro");
-		if (ltbDiagnosticosAgregados.getItemCount() != 0) {
-			System.out.println("For");
-			for (int i = 0; i < ltbDiagnosticosAgregados.getItemCount(); i++) {
-				Listitem listItem = ltbDiagnosticosAgregados.getItemAtIndex(i);
-				if (listItem != null) {
-
-					System.out.println("If1");
-					if (((Combobox) ((listItem.getChildren().get(1)))
-							.getFirstChild()).getValue() != null) {
-						System.out.println(((Combobox) ((listItem.getChildren()
-								.get(1))).getFirstChild()).getValue());
-						if (((Combobox) ((listItem.getChildren().get(1)))
-								.getFirstChild()).getValue().equals(
-								"Accidente Laboral")
-								|| ((Combobox) ((listItem.getChildren().get(1)))
-										.getFirstChild()).getValue().equals(
-										"Accidente Comun")) {
-							System.out.println("Ifinterno");
-							Arbol arbolItem = servicioArbol
-									.buscarPorNombreArbol("Registro Accidente");
-							cArbol.abrirVentanas(arbolItem);
-						}
-					}
-				}
-			}
-		}
+	public void ventanaBoton(Button a) {
+		Spinner spin = (Spinner) a.getParent().getParent().getChildren().get(4)
+				.getFirstChild();
+		long diagnositco = spin.getValue();
+		abrirVentana(diagnositco);
 	}
 
+	public void abrirVentana(long diagnostico) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("idDiagnostico", diagnostico);
+		map.put("lista", listaDetalle);
+		Sessions.getCurrent().setAttribute("consulta", map);
+		Window window = (Window) Executions.createComponents(
+				"/vistas/transacciones/VRegistroAccidente.zul", null, map);
+		window.doModal();
+	}
+
+	public void recibirLista(List<DetalleAccidente> lista) {
+		listaDetalle = lista;
+		System.out.println(listaDetalle.size());
+	}
 }
