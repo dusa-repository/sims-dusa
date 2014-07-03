@@ -43,10 +43,6 @@ public class Consulta implements Serializable {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_accidente")
-	private Accidente accidente;
-
 	@Column(name = "fecha_consulta")
 	private Timestamp fechaConsulta;
 
@@ -73,7 +69,7 @@ public class Consulta implements Serializable {
 
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private boolean accidenteLaboral;
+	private Boolean accidenteLaboral;
 
 	@OneToMany(mappedBy = "consulta")
 	private Set<ConsultaDiagnostico> diagnosticos;
@@ -192,32 +188,33 @@ public class Consulta implements Serializable {
 
 	@Column(name = "tipo_consulta_secundaria", length = 100)
 	private String tipoConsultaSecundaria;
-	
+
 	@Column(name = "examen_preempleo", length = 1000)
 	private String examenPreempleo;
 
 	@Column(name = "dias_reposo")
 	private Integer diasReposo;
-	
+
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public Consulta(long idConsulta, Paciente paciente, Usuario usuario,
-			Accidente accidente, Timestamp fechaConsulta, String horaConsulta,
-			String horaAuditoria, Timestamp fechaAuditoria,
-			String usuarioAuditoria, boolean accidenteLaboral, String motivo,
-			String tipo, String enfermedad, long consultaAsociada,
-			Double estatura, Double peso, Double perimetroOmbligo,
-			Double perimetroPlena, Double perimetroForzada, Integer frecuencia,
-			Integer frecuenciaR, Integer frecuenciaE, Integer frecuenciaP,
-			Integer sistolica1, Integer sistolica2, Integer sistolica3,
-			Integer diastolica1, Integer diastolica2, Integer diastolica3,
-			Integer extra1, Integer extra2, Integer extra3, Boolean ritmico,
-			Boolean ritmico1, Boolean ritmico2, Boolean ritmico3, Cargo cargo,
+			Timestamp fechaConsulta, String horaConsulta, String horaAuditoria,
+			Timestamp fechaAuditoria, String usuarioAuditoria,
+			boolean accidenteLaboral, String motivo, String tipo,
+			String enfermedad, long consultaAsociada, Double estatura,
+			Double peso, Double perimetroOmbligo, Double perimetroPlena,
+			Double perimetroForzada, Integer frecuencia, Integer frecuenciaR,
+			Integer frecuenciaE, Integer frecuenciaP, Integer sistolica1,
+			Integer sistolica2, Integer sistolica3, Integer diastolica1,
+			Integer diastolica2, Integer diastolica3, Integer extra1,
+			Integer extra2, Integer extra3, Boolean ritmico, Boolean ritmico1,
+			Boolean ritmico2, Boolean ritmico3, Cargo cargo,
 			Cargo cargoDeseado, Area area, Area areaDeseada, boolean apto,
-			boolean reposo, String tipoConsultaSecundaria, String examenPre, Integer dias) {
+			boolean reposo, String tipoConsultaSecundaria, String examenPre,
+			Integer dias) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
@@ -228,7 +225,6 @@ public class Consulta implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.usuario = usuario;
 		this.accidenteLaboral = accidenteLaboral;
-		this.accidente = accidente;
 		this.motivoConsulta = motivo;
 		this.enfermedadActual = enfermedad;
 		this.tipoConsulta = tipo;
@@ -330,11 +326,11 @@ public class Consulta implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public boolean isAccidenteLaboral() {
+	public Boolean isAccidenteLaboral() {
 		return accidenteLaboral;
 	}
 
-	public void setAccidenteLaboral(boolean accidenteLaboral) {
+	public void setAccidenteLaboral(Boolean accidenteLaboral) {
 		this.accidenteLaboral = accidenteLaboral;
 	}
 
@@ -376,14 +372,6 @@ public class Consulta implements Serializable {
 
 	public void setServicios(Set<ConsultaServicioExterno> servicios) {
 		this.servicios = servicios;
-	}
-
-	public Accidente getAccidente() {
-		return accidente;
-	}
-
-	public void setAccidente(Accidente accidente) {
-		this.accidente = accidente;
 	}
 
 	public String getMotivoConsulta() {
@@ -673,5 +661,5 @@ public class Consulta implements Serializable {
 	public void setDiasReposo(Integer diasReposo) {
 		this.diasReposo = diasReposo;
 	}
-	
+
 }
