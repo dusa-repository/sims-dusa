@@ -33,9 +33,6 @@ public class Accidente implements Serializable {
 	@Column(length=100)
 	private String tipo;
 	
-	@OneToMany(mappedBy="accidente")
-	private Set<Consulta> consultas;
-	
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
@@ -87,14 +84,6 @@ public class Accidente implements Serializable {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
-	}
-
-	public Set<Consulta> getConsultas() {
-		return consultas;
-	}
-
-	public void setConsultas(Set<Consulta> consultas) {
-		this.consultas = consultas;
 	}
 
 	public Timestamp getFechaAuditoria() {

@@ -92,6 +92,7 @@ public class CAccidenteDetalle extends CGenerico {
 					lista.add(detalleAccidente);
 					controlador.recibirLista(lista);
 					limpiar();
+					salir();
 				}
 			}
 

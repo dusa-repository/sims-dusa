@@ -36,6 +36,6 @@ public class SConsulta {
 	}
 
 	public List<Consulta> buscarPorAccidente(Paciente paciente) {
-		return consultaDAO.findByPacienteAndAccidenteNotNull(paciente);
+		return consultaDAO.findByPacienteAndAccidenteLaboralTrue(paciente);
 	}
 }

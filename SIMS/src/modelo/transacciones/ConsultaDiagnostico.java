@@ -1,5 +1,7 @@
 package modelo.transacciones;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,18 +35,30 @@ public class ConsultaDiagnostico {
 	@Column(length=100)
 	private String observacion;
 
+	@Column(name="lugar_accidente", length=100)
+	private String lugar;
+	
+	@Column(name="motivo_accidente", length=100)
+	private String motivo;
+	
+	@Column(name="fecha_accidente")
+	private Timestamp fecha;
+	
 	public ConsultaDiagnostico() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public ConsultaDiagnostico(Consulta consulta, Diagnostico diagnostico, String tipo,
-			String observacion) {
+			String observacion, String lugar,String motivo,Timestamp fecha) {
 		super();
 		this.consulta = consulta;
 		this.diagnostico = diagnostico;
 		this.observacion = observacion;
 		this.tipo = tipo;
+		this.lugar = lugar;
+		this.motivo = motivo;
+		this.fecha = fecha;
 	}
 
 	public Consulta getConsulta() {
@@ -77,6 +91,30 @@ public class ConsultaDiagnostico {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public String getLugar() {
+		return lugar;
+	}
+
+	public void setLugar(String lugar) {
+		this.lugar = lugar;
+	}
+
+	public String getMotivo() {
+		return motivo;
+	}
+
+	public void setMotivo(String motivo) {
+		this.motivo = motivo;
+	}
+
+	public Timestamp getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Timestamp fecha) {
+		this.fecha = fecha;
 	}
 
 }

@@ -15,6 +15,6 @@ public interface IConsultaDAO  extends JpaRepository<Consulta, Long> {
 	@Query("select coalesce(max(consulta.idConsulta), '0') from Consulta consulta")
 	long findMaxIdMedicina();
 
-	List<Consulta> findByPacienteAndAccidenteNotNull(Paciente paciente);
+	List<Consulta> findByPacienteAndAccidenteLaboralTrue(Paciente paciente);
 
 }
