@@ -22,6 +22,7 @@
 						<radiogroup id="rdgAntecedenteTipo">
 							<radio label="Medicos" value="Medicos" id="rdoMedico" />
 							<radio label="Laborales" value="Laborales" id="rdoLaboral" />
+										<radio label="Familiar" value="Familiar" id="rdoFamiliar" />
 						</radiogroup>
 					</row>
 				</rows>

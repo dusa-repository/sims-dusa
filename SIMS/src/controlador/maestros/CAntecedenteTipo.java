@@ -21,13 +21,14 @@ import componentes.Catalogo;
 
 public class CAntecedenteTipo extends CGenerico {
 
-
 	@Wire
 	private Radiogroup rdgAntecedenteTipo;
 	@Wire
 	private Radio rdoLaboral;
+	 @Wire
+	 private Radio rdoMedico;
 	@Wire
-	private Radio rdoMedico;
+	private Radio rdoFamiliar;
 	@Wire
 	private Div botoneraAntecedenteTipo;
 	@Wire
@@ -40,33 +41,40 @@ public class CAntecedenteTipo extends CGenerico {
 	private Div divAntecedenteTipo;
 	private long id = 0;
 	Catalogo<AntecedenteTipo> catalogo;
-	
+
 	@Override
 	public void inicializar() throws IOException {
 		Botonera botonera = new Botonera() {
-			
+
 			@Override
 			public void salir() {
-				cerrarVentana(divAntecedenteTipo, "Clasificacion de Antecedente");
+				cerrarVentana(divAntecedenteTipo,
+						"Clasificacion de Antecedente");
 			}
-			
+
 			@Override
 			public void limpiar() {
 				txtNombreAntecedenteTipo.setValue("");
 				rdoLaboral.setChecked(false);
 				rdoMedico.setChecked(false);
+				rdoFamiliar.setChecked(false);
 				id = 0;
 			}
-			
+
 			@Override
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombreAntecedenteTipo.getValue();
 					String tipo = "Medico";
 					if (rdoLaboral.isChecked())
-						tipo="Laboral";
-					
-					AntecedenteTipo antecedenteTipo = new AntecedenteTipo(id, nombre,tipo, fechaHora, horaAuditoria,
+						tipo = "Laboral";
+					else {
+						if (rdoFamiliar.isChecked())
+							tipo = "Familiar";
+					}
+
+					AntecedenteTipo antecedenteTipo = new AntecedenteTipo(id,
+							nombre, tipo, fechaHora, horaAuditoria,
 							nombreUsuarioSesion());
 					servicioAntecedenteTipo.guardar(antecedenteTipo);
 					Messagebox.show("Registro Guardado Exitosamente",
@@ -75,39 +83,43 @@ public class CAntecedenteTipo extends CGenerico {
 					limpiar();
 				}
 			}
-			
+
 			@Override
 			public void eliminar() {
-				if (id != 0 && txtNombreAntecedenteTipo.getText().compareTo("") != 0) {
-					Messagebox.show("¿Esta Seguro de Eliminar la Clasificacion de Antecedente?",
-							"Alerta", Messagebox.OK | Messagebox.CANCEL,
-							Messagebox.QUESTION,
-							new org.zkoss.zk.ui.event.EventListener<Event>() {
-								public void onEvent(Event evt)
-										throws InterruptedException {
-									if (evt.getName().equals("onOK")) {
-										AntecedenteTipo antecedenteTipo = servicioAntecedenteTipo
-												.buscar(id);
-										List<Antecedente> antecedentes = servicioAntecedente
-												.buscarPorAntecedenteTipo(antecedenteTipo);
-										if (!antecedentes.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
-										} else {
-											servicioAntecedenteTipo.eliminar(antecedenteTipo);
-											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+				if (id != 0
+						&& txtNombreAntecedenteTipo.getText().compareTo("") != 0) {
+					Messagebox
+							.show("¿Esta Seguro de Eliminar la Clasificacion de Antecedente?",
+									"Alerta",
+									Messagebox.OK | Messagebox.CANCEL,
+									Messagebox.QUESTION,
+									new org.zkoss.zk.ui.event.EventListener<Event>() {
+										public void onEvent(Event evt)
+												throws InterruptedException {
+											if (evt.getName().equals("onOK")) {
+												AntecedenteTipo antecedenteTipo = servicioAntecedenteTipo
+														.buscar(id);
+												List<Antecedente> antecedentes = servicioAntecedente
+														.buscarPorAntecedenteTipo(antecedenteTipo);
+												if (!antecedentes.isEmpty()) {
+													Messagebox
+															.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
+																	"Informacion",
+																	Messagebox.OK,
+																	Messagebox.INFORMATION);
+												} else {
+													servicioAntecedenteTipo
+															.eliminar(antecedenteTipo);
+													limpiar();
+													Messagebox
+															.show("Registro Eliminado Exitosamente",
+																	"Informacion",
+																	Messagebox.OK,
+																	Messagebox.INFORMATION);
+												}
+											}
 										}
-									}
-								}
-							});
+									});
 				} else {
 					Messagebox.show("No ha Seleccionado Ningun Registro",
 							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
@@ -126,24 +138,25 @@ public class CAntecedenteTipo extends CGenerico {
 		} else
 			return true;
 	}
-	
+
 	/* Muestra el catalogo de los antecedenteTipoes */
 	@Listen("onClick = #btnBuscarAntecedenteTipo")
 	public void mostrarCatalogo() {
-		final List<AntecedenteTipo> antecedenteTipos = servicioAntecedenteTipo.buscarTodos();
-		catalogo = new Catalogo<AntecedenteTipo>(catalogoAntecedenteTipo, "Catalogo de Clasificaciones",
-				antecedenteTipos, "Nombre","Clasificacion") {
+		final List<AntecedenteTipo> antecedenteTipos = servicioAntecedenteTipo
+				.buscarTodos();
+		catalogo = new Catalogo<AntecedenteTipo>(catalogoAntecedenteTipo,
+				"Catalogo de Clasificaciones", antecedenteTipos, "Nombre",
+				"Clasificacion") {
 
 			@Override
 			protected List<AntecedenteTipo> buscar(String valor, String combo) {
 				if (combo.equals("Nombre"))
 					return servicioAntecedenteTipo.filtroNombre(valor);
-				else
-				{
+				else {
 					if (combo.equals("Clasificacion"))
 						return servicioAntecedenteTipo.filtroTipo(valor);
 					else
-					return antecedenteTipos;
+						return antecedenteTipos;
 				}
 			}
 
@@ -162,7 +175,8 @@ public class CAntecedenteTipo extends CGenerico {
 	/* Permite la seleccion de un item del catalogo */
 	@Listen("onSeleccion = #catalogoAntecedenteTipo")
 	public void seleccinar() {
-		AntecedenteTipo antecedenteTipo = catalogo.objetoSeleccionadoDelCatalogo();
+		AntecedenteTipo antecedenteTipo = catalogo
+				.objetoSeleccionadoDelCatalogo();
 		llenarCampos(antecedenteTipo);
 		catalogo.setParent(null);
 	}
@@ -170,8 +184,8 @@ public class CAntecedenteTipo extends CGenerico {
 	/* Busca si existe un antecedenteTipo con el mismo nombre escrito */
 	@Listen("onChange = #txtNombreAntecedenteTipo")
 	public void buscarPorNombre() {
-		AntecedenteTipo antecedenteTipo = servicioAntecedenteTipo.buscarPorNombre(txtNombreAntecedenteTipo
-				.getValue());
+		AntecedenteTipo antecedenteTipo = servicioAntecedenteTipo
+				.buscarPorNombre(txtNombreAntecedenteTipo.getValue());
 		if (antecedenteTipo != null)
 			llenarCampos(antecedenteTipo);
 	}
@@ -179,10 +193,16 @@ public class CAntecedenteTipo extends CGenerico {
 	/* LLena los campos del formulario dado un antecedenteTipo */
 	private void llenarCampos(AntecedenteTipo antecedenteTipo) {
 		txtNombreAntecedenteTipo.setValue(antecedenteTipo.getNombre());
-		if(antecedenteTipo.getTipo().equals("Medico"))
+		if (antecedenteTipo.getTipo().equals("Medico"))
 			rdoMedico.setChecked(true);
 		else
-			rdoLaboral.setChecked(true);
+		{
+			if (antecedenteTipo.getTipo().equals("Familiar"))
+				rdoFamiliar.setChecked(true);
+			else
+				rdoLaboral.setChecked(true);
+				
+		}	
 		id = antecedenteTipo.getIdAntecedenteTipo();
 	}
 

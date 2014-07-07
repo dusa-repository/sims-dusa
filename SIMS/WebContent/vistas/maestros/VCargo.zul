@@ -1,0 +1,26 @@
+<zk>
+	<script src="/public/progress.js" />
+		<div id="divCargo" apply="controlador.maestros.CCargo">
+			<groupbox width="42em" mold="3d" title="Cargo">
+				<grid width="100%">
+					<columns visible="false">
+						<column label="" width="22%" />
+						<column label="" width="62%" />
+						<column label="" width="16%" />
+					</columns>
+					<rows>
+						<row>
+							<label class="etiqueta" value="Nombre:" />
+							<textbox id="txtNombreCargo" hflex="1" maxlength="100"
+								tooltiptext="Ingrese el Nombre del Cargo" />
+							<button id="btnBuscarCargo" class="btn" label="Buscar"
+								tooltiptext="Catalogo de Cargos" image="/public/imagenes/botones/buscar.png" />
+						</row>
+					</rows>
+				</grid>
+				<separator />
+				<div id="botoneraCargo" />
+				<div id="catalogoCargo" />
+			</groupbox>
+		</div>
+</zk>

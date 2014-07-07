@@ -1,8 +1,10 @@
-package controlador.sha;
+package controlador.maestros;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
+import modelo.maestros.Cargo;
 import modelo.sha.Area;
 
 import org.zkoss.zk.ui.event.Event;
@@ -19,51 +21,50 @@ import componentes.Catalogo;
 
 import controlador.maestros.CGenerico;
 
-public class CArea extends CGenerico {
+public class CCargo extends CGenerico {
 
 	@Wire
-	private Div botoneraArea;
+	private Div botoneraCargo;
 	@Wire
-	private Textbox txtNombreArea;
+	private Textbox txtNombreCargo;
 	@Wire
-	private Button btnBuscarArea;
+	private Button btnBuscarCargo;
 	@Wire
-	private Div catalogoArea;
+	private Div catalogoCargo;
 	@Wire
-	private Div divArea;
-	@Wire
-	private Window wdwArea;
+	private Div divCargo;
 
 	private long id = 0;
-	Catalogo<Area> catalogo;
+	Catalogo<Cargo> catalogo;
 
 	@Override
 	public void inicializar() throws IOException {
 
-		txtNombreArea.setFocus(true);
+		txtNombreCargo.setFocus(true);
 
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divArea, "Area");
+				cerrarVentana(divCargo, "Cargo");
 
 			}
 
 			@Override
 			public void limpiar() {
-				txtNombreArea.setValue("");
+				txtNombreCargo.setValue("");
 				id = 0;
-				txtNombreArea.setFocus(true);
+				txtNombreCargo.setFocus(true);
 
 			}
 
 			@Override
 			public void guardar() {
 				if (validar()) {
-					String nombre = txtNombreArea.getValue();
-					Area area = new Area(id, nombre,fechaHora, horaAuditoria, nombreUsuarioSesion());
-					servicioArea.guardar(area);
+					String nombre = txtNombreCargo.getValue();
+					Cargo cargo = new Cargo(id, nombre, fechaHora,
+							horaAuditoria, nombreUsuarioSesion());
+					servicioCargo.guardar(cargo);
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
@@ -74,15 +75,15 @@ public class CArea extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				if (id != 0 && txtNombreArea.getText().compareTo("") != 0) {
-					Messagebox.show("¿Esta Seguro de Eliminar el Area?",
+				if (id != 0 && txtNombreCargo.getText().compareTo("") != 0) {
+					Messagebox.show("¿Esta Seguro de Eliminar el Cargo?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										Area area = servicioArea.buscar(id);
+										Cargo cargo = servicioCargo.buscar(id);
 										if (true) {
 											Messagebox
 													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
@@ -90,7 +91,7 @@ public class CArea extends CGenerico {
 															Messagebox.OK,
 															Messagebox.INFORMATION);
 										} else {
-											servicioArea.eliminar(area);
+											servicioCargo.eliminar(cargo);
 											limpiar();
 											Messagebox
 													.show("Registro Eliminado Exitosamente",
@@ -109,12 +110,12 @@ public class CArea extends CGenerico {
 			}
 		};
 
-		 botoneraArea.appendChild(botonera);
+		botoneraCargo.appendChild(botonera);
 	}
 
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (txtNombreArea.getText().compareTo("") == 0) {
+		if (txtNombreCargo.getText().compareTo("") == 0) {
 			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
 					Messagebox.OK, Messagebox.INFORMATION);
 			return false;
@@ -123,53 +124,53 @@ public class CArea extends CGenerico {
 	}
 
 	/* Muestra el catalogo de los areas */
-	@Listen("onClick = #btnBuscarArea")
+	@Listen("onClick = #btnBuscarCargo")
 	public void mostrarCatalogo() {
-		final List<Area> areas = servicioArea.buscarTodos();
-		catalogo = new Catalogo<Area>(catalogoArea,
-				"Catalogo de Areas", areas, "Nombre") {
+		final List<Cargo> cargos = servicioCargo.buscarTodos();
+		catalogo = new Catalogo<Cargo>(catalogoCargo, "Catalogo de Areas",
+				cargos, "Nombre") {
 
 			@Override
-			protected List<Area> buscar(String valor, String combo) {
+			protected List<Cargo> buscar(String valor, String combo) {
 				switch (combo) {
 				case "Nombre":
-					return servicioArea.filtroNombre(valor);
+					return servicioCargo.filtroNombre(valor);
 				default:
-					return areas;
+					return cargos;
 				}
 			}
 
 			@Override
-			protected String[] crearRegistros(Area area) {
+			protected String[] crearRegistros(Cargo cargo) {
 				String[] registros = new String[1];
-				registros[0] = area.getNombre();
+				registros[0] = cargo.getNombre();
 				return registros;
 			}
 		};
-		catalogo.setParent(catalogoArea);
+		catalogo.setParent(catalogoCargo);
 		catalogo.doModal();
 	}
 
 	/* Permite la seleccion de un item del catalogo */
-	@Listen("onSeleccion = #catalogoArea")
+	@Listen("onSeleccion = #catalogoCargo")
 	public void seleccinar() {
-		Area area = catalogo.objetoSeleccionadoDelCatalogo();
-		llenarCampos(area);
+		Cargo cargo = catalogo.objetoSeleccionadoDelCatalogo();
+		llenarCampos(cargo);
 		catalogo.setParent(null);
 	}
 
 	/* Busca si existe un area con el mismo nombre escrito */
-	@Listen("onChange = #txtNombreArea")
+	@Listen("onChange = #txtNombreCargo")
 	public void buscarPorNombre() {
-		Area area = servicioArea.buscarPorNombre(txtNombreArea.getValue());
-		if (area != null)
-			llenarCampos(area);
+		Cargo cargo = servicioCargo.buscarPorNombre(txtNombreCargo.getValue());
+		if (cargo != null)
+			llenarCampos(cargo);
 	}
 
 	/* LLena los campos del formulario dado un area */
-	private void llenarCampos(Area area) {
-		txtNombreArea.setValue(area.getNombre());
-		id = area.getIdArea();
+	private void llenarCampos(Cargo cargo) {
+		txtNombreCargo.setValue(cargo.getNombre());
+		id = cargo.getIdCargo();
 	}
 
 }

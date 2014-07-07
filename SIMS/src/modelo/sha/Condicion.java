@@ -2,13 +2,17 @@ package modelo.sha;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import modelo.seguridad.Usuario;
 
 @Entity
 @Table(name = "condicion")
@@ -35,6 +39,24 @@ public class Condicion implements Serializable {
 
 	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
+	
+	@ManyToMany(mappedBy="condicionA")
+	private Set<Informe> informesA;
+	
+	@ManyToMany(mappedBy="condicionB")
+	private Set<Informe> informesB;
+	
+	@ManyToMany(mappedBy="condicionC")
+	private Set<Informe> informesC;
+	
+	@ManyToMany(mappedBy="condicionD")
+	private Set<Informe> informesD;
+	
+	@ManyToMany(mappedBy="condicionE")
+	private Set<Informe> informesE;
+	
+	@ManyToMany(mappedBy="condicionF")
+	private Set<Informe> informesF;
 
 	public Condicion() {
 		super();
@@ -99,6 +121,54 @@ public class Condicion implements Serializable {
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+	public Set<Informe> getInformesA() {
+		return informesA;
+	}
+
+	public void setInformesA(Set<Informe> informesA) {
+		this.informesA = informesA;
+	}
+
+	public Set<Informe> getInformesB() {
+		return informesB;
+	}
+
+	public void setInformesB(Set<Informe> informesB) {
+		this.informesB = informesB;
+	}
+
+	public Set<Informe> getInformesC() {
+		return informesC;
+	}
+
+	public void setInformesC(Set<Informe> informesC) {
+		this.informesC = informesC;
+	}
+
+	public Set<Informe> getInformesD() {
+		return informesD;
+	}
+
+	public void setInformesD(Set<Informe> informesD) {
+		this.informesD = informesD;
+	}
+
+	public Set<Informe> getInformesE() {
+		return informesE;
+	}
+
+	public void setInformesE(Set<Informe> informesE) {
+		this.informesE = informesE;
+	}
+
+	public Set<Informe> getInformesF() {
+		return informesF;
+	}
+
+	public void setInformesF(Set<Informe> informesF) {
+		this.informesF = informesF;
 	}
 	
 	

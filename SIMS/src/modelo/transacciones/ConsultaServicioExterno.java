@@ -34,6 +34,9 @@ public class ConsultaServicioExterno {
 	
 	@Column(name="costo")
 	private double costo;
+	
+	@Column(length=100)
+	private String resultado;
 
 	public ConsultaServicioExterno() {
 		super();
@@ -79,6 +82,14 @@ public class ConsultaServicioExterno {
 
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
+	}
+
+	public String getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(String resultado) {
+		this.resultado = resultado;
 	}
 	
 	

@@ -30,7 +30,7 @@
 							<label class="etiqueta"
 								value="CÓDIGO  DECLARACIÓN DEL ACCIDENTE ANTE EL INPSASEL:" />
 							<textbox multiline="true" width="400px" id="txt1"
-								tooltiptext="Ingrese el Codigo" />
+								tooltiptext="Ingrese el Codigo" maxlength="50"/>
 						</hbox>
 						<separator />
 						<label class="etiqueta" value="INVESTIGACION DEL ACCIDENTE" />
@@ -710,7 +710,7 @@
 										onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Ocurrencia" />
 									<label class="etiqueta" value="Horario de la Jornada del Trabajador/a:" />
 									<textbox id="txt64"
-										tooltiptext="Ingrese el Horario del traajador/a el dia del Accidente" />
+										tooltiptext="Ingrese el Horario del trabajador/a el dia del Accidente" />
 								</row>
 								<row>
 									<label class="etiqueta" value="Horas laboradas al momento del Accidente:" />
@@ -1069,7 +1069,7 @@
 																tooltiptext="Marque para Responder" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt8253" />
+													<textbox multiline="true" id="txt825" />
 												</cell>
 											</row>
 											<row>
