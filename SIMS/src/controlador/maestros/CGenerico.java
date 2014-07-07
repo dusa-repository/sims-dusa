@@ -67,6 +67,7 @@ import servicio.seguridad.SUsuario;
 import servicio.sha.SArea;
 import servicio.sha.SClasificacionAccidente;
 import servicio.sha.SCondicion;
+import servicio.sha.SInforme;
 import servicio.transacciones.SCita;
 import servicio.transacciones.SConsulta;
 import servicio.transacciones.SConsultaDiagnostico;
@@ -140,6 +141,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SHistoriaIntervencion servicioHistoriaIntervencion;
 	@WireVariable("SHistoriaVacuna")
 	protected SHistoriaVacuna servicioHistoriaVacuna;
+	@WireVariable("SInforme")
+	protected SInforme servicioInforme;
 	@WireVariable("SIntervencion")
 	protected SIntervencion servicioIntervencion;
 	@WireVariable("SLaboratorio")

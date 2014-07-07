@@ -6,6 +6,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.Type;
 
 import modelo.sha.Area;
+import modelo.sha.Informe;
 import modelo.transacciones.Historia;
 
 import java.sql.Timestamp;
@@ -107,9 +108,6 @@ public class Paciente implements Serializable {
 	@Lob
 	private byte[] imagen;
 	
-	@Column(length=100)
-	private String cargo;
-	
 	@Column(length=500)
 	private String direccion;
 
@@ -208,6 +206,45 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "id_area")
 	private Area area;
 	
+	@OneToMany(mappedBy = "pacienteA")
+	private Set<Informe> informesA;
+	
+	@OneToMany(mappedBy = "pacienteB")
+	private Set<Informe> informesB;
+	
+	@OneToMany(mappedBy = "pacienteC")
+	private Set<Informe> informesC;
+	
+	@OneToMany(mappedBy = "pacienteD")
+	private Set<Informe> informesD;
+	
+	@OneToMany(mappedBy = "pacienteE")
+	private Set<Informe> informesE;
+	
+	@OneToMany(mappedBy = "pacienteF")
+	private Set<Informe> informeF;
+	
+	@OneToMany(mappedBy = "pacienteG")
+	private Set<Informe> informesG;
+	
+	@OneToMany(mappedBy = "pacienteH")
+	private Set<Informe> informesH;
+	
+	@OneToMany(mappedBy = "pacienteI")
+	private Set<Informe> informesI;
+	
+	@OneToMany(mappedBy = "pacienteJ")
+	private Set<Informe> informesJ;
+	
+	@OneToMany(mappedBy = "pacienteK")
+	private Set<Informe> informesK;
+	
+	@OneToMany(mappedBy = "pacienteL")
+	private Set<Informe> informesL;
+	
+	@OneToMany(mappedBy = "pacienteM")
+	private Set<Informe> informesM;
+	
 	public Paciente() {
 	}
 
@@ -220,7 +257,7 @@ public class Paciente implements Serializable {
 			double peso, String origenDiscapacidad, String tipoDiscapacidad,
 			String observacionDiscapacidad, Timestamp fechaAuditoria,
 			String horaAuditoria, String usuarioAuditoria, byte[] imagen,
-			String cargo, String direccion, String email, String telefono1,
+		 String direccion, String email, String telefono1,
 			String telefono2, String nombresEmergencia,
 			String apellidosEmergencia, String parentescoEmergencia,
 			String telefono1Emergencia, String telefono2Emergencia,
@@ -254,7 +291,6 @@ public class Paciente implements Serializable {
 		this.horaAuditoria = horaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.imagen = imagen;
-		this.cargo = cargo;
 		this.direccion = direccion;
 		this.email = email;
 		this.telefono1 = telefono1;
@@ -527,14 +563,6 @@ public class Paciente implements Serializable {
 		this.observacionDiscapacidad = observacionDiscapacidad;
 	}
 
-	public String getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
-	}
-
 	public String getDireccion() {
 		return direccion;
 	}
@@ -742,6 +770,110 @@ public Historia getHistoria() {
 
 	public void setArea(Area area) {
 		this.area = area;
+	}
+
+	public Set<Informe> getInformesA() {
+		return informesA;
+	}
+
+	public void setInformesA(Set<Informe> informesA) {
+		this.informesA = informesA;
+	}
+
+	public Set<Informe> getInformesB() {
+		return informesB;
+	}
+
+	public void setInformesB(Set<Informe> informesB) {
+		this.informesB = informesB;
+	}
+
+	public Set<Informe> getInformesC() {
+		return informesC;
+	}
+
+	public void setInformesC(Set<Informe> informesC) {
+		this.informesC = informesC;
+	}
+
+	public Set<Informe> getInformesD() {
+		return informesD;
+	}
+
+	public void setInformesD(Set<Informe> informesD) {
+		this.informesD = informesD;
+	}
+
+	public Set<Informe> getInformesE() {
+		return informesE;
+	}
+
+	public void setInformesE(Set<Informe> informesE) {
+		this.informesE = informesE;
+	}
+
+	public Set<Informe> getInformeF() {
+		return informeF;
+	}
+
+	public void setInformeF(Set<Informe> informeF) {
+		this.informeF = informeF;
+	}
+
+	public Set<Informe> getInformesG() {
+		return informesG;
+	}
+
+	public void setInformesG(Set<Informe> informesG) {
+		this.informesG = informesG;
+	}
+
+	public Set<Informe> getInformesH() {
+		return informesH;
+	}
+
+	public void setInformesH(Set<Informe> informesH) {
+		this.informesH = informesH;
+	}
+
+	public Set<Informe> getInformesI() {
+		return informesI;
+	}
+
+	public void setInformesI(Set<Informe> informesI) {
+		this.informesI = informesI;
+	}
+
+	public Set<Informe> getInformesJ() {
+		return informesJ;
+	}
+
+	public void setInformesJ(Set<Informe> informesJ) {
+		this.informesJ = informesJ;
+	}
+
+	public Set<Informe> getInformesK() {
+		return informesK;
+	}
+
+	public void setInformesK(Set<Informe> informesK) {
+		this.informesK = informesK;
+	}
+
+	public Set<Informe> getInformesL() {
+		return informesL;
+	}
+
+	public void setInformesL(Set<Informe> informesL) {
+		this.informesL = informesL;
+	}
+
+	public Set<Informe> getInformesM() {
+		return informesM;
+	}
+
+	public void setInformesM(Set<Informe> informesM) {
+		this.informesM = informesM;
 	}
 
 

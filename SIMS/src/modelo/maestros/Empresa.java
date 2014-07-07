@@ -2,9 +2,13 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import modelo.sha.Informe;
+
 import org.zkoss.zul.Textbox;
 
 import java.sql.Timestamp;
+import java.util.Set;
 
 /**
  * The persistent class for the empresa database table.
@@ -131,6 +135,12 @@ public class Empresa implements Serializable {
 
 	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
+	
+	@OneToMany(mappedBy = "empresaA")
+	private Set<Informe> informesA;
+	
+	@OneToMany(mappedBy = "empresaB")
+	private Set<Informe> informesB;
 
 	public Empresa() {
 	}
@@ -453,4 +463,21 @@ public class Empresa implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
+	public Set<Informe> getInformesA() {
+		return informesA;
+	}
+
+	public void setInformesA(Set<Informe> informesA) {
+		this.informesA = informesA;
+	}
+
+	public Set<Informe> getInformesB() {
+		return informesB;
+	}
+
+	public void setInformesB(Set<Informe> informesB) {
+		this.informesB = informesB;
+	}
+
+	
 }

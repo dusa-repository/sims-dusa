@@ -1,5 +1,6 @@
 package modelo.sha;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -30,6 +31,14 @@ public class Area implements Serializable {
 	@Column(length=100)
 	private String nombre;
 	
+	@Column(name="fecha_auditoria")
+	private Timestamp fechaAuditoria;
+
+	@Column(name="hora_auditoria", length=10)
+	private String horaAuditoria;
+
+	@Column(name="usuario_auditoria", length=50)
+	private String usuarioAuditoria;
 	
 	@OneToMany(mappedBy = "area")
 	private Set<Consulta> consultas;
@@ -40,15 +49,22 @@ public class Area implements Serializable {
 	@OneToMany(mappedBy = "area")
 	private Set<Paciente> pacientes;
 	
+	@OneToMany(mappedBy = "area")
+	private Set<Informe> informes;
+	
 	public Area() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Area(long idArea, String nombre) {
+	public Area(long idArea, String nombre, Timestamp fechaAuditoria,
+			String horaAuditoria, String usuarioAuditoria) {
 		super();
 		this.idArea = idArea;
 		this.nombre = nombre;
+		this.fechaAuditoria = fechaAuditoria;
+		this.horaAuditoria = horaAuditoria;
+		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
 	public long getIdArea() {
@@ -89,6 +105,38 @@ public class Area implements Serializable {
 
 	public void setPacientes(Set<Paciente> pacientes) {
 		this.pacientes = pacientes;
+	}
+
+	public Timestamp getFechaAuditoria() {
+		return fechaAuditoria;
+	}
+
+	public void setFechaAuditoria(Timestamp fechaAuditoria) {
+		this.fechaAuditoria = fechaAuditoria;
+	}
+
+	public String getHoraAuditoria() {
+		return horaAuditoria;
+	}
+
+	public void setHoraAuditoria(String horaAuditoria) {
+		this.horaAuditoria = horaAuditoria;
+	}
+
+	public String getUsuarioAuditoria() {
+		return usuarioAuditoria;
+	}
+
+	public void setUsuarioAuditoria(String usuarioAuditoria) {
+		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+	public Set<Informe> getInformes() {
+		return informes;
+	}
+
+	public void setInformes(Set<Informe> informes) {
+		this.informes = informes;
 	}
 
 	

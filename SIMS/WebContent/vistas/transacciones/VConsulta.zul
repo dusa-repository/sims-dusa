@@ -11,24 +11,24 @@
 					<column label="" width="12.5%" />
 					<column label="" width="12.5%" />
 					<column label="" width="12.5%" />
-					<column label="" width="12.5%" />
-					<column label="" width="12.5%%" />
-					<column label="" width="12.5%" />
-					<column label="" width="12.5%" />
+					<column label="" width="10%" />
+					<column label="" width="15%%" />
+					<column label="" width="10%" />
+					<column label="" width="15%" />
 				</columns>
 				<rows>
 					<row>
 						<label class="etiqueta" value="Buscar Cedula:" />
 						<textbox maxlength="500" id="txtCedula" hflex="1"
 							tooltiptext="Ingrese la Cedula del Paciente" />
-						<button id="btnBuscarPaciente" label="Buscar Paciente"
+						<button autodisable="true" id="btnBuscarPaciente" label="Buscar Paciente"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
-						<button id="btnVerHistoria" label="Ver Historia"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/reporte.png" />
+						<button autodisable="true" id="btnVerHistoria" label="Ver Historia"
+							tooltiptext="Catalogo" image="/public/imagenes/botones/generar.png" />
 						<label class="etiqueta" value="Cargo:" />
-						<label class="etiqueta" id="lblCargo1" />
+						<label id="lblCargo1" />
 						<label class="etiqueta" value="Area:" />
-						<label class="etiqueta" id="lblArea" />
+						<label id="lblArea" />
 					</row>
 				</rows>
 			</grid>
@@ -342,58 +342,55 @@
 								<tabpanel>
 									<grid width="100%" style="border:false;">
 										<columns visible="false">
-											<column label="" width="15%" />
-											<column label="" width="35%" />
-											<column label="" width="15%" />
-											<column label="" width="35%" />
+											<column label="" width="12%" />
+											<column label="" width="13%" />
+											<column label="" width="12%" />
+											<column label="" width="13%" />
+											<column label="" width="12%" />
+											<column label="" width="13%" />
+											<column label="" width="12%" />
+											<column label="" width="13%" />
 										</columns>
 										<rows>
-											<row id="row" visible="false">
-												<label class="etiqueta" value="Examenes Pre-Empleo:" />
+											<row>
+												<label class="etiqueta" value="Motivo de la Consulta:" />
 												<cell colspan="3">
 													<textbox maxlength="1000" class="multilinea"
-														multiline="true" id="txtExamenPreempleo" hflex="1"
+														multiline="true" id="txtMotivo" hflex="1"
 														tooltiptext="Ingrese el Motivo de la Consulta" />
+												</cell>
+												<label class="etiqueta" value="Enfermedad Actual:" />
+												<cell colspan="3">
+													<textbox maxlength="1000" class="multilinea"
+														multiline="true" id="txtEnfermedad" hflex="1"
+														tooltiptext="Ingrese la Enfermedad Actual Observada" />
 												</cell>
 											</row>
 											<row>
-												<label class="etiqueta" value="Motivo de la Consulta:" />
-												<textbox maxlength="1000" class="multilinea"
-													multiline="true" id="txtMotivo" hflex="1"
-													tooltiptext="Ingrese el Motivo de la Consulta" />
-												<label class="etiqueta" value="Enfermedad Actual:" />
-												<textbox maxlength="1000" class="multilinea"
-													multiline="true" id="txtEnfermedad" hflex="1"
-													tooltiptext="Ingrese la Enfermedad Actual Observada" />
-											</row>
-											<row>
-												<hbox />
-												<hbox>
-													<label class="etiqueta" value="Estatura(mts):" />
-													<doublespinner value="0" id="spnEstatura"
-														hflex="1" tooltiptext="Ingrese la estatura del paciente"
-														step="1" format="#.##" constraint="min 0 max 100000" />
-													<space />
-													<space />
-													<label class="etiqueta" value="Peso (kgs):" />
-													<doublespinner value="0" id="spnPeso" hflex="1"
-														tooltiptext="Ingrese el peso del Paciente" step="1"
-														format="#.##" constraint="min 0 max 100000" />
-												</hbox>
+												<label class="etiqueta" value="Estatura(mts):" />
+												<doublespinner value="0" id="spnEstatura"
+													hflex="1" tooltiptext="Ingrese la estatura del paciente"
+													step="1" format="#.##" constraint="min 0 max 100000" />
+												<label class="etiqueta" value="Peso (kgs):" />
+												<doublespinner value="0" id="spnPeso" hflex="1"
+													tooltiptext="Ingrese el peso del Paciente" step="1" format="#.##"
+													constraint="min 0 max 100000" />
 												<label class="etiqueta" value="Indice Masa Corporal:" />
 												<label class="etiqueta" id="lblIndice" />
+												<hbox />
+												<hbox />
 											</row>
 											<row>
-												<label class="etiqueta"
-													value="Perimetro del torax al nivel del apendice:" />
-												<hbox>
-													<label class="etiqueta" value="Inspiracion Plena(cms):" />
-													<doublespinner value="0" id="spnPlena" hflex="1"
-														step="1" format="#.#" constraint="min 0 max 100000" />
-													<label class="etiqueta" value="Inspiracion Forzada(cms):" />
-													<doublespinner value="0" id="spnForzada"
-														hflex="1" step="1" format="#.#" constraint="min 0 max 100000" />
-												</hbox>
+												<cell colspan="2">
+													<label class="etiqueta"
+														value="Perimetro del torax al nivel del apendice:" />
+												</cell>
+												<label class="etiqueta" value="Inspiracion Plena(cms):" />
+												<doublespinner value="0" id="spnPlena" hflex="1"
+													step="1" format="#.#" constraint="min 0 max 100000" />
+												<label class="etiqueta" value="Inspiracion Forzada(cms):" />
+												<doublespinner value="0" id="spnForzada"
+													hflex="1" step="1" format="#.#" constraint="min 0 max 100000" />
 												<label class="etiqueta"
 													value="Perimetro del abdomen a nivel del ombligo:" />
 												<doublespinner value="0" id="spnOmbligo" step="1"
@@ -408,87 +405,80 @@
 													<radio label="SI" value="si" id="rdoSiRitmico" />
 													<radio label="NO" value="no" id="rdoNoRitmico" />
 												</radiogroup>
+												<hbox />
+												<hbox />
+												<hbox />
+												<hbox />
 											</row>
 											<row>
 												<label class="etiqueta" value="Pulso en prueba de esfuerzo" />
-												<hbox hflex="1" vflex="1" align="center" pack="center"
-													widths="33%,33%,34%">
-													<label hflex="1" class="etiqueta" value="En Reposo" />
-													<label class="etiqueta" value="En Esfuerzo" />
-													<label class="etiqueta" value="PostEsfuerzo" />
-												</hbox>
+												<label hflex="1" class="etiqueta" value="En Reposo" />
+												<label class="etiqueta" value="En Esfuerzo" />
+												<label class="etiqueta" value="PostEsfuerzo" />
 												<label class="etiqueta" value="Presion Arterial" />
-												<hbox hflex="1" vflex="1" align="center" pack="center"
-													widths="33%,33%,34%">
-													<label hflex="1" class="etiqueta" value="1era" />
-													<label hflex="1" class="etiqueta" value="2da" />
-													<label hflex="1" class="etiqueta" value="3era" />
-												</hbox>
+												<label hflex="1" class="etiqueta" value="1era" />
+												<label hflex="1" class="etiqueta" value="2da" />
+												<label hflex="1" class="etiqueta" value="3era" />
 											</row>
 											<row>
 												<label class="etiqueta" value="Frecuencia minuto" />
-												<hbox hflex="1" vflex="1" align="center" pack="center"
-													widths="33%,33%,34%">
-													<spinner value="0" hflex="1" id="frecuencia11"
-														step="1" format="#" constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="frecuencia12"
-														step="1" format="#" constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="frecuencia13"
-														step="1" format="#" constraint="min 0 max 100000" />
-												</hbox>
+												<spinner value="0" hflex="1" id="frecuencia11" step="1"
+													format="#" constraint="min 0 max 100000" />
+												<spinner value="0" hflex="1" id="frecuencia12" step="1"
+													format="#" constraint="min 0 max 100000" />
+												<spinner value="0" hflex="1" id="frecuencia13" step="1"
+													format="#" constraint="min 0 max 100000" />
 												<label class="etiqueta" value="Sistolica" />
-												<hbox hflex="1" vflex="1" align="center" pack="center"
-													widths="33%,33%,34%">
-													<spinner value="0" hflex="1" id="s11" step="1"
-														format="#" constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="s12" step="1"
-														format="#" constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="s13" step="1"
-														format="#" constraint="min 0 max 100000" />
-												</hbox>
+												<spinner value="0" hflex="1" id="s11" step="1"
+													format="#" constraint="min 0 max 100000" />
+												<spinner value="0" hflex="1" id="s12" step="1"
+													format="#" constraint="min 0 max 100000" />
+												<spinner value="0" hflex="1" id="s13" step="1"
+													format="#" constraint="min 0 max 100000" />
 											</row>
 											<row>
 												<label class="etiqueta" value="¿Es Ritmico?" />
-												<hbox hflex="1" vflex="1" align="center" pack="center"
-													widths="33%,33%,34%">
-													<radiogroup id="rdgRitmicoF1">
-														<radio label="SI" value="si" id="rdoSiRitmicoF1" />
-														<radio label="NO" value="no" id="rdoNoRitmicoF1" />
-													</radiogroup>
-													<radiogroup id="rdgRitmicoF2">
-														<radio label="SI" value="si" id="rdoSiRitmicoF2" />
-														<radio label="NO" value="no" id="rdoNoRitmicoF2" />
-													</radiogroup>
-													<radiogroup id="rdgRitmicoF3">
-														<radio label="SI" value="si" id="rdoSiRitmicoF3" />
-														<radio label="NO" value="no" id="rdoNoRitmicoF3" />
-													</radiogroup>
-												</hbox>
+												<radiogroup id="rdgRitmicoF1">
+													<radio label="SI" value="si" id="rdoSiRitmicoF1" />
+													<radio label="NO" value="no" id="rdoNoRitmicoF1" />
+												</radiogroup>
+												<radiogroup id="rdgRitmicoF2">
+													<radio label="SI" value="si" id="rdoSiRitmicoF2" />
+													<radio label="NO" value="no" id="rdoNoRitmicoF2" />
+												</radiogroup>
+												<radiogroup id="rdgRitmicoF3">
+													<radio label="SI" value="si" id="rdoSiRitmicoF3" />
+													<radio label="NO" value="no" id="rdoNoRitmicoF3" />
+												</radiogroup>
 												<label class="etiqueta" value="Diastolica" />
-												<hbox hflex="1" vflex="1" align="center" pack="center"
-													widths="33%,33%,34%">
-													<spinner value="0" hflex="1" id="d11" step="1"
-														format="#" constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="d12" step="1"
-														format="#" constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="d13" step="1"
-														format="#" constraint="min 0 max 100000" />
-												</hbox>
+												<spinner value="0" hflex="1" id="d11" step="1"
+													format="#" constraint="min 0 max 100000" />
+												<spinner value="0" hflex="1" id="d12" step="1"
+													format="#" constraint="min 0 max 100000" />
+												<spinner value="0" hflex="1" id="d13" step="1"
+													format="#" constraint="min 0 max 100000" />
 											</row>
 											<row>
 												<label class="etiqueta" value="Extrasistoles por minuto" />
-												<hbox hflex="1" vflex="1" align="center" pack="center"
-													widths="33%,33%,34%">
-													<spinner value="0" hflex="1" id="ex11" step="1"
-														format="#" constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="ex12" step="1"
-														format="#" constraint="min 0 max 100000" />
-													<spinner value="0" hflex="1" id="ex13" step="1"
-														format="#" constraint="min 0 max 100000" />
-												</hbox>
+												<spinner value="0" hflex="1" id="ex11" step="1"
+													format="#" constraint="min 0 max 100000" />
+												<spinner value="0" hflex="1" id="ex12" step="1"
+													format="#" constraint="min 0 max 100000" />
+												<spinner value="0" hflex="1" id="ex13" step="1"
+													format="#" constraint="min 0 max 100000" />
+												<hbox />
+												<hbox />
 												<hbox />
 												<hbox />
 											</row>
+															<row id="row" visible="false">
+										<label class="etiqueta" value="Examenes Pre-Empleo:" />
+										<cell colspan="8">
+											<textbox maxlength="1000" class="multilinea"
+												multiline="true" id="txtExamenPreempleo" hflex="1"
+												tooltiptext="Ingrese el Motivo de la Consulta" />
+										</cell>
+									</row>
 										</rows>
 									</grid>
 									<separator />
@@ -622,10 +612,10 @@
 													</row>
 													<row id="rowReposo" visible="false">
 														<label class="etiqueta" value="Dias de Reposo:" />
-														<spinner value="0" id="spnReposo" step="1"
+														<spinner hflex="1" vflex="1" value="0" id="spnReposo" step="1"
 															constraint="min 0 max 100000" />
 													</row>
-													<row>
+													<row id="rowApto" visible="false">
 														<label class="etiqueta" value="¿Esta apto para el empleo?" />
 														<radiogroup id="rdgApto">
 															<radio label="SI" value="si" id="rdoSiApto" />
@@ -633,7 +623,7 @@
 														</radiogroup>
 													</row>
 													<row>
-														<label visible="false" id="lblConsulta"
+														<label  class="etiqueta"  visible="false" id="lblConsulta"
 															value="Consulta Asociada al Control:" />
 														<combobox visible="false" tooltiptext="Seleccione un Estado"
 															placeholder="Seleccione una Consulta" id="cmbConsulta"
@@ -734,7 +724,7 @@
 													</row>
 
 													<row>
-														<label value="Prioridad Recipe:" />
+														<label class="etiqueta" value="Prioridad Recipe:" />
 														<combobox tooltiptext="Seleccione la Prioridad"
 															placeholder="Seleccione la Prioridad" id="cmbPrioridad"
 															width="100%" readonly="true">
@@ -743,7 +733,7 @@
 														</combobox>
 													</row>
 													<row>
-														<label value="Recipe Valido hasta:" />
+														<label class="etiqueta" value="Recipe Valido hasta:" />
 														<datebox readonly="true" width="100%" id="dtbValido"
 															constraint="no past,no empty" onCreate="self.value = new Date()"
 															tooltiptext="Indique la Fecha de Vencimiento del Recipe" />
@@ -837,7 +827,7 @@
 														</cell>
 													</row>
 													<row>
-														<label value="Laboratorio encargado de examenes:" />
+														<label class="etiqueta" value="Laboratorio encargado de examenes:" />
 														<combobox tooltiptext="Seleccione un Laboratorio"
 															model="${$composer.proveedores}" placeholder="Seleccione un Laboratorio"
 															id="cmbProveedor" readonly="true" width="100%">
@@ -1012,7 +1002,7 @@
 												<listitem>
 													<listcell label="${each.servicioExterno.nombre}">
 													</listcell>
-													
+
 													<listcell>
 														<combobox onSelect='$composer.cambio'
 															tooltiptext="Seleccione un Centro" model="${$composer.proveedores}"
@@ -1102,8 +1092,7 @@
 												<template name="model">
 													<listitem>
 														<listcell label="${each.examen.nombre}">
-														<!-- </listcell>
-														<listcell label="${each.costo}"> -->
+															<!-- </listcell> <listcell label="${each.costo}"> -->
 														</listcell>
 														<listcell label="${each.observacion}">
 														</listcell>
@@ -1156,13 +1145,13 @@
 						<div id="botoneraConsulta" />
 					</tabpanel>
 					<tabpanel>
-						<hbox widths="95%,5%">
+						<hbox widths="90%,10%">
 							<listbox id="ltbConsultas" height="260px" width="100%"
 								emptyMessage="El Paciente no posee Consultas Registradas">
 								<listhead>
 									<listheader label="Fecha" width="10%" />
-									<listheader label="Motivo de Consulta" width="30%" />
-									<listheader label="Enfermedad Actual" width="30%" />
+									<listheader label="Motivo de Consulta" width="35%" />
+									<listheader label="Enfermedad Actual" width="35%" />
 									<listheader label="Tipo de Consulta" width="10%" />
 									<listheader label="SubTipo de Consulta" width="10%" />
 									<listheader label="id" visible="false" />
@@ -1187,14 +1176,17 @@
 								</template>
 							</listbox>
 							<vbox width="100%">
-								<button label="Ver" id="btnVerConsulta"
+								<button label="Ver" id="btnVerConsulta" autodisable="true"
 									image="/public/imagenes/botones/buscar.png"
 									tooltiptext="Seleccione una consulta y presione este boton para ver el detalle de la consulta"
 									hflex="1" />
 								<button label="Reporte" id="btnReporteConsulta"
 									image="/public/imagenes/botones/generar.png"
 									tooltiptext="Seleccione una consulta y presione este boton para generar el reporte de la consulta"
-									hflex="1" />
+									hflex="1" autodisable="true" />
+								<button id="btnVerResultado" label="Agregar Resultados"
+									sclass="btn" image="/public/imagenes/botones/agregar.png"
+									autodisable="true" hflex="1" />
 							</vbox>
 						</hbox>
 					</tabpanel>
@@ -1553,94 +1545,95 @@
 											</rows>
 										</grid>
 									</groupbox>
-									<groupbox id="gpxOjo" closable="false" open="true"
-										width="100%">
-										<caption label="Medidas (cms)"
-											style="color:blue; font-size: 12px; font-weight:bold" />
-										<grid width="100%">
-											<columns visible="false">
-												<column label="" width="16.6%" />
-												<column label="" width="16.6%" />
-												<column label="" width="16.6%" />
-												<column label="" width="16.6%" />
-												<column label="" width="16.6%" />
-												<column label="" width="17%" />
-											</columns>
-											<rows>
-												<row>
-													<label class="etiqueta" value="Lectura con carta Snell" />
-													<combobox
-														tooltiptext="Seleccione el Nivel de visión respecto a la fila en la Gráfica de Snell observada en el Paciente"
-														placeholder="Seleccione" id="cmbCarta" width="98%"
-														readonly="true">
-														<comboitem label="20/10" />
-														<comboitem label="20/12" />
-														<comboitem label="20/15" />
-														<comboitem label="20/20" />
-														<comboitem label="20/25" />
-														<comboitem label="20/30" />
-														<comboitem label="20/35" />
-														<comboitem label="20/40" />
-														<comboitem label="20/50" />
-														<comboitem label="20/70" />
-														<comboitem label="20/100" />
-														<comboitem label="20/200" />
-													</combobox>
-													<hbox />
-													<hbox />
-													<label class="etiqueta" value="¿Vision de Colores?" />
-													<radiogroup id="rdgColores">
-														<radio label="SI" value="si" id="rdoSiColores" />
-														<radio label="NO" value="no" id="rdoNoColores" />
-													</radiogroup>
-												</row>
-												<row>
-													<label class="etiqueta" value="Altura de Hombro" />
-													<doublespinner value="0" id="spnAlturaHombro"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-													<label class="etiqueta" value="Anchura de Hombro" />
-													<doublespinner value="0" id="spnAnchuraHombro"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-													<label class="etiqueta" value="Altura de Codo" />
-													<doublespinner value="0" id="spnAlturaCodo"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-												</row>
-												<row>
-													<label class="etiqueta" value="Long Miembro Superior Izquierdo" />
-													<doublespinner value="0" id="spnLongIzquierdo"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-													<label class="etiqueta" value="Long Miembro Superior Derecho" />
-													<doublespinner value="0" id="spnLongDerecho"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-													<label class="etiqueta" value="Altura Poplitea" />
-													<doublespinner value="0" id="spnPoplitea"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-												</row>
-												<row>
-													<label class="etiqueta" value="Altura silla ojo" />
-													<doublespinner value="0" id="spnSillaOjo"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-													<label class="etiqueta" value="Altura codo silla" />
-													<doublespinner value="0" id="spnCodoSilla"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-													<label class="etiqueta" value="Circunferencia Abdominal" />
-													<doublespinner value="0" id="spnCircunferenciaA"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-												</row>
-												<row>
-													<label class="etiqueta" value="Distancia Mano Piso" />
-													<doublespinner value="0" id="spnManoPiso"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-													<label class="etiqueta" value="Circunferencia de Cadera" />
-													<doublespinner value="0" id="spnCircunferenciaC"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-													<label class="etiqueta" value="Indice cadera Abdominal" />
-													<doublespinner value="0" id="spnCaderaAbdominal"
-														step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
-												</row>
-											</rows>
-										</grid>
-									</groupbox>
+									<grid width="100%">
+										<columns visible="false">
+											<column label="" width="16.6%" />
+											<column label="" width="16.6%" />
+											<column label="" width="16.6%" />
+											<column label="" width="16.6%" />
+											<column label="" width="16.6%" />
+											<column label="" width="17%" />
+										</columns>
+										<rows>
+											<row>
+												<label class="etiqueta" value="Lectura con carta Snell" />
+												<combobox
+													tooltiptext="Seleccione el Nivel de visión respecto a la fila en la Gráfica de Snell observada en el Paciente"
+													placeholder="Seleccione" id="cmbCarta" width="98%"
+													readonly="true">
+													<comboitem label="20/10" />
+													<comboitem label="20/12" />
+													<comboitem label="20/15" />
+													<comboitem label="20/20" />
+													<comboitem label="20/25" />
+													<comboitem label="20/30" />
+													<comboitem label="20/35" />
+													<comboitem label="20/40" />
+													<comboitem label="20/50" />
+													<comboitem label="20/70" />
+													<comboitem label="20/100" />
+													<comboitem label="20/200" />
+												</combobox>
+												<label class="etiqueta" value="¿Vision de Colores?" />
+												<radiogroup id="rdgColores">
+													<radio label="SI" value="si" id="rdoSiColores" />
+													<radio label="NO" value="no" id="rdoNoColores" />
+												</radiogroup>
+												<hbox />
+												<hbox />
+											</row>
+											<row>
+												<cell colspan="6">
+													<label style="color:blue; font-size: 12px; font-weight:bold"
+														value="Antropometria" />
+												</cell>
+											</row>
+											<row>
+												<label class="etiqueta" value="Altura de Hombro" />
+												<doublespinner value="0" id="spnAlturaHombro"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Anchura de Hombro" />
+												<doublespinner value="0" id="spnAnchuraHombro"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Altura de Codo" />
+												<doublespinner value="0" id="spnAlturaCodo"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Long Miembro Superior Izquierdo" />
+												<doublespinner value="0" id="spnLongIzquierdo"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Long Miembro Superior Derecho" />
+												<doublespinner value="0" id="spnLongDerecho"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Altura Poplitea" />
+												<doublespinner value="0" id="spnPoplitea"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Altura silla ojo" />
+												<doublespinner value="0" id="spnSillaOjo"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Altura codo silla" />
+												<doublespinner value="0" id="spnCodoSilla"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Circunferencia Abdominal" />
+												<doublespinner value="0" id="spnCircunferenciaA"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Distancia Mano Piso" />
+												<doublespinner value="0" id="spnManoPiso"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Circunferencia de Cadera" />
+												<doublespinner value="0" id="spnCircunferenciaC"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Indice cadera Abdominal" />
+												<doublespinner value="0" id="spnCaderaAbdominal"
+													step="1" format="#.#" constraint="min 0 max 100000" width="98%" />
+											</row>
+										</rows>
+									</grid>
 								</tabpanel>
 								<tabpanel>
 									<hbox>

@@ -22,4 +22,22 @@ public class SCargo {
 	public Cargo buscar(long parseLong) {
 		return cargoDAO.findOne(parseLong);
 	}
+
+	public void guardar(Cargo cargo) {
+		cargoDAO.save(cargo);
+		
+	}
+
+	public void eliminar(Cargo cargo) {
+		cargoDAO.delete(cargo);
+		
+	}
+
+	public List<Cargo> filtroNombre(String valor) {
+		return cargoDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public Cargo buscarPorNombre(String value) {
+		return cargoDAO.findByNombre(value);
+	}
 }

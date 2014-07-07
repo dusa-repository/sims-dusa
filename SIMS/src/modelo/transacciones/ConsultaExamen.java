@@ -37,6 +37,9 @@ public class ConsultaExamen {
 	
 	@Column(name="costo")
 	private double costo;
+	
+	@Column(length=100)
+	private String resultado;
 
 	public ConsultaExamen() {
 		super();
@@ -90,6 +93,14 @@ public class ConsultaExamen {
 
 	public void setCosto(double costo) {
 		this.costo = costo;
+	}
+
+	public String getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(String resultado) {
+		this.resultado = resultado;
 	}
 	
 	

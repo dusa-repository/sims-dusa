@@ -194,6 +194,9 @@ public class Consulta implements Serializable {
 
 	@Column(name = "dias_reposo")
 	private Integer diasReposo;
+	
+	@Column(length=500)
+	private String observacion;
 
 	public Consulta() {
 		super();
@@ -660,6 +663,14 @@ public class Consulta implements Serializable {
 
 	public void setDiasReposo(Integer diasReposo) {
 		this.diasReposo = diasReposo;
+	}
+
+	public String getObservacion() {
+		return observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 
 }

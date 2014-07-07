@@ -10,11 +10,13 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import modelo.maestros.Cargo;
 import modelo.maestros.Cita;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Arbol;
+import modelo.sha.Area;
 
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
@@ -133,12 +135,17 @@ public class CPaciente extends CGenerico {
 	private Combobox cmbTipoDiscapacidad;
 	@Wire
 	private Textbox txtOtras;
+	// @Wire
+	// private Textbox txtCargo;
 	@Wire
-	private Textbox txtCargo;
+	private Combobox cmbCargo;
+	@Wire
+	private Combobox cmbArea;
 	@Wire
 	private Combobox cmbEmpresa;
 	@Wire
 	private Combobox cmbCiudad;
+
 	@Wire
 	private Textbox txtDireccion;
 	@Wire
@@ -209,6 +216,8 @@ public class CPaciente extends CGenerico {
 
 		llenarComboCiudad();
 		llenarComboEmpresa();
+		llenarComboArea();
+		llenarComboCargo();
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -245,7 +254,10 @@ public class CPaciente extends CGenerico {
 				cmbTipoDiscapacidad.setValue("");
 				cmbTipoDiscapacidad.setValue("Seleccione un Tipo");
 				txtOtras.setValue("");
-				txtCargo.setValue("");
+				cmbCargo.setValue("");
+				cmbCargo.setValue("Seleccione un Cargo");
+				cmbArea.setValue("");
+				cmbArea.setValue("Seleccione un Area");
 				txtDireccion.setValue("");
 				txtTelefono1.setValue("");
 				txtTelefono2.setValue("");
@@ -315,7 +327,7 @@ public class CPaciente extends CGenerico {
 						imagen = imagenPaciente.getContent().getByteData();
 					}
 
-					String profesion, nacionalidad, nivelEducativo, turno, retiroIVSS, nroInpsasel, nombre1, apellido1, cedula, nombre2, apellido2, ficha, detalleAlergia, lugarNac, sexo, estadoCivil, grupoSanguineo, mano, origen, tipoDiscapacidad, otrasDiscapacidad, cargo, direccion, telefono1, telefono2, correo, nombresE, apellidosE, telefono1E, telefono2E, parentescoE, parentescoFamiliar;
+					String profesion, nacionalidad, nivelEducativo, turno, retiroIVSS, nroInpsasel, nombre1, apellido1, cedula, nombre2, apellido2, ficha, detalleAlergia, lugarNac, sexo, estadoCivil, grupoSanguineo, mano, origen, tipoDiscapacidad, otrasDiscapacidad, direccion, telefono1, telefono2, correo, nombresE, apellidosE, telefono1E, telefono2E, parentescoE, parentescoFamiliar;
 					int edad, carga;
 					boolean trabajador = false, alergia = false, discapacidad = false, lentes = false;
 					double estatura, peso;
@@ -323,18 +335,18 @@ public class CPaciente extends CGenerico {
 					Timestamp fechaIngreso = null;
 					Timestamp fechaEgreso = null;
 					Timestamp fechaInscripcion = null;
-					
-					if(dtbFechaIngreso.getValue()!=null)
-					fechaIngreso = new Timestamp(dtbFechaIngreso
-							.getValue().getTime());
-					
-					if(dtbFechaEgreso.getValue()!=null)
-					fechaEgreso = new Timestamp(dtbFechaEgreso
-							.getValue().getTime());
-					
-					if(dtbInscripcionIVSS.getValue()!=null)
-					fechaInscripcion = new Timestamp(
-							dtbInscripcionIVSS.getValue().getTime());
+
+					if (dtbFechaIngreso.getValue() != null)
+						fechaIngreso = new Timestamp(dtbFechaIngreso.getValue()
+								.getTime());
+
+					if (dtbFechaEgreso.getValue() != null)
+						fechaEgreso = new Timestamp(dtbFechaEgreso.getValue()
+								.getTime());
+
+					if (dtbInscripcionIVSS.getValue() != null)
+						fechaInscripcion = new Timestamp(dtbInscripcionIVSS
+								.getValue().getTime());
 
 					if (rdoV.isChecked())
 						nacionalidad = "V";
@@ -362,7 +374,14 @@ public class CPaciente extends CGenerico {
 					origen = cmbOrigen.getValue();
 					tipoDiscapacidad = cmbTipoDiscapacidad.getValue();
 					otrasDiscapacidad = txtOtras.getValue();
-					cargo = txtCargo.getValue();
+					//
+
+					Cargo cargo = servicioCargo.buscar(Long.parseLong(cmbCargo
+							.getSelectedItem().getContext()));
+					Area area = servicioArea.buscar(Long.parseLong(cmbArea
+							.getSelectedItem().getContext()));
+
+					// cargo = txtCargo.getValue();
 					direccion = txtDireccion.getValue();
 					telefono1 = txtTelefono1.getValue();
 					telefono2 = txtTelefono2.getValue();
@@ -409,10 +428,10 @@ public class CPaciente extends CGenerico {
 							detalleAlergia, mano, estatura, peso, origen,
 							tipoDiscapacidad, otrasDiscapacidad, fechaHora,
 							horaAuditoria, nombreUsuarioSesion(), imagen,
-							cargo, direccion, correo, telefono1, telefono2,
-							nombresE, apellidosE, parentescoE, telefono1E,
-							telefono2E, cedulaFamiliar, parentescoFamiliar,
-							empresa, ciudad, null, null);
+							direccion, correo, telefono1, telefono2, nombresE,
+							apellidosE, parentescoE, telefono1E, telefono2E,
+							cedulaFamiliar, parentescoFamiliar, empresa,
+							ciudad, cargo, area);
 
 					paciente.setNacionalidad(nacionalidad);
 					paciente.setCarga(carga);
@@ -508,8 +527,10 @@ public class CPaciente extends CGenerico {
 				|| (!rdoFamiliar.isChecked() && !rdoTrabajador.isChecked())
 				|| (!rdoNoDiscapacidad.isChecked() && !rdoSiDiscapacidad
 						.isChecked())
-				|| (rdoTrabajador.isChecked() && (txtCargo.getText().compareTo(
-						"") == 0 || cmbEmpresa.getText().compareTo("") == 0))
+				|| (rdoTrabajador.isChecked()
+						&& (cmbCargo.getText().compareTo("") == 0 || cmbEmpresa
+								.getText().compareTo("") == 0) || cmbArea
+						.getText().compareTo("") == 0)
 				|| (rdoFamiliar.isChecked() && cmbParentescoFamiliar.getText()
 						.compareTo("") == 0)
 				|| (!rdoSiLentes.isChecked() && !rdoNoLentes.isChecked())) {
@@ -726,6 +747,18 @@ public class CPaciente extends CGenerico {
 		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
 		cmbCiudad.setModel(new ListModelList<Ciudad>(ciudades));
 	}
+	/* Llena el combo de Cargos cada vez que se abre */
+	@Listen("onOpen = #cmbCargo")
+	public void llenarComboCargo() {
+		List<Cargo> cargos = servicioCargo.buscarTodos();
+		cmbCargo.setModel(new ListModelList<Cargo>(cargos));
+	}
+	/* Llena el combo de Areas cada vez que se abre */
+	@Listen("onOpen = #cmbArea")
+	public void llenarComboArea() {
+		List<Area> areas = servicioArea.buscarTodos();
+		cmbArea.setModel(new ListModelList<Area>(areas));
+	}
 
 	/*
 	 * Muestra los componentes de la vista relacionados a un trabajador
@@ -745,7 +778,10 @@ public class CPaciente extends CGenerico {
 	public void esFamiliar() {
 		rowCargoyEmpresa.setVisible(false);
 		gbxTrabajadorAsociado.setVisible(true);
-		txtCargo.setText("");
+		cmbCargo.setValue("");
+		cmbCargo.setValue("Seleccione un Cargo");
+		cmbArea.setValue("");
+		cmbArea.setValue("Seleccione un Area");
 		cmbEmpresa.setValue("");
 		cmbEmpresa.setPlaceholder("Seleccione una Empresa");
 
@@ -788,7 +824,8 @@ public class CPaciente extends CGenerico {
 		cmbOrigen.setValue(paciente.getOrigenDiscapacidad());
 		cmbTipoDiscapacidad.setValue(paciente.getTipoDiscapacidad());
 		txtOtras.setValue(paciente.getOrigenDiscapacidad());
-		txtCargo.setValue(paciente.getCargo());
+		cmbCargo.setValue(paciente.getCargoReal().getNombre());
+		cmbArea.setValue(paciente.getArea().getNombre());
 		txtDireccion.setValue(paciente.getDireccion());
 		txtTelefono1.setValue(paciente.getTelefono1());
 		txtTelefono2.setValue(paciente.getTelefono2());
@@ -886,6 +923,19 @@ public class CPaciente extends CGenerico {
 	@Listen("onClick = #btnAbrirEmpresa")
 	public void abrirEmpresa() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Empresa");
+		cArbol.abrirVentanas(arbolItem);
+	}
+	
+	/* Abre la vista de Cargo */
+	@Listen("onClick = #btnAbrirCargo")
+	public void abrirCargo() {
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Cargo");
+		cArbol.abrirVentanas(arbolItem);
+	}
+	/* Abre la vista de Area */
+	@Listen("onClick = #btnAbrirArea")
+	public void abrirArea() {
+		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Area");
 		cArbol.abrirVentanas(arbolItem);
 	}
 

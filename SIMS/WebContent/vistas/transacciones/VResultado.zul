@@ -1,0 +1,87 @@
+<zk>
+	<window width="90em" closable="false" id="wdwResultado"
+		apply="controlador.transacciones.CResultado">
+		<caption label="Resultados de la consulta"
+			style="color:white; font-size: 16px; font-weight:bold; " />
+		<div>
+			<space />
+			<vbox heights="30%,30%,30%,10%" hflex="1" vflex="1">
+				<listbox id="ltbExamenes" height="100%" width="100%"
+					emptyMessage="La consulta no posee examenes asociados">
+					<listhead>
+						<listheader label="Examen" width="30%" />
+						<listheader label="Resultado" width="70%" />
+						<listheader label="id" visible="false" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.examen.nombre}">
+							</listcell>
+							<listcell>
+								<textbox value="${each.resultado}" width="98%" />
+							</listcell>
+							<listcell>
+								<spinner value="${each.examen.idExamen}" width="98%"
+									visible="false" disabled="true" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+				<listbox id="ltbEspecialistas" height="100%" width="100%"
+					emptyMessage="La consulta no posee especialistas asociados">
+					<listhead>
+						<listheader label="Especialista" width="30%" />
+						<listheader label="Especialidad" width="30%" />
+						<listheader label="Resultado" width="40%" />
+						<listheader label="id" visible="false" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.especialista.nombre}">
+							</listcell>
+							<listcell label="${each.especialista.especialidad.descripcion}">
+							</listcell>
+							<listcell>
+								<textbox value="${each.resultado}" width="98%" />
+							</listcell>
+							<listcell>
+								<spinner value="${each.especialista.cedula}" width="98%"
+									visible="false" disabled="true" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+				<listbox id="ltbServicio" height="100%" width="100%"
+					emptyMessage="La consulta no posee servicios externos asociados">
+					<listhead>
+						<listheader label="Estudio Externo" width="30%" />
+						<listheader label="Centro" width="30%" />
+						<listheader label="Resultado" width="40%" />
+						<listheader label="id" visible="false" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.servicioExterno.nombre}">
+							</listcell>
+							<listcell label="${each.proveedor.nombre}">
+							</listcell>
+							<listcell>
+								<textbox value="${each.resultado}" width="98%" />
+							</listcell>
+							<listcell>
+								<spinner value="${each.servicioExterno.idServicioExterno}"
+									width="98%" visible="false" disabled="true" />
+							</listcell>
+						</listitem>
+					</template>
+				</listbox>
+			</vbox>
+			<hbox width="100%" widths="5%,95%">
+				<label hflex="1" class="etiqueta" value="Observacion" />
+				<textbox maxlength="500" class="multilinea" multiline="true"
+					id="txtObservacion" hflex="1" tooltiptext="Ingrese la observacion respectiva" />
+			</hbox>
+			<div id="botoneraResultado" />
+		</div>
+	</window>
+</zk>

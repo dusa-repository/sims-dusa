@@ -672,6 +672,8 @@ public class CConsulta extends CGenerico {
 	private Tab tabResumen;
 	@Wire
 	private Tab tabConsulta;
+	@Wire
+	private Row rowApto;
 	//
 	Botonera botonera;
 	@Wire
@@ -865,11 +867,9 @@ public class CConsulta extends CGenerico {
 					boolean reposo = false;
 					if (rdoSiReposo.isChecked())
 						reposo = true;
-					Boolean apto = null;
+					boolean apto = false;
 					if (rdoSiApto.isChecked())
 						apto = true;
-					if (rdoNoApto.isChecked())
-						apto = false;
 
 					String tipoSecundaria = cmbTipoPreventiva.getValue();
 					String examenesPre = txtExamenPreempleo.getValue();
@@ -895,6 +895,7 @@ public class CConsulta extends CGenerico {
 					System.out.println(cargoDeseado);
 					System.out.println(areaDeseado);
 					int dias = spnReposo.getValue();
+					System.out.println("aa"+areaDeseado);
 					Consulta consulta = new Consulta(idConsulta, paciente,
 							usuario, fechaConsulta, horaAuditoria,
 							horaAuditoria, fechaHora, nombreUsuarioSesion(),
@@ -1989,7 +1990,6 @@ public class CConsulta extends CGenerico {
 	}
 
 	private void llenarCampos(Paciente paciente) {
-		// TODO Auto-generated method stub
 		if (paciente.getCargoReal() != null)
 			lblCargo1.setValue(paciente.getCargoReal().getNombre());
 		if (paciente.getArea() != null)
@@ -2019,7 +2019,7 @@ public class CConsulta extends CGenerico {
 		lblTipoDiscapacidad.setValue(paciente.getTipoDiscapacidad());
 		lblObservacionDiscapacidad.setValue(paciente
 				.getObservacionDiscapacidad());
-		lblCargo.setValue(paciente.getCargo());
+		lblCargo.setValue(paciente.getCargoReal().getNombre());
 		lblDireccion.setValue(paciente.getDireccion());
 		lblTelefono1.setValue(paciente.getTelefono1());
 		lblTelefono2.setValue(paciente.getTelefono2());
@@ -2717,6 +2717,7 @@ public class CConsulta extends CGenerico {
 			rdoSiApto.setChecked(false);
 		if (rdoNoApto.isChecked())
 			rdoNoApto.setChecked(false);
+		rowApto.setVisible(false);
 	}
 
 	public void limpiarCampos() {
@@ -3182,16 +3183,21 @@ public class CConsulta extends CGenerico {
 		if (cmbTipoPreventiva.getValue().equals("Pre-Empleo")) {
 			row.setVisible(true);
 			rowPromocion.setVisible(false);
+			rowApto.setVisible(true);
 		} else {
 			if (cmbTipoPreventiva.getValue().equals("Control")) {
 				cmbConsulta.setVisible(true);
 				lblConsulta.setVisible(true);
 			} else {
 				if (cmbTipoPreventiva.getValue().equals("Cambio de Puesto")
-						|| cmbTipoPreventiva.getValue().equals("Promocion"))
+						|| cmbTipoPreventiva.getValue().equals("Promocion")){
+					rowApto.setVisible(true);
 					rowPromocion.setVisible(true);
-				else
+				}
+				else{
+					rowApto.setVisible(false);
 					rowPromocion.setVisible(false);
+				}
 				cmbConsulta.setVisible(false);
 				lblConsulta.setVisible(false);
 			}
@@ -3874,7 +3880,7 @@ public class CConsulta extends CGenerico {
 		double estatura = spnEstatura.getValue();
 		double imc = 0;
 		if (estatura != 0) {
-			imc = Math.round((peso / (estatura * estatura)) * 10) / 10;
+			imc = Math.round((peso / (estatura * estatura)) * 1000) / 1000;
 			if (imc < 18.5)
 				lblIndice.setValue(imc + " Bajo Peso");
 			else {
@@ -3928,6 +3934,8 @@ public class CConsulta extends CGenerico {
 									.getFirstChild()).setValue((double) 0);
 							((Combobox) ((listItem.getChildren().get(1)))
 									.getFirstChild()).setFocus(true);
+							((Combobox) ((listItem.getChildren().get(1)))
+									.getFirstChild()).setValue("");
 						}
 					}
 				}
@@ -4085,5 +4093,27 @@ public class CConsulta extends CGenerico {
 
 	public void recibirLista(List<DetalleAccidente> lista) {
 		listaDetalle = lista;
+	}
+
+//	Ventana de resultados
+	
+	@Listen("onClick = #btnVerResultado")
+	public void abrirVentanaResultado() {
+		if (ltbConsultas.getItemCount() != 0) {
+			if (ltbConsultas.getSelectedItems().size() == 1) {
+				Listitem listItem = ltbConsultas.getSelectedItem();
+				if (listItem != null) {
+					Consulta consulta = listItem.getValue();
+					HashMap<String, Object> mapiin = new HashMap<String, Object>();
+					mapiin.put("idConsulta", consulta.getIdConsulta());
+					Sessions.getCurrent().setAttribute("consultaResultado",
+							mapiin);
+					Window window = (Window) Executions.createComponents(
+							"/vistas/transacciones/VResultado.zul", null,
+							mapiin);
+					window.doModal();
+				}
+			}
+		}
 	}
 }

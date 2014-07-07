@@ -24,6 +24,9 @@ public class ClasificacionAccidente implements Serializable {
 	@Column(length=100)
 	private String nombre;
 	
+	@OneToMany(mappedBy = "clasificacion")
+	private Set<Informe> informes;
+	
 	public ClasificacionAccidente() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -49,6 +52,14 @@ public class ClasificacionAccidente implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public Set<Informe> getInformes() {
+		return informes;
+	}
+
+	public void setInformes(Set<Informe> informes) {
+		this.informes = informes;
 	}
 
 	
