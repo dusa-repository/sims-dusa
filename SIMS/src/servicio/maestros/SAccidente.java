@@ -23,29 +23,54 @@ public class SAccidente {
 	@Autowired
 	private IHistoriaAccidenteDAO accidenteHistoriaDAO;
 
-	public List<Accidente> buscarPorTipo(String valor) {
-		return accidenteDAO.findByTipo(valor);
-	}
-
 	public Accidente buscar(long parseLong) {
 		return accidenteDAO.findOne(parseLong);
 	}
 
 	public List<Accidente> buscarDisponibles(Historia historia, String string) {
-		List<HistoriaAccidente> accidentesHistoricos = accidenteHistoriaDAO.findByHistoriaAndAccidenteTipo(historia, string);
+		List<HistoriaAccidente> accidentesHistoricos = accidenteHistoriaDAO
+				.findByHistoriaAndTipoAccidente(historia, string);
 		List<Long> ids = new ArrayList<Long>();
-		if(accidentesHistoricos.isEmpty())
-			return accidenteDAO.findByTipo(string);
-		else{
-			for(int i=0; i<accidentesHistoricos.size();i++){
-				ids.add(accidentesHistoricos.get(i).getAccidente().getIdAccidente());
+		if (accidentesHistoricos.isEmpty())
+			return accidenteDAO.findAllOrderByCodigoAsc();
+		else {
+			for (int i = 0; i < accidentesHistoricos.size(); i++) {
+				ids.add(accidentesHistoricos.get(i).getAccidente()
+						.getIdAccidente());
 			}
-			return accidenteDAO.findByTipoAndIdAccidenteNotIn(string,ids);
+			return accidenteDAO.findByIdAccidenteNotIn(ids);
 		}
 	}
 
-	public List<Accidente> filtroNombre(String valor, String tipo) {
-		// TODO Auto-generated method stub
-		return accidenteDAO.findByNombreStartingWithAndTipoAllIgnoreCase(valor, tipo);
+	public List<Accidente> filtroNombre(String valor) {
+		return accidenteDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Accidente> buscarTodos() {
+		return accidenteDAO.findAllOrderByCodigoAsc();
+	}
+
+	public List<Accidente> filtroCodigo(String valor) {
+		return accidenteDAO.findByIdAccidenteStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Accidente> filtroClasificacion(String valor) {
+		return accidenteDAO
+				.findByClasificacionNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public void guardar(Accidente accidente) {
+		accidenteDAO.saveAndFlush(accidente);
+	}
+
+	public void eliminar(Accidente accidente) {
+		accidenteDAO.delete(accidente);
+	}
+
+	public Accidente buscarUltimo() {
+		long id = accidenteDAO.findMaxIdDiagnostico();
+		if (id != 0)
+			return accidenteDAO.findOne(id);
+		return null;
 	}
 }

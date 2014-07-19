@@ -38,4 +38,45 @@ public class SConsulta {
 	public List<Consulta> buscarPorAccidente(Paciente paciente) {
 		return consultaDAO.findByPacienteAndAccidenteLaboralTrue(paciente);
 	}
+
+	public List<Consulta> filtroFecha(String valor) {
+		return consultaDAO.findByFechaConsultaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Consulta> filtroDoctor(String valor) {
+		boolean blanco = false;
+		int corte = valor.length()+1;
+		for (int i = 0; i < valor.length(); i++) {
+			if (Character.isWhitespace(valor.charAt(i))){
+				blanco = true;
+				corte = i;
+				i = valor.length();
+			}
+		}
+		List<Consulta> consultas = consultaDAO
+				.findByUsuarioPrimerNombreStartingWithAllIgnoreCase(valor.substring(0,corte-1));
+		if (blanco)
+			consultas
+					.addAll(consultaDAO
+							.findByUsuarioPrimerApellidoStartingWithAllIgnoreCase(valor.substring(corte)+1));
+		return consultas;
+	}
+
+	public List<Consulta> filtroMotivo(String valor) {
+		return consultaDAO.findByMotivoConsultaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Consulta> filtroEnfermedad(String valor) {
+		return consultaDAO
+				.findByEnfermedadActualStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Consulta> filtroTipo(String valor) {
+		return consultaDAO.findByTipoConsultaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Consulta> filtroTipoSecundaria(String valor) {
+		return consultaDAO
+				.findByTipoConsultaSecundariaStartingWithAllIgnoreCase(valor);
+	}
 }

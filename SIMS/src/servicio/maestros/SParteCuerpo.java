@@ -39,4 +39,11 @@ public class SParteCuerpo {
 	public ParteCuerpo buscarPorNombre(String value) {
 		return parteDAO.findByNombre(value);
 	}
+
+	public ParteCuerpo buscarUltimo() {
+		long id = parteDAO.findMaxIdParte();
+		if (id != 0)
+			return parteDAO.findOne(id);
+		return null;
+	}
 }

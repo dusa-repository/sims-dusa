@@ -4,6 +4,7 @@ import interfacedao.transacciones.IConsultaDiagnosticoDAO;
 
 import java.util.List;
 
+import modelo.maestros.Accidente;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
 
@@ -29,5 +30,9 @@ public class SConsultaDiagnostico {
 
 	public void guardar(List<ConsultaDiagnostico> listaDiagnostico) {
 		consultaDiagnosticoDAO.save(listaDiagnostico);
+	}
+
+	public List<ConsultaDiagnostico> buscarPorAccidente(Accidente accidente) {
+		return consultaDiagnosticoDAO.findByAccidente(accidente);
 	}
 }

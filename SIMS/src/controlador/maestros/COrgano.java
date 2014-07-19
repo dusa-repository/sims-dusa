@@ -1,23 +1,29 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import modelo.maestros.Diagnostico;
 import modelo.maestros.Intervencion;
 import modelo.maestros.ParteCuerpo;
 import modelo.maestros.Vacuna;
 import modelo.transacciones.ConsultaParteCuerpo;
 import modelo.transacciones.HistoriaIntervencion;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import controlador.transacciones.CConsulta;
 
 public class COrgano extends CGenerico {
 
@@ -32,9 +38,23 @@ public class COrgano extends CGenerico {
 	private Div divOrgano;
 	private long id = 0;
 	Catalogo<ParteCuerpo> catalogo;
+	private boolean consulta = false;
+	private CConsulta cConsulta = new CConsulta();
+	List<ParteCuerpo> partes = new ArrayList<ParteCuerpo>();
+	Listbox listaConsulta;
 
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		if (map != null) {
+			if (map.get("id") != null) {
+				consulta = true;
+				listaConsulta = (Listbox) map.get("listbox");
+				map.clear();
+				map = null;
+			}
+		}
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -55,6 +75,16 @@ public class COrgano extends CGenerico {
 					ParteCuerpo parte = new ParteCuerpo(id, nombre, fechaHora,
 							horaAuditoria, nombreUsuarioSesion());
 					servicioParteCuerpo.guardar(parte);
+					if (consulta) {
+						if (id != 0)
+							parte = servicioParteCuerpo.buscar(id);
+						else {
+							parte = servicioParteCuerpo.buscarUltimo();
+							partes.add(parte);
+						}
+						cConsulta.recibirCuerpo(partes,
+								listaConsulta, servicioParteCuerpo);
+					}
 					Messagebox.show("Registro Guardado Exitosamente",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);

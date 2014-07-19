@@ -52,6 +52,7 @@ public abstract class Catalogo<Clase> extends Window {
 		txtBuscar.setWidth("20em");
 		txtBuscar.setPlaceholder("Introduzca el criterio de busqueda");
 		final Combobox cmbBuscarPor = new Combobox();
+		cmbBuscarPor.setReadonly(true);
 		cmbBuscarPor.setPlaceholder("Seleccione el Campo");
 		txtBuscar.addEventListener(Events.ON_CHANGING,
 				new EventListener<InputEvent>() {
@@ -67,7 +68,9 @@ public abstract class Catalogo<Clase> extends Window {
 		lsbCatalogo.setPageSize(10);
 		Listhead lhdEncabezado = new Listhead();
 		for (int i = 0; i < campos.length; i++) {
-			lhdEncabezado.appendChild(new Listheader(campos[i]));
+			Listheader listHeader = new Listheader(campos[i]);
+			listHeader.setHflex("min");
+			lhdEncabezado.appendChild(listHeader);
 		}
 		lsbCatalogo.appendChild(lhdEncabezado);
 		lhdEncabezado.setVisible(true);
@@ -85,8 +88,8 @@ public abstract class Catalogo<Clase> extends Window {
 				}
 			}
 		});
-		
-
+		lsbCatalogo.setWidth("100%");
+		lsbCatalogo.setSpan(true);
 		this.appendChild(separador1);
 		this.appendChild(hbxBusqueda);		
 		lblBuscar.setValue("Buscar Por :  ");

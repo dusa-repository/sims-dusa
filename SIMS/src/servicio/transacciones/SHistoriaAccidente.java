@@ -4,6 +4,7 @@ import java.util.List;
 
 import interfacedao.transacciones.IHistoriaAccidenteDAO;
 
+import modelo.maestros.Accidente;
 import modelo.transacciones.Historia;
 import modelo.transacciones.HistoriaAccidente;
 
@@ -17,7 +18,7 @@ public class SHistoriaAccidente {
 	private IHistoriaAccidenteDAO historiaAccidenteDAO;
 
 	public List<HistoriaAccidente> buscarPorHistoria(Historia historia, String string) {
-		return historiaAccidenteDAO.findByHistoriaAndAccidenteTipo(historia, string);
+		return historiaAccidenteDAO.findByHistoriaAndTipoAccidente(historia, string);
 	}
 
 	public void limpiar(Historia historia) {
@@ -28,5 +29,9 @@ public class SHistoriaAccidente {
 
 	public void guardar(List<HistoriaAccidente> historialAccidentes) {
 		historiaAccidenteDAO.save(historialAccidentes);
+	}
+
+	public List<HistoriaAccidente> buscarPorAccidente(Accidente accidente) {
+		return historiaAccidenteDAO.findByAccidente(accidente);
 	}
 }

@@ -17,6 +17,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import modelo.seguridad.Usuario;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.Component;
@@ -228,6 +230,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		Authentication sesion = SecurityContextHolder.getContext()
 				.getAuthentication();
 		return sesion.getName();
+	}
+	
+	public Usuario usuarioSesion(String valor) {
+		return servicioUsuario.buscarUsuarioPorNombre(valor);
 	}
 	
 	/* Metodo que permite enviar un correo electronico a cualquier destinatario */

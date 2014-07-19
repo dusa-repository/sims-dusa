@@ -39,4 +39,11 @@ public class SVacuna {
 	public Vacuna buscarPorNombre(String value) {
 		return vacunaDAO.findByNombre(value);
 	}
+
+	public Vacuna buscarUltimo() {
+		long id = vacunaDAO.findMaxIdDiagnostico();
+		if (id != 0)
+			return vacunaDAO.findOne(id);
+		return null;
+	}
 }

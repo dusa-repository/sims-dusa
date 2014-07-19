@@ -45,6 +45,9 @@ public class HistoriaAccidente {
 	
 	@Column(length=100)
 	private String secuelas;
+	
+	@Column(length=100)
+	private String tipoAccidente;
 
 	public HistoriaAccidente() {
 		super();
@@ -53,7 +56,7 @@ public class HistoriaAccidente {
 
 	public HistoriaAccidente(Historia historia, Accidente accidente,
 			Timestamp fecha, String lugar, String tipoLesion, int diasReposo,
-			String secuelas) {
+			String secuelas, String tipo) {
 		super();
 		this.historia = historia;
 		this.accidente = accidente;
@@ -62,6 +65,7 @@ public class HistoriaAccidente {
 		this.tipoLesion = tipoLesion;
 		this.diasReposo = diasReposo;
 		this.secuelas = secuelas;
+		this.tipoAccidente = tipo;
 	}
 
 
@@ -120,6 +124,14 @@ public class HistoriaAccidente {
 
 	public void setSecuelas(String secuelas) {
 		this.secuelas = secuelas;
+	}
+
+	public String getTipoAccidente() {
+		return tipoAccidente;
+	}
+
+	public void setTipoAccidente(String tipoAccidente) {
+		this.tipoAccidente = tipoAccidente;
 	}
 
 	
