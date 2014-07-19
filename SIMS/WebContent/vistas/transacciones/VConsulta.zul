@@ -19,8 +19,8 @@
 				<rows>
 					<row>
 						<label class="etiqueta" value="Buscar Cedula:" />
-						<textbox maxlength="500" id="txtCedula" hflex="1"
-							tooltiptext="Ingrese la Cedula del Paciente" />
+						<textbox maxlength="500" inplace="true" id="txtCedula"
+							hflex="1" tooltiptext="Ingrese la Cedula del Paciente" />
 						<button autodisable="true" id="btnBuscarPaciente" label="Buscar Paciente"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 						<button autodisable="true" id="btnVerHistoria" label="Ver Historia"
@@ -471,20 +471,22 @@
 												<hbox />
 												<hbox />
 											</row>
-															<row id="row" visible="false">
-										<label class="etiqueta" value="Examenes Pre-Empleo:" />
-										<cell colspan="8">
-											<textbox maxlength="1000" class="multilinea"
-												multiline="true" id="txtExamenPreempleo" hflex="1"
-												tooltiptext="Ingrese el Motivo de la Consulta" />
-										</cell>
-									</row>
+											<row id="row" visible="false">
+												<label class="etiqueta" value="Examenes Pre-Empleo:" />
+												<cell colspan="8">
+													<textbox maxlength="1000" class="multilinea"
+														multiline="true" id="txtExamenPreempleo" hflex="1"
+														tooltiptext="Ingrese el Motivo de la Consulta" />
+												</cell>
+											</row>
 										</rows>
 									</grid>
 									<separator />
 									<groupbox id="gpxExamenFisico" closable="false" open="true">
 										<caption label="Examen Fisico"
 											style="color:blue; font-size: 12px; font-weight:bold" />
+										<button id="btnAbrirCuerpo" label=""
+											tooltiptext="Crear una Nueva parte del Cuerpo" image="/public/imagenes/botones/agregar.png" />
 										<listbox id="ltbExamenFisico" model="${$composer.modelFisico}"
 											height="150px" width="100%" emptyMessage="No hay sistemas fisicos registrados">
 											<listhead>
@@ -576,6 +578,7 @@
 															placeholder="Seleccione el Tipo" width="98%" readonly="true">
 															<comboitem label="Accidente Laboral" />
 															<comboitem label="Accidente Comun" />
+															<comboitem label="Incidente" />
 															<comboitem label="Enfermedad Laboral" />
 															<comboitem label="Enfermedad Comun" />
 															<comboitem label="Otro" />
@@ -612,8 +615,8 @@
 													</row>
 													<row id="rowReposo" visible="false">
 														<label class="etiqueta" value="Dias de Reposo:" />
-														<spinner hflex="1" vflex="1" value="0" id="spnReposo" step="1"
-															constraint="min 0 max 100000" />
+														<spinner hflex="1" vflex="1" value="0" id="spnReposo"
+															step="1" constraint="min 0 max 100000" />
 													</row>
 													<row id="rowApto" visible="false">
 														<label class="etiqueta" value="¿Esta apto para el empleo?" />
@@ -622,17 +625,31 @@
 															<radio label="NO" value="no" id="rdoNoApto" />
 														</radiogroup>
 													</row>
-													<row>
-														<label  class="etiqueta"  visible="false" id="lblConsulta"
+													<row id="rowApto2" visible="false">
+														<label class="etiqueta" value="Condicionado a:" />
+														<textbox maxlength="100" multiline="true"
+															id="txtCondicionado" hflex="1"
+															tooltiptext="Ingrese la condicion a la cual esta sujeto el paciente" />
+													</row>
+													<row id="rowAsociada" visible="false">
+														<label class="etiqueta" id="lblConsulta"
 															value="Consulta Asociada al Control:" />
-														<combobox visible="false" tooltiptext="Seleccione un Estado"
-															placeholder="Seleccione una Consulta" id="cmbConsulta"
-															readonly="true" width="100%">
-															<template name="model">
-																<comboitem description="${each.fechaConsulta}"
-																	label="${each.motivoConsulta}" context="${each.idConsulta}" />
-															</template>
-														</combobox>
+														<button label="Consulta Asociada" id="btnConsultaAsociada"
+															image="/public/imagenes/botones/agregar.png"
+															tooltiptext="Seleccione la consulta asociada a la consulta de control que esta realizando"
+															vflex="1" hflex="1" />
+													</row>
+													<row id="rowAsociada2" visible="false">
+														<label class="etiqueta" id="lblEnfermedadAsociada"
+															value="Enfermedad de consulta Asociada:" />
+														<label class="etiqueta" id="lblEnfermedadAsociada2"
+															value="" />
+													</row>
+													<row id="rowAsociada3" visible="false">
+														<label class="etiqueta" id="lblDiagnosticoAsociado"
+															value="Diagnostico de consulta Asociada:" />
+														<label class="etiqueta" id="lblDiagnosticoAsociado2"
+															value="" />
 													</row>
 													<row>
 														<button label="Agregar" id="btnAgregarDiagnosticos"
@@ -641,6 +658,12 @@
 														<button visible="false" label="Generar Reposo" id="btnGenerarReposo"
 															image="/public/imagenes/botones/agregar.png" tooltiptext="Generar Reposo"
 															vflex="1" hflex="1" />
+													</row>
+													<row>
+														<cell colspan="2">
+															<label style="color:red" class="etiqueta" visible="false"
+																id="lblPreventivaArea" value="Recuerde programar la cita correspondiente" />
+														</cell>
 													</row>
 												</rows>
 											</grid>
@@ -874,6 +897,9 @@
 													<listcell label="${each.especialidad.descripcion}">
 													</listcell>
 													<listcell>
+														<textbox maxlength="100" width="98%" />
+													</listcell>
+													<listcell>
 														<doublespinner step="0.1" format="#.##"
 															constraint="min 0 max 100000000" value="${each.costo}"
 															width="98%" readonly="true" />
@@ -895,8 +921,9 @@
 										<listbox id="ltbEspecialistasAgregados" height="250px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Especialista">
 											<listhead>
-												<listheader label="Especialista" width="50%" />
+												<listheader label="Especialista" width="35%" />
 												<listheader label="Especialidad" width="50%" />
+												<listheader label="Observacion" width="35%"></listheader>
 												<!-- <listheader label="Costo" width="10%" /> -->
 												<listheader label="id" visible="false" />
 											</listhead>
@@ -905,6 +932,10 @@
 													<listcell label="${each.especialista.nombre}">
 													</listcell>
 													<listcell label="${each.especialista.especialidad.descripcion}">
+													</listcell>
+													<listcell>
+														<textbox maxlength="100" value="${each.observacion}"
+															hflex="1" />
 													</listcell>
 													<listcell>
 														<doublespinner step="1" format="#.##"
@@ -993,16 +1024,20 @@
 										<listbox id="ltbServicioExternoAgregados" height="250px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
 											<listhead>
-												<listheader label="Estudio Externo" width="50%" />
+												<listheader label="Estudio Externo" width="35%" />
 												<!-- <listheader label="Costo" width="20%" /> -->
-												<listheader label="Centro" width="50%" />
+												<listheader label="Observacion" width="35%" />
+												<listheader label="Centro" width="30%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
 												<listitem>
 													<listcell label="${each.servicioExterno.nombre}">
 													</listcell>
-
+													<listcell>
+														<textbox maxlength="100" value="${each.observacion}"
+															hflex="1" />
+													</listcell>
 													<listcell>
 														<combobox onSelect='$composer.cambio'
 															tooltiptext="Seleccione un Centro" model="${$composer.proveedores}"
@@ -1056,13 +1091,13 @@
 												height="250px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
 												<listhead>
 													<listheader label="Diagnostico" width="50%" />
-													<listheader label="Observacion" width="50%" />
+													<listheader label="Tipo Diagnostico" width="50%" />
 												</listhead>
 												<template name="model">
 													<listitem>
 														<listcell label="${each.diagnostico.nombre}">
 														</listcell>
-														<listcell label="${each.observacion}">
+														<listcell label="${each.tipo}">
 														</listcell>
 													</listitem>
 												</template>
@@ -1119,14 +1154,14 @@
 												width="auto" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
 												<listhead>
 													<listheader label="Estudio Externo" width="50%" />
-													<listheader label="Centro" width="50%" />
+													<listheader label="Observacion" width="50%" />
 													<!-- <listheader label="Costo" width="18%" /> -->
 												</listhead>
 												<template name="model">
 													<listitem>
 														<listcell label="${each.servicioExterno.nombre}">
 														</listcell>
-														<listcell label="${each.proveedor.nombre}">
+														<listcell label="${each.observacion}">
 														</listcell>
 														<listcell label="${each.costo}">
 														</listcell>
@@ -1146,19 +1181,22 @@
 					</tabpanel>
 					<tabpanel>
 						<hbox widths="90%,10%">
-							<listbox id="ltbConsultas" height="260px" width="100%"
-								emptyMessage="El Paciente no posee Consultas Registradas">
+							<listbox id="ltbConsultas" span="true" height="260px"
+								width="100%" emptyMessage="El Paciente no posee Consultas Registradas">
 								<listhead>
-									<listheader label="Fecha" width="10%" />
-									<listheader label="Motivo de Consulta" width="35%" />
-									<listheader label="Enfermedad Actual" width="35%" />
-									<listheader label="Tipo de Consulta" width="10%" />
-									<listheader label="SubTipo de Consulta" width="10%" />
+									<listheader label="Fecha" hflex="min" />
+									<listheader label="Doctor" hflex="min" />
+									<listheader label="Motivo de Consulta" hflex="min" />
+									<listheader label="Enfermedad Actual" hflex="min" />
+									<listheader label="Tipo de Consulta" hflex="min" />
+									<listheader label="SubTipo de Consulta" hflex="min" />
 									<listheader label="id" visible="false" />
 								</listhead>
 								<template name="model">
 									<listitem>
 										<listcell label="${each.horaConsulta}">
+										</listcell>
+										<listcell label="${each.usuario.primerNombre}">
 										</listcell>
 										<listcell label="${each.motivoConsulta}">
 										</listcell>
@@ -1994,6 +2032,9 @@
 											width="100%">
 											<caption label="Antecedentes Medicos"
 												style="color:blue; font-size: 12px; font-weight:bold" />
+											<button id="btnAbrirAntecedente1" label=""
+												tooltiptext="Crear un Nuevo Antecedente" image="/public/imagenes/botones/agregar.png" />
+
 											<hbox>
 												<listbox id="ltbMedicos" model="${$composer.modelo}"
 													height="350px" width="100%"
@@ -2010,6 +2051,9 @@
 											width="100%">
 											<caption label="Antecedentes Laborales"
 												style="color:blue; font-size: 12px; font-weight:bold" />
+											<button id="btnAbrirAntecedente2" label=""
+												tooltiptext="Crear un Nuevo Antecedente" image="/public/imagenes/botones/agregar.png" />
+
 											<hbox>
 												<listbox id="ltbLaborales" model="${$composer.model}"
 													height="350px" width="100%"
@@ -2026,6 +2070,9 @@
 											width="100%">
 											<caption label="Antecedentes Familiares"
 												style="color:blue; font-size: 12px; font-weight:bold" />
+											<button id="btnAbrirAntecedente3" label=""
+												tooltiptext="Crear un Nuevo Antecedente" image="/public/imagenes/botones/agregar.png" />
+
 											<hbox>
 												<listbox id="ltbFamiliares" model="${$composer.modelFamiliares}"
 													height="350px" width="100%"
@@ -2319,6 +2366,8 @@
 												</hbox>
 											</tabpanel>
 											<tabpanel>
+												<button id="btnAbrirVacuna" label=""
+													tooltiptext="Crear una Nueva Vacuna" image="/public/imagenes/botones/agregar.png" />
 												<listbox id="ltbVacunas" model="${$composer.modelVacunas}"
 													height="350px" width="100%"
 													emptyMessage="El Paciente no posee Vacunas Recibidas">
@@ -2496,6 +2545,7 @@
 			</tabbox>
 			<div id="divCatalogoPacientes" />
 			<div id="botoneraConsultaGeneral" />
+			<div id="catalogoConsulta" />
 		</groupbox>
 	</div>
 </zk>

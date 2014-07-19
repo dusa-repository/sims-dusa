@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import modelo.maestros.Accidente;
 import modelo.maestros.Diagnostico;
 import modelo.pk.ConsultaDiagnosticoId;
 
@@ -29,6 +30,10 @@ public class ConsultaDiagnostico {
 	@JoinColumn(name = "id_diagnostico", referencedColumnName = "id_diagnostico")
 	private Diagnostico diagnostico;
 	
+	@ManyToOne(optional = true,fetch=FetchType.LAZY)
+	@JoinColumn(name="id_accidente",nullable=true)
+	private Accidente accidente;
+	
 	@Column(length=100)
 	private String tipo;
 	
@@ -41,6 +46,9 @@ public class ConsultaDiagnostico {
 	@Column(name="motivo_accidente", length=100)
 	private String motivo;
 	
+	@Column(name="clasificacion_accidente", length=100)
+	private String clasificacion;
+	
 	@Column(name="fecha_accidente")
 	private Timestamp fecha;
 	
@@ -49,9 +57,10 @@ public class ConsultaDiagnostico {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ConsultaDiagnostico(Consulta consulta, Diagnostico diagnostico, String tipo,
-			String observacion, String lugar,String motivo,Timestamp fecha) {
+	public ConsultaDiagnostico(Consulta consulta, Diagnostico diagnostico, Accidente accidente, String tipo,
+			String observacion, String lugar,String motivo,Timestamp fecha, String clasificacion) {
 		super();
+		this.accidente = accidente;
 		this.consulta = consulta;
 		this.diagnostico = diagnostico;
 		this.observacion = observacion;
@@ -59,6 +68,7 @@ public class ConsultaDiagnostico {
 		this.lugar = lugar;
 		this.motivo = motivo;
 		this.fecha = fecha;
+		this.clasificacion = clasificacion;
 	}
 
 	public Consulta getConsulta() {
@@ -115,6 +125,22 @@ public class ConsultaDiagnostico {
 
 	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getClasificacion() {
+		return clasificacion;
+	}
+
+	public void setClasificacion(String clasificacion) {
+		this.clasificacion = clasificacion;
+	}
+
+	public Accidente getAccidente() {
+		return accidente;
+	}
+
+	public void setAccidente(Accidente accidente) {
+		this.accidente = accidente;
 	}
 
 }

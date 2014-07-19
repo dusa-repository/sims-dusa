@@ -31,6 +31,9 @@ public class ConsultaEspecialista {
 	private double costo;
 	
 	@Column(length=100)
+	private String observacion;
+	
+	@Column(length=100)
 	private String resultado;
 
 	public ConsultaEspecialista() {
@@ -39,11 +42,12 @@ public class ConsultaEspecialista {
 	}
 
 	public ConsultaEspecialista(Consulta consulta, Especialista especialista,
-			double costo) {
+			double costo, String observacion) {
 		super();
 		this.consulta = consulta;
 		this.especialista = especialista;
 		this.costo = costo;
+		this.observacion = observacion;
 	}
 
 	public Consulta getConsulta() {
@@ -76,6 +80,14 @@ public class ConsultaEspecialista {
 
 	public void setResultado(String resultado) {
 		this.resultado = resultado;
+	}
+
+	public String getObservacion() {
+		return observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 	
 }

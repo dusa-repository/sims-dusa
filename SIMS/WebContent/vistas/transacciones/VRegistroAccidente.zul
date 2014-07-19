@@ -13,7 +13,25 @@
 						<row>
 							<label class="etiqueta" value="Diagnostico:" />
 							<label class="etiqueta" id="lblDiagnostio" />
-							<hbox/>
+							<hbox />
+						</row>
+						<row>
+							<label class="etiqueta" value="Accidente:" />
+							<textbox maxlength="100" inplace="true" id="txtNombre"
+								hflex="1" tooltiptext="Ingrese el codigo CIUU del Accidente" />
+							<button autodisable="true" id="btnBuscar" label=""
+								tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						</row>
+						<row>
+							<label class="etiqueta" value="Clasificacion de Accidente:" />
+							<combobox tooltiptext="Seleccione una Clasificacion"
+								placeholder="Seleccione una Clasificacion" id="cmbClasificacion"
+								readonly="true" hflex="1">
+								<template name="model">
+									<comboitem label="${each}" />
+								</template>
+							</combobox>
+							<hbox />
 						</row>
 						<row>
 							<label class="etiqueta" value="Lugar del Accidente:" />
@@ -39,6 +57,7 @@
 				</grid>
 				<separator />
 				<div id="botoneraDetalle" />
+				<div id="catalogoAccidente" />
 			</groupbox>
 		</div>
 	</window>

@@ -197,6 +197,9 @@ public class Consulta implements Serializable {
 	
 	@Column(length=500)
 	private String observacion;
+	
+	@Column(name = "condicion_apto",length=100)
+	private String condicionApto;
 
 	public Consulta() {
 		super();
@@ -217,7 +220,7 @@ public class Consulta implements Serializable {
 			Boolean ritmico2, Boolean ritmico3, Cargo cargo,
 			Cargo cargoDeseado, Area area, Area areaDeseada, boolean apto,
 			boolean reposo, String tipoConsultaSecundaria, String examenPre,
-			Integer dias) {
+			Integer dias, String condicion) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
@@ -263,6 +266,7 @@ public class Consulta implements Serializable {
 		this.tipoConsultaSecundaria = tipoConsultaSecundaria;
 		this.examenPreempleo = examenPre;
 		this.diasReposo = dias;
+		this.condicionApto = condicion;
 	}
 
 	public long getIdConsulta() {
@@ -671,6 +675,14 @@ public class Consulta implements Serializable {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+	public String getCondicionApto() {
+		return condicionApto;
+	}
+
+	public void setCondicionApto(String condicionApto) {
+		this.condicionApto = condicionApto;
 	}
 
 }

@@ -1,5 +1,6 @@
 package interfacedao.transacciones;
 
+import java.util.Collection;
 import java.util.List;
 
 import modelo.maestros.Paciente;
@@ -16,5 +17,22 @@ public interface IConsultaDAO  extends JpaRepository<Consulta, Long> {
 	long findMaxIdMedicina();
 
 	List<Consulta> findByPacienteAndAccidenteLaboralTrue(Paciente paciente);
+
+	List<Consulta> findByFechaConsultaStartingWithAllIgnoreCase(String valor);
+
+	List<Consulta> findByMotivoConsultaStartingWithAllIgnoreCase(String valor);
+
+	List<Consulta> findByEnfermedadActualStartingWithAllIgnoreCase(String valor);
+
+	List<Consulta> findByTipoConsultaStartingWithAllIgnoreCase(String valor);
+
+	List<Consulta> findByTipoConsultaSecundariaStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Consulta> findByUsuarioPrimerNombreStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Consulta> findByUsuarioPrimerApellidoStartingWithAllIgnoreCase(
+			String valor);
 
 }

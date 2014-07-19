@@ -1,0 +1,43 @@
+<zk>
+	<div id="divAccidente" apply="controlador.maestros.CAccidente">
+		<groupbox width="40em" mold="3d" title="Accidente">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Codigo (CIIU):" />
+						<longbox id="txtCodigo" hflex="1" tooltiptext="Ingrese el Codigo CIIU"
+							maxlength="18" />
+						<button id="btnBuscar" class="btn" label="Buscar"
+							tooltiptext="Catalogo Ciudades" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Nombre:" />
+						<textbox id="txtNombre" hflex="1" tooltiptext="Ingrese el Codigo CIIU"
+							maxlength="100" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Clasificacion:" />
+						<combobox tooltiptext="Seleccione una Clasificacion"
+							placeholder="Seleccione una Clasificacion" id="cmbClasificacion"
+							readonly="true" hflex="1">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idClasificacionAccidente}" />
+							</template>
+						</combobox>
+						<button id="btnAbrir" label="" tooltiptext="Crear una Nueva Clasificacion"
+							image="/public/imagenes/botones/agregar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraAccidente" />
+			<div id="catalogoAccidente" />
+		</groupbox>
+	</div>
+</zk>

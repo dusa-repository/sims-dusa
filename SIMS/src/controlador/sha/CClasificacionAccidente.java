@@ -14,6 +14,8 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+import arbol.CArbol;
+
 import componentes.Botonera;
 import componentes.Catalogo;
 
@@ -31,7 +33,6 @@ public class CClasificacionAccidente extends CGenerico {
 	private Div catalogoClasificacionAccidente;
 	@Wire
 	private Div divClasificacionAccidente;
-
 	private long id = 0;
 	Catalogo<ClasificacionAccidente> catalogo;
 
@@ -61,7 +62,7 @@ public class CClasificacionAccidente extends CGenerico {
 				if (validar()) {
 					String nombre = txtNombreClasificacionAccidente.getValue();
 					ClasificacionAccidente clasificacionAccidente = new ClasificacionAccidente(
-							id, nombre);
+							id, nombre, fechaHora, horaAuditoria, nombreUsuarioSesion());
 					servicioClasificacionAccidente
 							.guardar(clasificacionAccidente);
 					Messagebox.show("Registro Guardado Exitosamente",
