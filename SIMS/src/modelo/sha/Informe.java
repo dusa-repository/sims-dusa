@@ -34,7 +34,7 @@ public class Informe implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_a", referencedColumnName = "id_paciente")
-	private Paciente pacienteA;
+	private Paciente paciente;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_b", referencedColumnName = "id_paciente")
@@ -90,7 +90,7 @@ public class Informe implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_empresa_a", referencedColumnName = "id_empresa")
-	private Empresa empresaA;
+	private Empresa empresa;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_empresa_b", referencedColumnName = "id_empresa")
@@ -104,10 +104,10 @@ public class Informe implements Serializable {
 	@JoinTable(
 		name="informe_condicion_a"
 		, joinColumns={
-			@JoinColumn(name="id_grupo", nullable=false)
+			@JoinColumn(name="id_informe", nullable=false)
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="id_arbol", nullable=false)
+			@JoinColumn(name="id_condicion", nullable=false)
 			}
 		)
 	private Set<Condicion> condicionA;
@@ -116,10 +116,10 @@ public class Informe implements Serializable {
 	@JoinTable(
 		name="informe_condicion_b"
 		, joinColumns={
-			@JoinColumn(name="id_grupo", nullable=false)
+			@JoinColumn(name="id_informe", nullable=false)
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="id_arbol", nullable=false)
+			@JoinColumn(name="id_condicion", nullable=false)
 			}
 		)
 	private Set<Condicion> condicionB;
@@ -128,10 +128,10 @@ public class Informe implements Serializable {
 	@JoinTable(
 		name="informe_condicion_c"
 		, joinColumns={
-			@JoinColumn(name="id_grupo", nullable=false)
+			@JoinColumn(name="id_informe", nullable=false)
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="id_arbol", nullable=false)
+			@JoinColumn(name="id_condicion", nullable=false)
 			}
 		)
 	private Set<Condicion> condicionC;
@@ -140,10 +140,10 @@ public class Informe implements Serializable {
 	@JoinTable(
 		name="informe_condicion_d"
 		, joinColumns={
-			@JoinColumn(name="id_grupo", nullable=false)
+			@JoinColumn(name="id_informe", nullable=false)
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="id_arbol", nullable=false)
+			@JoinColumn(name="id_condicion", nullable=false)
 			}
 		)
 	private Set<Condicion> condicionD;
@@ -152,10 +152,10 @@ public class Informe implements Serializable {
 	@JoinTable(
 		name="informe_condicion_e"
 		, joinColumns={
-			@JoinColumn(name="id_grupo", nullable=false)
+			@JoinColumn(name="id_informe", nullable=false)
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="id_arbol", nullable=false)
+			@JoinColumn(name="id_condicion", nullable=false)
 			}
 		)
 	private Set<Condicion> condicionE;
@@ -164,14 +164,38 @@ public class Informe implements Serializable {
 	@JoinTable(
 		name="informe_condicion_f"
 		, joinColumns={
-			@JoinColumn(name="id_grupo", nullable=false)
+			@JoinColumn(name="id_informe", nullable=false)
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="id_arbol", nullable=false)
+			@JoinColumn(name="id_condicion", nullable=false)
 			}
 		)
 	private Set<Condicion> condicionF;
 	
+	@Column(length=50)
+	private String ebc;
+	
+	@Column(length=50)
+	private String ebcf;
+	
+	@Column(length=50)
+	private String ebd;
+	
+	@Column(length=50)
+	private String ebe;
+	
+	@Column(length=50)
+	private String ebeg;
+	
+	@Column(length=50)
+	private String ebf;
+	
+	@Column(length=50)
+	private String ebg;
+	
+	@Column(length=50)
+	private String ebge;
+
 	@Column(length=50)
 	private String codigo;
 	
@@ -704,7 +728,7 @@ public class Informe implements Serializable {
 			String idab, Boolean idac, String idad, Timestamp fecha, String hora, String usuario) {
 		super();
 		this.idInforme = idInforme;
-		this.pacienteA = pacienteA;
+		this.paciente = pacienteA;
 		this.pacienteB = pacienteB;
 		this.pacienteC = pacienteC;
 		this.pacienteD = pacienteD;
@@ -718,7 +742,7 @@ public class Informe implements Serializable {
 		this.pacienteL = pacienteL;
 		this.pacienteM = pacienteM;
 		this.area = area;
-		this.empresaA = empresaA;
+		this.empresa = empresaA;
 		this.empresaB = empresaB;
 		this.clasificacion = clasificacion;
 		this.condicionA = condicionA;
@@ -880,11 +904,11 @@ public class Informe implements Serializable {
 	}
 
 	public Paciente getPacienteA() {
-		return pacienteA;
+		return paciente;
 	}
 
 	public void setPacienteA(Paciente pacienteA) {
-		this.pacienteA = pacienteA;
+		this.paciente = pacienteA;
 	}
 
 	public Paciente getPacienteB() {
@@ -992,11 +1016,11 @@ public class Informe implements Serializable {
 	}
 
 	public Empresa getEmpresaA() {
-		return empresaA;
+		return empresa;
 	}
 
 	public void setEmpresaA(Empresa empresaA) {
-		this.empresaA = empresaA;
+		this.empresa = empresaA;
 	}
 
 	public Empresa getEmpresaB() {
@@ -2207,5 +2231,68 @@ public class Informe implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 	
+	public String getEbc() {
+		return ebc;
+	}
+
+	public void setEbc(String ebc) {
+		this.ebc = ebc;
+	}
+
+	public String getEbcf() {
+		return ebcf;
+	}
+
+	public void setEbcf(String ebcf) {
+		this.ebcf = ebcf;
+	}
+
+	public String getEbd() {
+		return ebd;
+	}
+
+	public void setEbd(String ebd) {
+		this.ebd = ebd;
+	}
+
+	public String getEbe() {
+		return ebe;
+	}
+
+	public void setEbe(String ebe) {
+		this.ebe = ebe;
+	}
+
+	public String getEbeg() {
+		return ebeg;
+	}
+
+	public void setEbeg(String ebeg) {
+		this.ebeg = ebeg;
+	}
+
+	public String getEbf() {
+		return ebf;
+	}
+
+	public void setEbf(String ebf) {
+		this.ebf = ebf;
+	}
+
+	public String getEbg() {
+		return ebg;
+	}
+
+	public void setEbg(String ebg) {
+		this.ebg = ebg;
+	}
+
+	public String getEbge() {
+		return ebge;
+	}
+
+	public void setEbge(String ebge) {
+		this.ebge = ebge;
+	}
 	
 }

@@ -1,7 +1,10 @@
 package servicio.sha;
 
+import java.util.List;
+
 import interfacedao.sha.IInformeDAO;
 
+import modelo.sha.Condicion;
 import modelo.sha.Informe;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,4 +20,31 @@ public class SInforme {
 		informeDAO.save(informe);
 		
 	}
-}
+
+	public List<Informe> buscarTodos() {
+	return	informeDAO.findAll();
+	}
+
+	public List<Informe> filtroCodigo(String valor) {
+		return informeDAO.findByCodigoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Informe> filtroNombreTrabajador(String valor) {
+		return informeDAO.findByPacientePrimerNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Informe> filtroApellidoTrabajador(String valor) {
+		return informeDAO.findByPacientePrimerApellidoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Informe> filtroEmpresa(String valor) {
+		return informeDAO.findByEmpresaNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Informe> buscarPorCondicion(Condicion condicion) {
+		return informeDAO.findByCondicionAOrCondicionBOrCondicionCOrCondicionDOrCondicionEOrCondicionF(condicion,condicion,condicion,condicion,condicion,condicion);
+	}
+
+
+
+	}

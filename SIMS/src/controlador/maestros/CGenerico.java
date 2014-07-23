@@ -37,6 +37,8 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
 
+import componentes.Mensaje;
+
 import arbol.CArbol;
 
 import servicio.maestros.SAccidente;
@@ -202,7 +204,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SClasificacionAccidente servicioClasificacionAccidente;
 	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 			"/META-INF/ConfiguracionAplicacion.xml");
-
+	public Mensaje msj = new Mensaje();
 	public Tabbox tabBox;
 	public Include contenido;
 	public Tab tab;

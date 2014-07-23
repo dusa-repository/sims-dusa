@@ -2,6 +2,19 @@
 	<script src="/public/progress.js" />
 	<div id="divInforme" apply="controlador.sha.CInforme" width="auto">
 		<groupbox width="auto" mold="3d" title="Informe">
+			<grid width="auto">
+				<columns>
+					<column label="" width="30%" />
+					<column label="" width="70%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Buscar Informe Registrado" />
+						<button autodisable="self" id="btnBuscar1" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
 			<!-- <grid width="auto"> <columns visible="false"> <column label="" width="15%" 
 				/> <column label="" width="30%" /> <column label="" width="3%" /> <column 
 				label="" width="52%" /> </columns> <rows> <row> <label class="etiqueta" value="Ir 
@@ -12,6 +25,7 @@
 				label="Seccion 9" /> </combobox> <image class="imgAyuda" width="100%" height="100%" 
 				style="cursor: help" tooltip="seccion" src="/public/imagenes/botones/signoInterrogacion.png" 
 				/> <hbox /> </row> </rows> </grid> -->
+
 			<separator />
 			<tabbox height="auto" width="auto" id="taxSecciones" orient="horizontal">
 				<tabs>
@@ -27,10 +41,14 @@
 					<tabpanel>
 						<separator />
 						<hbox>
-							<label class="etiqueta"
-								value="CÓDIGO  DECLARACIÓN DEL ACCIDENTE ANTE EL INPSASEL:" />
+							<hbox>
+								<label class="etiqueta"
+									value="CÓDIGO  DECLARACIÓN DEL ACCIDENTE ANTE EL INPSASEL:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 							<textbox multiline="true" width="400px" id="txt1"
-								tooltiptext="Ingrese el Codigo" maxlength="50"/>
+								tooltiptext="Ingrese el Codigo" maxlength="50" />
 						</hbox>
 						<separator />
 						<label class="etiqueta" value="INVESTIGACION DEL ACCIDENTE" />
@@ -57,24 +75,27 @@
 									<label id="lbl212" />
 									<label id="lbl213" />
 									<label id="lbl214" />
-									<button id="btnBuscar21" class="btn" label="Buscar"
-										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<button autodisable="self" id="btnBuscar21" class="btn"
+										label="Buscar" tooltiptext="Catalogo"
+										image="/public/imagenes/botones/buscar.png" />
 								</row>
 								<row>
 									<label id="lbl221" />
 									<label id="lbl222" />
 									<label id="lbl223" />
 									<label id="lbl224" />
-									<button id="btnBuscar22" class="btn" label="Buscar"
-										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<button autodisable="self" id="btnBuscar22" class="btn"
+										label="Buscar" tooltiptext="Catalogo"
+										image="/public/imagenes/botones/buscar.png" />
 								</row>
 								<row>
 									<label id="lbl231" />
 									<label id="lbl232" />
 									<label id="lbl233" />
 									<label id="lbl234" />
-									<button id="btnBuscar23" class="btn" label="Buscar"
-										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<button autodisable="self" id="btnBuscar23" class="btn"
+										label="Buscar" tooltiptext="Catalogo"
+										image="/public/imagenes/botones/buscar.png" />
 								</row>
 								<row>
 									<cell colspan="5">
@@ -89,24 +110,27 @@
 									<label id="lbl242" />
 									<label id="lbl243" />
 									<label id="lbl244" />
-									<button id="btnBuscar24" class="btn" label="Buscar"
-										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<button autodisable="self" id="btnBuscar24" class="btn"
+										label="Buscar" tooltiptext="Catalogo"
+										image="/public/imagenes/botones/buscar.png" />
 								</row>
 								<row>
 									<label id="lbl251" />
 									<label id="lbl252" />
 									<label id="lbl253" />
 									<label id="lbl254" />
-									<button id="btnBuscar25" class="btn" label="Buscar"
-										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<button autodisable="self" id="btnBuscar25" class="btn"
+										label="Buscar" tooltiptext="Catalogo"
+										image="/public/imagenes/botones/buscar.png" />
 								</row>
 								<row>
 									<label id="lbl261" />
 									<label id="lbl262" />
 									<label id="lbl263" />
 									<label id="lbl264" />
-									<button id="btnBuscar26" class="btn" label="Buscar"
-										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<button autodisable="self" id="btnBuscar26" class="btn"
+										label="Buscar" tooltiptext="Catalogo"
+										image="/public/imagenes/botones/buscar.png" />
 								</row>
 							</rows>
 						</grid>
@@ -133,8 +157,12 @@
 								<row>
 									<cell colspan="8">
 										<separator />
-										<label class="etiqueta"
-											value="DATOS DE LA EMPRESA PARA LA CUAL LABORA / LABORABA LA/EL TRABAJADORA / TABAJADOR - ACCIDENTADO / ACCIDENTADA " />
+										<hbox>
+											<label class="etiqueta"
+												value="DATOS DE LA EMPRESA PARA LA CUAL LABORA / LABORABA LA/EL TRABAJADORA / TABAJADOR - ACCIDENTADO / ACCIDENTADA " />
+											<space />
+											<label value="*" style="font-weight:bold;color:red" />
+										</hbox>
 										<separator />
 									</cell>
 								</row>
@@ -147,8 +175,9 @@
 									<cell colspan="2">
 										<label id="lbl32" />
 									</cell>
-									<button id="btnBuscar3" class="btn" label="Buscar"
-										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<button autodisable="self" id="btnBuscar3" class="btn"
+										label="Buscar" tooltiptext="Catalogo"
+										image="/public/imagenes/botones/buscar.png" />
 									<hbox />
 								</row>
 								<row>
@@ -315,8 +344,9 @@
 									<cell colspan="2">
 										<label id="lbl42" />
 									</cell>
-									<button id="btnBuscar4" class="btn" label="Buscar"
-										tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+									<button autodisable="self" id="btnBuscar4" class="btn"
+										label="Buscar" tooltiptext="Catalogo"
+										image="/public/imagenes/botones/buscar.png" />
 									<hbox />
 								</row>
 								<row>
@@ -471,8 +501,12 @@
 								<row>
 									<cell colspan="8">
 										<separator />
-										<label class="etiqueta"
-											value="DATOS DEL TRABAJADOR / TRABAJADORA - ACCIDENTADO / ACCIDENTADA" />
+										<hbox>
+											<label class="etiqueta"
+												value="DATOS DEL TRABAJADOR / TRABAJADORA - ACCIDENTADO / ACCIDENTADA" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red" />
+										</hbox>
 										<separator />
 									</cell>
 								</row>
@@ -557,7 +591,7 @@
 												tooltiptext="Marque para indicar la Condicion" />
 											<radio label="Otro (Indique)" id="rdo5236"
 												tooltiptext="Marque para indicar la Condicion" />
-											<textbox id="txt5236" />
+											<textbox id="txt5236" multiline="true" />
 										</vbox>
 									</radiogroup>
 									<cell align="center" colspan="2">
@@ -603,7 +637,7 @@
 													tooltiptext="Marque para indicar el tipo de contrato" />
 												<radio label="Otra (Indique)" id="rdo5257"
 													tooltiptext="Marque para indicar el tipo de contrato" />
-												<textbox id="txt5257" />
+												<textbox id="txt5257" multiline="true" />
 											</vbox>
 										</radiogroup>
 									</cell>
@@ -650,7 +684,7 @@
 											<separator />
 											<radio label="Otro (Indique)" id="rdo5275"
 												tooltiptext="Marque para indicar la frecuencia de pagoo" />
-											<textbox id="txt5275" />
+											<textbox id="txt5275" multiline="true" />
 										</vbox>
 									</radiogroup>
 								</row>
@@ -1013,7 +1047,8 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<listbox model="${$composer.condiciones}" id="ltb822" height="50px">
+													<listbox model="${$composer.condicionesA}" id="ltb822"
+														height="150px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -1107,8 +1142,7 @@
 																id="rdo8282" tooltiptext="Marque para Responder" />
 															<radio label="Deteriorado/a o en mal Estado" id="rdo8283"
 																tooltiptext="Marque para Responder" />
-															<radio label="Otros (Especifique):" id="rdo8284"
-																tooltiptext="Marque para Responder" />
+															<radio label="Otros" id="rdo8284" tooltiptext="Marque para Responder" />
 														</hbox>
 													</radiogroup>
 												</cell>
@@ -1118,7 +1152,8 @@
 													<separator />
 													<label class="etiqueta"
 														value="¿Existía Alguna de las Siguientes Condiciones en los Equipos Maquinas o Herramientas?" />
-													<listbox model="${$composer.condiciones}" id="ltb829" height="50px">
+													<listbox model="${$composer.condicionesB}" id="ltb829"
+														height="150px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -1131,7 +1166,8 @@
 													<separator />
 													<label class="etiqueta"
 														value="¿Cuál de las Siguientes Condiciones Asociadas con  las Instalaciones Y/O los Materiales Utilizados para la Ejecución del Proceso de Trabajo Existían para el Momento de la Ocurrencia del Accidente?" />
-													<listbox model="${$composer.condiciones}" id="ltb8210" height="50px">
+													<listbox model="${$composer.condicionesC}" id="ltb8210"
+														height="150px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -1177,7 +1213,8 @@
 												<cell colspan="4">
 													<label class="etiqueta"
 														value="¿Cuál o Cuáles de las Siguientes Condiciones del Ambiente de Trabajo Estaban Presentes al Momento de la Ocurrencia del Accidente?" />
-													<listbox model="${$composer.condiciones}" id="ltb8213" height="50px">
+													<listbox model="${$composer.condicionesD}" id="ltb8213"
+														height="150px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -1398,7 +1435,7 @@
 													<separator />
 													<radiogroup id="rdg8315">
 														<hbox>
-															<radio label="Al Incio de la Jornada" id="rdo83151"
+															<radio label="Al Inicio de la Jornada" id="rdo83151"
 																tooltiptext="Marque para Responder" />
 															<radio label="En el Intermedio de la Jornada" id="rdo83152"
 																tooltiptext="Marque para Responder" />
@@ -1542,7 +1579,6 @@
 									</grid>
 								</tabpanel>
 								<tabpanel>
-
 									<separator />
 									<grid width="auto">
 										<columns>
@@ -1594,7 +1630,8 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<listbox model="${$composer.condiciones}" id="ltb84" height="50px">
+													<listbox model="${$composer.condicionesE}" id="ltb84"
+														height="150px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -1664,7 +1701,8 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<listbox model="${$composer.condiciones}" id="ltb841" height="50px">
+													<listbox model="${$composer.condicionesF}" id="ltb841"
+														height="150px">
 														<template name="model">
 															<listitem>
 																<listcell label="${each.nombre}">
@@ -2112,8 +2150,9 @@
 																<label id="lbl931414" />
 																<label id="lbl931415" />
 																<label id="lbl931416" />
-																<button id="btnBuscar93141" class="btn" label="Buscar"
-																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+																<button autodisable="self" id="btnBuscar93141"
+																	class="btn" label="Buscar" tooltiptext="Catalogo"
+																	image="/public/imagenes/botones/buscar.png" />
 															</row>
 															<row>
 																<label id="lbl931421" />
@@ -2122,8 +2161,9 @@
 																<label id="lbl931424" />
 																<label id="lbl931425" />
 																<label id="lbl931426" />
-																<button id="btnBuscar93142" class="btn" label="Buscar"
-																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+																<button autodisable="self" id="btnBuscar93142"
+																	class="btn" label="Buscar" tooltiptext="Catalogo"
+																	image="/public/imagenes/botones/buscar.png" />
 															</row>
 															<row>
 																<label id="lbl931431" />
@@ -2132,8 +2172,9 @@
 																<label id="lbl931434" />
 																<label id="lbl931435" />
 																<label id="lbl931436" />
-																<button id="btnBuscar93143" class="btn" label="Buscar"
-																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+																<button autodisable="self" id="btnBuscar93143"
+																	class="btn" label="Buscar" tooltiptext="Catalogo"
+																	image="/public/imagenes/botones/buscar.png" />
 															</row>
 															<row>
 																<label id="lbl931441" />
@@ -2142,8 +2183,9 @@
 																<label id="lbl931444" />
 																<label id="lbl931445" />
 																<label id="lbl931446" />
-																<button id="btnBuscar93144" class="btn" label="Buscar"
-																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+																<button autodisable="self" id="btnBuscar93144"
+																	class="btn" label="Buscar" tooltiptext="Catalogo"
+																	image="/public/imagenes/botones/buscar.png" />
 															</row>
 															<row>
 																<label id="lbl931451" />
@@ -2152,8 +2194,9 @@
 																<label id="lbl931454" />
 																<label id="lbl931455" />
 																<label id="lbl931456" />
-																<button id="btnBuscar93145" class="btn" label="Buscar"
-																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+																<button autodisable="self" id="btnBuscar93145"
+																	class="btn" label="Buscar" tooltiptext="Catalogo"
+																	image="/public/imagenes/botones/buscar.png" />
 															</row>
 															<row>
 																<label id="lbl931461" />
@@ -2162,8 +2205,9 @@
 																<label id="lbl931464" />
 																<label id="lbl931465" />
 																<label id="lbl931466" />
-																<button id="btnBuscar93146" class="btn" label="Buscar"
-																	tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+																<button autodisable="self" id="btnBuscar93146"
+																	class="btn" label="Buscar" tooltiptext="Catalogo"
+																	image="/public/imagenes/botones/buscar.png" />
 															</row>
 														</rows>
 													</grid>
@@ -2345,10 +2389,11 @@
 					</tabpanel>
 				</tabpanels>
 			</tabbox>
-			<separator />			
+			<separator />
 			<div id="botoneraInforme" />
 			<div id="catalogoPaciente" />
 			<div id="catalogoEmpresa" />
+			<div id="catalogoInforme" />
 		</groupbox>
 		<popup id="seccion" width="350px">
 			<label class="inicioAyuda" value="Secciones:" />
