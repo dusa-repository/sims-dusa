@@ -2,19 +2,27 @@ package controlador.sha;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import modelo.maestros.Antecedente;
+import modelo.maestros.AntecedenteTipo;
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
+import modelo.maestros.ParteCuerpo;
 import modelo.sha.Area;
 import modelo.sha.ClasificacionAccidente;
 import modelo.sha.Condicion;
 import modelo.sha.Informe;
+import modelo.transacciones.ConsultaParteCuerpo;
 
+import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -26,6 +34,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Tab;
@@ -34,6 +43,7 @@ import org.zkoss.zul.Timebox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 import controlador.maestros.CGenerico;
 
@@ -375,6 +385,10 @@ public class CInforme extends CGenerico {
 	@Wire
 	private Radiogroup rdg679;
 	@Wire
+	private Radio rdo6791;
+	@Wire
+	private Radio rdo6792;
+	@Wire
 	private Textbox txt6710;
 	@Wire
 	private Textbox txt6711;
@@ -399,6 +413,10 @@ public class CInforme extends CGenerico {
 	@Wire
 	private Radiogroup rdg815;
 	@Wire
+	private Radio rdo8151;
+	@Wire
+	private Radio rdo8152;
+	@Wire
 	private Textbox txt815;
 	@Wire
 	private Textbox txt816;
@@ -415,6 +433,12 @@ public class CInforme extends CGenerico {
 	@Wire
 	private Radiogroup rdg825;
 	@Wire
+	private Radio rdo8251;
+	@Wire
+	private Radio rdo8252;
+	@Wire
+	private Radio rdo8253;
+	@Wire
 	private Textbox txt825;
 	@Wire
 	private Radio rdo8261;
@@ -426,6 +450,14 @@ public class CInforme extends CGenerico {
 	private Radio rdo8272;
 	@Wire
 	private Radiogroup rdg828;
+	@Wire
+	private Radio rdo8281;
+	@Wire
+	private Radio rdo8282;
+	@Wire
+	private Radio rdo8283;
+	@Wire
+	private Radio rdo8284;
 	@Wire
 	private Radio rdo82111;
 	@Wire
@@ -457,9 +489,21 @@ public class CInforme extends CGenerico {
 	@Wire
 	private Textbox txt835;
 	@Wire
+	private Radio rdo8351;
+	@Wire
+	private Radio rdo8352;
+	@Wire
+	private Radio rdo8353;
+	@Wire
 	private Radiogroup rdg836;
 	@Wire
 	private Textbox txt836;
+	@Wire
+	private Radio rdo8361;
+	@Wire
+	private Radio rdo8362;
+	@Wire
+	private Radio rdo8363;
 	@Wire
 	private Radio rdo8371;
 	@Wire
@@ -469,9 +513,23 @@ public class CInforme extends CGenerico {
 	@Wire
 	private Textbox txt838;
 	@Wire
+	private Radio rdo8381;
+	@Wire
+	private Radio rdo8382;
+	@Wire
+	private Radio rdo8383;
+	@Wire
+	private Radio rdo8384;
+	@Wire
 	private Radiogroup rdg839;
 	@Wire
 	private Textbox txt839;
+	@Wire
+	private Radio rdo8391;
+	@Wire
+	private Radio rdo8392;
+	@Wire
+	private Radio rdo8393;
 	@Wire
 	private Radio rdo83101;
 	@Wire
@@ -548,6 +606,10 @@ public class CInforme extends CGenerico {
 	private Textbox txt842;
 	@Wire
 	private Radiogroup rdg843;
+	@Wire
+	private Radio rdo8431;
+	@Wire
+	private Radio rdo8432;
 	@Wire
 	private Textbox txt843;
 	@Wire
@@ -830,10 +892,18 @@ public class CInforme extends CGenerico {
 	@Wire
 	private Div catalogoEmpresa;
 	@Wire
+	private Div catalogoInforme;
+	@Wire
 	private Div botoneraInforme;
 	Catalogo<Paciente> catalogoP;
 	Catalogo<Empresa> catalogoE;
-	ListModelList<Condicion> condiciones;
+	Catalogo<Informe> catalogoI;
+	ListModelList<Condicion> condicionesA;
+	ListModelList<Condicion> condicionesB;
+	ListModelList<Condicion> condicionesC;
+	ListModelList<Condicion> condicionesD;
+	ListModelList<Condicion> condicionesE;
+	ListModelList<Condicion> condicionesF;
 	String idBotonPaciente = "";
 	String idBotonEmpresa = "";
 	List<Listbox> listas = new ArrayList<Listbox>();
@@ -843,6 +913,15 @@ public class CInforme extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		listas.add(ltb8210);
 		listas.add(ltb8213);
 		listas.add(ltb822);
@@ -850,17 +929,20 @@ public class CInforme extends CGenerico {
 		listas.add(ltb84);
 		listas.add(ltb841);
 		listasMultiples();
+		llenarComboCLasificacion();
+		llenarComboArea();
+
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divInforme, "Informe");
+				cerrarVentana(divInforme, "Informe",tabs);
 			}
 
 			@Override
 			public void limpiar() {
-				// TODO Auto-generated method stub
-
+				idInforme = 0;
+				limpiarCampos();
 			}
 
 			@Override
@@ -872,6 +954,28 @@ public class CInforme extends CGenerico {
 					Paciente pacientePrincipal = servicioPaciente
 							.buscarPorCedula(lbl53.getValue());
 					informe.setPacienteA(pacientePrincipal);
+
+					if (rdg523.getSelectedItem() != null)
+					{
+						informe.setEbc(rdg523.getSelectedItem().getLabel());
+					informe.setEbcf(txt5236.getValue());
+					}
+					if (rdg524.getSelectedItem() != null)
+						informe.setEbd(rdg524.getSelectedItem().getLabel());
+					if (rdg525.getSelectedItem() != null)
+						{
+						informe.setEbe(rdg525.getSelectedItem().getLabel());
+				    	informe.setEbeg(txt5257.getValue());
+						}
+					if (rdg526.getSelectedItem() != null)
+						informe.setEbf(rdg526.getSelectedItem().getLabel());
+					
+					if (rdg527.getSelectedItem() != null)
+					{
+						informe.setEbg(rdg527.getSelectedItem().getLabel());
+						informe.setEbge(txt5275.getValue());
+					}
+
 					Paciente paciente = servicioPaciente.buscarPorCedula(lbl212
 							.getValue());
 					informe.setPacienteB(paciente);
@@ -908,21 +1012,25 @@ public class CInforme extends CGenerico {
 					paciente = servicioPaciente.buscarPorCedula(lbl931462
 							.getValue());
 					informe.setPacienteM(paciente);
-					Area area = servicioArea.buscar(Long.valueOf(cmb6713
-							.getSelectedItem().getContext()));
-					informe.setArea(area);
-					ClasificacionAccidente clasificacion = servicioClasificacionAccidente
-							.buscar(Long.valueOf(cmb67.getSelectedItem()
-									.getContext()));
-					informe.setClasificacion(clasificacion);
+					if (cmb6713.getSelectedItem() != null) {
+						Area area = servicioArea.buscar(Long.valueOf(cmb6713
+								.getSelectedItem().getContext()));
+						informe.setArea(area);
+					}
+					if (cmb67.getSelectedItem() != null) {
+						ClasificacionAccidente clasificacion = servicioClasificacionAccidente
+								.buscar(Long.valueOf(cmb67.getSelectedItem()
+										.getContext()));
+						informe.setClasificacion(clasificacion);
+					}
 					Empresa empresa = servicioEmpresa.buscar(idEmpresa);
 					informe.setEmpresaA(empresa);
 					empresa = servicioEmpresa.buscar(idEmpresa2);
 					informe.setEmpresaB(empresa);
 
 					Set<Condicion> condiciones = new HashSet<Condicion>();
-					for (int i = 0; i < ltb8210.getItemCount(); i++) {
-						Listitem listItem = ltb8210.getItemAtIndex(i);
+					for (int i = 0; i < ltb822.getItemCount(); i++) {
+						Listitem listItem = ltb822.getItemAtIndex(i);
 						if (listItem.isSelected()) {
 							Condicion condicion = listItem.getValue();
 							condiciones.add(condicion);
@@ -931,8 +1039,8 @@ public class CInforme extends CGenerico {
 					informe.setCondicionA(condiciones);
 
 					condiciones = new HashSet<Condicion>();
-					for (int i = 0; i < ltb8213.getItemCount(); i++) {
-						Listitem listItem = ltb8213.getItemAtIndex(i);
+					for (int i = 0; i < ltb829.getItemCount(); i++) {
+						Listitem listItem = ltb829.getItemAtIndex(i);
 						if (listItem.isSelected()) {
 							Condicion condicion = listItem.getValue();
 							condiciones.add(condicion);
@@ -941,8 +1049,8 @@ public class CInforme extends CGenerico {
 					informe.setCondicionB(condiciones);
 
 					condiciones = new HashSet<Condicion>();
-					for (int i = 0; i < ltb822.getItemCount(); i++) {
-						Listitem listItem = ltb822.getItemAtIndex(i);
+					for (int i = 0; i < ltb8210.getItemCount(); i++) {
+						Listitem listItem = ltb8210.getItemAtIndex(i);
 						if (listItem.isSelected()) {
 							Condicion condicion = listItem.getValue();
 							condiciones.add(condicion);
@@ -951,8 +1059,8 @@ public class CInforme extends CGenerico {
 					informe.setCondicionC(condiciones);
 
 					condiciones = new HashSet<Condicion>();
-					for (int i = 0; i < ltb829.getItemCount(); i++) {
-						Listitem listItem = ltb829.getItemAtIndex(i);
+					for (int i = 0; i < ltb8213.getItemCount(); i++) {
+						Listitem listItem = ltb8213.getItemAtIndex(i);
 						if (listItem.isSelected()) {
 							Condicion condicion = listItem.getValue();
 							condiciones.add(condicion);
@@ -993,7 +1101,7 @@ public class CInforme extends CGenerico {
 					informe.setFgc(txt673.getValue());
 					informe.setFgd(txt674.getValue());
 					informe.setFge(txt675.getValue());
-					informe.setFgh(cmb676.getValue());
+					informe.setFgf(cmb676.getValue());
 					if (rdo6771.isChecked())
 						informe.setFgga(true);
 					else
@@ -1003,7 +1111,8 @@ public class CInforme extends CGenerico {
 						informe.setFgh(txt678.getValue());
 					} else
 						informe.setFgha(false);
-					informe.setFgi(rdg679.getSelectedItem().getLabel());
+					if (rdg679.getSelectedItem() != null)
+						informe.setFgi(rdg679.getSelectedItem().getLabel());
 					informe.setFgj(txt6710.getValue());
 					informe.setFgaa(txt6711.getValue());
 					informe.setFgab(txt6712.getValue());
@@ -1016,7 +1125,8 @@ public class CInforme extends CGenerico {
 						informe.setHada(true);
 					else
 						informe.setHada(false);
-					informe.setHaea(rdg815.getSelectedItem().getLabel());
+					if (rdg815.getSelectedItem() != null)
+						informe.setHaea(rdg815.getSelectedItem().getLabel());
 					informe.setHae(txt815.getValue());
 					informe.setHaf(txt816.getValue());
 					informe.setHba(txt821.getValue());
@@ -1027,7 +1137,8 @@ public class CInforme extends CGenerico {
 					else
 						informe.setHbd(true);
 					informe.setHbda(txt8241.getValue());
-					informe.setHbe(rdg825.getSelectedItem().getLabel());
+					if (rdg825.getSelectedItem() != null)
+						informe.setHbe(rdg825.getSelectedItem().getLabel());
 					informe.setHbea(txt825.getValue());
 					if (rdo8261.isChecked())
 						informe.setHbf(false);
@@ -1037,7 +1148,8 @@ public class CInforme extends CGenerico {
 						informe.setHbg(false);
 					else
 						informe.setHbg(true);
-					informe.setHbh(rdg828.getSelectedItem().getLabel());
+					if (rdg828.getSelectedItem() != null)
+						informe.setHbh(rdg828.getSelectedItem().getLabel());
 					if (rdo82111.isChecked())
 						informe.setHbaaa(false);
 					else {
@@ -1064,17 +1176,21 @@ public class CInforme extends CGenerico {
 						informe.setHcd(true);
 					else
 						informe.setHcd(false);
-					informe.setHcae(rdg835.getSelectedItem().getLabel());
-					informe.setHcaea(txt835.getValue());
-					informe.setHcaf(rdg836.getSelectedItem().getLabel());
-					informe.setHcafa(txt836.getValue());
+					if (rdg835.getSelectedItem() != null)
+						informe.setHcae(rdg835.getSelectedItem().getLabel());
+					informe.setHcea(txt835.getValue());
+					if (rdg836.getSelectedItem() != null)
+						informe.setHcf(rdg836.getSelectedItem().getLabel());
+					informe.setHcfa(txt836.getValue());
 					if (rdo8371.isChecked())
 						informe.setHcg(true);
 					else
 						informe.setHcg(false);
-					informe.setHch(rdg838.getSelectedItem().getLabel());
+					if (rdg838.getSelectedItem() != null)
+						informe.setHch(rdg838.getSelectedItem().getLabel());
 					informe.setHcha(txt838.getValue());
-					informe.setHci(rdg839.getSelectedItem().getLabel());
+					if (rdg839.getSelectedItem() != null)
+						informe.setHci(rdg839.getSelectedItem().getLabel());
 					informe.setHcia(txt839.getValue());
 					if (rdo83101.isChecked())
 						informe.setHcj(true);
@@ -1097,7 +1213,8 @@ public class CInforme extends CGenerico {
 						informe.setHcac(false);
 
 					informe.setHcad(txt8314.getValue());
-					informe.setHcae(rdg8315.getSelectedItem().getLabel());
+					if (rdg8315.getSelectedItem() != null)
+						informe.setHcae(rdg8315.getSelectedItem().getLabel());
 					informe.setHcaea(txt8315.getValue());
 					informe.setHcaf(txt8316.getValue());
 					if (rdo831711.isChecked())
@@ -1148,7 +1265,8 @@ public class CInforme extends CGenerico {
 						informe.setHdba(txt842.getValue());
 					}
 
-					informe.setHdc(rdg843.getSelectedItem().getLabel());
+					if (rdg843.getSelectedItem() != null)
+						informe.setHdc(rdg843.getSelectedItem().getLabel());
 					informe.setHdca(txt843.getValue());
 					informe.setHdd(txt844.getValue());
 					informe.setHdea(txt8451.getValue());
@@ -1244,7 +1362,8 @@ public class CInforme extends CGenerico {
 					Timestamp fe932 = new Timestamp(fecha932.getTime());
 					informe.setIcb(fe932);
 					informe.setIcc(txt933.getValue());
-					informe.setIcd(rdg934.getSelectedItem().getLabel());
+					if (rdg934.getSelectedItem() != null)
+						informe.setIcd(rdg934.getSelectedItem().getLabel());
 					if (rdo9351.isChecked())
 						informe.setIce(true);
 					else
@@ -1269,8 +1388,10 @@ public class CInforme extends CGenerico {
 					Timestamp fe9310 = new Timestamp(fecha9310.getTime());
 					informe.setIcj(fe9310);
 					informe.setIcaa(txt9311.getValue());
-					informe.setIcab(rdg9312.getSelectedItem().getLabel());
-					informe.setIcac(rdg9313.getSelectedItem().getLabel());
+					if (rdg9312.getSelectedItem() != null)
+						informe.setIcab(rdg9312.getSelectedItem().getLabel());
+					if (rdg9313.getSelectedItem() != null)
+						informe.setIcac(rdg9313.getSelectedItem().getLabel());
 					informe.setIcae(txt9315.getValue());
 					if (rdo9411.isChecked())
 						informe.setIda(true);
@@ -1322,6 +1443,9 @@ public class CInforme extends CGenerico {
 						informe.setIdac(false);
 					informe.setIdad(txt9414.getValue());
 					servicioInforme.guardar(informe);
+					msj.mensajeInformacion(Mensaje.guardado);
+					limpiarCampos();
+					listasMultiples();
 				}
 
 			}
@@ -1337,9 +1461,55 @@ public class CInforme extends CGenerico {
 		botoneraInforme.appendChild(botonera);
 	}
 
+	public ListModelList<Condicion> getCondicionesA() {
+
+		condicionesA = new ListModelList<>(
+				servicioCondicion.buscarPorTipo("Instalaciones"));
+		return condicionesA;
+	}
+
+	public ListModelList<Condicion> getCondicionesB() {
+
+		condicionesB = new ListModelList<>(
+				servicioCondicion.buscarPorTipo("Equipos"));
+		return condicionesB;
+	}
+
+	public ListModelList<Condicion> getCondicionesC() {
+
+		condicionesC = new ListModelList<>(
+				servicioCondicion.buscarPorTipo("Materiales"));
+		return condicionesC;
+	}
+
+	public ListModelList<Condicion> getCondicionesD() {
+
+		condicionesD = new ListModelList<>(
+				servicioCondicion.buscarPorTipo("Ambiente"));
+		return condicionesD;
+	}
+
+	public ListModelList<Condicion> getCondicionesE() {
+
+		condicionesE = new ListModelList<>(
+				servicioCondicion.buscarPorTipo("Organizacion"));
+		return condicionesE;
+	}
+
+	public ListModelList<Condicion> getCondicionesF() {
+
+		condicionesF = new ListModelList<>(
+				servicioCondicion.buscarPorTipo("Disergonomicos"));
+		return condicionesF;
+	}
+
 	protected boolean validar() {
-		// TODO Auto-generated method stub
-		return false;
+		if (txt1.getText().compareTo("") == 0 || lbl53.getValue() == ""
+				|| lbl31.getValue() == "") {
+			msj.mensajeError(Mensaje.camposVacios);
+			return false;
+		} else
+			return true;
 	}
 
 	@Listen("onClick =  #btnBuscar21,#btnBuscar22,#btnBuscar23,#btnBuscar24,#btnBuscar25,#btnBuscar26,#btnBuscar5,#btnBuscar93141,#btnBuscar93142,#btnBuscar93143,#btnBuscar93144,#btnBuscar93145,#btnBuscar93146")
@@ -1439,7 +1609,8 @@ public class CInforme extends CGenerico {
 				+ paciente.getPrimerApellido());
 		lbl931462.setValue(paciente.getCedula());
 		lbl931463.setValue(paciente.getProfesion());
-		lbl931464.setValue(paciente.getCargoReal().getNombre());
+		if (paciente.getCargoReal() != null)
+			lbl931464.setValue(paciente.getCargoReal().getNombre());
 		lbl931465.setValue(paciente.getTurno());
 		lbl931466.setValue(paciente.getNroInpsasel());
 	}
@@ -1449,7 +1620,8 @@ public class CInforme extends CGenerico {
 				+ paciente.getPrimerApellido());
 		lbl931452.setValue(paciente.getCedula());
 		lbl931453.setValue(paciente.getProfesion());
-		lbl931454.setValue(paciente.getCargoReal().getNombre());
+		if (paciente.getCargoReal() != null)
+			lbl931454.setValue(paciente.getCargoReal().getNombre());
 		lbl931455.setValue(paciente.getTurno());
 		lbl931456.setValue(paciente.getNroInpsasel());
 	}
@@ -1459,7 +1631,8 @@ public class CInforme extends CGenerico {
 				+ paciente.getPrimerApellido());
 		lbl931442.setValue(paciente.getCedula());
 		lbl931443.setValue(paciente.getProfesion());
-		lbl931444.setValue(paciente.getCargoReal().getNombre());
+		if (paciente.getCargoReal() != null)
+			lbl931444.setValue(paciente.getCargoReal().getNombre());
 		lbl931445.setValue(paciente.getTurno());
 		lbl931446.setValue(paciente.getNroInpsasel());
 	}
@@ -1469,7 +1642,8 @@ public class CInforme extends CGenerico {
 				+ paciente.getPrimerApellido());
 		lbl931432.setValue(paciente.getCedula());
 		lbl931433.setValue(paciente.getProfesion());
-		lbl931434.setValue(paciente.getCargoReal().getNombre());
+		if (paciente.getCargoReal() != null)
+			lbl931434.setValue(paciente.getCargoReal().getNombre());
 		lbl931435.setValue(paciente.getTurno());
 		lbl931436.setValue(paciente.getNroInpsasel());
 	}
@@ -1479,7 +1653,8 @@ public class CInforme extends CGenerico {
 				+ paciente.getPrimerApellido());
 		lbl931422.setValue(paciente.getCedula());
 		lbl931423.setValue(paciente.getProfesion());
-		lbl931424.setValue(paciente.getCargoReal().getNombre());
+		if (paciente.getCargoReal() != null)
+			lbl931424.setValue(paciente.getCargoReal().getNombre());
 		lbl931425.setValue(paciente.getTurno());
 		lbl931426.setValue(paciente.getNroInpsasel());
 	}
@@ -1489,7 +1664,8 @@ public class CInforme extends CGenerico {
 				+ paciente.getPrimerApellido());
 		lbl931412.setValue(paciente.getCedula());
 		lbl931413.setValue(paciente.getProfesion());
-		lbl931414.setValue(paciente.getCargoReal().getNombre());
+		if (paciente.getCargoReal() != null)
+			lbl931414.setValue(paciente.getCargoReal().getNombre());
 		lbl931415.setValue(paciente.getTurno());
 		lbl931416.setValue(paciente.getNroInpsasel());
 	}
@@ -1640,8 +1816,8 @@ public class CInforme extends CGenerico {
 		lbl45.setValue(empresa.getRif());
 		lbl46.setValue(empresa.getNil());
 		lbl47.setValue(empresa.getNroIvss());
-		lbl48.setValue(empresa.getCodigoCiiu());
-		lbl49.setValue(empresa.getActividadEconomica());
+		lbl48.setValue(empresa.getActividadEconomica());
+		lbl49.setValue(empresa.getCodigoCiiu());
 		lbl410.setValue(empresa.getTelefono());
 		lbl411.setValue(empresa.getCorreo());
 		lbl412.setValue(empresa.getRegistroMercantil());
@@ -1690,8 +1866,8 @@ public class CInforme extends CGenerico {
 		lbl35.setValue(empresa.getRif());
 		lbl36.setValue(empresa.getNil());
 		lbl37.setValue(empresa.getNroIvss());
-		lbl38.setValue(empresa.getCodigoCiiu());
-		lbl39.setValue(empresa.getActividadEconomica());
+		lbl38.setValue(empresa.getActividadEconomica());
+		lbl39.setValue(empresa.getCodigoCiiu());
 		lbl310.setValue(empresa.getTelefono());
 		lbl311.setValue(empresa.getCorreo());
 		lbl312.setValue(empresa.getRegistroMercantil());
@@ -1731,11 +1907,6 @@ public class CInforme extends CGenerico {
 			lbl334.setValue(String.valueOf(empresa.getExtranjeros()));
 	}
 
-	public ListModelList<Condicion> getCondiciones() {
-		condiciones = new ListModelList<>(servicioCondicion.buscarTodos());
-		return condiciones;
-	}
-
 	@Listen("onClick = #btnSiguiente1,#btnSiguiente2,#btnSiguiente3,#btnSiguiente4,#btnSiguiente5")
 	public void siguiente() {
 		if (tab6y7.isSelected())
@@ -1770,5 +1941,1529 @@ public class CInforme extends CGenerico {
 			listas.get(i).setMultiple(true);
 			listas.get(i).setCheckmark(true);
 		}
+	}
+
+	@Listen("onOpen = #cmb67")
+	public void llenarComboCLasificacion() {
+		List<ClasificacionAccidente> clasificacion = servicioClasificacionAccidente
+				.buscarTodos();
+		cmb67.setModel(new ListModelList<ClasificacionAccidente>(clasificacion));
+	}
+
+	@Listen("onOpen = #cmb6713")
+	public void llenarComboArea() {
+		List<Area> area = servicioArea.buscarTodos();
+		cmb6713.setModel(new ListModelList<Area>(area));
+	}
+
+	@Listen("onClick =  #btnBuscar1")
+	public void buscarInforme(Event e) {
+
+		final List<Informe> informes = servicioInforme.buscarTodos();
+		catalogoI = new Catalogo<Informe>(catalogoInforme,
+				"Catalogo de Informes", informes, "Codigo",
+				"Nombre Trabajador", "Apellido Trabajador", "Empresa") {
+
+			@Override
+			protected List<Informe> buscar(String valor, String combo) {
+
+				switch (combo) {
+				case "Codigo":
+					return servicioInforme.filtroCodigo(valor);
+				case "Nombre Trabajador":
+					return servicioInforme.filtroNombreTrabajador(valor);
+				case "Apellido Trabajador":
+					return servicioInforme.filtroApellidoTrabajador(valor);
+				case "Empresa":
+					return servicioInforme.filtroEmpresa(valor);
+				default:
+					return informes;
+				}
+
+			}
+
+			@Override
+			protected String[] crearRegistros(Informe objeto) {
+				String[] registros = new String[4];
+				registros[0] = objeto.getCodigo();
+				registros[1] = objeto.getPacienteA().getPrimerNombre();
+				registros[2] = objeto.getPacienteA().getPrimerApellido();
+				registros[3] = objeto.getEmpresaA().getNombre();
+				return registros;
+			}
+
+		};
+		catalogoI.setParent(catalogoInforme);
+		catalogoI.doModal();
+	}
+
+	@Listen("onSeleccion = #catalogoInforme")
+	public void seleccion() {
+		Informe informe = catalogoI.objetoSeleccionadoDelCatalogo();
+		txt1.setValue(informe.getCodigo());
+		setear5(informe.getPacienteA());
+		setear3(informe.getEmpresaA());
+		if (informe.getPacienteB() != null)
+			setear21(informe.getPacienteB());
+		if (informe.getPacienteC() != null)
+			setear22(informe.getPacienteC());
+		if (informe.getPacienteD() != null)
+			setear23(informe.getPacienteD());
+		if (informe.getPacienteE() != null)
+			setear24(informe.getPacienteE());
+		if (informe.getPacienteF() != null)
+			setear25(informe.getPacienteF());
+		if (informe.getPacienteG() != null)
+			setear26(informe.getPacienteG());
+		if (informe.getEmpresaB() != null)
+			setear4(informe.getEmpresaB());
+		idInforme = informe.getIdInforme();
+		llenarCampos(informe);
+		catalogoI.setParent(null);
+	}
+
+	private void llenarCampos(Informe informe) {
+		
+		//seccion 5
+		
+		if (informe.getEbc() != null) {
+			Radio radio = new Radio();
+			switch (informe.getEbc()) {
+			case "Trabajando":
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(0);
+				radio.setChecked(true);
+				break;
+			case "Reposo":
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(1);
+				radio.setChecked(true);
+				break;
+			case "Retirado":
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(2);
+				radio.setChecked(true);
+				break;
+			case "Despedido":
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(3);
+				radio.setChecked(true);
+				break;
+			case "Reubicado":
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(4);
+				radio.setChecked(true);
+				break;
+			case "Otro (Indique)":
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(5);
+				radio.setChecked(true);
+				txt5236.setValue(informe.getEbcf());
+				break;
+			default:
+				break;
+			}
+		}
+		
+		if (informe.getEbd() != null) {
+			Radio radio = new Radio();
+			switch (informe.getEbd()) {
+			case "Jornada Completa":
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(0);
+				radio.setChecked(true);
+				break;
+			case "Jornada Parcial":
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(1);
+				radio.setChecked(true);
+				break;
+			case "Turno Fijo Mañanas":
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(2);
+				radio.setChecked(true);
+				break;
+			case "Turno Fijo Tardes":
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(3);
+				radio.setChecked(true);
+				break;
+			case "Turno Fijo Noches":
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(4);
+				radio.setChecked(true);
+				break;
+			case "Turno Rotativo":
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(5);
+				radio.setChecked(true);
+				break;
+			case "Turno Mixto":
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(6);
+				radio.setChecked(true);
+				break;
+			default:
+				break;
+			}
+		}
+		
+		if (informe.getEbe() != null) {
+			Radio radio = new Radio();
+			switch (informe.getEbe()) {
+			case "Fijo Nomina":
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(1);
+				radio.setChecked(true);
+				break;
+			case "Contrato Tiempo Determinado":
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(2);
+				radio.setChecked(true);
+				break;
+			case "Contrato Obra Determinada":
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(3);
+				radio.setChecked(true);
+				break;
+			case "Contrato Destajo":
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(4);
+				radio.setChecked(true);
+				break;
+			case "Aprendiz":
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(5);
+				radio.setChecked(true);
+				break;
+			case "Ocasional":
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(6);
+				radio.setChecked(true);
+				break;
+			case "Otra (Indique)":
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(7);
+				radio.setChecked(true);
+				txt5257.setValue(informe.getEbeg());
+				break;
+			default:
+				break;
+			}
+		}
+		
+		
+		if (informe.getEbf() != null) {
+			Radio radio = new Radio();
+			switch (informe.getEbf()) {
+			case "Por unidad de Tiempo":
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(3);
+				radio.setChecked(true);
+				break;
+			case "Por unidad de Obra":
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(5);
+				radio.setChecked(true);
+				break;
+			case "Por pieza o a Destajo":
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(7);
+				radio.setChecked(true);
+				break;
+			case "Por Tarea":
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(9);
+				radio.setChecked(true);
+				break;
+			case "Por Productividad":
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(11);
+				radio.setChecked(true);
+				break;
+			default:
+				break;
+			}
+		}
+		
+		if (informe.getEbg() != null) {
+			Radio radio = new Radio();
+			switch (informe.getEbg()) {
+			case "Diario":
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(2);
+				radio.setChecked(true);
+				break;
+			case "Semanal":
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(4);
+				radio.setChecked(true);
+				break;
+			case "Quincenal":
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(6);
+				radio.setChecked(true);
+				break;
+			case "Mensual":
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(8);
+				radio.setChecked(true);
+				break;
+			case "Otro (Indique)":
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(10);
+				radio.setChecked(true);
+				txt5275.setValue(informe.getEbge());				
+				break;
+			default:
+				break;
+			}
+		}
+		
+		
+		// seccion 6 y 7
+		if (informe.getFa() != null)
+			dtb61.setValue(informe.getFa());
+		cmb62.setValue(informe.getFb());
+		if (informe.getFc() != null) {
+			try {
+				tmb63.setValue(df.parse(informe.getFc()));
+			} catch (WrongValueException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		txt64.setValue(informe.getFd());
+		txt65.setValue(informe.getFe());
+		txt66.setValue(informe.getFf());
+		if (informe.getClasificacion() != null)
+			cmb67.setValue(informe.getClasificacion().getNombre());
+		txt671.setValue(informe.getFga());
+		txt672.setValue(informe.getFgb());
+		txt673.setValue(informe.getFgc());
+		txt674.setValue(informe.getFgd());
+		txt675.setValue(informe.getFge());
+		cmb676.setValue(informe.getFgf());
+		if (informe.getFgga())
+			rdo6771.setChecked(true);
+		else
+			rdo6772.setChecked(true);
+		if (informe.getFgha()) {
+			rdo6781.setChecked(true);
+			txt678.setValue(informe.getFgh());
+		} else
+			rdo6782.setChecked(true);
+		if (informe.getFgi() != null && informe.getFgi().equals("Publico"))
+			rdo6791.setChecked(true);
+		else {
+			if (informe.getFgi() != null && informe.getFgi().equals("Privado"))
+				rdo6792.setChecked(true);
+		}
+		txt6710.setValue(informe.getFgj());
+		txt6711.setValue(informe.getFgaa());
+		txt6712.setValue(informe.getFgab());
+		if (informe.getArea() != null)
+			cmb6713.setValue(informe.getArea().getNombre());
+		txt6714.setValue(informe.getFgad());
+		txt711.setValue(informe.getGaa());
+
+		// Seccion 8
+
+		txt811.setValue(informe.getHaa());
+		txt812.setValue(informe.getHab());
+		txt813.setValue(informe.getHac());
+		if (informe.getHada())
+			rdo8141.setChecked(true);
+		else
+			rdo8142.setChecked(true);
+		if (informe.getHaea() != null
+				&& informe.getHaea()
+						.equals("Porque la Habitual Estaba Agotada"))
+			rdo8151.setChecked(true);
+		else {
+			rdo8152.setChecked(true);
+			txt815.setValue(informe.getHae());
+		}
+		txt816.setValue(informe.getHaf());
+		txt821.setValue(informe.getHba());
+		// lista822
+		txt823.setValue(informe.getHbc());
+		if (informe.getHbd()) {
+			rdo8241.setChecked(true);
+			txt8241.setValue(informe.getHbda());
+		} else
+			rdo8242.setChecked(true);
+		if (informe.getHbe() != null
+				&& informe.getHbe().equals(
+						"El Trabajador o Trabajadora Accidentado"))
+			rdo8251.setChecked(true);
+		else {
+			if (informe.getHbe() != null
+					&& informe.getHbe().equals("Otro Trabajador o Trabajadora"))
+				rdo8252.setChecked(true);
+			else {
+				rdo8253.setChecked(true);
+				txt825.setValue(informe.getHbea());
+			}
+		}
+		if (informe.getHbf())
+			rdo8262.setChecked(true);
+		else
+			rdo8261.setChecked(true);
+		if (informe.getHbg())
+			rdo8272.setChecked(true);
+		else
+			rdo8271.setChecked(true);
+
+		if (informe.getHbh() != null
+				&& informe.getHbh().equals("Inexistencia del/la  Mismo/a"))
+			rdo8281.setChecked(true);
+		else {
+			if (informe.getHbh() != null
+					&& informe.getHbh().equals(
+							"Lo Estaba Utilizando otra Persona."))
+				rdo8282.setChecked(true);
+			else {
+				if (informe.getHbh() != null
+						&& informe.getHbh().equals(
+								"Deteriorado/a o en mal Estado"))
+					rdo8283.setChecked(true);
+				else {
+					if (informe.getHbh() != null
+							&& informe.getHbh().equals("Otros"))
+						rdo8284.setChecked(true);
+				}
+			}
+		}
+		if (informe.getHbaaa()) {
+			rdo82112.setChecked(true);
+			txt8211.setValue(informe.getHbaa());
+		} else
+			rdo82111.setChecked(true);
+		if (informe.getHbaab()) {
+			rdo82122.setChecked(true);
+			txt8212.setValue(informe.getHbab());
+		} else
+			rdo82121.setChecked(true);
+
+		txt831.setValue(informe.getHca());
+		if (informe.getHcb())
+			rdo8322.setChecked(true);
+		else
+			rdo8321.setChecked(true);
+
+		if (informe.getHcc())
+			rdo8332.setChecked(true);
+		else
+			rdo8331.setChecked(true);
+
+		if (informe.getHcd())
+			rdo8341.setChecked(true);
+		else
+			rdo8342.setChecked(true);
+		if (informe.getHce() != null
+				&& informe.getHce().equals(
+						"Desconocia la Forma Habitual de Realizarla"))
+			rdo8351.setChecked(true);
+		else {
+			if (informe.getHce() != null
+					&& informe
+							.getHce()
+							.equals("Habia Recibido Instrucciones para Realizarla de esa Manera."))
+				rdo8352.setChecked(true);
+			else {
+				rdo8353.setChecked(true);
+				txt835.setValue(informe.getHcea());
+			}
+		}
+		if (informe.getHcf() != null
+				&& informe.getHcf().equals("Era la Primera Vez"))
+			rdo8361.setChecked(true);
+		else {
+			if (informe.getHbe() != null
+					&& informe.getHbe().equals("De manera Esporadica"))
+				rdo8362.setChecked(true);
+			else {
+				rdo8363.setChecked(true);
+				txt836.setValue(informe.getHcfa());
+			}
+		}
+		if (informe.getHcg())
+			rdo8371.setChecked(true);
+		else
+			rdo8372.setChecked(true);
+
+		if (informe.getHch() != null && informe.getHch().equals("Escritas"))
+			rdo8381.setChecked(true);
+		else {
+			if (informe.getHch() != null && informe.getHch().equals("Verbales"))
+				rdo8382.setChecked(true);
+			else {
+				if (informe.getHch() != null
+						&& informe.getHch().equals("Ambas"))
+					rdo8383.setChecked(true);
+				else {
+					rdo8384.setChecked(true);
+					txt838.setValue(informe.getHcha());
+				}
+			}
+		}
+		if (informe.getHci() != null
+				&& informe.getHci().equals("Del Empleador"))
+			rdo8391.setChecked(true);
+		else {
+			if (informe.getHci() != null
+					&& informe.getHci().equals("Del Supervisor"))
+				rdo8392.setChecked(true);
+			else {
+				rdo8393.setChecked(true);
+				txt839.setValue(informe.getHcia());
+			}
+		}
+		if (informe.getHcj())
+			rdo83101.setChecked(true);
+		else
+			rdo83102.setChecked(true);
+		if (informe.getHcaa()) {
+			rdo83111.setChecked(true);
+			txt8311.setValue(informe.getHcaaa());
+		} else
+			rdo83112.setChecked(true);
+		if (informe.getHcab()) {
+			rdo83122.setChecked(true);
+			txt8312.setValue(informe.getHcaba());
+		} else
+			rdo83121.setChecked(true);
+		if (informe.getHcac())
+			rdo83131.setChecked(true);
+		else
+			rdo83132.setChecked(true);
+		txt8314.setValue(informe.getHcad());
+
+		if (informe.getHcae() != null) {
+			Radio radio = new Radio();
+			switch (informe.getHcae()) {
+			case "Al Incio de la Jornada":
+				radio = (Radio) rdg8315.getChildren().get(0).getChildren()
+						.get(0);
+				radio.setChecked(true);
+				break;
+			case "En el Intermedio de la Jornada":
+				radio = (Radio) rdg8315.getChildren().get(0).getChildren()
+						.get(1);
+				radio.setChecked(true);
+				break;
+			case "Al Final de la Jornada":
+				radio = (Radio) rdg8315.getChildren().get(0).getChildren()
+						.get(2);
+				radio.setChecked(true);
+				break;
+			case "Durante una Pausa en el Proceso del Trabajo":
+				radio = (Radio) rdg8315.getChildren().get(0).getChildren()
+						.get(3);
+				radio.setChecked(true);
+				break;
+			case "Despues de una Pausa del Proceso de Trabajo":
+				radio = (Radio) rdg8315.getChildren().get(0).getChildren()
+						.get(4);
+				radio.setChecked(true);
+				break;
+			case "Durante el Tiempo de Descanso":
+				radio = (Radio) rdg8315.getChildren().get(0).getChildren()
+						.get(5);
+				radio.setChecked(true);
+				break;
+			case "Horas Extras":
+				radio = (Radio) rdg8315.getChildren().get(0).getChildren()
+						.get(6);
+				radio.setChecked(true);
+				break;
+			case "Doblando un  Turno":
+				radio = (Radio) rdg8315.getChildren().get(0).getChildren()
+						.get(7);
+				radio.setChecked(true);
+				break;
+			case "Otros (Indique)":
+				radio = (Radio) rdg8315.getChildren().get(0).getChildren()
+						.get(8);
+				radio.setChecked(true);
+				break;
+			default:
+				break;
+			}
+		}
+		txt8315.setValue(informe.getHcaea());
+		txt8316.setValue(informe.getHcaf());
+		if (informe.getHcaga())
+			rdo831711.setChecked(true);
+		else
+			rdo831712.setChecked(true);
+
+		if (informe.getHcagb())
+			rdo831721.setChecked(true);
+		else
+			rdo831722.setChecked(true);
+
+		if (informe.getHcagc())
+			rdo831731.setChecked(true);
+		else
+			rdo831732.setChecked(true);
+
+		if (informe.getHcagd())
+			rdo831741.setChecked(true);
+		else
+			rdo831742.setChecked(true);
+
+		if (informe.getHcage())
+			rdo831751.setChecked(true);
+		else
+			rdo831752.setChecked(true);
+
+		if (informe.getHcagf()) {
+			rdo831762.setChecked(true);
+			txt83176.setValue(informe.getHcagfa());
+		} else {
+			if (!informe.getHcagf())
+				rdo831761.setChecked(true);
+		}
+
+		if (informe.getHcagg())
+			rdo831771.setChecked(true);
+		else
+			rdo831772.setChecked(true);
+
+		if (informe.getHcagh())
+			rdo831781.setChecked(true);
+		else
+			rdo831782.setChecked(true);
+
+		if (informe.getHcagi())
+			rdo831791.setChecked(true);
+		else
+			rdo831792.setChecked(true);
+
+		txt841.setValue(informe.getHda());
+		if (informe.getHdb())
+			rdo8421.setChecked(true);
+		else {
+			rdo8422.setChecked(true);
+			txt842.setValue(informe.getHdba());
+		}
+
+		if (informe.getHdc() != null
+				&& informe
+						.getHdc()
+						.equals("Habia Recibido Instrucciones de Realizarla en Otro Lugar"))
+			rdo8431.setChecked(true);
+		else {
+			if (informe.getHdc() != null
+					&& informe.getHdc().equals("Otros (Especifique)")) {
+				rdo8432.setChecked(true);
+				txt843.setValue(informe.getHdca());
+			}
+		}
+		txt844.setValue(informe.getHdd());
+		txt8451.setValue(informe.getHdea());
+		txt8452.setValue(informe.getHdeb());
+		txt8453.setValue(informe.getHdec());
+		txt8454.setValue(informe.getHded());
+		txt846.setValue(informe.getHdf());
+
+		// Seccion 9
+		if (informe.getIaa())
+			rdo9111.setChecked(true);
+		else
+			rdo9112.setChecked(true);
+		if (informe.getIab())
+			rdo9121.setChecked(true);
+		else
+			rdo9122.setChecked(true);
+		if (informe.getIac())
+			rdo9131.setChecked(true);
+		else
+			rdo9132.setChecked(true);
+		if (informe.getIad()) {
+			txt914.setValue(informe.getIada());
+			rdo9142.setChecked(true);
+		} else
+			rdo9141.setChecked(true);
+		if (informe.getIae() != null)
+			dtb915.setValue(informe.getIae());
+		if (informe.getIaf())
+			rdo9161.setChecked(true);
+		else
+			rdo9162.setChecked(true);
+		if (informe.getIag()) {
+			rdo9172.setChecked(true);
+			txt917.setValue(informe.getIaga());
+		} else
+			rdo9171.setChecked(true);
+		if (informe.getIah())
+			rdo9181.setChecked(true);
+		else
+			rdo9182.setChecked(true);
+		txt919.setValue(informe.getIai());
+		txt9110.setValue(informe.getIaj());
+		if (informe.getIba())
+			rdo9211.setChecked(true);
+		else
+			rdo9212.setChecked(true);
+		if (informe.getIbb() != null)
+			dtb922.setValue(informe.getIbb());
+		txt923.setValue(informe.getIbc());
+		if (informe.getIbd() != null)
+			dtb924.setValue(informe.getIbd());
+		if (informe.getIbe())
+			rdo9251.setChecked(true);
+		else
+			rdo9252.setChecked(true);
+		if (informe.getIbf())
+			rdo9261.setChecked(true);
+		else
+			rdo9262.setChecked(true);
+		if (informe.getIbg())
+			rdo9271.setChecked(true);
+		else
+			rdo9272.setChecked(true);
+		if (informe.getIbh())
+			rdo9281.setChecked(true);
+		else
+			rdo9282.setChecked(true);
+		if (informe.getIbi())
+			rdo9291.setChecked(true);
+		else
+			rdo9292.setChecked(true);
+		if (informe.getIbj())
+			rdo92101.setChecked(true);
+		else
+			rdo92102.setChecked(true);
+		if (informe.getIbaa())
+			rdo92111.setChecked(true);
+		else
+			rdo92112.setChecked(true);
+		txt9212.setValue(informe.getIbab());
+		txt9213.setValue(informe.getIbac());
+		if (informe.getIca())
+			rdo9311.setChecked(true);
+		else
+			rdo9312.setChecked(true);
+		if (informe.getIcb() != null)
+			dtb932.setValue(informe.getIcb());
+		txt933.setValue(informe.getIcc());
+
+		if (informe.getIcd() != null && informe.getIcd().equals("Propio"))
+			rdo9341.setChecked(true);
+		else {
+			if (informe.getIcd() != null
+					&& informe.getIcd().equals("Mancomunado"))
+				rdo9342.setChecked(true);
+		}
+		if (informe.getIce())
+			rdo9351.setChecked(true);
+		else
+			rdo9352.setChecked(true);
+		if (informe.getIcf())
+			rdo9361.setChecked(true);
+		else
+			rdo9362.setChecked(true);
+		if (informe.getIcg())
+			rdo9371.setChecked(true);
+		else
+			rdo9372.setChecked(true);
+		if (informe.getIch())
+			rdo9381.setChecked(true);
+		else
+			rdo9382.setChecked(true);
+		if (informe.getIci())
+			rdo9391.setChecked(true);
+		else
+			rdo9392.setChecked(true);
+		if (informe.getIcj() != null)
+			dtb9310.setValue(informe.getIcj());
+		txt9311.setValue(informe.getIcaa());
+
+		if (informe.getIcab() != null && informe.getIcab().equals("Propio"))
+			rdo93121.setChecked(true);
+		else {
+			if (informe.getIcab() != null
+					&& informe.getIcab().equals("Mancomunado"))
+				rdo93122.setChecked(true);
+		}
+
+		if (informe.getIcac() != null) {
+			Radio radio = new Radio();
+			switch (informe.getIcac()) {
+			case "Mañana":
+				radio = (Radio) rdg9313.getChildren().get(0).getChildren()
+						.get(0);
+				radio.setChecked(true);
+				break;
+			case "Tarde":
+				radio = (Radio) rdg9313.getChildren().get(0).getChildren()
+						.get(1);
+				radio.setChecked(true);
+				break;
+			case "Noche":
+				radio = (Radio) rdg9313.getChildren().get(0).getChildren()
+						.get(2);
+				radio.setChecked(true);
+				break;
+			case "Mixto":
+				radio = (Radio) rdg9313.getChildren().get(0).getChildren()
+						.get(3);
+				radio.setChecked(true);
+				break;
+			case "Todos":
+				radio = (Radio) rdg9313.getChildren().get(0).getChildren()
+						.get(4);
+				radio.setChecked(true);
+				break;
+			default:
+				break;
+			}
+		}
+		if (informe.getPacienteH() != null)
+			setear93141(informe.getPacienteH());
+		if (informe.getPacienteI() != null)
+			setear93142(informe.getPacienteI());
+		if (informe.getPacienteJ() != null)
+			setear93143(informe.getPacienteJ());
+		if (informe.getPacienteK() != null)
+			setear93144(informe.getPacienteK());
+		if (informe.getPacienteL() != null)
+			setear93145(informe.getPacienteL());
+		if (informe.getPacienteM() != null)
+			setear93146(informe.getPacienteM());
+		txt9315.setValue(informe.getIcae());
+
+		if (informe.getIda())
+			rdo9411.setChecked(true);
+		else
+			rdo9412.setChecked(true);
+		if (informe.getIdb())
+			rdo9421.setChecked(true);
+		else
+			rdo9422.setChecked(true);
+		if (informe.getIdc())
+			rdo9431.setChecked(true);
+		else
+			rdo9432.setChecked(true);
+		if (informe.getIdd())
+			rdo9441.setChecked(true);
+		else
+			rdo9442.setChecked(true);
+		if (informe.getIde())
+			rdo9451.setChecked(true);
+		else
+			rdo9452.setChecked(true);
+		if (informe.getIdf())
+			rdo9461.setChecked(true);
+		else
+			rdo9462.setChecked(true);
+		if (informe.getIdg())
+			rdo9471.setChecked(true);
+		else
+			rdo9472.setChecked(true);
+		if (informe.getIdh())
+			rdo9481.setChecked(true);
+		else
+			rdo9482.setChecked(true);
+		if (informe.getIdi())
+			rdo9491.setChecked(true);
+		else
+			rdo9492.setChecked(true);
+		if (informe.getIdj())
+			rdo94101.setChecked(true);
+		else
+			rdo94102.setChecked(true);
+		if (informe.getIdaa() != null)
+			dtb9411.setValue(informe.getIdaa());
+		txt9412.setValue(informe.getIdab());
+		if (informe.getIdac())
+			rdo94131.setChecked(true);
+		else
+			rdo94132.setChecked(true);
+		txt9414.setValue(informe.getIdad());
+
+		// Setear Condiciones
+		List<Condicion> condicionesA = servicioCondicion.buscarPorInformeYTipo(
+				informe, "Instalaciones");
+		List<Condicion> condicionesB = servicioCondicion.buscarPorInformeYTipo(
+				informe, "Equipos");
+		List<Condicion> condicionesC = servicioCondicion.buscarPorInformeYTipo(
+				informe, "Materiales");
+		List<Condicion> condicionesD = servicioCondicion.buscarPorInformeYTipo(
+				informe, "Ambiente");
+		List<Condicion> condicionesE = servicioCondicion.buscarPorInformeYTipo(
+				informe, "Organizacion");
+		List<Condicion> condicionesF = servicioCondicion.buscarPorInformeYTipo(
+				informe, "Disergonomicos");
+
+		if (!condicionesA.isEmpty()) {
+			for (int i = 0; i < condicionesA.size(); i++) {
+				long id = condicionesA.get(i).getIdCondicion();
+				for (int j = 0; j < ltb822.getItemCount(); j++) {
+					Listitem listItem = ltb822.getItemAtIndex(j);
+					Condicion a = listItem.getValue();
+					long id2 = a.getIdCondicion();
+					if (id == id2) {
+						listItem.setSelected(true);
+						j = ltb822.getItemCount();
+					}
+				}
+
+			}
+		}
+		if (!condicionesB.isEmpty()) {
+			for (int i = 0; i < condicionesB.size(); i++) {
+				long id = condicionesB.get(i).getIdCondicion();
+				for (int j = 0; j < ltb829.getItemCount(); j++) {
+					Listitem listItem = ltb829.getItemAtIndex(j);
+					Condicion a = listItem.getValue();
+					long id2 = a.getIdCondicion();
+					if (id == id2) {
+						listItem.setSelected(true);
+						j = ltb829.getItemCount();
+					}
+				}
+
+			}
+		}
+		if (!condicionesC.isEmpty()) {
+			for (int i = 0; i < condicionesC.size(); i++) {
+				long id = condicionesC.get(i).getIdCondicion();
+				for (int j = 0; j < ltb8210.getItemCount(); j++) {
+					Listitem listItem = ltb8210.getItemAtIndex(j);
+					Condicion a = listItem.getValue();
+					long id2 = a.getIdCondicion();
+					if (id == id2) {
+						listItem.setSelected(true);
+						j = ltb8210.getItemCount();
+					}
+				}
+			}
+		}
+
+		if (!condicionesD.isEmpty()) {
+			for (int i = 0; i < condicionesD.size(); i++) {
+				long id = condicionesD.get(i).getIdCondicion();
+				for (int j = 0; j < ltb8213.getItemCount(); j++) {
+					Listitem listItem = ltb8213.getItemAtIndex(j);
+					Condicion a = listItem.getValue();
+					long id2 = a.getIdCondicion();
+					if (id == id2) {
+						listItem.setSelected(true);
+						j = ltb8213.getItemCount();
+					}
+				}
+			}
+		}
+
+		if (!condicionesE.isEmpty()) {
+			for (int i = 0; i < condicionesE.size(); i++) {
+				long id = condicionesE.get(i).getIdCondicion();
+				for (int j = 0; j < ltb84.getItemCount(); j++) {
+					Listitem listItem = ltb84.getItemAtIndex(j);
+					Condicion a = listItem.getValue();
+					long id2 = a.getIdCondicion();
+					if (id == id2) {
+						listItem.setSelected(true);
+						j = ltb84.getItemCount();
+					}
+				}
+			}
+		}
+
+		if (!condicionesF.isEmpty()) {
+			for (int i = 0; i < condicionesF.size(); i++) {
+				long id = condicionesF.get(i).getIdCondicion();
+				for (int j = 0; j < ltb841.getItemCount(); j++) {
+					Listitem listItem = ltb841.getItemAtIndex(j);
+					Condicion a = listItem.getValue();
+					long id2 = a.getIdCondicion();
+					if (id == id2) {
+						listItem.setSelected(true);
+						j = ltb841.getItemCount();
+					}
+				}
+			}
+		}
+
+	}
+
+	// Cosas relacionadas al limpiar
+
+	public void limpiarCampos() {
+		
+			Radio radio = new Radio();
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(0);
+				radio.setChecked(false);
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(1);
+				radio.setChecked(false);
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(2);
+				radio.setChecked(false);
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(3);
+				radio.setChecked(false);
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(4);
+				radio.setChecked(false);
+				radio = (Radio) rdg523.getChildren().get(2).getChildren()
+						.get(5);
+				radio.setChecked(false);
+				txt5236.setValue("");
+
+		
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(0);
+				radio.setChecked(false);
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(1);
+				radio.setChecked(false);
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(2);
+				radio.setChecked(false);
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(3);
+				radio.setChecked(false);
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(4);
+				radio.setChecked(false);
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(5);
+				radio.setChecked(false);
+				radio = (Radio) rdg524.getChildren().get(3).getChildren()
+						.get(6);
+				radio.setChecked(false);
+
+		
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(1);
+				radio.setChecked(false);
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(2);
+				radio.setChecked(false);
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(3);
+				radio.setChecked(false);
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(4);
+				radio.setChecked(false);
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(5);
+				radio.setChecked(false);
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(6);
+				radio.setChecked(false);
+				radio = (Radio) rdg525.getChildren().get(0).getChildren()
+						.get(7);
+				radio.setChecked(false);
+				txt5257.setValue("");
+
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(3);
+				radio.setChecked(false);
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(5);
+				radio.setChecked(false);
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(7);
+				radio.setChecked(false);
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(9);
+				radio.setChecked(false);
+				radio = (Radio) rdg526.getChildren().get(0).getChildren()
+						.get(11);
+				radio.setChecked(false);
+		
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(2);
+				radio.setChecked(false);
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(4);
+				radio.setChecked(false);
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(6);
+				radio.setChecked(false);
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(8);
+				radio.setChecked(false);
+				radio = (Radio) rdg527.getChildren().get(0).getChildren()
+						.get(10);
+				radio.setChecked(false);
+				txt5275.setValue("");				
+		
+		
+		txt1.setValue("");
+		limpiar5();
+		limpiar3();
+		limpiar21();
+		limpiar22();
+		limpiar23();
+		limpiar24();
+		limpiar25();
+		limpiar26();
+		limpiar4();
+		idInforme = 0;
+		dtb61.setValue(fechaHora);
+		cmb62.setValue("");
+		txt64.setValue("");
+		txt65.setValue("");
+		txt66.setValue("");
+		cmb67.setValue("");
+		txt671.setValue("");
+		txt672.setValue("");
+		txt673.setValue("");
+		txt674.setValue("");
+		txt675.setValue("");
+		cmb676.setValue("");
+		rdo6771.setChecked(false);
+		rdo6772.setChecked(false);
+		rdo6781.setChecked(false);
+		txt678.setValue("");
+		rdo6782.setChecked(false);
+		rdo6791.setChecked(false);
+		rdo6792.setChecked(false);
+		txt6710.setValue("");
+		txt6711.setValue("");
+		txt6712.setValue("");
+		cmb6713.setValue("");
+		txt6714.setValue("");
+		txt711.setValue("");
+		txt811.setValue("");
+		txt812.setValue("");
+		txt813.setValue("");
+		rdo8141.setChecked(false);
+		rdo8142.setChecked(false);
+		rdo8151.setChecked(false);
+		rdo8152.setChecked(false);
+		txt815.setValue("");
+		txt816.setValue("");
+		txt821.setValue("");
+		txt823.setValue("");
+		rdo8241.setChecked(false);
+		txt8241.setValue("");
+		rdo8242.setChecked(false);
+		rdo8251.setChecked(false);
+		rdo8252.setChecked(false);
+		rdo8253.setChecked(false);
+		txt825.setValue("");
+		rdo8262.setChecked(false);
+		rdo8261.setChecked(false);
+		rdo8272.setChecked(false);
+		rdo8271.setChecked(false);
+		rdo8281.setChecked(false);
+		rdo8282.setChecked(false);
+		rdo8283.setChecked(false);
+		rdo8284.setChecked(false);
+		rdo82112.setChecked(false);
+		txt8211.setValue("");
+		rdo82111.setChecked(false);
+		rdo82122.setChecked(false);
+		txt8212.setValue("");
+		rdo82121.setChecked(false);
+		txt831.setValue("");
+		rdo8322.setChecked(false);
+		rdo8321.setChecked(false);
+		rdo8332.setChecked(false);
+		rdo8331.setChecked(false);
+		rdo8341.setChecked(false);
+		rdo8342.setChecked(false);
+		rdo8351.setChecked(false);
+		rdo8352.setChecked(false);
+		rdo8353.setChecked(false);
+		txt835.setValue("");
+		rdo8361.setChecked(false);
+		rdo8362.setChecked(false);
+		rdo8363.setChecked(false);
+		txt836.setValue("");
+		rdo8371.setChecked(false);
+		rdo8372.setChecked(false);
+		rdo8381.setChecked(false);
+		rdo8382.setChecked(false);
+		rdo8383.setChecked(false);
+		rdo8384.setChecked(false);
+		txt838.setValue("");
+		rdo8391.setChecked(false);
+		rdo8392.setChecked(false);
+		rdo8393.setChecked(false);
+		txt839.setValue("");
+		rdo83101.setChecked(false);
+		rdo83102.setChecked(false);
+		rdo83111.setChecked(false);
+		txt8311.setValue("");
+		rdo83112.setChecked(false);
+		rdo83122.setChecked(false);
+		txt8312.setValue("");
+		rdo83121.setChecked(false);
+		rdo83131.setChecked(false);
+		rdo83132.setChecked(false);
+		txt8314.setValue("");
+
+		radio = (Radio) rdg8315.getChildren().get(0).getChildren().get(0);
+		radio.setChecked(false);
+		radio = (Radio) rdg8315.getChildren().get(0).getChildren().get(1);
+		radio.setChecked(true);
+		radio = (Radio) rdg8315.getChildren().get(0).getChildren().get(2);
+		radio.setChecked(false);
+		radio = (Radio) rdg8315.getChildren().get(0).getChildren().get(3);
+		radio.setChecked(false);
+		radio = (Radio) rdg8315.getChildren().get(0).getChildren().get(4);
+		radio.setChecked(false);
+		radio = (Radio) rdg8315.getChildren().get(0).getChildren().get(5);
+		radio.setChecked(false);
+		radio = (Radio) rdg8315.getChildren().get(0).getChildren().get(6);
+		radio.setChecked(false);
+		radio = (Radio) rdg8315.getChildren().get(0).getChildren().get(7);
+		radio.setChecked(false);
+		radio = (Radio) rdg8315.getChildren().get(0).getChildren().get(8);
+		radio.setChecked(false);
+
+		txt8315.setValue("");
+		txt8316.setValue("");
+		rdo831711.setChecked(false);
+		rdo831712.setChecked(false);
+		rdo831721.setChecked(false);
+		rdo831722.setChecked(false);
+		rdo831731.setChecked(false);
+		rdo831732.setChecked(false);
+		rdo831741.setChecked(false);
+		rdo831742.setChecked(false);
+		rdo831751.setChecked(false);
+		rdo831752.setChecked(false);
+		rdo831762.setChecked(false);
+		txt83176.setValue("");
+		rdo831761.setChecked(false);
+		rdo831771.setChecked(false);
+		rdo831772.setChecked(false);
+		rdo831781.setChecked(false);
+		rdo831782.setChecked(false);
+		rdo831791.setChecked(false);
+		rdo831792.setChecked(false);
+		txt841.setValue("");
+		rdo8421.setChecked(false);
+		rdo8422.setChecked(false);
+		txt842.setValue("");
+		rdo8431.setChecked(false);
+		rdo8432.setChecked(false);
+		txt843.setValue("");
+		txt844.setValue("");
+		txt8451.setValue("");
+		txt8452.setValue("");
+		txt8453.setValue("");
+		txt8454.setValue("");
+		txt846.setValue("");
+		rdo9111.setChecked(false);
+		rdo9112.setChecked(false);
+		rdo9121.setChecked(false);
+		rdo9122.setChecked(false);
+		rdo9131.setChecked(false);
+		rdo9132.setChecked(false);
+		txt914.setValue("");
+		rdo9142.setChecked(false);
+		rdo9141.setChecked(false);
+		dtb915.setValue(fechaHora);
+		rdo9161.setChecked(false);
+		rdo9162.setChecked(false);
+		rdo9172.setChecked(false);
+		txt917.setValue("");
+		rdo9171.setChecked(false);
+		rdo9181.setChecked(false);
+		rdo9182.setChecked(false);
+		txt919.setValue("");
+		txt9110.setValue("");
+		rdo9211.setChecked(false);
+		rdo9212.setChecked(false);
+		dtb922.setValue(fechaHora);
+		txt923.setValue("");
+		dtb924.setValue(fechaHora);
+		rdo9251.setChecked(false);
+		rdo9252.setChecked(false);
+		rdo9261.setChecked(false);
+		rdo9262.setChecked(false);
+		rdo9271.setChecked(false);
+		rdo9272.setChecked(false);
+		rdo9281.setChecked(false);
+		rdo9282.setChecked(false);
+		rdo9291.setChecked(false);
+		rdo9292.setChecked(false);
+		rdo92101.setChecked(false);
+		rdo92102.setChecked(false);
+		rdo92111.setChecked(false);
+		rdo92112.setChecked(false);
+		txt9212.setValue("");
+		txt9213.setValue("");
+		rdo9311.setChecked(false);
+		rdo9312.setChecked(false);
+		dtb932.setValue(fechaHora);
+		txt933.setValue("");
+		rdo9341.setChecked(false);
+		rdo9342.setChecked(false);
+		rdo9351.setChecked(false);
+		rdo9352.setChecked(false);
+		rdo9361.setChecked(false);
+		rdo9362.setChecked(false);
+		rdo9371.setChecked(false);
+		rdo9372.setChecked(false);
+		rdo9381.setChecked(false);
+		rdo9382.setChecked(false);
+		rdo9391.setChecked(false);
+		rdo9392.setChecked(false);
+		dtb9310.setValue(fechaHora);
+		txt9311.setValue("");
+		rdo93121.setChecked(false);
+		rdo93122.setChecked(false);
+		Radio radio2 = new Radio();
+		radio2 = (Radio) rdg9313.getChildren().get(0).getChildren().get(0);
+		radio2.setChecked(false);
+		radio2 = (Radio) rdg9313.getChildren().get(0).getChildren().get(1);
+		radio2.setChecked(false);
+		radio2 = (Radio) rdg9313.getChildren().get(0).getChildren().get(2);
+		radio2.setChecked(false);
+		radio2 = (Radio) rdg9313.getChildren().get(0).getChildren().get(3);
+		radio2.setChecked(false);
+		radio2 = (Radio) rdg9313.getChildren().get(0).getChildren().get(4);
+		radio2.setChecked(false);
+		limpiar93141();
+		limpiar93142();
+		limpiar93143();
+		limpiar93144();
+		limpiar93145();
+		limpiar93146();
+		txt9315.setValue("");
+		rdo9411.setChecked(false);
+		rdo9412.setChecked(false);
+		rdo9421.setChecked(false);
+		rdo9422.setChecked(false);
+		rdo9431.setChecked(false);
+		rdo9432.setChecked(false);
+		rdo9441.setChecked(false);
+		rdo9442.setChecked(false);
+		rdo9451.setChecked(false);
+		rdo9452.setChecked(false);
+		rdo9461.setChecked(false);
+		rdo9462.setChecked(false);
+		rdo9471.setChecked(false);
+		rdo9472.setChecked(false);
+		rdo9481.setChecked(false);
+		rdo9482.setChecked(false);
+		rdo9491.setChecked(false);
+		rdo9492.setChecked(false);
+		rdo94101.setChecked(false);
+		rdo94102.setChecked(false);
+		dtb9411.setValue(fechaHora);
+		txt9412.setValue("");
+		rdo94131.setChecked(false);
+		rdo94132.setChecked(false);
+		txt9414.setValue("");
+
+		llenarListas();
+
+	}
+
+	private void limpiar26() {
+		lbl261.setValue("");
+		lbl262.setValue("");
+		lbl264.setValue("");
+	}
+
+	private void limpiar25() {
+		lbl251.setValue("");
+		lbl252.setValue("");
+		lbl254.setValue("");
+	}
+
+	private void limpiar24() {
+		lbl241.setValue("");
+		lbl242.setValue("");
+		lbl244.setValue("");
+	}
+
+	private void limpiar23() {
+		lbl231.setValue("");
+		lbl232.setValue("");
+		lbl234.setValue("");
+	}
+
+	private void limpiar22() {
+		lbl221.setValue("");
+		lbl222.setValue("");
+		lbl224.setValue("");
+	}
+
+	private void limpiar21() {
+		lbl211.setValue("");
+		lbl212.setValue("");
+		lbl214.setValue("");
+	}
+
+	private void limpiar5() {
+		lbl51.setValue("");
+		lbl52.setValue("");
+		lbl53.setValue("");
+		lbl54.setValue("");
+		lbl55.setValue("");
+		lbl56.setValue("");
+		lbl57.setValue("");
+		lbl58.setValue("");
+		lbl59.setValue("");
+		lbl510.setValue("");
+		lbl511.setValue("");
+		lbl512.setValue("");
+		lbl513.setValue("");
+		lbl515.setValue("");
+		lbl516.setValue("");
+		lbl517.setValue("");
+		lbl518.setValue("");
+		lbl519.setValue("");
+		lbl520.setValue("");
+		lbl521.setValue("");
+		lbl522.setValue("");
+	}
+
+	private void limpiar4() {
+		idEmpresa2 = 0;
+		lbl41.setValue("");
+		lbl42.setValue("");
+		lbl43.setValue("");
+		lbl44.setValue("");
+		lbl45.setValue("");
+		lbl46.setValue("");
+		lbl47.setValue("");
+		lbl48.setValue("");
+		lbl49.setValue("");
+		lbl410.setValue("");
+		lbl411.setValue("");
+		lbl412.setValue("");
+		lbl413.setValue("");
+		lbl414.setValue("");
+		lbl415.setValue("");
+		lbl416.setValue("");
+		lbl417.setValue("");
+		lbl418.setValue("");
+		lbl419.setValue("");
+		lbl420.setValue("");
+		lbl421.setValue("");
+		lbl422.setValue("");
+		lbl423.setValue("");
+		lbl424.setValue("");
+		lbl425.setValue("");
+		lbl426.setValue("");
+		lbl427.setValue("");
+		lbl428.setValue("");
+		lbl429.setValue("");
+		lbl430.setValue("");
+		lbl431.setValue("");
+		lbl432.setValue("");
+		lbl433.setValue("");
+		lbl434.setValue("");
+	}
+
+	private void limpiar3() {
+		idEmpresa = 0;
+		lbl31.setValue("");
+		lbl32.setValue("");
+		lbl33.setValue("");
+		lbl34.setValue("");
+		lbl35.setValue("");
+		lbl36.setValue("");
+		lbl37.setValue("");
+		lbl38.setValue("");
+		lbl39.setValue("");
+		lbl310.setValue("");
+		lbl311.setValue("");
+		lbl312.setValue("");
+		lbl313.setValue("");
+		lbl314.setValue("");
+		lbl315.setValue("");
+		lbl316.setValue("");
+		lbl317.setValue("");
+		lbl318.setValue("");
+		lbl319.setValue("");
+		lbl320.setValue("");
+		lbl321.setValue("");
+		lbl322.setValue("");
+		lbl323.setValue("");
+		lbl324.setValue("");
+		lbl325.setValue("");
+		lbl326.setValue("");
+		lbl327.setValue("");
+		lbl328.setValue("");
+		lbl329.setValue("");
+		lbl330.setValue("");
+		lbl331.setValue("");
+		lbl332.setValue("");
+		lbl333.setValue("");
+		lbl334.setValue("");
+	}
+
+	private void limpiar93146() {
+		lbl931461.setValue("");
+		lbl931462.setValue("");
+		lbl931463.setValue("");
+		lbl931464.setValue("");
+		lbl931465.setValue("");
+		lbl931466.setValue("");
+	}
+
+	private void limpiar93145() {
+		lbl931451.setValue("");
+		lbl931452.setValue("");
+		lbl931453.setValue("");
+		lbl931454.setValue("");
+		lbl931455.setValue("");
+		lbl931456.setValue("");
+	}
+
+	private void limpiar93144() {
+		lbl931441.setValue("");
+		lbl931442.setValue("");
+		lbl931443.setValue("");
+		lbl931444.setValue("");
+		lbl931445.setValue("");
+		lbl931446.setValue("");
+	}
+
+	private void limpiar93143() {
+		lbl931431.setValue("");
+		lbl931432.setValue("");
+		lbl931433.setValue("");
+		lbl931434.setValue("");
+		lbl931435.setValue("");
+		lbl931436.setValue("");
+	}
+
+	private void limpiar93142() {
+		lbl931421.setValue("");
+		lbl931422.setValue("");
+		lbl931423.setValue("");
+		lbl931424.setValue("");
+		lbl931425.setValue("");
+		lbl931426.setValue("");
+	}
+
+	private void limpiar93141() {
+		lbl931411.setValue("");
+		lbl931412.setValue("");
+		lbl931413.setValue("");
+		lbl931414.setValue("");
+		lbl931415.setValue("");
+		lbl931416.setValue("");
+	}
+
+	public void llenarListas() {
+		ltb822.setModel(getCondicionesA());
+		ltb822.setModel(getCondicionesB());
+		ltb822.setModel(getCondicionesC());
+		ltb822.setModel(getCondicionesD());
+		ltb822.setModel(getCondicionesE());
+		ltb822.setModel(getCondicionesF());
+		listasMultiples();
 	}
 }

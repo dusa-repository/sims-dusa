@@ -136,7 +136,7 @@ public class Empresa implements Serializable {
 	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
 	
-	@OneToMany(mappedBy = "empresaA")
+	@OneToMany(mappedBy = "empresa")
 	private Set<Informe> informesA;
 	
 	@OneToMany(mappedBy = "empresaB")

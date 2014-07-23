@@ -1,0 +1,47 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divCondicion" apply="controlador.sha.CCondicion">
+		<groupbox width="45em" mold="3d" title="Condicion">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox class="multilinea" id="txtNombreCondicion" hflex="1"
+							maxlength="500" tooltiptext="Ingrese la Condicion" multiline="true" />
+						<button id="btnBuscarCondicion" class="btn" label="Buscar"
+							tooltiptext="Catalogo Condiciones" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Tipo de Condicion:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<cell colspan="2">
+							<radiogroup id="rdgCondicion">
+								<radio label="Instalaciones" value="Instalaciones" id="rdoInstalaciones" />
+								<radio label="Equipos" value="Equipos" id="rdoEquipos" />
+								<radio label="Materiales" value="Materiales" id="rdoMateriales" />
+								<radio label="Ambiente" value="Ambiente" id="rdoAmbiente" />
+								<radio label="Organizacion" value="Organizacion" id="rdoOrganizacion" />
+								<radio label="Disergonomicos" value="Disergonomicos" id="rdoDisergonomicos" />
+							</radiogroup>
+						</cell>
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraCondicion" />
+			<div id="catalogoCondicion" />
+		</groupbox>
+	</div>
+</zk>

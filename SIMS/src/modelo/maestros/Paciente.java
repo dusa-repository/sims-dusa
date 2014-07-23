@@ -206,7 +206,7 @@ public class Paciente implements Serializable {
 	@JoinColumn(name = "id_area")
 	private Area area;
 	
-	@OneToMany(mappedBy = "pacienteA")
+	@OneToMany(mappedBy = "paciente")
 	private Set<Informe> informesA;
 	
 	@OneToMany(mappedBy = "pacienteB")
