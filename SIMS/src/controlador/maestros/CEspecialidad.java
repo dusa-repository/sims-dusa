@@ -1,17 +1,20 @@
 package controlador.maestros;
 
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;
 import modelo.seguridad.Usuario;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
@@ -35,7 +38,16 @@ public class CEspecialidad extends CGenerico {
 
 	@Override
 	public void inicializar() {
-
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (map != null) {
+			if (map.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) map.get("tabsGenerales");
+				System.out.println(tabs.size());
+				map.clear();
+				map = null;
+			}
+		}
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -60,7 +72,7 @@ public class CEspecialidad extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divEspecialidad, "Especialidad");
+				cerrarVentana(divEspecialidad, "Especialidad", tabs);
 			}
 
 			@Override

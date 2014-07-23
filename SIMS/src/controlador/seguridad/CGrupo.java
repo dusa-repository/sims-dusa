@@ -25,6 +25,7 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeModel;
@@ -69,6 +70,15 @@ public class CGrupo extends CGenerico {
 	
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		treeGrupo.setModel(getModel());
 		treeGrupo.setCheckmark(true);
 		treeGrupo.setMultiple(true);
@@ -88,7 +98,7 @@ public class CGrupo extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divGrupo, "Grupo");
+				cerrarVentana(divGrupo, "Grupo", tabs);
 			}
 
 			@Override

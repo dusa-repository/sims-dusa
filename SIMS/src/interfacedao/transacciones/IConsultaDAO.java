@@ -35,4 +35,6 @@ public interface IConsultaDAO  extends JpaRepository<Consulta, Long> {
 	List<Consulta> findByUsuarioPrimerApellidoStartingWithAllIgnoreCase(
 			String valor);
 
+	List<Consulta> findByPacienteCedulaOrderByFechaConsultaAsc(String valueOf);
+
 }

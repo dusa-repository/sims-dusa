@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -13,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -20,6 +23,7 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
@@ -51,6 +55,15 @@ public class CEditarUsuario extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		Usuario usuario = servicioUsuario
 				.buscarUsuarioPorNombre(nombreUsuarioSesion());
 		id = Long.valueOf(usuario.getCedula());
@@ -72,7 +85,7 @@ public class CEditarUsuario extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divEditarUsuario, "Editar Usuario");
+				cerrarVentana(divEditarUsuario, "Editar Usuario", tabs);
 			}
 
 			@Override

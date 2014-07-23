@@ -22,10 +22,13 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Longbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -64,6 +67,20 @@ public class CAccidente extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
+		contenido = (Include) divAccidente.getParent();
+		Tabbox tabox = (Tabbox) divAccidente.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				System.out.println(tabs.size());
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
@@ -80,7 +97,7 @@ public class CAccidente extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divAccidente, "Accidente");
+				cerrarVentana(divAccidente, "Accidente", tabs);
 			}
 
 			@Override
@@ -243,7 +260,7 @@ public class CAccidente extends CGenerico {
 	public void abrirEstado() {
 		Arbol arbolItem = servicioArbol
 				.buscarPorNombreArbol("Clasificacion de Accidente");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 }

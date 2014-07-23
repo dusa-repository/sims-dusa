@@ -40,6 +40,9 @@ public class ConsultaServicioExterno {
 	
 	@Column(length=100)
 	private String observacion;
+	
+	@Column(length=20)
+	private String prioridad;
 
 	public ConsultaServicioExterno() {
 		super();
@@ -47,13 +50,14 @@ public class ConsultaServicioExterno {
 	}
 
 	public ConsultaServicioExterno(Consulta consulta,
-			ServicioExterno servicioExterno, Proveedor pro, double costo, String observacion) {
+			ServicioExterno servicioExterno, Proveedor pro, double costo, String observacion, String prioridad) {
 		super();
 		this.consulta = consulta;
 		this.servicioExterno = servicioExterno;
 		this.costo = costo;
 		this.proveedor = pro;
 		this.observacion = observacion;
+		this.prioridad = prioridad;
 	}
 
 	public Consulta getConsulta() {
@@ -102,6 +106,14 @@ public class ConsultaServicioExterno {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+	public String getPrioridad() {
+		return prioridad;
+	}
+
+	public void setPrioridad(String prioridad) {
+		this.prioridad = prioridad;
 	}
 	
 	

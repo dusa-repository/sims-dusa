@@ -17,9 +17,12 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -60,6 +63,20 @@ public class CEspecialista extends CGenerico {
 	Listbox listaConsulta;
 	@Override
 	public void inicializar() throws IOException {
+		contenido = (Include) divEspecialista.getParent();
+		Tabbox tabox = (Tabbox) divEspecialista.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				System.out.println(tabs.size());
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
@@ -76,7 +93,7 @@ public class CEspecialista extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divEspecialista, "Especialista");
+				cerrarVentana(divEspecialista, "Especialista", tabs);
 			}
 
 			@Override
@@ -266,6 +283,6 @@ public class CEspecialista extends CGenerico {
 	@Listen("onClick = #btnAbrirEspecialidad")
 	public void abrirEspecialidad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialidad");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 }

@@ -1,17 +1,20 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.CategoriaMedicina;
 import modelo.maestros.Medicina;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
@@ -36,11 +39,21 @@ public class CCategoriaMedicina extends CGenerico {
 	
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (map != null) {
+			if (map.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) map.get("tabsGenerales");
+				System.out.println(tabs.size());
+				map.clear();
+				map = null;
+			}
+		}
 		Botonera botonera = new Botonera() {
 			
 			@Override
 			public void salir() {
-				cerrarVentana(divCategoriaMedicina, "Categoria Medicina");
+				cerrarVentana(divCategoriaMedicina, "Categoria Medicina", tabs);
 			}
 			
 			@Override

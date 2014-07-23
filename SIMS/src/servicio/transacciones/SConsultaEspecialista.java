@@ -30,4 +30,9 @@ public class SConsultaEspecialista {
 	public void guardar(List<ConsultaEspecialista> listaConsultaEspecialista) {
 		consultaEspecialistaDAO.save(listaConsultaEspecialista);
 	}
+
+	public ConsultaEspecialista buscarPorConsultaYIdEspecialista(
+			Consulta consuta, String par3) {
+		return consultaEspecialistaDAO.findByConsultaAndEspecialistaCedula(consuta, par3);
+	}
 }

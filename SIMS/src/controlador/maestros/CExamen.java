@@ -18,6 +18,7 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
@@ -56,6 +57,15 @@ public class CExamen extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
@@ -71,7 +81,7 @@ public class CExamen extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divExamen, "Examen");
+				cerrarVentana(divExamen, "Examen", tabs);
 			}
 
 			@Override

@@ -12,4 +12,7 @@ public interface IConsultaServicioExternoDAO extends JpaRepository<ConsultaServi
 
 	List<ConsultaServicioExterno> findByConsulta(Consulta consulta);
 
+	ConsultaServicioExterno findByConsultaAndServicioExternoIdServicioExterno(
+			Consulta consuta, Long part4);
+
 }

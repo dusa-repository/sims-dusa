@@ -31,6 +31,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Image;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -39,6 +40,7 @@ import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -130,7 +132,19 @@ public class CUsuario extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
+		contenido = (Include) divUsuario.getParent();
+		Tabbox tabox = (Tabbox) divUsuario.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		llenarComboUnidad();
 		llenarComboEspecialidad();
 
@@ -145,7 +159,7 @@ public class CUsuario extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divUsuario, "Usuario");
+				cerrarVentana(divUsuario, "Usuario", tabs);
 			}
 
 			@Override
@@ -620,14 +634,14 @@ public class CUsuario extends CGenerico {
 	@Listen("onClick = #btnAbrirUnidad")
 	public void abrirUnidad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Unidad Usuario");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	/* Abre la vista de Especialidad */
 	@Listen("onClick = #btnAbrirEspecialidad")
 	public void abrirEspecialidad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialidad");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	/* Abre la vista de Grupos */
@@ -639,7 +653,7 @@ public class CUsuario extends CGenerico {
 		map.put("listbox", ltbGruposDisponibles);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Grupo");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 	
 	public void recibirGrupo(List<Grupo> lista, Listbox l) {

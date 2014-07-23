@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpSession;
 
 import modelo.generico.DetalleAccidente;
 import modelo.maestros.Accidente;
@@ -49,14 +51,22 @@ import modelo.transacciones.Historia;
 import modelo.transacciones.HistoriaAccidente;
 import modelo.transacciones.HistoriaIntervencion;
 import modelo.transacciones.HistoriaVacuna;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
-import org.zkoss.bind.annotation.Command;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.MouseEvent;
+import org.zkoss.zk.ui.http.SimpleSession;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
@@ -65,6 +75,7 @@ import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.GroupsModel;
 import org.zkoss.zul.Image;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
@@ -79,16 +90,13 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.SimpleGroupsModel;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
-import org.zkoss.zul.Tabpanel;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Timebox;
 import org.zkoss.zul.Window;
 
 import servicio.maestros.SParteCuerpo;
 import servicio.maestros.SVacuna;
 import servicio.transacciones.SHistoriaVacuna;
-
-import com.sun.org.glassfish.external.arc.Taxonomy;
 
 import arbol.CArbol;
 
@@ -96,7 +104,6 @@ import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 
-import controlador.maestros.CEspecialista;
 import controlador.maestros.CGenerico;
 
 public class CConsulta extends CGenerico {
@@ -665,8 +672,6 @@ public class CConsulta extends CGenerico {
 	@Wire
 	private Row rowReposo;
 	@Wire
-	private Button btnGenerarReposo;
-	@Wire
 	private Label lblCargo1;
 	@Wire
 	private Label lblArea;
@@ -710,6 +715,22 @@ public class CConsulta extends CGenerico {
 	private Button btnAbrirAntecedente2;
 	@Wire
 	private Button btnAbrirAntecedente1;
+	@Wire
+	private Button btnGenerarRecipe;
+	@Wire
+	private Button btnGenerarOrden;
+	@Wire
+	private Button btnGenerarReferencia;
+	@Wire
+	private Button btnGenerarOrdenServicios;
+	@Wire
+	private Button btnGenerarReposo;
+	@Wire
+	private Combobox cmbPrioridadServicio;
+	@Wire
+	private Combobox cmbPrioridadEspecialista;
+	@Wire
+	private Combobox cmbPrioridadExamen;
 	// -----------------------------
 	@Wire("#wdwRegistro")
 	private Window wdwRegistro;
@@ -784,7 +805,19 @@ public class CConsulta extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
+		contenido = (Include) divConsulta.getParent();
+		Tabbox tabox = (Tabbox) divConsulta.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		listas.add(ltbConsultas);
 		listas.add(ltbDiagnosticos);
 		listas.add(ltbDiagnosticosAgregados);
@@ -943,10 +976,20 @@ public class CConsulta extends CGenerico {
 					guardarExamenFisico(consultaDatos);
 					guardarAntecedentes(paciente);
 					guardarHistoria(paciente);
-					limpiarCampos();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					// limpiarCampos();
+					Messagebox
+							.show("Registro Guardado Exitosamente, ahora puede generar las ordenes respectivas",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
+					idConsulta = consultaDatos.getIdConsulta();
+					tabConsulta.setSelected(true);
+					tabResumen.setSelected(true);
+					if (consultaDatos.getReposo())
+						btnGenerarRecipe.setVisible(true);
+					btnGenerarOrden.setVisible(true);
+					btnGenerarReferencia.setVisible(true);
+					btnGenerarOrdenServicios.setVisible(true);
+					btnGenerarReposo.setVisible(true);
 				}
 			}
 
@@ -964,7 +1007,7 @@ public class CConsulta extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divConsulta, "Consulta");
+				cerrarVentana(divConsulta, "Consulta", tabs);
 			}
 
 			@Override
@@ -1357,9 +1400,10 @@ public class CConsulta extends CGenerico {
 					.parseLong(idProveedor));
 			String observacion = ((Textbox) ((listItem.getChildren().get(1)))
 					.getFirstChild()).getValue();
+			String prioridad = cmbPrioridadServicio.getValue();
 			ConsultaServicioExterno consultaServicio = new ConsultaServicioExterno(
 					consultaDatos, servicioExterno, proveedor, valor,
-					observacion);
+					observacion, prioridad);
 			listaServicioExterno.add(consultaServicio);
 		}
 		servicioConsultaServicioExterno.guardar(listaServicioExterno);
@@ -1377,8 +1421,9 @@ public class CConsulta extends CGenerico {
 					.getFirstChild()).getValue();
 			String observacion = ((Textbox) ((listItem.getChildren().get(2)))
 					.getFirstChild()).getValue();
+			String prioridad = cmbPrioridadEspecialista.getValue();
 			ConsultaEspecialista consultaEspecialista = new ConsultaEspecialista(
-					consultaDatos, especialista, valor, observacion);
+					consultaDatos, especialista, valor, observacion, prioridad);
 			listaConsultaEspecialista.add(consultaEspecialista);
 		}
 		servicioConsultaEspecialista.guardar(listaConsultaEspecialista);
@@ -1399,8 +1444,9 @@ public class CConsulta extends CGenerico {
 					.getFirstChild()).getValue();
 			// buscar precio del servicio externo
 			double precio = 0;
+			String prioridad = cmbPrioridadExamen.getValue();
 			ConsultaExamen consultaExamen = new ConsultaExamen(consultaDatos,
-					examen, valor, proveedor, precio);
+					examen, valor, proveedor, precio, prioridad);
 			listaConsultaExamen.add(consultaExamen);
 		}
 		servicioConsultaExamen.guardar(listaConsultaExamen);
@@ -1611,7 +1657,81 @@ public class CConsulta extends CGenerico {
 																				Messagebox.INFORMATION);
 																return false;
 															} else {
-																return true;
+																if (ltbServicioExternoAgregados
+																		.getItemCount() != 0
+																		&& cmbPrioridadServicio
+																				.getText()
+																				.compareTo(
+																						"") == 0) {
+																	Messagebox
+																			.show("Debe seleccionar la prioridad de la orden de los Estudios Externos",
+																					"Informacion",
+																					Messagebox.OK,
+																					Messagebox.INFORMATION);
+																	return false;
+																} else {
+																	if (ltbExamenesAgregados
+																			.getItemCount() != 0
+																			&& cmbPrioridadExamen
+																					.getText()
+																					.compareTo(
+																							"") == 0) {
+																		Messagebox
+																				.show("Debe seleccionar la prioridad de la orden de los Examenes",
+																						"Informacion",
+																						Messagebox.OK,
+																						Messagebox.INFORMATION);
+																		return false;
+																	} else {
+																		if (ltbEspecialistasAgregados
+																				.getItemCount() != 0
+																				&& cmbPrioridadEspecialista
+																						.getText()
+																						.compareTo(
+																								"") == 0) {
+																			Messagebox
+																					.show("Debe seleccionar la prioridad de la orden de los Especialistas",
+																							"Informacion",
+																							Messagebox.OK,
+																							Messagebox.INFORMATION);
+																			return false;
+																		} else {
+																			if (ltbIntervencionesAgregadas
+																					.getItemCount() != 0
+																					&& !validarIntervencion()) {
+																				Messagebox
+																						.show("Debe seleccionar al menos la Fecha de la lista de Intervenciones Agregadas",
+																								"Informacion",
+																								Messagebox.OK,
+																								Messagebox.INFORMATION);
+																				return false;
+																			} else {
+																				if (ltbAccidentesComunesAgregados
+																						.getItemCount() != 0
+																						&& !validarComunes()) {
+																					Messagebox
+																							.show("Debe seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados",
+																									"Informacion",
+																									Messagebox.OK,
+																									Messagebox.INFORMATION);
+																					return false;
+																				} else {
+																					if (ltbAccidentesLaboralesAgregados
+																							.getItemCount() != 0
+																							&& !validarLaborales()) {
+																						Messagebox
+																								.show("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados",
+																										"Informacion",
+																										Messagebox.OK,
+																										Messagebox.INFORMATION);
+																						return false;
+																					} else
+																						return true;
+																				}
+																			}
+																		}
+																	}
+																}
 															}
 														}
 													}
@@ -1626,6 +1746,37 @@ public class CConsulta extends CGenerico {
 				}
 			}
 		}
+	}
+
+	private boolean validarLaborales() {
+		for (int i = 0; i < ltbAccidentesLaboralesAgregados.getItemCount(); i++) {
+			Listitem listItem = ltbAccidentesLaboralesAgregados
+					.getItemAtIndex(i);
+			if (((Datebox) ((listItem.getChildren().get(1))).getFirstChild())
+					.getValue() == null)
+				return false;
+		}
+		return true;
+	}
+
+	private boolean validarComunes() {
+		for (int i = 0; i < ltbAccidentesComunesAgregados.getItemCount(); i++) {
+			Listitem listItem = ltbAccidentesComunesAgregados.getItemAtIndex(i);
+			if (((Datebox) ((listItem.getChildren().get(1))).getFirstChild())
+					.getValue() == null)
+				return false;
+		}
+		return true;
+	}
+
+	private boolean validarIntervencion() {
+		for (int i = 0; i < ltbIntervencionesAgregadas.getItemCount(); i++) {
+			Listitem listItem = ltbIntervencionesAgregadas.getItemAtIndex(i);
+			if (((Datebox) ((listItem.getChildren().get(1))).getFirstChild())
+					.getValue() == null)
+				return false;
+		}
+		return true;
 	}
 
 	/* Llena la listas al iniciar con todo lo existente */
@@ -1903,11 +2054,47 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onClick = #btnGuardarHistoria")
 	public void botonHistoria() {
-		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedula
-				.getValue());
-		guardarHistoria(paciente);
-		Messagebox.show("Registro Guardado Exitosamente", "Informacion",
-				Messagebox.OK, Messagebox.INFORMATION);
+		if (idPaciente != 0) {
+			Paciente paciente = servicioPaciente.buscarPorCedula(txtCedula
+					.getValue());
+			if (validarHistoria()) {
+				guardarHistoria(paciente);
+				Messagebox.show("Registro Guardado Exitosamente",
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			}
+		} else
+			Messagebox.show("Debe seleccionar Previamente un paciente",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+	}
+
+	private boolean validarHistoria() {
+		if (ltbIntervencionesAgregadas.getItemCount() != 0
+				&& !validarIntervencion()) {
+			Messagebox
+					.show("Debe seleccionar al menos la Fecha de la lista de Intervenciones Agregadas",
+							"Informacion", Messagebox.OK,
+							Messagebox.INFORMATION);
+			return false;
+		} else {
+			if (ltbAccidentesComunesAgregados.getItemCount() != 0
+					&& !validarComunes()) {
+				Messagebox
+						.show("Debe seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados",
+								"Informacion", Messagebox.OK,
+								Messagebox.INFORMATION);
+				return false;
+			} else {
+				if (ltbAccidentesLaboralesAgregados.getItemCount() != 0
+						&& !validarLaborales()) {
+					Messagebox
+							.show("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados",
+									"Informacion", Messagebox.OK,
+									Messagebox.INFORMATION);
+					return false;
+				} else
+					return true;
+			}
+		}
 	}
 
 	/* Muestra un catalogo de Pacientes */
@@ -2056,9 +2243,19 @@ public class CConsulta extends CGenerico {
 					llenarListas();
 					tabConsulta.setSelected(true);
 					tabResumen.setSelected(true);
+					if (consulta.getReposo())
+						btnGenerarRecipe.setVisible(true);
+					btnGenerarOrden.setVisible(true);
+					btnGenerarReferencia.setVisible(true);
+					btnGenerarOrdenServicios.setVisible(true);
+					btnGenerarReposo.setVisible(true);
 				}
-			}
-		}
+			} else
+				Messagebox.show("Debe Seleccionar solo una Consulta",
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+		} else
+			Messagebox.show("No existen consultas que Consultar",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
 	}
 
 	private void llenarCamposConsulta(Consulta consulta) {
@@ -2258,14 +2455,30 @@ public class CConsulta extends CGenerico {
 		if (listItem.size() != 0) {
 			for (int i = 0; i < listItem.size(); i++) {
 				if (listItem.get(i).isSelected()) {
-					Medicina Medicina = listItem.get(i).getValue();
-					medicinasDisponibles.remove(Medicina);
+					Medicina medicina = listItem.get(i).getValue();
+					medicinasDisponibles.remove(medicina);
 					ConsultaMedicina consultaMedicina = new ConsultaMedicina();
-					consultaMedicina.setMedicina(Medicina);
+					consultaMedicina.setMedicina(medicina);
+					medicinasAgregadas.clear();
+					for (int j = 0; j < ltbMedicinasAgregadas.getItemCount(); j++) {
+						Listitem listItemj = ltbMedicinasAgregadas
+								.getItemAtIndex(j);
+						Integer idMedicina = ((Spinner) ((listItemj
+								.getChildren().get(2))).getFirstChild())
+								.getValue();
+						Medicina medicinaj = servicioMedicina
+								.buscar(idMedicina);
+						String valor = ((Textbox) ((listItemj.getChildren()
+								.get(1))).getFirstChild()).getValue();
+						ConsultaMedicina consultaMedicinaj = new ConsultaMedicina(
+								null, medicinaj, valor, null);
+						medicinasAgregadas.add(consultaMedicinaj);
+					}
 					medicinasAgregadas.add(consultaMedicina);
 					ltbMedicinasAgregadas
 							.setModel(new ListModelList<ConsultaMedicina>(
 									medicinasAgregadas));
+					ltbMedicinasAgregadas.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
@@ -2311,10 +2524,52 @@ public class CConsulta extends CGenerico {
 					diagnosticosDisponibles.remove(diagnostico);
 					ConsultaDiagnostico consultaDiagnostico = new ConsultaDiagnostico();
 					consultaDiagnostico.setDiagnostico(diagnostico);
+					diagnosticosAgregados.clear();
+					for (int j = 0; j < ltbDiagnosticosAgregados.getItemCount(); j++) {
+						Listitem listItemj = ltbDiagnosticosAgregados
+								.getItemAtIndex(j);
+						Integer idDiagnostico = ((Spinner) ((listItemj
+								.getChildren().get(4))).getFirstChild())
+								.getValue();
+						String motivo = "";
+						String lugar = "";
+						String clasificacion = "";
+						Timestamp fecha = null;
+						Accidente accidente = new Accidente();
+						accidente = null;
+						for (int w = 0; w < listaDetalle.size(); w++) {
+							if (Long.valueOf(idDiagnostico) == listaDetalle
+									.get(w).getDiagnostico()) {
+								motivo = listaDetalle.get(w).getMotivo();
+								lugar = listaDetalle.get(w).getLugar();
+								fecha = listaDetalle.get(w).getFecha();
+								clasificacion = listaDetalle.get(w)
+										.getClasificacion();
+								accidente = listaDetalle.get(w).getAccidente();
+								w = listaDetalle.size();
+							}
+						}
+						Diagnostico diagnosticoj = servicioDiagnostico
+								.buscar(idDiagnostico);
+						String tipo = ((Combobox) ((listItemj.getChildren()
+								.get(1))).getFirstChild()).getValue();
+						if (tipo.equals("Accidente Laboral")
+								|| tipo.equals("Accidente Comun")
+								|| tipo.equals("Incidente"))
+							((Button) ((listItemj.getChildren().get(3)))
+									.getFirstChild()).setVisible(true);
+						String valor = ((Textbox) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						ConsultaDiagnostico consultaDiagnosticoj = new ConsultaDiagnostico(
+								null, diagnosticoj, accidente, tipo, valor,
+								lugar, motivo, fecha, clasificacion);
+						diagnosticosAgregados.add(consultaDiagnosticoj);
+					}
 					diagnosticosAgregados.add(consultaDiagnostico);
 					ltbDiagnosticosAgregados
 							.setModel(new ListModelList<ConsultaDiagnostico>(
 									diagnosticosAgregados));
+					ltbDiagnosticosAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
@@ -2365,10 +2620,25 @@ public class CConsulta extends CGenerico {
 					examenesDisponibles.remove(examen);
 					ConsultaExamen consultaExamen = new ConsultaExamen();
 					consultaExamen.setExamen(examen);
+					examenesAgregado.clear();
+					for (int j = 0; j < ltbExamenesAgregados.getItemCount(); j++) {
+						Listitem listItemj = ltbExamenesAgregados
+								.getItemAtIndex(j);
+						Integer idExamen = ((Spinner) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						Examen examenj = servicioExamen.buscar(idExamen);
+						String valor = ((Textbox) ((listItemj.getChildren()
+								.get(1))).getFirstChild()).getValue();
+						double precio = 0;
+						ConsultaExamen consultaExamenj = new ConsultaExamen(
+								null, examenj, valor, null, precio, "");
+						examenesAgregado.add(consultaExamenj);
+					}
 					examenesAgregado.add(consultaExamen);
 					ltbExamenesAgregados
 							.setModel(new ListModelList<ConsultaExamen>(
 									examenesAgregado));
+					ltbExamenesAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
@@ -2414,10 +2684,30 @@ public class CConsulta extends CGenerico {
 					ConsultaEspecialista consultaEspecialista = new ConsultaEspecialista();
 					consultaEspecialista.setEspecialista(especialista);
 					consultaEspecialista.setCosto(especialista.getCosto());
+					especialistasAgregados.clear();
+					for (int j = 0; j < ltbEspecialistasAgregados
+							.getItemCount(); j++) {
+						Listitem listItemj = ltbEspecialistasAgregados
+								.getItemAtIndex(j);
+						Integer id = ((Spinner) ((listItemj.getChildren()
+								.get(4))).getFirstChild()).getValue();
+						Especialista especialistaj = servicioEspecialista
+								.buscar(String.valueOf(id));
+						double valor = ((Doublespinner) ((listItemj
+								.getChildren().get(3))).getFirstChild())
+								.getValue();
+						String observacion = ((Textbox) ((listItemj
+								.getChildren().get(2))).getFirstChild())
+								.getValue();
+						ConsultaEspecialista consultaEspecialistaj = new ConsultaEspecialista(
+								null, especialistaj, valor, observacion, "");
+						especialistasAgregados.add(consultaEspecialistaj);
+					}
 					especialistasAgregados.add(consultaEspecialista);
 					ltbEspecialistasAgregados
 							.setModel(new ListModelList<ConsultaEspecialista>(
 									especialistasAgregados));
+					ltbEspecialistasAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
@@ -2464,10 +2754,44 @@ public class CConsulta extends CGenerico {
 					accidentesLaboralesDisponibles.remove(accidente);
 					HistoriaAccidente historia = new HistoriaAccidente();
 					historia.setAccidente(accidente);
+					accidentesLaboralesAgregadas.clear();
+					for (int j = 0; j < ltbAccidentesLaboralesAgregados
+							.getItemCount(); j++) {
+
+						Listitem listItemj = ltbAccidentesLaboralesAgregados
+								.getItemAtIndex(j);
+						long id = ((Spinner) ((listItemj.getChildren().get(6)))
+								.getFirstChild()).getValue();
+						Accidente accidentej = servicioAccidente.buscar(id);
+						Date fechaA = new Date();
+						Timestamp fechaAccidente = new Timestamp(
+								fechaA.getTime());
+						if (((Datebox) ((listItemj.getChildren().get(1)))
+								.getFirstChild()).getValue() != null) {
+							fechaA = ((Datebox) ((listItemj.getChildren()
+									.get(1))).getFirstChild()).getValue();
+							fechaAccidente = new Timestamp(fechaA.getTime());
+						}
+						String lugar = ((Textbox) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						String tipoAccidente = ((Textbox) ((listItemj
+								.getChildren().get(3))).getFirstChild())
+								.getValue();
+						int reposo = ((Spinner) ((listItemj.getChildren()
+								.get(4))).getFirstChild()).getValue();
+						String secuelas = ((Textbox) ((listItemj.getChildren()
+								.get(5))).getFirstChild()).getValue();
+						HistoriaAccidente historiaAccidente = new HistoriaAccidente(
+								null, accidentej, fechaAccidente, lugar,
+								tipoAccidente, reposo, secuelas,
+								"Accidente Laboral");
+						accidentesLaboralesAgregadas.add(historiaAccidente);
+					}
 					accidentesLaboralesAgregadas.add(historia);
 					ltbAccidentesLaboralesAgregados
 							.setModel(new ListModelList<HistoriaAccidente>(
 									accidentesLaboralesAgregadas));
+					ltbAccidentesLaboralesAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
@@ -2514,10 +2838,44 @@ public class CConsulta extends CGenerico {
 					accidentesComunesDisponibles.remove(accidente);
 					HistoriaAccidente historia = new HistoriaAccidente();
 					historia.setAccidente(accidente);
+					accidentesComunesAgregadas.clear();
+					for (int j = 0; j < ltbAccidentesComunesAgregados
+							.getItemCount(); j++) {
+
+						Listitem listItemj = ltbAccidentesComunesAgregados
+								.getItemAtIndex(j);
+						long id = ((Spinner) ((listItemj.getChildren().get(6)))
+								.getFirstChild()).getValue();
+						Accidente accidentej = servicioAccidente.buscar(id);
+						Date fechaA = new Date();
+						Timestamp fechaAccidente = new Timestamp(
+								fechaA.getTime());
+						if (((Datebox) ((listItemj.getChildren().get(1)))
+								.getFirstChild()).getValue() != null) {
+							fechaA = ((Datebox) ((listItemj.getChildren()
+									.get(1))).getFirstChild()).getValue();
+							fechaAccidente = new Timestamp(fechaA.getTime());
+						}
+						String lugar = ((Textbox) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						String tipoAccidente = ((Textbox) ((listItemj
+								.getChildren().get(3))).getFirstChild())
+								.getValue();
+						int reposo = ((Spinner) ((listItemj.getChildren()
+								.get(4))).getFirstChild()).getValue();
+						String secuelas = ((Textbox) ((listItemj.getChildren()
+								.get(5))).getFirstChild()).getValue();
+						HistoriaAccidente historiaAccidente = new HistoriaAccidente(
+								null, accidentej, fechaAccidente, lugar,
+								tipoAccidente, reposo, secuelas,
+								"Accidente Comun");
+						accidentesComunesAgregadas.add(historiaAccidente);
+					}
 					accidentesComunesAgregadas.add(historia);
 					ltbAccidentesComunesAgregados
 							.setModel(new ListModelList<HistoriaAccidente>(
 									accidentesComunesAgregadas));
+					ltbAccidentesComunesAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
@@ -2563,10 +2921,43 @@ public class CConsulta extends CGenerico {
 					intervencionesDisponibles.remove(intervencion);
 					HistoriaIntervencion historia = new HistoriaIntervencion();
 					historia.setIntervencion(intervencion);
+					intervencionesAgregadas.clear();
+					for (int j = 0; j < ltbIntervencionesAgregadas
+							.getItemCount(); j++) {
+						Listitem listItemj = ltbIntervencionesAgregadas
+								.getItemAtIndex(j);
+						long id = ((Spinner) ((listItemj.getChildren().get(6)))
+								.getFirstChild()).getValue();
+						Intervencion intervencionj = servicioIntervencion
+								.buscar(id);
+						Date fechaI = new Date();
+						Timestamp fechaIntervencion = new Timestamp(
+								fechaI.getTime());
+						if (((Datebox) ((listItemj.getChildren().get(1)))
+								.getFirstChild()).getValue() != null) {
+							fechaI = ((Datebox) ((listItemj.getChildren()
+									.get(1))).getFirstChild()).getValue();
+							fechaIntervencion = new Timestamp(fechaI.getTime());
+						}
+						String motivo = ((Textbox) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						String diagnostico = ((Textbox) ((listItemj
+								.getChildren().get(3))).getFirstChild())
+								.getValue();
+						int reposo = ((Spinner) ((listItemj.getChildren()
+								.get(4))).getFirstChild()).getValue();
+						String secuelas = ((Textbox) ((listItemj.getChildren()
+								.get(5))).getFirstChild()).getValue();
+						HistoriaIntervencion historiaIntervencion = new HistoriaIntervencion(
+								null, intervencionj, fechaIntervencion, motivo,
+								diagnostico, reposo, secuelas);
+						intervencionesAgregadas.add(historiaIntervencion);
+					}
 					intervencionesAgregadas.add(historia);
 					ltbIntervencionesAgregadas
 							.setModel(new ListModelList<HistoriaIntervencion>(
 									intervencionesAgregadas));
+					ltbIntervencionesAgregadas.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
@@ -2611,10 +3002,41 @@ public class CConsulta extends CGenerico {
 					serviciosDisponibles.remove(servicio);
 					ConsultaServicioExterno consultaServicio = new ConsultaServicioExterno();
 					consultaServicio.setServicioExterno(servicio);
+					serviciosAgregados.clear();
+					for (int j = 0; j < ltbServicioExternoAgregados
+							.getItemCount(); j++) {
+						Listitem listItemj = ltbServicioExternoAgregados
+								.getItemAtIndex(j);
+						Integer id = ((Spinner) ((listItemj.getChildren()
+								.get(4))).getFirstChild()).getValue();
+						ServicioExterno servicioExterno = servicioServicioExterno
+								.buscar(id);
+						double valor = ((Doublespinner) ((listItemj
+								.getChildren().get(3))).getFirstChild())
+								.getValue();
+						String idProveedor = "";
+						Proveedor proveedor = null;
+						if (((Combobox) ((listItemj.getChildren().get(2)))
+								.getFirstChild()).getSelectedItem() != null) {
+							idProveedor = ((Combobox) ((listItemj.getChildren()
+									.get(2))).getFirstChild())
+									.getSelectedItem().getContext();
+							proveedor = servicioProveedor.buscar(Long
+									.parseLong(idProveedor));
+						}
+						String observacion = ((Textbox) ((listItemj
+								.getChildren().get(1))).getFirstChild())
+								.getValue();
+						ConsultaServicioExterno consultaServicioj = new ConsultaServicioExterno(
+								null, servicioExterno, proveedor, valor,
+								observacion, "");
+						serviciosAgregados.add(consultaServicioj);
+					}
 					serviciosAgregados.add(consultaServicio);
 					ltbServicioExternoAgregados
 							.setModel(new ListModelList<ConsultaServicioExterno>(
 									serviciosAgregados));
+					ltbServicioExternoAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
@@ -2892,6 +3314,10 @@ public class CConsulta extends CGenerico {
 	}
 
 	public void limpiarCampos() {
+		btnGenerarRecipe.setVisible(false);
+		btnGenerarReferencia.setVisible(false);
+		btnGenerarOrdenServicios.setVisible(false);
+		btnGenerarReposo.setVisible(false);
 		listaDetalle = new ArrayList<DetalleAccidente>();
 		btnGuardarHistoria.setVisible(false);
 		idPaciente = 0;
@@ -3272,7 +3698,7 @@ public class CConsulta extends CGenerico {
 		map.put("listbox", ltbIntervenciones);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Intervencion");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	// @Listen("onClick = #btnAbrirAntecedente3,#btnAbrirAntecedente2,#btnAbrirAntecedente1")
@@ -3309,7 +3735,7 @@ public class CConsulta extends CGenerico {
 		}
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Accidente");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	@Listen("onClick = #btnAbrirExamen")
@@ -3320,7 +3746,7 @@ public class CConsulta extends CGenerico {
 		map.put("listbox", ltbExamenes);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Examen");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	@Listen("onClick = #btnAbrirCuerpo")
@@ -3331,7 +3757,7 @@ public class CConsulta extends CGenerico {
 		map.put("listbox", ltbExamenFisico);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Organo");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	@Listen("onClick = #btnAbrirVacuna")
@@ -3349,7 +3775,7 @@ public class CConsulta extends CGenerico {
 		map.put("listbox", ltbVacunas);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Vacuna");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	@Listen("onClick = #btnAbrirDiagnostico")
@@ -3360,7 +3786,7 @@ public class CConsulta extends CGenerico {
 		map.put("listbox", ltbDiagnosticos);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Diagnostico");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	@Listen("onClick = #btnAbrirEspecialista")
@@ -3371,7 +3797,7 @@ public class CConsulta extends CGenerico {
 		map.put("listbox", ltbEspecialistas);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialista");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	@Listen("onClick = #btnAbrirServicioExterno")
@@ -3383,7 +3809,7 @@ public class CConsulta extends CGenerico {
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol
 				.buscarPorNombreArbol("Servicios Externos");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	@Listen("onClick = #btnAbrirMedicina")
@@ -3394,7 +3820,7 @@ public class CConsulta extends CGenerico {
 		map.put("listbox", ltbMedicinas);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Medicina");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	@Listen("onOK = #txtCedula")
@@ -4376,14 +4802,12 @@ public class CConsulta extends CGenerico {
 	@Listen("onCheck = #rdoSiReposo")
 	public void checkSi() {
 		rowReposo.setVisible(true);
-		btnGenerarReposo.setVisible(true);
 	}
 
 	@Listen("onCheck = #rdoNoReposo")
 	public void checkNo() {
 		rowReposo.setVisible(false);
 		spnReposo.setValue(0);
-		btnGenerarReposo.setVisible(false);
 	}
 
 	// VENTANA DE ACCIDENTE
@@ -4451,6 +4875,426 @@ public class CConsulta extends CGenerico {
 				}
 			}
 		}
+	}
+
+	// Reporte Recipe Medicinas
+
+	@Listen("onClick = #btnGenerarRecipe")
+	public void generarRecipe() throws JSONException {
+		if (ltbMedicinasAgregadas.getItemCount() != 0) {
+			Long id = idConsulta;
+			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=1&valor2="
+					+ id
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		} else
+			Messagebox.show("No existe informacion para mostrar",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
+	}
+
+	public byte[] reporteRecipe(Long id) throws JRException, IOException {
+		byte[] fichero = null;
+		Consulta consuta = getServicioConsulta().buscar(id);
+		List<ConsultaMedicina> listaMedicinas = getServicioConsultaMedicina()
+				.buscarPorConsulta(consuta);
+		Integer dias = listaMedicinas.get(0).getRecipe().getValidez().getDate()
+				- consuta.getFechaConsulta().getDate();
+		Paciente paciente = consuta.getPaciente();
+		Usuario user = consuta.getUsuario();
+		Map p = new HashMap();
+		String nombreEmpresa = "DUSA C.A.";
+		String direccionEmpresa = "Via acarigua la miel";
+		String rifEmpresa = "J-dfghjk";
+		if (paciente.getEmpresa() != null) {
+			nombreEmpresa = paciente.getEmpresa().getNombre();
+			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
+			rifEmpresa = paciente.getEmpresa().getRif();
+		}
+
+		p.put("empresaNombre", nombreEmpresa);
+		p.put("empresaDireccion", direccionEmpresa);
+		p.put("empresaRif", rifEmpresa);
+		p.put("pacienteNombre", paciente.getPrimerNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteCedula", paciente.getCedula());
+		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
+		p.put("doctorNombre", user.getPrimerNombre());
+		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorCedula", user.getCedula());
+		p.put("dias", dias.toString());
+		p.put("msds", user.getLicenciaMsds());
+		p.put("comelar", user.getLicenciaCm());
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RRecipe.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p,
+				new JRBeanCollectionDataSource(listaMedicinas));
+		return fichero;
+	}
+
+	// Reporte Especialista
+
+	@Listen("onClick = #btnGenerarReferencia")
+	public void generarEspecialista() {
+		if (ltbEspecialistasAgregados.getItemCount() != 0) {
+			for (int i = 0; i < ltbEspecialistasAgregados.getItemCount(); i++) {
+				Listitem listItem = ltbEspecialistasAgregados.getItemAtIndex(i);
+				Integer idEs = ((Spinner) ((listItem.getChildren().get(4)))
+						.getFirstChild()).getValue();
+				Long id = idConsulta;
+				String idEspecialista = String.valueOf(idEs);
+				Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=2&valor2="
+						+ id
+						+ "&valor3="
+						+ idEspecialista
+						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			}
+		} else
+			Messagebox.show("No existe informacion para mostrar",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
+	}
+
+	public byte[] reporteEspecialista(Long part2, String par3)
+			throws JRException {
+		byte[] fichero = null;
+		Consulta consuta = getServicioConsulta().buscar(part2);
+		ConsultaEspecialista especialistaConsulta = getServicioConsultaEspecialista()
+				.buscarPorConsultaYIdEspecialista(consuta, par3);
+		List<ConsultaEspecialista> lista = getServicioConsultaEspecialista()
+				.buscarPorConsulta(consuta);
+		Paciente paciente = consuta.getPaciente();
+		Usuario user = consuta.getUsuario();
+		Map p = new HashMap();
+		String nombreEmpresa = "DUSA C.A.";
+		String direccionEmpresa = "Via acarigua la miel";
+		String rifEmpresa = "J-dfghjk";
+		if (paciente.getEmpresa() != null) {
+			nombreEmpresa = paciente.getEmpresa().getNombre();
+			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
+			rifEmpresa = paciente.getEmpresa().getRif();
+		}
+
+		p.put("empresaNombre", nombreEmpresa);
+		p.put("empresaDireccion", direccionEmpresa);
+		p.put("empresaRif", rifEmpresa);
+		p.put("pacienteNombre", paciente.getPrimerNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteCedula", paciente.getCedula());
+		p.put("pacienteEdad", paciente.getEdad());
+		p.put("pacienteSexo", paciente.getSexo());
+		p.put("doctorNombre", user.getPrimerNombre());
+		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorCedula", user.getCedula());
+		p.put("especialidad", especialistaConsulta.getEspecialista()
+				.getEspecialidad().getDescripcion());
+		p.put("especialistaNombre", especialistaConsulta.getEspecialista()
+				.getNombre());
+		p.put("especialistaApellido", especialistaConsulta.getEspecialista()
+				.getApellido());
+		p.put("enfermedad", consuta.getEnfermedadActual());
+		p.put("observacion", especialistaConsulta.getObservacion());
+		p.put("prioridad", especialistaConsulta.getPrioridad());
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RRecipeEspecialista.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p,
+				new JRBeanCollectionDataSource(lista));
+		return fichero;
+	}
+
+	// Reporte Servicio
+
+	@Listen("onClick = #btnGenerarOrdenServicios")
+	public void generarServicio() {
+		if (ltbServicioExternoAgregados.getItemCount() != 0) {
+			for (int i = 0; i < ltbServicioExternoAgregados.getItemCount(); i++) {
+				Listitem listItem = ltbServicioExternoAgregados
+						.getItemAtIndex(i);
+				Integer idSe = ((Spinner) ((listItem.getChildren().get(4)))
+						.getFirstChild()).getValue();
+				String idPr = ((Combobox) ((listItem.getChildren().get(2)))
+						.getFirstChild()).getSelectedItem().getContext();
+				Long id = idConsulta;
+				Long idServicio = Long.valueOf(idSe);
+				Long idProveedor = Long.valueOf(idPr);
+				Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=3&valor2="
+						+ id
+						+ "&valor4="
+						+ idServicio
+						+ "&valor5="
+						+ idProveedor
+						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			}
+		} else
+			Messagebox.show("No existe informacion para mostrar",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
+	}
+
+	public byte[] reporteServicio(Long part2, Long part4, Long part5)
+			throws JRException {
+		byte[] fichero = null;
+		Consulta consuta = getServicioConsulta().buscar(part2);
+		ConsultaServicioExterno servicioConsultas = getServicioConsultaServicioExterno()
+				.buscarPorConsultaYIdServicio(consuta, part4);
+		Paciente paciente = consuta.getPaciente();
+		Usuario user = consuta.getUsuario();
+		Map p = new HashMap();
+		String nombreEmpresa = "DUSA C.A.";
+		String direccionEmpresa = "Via acarigua la miel";
+		String rifEmpresa = "J-dfghjk";
+		if (paciente.getEmpresa() != null) {
+			nombreEmpresa = paciente.getEmpresa().getNombre();
+			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
+			rifEmpresa = paciente.getEmpresa().getRif();
+		}
+		p.put("empresaNombre", nombreEmpresa);
+		p.put("empresaDireccion", direccionEmpresa);
+		p.put("empresaRif", rifEmpresa);
+		p.put("pacienteNombre", paciente.getPrimerNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteCedula", paciente.getCedula());
+		p.put("pacienteEdad", paciente.getEdad());
+		p.put("pacienteSexo", paciente.getSexo());
+		p.put("doctorNombre", user.getPrimerNombre());
+		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorCedula", user.getCedula());
+		p.put("servicio", servicioConsultas.getServicioExterno().getNombre());
+		p.put("centro", servicioConsultas.getProveedor().getNombre());
+		p.put("enfermedad", consuta.getEnfermedadActual());
+		p.put("observacion", servicioConsultas.getObservacion());
+		p.put("prioridad", servicioConsultas.getPrioridad());
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RRecipeServicio.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p);
+		return fichero;
+	}
+
+	// Generar Orden Examenes
+
+	@Listen("onClick = #btnGenerarOrden")
+	public void generarExamenes() {
+		if (ltbExamenesAgregados.getItemCount() != 0) {
+			Long id = idConsulta;
+			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=4&valor2="
+					+ id
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		} else
+			Messagebox.show("No existe informacion para mostrar",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
+	}
+
+	public byte[] reporteExamen(Long part2) throws JRException {
+		byte[] fichero = null;
+		Consulta consuta = getServicioConsulta().buscar(part2);
+		List<ConsultaExamen> listaMedicinas = getServicioConsultaExamen()
+				.buscarPorConsulta(consuta);
+		Paciente paciente = consuta.getPaciente();
+		Usuario user = consuta.getUsuario();
+		Map p = new HashMap();
+		String nombreEmpresa = "DUSA C.A.";
+		String direccionEmpresa = "Via acarigua la miel";
+		String rifEmpresa = "J-dfghjk";
+		if (paciente.getEmpresa() != null) {
+			nombreEmpresa = paciente.getEmpresa().getNombre();
+			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
+			rifEmpresa = paciente.getEmpresa().getRif();
+		}
+
+		p.put("empresaNombre", nombreEmpresa);
+		p.put("empresaDireccion", direccionEmpresa);
+		p.put("empresaRif", rifEmpresa);
+		p.put("pacienteNombre", paciente.getPrimerNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteCedula", paciente.getCedula());
+		p.put("doctorNombre", user.getPrimerNombre());
+		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorCedula", user.getCedula());
+		p.put("prioridad", listaMedicinas.get(0).getPrioridad());
+		p.put("proveedor", listaMedicinas.get(0).getProveedor().getNombre());
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RRecipeExamen.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p,
+				new JRBeanCollectionDataSource(listaMedicinas));
+		return fichero;
+	}
+
+	// Reporte de Consulta
+
+	@Listen("onClick = #btnReporteConsulta")
+	public void generarConsulta() {
+		if (ltbConsultas.getItemCount() != 0) {
+			if (ltbConsultas.getSelectedItems().size() == 1) {
+				Listitem listItem = ltbConsultas.getSelectedItem();
+				if (listItem != null) {
+					Consulta consulta = listItem.getValue();
+					Long id = consulta.getIdConsulta();
+					Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=5&valor2="
+							+ id
+							+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+				}
+			} else
+				Messagebox.show("Debe Seleccionar solo una Consulta",
+						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+		} else
+			Messagebox.show("No existen consultas que Consultar",
+					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+
+	}
+
+	public byte[] reporteConsulta(Long part2) throws JRException {
+		byte[] fichero = null;
+		Consulta consuta = getServicioConsulta().buscar(part2);
+		List<ConsultaDiagnostico> diagnosticoConsulta = getServicioConsultaDiagnostico()
+				.buscarPorConsulta(consuta);
+		Paciente paciente = consuta.getPaciente();
+		Usuario user = consuta.getUsuario();
+		Map p = new HashMap();
+		String nombreEmpresa = "DUSA C.A.";
+		String direccionEmpresa = "Via acarigua la miel";
+		String rifEmpresa = "J-dfghjk";
+		if (paciente.getEmpresa() != null) {
+			nombreEmpresa = paciente.getEmpresa().getNombre();
+			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
+			rifEmpresa = paciente.getEmpresa().getRif();
+		}
+		p.put("empresaNombre", nombreEmpresa);
+		p.put("empresaDireccion", direccionEmpresa);
+		p.put("empresaRif", rifEmpresa);
+		p.put("pacienteNombre", paciente.getPrimerNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteCedula", paciente.getCedula());
+		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
+		p.put("doctorNombre", user.getPrimerNombre());
+		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorCedula", user.getCedula());
+		p.put("fechaConsulta", consuta.getFechaConsulta());
+		p.put("tipoConsulta", consuta.getTipoConsultaSecundaria());
+		p.put("enfermedad", consuta.getEnfermedadActual());
+		p.put("motivo", consuta.getMotivoConsulta());
+		p.put("diagnostico", diagnosticoConsulta.get(0).getDiagnostico()
+				.getNombre());
+		p.put("tipoDiagnostico", diagnosticoConsulta.get(0).getTipo());
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RConsulta.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p);
+		return fichero;
+	}
+
+	// Reporte historico de Consulta
+
+	@Listen("onClick = #btnVerHistoria")
+	public void generarHistoricoConsulta() {
+		if (idPaciente != 0) {
+			Long id = idPaciente;
+			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=6&valor2="
+					+ id
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		} else
+			Messagebox.show("Debe Seleccionar un Paciente", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
+	}
+
+	public byte[] reporteConsultaHistorico(Long part2) throws JRException {
+		byte[] fichero = null;
+		List<Consulta> listaConsultas = getServicioConsulta()
+				.buscarPorIdPacienteOrdenado(String.valueOf(part2));
+		for (int i = 0; i < listaConsultas.size(); i++) {
+			String nombre = listaConsultas.get(i).getUsuario()
+					.getPrimerNombre();
+			String apellido = listaConsultas.get(i).getUsuario()
+					.getPrimerApellido();
+			Consulta consulta = listaConsultas.get(i);
+			listaConsultas.get(i).getUsuario()
+					.setPrimerNombre(nombre + " " + apellido);
+			List<ConsultaDiagnostico> diagnosticos = getServicioConsultaDiagnostico()
+					.buscarPorConsulta(listaConsultas.get(i));
+			listaConsultas.get(i).setObservacion(
+					diagnosticos.get(0).getDiagnostico().getNombre());
+			listaConsultas.get(i).setCondicionApto(
+					diagnosticos.get(0).getTipo());
+		}
+
+		Map p = new HashMap();
+		p.put("pacienteNombre", listaConsultas.get(0).getPaciente()
+				.getPrimerNombre());
+		p.put("pacienteApellido", listaConsultas.get(0).getPaciente()
+				.getPrimerApellido());
+		p.put("pacienteCedula", listaConsultas.get(0).getPaciente().getCedula());
+		p.put("pacienteNacimiento", listaConsultas.get(0).getPaciente()
+				.getFechaNacimiento());
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RConsultaHistorico.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p,
+				new JRBeanCollectionDataSource(listaConsultas));
+		return fichero;
+	}
+
+	// Reporte reposo
+
+	@Listen("onClick = #btnGenerarReposo")
+	public void generarReposo() {
+		if (idConsulta != 0) {
+			Long id = idConsulta;
+			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=7&valor2="
+					+ id
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		} else
+			Messagebox.show("Debe registrar la Consulta", "Informacion",
+					Messagebox.OK, Messagebox.INFORMATION);
+	}
+
+	public byte[] reporteReposo(Long part2) throws JRException {
+		byte[] fichero = null;
+		Consulta consuta = getServicioConsulta().buscar(part2);
+		List<ConsultaDiagnostico> diagnosticoConsulta = getServicioConsultaDiagnostico()
+				.buscarPorConsulta(consuta);
+		List<ConsultaMedicina> medicinas = getServicioConsultaMedicina()
+				.buscarPorConsulta(consuta);
+		Paciente paciente = consuta.getPaciente();
+		Usuario user = consuta.getUsuario();
+		Map p = new HashMap();
+		String nombreEmpresa = "DUSA C.A.";
+		String direccionEmpresa = "Via acarigua la miel";
+		String rifEmpresa = "J-dfghjk";
+		String area = "";
+		if (paciente.getEmpresa() != null) {
+			nombreEmpresa = paciente.getEmpresa().getNombre();
+			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
+			rifEmpresa = paciente.getEmpresa().getRif();
+		}
+		if (paciente.getArea() != null) {
+			area = paciente.getArea().getNombre();
+		}
+		Calendar c = Calendar.getInstance();
+		c.setTime(consuta.getFechaConsulta());
+		c.add(Calendar.DAY_OF_YEAR, consuta.getDiasReposo());
+		Date fechaHasta = c.getTime();
+		p.put("empresaNombre", nombreEmpresa);
+		p.put("empresaDireccion", direccionEmpresa);
+		p.put("empresaRif", rifEmpresa);
+		p.put("pacienteNombre", paciente.getPrimerNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteCedula", paciente.getCedula());
+		p.put("doctorNombre", user.getPrimerNombre());
+		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorCedula", user.getCedula());
+		p.put("fechaDesde", consuta.getFechaConsulta());
+		p.put("fechaHasta", fechaHasta);
+		p.put("area", area);
+		p.put("diagnostico", diagnosticoConsulta.get(0).getDiagnostico()
+				.getNombre());
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RReposo.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p);
+		return fichero;
 	}
 
 }

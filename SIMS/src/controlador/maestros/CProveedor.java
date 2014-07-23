@@ -2,6 +2,7 @@ package controlador.maestros;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Ciudad;
@@ -16,6 +17,7 @@ import modelo.maestros.ServicioExterno;
 import modelo.maestros.UnidadMedicina;
 import modelo.seguridad.Arbol;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -23,12 +25,14 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -88,7 +92,19 @@ public class CProveedor extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
+		contenido = (Include) divProveedor.getParent();
+		Tabbox tabox = (Tabbox) divProveedor.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		llenarComboCiudad();
 		llenarListaExamenes(null);
 		llenarListaEstudios(null);
@@ -98,7 +114,7 @@ public class CProveedor extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divProveedor, "Proveedor");
+				cerrarVentana(divProveedor, "Proveedor", tabs);
 			}
 
 			@Override
@@ -360,7 +376,7 @@ public class CProveedor extends CGenerico {
 	@Listen("onClick = #btnAbrirCiudad")
 	public void abrirCiudad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	/* Cosas relacionadas con los grid */
@@ -604,14 +620,14 @@ public class CProveedor extends CGenerico {
 	public void abrirEstudio() {
 		Arbol arbolItem = servicioArbol
 				.buscarPorNombreArbol("Servicios Externos");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	/* Abre la vista de Examenes */
 	@Listen("onClick = #btnAbrirExamen")
 	public void abrirExamen() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Examen");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	/* Abre la pestanna de examenes */

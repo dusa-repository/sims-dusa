@@ -79,4 +79,8 @@ public class SConsulta {
 		return consultaDAO
 				.findByTipoConsultaSecundariaStartingWithAllIgnoreCase(valor);
 	}
+
+	public List<Consulta> buscarPorIdPacienteOrdenado(String valueOf) {
+		return consultaDAO.findByPacienteCedulaOrderByFechaConsultaAsc(valueOf);
+	}
 }

@@ -1,21 +1,31 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
+import modelo.maestros.Accidente;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Estado;
 import modelo.maestros.Pais;
 import modelo.seguridad.Arbol;
 
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
+import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -43,17 +53,30 @@ public class CEstado extends CGenerico {
 	private CArbol cArbol = new CArbol();
 	private long id = 0;
 	Catalogo<Estado> catalogo;
-
+	
 	@Override
 	public void inicializar() throws IOException {
-		
+		contenido = (Include) divEstado.getParent();
+		Tabbox tabox = (Tabbox) divEstado.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
 		llenarCombo();
-
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (map != null) {
+			if (map.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) map.get("tabsGenerales");
+				System.out.println(tabs.size());
+				map.clear();
+				map = null;
+			}
+		}
 		Botonera botonera = new Botonera() {
-
+			
 			@Override
 			public void salir() {
-			cerrarVentana(divEstado, "Estado");
+			cerrarVentana(divEstado, "Estado", tabs);
+			
 			}
 
 			@Override
@@ -198,6 +221,6 @@ public class CEstado extends CGenerico {
 	@Listen("onClick = #btnAbrirPais")
 	public void abrirPais(){		
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Pais");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 }

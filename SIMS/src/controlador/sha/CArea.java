@@ -1,16 +1,19 @@
 package controlador.sha;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.sha.Area;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
@@ -39,14 +42,22 @@ public class CArea extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		txtNombreArea.setFocus(true);
 
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divArea, "Area");
+				cerrarVentana(divArea, "Area", tabs);
 
 			}
 
