@@ -35,6 +35,9 @@ public class ConsultaEspecialista {
 	
 	@Column(length=100)
 	private String resultado;
+	
+	@Column(length=20)
+	private String prioridad;
 
 	public ConsultaEspecialista() {
 		super();
@@ -42,12 +45,13 @@ public class ConsultaEspecialista {
 	}
 
 	public ConsultaEspecialista(Consulta consulta, Especialista especialista,
-			double costo, String observacion) {
+			double costo, String observacion, String prioridad) {
 		super();
 		this.consulta = consulta;
 		this.especialista = especialista;
 		this.costo = costo;
 		this.observacion = observacion;
+		this.prioridad = prioridad;
 	}
 
 	public Consulta getConsulta() {
@@ -88,6 +92,14 @@ public class ConsultaEspecialista {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+	public String getPrioridad() {
+		return prioridad;
+	}
+
+	public void setPrioridad(String prioridad) {
+		this.prioridad = prioridad;
 	}
 	
 }

@@ -30,4 +30,10 @@ public class SConsultaServicioExterno {
 	public void guardar(List<ConsultaServicioExterno> listaServicioExterno) {
 		consultaServicioExternoDAO.save(listaServicioExterno);
 	}
+
+	public ConsultaServicioExterno buscarPorConsultaYIdServicio(
+			Consulta consuta, Long part4) {
+		// TODO Auto-generated method stub
+		return consultaServicioExternoDAO.findByConsultaAndServicioExternoIdServicioExterno(consuta,part4);
+	}
 }

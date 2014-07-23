@@ -212,10 +212,13 @@ public class CAccidenteDetalle extends CGenerico {
 				idAccidente = accidente.getIdAccidente();
 				txtNombre.setValue(accidente.getNombre());
 			}
-		} else
+		} else{
 			Messagebox
 					.show("Solo se Admiten numeros para el Codigo CIIU del Accidente",
 							"Informacion", Messagebox.OK,
 							Messagebox.INFORMATION);
+			txtNombre.setValue("");
+			txtNombre.setFocus(true);
+		}
 	}
 }

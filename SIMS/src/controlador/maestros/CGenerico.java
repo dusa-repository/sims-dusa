@@ -17,16 +17,25 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
+import org.zkoss.zul.Tabpanel;
 
 import arbol.CArbol;
 
@@ -191,9 +200,15 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SArea servicioArea;
 	@WireVariable("SClasificacionAccidente")
 	protected SClasificacionAccidente servicioClasificacionAccidente;
+	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+			"/META-INF/ConfiguracionAplicacion.xml");
 
+	public Tabbox tabBox;
+	public Include contenido;
+	public Tab tab;
 	protected DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-	public static  List<Tab> tabs = new ArrayList<Tab>();
+	// public static List<Tab> tabs = new ArrayList<Tab>();
+	public List<Tab> tabs = new ArrayList<Tab>();
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	public final Calendar calendario = Calendar.getInstance();
 	public String horaAuditoria = String.valueOf(calendario
@@ -212,13 +227,15 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	}
 
 	public abstract void inicializar() throws IOException;
-
-	public void cerrarVentana(Div div, String id) {
+	
+	public void cerrarVentana(Div div, String id, List<Tab> tabs2) {
 		div.setVisible(false);
-		for(int i =0; i<tabs.size();i++){
-			if(tabs.get(i).getLabel().equals(id)){
-				if(i==(tabs.size()-1)&& tabs.size()>1){
-					tabs.get(i-1).setSelected(true);
+		tabs = tabs2;
+		System.out.println(tabs.size());
+		for (int i = 0; i < tabs.size(); i++) {
+			if (tabs.get(i).getLabel().equals(id)) {
+				if (i == (tabs.size() - 1) && tabs.size() > 1) {
+					tabs.get(i - 1).setSelected(true);
 				}
 				tabs.get(i).onClose();
 				tabs.remove(i);
@@ -226,16 +243,44 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		}
 	}
 
+	public static SConsulta getServicioConsulta() {
+		return applicationContext.getBean(SConsulta.class);
+	}
+
+	public static SConsultaEspecialista getServicioConsultaEspecialista() {
+		return applicationContext.getBean(SConsultaEspecialista.class);
+	}
+
+	public static SConsultaServicioExterno getServicioConsultaServicioExterno() {
+		return applicationContext.getBean(SConsultaServicioExterno.class);
+	}
+
+	public static SConsultaExamen getServicioConsultaExamen() {
+		return applicationContext.getBean(SConsultaExamen.class);
+	}
+
+	public static SConsultaDiagnostico getServicioConsultaDiagnostico() {
+		return applicationContext.getBean(SConsultaDiagnostico.class);
+	}
+
+	public static SProveedor getServicioProveedor() {
+		return applicationContext.getBean(SProveedor.class);
+	}
+
+	public static SConsultaMedicina getServicioConsultaMedicina() {
+		return applicationContext.getBean(SConsultaMedicina.class);
+	}
+
 	public String nombreUsuarioSesion() {
 		Authentication sesion = SecurityContextHolder.getContext()
 				.getAuthentication();
 		return sesion.getName();
 	}
-	
+
 	public Usuario usuarioSesion(String valor) {
 		return servicioUsuario.buscarUsuarioPorNombre(valor);
 	}
-	
+
 	/* Metodo que permite enviar un correo electronico a cualquier destinatario */
 	public boolean enviarEmailNotificacion(String correo, String mensajes) {
 		try {
@@ -285,4 +330,5 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			return false;
 		}
 	}
+
 }

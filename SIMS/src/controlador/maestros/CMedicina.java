@@ -26,12 +26,14 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -120,6 +122,19 @@ public class CMedicina extends CGenerico {
 	
 	@Override
 	public void inicializar() throws IOException {
+		contenido = (Include) divMedicina.getParent();
+		Tabbox tabox = (Tabbox) divMedicina.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
@@ -260,7 +275,7 @@ public class CMedicina extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divMedicina, "Medicina");
+				cerrarVentana(divMedicina, "Medicina", tabs);
 			}
 
 			@Override
@@ -616,7 +631,7 @@ public class CMedicina extends CGenerico {
 	@Listen("onClick = #btnAbrirCategoria")
 	public void abrirCategoria(){		
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Categoria Medicina");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
 	}
 
 	/* Abre la vista de Presentacion*/
@@ -628,14 +643,14 @@ public class CMedicina extends CGenerico {
 		map.put("listbox", ltbPresentaciones);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Presentacion Medicina");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
 	}
 	
 	/* Abre la vista de Laboratorio*/
 	@Listen("onClick = #btnAbrirLaboratorio")
 	public void abrirLaboratorio(){		
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Laboratorio");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
 	}
 	
 	public void recibirPresentacion(List<PresentacionMedicina> lista, Listbox l) {

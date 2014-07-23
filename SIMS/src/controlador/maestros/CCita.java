@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Cita;
@@ -15,6 +16,7 @@ import modelo.maestros.Paciente;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -23,12 +25,14 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 
@@ -106,14 +110,27 @@ public class CCita extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
+		contenido = (Include) divCita.getParent();
+		Tabbox tabox = (Tabbox) divCita.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (map != null) {
+			if (map.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) map.get("tabsGenerales");
+				System.out.println(tabs.size());
+				map.clear();
+				map = null;
+			}
+		}
 		buscar();
 		llenarComboMotivo();
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divCita, "Cita");
+				cerrarVentana(divCita, "Cita", tabs);
 
 			}
 
@@ -507,6 +524,6 @@ public class CCita extends CGenerico {
 	@Listen("onClick = #btnAbrirMotivo")
 	public void abrirMotivo(){		
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Motivo");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
 	}
 }

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRecipe" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ecb1563-881e-4aab-84a2-d7229f4feb87">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="empresaNombre" class="java.lang.String"/>
+	<parameter name="empresaDireccion" class="java.lang.String"/>
+	<parameter name="empresaRif" class="java.lang.String"/>
+	<parameter name="doctorNombre" class="java.lang.String"/>
+	<parameter name="doctorApellido" class="java.lang.String"/>
+	<parameter name="doctorCedula" class="java.lang.String"/>
+	<parameter name="pacienteNombre" class="java.lang.String"/>
+	<parameter name="pacienteApellido" class="java.lang.String"/>
+	<parameter name="pacienteCedula" class="java.lang.String"/>
+	<parameter name="pacienteNacimiento" class="java.sql.Timestamp"/>
+	<parameter name="dias" class="java.lang.Integer"/>
+	<parameter name="msds" class="java.lang.String"/>
+	<parameter name="comelar" class="java.lang.String"/>
+	<field name="medicina.nombre" class="java.lang.String"/>
+	<field name="dosis" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="249" splitType="Stretch">
+			<image>
+				<reportElement x="19" y="34" width="120" height="64" uuid="0a255f37-fe38-479a-b677-c5a611fa8043"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="150" y="56" width="419" height="22" uuid="6757d0c3-2ef7-43c1-a4c5-da4f4e62410c"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaNombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="160" y="88" width="586" height="20" uuid="4c26eb91-4755-4631-922c-88e01de2cd42"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaDireccion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="592" y="58" width="154" height="20" uuid="fea96909-f8a0-4044-b233-c10b488f4e79"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="110" y="120" width="19" height="20" uuid="ab90fc39-e155-48a4-9e47-78cc7e154020"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dr:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="129" y="120" width="160" height="20" uuid="13641b01-000f-4ea4-bf55-df4d17891ea4"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{doctorNombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="73" y="150" width="56" height="20" uuid="4d7e354e-cf24-4f9f-ad30-8a87f58d8dec"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="129" y="150" width="150" height="20" uuid="242db5d7-83da-4b78-979a-a2b9e5748a59"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteNombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="310" y="150" width="201" height="20" uuid="380c9c12-b995-40f2-9a11-a13610858152"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteApellido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="532" y="150" width="18" height="20" uuid="70be1374-fef3-4e33-8621-597ed3954cc4"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="187" width="107" height="20" uuid="37ecc454-b500-44e1-9621-ff1b0bf09a17"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Nacimiento:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="129" y="187" width="150" height="20" uuid="4677306f-ebb9-4716-9f69-59a55b58a0bc"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{pacienteNacimiento})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="425" y="187" width="107" height="20" uuid="86ae2ad0-b161-4ecf-adef-e386d7f422d8"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Validez del recipe:]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="532" y="187" width="42" height="20" uuid="e3a39935-48ca-4b30-bb85-cd5fec7672fa"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dias}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="574" y="187" width="41" height="20" uuid="6d95f6c3-01c1-4ef7-99f1-1df11a3af7fc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[dia(s)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="592" y="14" width="39" height="20" uuid="ef4df979-3852-4a5b-a5d1-e5929dadfadc"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="631" y="14" width="105" height="20" uuid="ebb6ebcd-f8bd-491b-96ca-63f0f8ca14b3"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="550" y="150" width="126" height="20" uuid="fb5614b1-5f54-4d92-95c5-3e450be91deb"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="220" width="116" height="20" uuid="8e264b6b-88b6-48dc-8aa6-ebbb64c4c714"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direccion Emision:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="300" y="120" width="201" height="20" uuid="4e1c3253-1204-420a-9b4c-e53c27d6ce22"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{doctorApellido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="129" y="220" width="463" height="20" uuid="04b014ae-c0e1-4359-aef2-5792676f3825"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaDireccion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="73" y="0" width="240" height="20" uuid="d5d03b79-87ce-4b4e-a2d5-84b8fedaaf82"/>
+				<box>
+					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Medicina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="313" y="0" width="373" height="20" uuid="6e0c0d7e-c42d-4ae8-a7ba-042a8d3e513b"/>
+				<box>
+					<leftPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indicaciones]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="73" y="0" width="240" height="20" uuid="34fb130a-c6d5-460c-a519-a6d305fe50e0"/>
+				<box>
+					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medicina.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="313" y="0" width="373" height="20" uuid="1bd31875-1853-415a-830c-689b3149a836"/>
+				<box>
+					<leftPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dosis}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="38">
+			<staticText>
+				<reportElement x="38" y="10" width="17" height="20" uuid="eeb7f797-0cbe-42ce-b41e-b3206aa12c21"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dr:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="55" y="10" width="116" height="20" uuid="df377f88-735d-4437-9096-5c4af45a2990"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{doctorNombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="295" y="10" width="18" height="20" uuid="38c2c12b-c4a0-41b0-86d4-cfdf037be195"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="179" y="10" width="110" height="20" uuid="5b234c0e-22c6-4d39-a7b2-e76298e31775"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{doctorApellido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="313" y="10" width="100" height="20" uuid="a7f4a395-2600-4e96-8a57-a3e4480729d1"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{doctorCedula}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="442" y="10" width="59" height="20" uuid="5e8d332d-5fa3-4781-8dc4-82190eefb3d2"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMELAR:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="501" y="10" width="73" height="20" uuid="2c33eb90-bd68-4bdc-b55f-1f7614ae023c"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{comelar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="580" y="10" width="36" height="20" uuid="3c086a47-582f-492c-9a95-d34803fe0832"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MSDS:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="616" y="10" width="70" height="20" uuid="cde1ef62-38aa-47b4-aae5-1a81dbc8f247"/>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{msds}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

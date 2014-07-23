@@ -61,9 +61,13 @@ public class CArbol extends CGenerico {
 	@Wire
 	private West west;
 
-	private static Tabbox tabBox2;
-	private static Include contenido2;
-	private static Tab tab2;
+//	private static Tabbox tabBox2;
+//	private static Include contenido2;
+//	private static Tab tab2;
+	private Tabbox tabBox2;
+	private Include contenido2;
+	private Tab tab2;
+	HashMap<String, Object> mapGeneral = new HashMap<String, Object>();
 
 	@Override
 	public void inicializar() throws IOException {
@@ -235,6 +239,8 @@ public class CArbol extends CGenerico {
 						tabBox.getTabs().insertBefore(newTab, tab);
 						newTabpanel.setParent(tabBox.getTabpanels());
 						tabs.add(newTab);
+						mapGeneral.put("tabsGenerales", tabs);
+						Sessions.getCurrent().setAttribute("mapaGeneral", mapGeneral);
 					} else {
 						taba.setSelected(true);
 					}
@@ -246,8 +252,12 @@ public class CArbol extends CGenerico {
 		tab2 = tab;
 	}
 
-	public void abrirVentanas(final Arbol arbolItem) {
+	public void abrirVentanas(final Arbol arbolItem, Tabbox tabBox3, Include contenido3, Tab tab3, List<Tab> tabss) {
 		boolean abrir = true;
+		contenido2 = contenido3;
+		tabBox2 = tabBox3;
+		tab2 = tab3;
+		tabs = tabss;
 		Tab taba = new Tab();
 		if (!arbolItem.getUrl().equals("inicio")) {
 			for (int i = 0; i < tabs.size(); i++) {
@@ -288,6 +298,8 @@ public class CArbol extends CGenerico {
 				tabBox2.getTabs().insertBefore(newTab, tab2);
 				newTabpanel.setParent(tabBox2.getTabpanels());
 				tabs.add(newTab);
+				mapGeneral.put("tabsGenerales", tabs);
+				Sessions.getCurrent().setAttribute("mapaGeneral", mapGeneral);
 			} else {
 				taba.setSelected(true);
 			}
@@ -320,4 +332,5 @@ public class CArbol extends CGenerico {
 		} else
 			taba.setSelected(true);
 	}
+
 }

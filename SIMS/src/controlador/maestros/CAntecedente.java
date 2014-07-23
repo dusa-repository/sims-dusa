@@ -1,6 +1,7 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Antecedente;
@@ -11,14 +12,18 @@ import modelo.maestros.Empresa;
 import modelo.maestros.Estado;
 import modelo.seguridad.Arbol;
 
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -48,13 +53,26 @@ public class CAntecedente extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
+		contenido = (Include) divAntecedente.getParent();
+		Tabbox tabox = (Tabbox) divAntecedente.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (map != null) {
+			if (map.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) map.get("tabsGenerales");
+				System.out.println(tabs.size());
+				map.clear();
+				map = null;
+			}
+		}
 		llenarCombo();
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divAntecedente, "Antecedente");
+				cerrarVentana(divAntecedente, "Antecedente", tabs);
 			}
 
 			@Override
@@ -208,7 +226,7 @@ public class CAntecedente extends CGenerico {
 	@Listen("onClick = #btnAbrirTipoAntecedente")
 	public void abrirAntecedenteTipo(){		
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Clasificacion de Antecedente");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
 	}
 	
 }

@@ -12,4 +12,7 @@ public interface IConsultaEspecialistaDAO  extends JpaRepository<ConsultaEspecia
 
 	List<ConsultaEspecialista> findByConsulta(Consulta consulta);
 
+	ConsultaEspecialista findByConsultaAndEspecialistaCedula(Consulta consuta,
+			String par3);
+
 }

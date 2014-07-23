@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RConsulta" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d931b9f-5f9a-4d5d-9309-96071042820f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="21e0097c-1241-4eb5-a1c0-0c1c9e963c3a"/>
+	<parameter name="fechaConsulta" class="java.sql.Timestamp"/>
+	<parameter name="pacienteNombre" class="java.lang.String"/>
+	<parameter name="pacienteApellido" class="java.lang.String"/>
+	<parameter name="pacienteCedula" class="java.lang.String"/>
+	<parameter name="pacienteNacimiento" class="java.sql.Timestamp"/>
+	<parameter name="tipoConsulta" class="java.lang.String"/>
+	<parameter name="enfermedad" class="java.lang.String"/>
+	<parameter name="motivo" class="java.lang.String"/>
+	<parameter name="doctorNombre" class="java.lang.String"/>
+	<parameter name="doctorApellido" class="java.lang.String"/>
+	<parameter name="diagnostico" class="java.lang.String"/>
+	<parameter name="tipoDiagnostico" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="464" splitType="Stretch">
+			<image>
+				<reportElement x="17" y="16" width="125" height="67" uuid="01d663c7-7a4b-4e6b-9eb6-778ccb31736a"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="236" y="43" width="100" height="20" uuid="43e8da23-bddc-4eac-9e8e-12b4b389e04a"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Consulta Medica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="16" width="43" height="20" uuid="a8674a81-6fe3-4a70-b0e4-05afb810ca27"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="105" width="55" height="20" uuid="21d1056f-71d6-487d-9b86-3c14e60f2cd5"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="105" width="17" height="20" uuid="f06523a4-2964-45db-a89d-c9c252868a03"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="142" width="107" height="20" uuid="8bc99fd6-44d9-4f3e-bdea-7ba58cf82b56"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Nacimiento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="182" width="112" height="20" uuid="de4b5c0c-3986-4256-bee2-25a2dba821d7"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Consulta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="274" width="125" height="20" uuid="4eaef21c-e88e-4c1b-a689-d35bbf056b24"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Motivo de Consulta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="214" width="148" height="20" uuid="2c1bc232-461f-47ae-8088-448d55d64f6d"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enfermedad Presentada:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="341" width="107" height="20" uuid="eaf2ceca-49cb-4232-91ba-74b8e2c60b49"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Diagnostico Principal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="420" width="23" height="20" uuid="26255dcc-25c7-4873-9c1d-d8f9ed502f00"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dr:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="462" y="16" width="110" height="20" uuid="e50386f5-a3eb-431a-9981-194d6d8e7255"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="380" width="148" height="20" uuid="ac77cd5f-6043-4e53-a478-71e156460243"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Diagnostico Principal:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="165" y="380" width="407" height="20" uuid="13675702-8e9c-487c-afe7-5a7b41c682a8"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tipoDiagnostico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="284" y="182" width="102" height="20" uuid="6e8a2790-4ae9-4b85-abeb-8ced00cf28eb"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Consulta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="42" y="420" width="194" height="20" uuid="09c18b20-1549-47cf-b2b6-e7d60b0aa0ec"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{doctorNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="236" y="420" width="209" height="20" uuid="685fdf74-bc41-4234-b2e1-a837fc280f7d"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{doctorApellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="341" width="448" height="20" uuid="da7227b9-1f78-41ff-b37d-981d1f1e0a39"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{diagnostico}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="17" y="294" width="555" height="20" uuid="732ebcb1-0f32-4f5d-8857-0f0a50cbba4c"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{motivo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="17" y="234" width="555" height="20" uuid="7d683ac1-9e89-4c4d-b960-84089c35d82d"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{enfermedad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="182" width="136" height="20" uuid="82ee76c5-ac52-4b86-aa50-6207b3a93e65"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaConsulta})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="182" width="185" height="20" uuid="d02bf364-ae18-46a5-a11a-4599325abeab"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tipoConsulta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="124" y="142" width="141" height="20" uuid="5a6f12b9-672f-4cfe-852b-6db3cf051a11"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{pacienteNacimiento})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="72" y="105" width="164" height="20" uuid="9e0e22dc-b447-400d-a397-2af032cd00ec"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="105" width="183" height="20" uuid="365b73fc-869c-4222-877a-5ae7cc656008"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteApellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="462" y="105" width="110" height="20" uuid="70aa212d-f397-4119-ba62-42f6a3eef3b2"/>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

@@ -21,9 +21,12 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -65,6 +68,19 @@ public class CServicioExterno extends CGenerico {
 	
 	@Override
 	public void inicializar() throws IOException {
+		contenido = (Include) divServicioExterno.getParent();
+		Tabbox tabox = (Tabbox) divServicioExterno.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
@@ -81,7 +97,7 @@ public class CServicioExterno extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divServicioExterno, "Servicios Externos");
+				cerrarVentana(divServicioExterno, "Servicios Externos", tabs);
 			}
 
 			@Override
@@ -268,6 +284,6 @@ public class CServicioExterno extends CGenerico {
 	@Listen("onClick = #btnAbrirCiudad")
 	public void abrirCiudad(){		
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
 	}
 }

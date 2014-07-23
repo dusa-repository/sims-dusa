@@ -5,6 +5,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -20,6 +21,7 @@ import modelo.sha.Area;
 
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.UploadEvent;
@@ -33,6 +35,7 @@ import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Image;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
@@ -41,6 +44,7 @@ import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
@@ -213,7 +217,19 @@ public class CPaciente extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
+		contenido = (Include) divPaciente.getParent();
+		Tabbox tabox = (Tabbox) divPaciente.getParent().getParent().getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("mapaGeneral");
+		if (mapa != null) {
+			if (mapa.get("tabsGenerales") != null) {
+				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				mapa.clear();
+				mapa = null;
+			}
+		}
 		llenarComboCiudad();
 		llenarComboEmpresa();
 		llenarComboArea();
@@ -222,7 +238,7 @@ public class CPaciente extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divPaciente, "Paciente");
+				cerrarVentana(divPaciente, "Paciente", tabs);
 
 			}
 
@@ -923,27 +939,27 @@ public class CPaciente extends CGenerico {
 	@Listen("onClick = #btnAbrirEmpresa")
 	public void abrirEmpresa() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Empresa");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 	
 	/* Abre la vista de Cargo */
 	@Listen("onClick = #btnAbrirCargo")
 	public void abrirCargo() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Cargo");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 	/* Abre la vista de Area */
 	@Listen("onClick = #btnAbrirArea")
 	public void abrirArea() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Area");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	/* Abre la vista de Ciudad */
 	@Listen("onClick = #btnAbrirCiudad")
 	public void abrirCiudad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem);
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
 	/* Abre la pestanna de Datos contacto */
