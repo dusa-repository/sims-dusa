@@ -457,10 +457,26 @@ public class CProveedor extends CGenerico {
 					estudiosDisponibles.remove(servicio);
 					ProveedorServicio proveedorServicio = new ProveedorServicio();
 					proveedorServicio.setServicioExterno(servicio);
+					estudiosUsados.clear();
+					for (int j = 0; j < ltbEstudiosAgregados.getItemCount(); j++) {
+						Listitem listItemj = ltbEstudiosAgregados
+								.getItemAtIndex(j);
+						double costo = ((Doublespinner) ((listItemj
+								.getChildren().get(1))).getFirstChild())
+								.getValue();
+						long idEstudio = ((Spinner) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						ServicioExterno servicioExterno = servicioServicioExterno
+								.buscar(idEstudio);
+						ProveedorServicio proveedorServicioj = new ProveedorServicio(
+								null, servicioExterno, costo);
+						estudiosUsados.add(proveedorServicioj);
+					}
 					estudiosUsados.add(proveedorServicio);
 					ltbEstudiosAgregados
 							.setModel(new ListModelList<ProveedorServicio>(
 									estudiosUsados));
+					ltbEstudiosAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
@@ -542,10 +558,25 @@ public class CProveedor extends CGenerico {
 					examenesDisponibles.remove(examen);
 					ProveedorExamen proveedorExamen = new ProveedorExamen();
 					proveedorExamen.setExamen(examen);
+					examenesUsados.clear();
+					for (int j = 0; j < ltbExamenesAgregados.getItemCount(); j++) {
+						Listitem listItemj = ltbExamenesAgregados
+								.getItemAtIndex(j);
+						double costo = ((Doublespinner) ((listItemj
+								.getChildren().get(1))).getFirstChild())
+								.getValue();
+						long idExamen = ((Spinner) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						Examen examenj = servicioExamen.buscar(idExamen);
+						ProveedorExamen proveedorExamenj = new ProveedorExamen(
+								null, examenj, costo);
+						examenesUsados.add(proveedorExamenj);
+					}
 					examenesUsados.add(proveedorExamen);
 					ltbExamenesAgregados
 							.setModel(new ListModelList<ProveedorExamen>(
 									examenesUsados));
+					ltbExamenesAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}

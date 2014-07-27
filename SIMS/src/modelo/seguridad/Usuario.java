@@ -36,7 +36,7 @@ public class Usuario implements Serializable {
 	private boolean estado;
 	
 	@Type(type="org.hibernate.type.NumericBooleanType")
-	private boolean doctor;
+	private Boolean doctor;
 
 	@Column(name="estado_usuario", length=50)
 	private String estadoUsuario;
@@ -162,11 +162,11 @@ public class Usuario implements Serializable {
 	}
 
 
-	public boolean isDoctor() {
+	public Boolean isDoctor() {
 		return doctor;
 	}
 
-	public void setDoctor(boolean doctor) {
+	public void setDoctor(Boolean doctor) {
 		this.doctor = doctor;
 	}
 
