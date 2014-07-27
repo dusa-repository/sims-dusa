@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Cargo;
+import modelo.maestros.Paciente;
 import modelo.sha.Area;
+import modelo.transacciones.Consulta;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -21,6 +23,7 @@ import org.zkoss.zul.Window;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 import controlador.maestros.CGenerico;
 
@@ -77,9 +80,7 @@ public class CCargo extends CGenerico {
 					Cargo cargo = new Cargo(id, nombre, fechaHora,
 							horaAuditoria, nombreUsuarioSesion());
 					servicioCargo.guardar(cargo);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 
@@ -96,27 +97,21 @@ public class CCargo extends CGenerico {
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
 										Cargo cargo = servicioCargo.buscar(id);
-										if (true) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+										List<Paciente> pacientes = servicioPaciente
+												.buscarPorCargo(cargo);
+										List<Consulta> consultas1 = servicioConsulta.buscarPorCargo(cargo);
+										if (!pacientes.isEmpty() || !consultas1.isEmpty()) {
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioCargo.eliminar(cargo);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 
 			}
@@ -128,8 +123,7 @@ public class CCargo extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreCargo.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

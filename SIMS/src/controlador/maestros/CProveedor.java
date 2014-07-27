@@ -16,6 +16,8 @@ import modelo.maestros.ProveedorServicio;
 import modelo.maestros.ServicioExterno;
 import modelo.maestros.UnidadMedicina;
 import modelo.seguridad.Arbol;
+import modelo.transacciones.ConsultaExamen;
+import modelo.transacciones.ConsultaServicioExterno;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -40,6 +42,7 @@ import arbol.CArbol;
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import componentes.Validador;
 
 public class CProveedor extends CGenerico {
@@ -93,7 +96,8 @@ public class CProveedor extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divProveedor.getParent();
-		Tabbox tabox = (Tabbox) divProveedor.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divProveedor.getParent().getParent()
+				.getParent().getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -153,12 +157,9 @@ public class CProveedor extends CGenerico {
 								.getValue();
 						long idEstudio = ((Spinner) ((listItem.getChildren()
 								.get(2))).getFirstChild()).getValue();
-						if (String.valueOf(idEstudio) == ""
-								|| costo == 0.0)
-						{
+						if (String.valueOf(idEstudio) == "" || costo == 0.0) {
 							campoNuloEstudio = true;
-						}
-						else {
+						} else {
 							ServicioExterno servicioExterno = servicioServicioExterno
 									.buscar(idEstudio);
 							ProveedorServicio proveedorServicio = new ProveedorServicio(
@@ -177,12 +178,9 @@ public class CProveedor extends CGenerico {
 								.getValue();
 						long idExamen = ((Spinner) ((listItem.getChildren()
 								.get(2))).getFirstChild()).getValue();
-						if (String.valueOf(idExamen) == ""
-								|| costo == 0)
-						{
+						if (String.valueOf(idExamen) == "" || costo == 0) {
 							campoNuloExamen = true;
-						}
-						else {
+						} else {
 							Examen examen = servicioExamen.buscar(idExamen);
 							ProveedorExamen proveedorExamen = new ProveedorExamen(
 									null, examen, costo);
@@ -211,30 +209,25 @@ public class CProveedor extends CGenerico {
 						List<ProveedorServicio> estudios = servicioProveedorServicio
 								.buscarEstudiosUsados(proveedor);
 						if (!estudios.isEmpty())
-							servicioProveedorServicio
-									.eliminar(estudios);
-						for (int i = 0; i <listaEstudios.size(); i++) {
+							servicioProveedorServicio.eliminar(estudios);
+						for (int i = 0; i < listaEstudios.size(); i++) {
 							listaEstudios.get(i).setProveedor(proveedor);
 						}
 						servicioProveedorServicio.guardar(listaEstudios);
-						
-						List<ProveedorExamen> examenes = servicioProveedorExamen.buscarExamenesUsados(proveedor);
+
+						List<ProveedorExamen> examenes = servicioProveedorExamen
+								.buscarExamenesUsados(proveedor);
 						if (!examenes.isEmpty())
-							servicioProveedorExamen
-									.eliminar(examenes);
-						for (int i = 0; i <listaExamen.size(); i++) {
+							servicioProveedorExamen.eliminar(examenes);
+						for (int i = 0; i < listaExamen.size(); i++) {
 							listaExamen.get(i).setProveedor(proveedor);
 						}
 						servicioProveedorExamen.guardar(listaExamen);
-						
+
 						limpiar();
-						Messagebox.show("Registro Guardado Exitosamente",
-								"Informacion", Messagebox.OK,
-								Messagebox.INFORMATION);
+						msj.mensajeInformacion(Mensaje.guardado);
 					} else
-						Messagebox.show(
-								"Debe Llenar Todos los Campos de la Listas",
-								"Error", Messagebox.OK, Messagebox.ERROR);
+						msj.mensajeError(Mensaje.listaVacia);
 				}
 			}
 
@@ -250,20 +243,24 @@ public class CProveedor extends CGenerico {
 									if (evt.getName().equals("onOK")) {
 										Proveedor proveedor = servicioProveedor
 												.buscar(id);
-										servicioProveedor.eliminar(proveedor);
-										limpiar();
-										Messagebox
-												.show("Registro Eliminado Exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
-
+										List<ConsultaServicioExterno> consultas1 = servicioConsultaServicioExterno
+												.buscarPorProveedor(proveedor);
+										List<ConsultaExamen> consultas2 = servicioConsultaExamen
+												.buscarPorProveedor(proveedor);
+										if (!consultas1.isEmpty()
+												|| !consultas2.isEmpty())
+											msj.mensajeError(Mensaje.noEliminar);
+										else {
+											servicioProveedor
+													.eliminar(proveedor);
+											limpiar();
+											msj.mensajeInformacion(Mensaje.eliminado);
+										}
 									}
 								}
 							});
 				} else
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 			}
 		};
 		botoneraProveedor.appendChild(botonera);
@@ -282,13 +279,11 @@ public class CProveedor extends CGenerico {
 				|| txtNombreProveedor.getText().compareTo("") == 0
 				|| txtTelefonoProveedor.getText().compareTo("") == 0
 				|| cmbCiudadProveedor.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (!Validador.validarTelefono(txtTelefonoProveedor.getValue())) {
-				Messagebox.show("Telefono Invalido", "Informacion",
-						Messagebox.OK, Messagebox.INFORMATION);
+				msj.mensajeError(Mensaje.telefonoInvalido);
 				return false;
 			} else
 				return true;
@@ -339,8 +334,7 @@ public class CProveedor extends CGenerico {
 	@Listen("onChange = #txtTelefonoProveedor")
 	public void validarTelefono() {
 		if (!Validador.validarTelefono(txtTelefonoProveedor.getValue())) {
-			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 

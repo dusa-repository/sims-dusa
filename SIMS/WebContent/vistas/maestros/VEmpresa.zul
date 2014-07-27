@@ -15,24 +15,36 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Razon Social:" />
-								<cell colspan="2">
-						<textbox id="txtRazon" hflex="1" maxlength="500"
-							tooltiptext="Ingrese la Razon Social de la Empresa" multiline="true" />
-							</cell>
-						<label class="etiqueta" value="Centro de Trabajo:" />
-								<cell colspan="2">
-						<textbox id="txtNombreEmpresa" hflex="1" maxlength="500"
-							tooltiptext="Ingrese el Centro de Trabajo de la Empresa"
-							multiline="true" />
-							</cell>
-						<button id="btnBuscarEmpresa" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<hbox>
+							<label class="etiqueta" value="Razon Social:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<cell colspan="2">
+							<textbox id="txtRazon" hflex="1" maxlength="500"
+								tooltiptext="Ingrese la Razon Social de la Empresa" multiline="true" />
+						</cell>
+						<hbox>
+							<label class="etiqueta" value="Centro de Trabajo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<cell colspan="2">
+							<textbox id="txtNombreEmpresa" hflex="1" maxlength="500"
+								tooltiptext="Ingrese el Centro de Trabajo de la Empresa"
+								multiline="true" />
+						</cell>
+						<button autodisable="self" id="btnBuscarEmpresa" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 						<hbox />
 					</row>
 					<row>
 						<cell colspan="2">
-							<label class="etiqueta" value="Direccion del Centro de Trabajo:" />
+							<hbox>
+								<label class="etiqueta" value="Direccion del Centro de Trabajo:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 						</cell>
 						<cell colspan="6">
 							<textbox id="txtDireccionCentro" hflex="1" maxlength="1024"
@@ -42,7 +54,11 @@
 					</row>
 					<row>
 						<cell colspan="2">
-							<label class="etiqueta" value="Direccion Fiscal de la Razon Social:" />
+							<hbox>
+								<label class="etiqueta" value="Direccion Fiscal de la Razon Social:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 						</cell>
 						<cell colspan="6">
 							<textbox id="txtDireccionRazon" hflex="1" maxlength="1024"
@@ -51,13 +67,25 @@
 						</cell>
 					</row>
 					<row>
-						<label class="etiqueta" value="Rif:" />
+						<hbox>
+							<label class="etiqueta" value="Rif:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtRifEmpresa" hflex="1" maxlength="20"
 							tooltiptext="Ingrese el Rif de la Empresa" />
-						<label class="etiqueta" value="NIL:" />
+						<hbox>
+							<label class="etiqueta" value="NIL:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtNilEmpresa" hflex="1" maxlength="20"
 							tooltiptext="Ingrese el NIL de la Empresa" />
-						<label class="etiqueta" value="N° PatronalL IVSS:" />
+						<hbox>
+							<label class="etiqueta" value="N° PatronalL IVSS:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtNroIvssEmpresa" hflex="1" maxlength="20"
 							tooltiptext="Ingrese el N° PatronalL IVSS de la Empresa" />
 						<label class="etiqueta" value="Codigo CIIU:" />
@@ -65,16 +93,28 @@
 							tooltiptext="Ingrese el Codigo CIIU de la Empresa" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Actividad Economica:" />
+						<hbox>
+							<label class="etiqueta" value="Actividad Economica:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<cell colspan="2">
 							<textbox multiline="true" id="txtActividadEconomica"
 								hflex="1" maxlength="500"
 								tooltiptext="Ingrese la Actividad Economica de la Empresa" />
 						</cell>
-						<label class="etiqueta" value="Telefono/Fax:" />
+						<hbox>
+							<label class="etiqueta" value="Telefono/Fax:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtTelefonoEmpresa" hflex="1" maxlength="20"
 							tooltiptext="Ingrese el Numero de telefono de la empresa (0426-9999999)" />
-						<label class="etiqueta" value="Email:" />
+						<hbox>
+							<label class="etiqueta" value="Email:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtCorreo" width="180px"
 							tooltiptext="Ingrese el Correo Electronico (ejemplo@ejemplo.com)"
 							maxlength="50" />
@@ -151,8 +191,12 @@
 					</row>
 					<row>
 						<cell colspan="3">
-							<label class="etiqueta"
-								value="N° de Trabajadores de la Empresa, Segun Nomina:" />
+							<hbox>
+								<label class="etiqueta"
+									value="N° de Trabajadores de la Empresa, Segun Nomina:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 						</cell>
 						<spinner
 							tooltiptext="Indique el N° de Trabajadores de la Empresa, Segun Nomina"
@@ -163,33 +207,61 @@
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Hombres:" />
+						<hbox>
+							<label class="etiqueta" value="Hombres:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<spinner tooltiptext="Indique la Cantidad de Hombres de la Empresa"
-							id="spnHombres" width="98%" constraint="min 0" value="0"  />
-						<label class="etiqueta" value="Mujeres:" />
+							id="spnHombres" width="98%" constraint="min 0" value="0" />
+						<hbox>
+							<label class="etiqueta" value="Mujeres:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<spinner tooltiptext="Indique la Cantidad de Mujeres de la Empresa"
 							id="spnMujeres" width="98%" constraint="min 0" value="0" />
-						<label class="etiqueta" value="Adolescentes:" />
+						<hbox>
+							<label class="etiqueta" value="Adolescentes:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<spinner tooltiptext="Indique la Cantidad de Adolescentes de la Empresa"
-							id="spnAdolescentes" width="98%" constraint="min 0"  value="0" />
-						<label class="etiqueta" value="Aprendices:" />
+							id="spnAdolescentes" width="98%" constraint="min 0" value="0" />
+						<hbox>
+							<label class="etiqueta" value="Aprendices:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<spinner tooltiptext="Indique la Cantidad de Aprendices de la Empresa"
 							id="spnAprendices" width="98%" constraint="min 0" value="0" />
 					</row>
 					<row>
 						<cell colspan="2">
-							<label class="etiqueta" value="Trabajadores con Discapacidad LOPCYMAT:" />
+							<hbox>
+								<label class="etiqueta" value="Trabajadores con Discapacidad LOPCYMAT:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 						</cell>
 						<spinner
 							tooltiptext="Indique la Cantidad de Trabajadores con Discapacidad LOPCYMAT de la Empresa"
-							id="spnLopcymat" width="98%" constraint="min 0" value="0"  />
+							id="spnLopcymat" width="98%" constraint="min 0" value="0" />
 						<cell colspan="2">
-							<label class="etiqueta" value="Trabajadores con Discapacidad (CONAPDIS):" />
+							<hbox>
+								<label class="etiqueta" value="Trabajadores con Discapacidad (CONAPDIS):" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 						</cell>
 						<spinner
 							tooltiptext="Indique la Cantidad de Trabajadores con Discapacidad (CONAPDIS): de la Empresa"
 							id="spnConapdis" width="98%" constraint="min 0" value="0" />
-						<label class="etiqueta" value="Extranjeros/Exranjeras:" />
+						<hbox>
+							<label class="etiqueta" value="Extranjeros/Exranjeras:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<spinner
 							tooltiptext="Indique la Cantidad de Extranjeros/Exranjeras de la Empresa"
 							id="spnExtranjeros" width="98%" constraint="min 0" value="0" />

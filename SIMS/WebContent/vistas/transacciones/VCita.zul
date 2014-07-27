@@ -1,27 +1,30 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div id="divCita" apply="controlador.maestros.CCita" width="95%">
+	<div id="divCita" apply="controlador.transacciones.CCita" width="85%">
 		<groupbox width="100%" mold="3d" title="Cita">
 			<groupbox width="100%" title="Datos del Doctor">
 				<grid width="100%">
 					<columns visible="false">
-						<column label="" width="8%" />
-						<column label="" width="19%" />
-						<column label="" width="8%" />
-						<column label="" width="19%" />
-						<column label="" width="8%" />
-						<column label="" width="19%" />
-						<column label="" width="19%" />
+						<column label="" width="9%" />
+						<column label="" width="16%" />
+						<column label="" width="9%" />
+						<column label="" width="22%" />
+						<column label="" width="9%" />
+						<column label="" width="22%" />
+						<column label="" width="14%" />
 					</columns>
 					<rows>
 						<row>
-							<label class="etiqueta" value="Cedula:" />
+							<hbox>
+								<label class="etiqueta" value="Cedula:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 							<label id="lblCedulaDoctor" />
 							<label class="etiqueta" value="Nombres:" />
 							<label id="lblNombreDoctor" />
 							<label class="etiqueta" value="Apellidos:" />
 							<label id="lblApellidoDoctor" />
-
 							<button id="btnBuscarDoctor" class="btn" label="Buscar Doctor"
 								tooltiptext="Catalogo de Doctores" width="100%"
 								image="/public/imagenes/botones/buscar.png" />
@@ -40,15 +43,19 @@
 						<groupbox width="100%" title="Datos de Paciente">
 							<grid width="100%">
 								<columns visible="false">
-									<column label="" width="10%" />
-									<column label="" width="30%" />
-									<column label="" width="10%" />
-									<column label="" width="30%" />
-									<column label="" width="20%" />
+									<column label="" width="11%" />
+									<column label="" width="32%" />
+									<column label="" width="11%" />
+									<column label="" width="32%" />
+									<column label="" width="14%" />
 								</columns>
 								<rows>
 									<row>
-										<label class="etiqueta" value="Cedula:" />
+										<hbox>
+											<label class="etiqueta" value="Cedula:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red" />
+										</hbox>
 										<label id="lblCedulaPaciente" />
 										<label class="etiqueta" value="Empresa:" />
 										<label id="lblEmpresaPaciente" />
@@ -78,13 +85,21 @@
 								</columns>
 								<rows>
 									<row>
-										<label class="etiqueta" value="Fecha Cita:" />
+										<hbox>
+											<label class="etiqueta" value="Fecha Cita:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red" />
+										</hbox>
 										<datebox readonly="true" width="140px" id="dtbFechaCita"
-											onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita"/>
-										<label class="etiqueta" value="Hora Cita:" />
-										<timebox id="tmbHoraCita" hflex="1" format="a hh:mm:ss"
+											onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita" />
+										<hbox>
+											<label class="etiqueta" value="Hora Cita:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red" />
+										</hbox>
+										<timebox id="tmbHoraCita" format="a hh:mm:ss"
 											onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita"
-											width="60px"/>
+											width="140px" />
 										<hbox />
 									</row>
 									<row>
@@ -92,7 +107,11 @@
 										<textbox class="multilinea" id="txtObservacion" hflex="1"
 											maxlength="500" tooltiptext="Ingrese una Observacion de la Cita"
 											multiline="true" />
-										<label class="etiqueta" value="Motivo" />
+										<hbox>
+											<label class="etiqueta" value="Motivo" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red" />
+										</hbox>
 										<combobox id="cmbMotivo" readonly="true" tabindex="1"
 											width="100%" tooltiptext="Seleccione un Motivo" placeholder="Seleccione un Motivo">
 											<template name="model">
@@ -115,7 +134,10 @@
 					</tabpanel>
 					<tabpanel>
 						<groupbox width="100%" title="Citas Asociadas al Doctor">
+							<separator />
+							<separator />
 							<hbox>
+								<separator />
 								<label class="etiqueta" id="lblBuscar" value="Buscar por: " />
 								<combobox id="cmbBuscador" readonly="true" tabindex="1"
 									width="100%" tooltiptext="Seleccione el Campo" placeholder="Seleccione el Campo">
@@ -123,7 +145,7 @@
 										<comboitem label="${each}" />
 									</template>
 								</combobox>
-								<textbox id="txtBuscador" width="200px"
+								<textbox id="txtBuscador" width="250px"
 									tooltiptext="Ingrese el Criterio de Busqueda" placeholder="Ingrese el Criterio de Busqueda"></textbox>
 							</hbox>
 							<separator />
@@ -131,9 +153,9 @@
 								<listbox id="ltbCitas" height="280px" emptyMessage="No hay Citas registrados">
 									<listhead>
 										<listheader label="Paciente" sort="auto(paciente.primerNombre)"
-											width="23%" />
+											width="20%" />
 										<listheader label="Empresa Paciente" sort="auto(paciente.empresa.nombre)"
-											width="15%" />
+											width="18%" />
 										<listheader label="Fecha" sort="auto(fechaCita)"
 											width="12%" />
 										<listheader label="Motivo" sort="auto(motivoCita.descripcion)"
@@ -156,7 +178,6 @@
 										</listitem>
 									</template>
 								</listbox>
-
 								<vbox>
 									<div align="center">
 										<separator height="80px" />

@@ -13,13 +13,6 @@ public interface IServicioExternoDAO extends JpaRepository<ServicioExterno, Long
 
 	List<ServicioExterno> findByNombreStartingWithAllIgnoreCase(String valor);
 
-	List<ServicioExterno> findByDireccionStartingWithAllIgnoreCase(String valor);
-
-	List<ServicioExterno> findByTelefonoStartingWithAllIgnoreCase(String valor);
-
-	List<ServicioExterno> findByCiudadNombreStartingWithAllIgnoreCase(
-			String valor);
-
 	List<ServicioExterno> findByIdServicioExternoNotIn(List<Long> ids);
 
 	@Query("select coalesce(max(consulta.idServicioExterno), '0') from ServicioExterno consulta")

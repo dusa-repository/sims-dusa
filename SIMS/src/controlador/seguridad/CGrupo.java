@@ -14,6 +14,7 @@ import modelo.maestros.Examen;
 import modelo.maestros.PresentacionMedicina;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Grupo;
+import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -37,6 +38,7 @@ import arbol.Nodos;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 import controlador.maestros.CGenerico;
 import controlador.maestros.CMedicina;
@@ -67,7 +69,7 @@ public class CGrupo extends CGenerico {
 	private CUsuario cUsuario = new CUsuario();
 	List<Grupo> grupoUsuario = new ArrayList<Grupo>();
 	Listbox listas;
-	
+
 	@Override
 	public void inicializar() throws IOException {
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -114,46 +116,35 @@ public class CGrupo extends CGenerico {
 					Treechildren treeChildren = treeGrupo.getTreechildren();
 					Collection<Treeitem> lista = treeChildren.getItems();
 					String nombreGrupo = txtNombreGrupo.getValue();
-//					Grupo grupo = servicioGrupo.buscarPorNombre(nombreGrupo);
-//					if (id == 0 && grupo == null || id != 0) {
-						for (int i = 0; i < listaArbol.size(); i++) {
-							for (Iterator<?> iterator = lista.iterator(); iterator
-									.hasNext();) {
-								Treeitem treeitem = (Treeitem) iterator.next();
-								if (listaArbol.get(i).getNombre()
-										.equals(treeitem.getLabel())) {
-									if (treeitem.isSelected()) {
+					for (int i = 0; i < listaArbol.size(); i++) {
+						for (Iterator<?> iterator = lista.iterator(); iterator
+								.hasNext();) {
+							Treeitem treeitem = (Treeitem) iterator.next();
+							if (listaArbol.get(i).getNombre()
+									.equals(treeitem.getLabel())) {
+								if (treeitem.isSelected()) {
 
-										Arbol arbol = listaArbol.get(i);
-										arboles.add(arbol);
-									}
+									Arbol arbol = listaArbol.get(i);
+									arboles.add(arbol);
 								}
 							}
 						}
-						Boolean estatus = true;
-						String nombre = txtNombreGrupo.getValue();
-						Grupo grupo1 = new Grupo(id, estatus, nombre, arboles);
-						servicioGrupo.guardarGrupo(grupo1);
-						if (usuario) {
-							if (id != 0)
-								grupo1 = servicioGrupo.buscarGrupo(id);
-							else {
-								grupo1 = servicioGrupo.buscarUltimo();
-								grupoUsuario.add(grupo1);
-							}
-							cUsuario.recibirGrupo(grupoUsuario,
-									listas);
+					}
+					Boolean estatus = true;
+					String nombre = txtNombreGrupo.getValue();
+					Grupo grupo1 = new Grupo(id, estatus, nombre, arboles);
+					servicioGrupo.guardarGrupo(grupo1);
+					if (usuario) {
+						if (id != 0)
+							grupo1 = servicioGrupo.buscarGrupo(id);
+						else {
+							grupo1 = servicioGrupo.buscarUltimo();
+							grupoUsuario.add(grupo1);
 						}
-						Messagebox.show("Registro Guardado Exitosamente",
-								"Informacion", Messagebox.OK,
-								Messagebox.INFORMATION);
-						limpiar();
-//					} else {
-//						Messagebox.show("Nombre de Grupo no Disponible",
-//								"Informacion", Messagebox.OK,
-//								Messagebox.INFORMATION);
-//						limpiar();
-//					}
+						cUsuario.recibirGrupo(grupoUsuario, listas);
+					}
+					msj.mensajeInformacion(Mensaje.guardado);
+					limpiar();
 				}
 			}
 
@@ -167,21 +158,23 @@ public class CGrupo extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										Grupo grupo = servicioGrupo.buscarGrupo(id);
-										servicioGrupo.eliminar(grupo);
-										limpiar();
-										Messagebox
-												.show("Registro Eliminado Exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
+										Grupo grupo = servicioGrupo
+												.buscarGrupo(id);
 
+										List<Usuario> usuario = servicioUsuario
+												.buscarPorGrupo(grupo);
+										if (!usuario.isEmpty())
+											msj.mensajeError(Mensaje.noEliminar);
+										else {
+											servicioGrupo.eliminar(grupo);
+											limpiar();
+											msj.mensajeInformacion(Mensaje.eliminado);
+										}
 									}
 								}
 							});
 				} else
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 			}
 		};
 		botoneraGrupo.appendChild(botonera);
@@ -272,14 +265,12 @@ public class CGrupo extends CGenerico {
 		for (int i = 0; i < listaArbol.size(); i++) {
 			if (padre == listaArbol.get(i).getPadre()) {
 				if (itemSeleccionado.isSelected()) {
-					Messagebox.show("Seleccione las Funcionalidades", "Alerta",
-							Messagebox.OK, Messagebox.INFORMATION);
+					msj.mensajeAlerta(Mensaje.seleccioneFuncionalidades);
 					itemSeleccionado.setSelected(false);
 					i = listaArbol.size();
 					encontrado = true;
 				} else {
-					Messagebox.show("Seleccione las Funcionalidades", "Error",
-							Messagebox.OK, Messagebox.INFORMATION);
+					msj.mensajeAlerta(Mensaje.seleccioneFuncionalidades);
 					itemSeleccionado.setSelected(true);
 					i = listaArbol.size();
 					encontrado = true;
@@ -422,7 +413,7 @@ public class CGrupo extends CGenerico {
 	public void buscarItem() {
 		metodoLimpiar();
 		List<Grupo> grupos = servicioGrupo.buscarTodos();
-		catalogo = new Catalogo<Grupo>(catalogoGrupo, "Catálogo de Grupos",
+		catalogo = new Catalogo<Grupo>(catalogoGrupo, "Catalogo de Grupos",
 				grupos, "Nombre") {
 			@Override
 			protected String[] crearRegistros(Grupo grupo) {
@@ -525,8 +516,7 @@ public class CGrupo extends CGenerico {
 
 	private boolean validar() {
 		if (txtNombreGrupo.getValue().equals("")) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Alerta",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;

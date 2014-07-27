@@ -27,6 +27,7 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
+import componentes.Mensaje;
 import componentes.Validador;
 
 import controlador.maestros.CGenerico;
@@ -47,7 +48,7 @@ public class CEditarUsuario extends CGenerico {
 	private Div botoneraEditarUsuario;
 	@Wire
 	private Div divEditarUsuario;
-	private long id = 0;
+	private String id = "";
 	private Media media;
 	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	URL url = getClass().getResource("/controlador/maestros/usuario.png");
@@ -66,7 +67,7 @@ public class CEditarUsuario extends CGenerico {
 		}
 		Usuario usuario = servicioUsuario
 				.buscarUsuarioPorNombre(nombreUsuarioSesion());
-		id = Long.valueOf(usuario.getCedula());
+		id = usuario.getCedula();
 		txtNombreUsuarioEditar.setValue(usuario.getLogin());
 		if (usuario.getImagen() == null) {
 			imgUsuario.setContent(new AImage(url));
@@ -92,7 +93,7 @@ public class CEditarUsuario extends CGenerico {
 			public void limpiar() {
 				Usuario usuario = servicioUsuario
 						.buscarUsuarioPorNombre(nombreUsuarioSesion());
-				id = Long.valueOf(usuario.getCedula());
+				id = usuario.getCedula();
 				txtNombreUsuarioEditar.setValue(usuario.getLogin());
 				txtClaveUsuarioConfirmar.setValue("");
 				txtClaveUsuarioNueva.setValue("");
@@ -100,7 +101,7 @@ public class CEditarUsuario extends CGenerico {
 					try {
 						imgUsuario.setContent(new AImage(url));
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
+
 						e.printStackTrace();
 					}
 				} else {
@@ -128,19 +129,16 @@ public class CEditarUsuario extends CGenerico {
 						usuario.setPassword(password);
 						usuario.setImagen(imagenUsuario);
 						servicioUsuario.guardar(usuario);
-						Messagebox.show("Usuario Editado con Exito", "Informacion",
-								Messagebox.OK, Messagebox.INFORMATION);
+						msj.mensajeInformacion(Mensaje.guardado);
 						limpiar();
 					} else {
-						Messagebox.show("Passwords No Coinciden", "Alerta",
-								Messagebox.OK, Messagebox.ERROR);
+						msj.mensajeError(Mensaje.contrasennasNoCoinciden);
 					}
 				}
 			}
 
 			@Override
 			public void eliminar() {
-				// TODO Auto-generated method stub
 
 			}
 		};
@@ -151,8 +149,7 @@ public class CEditarUsuario extends CGenerico {
 	protected boolean validar() {
 		if (txtClaveUsuarioConfirmar.getValue().equals("")
 				|| txtClaveUsuarioNueva.getValue().equals("")) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -169,13 +166,11 @@ public class CEditarUsuario extends CGenerico {
 				imgUsuario.setContent((org.zkoss.image.Image) media);
 				imgUsuario.setVisible(true);
 			} else {
-				Messagebox.show("Imagen Muy Grande", "Alerta", Messagebox.OK,
-						Messagebox.EXCLAMATION);
+				msj.mensajeError(Mensaje.tamanioMuyGrande);
 				imgUsuario.setContent(new AImage(url));
 			}
 		} else {
-			Messagebox.show("Extencion de Imagen Incorrecta", "Alerta",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeError(Mensaje.formatoImagenNoValido);
 			imgUsuario.setContent(new AImage(url));
 		}
 	}

@@ -35,6 +35,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import componentes.Validador;
 import controlador.transacciones.CConsulta;
 
@@ -68,7 +69,8 @@ public class CAccidente extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divAccidente.getParent();
-		Tabbox tabox = (Tabbox) divAccidente.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divAccidente.getParent().getParent()
+				.getParent().getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -129,10 +131,7 @@ public class CAccidente extends CGenerico {
 						cConsulta.recibirAccidente(accidentes, listaConsulta,
 								tipo);
 					}
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -155,28 +154,18 @@ public class CAccidente extends CGenerico {
 												.buscarPorAccidente(accidente);
 										if (!historias.isEmpty()
 												|| !consultas.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioAccidente
 													.eliminar(accidente);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
-
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 			}
 		};
 		botoneraAccidente.appendChild(botonera);
@@ -186,8 +175,7 @@ public class CAccidente extends CGenerico {
 		if (cmbClasificacion.getText().compareTo("") == 0
 				|| txtCodigo.getText().compareTo("") == 0
 				|| txtNombre.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

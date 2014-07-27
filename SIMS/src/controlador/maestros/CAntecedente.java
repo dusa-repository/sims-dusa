@@ -10,6 +10,8 @@ import modelo.maestros.Ciudad;
 import modelo.maestros.Consultorio;
 import modelo.maestros.Empresa;
 import modelo.maestros.Estado;
+import modelo.maestros.Paciente;
+import modelo.maestros.PacienteAntecedente;
 import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.Sessions;
@@ -30,9 +32,9 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CAntecedente extends CGenerico {
-
 
 	@Wire
 	private Textbox txtNombreAntecedente;
@@ -46,7 +48,7 @@ public class CAntecedente extends CGenerico {
 	private Button btnBuscarAntecedente;
 	@Wire
 	private Combobox cmbTipoAntecedente;
-	
+
 	private CArbol cArbol = new CArbol();
 	Catalogo<Antecedente> catalogo;
 	long id = 0;
@@ -54,7 +56,8 @@ public class CAntecedente extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divAntecedente.getParent();
-		Tabbox tabox = (Tabbox) divAntecedente.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divAntecedente.getParent().getParent()
+				.getParent().getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -79,7 +82,8 @@ public class CAntecedente extends CGenerico {
 			public void limpiar() {
 				txtNombreAntecedente.setText("");
 				cmbTipoAntecedente.setValue("");
-				cmbTipoAntecedente.setPlaceholder("Seleccione una Clasificacion");
+				cmbTipoAntecedente
+						.setPlaceholder("Seleccione una Clasificacion");
 				id = 0;
 			}
 
@@ -87,16 +91,15 @@ public class CAntecedente extends CGenerico {
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombreAntecedente.getValue();
-					long idAntecedenteTipo = Long.valueOf(cmbTipoAntecedente.getSelectedItem()
-							.getContext());
-					AntecedenteTipo antecedenteTipo = servicioAntecedenteTipo.buscar(idAntecedenteTipo);
-					Antecedente antecedente = new Antecedente(id, nombre, antecedenteTipo,fechaHora, horaAuditoria,
-							 nombreUsuarioSesion());
+					long idAntecedenteTipo = Long.valueOf(cmbTipoAntecedente
+							.getSelectedItem().getContext());
+					AntecedenteTipo antecedenteTipo = servicioAntecedenteTipo
+							.buscar(idAntecedenteTipo);
+					Antecedente antecedente = new Antecedente(id, nombre,
+							antecedenteTipo, fechaHora, horaAuditoria,
+							nombreUsuarioSesion());
 					servicioAntecedente.guardar(antecedente);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 
@@ -114,31 +117,21 @@ public class CAntecedente extends CGenerico {
 									if (evt.getName().equals("onOK")) {
 										Antecedente antecedente = servicioAntecedente
 												.buscar(id);
-//										List<Paciente> empresas = servicioEmpresa
-//												.buscarPorAntecedente(antecedente);
-		
-								//		if (!empresas.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
-									//	} 
-//										else {
-//											servicioAntecedente.eliminar(antecedente);
-//											limpiar();
-//											Messagebox
-//													.show("Registro Eliminado Exitosamente",
-//															"Informacion",
-//															Messagebox.OK,
-//															Messagebox.INFORMATION);
-//										}
+										List<PacienteAntecedente> pacientes = servicioPacienteAntecedente
+												.buscarPorAntecedente(antecedente);
+										if (!pacientes.isEmpty())
+											msj.mensajeError(Mensaje.noEliminar);
+										else {
+											servicioAntecedente
+													.eliminar(antecedente);
+											limpiar();
+											msj.mensajeInformacion(Mensaje.eliminado);
+										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -150,8 +143,7 @@ public class CAntecedente extends CGenerico {
 
 		if (cmbTipoAntecedente.getText().compareTo("") == 0
 				|| txtNombreAntecedente.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -160,9 +152,11 @@ public class CAntecedente extends CGenerico {
 	/* Muestra un catalogo de antecedentees */
 	@Listen("onClick = #btnBuscarAntecedente")
 	public void mostrarCatalogo() throws IOException {
-		final List<Antecedente> antecedentes = servicioAntecedente.buscarTodos();
-		catalogo = new Catalogo<Antecedente>(catalogoAntecedente, "Catalogo de Antecedentes",
-				antecedentes, "Nombre", "Clasificacion") {
+		final List<Antecedente> antecedentes = servicioAntecedente
+				.buscarTodos();
+		catalogo = new Catalogo<Antecedente>(catalogoAntecedente,
+				"Catalogo de Antecedentes", antecedentes, "Nombre",
+				"Clasificacion") {
 
 			@Override
 			protected String[] crearRegistros(Antecedente antecedente) {
@@ -192,8 +186,8 @@ public class CAntecedente extends CGenerico {
 	/* Busca si existe una antecedente con el mismo nombre escrito */
 	@Listen("onChange = #txtNombreAntecedente")
 	public void buscarPorNombre() {
-		Antecedente antecedente = servicioAntecedente.buscarPorNombre(txtNombreAntecedente
-				.getValue());
+		Antecedente antecedente = servicioAntecedente
+				.buscarPorNombre(txtNombreAntecedente.getValue());
 		if (antecedente != null)
 			llenarCampos(antecedente);
 	}
@@ -201,12 +195,15 @@ public class CAntecedente extends CGenerico {
 	/* Llena el combo de antecedenteTipo cada vez que se abre */
 	@Listen("onOpen = #cmbTipoAntecedente")
 	public void llenarCombo() {
-		List<AntecedenteTipo> antecedenteTipos = servicioAntecedenteTipo.buscarTodos();
-		cmbTipoAntecedente.setModel(new ListModelList<AntecedenteTipo>(antecedenteTipos));
+		List<AntecedenteTipo> antecedenteTipos = servicioAntecedenteTipo
+				.buscarTodos();
+		cmbTipoAntecedente.setModel(new ListModelList<AntecedenteTipo>(
+				antecedenteTipos));
 	}
 
 	/*
-	 * Selecciona una antecedente del catalogo y llena los campos con la informacion
+	 * Selecciona una antecedente del catalogo y llena los campos con la
+	 * informacion
 	 */
 	@Listen("onSeleccion = #catalogoAntecedente")
 	public void seleccion() {
@@ -218,15 +215,17 @@ public class CAntecedente extends CGenerico {
 	/* LLena los campos del formulario dada una antecedente */
 	public void llenarCampos(Antecedente antecedente) {
 		txtNombreAntecedente.setValue(antecedente.getNombre());
-		cmbTipoAntecedente.setValue(antecedente.getAntecedenteTipo().getNombre());
+		cmbTipoAntecedente.setValue(antecedente.getAntecedenteTipo()
+				.getNombre());
 		id = antecedente.getIdAntecedente();
 	}
-	
-	/* Abre la vista de AntecedenteTipo*/
+
+	/* Abre la vista de AntecedenteTipo */
 	@Listen("onClick = #btnAbrirTipoAntecedente")
-	public void abrirAntecedenteTipo(){		
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Clasificacion de Antecedente");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
+	public void abrirAntecedenteTipo() {
+		Arbol arbolItem = servicioArbol
+				.buscarPorNombreArbol("Clasificacion de Antecedente");
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
-	
+
 }

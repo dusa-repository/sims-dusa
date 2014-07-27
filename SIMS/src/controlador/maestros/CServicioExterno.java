@@ -10,9 +10,12 @@ import modelo.maestros.Consultorio;
 import modelo.maestros.Empresa;
 import modelo.maestros.Examen;
 import modelo.maestros.Paciente;
+import modelo.maestros.ProveedorExamen;
+import modelo.maestros.ProveedorServicio;
 import modelo.maestros.ServicioExterno;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
+import modelo.transacciones.ConsultaServicioExterno;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -29,12 +32,15 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
+import com.apple.dnssd.TXTRecord;
+
 import arbol.CArbol;
 
 import sun.usagetracker.UsageTrackerClient;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import componentes.Validador;
 import controlador.transacciones.CConsulta;
 
@@ -42,34 +48,28 @@ public class CServicioExterno extends CGenerico {
 
 	private static final long serialVersionUID = -6178756189105805846L;
 	@Wire
+	private Textbox txtNombreServicioExterno;
+	@Wire
 	private Div divServicioExterno;
 	@Wire
 	private Div botoneraServicioExterno;
 	@Wire
 	private Div catalogoServicioExterno;
 	@Wire
-	private Textbox txtNombreServicioExterno;
-	@Wire
-	private Textbox txtTelefonoServicioExterno;
-	@Wire
-	private Textbox txtDireccionServicioExterno;
-	@Wire
 	private Button btnBuscarServicioExterno;
-	@Wire
-	private Combobox cmbCiudadServicioExterno;
 
-	private CArbol cArbol = new CArbol();
 	long id = 0;
 	Catalogo<ServicioExterno> catalogo;
 	private boolean consulta = false;
 	private CConsulta cConsulta = new CConsulta();
 	List<ServicioExterno> servicioConsulta = new ArrayList<ServicioExterno>();
 	Listbox listaConsulta;
-	
+
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divServicioExterno.getParent();
-		Tabbox tabox = (Tabbox) divServicioExterno.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divServicioExterno.getParent().getParent()
+				.getParent().getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -92,7 +92,6 @@ public class CServicioExterno extends CGenerico {
 				map = null;
 			}
 		}
-		llenarComboCiudad();
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -102,43 +101,33 @@ public class CServicioExterno extends CGenerico {
 
 			@Override
 			public void limpiar() {
-				txtDireccionServicioExterno.setValue("");
 				txtNombreServicioExterno.setValue("");
-				txtTelefonoServicioExterno.setValue("");
-				cmbCiudadServicioExterno.setValue("");
-				cmbCiudadServicioExterno
-						.setPlaceholder("Seleccione una Ciudad");
 				id = 0;
 			}
 
 			@Override
 			public void guardar() {
 				if (validar()) {
-					String nombre, direccion, telefono;
+					String nombre;
 					nombre = txtNombreServicioExterno.getValue();
-					direccion = txtDireccionServicioExterno.getValue();
-					telefono = txtTelefonoServicioExterno.getValue();
-					Ciudad ciudad = servicioCiudad.buscar(Long
-							.parseLong(cmbCiudadServicioExterno
-									.getSelectedItem().getContext()));
 					ServicioExterno servicioExterno = new ServicioExterno(id,
-							direccion, nombre, telefono, fechaHora,
-							horaAuditoria, nombreUsuarioSesion(), ciudad);
+							nombre, fechaHora, horaAuditoria,
+							nombreUsuarioSesion());
 					servicioServicioExterno.guardar(servicioExterno);
 					if (consulta) {
 						if (id != 0)
-							servicioExterno = servicioServicioExterno.buscar(id);
+							servicioExterno = servicioServicioExterno
+									.buscar(id);
 						else {
-							servicioExterno = servicioServicioExterno.buscarUltimo();
+							servicioExterno = servicioServicioExterno
+									.buscarUltimo();
 							servicioConsulta.add(servicioExterno);
 						}
 						cConsulta.recibirServicio(servicioConsulta,
 								listaConsulta);
 					}
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 
@@ -155,51 +144,38 @@ public class CServicioExterno extends CGenerico {
 									if (evt.getName().equals("onOK")) {
 										ServicioExterno servicioExterno = servicioServicioExterno
 												.buscar(id);
-										servicioServicioExterno
-												.eliminar(servicioExterno);
-										limpiar();
-										Messagebox
-												.show("Registro Eliminado Exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
 
+										List<ConsultaServicioExterno> consultas = servicioConsultaServicioExterno
+												.buscarPorServicio(servicioExterno);
+										List<ProveedorServicio> proveedores = servicioProveedorServicio
+												.buscarPorServicio(servicioExterno);
+
+										if (!proveedores.isEmpty()
+												|| !consultas.isEmpty())
+											msj.mensajeError(Mensaje.noEliminar);
+										else {
+											servicioServicioExterno
+													.eliminar(servicioExterno);
+											limpiar();
+											msj.mensajeInformacion(Mensaje.eliminado);
+										}
 									}
 								}
 							});
 				} else
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 			}
 		};
 		botoneraServicioExterno.appendChild(botonera);
 	}
 
-	/* Llena el combo de Ciudades cada vez que se abre */
-	@Listen("onOpen = #cmbCiudadServicioExterno")
-	public void llenarComboCiudad() {
-		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
-		cmbCiudadServicioExterno.setModel(new ListModelList<Ciudad>(ciudades));
-	}
-
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (txtDireccionServicioExterno.getText().compareTo("") == 0
-				|| txtNombreServicioExterno.getText().compareTo("") == 0
-				|| txtTelefonoServicioExterno.getText().compareTo("") == 0
-				|| cmbCiudadServicioExterno.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+		if (txtNombreServicioExterno.getText().compareTo("") == 0) {
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
-		} else {
-			if (!Validador.validarTelefono(txtTelefonoServicioExterno
-					.getValue())) {
-				Messagebox.show("Primer Telefono Invalido", "Informacion",
-						Messagebox.OK, Messagebox.INFORMATION);
-				return false;
-			} else
-				return true;
-		}
+		} else
+			return true;
 	}
 
 	/* Muestra el catalogo de los servicios externos */
@@ -208,8 +184,7 @@ public class CServicioExterno extends CGenerico {
 		final List<ServicioExterno> serviciosExternos = servicioServicioExterno
 				.buscarTodas();
 		catalogo = new Catalogo<ServicioExterno>(catalogoServicioExterno,
-				"Catalogo de Servicios Externos", serviciosExternos, "Nombre",
-				"Direccion", "Telefono", "Ciudad") {
+				"Catalogo de Servicios Externos", serviciosExternos, "Nombre") {
 
 			@Override
 			protected List<ServicioExterno> buscar(String valor, String combo) {
@@ -217,12 +192,6 @@ public class CServicioExterno extends CGenerico {
 				switch (combo) {
 				case "Nombre":
 					return servicioServicioExterno.filtroNombre(valor);
-				case "Direccion":
-					return servicioServicioExterno.filtroDireccion(valor);
-				case "Telefono":
-					return servicioServicioExterno.filtroTelefono(valor);
-				case "Ciudad":
-					return servicioServicioExterno.filtroCiudad(valor);
 				default:
 					return serviciosExternos;
 				}
@@ -232,24 +201,12 @@ public class CServicioExterno extends CGenerico {
 			protected String[] crearRegistros(ServicioExterno objeto) {
 				String[] registros = new String[4];
 				registros[0] = objeto.getNombre();
-				registros[1] = objeto.getDireccion();
-				registros[2] = objeto.getTelefono();
-				registros[3] = objeto.getCiudad().getNombre();
 				return registros;
 			}
 
 		};
 		catalogo.setParent(catalogoServicioExterno);
 		catalogo.doModal();
-	}
-
-	/* Valida el numero telefonico */
-	@Listen("onChange = #txtTelefonoServicioExterno")
-	public void validarTelefono() {
-		if (!Validador.validarTelefono(txtTelefonoServicioExterno.getValue())) {
-			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
-		}
 	}
 
 	/* Permite la seleccion de un item del catalogo */
@@ -272,18 +229,7 @@ public class CServicioExterno extends CGenerico {
 
 	/* LLena los campos del formulario dado un servicio externo */
 	private void llenarCampos(ServicioExterno servicioExterno) {
-		txtDireccionServicioExterno.setValue(servicioExterno.getDireccion());
 		txtNombreServicioExterno.setValue(servicioExterno.getNombre());
-		txtTelefonoServicioExterno.setValue(servicioExterno.getTelefono());
-		cmbCiudadServicioExterno.setValue(servicioExterno.getCiudad()
-				.getNombre());
 		id = servicioExterno.getIdServicioExterno();
-	}
-
-	/* Abre la vista de Ciudad*/
-	@Listen("onClick = #btnAbrirCiudad")
-	public void abrirCiudad(){		
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
 	}
 }

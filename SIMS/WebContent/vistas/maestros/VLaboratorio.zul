@@ -9,14 +9,19 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
-						<textbox maxlength="500" class="multilinea" multiline="true" id="txtNombre" hflex="1" tooltiptext="Ingrese el Nombre del Laboratorio" />
-						<button id="btnBuscarLaboratorio" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox maxlength="500" class="multilinea" multiline="true"
+							id="txtNombre" hflex="1" tooltiptext="Ingrese el Nombre del Laboratorio" />
+						<button autodisable="self" id="btnBuscarLaboratorio" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 				</rows>
 			</grid>
-			<separator/>
+			<separator />
 			<div id="botoneraLaboratorio" />
 			<div id="catalogoLaboratorio" />
 		</groupbox>

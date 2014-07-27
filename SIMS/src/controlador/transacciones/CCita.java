@@ -1,4 +1,4 @@
-package controlador.maestros;
+package controlador.transacciones;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -41,6 +41,8 @@ import arbol.CArbol;
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
+import componentes.Mensaje;
+import controlador.maestros.CGenerico;
 
 public class CCita extends CGenerico {
 
@@ -111,7 +113,8 @@ public class CCita extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divCita.getParent();
-		Tabbox tabox = (Tabbox) divCita.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divCita.getParent().getParent().getParent()
+				.getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -170,9 +173,7 @@ public class CCita extends CGenerico {
 					servicioCita.guardar(cita);
 					llenarListaCitas(usuario);
 					limpiar2();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 
 			}
@@ -209,7 +210,7 @@ public class CCita extends CGenerico {
 	/* Muestra un catalogo de Usuarios */
 	@Listen("onClick = #btnBuscarDoctor")
 	public void mostrarCatalogo() throws IOException {
-		final List<Usuario> usuarios = servicioUsuario.buscarTodos();
+		final List<Usuario> usuarios = servicioUsuario.buscarDoctores();
 		catalogo = new Catalogo<Usuario>(catalogoUsuarios,
 				"Catalogo de Doctores", usuarios, "Cedula", "Ficha", "Nombre",
 				"Apellido", "Especialidad") {
@@ -289,7 +290,7 @@ public class CCita extends CGenerico {
 		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
-				"Apellido", "Empresa") {
+				"Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -300,9 +301,6 @@ public class CCita extends CGenerico {
 				case "Cedula":
 					return servicioPaciente.filtroCedula(valor);
 				case "Apellido":
-					return servicioPaciente.filtroApellido1(valor);
-				case "Empresa":
-					return servicioPaciente.filtroEmpresa(valor);
 				default:
 					return pacientes;
 				}
@@ -310,11 +308,10 @@ public class CCita extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[4];
+				String[] registros = new String[3];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getPrimerNombre();
 				registros[2] = objeto.getPrimerApellido();
-				registros[3] = objeto.getEmpresa().getNombre();
 				return registros;
 			}
 
@@ -332,7 +329,6 @@ public class CCita extends CGenerico {
 				+ paciente.getSegundoNombre());
 		lblApellidoPaciente.setValue(paciente.getPrimerApellido() + " "
 				+ paciente.getSegundoApellido());
-		lblEmpresaPaciente.setValue(paciente.getEmpresa().getNombre());
 		idPaciente = Long.valueOf(paciente.getCedula());
 		catalogoPaciente.setParent(null);
 	}
@@ -346,13 +342,11 @@ public class CCita extends CGenerico {
 
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (txtObservacion.getText().compareTo("") == 0
-				|| cmbMotivo.getText().compareTo("") == 0
+		if (cmbMotivo.getText().compareTo("") == 0
 				|| tmbHoraCita.getText().compareTo("") == 0
 				|| dtbFechaCita.getText().compareTo("") == 0 || idDoctor == 0
 				|| idPaciente == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -414,19 +408,13 @@ public class CCita extends CGenerico {
 										.buscarPorCedula(String
 												.valueOf(idDoctor));
 								llenarListaCitas(usuario);
-								Messagebox.show(
-										"Se ha(n) Cancelado la(s) Cita(s)",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
-
+								msj.mensajeInformacion(Mensaje.citasCanceladas);
 							}
 						});
 			} else
-				Messagebox.show("Seleccione al menos una Cita para Cancelar",
-						"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+				msj.mensajeAlerta(Mensaje.seleccioneCitaCancelar);
 		} else
-			Messagebox.show("Actualmente No hay Citas para su Cancelacion",
-					"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeAlerta(Mensaje.noCitasCancelacion);
 	}
 
 	/*
@@ -473,18 +461,13 @@ public class CCita extends CGenerico {
 										.buscarPorCedula(String
 												.valueOf(idDoctor));
 								llenarListaCitas(usuario);
-								Messagebox.show(
-										"Se ha(n) Anulado la(s) Cita(s)",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
+								msj.mensajeInformacion(Mensaje.citasAnuladas);
 							}
 						});
 			} else
-				Messagebox.show("Seleccione al menos una Cita para Anular",
-						"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+				msj.mensajeAlerta(Mensaje.seleccioneCitaAnular);
 		} else
-			Messagebox.show("Actualmente No hay Citas para su Anulacion",
-					"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeAlerta(Mensaje.noCitasAnulacion);
 	}
 
 	public void buscar() {
@@ -496,7 +479,7 @@ public class CCita extends CGenerico {
 				switch (cmbBuscador.getValue()) {
 				case "Paciente":
 					return recorrer(servicioCita.filtroPaciente(valor));
-				case "Empresa": 
+				case "Empresa":
 					return recorrer(servicioCita.filtroEmpresa(valor));
 				case "Fecha":
 					return recorrer(servicioCita.filtroFecha(valor));
@@ -520,10 +503,10 @@ public class CCita extends CGenerico {
 		return lis;
 	}
 
-	/* Abre la vista de Motivo*/
+	/* Abre la vista de Motivo */
 	@Listen("onClick = #btnAbrirMotivo")
-	public void abrirMotivo(){		
+	public void abrirMotivo() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Motivo");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 }

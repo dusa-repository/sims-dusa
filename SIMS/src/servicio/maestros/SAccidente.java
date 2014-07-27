@@ -7,6 +7,7 @@ import interfacedao.maestros.IAccidenteDAO;
 import interfacedao.transacciones.IHistoriaAccidenteDAO;
 
 import modelo.maestros.Accidente;
+import modelo.sha.ClasificacionAccidente;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaServicioExterno;
 import modelo.transacciones.Historia;
@@ -72,5 +73,11 @@ public class SAccidente {
 		if (id != 0)
 			return accidenteDAO.findOne(id);
 		return null;
+	}
+
+	public List<Accidente> buscarPorClasificacion(
+			ClasificacionAccidente clasificacionAccidente) {
+		// TODO Auto-generated method stub
+		return accidenteDAO.findByClasificacion(clasificacionAccidente);
 	}
 }

@@ -10,12 +10,16 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox class="multilinea" id="txtNombre" hflex="1"
 							maxlength="500" tooltiptext="Ingrese el Nombre de la Vacuna"
 							multiline="true" />
-						<button id="btnBuscarVacuna" class="btn" label="Buscar"
-							tooltiptext="Catalogo Vacunas" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarVacuna" class="btn"
+							label="Buscar" tooltiptext="Catalogo Vacunas" image="/public/imagenes/botones/buscar.png" />
 					</row>
 				</rows>
 			</grid>

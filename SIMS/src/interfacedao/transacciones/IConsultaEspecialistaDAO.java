@@ -2,6 +2,7 @@ package interfacedao.transacciones;
 
 import java.util.List;
 
+import modelo.maestros.Especialista;
 import modelo.pk.ConsultaEspecialistaId;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaEspecialista;
@@ -14,5 +15,7 @@ public interface IConsultaEspecialistaDAO  extends JpaRepository<ConsultaEspecia
 
 	ConsultaEspecialista findByConsultaAndEspecialistaCedula(Consulta consuta,
 			String par3);
+
+	List<ConsultaEspecialista> findByEspecialista(Especialista especialista);
 
 }

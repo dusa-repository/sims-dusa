@@ -28,4 +28,6 @@ public interface ICitaDAO extends JpaRepository<Cita, Long> {
 
 	List<Cita> findByFechaCitaStartingWithAllIgnoreCase(String valor);
 
+	List<Cita> findByUsuario(Usuario usuario);
+
 }

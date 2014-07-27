@@ -8,6 +8,7 @@ import interfacedao.maestros.IAntecedenteDAO;
 import interfacedao.maestros.IProveedorDAO;
 import interfacedao.maestros.IProveedorServicioDAO;
 
+import modelo.maestros.Ciudad;
 import modelo.maestros.Proveedor;
 import modelo.maestros.ProveedorServicio;
 import modelo.maestros.ServicioExterno;
@@ -78,6 +79,11 @@ import org.springframework.stereotype.Service;
 			else
 				return null;
 			
+		}
+
+		public List<Proveedor> buscarPorCiudad(Ciudad ciudad) {
+			// TODO Auto-generated method stub
+			return  proveedorDAO.findByCiudad(ciudad);
 		}
 
 }

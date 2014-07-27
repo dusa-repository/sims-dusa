@@ -51,4 +51,8 @@ public class SCita {
 	public List<Cita> filtroMotivo(String valor) {
 		return citaDAO.findByMotivoCitaDescripcionStartingWithAllIgnoreCase(valor);
 	}
+
+	public List<Cita> buscarPorUsuario(Usuario usuario) {
+		return citaDAO.findByUsuario(usuario);
+	}
 }

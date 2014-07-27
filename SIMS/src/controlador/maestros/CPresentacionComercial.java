@@ -26,6 +26,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CPresentacionComercial extends CGenerico {
 
@@ -79,10 +80,7 @@ public class CPresentacionComercial extends CGenerico {
 							horaAuditoria, nombre, nombreUsuarioSesion(),
 							medicina);
 					servicioPresentacion.guardar(presentacion);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 
@@ -119,17 +117,12 @@ public class CPresentacionComercial extends CGenerico {
 										servicioPresentacion
 												.eliminar(presentacion);
 										limpiar();
-										Messagebox
-												.show("Registro Eliminado Exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
+										msj.mensajeInformacion(Mensaje.eliminado);
 									}
 								}
 							});
 				} else
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 			}
 		};
 		/* Dibuja el componente botonera en el div botoneraPresentacionr */
@@ -180,8 +173,7 @@ public class CPresentacionComercial extends CGenerico {
 
 		if (cmbMedicina.getText().compareTo("") == 0
 				|| txtNombre.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

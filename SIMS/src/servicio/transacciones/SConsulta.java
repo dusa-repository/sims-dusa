@@ -4,7 +4,9 @@ import interfacedao.transacciones.IConsultaDAO;
 
 import java.util.List;
 
+import modelo.maestros.Cargo;
 import modelo.maestros.Paciente;
+import modelo.sha.Area;
 import modelo.transacciones.Consulta;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,20 +47,21 @@ public class SConsulta {
 
 	public List<Consulta> filtroDoctor(String valor) {
 		boolean blanco = false;
-		int corte = valor.length()+1;
+		int corte = valor.length() + 1;
 		for (int i = 0; i < valor.length(); i++) {
-			if (Character.isWhitespace(valor.charAt(i))){
+			if (Character.isWhitespace(valor.charAt(i))) {
 				blanco = true;
 				corte = i;
 				i = valor.length();
 			}
 		}
 		List<Consulta> consultas = consultaDAO
-				.findByUsuarioPrimerNombreStartingWithAllIgnoreCase(valor.substring(0,corte-1));
+				.findByUsuarioPrimerNombreStartingWithAllIgnoreCase(valor
+						.substring(0, corte - 1));
 		if (blanco)
-			consultas
-					.addAll(consultaDAO
-							.findByUsuarioPrimerApellidoStartingWithAllIgnoreCase(valor.substring(corte)+1));
+			consultas.addAll(consultaDAO
+					.findByUsuarioPrimerApellidoStartingWithAllIgnoreCase(valor
+							.substring(corte) + 1));
 		return consultas;
 	}
 
@@ -82,5 +85,17 @@ public class SConsulta {
 
 	public List<Consulta> buscarPorIdPacienteOrdenado(String valueOf) {
 		return consultaDAO.findByPacienteCedulaOrderByFechaConsultaAsc(valueOf);
+	}
+
+	public List<Consulta> buscarPorCargo(Cargo cargo) {
+		return consultaDAO.findByCargo(cargo);
+	}
+
+	public List<Consulta> buscarPorArea(Area area) {
+		return consultaDAO.findByArea(area);
+	}
+
+	public List<Consulta> buscarPorArea2(Area area) {
+		return consultaDAO.findByAreaDeseada(area);
 	}
 }

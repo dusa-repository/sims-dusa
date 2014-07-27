@@ -19,6 +19,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CPais extends CGenerico {
 
@@ -35,7 +36,7 @@ public class CPais extends CGenerico {
 	private Div divPais;
 	private long id = 0;
 	Catalogo<Pais> catalogo;
-	
+
 	@Override
 	public void inicializar() throws IOException {
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -48,32 +49,30 @@ public class CPais extends CGenerico {
 			}
 		}
 		Botonera botonera = new Botonera() {
-			
+
 			@Override
 			public void salir() {
 				cerrarVentana(divPais, "Pais", tabs);
 			}
-			
+
 			@Override
 			public void limpiar() {
 				txtNombrePais.setValue("");
 				id = 0;
 			}
-			
+
 			@Override
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombrePais.getValue();
-					Pais pais = new Pais(id, fechaHora, horaAuditoria,
-							nombre, nombreUsuarioSesion());
+					Pais pais = new Pais(id, fechaHora, horaAuditoria, nombre,
+							nombreUsuarioSesion());
 					servicioPais.guardar(pais);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
-			
+
 			@Override
 			public void eliminar() {
 				if (id != 0 && txtNombrePais.getText().compareTo("") != 0) {
@@ -84,31 +83,21 @@ public class CPais extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										Pais pais = servicioPais
-												.buscar(id);
+										Pais pais = servicioPais.buscar(id);
 										List<Estado> estados = servicioEstado
 												.buscarPorPais(pais);
 										if (!estados.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioPais.eliminar(pais);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -118,13 +107,12 @@ public class CPais extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombrePais.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
 	}
-	
+
 	/* Muestra el catalogo de los paises */
 	@Listen("onClick = #btnBuscarPais")
 	public void mostrarCatalogo() {
@@ -162,8 +150,7 @@ public class CPais extends CGenerico {
 	/* Busca si existe un pais con el mismo nombre escrito */
 	@Listen("onChange = #txtNombrePais")
 	public void buscarPorNombre() {
-		Pais pais = servicioPais.buscarPorNombre(txtNombrePais
-				.getValue());
+		Pais pais = servicioPais.buscarPorNombre(txtNombrePais.getValue());
 		if (pais != null)
 			llenarCampos(pais);
 	}

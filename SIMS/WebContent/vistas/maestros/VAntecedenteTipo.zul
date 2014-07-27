@@ -4,26 +4,36 @@
 		<groupbox width="40em" mold="3d" title="Clasificacion de Antecedentes">
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="25%" />
-					<column label="" width="45%" />
 					<column label="" width="30%" />
+					<column label="" width="45%" />
+					<column label="" width="25%" />
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox class="multilinea" id="txtNombreAntecedenteTipo"
 							hflex="1" maxlength="500" tooltiptext="Ingrese la Clasificacion"
 							multiline="true" />
-						<button id="btnBuscarAntecedenteTipo" class="btn" label="Buscar"
-							tooltiptext="Catalogo Clasificaciones" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarAntecedenteTipo"
+							class="btn" label="Buscar" tooltiptext="Catalogo Clasificaciones"
+							image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Tipo de Antecedente:" />
+						<hbox>
+							<label class="etiqueta" value="Tipo de Antecedente:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<radiogroup id="rdgAntecedenteTipo">
 							<radio label="Medicos" value="Medicos" id="rdoMedico" />
 							<radio label="Laborales" value="Laborales" id="rdoLaboral" />
-										<radio label="Familiar" value="Familiar" id="rdoFamiliar" />
+							<radio label="Familiar" value="Familiar" id="rdoFamiliar" />
 						</radiogroup>
+						<hbox />
 					</row>
 				</rows>
 			</grid>

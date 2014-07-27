@@ -28,4 +28,8 @@ public class SProveedorExamen {
 	public void guardar(List<ProveedorExamen> listaExamen) {
 		proveedorExamenDAO.save(listaExamen);
 	}
+
+	public List<ProveedorExamen> buscarPorExamen(Examen examen) {
+		return proveedorExamenDAO.findByExamen(examen);
+	}
 }

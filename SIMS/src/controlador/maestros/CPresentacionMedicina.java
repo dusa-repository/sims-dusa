@@ -22,6 +22,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import controlador.transacciones.CConsulta;
 
 public class CPresentacionMedicina extends CGenerico {
@@ -44,7 +45,7 @@ public class CPresentacionMedicina extends CGenerico {
 	private CMedicina cMedicina = new CMedicina();
 	List<PresentacionMedicina> listaPresentacion = new ArrayList<PresentacionMedicina>();
 	Listbox lista;
-	
+
 	@Override
 	public void inicializar() throws IOException {
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -61,7 +62,8 @@ public class CPresentacionMedicina extends CGenerico {
 		if (map != null) {
 			if (map.get("id") != null) {
 				medicina = true;
-				listaPresentacion = (List<PresentacionMedicina>) map.get("lista");
+				listaPresentacion = (List<PresentacionMedicina>) map
+						.get("lista");
 				lista = (Listbox) map.get("listbox");
 				map.clear();
 				map = null;
@@ -71,7 +73,8 @@ public class CPresentacionMedicina extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divPresentacionMedicina, "Presentacion Medicina", tabs);
+				cerrarVentana(divPresentacionMedicina, "Presentacion Medicina",
+						tabs);
 			}
 
 			@Override
@@ -90,18 +93,17 @@ public class CPresentacionMedicina extends CGenerico {
 					servicioPresentacionMedicina.guardar(presentacionMedicina);
 					if (medicina) {
 						if (id != 0)
-							presentacionMedicina = servicioPresentacionMedicina.buscar(id);
+							presentacionMedicina = servicioPresentacionMedicina
+									.buscar(id);
 						else {
-							presentacionMedicina = servicioPresentacionMedicina.buscarUltimo();
+							presentacionMedicina = servicioPresentacionMedicina
+									.buscarUltimo();
 							listaPresentacion.add(presentacionMedicina);
 						}
-						cMedicina.recibirPresentacion(listaPresentacion,
-								lista);
+						cMedicina.recibirPresentacion(listaPresentacion, lista);
 					}
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 
@@ -124,28 +126,19 @@ public class CPresentacionMedicina extends CGenerico {
 												List<MedicinaPresentacionUnidad> medicinas = servicioMedicinaPresentacionUnidad
 														.buscarPorPresentacion(presentacionMedicina);
 												if (!medicinas.isEmpty()) {
-													Messagebox
-															.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-																	"Informacion",
-																	Messagebox.OK,
-																	Messagebox.INFORMATION);
+													msj.mensajeError(Mensaje.noEliminar);
 												} else {
 													servicioPresentacionMedicina
 															.eliminar(presentacionMedicina);
 													limpiar();
-													Messagebox
-															.show("Registro Eliminado Exitosamente",
-																	"Informacion",
-																	Messagebox.OK,
-																	Messagebox.INFORMATION);
+													msj.mensajeInformacion(Mensaje.eliminado);
 												}
 
 											}
 										}
 									});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -155,8 +148,7 @@ public class CPresentacionMedicina extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombrePresentacionMedicina.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

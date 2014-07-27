@@ -8,6 +8,8 @@ import modelo.maestros.Ciudad;
 import modelo.maestros.Consultorio;
 import modelo.maestros.Empresa;
 import modelo.maestros.Estado;
+import modelo.maestros.Paciente;
+import modelo.maestros.Proveedor;
 import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.Sessions;
@@ -28,6 +30,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CCiudad extends CGenerico {
 
@@ -45,7 +48,7 @@ public class CCiudad extends CGenerico {
 	private Button btnBuscarCiudad;
 	@Wire
 	private Combobox cmbEstado;
-	
+
 	private CArbol cArbol = new CArbol();
 	Catalogo<Ciudad> catalogo;
 	long id = 0;
@@ -53,7 +56,8 @@ public class CCiudad extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divCiudad.getParent();
-		Tabbox tabox = (Tabbox) divCiudad.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divCiudad.getParent().getParent().getParent()
+				.getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -92,10 +96,7 @@ public class CCiudad extends CGenerico {
 					Ciudad ciudad = new Ciudad(id, fechaHora, horaAuditoria,
 							nombre, nombreUsuarioSesion(), estado);
 					servicioCiudad.guardar(ciudad);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 
@@ -112,30 +113,27 @@ public class CCiudad extends CGenerico {
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
 										Ciudad ciudad = servicioCiudad
-												.buscar(id);										
+												.buscar(id);
 										List<Consultorio> consultorios = servicioConsultorio
 												.buscarPorCiudad(ciudad);
-										if (!consultorios.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+										List<Paciente> pacientes = servicioPaciente
+												.buscarPorCiudad(ciudad);
+										List<Proveedor> proveedores = servicioProveedor
+												.buscarPorCiudad(ciudad);
+										if (!consultorios.isEmpty()
+												|| !pacientes.isEmpty()
+												|| !proveedores.isEmpty()) {
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioCiudad.eliminar(ciudad);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -147,8 +145,7 @@ public class CCiudad extends CGenerico {
 
 		if (cmbEstado.getText().compareTo("") == 0
 				|| txtNombreCiudad.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -221,12 +218,12 @@ public class CCiudad extends CGenerico {
 		cmbEstado.setValue(ciudad.getEstado().getNombre());
 		id = ciudad.getIdCiudad();
 	}
-	
-	/* Abre la vista de Estado*/
+
+	/* Abre la vista de Estado */
 	@Listen("onClick = #btnAbrirEstado")
-	public void abrirEstado(){		
+	public void abrirEstado() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Estado");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
-	
+
 }

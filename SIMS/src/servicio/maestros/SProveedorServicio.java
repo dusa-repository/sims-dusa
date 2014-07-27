@@ -49,4 +49,10 @@ public class SProveedorServicio {
 		}
 		return proveedores;
 	}
+
+	public List<ProveedorServicio> buscarPorServicio(
+			ServicioExterno servicioExterno) {
+		// TODO Auto-generated method stub
+		return proveedorServicioDAO.findByServicioExterno(servicioExterno);
+	}
 }

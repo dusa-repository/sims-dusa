@@ -18,6 +18,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CUnidadUsuario extends CGenerico {
 
@@ -50,13 +51,12 @@ public class CUnidadUsuario extends CGenerico {
 			@Override
 			public void guardar() {
 				if (validar()) {
-					UnidadUsuario unidad = new UnidadUsuario(id, fechaHora, horaAuditoria,
-							txtNombreUnidad.getValue(), nombreUsuarioSesion());
+					UnidadUsuario unidad = new UnidadUsuario(id, fechaHora,
+							horaAuditoria, txtNombreUnidad.getValue(),
+							nombreUsuarioSesion());
 					servicioUnidadUsuario.guardar(unidad);
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 
@@ -86,27 +86,19 @@ public class CUnidadUsuario extends CGenerico {
 										List<Usuario> usuarios = servicioUsuario
 												.buscarPorUnidad(unidad);
 										if (!usuarios.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
-											servicioUnidadUsuario.eliminar(unidad);
+											servicioUnidadUsuario
+													.eliminar(unidad);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 
@@ -117,8 +109,7 @@ public class CUnidadUsuario extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreUnidad.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -128,15 +119,15 @@ public class CUnidadUsuario extends CGenerico {
 	@Listen("onClick = #btnBuscarUnidad")
 	public void mostrarCatalogo() {
 		List<UnidadUsuario> unidades = servicioUnidadUsuario.buscarTodas();
-		catalogo = new Catalogo<UnidadUsuario>(catalogoUnidadUsuario, "Catalogo de Unidades",
-				unidades, "Nombre") {
+		catalogo = new Catalogo<UnidadUsuario>(catalogoUnidadUsuario,
+				"Catalogo de Unidades", unidades, "Nombre") {
 
 			@Override
-			protected List<UnidadUsuario> buscar(String valor,String combo) {
-				if(combo.equals("Nombre"))
+			protected List<UnidadUsuario> buscar(String valor, String combo) {
+				if (combo.equals("Nombre"))
 					return servicioUnidadUsuario.filtroNombre(valor);
-					else
-						return servicioUnidadUsuario.buscarTodas();
+				else
+					return servicioUnidadUsuario.buscarTodas();
 			}
 
 			@Override
@@ -162,8 +153,8 @@ public class CUnidadUsuario extends CGenerico {
 	/* Busca si existe una unidad con el mismo nombre escrito */
 	@Listen("onChange = #txtNombreUnidad")
 	public void buscarPorNombre() {
-		UnidadUsuario unidad = servicioUnidadUsuario.buscarPorNombre(txtNombreUnidad
-				.getValue());
+		UnidadUsuario unidad = servicioUnidadUsuario
+				.buscarPorNombre(txtNombreUnidad.getValue());
 		if (unidad != null)
 			llenarCampos(unidad);
 	}

@@ -2,8 +2,11 @@ package interfacedao.maestros;
 
 import java.util.List;
 
+import modelo.maestros.Cargo;
+import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
+import modelo.sha.Area;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -22,5 +25,11 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 	List<Paciente> findByEmpresa(Empresa empresa);
 
 	List<Paciente> findByCedulaFamiliar(String valueOf);
+
+	List<Paciente> findByCargoReal(Cargo cargo);
+
+	List<Paciente> findByCiudadVivienda(Ciudad ciudad);
+
+	List<Paciente> findByArea(Area area);
 
 }

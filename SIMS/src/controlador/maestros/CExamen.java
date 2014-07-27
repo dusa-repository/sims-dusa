@@ -7,6 +7,8 @@ import java.util.List;
 
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Examen;
+import modelo.maestros.ProveedorExamen;
+import modelo.transacciones.ConsultaExamen;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -23,6 +25,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import controlador.transacciones.CConsulta;
 
 public class CExamen extends CGenerico {
@@ -88,7 +91,8 @@ public class CExamen extends CGenerico {
 			public void limpiar() {
 				txtNombreExamen.setValue("");
 				cmbResultadoExamen.setValue("");
-				cmbResultadoExamen.setPlaceholder("Seleccione un Tipo de Resultado");
+				cmbResultadoExamen
+						.setPlaceholder("Seleccione un Tipo de Resultado");
 				txtTipoExamen.setValue("");
 				dspCostoExamen.setValue(0.0);
 				dspMaxExamen.setValue(0.0);
@@ -116,12 +120,9 @@ public class CExamen extends CGenerico {
 							examen = servicioExamen.buscarUltimo();
 							examenConsulta.add(examen);
 						}
-						cConsulta.recibirExamen(examenConsulta,
-								listaConsulta);
+						cConsulta.recibirExamen(examenConsulta, listaConsulta);
 					}
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -138,20 +139,23 @@ public class CExamen extends CGenerico {
 									if (evt.getName().equals("onOK")) {
 										Examen examen = servicioExamen
 												.buscar(id);
-										servicioExamen.eliminar(examen);
-										limpiar();
-										Messagebox
-												.show("Registro Eliminado Exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
-
+										List<ProveedorExamen> proveedores = servicioProveedorExamen
+												.buscarPorExamen(examen);
+										List<ConsultaExamen> consultas = servicioConsultaExamen
+												.buscarPorExamen(examen);
+										if (!proveedores.isEmpty()
+												|| !consultas.isEmpty())
+											msj.mensajeError(Mensaje.noEliminar);
+										else {
+											servicioExamen.eliminar(examen);
+											limpiar();
+											msj.mensajeInformacion(Mensaje.eliminado);
+										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -162,12 +166,10 @@ public class CExamen extends CGenerico {
 	public boolean validar() {
 		if (txtNombreExamen.getText().compareTo("") == 0
 				|| cmbResultadoExamen.getText().compareTo("") == 0
-				|| txtTipoExamen.getText().compareTo("") == 0
 				|| dspCostoExamen.getText().compareTo("") == 0
 				|| dspMaxExamen.getText().compareTo("") == 0
 				|| dspMinExamen.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

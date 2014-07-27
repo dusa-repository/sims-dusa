@@ -19,6 +19,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CCategoriaMedicina extends CGenerico {
 
@@ -76,27 +77,18 @@ public class CCategoriaMedicina extends CGenerico {
 												.buscar(id);
 										List<Medicina> medicinas = servicioMedicina.buscarPorCategoria(categoriaMedicina);
 										if (!medicinas.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioCategoriaMedicina.eliminar(categoriaMedicina);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 
@@ -107,9 +99,7 @@ public class CCategoriaMedicina extends CGenerico {
 							txtNombreCategoriaMedicina.getValue(), nombreUsuarioSesion());
 					servicioCategoriaMedicina.guardar(categoriaMedicina);
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 		};
@@ -119,8 +109,7 @@ public class CCategoriaMedicina extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreCategoriaMedicina.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

@@ -33,6 +33,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CEstado extends CGenerico {
 
@@ -53,11 +54,12 @@ public class CEstado extends CGenerico {
 	private CArbol cArbol = new CArbol();
 	private long id = 0;
 	Catalogo<Estado> catalogo;
-	
+
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divEstado.getParent();
-		Tabbox tabox = (Tabbox) divEstado.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divEstado.getParent().getParent().getParent()
+				.getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		llenarCombo();
@@ -72,11 +74,11 @@ public class CEstado extends CGenerico {
 			}
 		}
 		Botonera botonera = new Botonera() {
-			
+
 			@Override
 			public void salir() {
-			cerrarVentana(divEstado, "Estado", tabs);
-			
+				cerrarVentana(divEstado, "Estado", tabs);
+
 			}
 
 			@Override
@@ -96,9 +98,7 @@ public class CEstado extends CGenerico {
 					Estado estado = new Estado(id, fechaHora, horaAuditoria,
 							nombre, nombreUsuarioSesion(), pais);
 					servicioEstado.guardar(estado);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -118,26 +118,17 @@ public class CEstado extends CGenerico {
 										List<Ciudad> ciudades = servicioCiudad
 												.buscarPorEstado(estado);
 										if (!ciudades.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioEstado.eliminar(estado);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -148,8 +139,7 @@ public class CEstado extends CGenerico {
 	public boolean validar() {
 		if (cmbPais.getText().compareTo("") == 0
 				|| txtNombreEstado.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -216,10 +206,10 @@ public class CEstado extends CGenerico {
 		List<Pais> paises = servicioPais.buscarTodos();
 		cmbPais.setModel(new ListModelList<Pais>(paises));
 	}
-		
-	/* Abre la vista de Pais*/
+
+	/* Abre la vista de Pais */
 	@Listen("onClick = #btnAbrirPais")
-	public void abrirPais(){		
+	public void abrirPais() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Pais");
 		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}

@@ -10,6 +10,7 @@ import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialista;
 import modelo.maestros.Medicina;
 import modelo.seguridad.Arbol;
+import modelo.transacciones.ConsultaDiagnostico;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -31,6 +32,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import controlador.transacciones.CConsulta;
 
 public class CDiagnostico extends CGenerico {
@@ -68,7 +70,8 @@ public class CDiagnostico extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divDiagnostico.getParent();
-		Tabbox tabox = (Tabbox) divDiagnostico.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divDiagnostico.getParent().getParent()
+				.getParent().getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -142,9 +145,7 @@ public class CDiagnostico extends CGenerico {
 								listaConsulta);
 					}
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 
@@ -158,22 +159,22 @@ public class CDiagnostico extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										Diagnostico diagnostico = servicioDiagnostico
+										Diagnostico diag = servicioDiagnostico
 												.buscar(id);
-										servicioDiagnostico
-												.eliminar(diagnostico);
-										limpiar();
-										Messagebox
-												.show("Registro Eliminado Exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
+										List<ConsultaDiagnostico> consultas = servicioConsultaDiagnostico
+												.buscarPorDiagnostico(diag);
+										if (!consultas.isEmpty())
+											msj.mensajeError(Mensaje.noEliminar);
+										else {
+											servicioDiagnostico.eliminar(diag);
+											limpiar();
+											msj.mensajeInformacion(Mensaje.eliminado);
+										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -187,8 +188,7 @@ public class CDiagnostico extends CGenerico {
 				|| txtGrupoDiagnostico.getText().compareTo("") == 0
 				|| cmbCategoria.getText().compareTo("") == 0
 				|| (!rdoNoEpi.isChecked() && !rdoSiEpi.isChecked())) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

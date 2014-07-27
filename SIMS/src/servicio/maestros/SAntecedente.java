@@ -65,4 +65,9 @@ public class SAntecedente {
 			AntecedenteTipo antecedenteTipo) {
 		return antecedenteDAO.findByAntecedenteTipo(antecedenteTipo);
 	}
+
+	public void eliminar(Antecedente antecedente) {
+		antecedenteDAO.delete(antecedente);
+		
+	}
 }

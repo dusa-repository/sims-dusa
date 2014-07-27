@@ -3,6 +3,7 @@ package interfacedao.maestros;
 import java.util.List;
 
 import modelo.maestros.Accidente;
+import modelo.sha.ClasificacionAccidente;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,5 +30,8 @@ public interface IAccidenteDAO extends JpaRepository<Accidente, Long> {
 
 	@Query("select coalesce(max(consulta.idAccidente), '0') from Accidente consulta")
 	long findMaxIdDiagnostico();
+
+	List<Accidente> findByClasificacion(
+			ClasificacionAccidente clasificacionAccidente);
 
 }

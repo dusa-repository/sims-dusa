@@ -11,11 +11,15 @@
 				</columns>
 				<rows>
 					<row>
-						<label value="Nombre del Grupo :" class="etiqueta" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtNombreGrupo" tooltiptext="Ingrese el Nombre del Grupo" />
 						<hbox />
-						<button id="btnCatalogoGrupo" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnCatalogoGrupo" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 				</rows>
 			</grid>

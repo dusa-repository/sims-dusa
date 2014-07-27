@@ -9,20 +9,32 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Codigo (CIIU):" />
+						<hbox>
+							<label class="etiqueta" value="Codigo (CIIU):" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<longbox id="txtCodigo" hflex="1" tooltiptext="Ingrese el Codigo CIIU"
 							maxlength="18" />
-						<button id="btnBuscar" class="btn" label="Buscar"
-							tooltiptext="Catalogo Ciudades" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscar" class="btn"
+							label="Buscar" tooltiptext="Catalogo Ciudades" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtNombre" hflex="1" tooltiptext="Ingrese el Codigo CIIU"
 							maxlength="100" />
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Clasificacion:" />
+						<hbox>
+							<label class="etiqueta" value="Clasificacion:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<combobox tooltiptext="Seleccione una Clasificacion"
 							placeholder="Seleccione una Clasificacion" id="cmbClasificacion"
 							readonly="true" hflex="1">

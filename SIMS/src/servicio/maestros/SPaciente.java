@@ -4,8 +4,11 @@ import java.util.List;
 
 import interfacedao.maestros.IPacienteDAO;
 
+import modelo.maestros.Cargo;
+import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
+import modelo.sha.Area;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +58,19 @@ public class SPaciente {
 
 	public List<Paciente> buscarParientes(String valueOf) {
 		return pacienteDAO.findByCedulaFamiliar(valueOf);
+	}
+
+	public List<Paciente> buscarPorCargo(Cargo cargo) {
+		return pacienteDAO.findByCargoReal(cargo);
+	}
+
+	public List<Paciente> buscarPorCiudad(Ciudad ciudad) {
+		// TODO Auto-generated method stub
+		return pacienteDAO.findByCiudadVivienda(ciudad);
+	}
+
+	public List<Paciente> buscarPorArea(Area area) {
+		return pacienteDAO.findByArea(area);
 	}
 
 }

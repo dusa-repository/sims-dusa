@@ -10,30 +10,43 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Codigo:" />
+						<hbox>
+							<label class="etiqueta" value="Codigo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtCodigoDiagnostico" hflex="1" maxlength="50"
 							tooltiptext="Ingrese el Codigo del Diagnostico" />
-						<button id="btnBuscarDiagnostico" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
-
+						<button autodisable="self" id="btnBuscarDiagnostico" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
-
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtNombreDiagnostico" hflex="1" maxlength="500"
 							class="multilinea" tooltiptext="Ingrese el Nombre del Diagnostico"
 							multiline="true" />
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Grupo:" />
+						<hbox>
+							<label class="etiqueta" value="Grupo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtGrupoDiagnostico" hflex="1" maxlength="50"
 							tooltiptext="Ingrese el Grupo del Diagnostico" />
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta"
-							value="¿Tipo EPI?" />
+						<hbox>
+							<label class="etiqueta" value="¿Tipo EPI?" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<radiogroup id="rdgEpi">
 							<radio label="SI" value="si" id="rdoSiEpi" />
 							<radio label="NO" value="no" id="rdoNoEpi" />
@@ -41,7 +54,11 @@
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Categoria:" />
+						<hbox>
+							<label class="etiqueta" value="Categoria:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<combobox id="cmbCategoria" readonly="true" tabindex="1"
 							width="100%" tooltiptext="Seleccione una Categoria" placeholder="Seleccione una Categoria">
 							<template name="model">

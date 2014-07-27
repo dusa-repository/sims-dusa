@@ -28,14 +28,8 @@ public class ServicioExterno implements Serializable {
 	@Column(name="id_servicio_externo", unique=true, nullable=false)
 	private long idServicioExterno;
 
-	@Column(length=1024)
-	private String direccion;
-
 	@Column(length=500)
 	private String nombre;
-	
-	@Column(length=20)
-	private String telefono;
 	
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
@@ -45,10 +39,6 @@ public class ServicioExterno implements Serializable {
 	
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
-
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_ciudad")
-	private Ciudad ciudad;
 	
 	@OneToMany(mappedBy = "servicioExterno")
 	private Set<ConsultaServicioExterno> servicios;
@@ -61,19 +51,19 @@ public class ServicioExterno implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ServicioExterno(long idServicioExterno, String direccion,
-			String nombre, String telefono, Timestamp fechaAuditoria,
-			String horaAuditoria, String usuarioAuditoria, Ciudad ciudad) {
+
+	public ServicioExterno(long idServicioExterno, String nombre,
+			Timestamp fechaAuditoria, String horaAuditoria,
+			String usuarioAuditoria) {
 		super();
 		this.idServicioExterno = idServicioExterno;
-		this.direccion = direccion;
 		this.nombre = nombre;
-		this.telefono = telefono;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
-		this.ciudad = ciudad;
 	}
+
+
 
 	public long getIdServicioExterno() {
 		return idServicioExterno;
@@ -83,28 +73,12 @@ public class ServicioExterno implements Serializable {
 		this.idServicioExterno = idServicioExterno;
 	}
 
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
 	}
 
 	public Timestamp getFechaAuditoria() {
@@ -129,14 +103,6 @@ public class ServicioExterno implements Serializable {
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
-	}
-
-	public Ciudad getCiudad() {
-		return ciudad;
-	}
-
-	public void setCiudad(Ciudad ciudad) {
-		this.ciudad = ciudad;
 	}
 
 	public Set<ConsultaServicioExterno> getServicios() {

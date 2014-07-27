@@ -9,12 +9,16 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox maxlength="500" class="multilinea" multiline="true"
 							id="txtDescripcionMotivoCita" hflex="1"
 							tooltiptext="Ingrese la descripcion de Motivo" />
-						<button id="btnBuscarMotivoCita" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarMotivoCita" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 				</rows>
 			</grid>

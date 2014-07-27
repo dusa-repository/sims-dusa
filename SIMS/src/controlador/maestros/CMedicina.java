@@ -17,6 +17,8 @@ import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.ServicioExterno;
 import modelo.maestros.UnidadMedicina;
 import modelo.seguridad.Arbol;
+import modelo.transacciones.ConsultaEspecialista;
+import modelo.transacciones.ConsultaMedicina;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -41,6 +43,7 @@ import arbol.CArbol;
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import controlador.transacciones.CConsulta;
 
 public class CMedicina extends CGenerico {
@@ -119,11 +122,12 @@ public class CMedicina extends CGenerico {
 	private CConsulta cConsulta = new CConsulta();
 	List<Medicina> medicinaConsulta = new ArrayList<Medicina>();
 	Listbox listaConsulta;
-	
+
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divMedicina.getParent();
-		Tabbox tabox = (Tabbox) divMedicina.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divMedicina.getParent().getParent().getParent()
+				.getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -169,9 +173,8 @@ public class CMedicina extends CGenerico {
 						long idPresentacion = ((Spinner) ((listItem
 								.getChildren().get(3))).getFirstChild())
 								.getValue();
-						if (String.valueOf(idPresentacion) == ""
-								|| id == ""
-								||valor == 0)
+						if (String.valueOf(idPresentacion) == "" || id == ""
+								|| valor == 0)
 							campoNulo = true;
 						else {
 							id = ((Combobox) ((listItem.getChildren().get(2)))
@@ -217,8 +220,8 @@ public class CMedicina extends CGenerico {
 						if (id != 0)
 							medicina = servicioMedicina.buscar(id);
 						else
-						medicina = servicioMedicina.buscarUltima();
-						
+							medicina = servicioMedicina.buscarUltima();
+
 						List<MedicinaPresentacionUnidad> medicinasPresentacionesUnidades = servicioMedicinaPresentacionUnidad
 								.buscarPresentacionesUsadas(medicina);
 						if (!medicinasPresentacionesUnidades.isEmpty())
@@ -236,15 +239,10 @@ public class CMedicina extends CGenerico {
 							cConsulta.recibirMedicina(medicinaConsulta,
 									listaConsulta);
 						}
-						Messagebox.show("Registro Guardado Exitosamente",
-								"Informacion", Messagebox.OK,
-								Messagebox.INFORMATION);
+						msj.mensajeInformacion(Mensaje.guardado);
 						limpiar();
 					} else {
-						Messagebox
-								.show("Debe Llenar Todos los Campos de la Lista de Presentaciones",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
+						msj.mensajeError(Mensaje.camposPresentaciones);
 					}
 				}
 
@@ -293,27 +291,21 @@ public class CMedicina extends CGenerico {
 												.buscar(id);
 										List<PresentacionComercial> presentaciones = servicioPresentacion
 												.buscarPorMedicina(medicina);
-										if (!presentaciones.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+										List<ConsultaMedicina> consultas = servicioConsultaMedicina
+												.buscarPorMedicina(medicina);
+										if (!presentaciones.isEmpty()
+												|| !consultas.isEmpty()) {
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioMedicina.eliminar(medicina);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 
 			}
 		};
@@ -429,17 +421,8 @@ public class CMedicina extends CGenerico {
 
 		if (cmbLaboratorio.getText().compareTo("") == 0
 				|| cmbLaboratorio.getText().compareTo("") == 0
-				|| txtNombre.getText().compareTo("") == 0
-				|| txtDenominacionGenerica.getText().compareTo("") == 0
-				|| txtComposicion.getText().compareTo("") == 0
-				|| txtPosologia.getText().compareTo("") == 0
-				|| txtIndicaciones.getText().compareTo("") == 0
-				|| txtEfectos.getText().compareTo("") == 0
-				|| txtPrecauciones.getText().compareTo("") == 0
-				|| txtContraindicaciones.getText().compareTo("") == 0
-				|| txtEmbarazo.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+				|| txtNombre.getText().compareTo("") == 0) {
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -552,19 +535,22 @@ public class CMedicina extends CGenerico {
 		ltbPresentaciones.setMultiple(true);
 		ltbPresentaciones.setCheckmark(true);
 	}
-	
 
 	public void buscar() {
-		buscador = new Buscar<PresentacionMedicina>(ltbPresentaciones, txtBuscadorPresentacion) {
+		buscador = new Buscar<PresentacionMedicina>(ltbPresentaciones,
+				txtBuscadorPresentacion) {
 
 			@Override
-			protected List<PresentacionMedicina> buscar(String valor) {	
+			protected List<PresentacionMedicina> buscar(String valor) {
 				List<PresentacionMedicina> presentacionesFiltradas = new ArrayList<PresentacionMedicina>();
-				List<PresentacionMedicina> presentaciones = servicioPresentacionMedicina.filtroNombre(valor);
-				for(int i=0;i<presentacionesDisponibles.size();i++){
-					PresentacionMedicina presentacion = presentacionesDisponibles.get(i);
-					for(int j=0;j<presentaciones.size();j++){
-						if(presentacion.getIdPresentacion()==presentaciones.get(j).getIdPresentacion())
+				List<PresentacionMedicina> presentaciones = servicioPresentacionMedicina
+						.filtroNombre(valor);
+				for (int i = 0; i < presentacionesDisponibles.size(); i++) {
+					PresentacionMedicina presentacion = presentacionesDisponibles
+							.get(i);
+					for (int j = 0; j < presentaciones.size(); j++) {
+						if (presentacion.getIdPresentacion() == presentaciones
+								.get(j).getIdPresentacion())
 							presentacionesFiltradas.add(presentacion);
 					}
 				}
@@ -614,45 +600,47 @@ public class CMedicina extends CGenerico {
 	public void pestanna8() {
 		txtEmbarazo.setFocus(true);
 	}
-	
+
 	/* Abre la pestanna de presentaciones */
 	@Listen("onClick = #btnSiguientePestanna")
 	public void siguientePestanna() {
 		tabPresentaciones.setSelected(true);
 	}
 
-	/* Abre la pestanna de especificaciones*/
+	/* Abre la pestanna de especificaciones */
 	@Listen("onClick = #btnAnteriorPestanna")
 	public void anteriorPestanna() {
 		tabEspecificaciones.setSelected(true);
 	}
-	
-	/* Abre la vista de Categoria*/
+
+	/* Abre la vista de Categoria */
 	@Listen("onClick = #btnAbrirCategoria")
-	public void abrirCategoria(){		
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Categoria Medicina");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
+	public void abrirCategoria() {
+		Arbol arbolItem = servicioArbol
+				.buscarPorNombreArbol("Categoria Medicina");
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
-	/* Abre la vista de Presentacion*/
+	/* Abre la vista de Presentacion */
 	@Listen("onClick = #btnAbrirPresentacion")
-	public void abrirPresentacion(){
+	public void abrirPresentacion() {
 		final HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("id", "medicina");
 		map.put("lista", presentacionesDisponibles);
 		map.put("listbox", ltbPresentaciones);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Presentacion Medicina");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
+		Arbol arbolItem = servicioArbol
+				.buscarPorNombreArbol("Presentacion Medicina");
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
-	
-	/* Abre la vista de Laboratorio*/
+
+	/* Abre la vista de Laboratorio */
 	@Listen("onClick = #btnAbrirLaboratorio")
-	public void abrirLaboratorio(){		
+	public void abrirLaboratorio() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Laboratorio");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
-	
+
 	public void recibirPresentacion(List<PresentacionMedicina> lista, Listbox l) {
 		ltbPresentaciones = l;
 		presentacionesDisponibles = lista;

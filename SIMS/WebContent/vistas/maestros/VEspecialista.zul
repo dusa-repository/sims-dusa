@@ -9,33 +9,54 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Cedula:" />
+						<hbox>
+							<label class="etiqueta" value="Cedula:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox maxlength="12" id="txtCedulaEspecialista" hflex="1"
 							tooltiptext="Ingrese la Cedula del Especialista" />
-						<button id="btnBuscarEspecialista" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarEspecialista"
+							class="btn" label="Buscar" tooltiptext="Catalogo"
+							image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombres:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox maxlength="100" id="txtNombreEspecialista" hflex="1"
 							tooltiptext="Ingrese el Nombre del Especialista" />
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Apellido:" />
+						<hbox>
+							<label class="etiqueta" value="Apellidos:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox maxlength="100" id="txtApellidoEspecialista"
 							hflex="1" tooltiptext="Ingrese el Apellido del Especialista" />
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Costo por Servicio:" />
+						<hbox>
+							<label class="etiqueta" value="Costo por Servicio:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<doublespinner id="dspCosto" value="0"
 							constraint="min 0 max 100000000" tooltiptext="Ingrese Costo por Servicio del Especialista"
 							step="0.1" format="#.##" width="98%" />
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Especialidad" />
+						<hbox>
+							<label class="etiqueta" value="Especialidad" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<combobox tooltiptext="Seleccione una Especialidad"
 							placeholder="Seleccione una Especialidad" id="cmbEspecialidad"
 							readonly="true" width="100%">
@@ -43,8 +64,8 @@
 								<comboitem label="${each.descripcion}" context="${each.idEspecialidad}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirEspecialidad" label="" tooltiptext="Crear una Nueva Especialidad"
-							image="/public/imagenes/botones/agregar.png" />
+						<button id="btnAbrirEspecialidad" label=""
+							tooltiptext="Crear una Nueva Especialidad" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>

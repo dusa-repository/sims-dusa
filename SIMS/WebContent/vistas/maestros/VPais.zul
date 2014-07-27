@@ -10,12 +10,16 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox class="multilinea" id="txtNombrePais" hflex="1"
 							maxlength="500" tooltiptext="Ingrese el Nombre del Pais"
 							multiline="true" />
-						<button id="btnBuscarPais" class="btn" label="Buscar"
-							tooltiptext="Catalogo Paises" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarPais" class="btn"
+							label="Buscar" tooltiptext="Catalogo Paises" image="/public/imagenes/botones/buscar.png" />
 					</row>
 				</rows>
 			</grid>

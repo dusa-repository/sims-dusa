@@ -19,6 +19,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CUnidadMedicina extends CGenerico{
 
@@ -66,9 +67,7 @@ public class CUnidadMedicina extends CGenerico{
 							txtNombreUnidadMedicina.getValue(), nombreUsuarioSesion());
 					servicioUnidadMedicina.guardar(unidadMedicina);
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 			
@@ -86,27 +85,18 @@ public class CUnidadMedicina extends CGenerico{
 												.buscar(id);
 										List<MedicinaPresentacionUnidad> medicinas = servicioMedicinaPresentacionUnidad.buscarPorUnidad(unidadMedicina);
 										if (!medicinas.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioUnidadMedicina.eliminar(unidadMedicina);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -116,8 +106,7 @@ public class CUnidadMedicina extends CGenerico{
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreUnidadMedicina.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
