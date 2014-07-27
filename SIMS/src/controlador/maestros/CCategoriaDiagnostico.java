@@ -18,6 +18,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CCategoriaDiagnostico extends CGenerico {
 
@@ -52,12 +53,11 @@ public class CCategoriaDiagnostico extends CGenerico {
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombreCategoriaDiagnostico.getValue();
-					CategoriaDiagnostico categoria = new CategoriaDiagnostico(id, fechaHora,
-							horaAuditoria, nombre, nombreUsuarioSesion());
+					CategoriaDiagnostico categoria = new CategoriaDiagnostico(
+							id, fechaHora, horaAuditoria, nombre,
+							nombreUsuarioSesion());
 					servicioCategoriaDiagnostico.guardar(categoria);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -70,12 +70,15 @@ public class CCategoriaDiagnostico extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divCategoriaDiagnostico, "Categoria Diagnostico", tabs);
+				cerrarVentana(divCategoriaDiagnostico, "Categoria Diagnostico",
+						tabs);
 			}
 
 			@Override
 			public void eliminar() {
-				if (id != 0 && txtNombreCategoriaDiagnostico.getText().compareTo("") != 0) {
+				if (id != 0
+						&& txtNombreCategoriaDiagnostico.getText()
+								.compareTo("") != 0) {
 					Messagebox.show("¿Esta Seguro de Eliminar la Categoria?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
@@ -88,27 +91,18 @@ public class CCategoriaDiagnostico extends CGenerico {
 										List<Diagnostico> diagnosticos = servicioDiagnostico
 												.buscarPorCategoria(categoria);
 										if (!diagnosticos.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioCategoriaDiagnostico
 													.eliminar(categoria);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 
@@ -119,8 +113,7 @@ public class CCategoriaDiagnostico extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreCategoriaDiagnostico.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -129,14 +122,17 @@ public class CCategoriaDiagnostico extends CGenerico {
 	/* Muestra el catalogo de las categorias */
 	@Listen("onClick = #btnBuscarCategoriaDiagnostico")
 	public void mostrarCatalogo() {
-		List<CategoriaDiagnostico> categorias = servicioCategoriaDiagnostico.buscarTodas();
-		catalogo = new Catalogo<CategoriaDiagnostico>(catalogoCategoriaDiagnostico,
-				"Catalogo de Categorias", categorias, "Nombre") {
+		List<CategoriaDiagnostico> categorias = servicioCategoriaDiagnostico
+				.buscarTodas();
+		catalogo = new Catalogo<CategoriaDiagnostico>(
+				catalogoCategoriaDiagnostico, "Catalogo de Categorias",
+				categorias, "Nombre") {
 
 			@Override
-			protected List<CategoriaDiagnostico> buscar(String valor, String combo) {
-				if(combo.equals("Nombre"))
-				return servicioCategoriaDiagnostico.filtroNombre(valor);
+			protected List<CategoriaDiagnostico> buscar(String valor,
+					String combo) {
+				if (combo.equals("Nombre"))
+					return servicioCategoriaDiagnostico.filtroNombre(valor);
 				else
 					return servicioCategoriaDiagnostico.buscarTodas();
 			}
@@ -155,7 +151,8 @@ public class CCategoriaDiagnostico extends CGenerico {
 	/* Permite la seleccion de un item del catalogo */
 	@Listen("onSeleccion = #catalogoCategoriaDiagnostico")
 	public void seleccinar() {
-		CategoriaDiagnostico categoria = catalogo.objetoSeleccionadoDelCatalogo();
+		CategoriaDiagnostico categoria = catalogo
+				.objetoSeleccionadoDelCatalogo();
 		llenarCampos(categoria);
 		catalogo.setParent(null);
 	}

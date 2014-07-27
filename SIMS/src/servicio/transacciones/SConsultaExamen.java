@@ -4,6 +4,8 @@ import interfacedao.transacciones.IConsultaExamenDAO;
 
 import java.util.List;
 
+import modelo.maestros.Examen;
+import modelo.maestros.Proveedor;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaExamen;
 
@@ -29,5 +31,14 @@ public class SConsultaExamen {
 
 	public void guardar(List<ConsultaExamen> listaConsultaExamen) {
 		consultaExamenDAO.save(listaConsultaExamen);
+	}
+
+	public List<ConsultaExamen> buscarPorProveedor(Proveedor proveedor) {
+		// TODO Auto-generated method stub
+		return  consultaExamenDAO.findByProveedor(proveedor);
+	}
+
+	public List<ConsultaExamen> buscarPorExamen(Examen examen) {
+		return  consultaExamenDAO.findByExamen(examen);
 	}
 }

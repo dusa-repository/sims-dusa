@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.maestros.Accidente;
 import modelo.sha.ClasificacionAccidente;
+import modelo.sha.Informe;
+import modelo.transacciones.ConsultaDiagnostico;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -21,6 +24,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 import controlador.maestros.CGenerico;
 
@@ -73,15 +77,13 @@ public class CClasificacionAccidente extends CGenerico {
 				if (validar()) {
 					String nombre = txtNombreClasificacionAccidente.getValue();
 					ClasificacionAccidente clasificacionAccidente = new ClasificacionAccidente(
-							id, nombre, fechaHora, horaAuditoria, nombreUsuarioSesion());
+							id, nombre, fechaHora, horaAuditoria,
+							nombreUsuarioSesion());
 					servicioClasificacionAccidente
 							.guardar(clasificacionAccidente);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
-
 			}
 
 			@Override
@@ -100,28 +102,23 @@ public class CClasificacionAccidente extends CGenerico {
 											if (evt.getName().equals("onOK")) {
 												ClasificacionAccidente clasificacionAccidente = servicioClasificacionAccidente
 														.buscar(id);
-												if (true) {
-													Messagebox
-															.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-																	"Informacion",
-																	Messagebox.OK,
-																	Messagebox.INFORMATION);
+												List<Accidente> accidentes = servicioAccidente
+														.buscarPorClasificacion(clasificacionAccidente);
+												List<Informe> informes = servicioInforme
+														.buscarPorClasificacion(clasificacionAccidente);
+												if (!accidentes.isEmpty()) {
+													msj.mensajeError(Mensaje.noEliminar);
 												} else {
 													servicioClasificacionAccidente
 															.eliminar(clasificacionAccidente);
 													limpiar();
-													Messagebox
-															.show("Registro Eliminado Exitosamente",
-																	"Informacion",
-																	Messagebox.OK,
-																	Messagebox.INFORMATION);
+													msj.mensajeInformacion(Mensaje.eliminado);
 												}
 											}
 										}
 									});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 
 			}
@@ -133,8 +130,7 @@ public class CClasificacionAccidente extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreClasificacionAccidente.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

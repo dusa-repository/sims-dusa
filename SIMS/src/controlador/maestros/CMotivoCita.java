@@ -19,6 +19,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CMotivoCita extends CGenerico {
 
@@ -71,11 +72,8 @@ public class CMotivoCita extends CGenerico {
 
 					MotivoCita motivoCita = new MotivoCita(id, Descripcion,
 							fechaHora, horaAuditoria, nombreUsuarioSesion());
-
 					servicioMotivoCita.guardar(motivoCita);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 
@@ -98,31 +96,22 @@ public class CMotivoCita extends CGenerico {
 										List<Cita> citas = servicioCita
 												.buscarPorMotivo(motivoCita);
 										if (!citas.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioMotivoCita
 													.eliminar(motivoCita);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 
 			}
 		};
-		
+
 		botoneraMotivoCita.appendChild(botonera);
 
 	}
@@ -157,8 +146,7 @@ public class CMotivoCita extends CGenerico {
 	public boolean validar() {
 
 		if (txtDescripcionMotivoCita.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

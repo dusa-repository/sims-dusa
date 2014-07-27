@@ -10,12 +10,16 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtNombreConsultorio" hflex="1" maxlength="500"
 							class="multilinea" tooltiptext="Ingrese el Nombre del Consultorio"
 							multiline="true" />
-						<button id="btnBuscarConsultorio" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarConsultorio" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
 						<label class="etiqueta" value="Descripcion:" />
@@ -25,13 +29,21 @@
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Correo Electronico:" />
+						<hbox>
+							<label class="etiqueta" value="Correo Electronico:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtCorreoConsultorio" hflex="1" maxlength="50"
 							tooltiptext="Ingrese el Correo del Consultorio (ejemplo@ejemplo.com)" />
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Primer Telefono:" />
+						<hbox>
+							<label class="etiqueta" value="Primer Telefono:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtTelefono1Consultorio" hflex="1" maxlength="20"
 							tooltiptext="Ingrese el Numero de telefono del Consultorio (0426-9999999)" />
 						<hbox />
@@ -43,14 +55,22 @@
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Direccion:" />
+						<hbox>
+							<label class="etiqueta" value="Direccion:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtDireccionConsultorio" hflex="1" maxlength="1024"
 							class="multilinea" tooltiptext="Ingrese la Direccion de la Consultorio"
 							multiline="true" />
 						<hbox />
 					</row>
 					<row>
-						<label class="etiqueta" value="Empresa:" />
+						<hbox>
+							<label class="etiqueta" value="Empresa:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<combobox tooltiptext="Seleccione una Empresa"
 							placeholder="Seleccione una Empresa" id="cmbEmpresa" readonly="true"
 							width="100%">
@@ -58,11 +78,15 @@
 								<comboitem label="${each.nombre}" context="${each.idEmpresa}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirEmpresa" label="" tooltiptext="Crear una Nueva Empresa"
-							image="/public/imagenes/botones/agregar.png" />
+						<button id="btnAbrirEmpresa" label=""
+							tooltiptext="Crear una Nueva Empresa" image="/public/imagenes/botones/agregar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Ciudad:" />
+						<hbox>
+							<label class="etiqueta" value="Ciudad:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<combobox id="cmbCiudadConsultorio" readonly="true"
 							tabindex="1" width="100%" tooltiptext="Seleccione una Ciudad"
 							placeholder="Seleccione una Ciudad">

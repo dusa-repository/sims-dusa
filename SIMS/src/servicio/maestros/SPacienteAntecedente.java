@@ -5,6 +5,7 @@ import java.util.Set;
 
 import interfacedao.maestros.IPacienteAntecedenteDAO;
 
+import modelo.maestros.Antecedente;
 import modelo.maestros.Paciente;
 import modelo.maestros.PacienteAntecedente;
 
@@ -29,8 +30,15 @@ public class SPacienteAntecedente {
 	}
 
 	public void borrarAntecedentesPaciente(Paciente paciente) {
-		List<PacienteAntecedente>	borrados = pacienteAntecedenteDAO.findByPaciente(paciente);
-		if(!borrados.isEmpty())
+		List<PacienteAntecedente> borrados = pacienteAntecedenteDAO
+				.findByPaciente(paciente);
+		if (!borrados.isEmpty())
 			pacienteAntecedenteDAO.delete(borrados);
+	}
+
+	public List<PacienteAntecedente> buscarPorAntecedente(
+			Antecedente antecedente) {
+		// TODO Auto-generated method stub
+		return pacienteAntecedenteDAO.findByAntecedente(antecedente);
 	}
 }

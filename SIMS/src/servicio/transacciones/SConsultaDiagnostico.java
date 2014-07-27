@@ -5,6 +5,8 @@ import interfacedao.transacciones.IConsultaDiagnosticoDAO;
 import java.util.List;
 
 import modelo.maestros.Accidente;
+import modelo.maestros.Diagnostico;
+import modelo.sha.ClasificacionAccidente;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
 
@@ -35,4 +37,9 @@ public class SConsultaDiagnostico {
 	public List<ConsultaDiagnostico> buscarPorAccidente(Accidente accidente) {
 		return consultaDiagnosticoDAO.findByAccidente(accidente);
 	}
+
+	public List<ConsultaDiagnostico> buscarPorDiagnostico(Diagnostico diag) {
+		return consultaDiagnosticoDAO.findByDiagnostico(diag);
+	}
+
 }

@@ -4,6 +4,7 @@ import interfacedao.transacciones.IConsultaMedicinaDAO;
 
 import java.util.List;
 
+import modelo.maestros.Medicina;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaMedicina;
 
@@ -29,5 +30,10 @@ public class SConsultaMedicina {
 
 	public void guardar(List<ConsultaMedicina> listaMedicina) {
 		consultaMedicinaDAO.save(listaMedicina);
+	}
+
+	public List<ConsultaMedicina> buscarPorMedicina(Medicina medicina) {
+		// TODO Auto-generated method stub
+		return consultaMedicinaDAO.findByMedicina(medicina);
 	}
 }

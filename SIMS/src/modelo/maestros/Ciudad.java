@@ -37,9 +37,6 @@ public class Ciudad implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_estado")
 	private Estado estado;
-
-	@OneToMany(mappedBy="ciudad")
-	private Set<ServicioExterno> serviciosExternos;
 	
 	@OneToMany(mappedBy="ciudad")
 	private Set<Consultorio> consultorios;
@@ -108,17 +105,6 @@ public class Ciudad implements Serializable {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-
-
-	public Set<ServicioExterno> getServiciosExternos() {
-		return serviciosExternos;
-	}
-
-
-	public void setServiciosExternos(Set<ServicioExterno> serviciosExternos) {
-		this.serviciosExternos = serviciosExternos;
-	}
-
 
 	public Set<Consultorio> getConsultorios() {
 		return consultorios;

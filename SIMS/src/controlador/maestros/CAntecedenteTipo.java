@@ -21,6 +21,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CAntecedenteTipo extends CGenerico {
 
@@ -28,8 +29,8 @@ public class CAntecedenteTipo extends CGenerico {
 	private Radiogroup rdgAntecedenteTipo;
 	@Wire
 	private Radio rdoLaboral;
-	 @Wire
-	 private Radio rdoMedico;
+	@Wire
+	private Radio rdoMedico;
 	@Wire
 	private Radio rdoFamiliar;
 	@Wire
@@ -90,9 +91,7 @@ public class CAntecedenteTipo extends CGenerico {
 							nombre, tipo, fechaHora, horaAuditoria,
 							nombreUsuarioSesion());
 					servicioAntecedenteTipo.guardar(antecedenteTipo);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -115,27 +114,18 @@ public class CAntecedenteTipo extends CGenerico {
 												List<Antecedente> antecedentes = servicioAntecedente
 														.buscarPorAntecedenteTipo(antecedenteTipo);
 												if (!antecedentes.isEmpty()) {
-													Messagebox
-															.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-																	"Informacion",
-																	Messagebox.OK,
-																	Messagebox.INFORMATION);
+													msj.mensajeError(Mensaje.noEliminar);
 												} else {
 													servicioAntecedenteTipo
 															.eliminar(antecedenteTipo);
 													limpiar();
-													Messagebox
-															.show("Registro Eliminado Exitosamente",
-																	"Informacion",
-																	Messagebox.OK,
-																	Messagebox.INFORMATION);
+													msj.mensajeInformacion(Mensaje.eliminado);
 												}
 											}
 										}
 									});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -144,9 +134,10 @@ public class CAntecedenteTipo extends CGenerico {
 
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (txtNombreAntecedenteTipo.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Alerta",
-					Messagebox.OK, Messagebox.INFORMATION);
+		if (txtNombreAntecedenteTipo.getText().compareTo("") == 0
+				|| (!rdoFamiliar.isChecked() && !rdoLaboral.isChecked() && !rdoMedico
+						.isChecked())) {
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -208,14 +199,13 @@ public class CAntecedenteTipo extends CGenerico {
 		txtNombreAntecedenteTipo.setValue(antecedenteTipo.getNombre());
 		if (antecedenteTipo.getTipo().equals("Medico"))
 			rdoMedico.setChecked(true);
-		else
-		{
+		else {
 			if (antecedenteTipo.getTipo().equals("Familiar"))
 				rdoFamiliar.setChecked(true);
 			else
 				rdoLaboral.setChecked(true);
-				
-		}	
+
+		}
 		id = antecedenteTipo.getIdAntecedenteTipo();
 	}
 

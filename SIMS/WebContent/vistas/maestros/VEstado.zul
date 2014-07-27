@@ -10,23 +10,31 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtNombreEstado" hflex="1" maxlength="500"
 							tooltiptext="Ingrese el Nombre del Estado" multiline="true"
 							class="multilinea" />
-						<button id="btnBuscarEstado" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarEstado" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Pais:" />
+						<hbox>
+							<label class="etiqueta" value="Pais:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<combobox tooltiptext="Seleccione un Pais" placeholder="Seleccione un Pais"
 							id="cmbPais" readonly="true" width="100%">
 							<template name="model">
 								<comboitem label="${each.nombre}" context="${each.idPais}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirPais" label=""
-							tooltiptext="Crear un Nuevo Pais" image="/public/imagenes/botones/agregar.png" />
+						<button id="btnAbrirPais" label="" tooltiptext="Crear un Nuevo Pais"
+							image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>

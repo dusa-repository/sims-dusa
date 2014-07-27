@@ -19,6 +19,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CEspecialidad extends CGenerico {
 
@@ -57,9 +58,7 @@ public class CEspecialidad extends CGenerico {
 					Especialidad especialidad = new Especialidad(id, nombre,
 							fechaHora, horaAuditoria, nombreUsuarioSesion());
 					servicioEspecialidad.guardar(especialidad);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -93,28 +92,20 @@ public class CEspecialidad extends CGenerico {
 												.buscarPorEspecialidad(especialidad);
 										List<Especialista> especialistas = servicioEspecialista
 												.buscarPorEspecialidad(especialidad);
-										if (!usuarios.isEmpty() || !especialistas.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+										if (!usuarios.isEmpty()
+												|| !especialistas.isEmpty()) {
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioEspecialidad
 													.eliminar(especialidad);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 
@@ -125,8 +116,7 @@ public class CEspecialidad extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtDescripcionEspecialidad.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -140,11 +130,11 @@ public class CEspecialidad extends CGenerico {
 				"Catalogo de Categorias", especialidades, "Descripcion") {
 
 			@Override
-			protected List<Especialidad> buscar(String valor,String combo) {
-				if(combo.equals("Descripcion"))
-				return servicioEspecialidad.filtroNombre(valor);
+			protected List<Especialidad> buscar(String valor, String combo) {
+				if (combo.equals("Descripcion"))
+					return servicioEspecialidad.filtroNombre(valor);
 				else
-				return servicioEspecialidad.buscarTodas();
+					return servicioEspecialidad.buscarTodas();
 			}
 
 			@Override

@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.maestros.Paciente;
 import modelo.sha.Area;
+import modelo.sha.Informe;
+import modelo.transacciones.Consulta;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -19,6 +22,7 @@ import org.zkoss.zul.Window;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 import controlador.maestros.CGenerico;
 
@@ -66,18 +70,16 @@ public class CArea extends CGenerico {
 				txtNombreArea.setValue("");
 				id = 0;
 				txtNombreArea.setFocus(true);
-
 			}
 
 			@Override
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombreArea.getValue();
-					Area area = new Area(id, nombre,fechaHora, horaAuditoria, nombreUsuarioSesion());
+					Area area = new Area(id, nombre, fechaHora, horaAuditoria,
+							nombreUsuarioSesion());
 					servicioArea.guardar(area);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 
@@ -94,40 +96,41 @@ public class CArea extends CGenerico {
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
 										Area area = servicioArea.buscar(id);
-										if (true) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+										List<Paciente> pacientes = servicioPaciente
+												.buscarPorArea(area);
+										List<Informe> informes = servicioInforme
+												.buscarPorArea(area);
+										List<Consulta> consultas1 = servicioConsulta
+												.buscarPorArea(area);
+										List<Consulta> consultas2 = servicioConsulta
+												.buscarPorArea2(area);
+										if (!pacientes.isEmpty()
+												|| !informes.isEmpty()
+												|| !consultas1.isEmpty()
+												|| !consultas2.isEmpty()) {
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioArea.eliminar(area);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 
 			}
 		};
 
-		 botoneraArea.appendChild(botonera);
+		botoneraArea.appendChild(botonera);
 	}
 
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreArea.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -137,8 +140,8 @@ public class CArea extends CGenerico {
 	@Listen("onClick = #btnBuscarArea")
 	public void mostrarCatalogo() {
 		final List<Area> areas = servicioArea.buscarTodos();
-		catalogo = new Catalogo<Area>(catalogoArea,
-				"Catalogo de Areas", areas, "Nombre") {
+		catalogo = new Catalogo<Area>(catalogoArea, "Catalogo de Areas", areas,
+				"Nombre") {
 
 			@Override
 			protected List<Area> buscar(String valor, String combo) {

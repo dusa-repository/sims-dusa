@@ -16,6 +16,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import componentes.Botonera;
+import componentes.Mensaje;
 import componentes.Validador;
 
 import controlador.maestros.CGenerico;
@@ -37,7 +38,7 @@ public class CReinicioPassword extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		// TODO Auto-generated method stub
+
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -73,12 +74,10 @@ public class CReinicioPassword extends CGenerico {
 										+ usuario.getLogin()
 										+ "  " + " Password: " + password);
 						limpiar();
+						msj.mensajeInformacion(Mensaje.reinicioContrasenna);
 						salir();
 					} else {
-						Messagebox
-								.show("El Numero de Cedula que Ingreso No esta asociado a Ningun Usuario",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
+						msj.mensajeError(Mensaje.cedulaNoExiste);
 					}
 				}
 			}
@@ -94,8 +93,7 @@ public class CReinicioPassword extends CGenerico {
 	protected boolean validar() {
 		if (txtCedulaUsuario.getText().compareTo("") == 0
 				|| txtCorreoUsuario.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -107,8 +105,7 @@ public class CReinicioPassword extends CGenerico {
 	@Listen("onChange = #txtCorreoUsuario")
 	public void validarCorreo() throws IOException {
 		if (Validador.validarCorreo(txtCorreoUsuario.getValue()) == false) {
-			Messagebox.show("Correo Invalido", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.correoInvalido);
 		}
 	}
 
@@ -116,8 +113,7 @@ public class CReinicioPassword extends CGenerico {
 	@Listen("onChange = #txtCedulaUsuario")
 	public void validarCedula() {
 		if (!Validador.validarNumero(txtCedulaUsuario.getValue())) {
-			Messagebox.show("Cedula Invalida", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.cedulaInvalida);
 		}
 	}
 }

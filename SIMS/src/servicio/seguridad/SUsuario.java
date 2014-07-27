@@ -5,6 +5,7 @@ import java.util.List;
 import interfacedao.seguridad.IUsuarioDAO;
 import modelo.maestros.Especialidad;
 import modelo.maestros.UnidadUsuario;
+import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class SUsuario {
 	private IUsuarioDAO usuarioDAO;
 	
 	@Transactional
-	public Usuario buscarUsuarioPorId(long codigo) {
-		return usuarioDAO.findOne(codigo);
+	public Usuario buscarUsuarioPorId(String id) {
+		return usuarioDAO.findByCedula(id);
 	}
 
 	public void guardar(Usuario usuario) {
@@ -80,6 +81,18 @@ public class SUsuario {
 
 	public List<Usuario> filtroEspecialidad(String valor) {
 		return usuarioDAO.findByEspecialidadDescripcionStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Usuario> buscarPorGrupo(Grupo grupo) {
+		return usuarioDAO.findByGrupos(grupo);
+	}
+
+	public List<Usuario> buscarDoctores() {
+	return usuarioDAO.findByDoctor(true);
+	}
+
+	public Usuario buscarPorLogin(String value) {
+		return usuarioDAO.findByLogin(value);
 	}
 
 }

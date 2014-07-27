@@ -4,6 +4,7 @@ import interfacedao.transacciones.IConsultaEspecialistaDAO;
 
 import java.util.List;
 
+import modelo.maestros.Especialista;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaEspecialista;
 
@@ -34,5 +35,11 @@ public class SConsultaEspecialista {
 	public ConsultaEspecialista buscarPorConsultaYIdEspecialista(
 			Consulta consuta, String par3) {
 		return consultaEspecialistaDAO.findByConsultaAndEspecialistaCedula(consuta, par3);
+	}
+
+	public List<ConsultaEspecialista> buscarPorEspecialista(
+			Especialista especialista) {
+		// TODO Auto-generated method stub
+		return consultaEspecialistaDAO.findByEspecialista(especialista);
 	}
 }

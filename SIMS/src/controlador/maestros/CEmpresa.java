@@ -15,6 +15,7 @@ import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Arbol;
+import modelo.sha.Informe;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -36,6 +37,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import componentes.Validador;
 
 public class CEmpresa extends CGenerico {
@@ -125,7 +127,8 @@ public class CEmpresa extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divEmpresa.getParent();
-		Tabbox tabox = (Tabbox) divEmpresa.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divEmpresa.getParent().getParent().getParent()
+				.getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -213,7 +216,7 @@ public class CEmpresa extends CGenerico {
 					cedula = txtCedulaRepresentante.getValue();
 					telefonoRepresentante = txtTelefonoRepresentante.getValue();
 					cargo = txtCargo.getValue();
-		
+
 					bajoNro2 = txtBajoNro2Empresa.getValue();
 					tomo2 = txtTomo2Empresa.getValue();
 					representante2 = txtRepresentante2Empresa.getValue();
@@ -253,17 +256,15 @@ public class CEmpresa extends CGenerico {
 						extranjeros = spnExtranjeros.getValue();
 						empresa.setExtranjeros(extranjeros);
 					}
-					if(dtbFechaRegistro.getText().compareTo("")!=0)
-					{
-						fechaRegistro = new Timestamp(dtbFechaRegistro.getValue()
-								.getTime());
+					if (dtbFechaRegistro.getText().compareTo("") != 0) {
+						fechaRegistro = new Timestamp(dtbFechaRegistro
+								.getValue().getTime());
 						empresa.setFechaRegistro(fechaRegistro);
 					}
-					if(dtbFechaActualizacion.getText().compareTo("")!=0)
-					{
-					fechaActualizacion = new Timestamp(dtbFechaActualizacion
-							.getValue().getTime());
-					empresa.setFechaActualizacion(fechaActualizacion);
+					if (dtbFechaActualizacion.getText().compareTo("") != 0) {
+						fechaActualizacion = new Timestamp(
+								dtbFechaActualizacion.getValue().getTime());
+						empresa.setFechaActualizacion(fechaActualizacion);
 					}
 
 					empresa.setTelefono(telefono);
@@ -274,7 +275,7 @@ public class CEmpresa extends CGenerico {
 					empresa.setCodigoCiiu(codigoCiiu);
 					empresa.setActividadEconomica(actividadEconomica);
 					empresa.setCorreo(correo);
-					empresa.setRegistroMercantil(registroMercantil);				
+					empresa.setRegistroMercantil(registroMercantil);
 					empresa.setBajoNroEmpresa(bajoNro);
 					empresa.setTomoEmpresa(tomo);
 					empresa.setRepresentanteEmpresa(representante);
@@ -290,9 +291,7 @@ public class CEmpresa extends CGenerico {
 
 					servicioEmpresa.guardar(empresa);
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 
@@ -312,29 +311,25 @@ public class CEmpresa extends CGenerico {
 												.buscarPorEmpresa(empresa);
 										List<Consultorio> consultorios = servicioConsultorio
 												.buscarPorEmpresa(empresa);
-
+										List<Informe> informe = servicioInforme
+												.buscarPorEmpresaTrabajador(empresa);
+										List<Informe> informe2 = servicioInforme
+												.buscarPorEmpresaBeneficiaria(empresa);
 										if (!pacientes.isEmpty()
-												|| !consultorios.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+												|| !consultorios.isEmpty()
+												|| !informe.isEmpty()
+												|| !informe2.isEmpty()) {
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioEmpresa.eliminar(empresa);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 			}
 		};
 		botoneraEmpresa.appendChild(botonera);
@@ -344,31 +339,42 @@ public class CEmpresa extends CGenerico {
 	public boolean validar() {
 		if (txtDireccionCentro.getText().compareTo("") == 0
 				|| txtNombreEmpresa.getText().compareTo("") == 0
-				|| txtRifEmpresa.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos Requeridos",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+				|| txtRazon.getText().compareTo("") == 0
+				|| txtDireccionRazon.getText().compareTo("") == 0
+				|| txtRifEmpresa.getText().compareTo("") == 0
+				|| txtNilEmpresa.getText().compareTo("") == 0
+				|| txtNroIvssEmpresa.getText().compareTo("") == 0
+				|| txtActividadEconomica.getText().compareTo("") == 0
+				|| txtTelefonoEmpresa.getText().compareTo("") == 0
+				|| spnAdolescentes.getText().compareTo("") == 0
+				|| spnAprendices.getText().compareTo("") == 0
+				|| spnConapdis.getText().compareTo("") == 0
+				|| spnExtranjeros.getText().compareTo("") == 0
+				|| spnHombres.getText().compareTo("") == 0
+				|| spnLopcymat.getText().compareTo("") == 0
+				|| spnMujeres.getText().compareTo("") == 0
+				|| spnNroTrabajadores.getText().compareTo("") == 0) {
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
-				if (txtTelefonoEmpresa.getText().compareTo("") != 0  && !Validador.validarTelefono(txtTelefonoEmpresa.getValue())) {
-					Messagebox.show("Telefono de la Empresa Invalido",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
-					return false;
+			if (txtTelefonoEmpresa.getText().compareTo("") != 0
+					&& !Validador
+							.validarTelefono(txtTelefonoEmpresa.getValue())) {
+				msj.mensajeError(Mensaje.telefonoInvalido);
+				return false;
 			} else {
-				if (txtTelefonoRepresentante.getText().compareTo("") != 0 && !Validador.validarTelefono(txtTelefonoRepresentante.getValue())) {
-						Messagebox.show("Telefono del Representante Invalido",
-								"Informacion", Messagebox.OK,
-								Messagebox.INFORMATION);
-						return false;
+				if (txtTelefonoRepresentante.getText().compareTo("") != 0
+						&& !Validador.validarTelefono(txtTelefonoRepresentante
+								.getValue())) {
+					msj.mensajeError(Mensaje.telefonoInvalido);
+					return false;
 				} else {
-						if (txtTelefono2Representante.getText().compareTo("") != 0  && !Validador
-								.validarTelefono(txtTelefono2Representante
-										.getValue())) {
-							Messagebox.show(
-									"Telefono del Representante Invalido",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
-							return false;
+					if (txtTelefono2Representante.getText().compareTo("") != 0
+							&& !Validador
+									.validarTelefono(txtTelefono2Representante
+											.getValue())) {
+						msj.mensajeError(Mensaje.telefonoInvalido);
+						return false;
 					} else
 						return true;
 				}
@@ -417,8 +423,7 @@ public class CEmpresa extends CGenerico {
 	@Listen("onChange = #txtTelefonoEmpresa")
 	public void validarTelefono() {
 		if (!Validador.validarTelefono(txtTelefonoEmpresa.getValue())) {
-			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 
@@ -426,8 +431,7 @@ public class CEmpresa extends CGenerico {
 	@Listen("onChange = #txtTelefonoRepresentante")
 	public void validarTelefono1() {
 		if (!Validador.validarTelefono(txtTelefonoRepresentante.getValue())) {
-			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 
@@ -435,8 +439,7 @@ public class CEmpresa extends CGenerico {
 	@Listen("onChange = #txtTelefono2Representante")
 	public void validarTelefono2() {
 		if (!Validador.validarTelefono(txtTelefono2Representante.getValue())) {
-			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 
@@ -484,9 +487,9 @@ public class CEmpresa extends CGenerico {
 		txtTelefono2Representante.setValue(empresa.getTelefono2Representante());
 		txtCargo2.setValue(empresa.getCargo2());
 		if (empresa.getFechaRegistro() != null)
-		dtbFechaRegistro.setValue(empresa.getFechaRegistro());
+			dtbFechaRegistro.setValue(empresa.getFechaRegistro());
 		if (empresa.getFechaActualizacion() != null)
-		dtbFechaActualizacion.setValue(empresa.getFechaActualizacion());
+			dtbFechaActualizacion.setValue(empresa.getFechaActualizacion());
 		if (empresa.getNroTrabajadores() != null)
 			spnNroTrabajadores.setValue(empresa.getNroTrabajadores());
 		if (empresa.getHombres() != null)
@@ -517,8 +520,7 @@ public class CEmpresa extends CGenerico {
 	@Listen("onChange = #txtCorreo")
 	public void validarCorreo() throws IOException {
 		if (Validador.validarCorreo(txtCorreo.getValue()) == false) {
-			Messagebox.show("Correo Electronico Invalido", "Alerta",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeAlerta(Mensaje.correoInvalido);
 		}
 	}
 }

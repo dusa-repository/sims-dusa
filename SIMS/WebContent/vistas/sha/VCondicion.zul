@@ -17,7 +17,7 @@
 						</hbox>
 						<textbox class="multilinea" id="txtNombreCondicion" hflex="1"
 							maxlength="500" tooltiptext="Ingrese la Condicion" multiline="true" />
-						<button id="btnBuscarCondicion" class="btn" label="Buscar"
+						<button autodisable="self" id="btnBuscarCondicion" class="btn" label="Buscar"
 							tooltiptext="Catalogo Condiciones" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>

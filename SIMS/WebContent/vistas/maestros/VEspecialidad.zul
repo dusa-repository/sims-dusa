@@ -10,12 +10,17 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtDescripcionEspecialidad" hflex="1"
 							maxlength="500" tooltiptext="Ingrese la Descripcion de la Especialidad"
 							multiline="true" class="multilinea" />
-						<button id="btnBuscarEspecialidad" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarEspecialidad"
+							class="btn" label="Buscar" tooltiptext="Catalogo"
+							image="/public/imagenes/botones/buscar.png" />
 					</row>
 				</rows>
 			</grid>

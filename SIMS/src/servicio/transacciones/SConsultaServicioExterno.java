@@ -4,6 +4,8 @@ import interfacedao.transacciones.IConsultaServicioExternoDAO;
 
 import java.util.List;
 
+import modelo.maestros.Proveedor;
+import modelo.maestros.ServicioExterno;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaServicioExterno;
 
@@ -35,5 +37,16 @@ public class SConsultaServicioExterno {
 			Consulta consuta, Long part4) {
 		// TODO Auto-generated method stub
 		return consultaServicioExternoDAO.findByConsultaAndServicioExternoIdServicioExterno(consuta,part4);
+	}
+
+	public List<ConsultaServicioExterno> buscarPorProveedor(Proveedor proveedor) {
+		// TODO Auto-generated method stub
+		return consultaServicioExternoDAO.findByProveedor(proveedor);
+	}
+
+	public List<ConsultaServicioExterno> buscarPorServicio(
+			ServicioExterno servicioExterno) {
+		// TODO Auto-generated method stub
+		return consultaServicioExternoDAO.findByServicioExterno(servicioExterno);
 	}
 }

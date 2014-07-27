@@ -28,6 +28,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import componentes.Validador;
 
 public class CConsultorio extends CGenerico {
@@ -65,7 +66,8 @@ public class CConsultorio extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divConsultorio.getParent();
-		Tabbox tabox = (Tabbox) divConsultorio.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divConsultorio.getParent().getParent()
+				.getParent().getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -124,9 +126,7 @@ public class CConsultorio extends CGenerico {
 							nombreUsuarioSesion(), ciudad, empresa);
 					servicioConsultorio.guardar(consultorio);
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 
@@ -145,17 +145,12 @@ public class CConsultorio extends CGenerico {
 										servicioConsultorio
 												.eliminar(consultorio);
 										limpiar();
-										Messagebox
-												.show("Registro Eliminado Exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
+										msj.mensajeInformacion(Mensaje.eliminado);
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -166,31 +161,26 @@ public class CConsultorio extends CGenerico {
 	public boolean validar() {
 		if (txtDireccionConsultorio.getText().compareTo("") == 0
 				|| txtNombreConsultorio.getText().compareTo("") == 0
-				|| txtDescripcionConsultorio.getText().compareTo("") == 0
 				|| txtCorreoConsultorio.getText().compareTo("") == 0
 				|| txtTelefono1Consultorio.getText().compareTo("") == 0
-				|| txtTelefono2Consultorio.getText().compareTo("") == 0
 				|| cmbCiudadConsultorio.getText().compareTo("") == 0
 				|| cmbEmpresa.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (!Validador.validarTelefono(txtTelefono1Consultorio.getValue())) {
-				Messagebox.show("Primer Telefono Invalido", "Informacion",
-						Messagebox.OK, Messagebox.INFORMATION);
+				msj.mensajeError(Mensaje.telefonoInvalido);
 				return false;
 			} else {
-				if (!Validador.validarTelefono(txtTelefono2Consultorio
-						.getValue())) {
-					Messagebox.show("Segundo Telefono Invalido", "Informacion",
-							Messagebox.OK, Messagebox.INFORMATION);
+				if (txtTelefono2Consultorio.getText().compareTo("") != 0
+						&& !Validador.validarTelefono(txtTelefono2Consultorio
+								.getValue())) {
+					msj.mensajeError(Mensaje.telefonoInvalido);
 					return false;
 				} else {
 					if (!Validador.validarCorreo(txtCorreoConsultorio
 							.getValue())) {
-						Messagebox.show("Correo Invalido", "Informacion",
-								Messagebox.OK, Messagebox.INFORMATION);
+						msj.mensajeError(Mensaje.correoInvalido);
 						return false;
 					} else
 						return true;
@@ -210,8 +200,7 @@ public class CConsultorio extends CGenerico {
 	@Listen("onChange = #txtTelefono1Consultorio")
 	public void validarTelefono() {
 		if (!Validador.validarTelefono(txtTelefono1Consultorio.getValue())) {
-			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 
@@ -219,8 +208,7 @@ public class CConsultorio extends CGenerico {
 	@Listen("onChange = #txtTelefono2Consultorio")
 	public void validarTelefono1() {
 		if (!Validador.validarTelefono(txtTelefono2Consultorio.getValue())) {
-			Messagebox.show("Telefono Invalido", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 
@@ -228,8 +216,7 @@ public class CConsultorio extends CGenerico {
 	@Listen("onChange = #txtCorreoConsultorio")
 	public void validarCorreo() {
 		if (!Validador.validarCorreo(txtCorreoConsultorio.getValue())) {
-			Messagebox.show("Correo Invalido", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.correoInvalido);
 		}
 	}
 
@@ -318,17 +305,17 @@ public class CConsultorio extends CGenerico {
 		id = consultorio.getIdConsultorio();
 	}
 
-	/* Abre la vista de Ciudad*/
+	/* Abre la vista de Ciudad */
 	@Listen("onClick = #btnAbrirCiudad")
-	public void abrirCiudad(){		
+	public void abrirCiudad() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 
-	/* Abre la vista de Empresa*/
+	/* Abre la vista de Empresa */
 	@Listen("onClick = #btnAbrirEmpresa")
-	public void abrirEmpresa(){		
+	public void abrirEmpresa() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Empresa");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
+		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
 }

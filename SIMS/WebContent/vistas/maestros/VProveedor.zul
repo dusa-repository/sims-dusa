@@ -5,40 +5,56 @@
 
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="15%" />
+					<column label="" width="20%" />
 					<column label="" width="45%" />
-					<column label="" width="40%" />
+					<column label="" width="35%" />
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre: " />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtNombreProveedor" hflex="1" maxlength="500"
 							tooltiptext="Ingrese el Nombre del Proveedor" multiline="true" />
-						<button id="btnBuscarProveedor" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarProveedor" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Telefono:" />
-						<cell colspan="2">
-							<textbox id="txtTelefonoProveedor" hflex="1" maxlength="20"
-								tooltiptext="Ingrese el Numero de telefono (0426-9999999)" />
+						<hbox>
+							<label class="etiqueta" value="Telefono:" />
 							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox id="txtTelefonoProveedor" hflex="1" maxlength="20"
+							tooltiptext="Ingrese el Numero de telefono (0426-9999999)" />
+						<hbox />
+
+					</row>
+					<row>
+						<hbox>
 							<label class="etiqueta" value="Ciudad:" />
 							<space />
-							<combobox id="cmbCiudadProveedor" readonly="true"
-								tabindex="1" width="300px" tooltiptext="Seleccione una Ciudad"
-								placeholder="Seleccione una Ciudad">
-								<template name="model">
-									<comboitem context="${each.idCiudad}" label="${each.nombre}" />
-								</template>
-							</combobox>
-							<space />
-							<button id="btnAbrirCiudad" label="" tooltiptext="Crear una Nueva Ciudad"
-								image="/public/imagenes/botones/agregar.png" />
-						</cell>
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox id="cmbCiudadProveedor" readonly="true"
+							tabindex="1" width="99%" tooltiptext="Seleccione una Ciudad"
+							placeholder="Seleccione una Ciudad">
+							<template name="model">
+								<comboitem context="${each.idCiudad}" label="${each.nombre}" />
+							</template>
+						</combobox>
+						<space />
+						<button id="btnAbrirCiudad" label="" tooltiptext="Crear una Nueva Ciudad"
+							image="/public/imagenes/botones/agregar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Direccion:" />
+						<hbox>
+							<label class="etiqueta" value="Direccion:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox id="txtDireccionProveedor" hflex="1" maxlength="1024"
 							class="multilinea" tooltiptext="Ingrese la Direccion del Proveedor"
 							multiline="true" width="60px" />
@@ -184,7 +200,7 @@
 								</template>
 							</listbox>
 						</hbox>
-						<separator/>
+						<separator />
 						<div align="left" style="float: right;">
 							<button label="Anterior" id="btnAnteriorPestanna"
 								image="/public/imagenes/botones/atras.png" />

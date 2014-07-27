@@ -24,6 +24,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import controlador.transacciones.CConsulta;
 
 public class COrgano extends CGenerico {
@@ -92,12 +93,10 @@ public class COrgano extends CGenerico {
 							parte = servicioParteCuerpo.buscarUltimo();
 							partes.add(parte);
 						}
-						cConsulta.recibirCuerpo(partes,
-								listaConsulta, servicioParteCuerpo);
+						cConsulta.recibirCuerpo(partes, listaConsulta,
+								servicioParteCuerpo);
 					}
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -117,26 +116,17 @@ public class COrgano extends CGenerico {
 										List<ConsultaParteCuerpo> estados = servicioConsultaParteCuerpo
 												.buscarPorParte(parte);
 										if (!estados.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioParteCuerpo.eliminar(parte);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -145,18 +135,17 @@ public class COrgano extends CGenerico {
 
 	protected boolean validar() {
 		if (txtNombre.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
 	}
-	
+
 	@Listen("onClick = #btnBuscarOrgano")
 	public void mostrarCatalogo() {
 		final List<ParteCuerpo> paises = servicioParteCuerpo.buscarTodos();
-		catalogo = new Catalogo<ParteCuerpo>(catalogoOrgano, "Catalogo de Intervenciones",
-				paises, "Nombre") {
+		catalogo = new Catalogo<ParteCuerpo>(catalogoOrgano,
+				"Catalogo de Intervenciones", paises, "Nombre") {
 
 			@Override
 			protected List<ParteCuerpo> buscar(String valor, String combo) {

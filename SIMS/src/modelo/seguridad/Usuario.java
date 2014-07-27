@@ -34,6 +34,9 @@ public class Usuario implements Serializable {
 
 	@Type(type="org.hibernate.type.NumericBooleanType")
 	private boolean estado;
+	
+	@Type(type="org.hibernate.type.NumericBooleanType")
+	private boolean doctor;
 
 	@Column(name="estado_usuario", length=50)
 	private String estadoUsuario;
@@ -127,7 +130,7 @@ public class Usuario implements Serializable {
 			String licenciaMsds, String login, String nombre, String apellido,String segundoNombre, String segundoApellido,
 			long numeroCitasDiarias, String password, String sexo,
 			String telefono, long tiempoEstimadoEntreCitas,
-			String usuarioAuditoria, Especialidad especialidad, UnidadUsuario unidad, Set<Grupo> grupos) {
+			String usuarioAuditoria, Especialidad especialidad, UnidadUsuario unidad, Set<Grupo> grupos, boolean doctor) {
 		super();
 		this.cedula = cedula;
 		this.direccion = direccion;
@@ -155,8 +158,17 @@ public class Usuario implements Serializable {
 		this.especialidad = especialidad;
 		this.unidad = unidad;
 		this.grupos = grupos;
+		this.doctor = doctor;
 	}
 
+
+	public boolean isDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(boolean doctor) {
+		this.doctor = doctor;
+	}
 
 	public String getCedula() {
 		return this.cedula;

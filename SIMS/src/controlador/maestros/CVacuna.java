@@ -23,6 +23,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import controlador.transacciones.CConsulta;
 
 public class CVacuna extends CGenerico {
@@ -93,12 +94,11 @@ public class CVacuna extends CGenerico {
 							vacuna = servicioVacuna.buscarUltimo();
 							vacunas.add(vacuna);
 						}
-						cConsulta.recibirVacuna(vacunas,
-								listaConsulta, servicioVacuna, historia, servicioHistoriaVacuna);
+						cConsulta.recibirVacuna(vacunas, listaConsulta,
+								servicioVacuna, historia,
+								servicioHistoriaVacuna);
 					}
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -118,26 +118,17 @@ public class CVacuna extends CGenerico {
 										List<HistoriaVacuna> estados = servicioHistoriaVacuna
 												.buscarPorVacuna(vacuna);
 										if (!estados.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioVacuna.eliminar(vacuna);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -146,18 +137,17 @@ public class CVacuna extends CGenerico {
 
 	protected boolean validar() {
 		if (txtNombre.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
 	}
-	
+
 	@Listen("onClick = #btnBuscarVacuna")
 	public void mostrarCatalogo() {
 		final List<Vacuna> paises = servicioVacuna.buscarTodos();
-		catalogo = new Catalogo<Vacuna>(catalogoVacuna, "Catalogo de Intervenciones",
-				paises, "Nombre") {
+		catalogo = new Catalogo<Vacuna>(catalogoVacuna,
+				"Catalogo de Intervenciones", paises, "Nombre") {
 
 			@Override
 			protected List<Vacuna> buscar(String valor, String combo) {
@@ -187,8 +177,7 @@ public class CVacuna extends CGenerico {
 
 	@Listen("onChange = #txtNombre")
 	public void buscarPorNombre() {
-		Vacuna vacuna = servicioVacuna.buscarPorNombre(txtNombre
-				.getValue());
+		Vacuna vacuna = servicioVacuna.buscarPorNombre(txtNombre.getValue());
 		if (vacuna != null)
 			llenarCampos(vacuna);
 	}

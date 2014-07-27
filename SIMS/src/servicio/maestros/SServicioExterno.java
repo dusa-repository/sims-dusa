@@ -46,18 +46,6 @@ public class SServicioExterno {
 		return servicioExternoDAO.findByNombreStartingWithAllIgnoreCase(valor);
 	}
 
-	public List<ServicioExterno> filtroDireccion(String valor) {
-		return servicioExternoDAO.findByDireccionStartingWithAllIgnoreCase(valor);
-	}
-
-	public List<ServicioExterno> filtroTelefono(String valor) {
-		return servicioExternoDAO.findByTelefonoStartingWithAllIgnoreCase(valor);
-	}
-
-	public List<ServicioExterno> filtroCiudad(String valor) {
-		return servicioExternoDAO.findByCiudadNombreStartingWithAllIgnoreCase(valor);
-	}
-
 	public List<ServicioExterno> buscarDisponibles(Consulta consulta) {
 		List<ConsultaServicioExterno> consultasServicios = consultaServicioExternoDAO.findByConsulta(consulta);
 		List<Long> ids = new ArrayList<Long>();

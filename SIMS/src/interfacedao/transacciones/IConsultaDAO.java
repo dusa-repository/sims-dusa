@@ -3,7 +3,9 @@ package interfacedao.transacciones;
 import java.util.Collection;
 import java.util.List;
 
+import modelo.maestros.Cargo;
 import modelo.maestros.Paciente;
+import modelo.sha.Area;
 import modelo.transacciones.Consulta;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -36,5 +38,11 @@ public interface IConsultaDAO  extends JpaRepository<Consulta, Long> {
 			String valor);
 
 	List<Consulta> findByPacienteCedulaOrderByFechaConsultaAsc(String valueOf);
+
+	List<Consulta> findByCargo(Cargo cargo);
+
+	List<Consulta> findByArea(Area area);
+
+	List<Consulta> findByAreaDeseada(Area area);
 
 }

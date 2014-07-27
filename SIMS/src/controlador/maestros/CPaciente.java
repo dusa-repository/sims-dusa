@@ -18,6 +18,8 @@ import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Arbol;
 import modelo.sha.Area;
+import modelo.sha.Informe;
+import modelo.transacciones.Consulta;
 
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
@@ -51,6 +53,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import componentes.Validador;
 
 public class CPaciente extends CGenerico {
@@ -139,8 +142,6 @@ public class CPaciente extends CGenerico {
 	private Combobox cmbTipoDiscapacidad;
 	@Wire
 	private Textbox txtOtras;
-	// @Wire
-	// private Textbox txtCargo;
 	@Wire
 	private Combobox cmbCargo;
 	@Wire
@@ -149,7 +150,6 @@ public class CPaciente extends CGenerico {
 	private Combobox cmbEmpresa;
 	@Wire
 	private Combobox cmbCiudad;
-
 	@Wire
 	private Textbox txtDireccion;
 	@Wire
@@ -218,7 +218,8 @@ public class CPaciente extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divPaciente.getParent();
-		Tabbox tabox = (Tabbox) divPaciente.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divPaciente.getParent().getParent().getParent()
+				.getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -297,7 +298,6 @@ public class CPaciente extends CGenerico {
 				lblCedula.setValue("");
 				lblFicha.setValue("");
 				lblNombres.setValue("");
-
 				txtNroInpsasel.setValue("");
 				txtProfesion.setValue("");
 				txtRetiroIVSS.setValue("");
@@ -306,9 +306,9 @@ public class CPaciente extends CGenerico {
 				cmbTurno.setValue("");
 				cmbTurno.setValue("Seleccione un Turno");
 				spnCarga.setValue(0);
-				dtbFechaEgreso.setValue(null);
-				dtbFechaIngreso.setValue(null);
-				dtbInscripcionIVSS.setValue(null);
+				dtbFechaEgreso.setValue(fecha);
+				dtbFechaIngreso.setValue(fecha);
+				dtbInscripcionIVSS.setValue(fecha);
 
 				rdoTrabajador.setValue(null);
 				rdoFamiliar.setValue(null);
@@ -390,14 +390,6 @@ public class CPaciente extends CGenerico {
 					origen = cmbOrigen.getValue();
 					tipoDiscapacidad = cmbTipoDiscapacidad.getValue();
 					otrasDiscapacidad = txtOtras.getValue();
-					//
-
-					Cargo cargo = servicioCargo.buscar(Long.parseLong(cmbCargo
-							.getSelectedItem().getContext()));
-					Area area = servicioArea.buscar(Long.parseLong(cmbArea
-							.getSelectedItem().getContext()));
-
-					// cargo = txtCargo.getValue();
 					direccion = txtDireccion.getValue();
 					telefono1 = txtTelefono1.getValue();
 					telefono2 = txtTelefono2.getValue();
@@ -412,12 +404,18 @@ public class CPaciente extends CGenerico {
 					edad = spnEdad.getValue();
 					String cedulaFamiliar = "";
 					Empresa empresa = null;
+					Area area = null;
+					Cargo cargo = null;
 					cedTrabajador = lblCedula.getValue();
 
 					if (rdoSiAlergico.isChecked())
 						alergia = true;
 					if (rdoTrabajador.isChecked()) {
 						trabajador = true;
+						cargo = servicioCargo.buscar(Long.parseLong(cmbCargo
+								.getSelectedItem().getContext()));
+						area = servicioArea.buscar(Long.parseLong(cmbArea
+								.getSelectedItem().getContext()));
 						empresa = servicioEmpresa.buscar(Long
 								.parseLong(cmbEmpresa.getSelectedItem()
 										.getContext()));
@@ -462,9 +460,7 @@ public class CPaciente extends CGenerico {
 
 					servicioPaciente.guardar(paciente);
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 
 			}
@@ -484,27 +480,24 @@ public class CPaciente extends CGenerico {
 														.valueOf(id));
 										List<Cita> citas = servicioCita
 												.buscarPorPaciente(paciente);
-										if (!citas.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+										List<Informe> informe = servicioInforme
+												.buscarPorPaciente(paciente);
+										List<Consulta> consultas = servicioConsulta
+												.buscarPorPaciente(paciente);
+										if (!citas.isEmpty()
+												|| !informe.isEmpty()
+												|| !consultas.isEmpty()) {
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioPaciente.eliminar(paciente);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 
 			}
@@ -517,9 +510,6 @@ public class CPaciente extends CGenerico {
 		if (txtApellido1Paciente.getText().compareTo("") == 0
 				|| txtNombre1Paciente.getText().compareTo("") == 0
 				|| txtCedulaPaciente.getText().compareTo("") == 0
-				|| txtNombre2Paciente.getText().compareTo("") == 0
-				|| txtApellido2Paciente.getText().compareTo("") == 0
-				|| txtLugarNacimiento.getText().compareTo("") == 0
 				|| txtFichaPaciente.getText().compareTo("") == 0
 				|| dtbFechaNac.getText().compareTo("") == 0
 				|| spnEdad.getValue() == 0
@@ -528,15 +518,18 @@ public class CPaciente extends CGenerico {
 				|| cmbGrupoSanguineo.getText().compareTo("") == 0
 				|| cmbMano.getText().compareTo("") == 0
 				|| cmbSexo.getText().compareTo("") == 0
+				|| cmbNivelEducativo.getText().compareTo("") == 0
 				|| dspPeso.getValue() == 0
 				|| dspEstatura.getValue() == 0
 				|| cmbCiudad.getText().compareTo("") == 0
-				|| txtDireccion.getText().compareTo("") == 0
 				|| txtTelefono1.getText().compareTo("") == 0
 				|| txtTelefono2.getText().compareTo("") == 0
-				|| txtCorreo.getText().compareTo("") == 0
 				|| txtTelefono1Emergencia.getText().compareTo("") == 0
 				|| txtTelefono2Emergencia.getText().compareTo("") == 0
+				|| txtNombresEmergencia.getText().compareTo("") == 0
+				|| txtApellidosEmergencia.getText().compareTo("") == 0
+				|| txtProfesion.getText().compareTo("") == 0
+				|| spnCarga.getText().compareTo("") == 0
 				|| cmbParentescoEmergencia.getText().compareTo("") == 0
 				|| (!rdoSiAlergico.isChecked() && !rdoNoAlergico.isChecked())
 				|| (!rdoE.isChecked() && !rdoV.isChecked())
@@ -547,71 +540,51 @@ public class CPaciente extends CGenerico {
 						&& (cmbCargo.getText().compareTo("") == 0 || cmbEmpresa
 								.getText().compareTo("") == 0) || cmbArea
 						.getText().compareTo("") == 0)
-				|| (rdoFamiliar.isChecked() && cmbParentescoFamiliar.getText()
-						.compareTo("") == 0)
+				|| (rdoFamiliar.isChecked() && (cmbParentescoFamiliar.getText()
+						.compareTo("") == 0 || lblNombres.getValue() == ""))
 				|| (!rdoSiLentes.isChecked() && !rdoNoLentes.isChecked())) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (rdoSiAlergico.isChecked()
 					&& txtAlergia.getText().compareTo("") == 0) {
-				Messagebox.show(
-						"Debe Especificar la Informacion de la Alergia",
-						"Alerta", Messagebox.OK, Messagebox.INFORMATION);
+				msj.mensajeError("Debe Especificar la Informacion de la Alergia");
 				return false;
 			} else {
 				if (rdoSiDiscapacidad.isChecked()
 						&& (cmbOrigen.getText().compareTo("") == 0 || cmbTipoDiscapacidad
 								.getText().compareTo("") == 0)) {
-					Messagebox
-							.show("Debe Especificar la Informacion de la Discapacidad",
-									"Alerta", Messagebox.OK,
-									Messagebox.INFORMATION);
+					msj.mensajeError("Debe Especificar la Informacion de la Discapacidad");
 					return false;
 				} else {
 					if (!Validador.validarNumero(txtCedulaPaciente.getValue())) {
-						Messagebox.show("Cedula Invalida", "Alerta",
-								Messagebox.OK, Messagebox.INFORMATION);
+						msj.mensajeError(Mensaje.cedulaInvalida);
 						return false;
 					} else {
-						if (!Validador.validarCorreo(txtCorreo.getValue())) {
-							Messagebox.show("Correo Electronico Invalido",
-									"Alerta", Messagebox.OK,
-									Messagebox.INFORMATION);
+						if (!Validador.validarTelefono(txtTelefono1.getValue())
+								|| !Validador.validarTelefono(txtTelefono2
+										.getValue())
+								|| !Validador
+										.validarTelefono(txtTelefono2Emergencia
+												.getValue())
+								|| !Validador
+										.validarTelefono(txtTelefono1Emergencia
+												.getValue())) {
+							msj.mensajeError(Mensaje.telefonoInvalido);
 							return false;
-						} else {
-							if (!Validador.validarTelefono(txtTelefono1
-									.getValue())
-									|| !Validador.validarTelefono(txtTelefono2
-											.getValue())
-									|| !Validador
-											.validarTelefono(txtTelefono2Emergencia
-													.getValue())
-									|| !Validador
-											.validarTelefono(txtTelefono1Emergencia
-													.getValue())) {
-								Messagebox.show(
-										"Formato de Telefono No Valido",
-										"Alerta", Messagebox.OK,
-										Messagebox.INFORMATION);
-								return false;
-							} else
-								return true;
-						}
+						} else
+							return true;
 					}
 				}
 			}
 		}
-
 	}
 
 	/* Metodo que valida el formmato del telefono ingresado */
 	@Listen("onChange = #txtTelefono1")
 	public void validarTelefono() throws IOException {
 		if (Validador.validarTelefono(txtTelefono1.getValue()) == false) {
-			Messagebox.show("Formato de Telefono No Valido", "Alerta",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 
@@ -619,8 +592,7 @@ public class CPaciente extends CGenerico {
 	@Listen("onChange = #txtTelefono2")
 	public void validarTelefono2() throws IOException {
 		if (Validador.validarTelefono(txtTelefono2.getValue()) == false) {
-			Messagebox.show("Formato de Telefono No Valido", "Alerta",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 
@@ -628,8 +600,7 @@ public class CPaciente extends CGenerico {
 	@Listen("onChange = #txtTelefono1Emergencia")
 	public void validarTelefonoE() throws IOException {
 		if (Validador.validarTelefono(txtTelefono1Emergencia.getValue()) == false) {
-			Messagebox.show("Formato de Telefono No Valido", "Alerta",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 
@@ -637,8 +608,7 @@ public class CPaciente extends CGenerico {
 	@Listen("onChange = #txtTelefono2Emergencia")
 	public void validarTelefono2E() throws IOException {
 		if (Validador.validarTelefono(txtTelefono2Emergencia.getValue()) == false) {
-			Messagebox.show("Formato de Telefono No Valido", "Alerta",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 
@@ -646,8 +616,7 @@ public class CPaciente extends CGenerico {
 	@Listen("onChange = #txtCorreo")
 	public void validarCorreo() throws IOException {
 		if (Validador.validarCorreo(txtCorreo.getValue()) == false) {
-			Messagebox.show("Correo Electronico Invalido", "Alerta",
-					Messagebox.OK, Messagebox.EXCLAMATION);
+			msj.mensajeAlerta(Mensaje.correoInvalido);
 		}
 	}
 
@@ -669,8 +638,6 @@ public class CPaciente extends CGenerico {
 					return servicioPaciente.filtroCedula(valor);
 				case "Apellido":
 					return servicioPaciente.filtroApellido1(valor);
-					// case "Empresa":
-					// return servicioPaciente.filtroEmpresa(valor);
 				default:
 					return pacientes;
 				}
@@ -745,8 +712,7 @@ public class CPaciente extends CGenerico {
 	@Listen("onChange = #txtCedulaPaciente")
 	public void validarCedula() {
 		if (!Validador.validarNumero(txtCedulaPaciente.getValue())) {
-			Messagebox.show("Cedula Invalida", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.cedulaInvalida);
 		}
 	}
 
@@ -763,12 +729,14 @@ public class CPaciente extends CGenerico {
 		List<Ciudad> ciudades = servicioCiudad.buscarTodas();
 		cmbCiudad.setModel(new ListModelList<Ciudad>(ciudades));
 	}
+
 	/* Llena el combo de Cargos cada vez que se abre */
 	@Listen("onOpen = #cmbCargo")
 	public void llenarComboCargo() {
 		List<Cargo> cargos = servicioCargo.buscarTodos();
 		cmbCargo.setModel(new ListModelList<Cargo>(cargos));
 	}
+
 	/* Llena el combo de Areas cada vez que se abre */
 	@Listen("onOpen = #cmbArea")
 	public void llenarComboArea() {
@@ -840,8 +808,6 @@ public class CPaciente extends CGenerico {
 		cmbOrigen.setValue(paciente.getOrigenDiscapacidad());
 		cmbTipoDiscapacidad.setValue(paciente.getTipoDiscapacidad());
 		txtOtras.setValue(paciente.getOrigenDiscapacidad());
-		cmbCargo.setValue(paciente.getCargoReal().getNombre());
-		cmbArea.setValue(paciente.getArea().getNombre());
 		txtDireccion.setValue(paciente.getDireccion());
 		txtTelefono1.setValue(paciente.getTelefono1());
 		txtTelefono2.setValue(paciente.getTelefono2());
@@ -856,7 +822,6 @@ public class CPaciente extends CGenerico {
 		dspEstatura.setValue(paciente.getEstatura());
 		dspPeso.setValue(paciente.getPeso());
 		cmbCiudad.setValue(paciente.getCiudadVivienda().getNombre());
-
 		spnCarga.setValue(paciente.getCarga());
 		txtNroInpsasel.setValue(paciente.getNroInpsasel());
 		txtProfesion.setValue(paciente.getProfesion());
@@ -873,13 +838,14 @@ public class CPaciente extends CGenerico {
 			else
 				rdoE.setChecked(true);
 		}
-
 		if (paciente.isAlergia())
 			rdoSiAlergico.setChecked(true);
 		else
 			rdoNoAlergico.setChecked(true);
 
 		if (paciente.isTrabajador()) {
+			cmbCargo.setValue(paciente.getCargoReal().getNombre());
+			cmbArea.setValue(paciente.getArea().getNombre());
 			cmbEmpresa.setValue(paciente.getEmpresa().getNombre());
 			rdoTrabajador.setChecked(true);
 			esTrabajador();
@@ -941,13 +907,14 @@ public class CPaciente extends CGenerico {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Empresa");
 		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
-	
+
 	/* Abre la vista de Cargo */
 	@Listen("onClick = #btnAbrirCargo")
 	public void abrirCargo() {
 		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Cargo");
 		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 	}
+
 	/* Abre la vista de Area */
 	@Listen("onClick = #btnAbrirArea")
 	public void abrirArea() {

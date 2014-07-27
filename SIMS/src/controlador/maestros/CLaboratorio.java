@@ -19,6 +19,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 public class CLaboratorio extends CGenerico {
 
@@ -57,11 +58,8 @@ public class CLaboratorio extends CGenerico {
 
 					Laboratorio laboratorio = new Laboratorio(id, fechaHora,
 							horaAuditoria, nombre, nombreUsuarioSesion());
-
 					servicioLaboratorio.guardar(laboratorio);
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -92,27 +90,18 @@ public class CLaboratorio extends CGenerico {
 										List<Medicina> medicinas = servicioMedicina
 												.buscarPorLaboratorio(laboratorio);
 										if (!medicinas.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioLaboratorio
 													.eliminar(laboratorio);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 			}
 		};
 		/* Dibuja el componente botonera en el div botoneraLaboratorio */
@@ -134,11 +123,11 @@ public class CLaboratorio extends CGenerico {
 			}
 
 			@Override
-			protected List<Laboratorio> buscar(String valor,String combo) {
-				if(combo.equals("Nombre"))
+			protected List<Laboratorio> buscar(String valor, String combo) {
+				if (combo.equals("Nombre"))
 					return servicioLaboratorio.filtroNombre(valor);
-					else
-						return servicioLaboratorio.buscarTodos();
+				else
+					return servicioLaboratorio.buscarTodos();
 			}
 		};
 		catalogo.setParent(catalogoLaboratorio);
@@ -149,8 +138,7 @@ public class CLaboratorio extends CGenerico {
 	public boolean validar() {
 
 		if (txtNombre.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;

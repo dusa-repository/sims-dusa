@@ -10,23 +10,32 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
-						<textbox class="multilinea" id="txtNombreAntecedente" hflex="1"
-							maxlength="500" tooltiptext="Ingrese el Nombre del Antecedente"
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox class="multilinea" id="txtNombreAntecedente"
+							hflex="1" maxlength="500" tooltiptext="Ingrese el Nombre del Antecedente"
 							multiline="true" />
-						<button id="btnBuscarAntecedente" class="btn" label="Buscar"
+						<button autodisable="self" id="btnBuscarAntecedente" class="btn" label="Buscar"
 							tooltiptext="Catalogo Antecedentes" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Clasificacion:" />
-						<combobox tooltiptext="Seleccione una Clasificacion" placeholder="Seleccione una Clasificacion"
-							id="cmbTipoAntecedente" readonly="true" width="100%">
+						<hbox>
+							<label class="etiqueta" value="Clasificacion:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox tooltiptext="Seleccione una Clasificacion"
+							placeholder="Seleccione una Clasificacion" id="cmbTipoAntecedente"
+							readonly="true" width="100%">
 							<template name="model">
 								<comboitem label="${each.nombre}" context="${each.idAntecedenteTipo}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirTipoAntecedente" label="" tooltiptext="Crear una Nueva Clasificacion"
-							image="/public/imagenes/botones/agregar.png" />
+						<button autodisable="self" id="btnAbrirTipoAntecedente"
+							label="" tooltiptext="Crear una Nueva Clasificacion" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
 			</grid>

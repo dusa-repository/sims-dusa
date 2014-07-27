@@ -4,6 +4,10 @@ import java.util.List;
 
 import interfacedao.sha.IInformeDAO;
 
+import modelo.maestros.Empresa;
+import modelo.maestros.Paciente;
+import modelo.sha.Area;
+import modelo.sha.ClasificacionAccidente;
 import modelo.sha.Condicion;
 import modelo.sha.Informe;
 
@@ -43,6 +47,27 @@ public class SInforme {
 
 	public List<Informe> buscarPorCondicion(Condicion condicion) {
 		return informeDAO.findByCondicionAOrCondicionBOrCondicionCOrCondicionDOrCondicionEOrCondicionF(condicion,condicion,condicion,condicion,condicion,condicion);
+	}
+
+	public List<Informe> buscarPorArea(Area area) {
+		return informeDAO.findByArea(area);
+	}
+
+	public List<Informe> buscarPorPaciente(Paciente paciente) {
+		return informeDAO.findByPaciente(paciente);
+	}
+
+	public List<Informe> buscarPorClasificacion(
+			ClasificacionAccidente clasificacionAccidente) {
+		return informeDAO.findByClasificacion(clasificacionAccidente);
+	}
+
+	public List<Informe> buscarPorEmpresaTrabajador(Empresa empresa) {
+		return informeDAO.findByEmpresa(empresa);
+	}
+
+	public List<Informe> buscarPorEmpresaBeneficiaria(Empresa empresa) {
+		return informeDAO.findByEmpresaB(empresa);
 	}
 
 

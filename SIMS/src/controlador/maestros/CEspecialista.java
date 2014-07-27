@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;
 import modelo.seguridad.Arbol;
+import modelo.transacciones.ConsultaDiagnostico;
+import modelo.transacciones.ConsultaEspecialista;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -29,6 +32,7 @@ import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import componentes.Validador;
 import controlador.transacciones.CConsulta;
 
@@ -61,10 +65,12 @@ public class CEspecialista extends CGenerico {
 	private CConsulta cConsulta = new CConsulta();
 	List<Especialista> especialistaConsulta = new ArrayList<Especialista>();
 	Listbox listaConsulta;
+
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divEspecialista.getParent();
-		Tabbox tabox = (Tabbox) divEspecialista.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divEspecialista.getParent().getParent()
+				.getParent().getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -124,14 +130,13 @@ public class CEspecialista extends CGenerico {
 					servicioEspecialista.guardar(especialista);
 					if (consulta) {
 						especialista = servicioEspecialista.buscar(cedula);
-						especialista.setNombre(especialista.getNombre()+" "+especialista.getApellido());
+						especialista.setNombre(especialista.getNombre() + " "
+								+ especialista.getApellido());
 						especialistaConsulta.add(especialista);
 						cConsulta.recibir(especialistaConsulta, listaConsulta);
 					}
 					limpiar();
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 
@@ -148,21 +153,22 @@ public class CEspecialista extends CGenerico {
 									if (evt.getName().equals("onOK")) {
 										Especialista especialista = servicioEspecialista
 												.buscar(String.valueOf(id));
-										servicioEspecialista
-												.eliminar(especialista);
-										limpiar();
-										Messagebox
-												.show("Registro Eliminado Exitosamente",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
+										List<ConsultaEspecialista> consultas = servicioConsultaEspecialista
+												.buscarPorEspecialista(especialista);
+										if (!consultas.isEmpty())
+											msj.mensajeError(Mensaje.noEliminar);
+										else {
+											servicioEspecialista
+													.eliminar(especialista);
+											limpiar();
+											msj.mensajeInformacion(Mensaje.eliminado);
+										}
 
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 
 			}
@@ -177,13 +183,11 @@ public class CEspecialista extends CGenerico {
 				|| txtNombreEspecialista.getText().compareTo("") == 0
 				|| dspCosto.getText().compareTo("") == 0
 				|| cmbEspecialidad.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (!Validador.validarNumero(txtCedulaEspecialista.getValue())) {
-				Messagebox.show("Cedula Invalida", "Informacion",
-						Messagebox.OK, Messagebox.INFORMATION);
+				msj.mensajeError(Mensaje.cedulaInvalida);
 				return false;
 			} else
 				return true;
@@ -238,8 +242,7 @@ public class CEspecialista extends CGenerico {
 	@Listen("onChange = #txtCedulaEspecialista")
 	public void validarCedula() {
 		if (!Validador.validarNumero(txtCedulaEspecialista.getValue())) {
-			Messagebox.show("Cedula Invalida", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.cedulaInvalida);
 		}
 	}
 

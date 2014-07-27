@@ -9,14 +9,22 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Nombre:" />
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox maxlength="500" id="txtNombre" hflex="1"
 							tooltiptext="Ingrese el Nombre de la Medicina" />
-						<button id="btnBuscarMedicina" class="btn" label="Buscar"
-							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<button autodisable="self" id="btnBuscarMedicina" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Categoria:" />
+						<hbox>
+							<label class="etiqueta" value="Categoria:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<combobox tooltiptext="Seleccione una Categoria"
 							placeholder="Seleccione una Categoria" id="cmbCategoria"
 							readonly="true" width="100%">
@@ -28,7 +36,11 @@
 							tooltiptext="Crear una Nueva Categoria de Medicina" image="/public/imagenes/botones/agregar.png" />
 					</row>
 					<row>
-						<label class="etiqueta" value="Laboratorio:" />
+						<hbox>
+							<label class="etiqueta" value="Laboratorio:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<combobox tooltiptext="Seleccione un Laboratorio"
 							placeholder="Seleccione un Laboratorio" id="cmbLaboratorio"
 							readonly="true" width="100%">
@@ -110,8 +122,9 @@
 					<tabpanel>
 						<separator />
 						<hbox>
-							<textbox tooltiptext="Ingrese el Nombre de la Presentacion" placeholder="Ingrese la Presentacion a Buscar"
-								width="195px" id="txtBuscadorPresentacion"></textbox>
+							<textbox tooltiptext="Ingrese el Nombre de la Presentacion"
+								placeholder="Ingrese la Presentacion a Buscar" width="195px"
+								id="txtBuscadorPresentacion"></textbox>
 							<separator />
 							<button id="btnAbrirPresentacion" label=""
 								tooltiptext="Crear una Nueva Presentacion" image="/public/imagenes/botones/agregar.png" />

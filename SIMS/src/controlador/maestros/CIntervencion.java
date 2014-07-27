@@ -21,6 +21,7 @@ import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import controlador.transacciones.CConsulta;
 
 public class CIntervencion extends CGenerico {
@@ -96,9 +97,7 @@ public class CIntervencion extends CGenerico {
 						cConsulta.recibirIntervencion(interConsulta,
 								listaConsulta);
 					}
-					Messagebox.show("Registro Guardado Exitosamente",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
 			}
@@ -106,7 +105,8 @@ public class CIntervencion extends CGenerico {
 			@Override
 			public void eliminar() {
 				if (id != 0 && txtNombre.getText().compareTo("") != 0) {
-					Messagebox.show("¿Esta Seguro de Eliminar la Intervencion?",
+					Messagebox.show(
+							"¿Esta Seguro de Eliminar la Intervencion?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -118,26 +118,18 @@ public class CIntervencion extends CGenerico {
 										List<HistoriaIntervencion> estados = servicioHistoriaIntervencion
 												.buscarPorIntervencion(intervencion);
 										if (!estados.isEmpty()) {
-											Messagebox
-													.show("No se Puede Eliminar el Registro, Esta siendo Utilizado",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError(Mensaje.noEliminar);
 										} else {
-											servicioIntervencion.eliminar(intervencion);
+											servicioIntervencion
+													.eliminar(intervencion);
 											limpiar();
-											Messagebox
-													.show("Registro Eliminado Exitosamente",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else {
-					Messagebox.show("No ha Seleccionado Ningun Registro",
-							"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
 		};
@@ -146,18 +138,17 @@ public class CIntervencion extends CGenerico {
 
 	protected boolean validar() {
 		if (txtNombre.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
 	}
-	
+
 	@Listen("onClick = #btnBuscarIntervencion")
 	public void mostrarCatalogo() {
 		final List<Intervencion> paises = servicioIntervencion.buscarTodos();
-		catalogo = new Catalogo<Intervencion>(catalogoIntervencion, "Catalogo de Intervenciones",
-				paises, "Nombre") {
+		catalogo = new Catalogo<Intervencion>(catalogoIntervencion,
+				"Catalogo de Intervenciones", paises, "Nombre") {
 
 			@Override
 			protected List<Intervencion> buscar(String valor, String combo) {
@@ -187,8 +178,8 @@ public class CIntervencion extends CGenerico {
 
 	@Listen("onChange = #txtNombre")
 	public void buscarPorNombre() {
-		Intervencion intervencion = servicioIntervencion.buscarPorNombre(txtNombre
-				.getValue());
+		Intervencion intervencion = servicioIntervencion
+				.buscarPorNombre(txtNombre.getValue());
 		if (intervencion != null)
 			llenarCampos(intervencion);
 	}
