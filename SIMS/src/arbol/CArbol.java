@@ -323,12 +323,36 @@ public class CArbol extends CGenerico {
 			contenido.setSrc(null);
 			contenido.setSrc(ruta);
 			Tab newTab = new Tab("Editar Usuario");
+			newTab.setClosable(true);
+			newTab.addEventListener(Events.ON_CLOSE,
+					new EventListener<Event>() {
+						@Override
+						public void onEvent(Event arg0)
+								throws Exception {
+							for (int i = 0; i < tabs.size(); i++) {
+								if (tabs.get(i)
+										.getLabel()
+										.equals("Editar Usuario")) {
+									if (i == (tabs.size() - 1)
+											&& tabs.size() > 1) {
+										tabs.get(i - 1)
+												.setSelected(true);
+									}
+
+									tabs.get(i).close();
+									tabs.remove(i);
+								}
+							}
+						}
+					});
 			newTab.setSelected(true);
 			Tabpanel newTabpanel = new Tabpanel();
 			newTabpanel.appendChild(contenido);
 			tabBox.getTabs().insertBefore(newTab, tab);
 			newTabpanel.setParent(tabBox.getTabpanels());
 			tabs.add(newTab);
+			mapGeneral.put("tabsGenerales", tabs);
+			Sessions.getCurrent().setAttribute("mapaGeneral", mapGeneral);
 		} else
 			taba.setSelected(true);
 	}

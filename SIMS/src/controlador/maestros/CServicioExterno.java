@@ -31,9 +31,6 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
-
-import com.apple.dnssd.TXTRecord;
-
 import arbol.CArbol;
 
 import sun.usagetracker.UsageTrackerClient;

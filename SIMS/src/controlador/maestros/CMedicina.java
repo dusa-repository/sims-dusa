@@ -18,6 +18,7 @@ import modelo.maestros.ServicioExterno;
 import modelo.maestros.UnidadMedicina;
 import modelo.seguridad.Arbol;
 import modelo.transacciones.ConsultaEspecialista;
+import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaMedicina;
 
 import org.zkoss.zk.ui.Sessions;
@@ -486,10 +487,39 @@ public class CMedicina extends CGenerico {
 					MedicinaPresentacionUnidad medicinaPresentacionUnidad = new MedicinaPresentacionUnidad();
 					medicinaPresentacionUnidad
 							.setPresentacionMedicina(presentacionMedicina);
+					presentacionesUsadas.clear();
+					for (int j = 0; j < ltbPresentacionesAgregadas.getItemCount(); j++) {
+						Listitem listItemj = ltbPresentacionesAgregadas
+								.getItemAtIndex(j);
+						double valor = ((Doublespinner) ((listItemj
+								.getChildren().get(1))).getFirstChild())
+								.getValue();
+						String id = ((Combobox) ((listItemj.getChildren().get(2)))
+								.getFirstChild()).getValue();
+						long idPresentacion = ((Spinner) ((listItemj
+								.getChildren().get(3))).getFirstChild())
+								.getValue();
+						long idUnidad = 0;
+						if (((Combobox) ((listItemj.getChildren().get(2)))
+								.getFirstChild()).getSelectedItem()!=null){
+							id = ((Combobox) ((listItemj.getChildren().get(2)))
+									.getFirstChild()).getSelectedItem()
+									.getContext();
+							idUnidad = Long.parseLong(id);
+						}
+							PresentacionMedicina presentacion = servicioPresentacionMedicina
+									.buscar(idPresentacion);
+							UnidadMedicina unidadMedicina = servicioUnidadMedicina
+									.buscar(idUnidad);
+							MedicinaPresentacionUnidad medicinaPresentacionUnidadj = new MedicinaPresentacionUnidad(
+									null, presentacion, unidadMedicina, valor);
+						presentacionesUsadas.add(medicinaPresentacionUnidadj);
+					}
 					presentacionesUsadas.add(medicinaPresentacionUnidad);
 					ltbPresentacionesAgregadas
 							.setModel(new ListModelList<MedicinaPresentacionUnidad>(
 									presentacionesUsadas));
+					ltbPresentacionesAgregadas.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
 			}
