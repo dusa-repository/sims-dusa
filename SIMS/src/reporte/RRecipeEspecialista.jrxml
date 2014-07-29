@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRecipeEspecialista" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ed592c1-ffc9-486d-b23e-4c1b7ea46e29">
-	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="288"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
@@ -24,39 +24,39 @@
 	<title>
 		<band height="380" splitType="Stretch">
 			<image>
-				<reportElement x="10" y="14" width="104" height="59" uuid="e7e31412-8eb0-4b7a-8151-6c176b9c0649"/>
+				<reportElement x="10" y="14" width="104" height="69" uuid="e7e31412-8eb0-4b7a-8151-6c176b9c0649"/>
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="163" y="93" width="227" height="20" uuid="ad8e21ec-3f28-4c5b-8586-3c8052f2a6e8"/>
+				<reportElement x="163" y="150" width="227" height="20" uuid="ad8e21ec-3f28-4c5b-8586-3c8052f2a6e8"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Orden para Servicio de Especialistas]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="126" y="34" width="323" height="20" uuid="8167f4b9-182c-4d03-a977-4d852f26733b"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="126" y="34" width="323" height="29" uuid="8167f4b9-182c-4d03-a977-4d852f26733b"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaNombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="459" y="34" width="100" height="20" uuid="6139566f-987f-4e30-b317-ab3e7d7332c4"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="459" y="34" width="113" height="29" uuid="6139566f-987f-4e30-b317-ab3e7d7332c4"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="126" y="63" width="433" height="20" uuid="7a894f55-7888-4f0a-8d9e-f6c63dd02b0a"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="126" y="82" width="446" height="28" uuid="7a894f55-7888-4f0a-8d9e-f6c63dd02b0a"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaDireccion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="414" y="10" width="41" height="20" uuid="54eafcbb-f3bd-4506-946d-d18b9fad9be5"/>
+				<reportElement x="418" y="10" width="41" height="20" uuid="54eafcbb-f3bd-4506-946d-d18b9fad9be5"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -70,123 +70,127 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="14" y="132" width="53" height="20" uuid="cf32ceaa-886f-41dd-b823-5b78917dcc6b"/>
+				<reportElement x="14" y="192" width="53" height="20" uuid="cf32ceaa-886f-41dd-b823-5b78917dcc6b"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nombre:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="14" y="162" width="34" height="20" uuid="0371a6ff-42c9-4afe-8024-7f54f002e49c"/>
+				<reportElement x="14" y="224" width="34" height="20" uuid="0371a6ff-42c9-4afe-8024-7f54f002e49c"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="287" y="162" width="34" height="20" uuid="a180a147-d9a5-4b5d-8963-8ec586881e00"/>
+				<reportElement x="287" y="224" width="34" height="20" uuid="a180a147-d9a5-4b5d-8963-8ec586881e00"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Sexo:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="14" y="193" width="80" height="20" uuid="bdd04847-ba4f-4717-8e1b-58dc5e673b13"/>
+				<reportElement x="14" y="258" width="80" height="20" uuid="bdd04847-ba4f-4717-8e1b-58dc5e673b13"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Consulta de:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="14" y="230" width="23" height="20" uuid="9c8fa2c4-5abe-4064-91f2-399bf4f150c2"/>
+				<reportElement x="14" y="296" width="23" height="20" uuid="9c8fa2c4-5abe-4064-91f2-399bf4f150c2"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dr:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="14" y="262" width="64" height="20" uuid="ff608993-b958-44d8-b36b-6d91c5831da2"/>
+				<reportElement x="14" y="333" width="64" height="20" uuid="ff608993-b958-44d8-b36b-6d91c5831da2"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Prioridad:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="67" y="132" width="206" height="20" uuid="4a5eb353-2bdf-4038-a630-d6473cf8b1d2"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="67" y="192" width="206" height="20" uuid="4a5eb353-2bdf-4038-a630-d6473cf8b1d2"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteNombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="287" y="132" width="248" height="20" uuid="cebee949-5131-4463-b69a-025b2a84780e"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="273" y="192" width="248" height="20" uuid="cebee949-5131-4463-b69a-025b2a84780e"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteApellido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="48" y="162" width="46" height="20" uuid="54bbfe83-00ca-4648-bd93-6f58b00f1867"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="48" y="224" width="46" height="20" uuid="54bbfe83-00ca-4648-bd93-6f58b00f1867"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteEdad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="104" y="162" width="100" height="20" uuid="dd8ee394-749c-4b15-b8a5-a0e46d7e0c0b"/>
+				<reportElement x="94" y="224" width="100" height="20" uuid="dd8ee394-749c-4b15-b8a5-a0e46d7e0c0b"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Años]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="321" y="162" width="214" height="20" uuid="7f7eaa58-e99c-452f-b0f1-8667de904c95"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="321" y="224" width="200" height="20" uuid="7f7eaa58-e99c-452f-b0f1-8667de904c95"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteSexo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="94" y="193" width="441" height="20" uuid="15bcd538-a343-4a76-b880-da34e82f373d"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="94" y="258" width="427" height="20" uuid="15bcd538-a343-4a76-b880-da34e82f373d"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{especialidad}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="37" y="230" width="236" height="20" uuid="17d17f1c-a500-4855-a08e-0c052303d42b"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="37" y="296" width="236" height="20" uuid="17d17f1c-a500-4855-a08e-0c052303d42b"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{doctorNombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="287" y="230" width="248" height="20" uuid="a4650071-8f38-4c6a-afba-e61d5331cb86"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="273" y="296" width="248" height="20" uuid="a4650071-8f38-4c6a-afba-e61d5331cb86"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{doctorApellido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="78" y="262" width="195" height="20" uuid="cde05bed-5091-417f-9e4e-8a9e44fe491f"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="78" y="333" width="195" height="20" uuid="cde05bed-5091-417f-9e4e-8a9e44fe491f"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{prioridad}]]></textFieldExpression>
 			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="50">
 			<staticText>
-				<reportElement x="376" y="342" width="137" height="20" uuid="f2d6394a-2dfb-47ba-84bc-c9829bd7ed8b"/>
+				<reportElement x="194" y="16" width="159" height="20" uuid="f2d6394a-2dfb-47ba-84bc-c9829bd7ed8b"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
-				<text><![CDATA[Firma del medico Asistencial]]></text>
+				<text><![CDATA[Firma del Medico Asistencial]]></text>
 			</staticText>
 		</band>
-	</title>
+	</pageFooter>
 	<summary>
 		<band height="471" splitType="Stretch">
 			<staticText>
-				<reportElement x="232" y="29" width="109" height="20" uuid="4300f030-c591-4be8-9b9b-9a531d015409"/>
+				<reportElement x="204" y="29" width="137" height="23" uuid="4300f030-c591-4be8-9b9b-9a531d015409"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -221,7 +225,7 @@
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="297" y="69" width="248" height="20" uuid="0e064418-dc99-40b6-9cd4-7f236f569f64"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="284" y="69" width="248" height="20" uuid="0e064418-dc99-40b6-9cd4-7f236f569f64"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -242,7 +246,7 @@
 				<text><![CDATA[Nombre:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="321" y="109" width="224" height="20" uuid="d50a4ef3-d2a9-4e83-aa39-ce99beb0d56d"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="318" y="109" width="224" height="20" uuid="d50a4ef3-d2a9-4e83-aa39-ce99beb0d56d"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -270,21 +274,21 @@
 				<textFieldExpression><![CDATA[$P{observacion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="24" y="432" width="80" height="20" uuid="e7a2651c-a684-4105-a498-7abb185d633d"/>
+				<reportElement x="24" y="448" width="80" height="20" uuid="e7a2651c-a684-4105-a498-7abb185d633d"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Especialista:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="104" y="432" width="190" height="20" uuid="17e51047-e6cd-4879-90c2-c7664670f6c3"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="104" y="448" width="169" height="20" uuid="17e51047-e6cd-4879-90c2-c7664670f6c3"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{especialistaNombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="297" y="432" width="248" height="20" uuid="bbf29ceb-8567-4198-9454-ba57fe218287"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="273" y="448" width="248" height="20" uuid="bbf29ceb-8567-4198-9454-ba57fe218287"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>

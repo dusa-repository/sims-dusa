@@ -18,10 +18,14 @@
 				</columns>
 				<rows>
 					<row>
-						<label class="etiqueta" value="Buscar Cedula:" />
+						<hbox>
+							<label class="etiqueta" value="Buscar Cedula:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<textbox maxlength="500" inplace="true" id="txtCedula"
 							hflex="1" tooltiptext="Ingrese la Cedula del Paciente" />
-						<button autodisable="true" id="btnBuscarPaciente" label="Buscar Paciente"
+						<button autodisable="self" id="btnBuscarPaciente" label="Buscar Paciente"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 						<button autodisable="true" id="btnVerHistoria" label="Ver Historia"
 							tooltiptext="Catalogo" image="/public/imagenes/botones/generar.png" />
@@ -285,18 +289,30 @@
 							</columns>
 							<rows>
 								<row>
-									<label class="etiqueta" value="Fecha Consulta:" />
+									<hbox>
+										<label class="etiqueta" value="Fecha Consulta:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
 									<datebox readonly="true" width="100%" id="dtbFechaConsulta"
 										onCreate="self.value = new Date()" cols="8" />
-									<label class="etiqueta" value="Tipo de Consulta:" />
+									<hbox>
+										<label class="etiqueta" value="Tipo de Consulta:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
 									<combobox tooltiptext="Seleccione el Tipo de la Consulta"
 										placeholder="Seleccione el Tipo" id="cmbTipoConsulta" width="100%"
 										readonly="true">
 										<comboitem label="Preventiva" />
 										<comboitem label="Curativa" />
 									</combobox>
-									<label visible="false" id="lblPreventiva" class="etiqueta"
-										value="Tipo de Consulta Preventiva:" />
+									<hbox>
+										<label visible="false" id="lblPreventiva" class="etiqueta"
+											value="Tipo de Consulta Preventiva:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
 									<combobox tooltiptext="Seleccione el Tipo de Consulta Preventiva"
 										placeholder="Seleccione el Tipo" id="cmbTipoPreventiva" width="100%"
 										readonly="true" visible="false">
@@ -306,7 +322,11 @@
 									</combobox>
 								</row>
 								<row id="rowPromocion" visible="false">
-									<label class="etiqueta" value="Cargo Pretendido:" />
+									<hbox>
+										<label class="etiqueta" value="Cargo Pretendido:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
 									<combobox tooltiptext="Seleccione el Cargo Pretendido"
 										placeholder="Seleccione el Tipo" id="cmbCargo" width="100%"
 										readonly="true">
@@ -314,7 +334,11 @@
 											<comboitem label="${each.nombre}" context="${each.idCargo}" />
 										</template>
 									</combobox>
-									<label class="etiqueta" value="Area Pretendida:" />
+									<hbox>
+										<label class="etiqueta" value="Area Pretendida:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
 									<combobox tooltiptext="Seleccione el area Pretendida"
 										placeholder="Seleccione el Tipo" id="cmbArea" width="100%"
 										readonly="true">
@@ -353,13 +377,21 @@
 										</columns>
 										<rows>
 											<row>
-												<label class="etiqueta" value="Motivo de la Consulta:" />
+												<hbox>
+													<label class="etiqueta" value="Motivo de la Consulta:" />
+													<space />
+													<label value="*" style="font-weight:bold;color:red" />
+												</hbox>
 												<cell colspan="3">
 													<textbox maxlength="1000" class="multilinea"
 														multiline="true" id="txtMotivo" hflex="1"
 														tooltiptext="Ingrese el Motivo de la Consulta" />
 												</cell>
-												<label class="etiqueta" value="Enfermedad Actual:" />
+												<hbox>
+													<label class="etiqueta" value="Enfermedad Actual:" />
+													<space />
+													<label value="*" style="font-weight:bold;color:red" />
+												</hbox>
 												<cell colspan="3">
 													<textbox maxlength="1000" class="multilinea"
 														multiline="true" id="txtEnfermedad" hflex="1"
@@ -485,8 +517,10 @@
 									<groupbox id="gpxExamenFisico" closable="false" open="true">
 										<caption label="Examen Fisico"
 											style="color:blue; font-size: 12px; font-weight:bold" />
+										<separator />
 										<button id="btnAbrirCuerpo" label=""
 											tooltiptext="Crear una Nueva parte del Cuerpo" image="/public/imagenes/botones/agregar.png" />
+										<separator />
 										<listbox id="ltbExamenFisico" model="${$composer.modelFisico}"
 											height="150px" width="100%" emptyMessage="No hay sistemas fisicos registrados">
 											<listhead>
@@ -519,7 +553,7 @@
 											tooltiptext="Crear un Nuevo Diagnostico" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbDiagnosticos" height="250px" width="100%"
+										<listbox id="ltbDiagnosticos" height="450px" width="100%"
 											emptyMessage="No hay Diagnosticos Registrados">
 											<listhead>
 												<listheader label="Diagnostico" width="100%" />
@@ -560,12 +594,12 @@
 												tooltiptext="Quitar Diagnostico" width="30px" />
 										</vbox>
 										<listbox id="ltbDiagnosticosAgregados" width="100%"
-											height="250px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
+											height="450px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
 											<listhead>
 												<listheader label="Diagnostico" width="35%" />
 												<listheader label="Tipo" width="25%" />
-												<listheader label="Observacion" width="40%" />
-												<listheader label=" " width="5%" />
+												<listheader label="Observacion" width="35%" />
+												<listheader label=" " width="10%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
@@ -590,7 +624,9 @@
 													<listcell>
 														<button label="Ver" autodisable="true"
 															onClick="$composer.ventanaBoton(self)" height="70%"
-															hflex="1" vflex="1" visible="false" />
+															hflex="1" vflex="1" visible="false"
+															image="/public/imagenes/botones/ver.png"
+															tooltiptext="Presione para ver los Detalles agregados del Accidente" />
 													</listcell>
 													<listcell>
 														<spinner value="${each.diagnostico.idDiagnostico}"
@@ -602,24 +638,43 @@
 										<vbox width="100%">
 											<grid width="100%">
 												<columns visible="false">
-													<column label="" width="50%" />
-													<column label="" width="50%" />
+													<column label="" width="40%" />
+													<column label="" width="60%" />
 												</columns>
 												<rows>
 													<row>
-														<label class="etiqueta" value="¿Amerita Reposo?" />
+														<cell colspan="2">
+															<button label="Agregar Diagnosticos" id="btnAgregarDiagnosticos"
+																image="/public/imagenes/botones/agregar.png"
+																tooltiptext="Agregar Diagnosticos" vflex="1" hflex="1" />
+														</cell>
+													</row>
+													<row>
+														<hbox>
+															<label class="etiqueta" value="¿Amerita Reposo?" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
 														<radiogroup id="rdgReposo">
 															<radio label="SI" value="si" id="rdoSiReposo" />
 															<radio label="NO" value="no" id="rdoNoReposo" />
 														</radiogroup>
 													</row>
 													<row id="rowReposo" visible="false">
-														<label class="etiqueta" value="Dias de Reposo:" />
+														<hbox>
+															<label class="etiqueta" value="Dias de Reposo:" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
 														<spinner hflex="1" vflex="1" value="0" id="spnReposo"
 															step="1" constraint="min 0 max 100000" />
 													</row>
 													<row id="rowApto" visible="false">
-														<label class="etiqueta" value="¿Esta apto para el empleo?" />
+														<hbox>
+															<label class="etiqueta" value="¿Esta apto para el empleo?" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
 														<radiogroup id="rdgApto">
 															<radio label="SI" value="si" id="rdoSiApto" />
 															<radio label="NO" value="no" id="rdoNoApto" />
@@ -632,37 +687,31 @@
 															tooltiptext="Ingrese la condicion a la cual esta sujeto el paciente" />
 													</row>
 													<row id="rowAsociada" visible="false">
-														<label class="etiqueta" id="lblConsulta"
-															value="Consulta Asociada al Control:" />
-														<button label="Consulta Asociada" id="btnConsultaAsociada"
-															image="/public/imagenes/botones/agregar.png"
+														<hbox>
+															<label class="etiqueta" id="lblConsulta"
+																value="Consulta Asociada al Control:" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
+														<button autodisable="self" label="Consulta Asociada"
+															id="btnConsultaAsociada" image="/public/imagenes/botones/buscar.png"
 															tooltiptext="Seleccione la consulta asociada a la consulta de control que esta realizando"
 															vflex="1" hflex="1" />
 													</row>
 													<row id="rowAsociada2" visible="false">
 														<label class="etiqueta" id="lblEnfermedadAsociada"
-															value="Enfermedad de consulta Asociada:" />
-														<label class="etiqueta" id="lblEnfermedadAsociada2"
-															value="" />
+															value="Enfermedad de Consulta Asociada:" />
+														<label id="lblEnfermedadAsociada2" value="" />
 													</row>
 													<row id="rowAsociada3" visible="false">
 														<label class="etiqueta" id="lblDiagnosticoAsociado"
-															value="Diagnostico de consulta Asociada:" />
-														<label class="etiqueta" id="lblDiagnosticoAsociado2"
-															value="" />
-													</row>
-													<row>
-														<button label="Agregar" id="btnAgregarDiagnosticos"
-															image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Diagnosticos"
-															vflex="1" hflex="1" />
-														<button visible="false" label="Generar Reposo" id="btnGenerarReposo"
-															image="/public/imagenes/botones/agregar.png" tooltiptext="Generar Reposo"
-															vflex="1" hflex="1" />
+															value="Diagnostico de Consulta Asociada:" />
+														<label id="lblDiagnosticoAsociado2" value="" />
 													</row>
 													<row>
 														<cell colspan="2">
 															<label style="color:red" class="etiqueta" visible="false"
-																id="lblPreventivaArea" value="Recuerde programar la cita correspondiente" />
+																id="lblPreventivaArea" value="Recuerde Programar la Cita Correspondiente" />
 														</cell>
 													</row>
 												</rows>
@@ -682,7 +731,7 @@
 											tooltiptext="Crear una Nueva Medicina" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbMedicinas" height="250px" width="100%"
+										<listbox id="ltbMedicinas" height="450px" width="100%"
 											emptyMessage="No hay Medicinas Registradas">
 											<listhead>
 												<listheader label="Medicina" width="100%" />
@@ -708,7 +757,7 @@
 											<button id="pasar2Medicina" image="/public/imagenes/botones/atras.png"
 												tooltiptext="Quitar Medicina" width="30px" />
 										</vbox>
-										<listbox id="ltbMedicinasAgregadas" height="250px"
+										<listbox id="ltbMedicinasAgregadas" height="450px"
 											width="100%" emptyMessage="No ha Seleccionado Ningúna Medicina">
 											<listhead>
 												<listheader label="Medicina" width="40%" />
@@ -732,22 +781,23 @@
 										<vbox width="100%">
 											<grid width="100%">
 												<columns visible="false">
-													<column label="" width="50%" />
-													<column label="" width="50%" />
+													<column label="" width="40%" />
+													<column label="" width="60%" />
 												</columns>
 												<rows>
 													<row>
 														<cell colspan="2">
-															<vbox>
-																<button label="Agregar Medicinas" id="btnAgregarMedicinas"
-																	image="/public/imagenes/botones/agregar.png"
-																	tooltiptext="Agregar Medicinas" width="200px" />
-															</vbox>
+															<button label="Agregar Medicinas" id="btnAgregarMedicinas"
+																image="/public/imagenes/botones/agregar.png"
+																tooltiptext="Agregar Medicinas" vflex="1" hflex="1" />
 														</cell>
 													</row>
-
 													<row>
-														<label class="etiqueta" value="Prioridad Recipe:" />
+														<hbox>
+															<label class="etiqueta" value="Prioridad Recipe:" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
 														<combobox tooltiptext="Seleccione la Prioridad"
 															placeholder="Seleccione la Prioridad" id="cmbPrioridad"
 															width="100%" readonly="true">
@@ -777,7 +827,7 @@
 											tooltiptext="Crear un Nuevo Examen" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbExamenes" height="250px" width="100%"
+										<listbox id="ltbExamenes" height="450px" width="100%"
 											emptyMessage="No hay Examenes Registrados">
 											<listhead>
 												<listheader label="Examen" width="100%" />
@@ -803,7 +853,7 @@
 											<button id="pasar2Examen" image="/public/imagenes/botones/atras.png"
 												tooltiptext="Quitar Examen" width="30px" />
 										</vbox>
-										<listbox id="ltbExamenesAgregados" height="250px"
+										<listbox id="ltbExamenesAgregados" height="450px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Examen">
 											<listhead>
 												<listheader label="Examen" width="40%" />
@@ -827,21 +877,23 @@
 										<hbox width="100%">
 											<grid width="100%">
 												<columns visible="false">
-													<column label="" width="50%" />
-													<column label="" width="50%" />
+													<column label="" width="40%" />
+													<column label="" width="60%" />
 												</columns>
 												<rows>
 													<row>
 														<cell colspan="2">
-															<vbox>
-																<button label="Agregar Examenes" id="btnAgregarExamenes"
-																	image="/public/imagenes/botones/agregar.png"
-																	tooltiptext="Agregar Examenes" width="200px" />
-															</vbox>
+															<button label="Agregar Examenes" id="btnAgregarExamenes"
+																image="/public/imagenes/botones/agregar.png"
+																tooltiptext="Agregar Examenes" vflex="1" hflex="1" />
 														</cell>
 													</row>
 													<row>
-														<label class="etiqueta" value="Laboratorio encargado de examenes:" />
+														<hbox>
+															<label class="etiqueta" value="Laboratorio encargado de examenes:" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
 														<combobox tooltiptext="Seleccione un Laboratorio"
 															model="${$composer.proveedores}" placeholder="Seleccione un Laboratorio"
 															id="cmbProveedor" readonly="true" width="100%">
@@ -851,7 +903,11 @@
 														</combobox>
 													</row>
 													<row>
-														<label class="etiqueta" value="Prioridad del Examen:" />
+														<hbox>
+															<label class="etiqueta" value="Prioridad del Examen:" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
 														<combobox tooltiptext="Seleccione la Prioridad del Examen"
 															placeholder="Seleccione el Tipo" id="cmbPrioridadExamen"
 															width="100%" readonly="true">
@@ -875,7 +931,7 @@
 											tooltiptext="Crear un Nuevo Especialista" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbEspecialistas" height="250px" width="100%"
+										<listbox id="ltbEspecialistas" height="450px" width="100%"
 											emptyMessage="No hay Especialistas Registrados">
 											<listhead>
 												<listheader label="Especialista" width="70%" />
@@ -909,7 +965,7 @@
 											<button id="pasar2Especialista" image="/public/imagenes/botones/atras.png"
 												tooltiptext="Quitar Especialista" width="30px" />
 										</vbox>
-										<listbox id="ltbEspecialistasAgregados" height="250px"
+										<listbox id="ltbEspecialistasAgregados" height="450px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Especialista">
 											<listhead>
 												<listheader label="Especialista" width="35%" />
@@ -943,17 +999,23 @@
 										<hbox width="100%">
 											<grid width="auto">
 												<columns visible="false">
-													<column label="" width="50%" />
-													<column label="" width="50%" />
+													<column label="" width="40%" />
+													<column label="" width="60%" />
 												</columns>
 												<rows>
 													<row>
-														<button label="Agregar Especialistas" id="btnAgregarEspecialistas"
-															image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Especialistas"
-															width="200px" />
+														<cell colspan="2">
+															<button label="Agregar Especialistas" id="btnAgregarEspecialistas"
+																image="/public/imagenes/botones/agregar.png"
+																tooltiptext="Agregar Especialistas" vflex="1" hflex="1" />
+														</cell>
 													</row>
 													<row>
-														<label class="etiqueta" value="Prioridad de la Orden:" />
+														<hbox>
+															<label class="etiqueta" value="Prioridad de la Orden:" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
 														<combobox tooltiptext="Seleccione la Prioridad de la Orden"
 															placeholder="Seleccione el Tipo" id="cmbPrioridadEspecialista"
 															width="100%" readonly="true">
@@ -977,7 +1039,7 @@
 											tooltiptext="Crear un Nuevo Estudio Externo" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbServicioExterno" height="250px" width="100%"
+										<listbox id="ltbServicioExterno" height="450px" width="100%"
 											emptyMessage="No hay Estudios Externos Registrados">
 											<listhead>
 												<listheader label="Estudio Externo" width="100%" />
@@ -1013,7 +1075,7 @@
 											<button id="pasar2ServicioExterno" image="/public/imagenes/botones/atras.png"
 												tooltiptext="Quitar Estudio Externo" width="30px" />
 										</vbox>
-										<listbox id="ltbServicioExternoAgregados" height="250px"
+										<listbox id="ltbServicioExternoAgregados" height="450px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
 											<listhead>
 												<listheader label="Estudio Externo" width="35%" />
@@ -1055,17 +1117,23 @@
 										<hbox width="100%">
 											<grid width="auto">
 												<columns visible="false">
-													<column label="" width="50%" />
-													<column label="" width="50%" />
+													<column label="" width="40%" />
+													<column label="" width="60%" />
 												</columns>
 												<rows>
 													<row>
-														<button label="Agregar Servicios" id="btnAgregarServicios"
-															image="/public/imagenes/botones/agregar.png" tooltiptext="Agregar Estudios Externos"
-															width="200px" />
+														<cell colspan="2">
+															<button label="Agregar Servicios" id="btnAgregarServicios"
+																image="/public/imagenes/botones/agregar.png"
+																tooltiptext="Agregar Estudios Externos" vflex="1" hflex="1" />
+														</cell>
 													</row>
 													<row>
-														<label class="etiqueta" value="Prioridad del Estudio:" />
+														<hbox>
+															<label class="etiqueta" value="Prioridad del Estudio:" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
 														<combobox tooltiptext="Seleccione la Prioridad del Estudio"
 															placeholder="Seleccione el Tipo" id="cmbPrioridadServicio"
 															width="100%" readonly="true">
@@ -1085,6 +1153,11 @@
 											style="color:blue; font-size: 12px; font-weight:bold" />
 										<hbox>
 											<vbox>
+												<separator />
+												<label class="etiqueta" value="DIAGNOSTICOS" />
+												<button visible="false" label="Generar Reposo" id="btnGenerarReposo"
+													image="/public/imagenes/botones/generar.png" tooltiptext="Generar Reposo"
+													width="200px" />
 												<listbox width="auto" id="ltbResumenDiagnosticos"
 													height="400px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
 													<listhead>
@@ -1102,6 +1175,8 @@
 												</listbox>
 											</vbox>
 											<vbox>
+												<separator />
+												<label class="etiqueta" value="MEDICINAS" />
 												<button visible="false" label="Generar Recipe" id="btnGenerarRecipe"
 													image="/public/imagenes/botones/generar.png" tooltiptext="Generar Recipe"
 													width="200px" />
@@ -1122,6 +1197,8 @@
 												</listbox>
 											</vbox>
 											<vbox>
+												<separator />
+												<label class="etiqueta" value="EXAMENES" />
 												<button visible="false" label="Generar Orden" id="btnGenerarOrden"
 													image="/public/imagenes/botones/generar.png" tooltiptext="Generar Orden"
 													width="200px" />
@@ -1135,7 +1212,6 @@
 													<template name="model">
 														<listitem>
 															<listcell label="${each.examen.nombre}">
-																<!-- </listcell> <listcell label="${each.costo}"> -->
 															</listcell>
 															<listcell label="${each.observacion}">
 															</listcell>
@@ -1144,6 +1220,8 @@
 												</listbox>
 											</vbox>
 											<vbox>
+												<separator />
+												<label class="etiqueta" value="ESPECIALISTAS" />
 												<button visible="false" label="Generar Referencia"
 													id="btnGenerarReferencia" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Orden" width="200px" />
@@ -1165,6 +1243,8 @@
 												</listbox>
 											</vbox>
 											<vbox>
+												<separator />
+												<label class="etiqueta" value="SERVICIOS EXTERNOS" />
 												<button visible="false" label="Generar Orden"
 													id="btnGenerarOrdenServicios" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Orden" width="200px" />
@@ -1189,10 +1269,6 @@
 											</vbox>
 										</hbox>
 									</groupbox>
-									<!-- <groupbox id="gpxServicio" open="false" width="100%"> <caption 
-										label="Agregar Servicios" style="color:blue; font-size: 12px; font-weight:bold" 
-										/> <separator /> <hbox> termina primero termina segundo termina <separator 
-										/> <separator /> -->
 								</tabpanel>
 							</tabpanels>
 						</tabbox>
@@ -1200,7 +1276,7 @@
 					</tabpanel>
 					<tabpanel>
 						<hbox widths="90%,10%">
-							<listbox id="ltbConsultas" span="true" height="260px"
+							<listbox id="ltbConsultas" span="true" height="480px"
 								width="100%" emptyMessage="El Paciente no posee Consultas Registradas">
 								<listhead>
 									<listheader label="Fecha" hflex="min" />
@@ -1213,9 +1289,9 @@
 								</listhead>
 								<template name="model">
 									<listitem>
-										<listcell label="${each.horaConsulta}">
+										<listcell label="${each.traerFecha()}">
 										</listcell>
-										<listcell label="${each.usuario.primerNombre}">
+										<listcell label="${each.horaAuditoria}">
 										</listcell>
 										<listcell label="${each.motivoConsulta}">
 										</listcell>
@@ -1233,17 +1309,17 @@
 								</template>
 							</listbox>
 							<vbox width="100%">
-								<button label="Ver" id="btnVerConsulta" autodisable="true"
-									image="/public/imagenes/botones/buscar.png"
+								<button autodisable="self" label="Ver Consulta" id="btnVerConsulta"
+									image="/public/imagenes/botones/ver.png"
 									tooltiptext="Seleccione una consulta y presione este boton para ver el detalle de la consulta"
-									hflex="1" />
-								<button label="Reporte" id="btnReporteConsulta"
-									image="/public/imagenes/botones/generar.png"
+									hflex="1" height="35px" />
+								<button autodisable="self" label="Reporte de Consulta"
+									id="btnReporteConsulta" image="/public/imagenes/botones/generar.png"
 									tooltiptext="Seleccione una consulta y presione este boton para generar el reporte de la consulta"
-									hflex="1" autodisable="true" />
-								<button id="btnVerResultado" label="Agregar Resultados"
+									hflex="1" height="35px"/>
+								<button autodisable="self" id="btnVerResultado" label="Agregar Resultados"
 									sclass="btn" image="/public/imagenes/botones/agregar.png"
-									autodisable="true" hflex="1" />
+									hflex="1" height="35px" />
 							</vbox>
 						</hbox>
 					</tabpanel>
@@ -1789,7 +1865,6 @@
 													</rows>
 												</grid>
 											</groupbox>
-
 											<groupbox id="gpxTabaquino" closable="false" open="true"
 												width="100%">
 												<caption label="Tabaquinos"
@@ -2051,9 +2126,7 @@
 											width="100%">
 											<caption label="Antecedentes Medicos"
 												style="color:blue; font-size: 12px; font-weight:bold" />
-											<button id="btnAbrirAntecedente1" label=""
-												tooltiptext="Crear un Nuevo Antecedente" image="/public/imagenes/botones/agregar.png" />
-
+											<separator />
 											<hbox>
 												<listbox id="ltbMedicos" model="${$composer.modelo}"
 													height="350px" width="100%"
@@ -2070,9 +2143,7 @@
 											width="100%">
 											<caption label="Antecedentes Laborales"
 												style="color:blue; font-size: 12px; font-weight:bold" />
-											<button id="btnAbrirAntecedente2" label=""
-												tooltiptext="Crear un Nuevo Antecedente" image="/public/imagenes/botones/agregar.png" />
-
+											<separator />
 											<hbox>
 												<listbox id="ltbLaborales" model="${$composer.model}"
 													height="350px" width="100%"
@@ -2089,9 +2160,7 @@
 											width="100%">
 											<caption label="Antecedentes Familiares"
 												style="color:blue; font-size: 12px; font-weight:bold" />
-											<button id="btnAbrirAntecedente3" label=""
-												tooltiptext="Crear un Nuevo Antecedente" image="/public/imagenes/botones/agregar.png" />
-
+											<separator />
 											<hbox>
 												<listbox id="ltbFamiliares" model="${$composer.modelFamiliares}"
 													height="350px" width="100%"

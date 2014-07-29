@@ -25,6 +25,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import componentes.Botonera;
+import componentes.Mensaje;
 
 import controlador.maestros.CGenerico;
 
@@ -133,8 +134,7 @@ public class CResultado extends CGenerico {
 				consulta.setObservacion(txtObservacion.getValue());
 				servicioConsulta.guardar(consulta);
 				limpiar();
-				Messagebox.show("Registro Guardado Exitosamente",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+				msj.mensajeInformacion(Mensaje.guardado);
 				salir();
 			}
 

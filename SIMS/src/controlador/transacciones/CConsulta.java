@@ -6,21 +6,16 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpSession;
 
 import modelo.generico.DetalleAccidente;
 import modelo.maestros.Accidente;
 import modelo.maestros.Antecedente;
-import modelo.maestros.AntecedenteTipo;
 import modelo.maestros.Cargo;
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialista;
@@ -30,12 +25,10 @@ import modelo.maestros.Medicina;
 import modelo.maestros.Paciente;
 import modelo.maestros.PacienteAntecedente;
 import modelo.maestros.ParteCuerpo;
-import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.Proveedor;
 import modelo.maestros.ProveedorServicio;
 import modelo.maestros.Recipe;
 import modelo.maestros.ServicioExterno;
-import modelo.maestros.UnidadMedicina;
 import modelo.maestros.Vacuna;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
@@ -57,13 +50,10 @@ import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.MouseEvent;
-import org.zkoss.zk.ui.http.SimpleSession;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
@@ -77,7 +67,6 @@ import org.zkoss.zul.GroupsModel;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
@@ -97,12 +86,12 @@ import org.zkoss.zul.Window;
 import servicio.maestros.SParteCuerpo;
 import servicio.maestros.SVacuna;
 import servicio.transacciones.SHistoriaVacuna;
-
 import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
+import componentes.Mensaje;
 
 import controlador.maestros.CGenerico;
 
@@ -806,7 +795,8 @@ public class CConsulta extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divConsulta.getParent();
-		Tabbox tabox = (Tabbox) divConsulta.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divConsulta.getParent().getParent().getParent()
+				.getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -976,11 +966,7 @@ public class CConsulta extends CGenerico {
 					guardarExamenFisico(consultaDatos);
 					guardarAntecedentes(paciente);
 					guardarHistoria(paciente);
-					// limpiarCampos();
-					Messagebox
-							.show("Registro Guardado Exitosamente, ahora puede generar las ordenes respectivas",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
+					msj.mensajeInformacion("Registro Guardado Exitosamente, Ahora puede Generar las Ordenes Respectivas");
 					idConsulta = consultaDatos.getIdConsulta();
 					tabConsulta.setSelected(true);
 					tabResumen.setSelected(true);
@@ -1012,9 +998,6 @@ public class CConsulta extends CGenerico {
 
 			@Override
 			public void limpiar() {
-				if (!botonera.getChildren().get(0).isVisible()) {
-					botonera.getChildren().get(0).setVisible(true);
-				}
 				limpiarCampos();
 			}
 
@@ -1515,85 +1498,54 @@ public class CConsulta extends CGenerico {
 
 	public boolean validar() {
 		if (txtCedula.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Seleccionar un Paciente", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError("Debe Seleccionar un Paciente");
 			return false;
 		} else {
 			if (dtbFechaConsulta.getText().compareTo("") == 0
 					|| cmbTipoConsulta.getText().compareTo("") == 0
 					|| dtbValido.getText().compareTo("") == 0
 					|| cmbTipoPreventiva.getText().compareTo("") == 0) {
-				Messagebox.show(
-						"Debe Llenar Todos los campos Basicos de la Consulta",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+				msj.mensajeError(Mensaje.camposVacios);
 				return false;
 			} else {
 				if (txtMotivo.getText().compareTo("") == 0
 						|| txtEnfermedad.getText().compareTo("") == 0
 						|| (!rdoSiReposo.isChecked() && !rdoNoReposo
 								.isChecked())) {
-					Messagebox
-							.show("Debe Llenar los campos secundarios de la Consulta (Motivo de la Consulta, Enfermedad Actual y si amerita o no reposo)",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
+					msj.mensajeError("Debe Llenar los campos secundarios de la Consulta (Motivo de la Consulta, Enfermedad Actual y si Amerita o no Reposo)");
 					return false;
 				} else {
 					if (!agregarMedicina()) {
-						Messagebox
-								.show("Debe Llenar Todos los Campos de la Lista de Medicinas",
-										"Informacion", Messagebox.OK,
-										Messagebox.INFORMATION);
+						msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Medicinas");
 						return false;
 					} else {
 						if (!agregarDiagnostico()) {
-							Messagebox
-									.show("Debe Llenar Todos los Campos de la Lista de Diagnosticos",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+							msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Diagnosticos");
 							return false;
 						} else {
 							if (!agregarExamen()) {
-								Messagebox
-										.show("Debe Llenar Todos los Campos de la Lista de Examenes",
-												"Informacion", Messagebox.OK,
-												Messagebox.INFORMATION);
+								msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Examenes");
 								return false;
 							} else {
 								if (!agregarEspecialista()) {
-									Messagebox
-											.show("Debe Llenar Todos los Campos de la Lista de Especialistas",
-													"Informacion",
-													Messagebox.OK,
-													Messagebox.INFORMATION);
+									msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Especialistas");
 									return false;
 								} else {
 									if (!agregarServicio()) {
-										Messagebox
-												.show("Debe Llenar Todos los Campos de la Lista de Servicios Externos",
-														"Informacion",
-														Messagebox.OK,
-														Messagebox.INFORMATION);
+										msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Servicios Externos");
 										return false;
 									} else {
 										if (cmbTipoPreventiva.getValue()
 												.equals("Control")
 												&& idConsultaAsociada == 0) {
-											Messagebox
-													.show("Debe seleccionar una consulta, que este asociada a la consulta de control que esta realizando",
-															"Informacion",
-															Messagebox.OK,
-															Messagebox.INFORMATION);
+											msj.mensajeError("Debe Seleccionar la Consulta Asociada al Control que se esta Realizando");
 											return false;
 										} else {
 											if (ltbMedicinasAgregadas
 													.getItemCount() != 0
 													&& cmbPrioridad.getText()
 															.compareTo("") == 0) {
-												Messagebox
-														.show("Debe Seleccionar la Prioridad del Recipe",
-																"Informacion",
-																Messagebox.OK,
-																Messagebox.INFORMATION);
+												msj.mensajeError("Debe Seleccionar la Prioridad del Recipe");
 												return false;
 											} else {
 												if (ltbExamenesAgregados
@@ -1601,20 +1553,12 @@ public class CConsulta extends CGenerico {
 														&& cmbProveedor
 																.getText()
 																.compareTo("") == 0) {
-													Messagebox
-															.show("Debe Seleccionar el Laboratorio que Realizara los Examenes",
-																	"Informacion",
-																	Messagebox.OK,
-																	Messagebox.INFORMATION);
+													msj.mensajeError("Debe Seleccionar el Laboratorio que Realizara los Examenes");
 													return false;
 												} else {
 													if (ltbDiagnosticosAgregados
 															.getItemCount() == 0) {
-														Messagebox
-																.show("Debe seleccionar al menos un diagnostico",
-																		"Informacion",
-																		Messagebox.OK,
-																		Messagebox.INFORMATION);
+														msj.mensajeError("Debe seleccionar al menos un diagnostico");
 														return false;
 													} else {
 														if ((cmbTipoPreventiva
@@ -1632,11 +1576,7 @@ public class CConsulta extends CGenerico {
 																		.getText()
 																		.compareTo(
 																				"") == 0)) {
-															Messagebox
-																	.show("Debe seleccionar el cargo y el area a la cual aspira el paciente",
-																			"Informacion",
-																			Messagebox.OK,
-																			Messagebox.INFORMATION);
+															msj.mensajeError("Debe Seleccionar el Cargo y el Area a la cual Aspira el Paciente");
 															return false;
 														} else {
 															if ((cmbTipoPreventiva
@@ -1650,11 +1590,7 @@ public class CConsulta extends CGenerico {
 																	&& (!rdoSiApto
 																			.isChecked() && !rdoNoApto
 																			.isChecked())) {
-																Messagebox
-																		.show("Debe indicar si el paciente es apto, o no para el cargo que aspira",
-																				"Informacion",
-																				Messagebox.OK,
-																				Messagebox.INFORMATION);
+																msj.mensajeError("Debe Indicar si el Paciente es Apto, o no para el Cargo que Aspira");
 																return false;
 															} else {
 																if (ltbServicioExternoAgregados
@@ -1663,11 +1599,7 @@ public class CConsulta extends CGenerico {
 																				.getText()
 																				.compareTo(
 																						"") == 0) {
-																	Messagebox
-																			.show("Debe seleccionar la prioridad de la orden de los Estudios Externos",
-																					"Informacion",
-																					Messagebox.OK,
-																					Messagebox.INFORMATION);
+																	msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Estudios Externos");
 																	return false;
 																} else {
 																	if (ltbExamenesAgregados
@@ -1676,11 +1608,7 @@ public class CConsulta extends CGenerico {
 																					.getText()
 																					.compareTo(
 																							"") == 0) {
-																		Messagebox
-																				.show("Debe seleccionar la prioridad de la orden de los Examenes",
-																						"Informacion",
-																						Messagebox.OK,
-																						Messagebox.INFORMATION);
+																		msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Examenes");
 																		return false;
 																	} else {
 																		if (ltbEspecialistasAgregados
@@ -1689,41 +1617,25 @@ public class CConsulta extends CGenerico {
 																						.getText()
 																						.compareTo(
 																								"") == 0) {
-																			Messagebox
-																					.show("Debe seleccionar la prioridad de la orden de los Especialistas",
-																							"Informacion",
-																							Messagebox.OK,
-																							Messagebox.INFORMATION);
+																			msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Especialistas");
 																			return false;
 																		} else {
 																			if (ltbIntervencionesAgregadas
 																					.getItemCount() != 0
 																					&& !validarIntervencion()) {
-																				Messagebox
-																						.show("Debe seleccionar al menos la Fecha de la lista de Intervenciones Agregadas",
-																								"Informacion",
-																								Messagebox.OK,
-																								Messagebox.INFORMATION);
+																				msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Intervenciones Agregadas");
 																				return false;
 																			} else {
 																				if (ltbAccidentesComunesAgregados
 																						.getItemCount() != 0
 																						&& !validarComunes()) {
-																					Messagebox
-																							.show("Debe seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados",
-																									"Informacion",
-																									Messagebox.OK,
-																									Messagebox.INFORMATION);
+																					msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados");
 																					return false;
 																				} else {
 																					if (ltbAccidentesLaboralesAgregados
 																							.getItemCount() != 0
 																							&& !validarLaborales()) {
-																						Messagebox
-																								.show("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados",
-																										"Informacion",
-																										Messagebox.OK,
-																										Messagebox.INFORMATION);
+																						msj.mensajeError("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados");
 																						return false;
 																					} else
 																						return true;
@@ -2059,37 +1971,26 @@ public class CConsulta extends CGenerico {
 					.getValue());
 			if (validarHistoria()) {
 				guardarHistoria(paciente);
-				Messagebox.show("Registro Guardado Exitosamente",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+				msj.mensajeInformacion(Mensaje.guardado);
 			}
 		} else
-			Messagebox.show("Debe seleccionar Previamente un paciente",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError("Debe Seleccionar un Paciente");
 	}
 
 	private boolean validarHistoria() {
 		if (ltbIntervencionesAgregadas.getItemCount() != 0
 				&& !validarIntervencion()) {
-			Messagebox
-					.show("Debe seleccionar al menos la Fecha de la lista de Intervenciones Agregadas",
-							"Informacion", Messagebox.OK,
-							Messagebox.INFORMATION);
+			msj.mensajeError("Debe seleccionar al menos la Fecha de la lista de Intervenciones Agregadas");
 			return false;
 		} else {
 			if (ltbAccidentesComunesAgregados.getItemCount() != 0
 					&& !validarComunes()) {
-				Messagebox
-						.show("Debe seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados",
-								"Informacion", Messagebox.OK,
-								Messagebox.INFORMATION);
+				msj.mensajeError("Debe seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados");
 				return false;
 			} else {
 				if (ltbAccidentesLaboralesAgregados.getItemCount() != 0
 						&& !validarLaborales()) {
-					Messagebox
-							.show("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados",
-									"Informacion", Messagebox.OK,
-									Messagebox.INFORMATION);
+					msj.mensajeError("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados");
 					return false;
 				} else
 					return true;
@@ -2115,8 +2016,6 @@ public class CConsulta extends CGenerico {
 					return servicioPaciente.filtroCedula(valor);
 				case "Apellido":
 					return servicioPaciente.filtroApellido1(valor);
-					// case "Empresa":
-					// return servicioPaciente.filtroEmpresa(valor);
 				default:
 					return pacientes;
 				}
@@ -2209,14 +2108,12 @@ public class CConsulta extends CGenerico {
 		for (int i = 0; i < consultas.size(); i++) {
 			consultas.get(i).setHoraConsulta(
 					formatoFecha.format(consultas.get(i).getFechaConsulta()));
-			// consultas
-			// .get(i)
-			// .getUsuario()
-			// .setPrimerNombre(
-			// consultas.get(i).getUsuario().getPrimerNombre()
-			// + " "
-			// + consultas.get(i).getUsuario()
-			// .getPrimerApellido());
+		}
+		for (int i = 0; i < consultas.size(); i++) {
+			String nombre = consultas.get(i).getUsuario().getPrimerNombre();
+			String apellido = consultas.get(i).getUsuario().getPrimerApellido();
+			Consulta consulta = consultas.get(i);
+			consulta.setHoraAuditoria(nombre + " " + apellido);
 		}
 		ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
 		ltbConsultas.setMultiple(false);
@@ -2244,22 +2141,21 @@ public class CConsulta extends CGenerico {
 					tabConsulta.setSelected(true);
 					tabResumen.setSelected(true);
 					if (consulta.getReposo())
-						btnGenerarRecipe.setVisible(true);
+						btnGenerarReposo.setVisible(true);
 					btnGenerarOrden.setVisible(true);
 					btnGenerarReferencia.setVisible(true);
 					btnGenerarOrdenServicios.setVisible(true);
-					btnGenerarReposo.setVisible(true);
+					btnGenerarRecipe.setVisible(true);
 				}
 			} else
-				Messagebox.show("Debe Seleccionar solo una Consulta",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+				msj.mensajeError("Debe Seleccionar una Consulta");
 		} else
-			Messagebox.show("No existen consultas que Consultar",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError("No existen Regitros de Consulta");
 	}
 
 	private void llenarCamposConsulta(Consulta consulta) {
 		limpiarCamposConsulta();
+		lblPreventiva.setVisible(true);
 		txtCondicionado.setValue(consulta.getCondicionApto());
 		cmbTipoConsulta.setValue(consulta.getTipoConsulta());
 		cmbTipoPreventiva.setVisible(true);
@@ -2370,6 +2266,8 @@ public class CConsulta extends CGenerico {
 		lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
 		lblFicha.setValue(paciente.getFicha());
 		lblAlergias.setValue(paciente.getObservacionAlergias());
+		lblFechaNac.setValue(String.valueOf(formatoFecha.format(paciente
+				.getFechaNacimiento())));
 		lblLugarNac.setValue(paciente.getLugarNacimiento());
 		lblSexo.setValue(paciente.getSexo());
 		lblEstadoCivil.setValue(paciente.getEstadoCivil());
@@ -2379,8 +2277,6 @@ public class CConsulta extends CGenerico {
 		lblTipoDiscapacidad.setValue(paciente.getTipoDiscapacidad());
 		lblObservacionDiscapacidad.setValue(paciente
 				.getObservacionDiscapacidad());
-		lblCargo.setValue(paciente.getCargoReal().getNombre());
-		lblArea.setValue(paciente.getArea().getNombre());
 		lblDireccion.setValue(paciente.getDireccion());
 		lblTelefono1.setValue(paciente.getTelefono1());
 		lblTelefono2.setValue(paciente.getTelefono2());
@@ -2401,9 +2297,11 @@ public class CConsulta extends CGenerico {
 		else
 			lblAlergico.setValue("NO");
 
-		if (paciente.isTrabajador())
+		if (paciente.isTrabajador()) {
 			lblTrabajador.setValue("SI");
-		else
+			lblCargo.setValue(paciente.getCargoReal().getNombre());
+			lblArea.setValue(paciente.getArea().getNombre());
+		} else
 			lblTrabajador.setValue("NO");
 
 		if (paciente.isDiscapacidad())
@@ -3095,7 +2993,6 @@ public class CConsulta extends CGenerico {
 			ltbResumenMedicinas.setModel(new ListModelList<ConsultaMedicina>(
 					medicinasResumen));
 		}
-		// medicinasResumen.clear();
 		if (falta)
 			return false;
 		else
@@ -3127,7 +3024,6 @@ public class CConsulta extends CGenerico {
 					.setModel(new ListModelList<ConsultaDiagnostico>(
 							diagnosticosResumen));
 		}
-		// diagnosticosResumen.clear();
 		if (falta)
 			return false;
 		else
@@ -3156,7 +3052,6 @@ public class CConsulta extends CGenerico {
 			ltbResumenExamenes.setModel(new ListModelList<ConsultaExamen>(
 					examenesResumen));
 		}
-		// examenesResumen.clear();
 		if (falta)
 			return false;
 		else
@@ -3188,7 +3083,6 @@ public class CConsulta extends CGenerico {
 					.setModel(new ListModelList<ConsultaEspecialista>(
 							especialistasResumen));
 		}
-		// examenesResumen.clear();
 		if (falta)
 			return false;
 		else
@@ -3207,11 +3101,6 @@ public class CConsulta extends CGenerico {
 						.getItemAtIndex(i);
 				consulta = new ConsultaServicioExterno();
 				consulta = listItem2.get(i).getValue();
-				// double valor = ((Doublespinner)
-				// ((listItem.getChildren().get(1)))
-				// .getFirstChild()).getValue();
-				// String centro = ((Combobox) ((listItem.getChildren().get(1)))
-				// .getFirstChild()).getValue();
 				String valor = ((Textbox) ((listItem.getChildren().get(1)))
 						.getFirstChild()).getValue();
 				String proveedor = ((Combobox) ((listItem.getChildren().get(2)))
@@ -3220,14 +3109,12 @@ public class CConsulta extends CGenerico {
 					falta = true;
 				}
 				consulta.setObservacion(valor);
-				// consulta.setProveedor(proveedor);
 				serviciosResumen.add(consulta);
 			}
 			ltbResumenServicios
 					.setModel(new ListModelList<ConsultaServicioExterno>(
 							serviciosResumen));
 		}
-		// serviciosResumen.clear();
 		if (falta)
 			return false;
 		else
@@ -3314,6 +3201,10 @@ public class CConsulta extends CGenerico {
 	}
 
 	public void limpiarCampos() {
+		if (!botonera.getChildren().get(0).isVisible()) {
+			botonera.getChildren().get(0).setVisible(true);
+		}
+		btnGenerarOrden.setVisible(false);
 		btnGenerarRecipe.setVisible(false);
 		btnGenerarReferencia.setVisible(false);
 		btnGenerarOrdenServicios.setVisible(false);
@@ -3836,8 +3727,7 @@ public class CConsulta extends CGenerico {
 			llenarListas();
 		} else {
 			limpiarCampos();
-			Messagebox.show("Cedula Incorrecta", "Informacion", Messagebox.OK,
-					Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.cedulaInvalida);
 		}
 	}
 
@@ -4609,10 +4499,8 @@ public class CConsulta extends CGenerico {
 							((Doublespinner) ((listItem.getChildren().get(3)))
 									.getFirstChild()).setValue(precioUnitario);
 						} else {
-							Messagebox
-									.show("Este proveedor no posee este estudio asignado, por favor seleccione otro o remuevalo de la lista",
-											"Informacion", Messagebox.OK,
-											Messagebox.INFORMATION);
+
+							msj.mensajeAlerta("Este proveedor no posee este estudio asignado, por favor seleccione otro o remuevalo de la lista");
 							((Doublespinner) ((listItem.getChildren().get(3)))
 									.getFirstChild()).setValue((double) 0);
 							((Combobox) ((listItem.getChildren().get(2)))
@@ -4779,7 +4667,7 @@ public class CConsulta extends CGenerico {
 				Diagnostico diagnostico = list2.getValue();
 				if (diagnostico.getEpi() != null) {
 					if (diagnostico.getEpi())
-						list2.setStyle("font-weight:bold; background:#FF4545; font-color:white");
+						list2.setStyle("font-weight:bold; background:#F8E0E0; font-color:white");
 				}
 			}
 		}
@@ -4793,7 +4681,7 @@ public class CConsulta extends CGenerico {
 				ConsultaDiagnostico consultaD = list2.getValue();
 				if (consultaD.getDiagnostico().getEpi() != null) {
 					if (consultaD.getDiagnostico().getEpi())
-						list2.setStyle("font-weight:bold; background:#FF4545; font-color:white");
+						list2.setStyle("font-weight:bold; background:#F8E0E0; font-color:white");
 				}
 			}
 		}
@@ -4873,8 +4761,10 @@ public class CConsulta extends CGenerico {
 							mapiin);
 					window.doModal();
 				}
-			}
-		}
+			} else
+				msj.mensajeError("Debe Seleccionar una Consulta");
+		} else
+			msj.mensajeError("No existen Regitros de Consulta");
 	}
 
 	// Reporte Recipe Medicinas
@@ -4887,8 +4777,7 @@ public class CConsulta extends CGenerico {
 					+ id
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else
-			Messagebox.show("No existe informacion para mostrar",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
 
 	}
 
@@ -4897,8 +4786,16 @@ public class CConsulta extends CGenerico {
 		Consulta consuta = getServicioConsulta().buscar(id);
 		List<ConsultaMedicina> listaMedicinas = getServicioConsultaMedicina()
 				.buscarPorConsulta(consuta);
-		Integer dias = listaMedicinas.get(0).getRecipe().getValidez().getDate()
-				- consuta.getFechaConsulta().getDate();
+
+		Date fechaRecipe = listaMedicinas.get(0).getRecipe().getValidez();
+		Calendar c = Calendar.getInstance();
+		c.setTime(fechaRecipe);
+		Calendar ca = Calendar.getInstance();
+		Date fechaConsulta = consuta.getFechaConsulta();
+		ca.setTime(fechaConsulta);
+		int dias = 0;
+		dias = (c.DAY_OF_YEAR - ca.DAY_OF_YEAR);
+
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
@@ -4911,17 +4808,24 @@ public class CConsulta extends CGenerico {
 			rifEmpresa = paciente.getEmpresa().getRif();
 		}
 
+		String nombre = paciente.getPrimerNombre() + "   "
+				+ paciente.getSegundoNombre();
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
-		p.put("pacienteNombre", paciente.getPrimerNombre());
-		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteNombre", nombre);
+		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
+				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
-		p.put("doctorNombre", user.getPrimerNombre());
-		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorNombre",
+				user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		p.put("doctorApellido",
+				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
-		p.put("dias", dias.toString());
+
+		// Restar Dias
+		p.put("dias", dias);
 		p.put("msds", user.getLicenciaMsds());
 		p.put("comelar", user.getLicenciaCm());
 
@@ -4950,8 +4854,7 @@ public class CConsulta extends CGenerico {
 						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 			}
 		} else
-			Messagebox.show("No existe informacion para mostrar",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
 
 	}
 
@@ -4978,13 +4881,18 @@ public class CConsulta extends CGenerico {
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
-		p.put("pacienteNombre", paciente.getPrimerNombre());
-		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteNombre",
+				paciente.getPrimerNombre() + "   "
+						+ paciente.getSegundoNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
+				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
 		p.put("pacienteEdad", paciente.getEdad());
 		p.put("pacienteSexo", paciente.getSexo());
-		p.put("doctorNombre", user.getPrimerNombre());
-		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorNombre",
+				user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		p.put("doctorApellido",
+				user.getPrimerApellido() + "" + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
 		p.put("especialidad", especialistaConsulta.getEspecialista()
 				.getEspecialidad().getDescripcion());
@@ -5027,8 +4935,7 @@ public class CConsulta extends CGenerico {
 						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 			}
 		} else
-			Messagebox.show("No existe informacion para mostrar",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
 
 	}
 
@@ -5052,13 +4959,17 @@ public class CConsulta extends CGenerico {
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
-		p.put("pacienteNombre", paciente.getPrimerNombre());
-		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteNombre",
+				paciente.getPrimerNombre() + "  " + paciente.getSegundoNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
+				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
 		p.put("pacienteEdad", paciente.getEdad());
 		p.put("pacienteSexo", paciente.getSexo());
-		p.put("doctorNombre", user.getPrimerNombre());
-		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorNombre",
+				user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		p.put("doctorApellido",
+				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
 		p.put("servicio", servicioConsultas.getServicioExterno().getNombre());
 		p.put("centro", servicioConsultas.getProveedor().getNombre());
@@ -5082,8 +4993,7 @@ public class CConsulta extends CGenerico {
 					+ id
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else
-			Messagebox.show("No existe informacion para mostrar",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
 
 	}
 
@@ -5107,11 +5017,15 @@ public class CConsulta extends CGenerico {
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
-		p.put("pacienteNombre", paciente.getPrimerNombre());
-		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteNombre",
+				paciente.getPrimerNombre() + "  " + paciente.getSegundoNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
+				+ paciente.getPrimerApellido());
 		p.put("pacienteCedula", paciente.getCedula());
-		p.put("doctorNombre", user.getPrimerNombre());
-		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorNombre",
+				user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		p.put("doctorApellido",
+				user.getPrimerApellido() + "" + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
 		p.put("prioridad", listaMedicinas.get(0).getPrioridad());
 		p.put("proveedor", listaMedicinas.get(0).getProveedor().getNombre());
@@ -5138,11 +5052,9 @@ public class CConsulta extends CGenerico {
 							+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 				}
 			} else
-				Messagebox.show("Debe Seleccionar solo una Consulta",
-						"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+				msj.mensajeError("Debe Seleccionar una Consulta");
 		} else
-			Messagebox.show("No existen consultas que Consultar",
-					"Informacion", Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError("No existen Regitros de Consulta");
 
 	}
 
@@ -5165,12 +5077,17 @@ public class CConsulta extends CGenerico {
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
-		p.put("pacienteNombre", paciente.getPrimerNombre());
-		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteNombre",
+				paciente.getPrimerNombre() + "   "
+						+ paciente.getSegundoNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
+				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
-		p.put("doctorNombre", user.getPrimerNombre());
-		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorNombre",
+				user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		p.put("doctorApellido",
+				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
 		p.put("fechaConsulta", consuta.getFechaConsulta());
 		p.put("tipoConsulta", consuta.getTipoConsultaSecundaria());
@@ -5196,8 +5113,7 @@ public class CConsulta extends CGenerico {
 					+ id
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else
-			Messagebox.show("Debe Seleccionar un Paciente", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError("Debe Seleccionar un Paciente");
 	}
 
 	public byte[] reporteConsultaHistorico(Long part2) throws JRException {
@@ -5222,9 +5138,13 @@ public class CConsulta extends CGenerico {
 
 		Map p = new HashMap();
 		p.put("pacienteNombre", listaConsultas.get(0).getPaciente()
-				.getPrimerNombre());
+				.getPrimerNombre()
+				+ "   "
+				+ listaConsultas.get(0).getPaciente().getSegundoNombre());
 		p.put("pacienteApellido", listaConsultas.get(0).getPaciente()
-				.getPrimerApellido());
+				.getPrimerApellido()
+				+ "   "
+				+ listaConsultas.get(0).getPaciente().getSegundoApellido());
 		p.put("pacienteCedula", listaConsultas.get(0).getPaciente().getCedula());
 		p.put("pacienteNacimiento", listaConsultas.get(0).getPaciente()
 				.getFechaNacimiento());
@@ -5246,8 +5166,7 @@ public class CConsulta extends CGenerico {
 					+ id
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else
-			Messagebox.show("Debe registrar la Consulta", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeAlerta("Debe registrar la Consulta");
 	}
 
 	public byte[] reporteReposo(Long part2) throws JRException {

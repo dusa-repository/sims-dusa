@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReposo" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80f827cd-f931-40fe-9157-fa70b2ef6b6a">
-	<property name="ireport.zoom" value="0.8264462809917354"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="29"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
@@ -20,9 +20,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="300" splitType="Stretch">
+		<band height="377" splitType="Stretch">
 			<image>
-				<reportElement x="17" y="30" width="107" height="69" uuid="69642d60-db9c-415e-a6bb-e7f549902e3e"/>
+				<reportElement x="11" y="30" width="113" height="69" uuid="69642d60-db9c-415e-a6bb-e7f549902e3e"/>
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<staticText>
@@ -40,112 +40,112 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="237" y="99" width="100" height="20" uuid="2b6269f2-e47d-4d30-b8a7-e852147b071a"/>
+				<reportElement x="214" y="117" width="121" height="21" uuid="2b6269f2-e47d-4d30-b8a7-e852147b071a"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="12" isBold="true" isUnderline="true"/>
+					<font fontName="Arial" size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Reposo Medico]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="136" y="34" width="309" height="20" uuid="ad9a6a96-1ad9-42aa-b871-4f2abaed84d4"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaNombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="456" y="34" width="116" height="20" uuid="375be4b4-0534-4b4b-88c8-c08126dd3c7d"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="137" y="64" width="435" height="20" uuid="82e19fa7-1390-414b-81e3-090e61e62921"/>
+				<reportElement x="137" y="64" width="435" height="35" uuid="82e19fa7-1390-414b-81e3-090e61e62921"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaDireccion}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="139" width="300" height="20" uuid="08226da2-d765-490d-bc6c-c83b8878cea7"/>
+				<reportElement x="0" y="158" width="300" height="20" uuid="08226da2-d765-490d-bc6c-c83b8878cea7"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Por medio de la presente se otorga Reposo Medico a:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="300" y="139" width="272" height="20" uuid="f85bc08e-08b3-414c-a567-058317d9f6bd"/>
+				<reportElement x="300" y="158" width="272" height="20" uuid="f85bc08e-08b3-414c-a567-058317d9f6bd"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteNombre}+" "+$P{pacienteApellido}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="159" width="124" height="20" uuid="fb30f3d3-69d4-43c9-9685-2cb52c8b6c15"/>
+				<reportElement x="0" y="178" width="124" height="20" uuid="fb30f3d3-69d4-43c9-9685-2cb52c8b6c15"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[cedula de Identidad:]]></text>
+				<text><![CDATA[Cedula de Identidad:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="124" y="159" width="183" height="20" uuid="477d4822-7bd1-4e7c-ae58-f3e6f89ecf29"/>
+				<reportElement x="124" y="178" width="124" height="20" uuid="477d4822-7bd1-4e7c-ae58-f3e6f89ecf29"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="307" y="159" width="230" height="20" uuid="c46b3811-d150-48d0-a34f-fcad744b06fa"/>
+				<reportElement x="248" y="178" width="230" height="20" uuid="c46b3811-d150-48d0-a34f-fcad744b06fa"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[quien presta sus servicios en el area de:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="179" width="342" height="20" uuid="825ef08d-f84e-4da9-b6d4-2d2d83c4204f"/>
+				<reportElement x="0" y="198" width="510" height="20" uuid="825ef08d-f84e-4da9-b6d4-2d2d83c4204f"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="211" width="148" height="20" uuid="8c705aeb-6d1d-46fc-95d1-1719797f79f1"/>
+				<reportElement x="0" y="230" width="163" height="20" uuid="8c705aeb-6d1d-46fc-95d1-1719797f79f1"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[El permiso empieza el dia:]]></text>
+				<text><![CDATA[El Reposo comienza el dia:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="148" y="211" width="100" height="20" uuid="76c945fe-29f6-4e07-bff6-d5d4ae72d490"/>
+				<reportElement x="163" y="230" width="100" height="20" uuid="76c945fe-29f6-4e07-bff6-d5d4ae72d490"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaDesde})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="248" y="211" width="72" height="20" uuid="bcff134c-d4a5-4abc-8ee6-d2ece8485324"/>
+				<reportElement x="263" y="230" width="72" height="20" uuid="bcff134c-d4a5-4abc-8ee6-d2ece8485324"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[hasta el dia:]]></text>
+				<text><![CDATA[Hasta el dia:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="320" y="211" width="100" height="20" uuid="589a8eba-6b33-45ac-bed3-e3c3f7898643"/>
+				<reportElement x="337" y="230" width="107" height="20" uuid="589a8eba-6b33-45ac-bed3-e3c3f7898643"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaHasta})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="252" width="80" height="20" uuid="92440f3f-210c-41b6-b647-e35a47f8f189"/>
+				<reportElement x="0" y="271" width="93" height="20" uuid="92440f3f-210c-41b6-b647-e35a47f8f189"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[Por motivo de:]]></text>
+				<text><![CDATA[Por Motivo de:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="80" y="252" width="448" height="20" uuid="48cb73aa-457d-42d6-bf81-da74b67ed248"/>
+				<reportElement x="93" y="271" width="435" height="20" uuid="48cb73aa-457d-42d6-bf81-da74b67ed248"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -153,4 +153,18 @@
 			</textField>
 		</band>
 	</title>
+	<pageFooter>
+		<band height="50">
+			<staticText>
+				<reportElement x="178" y="17" width="159" height="20" uuid="c533c1dd-baa9-432d-b6a2-c88aa914c920"/>
+				<box topPadding="0" leftPadding="0">
+					<topPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font fontName="Arial"/>
+				</textElement>
+				<text><![CDATA[Firma del Medico Asistencial]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
 </jasperReport>

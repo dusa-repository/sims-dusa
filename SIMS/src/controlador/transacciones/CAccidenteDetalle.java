@@ -25,6 +25,7 @@ import org.zkoss.zul.Window;
 
 import componentes.Botonera;
 import componentes.Catalogo;
+import componentes.Mensaje;
 import componentes.Validador;
 
 import controlador.maestros.CGenerico;
@@ -153,8 +154,7 @@ public class CAccidenteDetalle extends CGenerico {
 				|| txtRazon.getText().compareTo("") == 0
 				|| txtNombre.getText().compareTo("") == 0
 				|| cmbClasificacion.getText().compareTo("") == 0) {
-			Messagebox.show("Debe Llenar Todos los Campos", "Informacion",
-					Messagebox.OK, Messagebox.INFORMATION);
+			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -164,7 +164,7 @@ public class CAccidenteDetalle extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		final List<Accidente> accidentes = servicioAccidente.buscarTodos();
 		catalogo = new Catalogo<Accidente>(catalogoAccidente,
-				"Catalogo de Doctores", accidentes, "Codigo", "Nombre",
+				"Catalogo de Accidentes", accidentes, "Codigo", "Nombre",
 				"Clasificacion") {
 
 			@Override
@@ -212,7 +212,7 @@ public class CAccidenteDetalle extends CGenerico {
 				idAccidente = accidente.getIdAccidente();
 				txtNombre.setValue(accidente.getNombre());
 			}
-		} else{
+		} else {
 			Messagebox
 					.show("Solo se Admiten numeros para el Codigo CIIU del Accidente",
 							"Informacion", Messagebox.OK,
