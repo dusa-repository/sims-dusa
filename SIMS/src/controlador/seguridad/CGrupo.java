@@ -341,7 +341,7 @@ public class CGrupo extends CGenerico {
 						.setModel(new ListModelList<String>(funcionalidades));
 			}
 			Arbol arbolItem = servicioArbol.buscarPorNombreArbol(nombreItem);
-			listaArbol.remove((int) (long) arbolItem.getIdArbol() - 1);
+			listaArbol.remove(arbolItem);
 			long temp = arbolItem.getPadre();
 			long temp2 = 0;
 			long temp3 = temp;

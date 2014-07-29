@@ -1,5 +1,5 @@
 <zk>
-	<window width="40em" id="wdwRegistro"
+	<window width="50em" id="wdwRegistro"
 		apply="controlador.transacciones.CAccidenteDetalle">
 		<div>
 			<groupbox width="100%" mold="3d" title="Detalle de Accidente">
@@ -16,14 +16,22 @@
 							<hbox />
 						</row>
 						<row>
-							<label class="etiqueta" value="Accidente:" />
+							<hbox>
+								<label class="etiqueta" value="Accidente:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 							<textbox maxlength="100" inplace="true" id="txtNombre"
 								hflex="1" tooltiptext="Ingrese el codigo CIUU del Accidente" />
-							<button autodisable="true" id="btnBuscar" label=""
+							<button autodisable="self" id="btnBuscar" label=""
 								tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 						</row>
 						<row>
-							<label class="etiqueta" value="Clasificacion de Accidente:" />
+							<hbox>
+								<label class="etiqueta" value="Clasificacion de Accidente:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 							<combobox tooltiptext="Seleccione una Clasificacion"
 								placeholder="Seleccione una Clasificacion" id="cmbClasificacion"
 								readonly="true" hflex="1">
@@ -34,20 +42,32 @@
 							<hbox />
 						</row>
 						<row>
-							<label class="etiqueta" value="Lugar del Accidente:" />
+							<hbox>
+								<label class="etiqueta" value="Lugar del Accidente:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 							<textbox class="multilinea" id="txtLugar" hflex="1"
 								maxlength="100" tooltiptext="Ingrese la Clasificacion"
 								multiline="true" />
 							<hbox />
 						</row>
 						<row>
-							<label class="etiqueta" value="Fecha del Accidente:" />
+							<hbox>
+								<label class="etiqueta" value="Fecha del Accidente:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 							<datebox readonly="true" width="100%" id="dtbFecha"
 								onCreate="self.value = new Date()" />
 							<hbox />
 						</row>
 						<row>
-							<label class="etiqueta" value="Motivo del Accidente:" />
+							<hbox>
+								<label class="etiqueta" value="Motivo del Accidente:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
 							<textbox class="multilinea" id="txtRazon" hflex="1"
 								maxlength="100" tooltiptext="Ingrese la Clasificacion"
 								multiline="true" />

@@ -2,6 +2,8 @@ package modelo.transacciones;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -683,6 +685,11 @@ public class Consulta implements Serializable {
 
 	public void setCondicionApto(String condicionApto) {
 		this.condicionApto = condicionApto;
+	}
+	
+	public String traerFecha() {
+		DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+		return String.valueOf(formatoFecha.format(fechaConsulta));
 	}
 
 }

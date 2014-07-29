@@ -1,12 +1,13 @@
 <zk>
-	<window width="90em" closable="false" id="wdwResultado"
+	<window width="80em" closable="false" id="wdwResultado"
 		apply="controlador.transacciones.CResultado">
-		<caption label="Resultados de la consulta"
-			style="color:white; font-size: 16px; font-weight:bold; " />
+		<caption label="Resultados de la Consulta"
+			style="color:black; font-size: 16px; font-weight:bold; " />
 		<div>
 			<space />
 			<vbox heights="30%,30%,30%,10%" hflex="1" vflex="1">
-				<listbox id="ltbExamenes" height="100%" width="100%"
+				<label class="etiqueta" value="Examenes Solicitados en la Consulta" />
+				<listbox id="ltbExamenes" height="180px" width="100%"
 					emptyMessage="La consulta no posee examenes asociados">
 					<listhead>
 						<listheader label="Examen" width="30%" />
@@ -27,7 +28,8 @@
 						</listitem>
 					</template>
 				</listbox>
-				<listbox id="ltbEspecialistas" height="100%" width="100%"
+				<label class="etiqueta" value="Especialistas Referidos en la Consulta" />
+				<listbox id="ltbEspecialistas" height="180px" width="100%"
 					emptyMessage="La consulta no posee especialistas asociados">
 					<listhead>
 						<listheader label="Especialista" width="30%" />
@@ -51,7 +53,8 @@
 						</listitem>
 					</template>
 				</listbox>
-				<listbox id="ltbServicio" height="100%" width="100%"
+				<label class="etiqueta" value="Servicios Externos Solicitados en la Consulta" />
+				<listbox id="ltbServicio" height="180px" width="100%"
 					emptyMessage="La consulta no posee servicios externos asociados">
 					<listhead>
 						<listheader label="Estudio Externo" width="30%" />
@@ -76,11 +79,14 @@
 					</template>
 				</listbox>
 			</vbox>
-			<hbox width="100%" widths="5%,95%">
-				<label hflex="1" class="etiqueta" value="Observacion" />
+			<separator />
+			<hbox>
+				<label class="etiqueta" value="Observacion:" />
 				<textbox maxlength="500" class="multilinea" multiline="true"
-					id="txtObservacion" hflex="1" tooltiptext="Ingrese la observacion respectiva" />
+					id="txtObservacion" hflex="1" tooltiptext="Ingrese la observacion respectiva"
+					width="500px" />
 			</hbox>
+			<separator />
 			<div id="botoneraResultado" />
 		</div>
 	</window>

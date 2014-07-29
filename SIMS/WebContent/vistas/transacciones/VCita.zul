@@ -25,7 +25,7 @@
 							<label id="lblNombreDoctor" />
 							<label class="etiqueta" value="Apellidos:" />
 							<label id="lblApellidoDoctor" />
-							<button id="btnBuscarDoctor" class="btn" label="Buscar Doctor"
+							<button autodisable="self"  id="btnBuscarDoctor" class="btn" label="Buscar Doctor"
 								tooltiptext="Catalogo de Doctores" width="100%"
 								image="/public/imagenes/botones/buscar.png" />
 						</row>
@@ -59,7 +59,7 @@
 										<label id="lblCedulaPaciente" />
 										<label class="etiqueta" value="Empresa:" />
 										<label id="lblEmpresaPaciente" />
-										<button id="btnBuscarPaciente" class="btn" label="Buscar Paciente"
+										<button autodisable="self"  id="btnBuscarPaciente" class="btn" label="Buscar Paciente"
 											tooltiptext="Catalogo de Pacientes" width="100%"
 											image="/public/imagenes/botones/buscar.png" />
 									</row>
