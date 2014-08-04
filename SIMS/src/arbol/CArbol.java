@@ -61,9 +61,9 @@ public class CArbol extends CGenerico {
 	@Wire
 	private West west;
 
-//	private static Tabbox tabBox2;
-//	private static Include contenido2;
-//	private static Tab tab2;
+	// private static Tabbox tabBox2;
+	// private static Include contenido2;
+	// private static Tab tab2;
 	private Tabbox tabBox2;
 	private Include contenido2;
 	private Tab tab2;
@@ -150,7 +150,7 @@ public class CArbol extends CGenerico {
 		List<Long> idsPadre = new ArrayList<Long>();
 		List<Nodos> nodos = new ArrayList<Nodos>();
 		return crearArbol(root, nodos, arboles, 0, idsPadre);
-		
+
 	}
 
 	private Nodos crearArbol(Nodos roote, List<Nodos> nodos,
@@ -189,62 +189,64 @@ public class CArbol extends CGenerico {
 					.valueOf(arbolMenu.getSelectedItem().getValue());
 			boolean abrir = true;
 			Tab taba = new Tab();
-			if (arbolMenu.getSelectedItem().getLevel() > 0) {
-				final Arbol arbolItem = servicioArbol
-						.buscarPorNombreArbol(item);
-				if (!arbolItem.getUrl().equals("inicio")) {
+			// if (arbolMenu.getSelectedItem().getLevel() > 0) {
+			final Arbol arbolItem = servicioArbol.buscarPorNombreArbol(item);
+			if (!arbolItem.getUrl().equals("inicio")) {
 
-					if (String.valueOf(arbolMenu.getSelectedItem().getValue())
-							.equals("Consulta"))
-						west.setOpen(false);
-					for (int i = 0; i < tabs.size(); i++) {
-						if (tabs.get(i).getLabel()
-								.equals(arbolItem.getNombre())) {
-							abrir = false;
-							taba = tabs.get(i);
-						}
-					}
-					if (abrir) {
-						String ruta = "/vistas/" + arbolItem.getUrl() + ".zul";
-						contenido = new Include();
-						contenido.setSrc(null);
-						contenido.setSrc(ruta);
-						Tab newTab = new Tab(arbolItem.getNombre());
-						newTab.setClosable(true);
-						newTab.addEventListener(Events.ON_CLOSE,
-								new EventListener<Event>() {
-									@Override
-									public void onEvent(Event arg0)
-											throws Exception {
-										for (int i = 0; i < tabs.size(); i++) {
-											if (tabs.get(i)
-													.getLabel()
-													.equals(arbolItem
-															.getNombre())) {
-												if (i == (tabs.size() - 1)
-														&& tabs.size() > 1) {
-													tabs.get(i - 1)
-															.setSelected(true);
-												}
-
-												tabs.get(i).close();
-												tabs.remove(i);
-											}
-										}
-									}
-								});
-						newTab.setSelected(true);
-						Tabpanel newTabpanel = new Tabpanel();
-						newTabpanel.appendChild(contenido);
-						tabBox.getTabs().insertBefore(newTab, tab);
-						newTabpanel.setParent(tabBox.getTabpanels());
-						tabs.add(newTab);
-						mapGeneral.put("tabsGenerales", tabs);
-						Sessions.getCurrent().setAttribute("mapaGeneral", mapGeneral);
-					} else {
-						taba.setSelected(true);
+				if (String.valueOf(arbolMenu.getSelectedItem().getValue())
+						.equals("Consulta"))
+					west.setOpen(false);
+				for (int i = 0; i < tabs.size(); i++) {
+					if (tabs.get(i).getLabel().equals(arbolItem.getNombre())) {
+						abrir = false;
+						taba = tabs.get(i);
 					}
 				}
+				if (abrir) {
+					String ruta = "/vistas/" + arbolItem.getUrl() + ".zul";
+					contenido = new Include();
+					contenido.setSrc(null);
+					contenido.setSrc(ruta);
+					Tab newTab = new Tab(arbolItem.getNombre());
+					newTab.setClosable(true);
+					newTab.addEventListener(Events.ON_CLOSE,
+							new EventListener<Event>() {
+								@Override
+								public void onEvent(Event arg0)
+										throws Exception {
+									for (int i = 0; i < tabs.size(); i++) {
+										if (tabs.get(i).getLabel()
+												.equals(arbolItem.getNombre())) {
+											if (i == (tabs.size() - 1)
+													&& tabs.size() > 1) {
+												tabs.get(i - 1).setSelected(
+														true);
+											}
+
+											tabs.get(i).close();
+											tabs.remove(i);
+										}
+									}
+								}
+							});
+					newTab.setSelected(true);
+					Tabpanel newTabpanel = new Tabpanel();
+					newTabpanel.appendChild(contenido);
+					tabBox.getTabs().insertBefore(newTab, tab);
+					newTabpanel.setParent(tabBox.getTabpanels());
+					tabs.add(newTab);
+					mapGeneral.put("tabsGenerales", tabs);
+					Sessions.getCurrent().setAttribute("mapaGeneral",
+							mapGeneral);
+				} else {
+					taba.setSelected(true);
+				}
+				// }
+			} else {
+				if (!arbolMenu.getSelectedItem().isOpen())
+					arbolMenu.getSelectedItem().setOpen(true);
+				else
+					arbolMenu.getSelectedItem().setOpen(false);
 			}
 		}
 		tabBox2 = tabBox;
@@ -252,7 +254,8 @@ public class CArbol extends CGenerico {
 		tab2 = tab;
 	}
 
-	public void abrirVentanas(final Arbol arbolItem, Tabbox tabBox3, Include contenido3, Tab tab3, List<Tab> tabss) {
+	public void abrirVentanas(final Arbol arbolItem, Tabbox tabBox3,
+			Include contenido3, Tab tab3, List<Tab> tabss) {
 		boolean abrir = true;
 		contenido2 = contenido3;
 		tabBox2 = tabBox3;
@@ -327,16 +330,13 @@ public class CArbol extends CGenerico {
 			newTab.addEventListener(Events.ON_CLOSE,
 					new EventListener<Event>() {
 						@Override
-						public void onEvent(Event arg0)
-								throws Exception {
+						public void onEvent(Event arg0) throws Exception {
 							for (int i = 0; i < tabs.size(); i++) {
-								if (tabs.get(i)
-										.getLabel()
+								if (tabs.get(i).getLabel()
 										.equals("Editar Usuario")) {
 									if (i == (tabs.size() - 1)
 											&& tabs.size() > 1) {
-										tabs.get(i - 1)
-												.setSelected(true);
+										tabs.get(i - 1).setSelected(true);
 									}
 
 									tabs.get(i).close();
