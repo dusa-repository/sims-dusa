@@ -1,8 +1,14 @@
 <zk>
 	<style src="/public/Estilo.css" />
+	<style>
+		.z-groupbox-hr { background: #EBE8E8 }
+	</style>
 	<div id="divCita" apply="controlador.transacciones.CCita" width="85%">
 		<groupbox width="100%" mold="3d" title="Cita">
-			<groupbox width="100%" title="Datos del Doctor">
+			<groupbox width="100%" title="">
+				<caption label="Datos del Doctor"
+					style="color:black; font-size: 12px; font-weight:bold" />
+				<separator />
 				<grid width="100%">
 					<columns visible="false">
 						<column label="" width="9%" />
@@ -25,9 +31,8 @@
 							<label id="lblNombreDoctor" />
 							<label class="etiqueta" value="Apellidos:" />
 							<label id="lblApellidoDoctor" />
-							<button autodisable="self"  id="btnBuscarDoctor" class="btn" label="Buscar Doctor"
-								tooltiptext="Catalogo de Doctores" width="100%"
-								image="/public/imagenes/botones/buscar.png" />
+							<button autodisable="self" id="btnBuscarDoctor" class="btn"
+								label="Buscar" tooltiptext="Catalogo de Doctores" image="/public/imagenes/botones/buscar.png" />
 						</row>
 					</rows>
 				</grid>
@@ -40,7 +45,10 @@
 				</tabs>
 				<tabpanels>
 					<tabpanel>
-						<groupbox width="100%" title="Datos de Paciente">
+						<groupbox width="100%" title="">
+							<caption label="Datos de Paciente"
+								style="color:black; font-size: 12px; font-weight:bold" />
+							<separator />
 							<grid width="100%">
 								<columns visible="false">
 									<column label="" width="11%" />
@@ -59,8 +67,8 @@
 										<label id="lblCedulaPaciente" />
 										<label class="etiqueta" value="Empresa:" />
 										<label id="lblEmpresaPaciente" />
-										<button autodisable="self"  id="btnBuscarPaciente" class="btn" label="Buscar Paciente"
-											tooltiptext="Catalogo de Pacientes" width="100%"
+										<button autodisable="self" id="btnBuscarPaciente"
+											class="btn" label="Buscar" tooltiptext="Catalogo de Pacientes"
 											image="/public/imagenes/botones/buscar.png" />
 									</row>
 									<row>
@@ -74,7 +82,10 @@
 							</grid>
 							<separator />
 						</groupbox>
-						<groupbox width="100%" title="Datos de la Cita">
+						<groupbox width="100%" title="">
+							<caption label="Datos de la Cita"
+								style="color:black; font-size: 12px; font-weight:bold" />
+							<separator />
 							<grid width="100%">
 								<columns visible="false">
 									<column label="" width="15%" />
@@ -118,19 +129,23 @@
 												<comboitem label="${each.descripcion}" context="${each.idMotivoCita}" />
 											</template>
 										</combobox>
-										<button id="btnAbrirMotivo" label=""
+										<button class="abrir" id="btnAbrirMotivo" label=""
 											tooltiptext="Crear un Nuevo Motivo" image="/public/imagenes/botones/agregar.png" />
 									</row>
 								</rows>
 							</grid>
 							<separator />
-							<separator />
 						</groupbox>
-						<div width="50%" id="botoneraCita" align="left" style="float: left;" />
-						<div align="right" style="float: right;">
-							<button id="btnSiguientePestanna" label="Siguiente"
-								image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
+						<separator />
+						<div align="left" style="float: right;">
+							<separator />
+							<button class="btn" label="Siguiente" id="btnSiguientePestanna"
+								image="/public/imagenes/botones/adelante.png" tooltiptext="Pestaña Siguiente" />
 						</div>
+						<vbox>
+							<separator />
+							<div width="50%" id="botoneraCita" align="left" style="float: left;" />
+						</vbox>
 					</tabpanel>
 					<tabpanel>
 						<groupbox width="100%" title="Citas Asociadas al Doctor">
@@ -181,10 +196,10 @@
 								<vbox>
 									<div align="center">
 										<separator height="80px" />
-										<button label="Cancelar Citas" id="btnCancelarCita"
-											image="/public/imagenes/botones/cancelar.png" tooltiptext="Cancelar Citas Seleccionadas" />
+										<button class="btn" width="150px" label="Cancelar Citas" id="btnCancelarCita"
+											image="/public/imagenes/botones/salir.png" tooltiptext="Cancelar Citas Seleccionadas" />
 										<separator />
-										<button label="Anular Citas" id="btnAnularCita"
+										<button class="btn" width="150px"  label="Anular Citas" id="btnAnularCita"
 											image="/public/imagenes/botones/anular.png" tooltiptext="Anular Citas Seleccionadas" />
 									</div>
 								</vbox>
@@ -193,7 +208,9 @@
 						<separator />
 						<separator />
 						<div width="50%" align="left" style="float: left;">
-							<button label="Anterior" id="btnAnteriorPestanna"
+							<separator />
+							<separator />
+							<button class="btn" label="Anterior" id="btnAnteriorPestanna"
 								image="/public/imagenes/botones/atras.png" tooltiptext="Pestaña Anterior" />
 						</div>
 					</tabpanel>

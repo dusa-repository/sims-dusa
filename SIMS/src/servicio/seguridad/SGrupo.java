@@ -53,4 +53,8 @@ public class SGrupo {
 			return grupoDAO.findOne(id);
 		return null;
 	}
+
+	public List<Grupo> buscarGruposUsuario(Usuario u) {
+		return grupoDAO.findByUsuariosOrderByNombreAsc(u);
+	}
 }

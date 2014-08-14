@@ -42,7 +42,7 @@
 								<comboitem label="${each.nombre}" context="${each.idClasificacionAccidente}" />
 							</template>
 						</combobox>
-						<button id="btnAbrir" label="" tooltiptext="Crear una Nueva Clasificacion"
+						<button class="abrir" id="btnAbrir" label="" tooltiptext="Crear una Nueva Clasificacion"
 							image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>

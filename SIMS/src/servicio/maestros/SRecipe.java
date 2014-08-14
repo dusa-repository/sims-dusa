@@ -24,4 +24,8 @@ public class SRecipe {
 	public void guardar(Recipe recipe) {
 		recipeDAO.save(recipe);
 	}
+
+	public Recipe buscar(long recipe) {
+		return recipeDAO.findOne(recipe);
+	}
 }

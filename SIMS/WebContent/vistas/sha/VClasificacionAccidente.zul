@@ -5,8 +5,8 @@
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="22%" />
-					<column label="" width="62%" />
-					<column label="" width="16%" />
+					<column label="" width="60%" />
+					<column label="" width="18%" />
 				</columns>
 				<rows>
 					<row>

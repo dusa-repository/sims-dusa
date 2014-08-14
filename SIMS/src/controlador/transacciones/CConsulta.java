@@ -971,11 +971,11 @@ public class CConsulta extends CGenerico {
 					tabConsulta.setSelected(true);
 					tabResumen.setSelected(true);
 					if (consultaDatos.getReposo())
-						btnGenerarRecipe.setVisible(true);
+					btnGenerarReposo.setVisible(true);
 					btnGenerarOrden.setVisible(true);
 					btnGenerarReferencia.setVisible(true);
 					btnGenerarOrdenServicios.setVisible(true);
-					btnGenerarReposo.setVisible(true);
+					btnGenerarRecipe.setVisible(true);
 				}
 			}
 
@@ -1275,8 +1275,8 @@ public class CConsulta extends CGenerico {
 							.getNombre());
 					list2.setParent(arg0);
 					arg0.setCheckable(false);
-					list2.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
-					arg0.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
+					list2.setStyle("text-align:center; font-weight:bold; background:#F5F2AC; color:black");
+					arg0.setStyle("text-align:center; font-weight:bold; background:#F5F2AC; color:black");
 				}
 
 				Listcell list3 = new Listcell();
@@ -1288,8 +1288,8 @@ public class CConsulta extends CGenerico {
 
 				if (tipoAntecedente) {
 					list3.setVisible(false);
-					list3.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
-					arg0.setStyle("text-align:center; font-weight:bold; background:#D8D2D2; color:black");
+					list3.setStyle("text-align:center; font-weight:bold; background:#F5F2AC; color:black");
+					arg0.setStyle("text-align:center; font-weight:bold; background:#F5F2AC; color:black");
 				}
 
 			}
@@ -1710,6 +1710,8 @@ public class CConsulta extends CGenerico {
 		medicinasResumen = medicinasAgregadas;
 		ltbResumenMedicinas.setModel(new ListModelList<ConsultaMedicina>(
 				medicinasResumen));
+		if(!medicinasAgregadas.isEmpty())
+		cmbPrioridad.setValue(medicinasAgregadas.get(0).getRecipe().getPrioridad());
 
 		diagnosticosDisponibles = servicioDiagnostico
 				.buscarDisponibles(consulta);
@@ -1759,6 +1761,11 @@ public class CConsulta extends CGenerico {
 		examenesResumen = examenesAgregado;
 		ltbResumenExamenes.setModel(new ListModelList<ConsultaExamen>(
 				examenesResumen));
+		if(!examenesAgregado.isEmpty())
+		{
+		cmbPrioridadExamen.setValue(examenesAgregado.get(0).getPrioridad());
+		cmbProveedor.setValue(examenesAgregado.get(0).getProveedor().getNombre());
+		}
 
 		especialistasDisponibles = servicioEspecialista
 				.buscarDisponibles(consulta);
@@ -1780,6 +1787,8 @@ public class CConsulta extends CGenerico {
 		ltbResumenEspecialistas
 				.setModel(new ListModelList<ConsultaEspecialista>(
 						especialistasResumen));
+		if(!especialistasAgregados.isEmpty())
+		cmbPrioridadEspecialista.setValue(especialistasAgregados.get(0).getPrioridad());
 
 		serviciosDisponibles = servicioServicioExterno
 				.buscarDisponibles(consulta);
@@ -1794,6 +1803,8 @@ public class CConsulta extends CGenerico {
 		ltbResumenServicios
 				.setModel(new ListModelList<ConsultaServicioExterno>(
 						serviciosResumen));
+		if(!serviciosAgregados.isEmpty())
+		cmbPrioridadServicio.setValue(serviciosAgregados.get(0).getPrioridad());
 
 		//
 		Historia historia = servicioHistoria.buscarPorPaciente(paciente);
@@ -3014,7 +3025,7 @@ public class CConsulta extends CGenerico {
 						.getFirstChild()).getValue();
 				String valor2 = ((Combobox) ((listItem.getChildren().get(1)))
 						.getFirstChild()).getValue();
-				if (valor.equals("") || valor2.equals("")) {
+				if (valor2.equals("")) {
 					falta = true;
 				}
 				consultaDiagnostico.setTipo(valor2);
@@ -3032,7 +3043,6 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onClick = #btnAgregarExamenes")
 	public boolean agregarExamen() {
-		boolean falta = false;
 		examenesResumen.clear();
 		if (ltbExamenesAgregados.getItemCount() != 0) {
 			ConsultaExamen consulta = new ConsultaExamen();
@@ -3043,19 +3053,13 @@ public class CConsulta extends CGenerico {
 				consulta = listItem2.get(i).getValue();
 				String valor = ((Textbox) ((listItem.getChildren().get(1)))
 						.getFirstChild()).getValue();
-				if (valor.equals("")) {
-					falta = true;
-				}
 				consulta.setObservacion(valor);
 				examenesResumen.add(consulta);
 			}
 			ltbResumenExamenes.setModel(new ListModelList<ConsultaExamen>(
 					examenesResumen));
 		}
-		if (falta)
-			return false;
-		else
-			return true;
+		return true;
 	}
 
 	@Listen("onClick = #btnAgregarEspecialistas")
@@ -3105,7 +3109,7 @@ public class CConsulta extends CGenerico {
 						.getFirstChild()).getValue();
 				String proveedor = ((Combobox) ((listItem.getChildren().get(2)))
 						.getFirstChild()).getSelectedItem().getContext();
-				if (proveedor.equals("") || valor.equals("")) {
+				if (proveedor.equals("")) {
 					falta = true;
 				}
 				consulta.setObservacion(valor);
@@ -4817,7 +4821,6 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
 				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
-		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
 		p.put("doctorNombre",
 				user.getPrimerNombre() + "   " + user.getSegundoNombre());
 		p.put("doctorApellido",
@@ -4828,7 +4831,9 @@ public class CConsulta extends CGenerico {
 		p.put("dias", dias);
 		p.put("msds", user.getLicenciaMsds());
 		p.put("comelar", user.getLicenciaCm());
-
+		p.put("edad", String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
+		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
+		
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipe.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
@@ -4887,12 +4892,12 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
 				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
-		p.put("pacienteEdad", paciente.getEdad());
+		p.put("edad", String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("pacienteSexo", paciente.getSexo());
 		p.put("doctorNombre",
 				user.getPrimerNombre() + "   " + user.getSegundoNombre());
 		p.put("doctorApellido",
-				user.getPrimerApellido() + "" + user.getSegundoApellido());
+				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
 		p.put("especialidad", especialistaConsulta.getEspecialista()
 				.getEspecialidad().getDescripcion());
@@ -4900,7 +4905,7 @@ public class CConsulta extends CGenerico {
 				.getNombre());
 		p.put("especialistaApellido", especialistaConsulta.getEspecialista()
 				.getApellido());
-		p.put("enfermedad", consuta.getEnfermedadActual());
+		p.put("enfermedad", especialistaConsulta.getObservacion());
 		p.put("observacion", especialistaConsulta.getObservacion());
 		p.put("prioridad", especialistaConsulta.getPrioridad());
 
@@ -5020,15 +5025,17 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteNombre",
 				paciente.getPrimerNombre() + "  " + paciente.getSegundoNombre());
 		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
-				+ paciente.getPrimerApellido());
+				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
 		p.put("doctorNombre",
 				user.getPrimerNombre() + "   " + user.getSegundoNombre());
 		p.put("doctorApellido",
-				user.getPrimerApellido() + "" + user.getSegundoApellido());
+				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
 		p.put("prioridad", listaMedicinas.get(0).getPrioridad());
 		p.put("proveedor", listaMedicinas.get(0).getProveedor().getNombre());
+		p.put("edad", String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
+		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipeExamen.jasper"));
@@ -5207,8 +5214,7 @@ public class CConsulta extends CGenerico {
 		p.put("fechaDesde", consuta.getFechaConsulta());
 		p.put("fechaHasta", fechaHasta);
 		p.put("area", area);
-		p.put("diagnostico", diagnosticoConsulta.get(0).getDiagnostico()
-				.getNombre());
+		p.put("diagnostico", diagnosticoConsulta.get(0).getTipo());
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RReposo.jasper"));

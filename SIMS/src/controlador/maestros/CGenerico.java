@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -60,6 +61,7 @@ import servicio.maestros.SLaboratorio;
 import servicio.maestros.SMedicina;
 import servicio.maestros.SMedicinaPresentacionUnidad;
 import servicio.maestros.SMotivoCita;
+import servicio.maestros.SNomina;
 import servicio.maestros.SPaciente;
 import servicio.maestros.SPacienteAntecedente;
 import servicio.maestros.SPais;
@@ -202,6 +204,9 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SArea servicioArea;
 	@WireVariable("SClasificacionAccidente")
 	protected SClasificacionAccidente servicioClasificacionAccidente;
+	@WireVariable("SNomina")
+	protected SNomina servicioNomina;
+
 	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 			"/META-INF/ConfiguracionAplicacion.xml");
 	public Mensaje msj = new Mensaje();
@@ -333,4 +338,26 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		}
 	}
 
+	public static int calcularEdad(Date birthDate) {
+		Calendar birth = new GregorianCalendar();
+		Calendar today = new GregorianCalendar();
+		int age = 0;
+		int factor = 0;
+		Date currentDate = new Date(); // current date
+		birth.setTime(birthDate);
+		today.setTime(currentDate);
+		if (today.get(Calendar.MONTH) <= birth.get(Calendar.MONTH)) {
+			if (today.get(Calendar.MONTH) == birth.get(Calendar.MONTH)) {
+				if (today.get(Calendar.DATE) > birth.get(Calendar.DATE)) {
+					factor = -1; // Aun no celebra su cumpleaños
+				}
+			} else {
+				factor = -1; // Aun no celebra su cumpleaños
+			}
+		}
+		age = (today.get(Calendar.YEAR) - birth.get(Calendar.YEAR)) + factor;
+		if (age == -1)
+			age = 0;
+		return age;
+	}
 }

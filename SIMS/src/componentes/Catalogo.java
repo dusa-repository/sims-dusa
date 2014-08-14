@@ -30,7 +30,7 @@ public abstract class Catalogo<Clase> extends Window {
 			List<Clase> lista, String... campos) {
 		super(titulo, "2", true);
 		this.setId("cmpCatalogo");
-		this.setStyle("background-header:#FF7925; background: #f4f2f2");
+		this.setStyle("background-header:#661313; background: #f4f2f2");
 		setWidth("60%");
 		crearLista(lista, campos);
 		lsbCatalogo.addEventListener(Events.ON_SELECT,
@@ -49,7 +49,7 @@ public abstract class Catalogo<Clase> extends Window {
 		final Textbox txtBuscar = new Textbox();
 		final Separator separador1 = new Separator();
 		final Separator separador2 = new Separator();
-		txtBuscar.setWidth("20em");
+		txtBuscar.setWidth("23em");
 		txtBuscar.setPlaceholder("Introduzca el criterio de busqueda");
 		final Combobox cmbBuscarPor = new Combobox();
 		cmbBuscarPor.setReadonly(true);
@@ -93,6 +93,7 @@ public abstract class Catalogo<Clase> extends Window {
 		this.appendChild(separador1);
 		this.appendChild(hbxBusqueda);		
 		lblBuscar.setValue("Buscar Por :  ");
+		lblBuscar.setSclass("etiqueta");
 		hbxBusqueda.appendChild(lblBuscar);
 		cmbBuscarPor.setModel(new ListModelList<String>(campos));
 		hbxBusqueda.appendChild(cmbBuscarPor);

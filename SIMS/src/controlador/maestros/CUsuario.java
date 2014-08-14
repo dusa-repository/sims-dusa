@@ -122,7 +122,7 @@ public class CUsuario extends CGenerico {
 	@Wire
 	private Image imagen;
 	@Wire
-	private Fileupload fudImagenUsuario;
+	private Button fudImagenUsuario;
 	@Wire
 	private Media media;
 	@Wire

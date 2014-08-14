@@ -66,7 +66,7 @@
 									label="${each.nombre}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirCategoria" label=""
+						<button class="abrir"  id="btnAbrirCategoria" label=""
 							tooltiptext="Crear una Nueva Categoria de Diagnostico" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>

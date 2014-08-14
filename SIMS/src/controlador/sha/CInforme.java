@@ -1907,8 +1907,10 @@ public class CInforme extends CGenerico {
 			lbl334.setValue(String.valueOf(empresa.getExtranjeros()));
 	}
 
-	@Listen("onClick = #btnSiguiente1,#btnSiguiente2,#btnSiguiente3,#btnSiguiente4,#btnSiguiente5")
+	@Listen("onClick = #btnSiguiente1,#btnSiguiente2,#btnSiguiente3,#btnSiguiente4,#btnSiguiente5,#btnSiguiente6")
 	public void siguiente() {
+		if (tab8.isSelected())
+			tab9.setSelected(true);
 		if (tab6y7.isSelected())
 			tab8.setSelected(true);
 		if (tab5.isSelected())
@@ -1921,7 +1923,7 @@ public class CInforme extends CGenerico {
 			tab3.setSelected(true);
 	}
 
-	@Listen("onClick = #btnAtras2,#btnAtras3,#btnAtras4,#btnAtras5")
+	@Listen("onClick = #btnAtras2,#btnAtras3,#btnAtras4,#btnAtras5,#btnAtras6,#btnAtras7")
 	public void atras() {
 		if (tab3.isSelected())
 			tab1y2.setSelected(true);
@@ -1931,6 +1933,10 @@ public class CInforme extends CGenerico {
 			tab4.setSelected(true);
 		if (tab6y7.isSelected())
 			tab5.setSelected(true);
+		if (tab8.isSelected())
+			tab6y7.setSelected(true);
+		if (tab9.isSelected())
+			tab8.setSelected(true);
 	}
 
 	private void listasMultiples() {

@@ -295,7 +295,7 @@ public class CProveedor extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Proveedor> proveedores = servicioProveedor.buscarTodos();
 		catalogo = new Catalogo<Proveedor>(catalogoProveedor,
-				"Catalogo de Servicios Externos", proveedores, "Nombre",
+				"Catalogo de Proveedores", proveedores, "Nombre",
 				"Direccion", "Telefono", "Ciudad") {
 
 			@Override

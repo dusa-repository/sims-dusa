@@ -7,6 +7,7 @@ import interfacedao.maestros.IPacienteDAO;
 import modelo.maestros.Cargo;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
+import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.sha.Area;
 
@@ -71,6 +72,10 @@ public class SPaciente {
 
 	public List<Paciente> buscarPorArea(Area area) {
 		return pacienteDAO.findByArea(area);
+	}
+
+	public List<Paciente> buscarPorNomina(Nomina nomina) {
+		return pacienteDAO.findByNomina(nomina);
 	}
 
 }

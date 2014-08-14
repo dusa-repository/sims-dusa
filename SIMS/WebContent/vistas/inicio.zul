@@ -5,45 +5,66 @@
 	<window title="" border="0" height="100%" contentStyle="overflow:auto"
 		apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
-			<north height="4,5em">
+			<north height="4,5em" style="background-color:#661313;">
 				<hbox hflex="1">
+					<separator />
+					<separator />
+					<separator />
 					<vbox>
 						<separator />
 						<image src="../public/imagenes/generales/LogoDusa.png"
-							height="3em" width="13em" />
+							height="3em" width="15em" />
 					</vbox>
-					<div align="center" width="35em">
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<div align="center" width="40em">
 						<separator />
 						<separator />
 						<hbox>
-							<label style="font-size:24px;color:#0404B4;font-weight: bold"
+							<separator />
+							<separator />
+							<label style="font-size:25px;color:white;font-weight: bold"
 								value="Sistema Integral Medico y de Seguridad" />
 						</hbox>
 					</div>
-					<vbox>
-						<separator />
-						<image src="../public/imagenes/generales/banner.png" height="3em"
-							width="7em" />
-					</vbox>
 					<div align="center" width="100%">
 						<hbox>
 							<vbox>
 								<separator />
 								<image id="imagenes" width="60px" height="55px" />
 							</vbox>
+							<separator />
 							<vbox>
 								<separator />
-								<label style="color: red"
+								<label style="color: white;font-weight: bold"
 									value="Usuario: ${desktop.execution.userPrincipal.name}" />
-								<a href="../j_spring_security_logout" style="color: blue">
+								<a href="../j_spring_security_logout" style="color: white">
 									<space />
 									<label value="Cerrar Sesion" />
 								</a>
-								<a style="color: blue">
+								<a style="color: white">
 									<space />
 									<label id="lblEditarCuenta" value="Editar Cuenta" />
 									<!-- onClick='contenido.src="../vistas/seguridad/VEditarUsuario.zul"' -->
 								</a>
+							</vbox>
+							<separator />
+							<separator />
+							<separator />
+							<separator />
+							<separator />
+							<vbox>
+								<listbox style="border:none" width="200px" id="ltbRoles">
+									<template name="model">
+										<listitem>
+											<listcell style="color:white;font-weight: bold; background:#661313"
+												label="${each.nombre}">
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
 							</vbox>
 						</hbox>
 					</div>
@@ -63,9 +84,10 @@
 			</west>
 			<center border="none">
 				<borderlayout style="overflow-y:scroll;" sclass="complex-layout">
-					<center style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; " border="none" autoscroll="true">
-						<tabbox width="auto"
-							id="tabBox" hflex="1">
+					<center
+						style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
+						border="none" autoscroll="true">
+						<tabbox width="auto" id="tabBox" hflex="1">
 							<tabs>
 								<tab visible="false">Tab A</tab>
 								<tab id="tab" label="+" visible="false">
@@ -81,15 +103,15 @@
 					</center>
 				</borderlayout>
 			</center>
-			<south vflex="2" border="0" height="2em"
-				collapsible="false">
+			<south style="background-color:#661313;" vflex="2" border="0"
+				height="3em" collapsible="false">
 				<div align="center" sclass="footer">
-					<a href="../j_spring_security_logout">
+					<a style="color: white" href="../j_spring_security_logout">
 						<label value="INICIO">
 						</label>
 					</a>
 					<separator></separator>
-					<label style="padding-center:35%;"
+					<label style="padding-center:35%;color: white"
 						value="© 2014 Elaborado por BIZAPPS,C.A. All Rights Reserved. Terms Privacy    (Version 1.0)">
 					</label>
 				</div>
