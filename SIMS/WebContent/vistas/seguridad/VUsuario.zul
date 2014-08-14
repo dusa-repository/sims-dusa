@@ -37,9 +37,11 @@
 						</hbox>
 						<textbox id="txtCedulaUsuario" hflex="1" maxlength="12"
 							tooltiptext="Ingrese la Cedula del Usuario" />
-						<fileupload image="/public/imagenes/botones/cargar.png"
-							id="fudImagenUsuario" label="Foto">
-						</fileupload>
+						<button
+							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+							upload="true" image="/public/imagenes/botones/cargar.png" id="fudImagenUsuario"
+							label="Foto">
+						</button>
 						<hbox>
 							<label class="etiqueta" value="Ficha:" />
 							<space />
@@ -165,7 +167,7 @@
 												<comboitem label="${each.nombre}" context="${each.idUnidadUsuario}" />
 											</template>
 										</combobox>
-										<button id="btnAbrirUnidad" label=""
+										<button class="abrir" id="btnAbrirUnidad" label=""
 											tooltiptext="Crear una Nueva Unidad" image="/public/imagenes/botones/agregar.png" />
 										<hbox />
 										<hbox />
@@ -183,7 +185,7 @@
 												<comboitem label="${each.descripcion}" context="${each.idEspecialidad}" />
 											</template>
 										</combobox>
-										<button id="btnAbrirEspecialidad" label=""
+										<button class="abrir" id="btnAbrirEspecialidad" label=""
 											tooltiptext="Crear una Nueva Especialidad" image="/public/imagenes/botones/agregar.png" />
 										<label class="etiqueta" value="Licencia CM:" />
 										<textbox id="txtLicenciaCUsuario" hflex="1" maxlength="50"
@@ -195,7 +197,7 @@
 											tooltiptext="Ingrese la Licencia MSDS del Usuario" />
 										<hbox />
 										<label class="etiqueta" value="Numero de Citas Diarias:" />
-										<spinner value="1" id="spnCitasUsuario"
+										<spinner 	constraint="min 0 max 100000000" value="1" id="spnCitasUsuario"
 											tooltiptext="Ingrese la Cantidad de Citas Diarias" />
 									</row>
 
@@ -205,14 +207,16 @@
 											tooltiptext="Ingrese la Licencia INPSASEL del Usuario (Solo Numeros)" />
 										<hbox />
 										<label class="etiqueta" value="Tiempo entre citas(min):" />
-										<spinner value="1" id="spnTiempoUsuario" tooltiptext="Ingrese el Tiempo entre Citas" />
+										<spinner constraint="min 0 max 100000000" value="1" id="spnTiempoUsuario" tooltiptext="Ingrese el Tiempo entre Citas" />
 									</row>
 								</rows>
 							</grid>
 							<separator />
 						</groupbox>
 						<div align="right" style="float: right;">
-							<button id="btnSiguientePestanna" label="Siguiente"
+							<separator />
+							<separator />
+							<button id="btnSiguientePestanna" label="Siguiente" class="btn"
 								image="/public/imagenes/botones/adelante.png" />
 						</div>
 					</tabpanel>
@@ -258,8 +262,9 @@
 						<groupbox width="100%"
 							title="Seleccione los Grupos Correspondientes al Usuario">
 							<vbox>
-								<button id="btnAbrirGrupo" label="" tooltiptext="Crear un Nuevo Grupo"
-									image="/public/imagenes/botones/agregar.png" />
+								<button class="abrir" id="btnAbrirGrupo" label=""
+									tooltiptext="Crear un Nuevo Grupo" image="/public/imagenes/botones/agregar.png" />
+								<separator />
 							</vbox>
 							<hbox>
 								<listbox id="ltbGruposDisponibles" height="160px"
@@ -272,11 +277,13 @@
 									</template>
 								</listbox>
 								<vbox>
-									<button id="pasar1" image="/public/imagenes/botones/adelante.png"
-										tooltiptext="Agregar Grupos" width="30px" />
+									<button class="abrir" id="pasar1"
+										image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Grupos"
+										width="30px" />
 									<separator />
-									<button id="pasar2" image="/public/imagenes/botones/atras.png"
-										tooltiptext="Quitar Grupos" width="30px" />
+									<button class="abrir" id="pasar2"
+										image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Grupos"
+										width="30px" />
 								</vbox>
 								<listbox id="ltbGruposAgregados" height="160px"
 									emptyMessage="No ha Seleccionado ningun Grupo" checkmark="true">
@@ -292,10 +299,12 @@
 						<separator />
 						<separator />
 						<div align="left" style="float: right;">
-							<button label="Anterior" id="btnAnteriorPestanna"
+							<button class="btn" label="Anterior" id="btnAnteriorPestanna"
 								image="/public/imagenes/botones/atras.png" />
 						</div>
-						<div width="50%" id="botoneraUsuario" align="left" style="float: left;" />
+						<vbox>
+							<div width="50%" id="botoneraUsuario" align="left" style="float: left;" />
+						</vbox>
 					</tabpanel>
 				</tabpanels>
 			</tabbox>

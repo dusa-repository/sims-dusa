@@ -1,31 +1,64 @@
 @CHARSET "UTF-8";
 
+
+.z-window {
+	background-image: none;
+	background-color: #661313;
+}
+
+.z-window-header {
+	color: white;
+	font-size: 18px;
+	font-weight: normal;
+	background-color: #661313;
+}
+
+.z-borderlayout {
+	background-image: none;
+	background-color: #661313;
+}
+
 .etiqueta {
 	font-weight: bold;
 	font-family: arial;
-	color: #0404B4;
+	color: #771313;
+	font-size: 13px;
 }
+
 .z-textbox {
-		width: 99%;
+	width: 99%;
 }
+
 .z-groupbox-3d {
-	background: #FFFFFF;
+	background: white;
 }
 
 .z-groupbox-3d-hm {
-	background: #DDECFD;
+	background:  #CE6464;
+	/* 	background: #DDECFD;  BC4042*/
+}
+
+.z-groupbox-3d-hl .z-groupbox-3d-header {
+	color: white;
+	font-family: arial, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
 }
 
 .btn {
-	font-size: 10px;
+	font-size: 13px;
+	color: white;
 	cursor: pointer;
-	width: 85px;
-	height: 30px;
+	width: 100px;
+	height: 33px;
+	-webkit-border-radius: 0.7em;
+	-moz-border-radius: 0.7em;
+	border-radius: 0.7em;
+	background: #952C2C;
 }
 
 .multilinea {
 	height: 35px;
-
 }
 
 .multilineaTab {
@@ -33,7 +66,7 @@
 }
 
 .z-loading {
-	background-color: #DDECFD;
+	background-color: #952C2C;
 	border: 1px outset #A0A0A0;
 	font-weight: bold;
 	font-size: 18px;
@@ -45,4 +78,12 @@
 .z-loading-indicator {
 	color: gray;
 	border: 0 none;
+}
+
+.abrir {
+	cursor: pointer;
+	-webkit-border-radius: 0.7em;
+	-moz-border-radius: 0.7em;
+	border-radius: 0.7em;
+	background: #952C2C;
 }

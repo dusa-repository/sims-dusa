@@ -39,7 +39,7 @@
 					</row>
 					<row>
 						<label class="etiqueta" value="Adjuntar Imagen:" />
-						<fileupload id="fudImagenUsuario" image="/public/imagenes/botones/cargar.png" />
+						<fileupload id="fudImagenUsuario" image="/public/imagenes/botones/cargar.png" style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"/>
 					</row>
 					<row>
 						<label class="etiqueta" value="Imagen Seleccionada:" />

@@ -22,4 +22,6 @@ public interface IGrupoDAO extends JpaRepository<Grupo, Long> {
 
 	@Query("select coalesce(max(consulta.idGrupo), '0') from Grupo consulta")
 	public long findMaxIdExamen();
+
+	public List<Grupo> findByUsuariosOrderByNombreAsc(Usuario u);
 }

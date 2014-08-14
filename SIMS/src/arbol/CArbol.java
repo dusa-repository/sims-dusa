@@ -12,6 +12,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import modelo.seguridad.Arbol;
+import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.springframework.security.core.Authentication;
@@ -29,6 +30,8 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
@@ -60,10 +63,8 @@ public class CArbol extends CGenerico {
 	private Tabbox tabBox;
 	@Wire
 	private West west;
-
-	// private static Tabbox tabBox2;
-	// private static Include contenido2;
-	// private static Tab tab2;
+	@Wire
+	private Listbox ltbRoles;
 	private Tabbox tabBox2;
 	private Include contenido2;
 	private Tab tab2;
@@ -75,6 +76,9 @@ public class CArbol extends CGenerico {
 				.getAuthentication();
 
 		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
+
+		List<Grupo> grupos = servicioGrupo.buscarGruposUsuario(u);
+		ltbRoles.setModel(new ListModelList<Grupo>(grupos));
 
 		if (u.getImagen() == null) {
 			imagenes.setContent(new AImage(url));

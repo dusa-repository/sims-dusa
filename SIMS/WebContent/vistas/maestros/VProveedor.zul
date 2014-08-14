@@ -76,9 +76,10 @@
 								placeholder="Ingrese el Estudio a Buscar" width="195px"
 								id="txtBuscadorEstudio"></textbox>
 							<separator />
-							<button id="btnAbrirEstudio" label=""
+							<button class="abrir" id="btnAbrirEstudio" label=""
 								tooltiptext="Crear un Nuevo Estudio" image="/public/imagenes/botones/agregar.png" />
 						</hbox>
+						<separator />
 						<hbox>
 							<listbox id="ltbEstudios" height="250px" width="220px"
 								emptyMessage="No hay Estudios Registrados">
@@ -102,11 +103,13 @@
 								</template>
 							</listbox>
 							<vbox>
-								<button id="pasar1" image="/public/imagenes/botones/adelante.png"
-									tooltiptext="Agregar Estudio" width="30px" />
+								<button class="abrir" id="pasar1"
+									image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Estudio"
+									width="30px" />
 								<separator />
-								<button id="pasar2" image="/public/imagenes/botones/atras.png"
-									tooltiptext="Quitar Estudio" width="30px" />
+								<button class="abrir" id="pasar2"
+									image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Estudio"
+									width="30px" />
 							</vbox>
 							<listbox id="ltbEstudiosAgregados" height="250px"
 								emptyMessage="No ha Seleccionado Ningún Estudio">
@@ -133,7 +136,9 @@
 							</listbox>
 						</hbox>
 						<div align="right" style="float: right;">
-							<button id="btnSiguientePestanna" label="Siguiente"
+							<separator />
+							<separator />
+							<button class="btn" id="btnSiguientePestanna" label="Siguiente"
 								image="/public/imagenes/botones/adelante.png" />
 						</div>
 					</tabpanel>
@@ -144,9 +149,10 @@
 								placeholder="Ingrese el Examen a Buscar" width="195px"
 								id="txtBuscadorExamen"></textbox>
 							<separator />
-							<button id="btnAbrirExamen" label="" tooltiptext="Crear un Nuevo Examen"
-								image="/public/imagenes/botones/agregar.png" />
+							<button class="abrir" id="btnAbrirExamen" label=""
+								tooltiptext="Crear un Nuevo Examen" image="/public/imagenes/botones/agregar.png" />
 						</hbox>
+						<separator />
 						<hbox>
 							<listbox id="ltbExamen" height="250px" width="220px"
 								emptyMessage="No hay Examenes Registrados">
@@ -170,11 +176,13 @@
 								</template>
 							</listbox>
 							<vbox>
-								<button id="pasar11" image="/public/imagenes/botones/adelante.png"
-									tooltiptext="Agregar Examen" width="30px" />
+								<button class="abrir" id="pasar11"
+									image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Examen"
+									width="30px" />
 								<separator />
-								<button id="pasar22" image="/public/imagenes/botones/atras.png"
-									tooltiptext="Quitar Examen" width="30px" />
+								<button class="abrir" id="pasar22"
+									image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Examen"
+									width="30px" />
 							</vbox>
 							<listbox id="ltbExamenesAgregados" height="250px"
 								emptyMessage="No ha Seleccionado Ningún Examen">
@@ -202,10 +210,12 @@
 						</hbox>
 						<separator />
 						<div align="left" style="float: right;">
-							<button label="Anterior" id="btnAnteriorPestanna"
+							<button class="btn" label="Anterior" id="btnAnteriorPestanna"
 								image="/public/imagenes/botones/atras.png" />
 						</div>
-						<div width="50%" id="botoneraProveedor" align="left" style="float: left;" />
+						<vbox>
+							<div width="50%" id="botoneraProveedor" align="left" style="float: left;" />
+						</vbox>
 					</tabpanel>
 				</tabpanels>
 			</tabbox>

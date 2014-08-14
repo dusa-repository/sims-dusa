@@ -1,6 +1,6 @@
 <zk>
 	<div id="divCiudad" apply="controlador.maestros.CCiudad">
-		<groupbox width="40em" mold="3d" title="Presentacion">
+		<groupbox width="40em" mold="3d" title="Ciudad">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />
@@ -16,7 +16,7 @@
 						</hbox>
 						<textbox class="multilinea" multiline="true" id="txtNombreCiudad"
 							hflex="1" tooltiptext="Ingrese el Nombre de la Ciudad" maxlength="500" />
-						<button autodisable="self" id="btnBuscarCiudad" class="btn"
+						<button  autodisable="self" id="btnBuscarCiudad" class="btn"
 							label="Buscar" tooltiptext="Catalogo Ciudades" image="/public/imagenes/botones/buscar.png" />
 					</row>
 					<row>
@@ -31,7 +31,7 @@
 								<comboitem label="${each.nombre}" context="${each.idEstado}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirEstado" label="" tooltiptext="Crear un Nuevo Estado"
+						<button class="abrir" id="btnAbrirEstado" label="" tooltiptext="Crear un Nuevo Estado"
 							image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>

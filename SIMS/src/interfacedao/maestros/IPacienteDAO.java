@@ -5,6 +5,7 @@ import java.util.List;
 import modelo.maestros.Cargo;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
+import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.sha.Area;
 
@@ -31,5 +32,7 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 	List<Paciente> findByCiudadVivienda(Ciudad ciudad);
 
 	List<Paciente> findByArea(Area area);
+
+	List<Paciente> findByNomina(Nomina nomina);
 
 }

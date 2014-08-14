@@ -78,7 +78,7 @@
 								<comboitem label="${each.nombre}" context="${each.idEmpresa}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirEmpresa" label=""
+						<button  class="abrir" id="btnAbrirEmpresa" label=""
 							tooltiptext="Crear una Nueva Empresa" image="/public/imagenes/botones/agregar.png" />
 					</row>
 					<row>
@@ -94,7 +94,7 @@
 								<comboitem context="${each.idCiudad}" label="${each.nombre}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirCiudad" label="" tooltiptext="Crear una Nueva Ciudad"
+						<button class="abrir" id="btnAbrirCiudad" label="" tooltiptext="Crear una Nueva Ciudad"
 							image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>

@@ -51,6 +51,10 @@ public class Paciente implements Serializable {
 	
 	@Column
 	@Type(type="org.hibernate.type.NumericBooleanType")
+	private boolean estatus;
+	
+	@Column
+	@Type(type="org.hibernate.type.NumericBooleanType")
 	private boolean alergia;
 	
 	@Column
@@ -62,6 +66,9 @@ public class Paciente implements Serializable {
 
 	@Column(length=500, name="lugar_nacimiento")
 	private String lugarNacimiento;
+	
+	@Column(length=500, name="observacion_estatus")
+	private String observacionEstatus;
 	
 	@Column(length=10)
 	private String sexo;
@@ -201,6 +208,10 @@ public class Paciente implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cargo")
 	private Cargo cargoReal;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_nomina")
+	private Nomina nomina;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_area")
@@ -875,6 +886,31 @@ public Historia getHistoria() {
 	public void setInformesM(Set<Informe> informesM) {
 		this.informesM = informesM;
 	}
+
+	public Nomina getNomina() {
+		return nomina;
+	}
+
+	public void setNomina(Nomina nomina) {
+		this.nomina = nomina;
+	}
+
+	public boolean isEstatus() {
+		return estatus;
+	}
+
+	public void setEstatus(boolean estatus) {
+		this.estatus = estatus;
+	}
+
+	public String getObservacionEstatus() {
+		return observacionEstatus;
+	}
+
+	public void setObservacionEstatus(String observacionEstatus) {
+		this.observacionEstatus = observacionEstatus;
+	}
+	
 
 
 }

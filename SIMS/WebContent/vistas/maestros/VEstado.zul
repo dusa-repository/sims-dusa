@@ -33,7 +33,7 @@
 								<comboitem label="${each.nombre}" context="${each.idPais}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirPais" label="" tooltiptext="Crear un Nuevo Pais"
+						<button class="abrir" id="btnAbrirPais" label="" tooltiptext="Crear un Nuevo Pais"
 							image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>

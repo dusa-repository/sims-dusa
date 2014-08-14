@@ -53,9 +53,9 @@
 						</listitem>
 					</template>
 				</listbox>
-				<label class="etiqueta" value="Servicios Externos Solicitados en la Consulta" />
+				<label class="etiqueta" value="Estudios Externos Solicitados en la Consulta" />
 				<listbox id="ltbServicio" height="180px" width="100%"
-					emptyMessage="La consulta no posee servicios externos asociados">
+					emptyMessage="La consulta no posee estudioss externos asociados">
 					<listhead>
 						<listheader label="Estudio Externo" width="30%" />
 						<listheader label="Centro" width="30%" />

@@ -32,7 +32,7 @@
 								<comboitem label="${each.nombre}" context="${each.idCategoriaMedicina}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirCategoria" label=""
+						<button class="abrir" id="btnAbrirCategoria" label=""
 							tooltiptext="Crear una Nueva Categoria de Medicina" image="/public/imagenes/botones/agregar.png" />
 					</row>
 					<row>
@@ -48,7 +48,7 @@
 								<comboitem label="${each.nombre}" context="${each.idLaboratorio}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirLaboratorio" label=""
+						<button class="abrir" id="btnAbrirLaboratorio" label=""
 							tooltiptext="Crear un Nuevo Laboratorio" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
@@ -115,7 +115,9 @@
 							</tabpanels>
 						</tabbox>
 						<div align="right" style="float: right;">
-							<button id="btnSiguientePestanna" label="Siguiente"
+							<separator />
+							<separator />
+							<button class="btn" id="btnSiguientePestanna" label="Siguiente"
 								image="/public/imagenes/botones/adelante.png" />
 						</div>
 					</tabpanel>
@@ -126,7 +128,7 @@
 								placeholder="Ingrese la Presentacion a Buscar" width="195px"
 								id="txtBuscadorPresentacion"></textbox>
 							<separator />
-							<button id="btnAbrirPresentacion" label=""
+							<button class="abrir" id="btnAbrirPresentacion" label=""
 								tooltiptext="Crear una Nueva Presentacion" image="/public/imagenes/botones/agregar.png" />
 						</hbox>
 						<separator />
@@ -161,11 +163,13 @@
 								</template>
 							</listbox>
 							<vbox>
-								<button id="pasar1" image="/public/imagenes/botones/adelante.png"
-									tooltiptext="Agregar Presentacion" width="30px" />
+								<button class="abrir" id="pasar1"
+									image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Presentacion"
+									width="30px" />
 								<separator />
-								<button id="pasar2" image="/public/imagenes/botones/atras.png"
-									tooltiptext="Quitar Presentacion" width="30px" />
+								<button class="abrir" id="pasar2"
+									image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Presentacion"
+									width="30px" />
 							</vbox>
 							<listbox id="ltbPresentacionesAgregadas" height="280px"
 								emptyMessage="No ha Seleccionado Ningúna Presentacion">
@@ -202,10 +206,16 @@
 						</hbox>
 						<separator />
 						<div align="left" style="float: right;">
-							<button label="Anterior" id="btnAnteriorPestanna"
-								image="/public/imagenes/botones/atras.png" />
+							<separator />
+							<separator />
+							<button class="btn" label="Anterior" id="btnAnteriorPestanna"
+								image="/public/imagenes/botones/atras.png" tooltiptext="Pestaña Anterior" />
 						</div>
-						<div width="50%" id="botoneraMedicina" align="left" style="float: left;" />
+						<separator />
+						<separator />
+						<vbox>
+							<div width="50%" id="botoneraMedicina" align="left" style="float: left;" />
+						</vbox>
 					</tabpanel>
 				</tabpanels>
 			</tabbox>

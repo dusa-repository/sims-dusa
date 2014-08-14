@@ -1,0 +1,32 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divNomina" apply="controlador.maestros.CNomina">
+		<groupbox width="40em" mold="3d" title="Nomina">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox class="multilinea" id="txtNombre" hflex="1"
+							maxlength="500" tooltiptext="Ingrese el Nombre de la Nomina"
+							multiline="true" />
+						<button autodisable="self" id="btnBuscarNomina"
+							class="btn" label="Buscar" tooltiptext="Catalogo Nominas"
+							image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraNomina" />
+			<div id="catalogoNomina" />
+		</groupbox>
+	</div>
+</zk>

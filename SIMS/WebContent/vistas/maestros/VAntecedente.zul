@@ -34,7 +34,7 @@
 								<comboitem label="${each.nombre}" context="${each.idAntecedenteTipo}" />
 							</template>
 						</combobox>
-						<button autodisable="self" id="btnAbrirTipoAntecedente"
+						<button class="abrir"  autodisable="self" id="btnAbrirTipoAntecedente"
 							label="" tooltiptext="Crear una Nueva Clasificacion" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>

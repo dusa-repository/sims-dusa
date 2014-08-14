@@ -64,7 +64,7 @@
 								<comboitem label="${each.descripcion}" context="${each.idEspecialidad}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirEspecialidad" label=""
+						<button class="abrir"  id="btnAbrirEspecialidad" label=""
 							tooltiptext="Crear una Nueva Especialidad" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
