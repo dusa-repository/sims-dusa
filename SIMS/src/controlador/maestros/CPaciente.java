@@ -484,10 +484,9 @@ public class CPaciente extends CGenerico {
 									.parseLong(cmbNomina.getSelectedItem()
 											.getContext()));
 
-					} else
-					{
+					} else {
 						cedulaFamiliar = cedTrabajador;
-						ficha="";
+						ficha = "";
 					}
 
 					if (rdoSiDiscapacidad.isChecked())
@@ -533,6 +532,10 @@ public class CPaciente extends CGenerico {
 					paciente.setFechaMuerte(fechaMuerte);
 
 					servicioPaciente.guardar(paciente);
+					if (!rdoActivo.isChecked()) {
+						paciente = servicioPaciente.buscarPorCedula(cedula);
+						inhabilitarTrabajadorYTodosFamiliares(paciente);
+					}
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
 				}
@@ -611,8 +614,9 @@ public class CPaciente extends CGenerico {
 				|| (rdoTrabajador.isChecked() && (cmbCargo.getText().compareTo(
 						"") == 0
 						|| cmbEmpresa.getText().compareTo("") == 0
-						|| cmbArea.getText().compareTo("") == 0 || cmbNomina
-						.getText().compareTo("") == 0 || txtFichaPaciente.getText().compareTo("") == 0))
+						|| cmbArea.getText().compareTo("") == 0
+						|| cmbNomina.getText().compareTo("") == 0 || txtFichaPaciente
+						.getText().compareTo("") == 0))
 				|| (rdoFamiliar.isChecked() && (cmbParentescoFamiliar.getText()
 						.compareTo("") == 0 || lblNombres.getValue() == ""))
 				|| (!rdoSiLentes.isChecked() && !rdoNoLentes.isChecked())
@@ -971,10 +975,9 @@ public class CPaciente extends CGenerico {
 			rdoMuerte.setChecked(true);
 			dtbFechaMuerte.setVisible(true);
 			dtbFechaMuerte.setValue(paciente.getFechaMuerte());
-		} 
-		else {
-		if (!paciente.isEstatus())
-			rdoInactivo.setChecked(true);
+		} else {
+			if (!paciente.isEstatus())
+				rdoInactivo.setChecked(true);
 			else
 				rdoActivo.setChecked(true);
 		}

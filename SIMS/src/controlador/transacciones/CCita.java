@@ -287,7 +287,7 @@ public class CCita extends CGenerico {
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogoPaciente() throws IOException {
-		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
+		final List<Paciente> pacientes = servicioPaciente.buscarTodosActivos();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
 				"Apellido") {
@@ -324,6 +324,10 @@ public class CCita extends CGenerico {
 	@Listen("onSeleccion = #divCatalogoPacientes")
 	public void seleccionarPaciente() {
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
+		if (!paciente.isTrabajador()
+				&& paciente.getParentescoFamiliar().equals("Hijo(a)")
+				&& calcularEdad(paciente.getFechaNacimiento()) >= 18)
+			msj.mensajeAlerta(Mensaje.pacienteMayor);
 		lblCedulaPaciente.setValue(paciente.getCedula());
 		lblNombrePaciente.setValue(paciente.getPrimerNombre() + " "
 				+ paciente.getSegundoNombre());

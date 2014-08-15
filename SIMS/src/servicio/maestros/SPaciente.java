@@ -86,4 +86,11 @@ public class SPaciente {
 		return pacienteDAO.findByFichaStartingWithAllIgnoreCase(valor);
 	}
 
+	public List<Paciente> buscarTodosActivos() {
+		return pacienteDAO.findByEstatusTrue();
+	}
+
+	public void guardarVarios(List<Paciente> inactivos) {
+		pacienteDAO.save(inactivos);
+	}
 }
