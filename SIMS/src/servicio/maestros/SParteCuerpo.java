@@ -1,9 +1,8 @@
 package servicio.maestros;
 
-import java.util.Collection;
-import java.util.List;
-
 import interfacedao.maestros.IParteCuerpoDAO;
+
+import java.util.List;
 
 import modelo.maestros.ParteCuerpo;
 

@@ -1,12 +1,10 @@
 package servicio.maestros;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import interfacedao.maestros.IAntecedenteDAO;
 import interfacedao.maestros.IProveedorDAO;
 import interfacedao.maestros.IProveedorServicioDAO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import modelo.maestros.Ciudad;
 import modelo.maestros.Proveedor;

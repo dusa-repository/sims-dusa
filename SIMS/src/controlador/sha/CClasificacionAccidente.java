@@ -7,7 +7,6 @@ import java.util.List;
 import modelo.maestros.Accidente;
 import modelo.sha.ClasificacionAccidente;
 import modelo.sha.Informe;
-import modelo.transacciones.ConsultaDiagnostico;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -18,9 +17,6 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Window;
-
-import arbol.CArbol;
 
 import componentes.Botonera;
 import componentes.Catalogo;

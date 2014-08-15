@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.generico.DetalleAccidente;
-import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialista;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaEspecialista;
@@ -19,8 +17,6 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 

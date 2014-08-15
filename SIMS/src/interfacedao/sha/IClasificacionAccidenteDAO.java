@@ -2,7 +2,6 @@ package interfacedao.sha;
 
 import java.util.List;
 
-import modelo.sha.Area;
 import modelo.sha.ClasificacionAccidente;
 
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;
 import modelo.seguridad.Arbol;
-import modelo.transacciones.ConsultaDiagnostico;
 import modelo.transacciones.ConsultaEspecialista;
 
 import org.zkoss.zk.ui.Sessions;
@@ -34,6 +32,7 @@ import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
 import componentes.Validador;
+
 import controlador.transacciones.CConsulta;
 
 public class CEspecialista extends CGenerico {

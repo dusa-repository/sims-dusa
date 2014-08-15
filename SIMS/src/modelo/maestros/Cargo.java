@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.transacciones.Consulta;
-import modelo.transacciones.ConsultaParteCuerpo;
 
 @Entity
 @Table(name="cargo")

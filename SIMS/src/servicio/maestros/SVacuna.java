@@ -1,10 +1,9 @@
 package servicio.maestros;
 
-import java.util.List;
-
 import interfacedao.maestros.IVacunaDAO;
 
-import modelo.maestros.Intervencion;
+import java.util.List;
+
 import modelo.maestros.Vacuna;
 
 import org.springframework.beans.factory.annotation.Autowired;

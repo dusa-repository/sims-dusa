@@ -2,15 +2,12 @@ package controlador.transacciones;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Cita;
-import modelo.maestros.Ciudad;
 import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Arbol;
@@ -42,6 +39,7 @@ import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CCita extends CGenerico {

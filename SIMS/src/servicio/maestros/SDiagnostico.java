@@ -1,16 +1,15 @@
 package servicio.maestros;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import interfacedao.maestros.IDiagnosticoDAO;
 import interfacedao.transacciones.IConsultaDiagnosticoDAO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
-import modelo.transacciones.ConsultaMedicina;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

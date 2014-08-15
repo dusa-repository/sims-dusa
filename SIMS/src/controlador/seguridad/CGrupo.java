@@ -10,8 +10,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import modelo.maestros.Examen;
-import modelo.maestros.PresentacionMedicina;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
@@ -41,7 +39,6 @@ import componentes.Catalogo;
 import componentes.Mensaje;
 
 import controlador.maestros.CGenerico;
-import controlador.maestros.CMedicina;
 import controlador.maestros.CUsuario;
 
 public class CGrupo extends CGenerico {

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +72,6 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
@@ -2316,7 +2314,8 @@ public class CConsulta extends CGenerico {
 		lblTelefono2E.setValue(paciente.getTelefono2Emergencia());
 		lblParentesco.setValue(paciente.getParentescoEmergencia());
 		// lblParentescoFamiliar.setValue(paciente.getParentescoFamiliar());
-		lblEdad.setValue(String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
+		lblEdad.setValue(String.valueOf(calcularEdad(paciente
+				.getFechaNacimiento())));
 		lblEstatura.setValue(String.valueOf(paciente.getEstatura()));
 		lblPeso.setValue(String.valueOf(paciente.getPeso()));
 		// lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
@@ -2482,9 +2481,11 @@ public class CConsulta extends CGenerico {
 								.get(1))).getFirstChild()).getValue();
 						if (tipo.equals("Accidente Laboral")
 								|| tipo.equals("Accidente Comun")
-								|| tipo.equals("Incidente"))
-							((Button) ((listItemj.getChildren().get(3)))
-									.getFirstChild()).setVisible(true);
+								|| tipo.equals("Incidente")) {
+							Button boton = ((Button) ((listItemj.getChildren()
+									.get(3))).getFirstChild());
+							boton.setVisible(true);
+						}
 						String valor = ((Textbox) ((listItemj.getChildren()
 								.get(2))).getFirstChild()).getValue();
 						ConsultaDiagnostico consultaDiagnosticoj = new ConsultaDiagnostico(
@@ -2496,6 +2497,21 @@ public class CConsulta extends CGenerico {
 					ltbDiagnosticosAgregados
 							.setModel(new ListModelList<ConsultaDiagnostico>(
 									diagnosticosAgregados));
+					ltbDiagnosticosAgregados.renderAll();
+					for (int j = 0; j < ltbDiagnosticosAgregados.getItemCount(); j++) {
+						Listitem listItemj = ltbDiagnosticosAgregados
+								.getItemAtIndex(j);
+						String tipo = ((Combobox) ((listItemj.getChildren()
+								.get(1))).getFirstChild()).getValue();
+						if (tipo.equals("Accidente Laboral")
+								|| tipo.equals("Accidente Comun")
+								|| tipo.equals("Incidente")) {
+							System.out.println("entroBoton");
+							Button boton = ((Button) ((listItemj.getChildren()
+									.get(3))).getFirstChild());
+							boton.setVisible(true);
+						}
+					}
 					ltbDiagnosticosAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
@@ -5198,7 +5214,8 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteNacimiento", listaConsultas.get(0).getPaciente()
 				.getFechaNacimiento());
 		p.put("edad",
-				String.valueOf(calcularEdad(listaConsultas.get(0).getPaciente().getFechaNacimiento())));
+				String.valueOf(calcularEdad(listaConsultas.get(0).getPaciente()
+						.getFechaNacimiento())));
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RConsultaHistorico.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,

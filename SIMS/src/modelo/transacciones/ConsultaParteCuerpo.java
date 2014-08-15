@@ -9,9 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import modelo.maestros.Diagnostico;
 import modelo.maestros.ParteCuerpo;
-import modelo.pk.ConsultaDiagnosticoId;
 import modelo.pk.ConsultaParteCuerpoId;
 
 @Entity

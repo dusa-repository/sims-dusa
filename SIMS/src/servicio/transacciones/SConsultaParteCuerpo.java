@@ -1,13 +1,12 @@
 package servicio.transacciones;
 
-import java.util.List;
-
 import interfacedao.transacciones.IConsultaParteCuerpoDAO;
+
+import java.util.List;
 
 import modelo.maestros.ParteCuerpo;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaParteCuerpo;
-import modelo.transacciones.Historia;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

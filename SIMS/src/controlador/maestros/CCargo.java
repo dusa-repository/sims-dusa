@@ -1,13 +1,11 @@
 package controlador.maestros;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Cargo;
 import modelo.maestros.Paciente;
-import modelo.sha.Area;
 import modelo.transacciones.Consulta;
 
 import org.zkoss.zk.ui.Sessions;
@@ -19,13 +17,10 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Window;
 
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-
-import controlador.maestros.CGenerico;
 
 public class CCargo extends CGenerico {
 

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.maestros.Examen;
 import modelo.maestros.Intervencion;
 import modelo.transacciones.HistoriaIntervencion;
 
@@ -22,6 +21,7 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.transacciones.CConsulta;
 
 public class CIntervencion extends CGenerico {

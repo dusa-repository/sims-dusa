@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Accidente;
-import modelo.maestros.Ciudad;
-import modelo.maestros.Consultorio;
-import modelo.maestros.Diagnostico;
-import modelo.maestros.Estado;
 import modelo.seguridad.Arbol;
 import modelo.sha.ClasificacionAccidente;
 import modelo.transacciones.ConsultaDiagnostico;
@@ -36,7 +32,7 @@ import arbol.CArbol;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-import componentes.Validador;
+
 import controlador.transacciones.CConsulta;
 
 public class CAccidente extends CGenerico {

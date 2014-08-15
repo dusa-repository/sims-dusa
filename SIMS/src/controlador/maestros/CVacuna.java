@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.maestros.Diagnostico;
-import modelo.maestros.ParteCuerpo;
 import modelo.maestros.Vacuna;
 import modelo.transacciones.Historia;
 import modelo.transacciones.HistoriaVacuna;
@@ -24,6 +22,7 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.transacciones.CConsulta;
 
 public class CVacuna extends CGenerico {

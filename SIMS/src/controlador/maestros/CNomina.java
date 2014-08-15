@@ -1,22 +1,17 @@
 package controlador.maestros;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.maestros.Examen;
-import modelo.maestros.Intervencion;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
-import modelo.transacciones.HistoriaIntervencion;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Div;
-import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
@@ -24,7 +19,6 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-import controlador.transacciones.CConsulta;
 
 public class CNomina extends CGenerico {
 

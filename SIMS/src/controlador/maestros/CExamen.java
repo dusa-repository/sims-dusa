@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.maestros.Diagnostico;
 import modelo.maestros.Examen;
 import modelo.maestros.ProveedorExamen;
 import modelo.transacciones.ConsultaExamen;
@@ -26,6 +25,7 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.transacciones.CConsulta;
 
 public class CExamen extends CGenerico {

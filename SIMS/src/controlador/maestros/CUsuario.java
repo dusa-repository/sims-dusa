@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 
 import modelo.maestros.Cita;
 import modelo.maestros.Especialidad;
-import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Grupo;
@@ -30,7 +29,6 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
-import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;

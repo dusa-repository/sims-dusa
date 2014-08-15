@@ -1,10 +1,10 @@
 package servicio.maestros;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import interfacedao.maestros.IEspecialistaDAO;
 import interfacedao.transacciones.IConsultaEspecialistaDAO;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;

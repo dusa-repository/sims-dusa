@@ -7,14 +7,10 @@ import java.util.List;
 
 import modelo.maestros.Ciudad;
 import modelo.maestros.Examen;
-import modelo.maestros.Medicina;
-import modelo.maestros.MedicinaPresentacionUnidad;
-import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.Proveedor;
 import modelo.maestros.ProveedorExamen;
 import modelo.maestros.ProveedorServicio;
 import modelo.maestros.ServicioExterno;
-import modelo.maestros.UnidadMedicina;
 import modelo.seguridad.Arbol;
 import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaServicioExterno;

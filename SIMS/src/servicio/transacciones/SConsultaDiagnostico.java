@@ -6,7 +6,6 @@ import java.util.List;
 
 import modelo.maestros.Accidente;
 import modelo.maestros.Diagnostico;
-import modelo.sha.ClasificacionAccidente;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
 

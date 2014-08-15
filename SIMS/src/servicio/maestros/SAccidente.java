@@ -1,15 +1,13 @@
 package servicio.maestros;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import interfacedao.maestros.IAccidenteDAO;
 import interfacedao.transacciones.IHistoriaAccidenteDAO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import modelo.maestros.Accidente;
 import modelo.sha.ClasificacionAccidente;
-import modelo.transacciones.Consulta;
-import modelo.transacciones.ConsultaServicioExterno;
 import modelo.transacciones.Historia;
 import modelo.transacciones.HistoriaAccidente;
 

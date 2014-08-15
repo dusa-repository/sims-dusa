@@ -1,8 +1,8 @@
 package servicio.transacciones;
 
-import java.util.List;
-
 import interfacedao.transacciones.IHistoriaVacunaDAO;
+
+import java.util.List;
 
 import modelo.maestros.Vacuna;
 import modelo.transacciones.Historia;

@@ -7,8 +7,6 @@ import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
-import modelo.maestros.Especialista;
-import modelo.maestros.Medicina;
 import modelo.seguridad.Arbol;
 import modelo.transacciones.ConsultaDiagnostico;
 
@@ -33,6 +31,7 @@ import arbol.CArbol;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.transacciones.CConsulta;
 
 public class CDiagnostico extends CGenerico {

@@ -1,11 +1,9 @@
 package servicio.sha;
 
-import java.util.List;
-
-import interfacedao.sha.IAreaDAO;
 import interfacedao.sha.IClasificacionAccidenteDAO;
 
-import modelo.sha.Area;
+import java.util.List;
+
 import modelo.sha.ClasificacionAccidente;
 
 import org.springframework.beans.factory.annotation.Autowired;

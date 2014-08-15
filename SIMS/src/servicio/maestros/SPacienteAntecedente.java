@@ -1,9 +1,8 @@
 package servicio.maestros;
 
-import java.util.List;
-import java.util.Set;
-
 import interfacedao.maestros.IPacienteAntecedenteDAO;
+
+import java.util.List;
 
 import modelo.maestros.Antecedente;
 import modelo.maestros.Paciente;

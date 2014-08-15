@@ -1,8 +1,8 @@
 package servicio.transacciones;
 
-import java.util.List;
-
 import interfacedao.transacciones.IHistoriaAccidenteDAO;
+
+import java.util.List;
 
 import modelo.maestros.Accidente;
 import modelo.transacciones.Historia;
