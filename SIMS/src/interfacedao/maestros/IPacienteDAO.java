@@ -40,4 +40,30 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 	List<Paciente> findByFichaStartingWithAllIgnoreCase(String valor);
 
 	List<Paciente> findByEstatusTrue();
+
+	List<Paciente> findByParentescoFamiliarStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByTrabajadorTrue();
+
+	List<Paciente> findByCedulaFamiliarAndCedulaStartingWithAllIgnoreCase(
+			String value, String valor);
+
+	List<Paciente> findByCedulaFamiliarAndPrimerNombreStartingWithAllIgnoreCase(
+			String value, String valor);
+
+	List<Paciente> findByCedulaFamiliarAndPrimerApellidoStartingWithAllIgnoreCase(
+			String value, String valor);
+
+	List<Paciente> findByTrabajadorTrueAndPrimerNombreStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByTrabajadorTrueAndCedulaStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByTrabajadorTrueAndPrimerApellidoStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByCedulaFamiliarAndParentescoFamiliarStartingWithAllIgnoreCase(
+			String valor2, String valor);
 }

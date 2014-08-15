@@ -45,9 +45,9 @@
 												<radio label="Inactivo" value="Inactivo" id="rdoInactivo" />
 												<radio label="Deceso" value="Deceso" id="rdoMuerte" />
 											</radiogroup>
-											<datebox visible="false" readonly="true" width="140px" id="dtbFechaMuerte"
-												onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Nacimiento"
-												constraint="no future,no empty" />
+											<datebox visible="false" readonly="true" width="140px"
+												id="dtbFechaMuerte" onCreate="self.value = new Date()"
+												tooltiptext="Indique la Fecha de Nacimiento" constraint="no future,no empty" />
 										</vbox>
 									</cell>
 									<textbox maxlength="100" id="txtObservacionEstatus"
@@ -143,7 +143,10 @@
 										</vbox>
 									</cell>
 									<hbox />
-									<hbox />
+									<button visible="false" autodisable="self" label="Ver Carga Familiar" id="btnVer"
+									image="/public/imagenes/botones/ver.png"
+									tooltiptext="Seleccione una consulta y presione este boton para ver el detalle de la consulta"
+									hflex="1" height="35px" class="btn" />
 								</row>
 								<row>
 									<hbox>

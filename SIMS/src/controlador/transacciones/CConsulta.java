@@ -2121,9 +2121,17 @@ public class CConsulta extends CGenerico {
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
 		llenarCampos(paciente);
 		if (!paciente.isTrabajador()
-				&& paciente.getParentescoFamiliar().equals("Hijo(a)")
-				&& calcularEdad(paciente.getFechaNacimiento()) >= 18)
-			msj.mensajeAlerta(Mensaje.pacienteMayor);
+				&& paciente.getParentescoFamiliar().equals("Hijo(a)")) {
+			Paciente representante = servicioPaciente.buscarPorCedula(paciente
+					.getCedulaFamiliar());
+			if (representante.isMuerte()) {
+				if (calcularEdad(representante.getFechaMuerte()) >= 1)
+					msj.mensajeAlerta(Mensaje.pacienteFallecido);
+			} else {
+				if (calcularEdad(paciente.getFechaNacimiento()) >= 18)
+					msj.mensajeAlerta(Mensaje.pacienteMayor);
+			}
+		}
 		idPaciente = Long.valueOf(paciente.getCedula());
 		List<Consulta> consultas = servicioConsulta.buscarPorPaciente(paciente);
 		for (int i = 0; i < consultas.size(); i++) {

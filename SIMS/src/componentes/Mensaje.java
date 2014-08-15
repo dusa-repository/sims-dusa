@@ -43,7 +43,7 @@ public class Mensaje {
 	public static String seleccioneFuncionalidades = "Seleccione las Funcionalidades";
 	public static String cedulaNoExiste = "El Numero de Cedula que Ingreso No esta asociado a Ningun Usuario";
 	public static String reinicioContrasenna = "Se envio un Correo Indicando los datos del Usuario";
-	public static String loginUsado= "El Login no esta Disponible, esta siendo usado por otro Usuario";
+	public static String loginUsado = "El Login no esta Disponible, esta siendo usado por otro Usuario";
 	public static String citasCanceladas = "Se ha(n) Cancelado la(s) Cita(s)";
 	public static String seleccioneCitaCancelar = "Seleccione al menos una Cita para Cancelar";
 	public static String noCitasCancelacion = "Actualmente No hay Citas para su Cancelacion";
@@ -51,7 +51,8 @@ public class Mensaje {
 	public static String seleccioneCitaAnular = "Seleccione al menos una Cita para Anular";
 	public static String noCitasAnulacion = "Actualmente No hay Citas para su Anulacion";
 	public static String fichaExistente = "La Ficha ha sido Usada por Otro Registro.";
-	public static String pacienteMayor = "El paciente que ha seleccionado es mayor de edad, ademas de ser hijo de un trabajador, verifique si cumple los requisitos para inactivarlo";
+	public static String pacienteMayor = "El paciente que ha seleccionado es mayor de edad, ademas de ser hijo de un trabajador, verifique si cumple los requisitos para permanecer activo";
+	public static String pacienteFallecido = "El representante del paciente en la empresa ha fallecido y la fecha es mayor a un año, verifique si cumple los requisitos para permanecer activo";
 
 	public void mensajeInformacion(String msj) {
 		Messagebox.show(msj, "Informacion", Messagebox.OK,
