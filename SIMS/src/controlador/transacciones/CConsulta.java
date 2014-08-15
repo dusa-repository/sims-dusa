@@ -3626,8 +3626,12 @@ public class CConsulta extends CGenerico {
 		map.put("lista", intervencionesDisponibles);
 		map.put("listbox", ltbIntervenciones);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Intervencion");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol
+				.buscarPorNombreArbol("Intervencion");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	// @Listen("onClick = #btnAbrirAntecedente3,#btnAbrirAntecedente2,#btnAbrirAntecedente1")
@@ -3663,8 +3667,11 @@ public class CConsulta extends CGenerico {
 			map.put("listbox", ltbAccidentesComunes);
 		}
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Accidente");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Accidente");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	@Listen("onClick = #btnAbrirExamen")
@@ -3674,8 +3681,11 @@ public class CConsulta extends CGenerico {
 		map.put("lista", examenesDisponibles);
 		map.put("listbox", ltbExamenes);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Examen");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Examen");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	@Listen("onClick = #btnAbrirCuerpo")
@@ -3685,8 +3695,11 @@ public class CConsulta extends CGenerico {
 		map.put("lista", modelFisico);
 		map.put("listbox", ltbExamenFisico);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Organo");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Organo");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	@Listen("onClick = #btnAbrirVacuna")
@@ -3703,8 +3716,11 @@ public class CConsulta extends CGenerico {
 		map.put("historia", historia);
 		map.put("listbox", ltbVacunas);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Vacuna");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Vacuna");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	@Listen("onClick = #btnAbrirDiagnostico")
@@ -3714,8 +3730,11 @@ public class CConsulta extends CGenerico {
 		map.put("lista", diagnosticosDisponibles);
 		map.put("listbox", ltbDiagnosticos);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Diagnostico");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Diagnostico");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	@Listen("onClick = #btnAbrirEspecialista")
@@ -3725,8 +3744,12 @@ public class CConsulta extends CGenerico {
 		map.put("lista", especialistasDisponibles);
 		map.put("listbox", ltbEspecialistas);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialista");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol
+				.buscarPorNombreArbol("Especialista");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	@Listen("onClick = #btnAbrirServicioExterno")
@@ -3736,9 +3759,12 @@ public class CConsulta extends CGenerico {
 		map.put("lista", serviciosDisponibles);
 		map.put("listbox", ltbServicioExterno);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol
+		List<Arbol> arboles = servicioArbol
 				.buscarPorNombreArbol("Servicios Externos");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	@Listen("onClick = #btnAbrirMedicina")
@@ -3748,8 +3774,11 @@ public class CConsulta extends CGenerico {
 		map.put("lista", medicinasDisponibles);
 		map.put("listbox", ltbMedicinas);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Medicina");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Medicina");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	@Listen("onOK = #txtCedula")
@@ -5175,7 +5204,7 @@ public class CConsulta extends CGenerico {
 		List<Consulta> listaConsultas = getServicioConsulta()
 				.buscarPorIdPacienteOrdenado(String.valueOf(part2));
 		for (int i = 0; i < listaConsultas.size(); i++) {
-			
+
 			String nombre = listaConsultas.get(i).getUsuario()
 					.getPrimerNombre();
 			String apellido = listaConsultas.get(i).getUsuario()
@@ -5184,19 +5213,18 @@ public class CConsulta extends CGenerico {
 			listaConsultas.get(i).setExamenPreempleo(nombre + " " + apellido);
 			List<ConsultaDiagnostico> diagnosticos = getServicioConsultaDiagnostico()
 					.buscarPorConsulta(listaConsultas.get(i));
-			
-			//For de los diagnosticos
 
-		
-			String nombresDiagnosticos =""; 
-			String tipoDiagnosticos =""; 
+			// For de los diagnosticos
+
+			String nombresDiagnosticos = "";
+			String tipoDiagnosticos = "";
 			for (int j = 0; j < diagnosticos.size(); j++) {
-				String diag = diagnosticos.get(j).getDiagnostico().getNombre();	
+				String diag = diagnosticos.get(j).getDiagnostico().getNombre();
 				String tipo = diagnosticos.get(j).getTipo();
-				nombresDiagnosticos += "-"+diag+"\n";
-				tipoDiagnosticos += "-"+tipo+"\n";
+				nombresDiagnosticos += "-" + diag + "\n";
+				tipoDiagnosticos += "-" + tipo + "\n";
 			}
-			
+
 			listaConsultas.get(i).setObservacion(nombresDiagnosticos);
 			listaConsultas.get(i).setCondicionApto(tipoDiagnosticos);
 		}

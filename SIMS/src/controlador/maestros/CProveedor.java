@@ -291,8 +291,8 @@ public class CProveedor extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Proveedor> proveedores = servicioProveedor.buscarTodos();
 		catalogo = new Catalogo<Proveedor>(catalogoProveedor,
-				"Catalogo de Proveedores", proveedores, "Nombre",
-				"Direccion", "Telefono", "Ciudad") {
+				"Catalogo de Proveedores", proveedores, "Nombre", "Direccion",
+				"Telefono", "Ciudad") {
 
 			@Override
 			protected List<Proveedor> buscar(String valor, String combo) {
@@ -365,8 +365,11 @@ public class CProveedor extends CGenerico {
 	/* Abre la vista de Ciudad */
 	@Listen("onClick = #btnAbrirCiudad")
 	public void abrirCiudad() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Ciudad");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Cosas relacionadas con los grid */
@@ -639,16 +642,22 @@ public class CProveedor extends CGenerico {
 	/* Abre la vista de Estudios */
 	@Listen("onClick = #btnAbrirEstudio")
 	public void abrirEstudio() {
-		Arbol arbolItem = servicioArbol
+		List<Arbol> arboles = servicioArbol
 				.buscarPorNombreArbol("Servicios Externos");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Abre la vista de Examenes */
 	@Listen("onClick = #btnAbrirExamen")
 	public void abrirExamen() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Examen");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Examen");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Abre la pestanna de examenes */

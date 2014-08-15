@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divServicioExterno" apply="controlador.maestros.CServicioExterno">
-		<groupbox width="40em" mold="3d" title="Servicio Externo">
+		<groupbox width="40em" mold="3d" title="Estudio Externo">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />

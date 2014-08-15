@@ -483,31 +483,32 @@ public class CMedicina extends CGenerico {
 					medicinaPresentacionUnidad
 							.setPresentacionMedicina(presentacionMedicina);
 					presentacionesUsadas.clear();
-					for (int j = 0; j < ltbPresentacionesAgregadas.getItemCount(); j++) {
+					for (int j = 0; j < ltbPresentacionesAgregadas
+							.getItemCount(); j++) {
 						Listitem listItemj = ltbPresentacionesAgregadas
 								.getItemAtIndex(j);
 						double valor = ((Doublespinner) ((listItemj
 								.getChildren().get(1))).getFirstChild())
 								.getValue();
-						String id = ((Combobox) ((listItemj.getChildren().get(2)))
-								.getFirstChild()).getValue();
+						String id = ((Combobox) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
 						long idPresentacion = ((Spinner) ((listItemj
 								.getChildren().get(3))).getFirstChild())
 								.getValue();
 						long idUnidad = 0;
 						if (((Combobox) ((listItemj.getChildren().get(2)))
-								.getFirstChild()).getSelectedItem()!=null){
+								.getFirstChild()).getSelectedItem() != null) {
 							id = ((Combobox) ((listItemj.getChildren().get(2)))
 									.getFirstChild()).getSelectedItem()
 									.getContext();
 							idUnidad = Long.parseLong(id);
 						}
-							PresentacionMedicina presentacion = servicioPresentacionMedicina
-									.buscar(idPresentacion);
-							UnidadMedicina unidadMedicina = servicioUnidadMedicina
-									.buscar(idUnidad);
-							MedicinaPresentacionUnidad medicinaPresentacionUnidadj = new MedicinaPresentacionUnidad(
-									null, presentacion, unidadMedicina, valor);
+						PresentacionMedicina presentacion = servicioPresentacionMedicina
+								.buscar(idPresentacion);
+						UnidadMedicina unidadMedicina = servicioUnidadMedicina
+								.buscar(idUnidad);
+						MedicinaPresentacionUnidad medicinaPresentacionUnidadj = new MedicinaPresentacionUnidad(
+								null, presentacion, unidadMedicina, valor);
 						presentacionesUsadas.add(medicinaPresentacionUnidadj);
 					}
 					presentacionesUsadas.add(medicinaPresentacionUnidad);
@@ -641,9 +642,12 @@ public class CMedicina extends CGenerico {
 	/* Abre la vista de Categoria */
 	@Listen("onClick = #btnAbrirCategoria")
 	public void abrirCategoria() {
-		Arbol arbolItem = servicioArbol
+		List<Arbol> arboles = servicioArbol
 				.buscarPorNombreArbol("Categoria Medicina");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Abre la vista de Presentacion */
@@ -654,16 +658,22 @@ public class CMedicina extends CGenerico {
 		map.put("lista", presentacionesDisponibles);
 		map.put("listbox", ltbPresentaciones);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol
+		List<Arbol> arboles = servicioArbol
 				.buscarPorNombreArbol("Presentacion Medicina");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Abre la vista de Laboratorio */
 	@Listen("onClick = #btnAbrirLaboratorio")
 	public void abrirLaboratorio() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Laboratorio");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Laboratorio");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	public void recibirPresentacion(List<PresentacionMedicina> lista, Listbox l) {

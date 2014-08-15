@@ -52,7 +52,8 @@ public class CPresentacionComercial extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		contenido = (Include) divPresentacion.getParent();
-		Tabbox tabox = (Tabbox) divPresentacion.getParent().getParent().getParent().getParent();
+		Tabbox tabox = (Tabbox) divPresentacion.getParent().getParent()
+				.getParent().getParent();
 		tabBox = tabox;
 		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
@@ -76,9 +77,9 @@ public class CPresentacionComercial extends CGenerico {
 							.getSelectedItem().getContext());
 					Medicina medicina = servicioMedicina.buscar(idMedicina);
 
-					PresentacionComercial presentacion = new PresentacionComercial(id, fechaHora,
-							horaAuditoria, nombre, nombreUsuarioSesion(),
-							medicina);
+					PresentacionComercial presentacion = new PresentacionComercial(
+							id, fechaHora, horaAuditoria, nombre,
+							nombreUsuarioSesion(), medicina);
 					servicioPresentacion.guardar(presentacion);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
@@ -132,7 +133,8 @@ public class CPresentacionComercial extends CGenerico {
 	/* Muestra un catalogo de presentaciones */
 	@Listen("onClick = #btnBuscarPresentacion")
 	public void mostrarCatalogo() throws IOException {
-		List<PresentacionComercial> presentaciones = servicioPresentacion.buscarTodas();
+		List<PresentacionComercial> presentaciones = servicioPresentacion
+				.buscarTodas();
 		catalogo = new Catalogo<PresentacionComercial>(catalogoPresentacion,
 				"Catalogo de Presentaciones", presentaciones, "Nombre",
 				"Medicina") {
@@ -146,12 +148,13 @@ public class CPresentacionComercial extends CGenerico {
 			}
 
 			@Override
-			protected List<PresentacionComercial> buscar(String valor,String combo) {
-				if(combo.equals("Nombre"))
-				return servicioPresentacion.filtroNombre(valor);
-				else{
-					if(combo.equals("Medicina"))
-					return servicioPresentacion.filtroMedicina(valor);
+			protected List<PresentacionComercial> buscar(String valor,
+					String combo) {
+				if (combo.equals("Nombre"))
+					return servicioPresentacion.filtroNombre(valor);
+				else {
+					if (combo.equals("Medicina"))
+						return servicioPresentacion.filtroMedicina(valor);
 				}
 				return servicioPresentacion.buscarTodas();
 			}
@@ -166,7 +169,6 @@ public class CPresentacionComercial extends CGenerico {
 		List<Medicina> medicina = servicioMedicina.buscarTodas();
 		cmbMedicina.setModel(new ListModelList<Medicina>(medicina));
 	}
-
 
 	/* Validaciones de pantalla para poder realizar el guardar */
 	public boolean validar() {
@@ -194,7 +196,8 @@ public class CPresentacionComercial extends CGenerico {
 	 */
 	@Listen("onSeleccion = #catalogoPresentacion")
 	public void seleccion() {
-		PresentacionComercial presentacion = catalogo.objetoSeleccionadoDelCatalogo();
+		PresentacionComercial presentacion = catalogo
+				.objetoSeleccionadoDelCatalogo();
 		llenarCampos(presentacion);
 		catalogo.setParent(null);
 	}
@@ -205,11 +208,14 @@ public class CPresentacionComercial extends CGenerico {
 		cmbMedicina.setValue(presentacion.getMedicina().getNombre());
 		id = presentacion.getIdPresentacion();
 	}
-	
-	/* Abre la vista de Medicina*/
+
+	/* Abre la vista de Medicina */
 	@Listen("onClick = #btnAbrirMedicina")
-	public void abrirMedicina(){		
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Medicina");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);	
+	public void abrirMedicina() {
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Medicina");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 }

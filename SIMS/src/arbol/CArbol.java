@@ -35,6 +35,7 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeModel;
+import org.zkoss.zul.Treecell;
 import org.zkoss.zul.West;
 
 import componentes.Validador;
@@ -161,7 +162,7 @@ public class CArbol extends CGenerico {
 			Nodos oneLevelNode = new Nodos(null, 0, "");
 			Nodos two = new Nodos(null, 0, "");
 			if (arboles.get(z).getPadre() == 0) {
-				oneLevelNode = new Nodos(roote, z, arboles.get(z).getNombre());
+				oneLevelNode = new Nodos(roote, (int) arboles.get(z).getIdArbol(), arboles.get(z).getNombre());
 				roote.appendChild(oneLevelNode);
 				idsPadre.add(arboles.get(z).getIdArbol());
 				nodos.add(oneLevelNode);
@@ -169,7 +170,7 @@ public class CArbol extends CGenerico {
 				for (int j = 0; j < idsPadre.size(); j++) {
 					if (idsPadre.get(j) == arboles.get(z).getPadre()) {
 						oneLevelNode = nodos.get(j);
-						two = new Nodos(oneLevelNode, z, arboles.get(z)
+						two = new Nodos(oneLevelNode, (int) arboles.get(z).getIdArbol(), arboles.get(z)
 								.getNombre());
 						oneLevelNode.appendChild(two);
 						idsPadre.add(arboles.get(z).getIdArbol());
@@ -188,12 +189,12 @@ public class CArbol extends CGenerico {
 	@Listen("onClick = #arbolMenu")
 	public void selectedNode() {
 		if (arbolMenu.getSelectedItem() != null) {
-			String item = String
-					.valueOf(arbolMenu.getSelectedItem().getValue());
+			Treecell celda = (Treecell) arbolMenu.getSelectedItem().getChildren().get(0).getChildren().get(0);
+			long item = Long.valueOf(celda.getId());
 			boolean abrir = true;
 			Tab taba = new Tab();
 			// if (arbolMenu.getSelectedItem().getLevel() > 0) {
-			final Arbol arbolItem = servicioArbol.buscarPorNombreArbol(item);
+			final Arbol arbolItem = servicioArbol.buscarPorId(item);
 			if (!arbolItem.getUrl().equals("inicio")) {
 
 				if (String.valueOf(arbolMenu.getSelectedItem().getValue())

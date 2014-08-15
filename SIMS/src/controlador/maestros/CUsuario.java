@@ -674,15 +674,23 @@ public class CUsuario extends CGenerico {
 	/* Abre la vista de Unidad */
 	@Listen("onClick = #btnAbrirUnidad")
 	public void abrirUnidad() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Unidad Usuario");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol
+				.buscarPorNombreArbol("Unidad Usuario");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Abre la vista de Especialidad */
 	@Listen("onClick = #btnAbrirEspecialidad")
 	public void abrirEspecialidad() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialidad");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol
+				.buscarPorNombreArbol("Especialidad");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Abre la vista de Grupos */
@@ -693,8 +701,11 @@ public class CUsuario extends CGenerico {
 		map.put("lista", gruposDisponibles);
 		map.put("listbox", ltbGruposDisponibles);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Grupo");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Grupo");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	public void recibirGrupo(List<Grupo> lista, Listbox l) {

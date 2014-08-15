@@ -242,9 +242,12 @@ public class CAccidente extends CGenerico {
 
 	@Listen("onClick = #btnAbrir")
 	public void abrirEstado() {
-		Arbol arbolItem = servicioArbol
+		List<Arbol> arboles = servicioArbol
 				.buscarPorNombreArbol("Clasificacion de Accidente");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 }

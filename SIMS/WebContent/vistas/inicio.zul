@@ -74,9 +74,9 @@
 				collapsible="true" autoscroll="true">
 				<tree id="arbolMenu" width="99%" zclass="z-vfiletree">
 					<template name="model">
-						<treeitem context="menupopup">
+						<treeitem  context="menupopup" >
 							<treerow>
-								<treecell label="${each.label}" />
+								<treecell id="${each.index}" label="${each.label}" />
 							</treerow>
 						</treeitem>
 					</template>

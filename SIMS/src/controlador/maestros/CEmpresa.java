@@ -504,8 +504,11 @@ public class CEmpresa extends CGenerico {
 	/* Abre la vista de Ciudad */
 	@Listen("onClick = #btnAbrirCiudad")
 	public void abrirCiudad() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Ciudad");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Metodo que valida el formmato del correo ingresado */

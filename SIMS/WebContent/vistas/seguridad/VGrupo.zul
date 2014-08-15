@@ -31,7 +31,7 @@
 						<template name="model">
 							<treeitem context="menupopup" open="true">
 								<treerow>
-									<treecell label="${each.label}" />
+									<treecell context="${each.index}" label="${each.label}" />
 								</treerow>
 							</treeitem>
 						</template>

@@ -280,8 +280,11 @@ public class CDiagnostico extends CGenerico {
 	/* Abre la vista de Categoria */
 	@Listen("onClick = #btnAbrirCategoria")
 	public void abrirCategoria() {
-		Arbol arbolItem = servicioArbol
+		List<Arbol> arboles = servicioArbol
 				.buscarPorNombreArbol("Categoria Diagnostico");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 }
