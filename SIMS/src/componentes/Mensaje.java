@@ -51,6 +51,7 @@ public class Mensaje {
 	public static String seleccioneCitaAnular = "Seleccione al menos una Cita para Anular";
 	public static String noCitasAnulacion = "Actualmente No hay Citas para su Anulacion";
 	public static String fichaExistente = "La Ficha ha sido Usada por Otro Registro.";
+	public static String pacienteMayor = "El paciente que ha seleccionado es mayor de edad, ademas de ser hijo de un trabajador, verifique si cumple los requisitos para inactivarlo";
 
 	public void mensajeInformacion(String msj) {
 		Messagebox.show(msj, "Informacion", Messagebox.OK,

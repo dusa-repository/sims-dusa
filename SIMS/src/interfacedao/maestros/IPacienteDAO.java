@@ -39,5 +39,5 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
 	List<Paciente> findByFichaStartingWithAllIgnoreCase(String valor);
 
-
+	List<Paciente> findByEstatusTrue();
 }

@@ -168,7 +168,7 @@ public class CArbol extends CGenerico {
 				idsPadre.add(arboles.get(z).getIdArbol());
 				nodos.add(oneLevelNode);
 			} else {
-				for (int j = 0; j < idsPadre.size(); j++)
+				for (int j = 0; j < idsPadre.size(); j++) {
 					if (idsPadre.get(j) == arboles.get(z).getPadre()) {
 						oneLevelNode = nodos.get(j);
 						two = new Nodos(oneLevelNode, z, arboles.get(z)
@@ -177,6 +177,7 @@ public class CArbol extends CGenerico {
 						idsPadre.add(arboles.get(z).getIdArbol());
 						nodos.add(two);
 					}
+				}
 			}
 		}
 		return roote;

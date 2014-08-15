@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -18,6 +19,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import modelo.maestros.Paciente;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 
@@ -234,7 +236,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	}
 
 	public abstract void inicializar() throws IOException;
-	
+
 	public void cerrarVentana(Div div, String id, List<Tab> tabs2) {
 		div.setVisible(false);
 		tabs = tabs2;
@@ -343,21 +345,39 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		Calendar today = new GregorianCalendar();
 		int age = 0;
 		int factor = 0;
-		Date currentDate = new Date(); // current date
+		Date currentDate = new Date();
 		birth.setTime(birthDate);
 		today.setTime(currentDate);
-		if (today.get(Calendar.MONTH) <= birth.get(Calendar.MONTH)) {
-			if (today.get(Calendar.MONTH) == birth.get(Calendar.MONTH)) {
-				if (today.get(Calendar.DATE) > birth.get(Calendar.DATE)) {
-					factor = -1; // Aun no celebra su cumpleaños
-				}
-			} else {
-				factor = -1; // Aun no celebra su cumpleaños
-			}
+		if (today.get(Calendar.DAY_OF_YEAR) < birth.get(Calendar.DAY_OF_YEAR)) {
+			factor = -1;
 		}
-		age = (today.get(Calendar.YEAR) - birth.get(Calendar.YEAR)) + factor;
+		age = (currentDate.getYear() - birthDate.getYear()) + factor;
 		if (age == -1)
 			age = 0;
 		return age;
+	}
+
+	public void inhabilitarTrabajadorYTodosFamiliares(Paciente paciente) {
+		List<Paciente> inactivos = new ArrayList<Paciente>();
+		paciente.setEstatus(false);
+		inactivos.add(paciente);
+		if (paciente.isTrabajador()) {
+			List<Paciente> carga = servicioPaciente.buscarParientes(paciente
+					.getCedula());
+			for (Iterator<Paciente> iterator = carga.iterator(); iterator
+					.hasNext();) {
+				Paciente paciente2 = (Paciente) iterator.next();
+				if (!paciente.isMuerte()) {
+					paciente2.setEstatus(false);
+					inactivos.add(paciente2);
+				} else {
+					if (!paciente2.getParentescoFamiliar().equals("Hijo(a)")) {
+						paciente2.setEstatus(false);
+						inactivos.add(paciente2);
+					}
+				}
+			}
+		}
+		servicioPaciente.guardarVarios(inactivos);
 	}
 }

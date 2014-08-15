@@ -1893,7 +1893,7 @@
 											</groupbox>
 											<groupbox id="gpxTabaquino" closable="false" open="true"
 												width="100%">
-												<caption label="Tabaquinos"
+												<caption label="Tabaquicos"
 													style="color:black; font-size: 12px; font-weight:bold" />
 												<separator />
 												<grid width="100%">
@@ -1940,7 +1940,7 @@
 										<vbox>
 											<groupbox id="gpxAlcohol" closable="false" open="true"
 												width="100%">
-												<caption label="Alcoholico"
+												<caption label="Alcoholicos"
 													style="color:black; font-size: 12px; font-weight:bold" />
 												<separator />
 												<grid width="100%">
@@ -1993,7 +1993,7 @@
 														</row>
 														<row>
 															<label class="etiqueta"
-																value="¿A sufrido accidentes por el Alcohol?" />
+																value="¿Ha sufrido accidentes por el Alcohol?" />
 															<radiogroup id="rdgAccidenteAlcohol">
 																<radio label="SI" value="si" id="rdoSiAccidenteAlcohol" />
 																<radio label="NO" value="no" id="rdoNoAccidenteAlcohol" />
