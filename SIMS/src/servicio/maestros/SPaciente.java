@@ -78,4 +78,12 @@ public class SPaciente {
 		return pacienteDAO.findByNomina(nomina);
 	}
 
+	public Paciente buscarPorFicha(String value) {
+		return pacienteDAO.findByFicha(value);
+	}
+
+	public List<Paciente> filtroFicha(String valor) {
+		return pacienteDAO.findByFichaStartingWithAllIgnoreCase(valor);
+	}
+
 }
