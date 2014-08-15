@@ -50,6 +50,7 @@ public class Mensaje {
 	public static String citasAnuladas = "Se ha(n) Anulado la(s) Cita(s)";
 	public static String seleccioneCitaAnular = "Seleccione al menos una Cita para Anular";
 	public static String noCitasAnulacion = "Actualmente No hay Citas para su Anulacion";
+	public static String fichaExistente = "La Ficha ha sido Usada por Otro Registro.";
 
 	public void mensajeInformacion(String msj) {
 		Messagebox.show(msj, "Informacion", Messagebox.OK,

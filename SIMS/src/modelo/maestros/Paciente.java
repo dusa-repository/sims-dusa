@@ -55,6 +55,10 @@ public class Paciente implements Serializable {
 	
 	@Column
 	@Type(type="org.hibernate.type.NumericBooleanType")
+	private boolean muerte;
+	
+	@Column
+	@Type(type="org.hibernate.type.NumericBooleanType")
 	private boolean alergia;
 	
 	@Column
@@ -170,6 +174,10 @@ public class Paciente implements Serializable {
 	
 	@Column(name="nro_inpsasel")
 	private String NroInpsasel;
+	
+	@Column(name="fecha_muerte")
+	private Timestamp fechaMuerte;
+
 	
 	@Column(name="fecha_ingreso")
 	private Timestamp fechaIngreso;
@@ -909,6 +917,22 @@ public Historia getHistoria() {
 
 	public void setObservacionEstatus(String observacionEstatus) {
 		this.observacionEstatus = observacionEstatus;
+	}
+
+	public boolean isMuerte() {
+		return muerte;
+	}
+
+	public void setMuerte(boolean muerte) {
+		this.muerte = muerte;
+	}
+
+	public Timestamp getFechaMuerte() {
+		return fechaMuerte;
+	}
+
+	public void setFechaMuerte(Timestamp fechaMuerte) {
+		this.fechaMuerte = fechaMuerte;
 	}
 	
 

@@ -16,8 +16,8 @@
 								<column label="" width="14%" />
 								<column label="" width="11%" />
 								<column label="" width="14%" />
-								<column label="" width="11%" />
-								<column label="" width="14%" />
+								<column label="" width="9%" />
+								<column label="" width="16%" />
 							</columns>
 							<rows>
 								<row>
@@ -37,16 +37,22 @@
 									<button autodisable="self" id="btnBuscarPaciente" class="btn"
 										label="Buscar" tooltiptext="Catalogo"
 										image="/public/imagenes/botones/buscar.png" />
-										<label class="etiqueta" value="Estatus" />
-									<radiogroup id="rdgEstatus">
-										<radio label="Activo" value="Activo" id="rdoActivo" />
-										<radio label="Inactivo" value="Inactivo" id="rdoInactivo" />
-									</radiogroup>
+									<label class="etiqueta" value="Estatus" />
 									<cell colspan="2">
-										<textbox maxlength="100" id="txtObservacionEstatus"
-											hflex="1" multiline="true"
-											tooltiptext="Ingrese una Informacion Adicional del Estatus del Paciente" />
+										<vbox>
+											<radiogroup id="rdgEstatus">
+												<radio label="Activo" value="Activo" id="rdoActivo" />
+												<radio label="Inactivo" value="Inactivo" id="rdoInactivo" />
+												<radio label="Deceso" value="Deceso" id="rdoMuerte" />
+											</radiogroup>
+											<datebox visible="false" readonly="true" width="140px" id="dtbFechaMuerte"
+												onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Nacimiento"
+												constraint="no future,no empty" />
+										</vbox>
 									</cell>
+									<textbox maxlength="100" id="txtObservacionEstatus"
+										hflex="1" multiline="true"
+										tooltiptext="Ingrese una Informacion Adicional del Estatus del Paciente" />
 								</row>
 								<row>
 									<hbox>

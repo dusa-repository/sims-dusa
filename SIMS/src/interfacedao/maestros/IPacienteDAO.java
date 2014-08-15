@@ -35,4 +35,9 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
 	List<Paciente> findByNomina(Nomina nomina);
 
+	Paciente findByFicha(String value);
+
+	List<Paciente> findByFichaStartingWithAllIgnoreCase(String valor);
+
+
 }
