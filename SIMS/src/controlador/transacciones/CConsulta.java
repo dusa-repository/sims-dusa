@@ -941,7 +941,7 @@ public class CConsulta extends CGenerico {
 					} else
 						areaDeseado = null;
 					int dias = spnReposo.getValue();
-					if(tipoSecundaria.equals("Egreso"))
+					if (tipoSecundaria.equals("Egreso"))
 						inhabilitarTrabajadorYTodosFamiliares(paciente);
 					Consulta consulta = new Consulta(idConsulta, paciente,
 							usuario, fechaConsulta, horaAuditoria,
@@ -2308,7 +2308,7 @@ public class CConsulta extends CGenerico {
 		lblTelefono2E.setValue(paciente.getTelefono2Emergencia());
 		lblParentesco.setValue(paciente.getParentescoEmergencia());
 		// lblParentescoFamiliar.setValue(paciente.getParentescoFamiliar());
-		lblEdad.setValue(String.valueOf(paciente.getEdad()));
+		lblEdad.setValue(String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		lblEstatura.setValue(String.valueOf(paciente.getEstatura()));
 		lblPeso.setValue(String.valueOf(paciente.getPeso()));
 		// lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
@@ -4920,6 +4920,7 @@ public class CConsulta extends CGenerico {
 		p.put("enfermedad", especialistaConsulta.getObservacion());
 		p.put("observacion", especialistaConsulta.getObservacion());
 		p.put("prioridad", especialistaConsulta.getPrioridad());
+		p.put("cedula", paciente.getCedula());
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipeEspecialista.jasper"));
@@ -4973,6 +4974,7 @@ public class CConsulta extends CGenerico {
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
 			rifEmpresa = paciente.getEmpresa().getRif();
 		}
+		p.put("cedula", paciente.getCedula());
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
@@ -4990,9 +4992,11 @@ public class CConsulta extends CGenerico {
 		p.put("doctorCedula", user.getCedula());
 		p.put("servicio", servicioConsultas.getServicioExterno().getNombre());
 		p.put("centro", servicioConsultas.getProveedor().getNombre());
-		p.put("enfermedad", consuta.getEnfermedadActual());
+		p.put("enfermedad", servicioConsultas.getObservacion());
 		p.put("observacion", servicioConsultas.getObservacion());
 		p.put("prioridad", servicioConsultas.getPrioridad());
+		p.put("edad",
+				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipeServicio.jasper"));
@@ -5116,10 +5120,16 @@ public class CConsulta extends CGenerico {
 		p.put("diagnostico", diagnosticoConsulta.get(0).getDiagnostico()
 				.getNombre());
 		p.put("tipoDiagnostico", diagnosticoConsulta.get(0).getTipo());
+		p.put("edad",
+				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RConsulta.jasper"));
-		fichero = JasperRunManager.runReportToPdf(reporte, p);
+		// fichero = JasperRunManager.runReportToPdf(reporte, p);
+
+		diagnosticoConsulta.remove(0);
+		fichero = JasperRunManager.runReportToPdf(reporte, p,
+				new JRBeanCollectionDataSource(diagnosticoConsulta));
 		return fichero;
 	}
 
@@ -5146,8 +5156,7 @@ public class CConsulta extends CGenerico {
 			String apellido = listaConsultas.get(i).getUsuario()
 					.getPrimerApellido();
 			Consulta consulta = listaConsultas.get(i);
-			listaConsultas.get(i).getUsuario()
-					.setPrimerNombre(nombre + " " + apellido);
+			listaConsultas.get(i).setExamenPreempleo(nombre + " " + apellido);
 			List<ConsultaDiagnostico> diagnosticos = getServicioConsultaDiagnostico()
 					.buscarPorConsulta(listaConsultas.get(i));
 			listaConsultas.get(i).setObservacion(
@@ -5168,7 +5177,8 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteCedula", listaConsultas.get(0).getPaciente().getCedula());
 		p.put("pacienteNacimiento", listaConsultas.get(0).getPaciente()
 				.getFechaNacimiento());
-
+		p.put("edad",
+				String.valueOf(calcularEdad(listaConsultas.get(0).getPaciente().getFechaNacimiento())));
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RConsultaHistorico.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,

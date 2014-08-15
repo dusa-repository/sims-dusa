@@ -28,7 +28,7 @@
 			<staticText>
 				<reportElement x="430" y="10" width="42" height="20" uuid="b5a02274-01e3-4c9c-8079-f5a9e9189d48"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
@@ -42,21 +42,21 @@
 			<staticText>
 				<reportElement x="214" y="117" width="121" height="21" uuid="2b6269f2-e47d-4d30-b8a7-e852147b071a"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="14" isBold="true" isUnderline="true"/>
+					<font fontName="SansSerif" size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Reposo Medico]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="136" y="34" width="309" height="20" uuid="ad9a6a96-1ad9-42aa-b871-4f2abaed84d4"/>
 				<textElement>
-					<font fontName="Arial" size="14" isBold="true"/>
+					<font fontName="SansSerif" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaNombre}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="456" y="34" width="116" height="20" uuid="375be4b4-0534-4b4b-88c8-c08126dd3c7d"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
 			</textField>
@@ -77,7 +77,7 @@
 			<textField>
 				<reportElement x="300" y="158" width="272" height="20" uuid="f85bc08e-08b3-414c-a567-058317d9f6bd"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteNombre}+" "+$P{pacienteApellido}]]></textFieldExpression>
 			</textField>
@@ -91,7 +91,7 @@
 			<textField>
 				<reportElement x="124" y="178" width="90" height="20" uuid="477d4822-7bd1-4e7c-ae58-f3e6f89ecf29"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
 			</textField>
@@ -105,7 +105,7 @@
 			<textField>
 				<reportElement x="0" y="198" width="510" height="20" uuid="825ef08d-f84e-4da9-b6d4-2d2d83c4204f"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
 			</textField>
@@ -119,7 +119,7 @@
 			<textField>
 				<reportElement x="163" y="230" width="78" height="20" uuid="76c945fe-29f6-4e07-bff6-d5d4ae72d490"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaDesde})]]></textFieldExpression>
 			</textField>
@@ -133,14 +133,14 @@
 			<textField>
 				<reportElement x="313" y="230" width="107" height="20" uuid="589a8eba-6b33-45ac-bed3-e3c3f7898643"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaHasta})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="271" width="93" height="20" uuid="92440f3f-210c-41b6-b647-e35a47f8f189"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Por Motivo de:]]></text>
 			</staticText>
@@ -171,14 +171,14 @@
 			<textField>
 				<reportElement x="165" y="593" width="76" height="20" uuid="7e0af1ba-87a6-431e-8186-f6db8ca059c6"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaDesde})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="2" y="561" width="510" height="20" uuid="503c70e7-29dd-4e0b-aabd-b5470141c194"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
 			</textField>
@@ -192,14 +192,14 @@
 			<textField>
 				<reportElement x="313" y="593" width="107" height="20" uuid="b0fd95ef-7f9a-4829-a7ce-d4e99d916e68"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaHasta})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="126" y="541" width="86" height="20" uuid="a96787f6-91db-4e2c-93ba-7b9cf9366ce7"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
 			</textField>
@@ -216,7 +216,7 @@
 			<textField>
 				<reportElement x="131" y="397" width="309" height="20" uuid="c6b05e45-d4b0-436f-9e49-977c9f9d5548"/>
 				<textElement>
-					<font fontName="Arial" size="14" isBold="true"/>
+					<font fontName="SansSerif" size="14" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaNombre}]]></textFieldExpression>
 			</textField>
@@ -230,14 +230,14 @@
 			<staticText>
 				<reportElement x="2" y="634" width="93" height="20" uuid="404909f9-04a3-4688-bc2b-16819242185e"/>
 				<textElement>
-					<font fontName="Arial" size="12"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Por Motivo de:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="302" y="521" width="272" height="20" uuid="2f757465-4f84-4b62-a578-6752709ba4d4"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteNombre}+" "+$P{pacienteApellido}]]></textFieldExpression>
 			</textField>
@@ -251,14 +251,14 @@
 			<staticText>
 				<reportElement x="425" y="373" width="42" height="20" uuid="aeba6086-9c87-4773-8b55-99c00639570f"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="209" y="480" width="121" height="21" uuid="d253a600-0831-4de3-9f54-e44c422fde3f"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="14" isBold="true" isUnderline="true"/>
+					<font fontName="SansSerif" size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Reposo Medico]]></text>
 			</staticText>
@@ -276,7 +276,7 @@
 			<textField>
 				<reportElement x="451" y="397" width="116" height="20" uuid="cd730082-2528-444b-8dd7-be728e1b2fc9"/>
 				<textElement>
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
 			</textField>
