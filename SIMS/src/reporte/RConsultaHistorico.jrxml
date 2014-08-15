@@ -199,15 +199,11 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="47" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="8" width="52" height="20" uuid="91d9752a-5003-4faf-9374-f384121c3f78"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="4" width="52" height="20" uuid="91d9752a-5003-4faf-9374-f384121c3f78"/>
 				<box>
-					<pen lineWidth="0.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
 					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement>
 					<font fontName="Arial"/>
@@ -215,11 +211,9 @@
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="147" y="8" width="134" height="20" uuid="695a8aff-2fbb-4cb2-b361-916f0b9bb038"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="147" y="4" width="134" height="20" uuid="695a8aff-2fbb-4cb2-b361-916f0b9bb038"/>
 				<box>
-					<leftPen lineWidth="0.0"/>
 					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement>
 					<font fontName="Arial"/>
@@ -227,11 +221,9 @@
 				<textFieldExpression><![CDATA[$F{motivoConsulta}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="292" y="8" width="126" height="20" uuid="43fcabd4-ebdc-43fa-a00b-cbe7e7b43ba5"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="292" y="4" width="126" height="20" uuid="43fcabd4-ebdc-43fa-a00b-cbe7e7b43ba5"/>
 				<box>
-					<leftPen lineWidth="0.0"/>
 					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement>
 					<font fontName="Arial"/>
@@ -239,11 +231,9 @@
 				<textFieldExpression><![CDATA[$F{enfermedadActual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="60" y="8" width="78" height="20" uuid="98129b1f-6cd6-4523-81e2-ff06801835c0"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="60" y="4" width="78" height="20" uuid="98129b1f-6cd6-4523-81e2-ff06801835c0"/>
 				<box>
-					<leftPen lineWidth="0.0"/>
 					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement>
 					<font fontName="Arial"/>
@@ -251,11 +241,9 @@
 				<textFieldExpression><![CDATA[$F{tipoConsultaSecundaria}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="434" y="8" width="108" height="20" uuid="861438bd-ef54-4411-8d2e-0d127edfc22d"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="434" y="4" width="108" height="20" uuid="861438bd-ef54-4411-8d2e-0d127edfc22d"/>
 				<box>
-					<leftPen lineWidth="0.0"/>
 					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement>
 					<font fontName="Arial"/>
@@ -263,11 +251,9 @@
 				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="553" y="8" width="89" height="20" uuid="e50ce5b2-00c6-4c90-8097-7ff3f2abbeb4"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="553" y="4" width="89" height="20" uuid="e50ce5b2-00c6-4c90-8097-7ff3f2abbeb4"/>
 				<box>
-					<leftPen lineWidth="0.0"/>
 					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement>
 					<font fontName="Arial"/>
@@ -275,10 +261,13 @@
 				<textFieldExpression><![CDATA[$F{condicionApto}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="46" width="752" height="1" uuid="65ded696-87e5-45a4-9de1-d21bb75bba79"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="28" width="752" height="1" uuid="65ded696-87e5-45a4-9de1-d21bb75bba79"/>
 			</line>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="652" y="8" width="100" height="20" uuid="7db00af3-dff8-41dd-90c2-ca8e913952f0"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="652" y="4" width="100" height="20" uuid="7db00af3-dff8-41dd-90c2-ca8e913952f0"/>
+				<box>
+					<bottomPen lineWidth="0.0"/>
+				</box>
 				<textFieldExpression><![CDATA[$F{examenPreempleo}]]></textFieldExpression>
 			</textField>
 		</band>
