@@ -1268,7 +1268,7 @@
 											</vbox>
 											<vbox>
 												<separator />
-												<label class="etiqueta" value="SERVICIOS EXTERNOS" />
+												<label class="etiqueta" value="ESTUDIOS EXTERNOS" />
 												<button class="btn" visible="false" label="Generar Orden"
 													id="btnGenerarOrdenServicios" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Orden" width="200px" />
