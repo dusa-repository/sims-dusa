@@ -204,7 +204,10 @@ public class CEstado extends CGenerico {
 	/* Abre la vista de Pais */
 	@Listen("onClick = #btnAbrirPais")
 	public void abrirPais() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Pais");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Pais");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 }

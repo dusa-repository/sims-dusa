@@ -516,7 +516,10 @@ public class CCita extends CGenerico {
 	/* Abre la vista de Motivo */
 	@Listen("onClick = #btnAbrirMotivo")
 	public void abrirMotivo() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Motivo");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Motivo");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 }

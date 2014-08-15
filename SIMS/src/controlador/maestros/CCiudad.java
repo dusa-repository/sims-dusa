@@ -221,8 +221,11 @@ public class CCiudad extends CGenerico {
 	/* Abre la vista de Estado */
 	@Listen("onClick = #btnAbrirEstado")
 	public void abrirEstado() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Estado");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Estado");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 }

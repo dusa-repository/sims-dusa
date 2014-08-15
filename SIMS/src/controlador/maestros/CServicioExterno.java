@@ -80,7 +80,7 @@ public class CServicioExterno extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divServicioExterno, "Servicios Externos", tabs);
+				cerrarVentana(divServicioExterno, "Estudios Externos", tabs);
 			}
 
 			@Override

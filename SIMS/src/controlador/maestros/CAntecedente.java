@@ -218,9 +218,12 @@ public class CAntecedente extends CGenerico {
 	/* Abre la vista de AntecedenteTipo */
 	@Listen("onClick = #btnAbrirTipoAntecedente")
 	public void abrirAntecedenteTipo() {
-		Arbol arbolItem = servicioArbol
+		List<Arbol> arboles = servicioArbol
 				.buscarPorNombreArbol("Clasificacion de Antecedente");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 }

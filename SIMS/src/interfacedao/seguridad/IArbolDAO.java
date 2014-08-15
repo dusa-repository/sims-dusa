@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IArbolDAO extends JpaRepository<Arbol, Long> {
 	
-	 public Arbol findByNombre(String nombre);
+	 public List<Arbol> findByNombre(String nombre);
 
 	 @Query("select a from Arbol a order by a.idArbol asc")
 	public List<Arbol> buscarTodos();

@@ -28,6 +28,7 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeModel;
+import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treechildren;
 import org.zkoss.zul.Treeitem;
 
@@ -196,8 +197,8 @@ public class CGrupo extends CGenerico {
 		ArrayList<Long> ids = new ArrayList<Long>();
 		for (int k = 0; k < listaArbol.size(); k++) {
 			Arbol arbol;
-			String nombre = listaArbol.get(k).getNombre();
-			arbol = servicioArbol.buscarPorNombreArbol(nombre);
+			long nombre = listaArbol.get(k).getIdArbol();
+			arbol = servicioArbol.buscarPorId(nombre);
 			if (arbol != null)
 				ids.add(arbol.getIdArbol());
 			arbole.add(arbol);
@@ -211,20 +212,23 @@ public class CGrupo extends CGenerico {
 		long temp1, temp2, temp3 = 0;
 		for (int i = 0; i < arboles.size(); i++) {
 			if (arboles.get(i).getPadre() == 0) {
-				oneLevelNode = new Nodos(root, i, arboles.get(i).getNombre());
+				oneLevelNode = new Nodos(root, (int) arboles.get(i)
+						.getIdArbol(), arboles.get(i).getNombre());
 				root.appendChild(oneLevelNode);
 				temp1 = arboles.get(i).getIdArbol();
 				arboles.remove(i);
 				for (int j = i; j < arboles.size(); j++) {
 					if (temp1 == arboles.get(j).getPadre()) {
-						twoLevelNode = new Nodos(oneLevelNode, i, arboles
-								.get(j).getNombre());
+						twoLevelNode = new Nodos(oneLevelNode, (int) arboles
+								.get(i).getIdArbol(), arboles.get(j)
+								.getNombre());
 						oneLevelNode.appendChild(twoLevelNode);
 						temp2 = arboles.get(j).getIdArbol();
 						arboles.remove(j);
 						for (int k = j; k < arboles.size(); k++) {
 							if (temp2 == arboles.get(k).getPadre()) {
-								threeLevelNode = new Nodos(twoLevelNode, i,
+								threeLevelNode = new Nodos(twoLevelNode,
+										(int) arboles.get(i).getIdArbol(),
 										arboles.get(k).getNombre());
 								twoLevelNode.appendChild(threeLevelNode);
 								temp3 = arboles.get(k).getIdArbol();
@@ -232,8 +236,9 @@ public class CGrupo extends CGenerico {
 								for (int z = k; z < arboles.size(); z++) {
 									if (temp3 == arboles.get(z).getPadre()) {
 										fourLevelNode = new Nodos(
-												threeLevelNode, i, arboles.get(
-														z).getNombre());
+												threeLevelNode, (int) arboles
+														.get(i).getIdArbol(),
+												arboles.get(z).getNombre());
 										threeLevelNode
 												.appendChild(fourLevelNode);
 										arboles.remove(z);
@@ -254,8 +259,10 @@ public class CGrupo extends CGenerico {
 
 	public boolean validarNodoHijo(SelectEvent<Treeitem, String> event) {
 		Treeitem itemSeleccionado = event.getReference();
-		Arbol arbol = servicioArbol.buscarPorNombreArbol(itemSeleccionado
-				.getLabel());
+		Treecell celda = (Treecell) itemSeleccionado.getChildren().get(0)
+				.getChildren().get(0);
+		long item = Long.valueOf(celda.getContext());
+		Arbol arbol = servicioArbol.buscarPorId(item);
 		long padre = arbol.getIdArbol();
 		boolean encontrado = false;
 		List<Arbol> listaArbol = servicioArbol.listarArbol();
@@ -307,6 +314,9 @@ public class CGrupo extends CGenerico {
 			Treechildren treeChildren = treeGrupo.getTreechildren();
 			Collection<Treeitem> listaItems = treeChildren.getItems();
 			Treeitem itemSeleccionado = event.getReference();
+			Treecell celda = (Treecell) itemSeleccionado.getChildren().get(0)
+					.getChildren().get(0);
+			long idArbol = Long.valueOf(celda.getContext());
 			List<Long> ids = new ArrayList<Long>();
 			for (int o = 0; o < listaArbol2.size(); o++) {
 				long id = listaArbol2.get(o).getIdArbol();
@@ -337,7 +347,7 @@ public class CGrupo extends CGenerico {
 				ltbFuncionalidadesSeleccionados
 						.setModel(new ListModelList<String>(funcionalidades));
 			}
-			Arbol arbolItem = servicioArbol.buscarPorNombreArbol(nombreItem);
+			Arbol arbolItem = servicioArbol.buscarPorId(idArbol);
 			listaArbol.remove(arbolItem);
 			long temp = arbolItem.getPadre();
 			long temp2 = 0;

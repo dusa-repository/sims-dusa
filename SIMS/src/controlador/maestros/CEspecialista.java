@@ -284,7 +284,11 @@ public class CEspecialista extends CGenerico {
 	/* Abre la vista de Especialidad */
 	@Listen("onClick = #btnAbrirEspecialidad")
 	public void abrirEspecialidad() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Especialidad");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol
+				.buscarPorNombreArbol("Especialidad");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 }

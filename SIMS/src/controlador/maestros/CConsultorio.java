@@ -307,14 +307,20 @@ public class CConsultorio extends CGenerico {
 	/* Abre la vista de Ciudad */
 	@Listen("onClick = #btnAbrirCiudad")
 	public void abrirCiudad() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Ciudad");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Ciudad");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Abre la vista de Empresa */
 	@Listen("onClick = #btnAbrirEmpresa")
 	public void abrirEmpresa() {
-		Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Empresa");
-		cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Empresa");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 }
