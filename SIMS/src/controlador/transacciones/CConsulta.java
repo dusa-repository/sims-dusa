@@ -1278,8 +1278,8 @@ public class CConsulta extends CGenerico {
 							.getNombre());
 					list2.setParent(arg0);
 					arg0.setCheckable(false);
-					list2.setStyle("text-align:center; font-weight:bold; background:#F5F2AC; color:black");
-					arg0.setStyle("text-align:center; font-weight:bold; background:#F5F2AC; color:black");
+					list2.setStyle("text-align:center; font-weight:bold; background:#FDFCDB; color:black");
+					arg0.setStyle("text-align:center; font-weight:bold; background:#FDFCDB; color:black");
 				}
 
 				Listcell list3 = new Listcell();
@@ -1291,8 +1291,8 @@ public class CConsulta extends CGenerico {
 
 				if (tipoAntecedente) {
 					list3.setVisible(false);
-					list3.setStyle("text-align:center; font-weight:bold; background:#F5F2AC; color:black");
-					arg0.setStyle("text-align:center; font-weight:bold; background:#F5F2AC; color:black");
+					list3.setStyle("text-align:center; font-weight:bold; background:#FDFCDB; color:black");
+					arg0.setStyle("text-align:center; font-weight:bold; background:#FDFCDB; color:black");
 				}
 
 			}
@@ -5159,6 +5159,7 @@ public class CConsulta extends CGenerico {
 		List<Consulta> listaConsultas = getServicioConsulta()
 				.buscarPorIdPacienteOrdenado(String.valueOf(part2));
 		for (int i = 0; i < listaConsultas.size(); i++) {
+			
 			String nombre = listaConsultas.get(i).getUsuario()
 					.getPrimerNombre();
 			String apellido = listaConsultas.get(i).getUsuario()
@@ -5167,10 +5168,21 @@ public class CConsulta extends CGenerico {
 			listaConsultas.get(i).setExamenPreempleo(nombre + " " + apellido);
 			List<ConsultaDiagnostico> diagnosticos = getServicioConsultaDiagnostico()
 					.buscarPorConsulta(listaConsultas.get(i));
-			listaConsultas.get(i).setObservacion(
-					diagnosticos.get(0).getDiagnostico().getNombre());
-			listaConsultas.get(i).setCondicionApto(
-					diagnosticos.get(0).getTipo());
+			
+			//For de los diagnosticos
+
+		
+			String nombresDiagnosticos =""; 
+			String tipoDiagnosticos =""; 
+			for (int j = 0; j < diagnosticos.size(); j++) {
+				String diag = diagnosticos.get(j).getDiagnostico().getNombre();	
+				String tipo = diagnosticos.get(j).getTipo();
+				nombresDiagnosticos += "-"+diag+"\n";
+				tipoDiagnosticos += "-"+tipo+"\n";
+			}
+			
+			listaConsultas.get(i).setObservacion(nombresDiagnosticos);
+			listaConsultas.get(i).setCondicionApto(tipoDiagnosticos);
 		}
 
 		Map p = new HashMap();
