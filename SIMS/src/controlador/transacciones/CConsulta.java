@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -940,6 +941,8 @@ public class CConsulta extends CGenerico {
 					} else
 						areaDeseado = null;
 					int dias = spnReposo.getValue();
+					if(tipoSecundaria.equals("Egreso"))
+						inhabilitarTrabajadorYTodosFamiliares(paciente);
 					Consulta consulta = new Consulta(idConsulta, paciente,
 							usuario, fechaConsulta, horaAuditoria,
 							horaAuditoria, fechaHora, nombreUsuarioSesion(),
@@ -971,7 +974,7 @@ public class CConsulta extends CGenerico {
 					tabConsulta.setSelected(true);
 					tabResumen.setSelected(true);
 					if (consultaDatos.getReposo())
-					btnGenerarReposo.setVisible(true);
+						btnGenerarReposo.setVisible(true);
 					btnGenerarOrden.setVisible(true);
 					btnGenerarReferencia.setVisible(true);
 					btnGenerarOrdenServicios.setVisible(true);
@@ -1710,8 +1713,9 @@ public class CConsulta extends CGenerico {
 		medicinasResumen = medicinasAgregadas;
 		ltbResumenMedicinas.setModel(new ListModelList<ConsultaMedicina>(
 				medicinasResumen));
-		if(!medicinasAgregadas.isEmpty())
-		cmbPrioridad.setValue(medicinasAgregadas.get(0).getRecipe().getPrioridad());
+		if (!medicinasAgregadas.isEmpty())
+			cmbPrioridad.setValue(medicinasAgregadas.get(0).getRecipe()
+					.getPrioridad());
 
 		diagnosticosDisponibles = servicioDiagnostico
 				.buscarDisponibles(consulta);
@@ -1761,10 +1765,10 @@ public class CConsulta extends CGenerico {
 		examenesResumen = examenesAgregado;
 		ltbResumenExamenes.setModel(new ListModelList<ConsultaExamen>(
 				examenesResumen));
-		if(!examenesAgregado.isEmpty())
-		{
-		cmbPrioridadExamen.setValue(examenesAgregado.get(0).getPrioridad());
-		cmbProveedor.setValue(examenesAgregado.get(0).getProveedor().getNombre());
+		if (!examenesAgregado.isEmpty()) {
+			cmbPrioridadExamen.setValue(examenesAgregado.get(0).getPrioridad());
+			cmbProveedor.setValue(examenesAgregado.get(0).getProveedor()
+					.getNombre());
 		}
 
 		especialistasDisponibles = servicioEspecialista
@@ -1787,8 +1791,9 @@ public class CConsulta extends CGenerico {
 		ltbResumenEspecialistas
 				.setModel(new ListModelList<ConsultaEspecialista>(
 						especialistasResumen));
-		if(!especialistasAgregados.isEmpty())
-		cmbPrioridadEspecialista.setValue(especialistasAgregados.get(0).getPrioridad());
+		if (!especialistasAgregados.isEmpty())
+			cmbPrioridadEspecialista.setValue(especialistasAgregados.get(0)
+					.getPrioridad());
 
 		serviciosDisponibles = servicioServicioExterno
 				.buscarDisponibles(consulta);
@@ -1803,8 +1808,9 @@ public class CConsulta extends CGenerico {
 		ltbResumenServicios
 				.setModel(new ListModelList<ConsultaServicioExterno>(
 						serviciosResumen));
-		if(!serviciosAgregados.isEmpty())
-		cmbPrioridadServicio.setValue(serviciosAgregados.get(0).getPrioridad());
+		if (!serviciosAgregados.isEmpty())
+			cmbPrioridadServicio.setValue(serviciosAgregados.get(0)
+					.getPrioridad());
 
 		//
 		Historia historia = servicioHistoria.buscarPorPaciente(paciente);
@@ -2012,7 +2018,7 @@ public class CConsulta extends CGenerico {
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogoPaciente() throws IOException {
-		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
+		final List<Paciente> pacientes = servicioPaciente.buscarTodosActivos();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
 				"Apellido") {
@@ -2114,6 +2120,10 @@ public class CConsulta extends CGenerico {
 		limpiarCampos();
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
 		llenarCampos(paciente);
+		if (!paciente.isTrabajador()
+				&& paciente.getParentescoFamiliar().equals("Hijo(a)")
+				&& calcularEdad(paciente.getFechaNacimiento()) >= 18)
+			msj.mensajeAlerta(Mensaje.pacienteMayor);
 		idPaciente = Long.valueOf(paciente.getCedula());
 		List<Consulta> consultas = servicioConsulta.buscarPorPaciente(paciente);
 		for (int i = 0; i < consultas.size(); i++) {
@@ -4831,9 +4841,10 @@ public class CConsulta extends CGenerico {
 		p.put("dias", dias);
 		p.put("msds", user.getLicenciaMsds());
 		p.put("comelar", user.getLicenciaCm());
-		p.put("edad", String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
+		p.put("edad",
+				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
-		
+
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipe.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
@@ -4892,7 +4903,8 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
 				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
-		p.put("edad", String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
+		p.put("edad",
+				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("pacienteSexo", paciente.getSexo());
 		p.put("doctorNombre",
 				user.getPrimerNombre() + "   " + user.getSegundoNombre());
@@ -5034,7 +5046,8 @@ public class CConsulta extends CGenerico {
 		p.put("doctorCedula", user.getCedula());
 		p.put("prioridad", listaMedicinas.get(0).getPrioridad());
 		p.put("proveedor", listaMedicinas.get(0).getProveedor().getNombre());
-		p.put("edad", String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
+		p.put("edad",
+				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
