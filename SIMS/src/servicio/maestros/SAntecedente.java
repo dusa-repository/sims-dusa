@@ -1,15 +1,11 @@
 package servicio.maestros;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import interfacedao.maestros.IAntecedenteDAO;
-import interfacedao.maestros.IPacienteAntecedenteDAO;
+
+import java.util.List;
 
 import modelo.maestros.Antecedente;
 import modelo.maestros.AntecedenteTipo;
-import modelo.maestros.Paciente;
-import modelo.maestros.PacienteAntecedente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

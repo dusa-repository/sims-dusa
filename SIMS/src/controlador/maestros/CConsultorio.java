@@ -6,7 +6,6 @@ import java.util.List;
 
 import modelo.maestros.Ciudad;
 import modelo.maestros.Consultorio;
-import modelo.maestros.Diagnostico;
 import modelo.maestros.Empresa;
 import modelo.seguridad.Arbol;
 

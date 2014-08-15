@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.maestros.Examen;
 import modelo.maestros.MedicinaPresentacionUnidad;
 import modelo.maestros.PresentacionMedicina;
 
@@ -23,7 +22,6 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-import controlador.transacciones.CConsulta;
 
 public class CPresentacionMedicina extends CGenerico {
 

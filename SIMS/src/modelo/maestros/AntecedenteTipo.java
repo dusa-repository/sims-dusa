@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 @Entity
 @Table(name="antecedente_tipo")
 public class AntecedenteTipo implements Serializable {

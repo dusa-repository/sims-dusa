@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import modelo.transacciones.ConsultaServicioExterno;
 import modelo.transacciones.HistoriaIntervencion;
 
 @Entity

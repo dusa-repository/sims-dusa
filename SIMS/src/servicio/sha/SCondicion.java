@@ -1,8 +1,8 @@
 package servicio.sha;
 
-import java.util.List;
-
 import interfacedao.sha.ICondicionDAO;
+
+import java.util.List;
 
 import modelo.sha.Condicion;
 import modelo.sha.Informe;

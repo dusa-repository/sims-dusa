@@ -6,19 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.CategoriaMedicina;
-import modelo.maestros.Cita;
-import modelo.maestros.Examen;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 import modelo.maestros.MedicinaPresentacionUnidad;
-import modelo.maestros.Paciente;
 import modelo.maestros.PresentacionComercial;
 import modelo.maestros.PresentacionMedicina;
-import modelo.maestros.ServicioExterno;
 import modelo.maestros.UnidadMedicina;
 import modelo.seguridad.Arbol;
-import modelo.transacciones.ConsultaEspecialista;
-import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaMedicina;
 
 import org.zkoss.zk.ui.Sessions;
@@ -45,6 +39,7 @@ import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.transacciones.CConsulta;
 
 public class CMedicina extends CGenerico {

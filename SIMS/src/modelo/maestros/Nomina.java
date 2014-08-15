@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import modelo.transacciones.HistoriaIntervencion;
-
 @Entity
 @Table(name = "nomina")
 public class Nomina implements Serializable {

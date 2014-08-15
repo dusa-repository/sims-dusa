@@ -17,14 +17,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
-import modelo.maestros.Accidente;
-import modelo.maestros.AntecedenteTipo;
 import modelo.maestros.Cargo;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "consulta")

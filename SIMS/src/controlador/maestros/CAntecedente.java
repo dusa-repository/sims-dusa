@@ -6,11 +6,6 @@ import java.util.List;
 
 import modelo.maestros.Antecedente;
 import modelo.maestros.AntecedenteTipo;
-import modelo.maestros.Ciudad;
-import modelo.maestros.Consultorio;
-import modelo.maestros.Empresa;
-import modelo.maestros.Estado;
-import modelo.maestros.Paciente;
 import modelo.maestros.PacienteAntecedente;
 import modelo.seguridad.Arbol;
 

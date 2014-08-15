@@ -10,16 +10,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import modelo.maestros.Antecedente;
-import modelo.maestros.AntecedenteTipo;
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
-import modelo.maestros.ParteCuerpo;
 import modelo.sha.Area;
 import modelo.sha.ClasificacionAccidente;
 import modelo.sha.Condicion;
 import modelo.sha.Informe;
-import modelo.transacciones.ConsultaParteCuerpo;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.WrongValueException;
@@ -34,7 +30,6 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Tab;

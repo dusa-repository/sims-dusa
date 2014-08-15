@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import modelo.seguridad.Usuario;
-
 @Entity
 @Table(name = "condicion")
 public class Condicion implements Serializable {

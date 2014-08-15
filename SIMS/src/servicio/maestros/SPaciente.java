@@ -1,8 +1,8 @@
 package servicio.maestros;
 
-import java.util.List;
-
 import interfacedao.maestros.IPacienteDAO;
+
+import java.util.List;
 
 import modelo.maestros.Cargo;
 import modelo.maestros.Ciudad;

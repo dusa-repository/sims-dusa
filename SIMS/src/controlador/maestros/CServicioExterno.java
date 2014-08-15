@@ -5,16 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.maestros.Ciudad;
-import modelo.maestros.Consultorio;
-import modelo.maestros.Empresa;
-import modelo.maestros.Examen;
-import modelo.maestros.Paciente;
-import modelo.maestros.ProveedorExamen;
 import modelo.maestros.ProveedorServicio;
 import modelo.maestros.ServicioExterno;
-import modelo.seguridad.Arbol;
-import modelo.seguridad.Usuario;
 import modelo.transacciones.ConsultaServicioExterno;
 
 import org.zkoss.zk.ui.Sessions;
@@ -22,23 +14,18 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Include;
-import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
-import arbol.CArbol;
-
-import sun.usagetracker.UsageTrackerClient;
 
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-import componentes.Validador;
+
 import controlador.transacciones.CConsulta;
 
 public class CServicioExterno extends CGenerico {

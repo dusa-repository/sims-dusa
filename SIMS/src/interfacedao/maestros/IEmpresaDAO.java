@@ -2,7 +2,6 @@ package interfacedao.maestros;
 
 import java.util.List;
 
-import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 
 import org.springframework.data.jpa.repository.JpaRepository;

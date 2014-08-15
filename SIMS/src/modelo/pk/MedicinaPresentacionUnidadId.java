@@ -3,7 +3,6 @@ package modelo.pk;
 import java.io.Serializable;
 
 import modelo.maestros.Medicina;
-import modelo.maestros.PresentacionComercial;
 import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.UnidadMedicina;
 

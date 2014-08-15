@@ -1,8 +1,9 @@
 package servicio.seguridad;
 
+import interfacedao.seguridad.IUsuarioDAO;
+
 import java.util.List;
 
-import interfacedao.seguridad.IUsuarioDAO;
 import modelo.maestros.Especialidad;
 import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Grupo;

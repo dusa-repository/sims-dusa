@@ -1,7 +1,6 @@
 package servicio.transacciones;
 
 import interfacedao.transacciones.IHistoriaDAO;
-
 import modelo.maestros.Paciente;
 import modelo.transacciones.Historia;
 

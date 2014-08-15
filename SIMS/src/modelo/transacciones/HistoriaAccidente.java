@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import modelo.maestros.Accidente;
-import modelo.maestros.Diagnostico;
-import modelo.pk.ConsultaDiagnosticoId;
 import modelo.pk.HistoriaAccidenteId;
 
 @Entity

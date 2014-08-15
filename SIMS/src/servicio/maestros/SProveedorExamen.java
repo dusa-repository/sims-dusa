@@ -1,8 +1,8 @@
 package servicio.maestros;
 
-import java.util.List;
-
 import interfacedao.maestros.IProveedorExamenDAO;
+
+import java.util.List;
 
 import modelo.maestros.Examen;
 import modelo.maestros.Proveedor;

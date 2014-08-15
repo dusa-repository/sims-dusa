@@ -1,9 +1,9 @@
 package servicio.maestros;
 
+import interfacedao.maestros.IProveedorServicioDAO;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import interfacedao.maestros.IProveedorServicioDAO;
 
 import modelo.maestros.Proveedor;
 import modelo.maestros.ProveedorServicio;

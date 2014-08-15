@@ -1,14 +1,13 @@
 package servicio.maestros;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import interfacedao.maestros.IServicioExternoDAO;
 import interfacedao.transacciones.IConsultaServicioExternoDAO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import modelo.maestros.ServicioExterno;
 import modelo.transacciones.Consulta;
-import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaServicioExterno;
 
 import org.springframework.beans.factory.annotation.Autowired;

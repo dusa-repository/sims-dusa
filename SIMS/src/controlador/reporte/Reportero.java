@@ -1,14 +1,6 @@
 package controlador.reporte;
 
 import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -16,24 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import jxl.biff.formula.ParseContext;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.http.SimpleSession;
-import org.zkoss.zk.ui.select.annotation.WireVariable;
-import org.zkoss.zul.Listbox;
-
-import servicio.transacciones.SConsulta;
-
-import modelo.maestros.Accidente;
-import modelo.transacciones.ConsultaMedicina;
 import net.sf.jasperreports.engine.JRException;
-
 import controlador.transacciones.CConsulta;
 
 /**

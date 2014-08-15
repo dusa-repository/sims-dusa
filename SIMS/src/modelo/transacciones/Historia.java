@@ -15,9 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import modelo.maestros.Paciente;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "historia")

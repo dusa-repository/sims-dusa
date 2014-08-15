@@ -1,8 +1,8 @@
 package servicio.maestros;
 
-import java.util.List;
-
 import interfacedao.maestros.ICategoriaMedicinaDAO;
+
+import java.util.List;
 
 import modelo.maestros.CategoriaMedicina;
 

@@ -20,7 +20,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import modelo.maestros.Paciente;
-import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 
 import org.springframework.context.ApplicationContext;
@@ -28,9 +27,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -38,11 +34,6 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
-import org.zkoss.zul.Tabpanel;
-
-import componentes.Mensaje;
-
-import arbol.CArbol;
 
 import servicio.maestros.SAccidente;
 import servicio.maestros.SAntecedente;
@@ -97,6 +88,8 @@ import servicio.transacciones.SHistoria;
 import servicio.transacciones.SHistoriaAccidente;
 import servicio.transacciones.SHistoriaIntervencion;
 import servicio.transacciones.SHistoriaVacuna;
+
+import componentes.Mensaje;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public abstract class CGenerico extends SelectorComposer<Component> {

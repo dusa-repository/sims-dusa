@@ -16,10 +16,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
+
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "informe")

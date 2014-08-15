@@ -4,7 +4,6 @@ import java.util.List;
 
 import modelo.maestros.Antecedente;
 import modelo.maestros.AntecedenteTipo;
-import modelo.maestros.Paciente;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

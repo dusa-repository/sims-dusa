@@ -1,13 +1,12 @@
 package servicio.maestros;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import interfacedao.maestros.IIntervencionDAO;
 import interfacedao.transacciones.IHistoriaIntervencionDAO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import modelo.maestros.Intervencion;
-import modelo.transacciones.ConsultaServicioExterno;
 import modelo.transacciones.Historia;
 import modelo.transacciones.HistoriaIntervencion;
 
