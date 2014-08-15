@@ -7,6 +7,7 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -229,6 +230,8 @@ public class CPaciente extends CGenerico {
 	private Textbox txtRetiroIVSS;
 	@Wire
 	private Datebox dtbFechaEgreso;
+	@Wire
+	private Button btnVer;
 
 	URL url = getClass().getResource("usuario.png");
 	private CArbol cArbol = new CArbol();
@@ -236,6 +239,8 @@ public class CPaciente extends CGenerico {
 	String cedTrabajador = "";
 	Catalogo<Paciente> catalogo;
 	Catalogo<Paciente> catalogoFamiliar;
+
+	private String idBoton = "";
 
 	@Override
 	public void inicializar() throws IOException {
@@ -272,6 +277,7 @@ public class CPaciente extends CGenerico {
 
 			@Override
 			public void limpiar() {
+				idBoton = "";
 				txtObservacionEstatus.setValue("");
 				txtNombre1Paciente.setValue("");
 				txtCedulaPaciente.setValue("");
@@ -704,11 +710,22 @@ public class CPaciente extends CGenerico {
 	}
 
 	/* Muestra el catalogo de los Pacientes */
-	@Listen("onClick = #btnBuscarPaciente")
-	public void mostrarCatalogo() {
-		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
+	@Listen("onClick = #btnBuscarPaciente, #btnVer")
+	public void mostrarCatalogo(Event evento) {
+		idBoton = evento.getTarget().getId();
+		List<Paciente> pacientes2 = new ArrayList<Paciente>();
+		String segundo = "Ficha";
+		if (idBoton.equals("btnBuscarPaciente"))
+			pacientes2 = servicioPaciente.buscarTodos();
+		else {
+			if (!txtCedulaPaciente.getValue().equals(""))
+				pacientes2 = servicioPaciente.buscarParientes(txtCedulaPaciente
+						.getValue());
+			segundo = "Parentesco";
+		}
+		final List<Paciente> pacientes = pacientes2;
 		catalogo = new Catalogo<Paciente>(catalogoPaciente,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Catalogo de Pacientes", pacientes, "Cedula", segundo,
 				"Nombre", "Apellido") {
 
 			@Override
@@ -716,12 +733,24 @@ public class CPaciente extends CGenerico {
 
 				switch (combo) {
 				case "Nombre":
+					if (!idBoton.equals("btnBuscarPaciente"))
+						return servicioPaciente.filtroNombre1C(valor,
+								txtCedulaPaciente.getValue());
 					return servicioPaciente.filtroNombre1(valor);
+				case "Parentesco":
+					return servicioPaciente.filtroParentescoC(valor,
+							txtCedulaPaciente.getValue());
 				case "Cedula":
+					if (!idBoton.equals("btnBuscarPaciente"))
+						return servicioPaciente.filtroCedulaC(valor,
+								txtCedulaPaciente.getValue());
 					return servicioPaciente.filtroCedula(valor);
 				case "Ficha":
 					return servicioPaciente.filtroFicha(valor);
 				case "Apellido":
+					if (!idBoton.equals("btnBuscarPaciente"))
+						return servicioPaciente.filtroApellido1C(valor,
+								txtCedulaPaciente.getValue());
 					return servicioPaciente.filtroApellido1(valor);
 				default:
 					return pacientes;
@@ -730,9 +759,13 @@ public class CPaciente extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
+				String valor = objeto.getFicha();
+				if (!idBoton.equals("btnBuscarPaciente")) {
+					valor = objeto.getParentescoFamiliar();
+				}
 				String[] registros = new String[4];
 				registros[0] = objeto.getCedula();
-				registros[1] = objeto.getFicha();
+				registros[1] = valor;
 				registros[2] = objeto.getPrimerNombre();
 				registros[3] = objeto.getPrimerApellido();
 				return registros;
@@ -746,7 +779,8 @@ public class CPaciente extends CGenerico {
 	/* Muestra el catalogo de los Pacientes */
 	@Listen("onClick = #btnBuscarTrabajadores")
 	public void mostrarCatalogoFamiliar() {
-		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
+		final List<Paciente> pacientes = servicioPaciente
+				.buscarTodosTrabajadores();
 		catalogoFamiliar = new Catalogo<Paciente>(divCatalogoFamiliar,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
 				"Apellido") {
@@ -756,11 +790,11 @@ public class CPaciente extends CGenerico {
 
 				switch (combo) {
 				case "Nombre":
-					return servicioPaciente.filtroNombre1(valor);
+					return servicioPaciente.filtroNombre1T(valor);
 				case "Cedula":
-					return servicioPaciente.filtroCedula(valor);
+					return servicioPaciente.filtroCedulaT(valor);
 				case "Apellido":
-					return servicioPaciente.filtroApellido1(valor);
+					return servicioPaciente.filtroApellido1T(valor);
 				default:
 					return pacientes;
 				}
@@ -854,6 +888,10 @@ public class CPaciente extends CGenerico {
 	 */
 	@Listen("onClick =#rdoTrabajador")
 	public void esTrabajador() {
+		if (id != 0)
+			btnVer.setVisible(true);
+		else
+			btnVer.setVisible(false);
 		rowCargoyEmpresa.setVisible(true);
 		rowAreayNomina.setVisible(true);
 		gbxTrabajadorAsociado.setVisible(false);
@@ -881,6 +919,7 @@ public class CPaciente extends CGenerico {
 	 */
 	@Listen("onClick =#rdoFamiliar")
 	public void esFamiliar() {
+		btnVer.setVisible(false);
 		rowCargoyEmpresa.setVisible(false);
 		rowAreayNomina.setVisible(false);
 		gbxTrabajadorAsociado.setVisible(true);
@@ -899,7 +938,8 @@ public class CPaciente extends CGenerico {
 	@Listen("onSeleccion = #catalogoPaciente")
 	public void seleccinar() {
 		Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
-		llenarCampos(paciente);
+		if (!idBoton.equals("btnVer"))
+			llenarCampos(paciente);
 		catalogo.setParent(null);
 	}
 

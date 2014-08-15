@@ -325,9 +325,17 @@ public class CCita extends CGenerico {
 	public void seleccionarPaciente() {
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
 		if (!paciente.isTrabajador()
-				&& paciente.getParentescoFamiliar().equals("Hijo(a)")
-				&& calcularEdad(paciente.getFechaNacimiento()) >= 18)
-			msj.mensajeAlerta(Mensaje.pacienteMayor);
+				&& paciente.getParentescoFamiliar().equals("Hijo(a)")) {
+			Paciente representante = servicioPaciente.buscarPorCedula(paciente
+					.getCedulaFamiliar());
+			if (representante.isMuerte()) {
+				if (calcularEdad(representante.getFechaMuerte()) >= 1)
+					msj.mensajeAlerta(Mensaje.pacienteFallecido);
+			} else {
+				if (calcularEdad(paciente.getFechaNacimiento()) >= 18)
+					msj.mensajeAlerta(Mensaje.pacienteMayor);
+			}
+		}
 		lblCedulaPaciente.setValue(paciente.getCedula());
 		lblNombrePaciente.setValue(paciente.getPrimerNombre() + " "
 				+ paciente.getSegundoNombre());

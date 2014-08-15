@@ -93,4 +93,40 @@ public class SPaciente {
 	public void guardarVarios(List<Paciente> inactivos) {
 		pacienteDAO.save(inactivos);
 	}
+
+	public List<Paciente> filtroParentesco(String valor) {
+		return pacienteDAO.findByParentescoFamiliarStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> buscarTodosTrabajadores() {
+		return pacienteDAO.findByTrabajadorTrue();
+	}
+
+	public List<Paciente> filtroNombre1C(String valor, String value) {
+		return pacienteDAO.findByCedulaFamiliarAndPrimerNombreStartingWithAllIgnoreCase(value,valor);
+	}
+
+	public List<Paciente> filtroCedulaC(String valor, String value) {
+		return pacienteDAO.findByCedulaFamiliarAndCedulaStartingWithAllIgnoreCase(value,valor);
+	}
+
+	public List<Paciente> filtroApellido1C(String valor, String value) {
+		return pacienteDAO.findByCedulaFamiliarAndPrimerApellidoStartingWithAllIgnoreCase(value,valor);
+	}
+
+	public List<Paciente> filtroCedulaT(String valor) {
+		return pacienteDAO.findByTrabajadorTrueAndCedulaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroNombre1T(String valor) {
+		return pacienteDAO.findByTrabajadorTrueAndPrimerNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroApellido1T(String valor) {
+		return pacienteDAO.findByTrabajadorTrueAndPrimerApellidoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroParentescoC(String valor, String valor2) {
+		return pacienteDAO.findByCedulaFamiliarAndParentescoFamiliarStartingWithAllIgnoreCase(valor2,valor);
+	}
 }
