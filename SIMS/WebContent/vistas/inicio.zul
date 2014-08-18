@@ -13,7 +13,7 @@
 					<vbox>
 						<separator />
 						<image src="../public/imagenes/generales/LogoDusa.png"
-							height="3em" width="15em" />
+							height="3em" width="13em" />
 					</vbox>
 					<separator />
 					<separator />
@@ -25,8 +25,9 @@
 						<hbox>
 							<separator />
 							<separator />
-							<label style="font-size:25px;color:white;font-weight: bold"
-								value="Sistema Integral Medico y de Seguridad" />
+							<separator />
+							<label style="font-size:23px;color:white;font-weight: bold"
+								value="SISTEMA INTEGRAL MEDICO Y DE SEGURIDAD" />
 						</hbox>
 					</div>
 					<div align="center" width="100%">
@@ -74,7 +75,7 @@
 				collapsible="true" autoscroll="true">
 				<tree id="arbolMenu" width="99%" zclass="z-vfiletree">
 					<template name="model">
-						<treeitem  context="menupopup" >
+						<treeitem context="menupopup">
 							<treerow>
 								<treecell id="${each.index}" label="${each.label}" />
 							</treerow>

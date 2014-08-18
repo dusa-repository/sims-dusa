@@ -53,8 +53,8 @@
 						<separator />
 						<separator />
 						<separator />
-						<label style="font-size:30px;color:#661313;font-weight: bold"
-							value="Sistema Integral Medico y de Seguridad" />
+						<label style="font-size:26px;color:#661313;font-weight: bold"
+							value="SISTEMA INTEGRAL MEDICO Y DE SEGURIDAD" />
 					</div>
 					<div align="center">
 						<groupbox width="35em" height="18em">

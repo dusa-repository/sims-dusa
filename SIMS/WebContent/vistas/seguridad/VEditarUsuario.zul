@@ -4,8 +4,8 @@
 		<groupbox width="40em" mold="3d" title="Editar Usuario">
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="34%" />
-					<column label="" width="64%" />
+					<column label="" width="35%" />
+					<column label="" width="65%" />
 				</columns>
 				<rows>
 					<row>
