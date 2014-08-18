@@ -26,6 +26,7 @@ import modelo.maestros.Paciente;
 import modelo.maestros.PacienteAntecedente;
 import modelo.maestros.ParteCuerpo;
 import modelo.maestros.Proveedor;
+import modelo.maestros.ProveedorExamen;
 import modelo.maestros.ProveedorServicio;
 import modelo.maestros.Recipe;
 import modelo.maestros.ServicioExterno;
@@ -72,6 +73,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.ListitemRenderer;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
@@ -1419,6 +1421,7 @@ public class CConsulta extends CGenerico {
 		if (cmbProveedor.getText().compareTo("") != 0)
 			proveedor = servicioProveedor.buscar(Long.parseLong(cmbProveedor
 					.getSelectedItem().getContext()));
+		ProveedorExamen proveedorExamen = new ProveedorExamen();
 		for (int i = 0; i < ltbExamenesAgregados.getItemCount(); i++) {
 			Listitem listItem = ltbExamenesAgregados.getItemAtIndex(i);
 			Integer idExamen = ((Spinner) ((listItem.getChildren().get(2)))
@@ -1426,8 +1429,9 @@ public class CConsulta extends CGenerico {
 			Examen examen = servicioExamen.buscar(idExamen);
 			String valor = ((Textbox) ((listItem.getChildren().get(1)))
 					.getFirstChild()).getValue();
-			// buscar precio del servicio externo
-			double precio = 0;
+			proveedorExamen = servicioProveedorExamen
+					.buscarPorProveedoryExamen(proveedor, examen);
+			double precio = proveedorExamen.getCosto();
 			String prioridad = cmbPrioridadExamen.getValue();
 			ConsultaExamen consultaExamen = new ConsultaExamen(consultaDatos,
 					examen, valor, proveedor, precio, prioridad);
@@ -1528,56 +1532,43 @@ public class CConsulta extends CGenerico {
 								msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Examenes");
 								return false;
 							} else {
-								if (!agregarEspecialista()) {
-									msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Especialistas");
+								if (!validarProveedor()) {
 									return false;
 								} else {
-									if (!agregarServicio()) {
-										msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Servicios Externos");
+									if (!agregarEspecialista()) {
+										msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Especialistas");
 										return false;
 									} else {
-										if (cmbTipoPreventiva.getValue()
-												.equals("Control")
-												&& idConsultaAsociada == 0) {
-											msj.mensajeError("Debe Seleccionar la Consulta Asociada al Control que se esta Realizando");
+										if (!agregarServicio()) {
+											msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Servicios Externos");
 											return false;
 										} else {
-											if (ltbMedicinasAgregadas
-													.getItemCount() != 0
-													&& cmbPrioridad.getText()
-															.compareTo("") == 0) {
-												msj.mensajeError("Debe Seleccionar la Prioridad del Recipe");
+											if (cmbTipoPreventiva.getValue()
+													.equals("Control")
+													&& idConsultaAsociada == 0) {
+												msj.mensajeError("Debe Seleccionar la Consulta Asociada al Control que se esta Realizando");
 												return false;
 											} else {
-												if (ltbExamenesAgregados
+												if (ltbMedicinasAgregadas
 														.getItemCount() != 0
-														&& cmbProveedor
+														&& cmbPrioridad
 																.getText()
 																.compareTo("") == 0) {
-													msj.mensajeError("Debe Seleccionar el Laboratorio que Realizara los Examenes");
+													msj.mensajeError("Debe Seleccionar la Prioridad del Recipe");
 													return false;
 												} else {
-													if (ltbDiagnosticosAgregados
-															.getItemCount() == 0) {
-														msj.mensajeError("Debe seleccionar al menos un diagnostico");
+													if (ltbExamenesAgregados
+															.getItemCount() != 0
+															&& cmbProveedor
+																	.getText()
+																	.compareTo(
+																			"") == 0) {
+														msj.mensajeError("Debe Seleccionar el Laboratorio que Realizara los Examenes");
 														return false;
 													} else {
-														if ((cmbTipoPreventiva
-																.getValue()
-																.equals("Pre-Empleo")
-																|| cmbTipoPreventiva
-																		.getValue()
-																		.equals("Cambio de Puesto") || cmbTipoPreventiva
-																.getValue()
-																.equals("Promocion"))
-																&& (cmbArea
-																		.getText()
-																		.compareTo(
-																				"") == 0 || cmbCargo
-																		.getText()
-																		.compareTo(
-																				"") == 0)) {
-															msj.mensajeError("Debe Seleccionar el Cargo y el Area a la cual Aspira el Paciente");
+														if (ltbDiagnosticosAgregados
+																.getItemCount() == 0) {
+															msj.mensajeError("Debe seleccionar al menos un diagnostico");
 															return false;
 														} else {
 															if ((cmbTipoPreventiva
@@ -1588,58 +1579,77 @@ public class CConsulta extends CGenerico {
 																			.equals("Cambio de Puesto") || cmbTipoPreventiva
 																	.getValue()
 																	.equals("Promocion"))
-																	&& (!rdoSiApto
-																			.isChecked() && !rdoNoApto
-																			.isChecked())) {
-																msj.mensajeError("Debe Indicar si el Paciente es Apto, o no para el Cargo que Aspira");
+																	&& (cmbArea
+																			.getText()
+																			.compareTo(
+																					"") == 0 || cmbCargo
+																			.getText()
+																			.compareTo(
+																					"") == 0)) {
+																msj.mensajeError("Debe Seleccionar el Cargo y el Area a la cual Aspira el Paciente");
 																return false;
 															} else {
-																if (ltbServicioExternoAgregados
-																		.getItemCount() != 0
-																		&& cmbPrioridadServicio
-																				.getText()
-																				.compareTo(
-																						"") == 0) {
-																	msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Estudios Externos");
+																if ((cmbTipoPreventiva
+																		.getValue()
+																		.equals("Pre-Empleo")
+																		|| cmbTipoPreventiva
+																				.getValue()
+																				.equals("Cambio de Puesto") || cmbTipoPreventiva
+																		.getValue()
+																		.equals("Promocion"))
+																		&& (!rdoSiApto
+																				.isChecked() && !rdoNoApto
+																				.isChecked())) {
+																	msj.mensajeError("Debe Indicar si el Paciente es Apto, o no para el Cargo que Aspira");
 																	return false;
 																} else {
-																	if (ltbExamenesAgregados
+																	if (ltbServicioExternoAgregados
 																			.getItemCount() != 0
-																			&& cmbPrioridadExamen
+																			&& cmbPrioridadServicio
 																					.getText()
 																					.compareTo(
 																							"") == 0) {
-																		msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Examenes");
+																		msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Estudios Externos");
 																		return false;
 																	} else {
-																		if (ltbEspecialistasAgregados
+																		if (ltbExamenesAgregados
 																				.getItemCount() != 0
-																				&& cmbPrioridadEspecialista
+																				&& cmbPrioridadExamen
 																						.getText()
 																						.compareTo(
 																								"") == 0) {
-																			msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Especialistas");
+																			msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Examenes");
 																			return false;
 																		} else {
-																			if (ltbIntervencionesAgregadas
+																			if (ltbEspecialistasAgregados
 																					.getItemCount() != 0
-																					&& !validarIntervencion()) {
-																				msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Intervenciones Agregadas");
+																					&& cmbPrioridadEspecialista
+																							.getText()
+																							.compareTo(
+																									"") == 0) {
+																				msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Especialistas");
 																				return false;
 																			} else {
-																				if (ltbAccidentesComunesAgregados
+																				if (ltbIntervencionesAgregadas
 																						.getItemCount() != 0
-																						&& !validarComunes()) {
-																					msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados");
+																						&& !validarIntervencion()) {
+																					msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Intervenciones Agregadas");
 																					return false;
 																				} else {
-																					if (ltbAccidentesLaboralesAgregados
+																					if (ltbAccidentesComunesAgregados
 																							.getItemCount() != 0
-																							&& !validarLaborales()) {
-																						msj.mensajeError("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados");
+																							&& !validarComunes()) {
+																						msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados");
 																						return false;
-																					} else
-																						return true;
+																					} else {
+																						if (ltbAccidentesLaboralesAgregados
+																								.getItemCount() != 0
+																								&& !validarLaborales()) {
+																							msj.mensajeError("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados");
+																							return false;
+																						} else
+																							return true;
+																					}
 																				}
 																			}
 																		}
@@ -3075,6 +3085,43 @@ public class CConsulta extends CGenerico {
 			return true;
 	}
 
+	@Listen("onChange = #cmbProveedor")
+	public boolean validarProveedor() {
+		Proveedor proveedor = null;
+		Examen examen = null;
+		if (cmbProveedor.getText().compareTo("") != 0)
+			proveedor = servicioProveedor.buscar(Long.parseLong(cmbProveedor
+					.getSelectedItem().getContext()));
+		boolean error = false;
+		if (ltbExamenesAgregados.getItemCount() != 0) {
+			ProveedorExamen proveedorExamen = new ProveedorExamen();
+			for (int i = 0; i < ltbExamenesAgregados.getItemCount(); i++) {
+				Listitem listItem = ltbExamenesAgregados.getItemAtIndex(i);
+				Integer idExamen = ((Spinner) ((listItem.getChildren().get(2)))
+						.getFirstChild()).getValue();
+				examen = servicioExamen.buscar(idExamen);
+				proveedorExamen = servicioProveedorExamen
+						.buscarPorProveedoryExamen(proveedor, examen);
+				if (proveedorExamen == null) {
+					error = true;
+					i = ltbExamenesAgregados.getItemCount();
+				}
+
+			}
+			if (error) {
+				cmbProveedor.setFocus(true);
+				Messagebox.show(
+						"El proveedor seleccionado no realiza el examen, "
+								+ examen.getNombre()
+								+ ", por favor modifiquelo si es el caso",
+						"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+				return false;
+			} else
+				return true;
+		} else
+			return true;
+	}
+
 	@Listen("onClick = #btnAgregarExamenes")
 	public boolean agregarExamen() {
 		examenesResumen.clear();
@@ -3141,11 +3188,14 @@ public class CConsulta extends CGenerico {
 				consulta = listItem2.get(i).getValue();
 				String valor = ((Textbox) ((listItem.getChildren().get(1)))
 						.getFirstChild()).getValue();
-				String proveedor = ((Combobox) ((listItem.getChildren().get(2)))
-						.getFirstChild()).getSelectedItem().getContext();
-				if (proveedor.equals("")) {
+				String proveedor = "";
+				if (((Combobox) ((listItem.getChildren().get(2)))
+						.getFirstChild()).getSelectedItem() == null) {
 					falta = true;
-				}
+				} else
+					proveedor = ((Combobox) ((listItem.getChildren().get(2)))
+							.getFirstChild()).getSelectedItem().getContext();
+
 				consulta.setObservacion(valor);
 				serviciosResumen.add(consulta);
 			}

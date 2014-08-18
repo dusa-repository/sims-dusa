@@ -32,4 +32,9 @@ public class SProveedorExamen {
 	public List<ProveedorExamen> buscarPorExamen(Examen examen) {
 		return proveedorExamenDAO.findByExamen(examen);
 	}
+
+	public ProveedorExamen buscarPorProveedoryExamen(Proveedor proveedor,
+			Examen examen) {
+		return proveedorExamenDAO.findByProveedorAndExamen(proveedor,examen);
+	}
 }
