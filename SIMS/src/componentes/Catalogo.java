@@ -92,7 +92,7 @@ public abstract class Catalogo<Clase> extends Window {
 		lsbCatalogo.setSpan(true);
 		this.appendChild(separador1);
 		this.appendChild(hbxBusqueda);		
-		lblBuscar.setValue("Buscar Por :  ");
+		lblBuscar.setValue("   Buscar Por :  ");
 		lblBuscar.setSclass("etiqueta");
 		hbxBusqueda.appendChild(lblBuscar);
 		cmbBuscarPor.setModel(new ListModelList<String>(campos));
