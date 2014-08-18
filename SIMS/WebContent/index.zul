@@ -20,7 +20,7 @@
 		apply="controlador.portal.CIndex">
 		<borderlayout height="100%"
 			style="background-image: url('public/imagenes/generales/fondo.png'); background-repeat:no-repeat;height=100%; width=100% ; background-color:white">
-			<north height="4,5em" style="background-color:#661313;">
+			<north height="4,5em" class="banner">
 				<hbox hflex="1">
 					<separator />
 					<separator />
@@ -53,7 +53,7 @@
 						<separator />
 						<separator />
 						<separator />
-						<label style="font-size:26px;color:#661313;font-weight: bold"
+						<label class="lblIndex"
 							value="SISTEMA INTEGRAL MEDICO Y DE SEGURIDAD" />
 					</div>
 					<div align="center">
@@ -99,7 +99,7 @@
 					</div>
 				</vlayout>
 			</east>
-			<south style="background-color:#661313;" vflex="2" border="0"
+			<south class="banner" vflex="2" border="0"
 				height="3em" collapsible="false">
 				<div align="center" sclass="footer">
 					<separator></separator>
