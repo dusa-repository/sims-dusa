@@ -218,6 +218,8 @@ public class CArbol extends CGenerico {
 								@Override
 								public void onEvent(Event arg0)
 										throws Exception {
+									if(arbolItem.getNombre().equals("Consulta"))
+										west.setOpen(true);
 									for (int i = 0; i < tabs.size(); i++) {
 										if (tabs.get(i).getLabel()
 												.equals(arbolItem.getNombre())) {
@@ -240,6 +242,7 @@ public class CArbol extends CGenerico {
 					newTabpanel.setParent(tabBox.getTabpanels());
 					tabs.add(newTab);
 					mapGeneral.put("tabsGenerales", tabs);
+					mapGeneral.put("west", west);
 					Sessions.getCurrent().setAttribute("mapaGeneral",
 							mapGeneral);
 				} else {

@@ -82,6 +82,7 @@ import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.West;
 import org.zkoss.zul.Window;
 
 import servicio.maestros.SParteCuerpo;
@@ -790,7 +791,7 @@ public class CConsulta extends CGenerico {
 			"Post-Vacacional", "Egreso", "Cambio de Puesto", "Promocion",
 			"Reintegro", "Por Area" };
 	private String[] consultaCurativa = { "Primera", "Control" };
-
+	private West west;
 	private List<DetalleAccidente> listaDetalle = new ArrayList<DetalleAccidente>();
 
 	@Override
@@ -805,6 +806,7 @@ public class CConsulta extends CGenerico {
 		if (mapa != null) {
 			if (mapa.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				west = (West) mapa.get("west");
 				mapa.clear();
 				mapa = null;
 			}
@@ -997,6 +999,7 @@ public class CConsulta extends CGenerico {
 			@Override
 			public void salir() {
 				cerrarVentana(divConsulta, "Consulta", tabs);
+				west.setOpen(true);
 			}
 
 			@Override
