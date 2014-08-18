@@ -15,4 +15,6 @@ public interface IProveedorExamenDAO extends JpaRepository<ProveedorExamen, Prov
 
 	List<ProveedorExamen> findByProveedor(Proveedor proveedor);
 
+	ProveedorExamen findByProveedorAndExamen(Proveedor proveedor, Examen examen);
+
 }
