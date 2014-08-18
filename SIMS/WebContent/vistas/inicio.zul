@@ -5,7 +5,7 @@
 	<window title="" border="0" height="100%" contentStyle="overflow:auto"
 		apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
-			<north height="4,5em" style="background-color:#661313;">
+			<north height="4,5em" class="banner">
 				<hbox hflex="1">
 					<separator />
 					<separator />
@@ -104,7 +104,7 @@
 					</center>
 				</borderlayout>
 			</center>
-			<south style="background-color:#661313;" vflex="2" border="0"
+			<south class="banner" vflex="2" border="0"
 				height="3em" collapsible="false">
 				<div align="center" sclass="footer">
 					<a style="color: white" href="../j_spring_security_logout">
