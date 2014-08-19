@@ -63,6 +63,9 @@ public class Diagnostico implements Serializable {
 	
 	@OneToMany(mappedBy = "diagnostico")
 	private Set<ConsultaDiagnostico> diagnosticos;
+
+	@Column(name = "id_referencia")
+	private long idReferencia;
 	
 	public Diagnostico() {
 	}
@@ -166,6 +169,16 @@ public class Diagnostico implements Serializable {
 
 	public void setEpi(Boolean epi) {
 		this.epi = epi;
+	}
+
+
+	public long getIdReferencia() {
+		return idReferencia;
+	}
+
+
+	public void setIdReferencia(long idReferencia) {
+		this.idReferencia = idReferencia;
 	}
 
 }

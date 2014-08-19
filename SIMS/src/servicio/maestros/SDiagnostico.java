@@ -81,4 +81,9 @@ public class SDiagnostico {
 			return diagnosticoDAO.findOne(id);
 		return null;
 	}
+
+	public void guardarVarios(List<Diagnostico> diagnosticos) {
+		System.out.println(diagnosticos.size());
+		diagnosticoDAO.save(diagnosticos);
+	}
 }

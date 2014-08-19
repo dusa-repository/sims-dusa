@@ -26,6 +26,9 @@ public class Area implements Serializable {
 	private long idArea;
 	
 	@Column(length=100)
+	private String codigo;
+	
+	@Column(length=100)
 	private String nombre;
 	
 	@Column(name="fecha_auditoria")
@@ -54,10 +57,11 @@ public class Area implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Area(long idArea, String nombre, Timestamp fechaAuditoria,
+	public Area(long idArea, String codigo, String nombre, Timestamp fechaAuditoria,
 			String horaAuditoria, String usuarioAuditoria) {
 		super();
 		this.idArea = idArea;
+		this.codigo = codigo;
 		this.nombre = nombre;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
@@ -134,6 +138,14 @@ public class Area implements Serializable {
 
 	public void setInformes(Set<Informe> informes) {
 		this.informes = informes;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	

@@ -58,6 +58,8 @@ public class Examen implements Serializable {
 	@OneToMany(mappedBy = "examen")
 	private Set<ProveedorExamen> proveedoresExamenes;
 	
+	@Column(name = "id_referencia")
+	private long idReferencia;
 	public Examen() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -174,6 +176,14 @@ public class Examen implements Serializable {
 
 	public void setProveedoresExamenes(Set<ProveedorExamen> proveedoresExamenes) {
 		this.proveedoresExamenes = proveedoresExamenes;
+	}
+
+	public long getIdReferencia() {
+		return idReferencia;
+	}
+
+	public void setIdReferencia(long idReferencia) {
+		this.idReferencia = idReferencia;
 	}
 	
 }

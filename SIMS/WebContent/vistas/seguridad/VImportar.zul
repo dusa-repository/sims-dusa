@@ -33,9 +33,9 @@
 							image="/public/imagenes/botones/importar.png" />
 						<label id="lblNombreArea" />
 					</row>
-					<row>
+					<row id="rowDiagnostico">
 						<label class="etiqueta" value="Importar Diagnosticos:" />
-						<button autodisable="self" id="btnImportarDiagnostico"
+						<button autodisable="self" id="btnImportarDiagostico"
 							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
 							upload="true" label="Buscar" tooltiptext="Importar Diagnosticos"
 							image="/public/imagenes/botones/importar.png" />
