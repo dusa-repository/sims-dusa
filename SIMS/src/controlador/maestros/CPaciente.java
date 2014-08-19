@@ -227,7 +227,7 @@ public class CPaciente extends CGenerico {
 
 	URL url = getClass().getResource("usuario.png");
 	private CArbol cArbol = new CArbol();
-	long id = 0;
+	String id = "";
 	String cedTrabajador = "";
 	Catalogo<Paciente> catalogo;
 	Catalogo<Paciente> catalogoFamiliar;
@@ -283,7 +283,7 @@ public class CPaciente extends CGenerico {
 				cmbNomina.setValue("");
 				cmbNomina.setPlaceholder("Seleccione un Tipo de Nomina");
 				imagenPaciente.setVisible(false);
-				id = 0;
+				id = "";
 				txtFichaPaciente.setValue("");
 				txtAlergia.setValue("");
 				txtLugarNacimiento.setValue("");
@@ -542,7 +542,7 @@ public class CPaciente extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				if (id != 0) {
+				if (id.equals("")) {
 					Messagebox.show("¿Esta Seguro de Eliminar el Paciente?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
@@ -831,8 +831,8 @@ public class CPaciente extends CGenerico {
 	/* Valida la Ficha */
 	@Listen("onChange = #txtFichaPaciente")
 	public boolean validarFicha() {
-		if (servicioPaciente.buscarPorFicha(txtFichaPaciente.getValue()) != null) {
-			if (id == 0) {
+		if (!servicioPaciente.buscarPorFicha(txtFichaPaciente.getValue()).isEmpty()) {
+			if (id.equals("")) {
 				msj.mensajeAlerta(Mensaje.fichaExistente);
 				return false;
 			}
@@ -880,7 +880,7 @@ public class CPaciente extends CGenerico {
 	 */
 	@Listen("onClick =#rdoTrabajador")
 	public void esTrabajador() {
-		if (id != 0)
+		if (!id.equals(""))
 			btnVer.setVisible(true);
 		else
 			btnVer.setVisible(false);
@@ -955,7 +955,7 @@ public class CPaciente extends CGenerico {
 		txtApellido2Paciente.setValue(paciente.getSegundoApellido());
 		txtCedulaPaciente.setDisabled(true);
 		txtFichaPaciente.setDisabled(true);
-		id = Long.valueOf(paciente.getCedula());
+		id = paciente.getCedula();
 		txtFichaPaciente.setValue(paciente.getFicha());
 		txtAlergia.setValue(paciente.getObservacionAlergias());
 		txtLugarNacimiento.setValue(paciente.getLugarNacimiento());
@@ -1058,6 +1058,8 @@ public class CPaciente extends CGenerico {
 		if (!paciente.isTrabajador()) {
 			Paciente familiar = servicioPaciente.buscarPorCedula(paciente
 					.getCedulaFamiliar());
+			if(familiar!=null)
+			{
 			lblNombres.setValue(familiar.getPrimerNombre() + " "
 					+ familiar.getSegundoNombre());
 			lblApellidos.setValue(familiar.getPrimerApellido() + " "
@@ -1065,7 +1067,7 @@ public class CPaciente extends CGenerico {
 			lblFicha.setValue(familiar.getFicha());
 			lblCedula.setValue(familiar.getCedula());
 			cedTrabajador = familiar.getCedula();
-			// cmbParentescoFamiliar.setValue(familiar.getParentescoFamiliar());
+			}
 		}
 	}
 

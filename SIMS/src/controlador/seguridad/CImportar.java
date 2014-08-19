@@ -53,6 +53,7 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 
 import componentes.Botonera;
+import componentes.Mensaje;
 import componentes.Validador;
 
 import controlador.maestros.CGenerico;
@@ -160,11 +161,13 @@ public class CImportar extends CGenerico {
 					importarAreas();
 					importarExamenes();
 					importarMedicinas();
-					// importarPacientes();
+					importarPacientes();
 					importarConsultas();
 					importarDiagnosticoConsulta();
 					importarExamenConsulta();
 					importarMedicinaConsulta();
+					// Verificar si guardo
+					msj.mensajeInformacion(Mensaje.guardadosArchivos);
 				}
 
 			}
@@ -193,8 +196,8 @@ public class CImportar extends CGenerico {
 			}
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			Iterator<Row> rowIterator = sheet.iterator();
-			Recipe recipe = new Recipe(0, "1 (Urgente)", fechaHora,
-					fechaHora, horaAuditoria, nombreUsuarioSesion());
+			Recipe recipe = new Recipe(0, "1 (Urgente)", fechaHora, fechaHora,
+					horaAuditoria, nombreUsuarioSesion());
 			servicioRecipe.guardar(recipe);
 			recipe = servicioRecipe.buscarUltimo();
 			List<ConsultaMedicina> consultasMedicina = new ArrayList<ConsultaMedicina>();
@@ -269,8 +272,7 @@ public class CImportar extends CGenerico {
 		if (mediaConsultaExamen != null) {
 			XSSFWorkbook workbook = null;
 			try {
-				workbook = new XSSFWorkbook(
-						mediaConsultaExamen.getStreamData());
+				workbook = new XSSFWorkbook(mediaConsultaExamen.getStreamData());
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -684,7 +686,6 @@ public class CImportar extends CGenerico {
 			try {
 				imgUsuario.setContent(new AImage(url));
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			List<Paciente> pacientes = new ArrayList<Paciente>();
@@ -696,13 +697,14 @@ public class CImportar extends CGenerico {
 				Timestamp fechaNac = null;
 				Date fechaNac2 = new Date();
 				Double cedRef = (double) 0;
+				Double dirRef = (double) 0;
 				Double fichaRef = (double) 0;
 				Double codigoRef = (double) 0;
 				byte[] imagenUsuario = null;
 
 				Iterator<Cell> cellIterator = row.cellIterator();
 				while (cellIterator.hasNext()) {
-					System.out.println("paso");
+
 					Cell cell = cellIterator.next();
 
 					switch (cell.getColumnIndex()) {
@@ -728,7 +730,14 @@ public class CImportar extends CGenerico {
 						segundoApellido = cell.getStringCellValue();
 						break;
 					case 5:
-						direccion = cell.getStringCellValue();
+						if (cell.getCellType() == 1)
+							direccion = cell.getStringCellValue();
+						else {
+							dirRef = cell.getNumericCellValue();
+							if (dirRef != null)
+								direccion = String.valueOf(dirRef.longValue());
+						}
+
 						break;
 					case 7:
 						fechaNac2 = cell.getDateCellValue();
@@ -736,16 +745,21 @@ public class CImportar extends CGenerico {
 						break;
 					case 8:
 						sexo = cell.getStringCellValue();
-					case 10:
-						if (cell.getCellType() == 1)
-							ficha = cell.getStringCellValue();
-						else {
-							fichaRef = cell.getNumericCellValue();
-							if (fichaRef != null)
-								ficha = String.valueOf(fichaRef.longValue());
-						}
 						break;
 					case 11:
+						if (cell.getCellType() == 1) {
+							if (cell.getStringCellValue().equals("NULL"))
+								ficha = "";
+							else
+								ficha = cell.getStringCellValue();
+						} else {
+							fichaRef = cell.getNumericCellValue();
+							if (fichaRef != null) {
+								ficha = String.valueOf(fichaRef.longValue());
+							}
+						}
+						break;
+					case 12:
 						if (cell.getCellType() == 1)
 							codigoArea = cell.getStringCellValue();
 						else {
@@ -759,6 +773,7 @@ public class CImportar extends CGenerico {
 						break;
 					}
 				}
+
 				paciente.setCedula(cedula);
 				paciente.setPrimerNombre(primerNombre);
 				paciente.setSegundoNombre(segundoNombre);
@@ -775,7 +790,7 @@ public class CImportar extends CGenerico {
 				area = servicioArea.buscarPorCodigo(codigoArea);
 				if (area == null || codigoArea.equals("-")
 						|| codigoArea.equals("NULL"))
-					area = servicioArea.buscar(1); // PENDIENTE
+					area = servicioArea.buscar(1); //
 				paciente.setArea(area);
 				paciente.setNacionalidad("V");
 				paciente.setEstatus(true);
@@ -1107,7 +1122,19 @@ public class CImportar extends CGenerico {
 	}
 
 	public boolean validar() {
-		return true;
-	}
 
+		if (mediaArea !=null && !Validador.validarExcel(mediaArea)
+				|| mediaConsulta !=null && !Validador.validarExcel(mediaConsulta)
+				|| mediaConsultaDiagnostico !=null && !Validador.validarExcel(mediaConsultaDiagnostico)
+				|| mediaConsultaExamen !=null && !Validador.validarExcel(mediaConsultaExamen)
+				|| mediaConsultaMedicina !=null && !Validador.validarExcel(mediaConsultaMedicina)
+				|| mediaDiagnostico !=null && !Validador.validarExcel(mediaDiagnostico)
+				|| mediaExamen !=null && !Validador.validarExcel(mediaExamen)
+				|| mediaMedicina !=null && !Validador.validarExcel(mediaMedicina)
+				|| mediaPaciente !=null && !Validador.validarExcel(mediaPaciente)) {
+			msj.mensajeError(Mensaje.archivoExcel);
+			return false;
+		} else
+			return true;
+	}
 }
