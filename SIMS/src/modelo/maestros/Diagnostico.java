@@ -65,7 +65,7 @@ public class Diagnostico implements Serializable {
 	private Set<ConsultaDiagnostico> diagnosticos;
 
 	@Column(name = "id_referencia")
-	private long idReferencia;
+	private Long idReferencia;
 	
 	public Diagnostico() {
 	}
@@ -172,12 +172,12 @@ public class Diagnostico implements Serializable {
 	}
 
 
-	public long getIdReferencia() {
+	public Long getIdReferencia() {
 		return idReferencia;
 	}
 
 
-	public void setIdReferencia(long idReferencia) {
+	public void setIdReferencia(Long idReferencia) {
 		this.idReferencia = idReferencia;
 	}
 

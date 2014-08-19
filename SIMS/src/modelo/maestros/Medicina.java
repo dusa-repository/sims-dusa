@@ -87,7 +87,7 @@ public class Medicina implements Serializable {
 	private Set<ConsultaMedicina> medicinas;
 
 	@Column(name = "id_referencia")
-	private long idReferencia;
+	private Long idReferencia;
 	
 	public Medicina() {
 	}
@@ -277,11 +277,11 @@ public class Medicina implements Serializable {
 		return presentacion;
 	}
 
-	public long getIdReferencia() {
+	public Long getIdReferencia() {
 		return idReferencia;
 	}
 
-	public void setIdReferencia(long idReferencia) {
+	public void setIdReferencia(Long idReferencia) {
 		this.idReferencia = idReferencia;
 	}
 

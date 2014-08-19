@@ -4,12 +4,13 @@
 		<groupbox width="40em" mold="3d" title="Importar">
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="40%" />
+					<column label="" width="30%" />
 					<column label="" width="20%" />
-					<column label="" width="40%" />
+					<column label="" width="40%" />					
+					<column label="" width="10%" />
 				</columns>
 				<rows>
-					<row>
+					<row id="rowMedicina">
 						<label class="etiqueta" value="Importar Medicinas:" />
 						<button autodisable="self" id="btnImportarMedicina"
 							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
@@ -17,7 +18,7 @@
 							image="/public/imagenes/botones/importar.png" />
 						<label id="lblNombreMedicina" />
 					</row>
-					<row>
+					<row id="rowExamen">
 						<label class="etiqueta" value="Importar Examenes:" />
 						<button autodisable="self" id="btnImportarExamen"
 							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
@@ -25,7 +26,7 @@
 							image="/public/imagenes/botones/importar.png" />
 						<label id="lblNombreExamen" />
 					</row>
-					<row>
+					<row id="rowArea">
 						<label class="etiqueta" value="Importar Areas:" />
 						<button autodisable="self" id="btnImportarArea"
 							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
@@ -41,13 +42,21 @@
 							image="/public/imagenes/botones/importar.png" />
 						<label id="lblNombreDiagnostico" />
 					</row>
-					<row>
+					<row id="rowPaciente">
 						<label class="etiqueta" value="Importar Pacientes:" />
 						<button autodisable="self" id="btnImportarPaciente"
 							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
 							upload="true" label="Buscar" tooltiptext="Importar Pacientes"
 							image="/public/imagenes/botones/importar.png" />
 						<label id="lblNombrePaciente" />
+					</row>
+					<row id="rowConsulta" visible="false">
+						<label class="etiqueta" value="Importar Consultas:" />
+						<button autodisable="self" id="btnImportarConsulta"
+							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+							upload="true" label="Buscar" tooltiptext="Importar Consultas"
+							image="/public/imagenes/botones/importar.png" />
+						<label id="lblNombreConsulta" />
 					</row>
 				</rows>
 			</grid>

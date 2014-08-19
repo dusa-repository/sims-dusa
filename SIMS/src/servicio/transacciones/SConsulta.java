@@ -98,4 +98,8 @@ public class SConsulta {
 	public List<Consulta> buscarPorArea2(Area area) {
 		return consultaDAO.findByAreaDeseada(area);
 	}
+
+	public void guardarVarios(List<Consulta> consultas) {
+		consultaDAO.save(consultas);
+	}
 }

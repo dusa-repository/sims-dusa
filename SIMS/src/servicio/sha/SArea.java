@@ -42,4 +42,8 @@ public class SArea {
 	public Area buscarPorCodigo(String value) {
 		return areaDAO.findByCodigo(value);
 	}
+
+	public void guardarVarios(List<Area> areas) {
+		areaDAO.save(areas);
+	}
 }

@@ -59,7 +59,7 @@ public class Examen implements Serializable {
 	private Set<ProveedorExamen> proveedoresExamenes;
 	
 	@Column(name = "id_referencia")
-	private long idReferencia;
+	private Long idReferencia;
 	public Examen() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -178,11 +178,11 @@ public class Examen implements Serializable {
 		this.proveedoresExamenes = proveedoresExamenes;
 	}
 
-	public long getIdReferencia() {
+	public Long getIdReferencia() {
 		return idReferencia;
 	}
 
-	public void setIdReferencia(long idReferencia) {
+	public void setIdReferencia(Long idReferencia) {
 		this.idReferencia = idReferencia;
 	}
 	
