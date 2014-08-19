@@ -757,7 +757,7 @@ public class CConsulta extends CGenerico {
 	List<ConsultaServicioExterno> serviciosAgregados = new ArrayList<ConsultaServicioExterno>();
 	List<ConsultaServicioExterno> serviciosResumen = new ArrayList<ConsultaServicioExterno>();
 
-	long idPaciente = 0;
+	String idPaciente = "";
 	long idConsulta = 0;
 	long idConsultaAsociada = 0;
 
@@ -1994,7 +1994,7 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onClick = #btnGuardarHistoria")
 	public void botonHistoria() {
-		if (idPaciente != 0) {
+		if (!idPaciente.equals("")) {
 			Paciente paciente = servicioPaciente.buscarPorCedula(txtCedula
 					.getValue());
 			if (validarHistoria()) {
@@ -2143,7 +2143,7 @@ public class CConsulta extends CGenerico {
 					msj.mensajeAlerta(Mensaje.pacienteMayor);
 			}
 		}
-		idPaciente = Long.valueOf(paciente.getCedula());
+		idPaciente = paciente.getCedula();
 		List<Consulta> consultas = servicioConsulta.buscarPorPaciente(paciente);
 		for (int i = 0; i < consultas.size(); i++) {
 			consultas.get(i).setHoraConsulta(
@@ -2173,8 +2173,8 @@ public class CConsulta extends CGenerico {
 					botonera.getChildren().get(0).setVisible(false);
 					Consulta consulta = listItem.getValue();
 					idConsulta = consulta.getIdConsulta();
-					idPaciente = Long.parseLong(consulta.getPaciente()
-							.getCedula());
+					idPaciente = consulta.getPaciente()
+							.getCedula();
 					llenarCamposConsulta(consulta);
 					llenarCampos(consulta.getPaciente());
 					llenarListas();
@@ -3302,7 +3302,7 @@ public class CConsulta extends CGenerico {
 		btnGenerarReposo.setVisible(false);
 		listaDetalle = new ArrayList<DetalleAccidente>();
 		btnGuardarHistoria.setVisible(false);
-		idPaciente = 0;
+		idPaciente = "";
 		idConsulta = 0;
 		idConsultaAsociada = 0;
 		limpiarListBox();
@@ -3840,7 +3840,7 @@ public class CConsulta extends CGenerico {
 				.getValue());
 		if (paciente != null) {
 			llenarCampos(paciente);
-			idPaciente = Long.valueOf(paciente.getCedula());
+			idPaciente = paciente.getCedula();
 			List<Consulta> consultas = servicioConsulta
 					.buscarPorPaciente(paciente);
 			ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
@@ -5243,19 +5243,19 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onClick = #btnVerHistoria")
 	public void generarHistoricoConsulta() {
-		if (idPaciente != 0) {
-			Long id = idPaciente;
-			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=6&valor2="
+		if (!idPaciente.equals("")) {
+			String id = idPaciente;
+			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=6&valor3="
 					+ id
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else
 			msj.mensajeError("Debe Seleccionar un Paciente");
 	}
 
-	public byte[] reporteConsultaHistorico(Long part2) throws JRException {
+	public byte[] reporteConsultaHistorico(String part2) throws JRException {
 		byte[] fichero = null;
 		List<Consulta> listaConsultas = getServicioConsulta()
-				.buscarPorIdPacienteOrdenado(String.valueOf(part2));
+				.buscarPorIdPacienteOrdenado(part2);
 		for (int i = 0; i < listaConsultas.size(); i++) {
 
 			String nombre = listaConsultas.get(i).getUsuario()
