@@ -53,6 +53,8 @@ public class Mensaje {
 	public static String fichaExistente = "La Ficha ha sido Usada por Otro Registro.";
 	public static String pacienteMayor = "El Paciente que ha Seleccionado es Mayor de Edad y es Hijo de un Trabajador, Verifique si Cumple los Requisitos para Rermanecer Activo";
 	public static String pacienteFallecido = "El Representante del Paciente en la Empresa ha fallecido y la Fecha es Mayor a un Año, Ferifique si Cumple los Requisitos para Permanecer Activo";
+	public static String archivoExcel = "Los Archivos deben ser de Tipo .xls";
+	public static String guardadosArchivos ="La Data ha sido Guardada Exitosamente";
 
 	public void mensajeInformacion(String msj) {
 		Messagebox.show(msj, "Informacion", Messagebox.OK,

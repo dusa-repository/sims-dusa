@@ -57,6 +57,13 @@ public abstract class Validador {
 		else
 			return false;
 	}
+	public static boolean validarExcel(Media media) {
+		String extencion = media.getFormat();
+		if (extencion.equals("xls") || extencion.equals("xlsx"))
+			return true;
+		else
+			return false;
+	}
 
 	/*
 	 * Valida que el archivo que se sube sea un documento de solo lectura .pdf

@@ -1,12 +1,12 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divImportar" apply="controlador.seguridad.CImportar">
-		<groupbox width="40em" mold="3d" title="Importar">
+		<groupbox width="46em" mold="3d" title="Importar">
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="30%" />
+					<column label="" width="35%" />
 					<column label="" width="20%" />
-					<column label="" width="40%" />					
+					<column label="" width="35%" />
 					<column label="" width="10%" />
 				</columns>
 				<rows>
@@ -86,5 +86,6 @@
 			</grid>
 		</groupbox>
 		<div id="botoneraImportar" />
+		<image id="imgUsuario" visible="false" />
 	</div>
 </zk>

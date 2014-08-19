@@ -60,7 +60,7 @@
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
-									<textbox maxlength="12" id="txtCedulaPaciente" hflex="1"
+									<textbox maxlength="15" id="txtCedulaPaciente" hflex="1"
 										tooltiptext="Ingrese la Cedula del Paciente" />
 									<radiogroup>
 										<radio label="V" value="Venezolano" id="rdoV" />
@@ -555,7 +555,7 @@
 										<space />
 										<space />
 										<cell colspan="3">
-											<textbox id="txtDireccion" width="400px" maxlength="500"
+											<textbox id="txtDireccion" width="400px" maxlength="1000"
 												tooltiptext="Ingrese la Direccion Actual" multiline="true"
 												class="multilinea" />
 										</cell>

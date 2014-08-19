@@ -32,7 +32,7 @@ public class Paciente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_paciente", length=12, unique=true, nullable=false)
+	@Column(name="id_paciente", length=15, unique=true, nullable=false)
 	private String cedula;
 	
 	@Column(length=50)
@@ -128,7 +128,7 @@ public class Paciente implements Serializable {
 	@Lob
 	private byte[] imagen;
 	
-	@Column(length=500)
+	@Column(length=1000)
 	private String direccion;
 
 	@Column(length=50)
@@ -159,7 +159,7 @@ public class Paciente implements Serializable {
 	
 	/*Datos en caso de ser familiar*/
 	
-	@Column(length=12)
+	@Column(length=15)
 	private String cedulaFamiliar;
 	
 	@Column(length=15)
