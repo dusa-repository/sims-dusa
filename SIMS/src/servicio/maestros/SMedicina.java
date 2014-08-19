@@ -89,4 +89,8 @@ public class SMedicina {
 	public void guardarVarios(List<Medicina> medicinas) {
 		medicinaDAO.save(medicinas);
 	}
+
+	public Medicina buscarPorReferencia(long idRefD) {
+		return medicinaDAO.findByIdReferencia(idRefD);
+	}
 }

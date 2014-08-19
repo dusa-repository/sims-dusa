@@ -28,4 +28,6 @@ public interface IDiagnosticoDAO extends JpaRepository<Diagnostico, Long> {
 	@Query("select coalesce(max(consulta.idDiagnostico), '0') from Diagnostico consulta")
 	long findMaxIdDiagnostico();
 
+	Diagnostico findByIdReferencia(long idRefD);
+
 }

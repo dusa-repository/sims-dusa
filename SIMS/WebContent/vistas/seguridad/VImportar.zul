@@ -50,13 +50,37 @@
 							image="/public/imagenes/botones/importar.png" />
 						<label id="lblNombrePaciente" />
 					</row>
-					<row id="rowConsulta" visible="false">
+					<row id="rowConsulta">
 						<label class="etiqueta" value="Importar Consultas:" />
 						<button autodisable="self" id="btnImportarConsulta"
 							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
 							upload="true" label="Buscar" tooltiptext="Importar Consultas"
 							image="/public/imagenes/botones/importar.png" />
 						<label id="lblNombreConsulta" />
+					</row>
+					<row id="rowConsultaExamen">
+						<label class="etiqueta" value="Importar Examenes de Consulta:" />
+						<button autodisable="self" id="btnImportarExamenConsulta"
+							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+							upload="true" label="Buscar" tooltiptext="Importar Consultas"
+							image="/public/imagenes/botones/importar.png" />
+						<label id="lblNombreExamenConsulta" />
+					</row>
+					<row id="rowConsultaDiagnostico">
+						<label class="etiqueta" value="Importar Diagnosticos de Consulta:" />
+						<button autodisable="self" id="btnImportarDiagnosticoConsulta"
+							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+							upload="true" label="Buscar" tooltiptext="Importar Consultas"
+							image="/public/imagenes/botones/importar.png" />
+						<label id="lblNombreDiagnosticoConsulta" />
+					</row>
+					<row id="rowConsultaMedicina">
+						<label class="etiqueta" value="Importar Medicinas de Consulta:" />
+						<button autodisable="self" id="btnImportarMedicinaConsulta"
+							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+							upload="true" label="Buscar" tooltiptext="Importar Consultas"
+							image="/public/imagenes/botones/importar.png" />
+						<label id="lblNombreMedicinaConsulta" />
 					</row>
 				</rows>
 			</grid>

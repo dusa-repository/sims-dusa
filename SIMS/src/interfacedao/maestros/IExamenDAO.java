@@ -28,4 +28,6 @@ public interface IExamenDAO extends JpaRepository<Examen, Long>{
 	@Query("select coalesce(max(consulta.idExamen), '0') from Examen consulta")
 	long findMaxIdExamen();
 
+	Examen findByIdReferencia(long idRefD);
+
 }

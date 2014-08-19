@@ -102,4 +102,8 @@ public class SConsulta {
 	public void guardarVarios(List<Consulta> consultas) {
 		consultaDAO.save(consultas);
 	}
+
+	public Consulta buscarPorReferencias(long idRefC, String cedRef) {
+		return consultaDAO.findByIdReferenciaAndCedulaReferencia(idRefC,cedRef);
+	}
 }

@@ -28,5 +28,7 @@ public interface IMedicinaDAO extends JpaRepository<Medicina, Long> {
 
 	List<Medicina> findByIdMedicinaNotIn(List<Long> ids);
 
+	Medicina findByIdReferencia(long idRefD);
+
 
 }

@@ -44,4 +44,6 @@ public interface IConsultaDAO  extends JpaRepository<Consulta, Long> {
 
 	List<Consulta> findByAreaDeseada(Area area);
 
+	Consulta findByIdReferenciaAndCedulaReferencia(long idRefC, String cedRef);
+
 }

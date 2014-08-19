@@ -21,9 +21,14 @@ import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
+import modelo.maestros.Proveedor;
+import modelo.maestros.Recipe;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
 import modelo.transacciones.Consulta;
+import modelo.transacciones.ConsultaDiagnostico;
+import modelo.transacciones.ConsultaExamen;
+import modelo.transacciones.ConsultaMedicina;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -74,6 +79,12 @@ public class CImportar extends CGenerico {
 	@Wire
 	private Label lblNombrePaciente;
 	@Wire
+	private Label lblNombreExamenConsulta;
+	@Wire
+	private Label lblNombreDiagnosticoConsulta;
+	@Wire
+	private Label lblNombreMedicinaConsulta;
+	@Wire
 	private org.zkoss.zul.Row rowDiagnostico;
 	@Wire
 	private org.zkoss.zul.Row rowMedicina;
@@ -86,6 +97,12 @@ public class CImportar extends CGenerico {
 	@Wire
 	private org.zkoss.zul.Row rowPaciente;
 	@Wire
+	private org.zkoss.zul.Row rowConsultaExamen;
+	@Wire
+	private org.zkoss.zul.Row rowConsultaDiagnostico;
+	@Wire
+	private org.zkoss.zul.Row rowConsultaMedicina;
+	@Wire
 	private Image imgUsuario;
 	URL url = getClass().getResource("/controlador/maestros/usuario.png");
 	private Media mediaExamen;
@@ -93,6 +110,9 @@ public class CImportar extends CGenerico {
 	private Media mediaArea;
 	private Media mediaDiagnostico;
 	private Media mediaConsulta;
+	private Media mediaConsultaExamen;
+	private Media mediaConsultaMedicina;
+	private Media mediaConsultaDiagnostico;
 	private Media mediaPaciente;
 
 	@Override
@@ -140,8 +160,11 @@ public class CImportar extends CGenerico {
 					importarAreas();
 					importarExamenes();
 					importarMedicinas();
-					importarPacientes();
+					// importarPacientes();
 					importarConsultas();
+					importarDiagnosticoConsulta();
+					importarExamenConsulta();
+					importarMedicinaConsulta();
 				}
 
 			}
@@ -157,6 +180,245 @@ public class CImportar extends CGenerico {
 		botonera.getChildren().get(2).setVisible(false);
 		botoneraImportar.appendChild(botonera);
 
+	}
+
+	protected void importarMedicinaConsulta() {
+		if (mediaConsultaMedicina != null) {
+			XSSFWorkbook workbook = null;
+			try {
+				workbook = new XSSFWorkbook(
+						mediaConsultaMedicina.getStreamData());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			Iterator<Row> rowIterator = sheet.iterator();
+			Recipe recipe = new Recipe(0, "1 (Urgente)", fechaHora,
+					fechaHora, horaAuditoria, nombreUsuarioSesion());
+			servicioRecipe.guardar(recipe);
+			recipe = servicioRecipe.buscarUltimo();
+			List<ConsultaMedicina> consultasMedicina = new ArrayList<ConsultaMedicina>();
+			while (rowIterator.hasNext()) {
+				Row row = rowIterator.next();
+				Medicina medicina = new Medicina();
+				Consulta consulta = new Consulta();
+				ConsultaMedicina consultaMedicina = new ConsultaMedicina();
+				Double idReferenciaC = (double) 0;
+				long idRefC = 0;
+				Double idReferenciaD = (double) 0;
+				long idRefD = 0;
+				Double cedReferencia = (double) 0;
+				String cedRef = "";
+				Double dosisReferencia = (double) 0;
+				String dosis = "";
+				Iterator<Cell> cellIterator = row.cellIterator();
+				while (cellIterator.hasNext()) {
+					Cell cell = cellIterator.next();
+
+					switch (cell.getColumnIndex()) {
+					case 0:
+						idReferenciaC = cell.getNumericCellValue();
+						if (idReferenciaC != null)
+							idRefC = idReferenciaC.longValue();
+						break;
+					case 1:
+						idReferenciaD = cell.getNumericCellValue();
+						if (idReferenciaD != null)
+							idRefD = idReferenciaD.longValue();
+						break;
+					case 2:
+						if (cell.getCellType() == 1) {
+							cedRef = cell.getStringCellValue();
+						} else {
+							cedReferencia = cell.getNumericCellValue();
+							if (cedReferencia != null)
+								cedRef = String.valueOf(cedReferencia
+										.longValue());
+						}
+						break;
+					case 3:
+						if (cell.getCellType() == 1) {
+							dosis = cell.getStringCellValue();
+						} else {
+							dosisReferencia = cell.getNumericCellValue();
+							if (dosisReferencia != null)
+								dosis = String.valueOf(dosisReferencia
+										.longValue());
+						}
+						break;
+					default:
+						break;
+					}
+				}
+				medicina = servicioMedicina.buscarPorReferencia(idRefD);
+				consulta = servicioConsulta
+						.buscarPorReferencias(idRefC, cedRef);
+				if (medicina != null && consulta != null) {
+					consultaMedicina.setConsulta(consulta);
+					consultaMedicina.setMedicina(medicina);
+					consultaMedicina.setDosis(dosis);
+					consultaMedicina.setRecipe(recipe);
+					consultasMedicina.add(consultaMedicina);
+				}
+			}
+			servicioConsultaMedicina.guardar(consultasMedicina);
+		}
+	}
+
+	protected void importarExamenConsulta() {
+		if (mediaConsultaExamen != null) {
+			XSSFWorkbook workbook = null;
+			try {
+				workbook = new XSSFWorkbook(
+						mediaConsultaExamen.getStreamData());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			Iterator<Row> rowIterator = sheet.iterator();
+			Proveedor proveedor = servicioProveedor.buscar(1);
+			List<ConsultaExamen> consultasExamen = new ArrayList<ConsultaExamen>();
+			while (rowIterator.hasNext()) {
+				Row row = rowIterator.next();
+				Examen examen = new Examen();
+				Consulta consulta = new Consulta();
+				ConsultaExamen consultaExamen = new ConsultaExamen();
+				Double idReferenciaC = (double) 0;
+				long idRefC = 0;
+				Double idReferenciaD = (double) 0;
+				long idRefD = 0;
+				Double cedReferencia = (double) 0;
+				String cedRef = "";
+				Double dosisReferencia = (double) 0;
+				String dosis = "";
+				Iterator<Cell> cellIterator = row.cellIterator();
+				while (cellIterator.hasNext()) {
+					Cell cell = cellIterator.next();
+
+					switch (cell.getColumnIndex()) {
+					case 0:
+						idReferenciaC = cell.getNumericCellValue();
+						if (idReferenciaC != null)
+							idRefC = idReferenciaC.longValue();
+						break;
+					case 1:
+						idReferenciaD = cell.getNumericCellValue();
+						if (idReferenciaD != null)
+							idRefD = idReferenciaD.longValue();
+						break;
+					case 2:
+						if (cell.getCellType() == 1) {
+							cedRef = cell.getStringCellValue();
+						} else {
+							cedReferencia = cell.getNumericCellValue();
+							if (cedReferencia != null)
+								cedRef = String.valueOf(cedReferencia
+										.longValue());
+						}
+						break;
+					case 3:
+						if (cell.getCellType() == 1) {
+							dosis = cell.getStringCellValue();
+						} else {
+							dosisReferencia = cell.getNumericCellValue();
+							if (dosisReferencia != null)
+								dosis = String.valueOf(dosisReferencia
+										.longValue());
+						}
+						break;
+					default:
+						break;
+					}
+				}
+				examen = servicioExamen.buscarPorReferencia(idRefD);
+				consulta = servicioConsulta
+						.buscarPorReferencias(idRefC, cedRef);
+				if (examen != null && consulta != null) {
+					consultaExamen.setConsulta(consulta);
+					consultaExamen.setExamen(examen);
+					consultaExamen.setObservacion(dosis);
+					consultaExamen.setCosto(0);
+					consultaExamen.setProveedor(proveedor);
+					consultaExamen.setPrioridad("1 (Urgente)");
+					consultasExamen.add(consultaExamen);
+				}
+			}
+			servicioConsultaExamen.guardar(consultasExamen);
+		}
+	}
+
+	protected void importarDiagnosticoConsulta() {
+		if (mediaConsultaDiagnostico != null) {
+			System.out.println("entroooooo");
+			XSSFWorkbook workbook = null;
+			try {
+				workbook = new XSSFWorkbook(
+						mediaConsultaDiagnostico.getStreamData());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			Iterator<Row> rowIterator = sheet.iterator();
+			List<ConsultaDiagnostico> consultasDiagnostico = new ArrayList<ConsultaDiagnostico>();
+			while (rowIterator.hasNext()) {
+				Row row = rowIterator.next();
+				Diagnostico diagnostico = new Diagnostico();
+				Consulta consulta = new Consulta();
+				ConsultaDiagnostico consultaDagnostico = new ConsultaDiagnostico();
+				Double idReferenciaC = (double) 0;
+				long idRefC = 0;
+				Double idReferenciaD = (double) 0;
+				long idRefD = 0;
+				Double cedReferencia = (double) 0;
+				String cedRef = "";
+				Iterator<Cell> cellIterator = row.cellIterator();
+				while (cellIterator.hasNext()) {
+					Cell cell = cellIterator.next();
+
+					switch (cell.getColumnIndex()) {
+					case 0:
+						idReferenciaD = cell.getNumericCellValue();
+						if (idReferenciaD != null)
+							idRefD = idReferenciaD.longValue();
+						break;
+					case 1:
+						idReferenciaC = cell.getNumericCellValue();
+						if (idReferenciaC != null)
+							idRefC = idReferenciaC.longValue();
+						break;
+					case 2:
+						if (cell.getCellType() == 1) {
+							System.out.println(cell.getStringCellValue());
+							cedRef = cell.getStringCellValue();
+						} else {
+							cedReferencia = cell.getNumericCellValue();
+							if (cedReferencia != null)
+								cedRef = String.valueOf(cedReferencia
+										.longValue());
+						}
+						break;
+					default:
+						break;
+					}
+				}
+				diagnostico = servicioDiagnostico.buscarPorReferencia(idRefD);
+				consulta = servicioConsulta
+						.buscarPorReferencias(idRefC, cedRef);
+				if (diagnostico != null && consulta != null) {
+					consultaDagnostico.setConsulta(consulta);
+					consultaDagnostico.setDiagnostico(diagnostico);
+					consultaDagnostico.setAccidente(null);
+					consultaDagnostico.setClasificacion("");
+					consultaDagnostico.setLugar("");
+					consultaDagnostico.setMotivo("");
+					consultaDagnostico.setFecha(null);
+					consultaDagnostico.setObservacion("");
+					consultaDagnostico.setTipo("Otro");
+					consultasDiagnostico.add(consultaDagnostico);
+				}
+			}
+			servicioConsultaDiagnostico.guardar(consultasDiagnostico);
+		}
 	}
 
 	protected void importarMedicinas() {
@@ -440,6 +702,7 @@ public class CImportar extends CGenerico {
 
 				Iterator<Cell> cellIterator = row.cellIterator();
 				while (cellIterator.hasNext()) {
+					System.out.println("paso");
 					Cell cell = cellIterator.next();
 
 					switch (cell.getColumnIndex()) {
@@ -488,7 +751,8 @@ public class CImportar extends CGenerico {
 						else {
 							codigoRef = cell.getNumericCellValue();
 							if (codigoRef != null)
-								codigoArea = String.valueOf(codigoRef.longValue());
+								codigoArea = String.valueOf(codigoRef
+										.longValue());
 						}
 						break;
 					default:
@@ -590,27 +854,31 @@ public class CImportar extends CGenerico {
 				String cedRef = "";
 				Double idReferencia = (double) 0;
 				long idRef = 0;
-				Date fecha = new Date();
+				Date fecha2 = new Date();
 				Timestamp fechaReal = null;
 				String enfermedadActual = "";
 				String doctor = "";
 				Iterator<Cell> cellIterator = row.cellIterator();
 				while (cellIterator.hasNext()) {
+					System.out.println("paso1");
 					Cell cell = cellIterator.next();
 
 					switch (cell.getColumnIndex()) {
 					case 0:
-						if (cell.getCellType() == 1)
+						if (cell.getCellType() == 1) {
+							System.out.println(cell.getStringCellValue());
 							cedRef = cell.getStringCellValue();
-						else {
+						} else {
 							cedReferencia = cell.getNumericCellValue();
 							if (cedReferencia != null)
 								cedRef = String.valueOf(cedReferencia
 										.longValue());
 						}
+						break;
 					case 1:
-						fecha = cell.getDateCellValue();
-						fechaReal = new Timestamp(fecha.getTime());
+						System.out.println(cell.getDateCellValue());
+						fecha2 = cell.getDateCellValue();
+						fechaReal = new Timestamp(fecha2.getTime());
 						break;
 					case 3:
 						enfermedadActual = cell.getStringCellValue();
@@ -777,12 +1045,62 @@ public class CImportar extends CGenerico {
 		mostrarConsulta();
 	}
 
+	@Listen("onUpload = #btnImportarExamenConsulta")
+	public void cargarExamenConsulta(UploadEvent event) {
+		mediaConsultaExamen = event.getMedia();
+		lblNombreExamenConsulta.setValue(mediaConsultaExamen.getName());
+		final A rm = new A("Remover");
+		rm.addEventListener(Events.ON_CLICK,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
+					public void onEvent(Event event) throws Exception {
+						lblNombreExamenConsulta.setValue("");
+						rm.detach();
+						mediaConsultaExamen = null;
+					}
+				});
+		rowConsultaExamen.appendChild(rm);
+	}
+
+	@Listen("onUpload = #btnImportarDiagnosticoConsulta")
+	public void cargarDiagnosticoConsulta(UploadEvent event) {
+		mediaConsultaDiagnostico = event.getMedia();
+		lblNombreDiagnosticoConsulta.setValue(mediaConsultaDiagnostico
+				.getName());
+		final A rm = new A("Remover");
+		rm.addEventListener(Events.ON_CLICK,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
+					public void onEvent(Event event) throws Exception {
+						lblNombreDiagnosticoConsulta.setValue("");
+						rm.detach();
+						mediaConsultaDiagnostico = null;
+					}
+				});
+		rowConsultaDiagnostico.appendChild(rm);
+	}
+
+	@Listen("onUpload = #btnImportarMedicinaConsulta")
+	public void cargarMedicinaConsulta(UploadEvent event) {
+		mediaConsultaMedicina = event.getMedia();
+		lblNombreMedicinaConsulta.setValue(mediaConsultaMedicina.getName());
+		final A rm = new A("Remover");
+		rm.addEventListener(Events.ON_CLICK,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
+					public void onEvent(Event event) throws Exception {
+						lblNombreMedicinaConsulta.setValue("");
+						rm.detach();
+						mediaConsultaMedicina = null;
+					}
+				});
+		rowConsultaMedicina.appendChild(rm);
+	}
+
 	public void mostrarConsulta() {
 		if (lblNombreArea.getValue().compareTo("") != 0
 				&& lblNombreDiagnostico.getValue().compareTo("") != 0
 				&& lblNombreExamen.getValue().compareTo("") != 0
 				&& lblNombreMedicina.getValue().compareTo("") != 0
-				&& lblNombrePaciente.getValue().compareTo("") != 0)
+		// && lblNombrePaciente.getValue().compareTo("") != 0
+		)
 			rowConsulta.setVisible(true);
 		else
 			rowConsulta.setVisible(false);

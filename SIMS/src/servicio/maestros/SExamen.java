@@ -93,4 +93,8 @@ public class SExamen {
 	public void guardarVarios(List<Examen> examenes) {
 		examenDAO.save(examenes);
 	}
+
+	public Examen buscarPorReferencia(long idRefD) {
+		return examenDAO.findByIdReferencia(idRefD);
+	}
 }

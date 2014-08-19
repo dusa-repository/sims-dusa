@@ -36,8 +36,11 @@ public class Reportero extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		CConsulta consulta = new CConsulta();
 		ServletOutputStream out;
+		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
-		Long part2 = Long.parseLong(request.getParameter("valor2"));
+		String part21 = request.getParameter("valor2");
+		if(part21!=null)
+			part2 = Long.parseLong(part21);
 		String par3 = request.getParameter("valor3");
 		String partecita4 = request.getParameter("valor4");
 		String partecita5 = request.getParameter("valor5");
@@ -66,7 +69,7 @@ public class Reportero extends HttpServlet {
 				fichero = consulta.reporteConsulta(part2);
 				break;
 			case "6":
-				fichero = consulta.reporteConsultaHistorico(part2);
+				fichero = consulta.reporteConsultaHistorico(par3);
 				break;
 			case "7":
 				fichero = consulta.reporteReposo(part2);

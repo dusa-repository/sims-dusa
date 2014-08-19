@@ -86,4 +86,8 @@ public class SDiagnostico {
 		System.out.println(diagnosticos.size());
 		diagnosticoDAO.save(diagnosticos);
 	}
+
+	public Diagnostico buscarPorReferencia(long idRefD) {
+		return diagnosticoDAO.findByIdReferencia(idRefD);
+	}
 }
