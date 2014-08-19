@@ -66,12 +66,13 @@ public class SExamen {
 	}
 
 	public List<Examen> buscarDisponibles(Consulta consulta) {
-		List<ConsultaExamen> consultasExamen = consultaExamenDAO.findByConsulta(consulta);
+		List<ConsultaExamen> consultasExamen = consultaExamenDAO
+				.findByConsulta(consulta);
 		List<Long> ids = new ArrayList<Long>();
-		if(consultasExamen.isEmpty())
+		if (consultasExamen.isEmpty())
 			return examenDAO.findAll();
-		else{
-			for(int i=0; i<consultasExamen.size();i++){
+		else {
+			for (int i = 0; i < consultasExamen.size(); i++) {
 				ids.add(consultasExamen.get(i).getExamen().getIdExamen());
 			}
 			return examenDAO.findByIdExamenNotIn(ids);
@@ -87,5 +88,9 @@ public class SExamen {
 		if (id != 0)
 			return examenDAO.findOne(id);
 		return null;
+	}
+
+	public void guardarVarios(List<Examen> examenes) {
+		examenDAO.save(examenes);
 	}
 }

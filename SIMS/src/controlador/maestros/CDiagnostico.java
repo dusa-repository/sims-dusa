@@ -131,7 +131,7 @@ public class CDiagnostico extends CGenerico {
 									.getSelectedItem().getContext()));
 					Diagnostico diagnostico = new Diagnostico(id, codigo,
 							fechaHora, grupo, horaAuditoria, nombre,
-							horaAuditoria, categoria, epi);
+							nombreUsuarioSesion(), categoria, epi);
 					servicioDiagnostico.guardar(diagnostico);
 					if (consulta) {
 						if (id != 0)

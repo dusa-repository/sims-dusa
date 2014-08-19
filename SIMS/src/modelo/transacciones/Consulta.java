@@ -202,7 +202,13 @@ public class Consulta implements Serializable {
 	private String condicionApto;
 	
 	@Column(name = "id_referencia")
-	private long idReferencia;
+	private Long idReferencia;
+	
+	@Column(length=100, name = "cedula_referencia")
+	private String cedulaReferencia;
+	
+	@Column(length=256, name = "doctor")
+	private String doctor;
 
 	public Consulta() {
 		super();
@@ -223,7 +229,7 @@ public class Consulta implements Serializable {
 			Boolean ritmico2, Boolean ritmico3, Cargo cargo,
 			Cargo cargoDeseado, Area area, Area areaDeseada, boolean apto,
 			boolean reposo, String tipoConsultaSecundaria, String examenPre,
-			Integer dias, String condicion) {
+			Integer dias, String condicion, String doctor) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
@@ -270,6 +276,7 @@ public class Consulta implements Serializable {
 		this.examenPreempleo = examenPre;
 		this.diasReposo = dias;
 		this.condicionApto = condicion;
+		this.doctor = doctor;
 	}
 
 	public long getIdConsulta() {
@@ -693,12 +700,28 @@ public class Consulta implements Serializable {
 		return String.valueOf(formatoFecha.format(fechaConsulta));
 	}
 
-	public long getIdReferencia() {
+	public Long getIdReferencia() {
 		return idReferencia;
 	}
 
-	public void setIdReferencia(long idReferencia) {
+	public void setIdReferencia(Long idReferencia) {
 		this.idReferencia = idReferencia;
+	}
+
+	public String getCedulaReferencia() {
+		return cedulaReferencia;
+	}
+
+	public void setCedulaReferencia(String cedulaReferencia) {
+		this.cedulaReferencia = cedulaReferencia;
+	}
+
+	public String getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(String doctor) {
+		this.doctor = doctor;
 	}
 
 }

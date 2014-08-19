@@ -956,7 +956,7 @@ public class CConsulta extends CGenerico {
 							extra2, extra3, ritmico, ritmico1, ritmico2,
 							ritmico3, paciente.getCargoReal(), cargoDeseado,
 							paciente.getArea(), areaDeseado, apto, reposo,
-							tipoSecundaria, examenesPre, dias, condicionApto);
+							tipoSecundaria, examenesPre, dias, condicionApto, nombreUsuarioSesion());
 					servicioConsulta.guardar(consulta);
 					Consulta consultaDatos = new Consulta();
 					if (idConsulta != 0)

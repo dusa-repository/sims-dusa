@@ -85,4 +85,8 @@ public class SMedicina {
 			return medicinaDAO.findByIdMedicinaNotIn(ids);
 		}
 	}
+
+	public void guardarVarios(List<Medicina> medicinas) {
+		medicinaDAO.save(medicinas);
+	}
 }
