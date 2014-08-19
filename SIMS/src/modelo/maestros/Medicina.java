@@ -86,6 +86,9 @@ public class Medicina implements Serializable {
 	@OneToMany(mappedBy = "medicina")
 	private Set<ConsultaMedicina> medicinas;
 
+	@Column(name = "id_referencia")
+	private long idReferencia;
+	
 	public Medicina() {
 	}
 
@@ -272,6 +275,14 @@ public class Medicina implements Serializable {
 		presentacion.setMedicina(null);
 
 		return presentacion;
+	}
+
+	public long getIdReferencia() {
+		return idReferencia;
+	}
+
+	public void setIdReferencia(long idReferencia) {
+		this.idReferencia = idReferencia;
 	}
 
 }

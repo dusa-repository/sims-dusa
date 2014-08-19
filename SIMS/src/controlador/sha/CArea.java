@@ -33,6 +33,8 @@ public class CArea extends CGenerico {
 	@Wire
 	private Textbox txtNombreArea;
 	@Wire
+	private Textbox txtCodigoArea;
+	@Wire
 	private Button btnBuscarArea;
 	@Wire
 	private Div catalogoArea;
@@ -68,16 +70,18 @@ public class CArea extends CGenerico {
 			@Override
 			public void limpiar() {
 				txtNombreArea.setValue("");
+				txtCodigoArea.setValue("");
 				id = 0;
-				txtNombreArea.setFocus(true);
+				txtCodigoArea.setFocus(true);
 			}
 
 			@Override
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombreArea.getValue();
-					Area area = new Area(id, nombre, fechaHora, horaAuditoria,
-							nombreUsuarioSesion());
+					String codigo = txtCodigoArea.getValue();
+					Area area = new Area(id, codigo, nombre, fechaHora,
+							horaAuditoria, nombreUsuarioSesion());
 					servicioArea.guardar(area);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
@@ -129,7 +133,8 @@ public class CArea extends CGenerico {
 
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (txtNombreArea.getText().compareTo("") == 0) {
+		if (txtNombreArea.getText().compareTo("") == 0
+				|| txtCodigoArea.getText().compareTo("") == 0) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
@@ -180,9 +185,18 @@ public class CArea extends CGenerico {
 			llenarCampos(area);
 	}
 
+	/* Busca si existe un area con el mismo nombre escrito */
+	@Listen("onChange = #txtCodigoArea")
+	public void buscarPorCodigo() {
+		Area area = servicioArea.buscarPorCodigo(txtCodigoArea.getValue());
+		if (area != null)
+			llenarCampos(area);
+	}
+
 	/* LLena los campos del formulario dado un area */
 	private void llenarCampos(Area area) {
 		txtNombreArea.setValue(area.getNombre());
+		txtCodigoArea.setValue(area.getCodigo());
 		id = area.getIdArea();
 	}
 

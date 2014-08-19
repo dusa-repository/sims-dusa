@@ -16,4 +16,6 @@ public interface IAreaDAO extends JpaRepository<Area, Long> {
 	@Query("select a from Area a order by a.nombre asc")
 	List<Area> findAllOrderByNombreAsc();
 
+	Area findByCodigo(String value);
+
 }

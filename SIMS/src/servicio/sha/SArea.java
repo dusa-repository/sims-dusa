@@ -38,4 +38,8 @@ public class SArea {
 	public Area buscarPorNombre(String value) {
 		return areaDAO.findByNombre(value);
 	}
+
+	public Area buscarPorCodigo(String value) {
+		return areaDAO.findByCodigo(value);
+	}
 }

@@ -200,6 +200,9 @@ public class Consulta implements Serializable {
 	
 	@Column(name = "condicion_apto",length=100)
 	private String condicionApto;
+	
+	@Column(name = "id_referencia")
+	private long idReferencia;
 
 	public Consulta() {
 		super();
@@ -688,6 +691,14 @@ public class Consulta implements Serializable {
 	public String traerFecha() {
 		DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 		return String.valueOf(formatoFecha.format(fechaConsulta));
+	}
+
+	public long getIdReferencia() {
+		return idReferencia;
+	}
+
+	public void setIdReferencia(long idReferencia) {
+		this.idReferencia = idReferencia;
 	}
 
 }
