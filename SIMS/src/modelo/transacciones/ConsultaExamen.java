@@ -32,7 +32,7 @@ public class ConsultaExamen {
 	@JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor")
 	private Proveedor proveedor;
 	
-	@Column(length=100)
+	@Column(length=300)
 	private String observacion;
 	
 	@Column(name="costo")

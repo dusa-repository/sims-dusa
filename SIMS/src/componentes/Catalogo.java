@@ -89,7 +89,7 @@ public abstract class Catalogo<Clase> extends Window {
 			}
 		});
 		lsbCatalogo.setWidth("100%");
-		lsbCatalogo.setSpan(true);
+		lsbCatalogo.setSpan("true");
 		this.appendChild(separador1);
 		this.appendChild(hbxBusqueda);		
 		lblBuscar.setValue("   Buscar Por :  ");

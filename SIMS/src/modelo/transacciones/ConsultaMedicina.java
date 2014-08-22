@@ -32,7 +32,7 @@ public class ConsultaMedicina {
 	@JoinColumn(name = "id_recipe", referencedColumnName = "id_recipe")
 	private Recipe recipe;
 	
-	@Column(length=100)
+	@Column(length=1000)
 	private String dosis;
 
 	public ConsultaMedicina() {

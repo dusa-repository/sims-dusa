@@ -557,7 +557,7 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbDiagnosticos" height="450px" width="100%"
+										<listbox mold="paging" pageSize="15" id="ltbDiagnosticos" height="450px" width="100%"
 											emptyMessage="No hay Diagnosticos Registrados">
 											<listhead>
 												<listheader label="Diagnostico" width="100%" />
@@ -739,7 +739,7 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbMedicinas" height="450px" width="100%"
+										<listbox mold="paging" pageSize="15" id="ltbMedicinas" height="450px" width="100%"
 											emptyMessage="No hay Medicinas Registradas">
 											<listhead>
 												<listheader label="Medicina" width="100%" />
@@ -840,7 +840,7 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbExamenes" height="450px" width="100%"
+										<listbox mold="paging" pageSize="15" id="ltbExamenes" height="450px" width="100%"
 											emptyMessage="No hay Examenes Registrados">
 											<listhead>
 												<listheader label="Examen" width="100%" />
@@ -949,7 +949,7 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbEspecialistas" height="450px" width="100%"
+										<listbox mold="paging" pageSize="15" id="ltbEspecialistas" height="450px" width="100%"
 											emptyMessage="No hay Especialistas Registrados">
 											<listhead>
 												<listheader label="Especialista" width="60%" />
@@ -1060,7 +1060,7 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox id="ltbServicioExterno" height="450px" width="100%"
+										<listbox mold="paging" pageSize="15" id="ltbServicioExterno" height="450px" width="100%"
 											emptyMessage="No hay Estudios Externos Registrados">
 											<listhead>
 												<listheader label="Estudio Externo" width="100%" />
