@@ -81,7 +81,7 @@
 						</hbox>
 						<separator />
 						<hbox>
-							<listbox id="ltbEstudios" height="250px" width="220px"
+							<listbox mold="paging" pageSize="10" id="ltbEstudios" height="250px" width="220px"
 								emptyMessage="No hay Estudios Registrados">
 								<listhead>
 									<listheader label="Estudio" width="100%" />
@@ -154,7 +154,7 @@
 						</hbox>
 						<separator />
 						<hbox>
-							<listbox id="ltbExamen" height="250px" width="220px"
+							<listbox mold="paging" pageSize="10" id="ltbExamen" height="250px" width="220px"
 								emptyMessage="No hay Examenes Registrados">
 								<listhead>
 									<listheader label="Examen" width="100%" />

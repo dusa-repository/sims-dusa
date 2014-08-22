@@ -55,6 +55,8 @@ public class Mensaje {
 	public static String pacienteFallecido = "El Representante del Paciente en la Empresa ha fallecido y la Fecha es Mayor a un Año, Ferifique si Cumple los Requisitos para Permanecer Activo";
 	public static String archivoExcel = "Los Archivos deben ser de Tipo .xls";
 	public static String guardadosArchivos ="La Data ha sido Guardada Exitosamente";
+	public static String guardadosAlgunosArchivos = "Alguna Data estaba mal estructurada por lo tanto no pudo ser guardada toda correctamente";
+	
 
 	public void mensajeInformacion(String msj) {
 		Messagebox.show(msj, "Informacion", Messagebox.OK,
