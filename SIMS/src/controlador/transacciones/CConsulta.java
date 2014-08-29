@@ -956,7 +956,9 @@ public class CConsulta extends CGenerico {
 							extra2, extra3, ritmico, ritmico1, ritmico2,
 							ritmico3, paciente.getCargoReal(), cargoDeseado,
 							paciente.getArea(), areaDeseado, apto, reposo,
-							tipoSecundaria, examenesPre, dias, condicionApto, nombreUsuarioSesion());
+							tipoSecundaria, examenesPre, dias, condicionApto,
+							usuario.getPrimerNombre() + " "
+									+ usuario.getPrimerApellido());
 					servicioConsulta.guardar(consulta);
 					Consulta consultaDatos = new Consulta();
 					if (idConsulta != 0)
@@ -2173,8 +2175,7 @@ public class CConsulta extends CGenerico {
 					botonera.getChildren().get(0).setVisible(false);
 					Consulta consulta = listItem.getValue();
 					idConsulta = consulta.getIdConsulta();
-					idPaciente = consulta.getPaciente()
-							.getCedula();
+					idPaciente = consulta.getPaciente().getCedula();
 					llenarCamposConsulta(consulta);
 					llenarCampos(consulta.getPaciente());
 					llenarListas();

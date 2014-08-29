@@ -39,12 +39,12 @@
 				</rows>
 			</grid>
 			<separator />
-			<tabbox height="auto" id="taxConsulta" orient="horizontal">
-				<tabs id="tbsConsulta" width="auto">
-					<tab label="Identificacion" id="tabIdentificacion" />
-					<tab label="Consulta" id="tabConsulta" />
-					<tab label="Historial de Consultas" id="tabHistoriasMedicas" />
-					<tab label="Historia Medica" id="tabAntecedentes" />
+			<tabbox width="100%" height="auto" id="taxConsulta" orient="horizontal">
+				<tabs id="tbsConsulta" width="100%">
+					<tab label="Identificacion" id="tabIdentificacion"/>
+					<tab label="Consulta" id="tabConsulta"/>
+					<tab label="Historial de Consultas" id="tabHistoriasMedicas"/>
+					<tab label="Historia Medica" id="tabAntecedentes"/>
 				</tabs>
 				<tabpanels>
 					<tabpanel>
@@ -557,8 +557,8 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbDiagnosticos" height="450px" width="100%"
-											emptyMessage="No hay Diagnosticos Registrados">
+										<listbox mold="paging" pageSize="15" id="ltbDiagnosticos"
+											height="450px" width="100%" emptyMessage="No hay Diagnosticos Registrados">
 											<listhead>
 												<listheader label="Diagnostico" width="100%" />
 											</listhead>
@@ -739,8 +739,8 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbMedicinas" height="450px" width="100%"
-											emptyMessage="No hay Medicinas Registradas">
+										<listbox mold="paging" pageSize="15" id="ltbMedicinas"
+											height="450px" width="100%" emptyMessage="No hay Medicinas Registradas">
 											<listhead>
 												<listheader label="Medicina" width="100%" />
 											</listhead>
@@ -840,8 +840,8 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbExamenes" height="450px" width="100%"
-											emptyMessage="No hay Examenes Registrados">
+										<listbox mold="paging" pageSize="15" id="ltbExamenes"
+											height="450px" width="100%" emptyMessage="No hay Examenes Registrados">
 											<listhead>
 												<listheader label="Examen" width="100%" />
 											</listhead>
@@ -949,8 +949,8 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbEspecialistas" height="450px" width="100%"
-											emptyMessage="No hay Especialistas Registrados">
+										<listbox mold="paging" pageSize="15" id="ltbEspecialistas"
+											height="450px" width="100%" emptyMessage="No hay Especialistas Registrados">
 											<listhead>
 												<listheader label="Especialista" width="60%" />
 												<listheader label="Especialidad" width="40%" />
@@ -1060,8 +1060,8 @@
 									</hbox>
 									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbServicioExterno" height="450px" width="100%"
-											emptyMessage="No hay Estudios Externos Registrados">
+										<listbox mold="paging" pageSize="15" id="ltbServicioExterno"
+											height="450px" width="100%" emptyMessage="No hay Estudios Externos Registrados">
 											<listhead>
 												<listheader label="Estudio Externo" width="100%" />
 											</listhead>
@@ -1298,52 +1298,55 @@
 						</tabbox>
 						<div id="botoneraConsulta" />
 					</tabpanel>
-					<tabpanel>
-						<hbox widths="90%,10%">
-							<listbox id="ltbConsultas" span="true" height="480px"
-								width="100%" emptyMessage="El Paciente no posee Consultas Registradas">
-								<listhead>
-									<listheader label="Fecha" hflex="min" />
-									<listheader label="Doctor" hflex="min" />
-									<listheader label="Motivo de Consulta" hflex="min" />
-									<listheader label="Enfermedad Actual" hflex="min" />
-									<listheader label="Tipo de Consulta" hflex="min" />
-									<listheader label="SubTipo de Consulta" hflex="min" />
-									<listheader label="id" visible="false" />
-								</listhead>
-								<template name="model">
-									<listitem>
-										<listcell label="${each.traerFecha()}">
-										</listcell>
-										<listcell label="${each.horaAuditoria}">
-										</listcell>
-										<listcell label="${each.motivoConsulta}">
-										</listcell>
-										<listcell label="${each.enfermedadActual}">
-										</listcell>
-										<listcell label="${each.tipoConsulta}">
-										</listcell>
-										<listcell label="${each.tipoConsultaSecundaria}">
-										</listcell>
-										<listcell>
-											<spinner value="${each.idConsulta}" width="98%"
-												visible="false" disabled="true" />
-										</listcell>
-									</listitem>
-								</template>
-							</listbox>
+					<tabpanel style="overflow-x:scroll;" width="100%">
+						<hbox width="100%" widths="90%,10%">
+							<div width="100%">
+								<listbox span="true" hflex="1" mold="paging" autopaging="true" pagingPosition="bottom"
+									id="ltbConsultas" height="350px" width="80%"
+									emptyMessage="El Paciente no posee Consultas Registradas">
+									<listhead>
+										<listheader label="Fecha" hflex="min" />
+										<listheader label="Doctor" hflex="min" />
+										<listheader label="Motivo de Consulta" hflex="min" />
+										<listheader label="Enfermedad Actual" hflex="min" />
+										<listheader label="Tipo de Consulta" hflex="min" />
+										<listheader label="SubTipo de Consulta" hflex="min" />
+										<listheader label="id" visible="false" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.traerFecha()}">
+											</listcell>
+											<listcell label="${each.horaAuditoria}">
+											</listcell>
+											<listcell label="${each.motivoConsulta}">
+											</listcell>
+											<listcell label="${each.enfermedadActual}">
+											</listcell>
+											<listcell label="${each.tipoConsulta}">
+											</listcell>
+											<listcell label="${each.tipoConsultaSecundaria}">
+											</listcell>
+											<listcell>
+												<spinner value="${each.idConsulta}" width="98%"
+													visible="false" disabled="true" />
+											</listcell>
+										</listitem>
+									</template>
+								</listbox>
+							</div>
 							<vbox width="100%">
 								<button autodisable="self" label="Ver Consulta" id="btnVerConsulta"
 									image="/public/imagenes/botones/ver.png"
 									tooltiptext="Seleccione una consulta y presione este boton para ver el detalle de la consulta"
-									hflex="1" height="35px" class="btn" />
+									hflex="1" height="40px" class="btn" />
 								<button autodisable="self" label="Reporte Consulta" id="btnReporteConsulta"
 									image="/public/imagenes/botones/generar.png"
 									tooltiptext="Seleccione una consulta y presione este boton para generar el reporte de la consulta"
-									hflex="1" height="35px" class="btn" />
+									hflex="1" height="40px" class="btn" />
 								<button autodisable="self" id="btnVerResultado" label="Agregar Resultados"
 									sclass="btn" image="/public/imagenes/botones/agregar.png"
-									hflex="1" height="35px" />
+									hflex="1" height="40px" />
 							</vbox>
 						</hbox>
 					</tabpanel>
