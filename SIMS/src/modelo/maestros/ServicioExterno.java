@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import modelo.transacciones.ConsultaServicioExterno;
 
 @Entity
-@Table(name="servicio_externo")
+@Table(name="servicio_externo", schema="dusa_sims.dbo")
 public class ServicioExterno implements Serializable {
 
 	private static final long serialVersionUID = 269284669873250302L;

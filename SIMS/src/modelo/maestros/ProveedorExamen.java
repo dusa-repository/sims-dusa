@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import modelo.pk.ProveedorExamenId;
 
 @Entity
-@Table(name = "proveedor_examen")
+@Table(name = "proveedor_examen", schema="dusa_sims.dbo")
 @IdClass(ProveedorExamenId.class)
 public class ProveedorExamen {
 

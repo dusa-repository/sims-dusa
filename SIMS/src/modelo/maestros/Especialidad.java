@@ -20,7 +20,7 @@ import modelo.seguridad.Usuario;
  * 
  */
 @Entity
-@Table(name="especialidad")
+@Table(name="especialidad", schema="dusa_sims.dbo")
 public class Especialidad implements Serializable {
 	private static final long serialVersionUID = 1L;
 

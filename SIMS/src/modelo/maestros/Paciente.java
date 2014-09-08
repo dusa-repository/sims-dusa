@@ -27,7 +27,7 @@ import org.hibernate.annotations.Type;
  * 
  */
 @Entity
-@Table(name="paciente")
+@Table(name="paciente", schema="dusa_sims.dbo")
 public class Paciente implements Serializable {
 	private static final long serialVersionUID = 1L;
 

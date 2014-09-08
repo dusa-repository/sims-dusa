@@ -13,7 +13,7 @@ import modelo.maestros.ParteCuerpo;
 import modelo.pk.ConsultaParteCuerpoId;
 
 @Entity
-@Table(name = "consulta_parte_cuerpo")
+@Table(name = "consulta_parte_cuerpo", schema="dusa_sims.dbo")
 @IdClass(ConsultaParteCuerpoId.class)
 public class ConsultaParteCuerpo {
 	

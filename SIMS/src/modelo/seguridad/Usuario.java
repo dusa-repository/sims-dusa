@@ -28,7 +28,7 @@ import org.hibernate.annotations.Type;
  * 
  */
 @Entity
-@Table(name="usuario")
+@Table(name="usuario", schema="dusa_sims.dbo")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -117,7 +117,7 @@ public class Usuario implements Serializable {
 
 	@ManyToMany
 	@JoinTable(
-		name="grupo_usuario"
+		name="grupo_usuario", schema="dusa_sims.dbo"
 		, joinColumns={
 			@JoinColumn(name="id_usuario", nullable=false)
 			}

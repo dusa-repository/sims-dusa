@@ -22,7 +22,7 @@ import modelo.seguridad.Usuario;
  * 
  */
 @Entity
-@Table(name="cita")
+@Table(name="cita", schema="dusa_sims.dbo")
 public class Cita implements Serializable {
 	private static final long serialVersionUID = 1L;
 

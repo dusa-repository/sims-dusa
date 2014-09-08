@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "nomina")
+@Table(name = "nomina", schema="dusa_sims.dbo")
 public class Nomina implements Serializable {
 
 	private static final long serialVersionUID = 2784782575138871908L;
@@ -37,6 +37,9 @@ public class Nomina implements Serializable {
 	
 	@OneToMany(mappedBy = "nomina")
 	private Set<Paciente> pacientes;
+
+	@OneToMany(mappedBy="nomina")
+	private Set<EmpresaNomina> empresasNominas;
 
 	public Nomina(long idNomina, String nombre, Timestamp fechaAuditoria,
 			String horaAuditoria, String usuarioAuditoria) {
@@ -99,6 +102,14 @@ public class Nomina implements Serializable {
 
 	public void setPacientes(Set<Paciente> pacientes) {
 		this.pacientes = pacientes;
+	}
+
+	public Set<EmpresaNomina> getEmpresasNominas() {
+		return empresasNominas;
+	}
+
+	public void setEmpresasNominas(Set<EmpresaNomina> empresasNominas) {
+		this.empresasNominas = empresasNominas;
 	}
 
 }

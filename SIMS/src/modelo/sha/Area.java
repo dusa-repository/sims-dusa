@@ -15,7 +15,7 @@ import modelo.maestros.Paciente;
 import modelo.transacciones.Consulta;
 
 @Entity
-@Table(name="area")
+@Table(name="area", schema="dusa_sims.dbo")
 public class Area implements Serializable {
 
 	private static final long serialVersionUID = 2545006923709588765L;

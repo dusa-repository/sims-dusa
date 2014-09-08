@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import modelo.maestros.Accidente;
 
 @Entity
-@Table(name="clasificacion_accidente")
+@Table(name="clasificacion_accidente", schema="dusa_sims.dbo")
 public class ClasificacionAccidente implements Serializable {
 
 	private static final long serialVersionUID = 2255744639671891059L;

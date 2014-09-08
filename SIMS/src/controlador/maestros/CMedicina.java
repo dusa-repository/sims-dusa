@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import modelo.inventario.F4101;
 import modelo.maestros.CategoriaMedicina;
 import modelo.maestros.Laboratorio;
 import modelo.maestros.Medicina;
@@ -121,6 +122,7 @@ public class CMedicina extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
+		System.out.println(servicioF4101.buscarTodosOrdenados().size());
 		contenido = (Include) divMedicina.getParent();
 		Tabbox tabox = (Tabbox) divMedicina.getParent().getParent().getParent()
 				.getParent();
@@ -235,6 +237,7 @@ public class CMedicina extends CGenerico {
 							cConsulta.recibirMedicina(medicinaConsulta,
 									listaConsulta);
 						}
+						guardarInventario(nombre);
 						msj.mensajeInformacion(Mensaje.guardado);
 						limpiar();
 					} else {
@@ -685,5 +688,52 @@ public class CMedicina extends CGenerico {
 		ltbPresentaciones.setCheckmark(false);
 		ltbPresentaciones.setMultiple(true);
 		ltbPresentaciones.setCheckmark(true);
+	}
+
+	protected void guardarInventario(String nombre) {
+		F4101 f4101 = new F4101();
+		f4101.setImitm(nextNumber("4", "JE"));
+		f4101.setImlitm("sims");
+		f4101.setImdsc1(nombre);
+		f4101.setImuom1("02");
+		f4101.setImstkt("1");
+		f4101.setImdsc2("");
+		f4101.setImsrtx("");
+		f4101.setImglpt("");
+		f4101.setImlnty("");
+		f4101.setImbpfg("");
+		f4101.setImclev("");
+		f4101.setImplev("");
+		f4101.setImpplv("");
+		f4101.setImpmth("");
+		f4101.setImcmeth("");
+		f4101.setImcmgl("");
+		f4101.setIminmg("");
+		f4101.setImifla("");
+		f4101.setImtfla("");
+		f4101.setImprgr("");
+		f4101.setImrprc("");
+		f4101.setImorpr("");
+		f4101.setImdsgp("");
+		f4101.setImuom2("");
+		f4101.setImuom3("");
+		f4101.setImuom4("");
+		f4101.setImuom6("");
+		f4101.setImuom8("");
+		f4101.setImuom9("");
+		f4101.setImuwum("");
+		f4101.setImuvm1("");
+		f4101.setImsrnr("");
+		f4101.setImlots("");
+		f4101.setImsrce("");
+		f4101.setImcmdm("");
+		f4101.setImlecm("");
+		f4101.setImback("N");
+		f4101.setImckav("N");
+		f4101.setImxdck("N");
+		f4101.setImdual("N");
+		f4101.setImdppo("N");
+		System.out.println("entro");
+		servicioF4101.guardar(f4101);
 	}
 }

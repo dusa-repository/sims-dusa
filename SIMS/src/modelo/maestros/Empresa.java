@@ -19,7 +19,7 @@ import modelo.sha.Informe;
  * 
  */
 @Entity
-@Table(name = "empresa")
+@Table(name = "empresa", schema="dusa_sims.dbo")
 public class Empresa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -146,6 +146,9 @@ public class Empresa implements Serializable {
 	@OneToMany(mappedBy = "empresaB")
 	private Set<Informe> informesB;
 
+	@OneToMany(mappedBy="empresa")
+	private Set<EmpresaNomina> empresasNominas;
+	
 	public Empresa() {
 	}
 
@@ -481,6 +484,14 @@ public class Empresa implements Serializable {
 
 	public void setInformesB(Set<Informe> informesB) {
 		this.informesB = informesB;
+	}
+
+	public Set<EmpresaNomina> getEmpresasNominas() {
+		return empresasNominas;
+	}
+
+	public void setEmpresasNominas(Set<EmpresaNomina> empresasNominas) {
+		this.empresasNominas = empresasNominas;
 	}
 
 	

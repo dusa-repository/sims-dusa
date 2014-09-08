@@ -17,8 +17,10 @@ http://www.springframework.org/schema/data/jpa http://www.springframework.org/sc
 	<mvc:annotation-driven />
 	<aop:config proxy-target-class="true" />
 	<context:component-scan base-package="servicio" />
-	<jpa:repositories base-package="interfacedao" />
+	<jpa:repositories base-package="interfacedao" entity-manager-factory-ref="entityManagerFactory"/>
+	<jpa:repositories base-package="interfacedaoInventario" entity-manager-factory-ref="entityManagerFactory2"/>
 	<import resource="classpath:/META-INF/ConfiguracionSeguridad.xml" />
 	<import resource="classpath:/META-INF/ConfiguracionBaseDatos.xml" />
+	<import resource="classpath:/META-INF/ConfiguracionBaseDatosInventario.xml" />
 	<import resource="classpath:/META-INF/PropiedadesBaseDatos.xml" />
 </beans>

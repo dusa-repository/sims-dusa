@@ -19,7 +19,7 @@ import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaServicioExterno;
 
 @Entity
-@Table(name="proveedor")
+@Table(name="proveedor", schema="dusa_sims.dbo")
 public class Proveedor implements Serializable {
 
 	private static final long serialVersionUID = 4881695044311813270L;

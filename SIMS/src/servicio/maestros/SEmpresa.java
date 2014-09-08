@@ -51,4 +51,11 @@ public class SEmpresa {
 	public Empresa buscarPorRif(String value) {
 		return empresaDAO.findByRif(value);
 	}
+
+	public Empresa buscarUltima() {
+		long id = empresaDAO.findMaxIdEmpresa();
+		if (id != 0)
+			return empresaDAO.findOne(id);
+		return null;
+	}
 }

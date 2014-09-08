@@ -116,9 +116,10 @@ public class CImportar extends CGenerico {
 	private Media mediaConsultaDiagnostico;
 	private Media mediaPaciente;
 	private boolean errorGeneral = false;
-	private String archivoConErrores = "El siguiente archivo no pudo ser importado correctamente ya que tiene errores de estructura.";
 	private String archivoVacio = "El siguiente archivo no posee registros, por lo tanto no fue importado.";
-	private boolean mostrarGuardado = false;
+	private String archivoConError = "Existe un error en el siguiente archivo adjunto: ";
+	private String errorLongitud = "La siguiente ubicacion excede el limite establecido de longitud:";
+	private String valorNoEncontrado = "Valor no encontrado, ";
 
 	@Override
 	public void inicializar() throws IOException {
@@ -154,31 +155,59 @@ public class CImportar extends CGenerico {
 
 			@Override
 			public void limpiar() {
-				errorGeneral = false;
+				if (rowArea.getChildren().size() == 4) {
+					A linea = (A) rowArea.getChildren().get(3);
+					Events.postEvent("onClick", linea, null);
+				}
+				if (rowConsulta.getChildren().size() == 4) {
+					A linea = (A) rowConsulta.getChildren().get(3);
+					Events.postEvent("onClick", linea, null);
+				}
+				if (rowConsultaDiagnostico.getChildren().size() == 4) {
+					A linea = (A) rowConsultaDiagnostico.getChildren().get(3);
+					Events.postEvent("onClick", linea, null);
+				}
+				if (rowConsultaExamen.getChildren().size() == 4) {
+					A linea = (A) rowConsultaExamen.getChildren().get(3);
+					Events.postEvent("onClick", linea, null);
+				}
+				if (rowConsultaMedicina.getChildren().size() == 4) {
+					A linea = (A) rowConsultaMedicina.getChildren().get(3);
+					Events.postEvent("onClick", linea, null);
+				}
+				if (rowDiagnostico.getChildren().size() == 4) {
+					A linea = (A) rowDiagnostico.getChildren().get(3);
+					Events.postEvent("onClick", linea, null);
+				}
+				if (rowExamen.getChildren().size() == 4) {
+					A linea = (A) rowExamen.getChildren().get(3);
+					Events.postEvent("onClick", linea, null);
+				}
+				if (rowMedicina.getChildren().size() == 4) {
+					A linea = (A) rowMedicina.getChildren().get(3);
+					Events.postEvent("onClick", linea, null);
+				}
+				if (rowPaciente.getChildren().size() == 4) {
+					A linea = (A) rowPaciente.getChildren().get(3);
+					Events.postEvent("onClick", linea, null);
+				}
 			}
 
 			@Override
 			public void guardar() {
-				if (validar()) {
-					importarDiagnosticos();
-					importarAreas();
-					importarExamenes();
-					importarMedicinas();
-					importarPacientes();
-					importarConsultas();
-					importarDiagnosticoConsulta();
-					importarExamenConsulta();
-					importarMedicinaConsulta();
-					// Verificar si guardo
-					if (!mostrarGuardado) {
-						if (!errorGeneral)
-							msj.mensajeInformacion(Mensaje.guardadosArchivos);
-						else
-							msj.mensajeInformacion(Mensaje.guardadosAlgunosArchivos);
-					}
+				importarDiagnosticos();
+				importarAreas();
+				importarExamenes();
+				importarMedicinas();
+				importarPacientes();
+				importarConsultas();
+				importarDiagnosticoConsulta();
+				importarExamenConsulta();
+				importarMedicinaConsulta();
+				if (!errorGeneral) {
+					msj.mensajeInformacion(Mensaje.guardadosArchivos);
 					limpiar();
 				}
-
 			}
 
 			@Override
@@ -189,7 +218,6 @@ public class CImportar extends CGenerico {
 
 		};
 		botonera.getChildren().get(1).setVisible(false);
-		botonera.getChildren().get(2).setVisible(false);
 		botoneraImportar.appendChild(botonera);
 
 	}
@@ -211,10 +239,10 @@ public class CImportar extends CGenerico {
 				servicioRecipe.guardar(recipe);
 				recipe = servicioRecipe.buscarUltimo();
 				List<ConsultaMedicina> consultasMedicina = new ArrayList<ConsultaMedicina>();
-				int con = 0;
-				while (rowIterator.hasNext()) {
-					con = con + 1;
-					System.out.println(con);
+				int contadorRow = 0;
+				boolean error = false;
+				while (rowIterator.hasNext() && !error) {
+					contadorRow = contadorRow + 1;
 					Row row = rowIterator.next();
 					Medicina medicina = new Medicina();
 					Consulta consulta = new Consulta();
@@ -228,7 +256,9 @@ public class CImportar extends CGenerico {
 					Double dosisReferencia = (double) 0;
 					String dosis = "";
 					Iterator<Cell> cellIterator = row.cellIterator();
-					while (cellIterator.hasNext()) {
+					int contadorCell = 0;
+					while (cellIterator.hasNext() && !error) {
+						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
 						switch (cell.getColumnIndex()) {
 						case 0:
@@ -237,7 +267,7 @@ public class CImportar extends CGenerico {
 								if (idReferenciaC != null)
 									idRefC = idReferenciaC.longValue();
 							} else
-								errorGeneral = true;
+								error = true;
 							break;
 						case 1:
 							if (cell.getCellType() == 0) {
@@ -245,7 +275,7 @@ public class CImportar extends CGenerico {
 								if (idReferenciaD != null)
 									idRefD = idReferenciaD.longValue();
 							} else
-								errorGeneral = true;
+								error = true;
 							break;
 						case 2:
 							if (cell.getCellType() == 1) {
@@ -271,35 +301,62 @@ public class CImportar extends CGenerico {
 							break;
 						}
 					}
-					if (row.getPhysicalNumberOfCells() != 0) {
-						if (row.getPhysicalNumberOfCells() == 1
-								&& consultasMedicina.size() != 0) {
-							int total = consultasMedicina.size();
-							String dosis2 = consultasMedicina.get(total - 1)
-									.getDosis();
-							consultasMedicina.get(total - 1).setDosis(
-									dosis + " " + dosis2);
-						} else {
-							medicina = servicioMedicina
-									.buscarPorReferencia(idRefD);
-							consulta = servicioConsulta.buscarPorReferencias(
-									idRefC, cedRef);
-							if (medicina != null && consulta != null) {
-								consultaMedicina.setConsulta(consulta);
-								consultaMedicina.setMedicina(medicina);
-								consultaMedicina.setDosis(dosis);
-								consultaMedicina.setRecipe(recipe);
-								consultasMedicina.add(consultaMedicina);
+					if (!error) {
+						if (row.getPhysicalNumberOfCells() != 0) {
+							if (row.getPhysicalNumberOfCells() == 1
+									&& consultasMedicina.size() != 0) {
+								int total = consultasMedicina.size();
+								String dosis2 = consultasMedicina
+										.get(total - 1).getDosis();
+								consultasMedicina.get(total - 1).setDosis(
+										dosis + " " + dosis2);
+							} else {
+								medicina = servicioMedicina
+										.buscarPorReferencia(idRefD);
+								consulta = servicioConsulta
+										.buscarPorReferencias(idRefC,
+												cedRef.replaceAll("\\s", ""));
+								if (medicina != null) {
+									if (consulta != null) {
+										consultaMedicina.setConsulta(consulta);
+										consultaMedicina.setMedicina(medicina);
+										consultaMedicina.setDosis(dosis);
+										consultaMedicina.setRecipe(recipe);
+										consultasMedicina.add(consultaMedicina);
+									} else {
+										msj.mensajeError(valorNoEncontrado
+												+ " la consulta con referencia de ID: "
+												+ idRefC
+												+ " y Paciente:"
+												+ cedRef
+												+ " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
+												+ " Fila: " + contadorRow
+												+ ". Columna: " + contadorCell);
+										error = true;
+									}
+								} else {
+									msj.mensajeError(valorNoEncontrado
+											+ " la Medicina con ID: "
+											+ idRefD
+											+ " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
+											+ " Fila: " + contadorRow
+											+ ". Columna: " + contadorCell);
+									error = true;
+								}
 							}
 						}
+					} else {
+						msj.mensajeError(archivoConError
+								+ lblNombreMedicinaConsulta.getValue()
+								+ ". Fila: " + contadorRow + ". Columna: "
+								+ contadorCell);
+						error = true;
 					}
 				}
-				if (consultasMedicina.size() != 0)
+				if (!error)
 					servicioConsultaMedicina.guardar(consultasMedicina);
 				else
-					msj.mensajeAlerta(archivoConErrores + " "
-							+ lblNombreMedicinaConsulta.getValue());
-				mostrarGuardado = true;
+					errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreMedicinaConsulta.getValue());
@@ -319,10 +376,10 @@ public class CImportar extends CGenerico {
 			if (rowIterator.hasNext()) {
 				Proveedor proveedor = servicioProveedor.buscar(1);
 				List<ConsultaExamen> consultasExamen = new ArrayList<ConsultaExamen>();
-				int con = 0;
-				while (rowIterator.hasNext()) {
-					con = con + 1;
-					System.out.println(con);
+				int contadorRow = 0;
+				boolean error = false;
+				while (rowIterator.hasNext() && !error) {
+					contadorRow = contadorRow + 1;
 					Row row = rowIterator.next();
 					Examen examen = new Examen();
 					Consulta consulta = new Consulta();
@@ -336,9 +393,10 @@ public class CImportar extends CGenerico {
 					Double dosisReferencia = (double) 0;
 					String dosis = "";
 					Iterator<Cell> cellIterator = row.cellIterator();
-					while (cellIterator.hasNext()) {
+					int contadorCell = 0;
+					while (cellIterator.hasNext() && !error) {
+						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
-
 						switch (cell.getColumnIndex()) {
 						case 0:
 							if (cell.getCellType() == 0) {
@@ -346,7 +404,7 @@ public class CImportar extends CGenerico {
 								if (idReferenciaC != null)
 									idRefC = idReferenciaC.longValue();
 							} else
-								errorGeneral = true;
+								error = true;
 							break;
 						case 1:
 							if (cell.getCellType() == 0) {
@@ -354,7 +412,7 @@ public class CImportar extends CGenerico {
 								if (idReferenciaD != null)
 									idRefD = idReferenciaD.longValue();
 							} else
-								errorGeneral = true;
+								error = true;
 							break;
 						case 2:
 							if (cell.getCellType() == 1) {
@@ -380,25 +438,51 @@ public class CImportar extends CGenerico {
 							break;
 						}
 					}
-					examen = servicioExamen.buscarPorReferencia(idRefD);
-					consulta = servicioConsulta.buscarPorReferencias(idRefC,
-							cedRef);
-					if (examen != null && consulta != null) {
-						consultaExamen.setConsulta(consulta);
-						consultaExamen.setExamen(examen);
-						consultaExamen.setObservacion(dosis);
-						consultaExamen.setCosto(0);
-						consultaExamen.setProveedor(proveedor);
-						consultaExamen.setPrioridad("1 (Urgente)");
-						consultasExamen.add(consultaExamen);
+					if (!error) {
+						examen = servicioExamen.buscarPorReferencia(idRefD);
+						consulta = servicioConsulta.buscarPorReferencias(
+								idRefC, cedRef.replaceAll("\\s", ""));
+						if (examen != null) {
+							if (consulta != null) {
+								consultaExamen.setConsulta(consulta);
+								consultaExamen.setExamen(examen);
+								consultaExamen.setObservacion(dosis);
+								consultaExamen.setCosto(0);
+								consultaExamen.setProveedor(proveedor);
+								consultaExamen.setPrioridad("1 (Urgente)");
+								consultasExamen.add(consultaExamen);
+							} else {
+								msj.mensajeError(valorNoEncontrado
+										+ " la consulta con referencia de ID: "
+										+ idRefC
+										+ " y Paciente:"
+										+ cedRef
+										+ " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
+										+ " Fila: " + contadorRow
+										+ ". Columna: " + contadorCell);
+								error = true;
+							}
+						} else {
+							msj.mensajeError(valorNoEncontrado
+									+ " el examen con ID: "
+									+ idRefD
+									+ " no ha sido encontrado, por lo tanto no ha sido importado el archivo"
+									+ " Fila: " + contadorRow + ". Columna: "
+									+ contadorCell);
+							error = true;
+						}
+					} else {
+						msj.mensajeError(archivoConError
+								+ lblNombreExamenConsulta.getValue()
+								+ ". Fila: " + contadorRow + ". Columna: "
+								+ contadorCell);
+						error = true;
 					}
 				}
-				if (!consultasExamen.isEmpty())
+				if (!error)
 					servicioConsultaExamen.guardar(consultasExamen);
 				else
-					msj.mensajeAlerta(archivoConErrores + " "
-							+ lblNombreExamenConsulta.getValue());
-				mostrarGuardado = true;
+					errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreExamenConsulta.getValue());
@@ -418,10 +502,10 @@ public class CImportar extends CGenerico {
 			Iterator<Row> rowIterator = sheet.iterator();
 			if (rowIterator.hasNext()) {
 				List<ConsultaDiagnostico> consultasDiagnostico = new ArrayList<ConsultaDiagnostico>();
-				int con = 0;
-				while (rowIterator.hasNext()) {
-					con = con + 1;
-					System.out.println(con);
+				int contadorRow = 0;
+				boolean error = false;
+				while (rowIterator.hasNext() && !error) {
+					contadorRow = contadorRow + 1;
 					Row row = rowIterator.next();
 					Diagnostico diagnostico = new Diagnostico();
 					Consulta consulta = new Consulta();
@@ -433,9 +517,10 @@ public class CImportar extends CGenerico {
 					Double cedReferencia = (double) 0;
 					String cedRef = "";
 					Iterator<Cell> cellIterator = row.cellIterator();
-					while (cellIterator.hasNext()) {
+					int contadorCell = 0;
+					while (cellIterator.hasNext() && !error) {
+						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
-
 						switch (cell.getColumnIndex()) {
 						case 0:
 							if (cell.getCellType() == 0) {
@@ -443,7 +528,7 @@ public class CImportar extends CGenerico {
 								if (idReferenciaD != null)
 									idRefD = idReferenciaD.longValue();
 							} else
-								errorGeneral = true;
+								error = true;
 							break;
 						case 1:
 							if (cell.getCellType() == 0) {
@@ -451,7 +536,7 @@ public class CImportar extends CGenerico {
 								if (idReferenciaC != null)
 									idRefC = idReferenciaC.longValue();
 							} else
-								errorGeneral = true;
+								error = true;
 							break;
 						case 2:
 							if (cell.getCellType() == 1) {
@@ -467,29 +552,55 @@ public class CImportar extends CGenerico {
 							break;
 						}
 					}
-					diagnostico = servicioDiagnostico
-							.buscarPorReferencia(idRefD);
-					consulta = servicioConsulta.buscarPorReferencias(idRefC,
-							cedRef);
-					if (diagnostico != null && consulta != null) {
-						consultaDagnostico.setConsulta(consulta);
-						consultaDagnostico.setDiagnostico(diagnostico);
-						consultaDagnostico.setAccidente(null);
-						consultaDagnostico.setClasificacion("");
-						consultaDagnostico.setLugar("");
-						consultaDagnostico.setMotivo("");
-						consultaDagnostico.setFecha(null);
-						consultaDagnostico.setObservacion("");
-						consultaDagnostico.setTipo("Otro");
-						consultasDiagnostico.add(consultaDagnostico);
+					if (!error) {
+						diagnostico = servicioDiagnostico
+								.buscarPorReferencia(idRefD);
+						consulta = servicioConsulta.buscarPorReferencias(
+								idRefC, cedRef.replaceAll("\\s", ""));
+						if (diagnostico != null) {
+							if (consulta != null) {
+								consultaDagnostico.setConsulta(consulta);
+								consultaDagnostico.setDiagnostico(diagnostico);
+								consultaDagnostico.setAccidente(null);
+								consultaDagnostico.setClasificacion("");
+								consultaDagnostico.setLugar("");
+								consultaDagnostico.setMotivo("");
+								consultaDagnostico.setFecha(null);
+								consultaDagnostico.setObservacion("");
+								consultaDagnostico.setTipo("Otro");
+								consultasDiagnostico.add(consultaDagnostico);
+							} else {
+								msj.mensajeError(valorNoEncontrado
+										+ " la consulta con referencia de ID: "
+										+ idRefC
+										+ " y Paciente:"
+										+ cedRef
+										+ " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
+										+ " Fila: " + contadorRow
+										+ ". Columna: " + contadorCell);
+								error = true;
+							}
+						} else {
+							msj.mensajeError(valorNoEncontrado
+									+ " el diagnostico con ID: "
+									+ idRefD
+									+ " no ha sido encontrado, por lo tanto no ha sido importado el archivo"
+									+ " Fila: " + contadorRow + ". Columna: "
+									+ contadorCell);
+							error = true;
+						}
+					} else {
+						msj.mensajeError(archivoConError
+								+ lblNombreDiagnosticoConsulta.getValue()
+								+ ". Fila: " + contadorRow + ". Columna: "
+								+ contadorCell);
+						error = true;
 					}
 				}
-				if (!consultasDiagnostico.isEmpty())
+				if (!error)
 					servicioConsultaDiagnostico.guardar(consultasDiagnostico);
 				else
-					msj.mensajeAlerta(archivoConErrores + " "
-							+ lblNombreDiagnosticoConsulta.getValue());
-				mostrarGuardado = true;
+					errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreDiagnosticoConsulta.getValue());
@@ -511,18 +622,20 @@ public class CImportar extends CGenerico {
 						.buscar(1);
 				Laboratorio laboratorio = servicioLaboratorio.buscar(1);
 				List<Medicina> medicinas = new ArrayList<Medicina>();
-				int con = 0;
-				while (rowIterator.hasNext()) {
-					con = con + 1;
-					System.out.println(con);
+				int contadorRow = 0;
+				boolean error = false;
+				boolean errorLong = false;
+				while (rowIterator.hasNext() && !error && !errorLong) {
+					contadorRow = contadorRow + 1;
 					Row row = rowIterator.next();
 					Medicina medicina = new Medicina();
 					Double idReferencia = (double) 0;
 					long idRef = 0;
 					String nombre = "";
-					boolean error = false;
+					int contadorCell = 0;
 					Iterator<Cell> cellIterator = row.cellIterator();
-					while (cellIterator.hasNext()) {
+					while (cellIterator.hasNext() && !error && !errorLong) {
+						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
 						switch (cell.getColumnIndex()) {
 						case 0:
@@ -537,40 +650,60 @@ public class CImportar extends CGenerico {
 							break;
 						case 1:
 							nombre = cell.getStringCellValue();
+							if (nombre.length() > 500)
+								errorLong = true;
 							break;
 						default:
 							break;
 						}
 					}
-					if (!error) {
-						medicina.setNombre(nombre);
-						medicina.setCategoriaMedicina(categoria);
-						medicina.setLaboratorio(laboratorio);
-						medicina.setIdReferencia(idRef);
-						medicina.setFechaAuditoria(fechaHora);
-						medicina.setHoraAuditoria(horaAuditoria);
-						medicina.setUsuarioAuditoria("frivero");
-						medicinas.add(medicina);
-					}
-				}
-				String nombre = "";
-				for (int i = 0; i < medicinas.size(); i++) {
-					nombre = medicinas.get(i).getNombre();
-					if (i < medicinas.size() - 1) {
-						for (int j = i + 1; j < medicinas.size(); j++) {
-							if (medicinas.get(j).getNombre().equals(nombre)) {
-								medicinas.get(j).setNombre(nombre + "2");
-								j = medicinas.size();
+					if (!errorLong) {
+						if (!error) {
+							medicina.setNombre(nombre);
+							medicina.setCategoriaMedicina(categoria);
+							medicina.setLaboratorio(laboratorio);
+							medicina.setIdReferencia(idRef);
+							medicina.setFechaAuditoria(fechaHora);
+							medicina.setHoraAuditoria(horaAuditoria);
+							medicina.setUsuarioAuditoria("frivero");
+							medicinas.add(medicina);
+							String nombrel = "";
+							for (int i = 0; i < medicinas.size(); i++) {
+								nombrel = medicinas.get(i).getNombre();
+								if (i < medicinas.size() - 1) {
+									for (int j = i + 1; j < medicinas.size(); j++) {
+										if (medicinas.get(j).getNombre()
+												.equals(nombrel)) {
+											medicinas.get(j).setNombre(
+													nombrel + "2");
+											j = medicinas.size();
+										}
+									}
+								}
 							}
+						} else {
+							msj.mensajeError(archivoConError
+									+ lblNombreMedicina.getValue() + ". Fila: "
+									+ contadorRow + ". Columna: "
+									+ contadorCell);
+							error = true;
 						}
+					} else {
+						msj.mensajeError(errorLongitud
+								+ lblNombreMedicina.getValue()
+								+ ". Fila: "
+								+ contadorRow
+								+ ". Columna: "
+								+ contadorCell
+								+ ". Longitudes permitidas: campo1 19, campo2 500");
+						error = true;
 					}
+
 				}
-				if (!medicinas.isEmpty())
+				if (!error)
 					servicioMedicina.guardarVarios(medicinas);
 				else
-					msj.mensajeAlerta(archivoConErrores + " "
-							+ lblNombreMedicina.getValue());
-				mostrarGuardado = true;
+					errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreMedicina.getValue());
@@ -589,20 +722,21 @@ public class CImportar extends CGenerico {
 			Iterator<Row> rowIterator = sheet.iterator();
 			if (rowIterator.hasNext()) {
 				List<Examen> examenes = new ArrayList<Examen>();
-				int con = 0;
-				while (rowIterator.hasNext()) {
-					con = con + 1;
-					System.out.println(con);
+				int contadorRow = 0;
+				boolean error = false;
+				boolean errorLong = false;
+				while (rowIterator.hasNext() && !error && !errorLong) {
+					contadorRow = contadorRow + 1;
 					Row row = rowIterator.next();
 					Examen examen = new Examen();
 					Double idReferencia = (double) 0;
 					long idRef = 0;
 					String nombre = "";
-					boolean error = false;
+					int contadorCell = 0;
 					Iterator<Cell> cellIterator = row.cellIterator();
-					while (cellIterator.hasNext()) {
+					while (cellIterator.hasNext() && !error && !errorLong) {
+						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
-
 						switch (cell.getColumnIndex()) {
 						case 0:
 							if (cell.getCellType() == 0) {
@@ -616,41 +750,60 @@ public class CImportar extends CGenerico {
 							break;
 						case 1:
 							nombre = cell.getStringCellValue();
+							if (nombre.length() > 50)
+								errorLong = true;
 							break;
 						default:
 							break;
 						}
 					}
-					if (!error) {
-						examen.setNombre(nombre);
-						examen.setIdReferencia(idRef);
-						examen.setCosto(0);
-						examen.setMaximo(0);
-						examen.setMinimo(0);
-						examen.setFechaAuditoria(fechaHora);
-						examen.setHoraAuditoria(horaAuditoria);
-						examen.setUsuarioAuditoria("frivero");
-						examenes.add(examen);
-					}
-				}
-				String nombre = "";
-				for (int i = 0; i < examenes.size(); i++) {
-					nombre = examenes.get(i).getNombre();
-					if (i < examenes.size() - 1) {
-						for (int j = i + 1; j < examenes.size(); j++) {
-							if (examenes.get(j).getNombre().equals(nombre)) {
-								examenes.get(j).setNombre(nombre + "2");
-								j = examenes.size();
+					if (!errorLong) {
+						if (!error) {
+							examen.setNombre(nombre);
+							examen.setIdReferencia(idRef);
+							examen.setCosto(0);
+							examen.setMaximo(0);
+							examen.setMinimo(0);
+							examen.setFechaAuditoria(fechaHora);
+							examen.setHoraAuditoria(horaAuditoria);
+							examen.setUsuarioAuditoria("frivero");
+							examenes.add(examen);
+							String nombrej = "";
+							for (int i = 0; i < examenes.size(); i++) {
+								nombrej = examenes.get(i).getNombre();
+								if (i < examenes.size() - 1) {
+									for (int j = i + 1; j < examenes.size(); j++) {
+										if (examenes.get(j).getNombre()
+												.equals(nombrej)) {
+											examenes.get(j).setNombre(
+													nombrej + "2");
+											j = examenes.size();
+										}
+									}
+								}
 							}
+						} else {
+							msj.mensajeError(archivoConError
+									+ lblNombreExamen.getValue() + ". Fila: "
+									+ contadorRow + ". Columna: "
+									+ contadorCell);
+							error = true;
 						}
+					} else {
+						msj.mensajeError(errorLongitud
+								+ lblNombreExamen.getValue()
+								+ ". Fila: "
+								+ contadorRow
+								+ ". Columna: "
+								+ contadorCell
+								+ ". Longitudes permitidas: campo1 19 y campo2 50");
+						error = true;
 					}
 				}
-				if (!examenes.isEmpty())
+				if (!error)
 					servicioExamen.guardarVarios(examenes);
 				else
-					msj.mensajeAlerta(archivoConErrores + " "
-							+ lblNombreExamen.getValue());
-				mostrarGuardado = true;
+					errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreExamen.getValue());
@@ -669,19 +822,21 @@ public class CImportar extends CGenerico {
 			Iterator<Row> rowIterator = sheet.iterator();
 			if (rowIterator.hasNext()) {
 				List<Area> areas = new ArrayList<Area>();
-				int con = 0;
-				while (rowIterator.hasNext()) {
-					con = con + 1;
-					System.out.println(con);
+				int contadorRow = 0;
+				boolean error = false;
+				boolean errorLong = false;
+				while (rowIterator.hasNext() && !error && !errorLong) {
+					contadorRow = contadorRow + 1;
 					Row row = rowIterator.next();
 					Area area = new Area();
 					Double idReferencia = (double) 0;
-					String idRef = "";
+					String idRef = null;
 					String nombre = "";
+					int contadorCell = 0;
 					Iterator<Cell> cellIterator = row.cellIterator();
-					while (cellIterator.hasNext()) {
+					while (cellIterator.hasNext() && !error && !errorLong) {
+						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
-
 						switch (cell.getColumnIndex()) {
 						case 0:
 							if (cell.getCellType() == 1)
@@ -692,41 +847,64 @@ public class CImportar extends CGenerico {
 									idRef = String.valueOf(idReferencia
 											.longValue());
 							}
+							if (idRef.length() > 100)
+								errorLong = true;
 							break;
 						case 1:
 							nombre = cell.getStringCellValue();
+							if (nombre.length() > 100)
+								errorLong = true;
 							break;
 						default:
 							break;
 						}
 					}
-					if (!idRef.equals("NULL")) {
-						area.setNombre(nombre);
-						area.setCodigo(idRef);
-						area.setFechaAuditoria(fechaHora);
-						area.setHoraAuditoria(horaAuditoria);
-						area.setUsuarioAuditoria("frivero");
-						areas.add(area);
-					}
-				}
-				String nombre = "";
-				for (int i = 0; i < areas.size(); i++) {
-					nombre = areas.get(i).getNombre();
-					if (i < areas.size() - 1) {
-						for (int j = i + 1; j < areas.size(); j++) {
-							if (areas.get(j).getNombre().equals(nombre)) {
-								areas.get(j).setNombre(nombre + "2");
-								j = areas.size();
+
+					if (!errorLong) {
+						if (!error && idRef != null && !idRef.equals("NULL")) {
+							area.setNombre(nombre);
+							area.setCodigo(idRef);
+							area.setFechaAuditoria(fechaHora);
+							area.setHoraAuditoria(horaAuditoria);
+							area.setUsuarioAuditoria("frivero");
+							areas.add(area);
+							String nombrej = "";
+							for (int i = 0; i < areas.size(); i++) {
+								nombrej = areas.get(i).getNombre();
+								if (i < areas.size() - 1) {
+									for (int j = i + 1; j < areas.size(); j++) {
+										if (areas.get(j).getNombre()
+												.equals(nombrej)) {
+											areas.get(j).setNombre(
+													nombrej + "2");
+											j = areas.size();
+										}
+									}
+								}
 							}
+
+						} else {
+							msj.mensajeError(archivoConError
+									+ lblNombreArea.getValue() + ". Fila: "
+									+ contadorRow + ". Columna: "
+									+ contadorCell);
+							error = true;
 						}
+					} else {
+						msj.mensajeError(errorLongitud
+								+ lblNombreArea.getValue()
+								+ ". Fila: "
+								+ contadorRow
+								+ ". Columna: "
+								+ contadorCell
+								+ ". Longitudes permitidas: campo1 100 y campo2 100");
+						error = true;
 					}
 				}
-				if (!areas.isEmpty())
+				if (!error)
 					servicioArea.guardarVarios(areas);
 				else
-					msj.mensajeAlerta(archivoConErrores + " "
-							+ lblNombreArea.getValue());
-				mostrarGuardado = true;
+					errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " " + lblNombreArea.getValue());
 		}
@@ -746,20 +924,21 @@ public class CImportar extends CGenerico {
 				CategoriaDiagnostico categoria = new CategoriaDiagnostico();
 				categoria = servicioCategoriaDiagnostico.buscar(1);
 				List<Diagnostico> diagnosticos = new ArrayList<Diagnostico>();
-				int con = 0;
-				while (rowIterator.hasNext()) {
-					con = con + 1;
-					System.out.println(con);
+				int contadorRow = 0;
+				boolean error = false;
+				boolean errorLong = false;
+				while (rowIterator.hasNext() && !error && !errorLong) {
+					contadorRow = contadorRow + 1;
 					Row row = rowIterator.next();
 					Diagnostico diagnostico = new Diagnostico();
 					Double idReferencia = (double) 0;
 					long idRef = 0;
 					String nombre = "";
 					Iterator<Cell> cellIterator = row.cellIterator();
-					boolean error = false;
-					while (cellIterator.hasNext()) {
+					int contadorCell = 0;
+					while (cellIterator.hasNext() && !error && !errorLong) {
+						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
-
 						switch (cell.getColumnIndex()) {
 						case 0:
 							if (cell.getCellType() == 0) {
@@ -773,42 +952,61 @@ public class CImportar extends CGenerico {
 							break;
 						case 1:
 							nombre = cell.getStringCellValue();
+							if (nombre.length() > 500)
+								errorLong = true;
 							break;
 						default:
 							break;
 						}
 					}
-					if (!error) {
-						diagnostico.setNombre(nombre);
-						diagnostico.setEpi(false);
-						diagnostico.setCategoria(categoria);
-						diagnostico.setIdReferencia(idRef);
-						diagnostico.setCodigo(String.valueOf(idRef));
-						diagnostico.setGrupo("Sin Grupo");
-						diagnostico.setFechaAuditoria(fechaHora);
-						diagnostico.setHoraAuditoria(horaAuditoria);
-						diagnostico.setUsuarioAuditoria("frivero");
-						diagnosticos.add(diagnostico);
-					}
-				}
-				String nombre = "";
-				for (int i = 0; i < diagnosticos.size(); i++) {
-					nombre = diagnosticos.get(i).getNombre();
-					if (i < diagnosticos.size() - 1) {
-						for (int j = i + 1; j < diagnosticos.size(); j++) {
-							if (diagnosticos.get(j).getNombre().equals(nombre)) {
-								diagnosticos.get(j).setNombre(nombre + "2");
-								j = diagnosticos.size();
+					if (!errorLong) {
+						if (!error) {
+							diagnostico.setNombre(nombre);
+							diagnostico.setEpi(false);
+							diagnostico.setCategoria(categoria);
+							diagnostico.setIdReferencia(idRef);
+							diagnostico.setCodigo(String.valueOf(idRef));
+							diagnostico.setGrupo("Sin Grupo");
+							diagnostico.setFechaAuditoria(fechaHora);
+							diagnostico.setHoraAuditoria(horaAuditoria);
+							diagnostico.setUsuarioAuditoria("frivero");
+							diagnosticos.add(diagnostico);
+							String nombrej = "";
+							for (int i = 0; i < diagnosticos.size(); i++) {
+								nombrej = diagnosticos.get(i).getNombre();
+								if (i < diagnosticos.size() - 1) {
+									for (int j = i + 1; j < diagnosticos.size(); j++) {
+										if (diagnosticos.get(j).getNombre()
+												.equals(nombrej)) {
+											diagnosticos.get(j).setNombre(
+													nombrej + "2");
+											j = diagnosticos.size();
+										}
+									}
+								}
 							}
+						} else {
+							msj.mensajeError(archivoConError
+									+ lblNombreDiagnostico.getValue()
+									+ ". Fila: " + contadorRow + ". Columna: "
+									+ contadorCell);
+							error = true;
 						}
+					} else {
+						msj.mensajeError(errorLongitud
+								+ lblNombreDiagnostico.getValue()
+								+ ". Fila: "
+								+ contadorRow
+								+ ". Columna: "
+								+ contadorCell
+								+ ". Longitudes permitidas: campo1 19 y campo2 500");
+						errorLong = true;
 					}
 				}
-				if (!diagnosticos.isEmpty())
+				if (!error)
 					servicioDiagnostico.guardarVarios(diagnosticos);
 				else
-					msj.mensajeAlerta(archivoConErrores + " "
-							+ lblNombreDiagnostico.getValue());
-				mostrarGuardado = true;
+					errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreDiagnostico.getValue());
@@ -836,10 +1034,11 @@ public class CImportar extends CGenerico {
 					e1.printStackTrace();
 				}
 				List<Paciente> pacientes = new ArrayList<Paciente>();
-				int y = 0;
-				while (rowIterator.hasNext()) {
-					y = y + 1;
-					System.out.println(y);
+				int contadorRow = 0;
+				boolean error = false;
+				boolean errorLong = false;
+				while (rowIterator.hasNext() && !error && !errorLong) {
+					contadorRow = contadorRow + 1;
 					Row row = rowIterator.next();
 					Area area = new Area();
 					Paciente paciente = new Paciente();
@@ -851,12 +1050,11 @@ public class CImportar extends CGenerico {
 					Double fichaRef = (double) 0;
 					Double codigoRef = (double) 0;
 					byte[] imagenUsuario = null;
-
 					Iterator<Cell> cellIterator = row.cellIterator();
-					while (cellIterator.hasNext()) {
-
+					int contadorCell = 0;
+					while (cellIterator.hasNext() && !error && !errorLong) {
+						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
-
 						switch (cell.getColumnIndex()) {
 						case 0:
 							if (cell.getCellType() == 1)
@@ -866,18 +1064,28 @@ public class CImportar extends CGenerico {
 								if (cedRef != null)
 									cedula = String.valueOf(cedRef.longValue());
 							}
+							if (cedula.length() > 15)
+								errorLong = true;
 							break;
 						case 1:
 							primerNombre = cell.getStringCellValue();
+							if (primerNombre.length() > 100)
+								errorLong = true;
 							break;
 						case 2:
 							segundoNombre = cell.getStringCellValue();
+							if (segundoNombre.length() > 100)
+								errorLong = true;
 							break;
 						case 3:
 							primerApellido = cell.getStringCellValue();
+							if (primerApellido.length() > 100)
+								errorLong = true;
 							break;
 						case 4:
 							segundoApellido = cell.getStringCellValue();
+							if (segundoApellido.length() > 100)
+								errorLong = true;
 							break;
 						case 5:
 							if (cell.getCellType() == 1)
@@ -888,13 +1096,15 @@ public class CImportar extends CGenerico {
 									direccion = String.valueOf(dirRef
 											.longValue());
 							}
-
+							if (direccion.length() > 1000)
+								errorLong = true;
 							break;
 						case 7:
 							if (cell.getCellType() == 0) {
 								fechaNac2 = cell.getDateCellValue();
 								fechaNac = new Timestamp(fechaNac2.getTime());
-							}
+							} else
+								error = true;
 							break;
 						case 8:
 							sexo = cell.getStringCellValue();
@@ -928,82 +1138,101 @@ public class CImportar extends CGenerico {
 						}
 					}
 
-					paciente.setCedula(cedula);
-					paciente.setPrimerNombre(primerNombre);
-					paciente.setSegundoNombre(segundoNombre);
-					paciente.setPrimerApellido(primerApellido);
-					paciente.setSegundoApellido(segundoApellido);
-					paciente.setDireccion(direccion);
-					if (sexo.equalsIgnoreCase("Femenino"))
-						paciente.setSexo("Femenino");
-					else
-						paciente.setSexo("Masculino");
-					imagenUsuario = imgUsuario.getContent().getByteData();
-					paciente.setImagen(imagenUsuario);
-					paciente.setFicha(ficha);
-					area = servicioArea.buscarPorCodigo(codigoArea);
-					if (area == null || codigoArea.equals("-")
-							|| codigoArea.equals("NULL"))
-						area = servicioArea.buscar(1); //
-					paciente.setArea(area);
-					paciente.setNacionalidad("V");
-					paciente.setEstatus(true);
-					paciente.setMuerte(false);
-					paciente.setDiscapacidad(false);
-					paciente.setAlergia(false);
-					paciente.setLentes(false);
-					paciente.setProfesion("");
-					paciente.setEdad(0);
-					paciente.setEstatura(0.0);
-					paciente.setEstadoCivil("Otro");
-					paciente.setNivelEducativo("Primaria");
-					paciente.setFechaAuditoria(fechaHora);
-					paciente.setFechaNacimiento(fechaNac);
-					paciente.setFechaEgreso(fechaHora);
-					paciente.setFechaIngreso(fechaHora);
-					paciente.setFechaInscripcionIVSS(fechaHora);
-					paciente.setCarga(0);
-					paciente.setGrupoSanguineo("A+");
-					paciente.setMano("Derecho");
-					paciente.setPeso(0.0);
-					paciente.setEmpresa(empresa);
-					paciente.setCargoReal(cargo);
-					paciente.setNomina(nomina);
-					paciente.setCiudadVivienda(ciudad);
-					paciente.setTurno("Jornada Completa");
-					paciente.setTelefono1("");
-					paciente.setTelefono2("");
-					paciente.setTelefono1Emergencia("");
-					paciente.setTelefono2Emergencia("");
-					paciente.setEmail("");
-					paciente.setNombresEmergencia("");
-					paciente.setApellidosEmergencia("");
-					paciente.setParentescoEmergencia("Otro");
-					if (Validador.validarNumero(cedula))
-						paciente.setTrabajador(true);
-					else {
-						paciente.setTrabajador(false);
-						paciente.setParentescoFamiliar("Otro");
-						String a = "";
-						String familiar = "";
-						for (int i = 0; i < cedula.length(); i++) {
-							a = Character.toString(cedula.charAt(i));
-							if (!a.equals("-"))
-								familiar += a;
+					if (!errorLong) {
+						if (!error) {
+							paciente.setCedula(cedula.replaceAll("\\s", ""));
+							paciente.setPrimerNombre(primerNombre);
+							paciente.setSegundoNombre(segundoNombre);
+							paciente.setPrimerApellido(primerApellido);
+							paciente.setSegundoApellido(segundoApellido);
+							paciente.setDireccion(direccion);
+							if (sexo.equalsIgnoreCase("Femenino"))
+								paciente.setSexo("Femenino");
 							else
-								paciente.setCedulaFamiliar(familiar);
+								paciente.setSexo("Masculino");
+							imagenUsuario = imgUsuario.getContent()
+									.getByteData();
+							paciente.setImagen(imagenUsuario);
+							paciente.setFicha(ficha);
+							area = servicioArea.buscarPorCodigo(codigoArea);
+							if (area == null || codigoArea.equals("-")
+									|| codigoArea.equals("NULL"))
+								area = servicioArea.buscar(1); //
+							paciente.setArea(area);
+							paciente.setNacionalidad("V");
+							paciente.setEstatus(true);
+							paciente.setMuerte(false);
+							paciente.setDiscapacidad(false);
+							paciente.setAlergia(false);
+							paciente.setLentes(false);
+							paciente.setProfesion("");
+							paciente.setEdad(0);
+							paciente.setEstatura(0.0);
+							paciente.setEstadoCivil("Otro");
+							paciente.setNivelEducativo("Primaria");
+							paciente.setFechaAuditoria(fechaHora);
+							paciente.setFechaNacimiento(fechaNac);
+							paciente.setFechaEgreso(fechaHora);
+							paciente.setFechaIngreso(fechaHora);
+							paciente.setFechaInscripcionIVSS(fechaHora);
+							paciente.setCarga(0);
+							paciente.setGrupoSanguineo("A+");
+							paciente.setMano("Derecho");
+							paciente.setPeso(0.0);
+							paciente.setEmpresa(empresa);
+							paciente.setCargoReal(cargo);
+							paciente.setNomina(nomina);
+							paciente.setCiudadVivienda(ciudad);
+							paciente.setTurno("Jornada Completa");
+							paciente.setTelefono1("");
+							paciente.setTelefono2("");
+							paciente.setTelefono1Emergencia("");
+							paciente.setTelefono2Emergencia("");
+							paciente.setEmail("");
+							paciente.setNombresEmergencia("");
+							paciente.setApellidosEmergencia("");
+							paciente.setParentescoEmergencia("Otro");
+							if (Validador.validarNumero(cedula))
+								paciente.setTrabajador(true);
+							else {
+								paciente.setTrabajador(false);
+								paciente.setParentescoFamiliar("Otro");
+								String a = "";
+								String familiar = "";
+								for (int i = 0; i < cedula.length(); i++) {
+									a = Character.toString(cedula.charAt(i));
+									if (!a.equals("-"))
+										familiar += a;
+									else
+										paciente.setCedulaFamiliar(familiar);
+								}
+							}
+							paciente.setUsuarioAuditoria("frivero");
+							paciente.setHoraAuditoria(horaAuditoria);
+							pacientes.add(paciente);
+						} else {
+							msj.mensajeError(archivoConError
+									+ lblNombrePaciente.getValue() + ". Fila: "
+									+ contadorRow + ". Columna: "
+									+ contadorCell);
+							error = true;
 						}
+					} else {
+						msj.mensajeError(errorLongitud
+								+ lblNombrePaciente.getValue()
+								+ ". Fila: "
+								+ contadorRow
+								+ ". Columna: "
+								+ contadorCell
+								+ ". Longitudes permitidas: campo1 20 y campo2 12");
+						errorLong = true;
+						error = true;
 					}
-					paciente.setUsuarioAuditoria("frivero");
-					paciente.setHoraAuditoria(horaAuditoria);
-					pacientes.add(paciente);
 				}
-				if (!pacientes.isEmpty())
+				if (!error)
 					servicioPaciente.guardarVarios(pacientes);
 				else
-					msj.mensajeAlerta(archivoConErrores + " "
-							+ lblNombrePaciente.getValue());
-				mostrarGuardado = true;
+					errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombrePaciente.getValue());
@@ -1025,10 +1254,12 @@ public class CImportar extends CGenerico {
 				Area area = servicioArea.buscar(1);
 				Cargo cargo = servicioCargo.buscar(1);
 				List<Consulta> consultas = new ArrayList<Consulta>();
-				int con = 0;
-				while (rowIterator.hasNext()) {
-					con = con + 1;
-					System.out.println(con);
+				int contadorRow = 0;
+				boolean error = false;
+				boolean errorLong = false;
+				while (rowIterator.hasNext() && !error && !errorLong) {
+					contadorRow = contadorRow + 1;
+					System.out.println(contadorRow);
 					Row row = rowIterator.next();
 					Consulta consulta = new Consulta();
 					Double cedReferencia = (double) 0;
@@ -1040,10 +1271,10 @@ public class CImportar extends CGenerico {
 					String enfermedadActual = "";
 					String doctor = "";
 					Iterator<Cell> cellIterator = row.cellIterator();
-					boolean error = false;
-					while (cellIterator.hasNext()) {
+					int contadorCell = 0;
+					while (cellIterator.hasNext() && !error && !errorLong) {
+						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
-
 						switch (cell.getColumnIndex()) {
 						case 0:
 							if (cell.getCellType() == 1) {
@@ -1054,6 +1285,8 @@ public class CImportar extends CGenerico {
 									cedRef = String.valueOf(cedReferencia
 											.longValue());
 							}
+							if (cedRef.length() > 15)
+								errorLong = true;
 							break;
 						case 1:
 							if (cell.getCellType() == 0) {
@@ -1065,11 +1298,17 @@ public class CImportar extends CGenerico {
 							}
 							break;
 						case 3:
-							if (cell.getCellType() == 1)
+							if (cell.getCellType() == 1) {
 								enfermedadActual = cell.getStringCellValue();
+								if (enfermedadActual.length() > 1500)
+									errorLong = true;
+							} else
+								error = true;
 							break;
 						case 4:
 							doctor = cell.getStringCellValue();
+							if (doctor.length() > 256)
+								errorLong = true;
 							break;
 						case 5:
 							if (cell.getCellType() == 0) {
@@ -1085,60 +1324,78 @@ public class CImportar extends CGenerico {
 							break;
 						}
 					}
-					if (!error) {
-						consulta.setIdReferencia(idRef);
-						consulta.setCedulaReferencia(cedRef);
-						consulta.setEnfermedadActual(enfermedadActual);
-						consulta.setMotivoConsulta("");
-						consulta.setTipoConsulta("Preventiva");
-						consulta.setTipoConsultaSecundaria("Reintegro");
-						consulta.setDoctor(doctor);
-						consulta.setFechaConsulta(fechaReal);
-						consulta.setUsuario(usuario);
-						consulta.setCargo(cargo);
-						consulta.setArea(area);
-						Paciente paciente = servicioPaciente
-								.buscarPorCedula(cedRef);
-						consulta.setPaciente(paciente);
-						consulta.setReposo(false);
-						consulta.setDiasReposo(0);
-						consulta.setAccidenteLaboral(false);
-						consulta.setConsultaAsociada(0);
-						consulta.setFrecuencia(0);
-						consulta.setFrecuenciaEsfuerzo(0);
-						consulta.setFrecuenciaPost(0);
-						consulta.setFrecuenciaReposo(0);
-						consulta.setPerimetroForzada((double) 0);
-						consulta.setPerimetroOmbligo((double) 0);
-						consulta.setPerimetroPlena((double) 0);
-						consulta.setPeso((double) 0);
-						consulta.setSistolicaPrimera(0);
-						consulta.setSistolicaSegunda(0);
-						consulta.setSistolicaTercera(0);
-						consulta.setDiastolicaPrimera(0);
-						consulta.setDiastolicaSegunda(0);
-						consulta.setDiastolicaTercera(0);
-						consulta.setEstatura((double) 0);
-						consulta.setExtraEsfuerzo(0);
-						consulta.setExtraPost(0);
-						consulta.setExtraReposo(0);
-						consulta.setRitmico(false);
-						consulta.setRitmicoEsfuerzo(false);
-						consulta.setRitmicoPost(false);
-						consulta.setRitmicoReposo(false);
-						consulta.setApto(false);
-						consulta.setFechaAuditoria(fechaHora);
-						consulta.setHoraAuditoria(horaAuditoria);
-						consulta.setUsuarioAuditoria("frivero");
-						consultas.add(consulta);
+					if (!errorLong) {
+						if (!error) {
+							consulta.setIdReferencia(idRef);
+							consulta.setCedulaReferencia(cedRef.replaceAll(
+									"\\s", ""));
+							consulta.setEnfermedadActual(enfermedadActual);
+							consulta.setMotivoConsulta("");
+							consulta.setTipoConsulta("Preventiva");
+							consulta.setTipoConsultaSecundaria("Reintegro");
+							consulta.setDoctor(doctor);
+							consulta.setFechaConsulta(fechaReal);
+							consulta.setUsuario(usuario);
+							consulta.setCargo(cargo);
+							consulta.setArea(area);
+							Paciente paciente = servicioPaciente
+									.buscarPorCedula(cedRef.replaceAll("\\s",
+											""));
+							consulta.setPaciente(paciente);
+							consulta.setReposo(false);
+							consulta.setDiasReposo(0);
+							consulta.setAccidenteLaboral(false);
+							consulta.setConsultaAsociada(0);
+							consulta.setFrecuencia(0);
+							consulta.setFrecuenciaEsfuerzo(0);
+							consulta.setFrecuenciaPost(0);
+							consulta.setFrecuenciaReposo(0);
+							consulta.setPerimetroForzada((double) 0);
+							consulta.setPerimetroOmbligo((double) 0);
+							consulta.setPerimetroPlena((double) 0);
+							consulta.setPeso((double) 0);
+							consulta.setSistolicaPrimera(0);
+							consulta.setSistolicaSegunda(0);
+							consulta.setSistolicaTercera(0);
+							consulta.setDiastolicaPrimera(0);
+							consulta.setDiastolicaSegunda(0);
+							consulta.setDiastolicaTercera(0);
+							consulta.setEstatura((double) 0);
+							consulta.setExtraEsfuerzo(0);
+							consulta.setExtraPost(0);
+							consulta.setExtraReposo(0);
+							consulta.setRitmico(false);
+							consulta.setRitmicoEsfuerzo(false);
+							consulta.setRitmicoPost(false);
+							consulta.setRitmicoReposo(false);
+							consulta.setApto(false);
+							consulta.setFechaAuditoria(fechaHora);
+							consulta.setHoraAuditoria(horaAuditoria);
+							consulta.setUsuarioAuditoria("frivero");
+							consultas.add(consulta);
+						} else {
+							msj.mensajeError(archivoConError
+									+ lblNombreConsulta.getValue() + ". Fila: "
+									+ contadorRow + ". Columna: "
+									+ contadorCell);
+							error = true;
+						}
+					} else {
+						msj.mensajeError(errorLongitud
+								+ lblNombreConsulta.getValue()
+								+ ". Fila: "
+								+ contadorRow
+								+ ". Columna: "
+								+ contadorCell
+								+ ". Longitudes permitidas: campo1 15, campo4 1500, campo5 256");
+						errorLong = true;
+						error = true;
 					}
 				}
-				if (!consultas.isEmpty())
+				if (!error)
 					servicioConsulta.guardarVarios(consultas);
 				else
-					msj.mensajeAlerta(archivoConErrores + " "
-							+ lblNombreConsulta.getValue());
-				mostrarGuardado = true;
+					errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreConsulta.getValue());
@@ -1148,186 +1405,176 @@ public class CImportar extends CGenerico {
 	@Listen("onUpload = #btnImportarMedicina")
 	public void cargarMedicina(UploadEvent event) {
 		mediaMedicina = event.getMedia();
-		lblNombreMedicina.setValue(mediaMedicina.getName());
-		final A rm = new A("Remover");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombreMedicina.setValue("");
-						rm.detach();
-						mediaMedicina = null;
-					}
-				});
-		rowMedicina.appendChild(rm);
-		mostrarConsulta();
+		if (mediaMedicina != null && Validador.validarExcel(mediaMedicina)) {
+			lblNombreMedicina.setValue(mediaMedicina.getName());
+			final A rm = new A("Remover");
+			rm.addEventListener(Events.ON_CLICK,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event event) throws Exception {
+							lblNombreMedicina.setValue("");
+							rm.detach();
+							mediaMedicina = null;
+						}
+					});
+			rowMedicina.appendChild(rm);
+		} else
+			msj.mensajeError(Mensaje.archivoExcel);
 	}
 
 	@Listen("onUpload = #btnImportarDiagostico")
 	public void cargarDiagostico(UploadEvent event) {
 		mediaDiagnostico = event.getMedia();
-		lblNombreDiagnostico.setValue(mediaDiagnostico.getName());
-		final A rm = new A("Remover");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombreDiagnostico.setValue("");
-						rm.detach();
-						mediaDiagnostico = null;
-					}
-				});
-		rowDiagnostico.appendChild(rm);
-		mostrarConsulta();
+		if (mediaDiagnostico != null
+				&& Validador.validarExcel(mediaDiagnostico)) {
+			lblNombreDiagnostico.setValue(mediaDiagnostico.getName());
+			final A rm = new A("Remover");
+			rm.addEventListener(Events.ON_CLICK,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event event) throws Exception {
+							lblNombreDiagnostico.setValue("");
+							rm.detach();
+							mediaDiagnostico = null;
+						}
+					});
+			rowDiagnostico.appendChild(rm);
+		} else
+			msj.mensajeError(Mensaje.archivoExcel);
 	}
 
 	@Listen("onUpload = #btnImportarExamen")
 	public void cargarExamen(UploadEvent event) {
 		mediaExamen = event.getMedia();
-		lblNombreExamen.setValue(mediaExamen.getName());
-		final A rm = new A("Remover");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombreExamen.setValue("");
-						rm.detach();
-						mediaExamen = null;
-					}
-				});
-		rowExamen.appendChild(rm);
-		mostrarConsulta();
+		if (mediaExamen != null && Validador.validarExcel(mediaExamen)) {
+			lblNombreExamen.setValue(mediaExamen.getName());
+			final A rm = new A("Remover");
+			rm.addEventListener(Events.ON_CLICK,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event event) throws Exception {
+							lblNombreExamen.setValue("");
+							rm.detach();
+							mediaExamen = null;
+						}
+					});
+			rowExamen.appendChild(rm);
+		} else
+			msj.mensajeError(Mensaje.archivoExcel);
 	}
 
 	@Listen("onUpload = #btnImportarArea")
 	public void cargarArea(UploadEvent event) {
 		mediaArea = event.getMedia();
-		lblNombreArea.setValue(mediaArea.getName());
-		final A rm = new A("Remover");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombreArea.setValue("");
-						rm.detach();
-						mediaArea = null;
-					}
-				});
-		rowArea.appendChild(rm);
-		mostrarConsulta();
+		if (mediaArea != null && Validador.validarExcel(mediaArea)) {
+			lblNombreArea.setValue(mediaArea.getName());
+			final A rm = new A("Remover");
+			rm.addEventListener(Events.ON_CLICK,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event event) throws Exception {
+							lblNombreArea.setValue("");
+							rm.detach();
+							mediaArea = null;
+						}
+					});
+			rowArea.appendChild(rm);
+		} else
+			msj.mensajeError(Mensaje.archivoExcel);
 	}
 
 	@Listen("onUpload = #btnImportarConsulta")
 	public void cargarConsulta(UploadEvent event) {
 		mediaConsulta = event.getMedia();
-		lblNombreConsulta.setValue(mediaConsulta.getName());
-		final A rm = new A("Remover");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombreConsulta.setValue("");
-						rm.detach();
-						mediaConsulta = null;
-					}
-				});
-		rowConsulta.appendChild(rm);
+		if (mediaConsulta != null && Validador.validarExcel(mediaConsulta)) {
+			lblNombreConsulta.setValue(mediaConsulta.getName());
+			final A rm = new A("Remover");
+			rm.addEventListener(Events.ON_CLICK,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event event) throws Exception {
+							lblNombreConsulta.setValue("");
+							rm.detach();
+							mediaConsulta = null;
+						}
+					});
+			rowConsulta.appendChild(rm);
+		} else
+			msj.mensajeError(Mensaje.archivoExcel);
 	}
 
 	@Listen("onUpload = #btnImportarPaciente")
 	public void cargarPaciente(UploadEvent event) {
 		mediaPaciente = event.getMedia();
-		lblNombrePaciente.setValue(mediaPaciente.getName());
-		final A rm = new A("Remover");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombrePaciente.setValue("");
-						rm.detach();
-						mediaPaciente = null;
-					}
-				});
-		rowPaciente.appendChild(rm);
-		mostrarConsulta();
+		if (mediaPaciente != null && Validador.validarExcel(mediaPaciente)) {
+			lblNombrePaciente.setValue(mediaPaciente.getName());
+			final A rm = new A("Remover");
+			rm.addEventListener(Events.ON_CLICK,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event event) throws Exception {
+							lblNombrePaciente.setValue("");
+							rm.detach();
+							mediaPaciente = null;
+						}
+					});
+			rowPaciente.appendChild(rm);
+		} else
+			msj.mensajeError(Mensaje.archivoExcel);
 	}
 
 	@Listen("onUpload = #btnImportarExamenConsulta")
 	public void cargarExamenConsulta(UploadEvent event) {
 		mediaConsultaExamen = event.getMedia();
-		lblNombreExamenConsulta.setValue(mediaConsultaExamen.getName());
-		final A rm = new A("Remover");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombreExamenConsulta.setValue("");
-						rm.detach();
-						mediaConsultaExamen = null;
-					}
-				});
-		rowConsultaExamen.appendChild(rm);
+		if (mediaConsultaExamen != null
+				&& Validador.validarExcel(mediaConsultaExamen)) {
+			lblNombreExamenConsulta.setValue(mediaConsultaExamen.getName());
+			final A rm = new A("Remover");
+			rm.addEventListener(Events.ON_CLICK,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event event) throws Exception {
+							lblNombreExamenConsulta.setValue("");
+							rm.detach();
+							mediaConsultaExamen = null;
+						}
+					});
+			rowConsultaExamen.appendChild(rm);
+		} else
+			msj.mensajeError(Mensaje.archivoExcel);
 	}
 
 	@Listen("onUpload = #btnImportarDiagnosticoConsulta")
 	public void cargarDiagnosticoConsulta(UploadEvent event) {
 		mediaConsultaDiagnostico = event.getMedia();
-		lblNombreDiagnosticoConsulta.setValue(mediaConsultaDiagnostico
-				.getName());
-		final A rm = new A("Remover");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombreDiagnosticoConsulta.setValue("");
-						rm.detach();
-						mediaConsultaDiagnostico = null;
-					}
-				});
-		rowConsultaDiagnostico.appendChild(rm);
+		if (mediaConsultaDiagnostico != null
+				&& Validador.validarExcel(mediaConsultaDiagnostico)) {
+			lblNombreDiagnosticoConsulta.setValue(mediaConsultaDiagnostico
+					.getName());
+			final A rm = new A("Remover");
+			rm.addEventListener(Events.ON_CLICK,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event event) throws Exception {
+							lblNombreDiagnosticoConsulta.setValue("");
+							rm.detach();
+							mediaConsultaDiagnostico = null;
+						}
+					});
+			rowConsultaDiagnostico.appendChild(rm);
+		} else
+			msj.mensajeError(Mensaje.archivoExcel);
 	}
 
 	@Listen("onUpload = #btnImportarMedicinaConsulta")
 	public void cargarMedicinaConsulta(UploadEvent event) {
 		mediaConsultaMedicina = event.getMedia();
-		lblNombreMedicinaConsulta.setValue(mediaConsultaMedicina.getName());
-		final A rm = new A("Remover");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombreMedicinaConsulta.setValue("");
-						rm.detach();
-						mediaConsultaMedicina = null;
-					}
-				});
-		rowConsultaMedicina.appendChild(rm);
-	}
-
-	public void mostrarConsulta() {
-		if (lblNombreArea.getValue().compareTo("") != 0
-				&& lblNombreDiagnostico.getValue().compareTo("") != 0
-				&& lblNombreExamen.getValue().compareTo("") != 0
-				&& lblNombreMedicina.getValue().compareTo("") != 0
-		// && lblNombrePaciente.getValue().compareTo("") != 0
-		)
-			rowConsulta.setVisible(true);
-		else
-			rowConsulta.setVisible(false);
-	}
-
-	public boolean validar() {
-
-		if (mediaArea != null && !Validador.validarExcel(mediaArea)
-				|| mediaConsulta != null
-				&& !Validador.validarExcel(mediaConsulta)
-				|| mediaConsultaDiagnostico != null
-				&& !Validador.validarExcel(mediaConsultaDiagnostico)
-				|| mediaConsultaExamen != null
-				&& !Validador.validarExcel(mediaConsultaExamen)
-				|| mediaConsultaMedicina != null
-				&& !Validador.validarExcel(mediaConsultaMedicina)
-				|| mediaDiagnostico != null
-				&& !Validador.validarExcel(mediaDiagnostico)
-				|| mediaExamen != null && !Validador.validarExcel(mediaExamen)
-				|| mediaMedicina != null
-				&& !Validador.validarExcel(mediaMedicina)
-				|| mediaPaciente != null
-				&& !Validador.validarExcel(mediaPaciente)) {
-			msj.mensajeError(Mensaje.archivoExcel);
-			return false;
+		if (mediaConsultaMedicina != null
+				&& Validador.validarExcel(mediaConsultaMedicina)) {
+			lblNombreMedicinaConsulta.setValue(mediaConsultaMedicina.getName());
+			final A rm = new A("Remover");
+			rm.addEventListener(Events.ON_CLICK,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event event) throws Exception {
+							lblNombreMedicinaConsulta.setValue("");
+							rm.detach();
+							mediaConsultaMedicina = null;
+						}
+					});
+			rowConsultaMedicina.appendChild(rm);
 		} else
-			return true;
+			msj.mensajeError(Mensaje.archivoExcel);
 	}
 }

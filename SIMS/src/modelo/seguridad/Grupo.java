@@ -21,7 +21,7 @@ import org.hibernate.annotations.Type;
  * 
  */
 @Entity
-@Table(name="grupo")
+@Table(name="grupo", schema="dusa_sims.dbo")
 public class Grupo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public class Grupo implements Serializable {
 	//bi-directional many-to-many association to Arbol
 	@ManyToMany
 	@JoinTable(
-		name="arbol_grupo"
+		name="arbol_grupo", schema="dusa_sims.dbo"
 		, joinColumns={
 			@JoinColumn(name="id_grupo", nullable=false)
 			}

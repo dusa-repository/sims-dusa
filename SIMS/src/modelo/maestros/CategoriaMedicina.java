@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="categoria_medicina")
+@Table(name="categoria_medicina", schema="dusa_sims.dbo")
 public class CategoriaMedicina implements Serializable {
 
 	

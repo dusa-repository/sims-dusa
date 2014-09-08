@@ -1,19 +1,24 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
+import modelo.maestros.PresentacionMedicina;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Include;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
@@ -34,9 +39,19 @@ public class CNomina extends CGenerico {
 	private long id = 0;
 	Catalogo<Nomina> catalogo;
 
+	private boolean empresa = false;
+	private CEmpresa cEmpresa = new CEmpresa();
+	List<Nomina> listaNomina = new ArrayList<Nomina>();
+	Listbox lista;
+
 	@Override
 	public void inicializar() throws IOException {
-		
+		contenido = (Include) divNomina.getParent();
+		Tabbox tabox = (Tabbox) divNomina.getParent().getParent().getParent()
+				.getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
+
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("mapaGeneral");
 		if (mapa != null) {
@@ -46,7 +61,18 @@ public class CNomina extends CGenerico {
 				mapa = null;
 			}
 		}
-		
+
+		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
+				.getCurrent().getAttribute("itemsCatalogo");
+		if (map != null) {
+			if (map.get("id") != null) {
+				empresa = true;
+				listaNomina = (List<Nomina>) map.get("lista");
+				lista = (Listbox) map.get("listbox");
+				map.clear();
+				map = null;
+			}
+		}
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -64,9 +90,18 @@ public class CNomina extends CGenerico {
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombre.getValue();
-					Nomina nomina = new Nomina(id, nombre,
-							fechaHora, horaAuditoria, nombreUsuarioSesion());
+					Nomina nomina = new Nomina(id, nombre, fechaHora,
+							horaAuditoria, nombreUsuarioSesion());
 					servicioNomina.guardar(nomina);
+					if (empresa) {
+						if (id != 0)
+							nomina = servicioNomina.buscar(id);
+						else {
+							nomina = servicioNomina.buscarUltimo();
+							listaNomina.add(nomina);
+						}
+						cEmpresa.recibirNomina(listaNomina, lista);
+					}
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
@@ -75,8 +110,7 @@ public class CNomina extends CGenerico {
 			@Override
 			public void eliminar() {
 				if (id != 0 && txtNombre.getText().compareTo("") != 0) {
-					Messagebox.show(
-							"¿Esta Seguro de Eliminar la Nomina?",
+					Messagebox.show("¿Esta Seguro de Eliminar la Nomina?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -90,8 +124,7 @@ public class CNomina extends CGenerico {
 										if (!nominas.isEmpty()) {
 											msj.mensajeError(Mensaje.noEliminar);
 										} else {
-											servicioNomina
-													.eliminar(nomina);
+											servicioNomina.eliminar(nomina);
 											limpiar();
 											msj.mensajeInformacion(Mensaje.eliminado);
 										}
@@ -117,8 +150,8 @@ public class CNomina extends CGenerico {
 	@Listen("onClick = #btnBuscarNomina")
 	public void mostrarCatalogo() {
 		final List<Nomina> nominas = servicioNomina.buscarTodos();
-		catalogo = new Catalogo<Nomina>(catalogoNomina,
-				"Catalogo de Nominas", nominas, "Nombre") {
+		catalogo = new Catalogo<Nomina>(catalogoNomina, "Catalogo de Nominas",
+				nominas, "Nombre") {
 
 			@Override
 			protected List<Nomina> buscar(String valor, String combo) {
@@ -148,8 +181,7 @@ public class CNomina extends CGenerico {
 
 	@Listen("onChange = #txtNombre")
 	public void buscarPorNombre() {
-		Nomina nomina = servicioNomina
-				.buscarPorNombre(txtNombre.getValue());
+		Nomina nomina = servicioNomina.buscarPorNombre(txtNombre.getValue());
 		if (nomina != null)
 			llenarCampos(nomina);
 	}
@@ -160,4 +192,3 @@ public class CNomina extends CGenerico {
 	}
 
 }
-

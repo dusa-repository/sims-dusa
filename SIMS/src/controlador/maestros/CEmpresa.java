@@ -2,14 +2,23 @@ package controlador.maestros;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.Consultorio;
 import modelo.maestros.Empresa;
+import modelo.maestros.EmpresaNomina;
+import modelo.maestros.Medicina;
+import modelo.maestros.MedicinaPresentacionUnidad;
+import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
+import modelo.maestros.ParteCuerpo;
+import modelo.maestros.PresentacionMedicina;
 import modelo.seguridad.Arbol;
 import modelo.sha.Informe;
+import modelo.transacciones.ConsultaMedicina;
+import modelo.transacciones.ConsultaParteCuerpo;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -19,6 +28,9 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Include;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
@@ -28,6 +40,7 @@ import org.zkoss.zul.Textbox;
 import arbol.CArbol;
 
 import componentes.Botonera;
+import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
 import componentes.Validador;
@@ -35,6 +48,14 @@ import componentes.Validador;
 public class CEmpresa extends CGenerico {
 
 	private static final long serialVersionUID = -8397437400900885743L;
+	@Wire
+	private Tab tabBasicos;
+	@Wire
+	private Tab tabEmpleados;
+	@Wire
+	private Button btnSiguientePestanna;
+	@Wire
+	private Button btnAnteriorPestanna;
 	@Wire
 	private Div divEmpresa;
 	@Wire
@@ -111,6 +132,17 @@ public class CEmpresa extends CGenerico {
 	private Spinner spnConapdis;
 	@Wire
 	private Spinner spnExtranjeros;
+	@Wire
+	private Textbox txtBuscadorNomina;
+	@Wire
+	private Listbox ltbNominas;
+	@Wire
+	private Listbox ltbNominasAgregadas;
+	@Wire
+	private Button btnAbrirNomina;
+	List<Nomina> nominasDisponibles = new ArrayList<Nomina>();
+	List<EmpresaNomina> nominasAgregadas = new ArrayList<EmpresaNomina>();
+	Buscar<Nomina> buscador;
 
 	private CArbol cArbol = new CArbol();
 	long id = 0;
@@ -133,6 +165,10 @@ public class CEmpresa extends CGenerico {
 				map = null;
 			}
 		}
+
+		llenarListas();
+		listasMultiples();
+		buscar();
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -177,6 +213,7 @@ public class CEmpresa extends CGenerico {
 				spnConapdis.setValue(0);
 				spnExtranjeros.setValue(0);
 				id = 0;
+				llenarListas();
 			}
 
 			@Override
@@ -280,8 +317,12 @@ public class CEmpresa extends CGenerico {
 					empresa.setCedula2Representante(cedula2);
 					empresa.setTelefono2Representante(telefono2Representante);
 					empresa.setCargo2(cargo2);
-
 					servicioEmpresa.guardar(empresa);
+					if (id != 0)
+						empresa = servicioEmpresa.buscar(id);
+					else
+						empresa = servicioEmpresa.buscarUltima();
+					guardarNominas(empresa);
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
 				}
@@ -325,6 +366,153 @@ public class CEmpresa extends CGenerico {
 			}
 		};
 		botoneraEmpresa.appendChild(botonera);
+	}
+
+	protected void guardarNominas(Empresa empresa) {
+		List<EmpresaNomina> empresasNominas = new ArrayList<EmpresaNomina>();
+		servicioEmpresaNomina.borrarNominas(empresa);
+		if (ltbNominasAgregadas.getItemCount() != 0) {
+			for (int i = 0; i < ltbNominasAgregadas.getItemCount(); i++) {
+				Listitem listItem = ltbNominasAgregadas.getItemAtIndex(i);
+				Integer idNomina = ((Spinner) ((listItem.getChildren().get(2)))
+						.getFirstChild()).getValue();
+				Nomina nomina = servicioNomina.buscar(idNomina);
+				int valor = ((Spinner) ((listItem.getChildren().get(1)))
+						.getFirstChild()).getValue();
+				EmpresaNomina empresaNomina = new EmpresaNomina(empresa,
+						nomina, valor);
+				empresasNominas.add(empresaNomina);
+			}
+		}
+		servicioEmpresaNomina.guardar(empresasNominas);
+	}
+
+	private void listasMultiples() {
+		ltbNominas.setMultiple(false);
+		ltbNominas.setCheckmark(false);
+		ltbNominas.setMultiple(true);
+		ltbNominas.setCheckmark(true);
+		ltbNominasAgregadas.setMultiple(false);
+		ltbNominasAgregadas.setCheckmark(false);
+		ltbNominasAgregadas.setMultiple(true);
+		ltbNominasAgregadas.setCheckmark(true);
+	}
+
+	private void llenarListas() {
+		Empresa empresa = servicioEmpresa.buscar(id);
+		nominasDisponibles = servicioNomina.buscarDisponibles(empresa);
+		ltbNominas.setModel(new ListModelList<Nomina>(nominasDisponibles));
+		nominasAgregadas = servicioEmpresaNomina.buscarPorEmpresa(empresa);
+		ltbNominasAgregadas.setModel(new ListModelList<EmpresaNomina>(
+				nominasAgregadas));
+		listasMultiples();
+	}
+
+	@Listen("onClick = #pasar1")
+	public void derechaNomina() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem = ltbNominas.getItems();
+		if (listItem.size() != 0) {
+			for (int i = 0; i < listItem.size(); i++) {
+				if (listItem.get(i).isSelected()) {
+					Nomina nomina = listItem.get(i).getValue();
+					nominasDisponibles.remove(nomina);
+					EmpresaNomina empresaNomina = new EmpresaNomina();
+					empresaNomina.setNomina(nomina);
+					nominasAgregadas.clear();
+					for (int j = 0; j < ltbNominasAgregadas.getItemCount(); j++) {
+						Listitem listItemj = ltbNominasAgregadas
+								.getItemAtIndex(j);
+						Integer idNomina = ((Spinner) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						Nomina nominaj = servicioNomina.buscar(idNomina);
+						int valor = ((Spinner) ((listItemj.getChildren().get(1)))
+								.getFirstChild()).getValue();
+						EmpresaNomina empresaNominaj = new EmpresaNomina(null,
+								nominaj, valor);
+						nominasAgregadas.add(empresaNominaj);
+					}
+					nominasAgregadas.add(empresaNomina);
+					ltbNominasAgregadas
+							.setModel(new ListModelList<EmpresaNomina>(
+									nominasAgregadas));
+					ltbNominasAgregadas.renderAll();
+					listitemEliminar.add(listItem.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbNominas.removeItemAt(listitemEliminar.get(i).getIndex());
+		}
+		listasMultiples();
+	}
+
+	@Listen("onClick = #pasar2")
+	public void izquierdaNomina() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem2 = ltbNominasAgregadas.getItems();
+		if (listItem2.size() != 0) {
+			for (int i = 0; i < listItem2.size(); i++) {
+				if (listItem2.get(i).isSelected()) {
+					EmpresaNomina empresaNomina = listItem2.get(i).getValue();
+					nominasAgregadas.remove(empresaNomina);
+					nominasDisponibles.add(empresaNomina.getNomina());
+					ltbNominas.setModel(new ListModelList<Nomina>(
+							nominasDisponibles));
+					listitemEliminar.add(listItem2.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbNominasAgregadas
+					.removeItemAt(listitemEliminar.get(i).getIndex());
+		}
+		listasMultiples();
+	}
+
+	private void buscar() {
+		buscador = new Buscar<Nomina>(ltbNominas, txtBuscadorNomina) {
+			@Override
+			protected List<Nomina> buscar(String valor) {
+				List<Nomina> nominasFiltradas = new ArrayList<Nomina>();
+				List<Nomina> nominas = servicioNomina.filtroNombre(valor);
+				for (int i = 0; i < nominasDisponibles.size(); i++) {
+					Nomina nomina = nominasDisponibles.get(i);
+					for (int j = 0; j < nominas.size(); j++) {
+						if (nomina.getIdNomina() == nominas.get(j)
+								.getIdNomina())
+							nominasFiltradas.add(nomina);
+					}
+				}
+				return nominasFiltradas;
+			}
+		};
+	}
+
+	/* Abre la vista de Nomina */
+	@Listen("onClick = #btnAbrirNomina")
+	public void abrirNomina() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "nomina");
+		map.put("lista", nominasDisponibles);
+		map.put("listbox", ltbNominas);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Nomina");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
+	}
+
+	@Listen("onClick = #btnSiguientePestanna")
+	public void siguientePestanna() {
+		tabEmpleados.setSelected(true);
+	}
+
+	/* Abre la pestanna de especificaciones */
+	@Listen("onClick = #btnAnteriorPestanna")
+	public void anteriorPestanna() {
+		tabBasicos.setSelected(true);
 	}
 
 	/* Permite validar que todos los campos esten completos */
@@ -499,6 +687,7 @@ public class CEmpresa extends CGenerico {
 		if (empresa.getExtranjeros() != null)
 			spnExtranjeros.setValue(empresa.getExtranjeros());
 		id = empresa.getIdEmpresa();
+		llenarListas();
 	}
 
 	/* Abre la vista de Ciudad */
@@ -517,5 +706,15 @@ public class CEmpresa extends CGenerico {
 		if (Validador.validarCorreo(txtCorreo.getValue()) == false) {
 			msj.mensajeAlerta(Mensaje.correoInvalido);
 		}
+	}
+
+	public void recibirNomina(List<Nomina> listaNomina, Listbox lista) {
+		ltbNominas = lista;
+		nominasDisponibles = listaNomina;
+		ltbNominas.setModel(new ListModelList<Nomina>(nominasDisponibles));
+		ltbNominas.setMultiple(false);
+		ltbNominas.setCheckmark(false);
+		ltbNominas.setMultiple(true);
+		ltbNominas.setCheckmark(true);
 	}
 }

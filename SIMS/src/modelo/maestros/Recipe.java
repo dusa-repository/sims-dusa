@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import modelo.transacciones.ConsultaMedicina;
 
 @Entity
-@Table(name="recipe")
+@Table(name="recipe", schema="dusa_sims.dbo")
 public class Recipe implements Serializable {
 
 	private static final long serialVersionUID = -9191855414562669785L;

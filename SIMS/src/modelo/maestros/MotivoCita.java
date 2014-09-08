@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="motivo_cita")
+@Table(name="motivo_cita", schema="dusa_sims.dbo")
 public class MotivoCita implements Serializable {
 	private static final long serialVersionUID = 1L;
 

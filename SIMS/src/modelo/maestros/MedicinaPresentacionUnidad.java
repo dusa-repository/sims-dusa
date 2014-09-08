@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import modelo.pk.MedicinaPresentacionUnidadId;
 
 @Entity
-@Table(name = "medicina_presentacion_unidad")
+@Table(name = "medicina_presentacion_unidad", schema="dusa_sims.dbo")
 @IdClass(MedicinaPresentacionUnidadId.class)
 public class MedicinaPresentacionUnidad {
 

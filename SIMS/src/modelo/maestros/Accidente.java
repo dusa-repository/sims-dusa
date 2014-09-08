@@ -18,7 +18,7 @@ import modelo.transacciones.ConsultaDiagnostico;
 import modelo.transacciones.HistoriaAccidente;
 
 @Entity
-@Table(name = "accidente")
+@Table(name = "accidente", schema="dusa_sims.dbo")
 public class Accidente implements Serializable {
 
 	private static final long serialVersionUID = -5155885529457324266L;

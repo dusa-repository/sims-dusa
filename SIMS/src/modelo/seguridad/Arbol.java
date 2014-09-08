@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="arbol")
+@Table(name="arbol", schema="dusa_sims.dbo")
 public class Arbol implements Serializable {
 	private static final long serialVersionUID = 1L;
 

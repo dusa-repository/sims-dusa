@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pais")
+@Table(name="pais", schema="dusa_sims.dbo")
 public class Pais implements Serializable {
 
 	private static final long serialVersionUID = 8338344642426427005L;

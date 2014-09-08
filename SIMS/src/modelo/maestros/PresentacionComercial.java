@@ -19,7 +19,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="presentacion_comercial")
+@Table(name="presentacion_comercial", schema="dusa_sims.dbo")
 public class PresentacionComercial implements Serializable {
 	private static final long serialVersionUID = 1L;
 
