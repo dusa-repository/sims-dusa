@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RConstancia" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="fb533635-fe0b-4b54-a554-fc572d401198">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="empresaNombre" class="java.lang.String"/>
+	<parameter name="empresaRif" class="java.lang.String"/>
+	<parameter name="empresaDireccion" class="java.lang.String"/>
+	<parameter name="doctorNombre" class="java.lang.String"/>
+	<parameter name="doctorApellido" class="java.lang.String"/>
+	<parameter name="doctorCedula" class="java.lang.String"/>
+	<parameter name="pacienteNombre" class="java.lang.String"/>
+	<parameter name="pacienteApellido" class="java.lang.String"/>
+	<parameter name="pacienteCedula" class="java.lang.String"/>
+	<parameter name="fecha" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="355" splitType="Stretch">
+			<image>
+				<reportElement x="7" y="29" width="107" height="52" uuid="58d8abb0-f3ee-41fb-adbd-7b4c11bf43f9"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="368" y="177" width="154" height="20" uuid="8013c240-ae73-411c-9aa5-299397bd917f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="472" y="9" width="100" height="20" uuid="ccb750f3-146f-40cf-983e-e9995e54cc2e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="438" y="9" width="33" height="20" uuid="43d19177-31f0-4b7d-84f7-72c7c7f2c62b"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="114" y="34" width="325" height="20" uuid="dee19fad-7487-4708-9c13-d84c3354f309"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaNombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="446" y="34" width="126" height="20" uuid="4a75813f-3d66-463a-9e7f-dba5e6eeb697"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="114" y="61" width="458" height="20" uuid="8b48aebe-19f5-4722-9fb4-6c48045d1344"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaDireccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="237" y="107" width="88" height="20" uuid="f5bfb2c4-d80d-4e2f-84ab-8a64d7cf67a0"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Constancia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="147" width="320" height="20" uuid="31600c92-4fe1-479d-85e4-2265867503b5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Por medio de la presente se hace constar que el paciente:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="320" y="147" width="252" height="20" uuid="12b18ad4-c05f-46b9-b776-0f6bfdb6a729"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteNombre}+"  "+$P{pacienteApellido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="177" width="114" height="20" uuid="af90ee08-a404-4d33-a594-725a5779de83"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Cedula de Identidad:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="114" y="177" width="75" height="20" uuid="a3399d16-df67-409b-9dbf-0e2047992afa"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="189" y="177" width="179" height="20" uuid="df06beb0-f6ac-420f-ac41-38b70eec50e7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Asistio a Consulta Medica el dia:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="213" y="256" width="131" height="1" uuid="290e4ac5-469c-4e89-947a-26886156b043"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="213" y="269" width="131" height="20" uuid="27921410-1499-46f2-ab17-02f6e3b79129"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{doctorNombre}+"  "+$P{doctorApellido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

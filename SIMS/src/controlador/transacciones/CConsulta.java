@@ -722,6 +722,8 @@ public class CConsulta extends CGenerico {
 	private Combobox cmbPrioridadEspecialista;
 	@Wire
 	private Combobox cmbPrioridadExamen;
+	@Wire
+	private Button btnConstancia;
 	// -----------------------------
 	@Wire("#wdwRegistro")
 	private Window wdwRegistro;
@@ -983,6 +985,9 @@ public class CConsulta extends CGenerico {
 					btnGenerarReferencia.setVisible(true);
 					btnGenerarOrdenServicios.setVisible(true);
 					btnGenerarRecipe.setVisible(true);
+					botonera.getChildren().get(0).setVisible(false);
+					actualizarConsultas(paciente);
+					btnConstancia.setVisible(true);
 				}
 			}
 
@@ -1020,6 +1025,25 @@ public class CConsulta extends CGenerico {
 		botoneraGeneral.getChildren().get(0).setVisible(false);
 		botoneraGeneral.getChildren().get(1).setVisible(false);
 		botoneraConsultaGeneral.appendChild(botoneraGeneral);
+	}
+
+	public void actualizarConsultas(Paciente paciente) {
+		List<Consulta> consultas = servicioConsulta.buscarPorPaciente(paciente);
+		for (int i = 0; i < consultas.size(); i++) {
+			consultas.get(i).setHoraConsulta(
+					formatoFecha.format(consultas.get(i).getFechaConsulta()));
+		}
+		for (int i = 0; i < consultas.size(); i++) {
+			String nombre = consultas.get(i).getUsuario().getPrimerNombre();
+			String apellido = consultas.get(i).getUsuario().getPrimerApellido();
+			Consulta consultaj = consultas.get(i);
+			consultaj.setHoraAuditoria(nombre + " " + apellido);
+		}
+		ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
+		ltbConsultas.setMultiple(false);
+		ltbConsultas.setCheckmark(false);
+		ltbConsultas.setMultiple(true);
+		ltbConsultas.setCheckmark(true);
 	}
 
 	private void buscadorIntervenciones() {
@@ -2172,6 +2196,7 @@ public class CConsulta extends CGenerico {
 			if (ltbConsultas.getSelectedItems().size() == 1) {
 				Listitem listItem = ltbConsultas.getSelectedItem();
 				if (listItem != null) {
+					btnConstancia.setVisible(true);
 					botonera.getChildren().get(0).setVisible(false);
 					Consulta consulta = listItem.getValue();
 					idConsulta = consulta.getIdConsulta();
@@ -2650,6 +2675,9 @@ public class CConsulta extends CGenerico {
 								.get(4))).getFirstChild()).getValue();
 						Especialista especialistaj = servicioEspecialista
 								.buscar(String.valueOf(id));
+						String nombre = especialistaj.getNombre();
+						String apellido = especialistaj.getApellido();
+						especialistaj.setNombre(nombre + " " + apellido);
 						double valor = ((Doublespinner) ((listItemj
 								.getChildren().get(3))).getFirstChild())
 								.getValue();
@@ -3296,6 +3324,7 @@ public class CConsulta extends CGenerico {
 		if (!botonera.getChildren().get(0).isVisible()) {
 			botonera.getChildren().get(0).setVisible(true);
 		}
+		btnConstancia.setVisible(false);
 		btnGenerarOrden.setVisible(false);
 		btnGenerarRecipe.setVisible(false);
 		btnGenerarReferencia.setVisible(false);
@@ -4931,6 +4960,7 @@ public class CConsulta extends CGenerico {
 
 		String nombre = paciente.getPrimerNombre() + "   "
 				+ paciente.getSegundoNombre();
+		p.put("numero", consuta.getIdConsulta());
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
@@ -5246,9 +5276,13 @@ public class CConsulta extends CGenerico {
 	public void generarHistoricoConsulta() {
 		if (!idPaciente.equals("")) {
 			String id = idPaciente;
-			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=6&valor3="
-					+ id
-					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			if (!servicioConsulta.buscarPorIdPacienteOrdenado(idPaciente)
+					.isEmpty()) {
+				Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=6&valor3="
+						+ id
+						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			} else
+				msj.mensajeError("Este paciente no posee consultas");
 		} else
 			msj.mensajeError("Debe Seleccionar un Paciente");
 	}
@@ -5363,5 +5397,47 @@ public class CConsulta extends CGenerico {
 		fichero = JasperRunManager.runReportToPdf(reporte, p);
 		return fichero;
 	}
+	@Listen("onClick = #btnConstancia")
+	public void generarConstancia() {
+		if (idConsulta != 0) {
+			Long id = idConsulta;
+			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=8&valor2="
+					+ id
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		} else
+			msj.mensajeAlerta("Debe registrar la Consulta");
+	}
 
+	public byte[] reporteConstancia(Long part2) throws JRException {
+		byte[] fichero = null;
+		Consulta consuta = getServicioConsulta().buscar(part2);
+		
+		Paciente paciente = consuta.getPaciente();
+		Usuario user = consuta.getUsuario();
+		Map p = new HashMap();
+		String nombreEmpresa = "DUSA C.A.";
+		String direccionEmpresa = "Via acarigua la miel";
+		String rifEmpresa = "J-dfghjk";
+		String area = "";
+		if (paciente.getEmpresa() != null) {
+			nombreEmpresa = paciente.getEmpresa().getNombre();
+			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
+			rifEmpresa = paciente.getEmpresa().getRif();
+		}
+		p.put("empresaNombre", nombreEmpresa);
+		p.put("empresaDireccion", direccionEmpresa);
+		p.put("empresaRif", rifEmpresa);
+		p.put("pacienteNombre", paciente.getPrimerNombre());
+		p.put("pacienteApellido", paciente.getPrimerApellido());
+		p.put("pacienteCedula", paciente.getCedula());
+		p.put("doctorNombre", user.getPrimerNombre());
+		p.put("doctorApellido", user.getPrimerApellido());
+		p.put("doctorCedula", user.getCedula());
+		p.put("fecha", consuta.getFechaConsulta());
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RConstancia.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p);
+		return fichero;
+	}
 }
