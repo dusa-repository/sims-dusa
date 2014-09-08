@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import modelo.transacciones.ConsultaParteCuerpo;
 
 @Entity
-@Table(name="parte_cuerpo")
+@Table(name="parte_cuerpo", schema="dusa_sims.dbo")
 public class ParteCuerpo implements Serializable {
 
 	private static final long serialVersionUID = -3594152739178826679L;

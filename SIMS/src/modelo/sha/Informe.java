@@ -22,7 +22,7 @@ import modelo.maestros.Paciente;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "informe")
+@Table(name = "informe", schema="dusa_sims.dbo")
 public class Informe implements Serializable {
 
 	private static final long serialVersionUID = -5110967796816980541L;
@@ -102,7 +102,7 @@ public class Informe implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(
-		name="informe_condicion_a"
+		name="informe_condicion_a", schema="dusa_sims.dbo"
 		, joinColumns={
 			@JoinColumn(name="id_informe", nullable=false)
 			}
@@ -114,7 +114,7 @@ public class Informe implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(
-		name="informe_condicion_b"
+		name="informe_condicion_b", schema="dusa_sims.dbo"
 		, joinColumns={
 			@JoinColumn(name="id_informe", nullable=false)
 			}
@@ -126,7 +126,7 @@ public class Informe implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(
-		name="informe_condicion_c"
+		name="informe_condicion_c", schema="dusa_sims.dbo"
 		, joinColumns={
 			@JoinColumn(name="id_informe", nullable=false)
 			}
@@ -138,7 +138,7 @@ public class Informe implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(
-		name="informe_condicion_d"
+		name="informe_condicion_d", schema="dusa_sims.dbo"
 		, joinColumns={
 			@JoinColumn(name="id_informe", nullable=false)
 			}
@@ -150,7 +150,7 @@ public class Informe implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(
-		name="informe_condicion_e"
+		name="informe_condicion_e", schema="dusa_sims.dbo"
 		, joinColumns={
 			@JoinColumn(name="id_informe", nullable=false)
 			}
@@ -162,7 +162,7 @@ public class Informe implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(
-		name="informe_condicion_f"
+		name="informe_condicion_f", schema="dusa_sims.dbo"
 		, joinColumns={
 			@JoinColumn(name="id_informe", nullable=false)
 			}

@@ -22,7 +22,7 @@ import modelo.transacciones.ConsultaMedicina;
  * 
  */
 @Entity
-@Table(name = "medicina")
+@Table(name = "medicina", schema="dusa_sims.dbo")
 public class Medicina implements Serializable {
 	private static final long serialVersionUID = 1L;
 

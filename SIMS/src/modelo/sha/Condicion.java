@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "condicion")
+@Table(name = "condicion", schema="dusa_sims.dbo")
 public class Condicion implements Serializable {
 
 	private static final long serialVersionUID = -88415048395258025L;

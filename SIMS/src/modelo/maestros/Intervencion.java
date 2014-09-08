@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import modelo.transacciones.HistoriaIntervencion;
 
 @Entity
-@Table(name="intervencion")
+@Table(name="intervencion", schema="dusa_sims.dbo")
 public class Intervencion implements Serializable {
 
 	private static final long serialVersionUID = 2784782575138871908L;

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import modelo.pk.PacienteAntecedenteId;
 
 @Entity
-@Table(name = "paciente_antecedente")
+@Table(name = "paciente_antecedente", schema="dusa_sims.dbo")
 @IdClass(PacienteAntecedenteId.class)
 public class PacienteAntecedente {
 

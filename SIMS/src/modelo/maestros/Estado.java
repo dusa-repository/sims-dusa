@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="estado")
+@Table(name="estado", schema="dusa_sims.dbo")
 public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
 

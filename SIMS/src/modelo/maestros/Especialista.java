@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import modelo.transacciones.ConsultaEspecialista;
 
 @Entity
-@Table(name = "especialista")
+@Table(name = "especialista", schema="dusa_sims.dbo")
 public class Especialista implements Serializable {
 
 	private static final long serialVersionUID = 5227934273608392500L;

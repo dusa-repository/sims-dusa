@@ -16,7 +16,7 @@ import modelo.maestros.Diagnostico;
 import modelo.pk.ConsultaDiagnosticoId;
 
 @Entity
-@Table(name = "consulta_diagnostico")
+@Table(name = "consulta_diagnostico", schema="dusa_sims.dbo")
 @IdClass(ConsultaDiagnosticoId.class)
 public class ConsultaDiagnostico {
 

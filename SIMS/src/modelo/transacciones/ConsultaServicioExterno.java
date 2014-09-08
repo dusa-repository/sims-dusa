@@ -14,7 +14,7 @@ import modelo.maestros.ServicioExterno;
 import modelo.pk.ConsultaServicioExternoId;
 
 @Entity
-@Table(name = "consulta_servicio_externo")
+@Table(name = "consulta_servicio_externo", schema="dusa_sims.dbo")
 @IdClass(ConsultaServicioExternoId.class)
 public class ConsultaServicioExterno {
 

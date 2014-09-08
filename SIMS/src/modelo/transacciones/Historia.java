@@ -20,7 +20,7 @@ import modelo.maestros.Paciente;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "historia")
+@Table(name = "historia", schema="dusa_sims.dbo")
 public class Historia implements Serializable {
 
 	private static final long serialVersionUID = 3136973158445875804L;

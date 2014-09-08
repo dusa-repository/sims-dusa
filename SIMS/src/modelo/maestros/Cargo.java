@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import modelo.transacciones.Consulta;
 
 @Entity
-@Table(name="cargo")
+@Table(name="cargo", schema="dusa_sims.dbo")
 public class Cargo implements Serializable {
 
 	private static final long serialVersionUID = -1638892317114606348L;

@@ -1,6 +1,7 @@
 package controlador.maestros;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -19,6 +20,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import modelo.inventario.F00021;
+import modelo.inventario.F00021PK;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 
@@ -35,6 +38,8 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 
+import servicio.inventario.SF00021;
+import servicio.inventario.SF4101;
 import servicio.maestros.SAccidente;
 import servicio.maestros.SAntecedente;
 import servicio.maestros.SAntecedenteTipo;
@@ -45,6 +50,7 @@ import servicio.maestros.SCiudad;
 import servicio.maestros.SConsultorio;
 import servicio.maestros.SDiagnostico;
 import servicio.maestros.SEmpresa;
+import servicio.maestros.SEmpresaNomina;
 import servicio.maestros.SEspecialidad;
 import servicio.maestros.SEspecialista;
 import servicio.maestros.SEstado;
@@ -95,6 +101,10 @@ import componentes.Mensaje;
 public abstract class CGenerico extends SelectorComposer<Component> {
 
 	private static final long serialVersionUID = -2264423023637489596L;
+	@WireVariable("SF00021")
+	protected SF00021 servicioF00021;
+	@WireVariable("SF4101")
+	protected SF4101 servicioF4101;
 	@WireVariable("SAccidente")
 	protected SAccidente servicioAccidente;
 	@WireVariable("SAntecedente")
@@ -143,6 +153,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SEstado servicioEstado;
 	@WireVariable("SExamen")
 	protected SExamen servicioExamen;
+	@WireVariable("SEmpresaNomina")
+	protected SEmpresaNomina servicioEmpresaNomina;
 	@WireVariable("SHistoria")
 	protected SHistoria servicioHistoria;
 	@WireVariable("SHistoriaAccidente")
@@ -212,6 +224,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	// public static List<Tab> tabs = new ArrayList<Tab>();
 	public List<Tab> tabs = new ArrayList<Tab>();
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
+	public Calendar calendario2 = Calendar.getInstance();
 	public final Calendar calendario = Calendar.getInstance();
 	public String horaAuditoria = String.valueOf(calendario
 			.get(Calendar.HOUR_OF_DAY))
@@ -221,6 +234,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			+ String.valueOf(calendario.get(Calendar.SECOND));
 	public java.util.Date fecha = new Date();
 	public Timestamp fechaHora = new Timestamp(fecha.getTime());
+	public static double id = 0;
+	public static boolean nextNumber = true;
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -372,5 +387,75 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			}
 		}
 		servicioPaciente.guardarVarios(inactivos);
+	}
+	
+	public BigDecimal transformarGregorianoAJulia(Date fecha) {
+		String valor = "";
+
+		calendario2 = new GregorianCalendar();
+		calendario2.setTime(fecha);
+		String dia = "";
+		if (calendario2.get(Calendar.DAY_OF_YEAR) < 10)
+			dia = "00";
+		else {
+			if (calendario2.get(Calendar.DAY_OF_YEAR) >= 10
+					&& calendario2.get(Calendar.DAY_OF_YEAR) < 100)
+				dia = "0";
+		}
+		if ((fecha.getYear() + 1900) < 2000)
+			valor = "";
+		else
+			valor = "1";
+		long al = Long.valueOf(valor
+				+ String.valueOf(calendario2.get(Calendar.YEAR)).substring(2)
+				+ dia + String.valueOf(calendario2.get(Calendar.DAY_OF_YEAR)));
+		BigDecimal a = BigDecimal.valueOf(al);
+		return a;
+	}
+	
+	protected double nextNumber(String numero, String user) {
+		synchronized (this) {
+			while (!nextNumber) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+			nextNumber = false;
+			try {
+				double numeroNext = servicioF00021.Numero(numero, user);
+				if (numeroNext != 0) {
+					id = numeroNext + 1;
+					F00021 f021 = servicioF00021.buscar(numero, user);
+					f021.setNln001(id);
+					System.out.println("id"+id);
+					servicioF00021.guardar(f021);
+				} else {
+					id = 1;
+					F00021 f021 = new F00021();
+					F00021PK clave21 = new F00021PK();
+					clave21.setNldct(user);
+					clave21.setNlkco(numero);
+					clave21.setNlctry((double) 0);
+					clave21.setNlfy((double) 0);
+					f021.setId(clave21);
+					f021.setNln001(id);
+					servicioF00021.guardar(f021);
+				}
+			} catch (Exception a) {
+				nextNumber = true;
+				a.printStackTrace();
+				System.out.println("error");
+				return 0;
+			}
+		}
+		synchronized (this) {
+			nextNumber = true;
+			notifyAll();
+			return id;
+		}
 	}
 }

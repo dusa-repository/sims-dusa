@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import modelo.pk.ProveedorServicioId;
 
 @Entity
-@Table(name = "proveedor_servicio_externo")
+@Table(name = "proveedor_servicio_externo", schema="dusa_sims.dbo")
 @IdClass(ProveedorServicioId.class)
 public class ProveedorServicio {
 

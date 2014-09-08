@@ -25,7 +25,7 @@ import modelo.sha.Area;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "consulta")
+@Table(name = "consulta", schema="dusa_sims.dbo")
 public class Consulta implements Serializable {
 
 	private static final long serialVersionUID = -5405587652859401694L;

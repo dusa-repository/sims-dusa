@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="categoria_diagnostico")
+@Table(name="categoria_diagnostico", schema="dusa_sims.dbo")
 public class CategoriaDiagnostico implements Serializable {
 	private static final long serialVersionUID = 1L;
 

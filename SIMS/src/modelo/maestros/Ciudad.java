@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="ciudad")
+@Table(name="ciudad", schema="dusa_sims.dbo")
 public class Ciudad implements Serializable {
 	private static final long serialVersionUID = 1L;
 

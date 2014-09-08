@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import modelo.transacciones.HistoriaVacuna;
 
 @Entity
-@Table(name="vacuna")
+@Table(name="vacuna", schema="dusa_sims.dbo")
 public class Vacuna implements Serializable {
 
 	private static final long serialVersionUID = -1000385887270222127L;

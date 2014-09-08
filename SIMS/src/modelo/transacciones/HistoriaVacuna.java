@@ -15,7 +15,7 @@ import modelo.maestros.Vacuna;
 import modelo.pk.HistoriaVacunaId;
 
 @Entity
-@Table(name = "historia_vacuna")
+@Table(name = "historia_vacuna", schema="dusa_sims.dbo")
 @IdClass(HistoriaVacunaId.class)
 public class HistoriaVacuna {
 	

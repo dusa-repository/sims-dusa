@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="presentacion_medicina")
+@Table(name="presentacion_medicina", schema="dusa_sims.dbo")
 public class PresentacionMedicina implements Serializable {
 
 	private static final long serialVersionUID = -7429324046034863678L;
