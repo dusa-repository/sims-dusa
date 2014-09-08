@@ -11,10 +11,11 @@
 					<column label="" width="12.5%" />
 					<column label="" width="12.5%" />
 					<column label="" width="12.5%" />
+					<column label="" width="3%" />
+					<column label="" width="17.5%%" />
+					<column label="" width="3%" />
+					<column label="" width="17.5%" />
 					<column label="" width="10%" />
-					<column label="" width="15%%" />
-					<column label="" width="10%" />
-					<column label="" width="15%" />
 				</columns>
 				<rows>
 					<row>
@@ -35,6 +36,9 @@
 						<label id="lblCargo1" />
 						<label class="etiqueta" value="Area:" />
 						<label id="lblArea" />
+						<button class="btn" autodisable="true" id="btnConstancia"
+							label="Constancia" tooltiptext="Catalogo" visible="false"
+							image="/public/imagenes/botones/generar.png" width="150px" />
 					</row>
 				</rows>
 			</grid>
@@ -1175,14 +1179,14 @@
 									<groupbox id="gpxResumen" open="true">
 										<caption label="Resumen de la Consulta"
 											style="color:black; font-size: 12px; font-weight:bold" />
-										<hbox>
-											<vbox>
+										<hbox width="100%" widths="20%,20%,20%,20%,20%">
+											<vbox width="100%">
 												<separator />
 												<label class="etiqueta" value="DIAGNOSTICOS" />
 												<button class="btn" visible="false" label="Generar Reposo"
 													id="btnGenerarReposo" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Reposo" width="200px" />
-												<listbox width="auto" id="ltbResumenDiagnosticos"
+												<listbox width="100%" id="ltbResumenDiagnosticos"
 													height="400px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
 													<listhead>
 														<listheader label="Diagnostico" width="50%" />
@@ -1198,13 +1202,13 @@
 													</template>
 												</listbox>
 											</vbox>
-											<vbox>
+											<vbox width="100%">
 												<separator />
 												<label class="etiqueta" value="MEDICINAS" />
 												<button class="btn" visible="false" label="Generar Recipe"
 													id="btnGenerarRecipe" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Recipe" width="200px" />
-												<listbox width="auto" id="ltbResumenMedicinas"
+												<listbox width="100%" id="ltbResumenMedicinas"
 													height="400px" emptyMessage="No ha Seleccionado Ningúna Medicina">
 													<listhead>
 														<listheader label="Medicina" width="60%" />
@@ -1220,13 +1224,13 @@
 													</template>
 												</listbox>
 											</vbox>
-											<vbox>
+											<vbox width="100%">
 												<separator />
 												<label class="etiqueta" value="EXAMENES" />
 												<button class="btn" visible="false" label="Generar Orden"
 													id="btnGenerarOrden" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Orden" width="200px" />
-												<listbox width="auto" id="ltbResumenExamenes"
+												<listbox width="100%" id="ltbResumenExamenes"
 													height="400px" emptyMessage="No ha Seleccionado Ningún Examen">
 													<listhead>
 														<listheader label="Examen" width="40%" />
@@ -1243,13 +1247,13 @@
 													</template>
 												</listbox>
 											</vbox>
-											<vbox>
+											<vbox width="100%">
 												<separator />
 												<label class="etiqueta" value="ESPECIALISTAS" />
 												<button class="btn" visible="false" label="Generar Referencia"
 													id="btnGenerarReferencia" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Orden" width="200px" />
-												<listbox width="auto" id="ltbResumenEspecialistas"
+												<listbox width="100%" id="ltbResumenEspecialistas"
 													height="400px" emptyMessage="No ha Seleccionado Ningún Especialista">
 													<listhead>
 														<listheader label="Especialista" width="60%" />
@@ -1266,14 +1270,14 @@
 													</template>
 												</listbox>
 											</vbox>
-											<vbox>
+											<vbox width="100%">
 												<separator />
 												<label class="etiqueta" value="ESTUDIOS EXTERNOS" />
 												<button class="btn" visible="false" label="Generar Orden"
 													id="btnGenerarOrdenServicios" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Orden" width="200px" />
 												<listbox id="ltbResumenServicios" height="400px"
-													width="auto" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
+													width="100%" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
 													<listhead>
 														<listheader label="Estudio Externo" width="50%" />
 														<listheader label="Observacion" width="50%" />

@@ -74,6 +74,9 @@ public class Reportero extends HttpServlet {
 			case "7":
 				fichero = consulta.reporteReposo(part2);
 				break;
+			case "8":
+				fichero = consulta.reporteConstancia(part2);
+				break;
 			default:
 				break;
 			}
