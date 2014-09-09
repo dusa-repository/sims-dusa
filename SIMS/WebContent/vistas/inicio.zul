@@ -88,7 +88,7 @@
 					<center
 						style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
 						border="none" autoscroll="true">
-						<tabbox width="auto" id="tabBox" hflex="1">
+						<tabbox context="editPopup" width="auto" id="tabBox" hflex="1">
 							<tabs>
 								<tab visible="false">Tab A</tab>
 								<tab id="tab" label="+" visible="false">
@@ -104,8 +104,8 @@
 					</center>
 				</borderlayout>
 			</center>
-			<south class="banner" vflex="2" border="0"
-				height="3em" collapsible="false">
+			<south class="banner" vflex="2" border="0" height="3em"
+				collapsible="false">
 				<div align="center" sclass="footer">
 					<a style="color: white" href="../j_spring_security_logout">
 						<label value="INICIO">
@@ -118,5 +118,8 @@
 				</div>
 			</south>
 		</borderlayout>
+		<menupopup id="editPopup">
+			<menuitem id="mnuItem" label="Cerrar Todas" apply="arbol.CArbol"/>
+		</menupopup>
 	</window>
 </zk>
