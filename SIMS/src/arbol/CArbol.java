@@ -30,6 +30,7 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Menuitem;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Tabpanel;
@@ -53,6 +54,8 @@ public class CArbol extends CGenerico {
 	private Label etiqueta;
 	@Wire
 	private Image imagenes;
+	@Wire
+	private Menuitem mnuItem;
 	TreeModel _model;
 	URL url = getClass().getResource("/controlador/maestros/usuario.png");
 	List<String> listmenu1 = new ArrayList<String>();
@@ -162,7 +165,8 @@ public class CArbol extends CGenerico {
 			Nodos oneLevelNode = new Nodos(null, 0, "");
 			Nodos two = new Nodos(null, 0, "");
 			if (arboles.get(z).getPadre() == 0) {
-				oneLevelNode = new Nodos(roote, (int) arboles.get(z).getIdArbol(), arboles.get(z).getNombre());
+				oneLevelNode = new Nodos(roote, (int) arboles.get(z)
+						.getIdArbol(), arboles.get(z).getNombre());
 				roote.appendChild(oneLevelNode);
 				idsPadre.add(arboles.get(z).getIdArbol());
 				nodos.add(oneLevelNode);
@@ -170,8 +174,8 @@ public class CArbol extends CGenerico {
 				for (int j = 0; j < idsPadre.size(); j++) {
 					if (idsPadre.get(j) == arboles.get(z).getPadre()) {
 						oneLevelNode = nodos.get(j);
-						two = new Nodos(oneLevelNode, (int) arboles.get(z).getIdArbol(), arboles.get(z)
-								.getNombre());
+						two = new Nodos(oneLevelNode, (int) arboles.get(z)
+								.getIdArbol(), arboles.get(z).getNombre());
 						oneLevelNode.appendChild(two);
 						idsPadre.add(arboles.get(z).getIdArbol());
 						nodos.add(two);
@@ -189,7 +193,8 @@ public class CArbol extends CGenerico {
 	@Listen("onClick = #arbolMenu")
 	public void selectedNode() {
 		if (arbolMenu.getSelectedItem() != null) {
-			Treecell celda = (Treecell) arbolMenu.getSelectedItem().getChildren().get(0).getChildren().get(0);
+			Treecell celda = (Treecell) arbolMenu.getSelectedItem()
+					.getChildren().get(0).getChildren().get(0);
 			long item = Long.valueOf(celda.getId());
 			boolean abrir = true;
 			Tab taba = new Tab();
@@ -218,7 +223,8 @@ public class CArbol extends CGenerico {
 								@Override
 								public void onEvent(Event arg0)
 										throws Exception {
-									if(arbolItem.getNombre().equals("Consulta"))
+									if (arbolItem.getNombre()
+											.equals("Consulta"))
 										west.setOpen(true);
 									for (int i = 0; i < tabs.size(); i++) {
 										if (tabs.get(i).getLabel()
@@ -280,8 +286,7 @@ public class CArbol extends CGenerico {
 				String ruta = "/vistas/" + arbolItem.getUrl() + ".zul";
 				contenido2 = new Include();
 				contenido2.setSrc(null);
-				contenido2.setSrc(ruta);
-
+				contenido2.setSrc(ruta);				
 				Tab newTab = new Tab(arbolItem.getNombre());
 				newTab.setClosable(true);
 				newTab.addEventListener(Events.ON_CLOSE,
@@ -362,6 +367,15 @@ public class CArbol extends CGenerico {
 			Sessions.getCurrent().setAttribute("mapaGeneral", mapGeneral);
 		} else
 			taba.setSelected(true);
+	}
+
+	@Listen("onClick = #mnuItem")
+	public void cerrarTodas() {
+		for (int i = 0; i < tabs.size(); i++) {
+			tabs.get(i).close();
+			tabs.remove(i);
+			i--;
+		}
 	}
 
 }
