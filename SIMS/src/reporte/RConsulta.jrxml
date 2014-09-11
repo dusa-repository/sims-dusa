@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RConsulta" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d931b9f-5f9a-4d5d-9309-96071042820f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="197"/>
+	<property name="ireport.y" value="192"/>
 	<subDataset name="dataset1" uuid="21e0097c-1241-4eb5-a1c0-0c1c9e963c3a"/>
 	<parameter name="fechaConsulta" class="java.sql.Timestamp"/>
 	<parameter name="pacienteNombre" class="java.lang.String"/>
@@ -80,14 +80,14 @@
 				<text><![CDATA[Motivo de Consulta:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="17" y="364" width="148" height="20" uuid="2c1bc232-461f-47ae-8088-448d55d64f6d"/>
+				<reportElement x="17" y="360" width="148" height="20" uuid="2c1bc232-461f-47ae-8088-448d55d64f6d"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Enfermedad Actual:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="17" y="430" width="136" height="20" uuid="eaf2ceca-49cb-4232-91ba-74b8e2c60b49"/>
+				<reportElement x="17" y="446" width="136" height="20" uuid="eaf2ceca-49cb-4232-91ba-74b8e2c60b49"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -108,14 +108,14 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="17" y="463" width="189" height="20" uuid="ac77cd5f-6043-4e53-a478-71e156460243"/>
+				<reportElement x="17" y="473" width="189" height="20" uuid="ac77cd5f-6043-4e53-a478-71e156460243"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tipo de Diagnostico Principal:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="206" y="463" width="366" height="20" uuid="13675702-8e9c-487c-afe7-5a7b41c682a8"/>
+				<reportElement x="206" y="473" width="366" height="20" uuid="13675702-8e9c-487c-afe7-5a7b41c682a8"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -143,7 +143,7 @@
 				<textFieldExpression><![CDATA[$P{doctorApellido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="153" y="430" width="419" height="20" uuid="da7227b9-1f78-41ff-b37d-981d1f1e0a39"/>
+				<reportElement x="153" y="446" width="419" height="20" uuid="da7227b9-1f78-41ff-b37d-981d1f1e0a39"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -157,7 +157,7 @@
 				<textFieldExpression><![CDATA[$P{motivo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="17" y="384" width="555" height="33" uuid="7d683ac1-9e89-4c4d-b960-84089c35d82d"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="17" y="380" width="555" height="62" uuid="7d683ac1-9e89-4c4d-b960-84089c35d82d"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -227,7 +227,7 @@
 				<textFieldExpression><![CDATA[$P{edad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="165" y="500" width="203" height="20" uuid="990d4c2c-8280-474b-8e57-24b2e516e0ac"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="165" y="502" width="203" height="20" uuid="990d4c2c-8280-474b-8e57-24b2e516e0ac"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -236,7 +236,7 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="32">
+		<band height="27">
 			<staticText>
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="13" y="7" width="193" height="20" uuid="6b4192db-63ca-47a1-a876-6f77275709e3"/>
 				<box leftPadding="0" bottomPadding="0" rightPadding="0">

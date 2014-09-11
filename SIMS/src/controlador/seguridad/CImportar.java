@@ -191,6 +191,7 @@ public class CImportar extends CGenerico {
 					A linea = (A) rowPaciente.getChildren().get(3);
 					Events.postEvent("onClick", linea, null);
 				}
+				errorGeneral = false;
 			}
 
 			@Override
@@ -241,8 +242,10 @@ public class CImportar extends CGenerico {
 				List<ConsultaMedicina> consultasMedicina = new ArrayList<ConsultaMedicina>();
 				int contadorRow = 0;
 				boolean error = false;
-				while (rowIterator.hasNext() && !error) {
+				while (rowIterator.hasNext()) {
+					error = false;
 					contadorRow = contadorRow + 1;
+					System.out.println(contadorRow);
 					Row row = rowIterator.next();
 					Medicina medicina = new Medicina();
 					Consulta consulta = new Consulta();
@@ -257,7 +260,7 @@ public class CImportar extends CGenerico {
 					String dosis = "";
 					Iterator<Cell> cellIterator = row.cellIterator();
 					int contadorCell = 0;
-					while (cellIterator.hasNext() && !error) {
+					while (cellIterator.hasNext()) {
 						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
 						switch (cell.getColumnIndex()) {
@@ -323,40 +326,45 @@ public class CImportar extends CGenerico {
 										consultaMedicina.setDosis(dosis);
 										consultaMedicina.setRecipe(recipe);
 										consultasMedicina.add(consultaMedicina);
-									} else {
-										msj.mensajeError(valorNoEncontrado
-												+ " la consulta con referencia de ID: "
-												+ idRefC
-												+ " y Paciente:"
-												+ cedRef
-												+ " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
-												+ " Fila: " + contadorRow
-												+ ". Columna: " + contadorCell);
-										error = true;
 									}
-								} else {
-									msj.mensajeError(valorNoEncontrado
-											+ " la Medicina con ID: "
-											+ idRefD
-											+ " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
-											+ " Fila: " + contadorRow
-											+ ". Columna: " + contadorCell);
-									error = true;
+									// else {
+									// msj.mensajeError(valorNoEncontrado
+									// + " la consulta con referencia de ID: "
+									// + idRefC
+									// + " y Paciente:"
+									// + cedRef
+									// +
+									// " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
+									// + " Fila: " + contadorRow
+									// + ". Columna: " + contadorCell);
+									// error = true;
+									// }
 								}
+								// else {
+								// msj.mensajeError(valorNoEncontrado
+								// + " la Medicina con ID: "
+								// + idRefD
+								// +
+								// " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
+								// + " Fila: " + contadorRow
+								// + ". Columna: " + contadorCell);
+								// error = true;
+								// }
 							}
 						}
-					} else {
-						msj.mensajeError(archivoConError
-								+ lblNombreMedicinaConsulta.getValue()
-								+ ". Fila: " + contadorRow + ". Columna: "
-								+ contadorCell);
-						error = true;
 					}
+					// else {
+					// msj.mensajeError(archivoConError
+					// + lblNombreMedicinaConsulta.getValue()
+					// + ". Fila: " + contadorRow + ". Columna: "
+					// + contadorCell);
+					// error = true;
+					// }
 				}
-				if (!error)
-					servicioConsultaMedicina.guardar(consultasMedicina);
-				else
-					errorGeneral = true;
+				// if (!error)
+				servicioConsultaMedicina.guardar(consultasMedicina);
+				// else
+				// errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreMedicinaConsulta.getValue());
@@ -378,8 +386,10 @@ public class CImportar extends CGenerico {
 				List<ConsultaExamen> consultasExamen = new ArrayList<ConsultaExamen>();
 				int contadorRow = 0;
 				boolean error = false;
-				while (rowIterator.hasNext() && !error) {
+				while (rowIterator.hasNext()) {
+					error = false;
 					contadorRow = contadorRow + 1;
+					System.out.println(contadorRow);
 					Row row = rowIterator.next();
 					Examen examen = new Examen();
 					Consulta consulta = new Consulta();
@@ -394,7 +404,7 @@ public class CImportar extends CGenerico {
 					String dosis = "";
 					Iterator<Cell> cellIterator = row.cellIterator();
 					int contadorCell = 0;
-					while (cellIterator.hasNext() && !error) {
+					while (cellIterator.hasNext()) {
 						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
 						switch (cell.getColumnIndex()) {
@@ -451,38 +461,43 @@ public class CImportar extends CGenerico {
 								consultaExamen.setProveedor(proveedor);
 								consultaExamen.setPrioridad("1 (Urgente)");
 								consultasExamen.add(consultaExamen);
-							} else {
-								msj.mensajeError(valorNoEncontrado
-										+ " la consulta con referencia de ID: "
-										+ idRefC
-										+ " y Paciente:"
-										+ cedRef
-										+ " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
-										+ " Fila: " + contadorRow
-										+ ". Columna: " + contadorCell);
-								error = true;
 							}
-						} else {
-							msj.mensajeError(valorNoEncontrado
-									+ " el examen con ID: "
-									+ idRefD
-									+ " no ha sido encontrado, por lo tanto no ha sido importado el archivo"
-									+ " Fila: " + contadorRow + ". Columna: "
-									+ contadorCell);
-							error = true;
+							// else {
+							// msj.mensajeError(valorNoEncontrado
+							// + " la consulta con referencia de ID: "
+							// + idRefC
+							// + " y Paciente:"
+							// + cedRef
+							// +
+							// " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
+							// + " Fila: " + contadorRow
+							// + ". Columna: " + contadorCell);
+							// error = true;
+							// }
 						}
-					} else {
-						msj.mensajeError(archivoConError
-								+ lblNombreExamenConsulta.getValue()
-								+ ". Fila: " + contadorRow + ". Columna: "
-								+ contadorCell);
-						error = true;
+						// else {
+						// msj.mensajeError(valorNoEncontrado
+						// + " el examen con ID: "
+						// + idRefD
+						// +
+						// " no ha sido encontrado, por lo tanto no ha sido importado el archivo"
+						// + " Fila: " + contadorRow + ". Columna: "
+						// + contadorCell);
+						// error = true;
+						// }
 					}
+					// else {
+					// msj.mensajeError(archivoConError
+					// + lblNombreExamenConsulta.getValue()
+					// + ". Fila: " + contadorRow + ". Columna: "
+					// + contadorCell);
+					// error = true;
+					// }
 				}
-				if (!error)
-					servicioConsultaExamen.guardar(consultasExamen);
-				else
-					errorGeneral = true;
+				// if (!error)
+				servicioConsultaExamen.guardar(consultasExamen);
+				// else
+				// errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreExamenConsulta.getValue());
@@ -504,8 +519,10 @@ public class CImportar extends CGenerico {
 				List<ConsultaDiagnostico> consultasDiagnostico = new ArrayList<ConsultaDiagnostico>();
 				int contadorRow = 0;
 				boolean error = false;
-				while (rowIterator.hasNext() && !error) {
+				while (rowIterator.hasNext()) {
+					error = false;
 					contadorRow = contadorRow + 1;
+					System.out.println(contadorRow);
 					Row row = rowIterator.next();
 					Diagnostico diagnostico = new Diagnostico();
 					Consulta consulta = new Consulta();
@@ -518,7 +535,7 @@ public class CImportar extends CGenerico {
 					String cedRef = "";
 					Iterator<Cell> cellIterator = row.cellIterator();
 					int contadorCell = 0;
-					while (cellIterator.hasNext() && !error) {
+					while (cellIterator.hasNext()) {
 						contadorCell = contadorCell + 1;
 						Cell cell = cellIterator.next();
 						switch (cell.getColumnIndex()) {
@@ -569,38 +586,43 @@ public class CImportar extends CGenerico {
 								consultaDagnostico.setObservacion("");
 								consultaDagnostico.setTipo("Otro");
 								consultasDiagnostico.add(consultaDagnostico);
-							} else {
-								msj.mensajeError(valorNoEncontrado
-										+ " la consulta con referencia de ID: "
-										+ idRefC
-										+ " y Paciente:"
-										+ cedRef
-										+ " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
-										+ " Fila: " + contadorRow
-										+ ". Columna: " + contadorCell);
-								error = true;
 							}
-						} else {
-							msj.mensajeError(valorNoEncontrado
-									+ " el diagnostico con ID: "
-									+ idRefD
-									+ " no ha sido encontrado, por lo tanto no ha sido importado el archivo"
-									+ " Fila: " + contadorRow + ". Columna: "
-									+ contadorCell);
-							error = true;
+							// else {
+							// msj.mensajeError(valorNoEncontrado
+							// + " la consulta con referencia de ID: "
+							// + idRefC
+							// + " y Paciente:"
+							// + cedRef
+							// +
+							// " no ha sido encontrada, por lo tanto no ha sido importado el archivo"
+							// + " Fila: " + contadorRow
+							// + ". Columna: " + contadorCell);
+							// error = true;
+							// }
 						}
-					} else {
-						msj.mensajeError(archivoConError
-								+ lblNombreDiagnosticoConsulta.getValue()
-								+ ". Fila: " + contadorRow + ". Columna: "
-								+ contadorCell);
-						error = true;
+						// else {
+						// msj.mensajeError(valorNoEncontrado
+						// + " el diagnostico con ID: "
+						// + idRefD
+						// +
+						// " no ha sido encontrado, por lo tanto no ha sido importado el archivo"
+						// + " Fila: " + contadorRow + ". Columna: "
+						// + contadorCell);
+						// error = true;
+						// }
 					}
+					// else {
+					// msj.mensajeError(archivoConError
+					// + lblNombreDiagnosticoConsulta.getValue()
+					// + ". Fila: " + contadorRow + ". Columna: "
+					// + contadorCell);
+					// error = true;
+					// }
 				}
-				if (!error)
-					servicioConsultaDiagnostico.guardar(consultasDiagnostico);
-				else
-					errorGeneral = true;
+				// if (!error)
+				servicioConsultaDiagnostico.guardar(consultasDiagnostico);
+				// else
+				// errorGeneral = true;
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreDiagnosticoConsulta.getValue());

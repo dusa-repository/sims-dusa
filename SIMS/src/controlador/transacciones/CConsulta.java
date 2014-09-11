@@ -5224,6 +5224,16 @@ public class CConsulta extends CGenerico {
 		Consulta consuta = getServicioConsulta().buscar(part2);
 		List<ConsultaDiagnostico> diagnosticoConsulta = getServicioConsultaDiagnostico()
 				.buscarPorConsulta(consuta);
+		Diagnostico diag = new Diagnostico();
+		String nombreDiagnostico = "";
+		String tipoDiagnostico = "";
+		if (!diagnosticoConsulta.isEmpty()) {
+			nombreDiagnostico = diagnosticoConsulta.get(0).getDiagnostico()
+					.getNombre();
+			tipoDiagnostico = diagnosticoConsulta.get(0).getTipo();
+			diagnosticoConsulta.remove(0);
+		}
+
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
@@ -5245,18 +5255,27 @@ public class CConsulta extends CGenerico {
 				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
+		
+		if(user.getPrimerNombre().equals("Fernando") && user.getPrimerApellido().equals("Rivero"))
+		{
+			p.put("doctorNombre",consuta.getDoctor());
+			p.put("doctorApellido","  ");
+			p.put("doctorCedula", "Sin Informacion");
+		}
+		else
+		{
 		p.put("doctorNombre",
 				user.getPrimerNombre() + "   " + user.getSegundoNombre());
 		p.put("doctorApellido",
 				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
+		}
 		p.put("fechaConsulta", consuta.getFechaConsulta());
 		p.put("tipoConsulta", consuta.getTipoConsultaSecundaria());
 		p.put("enfermedad", consuta.getEnfermedadActual());
 		p.put("motivo", consuta.getMotivoConsulta());
-		p.put("diagnostico", diagnosticoConsulta.get(0).getDiagnostico()
-				.getNombre());
-		p.put("tipoDiagnostico", diagnosticoConsulta.get(0).getTipo());
+		p.put("diagnostico", nombreDiagnostico);
+		p.put("tipoDiagnostico", tipoDiagnostico);
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 
@@ -5264,7 +5283,7 @@ public class CConsulta extends CGenerico {
 				.getResource("/reporte/RConsulta.jasper"));
 		// fichero = JasperRunManager.runReportToPdf(reporte, p);
 
-		diagnosticoConsulta.remove(0);
+	
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(diagnosticoConsulta));
 		return fichero;
@@ -5397,6 +5416,7 @@ public class CConsulta extends CGenerico {
 		fichero = JasperRunManager.runReportToPdf(reporte, p);
 		return fichero;
 	}
+
 	@Listen("onClick = #btnConstancia")
 	public void generarConstancia() {
 		if (idConsulta != 0) {
@@ -5411,7 +5431,7 @@ public class CConsulta extends CGenerico {
 	public byte[] reporteConstancia(Long part2) throws JRException {
 		byte[] fichero = null;
 		Consulta consuta = getServicioConsulta().buscar(part2);
-		
+
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();

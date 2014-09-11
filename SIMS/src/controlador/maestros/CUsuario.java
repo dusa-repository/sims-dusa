@@ -172,6 +172,8 @@ public class CUsuario extends CGenerico {
 
 			@Override
 			public void limpiar() {
+				gruposDisponibles.clear();
+				gruposOcupados.clear();
 				ltbGruposAgregados.getItems().clear();
 				ltbGruposDisponibles.getItems().clear();
 				cmbEspecialidad.setValue("");
@@ -326,8 +328,6 @@ public class CUsuario extends CGenerico {
 	/* Validaciones de pantalla para poder realizar el guardar */
 	public boolean validar() {
 		if (txtApellidoUsuario.getText().compareTo("") == 0
-				|| txtApellido2Usuario.getText().compareTo("") == 0
-				|| txtNombre2Usuario.getText().compareTo("") == 0
 				|| txtCedulaUsuario.getText().compareTo("") == 0
 				|| txtCorreoUsuario.getText().compareTo("") == 0
 				|| txtDireccionUsuario.getText().compareTo("") == 0
@@ -579,7 +579,7 @@ public class CUsuario extends CGenerico {
 	public boolean buscarPorLogin() {
 		Usuario usuario = servicioUsuario.buscarPorLogin(txtLoginUsuario
 				.getValue());
-		if (usuario != null) {
+		if (usuario != null && id.equals("")) {
 			msj.mensajeAlerta(Mensaje.loginUsado);
 			txtLoginUsuario.setValue("");
 			txtLoginUsuario.setFocus(true);
