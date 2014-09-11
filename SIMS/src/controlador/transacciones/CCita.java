@@ -95,7 +95,7 @@ public class CCita extends CGenerico {
 	private Button btnCancelarCita;
 	long id = 0;
 	long idDoctor = 0;
-	long idPaciente = 0;
+	String idPaciente = "";
 	Catalogo<Usuario> catalogo;
 	Catalogo<Paciente> catalogoPaciente;
 
@@ -201,7 +201,7 @@ public class CCita extends CGenerico {
 		cmbMotivo.setValue("");
 		cmbMotivo.setPlaceholder("Seleccione un Motivo");
 		id = 0;
-		idPaciente = 0;
+		idPaciente = "";
 
 	}
 
@@ -339,7 +339,7 @@ public class CCita extends CGenerico {
 				+ paciente.getSegundoNombre());
 		lblApellidoPaciente.setValue(paciente.getPrimerApellido() + " "
 				+ paciente.getSegundoApellido());
-		idPaciente = Long.valueOf(paciente.getCedula());
+		idPaciente = paciente.getCedula();
 		catalogoPaciente.setParent(null);
 	}
 
@@ -355,7 +355,7 @@ public class CCita extends CGenerico {
 		if (cmbMotivo.getText().compareTo("") == 0
 				|| tmbHoraCita.getText().compareTo("") == 0
 				|| dtbFechaCita.getText().compareTo("") == 0 || idDoctor == 0
-				|| idPaciente == 0) {
+				|| idPaciente.equals("")) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else

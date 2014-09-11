@@ -102,7 +102,7 @@
 											<label value="*" style="font-weight:bold;color:red" />
 										</hbox>
 										<datebox readonly="true" width="140px" id="dtbFechaCita"
-											onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita" />
+											constraint="no past" onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita" />
 										<hbox>
 											<label class="etiqueta" value="Hora Cita:" />
 											<space />
