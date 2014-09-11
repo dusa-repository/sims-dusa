@@ -390,7 +390,7 @@
 													<label value="*" style="font-weight:bold;color:red" />
 												</hbox>
 												<cell colspan="3">
-													<textbox maxlength="1000" class="multilinea"
+													<textbox maxlength="1000" class="multilineab"
 														multiline="true" id="txtMotivo" hflex="1"
 														tooltiptext="Ingrese el Motivo de la Consulta" />
 												</cell>
@@ -400,7 +400,7 @@
 													<label value="*" style="font-weight:bold;color:red" />
 												</hbox>
 												<cell colspan="3">
-													<textbox maxlength="1000" class="multilinea"
+													<textbox maxlength="1000" class="multilineab"
 														multiline="true" id="txtEnfermedad" hflex="1"
 														tooltiptext="Ingrese la Enfermedad Actual Observada" />
 												</cell>
@@ -1305,23 +1305,23 @@
 					<tabpanel style="overflow-x:scroll;" width="100%">
 						<hbox width="100%" widths="90%,10%">
 							<div width="100%">
-								<listbox span="true" hflex="1" mold="paging" autopaging="true" pagingPosition="bottom"
-									id="ltbConsultas" height="350px" width="80%"
+								<listbox span="true"  mold="paging" autopaging="true" pagingPosition="bottom"
+									id="ltbConsultas" height="550px" width="100%"
 									emptyMessage="El Paciente no posee Consultas Registradas">
 									<listhead>
-										<listheader label="Fecha" hflex="min" />
-										<listheader label="Doctor" hflex="min" />
-										<listheader label="Motivo de Consulta" hflex="min" />
-										<listheader label="Enfermedad Actual" hflex="min" />
-										<listheader label="Tipo de Consulta" hflex="min" />
-										<listheader label="SubTipo de Consulta" hflex="min" />
+										<listheader label="Fecha" width="8%"/>
+										<listheader label="Doctor" width="8%"/>
+										<listheader label="Motivo de Consulta" width="29%"/>
+										<listheader label="Enfermedad Actual" width="35%" />
+										<listheader label="Tipo de Consulta" width="10%"/>
+										<listheader label="SubTipo de Consulta" width="10%" />
 										<listheader label="id" visible="false" />
 									</listhead>
 									<template name="model">
 										<listitem>
 											<listcell label="${each.traerFecha()}">
 											</listcell>
-											<listcell label="${each.horaAuditoria}">
+											<listcell label="${each.doctor}">
 											</listcell>
 											<listcell label="${each.motivoConsulta}">
 											</listcell>

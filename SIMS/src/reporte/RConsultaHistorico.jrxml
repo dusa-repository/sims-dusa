@@ -8,7 +8,7 @@
 	<parameter name="pacienteCedula" class="java.lang.String"/>
 	<parameter name="pacienteNacimiento" class="java.sql.Timestamp"/>
 	<parameter name="edad" class="java.lang.String"/>
-	<field name="examenPreempleo" class="java.lang.String"/>
+	<field name="doctor" class="java.lang.String"/>
 	<field name="fechaConsulta" class="java.sql.Timestamp"/>
 	<field name="motivoConsulta" class="java.lang.String"/>
 	<field name="enfermedadActual" class="java.lang.String"/>
@@ -268,7 +268,7 @@
 				<box>
 					<bottomPen lineWidth="0.0"/>
 				</box>
-				<textFieldExpression><![CDATA[$F{examenPreempleo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{doctor}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

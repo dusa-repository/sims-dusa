@@ -2,7 +2,7 @@
 <zk>
 	<style src="../public/Estilo.css" />
 	<script src="/public/progress.js" />
-	<window title="" border="0" height="100%" contentStyle="overflow:auto"
+	<window style=" zoom:75%" title="" border="0" height="100%" contentStyle="overflow:auto"
 		apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
 			<north height="4,5em" class="banner">
