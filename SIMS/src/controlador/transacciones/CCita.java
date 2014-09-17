@@ -339,6 +339,8 @@ public class CCita extends CGenerico {
 				+ paciente.getSegundoNombre());
 		lblApellidoPaciente.setValue(paciente.getPrimerApellido() + " "
 				+ paciente.getSegundoApellido());
+		if (paciente.isTrabajador())
+		lblEmpresaPaciente.setValue(paciente.getEmpresa().getNombre());
 		idPaciente = paciente.getCedula();
 		catalogoPaciente.setParent(null);
 	}

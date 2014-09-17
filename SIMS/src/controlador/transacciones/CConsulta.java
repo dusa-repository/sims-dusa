@@ -985,6 +985,7 @@ public class CConsulta extends CGenerico {
 					btnGenerarReferencia.setVisible(true);
 					btnGenerarOrdenServicios.setVisible(true);
 					btnGenerarRecipe.setVisible(true);
+					btnGuardarHistoria.setVisible(true);
 					botonera.getChildren().get(0).setVisible(false);
 					actualizarConsultas(paciente);
 					btnConstancia.setVisible(true);
@@ -3877,7 +3878,7 @@ public class CConsulta extends CGenerico {
 			llenarListas();
 		} else {
 			limpiarCampos();
-			msj.mensajeError(Mensaje.cedulaInvalida);
+			msj.mensajeError(Mensaje.pacienteNoExiste);
 		}
 	}
 

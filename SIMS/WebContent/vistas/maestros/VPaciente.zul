@@ -69,7 +69,7 @@
 									<hbox>
 										<label class="etiqueta" value="Ficha:" />
 										<space />
-										<label value="*" style="font-weight:bold;color:red" />
+										<label id="lblFichaI" value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<textbox maxlength="50" id="txtFichaPaciente" hflex="1"
 										tooltiptext="Ingrese la Ficha del Paciente" />
@@ -143,10 +143,10 @@
 										</vbox>
 									</cell>
 									<hbox />
-									<button visible="false" autodisable="self" label="Ver Carga Familiar" id="btnVer"
-									image="/public/imagenes/botones/ver.png"
-									tooltiptext="Seleccione una consulta y presione este boton para ver el detalle de la consulta"
-									hflex="1" height="35px" class="btn" />
+									<button visible="false" autodisable="self" label="Ver Carga Familiar"
+										id="btnVer" image="/public/imagenes/botones/ver.png"
+										tooltiptext="Seleccione una consulta y presione este boton para ver el detalle de la consulta"
+										hflex="1" height="35px" class="btn" />
 								</row>
 								<row>
 									<hbox>
@@ -202,7 +202,7 @@
 									<hbox>
 										<label class="etiqueta" value="Fecha Ingreso:" />
 										<space />
-										<label value="*" style="font-weight:bold;color:red" />
+										<label id="lblFecha" value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<datebox readonly="true" width="140px" id="dtbFechaIngreso"
 										onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Ingreso" />
@@ -497,6 +497,9 @@
 											placeholder="Seleccione un Parentesco" id="cmbParentescoFamiliar"
 											width="180px" readonly="true">
 											<comboitem label="Hermano(a)" />
+											<comboitem label="Conyuge" />
+											<comboitem label="Concubino(a)" />
+											<comboitem label="Hijastro(a)" />
 											<comboitem label="Hijo(a)" />
 											<comboitem label="Padre" />
 											<comboitem label="Madre" />
@@ -610,6 +613,9 @@
 										placeholder="Seleccione un Parentesco" id="cmbParentescoEmergencia"
 										width="180px" readonly="true">
 										<comboitem label="Hermano(a)" />
+										<comboitem label="Conyuge" />
+										<comboitem label="Concubino(a)" />
+										<comboitem label="Hijastro(a)" />
 										<comboitem label="Hijo(a)" />
 										<comboitem label="Padre" />
 										<comboitem label="Madre" />
