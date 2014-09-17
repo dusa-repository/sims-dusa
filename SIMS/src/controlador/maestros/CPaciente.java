@@ -224,6 +224,10 @@ public class CPaciente extends CGenerico {
 	private Datebox dtbFechaEgreso;
 	@Wire
 	private Button btnVer;
+	@Wire
+	private Label lblFichaI;
+	@Wire
+	private Label lblFecha;
 
 	URL url = getClass().getResource("usuario.png");
 	private CArbol cArbol = new CArbol();
@@ -233,6 +237,8 @@ public class CPaciente extends CGenerico {
 	Catalogo<Paciente> catalogoFamiliar;
 
 	private String idBoton = "";
+
+	private String ficha = "";
 
 	@Override
 	public void inicializar() throws IOException {
@@ -269,6 +275,7 @@ public class CPaciente extends CGenerico {
 
 			@Override
 			public void limpiar() {
+				ficha = "";
 				idBoton = "";
 				txtObservacionEstatus.setValue("");
 				txtNombre1Paciente.setValue("");
@@ -634,28 +641,24 @@ public class CPaciente extends CGenerico {
 					msj.mensajeError("Debe Especificar la Informacion de la Discapacidad");
 					return false;
 				} else {
-					if (!Validador.validarNumero(txtCedulaPaciente.getValue())) {
-						msj.mensajeError(Mensaje.cedulaInvalida);
+					if (!Validador.validarTelefono(txtTelefono1.getValue())
+							|| !Validador.validarTelefono(txtTelefono2
+									.getValue())
+							|| !Validador
+									.validarTelefono(txtTelefono2Emergencia
+											.getValue())
+							|| !Validador
+									.validarTelefono(txtTelefono1Emergencia
+											.getValue())) {
+						msj.mensajeError(Mensaje.telefonoInvalido);
 						return false;
 					} else {
-						if (!Validador.validarTelefono(txtTelefono1.getValue())
-								|| !Validador.validarTelefono(txtTelefono2
-										.getValue())
-								|| !Validador
-										.validarTelefono(txtTelefono2Emergencia
-												.getValue())
-								|| !Validador
-										.validarTelefono(txtTelefono1Emergencia
-												.getValue())) {
-							msj.mensajeError(Mensaje.telefonoInvalido);
+						if (!validarFicha())
 							return false;
-						} else {
-							if (!validarFicha())
-								return false;
-							else
-								return true;
-						}
+						else
+							return true;
 					}
+
 				}
 			}
 		}
@@ -831,11 +834,15 @@ public class CPaciente extends CGenerico {
 	/* Valida la Ficha */
 	@Listen("onChange = #txtFichaPaciente")
 	public boolean validarFicha() {
-		if (!servicioPaciente.buscarPorFicha(txtFichaPaciente.getValue()).isEmpty()) {
-			if (id.equals("")) {
-				msj.mensajeAlerta(Mensaje.fichaExistente);
-				return false;
+		List<Paciente> validador = servicioPaciente
+				.buscarPorFicha(txtFichaPaciente.getValue());
+		if (!validador.isEmpty()) {
+			if (!id.equals("")) {
+				if (ficha.equals(validador.get(0).getFicha()))
+					return true;
 			}
+			msj.mensajeAlerta(Mensaje.fichaExistente);
+			return false;
 		}
 		return true;
 	}
@@ -889,6 +896,8 @@ public class CPaciente extends CGenerico {
 		gbxTrabajadorAsociado.setVisible(false);
 		cmbParentescoFamiliar.setValue("");
 		cmbParentescoFamiliar.setPlaceholder("Seleccione un Parentesco");
+		lblFichaI.setVisible(true);
+		lblFecha.setVisible(true);
 	}
 
 	@Listen("onClick =#rdoMuerte")
@@ -911,6 +920,8 @@ public class CPaciente extends CGenerico {
 	 */
 	@Listen("onClick =#rdoFamiliar")
 	public void esFamiliar() {
+		lblFichaI.setVisible(false);
+		lblFecha.setVisible(false);
 		btnVer.setVisible(false);
 		rowCargoyEmpresa.setVisible(false);
 		rowAreayNomina.setVisible(false);
@@ -930,8 +941,10 @@ public class CPaciente extends CGenerico {
 	@Listen("onSeleccion = #catalogoPaciente")
 	public void seleccinar() {
 		Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
-		if (!idBoton.equals("btnVer"))
+		if (!idBoton.equals("btnVer")) {
 			llenarCampos(paciente);
+			ficha = paciente.getFicha();
+		}
 		catalogo.setParent(null);
 	}
 
@@ -954,7 +967,7 @@ public class CPaciente extends CGenerico {
 		txtNombre2Paciente.setValue(paciente.getSegundoNombre());
 		txtApellido2Paciente.setValue(paciente.getSegundoApellido());
 		txtCedulaPaciente.setDisabled(true);
-		txtFichaPaciente.setDisabled(true);
+		// txtFichaPaciente.setDisabled(true);
 		id = paciente.getCedula();
 		txtFichaPaciente.setValue(paciente.getFicha());
 		txtAlergia.setValue(paciente.getObservacionAlergias());
@@ -1058,15 +1071,14 @@ public class CPaciente extends CGenerico {
 		if (!paciente.isTrabajador()) {
 			Paciente familiar = servicioPaciente.buscarPorCedula(paciente
 					.getCedulaFamiliar());
-			if(familiar!=null)
-			{
-			lblNombres.setValue(familiar.getPrimerNombre() + " "
-					+ familiar.getSegundoNombre());
-			lblApellidos.setValue(familiar.getPrimerApellido() + " "
-					+ familiar.getSegundoApellido());
-			lblFicha.setValue(familiar.getFicha());
-			lblCedula.setValue(familiar.getCedula());
-			cedTrabajador = familiar.getCedula();
+			if (familiar != null) {
+				lblNombres.setValue(familiar.getPrimerNombre() + " "
+						+ familiar.getSegundoNombre());
+				lblApellidos.setValue(familiar.getPrimerApellido() + " "
+						+ familiar.getSegundoApellido());
+				lblFicha.setValue(familiar.getFicha());
+				lblCedula.setValue(familiar.getCedula());
+				cedTrabajador = familiar.getCedula();
 			}
 		}
 	}

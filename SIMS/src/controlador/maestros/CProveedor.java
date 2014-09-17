@@ -643,7 +643,7 @@ public class CProveedor extends CGenerico {
 	@Listen("onClick = #btnAbrirEstudio")
 	public void abrirEstudio() {
 		List<Arbol> arboles = servicioArbol
-				.buscarPorNombreArbol("Servicios Externos");
+				.buscarPorNombreArbol("Estudios Externos");
 		if (!arboles.isEmpty()) {
 			Arbol arbolItem = arboles.get(0);
 			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
