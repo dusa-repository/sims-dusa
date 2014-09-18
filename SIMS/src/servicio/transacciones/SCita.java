@@ -1,8 +1,8 @@
 package servicio.transacciones;
 
-
 import interfacedao.transacciones.ICitaDAO;
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Cita;
@@ -12,7 +12,6 @@ import modelo.seguridad.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 @Service("SCita")
 public class SCita {
@@ -30,18 +29,21 @@ public class SCita {
 
 	public void guardar(Cita cita) {
 		citaDAO.save(cita);
-		
+
 	}
+
 	public List<Cita> buscarPorUsuarioYEstado(Usuario usuario, String estado) {
-		return citaDAO.findByUsuarioAndEstado(usuario,estado);
+		return citaDAO.findByUsuarioAndEstado(usuario, estado);
 	}
 
 	public List<Cita> filtroPaciente(String valor) {
-		return citaDAO.findByPacientePrimerNombreStartingWithAllIgnoreCase(valor);
+		return citaDAO
+				.findByPacientePrimerNombreStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Cita> filtroEmpresa(String valor) {
-		return citaDAO.findByPacienteEmpresaNombreStartingWithAllIgnoreCase(valor);
+		return citaDAO
+				.findByPacienteEmpresaNombreStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Cita> filtroFecha(String valor) {
@@ -49,10 +51,21 @@ public class SCita {
 	}
 
 	public List<Cita> filtroMotivo(String valor) {
-		return citaDAO.findByMotivoCitaDescripcionStartingWithAllIgnoreCase(valor);
+		return citaDAO
+				.findByMotivoCitaDescripcionStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Cita> buscarPorUsuario(Usuario usuario) {
 		return citaDAO.findByUsuario(usuario);
+	}
+
+	public int buscarPorUsuarioYFechaYEstado(Usuario usuario, Date value,
+			String string) {
+		List<Cita> citas = citaDAO.findByUsuarioAndEstadoAndFechaCita(usuario,
+				string, value);
+		if (!citas.isEmpty())
+			return citas.size();
+		else
+			return 0;
 	}
 }

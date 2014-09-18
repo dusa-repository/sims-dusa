@@ -93,4 +93,8 @@ public class SMedicina {
 	public Medicina buscarPorReferencia(long idRefD) {
 		return medicinaDAO.findByIdReferencia(idRefD);
 	}
+
+	public List<Medicina> filtroDenominacion(String valor) {
+		return medicinaDAO.findByDenominacionGenericaStartingWithAllIgnoreCase(valor);
+	}
 }

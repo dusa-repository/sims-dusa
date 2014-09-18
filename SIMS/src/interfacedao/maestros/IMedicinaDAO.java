@@ -30,5 +30,8 @@ public interface IMedicinaDAO extends JpaRepository<Medicina, Long> {
 
 	Medicina findByIdReferencia(long idRefD);
 
+	List<Medicina> findByDenominacionGenericaStartingWithAllIgnoreCase(
+			String valor);
+
 
 }

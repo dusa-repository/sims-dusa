@@ -1,6 +1,7 @@
 package interfacedao.transacciones;
 
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Cita;
@@ -29,5 +30,8 @@ public interface ICitaDAO extends JpaRepository<Cita, Long> {
 	List<Cita> findByFechaCitaStartingWithAllIgnoreCase(String valor);
 
 	List<Cita> findByUsuario(Usuario usuario);
+
+	List<Cita> findByUsuarioAndEstadoAndFechaCita(Usuario usuario, String string,
+			Date value);
 
 }

@@ -64,7 +64,8 @@
 											<space />
 											<label value="*" style="font-weight:bold;color:red" />
 										</hbox>
-										<label id="lblCedulaPaciente" />
+										<textbox maxlength="15" id="txtCedulaPaciente" hflex="1"
+											tooltiptext="Ingrese la Cedula del Paciente" />
 										<label class="etiqueta" value="Empresa:" />
 										<label id="lblEmpresaPaciente" />
 										<button autodisable="self" id="btnBuscarPaciente"
@@ -102,7 +103,8 @@
 											<label value="*" style="font-weight:bold;color:red" />
 										</hbox>
 										<datebox readonly="true" width="140px" id="dtbFechaCita"
-											constraint="no past" onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Cita" />
+											constraint="no past" onCreate="self.value = new Date()"
+											tooltiptext="Seleccione la Hora de la Cita" />
 										<hbox>
 											<label class="etiqueta" value="Hora Cita:" />
 											<space />
@@ -165,7 +167,7 @@
 							</hbox>
 							<separator />
 							<hbox>
-								<listbox id="ltbCitas" height="280px" emptyMessage="No hay Citas registrados">
+								<listbox id="ltbCitas" height="100%" mold="paging" pageSize="10"  emptyMessage="No hay Citas registrados">
 									<listhead>
 										<listheader label="Paciente" sort="auto(paciente.primerNombre)"
 											width="20%" />
@@ -196,11 +198,13 @@
 								<vbox>
 									<div align="center">
 										<separator height="80px" />
-										<button class="btn" width="150px" label="Cancelar Citas" id="btnCancelarCita"
-											image="/public/imagenes/botones/salir.png" tooltiptext="Cancelar Citas Seleccionadas" />
+										<button class="btn" width="150px" label="Cancelar Citas"
+											id="btnCancelarCita" image="/public/imagenes/botones/salir.png"
+											tooltiptext="Cancelar Citas Seleccionadas" />
 										<separator />
-										<button class="btn" width="150px"  label="Anular Citas" id="btnAnularCita"
-											image="/public/imagenes/botones/anular.png" tooltiptext="Anular Citas Seleccionadas" />
+										<button class="btn" width="150px" label="Anular Citas"
+											id="btnAnularCita" image="/public/imagenes/botones/anular.png"
+											tooltiptext="Anular Citas Seleccionadas" />
 									</div>
 								</vbox>
 							</hbox>

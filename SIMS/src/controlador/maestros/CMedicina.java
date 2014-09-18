@@ -367,14 +367,14 @@ public class CMedicina extends CGenerico {
 		List<Medicina> medicinas = servicioMedicina.buscarTodas();
 		catalogo = new Catalogo<Medicina>(catalogoMedicina,
 				"Catalogo de Medicinas", medicinas, "Nombre", "Laboratorio",
-				"Posologia") {
+				"Denominacion Generica") {
 
 			@Override
 			protected String[] crearRegistros(Medicina medicina) {
 				String[] registros = new String[3];
 				registros[0] = medicina.getNombre();
 				registros[1] = medicina.getLaboratorio().getNombre();
-				registros[2] = medicina.getPosologia();
+				registros[2] = medicina.getDenominacionGenerica();
 
 				return registros;
 			}
@@ -387,8 +387,8 @@ public class CMedicina extends CGenerico {
 					if (combo.equals("Laboratorio"))
 						return servicioMedicina.filtroLaboratorio(valor);
 					else {
-						if (combo.equals("Posologia"))
-							return servicioMedicina.filtroPosologia(valor);
+						if (combo.equals("Denominacion Generica"))
+							return servicioMedicina.filtroDenominacion(valor);
 						else
 							return servicioMedicina.buscarTodas();
 					}

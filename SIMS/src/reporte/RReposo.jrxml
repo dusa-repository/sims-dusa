@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReposo" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80f827cd-f931-40fe-9157-fa70b2ef6b6a">
 	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="126"/>
+	<property name="ireport.y" value="46"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
@@ -86,7 +86,7 @@
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[Cedula de Identidad:]]></text>
+				<text><![CDATA[Ficha Nº:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="124" y="178" width="90" height="20" uuid="477d4822-7bd1-4e7c-ae58-f3e6f89ecf29"/>
@@ -246,7 +246,7 @@
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<text><![CDATA[Cedula de Identidad:]]></text>
+				<text><![CDATA[Ficha Nº:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="425" y="373" width="42" height="20" uuid="aeba6086-9c87-4773-8b55-99c00639570f"/>

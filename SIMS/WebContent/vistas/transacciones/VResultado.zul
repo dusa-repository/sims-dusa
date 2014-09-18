@@ -19,7 +19,8 @@
 							<listcell label="${each.examen.nombre}">
 							</listcell>
 							<listcell>
-								<textbox value="${each.resultado}" width="98%" />
+								<textbox class="multilinea" multiline="true"
+									value="${each.resultado}" width="98%" />
 							</listcell>
 							<listcell>
 								<spinner value="${each.examen.idExamen}" width="98%"
@@ -44,7 +45,8 @@
 							<listcell label="${each.especialista.especialidad.descripcion}">
 							</listcell>
 							<listcell>
-								<textbox value="${each.resultado}" width="98%" />
+								<textbox class="multilinea" multiline="true"
+									value="${each.resultado}" width="98%" />
 							</listcell>
 							<listcell>
 								<spinner value="${each.especialista.cedula}" width="98%"
@@ -69,7 +71,8 @@
 							<listcell label="${each.proveedor.nombre}">
 							</listcell>
 							<listcell>
-								<textbox value="${each.resultado}" width="98%" />
+								<textbox class="multilinea" multiline="true"
+									value="${each.resultado}" width="98%" />
 							</listcell>
 							<listcell>
 								<spinner value="${each.servicioExterno.idServicioExterno}"

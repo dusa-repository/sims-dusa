@@ -275,97 +275,7 @@ public class CPaciente extends CGenerico {
 
 			@Override
 			public void limpiar() {
-				ficha = "";
-				idBoton = "";
-				txtObservacionEstatus.setValue("");
-				txtNombre1Paciente.setValue("");
-				txtCedulaPaciente.setValue("");
-				txtCedulaPaciente.setDisabled(false);
-				txtFichaPaciente.setDisabled(false);
-				txtApellido1Paciente.setValue("");
-				txtNombre2Paciente.setValue("");
-				txtApellido2Paciente.setValue("");
-				cmbEmpresa.setValue("");
-				cmbEmpresa.setPlaceholder("Seleccione una Empresa");
-				cmbNomina.setValue("");
-				cmbNomina.setPlaceholder("Seleccione un Tipo de Nomina");
-				imagenPaciente.setVisible(false);
-				id = "";
-				txtFichaPaciente.setValue("");
-				txtAlergia.setValue("");
-				txtLugarNacimiento.setValue("");
-				cmbSexo.setValue("");
-				cmbSexo.setPlaceholder("Seleccione el Sexo");
-				cmbEstadoCivil.setValue("");
-				cmbEstadoCivil.setPlaceholder("Seleccione el Estado Civil");
-				cmbGrupoSanguineo.setValue("");
-				cmbGrupoSanguineo.setPlaceholder("Seleccione el Grupo");
-				cmbMano.setValue("");
-				cmbMano.setPlaceholder("Seleccione el Valor");
-				cmbOrigen.setValue("");
-				cmbOrigen.setPlaceholder("Seleccione el Origen");
-				cmbTipoDiscapacidad.setValue("");
-				cmbTipoDiscapacidad.setPlaceholder("Seleccione un Tipo");
-				txtOtras.setValue("");
-				cmbCargo.setValue("");
-				cmbCargo.setPlaceholder("Seleccione un Cargo");
-				cmbArea.setValue("");
-				cmbArea.setPlaceholder("Seleccione un Area");
-				txtDireccion.setValue("");
-				txtTelefono1.setValue("");
-				txtTelefono2.setValue("");
-				txtCorreo.setValue("");
-				txtNombresEmergencia.setValue("");
-				txtApellidosEmergencia.setValue("");
-				txtTelefono1Emergencia.setValue("");
-				txtTelefono2Emergencia.setValue("");
-				cmbParentescoEmergencia.setValue("");
-				cmbParentescoEmergencia
-						.setPlaceholder("Seleccione el Parentesco");
-				cmbParentescoFamiliar.setValue("");
-				cmbParentescoFamiliar
-						.setPlaceholder("Seleccione el Parentesco");
-				lblEdad.setValue("");
-				dspEstatura.setValue((double) 0);
-				dspPeso.setValue((double) 0);
-				cmbCiudad.setValue("");
-				cmbCiudad.setPlaceholder("Seleccione una Ciudad");
-				rdoSiAlergico.setValue(null);
-				rdoNoAlergico.setValue(null);
-				lblApellidos.setValue("");
-				lblCedula.setValue("");
-				lblFicha.setValue("");
-				lblNombres.setValue("");
-				txtNroInpsasel.setValue("");
-				txtProfesion.setValue("");
-				txtRetiroIVSS.setValue("");
-				cmbNivelEducativo.setValue("");
-				cmbNivelEducativo.setPlaceholder("Seleccione un Nivel");
-				cmbTurno.setValue("");
-				cmbTurno.setPlaceholder("Seleccione un Turno");
-				spnCarga.setValue(0);
-				dtbFechaEgreso.setValue(fecha);
-				dtbFechaIngreso.setValue(fecha);
-				dtbInscripcionIVSS.setValue(fecha);
-				dtbFechaMuerte.setValue(fecha);
-				dtbFechaMuerte.setVisible(false);
-				rdoTrabajador.setValue(null);
-				rdoFamiliar.setValue(null);
-
-				rdoActivo.setChecked(true);
-				rdoInactivo.setValue(null);
-
-				rdoSiDiscapacidad.setValue(null);
-				rdoNoDiscapacidad.setValue(null);
-
-				rdoSiLentes.setValue(null);
-				rdoNoLentes.setValue(null);
-
-				rdoTrabajador.setDisabled(false);
-				rdoFamiliar.setDisabled(false);
-
-				rdoE.setDisabled(false);
-				rdoV.setDisabled(false);
+				limpiarCampos();
 			}
 
 			@Override
@@ -602,15 +512,8 @@ public class CPaciente extends CGenerico {
 				|| dspPeso.getValue() == 0
 				|| dspEstatura.getValue() == 0
 				|| cmbCiudad.getText().compareTo("") == 0
-				|| txtTelefono1.getText().compareTo("") == 0
 				|| txtTelefono2.getText().compareTo("") == 0
-				|| txtTelefono1Emergencia.getText().compareTo("") == 0
-				|| txtTelefono2Emergencia.getText().compareTo("") == 0
-				|| txtNombresEmergencia.getText().compareTo("") == 0
-				|| txtApellidosEmergencia.getText().compareTo("") == 0
 				|| txtProfesion.getText().compareTo("") == 0
-				|| spnCarga.getText().compareTo("") == 0
-				|| cmbParentescoEmergencia.getText().compareTo("") == 0
 				|| (!rdoSiAlergico.isChecked() && !rdoNoAlergico.isChecked())
 				|| (!rdoE.isChecked() && !rdoV.isChecked())
 				|| (!rdoFamiliar.isChecked() && !rdoTrabajador.isChecked())
@@ -641,19 +544,19 @@ public class CPaciente extends CGenerico {
 					msj.mensajeError("Debe Especificar la Informacion de la Discapacidad");
 					return false;
 				} else {
-					if (!Validador.validarTelefono(txtTelefono1.getValue())
-							|| !Validador.validarTelefono(txtTelefono2
-									.getValue())
-							|| !Validador
+					if (!Validador.validarTelefono(txtTelefono2.getValue())
+							|| (txtTelefono1.getText().compareTo("") != 0 && !Validador
+									.validarTelefono(txtTelefono1.getValue()))
+							|| (txtTelefono2Emergencia.getText().compareTo("") != 0 && !Validador
 									.validarTelefono(txtTelefono2Emergencia
-											.getValue())
-							|| !Validador
+											.getValue()))
+							|| (txtTelefono1Emergencia.getText().compareTo("") != 0 && !Validador
 									.validarTelefono(txtTelefono1Emergencia
-											.getValue())) {
+											.getValue()))) {
 						msj.mensajeError(Mensaje.telefonoInvalido);
 						return false;
 					} else {
-						if (!validarFicha())
+						if (!validarFicha() && rdoTrabajador.isChecked())
 							return false;
 						else
 							return true;
@@ -823,20 +726,20 @@ public class CPaciente extends CGenerico {
 		catalogoFamiliar.setParent(null);
 	}
 
-	/* Valida la cedula */
-	@Listen("onChange = #txtCedulaPaciente")
-	public void validarCedula() {
-		if (!Validador.validarNumero(txtCedulaPaciente.getValue())) {
-			msj.mensajeAlerta(Mensaje.cedulaInvalida);
-		}
-	}
+	// /* Valida la cedula */
+	// @Listen("onChange = #txtCedulaPaciente")
+	// public void validarCedula() {
+	// if (!Validador.validarNumero(txtCedulaPaciente.getValue())) {
+	// msj.mensajeAlerta(Mensaje.cedulaInvalida);
+	// }
+	// }
 
 	/* Valida la Ficha */
 	@Listen("onChange = #txtFichaPaciente")
 	public boolean validarFicha() {
 		List<Paciente> validador = servicioPaciente
 				.buscarPorFicha(txtFichaPaciente.getValue());
-		if (!validador.isEmpty()) {
+		if (!validador.isEmpty() && rdoTrabajador.isChecked()) {
 			if (!id.equals("")) {
 				if (ficha.equals(validador.get(0).getFicha()))
 					return true;
@@ -1157,6 +1060,109 @@ public class CPaciente extends CGenerico {
 	@Listen("onChange = #dtbFechaNac")
 	public void cambioEdad() {
 		lblEdad.setValue(String.valueOf(calcularEdad(dtbFechaNac.getValue())));
+	}
+
+	@Listen("onOK = #txtCedulaPaciente")
+	public void buscarCedula() {
+		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedulaPaciente
+				.getValue());
+		if (paciente != null) {
+			llenarCampos(paciente);
+		} else {
+			limpiarCampos();
+			msj.mensajeError(Mensaje.cedulaNoExiste);
+		}
+	}
+
+	public void limpiarCampos() {
+		idBoton = "";
+		txtObservacionEstatus.setValue("");
+		txtNombre1Paciente.setValue("");
+		txtCedulaPaciente.setValue("");
+		txtCedulaPaciente.setDisabled(false);
+		txtFichaPaciente.setDisabled(false);
+		txtApellido1Paciente.setValue("");
+		txtNombre2Paciente.setValue("");
+		txtApellido2Paciente.setValue("");
+		cmbEmpresa.setValue("");
+		cmbEmpresa.setPlaceholder("Seleccione una Empresa");
+		cmbNomina.setValue("");
+		cmbNomina.setPlaceholder("Seleccione un Tipo de Nomina");
+		imagenPaciente.setVisible(false);
+		id = "";
+		txtFichaPaciente.setValue("");
+		txtAlergia.setValue("");
+		txtLugarNacimiento.setValue("");
+		cmbSexo.setValue("");
+		cmbSexo.setPlaceholder("Seleccione el Sexo");
+		cmbEstadoCivil.setValue("");
+		cmbEstadoCivil.setPlaceholder("Seleccione el Estado Civil");
+		cmbGrupoSanguineo.setValue("");
+		cmbGrupoSanguineo.setPlaceholder("Seleccione el Grupo");
+		cmbMano.setValue("");
+		cmbMano.setPlaceholder("Seleccione el Valor");
+		cmbOrigen.setValue("");
+		cmbOrigen.setPlaceholder("Seleccione el Origen");
+		cmbTipoDiscapacidad.setValue("");
+		cmbTipoDiscapacidad.setPlaceholder("Seleccione un Tipo");
+		txtOtras.setValue("");
+		cmbCargo.setValue("");
+		cmbCargo.setPlaceholder("Seleccione un Cargo");
+		cmbArea.setValue("");
+		cmbArea.setPlaceholder("Seleccione un Area");
+		txtDireccion.setValue("");
+		txtTelefono1.setValue("");
+		txtTelefono2.setValue("");
+		txtCorreo.setValue("");
+		txtNombresEmergencia.setValue("");
+		txtApellidosEmergencia.setValue("");
+		txtTelefono1Emergencia.setValue("");
+		txtTelefono2Emergencia.setValue("");
+		cmbParentescoEmergencia.setValue("");
+		cmbParentescoEmergencia.setPlaceholder("Seleccione el Parentesco");
+		cmbParentescoFamiliar.setValue("");
+		cmbParentescoFamiliar.setPlaceholder("Seleccione el Parentesco");
+		lblEdad.setValue("");
+		dspEstatura.setValue((double) 0);
+		dspPeso.setValue((double) 0);
+		cmbCiudad.setValue("");
+		cmbCiudad.setPlaceholder("Seleccione una Ciudad");
+		rdoSiAlergico.setValue(null);
+		rdoNoAlergico.setValue(null);
+		lblApellidos.setValue("");
+		lblCedula.setValue("");
+		lblFicha.setValue("");
+		lblNombres.setValue("");
+		txtNroInpsasel.setValue("");
+		txtProfesion.setValue("");
+		txtRetiroIVSS.setValue("");
+		cmbNivelEducativo.setValue("");
+		cmbNivelEducativo.setPlaceholder("Seleccione un Nivel");
+		cmbTurno.setValue("");
+		cmbTurno.setPlaceholder("Seleccione un Turno");
+		spnCarga.setValue(0);
+		dtbFechaEgreso.setValue(fecha);
+		dtbFechaIngreso.setValue(fecha);
+		dtbInscripcionIVSS.setValue(fecha);
+		dtbFechaMuerte.setValue(fecha);
+		dtbFechaMuerte.setVisible(false);
+		rdoTrabajador.setValue(null);
+		rdoFamiliar.setValue(null);
+
+		rdoActivo.setChecked(true);
+		rdoInactivo.setValue(null);
+
+		rdoSiDiscapacidad.setValue(null);
+		rdoNoDiscapacidad.setValue(null);
+
+		rdoSiLentes.setValue(null);
+		rdoNoLentes.setValue(null);
+
+		rdoTrabajador.setDisabled(false);
+		rdoFamiliar.setDisabled(false);
+
+		rdoE.setDisabled(false);
+		rdoV.setDisabled(false);
 	}
 
 }
