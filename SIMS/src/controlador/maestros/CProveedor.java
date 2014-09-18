@@ -145,15 +145,16 @@ public class CProveedor extends CGenerico {
 
 					/* Verifica los estudios asociados */
 					boolean campoNuloEstudio = false;
+					ltbEstudiosAgregados.renderAll();
 					for (int i = 0; i < ltbEstudiosAgregados.getItemCount(); i++) {
 						Listitem listItem = ltbEstudiosAgregados
 								.getItemAtIndex(i);
-						double costo = ((Doublespinner) ((listItem
+						Double costo = ((Doublespinner) ((listItem
 								.getChildren().get(1))).getFirstChild())
 								.getValue();
 						long idEstudio = ((Spinner) ((listItem.getChildren()
 								.get(2))).getFirstChild()).getValue();
-						if (String.valueOf(idEstudio) == "" || costo == 0.0) {
+						if (String.valueOf(idEstudio) == "" || costo == null) {
 							campoNuloEstudio = true;
 						} else {
 							ServicioExterno servicioExterno = servicioServicioExterno
@@ -166,15 +167,16 @@ public class CProveedor extends CGenerico {
 
 					/* Verifica los examenes asociados */
 					boolean campoNuloExamen = false;
+					ltbExamenesAgregados.renderAll();
 					for (int i = 0; i < ltbExamenesAgregados.getItemCount(); i++) {
 						Listitem listItem = ltbExamenesAgregados
 								.getItemAtIndex(i);
-						double costo = ((Doublespinner) ((listItem
+						Double costo = ((Doublespinner) ((listItem
 								.getChildren().get(1))).getFirstChild())
 								.getValue();
 						long idExamen = ((Spinner) ((listItem.getChildren()
 								.get(2))).getFirstChild()).getValue();
-						if (String.valueOf(idExamen) == "" || costo == 0) {
+						if (String.valueOf(idExamen) == "" || costo == null) {
 							campoNuloExamen = true;
 						} else {
 							Examen examen = servicioExamen.buscar(idExamen);
@@ -457,6 +459,7 @@ public class CProveedor extends CGenerico {
 					ProveedorServicio proveedorServicio = new ProveedorServicio();
 					proveedorServicio.setServicioExterno(servicio);
 					estudiosUsados.clear();
+					ltbEstudiosAgregados.renderAll();
 					for (int j = 0; j < ltbEstudiosAgregados.getItemCount(); j++) {
 						Listitem listItemj = ltbEstudiosAgregados
 								.getItemAtIndex(j);
@@ -487,6 +490,7 @@ public class CProveedor extends CGenerico {
 		ltbEstudiosAgregados.setCheckmark(false);
 		ltbEstudiosAgregados.setMultiple(true);
 		ltbEstudiosAgregados.setCheckmark(true);
+		ltbEstudios.clearSelection();
 	}
 
 	/*
@@ -519,6 +523,7 @@ public class CProveedor extends CGenerico {
 		ltbEstudios.setCheckmark(false);
 		ltbEstudios.setMultiple(true);
 		ltbEstudios.setCheckmark(true);
+		ltbEstudiosAgregados.clearSelection();
 	}
 
 	public void buscarEstudio() {
@@ -557,6 +562,7 @@ public class CProveedor extends CGenerico {
 					examenesDisponibles.remove(examen);
 					ProveedorExamen proveedorExamen = new ProveedorExamen();
 					proveedorExamen.setExamen(examen);
+					ltbExamenesAgregados.renderAll();
 					examenesUsados.clear();
 					for (int j = 0; j < ltbExamenesAgregados.getItemCount(); j++) {
 						Listitem listItemj = ltbExamenesAgregados
@@ -587,6 +593,7 @@ public class CProveedor extends CGenerico {
 		ltbExamenesAgregados.setCheckmark(false);
 		ltbExamenesAgregados.setMultiple(true);
 		ltbExamenesAgregados.setCheckmark(true);
+		ltbExamen.clearSelection();
 	}
 
 	/*
@@ -618,6 +625,7 @@ public class CProveedor extends CGenerico {
 		ltbExamen.setCheckmark(false);
 		ltbExamen.setMultiple(true);
 		ltbExamen.setCheckmark(true);
+		ltbExamenesAgregados.clearSelection();
 	}
 
 	public void buscarExamen() {

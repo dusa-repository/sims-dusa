@@ -212,7 +212,7 @@
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<spinner tooltiptext="Indique la Cantidad" id="spnCarga"
-										width="98%" constraint="min 0 max 100" />
+										width="98%" value="0" constraint="min 0 max 100" />
 									<hbox>
 										<label class="etiqueta" value="Profesion:" />
 										<space />
@@ -568,7 +568,7 @@
 									<hbox>
 										<label class="etiqueta" value="Telefono Fijo:" />
 										<space />
-										<label value="*" style="font-weight:bold;color:red" />
+										<label value="" style="font-weight:bold;color:red" />
 									</hbox>
 									<textbox id="txtTelefono1" hflex="1" maxlength="50"
 										tooltiptext="Ingrese el Numero de telefono del Paciente (0426-9999999)" />
@@ -593,21 +593,21 @@
 									<hbox>
 										<label class="etiqueta" value="Nombres:" />
 										<space />
-										<label value="*" style="font-weight:bold;color:red" />
+										<label value="" style="font-weight:bold;color:red" />
 									</hbox>
 									<textbox maxlength="200" id="txtNombresEmergencia"
 										hflex="1" tooltiptext="Ingrese el Nombre de la Persona a Contactar" />
 									<hbox>
 										<label class="etiqueta" value="Apellidos:" />
 										<space />
-										<label value="*" style="font-weight:bold;color:red" />
+										<label value="" style="font-weight:bold;color:red" />
 									</hbox>
 									<textbox maxlength="200" id="txtApellidosEmergencia"
 										hflex="1" tooltiptext="Ingrese el Apellido de la Persona a Contactar" />
 									<hbox>
 										<label class="etiqueta" value="Parentesco:" />
 										<space />
-										<label value="*" style="font-weight:bold;color:red" />
+										<label value="" style="font-weight:bold;color:red" />
 									</hbox>
 									<combobox tooltiptext="Seleccione un Parentesco"
 										placeholder="Seleccione un Parentesco" id="cmbParentescoEmergencia"
@@ -630,7 +630,7 @@
 									<hbox>
 										<label class="etiqueta" value="Telefono Fijo:" />
 										<space />
-										<label value="*" style="font-weight:bold;color:red" />
+										<label value="" style="font-weight:bold;color:red" />
 									</hbox>
 									<textbox id="txtTelefono1Emergencia" hflex="1"
 										maxlength="50"
@@ -638,7 +638,7 @@
 									<hbox>
 										<label class="etiqueta" value="Telefono Celular:" />
 										<space />
-										<label value="*" style="font-weight:bold;color:red" />
+										<label value="" style="font-weight:bold;color:red" />
 									</hbox>
 									<textbox id="txtTelefono2Emergencia" hflex="1"
 										maxlength="50"

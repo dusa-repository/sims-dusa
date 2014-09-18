@@ -3958,6 +3958,12 @@ public class CConsulta extends CGenerico {
 		return proveedores;
 	}
 
+	@Listen("onOpen = #cmbProveedor")
+	public void abrirProveedor() {
+		cmbProveedor.setModel(new ListModelList<Proveedor>(servicioProveedor
+				.buscarTodos()));
+	}
+
 	public ListModelList<Vacuna> getModelVacunas() {
 		modelVacunas = new ListModelList<Vacuna>(servicioVacuna.buscarTodos());
 		return modelVacunas;
@@ -5256,20 +5262,19 @@ public class CConsulta extends CGenerico {
 				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
-		
-		if(user.getPrimerNombre().equals("Fernando") && user.getPrimerApellido().equals("Rivero"))
-		{
-			p.put("doctorNombre",consuta.getDoctor());
-			p.put("doctorApellido","  ");
+
+		if (user.getPrimerNombre().equals("Fernando")
+				&& user.getPrimerApellido().equals("Rivero")) {
+			p.put("doctorNombre", consuta.getDoctor());
+			p.put("doctorApellido", "  ");
 			p.put("doctorCedula", "Sin Informacion");
-		}
-		else
-		{
-		p.put("doctorNombre",
-				user.getPrimerNombre() + "   " + user.getSegundoNombre());
-		p.put("doctorApellido",
-				user.getPrimerApellido() + "   " + user.getSegundoApellido());
-		p.put("doctorCedula", user.getCedula());
+		} else {
+			p.put("doctorNombre",
+					user.getPrimerNombre() + "   " + user.getSegundoNombre());
+			p.put("doctorApellido",
+					user.getPrimerApellido() + "   "
+							+ user.getSegundoApellido());
+			p.put("doctorCedula", user.getCedula());
 		}
 		p.put("fechaConsulta", consuta.getFechaConsulta());
 		p.put("tipoConsulta", consuta.getTipoConsultaSecundaria());
@@ -5284,7 +5289,6 @@ public class CConsulta extends CGenerico {
 				.getResource("/reporte/RConsulta.jasper"));
 		// fichero = JasperRunManager.runReportToPdf(reporte, p);
 
-	
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(diagnosticoConsulta));
 		return fichero;
@@ -5403,7 +5407,7 @@ public class CConsulta extends CGenerico {
 		p.put("empresaRif", rifEmpresa);
 		p.put("pacienteNombre", paciente.getPrimerNombre());
 		p.put("pacienteApellido", paciente.getPrimerApellido());
-		p.put("pacienteCedula", paciente.getCedula());
+		p.put("pacienteCedula", paciente.getFicha());
 		p.put("doctorNombre", user.getPrimerNombre());
 		p.put("doctorApellido", user.getPrimerApellido());
 		p.put("doctorCedula", user.getCedula());

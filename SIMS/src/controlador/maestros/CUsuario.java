@@ -194,8 +194,8 @@ public class CUsuario extends CGenerico {
 				txtNombreUsuario.setValue("");
 				txtNombre2Usuario.setValue("");
 				txtTelefonoUsuario.setValue("");
-				spnCitasUsuario.setValue(null);
-				spnTiempoUsuario.setValue(null);
+				spnCitasUsuario.setValue(0);
+				spnTiempoUsuario.setValue(0);
 				rdoSexoFUsuario.setChecked(false);
 				rdoSexoMUsuario.setChecked(false);
 				rdoDoctor.setChecked(false);

@@ -12,6 +12,7 @@ import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
+import modelo.transacciones.Consulta;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -72,7 +73,7 @@ public class CCita extends CGenerico {
 	@Wire
 	private Button btnBuscarPaciente;
 	@Wire
-	private Label lblCedulaPaciente;
+	private Textbox txtCedulaPaciente;
 	@Wire
 	private Label lblNombrePaciente;
 	@Wire
@@ -94,7 +95,7 @@ public class CCita extends CGenerico {
 	@Wire
 	private Button btnCancelarCita;
 	long id = 0;
-	long idDoctor = 0;
+	String idDoctor = "";
 	String idPaciente = "";
 	Catalogo<Usuario> catalogo;
 	Catalogo<Paciente> catalogoPaciente;
@@ -140,7 +141,7 @@ public class CCita extends CGenerico {
 				lblApellidoDoctor.setValue("");
 				lblNombreDoctor.setValue("");
 				lblCedulaDoctor.setValue("");
-				idDoctor = 0;
+				idDoctor = "";
 				ltbCitas.getItems().clear();
 				limpiar2();
 			}
@@ -191,7 +192,7 @@ public class CCita extends CGenerico {
 	 */
 	private void limpiar2() {
 		Date dt = new Date();
-		lblCedulaPaciente.setValue("");
+		txtCedulaPaciente.setValue("");
 		lblNombrePaciente.setValue("");
 		lblApellidoPaciente.setValue("");
 		lblEmpresaPaciente.setValue("");
@@ -251,12 +252,13 @@ public class CCita extends CGenerico {
 	@Listen("onSeleccion = #catalogoUsuarios")
 	public void seleccionarDoctor() {
 		Usuario usuario = catalogo.objetoSeleccionadoDelCatalogo();
+		validarCita(usuario);
 		lblApellidoDoctor.setValue(usuario.getPrimerApellido() + " "
 				+ usuario.getSegundoApellido());
 		lblNombreDoctor.setValue(usuario.getPrimerNombre() + " "
 				+ usuario.getSegundoNombre());
 		lblCedulaDoctor.setValue(usuario.getCedula());
-		idDoctor = Long.valueOf(usuario.getCedula());
+		idDoctor = usuario.getCedula();
 		llenarListaCitas(usuario);
 		limpiar2();
 		catalogo.setParent(null);
@@ -322,6 +324,11 @@ public class CCita extends CGenerico {
 	@Listen("onSeleccion = #divCatalogoPacientes")
 	public void seleccionarPaciente() {
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
+		llenarCamposPaciente(paciente);
+		catalogoPaciente.setParent(null);
+	}
+
+	public void llenarCamposPaciente(Paciente paciente) {
 		if (!paciente.isTrabajador()
 				&& paciente.getParentescoFamiliar().equals("Hijo(a)")) {
 			Paciente representante = servicioPaciente.buscarPorCedula(paciente
@@ -334,7 +341,7 @@ public class CCita extends CGenerico {
 					msj.mensajeAlerta(Mensaje.pacienteMayor);
 			}
 		}
-		lblCedulaPaciente.setValue(paciente.getCedula());
+		txtCedulaPaciente.setValue(paciente.getCedula());
 		lblNombrePaciente.setValue(paciente.getPrimerNombre() + " "
 				+ paciente.getSegundoNombre());
 		lblApellidoPaciente.setValue(paciente.getPrimerApellido() + " "
@@ -342,7 +349,6 @@ public class CCita extends CGenerico {
 		if (paciente.isTrabajador())
 		lblEmpresaPaciente.setValue(paciente.getEmpresa().getNombre());
 		idPaciente = paciente.getCedula();
-		catalogoPaciente.setParent(null);
 	}
 
 	/* Llena el combo de Motivos cada vez que se abre */
@@ -356,8 +362,8 @@ public class CCita extends CGenerico {
 	public boolean validar() {
 		if (cmbMotivo.getText().compareTo("") == 0
 				|| tmbHoraCita.getText().compareTo("") == 0
-				|| dtbFechaCita.getText().compareTo("") == 0 || idDoctor == 0
-				|| idPaciente.equals("")) {
+				|| dtbFechaCita.getText().compareTo("") == 0
+				|| idDoctor.equals("") || idPaciente.equals("")) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
@@ -522,6 +528,35 @@ public class CCita extends CGenerico {
 		if (!arboles.isEmpty()) {
 			Arbol arbolItem = arboles.get(0);
 			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
+	}
+
+	@Listen("onChange = #dtbFechaCita")
+	public void validarFecha() {
+		validarCita(servicioUsuario.buscarUsuarioPorId(idDoctor));
+	}
+
+	public boolean validarCita(Usuario usuario) {
+		long citas = usuario.getNumeroCitasDiarias();
+		int numero = servicioCita.buscarPorUsuarioYFechaYEstado(usuario,
+				dtbFechaCita.getValue(), "Pendiente");
+		if (citas >= numero)
+			return true;
+		else {
+			msj.mensajeAlerta("El doctor ya ha llegado al limite de citas diarias");
+			return false;
+		}
+	}
+
+	@Listen("onOK = #txtCedulaPaciente")
+	public void buscarCedula() {
+		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedulaPaciente
+				.getValue());
+		if (paciente != null) {
+			llenarCamposPaciente(paciente);
+		} else {
+			limpiar2();
+			msj.mensajeError(Mensaje.cedulaInvalida);
 		}
 	}
 }
