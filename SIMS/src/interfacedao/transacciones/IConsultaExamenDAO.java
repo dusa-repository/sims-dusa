@@ -18,4 +18,10 @@ public interface IConsultaExamenDAO  extends JpaRepository<ConsultaExamen, Consu
 
 	List<ConsultaExamen> findByExamen(Examen examen);
 
+	List<ConsultaExamen> findByConsultaOrderByProveedorIdProveedorAsc(
+			Consulta consulta);
+
+	List<ConsultaExamen> findByConsultaAndProveedorIdProveedor(
+			Consulta consuta, Long part5);
+
 }

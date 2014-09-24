@@ -236,7 +236,8 @@ public class CImportar extends CGenerico {
 			Iterator<Row> rowIterator = sheet.iterator();
 			if (rowIterator.hasNext()) {
 				Recipe recipe = new Recipe(0, "1 (Urgente)", fechaHora,
-						fechaHora, horaAuditoria, nombreUsuarioSesion());
+						fechaHora, horaAuditoria, nombreUsuarioSesion(),
+						"Agudo");
 				servicioRecipe.guardar(recipe);
 				recipe = servicioRecipe.buscarUltimo();
 				List<ConsultaMedicina> consultasMedicina = new ArrayList<ConsultaMedicina>();

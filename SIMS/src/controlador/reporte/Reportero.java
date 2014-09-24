@@ -63,7 +63,7 @@ public class Reportero extends HttpServlet {
 				fichero = consulta.reporteServicio(part2, part4, part5);
 				break;
 			case "4":
-				fichero = consulta.reporteExamen(part2);
+				fichero = consulta.reporteExamen(part2,part5);
 				break;
 			case "5":
 				fichero = consulta.reporteConsulta(part2);

@@ -1,6 +1,10 @@
 <zk>
 	<style>
 		.z-groupbox-hr { background: #EBE8E8 }
+		.rojo .z-tab-text{
+		<!-- background: red; -->
+		color:red;
+		}
 	</style>
 	<div id="divConsulta" apply="controlador.transacciones.CConsulta"
 		sclass="font-size:s" width="auto">
@@ -45,10 +49,10 @@
 			<separator />
 			<tabbox width="100%" height="auto" id="taxConsulta" orient="horizontal">
 				<tabs id="tbsConsulta" width="100%">
-					<tab label="Identificacion" id="tabIdentificacion"/>
-					<tab label="Consulta" id="tabConsulta"/>
-					<tab label="Historial de Consultas" id="tabHistoriasMedicas"/>
-					<tab label="Historia Medica" id="tabAntecedentes"/>
+					<tab label="Identificacion" id="tabIdentificacion" />
+					<tab label="Consulta" id="tabConsulta" sclass="rojo" />
+					<tab label="Historial de Consultas" id="tabHistoriasMedicas" />
+					<tab label="Historia Medica" id="tabAntecedentes" />
 				</tabs>
 				<tabpanels>
 					<tabpanel>
@@ -356,18 +360,36 @@
 									<hbox />
 									<hbox />
 								</row>
+								<row id="rowAsociada" visible="false">
+									<hbox>
+										<label class="etiqueta" id="lblConsulta"
+											value="Consulta Asociada al Control:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<button class="btn" autodisable="self" label="Consulta Asociada"
+										id="btnConsultaAsociada" image="/public/imagenes/botones/buscar.png"
+										tooltiptext="Seleccione la consulta asociada a la consulta de control que esta realizando"
+										vflex="1" hflex="1" />
+									<label class="etiqueta" id="lblEnfermedadAsociada"
+										value="Enfermedad de Consulta Asociada:" />
+									<label id="lblEnfermedadAsociada2" value="" />
+									<label class="etiqueta" id="lblDiagnosticoAsociado"
+										value="Diagnostico de Consulta Asociada:" />
+									<label id="lblDiagnosticoAsociado2" value="" />
+								</row>
 							</rows>
 						</grid>
 						<separator />
 						<tabbox height="auto" id="taxDatosConsulta" orient="horizontal">
 							<tabs>
-								<tab label="Registro de Consulta" id="tabRegistro" />
-								<tab label="Diagnosticos" id="tabDiagnosticos" />
-								<tab label="Medicinas" id="tabMedicinas" />
-								<tab label="Examenes" id="tabExamenes" />
-								<tab label="Especialistas" id="tabEspecialistas" />
-								<tab label="Estudios Externos" id="tabEstudios" />
-								<tab label="Resumen" id="tabResumen" />
+								<tab label="Registro de Consulta" id="tabRegistro" sclass="rojo" />
+								<tab label="Diagnosticos" id="tabDiagnosticos" sclass="rojo" />
+								<tab label="Medicinas" id="tabMedicinas" sclass="rojo" />
+								<tab label="Examenes" id="tabExamenes" sclass="rojo" />
+								<tab label="Especialistas" id="tabEspecialistas" sclass="rojo" />
+								<tab label="Estudios Externos" id="tabEstudios" sclass="rojo" />
+								<tab label="Resumen" id="tabResumen" sclass="rojo" />
 							</tabs>
 							<tabpanels>
 								<tabpanel>
@@ -697,28 +719,6 @@
 															id="txtCondicionado" hflex="1"
 															tooltiptext="Ingrese la condicion a la cual esta sujeto el paciente" />
 													</row>
-													<row id="rowAsociada" visible="false">
-														<hbox>
-															<label class="etiqueta" id="lblConsulta"
-																value="Consulta Asociada al Control:" />
-															<space />
-															<label value="*" style="font-weight:bold;color:red" />
-														</hbox>
-														<button class="btn" autodisable="self" label="Consulta Asociada"
-															id="btnConsultaAsociada" image="/public/imagenes/botones/buscar.png"
-															tooltiptext="Seleccione la consulta asociada a la consulta de control que esta realizando"
-															vflex="1" hflex="1" />
-													</row>
-													<row id="rowAsociada2" visible="false">
-														<label class="etiqueta" id="lblEnfermedadAsociada"
-															value="Enfermedad de Consulta Asociada:" />
-														<label id="lblEnfermedadAsociada2" value="" />
-													</row>
-													<row id="rowAsociada3" visible="false">
-														<label class="etiqueta" id="lblDiagnosticoAsociado"
-															value="Diagnostico de Consulta Asociada:" />
-														<label id="lblDiagnosticoAsociado2" value="" />
-													</row>
 													<row>
 														<cell colspan="2">
 															<label style="color:red" class="etiqueta" visible="false"
@@ -817,8 +817,21 @@
 															placeholder="Seleccione la Prioridad" id="cmbPrioridad"
 															width="100%" readonly="true">
 															<comboitem label="1 (Urgente)" />
-															<comboitem label="2 (1-5 Dias)" />
-															<comboitem label="3 (3-10 Dias)" />
+															<comboitem label="2 (1-3 Dias)" />
+															<comboitem label="3 (4-10 Dias)" />
+														</combobox>
+													</row>
+													<row>
+														<hbox>
+															<label class="etiqueta" value="Tratamiento:" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
+														<combobox tooltiptext="Seleccione el Tipo de Tratamiento"
+															placeholder="Seleccione el Tratamiento" id="cmbTratamiento"
+															width="100%" readonly="true">
+															<comboitem label="Agudo" />
+															<comboitem label="Cronico" />
 														</combobox>
 													</row>
 													<row>
@@ -857,6 +870,15 @@
 														<textbox width="98%" />
 													</listcell>
 													<listcell>
+														<combobox onSelect='$composer.cambio'
+															tooltiptext="Seleccione un Centro" model="${$composer.proveedores}"
+															placeholder="Seleccione un Centro" readonly="true" width="100%">
+															<template name="model">
+																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
+															</template>
+														</combobox>
+													</listcell>
+													<listcell>
 														<spinner inplace="true" width="98%" value="${each.idExamen}"
 															visible="false" disabled="true" />
 													</listcell>
@@ -875,8 +897,9 @@
 										<listbox id="ltbExamenesAgregados" height="450px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Examen">
 											<listhead>
-												<listheader label="Examen" width="40%" />
-												<listheader label="Observacion" width="60%" />
+												<listheader label="Examen" width="30%" />
+												<listheader label="Observacion" width="35%" />
+												<listheader label="Proveedor" width="35%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
@@ -886,6 +909,17 @@
 													<listcell>
 														<textbox value="${each.observacion}" width="98%"
 															class="multilinea" multiline="true" />
+													</listcell>
+													<!-- onSelect='$composer.validarExamen(self)' -->
+													<listcell>
+														<combobox onOpen='$composer.llenarProveedor(self)'
+															value="${each.proveedor.nombre}" tooltiptext="Seleccione un Proveedor"
+															model="${$composer.proveedores}" placeholder="Seleccione un Proveedor"
+															readonly="true" width="100%">
+															<template name="model">
+																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
+															</template>
+														</combobox>
 													</listcell>
 													<listcell>
 														<spinner value="${each.examen.idExamen}" width="98%"
@@ -897,12 +931,13 @@
 										<hbox width="100%">
 											<grid width="100%">
 												<columns visible="false">
-													<column label="" width="40%" />
-													<column label="" width="60%" />
+													<column label="" width="30%" />
+													<column label="" width="55%" />
+													<column label="" width="15%" />
 												</columns>
 												<rows>
 													<row>
-														<cell colspan="2">
+														<cell colspan="3">
 															<button class="btn" label="Agregar Examenes" id="btnAgregarExamenes"
 																image="/public/imagenes/botones/agregar.png"
 																tooltiptext="Agregar Examenes" vflex="1" hflex="1" />
@@ -921,6 +956,8 @@
 																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
 															</template>
 														</combobox>
+														<button class="abrir" id="btnAbrirProveedor" label=""
+															tooltiptext="Crear un Nuevo Proveedor" image="/public/imagenes/botones/agregar.png" />
 													</row>
 													<row>
 														<hbox>
@@ -928,13 +965,15 @@
 															<space />
 															<label value="*" style="font-weight:bold;color:red" />
 														</hbox>
-														<combobox tooltiptext="Seleccione la Prioridad del Examen"
-															placeholder="Seleccione el Tipo" id="cmbPrioridadExamen"
-															width="100%" readonly="true">
-															<comboitem label="1 (Urgente)" />
-															<comboitem label="2 (1-5 Dias)" />
-															<comboitem label="3 (3-10 Dias)" />
-														</combobox>
+														<cell colspan="2">
+															<combobox tooltiptext="Seleccione la Prioridad del Examen"
+																placeholder="Seleccione el Tipo" id="cmbPrioridadExamen"
+																width="100%" readonly="true">
+																<comboitem label="1 (Urgente)" />
+																<comboitem label="2 (1-3 Dias)" />
+																<comboitem label="3 (4-10 Dias)" />
+															</combobox>
+														</cell>
 													</row>
 												</rows>
 											</grid>
@@ -1043,8 +1082,8 @@
 															placeholder="Seleccione el Tipo" id="cmbPrioridadEspecialista"
 															width="100%" readonly="true">
 															<comboitem label="1 (Urgente)" />
-															<comboitem label="2 (1-5 Dias)" />
-															<comboitem label="3 (3-10 Dias)" />
+															<comboitem label="2 (1-3 Dias)" />
+															<comboitem label="3 (4-10 Dias)" />
 														</combobox>
 													</row>
 												</rows>
@@ -1165,8 +1204,8 @@
 															placeholder="Seleccione el Tipo" id="cmbPrioridadServicio"
 															width="100%" readonly="true">
 															<comboitem label="1 (Urgente)" />
-															<comboitem label="2 (1-5 Dias)" />
-															<comboitem label="3 (3-10 Dias)" />
+															<comboitem label="2 (1-3 Dias)" />
+															<comboitem label="3 (4-10 Dias)" />
 														</combobox>
 													</row>
 												</rows>
@@ -1305,15 +1344,15 @@
 					<tabpanel style="overflow-x:scroll;" width="100%">
 						<hbox width="100%" widths="90%,10%">
 							<div width="100%">
-								<listbox span="true"  mold="paging" autopaging="true" pagingPosition="bottom"
-									id="ltbConsultas" height="550px" width="100%"
+								<listbox span="true" mold="paging" autopaging="true"
+									pagingPosition="bottom" id="ltbConsultas" height="550px" width="100%"
 									emptyMessage="El Paciente no posee Consultas Registradas">
 									<listhead>
-										<listheader label="Fecha" width="8%"/>
-										<listheader label="Doctor" width="8%"/>
-										<listheader label="Motivo de Consulta" width="29%"/>
+										<listheader label="Fecha" width="8%" />
+										<listheader label="Doctor" width="8%" />
+										<listheader label="Motivo de Consulta" width="29%" />
 										<listheader label="Enfermedad Actual" width="35%" />
-										<listheader label="Tipo de Consulta" width="10%"/>
+										<listheader label="Tipo de Consulta" width="10%" />
 										<listheader label="SubTipo de Consulta" width="10%" />
 										<listheader label="id" visible="false" />
 									</listhead>

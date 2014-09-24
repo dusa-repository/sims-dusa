@@ -28,6 +28,9 @@ public class Recipe implements Serializable {
 	@Column(length=20)
 	private String prioridad;
 	
+	@Column(length=7)
+	private String tratamiento;
+	
 	@Column(name="validez")
 	private Timestamp validez;
 	
@@ -50,9 +53,10 @@ public class Recipe implements Serializable {
 
 	public Recipe(long idRecipe, String prioridad, Timestamp validez,
 			Timestamp fechaAuditoria, String horaAuditoria,
-			String usuarioAuditoria) {
+			String usuarioAuditoria, String tratamiento) {
 		super();
 		this.idRecipe = idRecipe;
+		this.tratamiento = tratamiento;
 		this.prioridad = prioridad;
 		this.validez = validez;
 		this.fechaAuditoria = fechaAuditoria;
@@ -114,6 +118,14 @@ public class Recipe implements Serializable {
 
 	public void setMedicinas(Set<ConsultaMedicina> medicinas) {
 		this.medicinas = medicinas;
+	}
+
+	public String getTratamiento() {
+		return tratamiento;
+	}
+
+	public void setTratamiento(String tratamiento) {
+		this.tratamiento = tratamiento;
 	}
 	
 	

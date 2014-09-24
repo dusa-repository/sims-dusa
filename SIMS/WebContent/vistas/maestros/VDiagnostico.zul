@@ -43,7 +43,7 @@
 					</row>
 					<row>
 						<hbox>
-							<label class="etiqueta" value="¿Tipo EPI?" />
+							<label class="etiqueta" value="¿Tipo ENO?" />
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
