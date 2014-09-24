@@ -675,10 +675,6 @@ public class CConsulta extends CGenerico {
 	@Wire
 	private Row rowAsociada;
 	@Wire
-	private Row rowAsociada2;
-	@Wire
-	private Row rowAsociada3;
-	@Wire
 	private Label lblEnfermedadAsociada;
 	@Wire
 	private Label lblEnfermedadAsociada2;
@@ -692,6 +688,8 @@ public class CConsulta extends CGenerico {
 	private Textbox txtCondicionado;
 	@Wire
 	private Label lblPreventivaArea;
+	@Wire
+	private Combobox cmbTratamiento;
 	//
 	Botonera botonera;
 	@Wire
@@ -791,7 +789,7 @@ public class CConsulta extends CGenerico {
 			"Ausencia" };
 	private String[] consultaPreventiva = { "Pre-Empleo", "Pre-Vacacional",
 			"Post-Vacacional", "Egreso", "Cambio de Puesto", "Promocion",
-			"Reintegro", "Por Area" };
+			"Reintegro", "Por Area", "Checkeo General" };
 	private String[] consultaCurativa = { "Primera", "Control" };
 	private West west;
 	private List<DetalleAccidente> listaDetalle = new ArrayList<DetalleAccidente>();
@@ -1041,9 +1039,9 @@ public class CConsulta extends CGenerico {
 			consultaj.setHoraAuditoria(nombre + " " + apellido);
 		}
 		ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
-		ltbConsultas.setMultiple(false);
+		// ltbConsultas.setMultiple(false);
 		ltbConsultas.setCheckmark(false);
-		ltbConsultas.setMultiple(true);
+		// ltbConsultas.setMultiple(true);
 		ltbConsultas.setCheckmark(true);
 	}
 
@@ -1448,17 +1446,17 @@ public class CConsulta extends CGenerico {
 	public void guardarExamenes(Consulta consultaDatos) {
 		List<ConsultaExamen> listaConsultaExamen = new ArrayList<ConsultaExamen>();
 		Proveedor proveedor = new Proveedor();
-		if (cmbProveedor.getText().compareTo("") != 0)
-			proveedor = servicioProveedor.buscar(Long.parseLong(cmbProveedor
-					.getSelectedItem().getContext()));
 		ProveedorExamen proveedorExamen = new ProveedorExamen();
 		for (int i = 0; i < ltbExamenesAgregados.getItemCount(); i++) {
 			Listitem listItem = ltbExamenesAgregados.getItemAtIndex(i);
-			Integer idExamen = ((Spinner) ((listItem.getChildren().get(2)))
+			Integer idExamen = ((Spinner) ((listItem.getChildren().get(3)))
 					.getFirstChild()).getValue();
 			Examen examen = servicioExamen.buscar(idExamen);
 			String valor = ((Textbox) ((listItem.getChildren().get(1)))
 					.getFirstChild()).getValue();
+			String idProveedor = ((Combobox) ((listItem.getChildren().get(2)))
+					.getFirstChild()).getSelectedItem().getContext();
+			proveedor = servicioProveedor.buscar(Long.parseLong(idProveedor));
 			proveedorExamen = servicioProveedorExamen
 					.buscarPorProveedoryExamen(proveedor, examen);
 			double precio = proveedorExamen.getCosto();
@@ -1512,7 +1510,8 @@ public class CConsulta extends CGenerico {
 			Date vali = dtbValido.getValue();
 			Timestamp validez = new Timestamp(vali.getTime());
 			recipe = new Recipe(0, cmbPrioridad.getValue(), validez, fechaHora,
-					horaAuditoria, nombreUsuarioSesion());
+					horaAuditoria, nombreUsuarioSesion(),
+					cmbTratamiento.getValue());
 			servicioRecipe.guardar(recipe);
 			recipe = servicioRecipe.buscarUltimo();
 		}
@@ -1730,6 +1729,16 @@ public class CConsulta extends CGenerico {
 				return false;
 		}
 		return true;
+	}
+
+	/* Abre la vista de Pais */
+	@Listen("onClick = #btnAbrirProveedor")
+	public void abrirPais() {
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Proveedor");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 
 	/* Llena la listas al iniciar con todo lo existente */
@@ -2015,6 +2024,9 @@ public class CConsulta extends CGenerico {
 				listas.get(i).setCheckmark(false);
 				listas.get(i).setMultiple(true);
 				listas.get(i).setCheckmark(true);
+			} else {
+				listas.get(i).setCheckmark(false);
+				listas.get(i).setCheckmark(true);
 			}
 		}
 	}
@@ -2147,8 +2159,9 @@ public class CConsulta extends CGenerico {
 		lblEnfermedadAsociada2.setValue(consulta.getEnfermedadActual());
 		List<ConsultaDiagnostico> lista = servicioConsultaDiagnostico
 				.buscarPorConsulta(consulta);
-		lblDiagnosticoAsociado2.setValue(lista.get(0).getDiagnostico()
-				.getNombre());
+		if (!lista.isEmpty())
+			lblDiagnosticoAsociado2.setValue(lista.get(0).getDiagnostico()
+					.getNombre());
 		catalogo.setParent(null);
 	}
 
@@ -2183,10 +2196,6 @@ public class CConsulta extends CGenerico {
 			consulta.setHoraAuditoria(nombre + " " + apellido);
 		}
 		ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
-		ltbConsultas.setMultiple(false);
-		ltbConsultas.setCheckmark(false);
-		ltbConsultas.setMultiple(true);
-		ltbConsultas.setCheckmark(true);
 		llenarListas();
 		catalogoPaciente.setParent(null);
 	}
@@ -2234,8 +2243,6 @@ public class CConsulta extends CGenerico {
 			Consulta consultaAsociada = servicioConsulta
 					.buscar(idConsultaAsociada);
 			rowAsociada.setVisible(true);
-			rowAsociada2.setVisible(true);
-			rowAsociada3.setVisible(true);
 			List<ConsultaDiagnostico> dia = servicioConsultaDiagnostico
 					.buscarPorConsulta(consultaAsociada);
 			lblDiagnosticoAsociado2.setValue(dia.get(0).getDiagnostico()
@@ -2608,13 +2615,21 @@ public class CConsulta extends CGenerico {
 						Listitem listItemj = ltbExamenesAgregados
 								.getItemAtIndex(j);
 						Integer idExamen = ((Spinner) ((listItemj.getChildren()
-								.get(2))).getFirstChild()).getValue();
+								.get(3))).getFirstChild()).getValue();
+						String idProveedor = "0";
+						if (((Combobox) ((listItemj.getChildren().get(2)))
+								.getFirstChild()).getSelectedItem() != null)
+							idProveedor = ((Combobox) ((listItemj.getChildren()
+									.get(2))).getFirstChild())
+									.getSelectedItem().getContext();
+						Proveedor proveedor = servicioProveedor.buscar(Long
+								.parseLong(idProveedor));
 						Examen examenj = servicioExamen.buscar(idExamen);
 						String valor = ((Textbox) ((listItemj.getChildren()
 								.get(1))).getFirstChild()).getValue();
 						double precio = 0;
 						ConsultaExamen consultaExamenj = new ConsultaExamen(
-								null, examenj, valor, null, precio, "");
+								null, examenj, valor, proveedor, precio, "");
 						examenesAgregado.add(consultaExamenj);
 					}
 					examenesAgregado.add(consultaExamen);
@@ -3118,7 +3133,43 @@ public class CConsulta extends CGenerico {
 			return true;
 	}
 
-	@Listen("onChange = #cmbProveedor")
+	public void llenarProveedor(Combobox a) {
+		Examen examen = new Examen();
+		List<Proveedor> proveedorExamen = new ArrayList<Proveedor>();
+		Spinner spin = (Spinner) a.getParent().getParent().getChildren().get(3)
+				.getFirstChild();
+		examen = servicioExamen.buscar(spin.getValue());
+		proveedorExamen = servicioProveedor
+				.buscarPorProveedoresPorExamen(examen);
+		if (!proveedorExamen.isEmpty())
+			a.setModel(new ListModelList<Proveedor>(proveedorExamen));
+		else
+			Messagebox.show("El examen no es realizado por ningun Proveedor",
+					"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+	}
+
+	// public void validarExamen(Combobox a) {
+	// Examen examen = new Examen();
+	// Proveedor proveedor = new Proveedor();
+	// ProveedorExamen proveedorExamen = new ProveedorExamen();
+	// Spinner spin = (Spinner) a.getParent().getParent().getChildren().get(3)
+	// .getFirstChild();
+	// proveedor = servicioProveedor.buscar(Long.parseLong(a.getSelectedItem()
+	// .getContext()));
+	// examen = servicioExamen.buscar(spin.getValue());
+	// proveedorExamen = servicioProveedorExamen.buscarPorProveedoryExamen(
+	// proveedor, examen);
+	// if (proveedorExamen == null) {
+	// Messagebox.show("El proveedor seleccionado no realiza el examen, "
+	// + examen.getNombre()
+	// + ", por favor modifiquelo si es el caso", "Alerta",
+	// Messagebox.OK, Messagebox.EXCLAMATION);
+	// a.setValue("");
+	// a.setFocus(true);
+	// }
+	// }
+
+	@Listen("onSelect = #cmbProveedor")
 	public boolean validarProveedor() {
 		Proveedor proveedor = null;
 		Examen examen = null;
@@ -3130,7 +3181,7 @@ public class CConsulta extends CGenerico {
 			ProveedorExamen proveedorExamen = new ProveedorExamen();
 			for (int i = 0; i < ltbExamenesAgregados.getItemCount(); i++) {
 				Listitem listItem = ltbExamenesAgregados.getItemAtIndex(i);
-				Integer idExamen = ((Spinner) ((listItem.getChildren().get(2)))
+				Integer idExamen = ((Spinner) ((listItem.getChildren().get(3)))
 						.getFirstChild()).getValue();
 				examen = servicioExamen.buscar(idExamen);
 				proveedorExamen = servicioProveedorExamen
@@ -3138,6 +3189,12 @@ public class CConsulta extends CGenerico {
 				if (proveedorExamen == null) {
 					error = true;
 					i = ltbExamenesAgregados.getItemCount();
+				} else {
+					Combobox combo = ((Combobox) ((listItem.getChildren()
+							.get(2))).getFirstChild());
+					if (combo.getSelectedItem() == null)
+						combo.setValue(proveedorExamen.getProveedor()
+								.getNombre());
 				}
 
 			}
@@ -3313,8 +3370,6 @@ public class CConsulta extends CGenerico {
 		if (rdoNoApto.isChecked())
 			rdoNoApto.setChecked(false);
 		rowAsociada.setVisible(false);
-		rowAsociada2.setVisible(false);
-		rowAsociada3.setVisible(false);
 		rowApto.setVisible(false);
 		rowApto2.setVisible(false);
 		rowPromocion.setVisible(false);
@@ -3898,8 +3953,6 @@ public class CConsulta extends CGenerico {
 		} else {
 			if (cmbTipoPreventiva.getValue().equals("Control")) {
 				rowAsociada.setVisible(true);
-				rowAsociada2.setVisible(true);
-				rowAsociada3.setVisible(true);
 				txtCondicionado.setValue("");
 				rowApto2.setVisible(false);
 			} else {
@@ -3916,8 +3969,6 @@ public class CConsulta extends CGenerico {
 					rowPromocion.setVisible(false);
 				}
 				rowAsociada.setVisible(false);
-				rowAsociada2.setVisible(false);
-				rowAsociada3.setVisible(false);
 				lblDiagnosticoAsociado2.setValue("");
 				lblEnfermedadAsociada2.setValue("");
 			}
@@ -3942,8 +3993,6 @@ public class CConsulta extends CGenerico {
 		rowPromocion.setVisible(false);
 		cmbTipoPreventiva.setVisible(true);
 		rowAsociada.setVisible(false);
-		rowAsociada2.setVisible(false);
-		rowAsociada3.setVisible(false);
 		lblDiagnosticoAsociado2.setValue("");
 		lblEnfermedadAsociada2.setValue("");
 		lblPreventiva.setVisible(true);
@@ -5154,19 +5203,39 @@ public class CConsulta extends CGenerico {
 	public void generarExamenes() {
 		if (ltbExamenesAgregados.getItemCount() != 0) {
 			Long id = idConsulta;
-			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=4&valor2="
-					+ id
-					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			Consulta consulta = servicioConsulta.buscar(idConsulta);
+			List<ConsultaExamen> listaMedicinas = servicioConsultaExamen
+					.buscarPorConsulta(consulta);
+			List<Long> idsProveedor = new ArrayList<Long>();
+			long provedor = listaMedicinas.get(0).getProveedor()
+					.getIdProveedor();
+			idsProveedor.add(provedor);
+			for (int i = 0; i < listaMedicinas.size(); i++) {
+				if (provedor != listaMedicinas.get(i).getProveedor()
+						.getIdProveedor()) {
+					idsProveedor.add(listaMedicinas.get(i).getProveedor()
+							.getIdProveedor());
+					provedor = listaMedicinas.get(i).getProveedor()
+							.getIdProveedor();
+				}
+			}
+			for (int i = 0; i < idsProveedor.size(); i++) {
+				Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=4&valor2="
+						+ id
+						+ "&valor5="
+						+ idsProveedor.get(i)
+						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			}
 		} else
 			msj.mensajeAlerta(Mensaje.noHayRegistros);
 
 	}
 
-	public byte[] reporteExamen(Long part2) throws JRException {
+	public byte[] reporteExamen(Long part2, Long part5) throws JRException {
 		byte[] fichero = null;
 		Consulta consuta = getServicioConsulta().buscar(part2);
 		List<ConsultaExamen> listaMedicinas = getServicioConsultaExamen()
-				.buscarPorConsulta(consuta);
+				.buscarPorConsultaYProveedor(consuta, part5);
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
@@ -5192,8 +5261,10 @@ public class CConsulta extends CGenerico {
 		p.put("doctorApellido",
 				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
-		p.put("prioridad", listaMedicinas.get(0).getPrioridad());
-		p.put("proveedor", listaMedicinas.get(0).getProveedor().getNombre());
+		if (!listaMedicinas.isEmpty()) {
+			p.put("prioridad", listaMedicinas.get(0).getPrioridad());
+			p.put("proveedor", listaMedicinas.get(0).getProveedor().getNombre());
+		}
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());

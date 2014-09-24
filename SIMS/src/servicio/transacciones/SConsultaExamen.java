@@ -19,7 +19,7 @@ public class SConsultaExamen {
 	private IConsultaExamenDAO consultaExamenDAO;
 
 	public List<ConsultaExamen> buscarPorConsulta(Consulta consulta) {
-		return consultaExamenDAO.findByConsulta(consulta);
+		return consultaExamenDAO.findByConsultaOrderByProveedorIdProveedorAsc(consulta);
 	}
 
 	public void borrarExamenesDeConsulta(Consulta consulta) {
@@ -40,5 +40,10 @@ public class SConsultaExamen {
 
 	public List<ConsultaExamen> buscarPorExamen(Examen examen) {
 		return  consultaExamenDAO.findByExamen(examen);
+	}
+
+	public List<ConsultaExamen> buscarPorConsultaYProveedor(Consulta consuta,
+			Long part5) {
+		return consultaExamenDAO.findByConsultaAndProveedorIdProveedor(consuta, part5);
 	}
 }
