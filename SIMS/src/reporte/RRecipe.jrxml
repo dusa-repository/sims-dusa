@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRecipe" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9ecb1563-881e-4aab-84a2-d7229f4feb87">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.8264462809917354"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
@@ -18,13 +18,14 @@
 	<parameter name="comelar" class="java.lang.String"/>
 	<parameter name="edad" class="java.lang.String"/>
 	<parameter name="numero" class="java.lang.Long"/>
+	<parameter name="tratamiento" class="java.lang.String"/>
 	<field name="medicina.nombre" class="java.lang.String"/>
 	<field name="dosis" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="306" splitType="Stretch">
+		<band height="351" splitType="Stretch">
 			<image>
 				<reportElement x="6" y="14" width="62" height="42" uuid="0a255f37-fe38-479a-b677-c5a611fa8043"/>
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
@@ -86,21 +87,21 @@
 				<text><![CDATA[CI:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="220" width="107" height="20" uuid="86ae2ad0-b161-4ecf-adef-e386d7f422d8"/>
+				<reportElement x="0" y="220" width="118" height="20" uuid="86ae2ad0-b161-4ecf-adef-e386d7f422d8"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Validez del recipe:]]></text>
 			</staticText>
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="101" y="220" width="42" height="20" uuid="e3a39935-48ca-4b30-bb85-cd5fec7672fa"/>
+				<reportElement stretchType="RelativeToBandHeight" x="117" y="220" width="26" height="20" uuid="e3a39935-48ca-4b30-bb85-cd5fec7672fa"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{dias}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="150" y="220" width="41" height="20" uuid="6d95f6c3-01c1-4ef7-99f1-1df11a3af7fc"/>
+				<reportElement x="147" y="220" width="41" height="20" uuid="6d95f6c3-01c1-4ef7-99f1-1df11a3af7fc"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -128,7 +129,7 @@
 				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="2" y="261" width="116" height="20" uuid="8e264b6b-88b6-48dc-8aa6-ebbb64c4c714"/>
+				<reportElement x="2" y="293" width="116" height="20" uuid="8e264b6b-88b6-48dc-8aa6-ebbb64c4c714"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -142,7 +143,7 @@
 				<textFieldExpression><![CDATA[$P{doctorApellido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="118" y="261" width="261" height="37" uuid="04b014ae-c0e1-4359-aef2-5792676f3825"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="118" y="293" width="261" height="37" uuid="04b014ae-c0e1-4359-aef2-5792676f3825"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -170,7 +171,7 @@
 				<text><![CDATA[Años]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="226" y="220" width="85" height="20" uuid="ae844ed3-b573-4d65-943d-ba24abcb186b"/>
+				<reportElement x="221" y="220" width="90" height="20" uuid="ae844ed3-b573-4d65-943d-ba24abcb186b"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -216,7 +217,7 @@
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="379" y="0" width="1" height="306" uuid="a201d8f3-c310-4fac-a368-0f77eed77dec"/>
+				<reportElement x="379" y="0" width="1" height="351" uuid="a201d8f3-c310-4fac-a368-0f77eed77dec"/>
 				<graphicElement>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
@@ -229,7 +230,7 @@
 				<text><![CDATA[Dr:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="384" y="220" width="107" height="20" uuid="3eaf9cba-c993-49e5-a52f-a1e1700389bc"/>
+				<reportElement x="384" y="220" width="122" height="20" uuid="3eaf9cba-c993-49e5-a52f-a1e1700389bc"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -250,14 +251,14 @@
 				<text><![CDATA[CI:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="618" y="220" width="85" height="20" uuid="6c8ae42a-bee8-47ca-8f27-7467fb7e6ae5"/>
+				<reportElement x="607" y="220" width="96" height="20" uuid="6c8ae42a-bee8-47ca-8f27-7467fb7e6ae5"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nro de Recipe:]]></text>
 			</staticText>
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="491" y="220" width="42" height="20" uuid="6c240119-2071-401a-b3b9-e66ff13a703e"/>
+				<reportElement stretchType="RelativeToBandHeight" x="506" y="220" width="42" height="20" uuid="6c240119-2071-401a-b3b9-e66ff13a703e"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -285,14 +286,14 @@
 				<text><![CDATA[Edad:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="533" y="220" width="41" height="20" uuid="09c7b062-6448-48f8-a20d-6dffa57bd85d"/>
+				<reportElement x="548" y="220" width="41" height="20" uuid="09c7b062-6448-48f8-a20d-6dffa57bd85d"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[dia(s)]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="493" y="261" width="258" height="37" uuid="71a5679f-40e6-4cbf-8936-0953df4f3faa"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="493" y="293" width="258" height="37" uuid="71a5679f-40e6-4cbf-8936-0953df4f3faa"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -334,7 +335,7 @@
 				<textFieldExpression><![CDATA[$P{pacienteNombre}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="384" y="261" width="109" height="20" uuid="66a55a8a-cd63-48ce-8f31-1b14e5e24212"/>
+				<reportElement x="384" y="293" width="109" height="20" uuid="66a55a8a-cd63-48ce-8f31-1b14e5e24212"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -347,6 +348,34 @@
 				</textElement>
 				<text><![CDATA[Paciente:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="256" width="100" height="20" uuid="ecd76d94-94b2-48f5-8bd1-1c82b0f27952"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tratamiento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="384" y="256" width="100" height="20" uuid="e47b03c6-e470-49e9-a7c9-2fd8577bbda4"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tratamiento;]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="256" width="175" height="20" uuid="29158791-387d-4553-ba09-94baf3a41bb8"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tratamiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="484" y="256" width="175" height="20" uuid="9b100b4b-1f73-4391-9c62-6d39b1677e8f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{tratamiento}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<columnHeader>

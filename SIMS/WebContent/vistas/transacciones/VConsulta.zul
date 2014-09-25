@@ -750,7 +750,7 @@
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.nombre}">
+													<listcell label="${each.nombre}(${each.inventario()})">
 													</listcell>
 													<listcell>
 														<textbox width="98%" />
