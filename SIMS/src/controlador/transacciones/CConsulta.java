@@ -1116,7 +1116,7 @@ public class CConsulta extends CGenerico {
 			protected List<Especialista> buscar(String valor) {
 				List<Especialista> presentacionesFiltradas = new ArrayList<Especialista>();
 				List<Especialista> presentaciones = servicioEspecialista
-						.filtroNombre(valor);
+						.filtroEspecialidad(valor);
 				for (int i = 0; i < especialistasDisponibles.size(); i++) {
 					Especialista especialista = especialistasDisponibles.get(i);
 					for (int j = 0; j < presentaciones.size(); j++) {
@@ -4979,7 +4979,9 @@ public class CConsulta extends CGenerico {
 	public void generarRecipe() throws JSONException {
 		if (ltbMedicinasAgregadas.getItemCount() != 0) {
 			Long id = idConsulta;
-			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=1&valor2="
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=1&valor2="
 					+ id
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else
@@ -5016,6 +5018,12 @@ public class CConsulta extends CGenerico {
 
 		String nombre = paciente.getPrimerNombre() + "   "
 				+ paciente.getSegundoNombre();
+		String tratamiento = "";
+		if (listaMedicinas.get(0).getRecipe().getTratamiento()== null)
+			tratamiento = "Sin Informacion";
+		else
+			tratamiento = listaMedicinas.get(0).getRecipe().getTratamiento();
+		p.put("tratamiento", tratamiento);
 		p.put("numero", consuta.getIdConsulta());
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
@@ -5056,7 +5064,9 @@ public class CConsulta extends CGenerico {
 						.getFirstChild()).getValue();
 				Long id = idConsulta;
 				String idEspecialista = String.valueOf(idEs);
-				Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=2&valor2="
+				Clients.evalJavaScript("window.open('"
+						+ damePath()
+						+ "Reportero?valor=2&valor2="
 						+ id
 						+ "&valor3="
 						+ idEspecialista
@@ -5137,7 +5147,9 @@ public class CConsulta extends CGenerico {
 				Long id = idConsulta;
 				Long idServicio = Long.valueOf(idSe);
 				Long idProveedor = Long.valueOf(idPr);
-				Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=3&valor2="
+				Clients.evalJavaScript("window.open('"
+						+ damePath()
+						+ "Reportero?valor=3&valor2="
 						+ id
 						+ "&valor4="
 						+ idServicio
@@ -5220,7 +5232,9 @@ public class CConsulta extends CGenerico {
 				}
 			}
 			for (int i = 0; i < idsProveedor.size(); i++) {
-				Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=4&valor2="
+				Clients.evalJavaScript("window.open('"
+						+ damePath()
+						+ "Reportero?valor=4&valor2="
 						+ id
 						+ "&valor5="
 						+ idsProveedor.get(i)
@@ -5286,7 +5300,9 @@ public class CConsulta extends CGenerico {
 				if (listItem != null) {
 					Consulta consulta = listItem.getValue();
 					Long id = consulta.getIdConsulta();
-					Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=5&valor2="
+					Clients.evalJavaScript("window.open('"
+							+ damePath()
+							+ "Reportero?valor=5&valor2="
 							+ id
 							+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 				}
@@ -5302,7 +5318,15 @@ public class CConsulta extends CGenerico {
 		Consulta consuta = getServicioConsulta().buscar(part2);
 		List<ConsultaDiagnostico> diagnosticoConsulta = getServicioConsultaDiagnostico()
 				.buscarPorConsulta(consuta);
-		Diagnostico diag = new Diagnostico();
+
+		List<ConsultaMedicina> medi = getServicioConsultaMedicina()
+				.buscarPorConsulta(consuta);
+		List<ConsultaExamen> examenes = getServicioConsultaExamen()
+				.buscarPorConsulta(consuta);
+		List<ConsultaEspecialista> especialistas = getServicioConsultaEspecialista()
+				.buscarPorConsulta(consuta);
+		List<ConsultaServicioExterno> estudis = getServicioConsultaServicioExterno()
+				.buscarPorConsulta(consuta);
 		String nombreDiagnostico = "";
 		String tipoDiagnostico = "";
 		if (!diagnosticoConsulta.isEmpty()) {
@@ -5355,10 +5379,13 @@ public class CConsulta extends CGenerico {
 		p.put("tipoDiagnostico", tipoDiagnostico);
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
-
+		p.put("data", new JRBeanCollectionDataSource(medi));
+		p.put("dataExamen", new JRBeanCollectionDataSource(examenes));
+		p.put("dataEspecialista", new JRBeanCollectionDataSource(especialistas));
+		p.put("dataEstudio", new JRBeanCollectionDataSource(estudis));
+		
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RConsulta.jasper"));
-		// fichero = JasperRunManager.runReportToPdf(reporte, p);
 
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(diagnosticoConsulta));
@@ -5373,7 +5400,9 @@ public class CConsulta extends CGenerico {
 			String id = idPaciente;
 			if (!servicioConsulta.buscarPorIdPacienteOrdenado(idPaciente)
 					.isEmpty()) {
-				Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=6&valor3="
+				Clients.evalJavaScript("window.open('"
+						+ damePath()
+						+ "Reportero?valor=6&valor3="
 						+ id
 						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 			} else
@@ -5440,7 +5469,9 @@ public class CConsulta extends CGenerico {
 	public void generarReposo() {
 		if (idConsulta != 0) {
 			Long id = idConsulta;
-			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=7&valor2="
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=7&valor2="
 					+ id
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else
@@ -5497,7 +5528,9 @@ public class CConsulta extends CGenerico {
 	public void generarConstancia() {
 		if (idConsulta != 0) {
 			Long id = idConsulta;
-			Clients.evalJavaScript("window.open('/SIMS/Reportero?valor=8&valor2="
+			Clients.evalJavaScript("window.open('/SIMS/"
+					+ damePath()
+					+ "Reportero?valor=8&valor2="
 					+ id
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else

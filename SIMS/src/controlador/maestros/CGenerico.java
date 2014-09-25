@@ -32,6 +32,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -42,6 +43,7 @@ import org.zkoss.zul.Tabbox;
 
 import servicio.inventario.SF00021;
 import servicio.inventario.SF4101;
+import servicio.inventario.SF41021;
 import servicio.maestros.SAccidente;
 import servicio.maestros.SAntecedente;
 import servicio.maestros.SAntecedenteTipo;
@@ -96,7 +98,6 @@ import servicio.transacciones.SHistoria;
 import servicio.transacciones.SHistoriaAccidente;
 import servicio.transacciones.SHistoriaIntervencion;
 import servicio.transacciones.SHistoriaVacuna;
-
 import componentes.Mensaje;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -107,6 +108,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SF00021 servicioF00021;
 	@WireVariable("SF4101")
 	protected SF4101 servicioF4101;
+	@WireVariable("SF41021")
+	protected SF41021 servicioF41021;
 	@WireVariable("SAccidente")
 	protected SAccidente servicioAccidente;
 	@WireVariable("SAntecedente")
@@ -459,5 +462,9 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		public PasswordAuthentication getPasswordAuthentication() {
 			return new PasswordAuthentication("cdusa", "cartucho");
 		}
+	}
+	
+	public String damePath(){
+		return Executions.getCurrent().getContextPath()+"/";
 	}
 }

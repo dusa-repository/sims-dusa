@@ -15,6 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import servicio.inventario.SF4101;
+import servicio.inventario.SF41021;
+import modelo.inventario.F41021;
+import modelo.inventario.F41021PK;
 import modelo.transacciones.ConsultaMedicina;
 
 /**
@@ -22,7 +29,7 @@ import modelo.transacciones.ConsultaMedicina;
  * 
  */
 @Entity
-@Table(name = "medicina", schema="dusa_sims.dbo")
+@Table(name = "medicina", schema = "dusa_sims.dbo")
 public class Medicina implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -82,13 +89,13 @@ public class Medicina implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_categoria_medicina")
 	private CategoriaMedicina categoriaMedicina;
-	
+
 	@OneToMany(mappedBy = "medicina")
 	private Set<ConsultaMedicina> medicinas;
 
 	@Column(name = "id_referencia")
 	private Long idReferencia;
-	
+
 	public Medicina() {
 	}
 
@@ -283,6 +290,27 @@ public class Medicina implements Serializable {
 
 	public void setIdReferencia(Long idReferencia) {
 		this.idReferencia = idReferencia;
+	}
+
+	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+			"/META-INF/ConfiguracionAplicacion.xml");
+
+	public static SF41021 getServicioF41021() {
+		return applicationContext.getBean(SF41021.class);
+	}
+
+	public long inventario() {
+		Long valor = idMedicina;
+		F41021PK claveSaldo = new F41021PK();
+		claveSaldo.setLiitm(valor.doubleValue());
+		claveSaldo.setLilocn("LOC001");
+		claveSaldo.setLilotn("");
+		claveSaldo.setLimcu("Planta");
+		F41021 f41021 = getServicioF41021().buscar(claveSaldo);
+		if (f41021 != null)
+			return f41021.getLipqoh().longValue();
+		else
+			return 0;
 	}
 
 }
