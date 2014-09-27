@@ -19,12 +19,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.image.AImage;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
@@ -40,7 +42,6 @@ import org.zkoss.zul.Treecell;
 import org.zkoss.zul.West;
 
 import componentes.Validador;
-
 import controlador.maestros.CGenerico;
 
 public class CArbol extends CGenerico {
@@ -74,6 +75,7 @@ public class CArbol extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
+		 Clients.confirmClose("Mensaje de la Aplicacion:");
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 

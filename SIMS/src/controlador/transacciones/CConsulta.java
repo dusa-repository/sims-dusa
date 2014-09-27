@@ -663,6 +663,8 @@ public class CConsulta extends CGenerico {
 	@Wire
 	private Row rowReposo;
 	@Wire
+	private Row rowValido;
+	@Wire
 	private Label lblCargo1;
 	@Wire
 	private Label lblArea;
@@ -1528,6 +1530,14 @@ public class CConsulta extends CGenerico {
 			listaMedicina.add(consultaMedicina);
 		}
 		servicioConsultaMedicina.guardar(listaMedicina);
+	}
+	
+	@Listen("onSelect=#cmbTratamiento")
+	public void validarTratamiento(){
+		if(cmbTratamiento.getValue().equals("Cronico"))
+			rowValido.setVisible(false);
+		else 
+			rowValido.setVisible(true);
 	}
 
 	public boolean validar() {
@@ -3173,6 +3183,7 @@ public class CConsulta extends CGenerico {
 	public boolean validarProveedor() {
 		Proveedor proveedor = null;
 		Examen examen = null;
+		String examenes="\n";
 		if (cmbProveedor.getText().compareTo("") != 0)
 			proveedor = servicioProveedor.buscar(Long.parseLong(cmbProveedor
 					.getSelectedItem().getContext()));
@@ -3188,7 +3199,7 @@ public class CConsulta extends CGenerico {
 						.buscarPorProveedoryExamen(proveedor, examen);
 				if (proveedorExamen == null) {
 					error = true;
-					i = ltbExamenesAgregados.getItemCount();
+					examenes += "-"+examen.getNombre()+ "\n";
 				} else {
 					Combobox combo = ((Combobox) ((listItem.getChildren()
 							.get(2))).getFirstChild());
@@ -3196,14 +3207,13 @@ public class CConsulta extends CGenerico {
 						combo.setValue(proveedorExamen.getProveedor()
 								.getNombre());
 				}
-
 			}
 			if (error) {
 				cmbProveedor.setFocus(true);
 				Messagebox.show(
-						"El proveedor seleccionado no realiza el examen, "
-								+ examen.getNombre()
-								+ ", por favor modifiquelo si es el caso",
+						"El proveedor seleccionado no realiza los(el) examen(es):   "
+								+ examenes
+								+ "Por favor modifiquelos",
 						"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 				return false;
 			} else
@@ -3380,6 +3390,7 @@ public class CConsulta extends CGenerico {
 		if (!botonera.getChildren().get(0).isVisible()) {
 			botonera.getChildren().get(0).setVisible(true);
 		}
+		rowValido.setVisible(true);
 		btnConstancia.setVisible(false);
 		btnGenerarOrden.setVisible(false);
 		btnGenerarRecipe.setVisible(false);
@@ -5528,7 +5539,7 @@ public class CConsulta extends CGenerico {
 	public void generarConstancia() {
 		if (idConsulta != 0) {
 			Long id = idConsulta;
-			Clients.evalJavaScript("window.open('/SIMS/"
+			Clients.evalJavaScript("window.open('"
 					+ damePath()
 					+ "Reportero?valor=8&valor2="
 					+ id

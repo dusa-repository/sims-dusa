@@ -834,7 +834,7 @@
 															<comboitem label="Cronico" />
 														</combobox>
 													</row>
-													<row>
+													<row id="rowValido">
 														<label class="etiqueta" value="Recipe Valido hasta:" />
 														<datebox readonly="true" width="100%" id="dtbValido"
 															constraint="no past,no empty" onCreate="self.value = new Date()"
@@ -870,7 +870,7 @@
 														<textbox width="98%" />
 													</listcell>
 													<listcell>
-														<combobox onSelect='$composer.cambio'
+														<combobox onOpen='$composer.llenarProveedor(self)'
 															tooltiptext="Seleccione un Centro" model="${$composer.proveedores}"
 															placeholder="Seleccione un Centro" readonly="true" width="100%">
 															<template name="model">
