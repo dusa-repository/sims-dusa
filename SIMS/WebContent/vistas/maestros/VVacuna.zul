@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divVacuna" apply="controlador.maestros.CVacuna">
-		<groupbox width="40em" mold="3d" title="Vacuna">
+		<groupbox width="50%" mold="3d" title="Vacuna">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />

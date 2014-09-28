@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divUnidadMedicina" apply="controlador.maestros.CUnidadMedicina">
-		<groupbox width="40em" mold="3d" title="Unidad de Medicina">
+		<groupbox width="50%" mold="3d" title="Unidad de Medicina">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />

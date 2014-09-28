@@ -1,6 +1,6 @@
 <zk>
 	<div id="divCiudad" apply="controlador.maestros.CCiudad">
-		<groupbox width="40em" mold="3d" title="Ciudad">
+		<groupbox width="50%" mold="3d" title="Ciudad">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />

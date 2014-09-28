@@ -1,6 +1,6 @@
 <zk>
 	<div id="divMedicina" apply="controlador.maestros.CMedicina">
-		<groupbox width="57em" mold="3d" title="Medicina">
+		<groupbox width="90%" mold="3d" title="Medicina">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="20%" />
@@ -116,13 +116,11 @@
 						</tabbox>
 						<div align="right" style="float: right;">
 							<separator />
-							<separator />
 							<button class="btn" id="btnSiguientePestanna" label="Siguiente"
 								image="/public/imagenes/botones/adelante.png" />
 						</div>
 					</tabpanel>
 					<tabpanel>
-						<separator />
 						<hbox>
 							<textbox tooltiptext="Ingrese el Nombre de la Presentacion"
 								placeholder="Ingrese la Presentacion a Buscar" width="195px"
@@ -131,9 +129,8 @@
 							<button class="abrir" id="btnAbrirPresentacion" label=""
 								tooltiptext="Crear una Nueva Presentacion" image="/public/imagenes/botones/agregar.png" />
 						</hbox>
-						<separator />
 						<hbox>
-							<listbox id="ltbPresentaciones" height="280px" width="220px"
+							<listbox id="ltbPresentaciones" height="250px" width="220px"
 								emptyMessage="No hay Presentaciones Registradas">
 								<listhead>
 									<listheader label="Presentacion" width="100%" />
@@ -171,7 +168,7 @@
 									image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Presentacion"
 									width="30px" />
 							</vbox>
-							<listbox id="ltbPresentacionesAgregadas" height="280px"
+							<listbox id="ltbPresentacionesAgregadas" height="250px"
 								emptyMessage="No ha Seleccionado Ningúna Presentacion">
 								<listhead>
 									<listheader label="Presentacion" width="35%" />
@@ -204,14 +201,11 @@
 								</template>
 							</listbox>
 						</hbox>
-						<separator />
 						<div align="left" style="float: right;">
-							<separator />
 							<separator />
 							<button class="btn" label="Anterior" id="btnAnteriorPestanna"
 								image="/public/imagenes/botones/atras.png" tooltiptext="Pestaña Anterior" />
 						</div>
-						<separator />
 						<separator />
 						<vbox>
 							<div width="50%" id="botoneraMedicina" align="left" style="float: left;" />

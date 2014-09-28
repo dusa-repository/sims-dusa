@@ -1,12 +1,12 @@
 <zk>
 	<script src="/public/progress.js" />
 	<div id="divArea" apply="controlador.sha.CArea">
-		<groupbox width="40em" mold="3d" title="Area">
+		<groupbox width="50%" mold="3d" title="Area">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="22%" />
-					<column label="" width="60%" />
-					<column label="" width="18%" />
+					<column label="" width="55%" />
+					<column label="" width="23%" />
 				</columns>
 				<rows>
 					<row>

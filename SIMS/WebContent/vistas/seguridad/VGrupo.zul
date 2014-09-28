@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divGrupo" apply="controlador.seguridad.CGrupo" width="80%">
-		<groupbox width="40em" mold="3d" title="Grupos">
+		<groupbox width="80%" mold="3d" title="Grupos">
 			<grid>
 				<columns visible="false">
 					<column label="" width="28%" />

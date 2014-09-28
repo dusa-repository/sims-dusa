@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divPresentacionMedicina" apply="controlador.maestros.CPresentacionMedicina">
-		<groupbox width="40em" mold="3d" title="Presentacion de Medicina">
+		<groupbox width="50%" mold="3d" title="Presentacion de Medicina">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />

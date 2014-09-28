@@ -1,6 +1,6 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div id="divUsuario" apply="controlador.maestros.CUsuario" width="80%">
+	<div id="divUsuario" apply="controlador.maestros.CUsuario" width="85%">
 		<groupbox width="100%" mold="3d" title="Usuario">
 			<grid width="100%">
 				<columns visible="false">
@@ -38,7 +38,7 @@
 						<textbox id="txtCedulaUsuario" hflex="1" maxlength="12"
 							tooltiptext="Ingrese la Cedula del Usuario" />
 						<button
-							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+							style="	background: #952C2C;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
 							upload="true" image="/public/imagenes/botones/cargar.png" id="fudImagenUsuario"
 							label="Foto">
 						</button>
@@ -208,7 +208,6 @@
 						</groupbox>
 						<div align="right" style="float: right;">
 							<separator />
-							<separator />
 							<button id="btnSiguientePestanna" label="Siguiente" class="btn"
 								image="/public/imagenes/botones/adelante.png" />
 						</div>
@@ -257,7 +256,6 @@
 							<vbox>
 								<button class="abrir" id="btnAbrirGrupo" label=""
 									tooltiptext="Crear un Nuevo Grupo" image="/public/imagenes/botones/agregar.png" />
-								<separator />
 							</vbox>
 							<hbox>
 								<listbox id="ltbGruposDisponibles" height="160px"
@@ -289,7 +287,6 @@
 								</listbox>
 							</hbox>
 						</groupbox>
-						<separator />
 						<separator />
 						<div align="left" style="float: right;">
 							<button class="btn" label="Anterior" id="btnAnteriorPestanna"

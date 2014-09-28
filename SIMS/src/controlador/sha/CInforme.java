@@ -1673,11 +1673,13 @@ public class CInforme extends CGenerico {
 		lbl53.setValue(paciente.getCedula());
 		lbl54.setValue(paciente.getNacionalidad());
 		lbl55.setValue(paciente.getSexo());
-		if (paciente.getEdad() != null)
-			lbl56.setValue(String.valueOf(paciente.getEdad()));
 		if (paciente.getFechaNacimiento() != null)
+		{
 			lbl57.setValue(String.valueOf(formatoFecha.format(paciente
 					.getFechaNacimiento())));
+			lbl56.setValue(String.valueOf(calcularEdad(paciente
+					.getFechaNacimiento())));
+		}
 		lbl58.setValue(paciente.getLugarNacimiento());
 		lbl59.setValue(paciente.getEstadoCivil());
 		lbl510.setValue(paciente.getMano());

@@ -1,12 +1,12 @@
 <zk>
 	<script src="/public/progress.js" />
 	<div id="divCargo" apply="controlador.maestros.CCargo">
-		<groupbox width="42em" mold="3d" title="Cargo">
+		<groupbox width="53%" mold="3d" title="Cargo">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="22%" />
-					<column label="" width="60%" />
-					<column label="" width="18%" />
+					<column label="" width="55%" />
+					<column label="" width="23%" />
 				</columns>
 				<rows>
 					<row>

@@ -1,6 +1,6 @@
 <zk>
 	<div id="divPaciente" apply="controlador.maestros.CPaciente">
-		<groupbox width="99%" mold="3d" title="Paciente">
+		<groupbox width="100%" mold="3d" title="Paciente">
 			<tabbox height="auto" id="taxPaciente" orient="horizontal">
 				<tabs id="tbsPaciente">
 					<tab label="Datos Basicos" id="tabDatosBasicos" />
@@ -10,14 +10,14 @@
 					<tabpanel>
 						<grid width="100%">
 							<columns visible="false">
-								<column label="" width="11%" />
+								<column label="" width="13%" />
 								<column label="" width="14%" />
 								<column label="" width="11%" />
 								<column label="" width="14%" />
 								<column label="" width="11%" />
 								<column label="" width="14%" />
 								<column label="" width="9%" />
-								<column label="" width="16%" />
+								<column label="" width="14%" />
 							</columns>
 							<rows>
 								<row>
@@ -80,7 +80,7 @@
 										</vbox>
 									</cell>
 									<button
-										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+										style="	background: #952C2C;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
 										upload="true" image="/public/imagenes/botones/cargar.png" id="fudImagenPaciente"
 										label="Foto">
 									</button>
@@ -127,7 +127,7 @@
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
-									<datebox readonly="true" width="140px" id="dtbFechaNac"
+									<datebox readonly="true" width="100%" id="dtbFechaNac"
 										onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Nacimiento"
 										constraint="no future,no empty" />
 									<hbox>
@@ -314,7 +314,7 @@
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<combobox tooltiptext="Seleccione el Origen de la Discapacidad"
-										placeholder="Seleccione el Origen" id="cmbOrigen" width="140px"
+										placeholder="Seleccione el Origen" id="cmbOrigen" width="100%"
 										readonly="true">
 										<comboitem label="Congenita" />
 										<comboitem label="Adquirida" />
@@ -327,7 +327,7 @@
 									</hbox>
 									<combobox tooltiptext="Seleccione un Tipo de Discapacidad"
 										placeholder="Seleccione un Tipo" id="cmbTipoDiscapacidad"
-										width="130px" readonly="true">
+										width="100%" readonly="true">
 										<comboitem label="Auditiva" />
 										<comboitem label="Mental" />
 										<comboitem label="Motora" />
@@ -418,7 +418,7 @@
 								</row>
 								<row>
 									<label class="etiqueta" value="Turno:" />
-									<combobox tooltiptext="Seleccione un Turno"
+									<combobox width="100%" tooltiptext="Seleccione un Turno"
 										placeholder="Seleccione un Turno" id="cmbTurno" readonly="true">
 										<comboitem label="Jornada Completa" />
 										<comboitem label="Jornada Parcial" />
@@ -448,7 +448,7 @@
 									<textbox maxlength="100" id="txtRetiroIVSS"
 										tooltiptext="Ingrese el Retiro de IVSS (FORMATO 14.03)" />
 									<label class="etiqueta" value="Fecha de Egreso:" />
-									<datebox readonly="true" id="dtbFechaEgreso" onCreate="self.value = new Date()"
+									<datebox width="100%" readonly="true" id="dtbFechaEgreso" onCreate="self.value = new Date()"
 										tooltiptext="Indique la Fecha de Egreso" />
 									<hbox />
 									<hbox />
@@ -514,7 +514,6 @@
 							</grid>
 						</groupbox>
 						<div align="right" style="float: right;">
-							<separator />
 							<separator />
 							<button class="btn" id="btnSiguientePestanna" label="Siguiente"
 								image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
@@ -611,7 +610,7 @@
 									</hbox>
 									<combobox tooltiptext="Seleccione un Parentesco"
 										placeholder="Seleccione un Parentesco" id="cmbParentescoEmergencia"
-										width="180px" readonly="true">
+										width="100%" readonly="true">
 										<comboitem label="Hermano(a)" />
 										<comboitem label="Conyuge" />
 										<comboitem label="Concubino(a)" />
@@ -648,7 +647,6 @@
 								</row>
 							</rows>
 						</grid>
-						<separator />
 						<div align="left" style="float: right;">
 							<separator />
 							<button class="btn" label="Anterior" id="btnAnteriorPestanna"

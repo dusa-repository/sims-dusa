@@ -25,8 +25,6 @@
 				label="Seccion 9" /> </combobox> <image class="imgAyuda" width="100%" height="100%" 
 				style="cursor: help" tooltip="seccion" src="/public/imagenes/botones/signoInterrogacion.png" 
 				/> <hbox /> </row> </rows> </grid> -->
-
-			<separator />
 			<tabbox height="auto" width="auto" id="taxSecciones" orient="horizontal">
 				<tabs>
 					<tab tooltip="seccion" label="Seccion 1 y 2" id="tab1y2" />
@@ -39,7 +37,6 @@
 				</tabs>
 				<tabpanels>
 					<tabpanel>
-						<separator />
 						<hbox>
 							<hbox>
 								<label class="etiqueta"
@@ -47,8 +44,8 @@
 								<space />
 								<label value="*" style="font-weight:bold;color:red" />
 							</hbox>
-							<textbox multiline="true" width="400px" id="txt1"
-								tooltiptext="Ingrese el Codigo" maxlength="50" />
+							<textbox width="100%" id="txt1" tooltiptext="Ingrese el Codigo"
+								maxlength="50" />
 						</hbox>
 						<separator />
 						<label class="etiqueta" value="INVESTIGACION DEL ACCIDENTE" />
@@ -64,7 +61,6 @@
 							<rows>
 								<row>
 									<cell colspan="5">
-										<separator />
 										<label class="etiqueta"
 											value="Responsables de la Investigacion del Accidente:" />
 										<separator />
@@ -135,7 +131,7 @@
 							</rows>
 						</grid>
 						<hbox>
-							<space width="900px" />
+							<space width="800px" />
 							<div align="right">
 								<button class="btn" id="btnSiguiente1" label="Siguiente"
 									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
@@ -143,22 +139,20 @@
 						</hbox>
 					</tabpanel>
 					<tabpanel>
-						<separator />
 						<grid width="100%">
 							<columns visible="false">
-								<column label="" width="12%" />
+								<column label="" width="14%" />
 								<column label="" width="13%" />
+								<column label="" width="10%" />
 								<column label="" width="12%" />
-								<column label="" width="13%" />
 								<column label="" width="12%" />
-								<column label="" width="13%" />
 								<column label="" width="12%" />
-								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="15%" />
 							</columns>
 							<rows>
 								<row>
 									<cell colspan="8">
-										<separator />
 										<hbox>
 											<label class="etiqueta"
 												value="DATOS DE LA EMPRESA PARA LA CUAL LABORA / LABORABA LA/EL TRABAJADORA / TABAJADOR - ACCIDENTADO / ACCIDENTADA " />
@@ -306,12 +300,11 @@
 						</grid>
 						<separator />
 						<hbox>
-							<space width="100px" />
 							<div align="left">
 								<button class="btn" id="btnAtras2" label="Anterior"
 									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
 							</div>
-							<space width="900px" />
+							<space width="700px" />
 							<div align="right">
 								<button class="btn" id="btnSiguiente2" label="Siguiente"
 									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
@@ -321,19 +314,19 @@
 					<tabpanel>
 						<grid width="100%">
 							<columns visible="false">
-								<column label="" width="12%" />
+								<column label="" width="14%" />
 								<column label="" width="13%" />
+								<column label="" width="10%" />
 								<column label="" width="12%" />
-								<column label="" width="13%" />
 								<column label="" width="12%" />
-								<column label="" width="13%" />
 								<column label="" width="12%" />
-								<column label="" width="13%" />
+								<column label="" width="12%" />
+								<column label="" width="15%" />
 							</columns>
 							<rows>
 								<row>
 									<cell colspan="8">
-										<separator />
+	
 										<label class="etiqueta" value="DATOS DE LA EMPRESA BENEFICIARIA" />
 										<separator />
 									</cell>
@@ -476,12 +469,11 @@
 						</grid>
 						<separator />
 						<hbox>
-							<space width="100px" />
 							<div align="left">
 								<button class="btn" id="btnAtras3" label="Anterior"
 									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
 							</div>
-							<space width="900px" />
+							<space width="700px" />
 							<div align="right">
 								<button class="btn" id="btnSiguiente3" label="Siguiente"
 									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
@@ -489,10 +481,8 @@
 						</hbox>
 					</tabpanel>
 					<tabpanel>
-						<separator />
 						<grid width="auto">
 							<columns>
-								<column label="" width="12%" />
 								<column label="" width="13%" />
 								<column label="" width="12%" />
 								<column label="" width="13%" />
@@ -500,11 +490,11 @@
 								<column label="" width="13%" />
 								<column label="" width="12%" />
 								<column label="" width="13%" />
+								<column label="" width="12%" />
 							</columns>
 							<rows>
 								<row>
 									<cell colspan="8">
-										<separator />
 										<hbox>
 											<label class="etiqueta"
 												value="DATOS DEL TRABAJADOR / TRABAJADORA - ACCIDENTADO / ACCIDENTADA" />
@@ -522,7 +512,9 @@
 									<label class="etiqueta" value="Cedula de Identidad:" />
 									<cell colspan="2">
 										<label id="lbl53" />
+										<label value="  " />
 										<label class="etiqueta" value="Nacionalidad:" />
+										<label value="  " />
 										<label id="lbl54" />
 									</cell>
 									<button id="btnBuscar5" class="btn" label="Buscar"
@@ -696,12 +688,11 @@
 						</grid>
 						<separator />
 						<hbox>
-							<space width="100px" />
 							<div align="left">
 								<button class="btn" id="btnAtras4" label="Anterior"
 									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
 							</div>
-							<space width="900px" />
+							<space width="700px" />
 							<div align="right">
 								<button class="btn" id="btnSiguiente4" label="Siguiente"
 									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
@@ -709,7 +700,6 @@
 						</hbox>
 					</tabpanel>
 					<tabpanel>
-						<separator />
 						<grid width="auto">
 							<columns>
 								<column label="" width="12%" />
@@ -724,15 +714,14 @@
 							<rows>
 								<row>
 									<cell colspan="8">
-										<separator />
 										<label class="etiqueta" value="DATOS RELATIVOS AL ACCIDENTE" />
 										<separator />
 									</cell>
 								</row>
 								<row>
 									<label class="etiqueta" value="Fecha del Accidente:" />
-									<datebox readonly="true" id="dtb61" onCreate="self.value = new Date()"
-										tooltiptext="Indique la Fecha del Accidente" />
+									<datebox width="100%" readonly="true" id="dtb61"
+										onCreate="self.value = new Date()" tooltiptext="Indique la Fecha del Accidente" />
 									<label class="etiqueta" value="Dia de la Semana:" />
 									<combobox tooltiptext="Seleccione el Dia" placeholder="Seleccione el Dia"
 										id="cmb62" width="100%" readonly="true">
@@ -745,8 +734,9 @@
 										<comboitem label="Domingo" />
 									</combobox>
 									<label class="etiqueta" value="Hora Ocurrencia:" />
-									<timebox hflex="1" vflex="1" id="tmb63" format="a hh:mm:ss"
-										onCreate="self.value = new Date()" tooltiptext="Seleccione la Hora de la Ocurrencia" />
+									<timebox width="100%" hflex="1" vflex="1" id="tmb63"
+										format="a hh:mm:ss" onCreate="self.value = new Date()"
+										tooltiptext="Seleccione la Hora de la Ocurrencia" />
 									<label class="etiqueta" value="Horario de la Jornada del Trabajador/a:" />
 									<textbox id="txt64"
 										tooltiptext="Ingrese el Horario del trabajador/a el dia del Accidente" />
@@ -766,7 +756,7 @@
 											placeholder="Seleccione una Clasificacion" id="cmb67"
 											readonly="true" width="100%">
 											<template name="model">
-												<comboitem description="${each.nombre}" label="${each.nombre}"
+												<comboitem label="${each.nombre}"
 													context="${each.idClasificacionAccidente}" />
 											</template>
 										</combobox>
@@ -845,8 +835,7 @@
 											placeholder="Seleccione un Area" id="cmb6713" readonly="true"
 											width="100%">
 											<template name="model">
-												<comboitem description="${each.nombre}" label="${each.nombre}"
-													context="${each.idArea}" />
+												<comboitem label="${each.nombre}" context="${each.idArea}" />
 											</template>
 										</combobox>
 									</cell>
@@ -886,12 +875,11 @@
 						</grid>
 						<separator />
 						<hbox>
-							<space width="100px" />
 							<div align="left">
 								<button class="btn" id="btnAtras5" label="Anterior"
 									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
 							</div>
-							<space width="900px" />
+							<space width="700px" />
 							<div align="right">
 								<button class="btn" id="btnSiguiente5" label="Siguiente"
 									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
@@ -899,7 +887,6 @@
 						</hbox>
 					</tabpanel>
 					<tabpanel>
-						<separator />
 						<hbox>
 							<label class="etiqueta" value="PROCESOS PELIGROSOS" />
 						</hbox>
@@ -924,7 +911,6 @@
 										<rows>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="Descripcion Especifica de la  Forma en que se Utilizaba la Materia Prima al Momento de la  Ocurrencia del Accidente:" />
 												</cell>
@@ -937,14 +923,12 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="Materia Prima/ Sustancia / Productos /Sujeto:" />
 												</cell>
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="¿Qué Materia Prima, Sustancia, Producto o Sujeto Estaba Utilizando el Trabajador al Momento de la Ocurrencia del Accidente? en el Caso de Existir Sujeto, Indíquese" />
 												</cell>
@@ -957,14 +941,12 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="Materia Prima/ Sustancia / Productos /Sujeto:" />
 												</cell>
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="¿Describa Cuales son las Características de la  Materia Prima, Sustancia, Producto o Sujeto, del Proceso de Trabajo que Ejecutaba el Trabajador o Trabajadora  al Momento de la Ocurrencia del Accidente?" />
 												</cell>
@@ -1003,7 +985,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="OBSERVACIONES" />
 												</cell>
 											</row>
@@ -1017,7 +998,6 @@
 									</grid>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<grid width="auto">
 										<columns>
 											<column label="" width="25%" />
@@ -1033,7 +1013,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="Descripción Especifica de las Instalaciones en las que Ocurrió el Accidente" />
 												</cell>
@@ -1046,7 +1025,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="¿Existía Alguna de las Siguientes Condiciones en las Instalaciones donde Ocurrió el Accidente?" />
 												</cell>
@@ -1066,14 +1044,12 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="EQUIPOS DE TRABAJO (Maquinarias, Equipos, Instrumentos, Herramientas, Sustancias, Etc.)" />
 												</cell>
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="Descripción Específica de las Maquinarias, Equipos, Instrumentos, Herramientas, Sustancias que se Emplean en el Momento en el Que Ocurrió el Accidente:" />
 												</cell>
@@ -1211,7 +1187,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="AMBIENTE  DE TRABAJO" />
 												</cell>
 											</row>
@@ -1234,7 +1209,6 @@
 									</grid>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<grid width="auto">
 										<columns>
 											<column label="" width="25%" />
@@ -1251,7 +1225,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="Descripción Específica de la/s Tarea/s o Actividad/es que se Realizaba/n  al Momento de la Ocurrencia  del Accidente:" />
 												</cell>
@@ -1418,7 +1391,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="OBSERVACIONES" />
 												</cell>
 											</row>
@@ -1435,7 +1407,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="¿En que Momento se Estaba Realizando la Tarea? " />
 													<separator />
@@ -1466,7 +1437,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="OBSERVACIONES" />
 												</cell>
 											</row>
@@ -1478,7 +1448,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="PARA SER LLENADO SI EL TRABAJO QUE REALIZABA EL TRABAJADOR / TRABAJADORA NO ERA PARTE DE SU FUNCIONES" />
 												</cell>
@@ -1585,7 +1554,6 @@
 									</grid>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<grid width="auto">
 										<columns>
 											<column label="" width="25%" />
@@ -1629,7 +1597,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="¿Cuál de las Siguientes Condiciones Relacionadas con la Organización del Trabajo Estaba Presente?" />
 												</cell>
@@ -1649,7 +1616,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="OTROS (Especifique)" />
 												</cell>
 											</row>
@@ -1661,7 +1627,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="¿Cuántas Horas Extras Laboro el Trabajador en los Periodos Indicados a Continuación?" />
 												</cell>
@@ -1688,7 +1653,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="OBSERVACION" />
 												</cell>
 											</row>
@@ -1700,7 +1664,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta"
 														value="¿Cuál de las Siguientes Condiciones Relacionadas con Factores Disergonómicos Estaban Presente al Momento del Accidente?" />
 												</cell>
@@ -1724,12 +1687,11 @@
 							</tabpanels>
 						</tabbox>
 						<hbox>
-							<space width="100px" />
 							<div align="left">
 								<button class="btn" id="btnAtras6" label="Anterior"
 									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
 							</div>
-							<space width="900px" />
+							<space width="700px" />
 							<div align="right">
 								<button class="btn" id="btnSiguiente6" label="Siguiente"
 									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
@@ -1753,7 +1715,6 @@
 							</tabs>
 							<tabpanels>
 								<tabpanel>
-									<separator />
 									<grid width="auto">
 										<columns>
 											<column label="" width="25%" />
@@ -1857,7 +1818,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="OBSERVACIONES" />
 												</cell>
 											</row>
@@ -1871,7 +1831,6 @@
 									</grid>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<grid width="auto">
 										<columns>
 											<column label="" width="25%" />
@@ -1992,7 +1951,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="OBSERVACIONES" />
 												</cell>
 											</row>
@@ -2006,7 +1964,6 @@
 									</grid>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<grid width="auto">
 										<columns>
 											<column label="" width="25%" />
@@ -2153,12 +2110,12 @@
 													<grid width="auto">
 														<columns>
 															<column label="Apellidos y Nombres" width="15%" />
-															<column label="Cedula de Identidad" width="15%" />
+															<column label="Cedula de Identidad" width="13%" />
 															<column label="Profesion" width="15%" />
 															<column label="Cargo" width="15%" />
 															<column label="Turno de Trabajo" width="15%" />
 															<column label="N° Registro INPSASEL" width="15%" />
-															<column label="" width="10%" />
+															<column label="" width="12%" />
 														</columns>
 														<rows>
 															<row>
@@ -2233,7 +2190,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="OBSERVACIONES" />
 												</cell>
 											</row>
@@ -2247,7 +2203,6 @@
 									</grid>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<grid width="auto">
 										<columns>
 											<column label="" width="25%" />
@@ -2389,7 +2344,6 @@
 											</row>
 											<row>
 												<cell colspan="4">
-													<separator />
 													<label class="etiqueta" value="OBSERVACIONES" />
 												</cell>
 											</row>
@@ -2405,7 +2359,6 @@
 							</tabpanels>
 						</tabbox>
 						<hbox>
-							<space width="100px" />
 							<div align="left">
 								<button class="btn" id="btnAtras7" label="Anterior"
 									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />

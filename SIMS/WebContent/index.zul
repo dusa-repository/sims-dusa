@@ -2,7 +2,8 @@
 	<style src="public/Estilo.css" />
 
 	<style>
-		.z-groupbox-hr { background:#661313;border-radius: 30px 30px 30px 30px }
+		.z-groupbox-hr { background:#661313;border-radius: 30px 30px
+		30px 30px }
 		.z-groupbox { border-radius: 30px 30px 30px 30px }
 	</style>
 	<zscript>
@@ -16,26 +17,18 @@
 		a =
 		execution.getParameter("respuesta");
 	</zscript>
-	<window style=" zoom:75%" title="" border="0" height="100%" contentStyle="overflow:auto"
-		apply="controlador.portal.CIndex">
+	<window height="100%" width="100%" title="" border="0"
+		contentStyle="overflow:auto" apply="controlador.portal.CIndex">
 		<borderlayout height="100%"
-			style="background-image: url('public/imagenes/generales/fondo.png'); background-repeat:no-repeat;height=100%; width=100% ; background-color:white">
-			<north height="4,5em" class="banner">
+			style="background-image: url('public/imagenes/generales/fondo.png'); background-repeat:no-repeat;height=50%; width=50% ; background-color:white">
+			<north height="2%" class="banner">
 				<hbox hflex="1">
 					<separator />
 					<separator />
 					<separator />
 				</hbox>
 			</north>
-			<west border="none">
-				<borderlayout style="overflow-y:scroll;">
-					<center border="none">
-						<div align="center">
-						</div>
-					</center>
-				</borderlayout>
-			</west>
-			<east width="60%" border="none">
+			<east width="70%" border="none">
 				<vlayout>
 					<div align="center">
 						<separator />
@@ -45,7 +38,7 @@
 						<image src="/public/imagenes/generales/LogoDusa.png" height="4em"
 							width="15em" />
 					</div>
-					<div height="240px" align="rigth">
+					<div height="100%" align="left">
 						<separator />
 						<separator />
 						<separator />
@@ -53,27 +46,33 @@
 						<separator />
 						<separator />
 						<separator />
-						<label class="lblIndex"
-							value="SISTEMA INTEGRAL MEDICO Y DE SEGURIDAD" />
+						<label class="lblIndex" value="SISTEMA INTEGRAL MEDICO Y DE SEGURIDAD" />
 					</div>
-					<div align="center">
-						<groupbox width="35em" height="18em">
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<div height="100%" width="100%" align="center">
+						<groupbox height="100%" width="40%">
 							<caption label="${a}"
-								style="color:black; font-size: 16px; font-weight:bold" />
+								style="color:black; font-size: 24px; font-weight:bold" />
 							<separator></separator>
 							<separator></separator>
 							<hlayout width="100%">
 								<h:form id="inicioSesion" action="j_spring_security_check"
 									method="POST" xmlns:h="native" align="left">
 									<vlayout width="100%">
-										<label class="etiqueta" height="20px" style="font-size:16px"
+										<label class="etiqueta" height="20px" style="font-size:14px"
 											value="Nombre de Usuario :" />
 										<textbox placeholder="Usuario" height="22px" id="log_usuario"
 											name="j_username" hflex="1" width="200px" />
 									</vlayout>
 									<separator></separator>
 									<vlayout width="100%">
-										<label class="etiqueta" height="20px" style="font-size:16px"
+										<label class="etiqueta" height="20px" style="font-size:14px"
 											value="Contraseña :" />
 										<textbox placeholder="Contraseña" height="22px" id="log_clave"
 											hflex="1" type="password" name="j_password" width="200px" />
@@ -81,8 +80,9 @@
 									<separator />
 									<separator />
 									<hlayout width="100%">
-										<button type="submit" class="btn" label="Entrar" 	style="font-size:18px" 
-											image="/public/imagenes/botones/entrar.png" height="37px" width="170px" />
+										<button type="submit" class="btn" label="Entrar"
+											style="font-size:18px" image="/public/imagenes/botones/entrar.png"
+											height="37px" width="170px" />
 									</hlayout>
 								</h:form>
 							</hlayout>
@@ -92,15 +92,14 @@
 								<a href="">
 									<label id="lblOlvidoClave" sclass="pointer"
 										value="¿Olvido su Contraseña?"
-										style="color:red;margin-left:10px;font-weight:bold;font-size:14px" />
+										style="color:red;margin-left:10px;font-weight:bold;font-size:12px" />
 								</a>
 							</vlayout>
 						</groupbox>
 					</div>
 				</vlayout>
 			</east>
-			<south class="banner" vflex="2" border="0"
-				height="3em" collapsible="false">
+			<south class="banner" border="0" height="5%" collapsible="false">
 				<div align="center" sclass="footer">
 					<separator></separator>
 					<label style="padding-center:35%;color: white"
