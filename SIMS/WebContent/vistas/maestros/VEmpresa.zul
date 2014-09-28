@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divEmpresa" apply="controlador.maestros.CEmpresa">
-		<groupbox width="70em" mold="3d" title="Empresa">
+		<groupbox width="99%" mold="3d" title="Empresa">
 			<tabbox id="taxEmpresa" orient="horizontal">
 				<tabs id="tbsEmpresa" width="10em">
 					<tab label="Datos Basicos" id="tabBasicos" />
@@ -303,7 +303,6 @@
 							</rows>
 						</grid>
 						<separator />
-						<separator />
 						<hbox>
 							<textbox tooltiptext="Ingrese el Nombre de la Nomina"
 								placeholder="Ingrese la Nomina a Buscar" width="195px"
@@ -312,7 +311,6 @@
 							<button class="abrir" id="btnAbrirNomina" label=""
 								tooltiptext="Crear una Nueva Nomina" image="/public/imagenes/botones/agregar.png" />
 						</hbox>
-						<separator />
 						<hbox widths="40%,5%,55%" width="100%">
 							<listbox id="ltbNominas" height="280px" width="100%"
 								emptyMessage="No hay Nominas Registradas">

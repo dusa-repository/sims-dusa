@@ -1,5 +1,5 @@
 <zk>
-	<window width="50em" id="wdwRegistro"
+	<window width="55%" id="wdwRegistro"
 		apply="controlador.transacciones.CAccidenteDetalle">
 		<div>
 			<groupbox width="100%" mold="3d" title="Detalle de Accidente">

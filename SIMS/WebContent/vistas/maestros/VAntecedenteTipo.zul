@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divAntecedenteTipo" apply="controlador.maestros.CAntecedenteTipo">
-		<groupbox width="40em" mold="3d" title="Clasificacion de Antecedentes">
+		<groupbox width="55%" mold="3d" title="Clasificacion de Antecedentes">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="30%" />

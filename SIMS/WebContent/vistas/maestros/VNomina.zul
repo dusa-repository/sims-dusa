@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divNomina" apply="controlador.maestros.CNomina">
-		<groupbox width="40em" mold="3d" title="Nomina">
+		<groupbox width="53%" mold="3d" title="Nomina">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />

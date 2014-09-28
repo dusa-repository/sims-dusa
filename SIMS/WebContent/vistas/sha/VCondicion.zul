@@ -1,12 +1,12 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divCondicion" apply="controlador.sha.CCondicion">
-		<groupbox width="45em" mold="3d" title="Condicion">
+		<groupbox width="70%" mold="3d" title="Condicion">
 			<grid width="100%">
 				<columns visible="false">
+					<column label="" width="20%" />
+					<column label="" width="55%" />
 					<column label="" width="25%" />
-					<column label="" width="45%" />
-					<column label="" width="30%" />
 				</columns>
 				<rows>
 					<row>
@@ -15,7 +15,7 @@
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
-						<textbox class="multilinea" id="txtNombreCondicion" hflex="1"
+						<textbox class="multilinea" id="txtNombreCondicion" height="45px"
 							maxlength="500" tooltiptext="Ingrese la Condicion" multiline="true" />
 						<button autodisable="self" id="btnBuscarCondicion" class="btn" label="Buscar"
 							tooltiptext="Catalogo Condiciones" image="/public/imagenes/botones/buscar.png" />

@@ -21,7 +21,7 @@
 	font-weight: bold;
 	font-family: arial;
 	color: #771313;
-	font-size: 13px;
+	font-size: 11px;
 }
 
 .z-textbox {
@@ -45,11 +45,11 @@
 }
 
 .btn {
-	font-size: 13px;
+	font-size: 11px;
 	color: white;
 	cursor: pointer;
-	width: 100px;
-	height: 33px;
+	width: 95px;
+	height: 29px;
 	-webkit-border-radius: 0.7em;
 	-moz-border-radius: 0.7em;
 	border-radius: 0.7em;
@@ -57,15 +57,15 @@
 }
 
 .multilinea {
-	height: 35px;
+	height: 27px;
 }
 
 .multilineab {
-	height: 50px;
+	height: 45px;
 }
 
 .multilineaTab {
-	height: 250px;
+	height: 230px;
 }
 
 .z-listbox-autopaging .z-listcell-content {
@@ -104,4 +104,20 @@
 	font-size: 26px;
 	color: #661313;
 	font-weight: bold;
+}
+
+div.z-listbox-header th.z-listheader,div.z-listbox-header th.z-auxheader
+	{
+	white-space: pre-line;
+	font-size: 10px;
+}
+
+body * {
+
+	font-size: 10.5px;
+}
+
+.z-listheader-content,.z-listcell-content,.z-listgroup-content,.z-listgroupfoot-content,.z-listfooter-content
+	{
+	font-size: 10px;
 }

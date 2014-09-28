@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div apply="controlador.seguridad.CEditarUsuario" id="divEditarUsuario">
-		<groupbox width="40em" mold="3d" title="Editar Usuario">
+		<groupbox width="52%" mold="3d" title="Editar Usuario">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="35%" />
@@ -39,7 +39,7 @@
 					</row>
 					<row>
 						<label class="etiqueta" value="Adjuntar Imagen:" />
-						<fileupload id="fudImagenUsuario" image="/public/imagenes/botones/cargar.png" style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"/>
+						<fileupload label="Foto" id="fudImagenUsuario" image="/public/imagenes/botones/cargar.png" style="	background: #952C2C;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"/>
 					</row>
 					<row>
 						<label class="etiqueta" value="Imagen Seleccionada:" />

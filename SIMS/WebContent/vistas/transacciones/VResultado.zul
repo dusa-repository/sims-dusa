@@ -1,13 +1,12 @@
 <zk>
-	<window width="70em" closable="false" id="wdwResultado"
-		apply="controlador.transacciones.CResultado">
+	<window width="80%" closable="true" id="wdwResultado"
+		apply="controlador.transacciones.CResultado" >
 		<caption label="Resultados de la Consulta"
 			style="color:black; font-size: 16px; font-weight:bold; " />
 		<div width="100%" height="100%">
-			<space />
 			<vbox heights="30%,30%,30%,10%" width="100%" height="100%">
 				<label class="etiqueta" value="Examenes Solicitados en la Consulta" />
-				<listbox id="ltbExamenes" height="180px" width="100%"
+				<listbox id="ltbExamenes" height="100%" width="100%"
 					emptyMessage="La consulta no posee examenes asociados">
 					<listhead>
 						<listheader label="Examen" width="30%" />
@@ -30,7 +29,7 @@
 					</template>
 				</listbox>
 				<label class="etiqueta" value="Especialistas Referidos en la Consulta" />
-				<listbox id="ltbEspecialistas" height="180px" width="100%"
+				<listbox id="ltbEspecialistas" height="100%" width="100%"
 					emptyMessage="La consulta no posee especialistas asociados">
 					<listhead>
 						<listheader label="Especialista" width="30%" />
@@ -56,7 +55,7 @@
 					</template>
 				</listbox>
 				<label class="etiqueta" value="Estudios Externos Solicitados en la Consulta" />
-				<listbox id="ltbServicio" height="180px" width="100%"
+				<listbox id="ltbServicio" height="100%" width="100%"
 					emptyMessage="La consulta no posee estudioss externos asociados">
 					<listhead>
 						<listheader label="Estudio Externo" width="30%" />

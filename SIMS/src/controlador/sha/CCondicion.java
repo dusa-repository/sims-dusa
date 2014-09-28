@@ -69,7 +69,7 @@ public class CCondicion extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divCondicion, "Condicion",tabs);
+				cerrarVentana(divCondicion, "Condicion", tabs);
 			}
 
 			@Override
@@ -135,7 +135,9 @@ public class CCondicion extends CGenerico {
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
 		if (txtNombreCondicion.getText().compareTo("") == 0
-				|| rdgCondicion.getSelectedItem().getLabel() == null) {
+				||(!rdoAmbiente.isChecked() && !rdoDisergonomicos.isChecked()
+				&& !rdoEquipos.isChecked() && !rdoInstalaciones.isChecked()
+				&& !rdoMateriales.isChecked() && !rdoOrganizacion.isChecked())) {
 			msj.mensajeAlerta(Mensaje.camposVacios);
 			return false;
 		} else

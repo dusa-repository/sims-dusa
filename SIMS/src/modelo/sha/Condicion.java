@@ -23,7 +23,7 @@ public class Condicion implements Serializable {
 	@Column(name = "id_condicion", unique = true, nullable = false)
 	private long idCondicion;
 
-	@Column(length = 100)
+	@Column(length = 200)
 	private String nombre;
 
 	@Column

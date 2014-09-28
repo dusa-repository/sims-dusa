@@ -9,17 +9,17 @@
 	<div id="divConsulta" apply="controlador.transacciones.CConsulta"
 		sclass="font-size:s" width="auto">
 		<groupbox width="auto" mold="3d" title="Historia Medica">
-			<grid width="auto">
+			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="12.5%" />
-					<column label="" width="12.5%" />
-					<column label="" width="12.5%" />
-					<column label="" width="12.5%" />
-					<column label="" width="3%" />
-					<column label="" width="17.5%%" />
-					<column label="" width="3%" />
-					<column label="" width="17.5%" />
 					<column label="" width="10%" />
+					<column label="" width="11.5%" />
+					<column label="" width="12.5%" />
+					<column label="" width="12.5%" />
+					<column label="" width="4%" />
+					<column label="" width="18%" />
+					<column label="" width="4%" />
+					<column label="" width="18%" />
+					<column label="" width="11%" />
 				</columns>
 				<rows>
 					<row>
@@ -32,17 +32,17 @@
 							hflex="1" tooltiptext="Ingrese la Cedula del Paciente" />
 						<button class="btn" autodisable="self" id="btnBuscarPaciente"
 							label="Buscar Paciente" tooltiptext="Catalogo"
-							image="/public/imagenes/botones/buscar.png" width="150px" />
+							image="/public/imagenes/botones/buscar.png" width="130px" />
 						<button class="btn" autodisable="true" id="btnVerHistoria"
 							label="Ver Historia" tooltiptext="Catalogo"
-							image="/public/imagenes/botones/generar.png" width="150px" />
+							image="/public/imagenes/botones/generar.png" width="130px" />
 						<label class="etiqueta" value="Cargo:" />
 						<label id="lblCargo1" />
 						<label class="etiqueta" value="Area:" />
 						<label id="lblArea" />
 						<button class="btn" autodisable="true" id="btnConstancia"
 							label="Constancia" tooltiptext="Catalogo" visible="false"
-							image="/public/imagenes/botones/generar.png" width="150px" />
+							image="/public/imagenes/botones/generar.png" width="110px" />
 					</row>
 				</rows>
 			</grid>
@@ -549,7 +549,6 @@
 										<separator />
 										<button class="abrir" id="btnAbrirCuerpo" label=""
 											tooltiptext="Crear una Nueva parte del Cuerpo" image="/public/imagenes/botones/agregar.png" />
-										<separator />
 										<listbox id="ltbExamenFisico" model="${$composer.modelFisico}"
 											height="150px" width="100%" emptyMessage="No hay sistemas fisicos registrados">
 											<listhead>
@@ -572,7 +571,6 @@
 								</tabpanel>
 								<tabpanel>
 									<!--Diagnosticos -->
-									<separator />
 									<hbox>
 										<textbox tooltiptext="Ingrese el Nombre del Diagnostico"
 											placeholder="Ingrese el Diagnostico a Buscar" width="195px"
@@ -581,10 +579,9 @@
 										<button class="abrir" id="btnAbrirDiagnostico" label=""
 											tooltiptext="Crear un Nuevo Diagnostico" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
-									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbDiagnosticos"
-											height="450px" width="100%" emptyMessage="No hay Diagnosticos Registrados">
+										<listbox mold="paging" pageSize="8" id="ltbDiagnosticos"
+											height="370px" width="100%" emptyMessage="No hay Diagnosticos Registrados">
 											<listhead>
 												<listheader label="Diagnostico" width="100%" />
 											</listhead>
@@ -626,7 +623,7 @@
 												width="30px" />
 										</vbox>
 										<listbox id="ltbDiagnosticosAgregados" width="100%"
-											height="450px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
+											height="370px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
 											<listhead>
 												<listheader label="Diagnostico" width="35%" />
 												<listheader label="Tipo" width="25%" />
@@ -732,7 +729,6 @@
 								</tabpanel>
 								<tabpanel>
 									<!-- title="Agregar Medicinas" -->
-									<separator />
 									<hbox>
 										<textbox tooltiptext="Ingrese el Nombre de la Medicina"
 											placeholder="Ingrese la Medicina a Buscar" width="195px"
@@ -741,10 +737,9 @@
 										<button class="abrir" id="btnAbrirMedicina" label=""
 											tooltiptext="Crear una Nueva Medicina" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
-									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbMedicinas"
-											height="450px" width="100%" emptyMessage="No hay Medicinas Registradas">
+										<listbox mold="paging" pageSize="8" id="ltbMedicinas"
+											height="370px" width="100%" emptyMessage="No hay Medicinas Registradas">
 											<listhead>
 												<listheader label="Medicina" width="100%" />
 											</listhead>
@@ -771,7 +766,7 @@
 												image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Medicina"
 												width="30px" />
 										</vbox>
-										<listbox id="ltbMedicinasAgregadas" height="450px"
+										<listbox id="ltbMedicinasAgregadas" height="370px"
 											width="100%" emptyMessage="No ha Seleccionado Ningúna Medicina">
 											<listhead>
 												<listheader label="Medicina" width="40%" />
@@ -846,7 +841,6 @@
 									</hbox>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<hbox align="center" pack="center">
 										<textbox tooltiptext="Ingrese el Nombre del Examen"
 											placeholder="Ingrese el Examen a Buscar" width="195px"
@@ -855,10 +849,9 @@
 										<button class="abrir" id="btnAbrirExamen" label=""
 											tooltiptext="Crear un Nuevo Examen" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
-									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbExamenes"
-											height="450px" width="100%" emptyMessage="No hay Examenes Registrados">
+										<listbox mold="paging" pageSize="8" id="ltbExamenes"
+											height="370px" width="100%" emptyMessage="No hay Examenes Registrados">
 											<listhead>
 												<listheader label="Examen" width="100%" />
 											</listhead>
@@ -894,7 +887,7 @@
 												image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Examen"
 												width="30px" />
 										</vbox>
-										<listbox id="ltbExamenesAgregados" height="450px"
+										<listbox id="ltbExamenesAgregados" height="370px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Examen">
 											<listhead>
 												<listheader label="Examen" width="30%" />
@@ -932,8 +925,8 @@
 											<grid width="100%">
 												<columns visible="false">
 													<column label="" width="30%" />
-													<column label="" width="55%" />
-													<column label="" width="15%" />
+													<column label="" width="50%" />
+													<column label="" width="20%" />
 												</columns>
 												<rows>
 													<row>
@@ -944,20 +937,27 @@
 														</cell>
 													</row>
 													<row>
-														<hbox>
-															<label class="etiqueta" value="Laboratorio encargado de examenes:" />
-															<space />
-															<label value="*" style="font-weight:bold;color:red" />
-														</hbox>
-														<combobox tooltiptext="Seleccione un Laboratorio"
-															model="${$composer.proveedores}" placeholder="Seleccione un Laboratorio"
-															id="cmbProveedor" readonly="true" width="100%">
-															<template name="model">
-																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
-															</template>
-														</combobox>
-														<button class="abrir" id="btnAbrirProveedor" label=""
-															tooltiptext="Crear un Nuevo Proveedor" image="/public/imagenes/botones/agregar.png" />
+														<cell colspan="3">
+															<hbox>
+																<label class="etiqueta" value="Laboratorio encargado de examenes:" />
+																<space />
+																<label value="*" style="font-weight:bold;color:red" />
+															</hbox>
+														</cell>
+													</row>
+													<row>
+														<cell colspan="2">
+															<combobox tooltiptext="Seleccione un Laboratorio"
+																model="${$composer.proveedores}" placeholder="Seleccione un Laboratorio"
+																id="cmbProveedor" readonly="true" width="100%">
+																<template name="model">
+																	<comboitem label="${each.nombre}" context="${each.idProveedor}" />
+																</template>
+															</combobox>
+															</cell>
+															<button class="abrir" id="btnAbrirProveedor"
+																label="" tooltiptext="Crear un Nuevo Proveedor"
+																image="/public/imagenes/botones/agregar.png" />
 													</row>
 													<row>
 														<hbox>
@@ -981,19 +981,17 @@
 									</hbox>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<hbox>
 										<textbox tooltiptext="Ingrese el Nombre del Especialista"
-											placeholder="Ingrese el Especialista a Buscar" width="195px"
+											placeholder="Ingrese la especialidad a Buscar" width="195px"
 											id="txtBuscadorEspecialista"></textbox>
 										<separator />
 										<button class="abrir" id="btnAbrirEspecialista" label=""
 											tooltiptext="Crear un Nuevo Especialista" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
-									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbEspecialistas"
-											height="450px" width="100%" emptyMessage="No hay Especialistas Registrados">
+										<listbox mold="paging" pageSize="8" id="ltbEspecialistas"
+											height="370px" width="100%" emptyMessage="No hay Especialistas Registrados">
 											<listhead>
 												<listheader label="Especialista" width="60%" />
 												<listheader label="Especialidad" width="40%" />
@@ -1028,7 +1026,7 @@
 												image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Especialista"
 												width="30px" />
 										</vbox>
-										<listbox id="ltbEspecialistasAgregados" height="450px"
+										<listbox id="ltbEspecialistasAgregados" height="370px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Especialista">
 											<listhead>
 												<listheader label="Especialista" width="30%" />
@@ -1092,7 +1090,6 @@
 									</hbox>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<hbox>
 										<textbox tooltiptext="Ingrese el Nombre del Estudio Externo"
 											placeholder="Ingrese el Estudio Externo a Buscar" width="195px"
@@ -1101,10 +1098,9 @@
 										<button class="abrir" id="btnAbrirServicioExterno"
 											label="" tooltiptext="Crear un Nuevo Estudio Externo" image="/public/imagenes/botones/agregar.png" />
 									</hbox>
-									<separator />
 									<hbox widths="25%,5%,50%,20">
-										<listbox mold="paging" pageSize="15" id="ltbServicioExterno"
-											height="450px" width="100%" emptyMessage="No hay Estudios Externos Registrados">
+										<listbox mold="paging" pageSize="8" id="ltbServicioExterno"
+											height="370px" width="100%" emptyMessage="No hay Estudios Externos Registrados">
 											<listhead>
 												<listheader label="Estudio Externo" width="100%" />
 											</listhead>
@@ -1141,7 +1137,7 @@
 												image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Estudio Externo"
 												width="30px" />
 										</vbox>
-										<listbox id="ltbServicioExternoAgregados" height="450px"
+										<listbox id="ltbServicioExternoAgregados" height="370px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
 											<listhead>
 												<listheader label="Estudio Externo" width="35%" />
@@ -1214,7 +1210,6 @@
 									</hbox>
 								</tabpanel>
 								<tabpanel>
-									<separator />
 									<groupbox id="gpxResumen" open="true">
 										<caption label="Resumen de la Consulta"
 											style="color:black; font-size: 12px; font-weight:bold" />
@@ -1226,7 +1221,7 @@
 													id="btnGenerarReposo" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Reposo" width="200px" />
 												<listbox width="100%" id="ltbResumenDiagnosticos"
-													height="400px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
+													height="350px" emptyMessage="No ha Seleccionado Ningún Diagnostico">
 													<listhead>
 														<listheader label="Diagnostico" width="50%" />
 														<listheader label="Tipo Diagnostico" width="50%" />
@@ -1248,7 +1243,7 @@
 													id="btnGenerarRecipe" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Recipe" width="200px" />
 												<listbox width="100%" id="ltbResumenMedicinas"
-													height="400px" emptyMessage="No ha Seleccionado Ningúna Medicina">
+													height="350px" emptyMessage="No ha Seleccionado Ningúna Medicina">
 													<listhead>
 														<listheader label="Medicina" width="60%" />
 														<listheader label="Dosis" width="40%" />
@@ -1270,7 +1265,7 @@
 													id="btnGenerarOrden" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Orden" width="200px" />
 												<listbox width="100%" id="ltbResumenExamenes"
-													height="400px" emptyMessage="No ha Seleccionado Ningún Examen">
+													height="350px" emptyMessage="No ha Seleccionado Ningún Examen">
 													<listhead>
 														<listheader label="Examen" width="40%" />
 														<!-- <listheader label="Costo" width="20%" /> -->
@@ -1293,7 +1288,7 @@
 													id="btnGenerarReferencia" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Orden" width="200px" />
 												<listbox width="100%" id="ltbResumenEspecialistas"
-													height="400px" emptyMessage="No ha Seleccionado Ningún Especialista">
+													height="350px" emptyMessage="No ha Seleccionado Ningún Especialista">
 													<listhead>
 														<listheader label="Especialista" width="60%" />
 														<listheader label="Especialidad" width="60%" />
@@ -1315,7 +1310,7 @@
 												<button class="btn" visible="false" label="Generar Orden"
 													id="btnGenerarOrdenServicios" image="/public/imagenes/botones/generar.png"
 													tooltiptext="Generar Orden" width="200px" />
-												<listbox id="ltbResumenServicios" height="400px"
+												<listbox id="ltbResumenServicios" height="350px"
 													width="100%" emptyMessage="No ha Seleccionado Ningún Estudio Externo">
 													<listhead>
 														<listheader label="Estudio Externo" width="50%" />
@@ -1342,10 +1337,10 @@
 						<div id="botoneraConsulta" />
 					</tabpanel>
 					<tabpanel style="overflow-x:scroll;" width="100%">
-						<hbox width="100%" widths="90%,10%">
+						<hbox width="100%" widths="87%,13%">
 							<div width="100%">
 								<listbox span="true" mold="paging" autopaging="true"
-									pagingPosition="bottom" id="ltbConsultas" height="550px" width="100%"
+									pagingPosition="bottom" id="ltbConsultas" height="450px" width="100%"
 									emptyMessage="El Paciente no posee Consultas Registradas">
 									<listhead>
 										<listheader label="Fecha" width="8%" />
@@ -1382,14 +1377,14 @@
 								<button autodisable="self" label="Ver Consulta" id="btnVerConsulta"
 									image="/public/imagenes/botones/ver.png"
 									tooltiptext="Seleccione una consulta y presione este boton para ver el detalle de la consulta"
-									hflex="1" height="40px" class="btn" />
+									hflex="1"  height="32px" class="btn" />
 								<button autodisable="self" label="Reporte Consulta" id="btnReporteConsulta"
 									image="/public/imagenes/botones/generar.png"
 									tooltiptext="Seleccione una consulta y presione este boton para generar el reporte de la consulta"
-									hflex="1" height="40px" class="btn" />
+									hflex="1" height="32px" class="btn" />
 								<button autodisable="self" id="btnVerResultado" label="Agregar Resultados"
 									sclass="btn" image="/public/imagenes/botones/agregar.png"
-									hflex="1" height="40px" />
+									hflex="1" height="32px" />
 							</vbox>
 						</hbox>
 					</tabpanel>
@@ -2139,8 +2134,8 @@
 										<separator />
 										<grid width="100%">
 											<columns visible="false">
-												<column label="" width="25%" />
-												<column label="" width="5%" />
+												<column label="" width="20%" />
+												<column label="" width="10%" />
 												<column label="" width="25%" />
 												<column label="" width="45%" />
 											</columns>
@@ -2268,7 +2263,6 @@
 														label="" tooltiptext="Crear un Nuevo Accidente"
 														image="/public/imagenes/botones/agregar.png" />
 												</hbox>
-												<separator />
 												<hbox widths="32%,3%,65%">
 													<listbox id="ltbAccidentesLaborales" height="250px"
 														width="100%" emptyMessage="No hay Accidentes Laborales Registrados">
@@ -2362,7 +2356,6 @@
 														label="" tooltiptext="Crear un Nuevo Accidente"
 														image="/public/imagenes/botones/agregar.png" />
 												</hbox>
-												<separator />
 												<hbox widths="32%,3%,65%">
 													<listbox id="ltbAccidentesComunes" height="250px"
 														width="100%" emptyMessage="No hay Accidentes Comunes Registrados">
@@ -2455,7 +2448,6 @@
 														label="" tooltiptext="Crear una Nueva Intervencion"
 														image="/public/imagenes/botones/agregar.png" />
 												</hbox>
-												<separator />
 												<hbox widths="32%,3%,65%">
 													<listbox id="ltbIntervenciones" height="250px"
 														width="100%" emptyMessage="No hay Intervenciones Registradas">
@@ -2542,9 +2534,8 @@
 											<tabpanel>
 												<button class="abrir" id="btnAbrirVacuna" label=""
 													tooltiptext="Crear una Nueva Vacuna" image="/public/imagenes/botones/agregar.png" />
-												<separator />
 												<listbox id="ltbVacunas" model="${$composer.modelVacunas}"
-													height="350px" width="100%"
+													height="300px" width="100%"
 													emptyMessage="El Paciente no posee Vacunas Recibidas">
 													<listhead>
 														<listheader label="Nombre" width="70%" />
