@@ -1305,6 +1305,7 @@ public class CImportar extends CGenerico {
 					String fechaT = null;
 					Timestamp fechaReal = null;
 					String enfermedadActual = "";
+					Double enfermandadDouble = null;
 					String doctor = "";
 					Iterator<Cell> cellIterator = row.cellIterator();
 					int contadorCell = 0;
@@ -1346,6 +1347,11 @@ public class CImportar extends CGenerico {
 						case 3:
 							if (cell.getCellType() == 1) {
 								enfermedadActual = cell.getStringCellValue();
+								if (enfermedadActual.length() > 1500)
+									errorLong = true;
+							} else if (cell.getCellType() == 0) {
+								enfermandadDouble = cell.getNumericCellValue();
+								enfermedadActual = enfermandadDouble.toString();
 								if (enfermedadActual.length() > 1500)
 									errorLong = true;
 							} else
