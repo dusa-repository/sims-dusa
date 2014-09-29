@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaEspecialista;
 
 @Entity
@@ -49,6 +50,9 @@ public class Especialista implements Serializable {
 
 	@OneToMany(mappedBy = "especialista")
 	private Set<ConsultaEspecialista> especialistas;
+
+	@OneToMany(mappedBy = "especialista")
+	private Set<Consulta> especialistasConsulta;
 	
 	public Especialista(String cedula, String apellido, String nombre,
 			double costo, Timestamp fechaAuditoria, String horaAuditoria,
@@ -139,6 +143,14 @@ public class Especialista implements Serializable {
 
 	public void setEspecialistas(Set<ConsultaEspecialista> especialistas) {
 		this.especialistas = especialistas;
+	}
+
+	public Set<Consulta> getEspecialistasConsulta() {
+		return especialistasConsulta;
+	}
+
+	public void setEspecialistasConsulta(Set<Consulta> especialistasConsulta) {
+		this.especialistasConsulta = especialistasConsulta;
 	}
 
 }
