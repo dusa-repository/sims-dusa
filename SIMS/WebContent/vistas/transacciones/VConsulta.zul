@@ -28,8 +28,8 @@
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
-						<textbox maxlength="500" inplace="true" id="txtCedula"
-							hflex="1" tooltiptext="Ingrese la Cedula del Paciente" />
+						<textbox maxlength="500" id="txtCedula" hflex="1"
+							tooltiptext="Ingrese la Cedula del Paciente" />
 						<button class="btn" autodisable="self" id="btnBuscarPaciente"
 							label="Buscar Paciente" tooltiptext="Catalogo"
 							image="/public/imagenes/botones/buscar.png" width="130px" />
@@ -954,10 +954,9 @@
 																	<comboitem label="${each.nombre}" context="${each.idProveedor}" />
 																</template>
 															</combobox>
-															</cell>
-															<button class="abrir" id="btnAbrirProveedor"
-																label="" tooltiptext="Crear un Nuevo Proveedor"
-																image="/public/imagenes/botones/agregar.png" />
+														</cell>
+														<button class="abrir" id="btnAbrirProveedor" label=""
+															tooltiptext="Crear un Nuevo Proveedor" image="/public/imagenes/botones/agregar.png" />
 													</row>
 													<row>
 														<hbox>
@@ -993,14 +992,14 @@
 										<listbox mold="paging" pageSize="8" id="ltbEspecialistas"
 											height="370px" width="100%" emptyMessage="No hay Especialistas Registrados">
 											<listhead>
-												<listheader label="Especialista" width="60%" />
-												<listheader label="Especialidad" width="40%" />
+												<listheader label="Especialidad" width="43%" />
+												<listheader label="Especialista" width="57%" />
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.nombre}">
-													</listcell>
 													<listcell label="${each.especialidad.descripcion}">
+													</listcell>
+													<listcell label="${each.nombre}">
 													</listcell>
 													<listcell>
 														<textbox maxlength="100" width="98%" />
@@ -1029,16 +1028,16 @@
 										<listbox id="ltbEspecialistasAgregados" height="370px"
 											width="100%" emptyMessage="No ha Seleccionado Ningún Especialista">
 											<listhead>
-												<listheader label="Especialista" width="30%" />
 												<listheader label="Especialidad" width="30%" />
+												<listheader label="Especialista" width="30%" />
 												<listheader label="Observacion" width="40%"></listheader>
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.especialista.nombre}">
-													</listcell>
 													<listcell label="${each.especialista.especialidad.descripcion}">
+													</listcell>
+													<listcell label="${each.especialista.nombre}">
 													</listcell>
 													<listcell>
 														<textbox maxlength="100" value="${each.observacion}"
@@ -1377,7 +1376,7 @@
 								<button autodisable="self" label="Ver Consulta" id="btnVerConsulta"
 									image="/public/imagenes/botones/ver.png"
 									tooltiptext="Seleccione una consulta y presione este boton para ver el detalle de la consulta"
-									hflex="1"  height="32px" class="btn" />
+									hflex="1" height="32px" class="btn" />
 								<button autodisable="self" label="Reporte Consulta" id="btnReporteConsulta"
 									image="/public/imagenes/botones/generar.png"
 									tooltiptext="Seleccione una consulta y presione este boton para generar el reporte de la consulta"
