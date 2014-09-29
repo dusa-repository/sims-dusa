@@ -378,6 +378,24 @@
 										value="Diagnostico de Consulta Asociada:" />
 									<label id="lblDiagnosticoAsociado2" value="" />
 								</row>
+								<row id="rowEspecialista" visible="false">
+									<hbox>
+										<label class="etiqueta" value="Especialista de la IC:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<combobox tooltiptext="Seleccione el area Pretendida"
+										placeholder="Seleccione el Tipo" id="cmbEspecialista" width="100%"
+										readonly="true">
+										<template name="model">
+											<comboitem label="${each.nombre} ${each.apellido}"
+												context="${each.cedula}" description="${each.especialidad.descripcion}" />
+										</template>
+									</combobox>
+									<cell colspan="4">
+										<hbox />
+									</cell>
+								</row>
 							</rows>
 						</grid>
 						<separator />
@@ -812,8 +830,8 @@
 															placeholder="Seleccione la Prioridad" id="cmbPrioridad"
 															width="100%" readonly="true">
 															<comboitem label="1 (Urgente)" />
-															<comboitem label="2 (1-3 Dias)" />
-															<comboitem label="3 (4-10 Dias)" />
+															<comboitem label="2 (1-5 Dias)" />
+															<comboitem label="3 (6-10 Dias)" />
 														</combobox>
 													</row>
 													<row>
@@ -969,8 +987,8 @@
 																placeholder="Seleccione el Tipo" id="cmbPrioridadExamen"
 																width="100%" readonly="true">
 																<comboitem label="1 (Urgente)" />
-																<comboitem label="2 (1-3 Dias)" />
-																<comboitem label="3 (4-10 Dias)" />
+																<comboitem label="2 (1-5 Dias)" />
+																<comboitem label="3 (6-10 Dias)" />
 															</combobox>
 														</cell>
 													</row>
@@ -1079,8 +1097,8 @@
 															placeholder="Seleccione el Tipo" id="cmbPrioridadEspecialista"
 															width="100%" readonly="true">
 															<comboitem label="1 (Urgente)" />
-															<comboitem label="2 (1-3 Dias)" />
-															<comboitem label="3 (4-10 Dias)" />
+															<comboitem label="2 (1-5 Dias)" />
+															<comboitem label="3 (6-10 Dias)" />
 														</combobox>
 													</row>
 												</rows>
@@ -1199,8 +1217,8 @@
 															placeholder="Seleccione el Tipo" id="cmbPrioridadServicio"
 															width="100%" readonly="true">
 															<comboitem label="1 (Urgente)" />
-															<comboitem label="2 (1-3 Dias)" />
-															<comboitem label="3 (4-10 Dias)" />
+															<comboitem label="2 (1-5 Dias)" />
+															<comboitem label="3 (6-10 Dias)" />
 														</combobox>
 													</row>
 												</rows>
@@ -1395,6 +1413,8 @@
 								<tab label="Antecedentes parte I" id="tabIAntecedentesI" />
 								<tab label="Antecedentes parte II" id="tabIAntecedentesII" />
 								<tab label="¿Paciente Mujer?" id="tabMujer" />
+								<tab label="Vacunas Recibidas" id="tabVacunas" />
+								<tab label="Historia Pediatrica" id="tabPediatrica" />
 							</tabs>
 							<tabpanels>
 								<tabpanel>
@@ -2249,7 +2269,6 @@
 											<tab label="Accidentes Laborales" />
 											<tab label="Accidentes Comunes" />
 											<tab label="Intervenciones" />
-											<tab label="Vacunas Recibidas" />
 										</tabs>
 										<tabpanels>
 											<tabpanel>
@@ -2530,28 +2549,6 @@
 													</listbox>
 												</hbox>
 											</tabpanel>
-											<tabpanel>
-												<button class="abrir" id="btnAbrirVacuna" label=""
-													tooltiptext="Crear una Nueva Vacuna" image="/public/imagenes/botones/agregar.png" />
-												<listbox id="ltbVacunas" model="${$composer.modelVacunas}"
-													height="300px" width="100%"
-													emptyMessage="El Paciente no posee Vacunas Recibidas">
-													<listhead>
-														<listheader label="Nombre" width="70%" />
-														<listheader label="Fecha" width="40%" />
-													</listhead>
-													<template name="model">
-														<listitem>
-															<listcell label="${each.nombre}">
-															</listcell>
-															<listcell>
-																<datebox readonly="true" width="100%"
-																	onCreate="self.value = new Date()" />
-															</listcell>
-														</listitem>
-													</template>
-												</listbox>
-											</tabpanel>
 										</tabpanels>
 									</tabbox>
 								</tabpanel>
@@ -2696,6 +2693,134 @@
 												<label class="etiqueta" value="Resultado" />
 												<textbox maxlength="500" id="txtResultadoMamografia"
 													hflex="1" tooltiptext="Ingrese el resultado de la Mamografia" />
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+								<tabpanel>
+									<button class="abrir" id="btnAbrirVacuna" label=""
+										tooltiptext="Crear una Nueva Vacuna" image="/public/imagenes/botones/agregar.png" />
+									<listbox id="ltbVacunas" model="${$composer.modelVacunas}"
+										height="300px" width="100%" emptyMessage="El Paciente no posee Vacunas Recibidas">
+										<listhead>
+											<listheader label="Nombre" width="70%" />
+											<listheader label="Fecha" width="40%" />
+										</listhead>
+										<template name="model">
+											<listitem>
+												<listcell label="${each.nombre}">
+												</listcell>
+												<listcell>
+													<datebox readonly="true" width="100%"
+														onCreate="self.value = new Date()" />
+												</listcell>
+											</listitem>
+										</template>
+									</listbox>
+								</tabpanel>
+								<tabpanel>
+									<grid width="100%">
+										<columns visible="false">
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+										</columns>
+										<rows>
+											<row>
+												<cell colspan="4">
+													<label class="etiqueta" value="Embarazo" />
+												</cell>
+											</row>
+											<row>
+												<label class="etiqueta" value="Edad Materna" />
+												<spinner value="0" id="spnEdadPediatrica" step="1"
+													format="#" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Nº Gestacion" />
+												<spinner value="0" id="spnGestacionPediatrica" step="1"
+													format="#" constraint="min 0 max 100000" width="98%" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Semanas de Embarazo" />
+												<spinner value="0" id="spnSemanasPediatrica" step="1"
+													format="#" constraint="min 0 max 100000" width="98%" />
+												<hbox width="100%">
+													<label class="etiqueta" value="¿Complicaciones en Embarazo?" />
+													<radiogroup id="rdgEmbarazoPediatrica">
+														<radio label="SI" value="si" id="rdoSiComplicacion" />
+														<radio label="NO" value="no" id="rdoNoComplicacion" />
+													</radiogroup>
+												</hbox>
+												<hbox width="100%">
+													<label class="etiqueta" value="¿Cual(es)?" />
+													<textbox maxlength="100" id="txtResultadoComplicacion"
+														multiline="true" class="multilinea" hflex="1"
+														tooltiptext="Ingrese el resultado de la Mamografia" />
+												</hbox>
+											</row>
+											<row>
+												<cell colspan="4">
+													<label class="etiqueta" value="Serologia" />
+												</cell>
+											</row>
+											<row>
+												<checkbox id="chkVdrl" label="VDRL" />
+												<checkbox id="chkVih" label="VIH" />
+												<checkbox id="chkTox" label="Toxoplasma" />
+												<hbox width="100%">
+													<label class="etiqueta" value="Observacion" />
+													<textbox maxlength="100" id="txtSerologia" hflex="1"
+														multiline="true" class="multilinea"
+														tooltiptext="Ingrese el resultado de la Mamografia" />
+												</hbox>
+											</row>
+											<row>
+												<cell colspan="4">
+													<label class="etiqueta" value="Parto" />
+												</cell>
+											</row>
+											<row>
+												<label class="etiqueta" value="Tipo de Parto" />
+												<radiogroup id="rdgEmbarazoPediatrica2">
+													<radio label="Vaginal" value="si" id="rdoSiVagina" />
+													<radio label="Cesarea" value="no" id="rdoNoVagina" />
+												</radiogroup>
+												<label class="etiqueta" value="Causa" />
+												<textbox maxlength="100" id="txtCausaCesarea" hflex="1"
+													multiline="true" class="multilinea"
+													tooltiptext="Ingrese el resultado de la Mamografia" />
+											</row>
+											<row>
+												<cell colspan="4">
+													<label class="etiqueta" value="Neonatal" />
+												</cell>
+											</row>
+											<row>
+												<label class="etiqueta" value="Peso" />
+												<doublespinner value="0" id="spnPesoPediatrica"
+													step="1" constraint="min 0 max 100000" width="98%" />
+												<label class="etiqueta" value="Talla" />
+												<doublespinner value="0" id="spnTallaPediatrica"
+													step="1" constraint="min 0 max 100000" width="98%" />
+											</row>
+											<row>
+												<label class="etiqueta" value="¿Complicaciones Neonatal?" />
+												<radiogroup id="rdgNeoPediatrica">
+													<radio label="SI" value="si" id="rdoSiComplicacionNeo" />
+													<radio label="NO" value="no" id="rdoNoComplicacionNeo" />
+												</radiogroup>
+												<label class="etiqueta" value="¿Cual(es)?" />
+												<textbox maxlength="100" id="txtResultadoComplicacionNeo"
+													multiline="true" class="multilinea" hflex="1"
+													tooltiptext="Ingrese el resultado de la Mamografia" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Observacion" />
+												<cell colspan="3">
+													<textbox maxlength="500" multiline="true" class="multilinea"
+														id="txtObservacionPrenatal" hflex="1"
+														tooltiptext="Ingrese el resultado de la Mamografia" />
+												</cell>
 											</row>
 										</rows>
 									</grid>

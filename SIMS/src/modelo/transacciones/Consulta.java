@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.maestros.Cargo;
+import modelo.maestros.Especialidad;
+import modelo.maestros.Especialista;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
@@ -210,6 +212,10 @@ public class Consulta implements Serializable {
 	@Column(length=256, name = "doctor")
 	private String doctor;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_especialista")
+	private Especialista especialista;
+	
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -229,7 +235,7 @@ public class Consulta implements Serializable {
 			Boolean ritmico2, Boolean ritmico3, Cargo cargo,
 			Cargo cargoDeseado, Area area, Area areaDeseada, boolean apto,
 			boolean reposo, String tipoConsultaSecundaria, String examenPre,
-			Integer dias, String condicion, String doctor) {
+			Integer dias, String condicion, String doctor, Especialista especialista) {
 		super();
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
@@ -277,6 +283,7 @@ public class Consulta implements Serializable {
 		this.diasReposo = dias;
 		this.condicionApto = condicion;
 		this.doctor = doctor;
+		this.especialista = especialista;
 	}
 
 	public long getIdConsulta() {
@@ -722,6 +729,14 @@ public class Consulta implements Serializable {
 
 	public void setDoctor(String doctor) {
 		this.doctor = doctor;
+	}
+
+	public Especialista getEspecialista() {
+		return especialista;
+	}
+
+	public void setEspecialista(Especialista especialista) {
+		this.especialista = especialista;
 	}
 
 }

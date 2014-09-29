@@ -20,7 +20,7 @@ import modelo.maestros.Paciente;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "historia", schema="dusa_sims.dbo")
+@Table(name = "historia", schema = "dusa_sims.dbo")
 public class Historia implements Serializable {
 
 	private static final long serialVersionUID = 3136973158445875804L;
@@ -423,6 +423,60 @@ public class Historia implements Serializable {
 	@Column(name = "indice_cadera")
 	private Double indiceCadera;
 
+	@Column(name = "materna_pediatrica")
+	private Integer edadMaternaPediatrica;
+
+	@Column(name = "gestacion_pediatrica")
+	private Integer gestacionNumeroPediatrica;
+
+	@Column(name = "embarazo_semana_pediatrica")
+	private Integer embarazoSemanasPediatrica;
+
+	@Column(name = "complicacion_pediatrica")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean complicacionesPediatrica;
+
+	@Column(name = "descripcion_complicacion_pediatrica", length = 100)
+	private String complicacionesDescripcionPediatrica;
+
+	@Column(name = "vdrl_pediatrica")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean vdrlPediatrica;
+
+	@Column(name = "vih_pediatrica")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean vihPediatrica;
+
+	@Column(name = "toxoplasma_pediatrica")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean toxoplasmaPediatrica;
+
+	@Column(name = "serologia_pediatrica", length = 100)
+	private String serologia;
+
+	@Column(name = "parto_pediatrica")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean partoPediatrica;
+
+	@Column(name = "casua_parto_pediatrica", length = 100)
+	private String causaPartoPediatrica;
+
+	@Column(name = "peso_pediatrica")
+	private Double pesoPediatrica;
+
+	@Column(name = "talla_pediatrica")
+	private Double tallaPediatrica;
+
+	@Column(name = "complicaciones_parto_pediatrica")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean complicacionesPediatricaParto;
+
+	@Column(name = "descripcion_parto_pediatrica", length = 100)
+	private String descripcionComplicacionParto;
+
+	@Column(name = "descripcion_pediatrica", length = 500)
+	private String descripcionPediatrica;
+
 	@OneToMany(mappedBy = "historia")
 	private Set<HistoriaVacuna> historiasVacunas;
 
@@ -480,7 +534,16 @@ public class Historia implements Serializable {
 			Double izquierdo, Double derecho, Double alturaPoplitea,
 			Double alturaOjo, Double alturaCodoSilla,
 			Double circunferenciaAbdominal, Double circunferenciaCadera,
-			Double manoPiso, Double indiceCadera) {
+			Double manoPiso, Double indiceCadera,
+			Integer edadMaternaPediatrica, Integer gestacionNumeroPediatrica,
+			Integer embarazoSemanasPediatrica,
+			Boolean complicacionesPediatrica,
+			String complicacionesDescripcionPediatrica, Boolean vdrlPediatrica,
+			Boolean vihPediatrica, Boolean toxoplasmaPediatrica,
+			String serologia, Boolean partoPediatrica,
+			String causaPartoPediatrica, Double pesoPediatrica,
+			Double tallaPediatrica, Boolean complicacionesPediatricaParto,
+			String descripcionComplicacionParto, String descripcionPediatrica) {
 		super();
 		this.idHistoria = idHistoria;
 		this.paciente = paciente;
@@ -601,6 +664,22 @@ public class Historia implements Serializable {
 		this.dienteze = dienteze;
 		this.dientezf = dientezf;
 		this.visionColor = visionColores;
+		this.edadMaternaPediatrica = edadMaternaPediatrica;
+		this.gestacionNumeroPediatrica = gestacionNumeroPediatrica;
+		this.embarazoSemanasPediatrica = embarazoSemanasPediatrica;
+		this.complicacionesPediatrica = complicacionesPediatrica;
+		this.complicacionesDescripcionPediatrica = complicacionesDescripcionPediatrica;
+		this.vdrlPediatrica = vdrlPediatrica;
+		this.vihPediatrica = vihPediatrica;
+		this.toxoplasmaPediatrica = toxoplasmaPediatrica;
+		this.serologia = serologia;
+		this.partoPediatrica = partoPediatrica;
+		this.causaPartoPediatrica = causaPartoPediatrica;
+		this.pesoPediatrica = pesoPediatrica;
+		this.tallaPediatrica = tallaPediatrica;
+		this.complicacionesPediatricaParto = complicacionesPediatricaParto;
+		this.descripcionComplicacionParto = descripcionComplicacionParto;
+		this.descripcionPediatrica = descripcionPediatrica;
 	}
 
 	public long getIdHistoria() {
@@ -1579,6 +1658,136 @@ public class Historia implements Serializable {
 
 	public void setVisionColor(Boolean visionColor) {
 		this.visionColor = visionColor;
+	}
+
+	public Integer getEdadMaternaPediatrica() {
+		return edadMaternaPediatrica;
+	}
+
+	public void setEdadMaternaPediatrica(Integer edadMaternaPediatrica) {
+		this.edadMaternaPediatrica = edadMaternaPediatrica;
+	}
+
+	public Integer getGestacionNumeroPediatrica() {
+		return gestacionNumeroPediatrica;
+	}
+
+	public void setGestacionNumeroPediatrica(Integer gestacionNumeroPediatrica) {
+		this.gestacionNumeroPediatrica = gestacionNumeroPediatrica;
+	}
+
+	public Integer getEmbarazoSemanasPediatrica() {
+		return embarazoSemanasPediatrica;
+	}
+
+	public void setEmbarazoSemanasPediatrica(Integer embarazoSemanasPediatrica) {
+		this.embarazoSemanasPediatrica = embarazoSemanasPediatrica;
+	}
+
+	public Boolean getComplicacionesPediatrica() {
+		return complicacionesPediatrica;
+	}
+
+	public void setComplicacionesPediatrica(Boolean complicacionesPediatrica) {
+		this.complicacionesPediatrica = complicacionesPediatrica;
+	}
+
+	public String getComplicacionesDescripcionPediatrica() {
+		return complicacionesDescripcionPediatrica;
+	}
+
+	public void setComplicacionesDescripcionPediatrica(
+			String complicacionesDescripcionPediatrica) {
+		this.complicacionesDescripcionPediatrica = complicacionesDescripcionPediatrica;
+	}
+
+	public Boolean getVdrlPediatrica() {
+		return vdrlPediatrica;
+	}
+
+	public void setVdrlPediatrica(Boolean vdrlPediatrica) {
+		this.vdrlPediatrica = vdrlPediatrica;
+	}
+
+	public Boolean getVihPediatrica() {
+		return vihPediatrica;
+	}
+
+	public void setVihPediatrica(Boolean vihPediatrica) {
+		this.vihPediatrica = vihPediatrica;
+	}
+
+	public Boolean getToxoplasmaPediatrica() {
+		return toxoplasmaPediatrica;
+	}
+
+	public void setToxoplasmaPediatrica(Boolean toxoplasmaPediatrica) {
+		this.toxoplasmaPediatrica = toxoplasmaPediatrica;
+	}
+
+	public String getSerologia() {
+		return serologia;
+	}
+
+	public void setSerologia(String serologia) {
+		this.serologia = serologia;
+	}
+
+	public Boolean getPartoPediatrica() {
+		return partoPediatrica;
+	}
+
+	public void setPartoPediatrica(Boolean partoPediatrica) {
+		this.partoPediatrica = partoPediatrica;
+	}
+
+	public String getCausaPartoPediatrica() {
+		return causaPartoPediatrica;
+	}
+
+	public void setCausaPartoPediatrica(String causaPartoPediatrica) {
+		this.causaPartoPediatrica = causaPartoPediatrica;
+	}
+
+	public Double getPesoPediatrica() {
+		return pesoPediatrica;
+	}
+
+	public void setPesoPediatrica(Double pesoPediatrica) {
+		this.pesoPediatrica = pesoPediatrica;
+	}
+
+	public Double getTallaPediatrica() {
+		return tallaPediatrica;
+	}
+
+	public void setTallaPediatrica(Double tallaPediatrica) {
+		this.tallaPediatrica = tallaPediatrica;
+	}
+
+	public Boolean getComplicacionesPediatricaParto() {
+		return complicacionesPediatricaParto;
+	}
+
+	public void setComplicacionesPediatricaParto(
+			Boolean complicacionesPediatricaParto) {
+		this.complicacionesPediatricaParto = complicacionesPediatricaParto;
+	}
+
+	public String getDescripcionComplicacionParto() {
+		return descripcionComplicacionParto;
+	}
+
+	public void setDescripcionComplicacionParto(String descripcionComplicacionParto) {
+		this.descripcionComplicacionParto = descripcionComplicacionParto;
+	}
+
+	public String getDescripcionPediatrica() {
+		return descripcionPediatrica;
+	}
+
+	public void setDescripcionPediatrica(String descripcionPediatrica) {
+		this.descripcionPediatrica = descripcionPediatrica;
 	}
 
 }
