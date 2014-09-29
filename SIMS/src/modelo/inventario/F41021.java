@@ -1,6 +1,7 @@
 package modelo.inventario;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 import modelo.inventario.F41021PK;
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
  * 
  */
 @Entity
+@Table(name="F4101", schema="bizapps_inventario.dbo")
 public class F41021 implements Serializable {
 	private static final long serialVersionUID = 1L;
 

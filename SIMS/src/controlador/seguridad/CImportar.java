@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,7 +56,6 @@ import org.zkoss.zul.Tabbox;
 import componentes.Botonera;
 import componentes.Mensaje;
 import componentes.Validador;
-
 import controlador.maestros.CGenerico;
 
 public class CImportar extends CGenerico {
@@ -1067,6 +1067,7 @@ public class CImportar extends CGenerico {
 					Paciente paciente = new Paciente();
 					String primerNombre = "", cedula = null, segundoNombre = "", primerApellido = "", segundoApellido = "", direccion = "", sexo = "", ficha = "", codigoArea = "";
 					Date fechaNac2 = new Date();
+					String fechaT = null;
 					Timestamp fechaNac = new Timestamp(fechaNac2.getTime());
 					Double cedRef = (double) 0;
 					Double dirRef = (double) 0;
@@ -1123,9 +1124,20 @@ public class CImportar extends CGenerico {
 								errorLong = true;
 							break;
 						case 7:
-							if (cell.getCellType() == 0) {
-								fechaNac2 = cell.getDateCellValue();
-								fechaNac = new Timestamp(fechaNac2.getTime());
+							if (cell.getCellType() == 1) {
+								fechaT = cell.getStringCellValue();
+								if (fechaT.length() != 0) {
+									try {
+										fechaNac2 = formatoImportar
+												.parse(fechaT.substring(0, 10));
+									} catch (ParseException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									fechaNac = new Timestamp(
+											fechaNac2.getTime());
+								} else
+									error = true;
 							} else
 								error = true;
 							break;
@@ -1290,6 +1302,7 @@ public class CImportar extends CGenerico {
 					Double idReferencia = (double) 0;
 					long idRef = 0;
 					Date fecha2 = new Date();
+					String fechaT = null;
 					Timestamp fechaReal = null;
 					String enfermedadActual = "";
 					String doctor = "";
@@ -1312,9 +1325,19 @@ public class CImportar extends CGenerico {
 								errorLong = true;
 							break;
 						case 1:
-							if (cell.getCellType() == 0) {
-								fecha2 = cell.getDateCellValue();
-								fechaReal = new Timestamp(fecha2.getTime());
+							if (cell.getCellType() == 1) {
+								fechaT = cell.getStringCellValue();
+								if (fechaT.length() != 0) {
+									try {
+										fecha2 = formatoImportar.parse(fechaT
+												.substring(0, 10));
+									} catch (ParseException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									fechaReal = new Timestamp(fecha2.getTime());
+								} else
+									error = true;
 							} else {
 								error = true;
 								errorGeneral = true;
