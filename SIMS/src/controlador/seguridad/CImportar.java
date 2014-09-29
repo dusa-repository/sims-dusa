@@ -237,7 +237,7 @@ public class CImportar extends CGenerico {
 			if (rowIterator.hasNext()) {
 				Recipe recipe = new Recipe(0, "1 (Urgente)", fechaHora,
 						fechaHora, horaAuditoria, nombreUsuarioSesion(),
-						"Agudo");
+						"Sin Informacion");
 				servicioRecipe.guardar(recipe);
 				recipe = servicioRecipe.buscarUltimo();
 				List<ConsultaMedicina> consultasMedicina = new ArrayList<ConsultaMedicina>();
@@ -989,7 +989,7 @@ public class CImportar extends CGenerico {
 							diagnostico.setCategoria(categoria);
 							diagnostico.setIdReferencia(idRef);
 							diagnostico.setCodigo(String.valueOf(idRef));
-							diagnostico.setGrupo("Sin Grupo");
+							diagnostico.setGrupo("N/A");
 							diagnostico.setFechaAuditoria(fechaHora);
 							diagnostico.setHoraAuditoria(horaAuditoria);
 							diagnostico.setUsuarioAuditoria("frivero");
@@ -1191,22 +1191,22 @@ public class CImportar extends CGenerico {
 							paciente.setProfesion("");
 							paciente.setEdad(0);
 							paciente.setEstatura(0.0);
-							paciente.setEstadoCivil("Otro");
-							paciente.setNivelEducativo("Primaria");
+							paciente.setEstadoCivil("N/A");
+							paciente.setNivelEducativo("N/A");
 							paciente.setFechaAuditoria(fechaHora);
 							paciente.setFechaNacimiento(fechaNac);
 							paciente.setFechaEgreso(fechaHora);
 							paciente.setFechaIngreso(fechaHora);
 							paciente.setFechaInscripcionIVSS(fechaHora);
 							paciente.setCarga(0);
-							paciente.setGrupoSanguineo("A+");
-							paciente.setMano("Derecho");
+							paciente.setGrupoSanguineo("N/A");
+							paciente.setMano("N/A");
 							paciente.setPeso(0.0);
 							paciente.setEmpresa(empresa);
 							paciente.setCargoReal(cargo);
 							paciente.setNomina(nomina);
 							paciente.setCiudadVivienda(ciudad);
-							paciente.setTurno("Jornada Completa");
+							paciente.setTurno("N/A");
 							paciente.setTelefono1("");
 							paciente.setTelefono2("");
 							paciente.setTelefono1Emergencia("");
@@ -1214,12 +1214,12 @@ public class CImportar extends CGenerico {
 							paciente.setEmail("");
 							paciente.setNombresEmergencia("");
 							paciente.setApellidosEmergencia("");
-							paciente.setParentescoEmergencia("Otro");
+							paciente.setParentescoEmergencia("N/A");
 							if (Validador.validarNumero(cedula))
 								paciente.setTrabajador(true);
 							else {
 								paciente.setTrabajador(false);
-								paciente.setParentescoFamiliar("Otro");
+								paciente.setParentescoFamiliar("N/A");
 								String a = "";
 								String familiar = "";
 								for (int i = 0; i < cedula.length(); i++) {
@@ -1354,8 +1354,8 @@ public class CImportar extends CGenerico {
 									"\\s", ""));
 							consulta.setEnfermedadActual(enfermedadActual);
 							consulta.setMotivoConsulta("");
-							consulta.setTipoConsulta("Preventiva");
-							consulta.setTipoConsultaSecundaria("Reintegro");
+							consulta.setTipoConsulta("Migracion");
+							consulta.setTipoConsultaSecundaria("Migracion");
 							consulta.setDoctor(doctor);
 							consulta.setFechaConsulta(fechaReal);
 							consulta.setUsuario(usuario);
