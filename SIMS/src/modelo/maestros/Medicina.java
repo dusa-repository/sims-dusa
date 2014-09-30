@@ -20,6 +20,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import servicio.inventario.SF4101;
 import servicio.inventario.SF41021;
+import modelo.inventario.F4101;
 import modelo.inventario.F41021;
 import modelo.inventario.F41021PK;
 import modelo.transacciones.ConsultaMedicina;
@@ -299,17 +300,25 @@ public class Medicina implements Serializable {
 		return applicationContext.getBean(SF41021.class);
 	}
 
+	public static SF4101 getServicioF4101() {
+		return applicationContext.getBean(SF4101.class);
+	}
+
 	public long inventario() {
-		Long valor = idMedicina;
-		F41021PK claveSaldo = new F41021PK();
-		claveSaldo.setLiitm(valor.doubleValue());
-		claveSaldo.setLilocn("LOC001");
-		claveSaldo.setLilotn("");
-		claveSaldo.setLimcu("Planta");
-		F41021 f41021 = getServicioF41021().buscar(claveSaldo);
-		if (f41021 != null)
-			return f41021.getLipqoh().longValue();
-		else
+		Long valor = idReferencia;
+		F4101 objeto = getServicioF4101().buscarPorReferencia(valor);
+		if (objeto != null) {
+			F41021PK claveSaldo = new F41021PK();
+			claveSaldo.setLilocn("LOC001");
+			claveSaldo.setLiitm(objeto.getImitm());
+			claveSaldo.setLilotn("");
+			claveSaldo.setLimcu("Planta");
+			F41021 f41021 = getServicioF41021().buscar(claveSaldo);
+			if (f41021 != null)
+				return f41021.getLipqoh().longValue();
+			else
+				return 0;
+		} else
 			return 0;
 	}
 

@@ -7,6 +7,7 @@ import modelo.inventario.F41021PK;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("SF41021")
 public class SF41021 {
@@ -14,6 +15,7 @@ public class SF41021 {
 	@Autowired
 	private IF41021DAO iF41021DAO;
 
+	@Transactional("segundo")
 	public F41021 buscar(F41021PK claveSaldo) {
 		return iF41021DAO.findOne(claveSaldo);
 	}

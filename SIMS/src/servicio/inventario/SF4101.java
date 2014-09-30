@@ -45,4 +45,8 @@ public class SF4101 {
 		f4101DAO.save(articulos);
 	}
 
+	public F4101 buscarPorReferencia(Long valor) {
+		return f4101DAO.findByReferencia(valor);
+	}
+
 }

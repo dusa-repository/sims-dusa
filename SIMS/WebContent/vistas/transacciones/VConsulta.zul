@@ -763,7 +763,7 @@
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.nombre}(${each.inventario()})">
+													<listcell label="${each.nombre} (${each.inventario()})">
 													</listcell>
 													<listcell>
 														<textbox width="98%" />
@@ -882,7 +882,7 @@
 													</listcell>
 													<listcell>
 														<combobox onOpen='$composer.llenarProveedor(self)'
-															tooltiptext="Seleccione un Centro" model="${$composer.proveedores}"
+															tooltiptext="Seleccione un Centro"
 															placeholder="Seleccione un Centro" readonly="true" width="100%">
 															<template name="model">
 																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
@@ -925,7 +925,7 @@
 													<listcell>
 														<combobox onOpen='$composer.llenarProveedor(self)'
 															value="${each.proveedor.nombre}" tooltiptext="Seleccione un Proveedor"
-															model="${$composer.proveedores}" placeholder="Seleccione un Proveedor"
+														 placeholder="Seleccione un Proveedor"
 															readonly="true" width="100%">
 															<template name="model">
 																<comboitem label="${each.nombre}" context="${each.idProveedor}" />

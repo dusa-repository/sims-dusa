@@ -104,6 +104,7 @@ public class CAccidente extends CGenerico {
 				txtNombre.setText("");
 				cmbClasificacion.setValue("");
 				cmbClasificacion.setPlaceholder("Seleccione una Clasificacion");
+				txtCodigo.setDisabled(false);
 				id = 0;
 			}
 
@@ -227,6 +228,7 @@ public class CAccidente extends CGenerico {
 		txtCodigo.setValue(accidente.getIdAccidente());
 		txtNombre.setValue(accidente.getNombre());
 		cmbClasificacion.setValue(accidente.getClasificacion().getNombre());
+		txtCodigo.setDisabled(true);
 		catalogo.setParent(null);
 	}
 
@@ -237,6 +239,7 @@ public class CAccidente extends CGenerico {
 			id = accidente.getIdAccidente();
 			txtNombre.setValue(accidente.getNombre());
 			cmbClasificacion.setValue(accidente.getClasificacion().getNombre());
+			txtCodigo.setDisabled(true);
 		}
 	}
 

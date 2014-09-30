@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  * 
  */
 @Entity
-@Table(name="F4101", schema="bizapps_inventario.dbo")
+@Table(name="F41021", schema="bizapps_inventario.dbo")
 public class F41021 implements Serializable {
 	private static final long serialVersionUID = 1L;
 
