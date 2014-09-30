@@ -20,6 +20,9 @@ public class F4101 implements Serializable {
 	@Id
 	@Column(name = "IMITM")
 	private Double imitm;
+	
+	@Column(name = "REFERENCIA")
+	private Long referencia;
 
 	@Column(name = "IMABCI")
 	private String imabci;
@@ -629,6 +632,14 @@ public class F4101 implements Serializable {
 
 	public void setImitm(Double imitm) {
 		this.imitm = imitm;
+	}
+
+	public Long getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(Long referencia) {
+		this.referencia = referencia;
 	}
 
 	public String getImabci() {

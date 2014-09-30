@@ -10,6 +10,7 @@ import java.util.List;
 import modelo.generico.DetalleAccidente;
 import modelo.maestros.Accidente;
 import modelo.maestros.Diagnostico;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -17,17 +18,21 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.West;
 import org.zkoss.zul.Window;
 
+import arbol.CArbol;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
 import componentes.Validador;
-
 import controlador.maestros.CGenerico;
 
 public class CAccidenteDetalle extends CGenerico {
@@ -61,6 +66,8 @@ public class CAccidenteDetalle extends CGenerico {
 			"Trabajando fuera de la Empresa", "In Itinere", "Deportivo",
 			"Actividad Recreacional o turismo" };
 	private String[] tipoComun = { "En el Hogar", "Vial", "Transeunte", "Otro" };
+	private CArbol cArbol = new CArbol();
+	private Div divConsulta = new Div();
 
 	@Override
 	public void inicializar() throws IOException {
@@ -87,6 +94,14 @@ public class CAccidenteDetalle extends CGenerico {
 						detalle = lista.get(i);
 					}
 				}
+				
+				divConsulta = (Div) map.get("div");
+				contenido = (Include) divConsulta.getParent();
+				Tabbox tabox = (Tabbox) divConsulta.getParent().getParent().getParent()
+						.getParent();
+				tabBox = tabox;
+				tab = (Tab) tabox.getTabs().getLastChild();
+						tabs = (List<Tab>) map.get("tabsGenerales");
 				map.clear();
 				map = null;
 			}
@@ -219,6 +234,16 @@ public class CAccidenteDetalle extends CGenerico {
 							Messagebox.INFORMATION);
 			txtNombre.setValue("");
 			txtNombre.setFocus(true);
+		}
+	}
+
+	@Listen("onClick = #btnAbrirAccidente")
+	public void divAccidenteComun() {
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Accidente");
+		if (!arboles.isEmpty()) {
+			wdwRegistro.onClose();
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
 		}
 	}
 }

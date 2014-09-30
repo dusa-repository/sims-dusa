@@ -46,4 +46,6 @@ public interface IConsultaDAO  extends JpaRepository<Consulta, Long> {
 
 	Consulta findByIdReferenciaAndCedulaReferencia(long idRefC, String cedRef);
 
+	List<Consulta> findByPacienteOrderByFechaConsultaDesc(Paciente paciente);
+
 }

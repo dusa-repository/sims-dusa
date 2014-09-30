@@ -23,8 +23,8 @@
 							</hbox>
 							<textbox maxlength="100" inplace="true" id="txtNombre"
 								hflex="1" tooltiptext="Ingrese el codigo CIUU del Accidente" />
-							<button class="btn" autodisable="self" id="btnBuscar" label="Buscar"
-								tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+							<button class="btn" autodisable="self" id="btnBuscar"
+								label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 						</row>
 						<row>
 							<hbox>
@@ -39,7 +39,8 @@
 									<comboitem label="${each}" />
 								</template>
 							</combobox>
-							<hbox />
+							<button class="abrir" id="btnAbrirAccidente" label=""
+								tooltiptext="Crear un Nuevo Accidente" image="/public/imagenes/botones/agregar.png" />
 						</row>
 						<row>
 							<hbox>

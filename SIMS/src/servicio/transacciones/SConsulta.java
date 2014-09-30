@@ -23,7 +23,7 @@ public class SConsulta {
 	}
 
 	public List<Consulta> buscarPorPaciente(Paciente paciente) {
-		return consultaDAO.findByPaciente(paciente);
+		return consultaDAO.findByPacienteOrderByFechaConsultaDesc(paciente);
 	}
 
 	public void guardar(Consulta consulta) {

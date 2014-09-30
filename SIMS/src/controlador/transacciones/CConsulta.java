@@ -3236,18 +3236,24 @@ public class CConsulta extends CGenerico {
 	}
 
 	public void llenarProveedor(Combobox a) {
-		Examen examen = new Examen();
-		List<Proveedor> proveedorExamen = new ArrayList<Proveedor>();
-		Spinner spin = (Spinner) a.getParent().getParent().getChildren().get(3)
-				.getFirstChild();
-		examen = servicioExamen.buscar(spin.getValue());
-		proveedorExamen = servicioProveedor
-				.buscarPorProveedoresPorExamen(examen);
-		if (!proveedorExamen.isEmpty())
-			a.setModel(new ListModelList<Proveedor>(proveedorExamen));
-		else
-			Messagebox.show("El examen no es realizado por ningun Proveedor",
-					"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+
+		if (a.isOpen()) {
+
+			Examen examen = new Examen();
+			List<Proveedor> proveedorExamen = new ArrayList<Proveedor>();
+			Spinner spin = (Spinner) a.getParent().getParent().getChildren()
+					.get(3).getFirstChild();
+			examen = servicioExamen.buscar(spin.getValue());
+			proveedorExamen = servicioProveedor
+					.buscarPorProveedoresPorExamen(examen);
+			if (!proveedorExamen.isEmpty())
+				a.setModel(new ListModelList<Proveedor>(proveedorExamen));
+			else
+				Messagebox.show(
+						"El examen no es realizado por ningun Proveedor",
+						"Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
+
+		}
 	}
 
 	// public void validarExamen(Combobox a) {
@@ -3345,14 +3351,6 @@ public class CConsulta extends CGenerico {
 				Listitem listItem = ltbEspecialistasAgregados.getItemAtIndex(i);
 				consulta = new ConsultaEspecialista();
 				consulta = listItem.getValue();
-				// listItem2.get(i).getValue();
-				// double valor = ((Doublespinner)
-				// ((listItem.getChildren().get(1)))
-				// .getFirstChild()).getValue();
-				// if (valor == 0) {
-				// falta = true;
-				// }
-				// consulta.setCosto(valor);
 				especialistasResumen.add(consulta);
 			}
 			ltbResumenEspecialistas
@@ -3873,27 +3871,6 @@ public class CConsulta extends CGenerico {
 		txtObservacionPrenatal.setValue("");
 		txtResultadoComplicacionNeo.setValue("");
 	}
-
-	// DIV PARA ACCIDENTE
-	// @Listen("onClick = #btnAbrirAccidenteComun,#btnAbrirAccidenteLaboral")
-	// public void divAccidenteComun(Event evento) {
-	// Button boton = (Button) evento.getTarget();
-	// final HashMap<String, Object> map = new HashMap<String, Object>();
-	// if (boton.getId().equals("btnAbrirAccidenteComun")) {
-	// map.put("id", "consulta");
-	// map.put("lista", accidentesComunesDisponibles);
-	// map.put("listbox", ltbAccidentesComunes);
-	// map.put("tipo", "Comun");
-	// } else {
-	// map.put("id", "consulta");
-	// map.put("lista", accidentesLaboralesDisponibles);
-	// map.put("listbox", ltbAccidentesLaborales);
-	// map.put("tipo", "Laboral");
-	// }
-	// Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-	// Arbol arbolItem = servicioArbol.buscarPorNombreArbol("Accidente");
-	// cArbol.abrirVentanas(arbolItem);
-	// }
 
 	@Listen("onClick = #btnAbrirIntervencion")
 	public void divIntervencion() {
@@ -5154,6 +5131,8 @@ public class CConsulta extends CGenerico {
 		map.put("idDiagnostico", diagnostico);
 		map.put("tipoDiagnostico", tipo);
 		map.put("lista", listaDetalle);
+		map.put("div", divConsulta);
+		map.put("tabsGenerales", tabs);
 		Sessions.getCurrent().setAttribute("consulta", map);
 		Window window = (Window) Executions.createComponents(
 				"/vistas/transacciones/VRegistroAccidente.zul", null, map);
