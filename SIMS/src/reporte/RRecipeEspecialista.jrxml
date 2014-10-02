@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRecipeEspecialista" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ed592c1-ffc9-486d-b23e-4c1b7ea46e29">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="292"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
@@ -30,7 +30,7 @@
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="163" y="126" width="227" height="20" uuid="ad8e21ec-3f28-4c5b-8586-3c8052f2a6e8"/>
+				<reportElement x="163" y="122" width="227" height="20" uuid="ad8e21ec-3f28-4c5b-8586-3c8052f2a6e8"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -49,13 +49,6 @@
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="126" y="71" width="446" height="31" uuid="7a894f55-7888-4f0a-8d9e-f6c63dd02b0a"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{empresaDireccion}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="418" y="10" width="41" height="20" uuid="54eafcbb-f3bd-4506-946d-d18b9fad9be5"/>
@@ -149,18 +142,11 @@
 				<textFieldExpression><![CDATA[$P{especialidad}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="37" y="163" width="177" height="20" uuid="17d17f1c-a500-4855-a08e-0c052303d42b"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="37" y="163" width="260" height="20" uuid="17d17f1c-a500-4855-a08e-0c052303d42b"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{doctorNombre}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="214" y="163" width="248" height="20" uuid="a4650071-8f38-4c6a-afba-e61d5331cb86"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{doctorApellido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="78" y="284" width="195" height="20" uuid="cde05bed-5091-417f-9e4e-8a9e44fe491f"/>
@@ -177,7 +163,7 @@
 				<textFieldExpression><![CDATA[$P{edad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="169" y="510" width="159" height="20" uuid="f2d6394a-2dfb-47ba-84bc-c9829bd7ed8b"/>
+				<reportElement x="169" y="535" width="159" height="20" uuid="f2d6394a-2dfb-47ba-84bc-c9829bd7ed8b"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
@@ -240,7 +226,7 @@
 				<textFieldExpression><![CDATA[$P{pacienteSexo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="14" y="424" width="521" height="45" uuid="1c17843e-a430-4c3a-b737-c216b4c2b55f"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="14" y="424" width="545" height="99" uuid="1c17843e-a430-4c3a-b737-c216b4c2b55f"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>

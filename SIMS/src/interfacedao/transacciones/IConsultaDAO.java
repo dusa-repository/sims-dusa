@@ -48,4 +48,6 @@ public interface IConsultaDAO  extends JpaRepository<Consulta, Long> {
 
 	List<Consulta> findByPacienteOrderByFechaConsultaDesc(Paciente paciente);
 
+	List<Consulta> findByPacienteCedulaOrderByFechaConsultaDesc(String valueOf);
+
 }

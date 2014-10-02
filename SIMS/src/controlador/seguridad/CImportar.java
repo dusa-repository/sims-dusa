@@ -237,7 +237,7 @@ public class CImportar extends CGenerico {
 			if (rowIterator.hasNext()) {
 				Recipe recipe = new Recipe(0, "1 (Urgente)", fechaHora,
 						fechaHora, horaAuditoria, nombreUsuarioSesion(),
-						"Sin Informacion");
+						"N/A");
 				servicioRecipe.guardar(recipe);
 				recipe = servicioRecipe.buscarUltimo();
 				List<ConsultaMedicina> consultasMedicina = new ArrayList<ConsultaMedicina>();

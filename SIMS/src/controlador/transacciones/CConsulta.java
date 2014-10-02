@@ -2229,8 +2229,7 @@ public class CConsulta extends CGenerico {
 			protected String[] crearRegistros(Consulta objeto) {
 				String[] registros = new String[6];
 				registros[0] = formatoFecha.format(objeto.getFechaConsulta());
-				registros[1] = objeto.getUsuario().getPrimerNombre() + " "
-						+ objeto.getUsuario().getPrimerApellido();
+				registros[1] = objeto.getDoctor();
 				registros[2] = objeto.getMotivoConsulta();
 				registros[3] = objeto.getEnfermedadActual();
 				registros[4] = objeto.getTipoConsulta();
@@ -5201,9 +5200,9 @@ public class CConsulta extends CGenerico {
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
-		String nombreEmpresa = "DUSA C.A.";
-		String direccionEmpresa = "Via acarigua la miel";
-		String rifEmpresa = "J-dfghjk";
+		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
+		String direccionEmpresa = "";
+		String rifEmpresa = "J-30940783-0";
 		if (paciente.getEmpresa() != null) {
 			nombreEmpresa = paciente.getEmpresa().getNombre();
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
@@ -5226,8 +5225,7 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
 				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
-		p.put("doctorNombre",
-				user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido",
 				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
@@ -5282,9 +5280,9 @@ public class CConsulta extends CGenerico {
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
-		String nombreEmpresa = "DUSA C.A.";
-		String direccionEmpresa = "Via acarigua la miel";
-		String rifEmpresa = "J-dfghjk";
+		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
+		String direccionEmpresa = "";
+		String rifEmpresa = "J-30940783-0";
 		if (paciente.getEmpresa() != null) {
 			nombreEmpresa = paciente.getEmpresa().getNombre();
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
@@ -5303,8 +5301,7 @@ public class CConsulta extends CGenerico {
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("pacienteSexo", paciente.getSexo());
-		p.put("doctorNombre",
-				user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido",
 				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
@@ -5365,9 +5362,9 @@ public class CConsulta extends CGenerico {
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
-		String nombreEmpresa = "DUSA C.A.";
-		String direccionEmpresa = "Via acarigua la miel";
-		String rifEmpresa = "J-dfghjk";
+		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
+		String direccionEmpresa = "";
+		String rifEmpresa = "J-30940783-0";
 		if (paciente.getEmpresa() != null) {
 			nombreEmpresa = paciente.getEmpresa().getNombre();
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
@@ -5384,8 +5381,7 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteCedula", paciente.getCedula());
 		p.put("pacienteEdad", paciente.getEdad());
 		p.put("pacienteSexo", paciente.getSexo());
-		p.put("doctorNombre",
-				user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido",
 				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
@@ -5447,9 +5443,9 @@ public class CConsulta extends CGenerico {
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
-		String nombreEmpresa = "DUSA C.A.";
-		String direccionEmpresa = "Via acarigua la miel";
-		String rifEmpresa = "J-dfghjk";
+		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
+		String direccionEmpresa = "";
+		String rifEmpresa = "J-30940783-0";
 		if (paciente.getEmpresa() != null) {
 			nombreEmpresa = paciente.getEmpresa().getNombre();
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
@@ -5464,8 +5460,7 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
 				+ paciente.getSegundoApellido());
 		p.put("pacienteCedula", paciente.getCedula());
-		p.put("doctorNombre",
-				user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido",
 				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
@@ -5533,9 +5528,9 @@ public class CConsulta extends CGenerico {
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
-		String nombreEmpresa = "DUSA C.A.";
-		String direccionEmpresa = "Via acarigua la miel";
-		String rifEmpresa = "J-dfghjk";
+		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
+		String direccionEmpresa = "";
+		String rifEmpresa = "J-30940783-0";
 		if (paciente.getEmpresa() != null) {
 			nombreEmpresa = paciente.getEmpresa().getNombre();
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
@@ -5552,19 +5547,24 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteCedula", paciente.getCedula());
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
 
-		if (user.getPrimerNombre().equals("Fernando")
-				&& user.getPrimerApellido().equals("Rivero")) {
-			p.put("doctorNombre", consuta.getDoctor());
-			p.put("doctorApellido", "  ");
-			p.put("doctorCedula", "Sin Informacion");
-		} else {
-			p.put("doctorNombre",
-					user.getPrimerNombre() + "   " + user.getSegundoNombre());
-			p.put("doctorApellido",
-					user.getPrimerApellido() + "   "
-							+ user.getSegundoApellido());
-			p.put("doctorCedula", user.getCedula());
-		}
+		// if (user.getPrimerNombre().equals("Fernando")
+		// && user.getPrimerApellido().equals("Rivero")) {
+		// p.put("doctorNombre", consuta.getDoctor());
+		// p.put("doctorApellido", "  ");
+		// p.put("doctorCedula", "Sin Informacion");
+		// } else {
+		// p.put("doctorNombre",
+		// user.getPrimerNombre() + "   " + user.getSegundoNombre());
+		// p.put("doctorApellido",
+		// user.getPrimerApellido() + "   "
+		// + user.getSegundoApellido());
+		// p.put("doctorCedula", user.getCedula());
+		// }
+		if (diagnosticoConsulta.size() > 1)
+			p.put("imprime", "Si");
+		else
+			p.put("imprime", "No");
+		p.put("doctorNombre", consuta.getDoctor());
 		p.put("fechaConsulta", consuta.getFechaConsulta());
 		p.put("tipoConsulta", consuta.getTipoConsultaSecundaria());
 		p.put("enfermedad", consuta.getEnfermedadActual());
@@ -5682,9 +5682,9 @@ public class CConsulta extends CGenerico {
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
-		String nombreEmpresa = "DUSA C.A.";
-		String direccionEmpresa = "Via acarigua la miel";
-		String rifEmpresa = "J-dfghjk";
+		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
+		String direccionEmpresa = "";
+		String rifEmpresa = "J-30940783-0";
 		String area = "";
 		if (paciente.getEmpresa() != null) {
 			nombreEmpresa = paciente.getEmpresa().getNombre();
@@ -5704,7 +5704,7 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteNombre", paciente.getPrimerNombre());
 		p.put("pacienteApellido", paciente.getPrimerApellido());
 		p.put("pacienteCedula", paciente.getFicha());
-		p.put("doctorNombre", user.getPrimerNombre());
+		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido", user.getPrimerApellido());
 		p.put("doctorCedula", user.getCedula());
 		p.put("fechaDesde", consuta.getFechaConsulta());
@@ -5738,9 +5738,9 @@ public class CConsulta extends CGenerico {
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
-		String nombreEmpresa = "DUSA C.A.";
-		String direccionEmpresa = "Via acarigua la miel";
-		String rifEmpresa = "J-dfghjk";
+		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
+		String direccionEmpresa = "";
+		String rifEmpresa = "J-30940783-0";
 		String area = "";
 		if (paciente.getEmpresa() != null) {
 			nombreEmpresa = paciente.getEmpresa().getNombre();
@@ -5753,7 +5753,7 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteNombre", paciente.getPrimerNombre());
 		p.put("pacienteApellido", paciente.getPrimerApellido());
 		p.put("pacienteCedula", paciente.getCedula());
-		p.put("doctorNombre", user.getPrimerNombre());
+		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido", user.getPrimerApellido());
 		p.put("doctorCedula", user.getCedula());
 		p.put("fecha", consuta.getFechaConsulta());

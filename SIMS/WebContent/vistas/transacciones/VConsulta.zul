@@ -881,7 +881,7 @@
 														<textbox width="98%" />
 													</listcell>
 													<listcell>
-														<combobox onOpen='$composer.llenarProveedor(self)'
+														<combobox model="${$composer.proveedores}" onOpen='$composer.llenarProveedor(self)'
 															tooltiptext="Seleccione un Centro"
 															placeholder="Seleccione un Centro" readonly="true" width="100%">
 															<template name="model">
@@ -923,7 +923,7 @@
 													</listcell>
 													<!-- onSelect='$composer.validarExamen(self)' -->
 													<listcell>
-														<combobox onOpen='$composer.llenarProveedor(self)'
+														<combobox model="${$composer.proveedores}"  onOpen='$composer.llenarProveedor(self)'
 															value="${each.proveedor.nombre}" tooltiptext="Seleccione un Proveedor"
 														 placeholder="Seleccione un Proveedor"
 															readonly="true" width="100%">

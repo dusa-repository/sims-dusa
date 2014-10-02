@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReposo" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80f827cd-f931-40fe-9157-fa70b2ef6b6a">
 	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="46"/>
+	<property name="ireport.y" value="126"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
@@ -40,7 +40,7 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="214" y="117" width="121" height="21" uuid="2b6269f2-e47d-4d30-b8a7-e852147b071a"/>
+				<reportElement x="214" y="114" width="121" height="21" uuid="2b6269f2-e47d-4d30-b8a7-e852147b071a"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="14" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -59,13 +59,6 @@
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="137" y="64" width="435" height="35" uuid="82e19fa7-1390-414b-81e3-090e61e62921"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{empresaDireccion}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="0" y="158" width="300" height="20" uuid="08226da2-d765-490d-bc6c-c83b8878cea7"/>
@@ -256,7 +249,7 @@
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="480" width="121" height="21" uuid="d253a600-0831-4de3-9f54-e44c422fde3f"/>
+				<reportElement x="209" y="477" width="121" height="21" uuid="d253a600-0831-4de3-9f54-e44c422fde3f"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="14" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -294,13 +287,6 @@
 				</textElement>
 				<text><![CDATA[Hasta el dia:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="132" y="427" width="435" height="35" uuid="6f282159-2ee3-4085-a98b-59d562d4d9cd"/>
-				<textElement>
-					<font fontName="Arial" size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{empresaDireccion}]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 </jasperReport>
