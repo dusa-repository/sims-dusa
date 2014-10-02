@@ -84,7 +84,7 @@ public class SConsulta {
 	}
 
 	public List<Consulta> buscarPorIdPacienteOrdenado(String valueOf) {
-		return consultaDAO.findByPacienteCedulaOrderByFechaConsultaAsc(valueOf);
+		return consultaDAO.findByPacienteCedulaOrderByFechaConsultaDesc(valueOf);
 	}
 
 	public List<Consulta> buscarPorCargo(Cargo cargo) {

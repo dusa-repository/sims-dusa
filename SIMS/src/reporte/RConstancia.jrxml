@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RConstancia" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="fb533635-fe0b-4b54-a554-fc572d401198">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="27"/>
+	<property name="ireport.y" value="96"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
@@ -51,29 +51,22 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="77" y="94" width="494" height="47" uuid="8b48aebe-19f5-4722-9fb4-6c48045d1344"/>
-				<textElement>
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{empresaDireccion}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="202" y="169" width="88" height="20" uuid="f5bfb2c4-d80d-4e2f-84ab-8a64d7cf67a0"/>
+				<reportElement x="202" y="153" width="88" height="20" uuid="f5bfb2c4-d80d-4e2f-84ab-8a64d7cf67a0"/>
 				<textElement>
 					<font size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Constancia:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="212" width="320" height="20" uuid="31600c92-4fe1-479d-85e4-2265867503b5"/>
+				<reportElement x="0" y="206" width="320" height="20" uuid="31600c92-4fe1-479d-85e4-2265867503b5"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Por medio de la presente se hace constar que el paciente:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="320" y="212" width="252" height="20" uuid="12b18ad4-c05f-46b9-b776-0f6bfdb6a729"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="320" y="206" width="252" height="20" uuid="12b18ad4-c05f-46b9-b776-0f6bfdb6a729"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -101,15 +94,12 @@
 				<text><![CDATA[Asistio a Consulta Medica el dia:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="187" y="353" width="131" height="1" uuid="290e4ac5-469c-4e89-947a-26886156b043"/>
+				<reportElement x="187" y="365" width="131" height="1" uuid="290e4ac5-469c-4e89-947a-26886156b043"/>
 			</line>
-			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="187" y="366" width="299" height="20" uuid="27921410-1499-46f2-ab17-02f6e3b79129"/>
-				<textElement>
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{doctorNombre}+"  "+$P{doctorApellido}]]></textFieldExpression>
-			</textField>
+			<staticText>
+				<reportElement x="191" y="382" width="115" height="20" uuid="a0346140-2421-4717-ba64-6e14d6383a77"/>
+				<text><![CDATA[Firma del Medico]]></text>
+			</staticText>
 		</band>
 	</title>
 </jasperReport>

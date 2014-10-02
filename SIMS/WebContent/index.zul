@@ -56,9 +56,9 @@
 					<separator />
 					<separator />
 					<div height="100%" width="100%" align="center">
-						<groupbox height="100%" width="40%">
+						<groupbox closable="false" height="100%" width="40%">
 							<caption label="${a}"
-								style="color:black; font-size: 24px; font-weight:bold" />
+								style="color:black; font-size: 20px; font-weight:bold" />
 							<separator></separator>
 							<separator></separator>
 							<hlayout width="100%">
