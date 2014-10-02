@@ -74,12 +74,13 @@ public class SMedicina {
 	}
 
 	public List<Medicina> buscarDisponibles(Consulta consulta) {
-		List<ConsultaMedicina> consultasMedicina = consultaMedicinaDAO.findByConsulta(consulta);
+		List<ConsultaMedicina> consultasMedicina = consultaMedicinaDAO
+				.findByConsulta(consulta);
 		List<Long> ids = new ArrayList<Long>();
-		if(consultasMedicina.isEmpty())
+		if (consultasMedicina.isEmpty())
 			return medicinaDAO.findAll();
-		else{
-			for(int i=0; i<consultasMedicina.size();i++){
+		else {
+			for (int i = 0; i < consultasMedicina.size(); i++) {
 				ids.add(consultasMedicina.get(i).getMedicina().getIdMedicina());
 			}
 			return medicinaDAO.findByIdMedicinaNotIn(ids);
@@ -95,6 +96,12 @@ public class SMedicina {
 	}
 
 	public List<Medicina> filtroDenominacion(String valor) {
-		return medicinaDAO.findByDenominacionGenericaStartingWithAllIgnoreCase(valor);
+		return medicinaDAO
+				.findByDenominacionGenericaStartingWithAllIgnoreCase(valor);
+	}
+
+	public long buscarUltimaReferencia() {
+		long id = medicinaDAO.findMaxIdReferencia();
+		return id;
 	}
 }

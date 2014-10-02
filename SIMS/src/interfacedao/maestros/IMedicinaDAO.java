@@ -33,5 +33,8 @@ public interface IMedicinaDAO extends JpaRepository<Medicina, Long> {
 	List<Medicina> findByDenominacionGenericaStartingWithAllIgnoreCase(
 			String valor);
 
+	@Query("select coalesce(max(medicina.idReferencia), '0') from Medicina medicina")
+	long findMaxIdReferencia();
+
 
 }
