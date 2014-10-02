@@ -882,8 +882,8 @@
 													</listcell>
 													<listcell>
 														<combobox model="${$composer.proveedores}" onOpen='$composer.llenarProveedor(self)'
-															tooltiptext="Seleccione un Centro"
-															placeholder="Seleccione un Centro" readonly="true" width="100%">
+															tooltiptext="Seleccione un Centro" placeholder="Seleccione un Centro"
+															readonly="true" width="100%">
 															<template name="model">
 																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
 															</template>
@@ -923,9 +923,9 @@
 													</listcell>
 													<!-- onSelect='$composer.validarExamen(self)' -->
 													<listcell>
-														<combobox model="${$composer.proveedores}"  onOpen='$composer.llenarProveedor(self)'
+														<combobox onOpen='$composer.llenarProveedor(self)'
 															value="${each.proveedor.nombre}" tooltiptext="Seleccione un Proveedor"
-														 placeholder="Seleccione un Proveedor"
+															model="${$composer.proveedores}" placeholder="Seleccione un Proveedor"
 															readonly="true" width="100%">
 															<template name="model">
 																<comboitem label="${each.nombre}" context="${each.idProveedor}" />

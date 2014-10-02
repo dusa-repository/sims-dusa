@@ -214,6 +214,11 @@ public class CMedicina extends CGenerico {
 								efectos, embarazo, fechaHora, horaAuditoria,
 								indicaciones, nombre, posologia, precauciones,
 								nombreUsuarioSesion(), laboratorio, ca);
+						long valor =0;
+						if (id == 0) {
+							valor = servicioMedicina.buscarUltimaReferencia();
+							medicina.setIdReferencia(valor+1);
+						}
 						servicioMedicina.guardar(medicina);
 						if (id != 0)
 							medicina = servicioMedicina.buscar(id);
@@ -237,7 +242,8 @@ public class CMedicina extends CGenerico {
 							cConsulta.recibirMedicina(medicinaConsulta,
 									listaConsulta);
 						}
-						guardarInventario(nombre);
+						if (id == 0)
+							guardarInventario(nombre,valor+1);
 						msj.mensajeInformacion(Mensaje.guardado);
 						limpiar();
 					} else {
@@ -690,12 +696,13 @@ public class CMedicina extends CGenerico {
 		ltbPresentaciones.setCheckmark(true);
 	}
 
-	protected void guardarInventario(String nombre) {
+	protected void guardarInventario(String nombre, long l) {
 		F4101 f4101 = new F4101();
 		f4101.setImitm(nextNumber("4", "JE"));
 		f4101.setImlitm("sims");
 		f4101.setImdsc1(nombre);
-		f4101.setImuom1("02");
+		f4101.setImuom1("01");
+		f4101.setReferencia(l);
 		f4101.setImstkt("1");
 		f4101.setImdsc2("");
 		f4101.setImsrtx("");
