@@ -920,7 +920,7 @@ public class CConsulta extends CGenerico {
 					Timestamp fechaConsulta = new Timestamp(fechaCon.getTime());
 					Usuario usuario = usuarioSesion(nombreUsuarioSesion());
 					Paciente paciente = servicioPaciente
-							.buscarPorCedula(txtCedula.getValue());
+							.buscarPorCedula(idPaciente);
 					boolean accidente = false;
 					if (listaDetalle.size() != 0)
 						accidente = true;
@@ -1904,8 +1904,9 @@ public class CConsulta extends CGenerico {
 				examenesResumen));
 		if (!examenesAgregado.isEmpty()) {
 			cmbPrioridadExamen.setValue(examenesAgregado.get(0).getPrioridad());
-			cmbProveedor.setValue(examenesAgregado.get(0).getProveedor()
-					.getNombre());
+			if (examenesAgregado.get(0).getProveedor() != null)
+				cmbProveedor.setValue(examenesAgregado.get(0).getProveedor()
+						.getNombre());
 		}
 
 		especialistasDisponibles = servicioEspecialista
@@ -2519,6 +2520,7 @@ public class CConsulta extends CGenerico {
 			tabCarga.setVisible(false);
 			gpxLaborales.setVisible(false);
 		}
+		idPaciente = paciente.getCedula();
 	}
 
 	@Listen("onClick = #pasar1Medicina")
@@ -3997,7 +3999,7 @@ public class CConsulta extends CGenerico {
 		map.put("listbox", ltbServicioExterno);
 		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		List<Arbol> arboles = servicioArbol
-				.buscarPorNombreArbol("Servicios Externos");
+				.buscarPorNombreArbol("Estudios Externos");
 		if (!arboles.isEmpty()) {
 			Arbol arbolItem = arboles.get(0);
 			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
@@ -4020,8 +4022,10 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onOK = #txtCedula")
 	public void buscarCedula() {
+		
 		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedula
 				.getValue());
+		limpiarCampos();
 		if (paciente != null) {
 			llenarCampos(paciente);
 			idPaciente = paciente.getCedula();
@@ -4030,7 +4034,6 @@ public class CConsulta extends CGenerico {
 			ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
 			llenarListas();
 		} else {
-			limpiarCampos();
 			msj.mensajeError(Mensaje.pacienteNoExiste);
 		}
 	}
@@ -4048,7 +4051,7 @@ public class CConsulta extends CGenerico {
 			rowApto2.setVisible(true);
 			txtCondicionado.setValue("");
 			rowEspecialista.setVisible(false);
-			rowAsociada.setVisible(true);
+			rowAsociada.setVisible(false);
 		} else {
 			if (cmbTipoPreventiva.getValue().equals("Control")) {
 				rowAsociada.setVisible(true);
@@ -5231,12 +5234,33 @@ public class CConsulta extends CGenerico {
 		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido",
 				user.getPrimerApellido() + "   " + user.getSegundoApellido());
-		p.put("doctorCedula", user.getCedula());
+		String ced = "";
+		if (consuta.getTipoConsultaSecundaria().equals("IC")) {
+			if (consuta.getEspecialista() != null)
+				ced = consuta.getEspecialista().getCedula();
+		} else {
+			if (user.isDoctor())
+				ced = user.getCedula();
+		}
+
+		p.put("doctorCedula", ced);
 
 		// Restar Dias
 		p.put("dias", dias);
-		p.put("msds", user.getLicenciaMsds());
-		p.put("comelar", user.getLicenciaCm());
+		String ms = "";
+		if (!user.isDoctor())
+			ms = "";
+		else
+			user.getLicenciaMsds();
+		p.put("msds", ms);
+
+		String cm = "";
+		if (!user.isDoctor())
+			cm = "";
+		else
+			user.getLicenciaCm();
+		p.put("msds", ms);
+		p.put("comelar", cm);
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());

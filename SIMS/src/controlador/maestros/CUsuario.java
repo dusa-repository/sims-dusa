@@ -538,7 +538,7 @@ public class CUsuario extends CGenerico {
 		final List<Usuario> usuarios = servicioUsuario.buscarTodos();
 		catalogo = new Catalogo<Usuario>(catalogoUsuario,
 				"Catalogo de Usuarios", usuarios, "Cedula", "Ficha", "Nombre",
-				"Apellido", "Login") {
+				"Apellido", "Doctor", "Login") {
 
 			@Override
 			protected List<Usuario> buscar(String valor, String combo) {
@@ -553,6 +553,8 @@ public class CUsuario extends CGenerico {
 					return servicioUsuario.filtroLogin(valor);
 				case "Apellido":
 					return servicioUsuario.filtroApellido(valor);
+				case "Doctor":
+					return servicioUsuario.filtroDoctor(valor.toLowerCase());
 				default:
 					return usuarios;
 				}
@@ -560,12 +562,18 @@ public class CUsuario extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Usuario objeto) {
-				String[] registros = new String[5];
+				String doctor = "";
+				if (objeto.isDoctor())
+					doctor = "Si";
+				else
+					doctor = "No";
+				String[] registros = new String[6];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
 				registros[2] = objeto.getPrimerNombre();
 				registros[3] = objeto.getPrimerApellido();
-				registros[4] = objeto.getLogin();
+				registros[4] = doctor;
+				registros[5] = objeto.getLogin();
 				return registros;
 			}
 

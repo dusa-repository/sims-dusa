@@ -193,11 +193,14 @@
 									<combobox tooltiptext="Seleccione el Nivel Educativo"
 										placeholder="Seleccione el Nivel Educativo" id="cmbNivelEducativo"
 										width="100%" readonly="true">
+										<comboitem label="Maternal" />
+										<comboitem label="Pre-Escolar" />
 										<comboitem label="Iletrado" />
 										<comboitem label="Primaria" />
 										<comboitem label="Secundaria" />
 										<comboitem label="Tecnica" />
 										<comboitem label="Superior" />
+										<comboitem label="Post-Grado" />
 									</combobox>
 									<hbox>
 										<label class="etiqueta" value="Fecha Ingreso:" />
@@ -448,8 +451,8 @@
 									<textbox maxlength="100" id="txtRetiroIVSS"
 										tooltiptext="Ingrese el Retiro de IVSS (FORMATO 14.03)" />
 									<label class="etiqueta" value="Fecha de Egreso:" />
-									<datebox width="100%" readonly="true" id="dtbFechaEgreso" onCreate="self.value = new Date()"
-										tooltiptext="Indique la Fecha de Egreso" />
+									<datebox width="100%" readonly="true" id="dtbFechaEgreso"
+										onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Egreso" />
 									<hbox />
 									<hbox />
 									<hbox />

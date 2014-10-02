@@ -18,7 +18,7 @@ public class SUsuario {
 
 	@Autowired
 	private IUsuarioDAO usuarioDAO;
-	
+
 	@Transactional
 	public Usuario buscarUsuarioPorId(String id) {
 		return usuarioDAO.findByCedula(id);
@@ -81,7 +81,8 @@ public class SUsuario {
 	}
 
 	public List<Usuario> filtroEspecialidad(String valor) {
-		return usuarioDAO.findByEspecialidadDescripcionStartingWithAllIgnoreCase(valor);
+		return usuarioDAO
+				.findByEspecialidadDescripcionStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Usuario> buscarPorGrupo(Grupo grupo) {
@@ -89,11 +90,22 @@ public class SUsuario {
 	}
 
 	public List<Usuario> buscarDoctores() {
-	return usuarioDAO.findByDoctor(true);
+		return usuarioDAO.findByDoctor(true);
 	}
 
 	public Usuario buscarPorLogin(String value) {
 		return usuarioDAO.findByLogin(value);
+	}
+
+	public List<Usuario> filtroDoctor(String valor) {
+		switch (valor.toLowerCase()) {
+		case "si":
+			return usuarioDAO.findByDoctor(true);
+		case "no":
+			return usuarioDAO.findByDoctor(false);
+		default:
+			return usuarioDAO.findAll();
+		}
 	}
 
 }
