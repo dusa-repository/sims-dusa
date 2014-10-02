@@ -76,6 +76,7 @@ public class CArbol extends CGenerico {
 	@Override
 	public void inicializar() throws IOException {
 		 Clients.confirmClose("Mensaje de la Aplicacion:");
+//		 Close session spring security in java
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 

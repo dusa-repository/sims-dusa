@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RConsulta" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1d931b9f-5f9a-4d5d-9309-96071042820f">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="597"/>
 	<subDataset name="dataset1" uuid="21e0097c-1241-4eb5-a1c0-0c1c9e963c3a"/>
 	<parameter name="fechaConsulta" class="java.sql.Timestamp"/>
 	<parameter name="pacienteNombre" class="java.lang.String"/>
@@ -274,7 +274,7 @@
 	</columnHeader>
 	<detail>
 		<band height="33">
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="16" y="7" width="190" height="20" uuid="f2f1c4aa-43a6-426c-a9ef-d25ed373bc3d"/>
 				<box>
 					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
@@ -284,7 +284,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{diagnostico.nombre}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="216" y="7" width="159" height="20" uuid="8cbfa999-ba2e-4fee-8000-7ff603211fa0"/>
 				<box>
 					<pen lineWidth="0.0" lineStyle="Dashed"/>

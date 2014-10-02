@@ -239,14 +239,14 @@
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<textbox id="txtPasswordUsuario" hflex="1" maxlength="256"
-										tooltiptext="Ingrese la Contraseña del Usuario" type="password" />
+										tooltiptext="Ingrese la Contraseña del Usuario"  />
 									<hbox>
 										<label class="etiqueta" value="Reescriba el Password:" />
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<textbox id="txtPassword2Usuario" hflex="1" maxlength="256"
-										tooltiptext="Reescriba el Login del Usuario" type="password" />
+										tooltiptext="Reescriba el Login del Usuario" />
 								</row>
 							</rows>
 						</grid>
