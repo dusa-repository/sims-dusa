@@ -51,6 +51,10 @@ public class CEspecialista extends CGenerico {
 	@Wire
 	private Textbox txtCedulaEspecialista;
 	@Wire
+	private Textbox txtTelefonoEspecialista;
+	@Wire
+	private Textbox txtDireccionEspecialista;
+	@Wire
 	private Combobox cmbEspecialidad;
 	@Wire
 	private Button btnBuscarEspecialista;
@@ -105,6 +109,8 @@ public class CEspecialista extends CGenerico {
 			public void limpiar() {
 				txtApellidoEspecialista.setValue("");
 				txtCedulaEspecialista.setValue("");
+				txtTelefonoEspecialista.setValue("");
+				txtDireccionEspecialista.setValue("");
 				txtNombreEspecialista.setValue("");
 				cmbEspecialidad.setValue("");
 				cmbEspecialidad.setPlaceholder("Seleccione una Especialidad");
@@ -125,7 +131,9 @@ public class CEspecialista extends CGenerico {
 									.getSelectedItem().getContext()));
 					Especialista especialista = new Especialista(cedula,
 							apellido, nombre, costoServicio, fechaHora,
-							horaAuditoria, nombreUsuarioSesion(), especialidad);
+							horaAuditoria, nombreUsuarioSesion(), especialidad,
+							txtDireccionEspecialista.getValue(),
+							txtTelefonoEspecialista.getValue());
 					servicioEspecialista.guardar(especialista);
 					if (consulta) {
 						especialista = servicioEspecialista.buscar(cedula);
@@ -181,6 +189,8 @@ public class CEspecialista extends CGenerico {
 				|| txtCedulaEspecialista.getText().compareTo("") == 0
 				|| txtNombreEspecialista.getText().compareTo("") == 0
 				|| dspCosto.getText().compareTo("") == 0
+				|| txtDireccionEspecialista.getText().compareTo("") == 0
+				|| txtTelefonoEspecialista.getText().compareTo("") == 0
 				|| cmbEspecialidad.getText().compareTo("") == 0) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
@@ -188,8 +198,15 @@ public class CEspecialista extends CGenerico {
 			if (!Validador.validarNumero(txtCedulaEspecialista.getValue())) {
 				msj.mensajeError(Mensaje.cedulaInvalida);
 				return false;
-			} else
+			} else {
+				if (!Validador.validarTelefono(txtTelefonoEspecialista
+						.getValue())) {
+					msj.mensajeError(Mensaje.telefonoInvalido);
+					return false;
+				}
 				return true;
+
+			}
 		}
 	}
 
@@ -245,6 +262,13 @@ public class CEspecialista extends CGenerico {
 		}
 	}
 
+	@Listen("onChange = #txtTelefonoEspecialista")
+	public void validarTelefono() {
+		if (!Validador.validarTelefono(txtTelefonoEspecialista.getValue())) {
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
+		}
+	}
+
 	/* Llena el combo de Especialidades cada vez que se abre */
 	@Listen("onOpen = #cmbEspecialidad")
 	public void llenarComboEspecialidad() {
@@ -275,6 +299,8 @@ public class CEspecialista extends CGenerico {
 		txtCedulaEspecialista.setValue(especialista.getCedula());
 		txtNombreEspecialista.setValue(especialista.getNombre());
 		txtApellidoEspecialista.setValue(especialista.getApellido());
+		txtDireccionEspecialista.setValue(especialista.getDireccion());
+		txtTelefonoEspecialista.setValue(especialista.getTelefono());
 		dspCosto.setValue(especialista.getCosto());
 		cmbEspecialidad.setValue(especialista.getEspecialidad()
 				.getDescripcion());

@@ -29,6 +29,12 @@ public class Especialista implements Serializable {
 	@Column(name = "apellido", length = 100)
 	private String apellido;
 
+	@Column(length=1024)
+	private String direccion;
+	
+	@Column(length=20)
+	private String telefono;
+
 	@Column(name = "nombre", length = 100)
 	private String nombre;
 
@@ -56,7 +62,7 @@ public class Especialista implements Serializable {
 	
 	public Especialista(String cedula, String apellido, String nombre,
 			double costo, Timestamp fechaAuditoria, String horaAuditoria,
-			String usuarioAuditoria, Especialidad especialidad) {
+			String usuarioAuditoria, Especialidad especialidad, String di, String pho) {
 		super();
 		this.cedula = cedula;
 		this.apellido = apellido;
@@ -66,6 +72,8 @@ public class Especialista implements Serializable {
 		this.horaAuditoria = horaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.especialidad = especialidad;
+		this.direccion = di;
+		this.telefono = pho;
 	}
 
 	public Especialista() {
@@ -151,6 +159,22 @@ public class Especialista implements Serializable {
 
 	public void setEspecialistasConsulta(Set<Consulta> especialistasConsulta) {
 		this.especialistasConsulta = especialistasConsulta;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 }

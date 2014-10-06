@@ -44,6 +44,8 @@ import org.zkoss.zul.Tabbox;
 import servicio.inventario.SF00021;
 import servicio.inventario.SF4101;
 import servicio.inventario.SF41021;
+import servicio.inventario.SF4105;
+import servicio.inventario.SF4211;
 import servicio.maestros.SAccidente;
 import servicio.maestros.SAntecedente;
 import servicio.maestros.SAntecedenteTipo;
@@ -108,8 +110,12 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SF00021 servicioF00021;
 	@WireVariable("SF4101")
 	protected SF4101 servicioF4101;
+	@WireVariable("SF4105")
+	protected SF4105 servicioF4105;
 	@WireVariable("SF41021")
 	protected SF41021 servicioF41021;
+	@WireVariable("SF4211")
+	protected SF4211 servicioF4211;
 	@WireVariable("SAccidente")
 	protected SAccidente servicioAccidente;
 	@WireVariable("SAntecedente")

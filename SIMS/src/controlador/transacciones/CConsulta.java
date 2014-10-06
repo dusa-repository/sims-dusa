@@ -14,6 +14,11 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import modelo.generico.DetalleAccidente;
+import modelo.inventario.F4101;
+import modelo.inventario.F4105;
+import modelo.inventario.F4105PK;
+import modelo.inventario.F4211;
+import modelo.inventario.F4211PK;
 import modelo.maestros.Accidente;
 import modelo.maestros.Antecedente;
 import modelo.maestros.Cargo;
@@ -1575,16 +1580,20 @@ public class CConsulta extends CGenerico {
 		List<ConsultaMedicina> listaMedicina = new ArrayList<ConsultaMedicina>();
 		for (int i = 0; i < ltbMedicinasAgregadas.getItemCount(); i++) {
 			Listitem listItem = ltbMedicinasAgregadas.getItemAtIndex(i);
-			Integer idMedicina = ((Spinner) ((listItem.getChildren().get(2)))
+			Integer idMedicina = ((Spinner) ((listItem.getChildren().get(3)))
+					.getFirstChild()).getValue();
+			Integer costo = ((Spinner) ((listItem.getChildren().get(1)))
 					.getFirstChild()).getValue();
 			Medicina medicina = servicioMedicina.buscar(idMedicina);
-			String valor = ((Textbox) ((listItem.getChildren().get(1)))
+			String valor = ((Textbox) ((listItem.getChildren().get(2)))
 					.getFirstChild()).getValue();
 			ConsultaMedicina consultaMedicina = new ConsultaMedicina(
-					consultaDatos, medicina, valor, recipe);
+					consultaDatos, medicina, valor, recipe, costo);
 			listaMedicina.add(consultaMedicina);
 		}
 		servicioConsultaMedicina.guardar(listaMedicina);
+		if (!listaMedicina.isEmpty())
+			guardarOrden(listaMedicina);
 	}
 
 	@Listen("onSelect=#cmbTratamiento")
@@ -2159,7 +2168,7 @@ public class CConsulta extends CGenerico {
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogoPaciente() throws IOException {
-		final List<Paciente> pacientes = servicioPaciente.buscarTodosActivos();
+		final List<Paciente> pacientes = new ArrayList<Paciente>();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
 				"Apellido") {
@@ -2190,6 +2199,8 @@ public class CConsulta extends CGenerico {
 
 		};
 		catalogoPaciente.setParent(divCatalogoPacientes);
+		Listbox lsita = (Listbox) catalogoPaciente.getChildren().get(3);
+		lsita.setEmptyMessage("Utilice el filtro para buscar el paciente que desea buscar");
 		catalogoPaciente.doModal();
 	}
 
@@ -2539,14 +2550,16 @@ public class CConsulta extends CGenerico {
 						Listitem listItemj = ltbMedicinasAgregadas
 								.getItemAtIndex(j);
 						Integer idMedicina = ((Spinner) ((listItemj
-								.getChildren().get(2))).getFirstChild())
+								.getChildren().get(3))).getFirstChild())
 								.getValue();
 						Medicina medicinaj = servicioMedicina
 								.buscar(idMedicina);
 						String valor = ((Textbox) ((listItemj.getChildren()
+								.get(2))).getFirstChild()).getValue();
+						Integer costo = ((Spinner) ((listItemj.getChildren()
 								.get(1))).getFirstChild()).getValue();
 						ConsultaMedicina consultaMedicinaj = new ConsultaMedicina(
-								null, medicinaj, valor, null);
+								null, medicinaj, valor, null, costo);
 						medicinasAgregadas.add(consultaMedicinaj);
 					}
 					medicinasAgregadas.add(consultaMedicina);
@@ -3187,9 +3200,11 @@ public class CConsulta extends CGenerico {
 				Listitem listItem = ltbMedicinasAgregadas.getItemAtIndex(i);
 				consultaMedicina = new ConsultaMedicina();
 				consultaMedicina = listItem2.get(i).getValue();
-				String valor = ((Textbox) ((listItem.getChildren().get(1)))
+				String valor = ((Textbox) ((listItem.getChildren().get(2)))
 						.getFirstChild()).getValue();
-				if (valor.equals("")) {
+				Integer cantidad = ((Spinner) ((listItem.getChildren().get(1)))
+						.getFirstChild()).getValue();
+				if (valor.equals("") || cantidad == 0) {
 					falta = true;
 				}
 				consultaMedicina.setDosis(valor);
@@ -4022,7 +4037,7 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onOK = #txtCedula")
 	public void buscarCedula() {
-		
+
 		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedula
 				.getValue());
 		limpiarCampos();
@@ -5334,12 +5349,17 @@ public class CConsulta extends CGenerico {
 		p.put("doctorCedula", user.getCedula());
 		p.put("especialidad", especialistaConsulta.getEspecialista()
 				.getEspecialidad().getDescripcion());
+		p.put("especialistaDireccion", especialistaConsulta.getEspecialista()
+				.getDireccion());
+		p.put("especialistaTelefono", especialistaConsulta.getEspecialista()
+				.getTelefono());
+		p.put("empresaDireccion", direccionEmpresa);
 		p.put("especialistaNombre", especialistaConsulta.getEspecialista()
 				.getNombre());
 		p.put("especialistaApellido", especialistaConsulta.getEspecialista()
 				.getApellido());
-//		p.put("especialistaTelefono", especialistaConsulta.getEspecialista()
-//				.getTelefono());
+		// p.put("especialistaTelefono", especialistaConsulta.getEspecialista()
+		// .getTelefono());
 		p.put("enfermedad", especialistaConsulta.getObservacion());
 		p.put("observacion", especialistaConsulta.getObservacion());
 		p.put("prioridad", especialistaConsulta.getPrioridad());
@@ -5776,11 +5796,11 @@ public class CConsulta extends CGenerico {
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
 			rifEmpresa = paciente.getEmpresa().getRif();
 		}
-		
+
 		if (paciente.getArea() != null) {
 			area = paciente.getArea().getNombre();
 		}
-		
+
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
@@ -5797,5 +5817,56 @@ public class CConsulta extends CGenerico {
 				.getResource("/reporte/RConstancia.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p);
 		return fichero;
+	}
+
+	public void guardarOrden(List<ConsultaMedicina> lista) {
+		Consulta consulta = lista.get(0).getConsulta();
+		Long idC = consulta.getIdConsulta();
+		// F4211 f4211 = new F4211();
+		F4211PK clave = new F4211PK();
+		clave.setSddcto("MK");
+		clave.setSddoco(nextNumber("7", "JE"));
+		clave.setSdkcoo("DUSA");
+		for (int i = 0; i < lista.size(); i++) {
+			// Item
+			F4101 f4101 = servicioF4101.buscarPorReferencia(lista.get(i)
+					.getMedicina().getIdReferencia());
+			// Costo
+			F4105 f4105 = new F4105();
+			F4105PK claveCosto = new F4105PK();
+			claveCosto.setCoitm(f4101.getImitm());
+			claveCosto.setColedg("02");
+			claveCosto.setColocn("");
+			claveCosto.setColotn("");
+			claveCosto.setComcu("Planta");
+			f4105 = servicioF4105.buscar(claveCosto);
+			Double costoIndividual = (double) 0;
+			if (f4105 != null) {
+				costoIndividual = f4105.getCouncs();
+			}
+			// Pedido
+			F4211 f4211 = new F4211();
+			Integer a = i + 1;
+			clave.setSdlnid(a.doubleValue());
+			f4211.setId(clave);
+			f4211.setSdmcu("Planta");
+			f4211.setSdkco("DUSA");
+			f4211.setSddoc(idC.doubleValue());
+			f4211.setSddrqj(transformarGregorianoAJulia(dtbFechaConsulta
+					.getValue()));
+			f4211.setSditm(f4101.getImitm());
+			f4211.setSduncs(costoIndividual);
+			f4211.setSdemcu("Planta");
+			// Cantidad por costo total getSdecst
+			Integer cantidad = lista.get(i).getCantidad();
+			f4211.setSdecst(costoIndividual * cantidad);
+			// Cantidad getSdpqor
+			f4211.setSdpqor(cantidad.doubleValue());
+			f4211.setSdlocn("LOC001");
+			// um del item
+			f4211.setSduom(f4101.getImuom1());
+			f4211.setSdspattn("Enviada");
+			servicioF4211.guardar(f4211);
+		}
 	}
 }

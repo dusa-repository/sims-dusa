@@ -42,6 +42,27 @@
 					</row>
 					<row>
 						<hbox>
+							<label class="etiqueta" value="Telefono:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox maxlength="20" id="txtTelefonoEspecialista"
+							hflex="1" tooltiptext="Ingrese el Telefono del Especialista" />
+						<hbox />
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Direccion:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox multiline="true" class="multilinea" maxlength="1024"
+							id="txtDireccionEspecialista" hflex="1"
+							tooltiptext="Ingrese el Direccion del Especialista" />
+						<hbox />
+					</row>
+					<row>
+						<hbox>
 							<label class="etiqueta" value="Costo por Servicio:" />
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />
@@ -64,7 +85,7 @@
 								<comboitem label="${each.descripcion}" context="${each.idEspecialidad}" />
 							</template>
 						</combobox>
-						<button class="abrir"  id="btnAbrirEspecialidad" label=""
+						<button class="abrir" id="btnAbrirEspecialidad" label=""
 							tooltiptext="Crear una Nueva Especialidad" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>
