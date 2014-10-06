@@ -766,6 +766,9 @@
 													<listcell label="${each.nombre} (${each.inventario()})">
 													</listcell>
 													<listcell>
+														<spinner value="0" constraint="min 0 max 1000" width="98%" />
+													</listcell>
+													<listcell>
 														<textbox width="98%" />
 													</listcell>
 													<listcell>
@@ -788,12 +791,16 @@
 											width="100%" emptyMessage="No ha Seleccionado Ningúna Medicina">
 											<listhead>
 												<listheader label="Medicina" width="40%" />
-												<listheader label="Dosis" width="60%" />
+												<listheader label="Cantidad" width="8%" />
+												<listheader label="Dosis" width="52%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
 												<listitem>
 													<listcell label="${each.medicina.nombre}">
+													</listcell>
+													<listcell>
+														<spinner constraint="min 0 max 1000" width="98%" value="${each.cantidad}" />
 													</listcell>
 													<listcell>
 														<textbox value="${each.dosis}" width="98%" class="multilinea"
@@ -881,9 +888,9 @@
 														<textbox width="98%" />
 													</listcell>
 													<listcell>
-														<combobox model="${$composer.proveedores}" onOpen='$composer.llenarProveedor(self)'
-															tooltiptext="Seleccione un Centro" placeholder="Seleccione un Centro"
-															readonly="true" width="100%">
+														<combobox model="${$composer.proveedores}"
+															onOpen='$composer.llenarProveedor(self)' tooltiptext="Seleccione un Centro"
+															placeholder="Seleccione un Centro" readonly="true" width="100%">
 															<template name="model">
 																<comboitem label="${each.nombre}" context="${each.idProveedor}" />
 															</template>

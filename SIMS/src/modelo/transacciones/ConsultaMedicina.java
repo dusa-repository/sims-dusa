@@ -34,18 +34,22 @@ public class ConsultaMedicina {
 	
 	@Column(length=1000)
 	private String dosis;
+	
+	@Column(name="cantidad")
+	private Integer cantidad;
 
 	public ConsultaMedicina() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ConsultaMedicina(Consulta consulta, Medicina medicina, String dosis, Recipe recipe) {
+	public ConsultaMedicina(Consulta consulta, Medicina medicina, String dosis, Recipe recipe, int cantidad) {
 		super();
 		this.consulta = consulta;
 		this.medicina = medicina;
 		this.dosis = dosis;
 		this.recipe = recipe;
+		this.cantidad = cantidad;
 	}
 
 	public Consulta getConsulta() {
@@ -78,6 +82,14 @@ public class ConsultaMedicina {
 
 	public void setDosis(String dosis) {
 		this.dosis = dosis;
+	}
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
 	}
 	
 }
