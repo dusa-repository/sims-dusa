@@ -21,6 +21,7 @@
 	<parameter name="tratamiento" class="java.lang.String"/>
 	<field name="medicina.nombre" class="java.lang.String"/>
 	<field name="dosis" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Integer"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -382,14 +383,14 @@
 	<detail>
 		<band height="31" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="30" y="8" width="349" height="20" uuid="34fb130a-c6d5-460c-a519-a6d305fe50e0"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="6" y="8" width="373" height="20" uuid="34fb130a-c6d5-460c-a519-a6d305fe50e0"/>
 				<box>
 					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
 				</box>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{medicina.nombre}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cantidad} + ": " + $F{medicina.nombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="392" y="9" width="354" height="20" uuid="1bd31875-1853-415a-830c-689b3149a836"/>
