@@ -5338,6 +5338,8 @@ public class CConsulta extends CGenerico {
 				.getNombre());
 		p.put("especialistaApellido", especialistaConsulta.getEspecialista()
 				.getApellido());
+//		p.put("especialistaTelefono", especialistaConsulta.getEspecialista()
+//				.getTelefono());
 		p.put("enfermedad", especialistaConsulta.getObservacion());
 		p.put("observacion", especialistaConsulta.getObservacion());
 		p.put("prioridad", especialistaConsulta.getPrioridad());
@@ -5774,16 +5776,22 @@ public class CConsulta extends CGenerico {
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
 			rifEmpresa = paciente.getEmpresa().getRif();
 		}
+		
+		if (paciente.getArea() != null) {
+			area = paciente.getArea().getNombre();
+		}
+		
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
 		p.put("pacienteNombre", paciente.getPrimerNombre());
 		p.put("pacienteApellido", paciente.getPrimerApellido());
-		p.put("pacienteCedula", paciente.getCedula());
 		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido", user.getPrimerApellido());
 		p.put("doctorCedula", user.getCedula());
 		p.put("fecha", consuta.getFechaConsulta());
+		p.put("area", area);
+		p.put("pacienteCedula", paciente.getFicha());
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RConstancia.jasper"));

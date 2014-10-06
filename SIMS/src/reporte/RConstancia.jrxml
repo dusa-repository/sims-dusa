@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RConstancia" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="fb533635-fe0b-4b54-a554-fc572d401198">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="43"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
@@ -13,17 +13,18 @@
 	<parameter name="pacienteApellido" class="java.lang.String"/>
 	<parameter name="pacienteCedula" class="java.lang.String"/>
 	<parameter name="fecha" class="java.sql.Timestamp"/>
+	<parameter name="area" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="421" splitType="Stretch">
+		<band height="752" splitType="Stretch">
 			<image>
 				<reportElement x="7" y="29" width="107" height="52" uuid="58d8abb0-f3ee-41fb-adbd-7b4c11bf43f9"/>
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="370" y="254" width="154" height="20" uuid="8013c240-ae73-411c-9aa5-299397bd917f"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="190" y="222" width="154" height="20" uuid="8013c240-ae73-411c-9aa5-299397bd917f"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -52,53 +53,163 @@
 				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="202" y="153" width="88" height="20" uuid="f5bfb2c4-d80d-4e2f-84ab-8a64d7cf67a0"/>
+				<reportElement x="209" y="473" width="88" height="20" uuid="f5bfb2c4-d80d-4e2f-84ab-8a64d7cf67a0"/>
 				<textElement>
 					<font size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Constancia:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="206" width="320" height="20" uuid="31600c92-4fe1-479d-85e4-2265867503b5"/>
+				<reportElement x="4" y="146" width="317" height="20" uuid="31600c92-4fe1-479d-85e4-2265867503b5"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Por medio de la presente se hace constar que el paciente:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="320" y="206" width="252" height="20" uuid="12b18ad4-c05f-46b9-b776-0f6bfdb6a729"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="321" y="146" width="252" height="20" uuid="12b18ad4-c05f-46b9-b776-0f6bfdb6a729"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteNombre}+"  "+$P{pacienteApellido}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="2" y="254" width="114" height="20" uuid="af90ee08-a404-4d33-a594-725a5779de83"/>
+				<reportElement x="4" y="171" width="70" height="20" uuid="af90ee08-a404-4d33-a594-725a5779de83"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Cedula de Identidad:]]></text>
+				<text><![CDATA[Ficha Nro:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="116" y="254" width="75" height="20" uuid="a3399d16-df67-409b-9dbf-0e2047992afa"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="74" y="171" width="75" height="20" uuid="a3399d16-df67-409b-9dbf-0e2047992afa"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="191" y="254" width="179" height="20" uuid="df06beb0-f6ac-420f-ac41-38b70eec50e7"/>
+				<reportElement x="4" y="222" width="185" height="20" uuid="df06beb0-f6ac-420f-ac41-38b70eec50e7"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Asistio a Consulta Medica el dia:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="187" y="365" width="131" height="1" uuid="290e4ac5-469c-4e89-947a-26886156b043"/>
+				<reportElement x="183" y="303" width="131" height="1" uuid="290e4ac5-469c-4e89-947a-26886156b043"/>
 			</line>
 			<staticText>
-				<reportElement x="191" y="382" width="115" height="20" uuid="a0346140-2421-4717-ba64-6e14d6383a77"/>
+				<reportElement x="199" y="323" width="115" height="20" uuid="a0346140-2421-4717-ba64-6e14d6383a77"/>
 				<text><![CDATA[Firma del Medico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="171" width="245" height="20" uuid="40d5a4c4-caf4-4af7-a75e-bc4b16a7a69f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Quien presta sus servicios en el area de: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="197" width="517" height="20" uuid="0317a1f5-60b0-41df-839e-984b56006494"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="72" y="537" width="75" height="20" uuid="9391dcd4-28da-4847-917c-67995621a681"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="119" y="422" width="365" height="26" uuid="ec3c7256-648a-4a00-9029-5df89a3d451d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaNombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="436" y="400" width="134" height="20" uuid="96d331c6-d0e0-4a9a-ac45-a9d5b7e07b70"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaRif}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="563" width="512" height="20" uuid="21aa762b-7904-4195-a8f3-4bb43386c7f9"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="537" width="65" height="20" uuid="01b69c98-33f4-46cd-b436-3aa479297547"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Ficha Nro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="113" width="88" height="20" uuid="ce323a8a-89a6-4922-bcd5-45a7cc61bcb1"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Constancia:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="318" y="507" width="252" height="20" uuid="6c085c81-6881-4f71-a7df-7815ad09dfd0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pacienteNombre}+"  "+$P{pacienteApellido}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="4" y="385" width="107" height="52" uuid="29c69ef8-ad59-49f4-8458-d188bb161728"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="468" y="370" width="100" height="20" uuid="fbf2bdf1-e10b-4c7e-8f1c-96b25b6d00f9"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="196" y="699" width="115" height="20" uuid="b8c62119-1ac6-465f-a282-a14123823447"/>
+				<text><![CDATA[Firma del Medico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="370" width="33" height="20" uuid="df6d9a01-86d2-46ff-bd74-3e54ad7d1168"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="181" y="676" width="131" height="1" uuid="84b796ad-f074-4b6f-ba54-c721ebe5ec06"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="196" y="593" width="154" height="20" uuid="5fc72916-338d-484e-bbfe-e55f369348ce"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="507" width="311" height="20" uuid="f094ecea-6295-4523-8ed2-a6c088e941a9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Por medio de la presente se hace constar que el paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="592" width="189" height="20" uuid="b369b758-c2ba-4044-8868-f2acb33bc772"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Asistio a Consulta Medica el dia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="537" width="245" height="20" uuid="3ca0a612-346b-432e-bb77-8d9ee1d83b0b"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Quien presta sus servicios en el area de: ]]></text>
 			</staticText>
 		</band>
 	</title>
