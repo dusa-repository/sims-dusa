@@ -153,7 +153,6 @@ public class CUsuario extends CGenerico {
 				mapa = null;
 			}
 		}
-		llenarComboUnidad();
 		llenarComboEspecialidad();
 
 		llenarListas(null);
@@ -225,7 +224,6 @@ public class CUsuario extends CGenerico {
 							gruposUsuario.add(grupo);
 						}
 						Especialidad especialidad = null;
-						UnidadUsuario unidad = null;
 						String licenciaI = "";
 						long citas = 0;
 						long tiempo = 0;
@@ -259,9 +257,6 @@ public class CUsuario extends CGenerico {
 							especialidad = servicioEspecialidad.buscar(Long
 									.parseLong(cmbEspecialidad
 											.getSelectedItem().getContext()));
-							unidad = servicioUnidadUsuario.buscar(Long
-									.parseLong(cmbUnidad.getSelectedItem()
-											.getContext()));
 						} else
 							doctor = false;
 						byte[] imagenUsuario = null;
@@ -285,8 +280,8 @@ public class CUsuario extends CGenerico {
 								imagenUsuario, licenciaC, licencia, licenciaM,
 								login, nombre, apellido, nombre2, apellido2,
 								citas, password, sexo, telefono, tiempo,
-								nombreUsuarioSesion(), especialidad, unidad,
-								gruposUsuario, doctor);
+								nombreUsuarioSesion(), especialidad,
+								cmbUnidad.getValue(), gruposUsuario, doctor);
 						servicioUsuario.guardar(usuario);
 						limpiar();
 						msj.mensajeInformacion(Mensaje.guardado);
@@ -337,11 +332,11 @@ public class CUsuario extends CGenerico {
 				|| txtPassword2Usuario.getText().compareTo("") == 0
 				|| txtPasswordUsuario.getText().compareTo("") == 0
 				|| txtTelefonoUsuario.getText().compareTo("") == 0
+				|| cmbUnidad.getText().compareTo("") == 0
 				|| (!rdoSexoFUsuario.isChecked() && !rdoSexoMUsuario
 						.isChecked())
 				|| (!rdoDoctor.isChecked() && !rdoNoDoctor.isChecked())
-				|| (rdoDoctor.isChecked() && (cmbEspecialidad.getSelectedItem() == null || cmbUnidad
-						.getSelectedItem() == null))) {
+				|| (rdoDoctor.isChecked() && cmbEspecialidad.getSelectedItem() == null)) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
@@ -447,13 +442,6 @@ public class CUsuario extends CGenerico {
 		ltbGruposDisponibles.setCheckmark(false);
 		ltbGruposDisponibles.setMultiple(true);
 		ltbGruposDisponibles.setCheckmark(true);
-	}
-
-	/* Llena el combo de Unidades cada vez que se abre */
-	@Listen("onOpen = #cmbUnidad")
-	public void llenarComboUnidad() {
-		List<UnidadUsuario> unidades = servicioUnidadUsuario.buscarTodas();
-		cmbUnidad.setModel(new ListModelList<UnidadUsuario>(unidades));
 	}
 
 	/* Llena el combo de Especialidades cada vez que se abre */
@@ -587,13 +575,29 @@ public class CUsuario extends CGenerico {
 	public boolean buscarPorLogin() {
 		Usuario usuario = servicioUsuario.buscarPorLogin(txtLoginUsuario
 				.getValue());
-		if (usuario != null && id.equals("")) {
-			msj.mensajeAlerta(Mensaje.loginUsado);
-			txtLoginUsuario.setValue("");
-			txtLoginUsuario.setFocus(true);
-			return false;
-		} else
+		if (usuario == null)
 			return true;
+		else {
+			if (usuario.getCedula().equals(id))
+				return true;
+			else {
+				msj.mensajeAlerta(Mensaje.loginUsado);
+				txtLoginUsuario.setValue("");
+				txtLoginUsuario.setFocus(true);
+				return false;
+			}
+		}
+
+		// if ((usuario != null && id.equals(""))) {
+		// if (usuario != null && !usuario.getCedula().equals(id)) {
+		// msj.mensajeAlerta(Mensaje.loginUsado);
+		// txtLoginUsuario.setValue("");
+		// txtLoginUsuario.setFocus(true);
+		// return false;
+		// } else
+		// return true;
+		// } else
+		// return true;
 	}
 
 	/* Busca si existe un usuario con la misma cedula nombre escrita */
@@ -646,7 +650,7 @@ public class CUsuario extends CGenerico {
 			rdoDoctor.setChecked(true);
 			cmbEspecialidad
 					.setValue(usuario.getEspecialidad().getDescripcion());
-			cmbUnidad.setValue(usuario.getUnidad().getNombre());
+			cmbUnidad.setValue(usuario.getUnidad());
 			gpxDoctor.setVisible(true);
 		} else {
 			rdoNoDoctor.setChecked(true);

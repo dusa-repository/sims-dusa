@@ -842,9 +842,13 @@ public class CConsulta extends CGenerico {
 	private String[] consultaCurativa = { "Primera", "Control", "IC" };
 	private West west;
 	private List<DetalleAccidente> listaDetalle = new ArrayList<DetalleAccidente>();
+	private boolean isPlanta = false;
 
 	@Override
 	public void inicializar() throws IOException {
+		Usuario usuario = usuarioSesion(nombreUsuarioSesion());
+		if (usuario.getUnidad().equals("Planta"))
+			isPlanta = true;
 		contenido = (Include) divConsulta.getParent();
 		Tabbox tabox = (Tabbox) divConsulta.getParent().getParent().getParent()
 				.getParent();
@@ -1178,7 +1182,7 @@ public class CConsulta extends CGenerico {
 			protected List<Especialista> buscar(String valor) {
 				List<Especialista> presentacionesFiltradas = new ArrayList<Especialista>();
 				List<Especialista> presentaciones = servicioEspecialista
-						.filtroEspecialidad(valor);
+						.filtroTodo(valor);
 				for (int i = 0; i < especialistasDisponibles.size(); i++) {
 					Especialista especialista = especialistasDisponibles.get(i);
 					for (int j = 0; j < presentaciones.size(); j++) {
@@ -2175,16 +2179,28 @@ public class CConsulta extends CGenerico {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
-
-				switch (combo) {
-				case "Nombre":
-					return servicioPaciente.filtroNombre1(valor);
-				case "Cedula":
-					return servicioPaciente.filtroCedula(valor);
-				case "Apellido":
-					return servicioPaciente.filtroApellido1(valor);
-				default:
-					return pacientes;
+				if (isPlanta) {
+					switch (combo) {
+					case "Nombre":
+						return servicioPaciente.filtroNombre1(valor);
+					case "Cedula":
+						return servicioPaciente.filtroCedula(valor);
+					case "Apellido":
+						return servicioPaciente.filtroApellido1(valor);
+					default:
+						return pacientes;
+					}
+				} else {
+					switch (combo) {
+					case "Nombre":
+						return servicioPaciente.filtroNombrePariente(valor);
+					case "Cedula":
+						return servicioPaciente.filtroCedulaPariente(valor);
+					case "Apellido":
+						return servicioPaciente.filtroApellidoPariente(valor);
+					default:
+						return pacientes;
+					}
 				}
 			}
 
@@ -5832,41 +5848,43 @@ public class CConsulta extends CGenerico {
 			F4101 f4101 = servicioF4101.buscarPorReferencia(lista.get(i)
 					.getMedicina().getIdReferencia());
 			// Costo
-			F4105 f4105 = new F4105();
-			F4105PK claveCosto = new F4105PK();
-			claveCosto.setCoitm(f4101.getImitm());
-			claveCosto.setColedg("02");
-			claveCosto.setColocn("");
-			claveCosto.setColotn("");
-			claveCosto.setComcu("Planta");
-			f4105 = servicioF4105.buscar(claveCosto);
-			Double costoIndividual = (double) 0;
-			if (f4105 != null) {
-				costoIndividual = f4105.getCouncs();
+			if (f4101 != null) {
+				F4105 f4105 = new F4105();
+				F4105PK claveCosto = new F4105PK();
+				claveCosto.setCoitm(f4101.getImitm());
+				claveCosto.setColedg("02");
+				claveCosto.setColocn("");
+				claveCosto.setColotn("");
+				claveCosto.setComcu("Planta");
+				f4105 = servicioF4105.buscar(claveCosto);
+				Double costoIndividual = (double) 0;
+				if (f4105 != null) {
+					costoIndividual = f4105.getCouncs();
+				}
+				// Pedido
+				F4211 f4211 = new F4211();
+				Integer a = i + 1;
+				clave.setSdlnid(a.doubleValue());
+				f4211.setId(clave);
+				f4211.setSdmcu("Planta");
+				f4211.setSdkco("DUSA");
+				f4211.setSddoc(idC.doubleValue());
+				f4211.setSddrqj(transformarGregorianoAJulia(dtbFechaConsulta
+						.getValue()));
+				f4211.setSditm(f4101.getImitm());
+				f4211.setSduncs(costoIndividual);
+				f4211.setSdemcu("Planta");
+				// Cantidad por costo total getSdecst
+				Integer cantidad = lista.get(i).getCantidad();
+				f4211.setSdecst(costoIndividual * cantidad);
+				// Cantidad getSdpqor
+				f4211.setSdpqor(cantidad.doubleValue());
+				f4211.setSdlocn("LOC001");
+				// um del item
+				f4211.setSduom(f4101.getImuom1());
+				f4211.setSdspattn("Enviada");
+				servicioF4211.guardar(f4211);
 			}
-			// Pedido
-			F4211 f4211 = new F4211();
-			Integer a = i + 1;
-			clave.setSdlnid(a.doubleValue());
-			f4211.setId(clave);
-			f4211.setSdmcu("Planta");
-			f4211.setSdkco("DUSA");
-			f4211.setSddoc(idC.doubleValue());
-			f4211.setSddrqj(transformarGregorianoAJulia(dtbFechaConsulta
-					.getValue()));
-			f4211.setSditm(f4101.getImitm());
-			f4211.setSduncs(costoIndividual);
-			f4211.setSdemcu("Planta");
-			// Cantidad por costo total getSdecst
-			Integer cantidad = lista.get(i).getCantidad();
-			f4211.setSdecst(costoIndividual * cantidad);
-			// Cantidad getSdpqor
-			f4211.setSdpqor(cantidad.doubleValue());
-			f4211.setSdlocn("LOC001");
-			// um del item
-			f4211.setSduom(f4101.getImuom1());
-			f4211.setSdspattn("Enviada");
-			servicioF4211.guardar(f4211);
 		}
 	}
 }

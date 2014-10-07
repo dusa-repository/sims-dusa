@@ -2,17 +2,13 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import modelo.seguridad.Usuario;
 
 
 /**
@@ -40,11 +36,7 @@ public class UnidadUsuario implements Serializable {
 
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
-
-	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="unidad")
-	private Set<Usuario> usuarios;
-
+	
 	public UnidadUsuario() {
 	}
 	
@@ -92,29 +84,6 @@ public class UnidadUsuario implements Serializable {
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
-
-	public Set<Usuario> getUsuarios() {
-		return this.usuarios;
-	}
-
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public Usuario addUsuario(Usuario usuario) {
-		getUsuarios().add(usuario);
-		usuario.setUnidad(this);
-
-		return usuario;
-	}
-
-	public Usuario removeUsuario(Usuario usuario) {
-		getUsuarios().remove(usuario);
-		usuario.setUnidad(null);
-
-		return usuario;
-	}
-
 
 	public long getIdUnidadUsuario() {
 		return idUnidadUsuario;

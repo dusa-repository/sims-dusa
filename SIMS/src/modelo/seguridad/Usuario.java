@@ -110,10 +110,13 @@ public class Usuario implements Serializable {
 	@JoinColumn(name="id_especialidad")
 	private Especialidad especialidad;
 
-	//bi-directional many-to-one association to Unidad
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_unidad")
-	private UnidadUsuario unidad;
+//	//bi-directional many-to-one association to Unidad
+//	@ManyToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name="id_unidad")
+//	private UnidadUsuario unidad;
+	
+	@Column(name="unidad", length=50)
+	private String unidad;
 
 	@ManyToMany
 	@JoinTable(
@@ -140,7 +143,7 @@ public class Usuario implements Serializable {
 			String licenciaMsds, String login, String nombre, String apellido,String segundoNombre, String segundoApellido,
 			long numeroCitasDiarias, String password, String sexo,
 			String telefono, long tiempoEstimadoEntreCitas,
-			String usuarioAuditoria, Especialidad especialidad, UnidadUsuario unidad, Set<Grupo> grupos, boolean doctor) {
+			String usuarioAuditoria, Especialidad especialidad, String unidad, Set<Grupo> grupos, boolean doctor) {
 		super();
 		this.cedula = cedula;
 		this.direccion = direccion;
@@ -339,12 +342,12 @@ public class Usuario implements Serializable {
 	public void setEspecialidad(Especialidad especialidad) {
 		this.especialidad = especialidad;
 	}
-
-	public UnidadUsuario getUnidad() {
-		return this.unidad;
+	
+	public String getUnidad() {
+		return unidad;
 	}
 
-	public void setUnidad(UnidadUsuario unidad) {
+	public void setUnidad(String unidad) {
 		this.unidad = unidad;
 	}
 
