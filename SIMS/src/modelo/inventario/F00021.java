@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name="F00021", schema="bizapps_inventario.dbo")
+@Table(name="F00021", schema="dusa_sims_inventario.dbo")
 public class F00021 implements Serializable {
 	private static final long serialVersionUID = 1L;
 

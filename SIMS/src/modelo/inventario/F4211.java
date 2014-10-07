@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * 
  */
 @Entity
-@Table(name="F4211", schema="bizapps_inventario.dbo")
+@Table(name="F4211", schema="dusa_sims_inventario.dbo")
 public class F4211 implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -130,4 +130,16 @@ public class SPaciente {
 	public List<Paciente> filtroParentescoC(String valor, String valor2) {
 		return pacienteDAO.findByCedulaFamiliarAndParentescoFamiliarStartingWithAllIgnoreCase(valor2,valor);
 	}
+
+	public List<Paciente> filtroNombrePariente(String valor) {
+		return pacienteDAO.findByTrabajadorFalseAndPrimerNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroCedulaPariente(String valor) {
+		return pacienteDAO.findByTrabajadorFalseAndCedulaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroApellidoPariente(String valor) {
+		return pacienteDAO.findByTrabajadorFalseAndPrimerApellidoStartingWithAllIgnoreCase(valor);
+	}
 }

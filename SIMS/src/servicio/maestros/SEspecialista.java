@@ -55,7 +55,8 @@ public class SEspecialista {
 	}
 
 	public List<Especialista> filtroEspecialidad(String valor) {
-		return especialistaDAO.findByEspecialidadDescripcionStartingWithAllIgnoreCase(valor);
+		return especialistaDAO
+				.findByEspecialidadDescripcionStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Especialista> buscarPorEspecialidad(Especialidad especialidad) {
@@ -63,16 +64,23 @@ public class SEspecialista {
 	}
 
 	public List<Especialista> buscarDisponibles(Consulta consulta) {
-		List<ConsultaEspecialista> consultasEspecialista = consultaEspecialistaDAO.findByConsulta(consulta);
+		List<ConsultaEspecialista> consultasEspecialista = consultaEspecialistaDAO
+				.findByConsulta(consulta);
 		List<String> ids = new ArrayList<String>();
-		if(consultasEspecialista.isEmpty())
+		if (consultasEspecialista.isEmpty())
 			return especialistaDAO.findAll();
-		else{
-			for(int i=0; i<consultasEspecialista.size();i++){
-				ids.add(consultasEspecialista.get(i).getEspecialista().getCedula());
+		else {
+			for (int i = 0; i < consultasEspecialista.size(); i++) {
+				ids.add(consultasEspecialista.get(i).getEspecialista()
+						.getCedula());
 			}
 			return especialistaDAO.findByCedulaNotIn(ids);
 		}
 	}
-	
+
+	public List<Especialista> filtroTodo(String valor) {
+		return especialistaDAO
+				.findByEspecialidadDescripcionStartingWithOrApellidoStartingWithOrNombreStartingWithAllIgnoreCase(valor,valor,valor);
+	}
+
 }

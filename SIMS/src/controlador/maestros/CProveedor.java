@@ -484,13 +484,13 @@ public class CProveedor extends CGenerico {
 			}
 		}
 		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbEstudios.renderAll();
 			ltbEstudios.removeItemAt(listitemEliminar.get(i).getIndex());
 		}
 		ltbEstudiosAgregados.setMultiple(false);
 		ltbEstudiosAgregados.setCheckmark(false);
 		ltbEstudiosAgregados.setMultiple(true);
 		ltbEstudiosAgregados.setCheckmark(true);
-		ltbEstudios.clearSelection();
 	}
 
 	/*
@@ -516,6 +516,7 @@ public class CProveedor extends CGenerico {
 			}
 		}
 		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbEstudiosAgregados.renderAll();
 			ltbEstudiosAgregados.removeItemAt(listitemEliminar.get(i)
 					.getIndex());
 		}
@@ -523,7 +524,6 @@ public class CProveedor extends CGenerico {
 		ltbEstudios.setCheckmark(false);
 		ltbEstudios.setMultiple(true);
 		ltbEstudios.setCheckmark(true);
-		ltbEstudiosAgregados.clearSelection();
 	}
 
 	public void buscarEstudio() {
@@ -587,13 +587,13 @@ public class CProveedor extends CGenerico {
 			}
 		}
 		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbExamen.renderAll();
 			ltbExamen.removeItemAt(listitemEliminar.get(i).getIndex());
 		}
 		ltbExamenesAgregados.setMultiple(false);
 		ltbExamenesAgregados.setCheckmark(false);
 		ltbExamenesAgregados.setMultiple(true);
 		ltbExamenesAgregados.setCheckmark(true);
-		ltbExamen.clearSelection();
 	}
 
 	/*
@@ -618,6 +618,7 @@ public class CProveedor extends CGenerico {
 			}
 		}
 		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbExamenesAgregados.renderAll();
 			ltbExamenesAgregados.removeItemAt(listitemEliminar.get(i)
 					.getIndex());
 		}
@@ -625,7 +626,6 @@ public class CProveedor extends CGenerico {
 		ltbExamen.setCheckmark(false);
 		ltbExamen.setMultiple(true);
 		ltbExamen.setCheckmark(true);
-		ltbExamenesAgregados.clearSelection();
 	}
 
 	public void buscarExamen() {
