@@ -30,7 +30,7 @@ public class ConsultaEspecialista {
 	@Column(name="costo")
 	private double costo;
 	
-	@Column(length=100)
+	@Column(length=1500)
 	private String observacion;
 	
 	@Column(length=100)
