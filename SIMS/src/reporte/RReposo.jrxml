@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReposo" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80f827cd-f931-40fe-9157-fa70b2ef6b6a">
 	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="126"/>
+	<property name="ireport.y" value="14"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
@@ -16,6 +16,7 @@
 	<parameter name="doctorApellido" class="java.lang.String"/>
 	<parameter name="diagnostico" class="java.lang.String"/>
 	<parameter name="area" class="java.lang.String"/>
+	<parameter name="diag" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -96,56 +97,56 @@
 				<text><![CDATA[quien presta sus servicios en el area de:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="198" width="510" height="20" uuid="825ef08d-f84e-4da9-b6d4-2d2d83c4204f"/>
+				<reportElement x="0" y="199" width="510" height="20" uuid="825ef08d-f84e-4da9-b6d4-2d2d83c4204f"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="230" width="163" height="20" uuid="8c705aeb-6d1d-46fc-95d1-1719797f79f1"/>
+				<reportElement x="0" y="224" width="163" height="20" uuid="8c705aeb-6d1d-46fc-95d1-1719797f79f1"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[El Reposo comienza el dia:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="163" y="230" width="78" height="20" uuid="76c945fe-29f6-4e07-bff6-d5d4ae72d490"/>
+				<reportElement x="163" y="224" width="78" height="20" uuid="76c945fe-29f6-4e07-bff6-d5d4ae72d490"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaDesde})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="241" y="230" width="72" height="20" uuid="bcff134c-d4a5-4abc-8ee6-d2ece8485324"/>
+				<reportElement x="241" y="224" width="72" height="20" uuid="bcff134c-d4a5-4abc-8ee6-d2ece8485324"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Hasta el dia:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="313" y="230" width="107" height="20" uuid="589a8eba-6b33-45ac-bed3-e3c3f7898643"/>
+				<reportElement x="313" y="224" width="107" height="20" uuid="589a8eba-6b33-45ac-bed3-e3c3f7898643"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaHasta})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="271" width="93" height="20" uuid="92440f3f-210c-41b6-b647-e35a47f8f189"/>
+				<reportElement x="0" y="281" width="93" height="20" uuid="92440f3f-210c-41b6-b647-e35a47f8f189"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Por Motivo de:]]></text>
+				<text><![CDATA[De Tipo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="93" y="271" width="435" height="20" uuid="48cb73aa-457d-42d6-bf81-da74b67ed248"/>
+				<reportElement x="93" y="281" width="463" height="20" uuid="48cb73aa-457d-42d6-bf81-da74b67ed248"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{diagnostico}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="195" y="328" width="159" height="20" uuid="c533c1dd-baa9-432d-b6a2-c88aa914c920"/>
+				<reportElement x="195" y="330" width="159" height="20" uuid="c533c1dd-baa9-432d-b6a2-c88aa914c920"/>
 				<box topPadding="0" leftPadding="0">
 					<topPen lineWidth="0.0" lineColor="#000000"/>
 				</box>
@@ -155,7 +156,7 @@
 				<text><![CDATA[Firma del Medico]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="95" y="634" width="435" height="20" uuid="2bcd0564-10d1-4246-b1c8-f1cad35b198f"/>
+				<reportElement x="95" y="628" width="435" height="20" uuid="2bcd0564-10d1-4246-b1c8-f1cad35b198f"/>
 				<textElement>
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -221,7 +222,7 @@
 				<text><![CDATA[El Reposo comienza el dia:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="634" width="93" height="20" uuid="404909f9-04a3-4688-bc2b-16819242185e"/>
+				<reportElement x="2" y="628" width="93" height="20" uuid="404909f9-04a3-4688-bc2b-16819242185e"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -249,7 +250,7 @@
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="209" y="477" width="121" height="21" uuid="d253a600-0831-4de3-9f54-e44c422fde3f"/>
+				<reportElement x="209" y="473" width="121" height="21" uuid="d253a600-0831-4de3-9f54-e44c422fde3f"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="14" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -287,6 +288,20 @@
 				</textElement>
 				<text><![CDATA[Hasta el dia:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="251" width="93" height="20" uuid="420b9cda-5eee-4208-ad2c-15d8de58905a"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Por Motivo de:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="94" y="251" width="463" height="20" uuid="c063d5b7-96a9-4350-97f6-36acd182eb26"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{diag}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 </jasperReport>

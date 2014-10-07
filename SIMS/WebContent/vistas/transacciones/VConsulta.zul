@@ -440,7 +440,7 @@
 													<label value="*" style="font-weight:bold;color:red" />
 												</hbox>
 												<cell colspan="3">
-													<textbox maxlength="1000" class="multilineab"
+													<textbox maxlength="2500" class="multilineab"
 														multiline="true" id="txtEnfermedad" hflex="1"
 														tooltiptext="Ingrese la Enfermedad Actual Observada" />
 												</cell>
@@ -1065,7 +1065,7 @@
 													<listcell label="${each.especialista.nombre}">
 													</listcell>
 													<listcell>
-														<textbox maxlength="100" value="${each.observacion}"
+														<textbox maxlength="1500" value="${each.observacion}"
 															class="multilinea" multiline="true" hflex="1" />
 													</listcell>
 													<listcell>

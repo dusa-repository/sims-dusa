@@ -5226,13 +5226,9 @@ public class CConsulta extends CGenerico {
 				.buscarPorConsulta(consuta);
 
 		Date fechaRecipe = listaMedicinas.get(0).getRecipe().getValidez();
-		Calendar c = Calendar.getInstance();
-		c.setTime(fechaRecipe);
-		Calendar ca = Calendar.getInstance();
-		Date fechaConsulta = consuta.getFechaConsulta();
-		ca.setTime(fechaConsulta);
-		int dias = 0;
-		dias = (c.DAY_OF_YEAR - ca.DAY_OF_YEAR);
+
+		String dias = "";
+		dias = formatoFecha.format(fechaRecipe);
 
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
@@ -5265,6 +5261,12 @@ public class CConsulta extends CGenerico {
 		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido",
 				user.getPrimerApellido() + "   " + user.getSegundoApellido());
+
+		if (tratamiento.equals("Agudo"))
+			p.put("impresion", "si");
+		else
+			p.put("impresion", "no");
+
 		String ced = "";
 		if (consuta.getTipoConsultaSecundaria().equals("IC")) {
 			if (consuta.getEspecialista() != null)
@@ -5282,14 +5284,14 @@ public class CConsulta extends CGenerico {
 		if (!user.isDoctor())
 			ms = "";
 		else
-			user.getLicenciaMsds();
+			ms = user.getLicenciaMsds();
 		p.put("msds", ms);
 
 		String cm = "";
 		if (!user.isDoctor())
 			cm = "";
 		else
-			user.getLicenciaCm();
+			cm = user.getLicenciaCm();
 		p.put("msds", ms);
 		p.put("comelar", cm);
 		p.put("edad",
@@ -5775,7 +5777,11 @@ public class CConsulta extends CGenerico {
 		p.put("fechaDesde", consuta.getFechaConsulta());
 		p.put("fechaHasta", fechaHasta);
 		p.put("area", area);
-		p.put("diagnostico", diagnosticoConsulta.get(0).getTipo());
+		if (!diagnosticoConsulta.isEmpty()) {
+			p.put("diag", diagnosticoConsulta.get(0).getDiagnostico()
+					.getNombre());
+			p.put("diagnostico", diagnosticoConsulta.get(0).getTipo());
+		}
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RReposo.jasper"));

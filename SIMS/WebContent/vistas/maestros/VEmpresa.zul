@@ -126,7 +126,7 @@
 									</hbox>
 									<textbox id="txtCorreo" width="180px"
 										tooltiptext="Ingrese el Correo Electronico (ejemplo@ejemplo.com)"
-										maxlength="50" />
+										maxlength="20" />
 									<hbox />
 								</row>
 								<row>

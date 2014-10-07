@@ -51,7 +51,7 @@ public class Consulta implements Serializable {
 	@Column(length = 500)
 	private String motivoConsulta;
 
-	@Column(length = 1500)
+	@Column(length = 2500)
 	private String enfermedadActual;
 
 	@Column(length = 100)
