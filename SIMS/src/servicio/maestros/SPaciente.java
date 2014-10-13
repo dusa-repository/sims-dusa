@@ -12,6 +12,8 @@ import modelo.maestros.Paciente;
 import modelo.sha.Area;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service("SPaciente")
@@ -21,7 +23,8 @@ public class SPaciente {
 	private IPacienteDAO pacienteDAO;
 
 	public List<Paciente> buscarTodos() {
-		return pacienteDAO.findAll();
+		Pageable topTen = new PageRequest(0, 10);
+		return pacienteDAO.findAllOrderByCedula(topTen);
 	}
 
 	public List<Paciente> filtroNombre1(String valor) {
@@ -88,7 +91,8 @@ public class SPaciente {
 	}
 
 	public List<Paciente> buscarTodosActivos() {
-		return pacienteDAO.findByEstatusTrue();
+		Pageable topTen = new PageRequest(0, 10);
+		return pacienteDAO.findByEstatusTrue(topTen);
 	}
 
 	public void guardarVarios(List<Paciente> inactivos) {
@@ -141,5 +145,41 @@ public class SPaciente {
 
 	public List<Paciente> filtroApellidoPariente(String valor) {
 		return pacienteDAO.findByTrabajadorFalseAndPrimerApellidoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroNombre1Activos(String valor) {
+		return pacienteDAO.findByPrimerNombreStartingWithAndEstatusTrueAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroCedulaActivos(String valor) {
+		return pacienteDAO.findByCedulaStartingWithAndEstatusTrueAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroApellido1Activos(String valor) {
+		return pacienteDAO.findByPrimerApellidoStartingWithAndEstatusTrueAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroNombreParienteActivos(String valor) {
+		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueAndPrimerNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroCedulaParienteActivos(String valor) {
+		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueAndCedulaStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroApellidoParienteActivos(String valor) {
+		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueAndPrimerApellidoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroFichaActivos(String valor) {
+		return pacienteDAO.findByFichaStartingWithAndEstatusTrueAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroFichaParienteActivos(String valor) {
+		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueAndFichaStartingWithAllIgnoreCase(valor);
+	}
+
+	public Paciente buscarPorCedulaActivo(String value) {
+		return pacienteDAO.findByCedulaAndEstatusTrue(value);
 	}
 }

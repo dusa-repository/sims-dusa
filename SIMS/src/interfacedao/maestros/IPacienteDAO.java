@@ -9,7 +9,9 @@ import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.sha.Area;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
@@ -39,7 +41,7 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
 	List<Paciente> findByFichaStartingWithAllIgnoreCase(String valor);
 
-	List<Paciente> findByEstatusTrue();
+	List<Paciente> findByEstatusTrue(Pageable topTen);
 
 	List<Paciente> findByParentescoFamiliarStartingWithAllIgnoreCase(
 			String valor);
@@ -75,4 +77,33 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
 	List<Paciente> findByTrabajadorFalseAndCedulaStartingWithAllIgnoreCase(
 			String valor);
+
+	List<Paciente> findByTrabajadorFalseAndEstatusTrueAndPrimerApellidoStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByTrabajadorFalseAndEstatusTrueAndCedulaStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByTrabajadorFalseAndEstatusTrueAndPrimerNombreStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByPrimerApellidoStartingWithAndEstatusTrueAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByCedulaStartingWithAndEstatusTrueAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByPrimerNombreStartingWithAndEstatusTrueAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByFichaStartingWithAndEstatusTrueAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByTrabajadorFalseAndEstatusTrueAndFichaStartingWithAllIgnoreCase(
+			String valor);
+
+	@Query("select p from Paciente p order by p.cedula asc")
+	List<Paciente> findAllOrderByCedula(Pageable topTen);
+
+	Paciente findByCedulaAndEstatusTrue(String value);
 }
