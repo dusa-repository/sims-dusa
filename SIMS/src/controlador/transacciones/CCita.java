@@ -35,12 +35,10 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 
 import arbol.CArbol;
-
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
-
 import controlador.maestros.CGenerico;
 
 public class CCita extends CGenerico {
@@ -108,9 +106,13 @@ public class CCita extends CGenerico {
 	@Wire
 	private Combobox cmbBuscador;
 	private String[] valores = { "Paciente", "Empresa", "Fecha", "Motivo" };
+	private boolean isPlanta = false;
 
 	@Override
 	public void inicializar() throws IOException {
+		Usuario usuario = usuarioSesion(nombreUsuarioSesion());
+		if (usuario.getUnidad().equals("Planta"))
+			isPlanta = true;
 		contenido = (Include) divCita.getParent();
 		Tabbox tabox = (Tabbox) divCita.getParent().getParent().getParent()
 				.getParent();
@@ -289,20 +291,41 @@ public class CCita extends CGenerico {
 	public void mostrarCatalogoPaciente() throws IOException {
 		final List<Paciente> pacientes = servicioPaciente.buscarTodosActivos();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
-				"Apellido") {
+				"Catalogo de Pacientes", pacientes, "Ficha", "Cedula",
+				"Nombre", "Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
-
-				switch (combo) {
-				case "Nombre":
-					return servicioPaciente.filtroNombre1(valor);
-				case "Cedula":
-					return servicioPaciente.filtroCedula(valor);
-				case "Apellido":
-				default:
-					return pacientes;
+				if (isPlanta) {
+					switch (combo) {
+					case "Ficha":
+						return servicioPaciente.filtroFichaActivos(valor);
+					case "Nombre":
+						return servicioPaciente.filtroNombre1Activos(valor);
+					case "Cedula":
+						return servicioPaciente.filtroCedulaActivos(valor);
+					case "Apellido":
+						return servicioPaciente.filtroApellido1Activos(valor);
+					default:
+						return pacientes;
+					}
+				} else {
+					switch (combo) {
+					case "Ficha":
+						return servicioPaciente
+								.filtroFichaParienteActivos(valor);
+					case "Nombre":
+						return servicioPaciente
+								.filtroNombreParienteActivos(valor);
+					case "Cedula":
+						return servicioPaciente
+								.filtroCedulaParienteActivos(valor);
+					case "Apellido":
+						return servicioPaciente
+								.filtroApellidoParienteActivos(valor);
+					default:
+						return pacientes;
+					}
 				}
 			}
 
@@ -347,7 +370,7 @@ public class CCita extends CGenerico {
 		lblApellidoPaciente.setValue(paciente.getPrimerApellido() + " "
 				+ paciente.getSegundoApellido());
 		if (paciente.isTrabajador())
-		lblEmpresaPaciente.setValue(paciente.getEmpresa().getNombre());
+			lblEmpresaPaciente.setValue(paciente.getEmpresa().getNombre());
 		idPaciente = paciente.getCedula();
 	}
 
@@ -550,7 +573,7 @@ public class CCita extends CGenerico {
 
 	@Listen("onOK = #txtCedulaPaciente")
 	public void buscarCedula() {
-		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedulaPaciente
+		Paciente paciente = servicioPaciente.buscarPorCedulaActivo(txtCedulaPaciente
 				.getValue());
 		if (paciente != null) {
 			llenarCamposPaciente(paciente);

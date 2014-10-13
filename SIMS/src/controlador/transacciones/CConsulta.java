@@ -2172,32 +2172,36 @@ public class CConsulta extends CGenerico {
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogoPaciente() throws IOException {
-		final List<Paciente> pacientes = new ArrayList<Paciente>();
+		final List<Paciente> pacientes = servicioPaciente.buscarTodosActivos();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
+				"Catalogo de Pacientes", pacientes,"Ficha", "Cedula", "Nombre",
 				"Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
 				if (isPlanta) {
 					switch (combo) {
+					case "Ficha":
+						return servicioPaciente.filtroFichaActivos(valor);
 					case "Nombre":
-						return servicioPaciente.filtroNombre1(valor);
+						return servicioPaciente.filtroNombre1Activos(valor);
 					case "Cedula":
-						return servicioPaciente.filtroCedula(valor);
+						return servicioPaciente.filtroCedulaActivos(valor);
 					case "Apellido":
-						return servicioPaciente.filtroApellido1(valor);
+						return servicioPaciente.filtroApellido1Activos(valor);
 					default:
 						return pacientes;
 					}
 				} else {
 					switch (combo) {
+					case "Ficha":
+						return servicioPaciente.filtroFichaParienteActivos(valor);
 					case "Nombre":
-						return servicioPaciente.filtroNombrePariente(valor);
+						return servicioPaciente.filtroNombreParienteActivos(valor);
 					case "Cedula":
-						return servicioPaciente.filtroCedulaPariente(valor);
+						return servicioPaciente.filtroCedulaParienteActivos(valor);
 					case "Apellido":
-						return servicioPaciente.filtroApellidoPariente(valor);
+						return servicioPaciente.filtroApellidoParienteActivos(valor);
 					default:
 						return pacientes;
 					}
@@ -2299,18 +2303,6 @@ public class CConsulta extends CGenerico {
 		limpiarCampos();
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
 		llenarCampos(paciente);
-		if (!paciente.isTrabajador()
-				&& paciente.getParentescoFamiliar().equals("Hijo(a)")) {
-			Paciente representante = servicioPaciente.buscarPorCedula(paciente
-					.getCedulaFamiliar());
-			if (representante.isMuerte()) {
-				if (calcularEdad(representante.getFechaMuerte()) >= 1)
-					msj.mensajeAlerta(Mensaje.pacienteFallecido);
-			} else {
-				if (calcularEdad(paciente.getFechaNacimiento()) >= 18)
-					msj.mensajeAlerta(Mensaje.pacienteMayor);
-			}
-		}
 		idPaciente = paciente.getCedula();
 		List<Consulta> consultas = servicioConsulta.buscarPorPaciente(paciente);
 		for (int i = 0; i < consultas.size(); i++) {
@@ -2548,6 +2540,18 @@ public class CConsulta extends CGenerico {
 			gpxLaborales.setVisible(false);
 		}
 		idPaciente = paciente.getCedula();
+		if (!paciente.isTrabajador()
+				&& paciente.getParentescoFamiliar().equals("Hijo(a)")) {
+			Paciente representante = servicioPaciente.buscarPorCedula(paciente
+					.getCedulaFamiliar());
+			if (representante.isMuerte()) {
+				if (calcularEdad(representante.getFechaMuerte()) >= 1)
+					msj.mensajeAlerta(Mensaje.pacienteFallecido);
+			} else {
+				if (calcularEdad(paciente.getFechaNacimiento()) >= 18)
+					msj.mensajeAlerta(Mensaje.pacienteMayor);
+			}
+		}
 	}
 
 	@Listen("onClick = #pasar1Medicina")
@@ -4053,8 +4057,7 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onOK = #txtCedula")
 	public void buscarCedula() {
-
-		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedula
+		Paciente paciente = servicioPaciente.buscarPorCedulaActivo(txtCedula
 				.getValue());
 		limpiarCampos();
 		if (paciente != null) {
