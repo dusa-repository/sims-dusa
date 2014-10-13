@@ -229,6 +229,7 @@ public class CPaciente extends CGenerico {
 	@Wire
 	private Label lblFecha;
 
+
 	URL url = getClass().getResource("usuario.png");
 	private CArbol cArbol = new CArbol();
 	String id = "";
@@ -680,7 +681,7 @@ public class CPaciente extends CGenerico {
 		final List<Paciente> pacientes = servicioPaciente
 				.buscarTodosTrabajadores();
 		catalogoFamiliar = new Catalogo<Paciente>(divCatalogoFamiliar,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
+				"Catalogo de Pacientes", pacientes, "Cedula","Ficha", "Nombre",
 				"Apellido") {
 
 			@Override
@@ -691,6 +692,8 @@ public class CPaciente extends CGenerico {
 					return servicioPaciente.filtroNombre1T(valor);
 				case "Cedula":
 					return servicioPaciente.filtroCedulaT(valor);
+				case "Ficha":
+					return servicioPaciente.filtroFichaT(valor);
 				case "Apellido":
 					return servicioPaciente.filtroApellido1T(valor);
 				default:
@@ -700,10 +703,11 @@ public class CPaciente extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[3];
+				String[] registros = new String[4];
 				registros[0] = objeto.getCedula();
-				registros[1] = objeto.getPrimerNombre();
-				registros[2] = objeto.getPrimerApellido();
+				registros[1] = objeto.getFicha();
+				registros[2] = objeto.getPrimerNombre();
+				registros[3] = objeto.getPrimerApellido();
 				return registros;
 			}
 
@@ -1163,6 +1167,7 @@ public class CPaciente extends CGenerico {
 
 		rdoE.setDisabled(false);
 		rdoV.setDisabled(false);
+		tabDatosBasicos.setSelected(true);
 	}
 
 }

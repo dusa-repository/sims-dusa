@@ -774,6 +774,8 @@ public class CConsulta extends CGenerico {
 	// -----------------------------
 	@Wire("#wdwRegistro")
 	private Window wdwRegistro;
+	@Wire
+	private Tab tabIdentificacion;
 	//
 	List<Listbox> listas = new ArrayList<Listbox>();
 
@@ -2174,7 +2176,7 @@ public class CConsulta extends CGenerico {
 	public void mostrarCatalogoPaciente() throws IOException {
 		final List<Paciente> pacientes = servicioPaciente.buscarTodosActivos();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes,"Ficha", "Cedula", "Nombre",
+				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha","Nombre",
 				"Apellido") {
 
 			@Override
@@ -2210,10 +2212,11 @@ public class CConsulta extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[3];
+				String[] registros = new String[4];
 				registros[0] = objeto.getCedula();
-				registros[1] = objeto.getPrimerNombre();
-				registros[2] = objeto.getPrimerApellido();
+				registros[1] = objeto.getFicha();
+				registros[2] = objeto.getPrimerNombre();
+				registros[3] = objeto.getPrimerApellido();
 				return registros;
 			}
 
@@ -2742,7 +2745,7 @@ public class CConsulta extends CGenerico {
 			for (int i = 0; i < listItem.size(); i++) {
 				if (listItem.get(i).isSelected()) {
 					Examen examen = listItem.get(i).getValue();
-					examenesDisponibles.remove(examen);
+				//	examenesDisponibles.remove(examen);
 					ConsultaExamen consultaExamen = new ConsultaExamen();
 					consultaExamen.setExamen(examen);
 					examenesAgregado.clear();
@@ -2776,9 +2779,9 @@ public class CConsulta extends CGenerico {
 				}
 			}
 		}
-		for (int i = 0; i < listitemEliminar.size(); i++) {
-			ltbExamenes.removeItemAt(listitemEliminar.get(i).getIndex());
-		}
+//		for (int i = 0; i < listitemEliminar.size(); i++) {
+//			ltbExamenes.removeItemAt(listitemEliminar.get(i).getIndex());
+//		}
 		listasMultiples();
 	}
 
@@ -3135,7 +3138,7 @@ public class CConsulta extends CGenerico {
 			for (int i = 0; i < listItem.size(); i++) {
 				if (listItem.get(i).isSelected()) {
 					ServicioExterno servicio = listItem.get(i).getValue();
-					serviciosDisponibles.remove(servicio);
+				//	serviciosDisponibles.remove(servicio);
 					ConsultaServicioExterno consultaServicio = new ConsultaServicioExterno();
 					consultaServicio.setServicioExterno(servicio);
 					serviciosAgregados.clear();
@@ -3177,9 +3180,9 @@ public class CConsulta extends CGenerico {
 				}
 			}
 		}
-		for (int i = 0; i < listitemEliminar.size(); i++) {
-			ltbServicioExterno.removeItemAt(listitemEliminar.get(i).getIndex());
-		}
+//		for (int i = 0; i < listitemEliminar.size(); i++) {
+//			ltbServicioExterno.removeItemAt(listitemEliminar.get(i).getIndex());
+//		}
 		listasMultiples();
 	}
 
@@ -3909,6 +3912,7 @@ public class CConsulta extends CGenerico {
 			rdoNoComplicacionNeo.setChecked(false);
 		txtObservacionPrenatal.setValue("");
 		txtResultadoComplicacionNeo.setValue("");
+		tabIdentificacion.setSelected(true);
 	}
 
 	@Listen("onClick = #btnAbrirIntervencion")

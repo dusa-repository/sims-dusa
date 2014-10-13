@@ -179,7 +179,7 @@ public class CExamen extends CGenerico {
 	@Listen("onClick = #btnBuscarExamen")
 	public void mostrarCatalogo() {
 		final List<Examen> examenes = servicioExamen.buscarTodos();
-		catalogo = new Catalogo<Examen>(catalogoExamen, "Catalogo de Estados",
+		catalogo = new Catalogo<Examen>(catalogoExamen, "Catalogo de Examenes",
 				examenes, "Nombre", "Tipo", "Resultado", "Costo",
 				"Valor Minimo", "Valor Maximo") {
 
