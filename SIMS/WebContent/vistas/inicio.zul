@@ -99,8 +99,8 @@
 					<center hflex="1"
 						style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
 						border="none" autoscroll="true">
-						<tabbox context="editPopup" width="auto" id="tabBox" >
-							<tabs>
+						<tabbox width="auto" id="tabBox" >
+							<tabs  context="editPopup">
 								<tab visible="false">Tab A</tab>
 								<tab id="tab" label="+" visible="false">
 								</tab>

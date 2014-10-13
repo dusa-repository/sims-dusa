@@ -46,7 +46,7 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 	List<Paciente> findByParentescoFamiliarStartingWithAllIgnoreCase(
 			String valor);
 
-	List<Paciente> findByTrabajadorTrue();
+	List<Paciente> findByTrabajadorTrue(Pageable topTen);
 
 	List<Paciente> findByCedulaFamiliarAndCedulaStartingWithAllIgnoreCase(
 			String value, String valor);
@@ -106,4 +106,7 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 	List<Paciente> findAllOrderByCedula(Pageable topTen);
 
 	Paciente findByCedulaAndEstatusTrue(String value);
+
+	List<Paciente> findByTrabajadorTrueAndFichaStartingWithAllIgnoreCase(
+			String valor);
 }

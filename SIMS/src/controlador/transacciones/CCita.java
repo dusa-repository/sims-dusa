@@ -145,6 +145,7 @@ public class CCita extends CGenerico {
 				lblCedulaDoctor.setValue("");
 				idDoctor = "";
 				ltbCitas.getItems().clear();
+				tabCita.setSelected(true);
 				limpiar2();
 			}
 
@@ -291,7 +292,7 @@ public class CCita extends CGenerico {
 	public void mostrarCatalogoPaciente() throws IOException {
 		final List<Paciente> pacientes = servicioPaciente.buscarTodosActivos();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes, "Ficha", "Cedula",
+				"Catalogo de Pacientes", pacientes,  "Cedula","Ficha",
 				"Nombre", "Apellido") {
 
 			@Override
@@ -331,10 +332,11 @@ public class CCita extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[3];
+				String[] registros = new String[4];
 				registros[0] = objeto.getCedula();
-				registros[1] = objeto.getPrimerNombre();
-				registros[2] = objeto.getPrimerApellido();
+				registros[1] = objeto.getFicha();
+				registros[2] = objeto.getPrimerNombre();
+				registros[3] = objeto.getPrimerApellido();
 				return registros;
 			}
 
@@ -579,7 +581,7 @@ public class CCita extends CGenerico {
 			llenarCamposPaciente(paciente);
 		} else {
 			limpiar2();
-			msj.mensajeError(Mensaje.cedulaInvalida);
+			msj.mensajeError(Mensaje.pacienteNoExiste);
 		}
 	}
 }

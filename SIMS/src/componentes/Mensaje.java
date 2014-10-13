@@ -56,7 +56,7 @@ public class Mensaje {
 	public static String archivoExcel = "Los Archivos deben ser de Tipo .xlsx";
 	public static String guardadosArchivos ="La Data ha sido Guardada Exitosamente";
 	public static String guardadosAlgunosArchivos = "Alguna Data estaba mal estructurada por lo tanto no pudo ser guardada toda correctamente";
-	public static String pacienteNoExiste="La Cedula del Paciente no Existe";
+	public static String pacienteNoExiste="La Cedula del Paciente no Existe  o el Paciente se Encuentra Inactivo";
 	
 
 	public void mensajeInformacion(String msj) {

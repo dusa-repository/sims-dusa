@@ -104,7 +104,8 @@ public class SPaciente {
 	}
 
 	public List<Paciente> buscarTodosTrabajadores() {
-		return pacienteDAO.findByTrabajadorTrue();
+		Pageable topTen = new PageRequest(0, 10);
+		return pacienteDAO.findByTrabajadorTrue(topTen);
 	}
 
 	public List<Paciente> filtroNombre1C(String valor, String value) {
@@ -182,4 +183,9 @@ public class SPaciente {
 	public Paciente buscarPorCedulaActivo(String value) {
 		return pacienteDAO.findByCedulaAndEstatusTrue(value);
 	}
+
+	public List<Paciente> filtroFichaT(String valor) {
+		return pacienteDAO.findByTrabajadorTrueAndFichaStartingWithAllIgnoreCase(valor);
+	}
+	
 }
