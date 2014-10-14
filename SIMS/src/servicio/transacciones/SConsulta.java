@@ -2,6 +2,7 @@ package servicio.transacciones;
 
 import interfacedao.transacciones.IConsultaDAO;
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Cargo;
@@ -105,5 +106,9 @@ public class SConsulta {
 
 	public Consulta buscarPorReferencias(long idRefC, String cedRef) {
 		return consultaDAO.findByIdReferenciaAndCedulaReferencia(idRefC,cedRef);
+	}
+
+	public List<Consulta> buscarEntreFechas(Date fecha1, Date fecha2) {
+		return consultaDAO.findByFechaConsultaBetween(fecha1, fecha2);
 	}
 }

@@ -35,6 +35,7 @@ public class Reportero extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		CConsulta consulta = new CConsulta();
+		CMorbilidad morbilidad = new CMorbilidad();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
@@ -50,6 +51,11 @@ public class Reportero extends HttpServlet {
 		Long part5 = (long) 0;
 		if (partecita5 != null)
 			part5 = Long.parseLong(partecita5);
+
+		String par6 = request.getParameter("valor6");
+		String par7 = request.getParameter("valor7");
+		String par8 = request.getParameter("valor8");
+		String par9 = request.getParameter("valor9");
 		byte[] fichero = null;
 		try {
 			switch (par1) {
@@ -76,6 +82,9 @@ public class Reportero extends HttpServlet {
 				break;
 			case "8":
 				fichero = consulta.reporteConstancia(part2);
+				break;
+			case "9":
+				fichero = morbilidad.reporteMorbilidad(par6,par7,par8,par9);
 				break;
 			default:
 				break;
