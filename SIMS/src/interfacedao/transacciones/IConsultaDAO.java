@@ -1,5 +1,6 @@
 package interfacedao.transacciones;
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Cargo;
@@ -10,7 +11,7 @@ import modelo.transacciones.Consulta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface IConsultaDAO  extends JpaRepository<Consulta, Long> {
+public interface IConsultaDAO extends JpaRepository<Consulta, Long> {
 
 	List<Consulta> findByPaciente(Paciente paciente);
 
@@ -49,5 +50,8 @@ public interface IConsultaDAO  extends JpaRepository<Consulta, Long> {
 	List<Consulta> findByPacienteOrderByFechaConsultaDesc(Paciente paciente);
 
 	List<Consulta> findByPacienteCedulaOrderByFechaConsultaDesc(String valueOf);
+
+	@Query("select c from Consulta c where c.fechaConsulta between ?1 and ?2 order by c.paciente.area.nombre asc,c.paciente.cargoReal.nombre asc,c.paciente.cedula asc")
+	List<Consulta> findByFechaConsultaBetween(Date fecha1, Date fecha2);
 
 }
