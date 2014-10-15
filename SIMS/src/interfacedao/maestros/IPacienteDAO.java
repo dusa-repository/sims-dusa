@@ -109,4 +109,9 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
 	List<Paciente> findByTrabajadorTrueAndFichaStartingWithAllIgnoreCase(
 			String valor);
+	
+	Paciente findByCedulaAndEstatusTrueAndTrabajadorFalse(String value);
+
+	List<Paciente> findByTrabajadorFalseAndEstatusTrueOrderByCedulaAsc(
+			Pageable topTen);
 }

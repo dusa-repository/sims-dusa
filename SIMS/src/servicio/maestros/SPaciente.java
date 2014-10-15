@@ -187,5 +187,14 @@ public class SPaciente {
 	public List<Paciente> filtroFichaT(String valor) {
 		return pacienteDAO.findByTrabajadorTrueAndFichaStartingWithAllIgnoreCase(valor);
 	}
+
+	public List<Paciente> buscarFamiliaresActivos() {
+		Pageable topTen = new PageRequest(0, 10);
+		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueOrderByCedulaAsc(topTen);
+	}
+
+	public Paciente buscarPorCedulaFamiliarActivo(String value) {
+		return pacienteDAO.findByCedulaAndEstatusTrueAndTrabajadorFalse(value);
+	}
 	
 }

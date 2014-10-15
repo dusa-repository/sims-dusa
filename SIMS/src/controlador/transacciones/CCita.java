@@ -290,9 +290,14 @@ public class CCita extends CGenerico {
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogoPaciente() throws IOException {
-		final List<Paciente> pacientes = servicioPaciente.buscarTodosActivos();
+		List<Paciente> pacientesBuscar = new ArrayList<Paciente>();
+		if (isPlanta)
+			pacientesBuscar = servicioPaciente.buscarTodosActivos();
+		else
+			pacientesBuscar = servicioPaciente.buscarFamiliaresActivos();
+		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes,  "Cedula","Ficha",
+				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
 				"Nombre", "Apellido") {
 
 			@Override
@@ -575,8 +580,13 @@ public class CCita extends CGenerico {
 
 	@Listen("onOK = #txtCedulaPaciente")
 	public void buscarCedula() {
-		Paciente paciente = servicioPaciente.buscarPorCedulaActivo(txtCedulaPaciente
-				.getValue());
+		Paciente paciente = new Paciente();
+		if (isPlanta)
+			paciente = servicioPaciente.buscarPorCedulaActivo(txtCedulaPaciente
+					.getValue());
+		else
+			paciente = servicioPaciente
+					.buscarPorCedulaFamiliarActivo(txtCedulaPaciente.getValue());
 		if (paciente != null) {
 			llenarCamposPaciente(paciente);
 		} else {
