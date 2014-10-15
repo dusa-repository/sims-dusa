@@ -2174,10 +2174,15 @@ public class CConsulta extends CGenerico {
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente")
 	public void mostrarCatalogoPaciente() throws IOException {
-		final List<Paciente> pacientes = servicioPaciente.buscarTodosActivos();
+		List<Paciente> pacientesBuscar = new ArrayList<Paciente>();
+		if (isPlanta)
+			pacientesBuscar = servicioPaciente.buscarTodosActivos();
+		else
+			pacientesBuscar = servicioPaciente.buscarFamiliaresActivos();
+		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha","Nombre",
-				"Apellido") {
+				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Nombre", "Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -2197,13 +2202,17 @@ public class CConsulta extends CGenerico {
 				} else {
 					switch (combo) {
 					case "Ficha":
-						return servicioPaciente.filtroFichaParienteActivos(valor);
+						return servicioPaciente
+								.filtroFichaParienteActivos(valor);
 					case "Nombre":
-						return servicioPaciente.filtroNombreParienteActivos(valor);
+						return servicioPaciente
+								.filtroNombreParienteActivos(valor);
 					case "Cedula":
-						return servicioPaciente.filtroCedulaParienteActivos(valor);
+						return servicioPaciente
+								.filtroCedulaParienteActivos(valor);
 					case "Apellido":
-						return servicioPaciente.filtroApellidoParienteActivos(valor);
+						return servicioPaciente
+								.filtroApellidoParienteActivos(valor);
 					default:
 						return pacientes;
 					}
@@ -2745,7 +2754,7 @@ public class CConsulta extends CGenerico {
 			for (int i = 0; i < listItem.size(); i++) {
 				if (listItem.get(i).isSelected()) {
 					Examen examen = listItem.get(i).getValue();
-				//	examenesDisponibles.remove(examen);
+					// examenesDisponibles.remove(examen);
 					ConsultaExamen consultaExamen = new ConsultaExamen();
 					consultaExamen.setExamen(examen);
 					examenesAgregado.clear();
@@ -2779,9 +2788,9 @@ public class CConsulta extends CGenerico {
 				}
 			}
 		}
-//		for (int i = 0; i < listitemEliminar.size(); i++) {
-//			ltbExamenes.removeItemAt(listitemEliminar.get(i).getIndex());
-//		}
+		// for (int i = 0; i < listitemEliminar.size(); i++) {
+		// ltbExamenes.removeItemAt(listitemEliminar.get(i).getIndex());
+		// }
 		listasMultiples();
 	}
 
@@ -3138,7 +3147,7 @@ public class CConsulta extends CGenerico {
 			for (int i = 0; i < listItem.size(); i++) {
 				if (listItem.get(i).isSelected()) {
 					ServicioExterno servicio = listItem.get(i).getValue();
-				//	serviciosDisponibles.remove(servicio);
+					// serviciosDisponibles.remove(servicio);
 					ConsultaServicioExterno consultaServicio = new ConsultaServicioExterno();
 					consultaServicio.setServicioExterno(servicio);
 					serviciosAgregados.clear();
@@ -3180,9 +3189,9 @@ public class CConsulta extends CGenerico {
 				}
 			}
 		}
-//		for (int i = 0; i < listitemEliminar.size(); i++) {
-//			ltbServicioExterno.removeItemAt(listitemEliminar.get(i).getIndex());
-//		}
+		// for (int i = 0; i < listitemEliminar.size(); i++) {
+		// ltbServicioExterno.removeItemAt(listitemEliminar.get(i).getIndex());
+		// }
 		listasMultiples();
 	}
 
@@ -4061,8 +4070,13 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onOK = #txtCedula")
 	public void buscarCedula() {
-		Paciente paciente = servicioPaciente.buscarPorCedulaActivo(txtCedula
-				.getValue());
+		Paciente paciente = new Paciente();
+		if (isPlanta)
+			paciente = servicioPaciente.buscarPorCedulaActivo(txtCedula
+					.getValue());
+		else
+			paciente = servicioPaciente.buscarPorCedulaFamiliarActivo(txtCedula
+					.getValue());
 		limpiarCampos();
 		if (paciente != null) {
 			llenarCampos(paciente);
