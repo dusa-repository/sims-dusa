@@ -221,15 +221,15 @@ public class CCita extends CGenerico {
 			protected List<Usuario> buscar(String valor, String combo) {
 				switch (combo) {
 				case "Cedula":
-					return servicioUsuario.filtroCedula(valor);
+					return servicioUsuario.filtroCedulaDoctor(valor);
 				case "Ficha":
-					return servicioUsuario.filtroFicha(valor);
+					return servicioUsuario.filtroFichaDoctor(valor);
 				case "Nombre":
-					return servicioUsuario.filtroNombre(valor);
+					return servicioUsuario.filtroNombreDoctor(valor);
 				case "Especialidad":
-					return servicioUsuario.filtroEspecialidad(valor);
+					return servicioUsuario.filtroEspecialidadDoctor(valor);
 				case "Apellido":
-					return servicioUsuario.filtroApellido(valor);
+					return servicioUsuario.filtroApellidoDoctor(valor);
 				default:
 					return usuarios;
 				}
@@ -242,6 +242,7 @@ public class CCita extends CGenerico {
 				registros[1] = objeto.getFicha();
 				registros[2] = objeto.getPrimerNombre();
 				registros[3] = objeto.getPrimerApellido();
+				if(objeto.getEspecialidad()!=null)
 				registros[4] = objeto.getEspecialidad().getDescripcion();
 				return registros;
 			}

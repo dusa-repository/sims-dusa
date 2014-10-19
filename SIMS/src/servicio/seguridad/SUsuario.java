@@ -108,4 +108,25 @@ public class SUsuario {
 		}
 	}
 
+	public List<Usuario> filtroCedulaDoctor(String valor) {
+		return usuarioDAO.findByDoctorAndCedulaStartingWithAllIgnoreCase(true,valor);
+	}
+
+	public List<Usuario> filtroFichaDoctor(String valor) {
+		return usuarioDAO.findByDoctorAndFichaStartingWithAllIgnoreCase(true,valor);
+	}
+
+	public List<Usuario> filtroNombreDoctor(String valor) {
+		return usuarioDAO.findByDoctorAndPrimerNombreStartingWithAllIgnoreCase(true,valor);
+	}
+
+	public List<Usuario> filtroEspecialidadDoctor(String valor) {
+		return usuarioDAO
+				.findByDoctorAndEspecialidadDescripcionStartingWithAllIgnoreCase(true,valor);
+	}
+
+	public List<Usuario> filtroApellidoDoctor(String valor) {
+		return usuarioDAO.findByDoctorAndPrimerApellidoStartingWithAllIgnoreCase(true,valor);
+	}
+
 }

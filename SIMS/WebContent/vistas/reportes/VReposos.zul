@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div id="divMorbilidad" apply="controlador.reporte.CMorbilidad">
-		<groupbox width="75%" mold="3d" title="Reporte de Morbilidad">
+	<div id="divReposo" apply="controlador.reporte.CReposo">
+		<groupbox width="75%" mold="3d" title="Reporte de Reposos">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="18%" />
@@ -65,33 +65,6 @@
 
 						<hbox />
 					</row>
-					<row id="rowTipoConsulta">
-						<hbox>
-							<label class="etiqueta" value="Tipo de Consulta:" />
-							<space />
-							<label value="*" style="font-weight:bold;color:red" />
-						</hbox>
-						<combobox tooltiptext="Seleccione el Tipo de la Consulta"
-							placeholder="Seleccione el Tipo" id="cmbTipoConsulta" width="100%"
-							readonly="true" value="TODAS">
-							<comboitem label="TODAS" />
-							<comboitem label="Preventiva" />
-							<comboitem label="Curativa" />
-						</combobox>
-						<hbox>
-							<label class="etiqueta" value="Sub-Tipo de Consulta:" />
-							<space />
-							<label value="*" style="font-weight:bold;color:red" />
-						</hbox>
-						<combobox tooltiptext="Seleccione el Tipo de Consulta"
-							placeholder="Seleccione el Tipo" id="cmbTipoPreventiva" width="100%"
-							value="TODAS" readonly="true">
-							<template name="model">
-								<comboitem label="${each}" />
-							</template>
-						</combobox>
-
-					</row>
 					<row id="rowDiagnostico">
 						<hbox>
 							<label class="etiqueta" value="Tipo de Diagnostico:" />
@@ -108,20 +81,8 @@
 							<comboitem label="Enfermedad Comun" />
 							<comboitem label="Otro" />
 						</combobox>
-						<hbox>
-							<label class="etiqueta" value="Grupo Etario:" />
-							<space />
-							<label value="*" style="font-weight:bold;color:red" />
-						</hbox>
-						<hbox>
-							<label class="etiqueta" value="De:" />
-							<spinner id="spnDe" step="1" format="#" constraint="min 0 max 1000"
-								width="80%" value="0" />
-							<label class="etiqueta" value="A:" />
-							<spinner value="100" id="spnA" step="1" format="#"
-								constraint="min 0 max 100" width="80%" />
-							<label class="etiqueta" value="Años" />
-						</hbox>
+						<hbox />
+						<hbox />
 					</row>
 					<row id="rowDoctor">
 						<hbox>
@@ -147,26 +108,10 @@
 							<comboitem label="Planta" />
 						</combobox>
 					</row>
-					<row id="rowFamiliar">
-						<label class="etiqueta" value="Consulta de:" />
-						<cell colspan="3">
-							<hbox>
-								<radiogroup id="rdgFamiliar">
-									<hbox>
-										<radio label="Familiares" value="familiares" id="rdoFamiliares" />
-										<separator />
-										<radio label="Trabajadores" value="trabajadores" id="rdoTrabajadores" />
-										<separator />
-										<radio label="Todos" value="todos" id="rdoTodos" />
-									</hbox>
-								</radiogroup>
-							</hbox>
-						</cell>
-					</row>
 				</rows>
 			</grid>
 			<separator />
-			<div id="botoneraMorbilidad" />
+			<div id="botoneraReposo" />
 			<div id="divCatalogoPaciente" />
 			<div id="catalogoUsuarios" />
 		</groupbox>

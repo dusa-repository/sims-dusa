@@ -204,7 +204,7 @@ public class CArbol extends CGenerico {
 			// if (arbolMenu.getSelectedItem().getLevel() > 0) {
 			final Arbol arbolItem = servicioArbol.buscarPorId(item);
 			if (!arbolItem.getUrl().equals("inicio")) {
-
+				mapGeneral.put("titulo", arbolItem.getNombre());
 				if (String.valueOf(arbolMenu.getSelectedItem().getValue())
 						.equals("Consulta"))
 					west.setOpen(false);
