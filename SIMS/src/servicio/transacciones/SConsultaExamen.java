@@ -46,4 +46,8 @@ public class SConsultaExamen {
 			Long part5) {
 		return consultaExamenDAO.findByConsultaAndProveedorIdProveedor(consuta, part5);
 	}
+
+	public double sumPorConsulta(Consulta consulta) {
+		return consultaExamenDAO.sumByConsulta(consulta);
+	}
 }

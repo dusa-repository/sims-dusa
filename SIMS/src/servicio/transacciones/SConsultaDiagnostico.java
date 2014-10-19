@@ -8,6 +8,7 @@ import java.util.List;
 
 import modelo.maestros.Accidente;
 import modelo.maestros.Diagnostico;
+import modelo.sha.Area;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
 
@@ -121,5 +122,77 @@ public class SConsultaDiagnostico {
 		return consultaDiagnosticoDAO.findByConsultaFechaConsultaBetweenAndTipo(
 				fecha1, fecha2,diagnostico, o);
 	}
+	public List<ConsultaDiagnostico> buscarEntreFechasResumen(Date desde,
+			Date hasta, boolean estado) {
+		List<String> lista = new ArrayList<String>();
+		lista.add("consultaPacienteAreaNombre");
+		lista.add("tipo");
+		Sort order = new Sort(Sort.Direction.ASC, lista);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteTrabajador(
+						desde, hasta, estado, order);
+	}
 
+	public List<ConsultaDiagnostico> buscarDiagnosticoEntreFechasResumen(
+			Date desde, Date hasta) {
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenOrderByDiagnosticoNombreAsc(
+						desde, hasta);
+	}
+
+	public List<ConsultaDiagnostico> buscarDiagnosticoEntreFechasYTrabajadorResumen(
+			Date desde, Date hasta, boolean trabajador) {
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteTrabajadorOrderByDiagnosticoNombreAsc(
+						desde, hasta, trabajador);
+	}
+
+	public List<ConsultaDiagnostico> buscarAccidenteEntreFechas(Date desde,
+			Date hasta) {
+		List<String> lista = new ArrayList<String>();
+		lista.add("consultaPacienteAreaNombre");
+		lista.add("tipo");
+		lista.add("consultaFechaConsulta");
+		Sort order = new Sort(Sort.Direction.ASC, lista);
+		List<String> lista2 = new ArrayList<String>();
+		lista2.add("Otro");
+		lista2.add("Enfermedad Comun");
+		lista2.add("Enfermedad Laboral");
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteTrabajadorTrueAndConsultaAccidenteLaboralTrueAndTipoNotIn(
+						desde, hasta, lista2, order);
+	}
+
+	public List<ConsultaDiagnostico> buscarAccidenteEntreFechasYArea(
+			Date desde, Date hasta, Area area) {
+		List<String> lista = new ArrayList<String>();
+		lista.add("tipo");
+		lista.add("consultaFechaConsulta");
+		Sort order = new Sort(Sort.Direction.ASC, lista);
+		List<String> lista2 = new ArrayList<String>();
+		lista2.add("Otro");
+		lista2.add("Enfermedad Comun");
+		lista2.add("Enfermedad Laboral");
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteTrabajadorTrueAndConsultaAccidenteLaboralTrueAndConsultaPacienteAreaAndTipoNotIn(
+						desde, hasta, area, lista2, order);
+	}
+
+	public List<ConsultaDiagnostico> buscarAccidenteEntreFechasYTipo(
+			Date desde, Date hasta, String diagnostico) {
+		List<String> lista = new ArrayList<String>();
+		lista.add("consultaPacienteAreaNombre");
+		lista.add("consultaFechaConsulta");
+		Sort order = new Sort(Sort.Direction.ASC, lista);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteTrabajadorTrueAndConsultaAccidenteLaboralTrueAndTipo(
+						desde, hasta, diagnostico, order);
+	}
+
+	public List<ConsultaDiagnostico> buscarAccidenteEntreFechasAreaYTipo(
+			Date desde, Date hasta, Area area, String diagnostico) {
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteTrabajadorTrueAndConsultaAccidenteLaboralTrueAndConsultaPacienteAreaAndTipoOrderByConsultaFechaConsultaAsc(
+						desde, hasta, area, diagnostico);
+	}
 }

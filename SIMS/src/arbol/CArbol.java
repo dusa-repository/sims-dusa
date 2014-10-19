@@ -251,6 +251,7 @@ public class CArbol extends CGenerico {
 					newTabpanel.setParent(tabBox.getTabpanels());
 					tabs.add(newTab);
 					mapGeneral.put("tabsGenerales", tabs);
+					mapGeneral.put("nombre", arbolItem.getNombre());
 					mapGeneral.put("west", west);
 					Sessions.getCurrent().setAttribute("mapaGeneral",
 							mapGeneral);
