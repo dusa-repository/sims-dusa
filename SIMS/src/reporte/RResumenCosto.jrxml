@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RResumenCosto" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="7b1f4fd0-6b56-402d-9818-80f79f37b9f1">
+	<property name="ireport.zoom" value="1.3310000000000008"/>
+	<property name="ireport.x" value="358"/>
+	<property name="ireport.y" value="216"/>
+	<parameter name="desde" class="java.lang.String"/>
+	<parameter name="hasta" class="java.lang.String"/>
+	<parameter name="area" class="java.lang.String"/>
+	<parameter name="diagnostico" class="java.lang.String"/>
+	<field name="consulta.paciente.area.nombre" class="java.lang.String"/>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="consulta.paciente.cedula" class="java.lang.String"/>
+	<field name="consulta.paciente.primerNombre" class="java.lang.String"/>
+	<field name="consulta.paciente.primerApellido" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Timestamp"/>
+	<field name="accidente.nombre" class="java.lang.String"/>
+	<field name="clasificacion" class="java.lang.String"/>
+	<field name="lugar" class="java.lang.String"/>
+	<field name="motivo" class="java.lang.String"/>
+	<field name="consulta.estatura" class="java.lang.Double"/>
+	<field name="consulta.peso" class="java.lang.Double"/>
+	<field name="consulta.perimetroForzada" class="java.lang.Double"/>
+	<field name="consulta.perimetroOmbligo" class="java.lang.Double"/>
+	<variable name="variable1" class="java.lang.Integer" resetType="Group" resetGroup="tipoDiagnostico" calculation="Count">
+		<variableExpression><![CDATA[$F{tipo}]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.lang.Integer" resetType="Group" resetGroup="area" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.paciente.area.nombre}]]></variableExpression>
+	</variable>
+	<variable name="variable3" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.paciente.cedula}]]></variableExpression>
+	</variable>
+	<group name="area" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{consulta.paciente.area.nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="0" y="0" width="293" height="20" uuid="bbd5761f-00dc-4ede-8359-37a1321de627"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{consulta.paciente.area.nombre}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<staticText>
+					<reportElement x="386" y="0" width="142" height="20" uuid="6ddb2f4c-12be-4e90-bb6c-739d5b24cdc2"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total por]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="698" y="0" width="54" height="20" uuid="a2553bfe-4ce9-47d2-aa91-9d5f95798ad2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="533" y="0" width="165" height="20" uuid="853e91af-825f-46ee-8539-0bcb5d4d8d6e"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{consulta.paciente.area.nombre}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="tipoDiagnostico">
+		<groupExpression><![CDATA[$F{tipo}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="44" y="0" width="249" height="20" uuid="7074758d-e564-414f-b489-4b8231ff1576"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<staticText>
+					<reportElement x="319" y="0" width="209" height="20" uuid="52979d0b-88ba-4e62-ae81-fd13262fc2d0"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total por  ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="698" y="0" width="54" height="20" uuid="290e7e18-6fb5-4c03-b972-95a65bd0f8dc"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="534" y="0" width="164" height="20" uuid="516155ba-e567-488f-9328-2de5f7aa9e01"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="145" splitType="Stretch">
+			<image>
+				<reportElement x="21" y="19" width="100" height="50" uuid="e12b9fb6-a651-410f-a85c-22c0aa3c342e"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="650" y="12" width="100" height="20" uuid="33c8eb1b-a05a-49af-aa57-9c36d13072f7"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="615" y="12" width="35" height="20" uuid="36d766f6-5c7e-4437-8969-44b47edac560"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="32" width="212" height="20" uuid="b0763acf-ba16-4bda-b35b-a42fa82015ce"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Costos generados por Accidentes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="69" width="43" height="20" uuid="2abae443-5fc8-4c74-b601-e65ee54da540"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="69" width="39" height="20" uuid="14ec59ad-c432-4d4c-bf79-431f1acec889"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="100" width="35" height="20" uuid="f50a95d6-fe9f-446d-813f-8b2c04b40485"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="100" width="130" height="20" uuid="17a24b97-a0c0-4c06-82c2-97d8b0203ba6"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Diagnostico:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="253" y="69" width="100" height="20" uuid="fd179af8-0450-40e9-8a72-443d494ad2a9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{desde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="467" y="69" width="100" height="20" uuid="fa4cb802-15c2-4e26-b9af-e22f8ab31fae"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hasta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="134" y="100" width="237" height="20" uuid="48f76e85-08d4-4fd3-8812-712a4a7c7dd7"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="501" y="100" width="160" height="20" uuid="7e0b334c-bdb3-49e5-9206-b51d04e8aee4"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{diagnostico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="54" height="20" uuid="b430a2c3-0192-477a-967b-30eeb9f9a587"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="0" width="90" height="20" uuid="5e9de65d-2307-4726-91b2-56e9bd0247c4"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Nombre y Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="0" width="78" height="20" uuid="3b7f4126-4e91-4a42-b40d-7bf904a68352"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Fecha Accidente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="112" height="20" uuid="3807a870-bd62-47bb-ae35-3ffabff50b69"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Accidente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="0" width="100" height="20" uuid="dfa7225c-2ffe-46e6-8e75-2b67dee0ac5c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Clasificacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="0" width="100" height="20" uuid="b002bed3-75ef-49a8-80ae-6ec5e9815492"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Lugar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="0" width="100" height="20" uuid="ee90c589-8b56-4fa2-9a87-967c6abb4570"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Motivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="634" y="0" width="118" height="20" uuid="32acdf7e-1a7c-4966-bdee-2cc2685f7bbc"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Gastos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="100" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="54" height="20" uuid="3eac2c2c-2f5e-49c9-8589-07334324999c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{consulta.paciente.cedula}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="54" y="0" width="90" height="20" uuid="ca747eff-7b4d-462f-bcd7-a21df51fb4af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{consulta.paciente.primerNombre}+" "+$F{consulta.paciente.primerApellido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="144" y="0" width="78" height="20" uuid="928daadd-0774-4a17-8a61-14cd306a957c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fecha})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="222" y="0" width="112" height="20" uuid="ccc9fb8f-a176-44f0-be65-fc85d6de18c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{accidente.nombre}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="334" y="0" width="100" height="20" uuid="8d7f02cd-fec1-49f4-bc32-4ec8f1898639"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{clasificacion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="434" y="0" width="100" height="20" uuid="b815a10f-ae66-4f6c-af4d-1d0978f572d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{lugar}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="534" y="0" width="100" height="20" uuid="3ee4d44c-0c2d-417f-9ac0-a95848a90787"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{motivo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="634" y="0" width="64" height="20" uuid="1a689b91-13cf-4ed7-b110-a11c0b2727ba"/>
+				<textElement verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Medicinas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="634" y="20" width="64" height="20" uuid="ac08484c-31d9-4fa1-a284-0c046286a1dc"/>
+				<textElement verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Examenes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="634" y="40" width="64" height="20" uuid="6afafee7-324d-427d-aa49-c723d4fe2198"/>
+				<textElement verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Especialistas:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="634" y="60" width="64" height="20" uuid="8350883a-96cc-457b-98aa-2ae385a04874"/>
+				<textElement verticalAlignment="Middle">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Estudios:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="633" y="80" width="65" height="20" uuid="57060bd1-4811-495a-9d64-4bb9f293d729"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Total Gastos:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="698" y="0" width="54" height="20" uuid="6df883e1-7a4c-46de-9262-624c4870d081"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{consulta.estatura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="698" y="20" width="54" height="20" uuid="b337b4dc-cb24-4a53-b2e9-905755812641"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{consulta.peso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="698" y="40" width="54" height="20" uuid="55060e83-a387-4f43-9cc7-afbc7dc903a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{consulta.perimetroForzada}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="698" y="60" width="54" height="20" uuid="0427915b-a711-4199-8303-924ad439e142"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{consulta.perimetroOmbligo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="698" y="80" width="54" height="20" uuid="7e9edda7-5e06-4f42-bf96-b68f7bd18fe8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{consulta.estatura}+$F{consulta.peso}+$F{consulta.perimetroForzada}+$F{consulta.perimetroOmbligo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="698" y="0" width="54" height="20" uuid="89f8c969-878e-452f-a133-9e6cb1c25894"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="605" y="0" width="93" height="20" uuid="4ba3b804-7e6e-4ba0-9e99-dddbd5596458"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Accidentes:]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>

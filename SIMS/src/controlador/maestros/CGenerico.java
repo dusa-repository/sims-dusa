@@ -96,10 +96,12 @@ import servicio.transacciones.SConsultaExamen;
 import servicio.transacciones.SConsultaMedicina;
 import servicio.transacciones.SConsultaParteCuerpo;
 import servicio.transacciones.SConsultaServicioExterno;
+import servicio.transacciones.SF4111;
 import servicio.transacciones.SHistoria;
 import servicio.transacciones.SHistoriaAccidente;
 import servicio.transacciones.SHistoriaIntervencion;
 import servicio.transacciones.SHistoriaVacuna;
+
 import componentes.Mensaje;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -116,6 +118,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SF41021 servicioF41021;
 	@WireVariable("SF4211")
 	protected SF4211 servicioF4211;
+	@WireVariable("SF4111")
+	protected SF4111 servicioF4111;
 	@WireVariable("SAccidente")
 	protected SAccidente servicioAccidente;
 	@WireVariable("SAntecedente")
@@ -272,12 +276,12 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		}
 	}
 
+	public static SF4111 getServicioF4111() {
+		return applicationContext.getBean(SF4111.class);
+	}
+
 	public static SConsulta getServicioConsulta() {
 		return applicationContext.getBean(SConsulta.class);
-	}
-	
-	public static SArea getServicioArea() {
-		return applicationContext.getBean(SArea.class);
 	}
 	
 	public static SUsuario getServicioUsuario() {
@@ -295,6 +299,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 
 	public static SConsultaExamen getServicioConsultaExamen() {
 		return applicationContext.getBean(SConsultaExamen.class);
+	}
+
+	public static SArea getServicioArea() {
+		return applicationContext.getBean(SArea.class);
 	}
 
 	public static SConsultaDiagnostico getServicioConsultaDiagnostico() {

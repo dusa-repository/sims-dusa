@@ -54,7 +54,8 @@ public interface IConsultaDAO extends JpaRepository<Consulta, Long> {
 	List<Consulta> findByPacienteCedulaOrderByFechaConsultaDesc(String valueOf);
 
 	@Query("select c from Consulta c where c.fechaConsulta between ?1 and ?2 order by c.paciente.area.nombre asc,c.paciente.cargoReal.nombre asc,c.paciente.cedula asc, c.fechaConsulta desc")
-	List<Consulta> findByFechaConsultaBetweenOrderByFechaConsultaDesc(Date fecha1, Date fecha2);
+	List<Consulta> findByFechaConsultaBetweenOrderByFechaConsultaDesc(
+			Date fecha1, Date fecha2);
 
 	List<Consulta> findByFechaConsultaBetweenAndPacienteArea(Date fecha1,
 			Date fecha2, Area area2, Sort o);
@@ -64,8 +65,6 @@ public interface IConsultaDAO extends JpaRepository<Consulta, Long> {
 
 	List<Consulta> findByFechaConsultaBetweenAndTipoConsultaAndTipoConsultaSecundaria(
 			Date fecha1, Date fecha2, String tipo, String subTipo, Sort o);
-
-	List<Consulta> findByFechaConsultaBetween(Date fecha1, Date fecha2, Sort o);
 
 	List<Consulta> findByFechaConsultaBetweenAndUsuario(Date fecha1,
 			Date fecha2, Usuario doc, Sort o);
@@ -86,5 +85,9 @@ public interface IConsultaDAO extends JpaRepository<Consulta, Long> {
 	List<Consulta> findByFechaConsultaBetweenAndUsuarioAndReposoAndPacienteTrabajador(
 			Date fecha1, Date fecha2, Usuario doc, boolean b, boolean c, Sort o);
 
+	List<Consulta> findByFechaConsultaBetween(Date desde, Date hasta, Sort order);
+
+	List<Consulta> findByFechaConsultaBetweenAndPacienteTrabajador(Date desde,
+			Date hasta, boolean trabajador, Sort order);
 
 }

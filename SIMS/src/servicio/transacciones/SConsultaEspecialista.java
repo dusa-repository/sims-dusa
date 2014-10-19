@@ -39,7 +39,10 @@ public class SConsultaEspecialista {
 
 	public List<ConsultaEspecialista> buscarPorEspecialista(
 			Especialista especialista) {
-		// TODO Auto-generated method stub
 		return consultaEspecialistaDAO.findByEspecialista(especialista);
+	}
+
+	public double sumPorConsulta(Consulta consulta) {
+		return consultaEspecialistaDAO.sumByConsulta(consulta);
 	}
 }

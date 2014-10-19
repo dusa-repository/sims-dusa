@@ -37,6 +37,8 @@ public class Reportero extends HttpServlet {
 		CConsulta consulta = new CConsulta();
 		CMorbilidad morbilidad = new CMorbilidad();
 		CReposo reposo = new CReposo();
+		CResumen resumen = new CResumen();
+		CCosto costo = new CCosto();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
@@ -59,9 +61,9 @@ public class Reportero extends HttpServlet {
 		String par9 = request.getParameter("valor9");
 		String par10 = request.getParameter("valor10");
 		String par11 = request.getParameter("valor11");
-		
+
 		// Reporte Tipo Consulta
-		
+
 		byte[] fichero = null;
 		try {
 			switch (par1) {
@@ -98,22 +100,33 @@ public class Reportero extends HttpServlet {
 						par9);
 				break;
 			case "11":
-				fichero = morbilidad.reporteMorbilidadPorDiagnostico(par6, par7, par8,
-						par9,par10,par11);
+				fichero = morbilidad.reporteMorbilidadPorDiagnostico(par6,
+						par7, par8, par9, par10, par11);
 				break;
 			case "12":
-				fichero = morbilidad.reporteMorbilidadPorDoctor(par6, par7, par8,
-						par9);
+				fichero = morbilidad.reporteMorbilidadPorDoctor(par6, par7,
+						par8, par9);
 				break;
 			case "13":
 				fichero = reposo.reporteReposoPorArea(par6, par7, par8);
 				break;
 			case "14":
-				fichero = reposo.reporteReposoPorDoctor(par6, par7, par8,par9);
+				fichero = reposo.reporteReposoPorDoctor(par6, par7, par8, par9);
 				break;
 			case "15":
 				fichero = reposo.reporteReposoPorDiagnostico(par6, par7, par8);
 				break;
+			case "16":
+				fichero = resumen.reporteAreaTipoDiagnostico(par6, par7);
+				break;
+			case "17":
+				fichero = resumen.reporteDiagnostico(par6, par7, par8, par9);
+				break;
+			case "18":
+				fichero = resumen.reporteTipoConsulta(par6, par7, par8, par9);
+				break;
+			case "19":
+				fichero = costo.reporteCosto(par6, par7, part2, par9);
 			default:
 				break;
 			}

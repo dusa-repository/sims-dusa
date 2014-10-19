@@ -1,0 +1,61 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divCosto" apply="controlador.reporte.CCosto">
+		<groupbox width="50%" mold="3d" title="Titulo">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="15%" />
+					<column label="" width="35%" />
+					<column label="" width="15%" />
+					<column label="" width="35%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Desde:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<datebox width="100%" readonly="true" id="dtbDesde"
+							onCreate="self.value = new Date()" tooltiptext="Seleccione el inicio del Periodo a buscar" />
+						<hbox>
+							<label class="etiqueta" value="Hasta:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<datebox width="100%" readonly="true" id="dtbHasta"
+							onCreate="self.value = new Date()" tooltiptext="Seleccione el fin del Periodo a buscar" />
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Area:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox tooltiptext="Seleccione un Area" placeholder="Seleccione un Area"
+							id="cmbArea" readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idArea}" />
+							</template>
+						</combobox>
+						<hbox>
+							<label class="etiqueta" value="Tipo de Diagnostico:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox tooltiptext="Seleccione un Tipo de Diagnostico"
+							placeholder="Seleccione un Tipo de Diagnostico" id="cmbDiagnostico"
+							readonly="true" width="100%">
+							<comboitem label="Todos" />
+							<comboitem label="Accidente Laboral" />
+							<comboitem label="Enfermedad Laboral" />
+							<comboitem label="Incidente" />
+						</combobox>
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraCosto" />
+		</groupbox>
+	</div>
+</zk>

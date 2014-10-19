@@ -49,4 +49,8 @@ public class SConsultaServicioExterno {
 		// TODO Auto-generated method stub
 		return consultaServicioExternoDAO.findByServicioExterno(servicioExterno);
 	}
+
+	public double sumPorConsulta(Consulta consulta) {
+		return consultaServicioExternoDAO.sumByConsulta(consulta);
+	}
 }

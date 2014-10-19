@@ -9,6 +9,7 @@ import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaExamen;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface IConsultaExamenDAO  extends JpaRepository<ConsultaExamen, ConsultaExamenId> {
 
@@ -23,5 +24,8 @@ public interface IConsultaExamenDAO  extends JpaRepository<ConsultaExamen, Consu
 
 	List<ConsultaExamen> findByConsultaAndProveedorIdProveedor(
 			Consulta consuta, Long part5);
+
+	@Query("select coalesce((SUM(c.costo)),'0') from ConsultaExamen c where c.consulta=?1")
+	double sumByConsulta(Consulta consulta);
 
 }

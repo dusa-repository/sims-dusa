@@ -256,5 +256,24 @@ public class SConsulta {
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return consultaDAO.findByFechaConsultaBetweenAndUsuarioAndReposoAndPacienteTrabajador(fecha1, fecha2,doc,true,true, o);
 	}
+	
+	public List<Consulta> buscarTipoDeConsultaEntreFechasResumen(Date desde,
+			Date hasta) {
+		List<String> lista = new ArrayList<String>();
+		lista.add("tipoConsulta");
+		lista.add("tipoConsultaSecundaria");
+		Sort order = new Sort(Sort.Direction.ASC, lista);
+		return consultaDAO.findByFechaConsultaBetween(desde, hasta, order);
+	}
+
+	public List<Consulta> buscarTipoDeConsultaEntreFechasYTrabajadorResumen(
+			Date desde, Date hasta, boolean trabajador) {
+		List<String> lista = new ArrayList<String>();
+		lista.add("tipoConsulta");
+		lista.add("tipoConsultaSecundaria");
+		Sort order = new Sort(Sort.Direction.ASC, lista);
+		return consultaDAO.findByFechaConsultaBetweenAndPacienteTrabajador(
+				desde, hasta, trabajador, order);
+	}
 
 }
