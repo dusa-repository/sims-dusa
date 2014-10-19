@@ -5797,6 +5797,7 @@ public class CConsulta extends CGenerico {
 		p.put("doctorCedula", user.getCedula());
 		p.put("fechaDesde", consuta.getFechaConsulta());
 		p.put("fechaHasta", fechaHasta);
+		p.put("diasReposo", consuta.getDiasReposo());
 		p.put("area", area);
 		if (!diagnosticoConsulta.isEmpty()) {
 			p.put("diag", diagnosticoConsulta.get(0).getDiagnostico()

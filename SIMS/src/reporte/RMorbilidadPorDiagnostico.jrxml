@@ -15,7 +15,7 @@
 	<field name="consulta.paciente.ficha" class="java.lang.String"/>
 	<field name="consulta.paciente.edad" class="java.lang.Integer"/>
 	<field name="consulta.paciente.sexo" class="java.lang.String"/>
-	<field name="consulta.fechaConsulta" class="java.lang.String"/>
+	<field name="consulta.fechaConsulta" class="java.sql.Timestamp"/>
 	<field name="consulta.paciente.cedula" class="java.lang.String"/>
 	<field name="consulta.tipoConsultaSecundaria" class="java.lang.String"/>
 	<variable name="totalDiag" class="java.lang.Integer" resetType="Group" resetGroup="diagnostico" calculation="Count">
