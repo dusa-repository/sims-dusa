@@ -1,17 +1,17 @@
 package controlador.reporte;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import modelo.maestros.Cargo;
-import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
@@ -24,7 +24,6 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
@@ -34,69 +33,45 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Radio;
-import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
-import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
-public class CMorbilidad extends CGenerico {
+public class CReposo extends CGenerico {
 
 	@Wire
 	private Div catalogoUsuarios;
 	@Wire
 	private Combobox cmbArea;
 	@Wire
-	private Combobox cmbCargo;
-	@Wire
 	private Datebox dtbDesde;
 	@Wire
 	private Datebox dtbHasta;
 	@Wire
-	private Div divMorbilidad;
+	private Div divReposo;
 	@Wire
-	private Div botoneraMorbilidad;
-	@Wire
-	private Combobox cmbTipoConsulta;
-	@Wire
-	private Combobox cmbTipoPreventiva;
+	private Div botoneraReposo;
 	@Wire
 	private Row rowArea;
 	@Wire
 	private Row rowPaciente;
 	@Wire
-	private Row rowTipoConsulta;
-	@Wire
 	private Row rowDiagnostico;
 	@Wire
 	private Row rowDoctor;
 	@Wire
-	private Row rowFamiliar;
-	@Wire
 	private Button btnBuscarPaciente;
-	@Wire
-	private Spinner spnDe;
-	@Wire
-	private Spinner spnA;
 	@Wire
 	private Button btnBuscarDoctor;
 	@Wire
 	private Combobox cmbUnidad;
 	@Wire
 	private Combobox cmbDiagnostico;
-	@Wire
-	private Radiogroup rdgFamiliar;
-	@Wire
-	private Radio rdoFamiliares;
-	@Wire
-	private Radio rdoTrabajadores;
-	@Wire
-	private Radio rdoTodos;
 	@Wire
 	private Label lblPaciente;
 	@Wire
@@ -114,13 +89,6 @@ public class CMorbilidad extends CGenerico {
 	public String getTitulo() {
 		return titulo;
 	}
-
-	private String[] consultaPreventiva = { "TODAS", "Pre-Empleo",
-			"Pre-Vacacional", "Post-Vacacional", "Egreso", "Cambio de Puesto",
-			"Promocion", "Reintegro", "Por Area", "Checkeo General" };
-	private String[] consultaCurativa = { "TODAS", "Primera", "Control", "IC" };
-
-	private String[] consultaTodas = { "TODAS" };
 
 	@Override
 	public void inicializar() throws IOException {
@@ -141,36 +109,21 @@ public class CMorbilidad extends CGenerico {
 			rowArea.setVisible(true);
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(false);
-			rowFamiliar.setVisible(false);
 			rowPaciente.setVisible(false);
-			rowTipoConsulta.setVisible(false);
 			tipo = "area";
-			break;
-		case "Por Tipo de Consulta":
-			rowArea.setVisible(false);
-			rowDiagnostico.setVisible(false);
-			rowDoctor.setVisible(false);
-			rowFamiliar.setVisible(false);
-			rowPaciente.setVisible(false);
-			rowTipoConsulta.setVisible(true);
-			tipo = "tipoConsulta";
 			break;
 		case "Por Diagnostico":
 			rowArea.setVisible(false);
 			rowDiagnostico.setVisible(true);
 			rowDoctor.setVisible(false);
-			rowFamiliar.setVisible(true);
 			rowPaciente.setVisible(false);
-			rowTipoConsulta.setVisible(false);
 			tipo = "diagnostico";
 			break;
 		case "Por Doctor":
 			rowArea.setVisible(false);
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(true);
-			rowFamiliar.setVisible(false);
 			rowPaciente.setVisible(false);
-			rowTipoConsulta.setVisible(false);
 			tipo = "doctor";
 			break;
 		}
@@ -180,7 +133,7 @@ public class CMorbilidad extends CGenerico {
 			@Override
 			public void salir() {
 				// Pasar el nombre del arbol por el CARBOL
-				cerrarVentana(divMorbilidad, titulo, tabs);
+				cerrarVentana(divReposo, titulo, tabs);
 			}
 
 			@Override
@@ -192,19 +145,8 @@ public class CMorbilidad extends CGenerico {
 				case "area":
 					cmbArea.setValue("TODAS");
 					break;
-				case "tipoConsulta":
-					cmbTipoConsulta.setValue("TODAS");
-					cmbTipoPreventiva.setValue("TODAS");
-					// lblPaciente.setValue("");
-					// idPaciente = "";
-					break;
 				case "diagnostico":
 					cmbDiagnostico.setValue("TODOS");
-					spnDe.setValue(0);
-					spnA.setValue(100);
-					rdoFamiliares.setChecked(false);
-					rdoTodos.setChecked(false);
-					rdoTrabajadores.setChecked(false);
 					break;
 				case "doctor":
 					idDoctor = "";
@@ -220,10 +162,6 @@ public class CMorbilidad extends CGenerico {
 					case "area":
 						if (validarArea())
 							reporteArea();
-						break;
-					case "tipoConsulta":
-						if (validarTipoConsulta())
-							reporteTipoConsulta();
 						break;
 					case "diagnostico":
 						if (validarDiagnostico())
@@ -246,7 +184,7 @@ public class CMorbilidad extends CGenerico {
 		Button guardar = (Button) botonera.getChildren().get(0);
 		guardar.setLabel("Reporte");
 		botonera.getChildren().get(1).setVisible(false);
-		botoneraMorbilidad.appendChild(botonera);
+		botoneraReposo.appendChild(botonera);
 	}
 
 	private void cargarCombos() {
@@ -257,34 +195,7 @@ public class CMorbilidad extends CGenerico {
 		List<Area> areas = new ArrayList<Area>();
 		areas.add(area);
 		areas.addAll(servicioArea.buscarTodos());
-		Cargo cargo = new Cargo();
-		cargo.setNombre(todos);
-		cargo.setIdCargo(0);
-		List<Cargo> cargos = new ArrayList<Cargo>();
-		cargos.add(cargo);
-		cargos.addAll(servicioCargo.buscarTodos());
 		cmbArea.setModel(new ListModelList<Area>(areas));
-		cmbCargo.setModel(new ListModelList<Cargo>(cargos));
-	}
-
-	@Listen("onSelect = #cmbTipoConsulta")
-	public void buscarPreventiva() {
-		if (cmbTipoConsulta.getValue().equals("Preventiva")) {
-			cmbTipoPreventiva.setModel(new ListModelList<String>(
-					consultaPreventiva));
-
-		} else {
-			if (cmbTipoConsulta.getValue().equals("Curativa")) {
-				cmbTipoPreventiva.setModel(new ListModelList<String>(
-						consultaCurativa));
-			} else {
-				cmbTipoPreventiva.setModel(new ListModelList<String>(
-						consultaTodas));
-
-			}
-		}
-		cmbTipoPreventiva.setVisible(true);
-		cmbTipoPreventiva.setValue("TODAS");
 	}
 
 	public boolean validar() {
@@ -311,21 +222,8 @@ public class CMorbilidad extends CGenerico {
 		return true;
 	}
 
-	public boolean validarTipoConsulta() {
-		if (cmbTipoConsulta.getText().compareTo("") == 0
-				|| cmbTipoPreventiva.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
-			return false;
-		}
-		return true;
-	}
-
 	public boolean validarDiagnostico() {
-		if (cmbDiagnostico.getText().compareTo("") == 0
-				|| spnA.getText().compareTo("") == 0
-				|| spnDe.getText().compareTo("") == 0
-				|| (!rdoFamiliares.isChecked() && !rdoTrabajadores.isChecked() && !rdoTodos
-						.isChecked())) {
+		if (cmbDiagnostico.getText().compareTo("") == 0) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
@@ -363,20 +261,18 @@ public class CMorbilidad extends CGenerico {
 		// else {
 		Clients.evalJavaScript("window.open('"
 				+ damePath()
-				+ "Reportero?valor=9&valor6="
+				+ "Reportero?valor=13&valor6="
 				+ fecha1
 				+ "&valor7="
 				+ fecha2
 				+ "&valor8="
 				+ area
-				+ "&valor9="
-				+ cmbCargo.getValue()
 				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 
 	}
 
-	public byte[] reporteMorbilidadPorArea(String part1, String part2,
-			String area, String cargo) throws JRException {
+	public byte[] reporteReposoPorArea(String part1, String part2, String area)
+			throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -395,112 +291,13 @@ public class CMorbilidad extends CGenerico {
 		List<Consulta> consuta = new ArrayList<Consulta>();
 
 		if (area.equals(""))
-			consuta = getServicioConsulta().buscarEntreFechas(fecha1, fecha2);
+			consuta = getServicioConsulta()
+					.buscarEntreFechasReposoyTrabajadores(fecha1, fecha2);
 		else {
 			Area area2 = getServicioArea().buscar(Long.parseLong(area));
-			consuta = getServicioConsulta().buscarEntreFechasyArea(fecha1,
-					fecha2, area2);
-		}
-
-		// if (consuta.isEmpty())
-		// msj.mensajeAlerta(Mensaje.noHayRegistros);
-		// else {
-		Map p = new HashMap();
-		p.put("desde", part1);
-		p.put("hasta", part2);
-		p.put("area", area);
-		p.put("cargo", cargo);
-
-		for (int i = 0; i < consuta.size(); i++) {
-			Consulta cons = consuta.get(i);
-			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
-					.buscarPorConsulta(cons);
-			if (!dig.isEmpty()) {
-				if (dig.get(0) != null) {
-					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
-							.getNombre());
-					cons.setMotivoConsulta(dig.get(0).getTipo());
-				}
-			} else {
-				cons.setEnfermedadActual("");
-				cons.setMotivoConsulta("");
-			}
-		}
-
-		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
-				.getResource("/reporte/RMorbilidadPorArea.jasper"));
-		fichero = JasperRunManager.runReportToPdf(reporte, p,
-				new JRBeanCollectionDataSource(consuta));
-		// }
-		return fichero;
-	}
-
-	public void reporteTipoConsulta() {
-		Date desde = dtbDesde.getValue();
-		Date hasta = dtbHasta.getValue();
-		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
-		String fecha1 = fecha.format(desde);
-		String fecha2 = fecha.format(hasta);
-		String tipoC = "";
-		String subTipo = "";
-
-		if (cmbTipoConsulta.getValue().equals("TODAS"))
-			tipoC = "";
-		else
-			tipoC = cmbTipoConsulta.getValue();
-
-		if (cmbTipoPreventiva.getValue().equals("TODAS"))
-			subTipo = "";
-		else
-			subTipo = cmbTipoPreventiva.getValue();
-
-		Clients.evalJavaScript("window.open('"
-				+ damePath()
-				+ "Reportero?valor=10&valor6="
-				+ fecha1
-				+ "&valor7="
-				+ fecha2
-				+ "&valor8="
-				+ tipoC
-				+ "&valor9="
-				+ subTipo
-				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
-
-	}
-
-	public byte[] reporteMorbilidadPorTipo(String part1, String part2,
-			String tipo, String subTipo) throws JRException {
-		byte[] fichero = null;
-		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-		Date fecha1 = null;
-		try {
-			fecha1 = formato.parse(part1);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		Date fecha2 = null;
-		try {
-			fecha2 = formato.parse(part2);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		List<Consulta> consuta = new ArrayList<Consulta>();
-
-		if (tipo.equals("") && subTipo.equals(""))
-			consuta = getServicioConsulta().buscarEntreFechasOrdenadasPorTipo(
-					fecha1, fecha2);
-		else {
-			if (!tipo.equals("") && subTipo.equals(""))
-				consuta = getServicioConsulta().buscarEntreFechasyTipoConsulta(
-						fecha1, fecha2, tipo);
-			else {
-				if (!tipo.equals("") && !subTipo.equals(""))
-					consuta = getServicioConsulta()
-							.buscarEntreFechasTipoConsultaySubTipo(fecha1,
-									fecha2, tipo, subTipo);
-			}
-
+			consuta = getServicioConsulta()
+					.buscarEntreFechasReposoAreayTrabajadores(fecha1, fecha2,
+							area2);
 		}
 
 		// if (consuta.isEmpty())
@@ -514,11 +311,20 @@ public class CMorbilidad extends CGenerico {
 			Consulta cons = consuta.get(i);
 			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
 					.buscarPorConsulta(cons);
+			Calendar c = Calendar.getInstance();
+			c.setTime(cons.getFechaConsulta());
+			c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+			Date fechaHasta = c.getTime();
+			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
+			// Timestamp fechaHasta = (Timestamp) c.getTime();
+			cons.setFechaAuditoria(fechaHasta2);
 			if (!dig.isEmpty()) {
 				if (dig.get(0) != null) {
+
 					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
 							.getNombre());
 					cons.setMotivoConsulta(dig.get(0).getTipo());
+
 				}
 			} else {
 				cons.setEnfermedadActual("");
@@ -527,7 +333,7 @@ public class CMorbilidad extends CGenerico {
 		}
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
-				.getResource("/reporte/RMorbilidadPorTipoConsulta.jasper"));
+				.getResource("/reporte/RRepososPorArea.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consuta));
 		// }
@@ -541,43 +347,25 @@ public class CMorbilidad extends CGenerico {
 		String fecha1 = fecha.format(desde);
 		String fecha2 = fecha.format(hasta);
 		String diagnostico = "";
-		String radio = "";
 		if (cmbDiagnostico.getValue().equals("TODOS"))
 			diagnostico = "";
 		else
 			diagnostico = cmbDiagnostico.getValue();
 
-		if (rdoFamiliares.isChecked())
-			radio = "Familiares";
-		if (rdoTodos.isChecked())
-			radio = "Todos";
-		if (rdoTrabajadores.isChecked())
-			radio = "Trabajadores";
-
-		String a = String.valueOf(spnA.getValue());
-		String de = String.valueOf(spnDe.getValue());
-
 		Clients.evalJavaScript("window.open('"
 				+ damePath()
-				+ "Reportero?valor=11&valor6="
+				+ "Reportero?valor=15&valor6="
 				+ fecha1
 				+ "&valor7="
 				+ fecha2
 				+ "&valor8="
 				+ diagnostico
-				+ "&valor9="
-				+ radio
-				+ "&valor10="
-				+ a
-				+ "&valor11="
-				+ de
 				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 
 	}
 
-	public byte[] reporteMorbilidadPorDiagnostico(String part1, String part2,
-			String diagnostico, String familiar, String a, String de)
-			throws JRException {
+	public byte[] reporteReposoPorDiagnostico(String part1, String part2,
+			String diagnostico) throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -594,45 +382,14 @@ public class CMorbilidad extends CGenerico {
 		}
 
 		List<ConsultaDiagnostico> consutaDiag = new ArrayList<ConsultaDiagnostico>();
-		int dea = Integer.valueOf(de);
-		int aa = Integer.valueOf(a);
-		if (diagnostico.equals("") && familiar.equals("Todos"))
+
+		if (diagnostico.equals(""))
 			consutaDiag = getServicioConsultaDiagnostico()
-					.buscarEntreFechasEntreEdades(fecha1, fecha2, dea, aa);
+					.buscarEntreFechasOrdenadoPorDiagnostico(fecha1, fecha2);
 		else {
-			if (!diagnostico.equals("") && familiar.equals("Todos"))
-				consutaDiag = getServicioConsultaDiagnostico()
-						.buscarEntreFechasEntreEdadesyTipoDiagnostico(fecha1,
-								fecha2, dea, aa, diagnostico);
-			else {
-				if (diagnostico.equals("") && familiar.equals("Familiares"))
-					consutaDiag = getServicioConsultaDiagnostico()
-							.buscarEntreFechasEntreEdadesyFamiliar(fecha1,
-									fecha2, dea, aa, false);
-				else {
-					if (diagnostico.equals("")
-							&& familiar.equals("Trabajadores"))
-						consutaDiag = getServicioConsultaDiagnostico()
-								.buscarEntreFechasEntreEdadesyFamiliar(fecha1,
-										fecha2, dea, aa, true);
-					else {
-						if (!diagnostico.equals("")
-								&& familiar.equals("Familiares"))
-							consutaDiag = getServicioConsultaDiagnostico()
-									.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliar(
-											fecha1, fecha2, dea, aa,
-											diagnostico, false);
-						else {
-							if (!diagnostico.equals("")
-									&& familiar.equals("Trabajadores"))
-								consutaDiag = getServicioConsultaDiagnostico()
-										.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliar(
-												fecha1, fecha2, dea, aa,
-												diagnostico, true);
-						}
-					}
-				}
-			}
+			consutaDiag = getServicioConsultaDiagnostico()
+					.buscarEntreFechasyTipoDiagnostico(fecha1,
+							fecha2, diagnostico);
 		}
 		// if (consutaDiag.isEmpty())
 		// msj.mensajeAlerta(Mensaje.noHayRegistros);
@@ -640,12 +397,19 @@ public class CMorbilidad extends CGenerico {
 		Map p = new HashMap();
 		p.put("desde", part1);
 		p.put("hasta", part2);
-		p.put("edad1", dea);
-		p.put("edad2", aa);
-		p.put("paciente", familiar);
+		
+		for (int i = 0; i < consutaDiag.size(); i++) {
+			Consulta cons = consutaDiag.get(i).getConsulta();
+			Calendar c = Calendar.getInstance();
+			c.setTime(cons.getFechaConsulta());
+			c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+			Date fechaHasta = c.getTime();
+			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
+			cons.setFechaAuditoria(fechaHasta2);
+		}
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
-				.getResource("/reporte/RMorbilidadPorDiagnostico.jasper"));
+				.getResource("/reporte/RRepososPorDiagnostico.jasper"));
 
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consutaDiag));
@@ -669,7 +433,7 @@ public class CMorbilidad extends CGenerico {
 
 		Clients.evalJavaScript("window.open('"
 				+ damePath()
-				+ "Reportero?valor=12&valor6="
+				+ "Reportero?valor=14&valor6="
 				+ fecha1
 				+ "&valor7="
 				+ fecha2
@@ -681,7 +445,7 @@ public class CMorbilidad extends CGenerico {
 
 	}
 
-	public byte[] reporteMorbilidadPorDoctor(String part1, String part2,
+	public byte[] reporteReposoPorDoctor(String part1, String part2,
 			String unidad, String doctor) throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -702,22 +466,26 @@ public class CMorbilidad extends CGenerico {
 
 		if (unidad.equals("") && doctor.equals("TODOS"))
 			consuta = getServicioConsulta()
-					.buscarEntreFechasOrdenadasPorUnidad(fecha1, fecha2);
+					.buscarEntreFechasOrdenadasPorUnidadReposoyTrabajadores(
+							fecha1, fecha2);
 		else {
 			if (!unidad.equals("") && doctor.equals("TODOS"))
-				consuta = getServicioConsulta().buscarEntreFechasPorUnidad(
-						fecha1, fecha2, unidad);
+				consuta = getServicioConsulta()
+						.buscarEntreFechasPorUnidadReposoyTrabajadores(fecha1,
+								fecha2, unidad);
 			else {
 				if (unidad.equals("") && !doctor.equals("TODOS")) {
 					Usuario doc = getServicioUsuario().buscarPorCedula(doctor);
-					consuta = getServicioConsulta().buscarEntreFechasPorDoctor(
-							fecha1, fecha2, doc);
+					consuta = getServicioConsulta()
+							.buscarEntreFechasPorDoctorReposoyTrabajadores(
+									fecha1, fecha2, doc);
 				} else {
 					if (!unidad.equals("") && !doctor.equals("TODOS")) {
 						Usuario doc = getServicioUsuario().buscarPorCedula(
 								doctor);
 						consuta = getServicioConsulta()
-								.buscarEntreFechasPorDoctor(fecha1, fecha2, doc);
+								.buscarEntreFechasPorDoctorReposoyTrabajadores(
+										fecha1, fecha2, doc);
 					}
 				}
 			}
@@ -730,15 +498,24 @@ public class CMorbilidad extends CGenerico {
 			p.put("unidad", "TODAS");
 		else
 			p.put("unidad", unidad);
+
 		for (int i = 0; i < consuta.size(); i++) {
 			Consulta cons = consuta.get(i);
 			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
 					.buscarPorConsulta(cons);
+			Calendar c = Calendar.getInstance();
+			c.setTime(cons.getFechaConsulta());
+			c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+			Date fechaHasta = c.getTime();
+			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
+			// Timestamp fechaHasta = (Timestamp) c.getTime();
+			cons.setFechaAuditoria(fechaHasta2);
 			if (!dig.isEmpty()) {
 				if (dig.get(0) != null) {
 					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
 							.getNombre());
 					cons.setMotivoConsulta(dig.get(0).getTipo());
+
 				}
 			} else {
 				cons.setEnfermedadActual("");
@@ -747,7 +524,7 @@ public class CMorbilidad extends CGenerico {
 		}
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
-				.getResource("/reporte/RMorbilidadPorDoctor.jasper"));
+				.getResource("/reporte/RRepososPorDoctor.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consuta));
 		// }

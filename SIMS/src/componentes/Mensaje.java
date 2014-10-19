@@ -57,7 +57,7 @@ public class Mensaje {
 	public static String guardadosArchivos ="La Data ha sido Guardada Exitosamente";
 	public static String guardadosAlgunosArchivos = "Alguna Data estaba mal estructurada por lo tanto no pudo ser guardada toda correctamente";
 	public static String pacienteNoExiste="La Cedula del Paciente no Existe  o el Paciente se Encuentra Inactivo";
-	
+	public static String fechaPosterior="La Fecha Inicio no puede ser Posterior a la Fecha Final ";
 
 	public void mensajeInformacion(String msj) {
 		Messagebox.show(msj, "Informacion", Messagebox.OK,

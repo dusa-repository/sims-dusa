@@ -19,85 +19,65 @@
 	</zscript>
 	<window height="100%" width="100%" title="" border="0"
 		contentStyle="overflow:auto" apply="controlador.portal.CIndex">
-		<borderlayout height="100%"
+		<borderlayout height="100%" 
 			style="background-image: url('public/imagenes/generales/fondo.png'); background-repeat:no-repeat;height=50%; width=50% ; background-color:white">
 			<north height="2%" class="banner">
-				<hbox hflex="1">
-					<separator />
-					<separator />
-					<separator />
-				</hbox>
 			</north>
-			<east width="70%" border="none">
-				<vlayout>
-					<div align="center">
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<image src="/public/imagenes/generales/LogoDusa.png" height="4em"
-							width="15em" />
-					</div>
-					<div height="100%" align="left">
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<label class="lblIndex" value="SISTEMA INTEGRAL MEDICO Y DE SEGURIDAD" />
-					</div>
-					<separator />
-					<separator />
-					<separator />
-					<separator />
-					<separator />
-					<separator />
-					<separator />
-					<div height="100%" width="100%" align="center">
-						<groupbox closable="false" height="100%" width="40%">
-							<caption label="${a}"
-								style="color:black; font-size: 20px; font-weight:bold" />
-							<separator></separator>
-							<separator></separator>
-							<hlayout width="100%">
-								<h:form id="inicioSesion" action="j_spring_security_check"
-									method="POST" xmlns:h="native" align="left">
-									<vlayout width="100%">
-										<label class="etiqueta" height="20px" style="font-size:14px"
-											value="Nombre de Usuario :" />
-										<textbox placeholder="Usuario" height="22px" id="log_usuario"
-											name="j_username" hflex="1" width="200px" />
-									</vlayout>
-									<separator></separator>
-									<vlayout width="100%">
-										<label class="etiqueta" height="20px" style="font-size:14px"
-											value="Contraseña :" />
-										<textbox placeholder="Contraseña" height="22px" id="log_clave"
-											hflex="1" type="password" name="j_password" width="200px" />
-									</vlayout>
+			<east width="75%" border="none">
+			<vlayout  height="100%" >
+					<vbox height="100%" heights="20%,20%,60%">
+						<div  width="100%" height="100%" align="center">
+							<image src="/public/imagenes/generales/LogoDusa.png"
+								height="5em" width="20em" />
+								<separator height="80%"/>
+						</div>
+						 <div   width="100%" height="100%"  align="center">
+							<label class="lblIndex" value="SISTEMA INTEGRAL MEDICO Y DE SEGURIDAD" />
+						</div>
+						<div  width="100%" height="100%" align="center">
+							<groupbox closable="false" height="100%" width="50%">
+								<caption label="${a}"
+									style="color:black; font-size: 20px; font-weight:bold" />
+								<separator></separator>
+								<separator></separator>
+								<hlayout width="100%">
+									<h:form id="inicioSesion" action="j_spring_security_check"
+										method="POST" xmlns:h="native" align="left">
+										<vlayout width="100%">
+											<label class="etiqueta" height="20px" style="font-size:14px"
+												value="Nombre de Usuario :" />
+											<textbox placeholder="Usuario" height="22px" id="log_usuario"
+												name="j_username" hflex="1" width="200px" />
+										</vlayout>
+										<separator></separator>
+										<vlayout width="100%">
+											<label class="etiqueta" height="20px" style="font-size:14px"
+												value="Contraseña :" />
+											<textbox placeholder="Contraseña" height="22px" id="log_clave"
+												hflex="1" type="password" name="j_password" width="200px" />
+										</vlayout>
+										<separator />
+										<separator />
+										<hlayout width="100%">
+											<button type="submit" class="btn" label="Entrar"
+												style="font-size:18px" image="/public/imagenes/botones/entrar.png"
+												height="37px" width="170px" />
+										</hlayout>
+									</h:form>
+								</hlayout>
+								<vlayout width="100%">
 									<separator />
 									<separator />
-									<hlayout width="100%">
-										<button type="submit" class="btn" label="Entrar"
-											style="font-size:18px" image="/public/imagenes/botones/entrar.png"
-											height="37px" width="170px" />
-									</hlayout>
-								</h:form>
-							</hlayout>
-							<vlayout width="100%">
-								<separator />
-								<separator />
-								<a href="">
-									<label id="lblOlvidoClave" sclass="pointer"
-										value="¿Olvido su Contraseña?"
-										style="color:red;margin-left:10px;font-weight:bold;font-size:12px" />
-								</a>
-							</vlayout>
-						</groupbox>
-					</div>
-				</vlayout>
+									<a href="">
+										<label id="lblOlvidoClave" sclass="pointer"
+											value="¿Olvido su Contraseña?"
+											style="color:red;margin-left:10px;font-weight:bold;font-size:12px" />
+									</a>
+								</vlayout>
+							</groupbox>
+						</div> 
+					</vbox>
+					</vlayout>
 			</east>
 			<south class="banner" border="0" height="5%" collapsible="false">
 				<div align="center" sclass="footer">

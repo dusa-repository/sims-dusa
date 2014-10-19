@@ -37,4 +37,20 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 	List<Usuario> findByGrupos(Grupo grupo);
 
 	List<Usuario> findByDoctor(boolean b);
+
+	List<Usuario> findByDoctorAndEspecialidadDescripcionStartingWithAllIgnoreCase(
+			boolean b, String valor);
+
+	List<Usuario> findByDoctorAndCedulaStartingWithAllIgnoreCase(boolean b,
+			String valor);
+
+	List<Usuario> findByDoctorAndFichaStartingWithAllIgnoreCase(boolean b,
+			String valor);
+
+	List<Usuario> findByDoctorAndPrimerNombreStartingWithAllIgnoreCase(
+			boolean b, String valor);
+
+	List<Usuario> findByDoctorAndPrimerApellidoStartingWithAllIgnoreCase(
+			boolean b, String valor);
+
 }

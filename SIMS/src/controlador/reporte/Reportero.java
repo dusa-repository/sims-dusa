@@ -36,11 +36,12 @@ public class Reportero extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		CConsulta consulta = new CConsulta();
 		CMorbilidad morbilidad = new CMorbilidad();
+		CReposo reposo = new CReposo();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
 		String part21 = request.getParameter("valor2");
-		if(part21!=null)
+		if (part21 != null)
 			part2 = Long.parseLong(part21);
 		String par3 = request.getParameter("valor3");
 		String partecita4 = request.getParameter("valor4");
@@ -51,11 +52,16 @@ public class Reportero extends HttpServlet {
 		Long part5 = (long) 0;
 		if (partecita5 != null)
 			part5 = Long.parseLong(partecita5);
-
+		// Reporte de Area y Tipo
 		String par6 = request.getParameter("valor6");
 		String par7 = request.getParameter("valor7");
 		String par8 = request.getParameter("valor8");
 		String par9 = request.getParameter("valor9");
+		String par10 = request.getParameter("valor10");
+		String par11 = request.getParameter("valor11");
+		
+		// Reporte Tipo Consulta
+		
 		byte[] fichero = null;
 		try {
 			switch (par1) {
@@ -69,7 +75,7 @@ public class Reportero extends HttpServlet {
 				fichero = consulta.reporteServicio(part2, part4, part5);
 				break;
 			case "4":
-				fichero = consulta.reporteExamen(part2,part5);
+				fichero = consulta.reporteExamen(part2, part5);
 				break;
 			case "5":
 				fichero = consulta.reporteConsulta(part2);
@@ -84,7 +90,29 @@ public class Reportero extends HttpServlet {
 				fichero = consulta.reporteConstancia(part2);
 				break;
 			case "9":
-				fichero = morbilidad.reporteMorbilidad(par6,par7,par8,par9);
+				fichero = morbilidad.reporteMorbilidadPorArea(par6, par7, par8,
+						par9);
+				break;
+			case "10":
+				fichero = morbilidad.reporteMorbilidadPorTipo(par6, par7, par8,
+						par9);
+				break;
+			case "11":
+				fichero = morbilidad.reporteMorbilidadPorDiagnostico(par6, par7, par8,
+						par9,par10,par11);
+				break;
+			case "12":
+				fichero = morbilidad.reporteMorbilidadPorDoctor(par6, par7, par8,
+						par9);
+				break;
+			case "13":
+				fichero = reposo.reporteReposoPorArea(par6, par7, par8);
+				break;
+			case "14":
+				fichero = reposo.reporteReposoPorDoctor(par6, par7, par8,par9);
+				break;
+			case "15":
+				fichero = reposo.reporteReposoPorDiagnostico(par6, par7, par8);
 				break;
 			default:
 				break;
