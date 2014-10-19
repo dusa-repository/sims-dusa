@@ -68,15 +68,15 @@ public class CResumen extends CGenerico {
 			}
 		}
 		switch (nombre) {
-		case "Resumen de Morbilidad por Area y Tipo de Diagnostico":
+		case "Morbilidad por Area y Tipo de Diagnostico":
 			row.setVisible(false);
 			tipo = "1";
 			break;
-		case "Resumen de Morbilidad por Diagnostico":
+		case "Morbilidad por Diagnostico":
 			row.setVisible(true);
 			tipo = "2";
 			break;
-		case "Resumen de Morbilidad por Tipo de Consulta":
+		case "Morbilidad por Tipo de Consulta":
 			row.setVisible(true);
 			tipo = "3";
 			break;
