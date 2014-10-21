@@ -32,7 +32,7 @@
 		<groupHeader>
 			<band height="25">
 				<rectangle>
-					<reportElement x="2" y="5" width="552" height="17" backcolor="#F1EDED" uuid="a09d1e98-1fb9-4bc8-8027-cdb5d41ec916"/>
+					<reportElement x="2" y="5" width="552" height="15" backcolor="#DBD7D7" uuid="a09d1e98-1fb9-4bc8-8027-cdb5d41ec916"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
@@ -71,7 +71,7 @@
 					<box>
 						<topPen lineWidth="0.5"/>
 					</box>
-					<textElement>
+					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{totalUnidad}]]></textFieldExpression>
@@ -90,7 +90,7 @@
 		<groupHeader>
 			<band height="24">
 				<rectangle>
-					<reportElement x="2" y="4" width="552" height="17" backcolor="#F1EDED" uuid="79a37a73-3430-46be-aa95-909c472b9d63"/>
+					<reportElement x="2" y="4" width="552" height="15" backcolor="#F1EDED" uuid="79a37a73-3430-46be-aa95-909c472b9d63"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
@@ -146,7 +146,7 @@
 					<box>
 						<topPen lineWidth="0.5"/>
 					</box>
-					<textElement>
+					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{totalDoctor}]]></textFieldExpression>
@@ -230,8 +230,8 @@
 				<text><![CDATA[Desde:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="139" y="22" width="315" height="25" uuid="b5e14a92-4943-45b8-9c2f-dfd8ff6d0f37"/>
-				<textElement>
+				<reportElement x="152" y="22" width="315" height="25" uuid="b5e14a92-4943-45b8-9c2f-dfd8ff6d0f37"/>
+				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[MORBILIDAD POR DOCTOR]]></text>

@@ -1,10 +1,12 @@
 package controlador.reporte;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -137,7 +139,7 @@ public class CMorbilidad extends CGenerico {
 		}
 
 		switch (titulo) {
-		case "Por Area":
+		case "Morbilidad Por Area":
 			rowArea.setVisible(true);
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(false);
@@ -146,7 +148,7 @@ public class CMorbilidad extends CGenerico {
 			rowTipoConsulta.setVisible(false);
 			tipo = "area";
 			break;
-		case "Por Tipo de Consulta":
+		case "Morbilidad Por Tipo de Consulta":
 			rowArea.setVisible(false);
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(false);
@@ -155,7 +157,7 @@ public class CMorbilidad extends CGenerico {
 			rowTipoConsulta.setVisible(true);
 			tipo = "tipoConsulta";
 			break;
-		case "Por Diagnostico":
+		case "Morbilidad Por Diagnostico":
 			rowArea.setVisible(false);
 			rowDiagnostico.setVisible(true);
 			rowDoctor.setVisible(false);
@@ -164,7 +166,7 @@ public class CMorbilidad extends CGenerico {
 			rowTipoConsulta.setVisible(false);
 			tipo = "diagnostico";
 			break;
-		case "Por Doctor":
+		case "Morbilidad Por Doctor":
 			rowArea.setVisible(false);
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(true);
@@ -245,6 +247,7 @@ public class CMorbilidad extends CGenerico {
 		};
 		Button guardar = (Button) botonera.getChildren().get(0);
 		guardar.setLabel("Reporte");
+		guardar.setSrc("/public/imagenes/botones/reporte.png");
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraMorbilidad.appendChild(botonera);
 	}
@@ -355,23 +358,24 @@ public class CMorbilidad extends CGenerico {
 			area2 = getServicioArea().buscar(Long.parseLong(area));
 		}
 
-		// if ((area.equals("") && servicioConsulta
-		// .buscarEntreFechas(desde, hasta).isEmpty())
-		// || (!area.equals("") && servicioConsulta
-		// .buscarEntreFechasyArea(desde, hasta, area2).isEmpty()))
-		// msj.mensajeAlerta(Mensaje.noHayRegistros);
-		// else {
-		Clients.evalJavaScript("window.open('"
-				+ damePath()
-				+ "Reportero?valor=9&valor6="
-				+ fecha1
-				+ "&valor7="
-				+ fecha2
-				+ "&valor8="
-				+ area
-				+ "&valor9="
-				+ cmbCargo.getValue()
-				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		if ((area.equals("") && servicioConsulta
+				.buscarEntreFechas(desde, hasta).isEmpty())
+				|| (!area.equals("") && servicioConsulta
+						.buscarEntreFechasyArea(desde, hasta, area2).isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=9&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ area
+					+ "&valor9="
+					+ cmbCargo.getValue()
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
 
 	}
 
@@ -401,10 +405,6 @@ public class CMorbilidad extends CGenerico {
 			consuta = getServicioConsulta().buscarEntreFechasyArea(fecha1,
 					fecha2, area2);
 		}
-
-		// if (consuta.isEmpty())
-		// msj.mensajeAlerta(Mensaje.noHayRegistros);
-		// else {
 		Map p = new HashMap();
 		p.put("desde", part1);
 		p.put("hasta", part2);
@@ -420,6 +420,8 @@ public class CMorbilidad extends CGenerico {
 					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
 							.getNombre());
 					cons.setMotivoConsulta(dig.get(0).getTipo());
+					Paciente paciente = cons.getPaciente();
+					paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
 				}
 			} else {
 				cons.setEnfermedadActual("");
@@ -431,7 +433,6 @@ public class CMorbilidad extends CGenerico {
 				.getResource("/reporte/RMorbilidadPorArea.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consuta));
-		// }
 		return fichero;
 	}
 
@@ -454,17 +455,28 @@ public class CMorbilidad extends CGenerico {
 		else
 			subTipo = cmbTipoPreventiva.getValue();
 
-		Clients.evalJavaScript("window.open('"
-				+ damePath()
-				+ "Reportero?valor=10&valor6="
-				+ fecha1
-				+ "&valor7="
-				+ fecha2
-				+ "&valor8="
-				+ tipoC
-				+ "&valor9="
-				+ subTipo
-				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		if ((tipoC.equals("") && subTipo.equals("") && servicioConsulta
+				.buscarEntreFechasOrdenadasPorTipo(desde, hasta).isEmpty())
+				|| (!tipoC.equals("") && subTipo.equals("") && servicioConsulta
+						.buscarEntreFechasyTipoConsulta(desde, hasta, tipoC)
+						.isEmpty())
+				|| (!tipoC.equals("") && !subTipo.equals("") && servicioConsulta
+						.buscarEntreFechasTipoConsultaySubTipo(desde, hasta,
+								tipoC, subTipo).isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=10&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ tipoC
+					+ "&valor9="
+					+ subTipo
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
 
 	}
 
@@ -503,9 +515,6 @@ public class CMorbilidad extends CGenerico {
 
 		}
 
-		// if (consuta.isEmpty())
-		// msj.mensajeAlerta(Mensaje.noHayRegistros);
-		// else {
 		Map p = new HashMap();
 		p.put("desde", part1);
 		p.put("hasta", part2);
@@ -519,6 +528,8 @@ public class CMorbilidad extends CGenerico {
 					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
 							.getNombre());
 					cons.setMotivoConsulta(dig.get(0).getTipo());
+					Paciente paciente = cons.getPaciente();
+					paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
 				}
 			} else {
 				cons.setEnfermedadActual("");
@@ -530,7 +541,6 @@ public class CMorbilidad extends CGenerico {
 				.getResource("/reporte/RMorbilidadPorTipoConsulta.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consuta));
-		// }
 		return fichero;
 	}
 
@@ -554,24 +564,49 @@ public class CMorbilidad extends CGenerico {
 		if (rdoTrabajadores.isChecked())
 			radio = "Trabajadores";
 
-		String a = String.valueOf(spnA.getValue());
-		String de = String.valueOf(spnDe.getValue());
+		int aa = spnA.getValue();
+		int dea = spnDe.getValue();
+		String a = String.valueOf(aa);
+		String de = String.valueOf(dea);
 
-		Clients.evalJavaScript("window.open('"
-				+ damePath()
-				+ "Reportero?valor=11&valor6="
-				+ fecha1
-				+ "&valor7="
-				+ fecha2
-				+ "&valor8="
-				+ diagnostico
-				+ "&valor9="
-				+ radio
-				+ "&valor10="
-				+ a
-				+ "&valor11="
-				+ de
-				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		if ((diagnostico.equals("") && radio.equals("Todos") && servicioConsultaDiagnostico
+				.buscarEntreFechasEntreEdades(desde, hasta, dea, aa).isEmpty())
+				|| (!diagnostico.equals("") && radio.equals("Todos") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesyTipoDiagnostico(desde,
+								hasta, dea, aa, diagnostico).isEmpty())
+				|| (diagnostico.equals("") && radio.equals("Familiares") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesyFamiliar(desde, hasta,
+								dea, aa, false).isEmpty())
+				|| (diagnostico.equals("") && radio.equals("Trabajadores") || servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesyFamiliar(desde, hasta,
+								dea, aa, true).isEmpty())
+				|| (!diagnostico.equals("") && radio.equals("Familiares") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliar(
+								desde, hasta, dea, aa, diagnostico, false)
+						.isEmpty())
+				|| (!diagnostico.equals("") && radio.equals("Trabajadores") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliar(
+								desde, hasta, dea, aa, diagnostico, true)
+						.isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=11&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ diagnostico
+					+ "&valor9="
+					+ radio
+					+ "&valor10="
+					+ a
+					+ "&valor11="
+					+ de
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
 
 	}
 
@@ -634,9 +669,7 @@ public class CMorbilidad extends CGenerico {
 				}
 			}
 		}
-		// if (consutaDiag.isEmpty())
-		// msj.mensajeAlerta(Mensaje.noHayRegistros);
-		// else {
+
 		Map p = new HashMap();
 		p.put("desde", part1);
 		p.put("hasta", part2);
@@ -644,13 +677,19 @@ public class CMorbilidad extends CGenerico {
 		p.put("edad2", aa);
 		p.put("paciente", familiar);
 
+		for (int i = 0; i < consutaDiag.size(); i++) {
+			Consulta cons = consutaDiag.get(i).getConsulta();
+			Paciente paciente = cons.getPaciente();
+			paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
+
+		}
+
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorDiagnostico.jasper"));
 
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consutaDiag));
 
-		//
 		return fichero;
 	}
 
@@ -667,17 +706,33 @@ public class CMorbilidad extends CGenerico {
 		else
 			unidad = cmbUnidad.getValue();
 
-		Clients.evalJavaScript("window.open('"
-				+ damePath()
-				+ "Reportero?valor=12&valor6="
-				+ fecha1
-				+ "&valor7="
-				+ fecha2
-				+ "&valor8="
-				+ unidad
-				+ "&valor9="
-				+ idDoctor
-				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		if ((unidad.equals("") && idDoctor.equals("TODOS") && servicioConsulta
+				.buscarEntreFechasOrdenadasPorUnidad(desde, hasta).isEmpty())
+				|| (!unidad.equals("") && idDoctor.equals("TODOS") && servicioConsulta
+						.buscarEntreFechasPorUnidad(desde, hasta, unidad)
+						.isEmpty())
+				|| (unidad.equals("") && !idDoctor.equals("TODOS") && servicioConsulta
+						.buscarEntreFechasPorDoctor(desde, hasta,
+								servicioUsuario.buscarPorCedula(idDoctor))
+						.isEmpty())
+				|| (!unidad.equals("") && !idDoctor.equals("TODOS") && servicioConsulta
+						.buscarEntreFechasPorDoctor(desde, hasta,
+								servicioUsuario.buscarPorCedula(idDoctor))
+						.isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=12&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ unidad
+					+ "&valor9="
+					+ idDoctor
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
 
 	}
 
@@ -739,6 +794,8 @@ public class CMorbilidad extends CGenerico {
 					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
 							.getNombre());
 					cons.setMotivoConsulta(dig.get(0).getTipo());
+					Paciente paciente = cons.getPaciente();
+					paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
 				}
 			} else {
 				cons.setEnfermedadActual("");

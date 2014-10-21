@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
@@ -70,8 +71,10 @@ public class CCosto extends CGenerico {
 
 			@Override
 			public void limpiar() {
-				// TODO Auto-generated method stub
-
+				dtbDesde.setValue(fecha);
+				dtbHasta.setValue(fecha);
+				cmbArea.setValue("TODOS");
+				cmbDiagnostico.setValue("TODOS");
 			}
 
 			@Override
@@ -84,11 +87,11 @@ public class CCosto extends CGenerico {
 					String fecha2 = fecha.format(hasta);
 					String diagnostico = cmbDiagnostico.getValue();
 					Area area = null;
-					if (!cmbArea.getValue().equals("Todos"))
+					if (!cmbArea.getValue().equals("TODOS"))
 						area = servicioArea.buscar(Long.parseLong(cmbArea
 								.getSelectedItem().getContext()));
 					List<ConsultaDiagnostico> consultas = new ArrayList<ConsultaDiagnostico>();
-					if (diagnostico.equals("Todos"))
+					if (diagnostico.equals("TODOS"))
 						if (area == null)
 							consultas = servicioConsultaDiagnostico
 									.buscarAccidenteEntreFechas(desde, hasta);
@@ -109,7 +112,6 @@ public class CCosto extends CGenerico {
 					long idArea = 0;
 					if (area != null)
 						idArea = area.getIdArea();
-					System.out.println(consultas.size());
 					if (!consultas.isEmpty())
 						Clients.evalJavaScript("window.open('"
 								+ damePath()
@@ -133,6 +135,10 @@ public class CCosto extends CGenerico {
 
 			}
 		};
+		Button guardar = (Button) botonera.getChildren().get(0);
+		guardar.setLabel("Reporte");
+		guardar.setSrc("/public/imagenes/botones/reporte.png");
+		botonera.getChildren().get(1).setVisible(false);
 		botoneraCosto.appendChild(botonera);
 
 	}
@@ -147,7 +153,7 @@ public class CCosto extends CGenerico {
 	}
 
 	private void cargarCombo() {
-		String todos = "Todos";
+		String todos = "TODOS";
 		Area area = new Area();
 		area.setNombre(todos);
 		area.setIdArea(0);
@@ -178,7 +184,7 @@ public class CCosto extends CGenerico {
 		Area area = getServicioArea().buscar(part2);
 		String diagnostico = par9;
 		List<ConsultaDiagnostico> consultas = new ArrayList<ConsultaDiagnostico>();
-		if (diagnostico.equals("Todos"))
+		if (diagnostico.equals("TODOS"))
 			if (area == null)
 				consultas = getServicioConsultaDiagnostico()
 						.buscarAccidenteEntreFechas(fecha1, fecha2);

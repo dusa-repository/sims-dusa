@@ -22,6 +22,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Listheader;
@@ -197,6 +198,10 @@ public class CResumen extends CGenerico {
 
 			}
 		};
+		Button guardar = (Button) botonera.getChildren().get(0);
+		guardar.setLabel("Reporte");
+		guardar.setSrc("/public/imagenes/botones/reporte.png");
+		botonera.getChildren().get(1).setVisible(false);
 		botoneraResumen.appendChild(botonera);
 	}
 
