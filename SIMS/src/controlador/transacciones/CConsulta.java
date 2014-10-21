@@ -1054,6 +1054,10 @@ public class CConsulta extends CGenerico {
 					botonera.getChildren().get(0).setVisible(false);
 					actualizarConsultas(paciente);
 					btnConstancia.setVisible(true);
+					if (paciente.getFechaNacimiento() != null)
+						paciente.setEdad(calcularEdad(paciente
+								.getFechaNacimiento()));
+					servicioPaciente.guardar(paciente);
 				}
 			}
 
@@ -2449,6 +2453,7 @@ public class CConsulta extends CGenerico {
 		else
 			rdoNoRitmicoF3.setChecked(true);
 		calcularIMC();
+		dtbFechaConsulta.setValue(consulta.getFechaConsulta());
 	}
 
 	private void llenarCampos(Paciente paciente) {
@@ -5786,6 +5791,18 @@ public class CConsulta extends CGenerico {
 		c.setTime(consuta.getFechaConsulta());
 		c.add(Calendar.DAY_OF_YEAR, consuta.getDiasReposo());
 		Date fechaHasta = c.getTime();
+		c.setTime(fechaHasta);
+		c.add(Calendar.DAY_OF_YEAR, -1);
+		fechaHasta = c.getTime();
+		if (c.get(Calendar.DAY_OF_WEEK) == 7)
+			c.add(Calendar.DAY_OF_YEAR, 2);
+		else {
+			if (c.get(Calendar.DAY_OF_WEEK) == 6)
+				c.add(Calendar.DAY_OF_YEAR, 3);
+			else
+				c.add(Calendar.DAY_OF_YEAR, 1);
+		}
+		Date fechaReintegro = c.getTime();
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
@@ -5797,6 +5814,7 @@ public class CConsulta extends CGenerico {
 		p.put("doctorCedula", user.getCedula());
 		p.put("fechaDesde", consuta.getFechaConsulta());
 		p.put("fechaHasta", fechaHasta);
+		p.put("fechaReintegro", fechaReintegro);
 		p.put("diasReposo", consuta.getDiasReposo());
 		p.put("area", area);
 		if (!diagnosticoConsulta.isEmpty()) {
