@@ -759,14 +759,18 @@
 										<listbox mold="paging" pageSize="8" id="ltbMedicinas"
 											height="370px" width="100%" emptyMessage="No hay Medicinas Registradas">
 											<listhead>
-												<listheader label="Medicina" width="100%" />
+												<listheader label="Medicina" width="85%" />
+												<listheader label="Exist" width="15%" />
 											</listhead>
 											<template name="model">
 												<listitem>
-													<listcell label="${each.nombre} (${each.inventario()})">
+													<listcell label="${each.nombre}">
+													</listcell>
+													<listcell label="${each.inventario()}">
 													</listcell>
 													<listcell>
-														<spinner value="0" constraint="min 0 max 1000" width="98%" />
+														<spinner value="0" constraint="min 0 max 1000"
+															width="98%" />
 													</listcell>
 													<listcell>
 														<textbox width="98%" />
@@ -800,7 +804,8 @@
 													<listcell label="${each.medicina.nombre}">
 													</listcell>
 													<listcell>
-														<spinner constraint="min 0 max 1000" width="98%" value="${each.cantidad}" />
+														<spinner constraint="min 0 max 1000" width="98%"
+															value="${each.cantidad}" />
 													</listcell>
 													<listcell>
 														<textbox value="${each.dosis}" width="98%" class="multilinea"
