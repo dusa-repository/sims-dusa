@@ -24,7 +24,7 @@
 		<groupHeader>
 			<band height="24">
 				<rectangle>
-					<reportElement x="1" y="4" width="554" height="17" backcolor="#F1EDED" uuid="24ed9f2e-ac2f-4cb0-bed1-82c0a5dbd689"/>
+					<reportElement x="1" y="4" width="554" height="15" backcolor="#DBD7D7" uuid="24ed9f2e-ac2f-4cb0-bed1-82c0a5dbd689"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
@@ -85,7 +85,7 @@
 		<groupHeader>
 			<band height="24">
 				<rectangle>
-					<reportElement x="1" y="4" width="554" height="17" backcolor="#F1EDED" uuid="0b7bec04-c100-4605-838b-56106bc0dd31"/>
+					<reportElement x="1" y="4" width="554" height="15" backcolor="#F1EDED" uuid="0b7bec04-c100-4605-838b-56106bc0dd31"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
@@ -173,8 +173,8 @@
 				<textFieldExpression><![CDATA[$P{desde}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="144" y="22" width="215" height="25" uuid="85bbf5d7-31df-485f-b132-1a070f8c1a5c"/>
-				<textElement>
+				<reportElement x="187" y="22" width="215" height="25" uuid="85bbf5d7-31df-485f-b132-1a070f8c1a5c"/>
+				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPOSOS POR DIAGNOSTICO]]></text>

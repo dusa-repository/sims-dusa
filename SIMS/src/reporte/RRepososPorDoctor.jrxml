@@ -29,7 +29,7 @@
 		<groupHeader>
 			<band height="24">
 				<rectangle>
-					<reportElement x="2" y="4" width="552" height="17" backcolor="#F1EDED" uuid="1b692940-0933-41e3-90a0-83045c83d867"/>
+					<reportElement x="2" y="4" width="552" height="15" backcolor="#DBD7D7" uuid="1b692940-0933-41e3-90a0-83045c83d867"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
@@ -87,7 +87,7 @@
 		<groupHeader>
 			<band height="24">
 				<rectangle>
-					<reportElement x="1" y="4" width="552" height="17" backcolor="#F1EDED" uuid="687c03c3-a09f-41bb-8aff-fe400b9bdd76"/>
+					<reportElement x="1" y="4" width="552" height="15" backcolor="#F1EDED" uuid="687c03c3-a09f-41bb-8aff-fe400b9bdd76"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
@@ -190,7 +190,7 @@
 			</textField>
 			<staticText>
 				<reportElement x="144" y="27" width="315" height="25" uuid="11d02231-909e-4c78-869d-4a5438ec202b"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPOSOS POR DOCTOR]]></text>

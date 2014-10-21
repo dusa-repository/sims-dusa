@@ -113,14 +113,14 @@
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
-						<hbox>
-							<label class="etiqueta" value="De:" />
-							<spinner id="spnDe" step="1" format="#" constraint="min 0 max 1000"
-								width="80%" value="0" />
-							<label class="etiqueta" value="A:" />
-							<spinner value="100" id="spnA" step="1" format="#"
-								constraint="min 0 max 100" width="80%" />
-							<label class="etiqueta" value="Años" />
+						<hbox width="100%" widths="10%,30%,10%,30%,20%">
+							<label class="etiqueta" value="De:" width="100%" />
+							<spinner id="spnDe" step="1" constraint="min 0 max 1000"
+								value="1" width="80%" />
+							<label class="etiqueta" value="A:" width="100%" />
+							<spinner width="80%" value="100" id="spnA" step="1"
+								constraint="min 0 max 100" />
+							<label class="etiqueta" value="Años" width="100%" />
 						</hbox>
 					</row>
 					<row id="rowDoctor">
@@ -148,7 +148,11 @@
 						</combobox>
 					</row>
 					<row id="rowFamiliar">
-						<label class="etiqueta" value="Consulta de:" />
+						<hbox>
+							<label class="etiqueta" value="Consulta de:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
 						<cell colspan="3">
 							<hbox>
 								<radiogroup id="rdgFamiliar">

@@ -25,7 +25,7 @@
 		<groupHeader>
 			<band height="26">
 				<rectangle>
-					<reportElement x="0" y="6" width="555" height="17" backcolor="#F1EDED" uuid="2cb25de9-17e7-4f42-9152-94222a76670e"/>
+					<reportElement x="0" y="6" width="555" height="15" backcolor="#DBD7D7" uuid="2cb25de9-17e7-4f42-9152-94222a76670e"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
@@ -140,8 +140,8 @@
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="145" y="22" width="215" height="25" uuid="cf2ea019-fa6d-461a-9a71-70bb6e1eb638"/>
-				<textElement>
+				<reportElement x="162" y="21" width="215" height="25" uuid="cf2ea019-fa6d-461a-9a71-70bb6e1eb638"/>
+				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[MORBILIDAD POR AREA]]></text>

@@ -105,21 +105,21 @@ public class CReposo extends CGenerico {
 		}
 
 		switch (titulo) {
-		case "Por Area":
+		case "Reposos Por Area":
 			rowArea.setVisible(true);
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(false);
 			rowPaciente.setVisible(false);
 			tipo = "area";
 			break;
-		case "Por Diagnostico":
+		case "Reposos Por Diagnostico":
 			rowArea.setVisible(false);
 			rowDiagnostico.setVisible(true);
 			rowDoctor.setVisible(false);
 			rowPaciente.setVisible(false);
 			tipo = "diagnostico";
 			break;
-		case "Por Doctor":
+		case "Reposos Por Doctor":
 			rowArea.setVisible(false);
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(true);
@@ -183,6 +183,7 @@ public class CReposo extends CGenerico {
 		};
 		Button guardar = (Button) botonera.getChildren().get(0);
 		guardar.setLabel("Reporte");
+		guardar.setSrc("/public/imagenes/botones/reporte.png");
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraReposo.appendChild(botonera);
 	}
@@ -253,21 +254,25 @@ public class CReposo extends CGenerico {
 			area2 = getServicioArea().buscar(Long.parseLong(area));
 		}
 
-		// if ((area.equals("") && servicioConsulta
-		// .buscarEntreFechas(desde, hasta).isEmpty())
-		// || (!area.equals("") && servicioConsulta
-		// .buscarEntreFechasyArea(desde, hasta, area2).isEmpty()))
-		// msj.mensajeAlerta(Mensaje.noHayRegistros);
-		// else {
-		Clients.evalJavaScript("window.open('"
-				+ damePath()
-				+ "Reportero?valor=13&valor6="
-				+ fecha1
-				+ "&valor7="
-				+ fecha2
-				+ "&valor8="
-				+ area
-				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		if ((area.equals("") && servicioConsulta
+				.buscarEntreFechasReposoyTrabajadores(desde, hasta).isEmpty())
+				|| (!area.equals("") && servicioConsulta
+						.buscarEntreFechasReposoAreayTrabajadores(desde, hasta,
+								servicioArea.buscar(Long.parseLong(area)))
+						.isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=13&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ area
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
 
 	}
 
@@ -300,9 +305,6 @@ public class CReposo extends CGenerico {
 							area2);
 		}
 
-		// if (consuta.isEmpty())
-		// msj.mensajeAlerta(Mensaje.noHayRegistros);
-		// else {
 		Map p = new HashMap();
 		p.put("desde", part1);
 		p.put("hasta", part2);
@@ -316,7 +318,6 @@ public class CReposo extends CGenerico {
 			c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
 			Date fechaHasta = c.getTime();
 			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
-			// Timestamp fechaHasta = (Timestamp) c.getTime();
 			cons.setFechaAuditoria(fechaHasta2);
 			if (!dig.isEmpty()) {
 				if (dig.get(0) != null) {
@@ -336,7 +337,6 @@ public class CReposo extends CGenerico {
 				.getResource("/reporte/RRepososPorArea.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consuta));
-		// }
 		return fichero;
 	}
 
@@ -352,15 +352,24 @@ public class CReposo extends CGenerico {
 		else
 			diagnostico = cmbDiagnostico.getValue();
 
-		Clients.evalJavaScript("window.open('"
-				+ damePath()
-				+ "Reportero?valor=15&valor6="
-				+ fecha1
-				+ "&valor7="
-				+ fecha2
-				+ "&valor8="
-				+ diagnostico
-				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		if ((diagnostico.equals("") && servicioConsultaDiagnostico
+				.buscarEntreFechasOrdenadoPorDiagnostico(desde, hasta)
+				.isEmpty())
+				|| (!diagnostico.equals("") && servicioConsultaDiagnostico
+						.buscarEntreFechasyTipoDiagnostico(desde, hasta,
+								diagnostico).isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=15&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ diagnostico
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
 
 	}
 
@@ -388,16 +397,14 @@ public class CReposo extends CGenerico {
 					.buscarEntreFechasOrdenadoPorDiagnostico(fecha1, fecha2);
 		else {
 			consutaDiag = getServicioConsultaDiagnostico()
-					.buscarEntreFechasyTipoDiagnostico(fecha1,
-							fecha2, diagnostico);
+					.buscarEntreFechasyTipoDiagnostico(fecha1, fecha2,
+							diagnostico);
 		}
-		// if (consutaDiag.isEmpty())
-		// msj.mensajeAlerta(Mensaje.noHayRegistros);
-		// else {
+
 		Map p = new HashMap();
 		p.put("desde", part1);
 		p.put("hasta", part2);
-		
+
 		for (int i = 0; i < consutaDiag.size(); i++) {
 			Consulta cons = consutaDiag.get(i).getConsulta();
 			Calendar c = Calendar.getInstance();
@@ -414,7 +421,6 @@ public class CReposo extends CGenerico {
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consutaDiag));
 
-		//
 		return fichero;
 	}
 
@@ -431,17 +437,35 @@ public class CReposo extends CGenerico {
 		else
 			unidad = cmbUnidad.getValue();
 
-		Clients.evalJavaScript("window.open('"
-				+ damePath()
-				+ "Reportero?valor=14&valor6="
-				+ fecha1
-				+ "&valor7="
-				+ fecha2
-				+ "&valor8="
-				+ unidad
-				+ "&valor9="
-				+ idDoctor
-				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		if ((unidad.equals("") && idDoctor.equals("TODOS") && servicioConsulta
+				.buscarEntreFechasOrdenadasPorUnidadReposoyTrabajadores(desde,
+						hasta).isEmpty())
+				|| (!unidad.equals("") && idDoctor.equals("TODOS") && servicioConsulta
+						.buscarEntreFechasPorUnidadReposoyTrabajadores(desde,
+								hasta, unidad).isEmpty())
+				|| (unidad.equals("") && !idDoctor.equals("TODOS") && servicioConsulta
+						.buscarEntreFechasPorDoctorReposoyTrabajadores(desde,
+								hasta,
+								servicioUsuario.buscarPorCedula(idDoctor))
+						.isEmpty())
+				|| (!unidad.equals("") && !idDoctor.equals("TODOS") && servicioConsulta
+						.buscarEntreFechasPorDoctorReposoyTrabajadores(desde,
+								hasta,
+								servicioUsuario.buscarPorCedula(idDoctor))
+						.isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=14&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ unidad
+					+ "&valor9="
+					+ idDoctor
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 
 	}
 
