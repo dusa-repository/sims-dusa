@@ -107,8 +107,9 @@ public class SConsultaDiagnostico {
 		ordenar.add("consultaPacienteCedula");
 		ordenar.add("consultaFechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDiagnosticoDAO.findByConsultaFechaConsultaBetween(
-				fecha1, fecha2, o);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaReposoAndConsultaPacienteTrabajador(
+						fecha1, fecha2, true, true, o);
 	}
 
 	public List<ConsultaDiagnostico> buscarEntreFechasyTipoDiagnostico(
@@ -119,9 +120,11 @@ public class SConsultaDiagnostico {
 		ordenar.add("consultaPacienteCedula");
 		ordenar.add("consultaFechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDiagnosticoDAO.findByConsultaFechaConsultaBetweenAndTipo(
-				fecha1, fecha2,diagnostico, o);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndTipoAndConsultaReposoAndConsultaPacienteTrabajador(
+						fecha1, fecha2, diagnostico, true, true, o);
 	}
+
 	public List<ConsultaDiagnostico> buscarEntreFechasResumen(Date desde,
 			Date hasta, boolean estado) {
 		List<String> lista = new ArrayList<String>();
@@ -194,5 +197,10 @@ public class SConsultaDiagnostico {
 		return consultaDiagnosticoDAO
 				.findByConsultaFechaConsultaBetweenAndConsultaPacienteTrabajadorTrueAndConsultaAccidenteLaboralTrueAndConsultaPacienteAreaAndTipoOrderByConsultaFechaConsultaAsc(
 						desde, hasta, area, diagnostico);
+	}
+
+	public List<Long> cantidadConsultas(List<ConsultaDiagnostico> consutaDiag) {
+		// TODO Auto-generated method stub
+		return consultaDiagnosticoDAO.buscarConsultas(consutaDiag);
 	}
 }

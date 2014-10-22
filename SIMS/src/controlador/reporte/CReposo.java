@@ -405,6 +405,9 @@ public class CReposo extends CGenerico {
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
+		List<Long> consuta = getServicioConsultaDiagnostico().cantidadConsultas(consutaDiag);
+		p.put("total",consuta.size());
+		
 		for (int i = 0; i < consutaDiag.size(); i++) {
 			Consulta cons = consutaDiag.get(i).getConsulta();
 			Calendar c = Calendar.getInstance();

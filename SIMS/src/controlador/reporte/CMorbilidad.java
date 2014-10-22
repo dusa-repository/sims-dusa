@@ -577,7 +577,7 @@ public class CMorbilidad extends CGenerico {
 				|| (diagnostico.equals("") && radio.equals("Familiares") && servicioConsultaDiagnostico
 						.buscarEntreFechasEntreEdadesyFamiliar(desde, hasta,
 								dea, aa, false).isEmpty())
-				|| (diagnostico.equals("") && radio.equals("Trabajadores") || servicioConsultaDiagnostico
+				|| (diagnostico.equals("") && radio.equals("Trabajadores") && servicioConsultaDiagnostico
 						.buscarEntreFechasEntreEdadesyFamiliar(desde, hasta,
 								dea, aa, true).isEmpty())
 				|| (!diagnostico.equals("") && radio.equals("Familiares") && servicioConsultaDiagnostico
@@ -676,6 +676,9 @@ public class CMorbilidad extends CGenerico {
 		p.put("edad1", dea);
 		p.put("edad2", aa);
 		p.put("paciente", familiar);
+		
+		List<Long> consuta = getServicioConsultaDiagnostico().cantidadConsultas(consutaDiag);
+		p.put("total",consuta.size());
 
 		for (int i = 0; i < consutaDiag.size(); i++) {
 			Consulta cons = consutaDiag.get(i).getConsulta();
