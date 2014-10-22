@@ -134,6 +134,7 @@ public class CProveedor extends CGenerico {
 				llenarListaExamenes(null);
 				examenesDisponibles.clear();
 				examenesUsados.clear();
+				tabEstudios.setSelected(true);
 			}
 
 			@Override

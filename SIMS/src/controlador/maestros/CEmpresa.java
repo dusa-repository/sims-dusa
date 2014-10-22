@@ -214,6 +214,7 @@ public class CEmpresa extends CGenerico {
 				spnExtranjeros.setValue(0);
 				id = 0;
 				llenarListas();
+				tabBasicos.setSelected(true);
 			}
 
 			@Override

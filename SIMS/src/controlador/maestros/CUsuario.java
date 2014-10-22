@@ -206,6 +206,7 @@ public class CUsuario extends CGenerico {
 				}
 				id = "";
 				llenarListas(null);
+				tabBasicos.setSelected(true);
 			}
 
 			@Override

@@ -97,4 +97,14 @@ public class SProveedor {
 		}
 		return prove;
 	}
+
+	public List<Proveedor> buscarPorProveedoresPorServicio(
+			ServicioExterno servicio) {
+		List<ProveedorServicio> lista = proveedorServicioDAO.findByServicioExterno(servicio);
+		List<Proveedor> prove = new ArrayList<Proveedor>();
+		for (int i = 0; i < lista.size(); i++) {
+			prove.add(lista.get(i).getProveedor());
+		}
+		return prove;
+	}
 }

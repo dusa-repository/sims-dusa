@@ -274,6 +274,7 @@ public class CMedicina extends CGenerico {
 				llenarListaPresentaciones(null);
 				presentacionesDisponibles.clear();
 				presentacionesUsadas.clear();
+				tabEspecificaciones.setSelected(true);
 			}
 
 			@Override
