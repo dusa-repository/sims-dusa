@@ -119,7 +119,7 @@ public class SConsulta {
 
 	public List<Consulta> buscarEntreFechas(Date fecha1, Date fecha2) {
 		return consultaDAO.findByFechaConsultaBetweenOrderByFechaConsultaDesc(
-				fecha1, fecha2);
+				fecha1, fecha2,true);
 	}
 
 	public List<Consulta> buscarEntreFechasyArea(Date fecha1, Date fecha2,
@@ -129,8 +129,8 @@ public class SConsulta {
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndPacienteArea(fecha1,
-				fecha2, area2, o);
+		return consultaDAO.findByFechaConsultaBetweenAndPacienteAreaAndPacienteTrabajador(fecha1,
+				fecha2, area2,true, o);
 	}
 
 	public List<Consulta> buscarEntreFechasyTipoConsulta(Date fecha1,

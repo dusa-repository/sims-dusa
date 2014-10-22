@@ -59,14 +59,14 @@
 		<groupFooter>
 			<band height="20">
 				<staticText>
-					<reportElement x="386" y="0" width="142" height="20" uuid="6ddb2f4c-12be-4e90-bb6c-739d5b24cdc2"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
+					<reportElement x="430" y="0" width="60" height="20" uuid="6ddb2f4c-12be-4e90-bb6c-739d5b24cdc2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<text><![CDATA[Total por]]></text>
+					<text><![CDATA[Total por ]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="698" y="0" width="54" height="20" uuid="a2553bfe-4ce9-47d2-aa91-9d5f95798ad2"/>
+					<reportElement x="725" y="0" width="27" height="20" uuid="a2553bfe-4ce9-47d2-aa91-9d5f95798ad2"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 					</box>
@@ -76,7 +76,7 @@
 					<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="533" y="0" width="165" height="20" uuid="853e91af-825f-46ee-8539-0bcb5d4d8d6e"/>
+					<reportElement x="490" y="0" width="235" height="20" uuid="853e91af-825f-46ee-8539-0bcb5d4d8d6e"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="false"/>
 					</textElement>
@@ -118,13 +118,13 @@
 			<band height="20">
 				<staticText>
 					<reportElement x="533" y="0" width="52" height="20" uuid="52979d0b-88ba-4e62-ae81-fd13262fc2d0"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total por  ]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="698" y="0" width="54" height="20" uuid="290e7e18-6fb5-4c03-b972-95a65bd0f8dc"/>
+					<reportElement x="725" y="0" width="27" height="20" uuid="290e7e18-6fb5-4c03-b972-95a65bd0f8dc"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 					</box>
@@ -134,7 +134,7 @@
 					<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="588" y="0" width="110" height="20" uuid="516155ba-e567-488f-9328-2de5f7aa9e01"/>
+					<reportElement x="585" y="0" width="140" height="20" uuid="516155ba-e567-488f-9328-2de5f7aa9e01"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="false"/>
 					</textElement>
@@ -411,31 +411,45 @@
 			<staticText>
 				<reportElement x="402" y="6" width="28" height="20" uuid="6852292d-4b77-41ef-956f-8ef9e520f35f"/>
 				<textElement>
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Pag.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="588" y="6" width="64" height="20" uuid="0677f6f0-dcf3-421a-809d-0f64737b3607"/>
+				<reportElement x="551" y="6" width="34" height="20" uuid="0677f6f0-dcf3-421a-809d-0f64737b3607"/>
 				<textElement>
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="652" y="6" width="100" height="20" uuid="7fe90fbf-fda5-4a47-9a82-73b48e7757d9"/>
+				<reportElement x="585" y="6" width="67" height="20" uuid="7fe90fbf-fda5-4a47-9a82-73b48e7757d9"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="430" y="6" width="100" height="20" uuid="72378d17-f8ed-4198-aa33-443c9feab2db"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="707" y="6" width="45" height="20" uuid="1b133c05-12b2-4102-a122-18ec552773ca"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="677" y="6" width="30" height="20" uuid="b996c8f2-ae93-4f71-bb21-633e889dc59d"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
 		</band>
 	</pageFooter>
 	<lastPageFooter>
 		<band height="20">
 			<textField>
-				<reportElement x="714" y="0" width="38" height="20" uuid="89f8c969-878e-452f-a133-9e6cb1c25894"/>
+				<reportElement x="725" y="0" width="27" height="20" uuid="89f8c969-878e-452f-a133-9e6cb1c25894"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 				</box>
@@ -445,8 +459,8 @@
 				<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="621" y="0" width="93" height="20" uuid="4ba3b804-7e6e-4ba0-9e99-dddbd5596458"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
+				<reportElement x="621" y="0" width="104" height="20" uuid="4ba3b804-7e6e-4ba0-9e99-dddbd5596458"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Accidentes:]]></text>

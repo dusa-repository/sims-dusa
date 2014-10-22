@@ -12,6 +12,7 @@ import modelo.transacciones.ConsultaDiagnostico;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface IConsultaDiagnosticoDAO extends
 		JpaRepository<ConsultaDiagnostico, ConsultaDiagnosticoId> {
@@ -62,5 +63,15 @@ public interface IConsultaDiagnosticoDAO extends
 
 	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaPacienteTrabajadorTrueAndConsultaAccidenteLaboralTrueAndTipo(
 			Date desde, Date hasta, String diagnostico, Sort order);
+
+	@Query("select distinct c.consulta.idConsulta from ConsultaDiagnostico c where c in ?1")
+	List<Long> buscarConsultas(List<ConsultaDiagnostico> consutaDiag);
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaReposoAndConsultaPacienteTrabajador(
+			Date fecha1, Date fecha2, boolean b, boolean c, Sort o);
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndTipoAndConsultaReposoAndConsultaPacienteTrabajador(
+			Date fecha1, Date fecha2, String diagnostico, boolean b, boolean c,
+			Sort o);
 
 }

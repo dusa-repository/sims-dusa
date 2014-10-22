@@ -289,26 +289,40 @@
 	<pageFooter>
 		<band height="25">
 			<staticText>
-				<reportElement x="408" y="5" width="64" height="20" uuid="46557239-54ef-4fee-9daf-4c5aa05c1efc"/>
+				<reportElement x="363" y="5" width="45" height="20" uuid="46557239-54ef-4fee-9daf-4c5aa05c1efc"/>
 				<textElement>
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="472" y="5" width="100" height="20" uuid="f172b11f-d595-42d6-beed-5cdd1c701e1c"/>
+				<reportElement x="408" y="5" width="71" height="20" uuid="f172b11f-d595-42d6-beed-5cdd1c701e1c"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="222" y="5" width="28" height="20" uuid="4c2c7da5-75e2-45cc-b013-7bb9f402e011"/>
 				<textElement>
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Pag.]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="250" y="5" width="100" height="20" uuid="33a1ff2b-0b01-4286-ad42-18ad01b09ccf"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="495" y="5" width="30" height="20" uuid="a21d746a-ebc0-47bb-af59-e9ddcaf20203"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement x="525" y="5" width="45" height="20" uuid="94bf081f-ea38-42f3-bfe3-7ec46bbb8218"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>

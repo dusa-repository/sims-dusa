@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RResumenArea" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" uuid="fc0daea8-b562-40ef-8ad5-f72900b4076d">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="97"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
 	<field name="nombre1" class="java.lang.String"/>
@@ -505,18 +505,18 @@
 			<staticText>
 				<reportElement x="221" y="6" width="28" height="20" uuid="be58ee9f-72de-4959-b871-e5b4cce4ddfa"/>
 				<textElement>
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Pag.]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="471" y="6" width="100" height="20" uuid="86eadf62-8954-4d0f-b267-80ea1e2a3e35"/>
+				<reportElement x="409" y="6" width="70" height="20" uuid="86eadf62-8954-4d0f-b267-80ea1e2a3e35"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="407" y="6" width="64" height="20" uuid="82b23697-01f0-4df1-b573-342ef5103241"/>
+				<reportElement x="369" y="6" width="40" height="20" uuid="82b23697-01f0-4df1-b573-342ef5103241"/>
 				<textElement>
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
@@ -524,6 +524,20 @@
 				<reportElement x="249" y="6" width="100" height="20" uuid="d3616134-1c1c-4860-8c0f-91ee78ddc061"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="524" y="6" width="45" height="20" uuid="e8a2a82a-3f60-4275-8b8f-d3cf3d01bb03"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="494" y="6" width="30" height="20" uuid="81b7c2d7-ed90-41a0-bc95-2c13239a8420"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
 		</band>
 	</pageFooter>
 	<summary>
