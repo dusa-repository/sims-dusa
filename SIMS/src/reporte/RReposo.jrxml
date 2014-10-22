@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReposo" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80f827cd-f931-40fe-9157-fa70b2ef6b6a">
-	<property name="ireport.zoom" value="0.6818181818181821"/>
+	<property name="ireport.zoom" value="0.7500000000000003"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="117"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
@@ -19,6 +19,8 @@
 	<parameter name="diag" class="java.lang.String"/>
 	<parameter name="diasReposo" class="java.lang.Integer"/>
 	<parameter name="fechaReintegro" class="java.util.Date"/>
+	<parameter name="tipoReposo" class="java.lang.String"/>
+	<parameter name="tipoPaciente" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -78,21 +80,23 @@
 				<textFieldExpression><![CDATA[$P{pacienteNombre}+" "+$P{pacienteApellido}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="140" width="124" height="20" uuid="fb30f3d3-69d4-43c9-9685-2cb52c8b6c15"/>
+				<reportElement x="0" y="140" width="81" height="20" uuid="fb30f3d3-69d4-43c9-9685-2cb52c8b6c15">
+					<printWhenExpression><![CDATA[$P{tipoPaciente}.equals( "Trabajador" )]]></printWhenExpression>
+				</reportElement>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Ficha Nº:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="124" y="140" width="90" height="20" uuid="477d4822-7bd1-4e7c-ae58-f3e6f89ecf29"/>
+				<reportElement x="80" y="140" width="107" height="20" uuid="477d4822-7bd1-4e7c-ae58-f3e6f89ecf29"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{pacienteCedula}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="215" y="140" width="230" height="20" uuid="c46b3811-d150-48d0-a34f-fcad744b06fa"/>
+				<reportElement x="187" y="140" width="230" height="20" uuid="c46b3811-d150-48d0-a34f-fcad744b06fa"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -179,7 +183,7 @@
 				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="209" y="510" width="230" height="20" uuid="e36a3997-8de7-4aea-9ae0-cfe693ecc707"/>
+				<reportElement x="181" y="510" width="230" height="20" uuid="e36a3997-8de7-4aea-9ae0-cfe693ecc707"/>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -193,7 +197,7 @@
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaHasta})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="126" y="510" width="86" height="20" uuid="a96787f6-91db-4e2c-93ba-7b9cf9366ce7"/>
+				<reportElement x="82" y="510" width="99" height="20" uuid="a96787f6-91db-4e2c-93ba-7b9cf9366ce7"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -238,7 +242,9 @@
 				<textFieldExpression><![CDATA[$P{pacienteNombre}+" "+$P{pacienteApellido}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="2" y="510" width="124" height="20" uuid="232a9cc6-f277-49a6-b327-1681ed9edc9c"/>
+				<reportElement x="2" y="510" width="81" height="20" uuid="232a9cc6-f277-49a6-b327-1681ed9edc9c">
+					<printWhenExpression><![CDATA[$P{tipoPaciente}.equals( "Trabajador" )]]></printWhenExpression>
+				</reportElement>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -319,14 +325,18 @@
 				<textFieldExpression><![CDATA[$P{diasReposo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="522" y="181" width="45" height="20" uuid="240f433f-167e-45c2-9571-1948301e7ef9"/>
+				<reportElement x="522" y="181" width="45" height="20" uuid="240f433f-167e-45c2-9571-1948301e7ef9">
+					<printWhenExpression><![CDATA[$P{tipoReposo}.equals( "Dias" )]]></printWhenExpression>
+				</reportElement>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Dias]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="523" y="550" width="45" height="20" uuid="957865ef-5997-4528-9971-0d44f49fef8a"/>
+				<reportElement x="523" y="550" width="45" height="20" uuid="957865ef-5997-4528-9971-0d44f49fef8a">
+					<printWhenExpression><![CDATA[$P{tipoReposo}.equals( "Dias" )]]></printWhenExpression>
+				</reportElement>
 				<textElement>
 					<font fontName="Arial" size="12"/>
 				</textElement>
@@ -373,6 +383,42 @@
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<text><![CDATA[Para reintegrarse el dia:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="523" y="181" width="41" height="20" uuid="4e606d1c-2a97-4faf-8354-8d4379a84cc8">
+					<printWhenExpression><![CDATA[$P{tipoReposo}.equals( "Horas" )]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Horas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="527" y="550" width="45" height="20" uuid="a19e09e3-e4c2-451c-bd74-112c2c8c699b">
+					<printWhenExpression><![CDATA[$P{tipoReposo}.equals( "Horas" )]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Horas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="140" width="74" height="20" uuid="398d2e14-7b15-4ea6-8de0-31ca1f0145dc">
+					<printWhenExpression><![CDATA[$P{tipoPaciente}.equals( "Familiar" )]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Cedula:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="510" width="75" height="20" uuid="3769d59e-2557-40ca-a584-663f74131fdb">
+					<printWhenExpression><![CDATA[$P{tipoPaciente}.equals( "Familiar" )]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Cedula:]]></text>
 			</staticText>
 		</band>
 	</title>

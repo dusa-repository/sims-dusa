@@ -27,7 +27,7 @@ import modelo.sha.Area;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "consulta", schema="dusa_sims.dbo")
+@Table(name = "consulta", schema = "dusa_sims.dbo")
 public class Consulta implements Serializable {
 
 	private static final long serialVersionUID = -5405587652859401694L;
@@ -196,26 +196,42 @@ public class Consulta implements Serializable {
 
 	@Column(name = "dias_reposo")
 	private Integer diasReposo;
-	
-	@Column(length=500)
+
+	@Column(length = 500)
 	private String observacion;
-	
-	@Column(name = "condicion_apto",length=100)
+
+	@Column(name = "condicion_apto", length = 100)
 	private String condicionApto;
-	
+
 	@Column(name = "id_referencia")
 	private Long idReferencia;
-	
-	@Column(length=100, name = "cedula_referencia")
+
+	@Column(length = 100, name = "cedula_referencia")
 	private String cedulaReferencia;
-	
-	@Column(length=256, name = "doctor")
+
+	@Column(length = 256, name = "doctor")
 	private String doctor;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_especialista")
 	private Especialista especialista;
-	
+
+	@Column(length = 100, name = "tipo_reposo")
+	private String tipoReposo;
+
+	@Column(length = 100, name = "reposo_embarazo")
+	private String reposoEmbarazo;
+
+	@Column(name = "fecha_reposo")
+	private Timestamp fechaReposo;
+
+	@Column(name = "frecuencia_respiratoria")
+	private Integer frecuenciaRespiratoria;
+
+	@Column(name = "ritmico_respiratoria")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean respiratoriaRitmica;
+
 	public Consulta() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -235,8 +251,13 @@ public class Consulta implements Serializable {
 			Boolean ritmico2, Boolean ritmico3, Cargo cargo,
 			Cargo cargoDeseado, Area area, Area areaDeseada, boolean apto,
 			boolean reposo, String tipoConsultaSecundaria, String examenPre,
-			Integer dias, String condicion, String doctor, Especialista especialista) {
+			Integer dias, String condicion, String doctor,
+			Especialista especialista, String tipoReposo,
+			String reposoEmbarazo, Timestamp fechaReposo,
+			Integer frecuenciaRespiratoria, Boolean respiratoriaRitmica) {
 		super();
+		this.frecuenciaRespiratoria = frecuenciaRespiratoria;
+		this.respiratoriaRitmica = respiratoriaRitmica;
 		this.idConsulta = idConsulta;
 		this.paciente = paciente;
 		this.fechaConsulta = fechaConsulta;
@@ -284,6 +305,9 @@ public class Consulta implements Serializable {
 		this.condicionApto = condicion;
 		this.doctor = doctor;
 		this.especialista = especialista;
+		this.tipoReposo = tipoReposo;
+		this.reposoEmbarazo = reposoEmbarazo;
+		this.fechaReposo = fechaReposo;
 	}
 
 	public long getIdConsulta() {
@@ -701,7 +725,7 @@ public class Consulta implements Serializable {
 	public void setCondicionApto(String condicionApto) {
 		this.condicionApto = condicionApto;
 	}
-	
+
 	public String traerFecha() {
 		DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 		return String.valueOf(formatoFecha.format(fechaConsulta));
@@ -737,6 +761,46 @@ public class Consulta implements Serializable {
 
 	public void setEspecialista(Especialista especialista) {
 		this.especialista = especialista;
+	}
+
+	public String getTipoReposo() {
+		return tipoReposo;
+	}
+
+	public void setTipoReposo(String tipoReposo) {
+		this.tipoReposo = tipoReposo;
+	}
+
+	public String getReposoEmbarazo() {
+		return reposoEmbarazo;
+	}
+
+	public void setReposoEmbarazo(String reposoEmbarazo) {
+		this.reposoEmbarazo = reposoEmbarazo;
+	}
+
+	public Timestamp getFechaReposo() {
+		return fechaReposo;
+	}
+
+	public void setFechaReposo(Timestamp fechaReposo) {
+		this.fechaReposo = fechaReposo;
+	}
+
+	public Integer getFrecuenciaRespiratoria() {
+		return frecuenciaRespiratoria;
+	}
+
+	public void setFrecuenciaRespiratoria(Integer frecuenciaRespiratoria) {
+		this.frecuenciaRespiratoria = frecuenciaRespiratoria;
+	}
+
+	public Boolean getRespiratoriaRitmica() {
+		return respiratoriaRitmica;
+	}
+
+	public void setRespiratoriaRitmica(Boolean respiratoriaRitmica) {
+		this.respiratoriaRitmica = respiratoriaRitmica;
 	}
 
 }

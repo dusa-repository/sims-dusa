@@ -45,8 +45,10 @@ public class CServicioExterno extends CGenerico {
 	long id = 0;
 	Catalogo<ServicioExterno> catalogo;
 	private boolean consulta = false;
+	private boolean proveedor = false;
 	private CConsulta cConsulta = new CConsulta();
-	List<ServicioExterno> servicioConsulta = new ArrayList<ServicioExterno>();
+	private CProveedor cProveedor = new CProveedor();
+	List<ServicioExterno> servicioConsultas = new ArrayList<ServicioExterno>();
 	Listbox listaConsulta;
 
 	@Override
@@ -70,8 +72,10 @@ public class CServicioExterno extends CGenerico {
 		if (map != null) {
 			if (map.get("id") != null) {
 				consulta = true;
-				servicioConsulta = (List<ServicioExterno>) map.get("lista");
+				servicioConsultas = (List<ServicioExterno>) map.get("lista");
 				listaConsulta = (Listbox) map.get("listbox");
+				if (map.get("id").equals("proveedor"))
+					proveedor = true;
 				map.clear();
 				map = null;
 			}
@@ -105,10 +109,14 @@ public class CServicioExterno extends CGenerico {
 						else {
 							servicioExterno = servicioServicioExterno
 									.buscarUltimo();
-							servicioConsulta.add(servicioExterno);
+							servicioConsultas.add(servicioExterno);
 						}
-						cConsulta.recibirServicio(servicioConsulta,
-								listaConsulta);
+						if (proveedor)
+							cProveedor.recibirServicio(servicioConsultas,
+									listaConsulta);
+						else
+							cConsulta.recibirServicio(servicioConsultas,
+									listaConsulta);
 					}
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);

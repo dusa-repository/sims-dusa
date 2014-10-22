@@ -541,6 +541,12 @@ public class CConsulta extends CGenerico {
 	private Radio rdoSiRitmicoF3;
 	@Wire
 	private Radio rdoNoRitmicoF3;
+	@Wire
+	private Spinner spnFrecuenciaRespitatoria;
+	@Wire
+	private Radio rdoSiRespiratoria;
+	@Wire
+	private Radio rdoNoRespiratoria;
 	// --------------------------
 	@Wire
 	private Combobox cmbDiente1;
@@ -678,6 +684,28 @@ public class CConsulta extends CGenerico {
 	private Textbox txtResultadoComplicacionNeo;
 	@Wire
 	private Textbox txtObservacionPrenatal;
+	@Wire
+	private Row rowReposoDias;
+	@Wire
+	private Radio rdoSiReposoDias;
+	@Wire
+	private Radio rdoNoReposoHoras;
+	@Wire
+	private Label lblReposo;
+	@Wire
+	private Row rowEmbarazo;
+	@Wire
+	private Radio rdoSiMaternal;
+	@Wire
+	private Radio rdoNoMaternal;
+	@Wire
+	private Row rowEmbarazo2;
+	@Wire
+	private Combobox cmbReposo;
+	@Wire
+	private Row rowReposoFecha;
+	@Wire
+	private Datebox dtbReposo;
 	//
 	@Wire
 	private Radio rdoSiReposo;
@@ -1013,6 +1041,21 @@ public class CConsulta extends CGenerico {
 							+ usuario.getPrimerApellido();
 					if (cmbTipoPreventiva.getValue().equals("IC"))
 						doctorGuardar = cmbEspecialista.getValue();
+					String tipoReposo = "";
+					if (rdoNoReposoHoras.isChecked())
+						tipoReposo = "Horas";
+					if (rdoSiReposoDias.isChecked())
+						tipoReposo = "Dias";
+
+					Timestamp fechaReposo = new Timestamp(dtbReposo.getValue()
+							.getTime());
+
+					Integer frecuenciaRespiratoria = spnFrecuenciaRespitatoria
+							.getValue();
+					boolean ritmicaRespiratoria = true;
+					if (rdoNoRespiratoria.isChecked())
+						ritmicaRespiratoria = false;
+					String reposoEmbarazo = cmbReposo.getValue();
 					Consulta consulta = new Consulta(idConsulta, paciente,
 							usuario, fechaConsulta, horaAuditoria,
 							horaAuditoria, fechaHora, nombreUsuarioSesion(),
@@ -1025,7 +1068,9 @@ public class CConsulta extends CGenerico {
 							ritmico3, paciente.getCargoReal(), cargoDeseado,
 							paciente.getArea(), areaDeseado, apto, reposo,
 							tipoSecundaria, examenesPre, dias, condicionApto,
-							doctorGuardar, especialista);
+							doctorGuardar, especialista, tipoReposo,
+							reposoEmbarazo, fechaReposo,
+							frecuenciaRespiratoria, ritmicaRespiratoria);
 					servicioConsulta.guardar(consulta);
 					Consulta consultaDatos = new Consulta();
 					if (idConsulta != 0)
@@ -1636,154 +1681,169 @@ public class CConsulta extends CGenerico {
 						msj.mensajeError("Debe Llenar los campos secundarios de la Consulta (Motivo de la Consulta, Enfermedad Actual y si Amerita o no Reposo)");
 						return false;
 					} else {
-						if (!agregarMedicina()) {
-							msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Medicinas");
+						if (rdoSiReposo.isChecked()
+								&& ((!rdoSiReposoDias.isChecked() && !rdoNoReposoHoras
+										.isChecked()) || (!rdoSiMaternal
+										.isChecked() && !rdoNoMaternal
+										.isChecked()))) {
+							msj.mensajeError("Debe indicar las opciones del reposo");
 							return false;
 						} else {
-							if (!agregarDiagnostico()) {
-								msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Diagnosticos");
+							if (rdoSiMaternal.isChecked()
+									&& cmbReposo.getText().compareTo("") == 0) {
+								msj.mensajeError("Debe indicar el tipo del reposo maternal");
 								return false;
 							} else {
-								if (!agregarExamen()) {
-									msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Examenes");
+								if (!agregarMedicina()) {
+									msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Medicinas");
 									return false;
 								} else {
-									if (!validarProveedor()) {
+									if (!agregarDiagnostico()) {
+										msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Diagnosticos");
 										return false;
 									} else {
-										if (!agregarEspecialista()) {
-											msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Especialistas");
+										if (!agregarExamen()) {
+											msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Examenes");
 											return false;
 										} else {
-											if (!agregarServicio()) {
-												msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Servicios Externos");
+											if (!validarProveedor()) {
 												return false;
 											} else {
-												if (cmbTipoPreventiva
-														.getValue().equals(
-																"Control")
-														&& idConsultaAsociada == 0) {
-													msj.mensajeError("Debe Seleccionar la Consulta Asociada al Control que se esta Realizando");
+												if (!agregarEspecialista()) {
+													msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Especialistas");
 													return false;
 												} else {
-													if (cmbTipoPreventiva
-															.getValue().equals(
-																	"IC")
-															&& idConsultaAsociada == 0) {
-														msj.mensajeError("Debe Seleccionar la Consulta Asociada a la Inter-Consulta");
+													if (!agregarServicio()) {
+														msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Servicios Externos");
 														return false;
 													} else {
 														if (cmbTipoPreventiva
 																.getValue()
-																.equals("IC")
-																&& cmbEspecialista
-																		.getText()
-																		.compareTo(
-																				"") == 0) {
-															msj.mensajeError("Debe Seleccionar el Especialista al cual asistio el paciente");
+																.equals("Control")
+																&& idConsultaAsociada == 0) {
+															msj.mensajeError("Debe Seleccionar la Consulta Asociada al Control que se esta Realizando");
 															return false;
 														} else {
-															if (ltbMedicinasAgregadas
-																	.getItemCount() != 0
-																	&& cmbPrioridad
-																			.getText()
-																			.compareTo(
-																					"") == 0) {
-																msj.mensajeError("Debe Seleccionar la Prioridad del Recipe");
+															if (cmbTipoPreventiva
+																	.getValue()
+																	.equals("IC")
+																	&& idConsultaAsociada == 0) {
+																msj.mensajeError("Debe Seleccionar la Consulta Asociada a la Inter-Consulta");
 																return false;
 															} else {
-																if (ltbExamenesAgregados
-																		.getItemCount() != 0
-																		&& cmbProveedor
+																if (cmbTipoPreventiva
+																		.getValue()
+																		.equals("IC")
+																		&& cmbEspecialista
 																				.getText()
 																				.compareTo(
 																						"") == 0) {
-																	msj.mensajeError("Debe Seleccionar el Laboratorio que Realizara los Examenes");
+																	msj.mensajeError("Debe Seleccionar el Especialista al cual asistio el paciente");
 																	return false;
 																} else {
-																	if (ltbDiagnosticosAgregados
-																			.getItemCount() == 0) {
-																		msj.mensajeError("Debe seleccionar al menos un diagnostico");
+																	if (ltbMedicinasAgregadas
+																			.getItemCount() != 0
+																			&& cmbPrioridad
+																					.getText()
+																					.compareTo(
+																							"") == 0) {
+																		msj.mensajeError("Debe Seleccionar la Prioridad del Recipe");
 																		return false;
 																	} else {
-																		if ((cmbTipoPreventiva
-																				.getValue()
-																				.equals("Pre-Empleo")
-																				|| cmbTipoPreventiva
-																						.getValue()
-																						.equals("Cambio de Puesto") || cmbTipoPreventiva
-																				.getValue()
-																				.equals("Promocion"))
-																				&& (cmbArea
+																		if (ltbExamenesAgregados
+																				.getItemCount() != 0
+																				&& cmbProveedor
 																						.getText()
 																						.compareTo(
-																								"") == 0 || cmbCargo
-																						.getText()
-																						.compareTo(
-																								"") == 0)) {
-																			msj.mensajeError("Debe Seleccionar el Cargo y el Area a la cual Aspira el Paciente");
+																								"") == 0) {
+																			msj.mensajeError("Debe Seleccionar el Laboratorio que Realizara los Examenes");
 																			return false;
 																		} else {
-																			if ((cmbTipoPreventiva
-																					.getValue()
-																					.equals("Pre-Empleo")
-																					|| cmbTipoPreventiva
-																							.getValue()
-																							.equals("Cambio de Puesto") || cmbTipoPreventiva
-																					.getValue()
-																					.equals("Promocion"))
-																					&& (!rdoSiApto
-																							.isChecked() && !rdoNoApto
-																							.isChecked())) {
-																				msj.mensajeError("Debe Indicar si el Paciente es Apto, o no para el Cargo que Aspira");
+																			if (ltbDiagnosticosAgregados
+																					.getItemCount() == 0) {
+																				msj.mensajeError("Debe seleccionar al menos un diagnostico");
 																				return false;
 																			} else {
-																				if (ltbServicioExternoAgregados
-																						.getItemCount() != 0
-																						&& cmbPrioridadServicio
+																				if ((cmbTipoPreventiva
+																						.getValue()
+																						.equals("Pre-Empleo")
+																						|| cmbTipoPreventiva
+																								.getValue()
+																								.equals("Cambio de Puesto") || cmbTipoPreventiva
+																						.getValue()
+																						.equals("Promocion"))
+																						&& (cmbArea
 																								.getText()
 																								.compareTo(
-																										"") == 0) {
-																					msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Estudios Externos");
+																										"") == 0 || cmbCargo
+																								.getText()
+																								.compareTo(
+																										"") == 0)) {
+																					msj.mensajeError("Debe Seleccionar el Cargo y el Area a la cual Aspira el Paciente");
 																					return false;
 																				} else {
-																					if (ltbExamenesAgregados
-																							.getItemCount() != 0
-																							&& cmbPrioridadExamen
-																									.getText()
-																									.compareTo(
-																											"") == 0) {
-																						msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Examenes");
+																					if ((cmbTipoPreventiva
+																							.getValue()
+																							.equals("Pre-Empleo")
+																							|| cmbTipoPreventiva
+																									.getValue()
+																									.equals("Cambio de Puesto") || cmbTipoPreventiva
+																							.getValue()
+																							.equals("Promocion"))
+																							&& (!rdoSiApto
+																									.isChecked() && !rdoNoApto
+																									.isChecked())) {
+																						msj.mensajeError("Debe Indicar si el Paciente es Apto, o no para el Cargo que Aspira");
 																						return false;
 																					} else {
-																						if (ltbEspecialistasAgregados
+																						if (ltbServicioExternoAgregados
 																								.getItemCount() != 0
-																								&& cmbPrioridadEspecialista
+																								&& cmbPrioridadServicio
 																										.getText()
 																										.compareTo(
 																												"") == 0) {
-																							msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Especialistas");
+																							msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Estudios Externos");
 																							return false;
 																						} else {
-																							if (ltbIntervencionesAgregadas
+																							if (ltbExamenesAgregados
 																									.getItemCount() != 0
-																									&& !validarIntervencion()) {
-																								msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Intervenciones Agregadas");
+																									&& cmbPrioridadExamen
+																											.getText()
+																											.compareTo(
+																													"") == 0) {
+																								msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Examenes");
 																								return false;
 																							} else {
-																								if (ltbAccidentesComunesAgregados
+																								if (ltbEspecialistasAgregados
 																										.getItemCount() != 0
-																										&& !validarComunes()) {
-																									msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados");
+																										&& cmbPrioridadEspecialista
+																												.getText()
+																												.compareTo(
+																														"") == 0) {
+																									msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Especialistas");
 																									return false;
 																								} else {
-																									if (ltbAccidentesLaboralesAgregados
+																									if (ltbIntervencionesAgregadas
 																											.getItemCount() != 0
-																											&& !validarLaborales()) {
-																										msj.mensajeError("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados");
+																											&& !validarIntervencion()) {
+																										msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Intervenciones Agregadas");
 																										return false;
-																									} else
-																										return true;
+																									} else {
+																										if (ltbAccidentesComunesAgregados
+																												.getItemCount() != 0
+																												&& !validarComunes()) {
+																											msj.mensajeError("Debe Seleccionar al menos la Fecha de la lista de Accidentes Comunes Agregados");
+																											return false;
+																										} else {
+																											if (ltbAccidentesLaboralesAgregados
+																													.getItemCount() != 0
+																													&& !validarLaborales()) {
+																												msj.mensajeError("Debe seleccionar al menos la Fecha de la lista de Accidentes Laborales Agregados");
+																												return false;
+																											} else
+																												return true;
+																										}
+																									}
 																								}
 																							}
 																						}
@@ -2372,8 +2432,14 @@ public class CConsulta extends CGenerico {
 		cmbTipoConsulta.setValue(consulta.getTipoConsulta());
 		cmbTipoPreventiva.setVisible(true);
 		cmbTipoPreventiva.setValue(consulta.getTipoConsultaSecundaria());
-		if (consulta.getReposo())
+		if (consulta.getReposo()) {
+			rowReposoDias.setVisible(true);
+			rowEmbarazo.setVisible(true);
 			rowReposo.setVisible(true);
+			rowReposoFecha.setVisible(true);
+			if (consulta.getFechaReposo() != null)
+				dtbReposo.setValue(consulta.getFechaReposo());
+		}
 		if (consulta.getConsultaAsociada() != 0) {
 			idConsultaAsociada = consulta.getConsultaAsociada();
 			Consulta consultaAsociada = servicioConsulta
@@ -2402,6 +2468,22 @@ public class CConsulta extends CGenerico {
 		txtMotivo.setValue(consulta.getMotivoConsulta());
 		txtEnfermedad.setValue(consulta.getEnfermedadActual());
 		spnReposo.setValue(consulta.getDiasReposo());
+		if (consulta.getTipoReposo() != null) {
+			if (consulta.getTipoReposo().equals("Horas"))
+				rdoNoReposoHoras.setChecked(true);
+			else
+				rdoSiReposoDias.setChecked(true);
+		} else
+			rdoSiReposoDias.setChecked(true);
+		if (consulta.getReposoEmbarazo() != null) {
+			rdoSiMaternal.setChecked(true);
+			cmbReposo.setValue(consulta.getReposoEmbarazo());
+			if (consulta.getReposoEmbarazo().equals("")) {
+				rdoNoMaternal.setChecked(true);
+				rowEmbarazo2.setVisible(false);
+			}
+		} else
+			rdoNoMaternal.setChecked(true);
 		spnPeso.setValue(consulta.getPeso());
 		spnEstatura.setValue(consulta.getEstatura());
 		spnOmbligo.setValue(consulta.getPerimetroOmbligo());
@@ -2452,6 +2534,15 @@ public class CConsulta extends CGenerico {
 			rdoSiRitmicoF3.setChecked(true);
 		else
 			rdoNoRitmicoF3.setChecked(true);
+		if (consulta.getFrecuenciaRespiratoria() != null)
+			spnFrecuenciaRespitatoria.setValue(consulta
+					.getFrecuenciaRespiratoria());
+		if (consulta.getRespiratoriaRitmica() != null) {
+			if (consulta.getRespiratoriaRitmica())
+				rdoSiRespiratoria.setChecked(true);
+			else
+				rdoNoRespiratoria.setChecked(true);
+		}
 		calcularIMC();
 		dtbFechaConsulta.setValue(consulta.getFechaConsulta());
 	}
@@ -2705,7 +2796,6 @@ public class CConsulta extends CGenerico {
 						if (tipo.equals("Accidente Laboral")
 								|| tipo.equals("Accidente Comun")
 								|| tipo.equals("Incidente")) {
-							System.out.println("entroBoton");
 							Button boton = ((Button) ((listItemj.getChildren()
 									.get(3))).getFirstChild());
 							boton.setVisible(true);
@@ -3530,12 +3620,24 @@ public class CConsulta extends CGenerico {
 		rowApto2.setVisible(false);
 		rowPromocion.setVisible(false);
 		cmbTipoPreventiva.setVisible(false);
+		rdoSiReposoDias.setChecked(false);
+		dtbReposo.setValue(fecha);
+		rdoNoReposoHoras.setChecked(false);
+		lblReposo.setValue("");
+		rowEmbarazo.setVisible(false);
+		rdoSiMaternal.setChecked(false);
+		rdoNoMaternal.setChecked(false);
+		rowEmbarazo2.setVisible(false);
+		rowReposoDias.setVisible(false);
+		rowReposoFecha.setVisible(false);
+		rowReposo.setVisible(false);
 	}
 
 	public void limpiarCampos() {
 		if (!botonera.getChildren().get(0).isVisible()) {
 			botonera.getChildren().get(0).setVisible(true);
 		}
+		cmbReposo.setValue("");
 		rowValido.setVisible(true);
 		btnConstancia.setVisible(false);
 		btnGenerarOrden.setVisible(false);
@@ -3659,6 +3761,10 @@ public class CConsulta extends CGenerico {
 			rdoNoRitmicoF2.setChecked(true);
 		if (rdoSiRitmicoF3.isChecked())
 			rdoSiRitmicoF3.setChecked(true);
+		if (rdoSiRespiratoria.isChecked())
+			rdoSiRespiratoria.setChecked(false);
+		if (rdoNoRespiratoria.isChecked())
+			rdoNoRespiratoria.setChecked(false);
 		if (rdoNoRitmicoF3.isChecked())
 			rdoNoRitmicoF3.setChecked(true);
 		if (rdoSiPeso.isChecked())
@@ -5147,15 +5253,50 @@ public class CConsulta extends CGenerico {
 		}
 	}
 
+	@Listen("onCheck = #rdoSiReposoDias")
+	public void checkSiDias() {
+		lblReposo.setValue("Cantidad de Dias");
+		rowReposo.setVisible(true);
+	}
+
+	@Listen("onCheck = #rdoNoReposoHoras")
+	public void checkNoHoras() {
+		lblReposo.setValue("Cantidad de Horas");
+		rowReposo.setVisible(true);
+	}
+
+	@Listen("onCheck = #rdoSiMaternal")
+	public void checkSiMaternal() {
+		rowEmbarazo2.setVisible(true);
+	}
+
+	@Listen("onCheck = #rdoNoMaternal")
+	public void checkNoMaternal() {
+		rowEmbarazo2.setVisible(false);
+		cmbReposo.setValue("");
+	}
+
 	@Listen("onCheck = #rdoSiReposo")
 	public void checkSi() {
-		rowReposo.setVisible(true);
+		rowReposoFecha.setVisible(true);
+		rowReposoDias.setVisible(true);
+		rowEmbarazo.setVisible(true);
 	}
 
 	@Listen("onCheck = #rdoNoReposo")
 	public void checkNo() {
-		rowReposo.setVisible(false);
+		rowReposoDias.setVisible(false);
+		rowReposoFecha.setVisible(false);
+		lblReposo.setValue("");
+		rowEmbarazo.setVisible(false);
+		rdoSiMaternal.setChecked(false);
+		rdoNoMaternal.setChecked(false);
+		rdoSiReposoDias.setChecked(false);
+		rdoNoReposoHoras.setChecked(false);
+		rowEmbarazo2.setVisible(false);
 		spnReposo.setValue(0);
+		cmbReposo.setValue("");
+		rowReposo.setVisible(false);
 	}
 
 	// VENTANA DE ACCIDENTE
@@ -5756,11 +5897,15 @@ public class CConsulta extends CGenerico {
 	public void generarReposo() {
 		if (idConsulta != 0) {
 			Long id = idConsulta;
-			Clients.evalJavaScript("window.open('"
-					+ damePath()
-					+ "Reportero?valor=7&valor2="
-					+ id
-					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			Consulta consulta = servicioConsulta.buscar(idConsulta);
+			if (consulta.getReposo()) {
+				Clients.evalJavaScript("window.open('"
+						+ damePath()
+						+ "Reportero?valor=7&valor2="
+						+ id
+						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			} else
+				msj.mensajeAlerta("En la Consulta no se indico reposo");
 		} else
 			msj.mensajeAlerta("Debe registrar la Consulta");
 	}
@@ -5788,7 +5933,10 @@ public class CConsulta extends CGenerico {
 			area = paciente.getArea().getNombre();
 		}
 		Calendar c = Calendar.getInstance();
-		c.setTime(consuta.getFechaConsulta());
+		if (consuta.getFechaReposo() != null)
+			c.setTime(consuta.getFechaReposo());
+		else
+			c.setTime(consuta.getFechaConsulta());
 		c.add(Calendar.DAY_OF_YEAR, consuta.getDiasReposo());
 		Date fechaHasta = c.getTime();
 		c.setTime(fechaHasta);
@@ -5808,13 +5956,36 @@ public class CConsulta extends CGenerico {
 		p.put("empresaRif", rifEmpresa);
 		p.put("pacienteNombre", paciente.getPrimerNombre());
 		p.put("pacienteApellido", paciente.getPrimerApellido());
-		p.put("pacienteCedula", paciente.getFicha());
+		if (paciente.isTrabajador()) {
+			p.put("pacienteCedula", paciente.getFicha());
+			p.put("tipoPaciente", "Trabajador");
+		} else {
+			p.put("pacienteCedula", paciente.getCedula());
+			p.put("tipoPaciente", "Familiar");
+		}
 		p.put("doctorNombre", consuta.getDoctor());
 		p.put("doctorApellido", user.getPrimerApellido());
 		p.put("doctorCedula", user.getCedula());
-		p.put("fechaDesde", consuta.getFechaConsulta());
-		p.put("fechaHasta", fechaHasta);
-		p.put("fechaReintegro", fechaReintegro);
+		if (consuta.getFechaReposo() != null)
+			p.put("fechaDesde", consuta.getFechaReposo());
+		else
+			p.put("fechaDesde", consuta.getFechaConsulta());
+		// p.put("fechaDesde", consuta.getFechaConsulta());
+		if (consuta.getTipoReposo() != null) {
+			if (consuta.getTipoReposo().equals("Dias")) {
+				p.put("tipoReposo", "Dias");
+				p.put("fechaHasta", fechaHasta);
+				p.put("fechaReintegro", fechaReintegro);
+			} else {
+				p.put("tipoReposo", "Horas");
+				p.put("fechaHasta", consuta.getFechaReposo());
+				p.put("fechaReintegro", consuta.getFechaReposo());
+			}
+		} else {
+			p.put("tipoReposo", "Dias");
+			p.put("fechaHasta", fechaHasta);
+			p.put("fechaReintegro", fechaReintegro);
+		}
 		p.put("diasReposo", consuta.getDiasReposo());
 		p.put("area", area);
 		if (!diagnosticoConsulta.isEmpty()) {

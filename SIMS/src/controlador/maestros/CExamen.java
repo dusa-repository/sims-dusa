@@ -55,6 +55,8 @@ public class CExamen extends CGenerico {
 	Catalogo<Examen> catalogo;
 	private boolean consulta = false;
 	private CConsulta cConsulta = new CConsulta();
+	private CProveedor cProveedor = new CProveedor();
+	private boolean proveedor = false;
 	List<Examen> examenConsulta = new ArrayList<Examen>();
 	Listbox listaConsulta;
 
@@ -76,6 +78,8 @@ public class CExamen extends CGenerico {
 				consulta = true;
 				examenConsulta = (List<Examen>) map.get("lista");
 				listaConsulta = (Listbox) map.get("listbox");
+				if (map.get("id").equals("proveedor"))
+					proveedor = true;
 				map.clear();
 				map = null;
 			}
@@ -120,7 +124,12 @@ public class CExamen extends CGenerico {
 							examen = servicioExamen.buscarUltimo();
 							examenConsulta.add(examen);
 						}
-						cConsulta.recibirExamen(examenConsulta, listaConsulta);
+						if (proveedor)
+							cProveedor.recibirExamen(examenConsulta,
+									listaConsulta);
+						else
+							cConsulta.recibirExamen(examenConsulta,
+									listaConsulta);
 					}
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
