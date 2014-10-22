@@ -34,7 +34,6 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
-
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
@@ -650,6 +649,11 @@ public class CProveedor extends CGenerico {
 	/* Abre la vista de Estudios */
 	@Listen("onClick = #btnAbrirEstudio")
 	public void abrirEstudio() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "proveedor");
+		map.put("lista", estudiosDisponibles);
+		map.put("listbox", ltbEstudios);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		List<Arbol> arboles = servicioArbol
 				.buscarPorNombreArbol("Estudios Externos");
 		if (!arboles.isEmpty()) {
@@ -661,6 +665,11 @@ public class CProveedor extends CGenerico {
 	/* Abre la vista de Examenes */
 	@Listen("onClick = #btnAbrirExamen")
 	public void abrirExamen() {
+		final HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "proveedor");
+		map.put("lista", examenesDisponibles);
+		map.put("listbox", ltbExamen);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
 		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Examen");
 		if (!arboles.isEmpty()) {
 			Arbol arbolItem = arboles.get(0);
@@ -678,5 +687,26 @@ public class CProveedor extends CGenerico {
 	@Listen("onClick = #btnAnteriorPestanna")
 	public void anteriorPestanna() {
 		tabEstudios.setSelected(true);
+	}
+
+	public void recibirExamen(List<Examen> lista, Listbox l) {
+		ltbExamen = l;
+		examenesDisponibles = lista;
+		ltbExamen.setModel(new ListModelList<Examen>(examenesDisponibles));
+		ltbExamen.setMultiple(false);
+		ltbExamen.setCheckmark(false);
+		ltbExamen.setMultiple(true);
+		ltbExamen.setCheckmark(true);
+	}
+
+	public void recibirServicio(List<ServicioExterno> lista, Listbox l) {
+		ltbEstudios = l;
+		estudiosDisponibles = lista;
+		ltbEstudios.setModel(new ListModelList<ServicioExterno>(
+				estudiosDisponibles));
+		ltbEstudios.setMultiple(false);
+		ltbEstudios.setCheckmark(false);
+		ltbEstudios.setMultiple(true);
+		ltbEstudios.setCheckmark(true);
 	}
 }

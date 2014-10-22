@@ -484,10 +484,14 @@
 													<radio label="SI" value="si" id="rdoSiRitmico" />
 													<radio label="NO" value="no" id="rdoNoRitmico" />
 												</radiogroup>
-												<hbox />
-												<hbox />
-												<hbox />
-												<hbox />
+												<label class="etiqueta" value="Frecuencia Respiratoria:" />
+												<spinner value="0" id="spnFrecuenciaRespitatoria"
+													step="1" format="#.#" constraint="min 0 max 100000" />
+												<label class="etiqueta" value="¿Es ritmico?" />
+												<radiogroup>
+													<radio label="SI" value="si" id="rdoSiRespiratoria" />
+													<radio label="NO" value="no" id="rdoNoRespiratoria" />
+												</radiogroup>
 											</row>
 											<row>
 												<label class="etiqueta" value="Pulso en prueba de esfuerzo" />
@@ -708,14 +712,59 @@
 															<radio label="NO" value="no" id="rdoNoReposo" />
 														</radiogroup>
 													</row>
+													<row id="rowReposoFecha" visible="false">
+														<hbox>
+															<label class="etiqueta" value="Fecha Inicio de Reposo" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
+														<datebox readonly="true" width="100%" id="dtbReposo"
+															constraint="no past,no empty" onCreate="self.value = new Date()"
+															tooltiptext="Indique la Fecha de Inicio del Reposo" />
+													</row>
+													<row id="rowReposoDias" visible="false">
+														<hbox>
+															<label class="etiqueta" value="¿Reposo en dias u horas?" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
+														<radiogroup>
+															<radio label="Dias" value="si" id="rdoSiReposoDias" />
+															<radio label="Horas" value="no" id="rdoNoReposoHoras" />
+														</radiogroup>
+													</row>
 													<row id="rowReposo" visible="false">
 														<hbox>
-															<label class="etiqueta" value="Dias de Reposo:" />
+															<label id="lblReposo" class="etiqueta" value="" />
 															<space />
 															<label value="*" style="font-weight:bold;color:red" />
 														</hbox>
 														<spinner hflex="1" vflex="1" value="0" id="spnReposo"
 															step="1" constraint="min 0 max 100000" />
+													</row>
+													<row id="rowEmbarazo" visible="false">
+														<hbox>
+															<label class="etiqueta" value="¿Reposo por motivos maternales?" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
+														<radiogroup>
+															<radio label="SI" value="si" id="rdoSiMaternal" />
+															<radio label="NO" value="no" id="rdoNoMaternal" />
+														</radiogroup>
+													</row>
+													<row id="rowEmbarazo2" visible="false">
+														<hbox>
+															<label class="etiqueta" value="Tipo de Reposo" />
+															<space />
+															<label value="*" style="font-weight:bold;color:red" />
+														</hbox>
+														<combobox tooltiptext="Seleccione el Tipo de Reposo"
+															placeholder="Seleccione el Tipo de Reposo" id="cmbReposo"
+															width="100%" readonly="true">
+															<comboitem label="Pre-Natal" />
+															<comboitem label="Post-Natal" />
+														</combobox>
 													</row>
 													<row id="rowApto" visible="false">
 														<hbox>
