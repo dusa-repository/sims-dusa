@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RResumenDiagnostico" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" uuid="0b9496a3-6047-4657-870d-87c45f4d6d33">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="106"/>
+	<property name="ireport.y" value="554"/>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
 	<parameter name="tipoPaciente" class="java.lang.String"/>
@@ -258,8 +258,8 @@
 				<text><![CDATA[MORBILIDAD POR DIAGNOSTICOS]]></text>
 			</staticText>
 			<pieChart>
-				<chart isShowLegend="false">
-					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="14" y="64" width="550" height="588" uuid="c8fe6a7f-8e1a-4919-97ea-4947f8359cab"/>
+				<chart isShowLegend="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="14" y="64" width="550" height="588" uuid="c8fe6a7f-8e1a-4919-97ea-4947f8359cab"/>
 					<chartTitle/>
 					<chartSubtitle>
 						<font size="8"/>
@@ -271,10 +271,13 @@
 				<pieDataset>
 					<keyExpression><![CDATA[$F{nombre1}]]></keyExpression>
 					<valueExpression><![CDATA[$F{valor1}]]></valueExpression>
+					<labelExpression><![CDATA[null]]></labelExpression>
 				</pieDataset>
 				<piePlot isShowLabels="true" isCircular="true">
-					<plot/>
-					<itemLabel/>
+					<plot orientation="Horizontal"/>
+					<itemLabel>
+						<font size="8"/>
+					</itemLabel>
 				</piePlot>
 			</pieChart>
 		</band>

@@ -22,6 +22,21 @@
 							class="btn" label="Buscar" tooltiptext="Catalogo"
 							image="/public/imagenes/botones/buscar.png" />
 					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Clasificacion:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox tooltiptext="Seleccione una Clasificacion" placeholder="Seleccione una Clasificacion"
+							id="cmbClasificacion" readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idClasificacion}" />
+							</template>
+						</combobox>
+						<button class="abrir" id="btnAbrirClasificacion" label=""
+							tooltiptext="Crear una Nueva Clasificacion" image="/public/imagenes/botones/agregar.png" />
+					</row>
 				</rows>
 			</grid>
 			<separator />

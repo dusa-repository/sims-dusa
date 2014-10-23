@@ -2,28 +2,26 @@ package modelo.maestros;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
-/**
- * The persistent class for the unidad database table.
- * 
- */
 @Entity
-@Table(name="unidad_usuario", schema="dusa_sims.dbo")
-public class UnidadUsuario implements Serializable {
-	private static final long serialVersionUID = 1L;
+@Table(name="clasificacion_diagnostico", schema="dusa_sims.dbo")
+public class ClasificacionDiagnostico implements Serializable {
+	
+	private static final long serialVersionUID = 5037866792426235260L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_unidad_usuario", unique=true, nullable=false)
-	private long idUnidadUsuario;
+	@Column(name="id_clasificacion_diagnostico", unique=true, nullable=false)
+	private long idClasificacion;
 
 	@Column(name="fecha_auditoria")
 	private Timestamp fechaAuditoria;
@@ -37,24 +35,35 @@ public class UnidadUsuario implements Serializable {
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 	
-	public UnidadUsuario() {
-	}
-	
+	@OneToMany(mappedBy="clasificacion")
+	private Set<CategoriaDiagnostico> categorias;
 
-	public UnidadUsuario(long idUnidad, Timestamp fechaAuditoria,
-			String horaAuditoria, String nombre, String usuarioAuditoria) {
+	public ClasificacionDiagnostico() {
 		super();
-		this.idUnidadUsuario = idUnidad;
+		// TODO Auto-generated constructor stub
+	}
+
+	public ClasificacionDiagnostico(long idClasificacion,
+			Timestamp fechaAuditoria, String horaAuditoria, String nombre,
+			String usuarioAuditoria) {
+		super();
+		this.idClasificacion = idClasificacion;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
+	public long getIdClasificacion() {
+		return idClasificacion;
+	}
 
+	public void setIdClasificacion(long idClasificacion) {
+		this.idClasificacion = idClasificacion;
+	}
 
 	public Timestamp getFechaAuditoria() {
-		return this.fechaAuditoria;
+		return fechaAuditoria;
 	}
 
 	public void setFechaAuditoria(Timestamp fechaAuditoria) {
@@ -62,7 +71,7 @@ public class UnidadUsuario implements Serializable {
 	}
 
 	public String getHoraAuditoria() {
-		return this.horaAuditoria;
+		return horaAuditoria;
 	}
 
 	public void setHoraAuditoria(String horaAuditoria) {
@@ -70,7 +79,7 @@ public class UnidadUsuario implements Serializable {
 	}
 
 	public String getNombre() {
-		return this.nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
@@ -78,20 +87,20 @@ public class UnidadUsuario implements Serializable {
 	}
 
 	public String getUsuarioAuditoria() {
-		return this.usuarioAuditoria;
+		return usuarioAuditoria;
 	}
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
 
-	public long getIdUnidadUsuario() {
-		return idUnidadUsuario;
+	public Set<CategoriaDiagnostico> getCategorias() {
+		return categorias;
 	}
 
-
-	public void setIdUnidadUsuario(long idUnidadUsuario) {
-		this.idUnidadUsuario = idUnidadUsuario;
+	public void setCategorias(Set<CategoriaDiagnostico> categorias) {
+		this.categorias = categorias;
 	}
-
+	
+	
 }

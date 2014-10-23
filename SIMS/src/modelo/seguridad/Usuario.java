@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.maestros.Especialidad;
-import modelo.maestros.UnidadUsuario;
 import modelo.transacciones.Consulta;
 
 import org.hibernate.annotations.Type;

@@ -1517,20 +1517,22 @@ public class CConsulta extends CGenerico {
 
 	public void guardarServicios(Consulta consultaDatos) {
 		List<ConsultaServicioExterno> listaServicioExterno = new ArrayList<ConsultaServicioExterno>();
+		ProveedorServicio proveedorServicio = new ProveedorServicio();
 		for (int i = 0; i < ltbServicioExternoAgregados.getItemCount(); i++) {
 			Listitem listItem = ltbServicioExternoAgregados.getItemAtIndex(i);
 			Integer id = ((Spinner) ((listItem.getChildren().get(4)))
 					.getFirstChild()).getValue();
 			ServicioExterno servicioExterno = servicioServicioExterno
 					.buscar(id);
-			double valor = ((Doublespinner) ((listItem.getChildren().get(3)))
-					.getFirstChild()).getValue();
 			String idProveedor = ((Combobox) ((listItem.getChildren().get(2)))
 					.getFirstChild()).getSelectedItem().getContext();
 			Proveedor proveedor = servicioProveedor.buscar(Long
 					.parseLong(idProveedor));
 			String observacion = ((Textbox) ((listItem.getChildren().get(1)))
 					.getFirstChild()).getValue();
+			proveedorServicio = servicioProveedorServicio
+					.buscarPorCodigoDeAmbos(proveedor.getIdProveedor(), id);
+			double valor = proveedorServicio.getCosto();
 			String prioridad = cmbPrioridadServicio.getValue();
 			ConsultaServicioExterno consultaServicio = new ConsultaServicioExterno(
 					consultaDatos, servicioExterno, proveedor, valor,
@@ -2381,6 +2383,10 @@ public class CConsulta extends CGenerico {
 		llenarCampos(paciente);
 		idPaciente = paciente.getCedula();
 		List<Consulta> consultas = servicioConsulta.buscarPorPaciente(paciente);
+		if (!consultas.isEmpty())
+			if (consultas.get(0).getTipoConsultaSecundaria()
+					.equals("Pre-Vacacional"))
+				msj.mensajeAlerta("La ultima consulta de este paciente fue de tipo Pre-Vacacional, por lo tanto la consulta actual debe ser de tipo Post-Vacacional");
 		for (int i = 0; i < consultas.size(); i++) {
 			consultas.get(i).setHoraConsulta(
 					formatoFecha.format(consultas.get(i).getFechaConsulta()));
@@ -4226,6 +4232,10 @@ public class CConsulta extends CGenerico {
 			idPaciente = paciente.getCedula();
 			List<Consulta> consultas = servicioConsulta
 					.buscarPorPaciente(paciente);
+			if (!consultas.isEmpty())
+				if (consultas.get(0).getTipoConsultaSecundaria()
+						.equals("Pre-Vacacional"))
+					msj.mensajeAlerta("La ultima consulta de este paciente fue de tipo Pre-Vacacional, por lo tanto la consulta actual debe ser de tipo Post-Vacacional");
 			ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
 			llenarListas();
 		} else {
@@ -5594,24 +5604,52 @@ public class CConsulta extends CGenerico {
 	@Listen("onClick = #btnGenerarOrdenServicios")
 	public void generarServicio() {
 		if (ltbServicioExternoAgregados.getItemCount() != 0) {
-			for (int i = 0; i < ltbServicioExternoAgregados.getItemCount(); i++) {
-				Listitem listItem = ltbServicioExternoAgregados
-						.getItemAtIndex(i);
-				Integer idSe = ((Spinner) ((listItem.getChildren().get(4)))
-						.getFirstChild()).getValue();
-				String idPr = ((Combobox) ((listItem.getChildren().get(2)))
-						.getFirstChild()).getSelectedItem().getContext();
-				Long id = idConsulta;
-				Long idServicio = Long.valueOf(idSe);
-				Long idProveedor = Long.valueOf(idPr);
+			// for (int i = 0; i < ltbServicioExternoAgregados.getItemCount();
+			// i++) {
+			// Listitem listItem = ltbServicioExternoAgregados
+			// .getItemAtIndex(i);
+			// Integer idSe = ((Spinner) ((listItem.getChildren().get(4)))
+			// .getFirstChild()).getValue();
+			// String idPr = ((Combobox) ((listItem.getChildren().get(2)))
+			// .getFirstChild()).getSelectedItem().getContext();
+			// Long id = idConsulta;
+			// Long idServicio = Long.valueOf(idSe);
+			// Long idProveedor = Long.valueOf(idPr);
+			// Clients.evalJavaScript("window.open('"
+			// + damePath()
+			// + "Reportero?valor=3&valor2="
+			// + id
+			// + "&valor4="
+			// + idServicio
+			// + "&valor5="
+			// + idProveedor
+			// +
+			// "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			// }
+			Long id = idConsulta;
+			Consulta consulta = servicioConsulta.buscar(id);
+			List<ConsultaServicioExterno> listaMedicinas = servicioConsultaServicioExterno
+					.buscarPorConsulta(consulta);
+			List<Long> idsProveedor = new ArrayList<Long>();
+			long provedor = listaMedicinas.get(0).getProveedor()
+					.getIdProveedor();
+			idsProveedor.add(provedor);
+			for (int i = 0; i < listaMedicinas.size(); i++) {
+				if (provedor != listaMedicinas.get(i).getProveedor()
+						.getIdProveedor()) {
+					idsProveedor.add(listaMedicinas.get(i).getProveedor()
+							.getIdProveedor());
+					provedor = listaMedicinas.get(i).getProveedor()
+							.getIdProveedor();
+				}
+			}
+			for (int i = 0; i < idsProveedor.size(); i++) {
 				Clients.evalJavaScript("window.open('"
 						+ damePath()
 						+ "Reportero?valor=3&valor2="
 						+ id
-						+ "&valor4="
-						+ idServicio
 						+ "&valor5="
-						+ idProveedor
+						+ idsProveedor.get(i)
 						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 			}
 		} else
@@ -5619,12 +5657,19 @@ public class CConsulta extends CGenerico {
 
 	}
 
-	public byte[] reporteServicio(Long part2, Long part4, Long part5)
-			throws JRException {
+	public byte[] reporteServicio(Long part2, Long part5) throws JRException {
 		byte[] fichero = null;
 		Consulta consuta = getServicioConsulta().buscar(part2);
-		ConsultaServicioExterno servicioConsultas = getServicioConsultaServicioExterno()
-				.buscarPorConsultaYIdServicio(consuta, part4);
+		// ConsultaServicioExterno servicioConsultas =
+		// getServicioConsultaServicioExterno()
+		// .buscarPorConsultaYIdServicio(consuta, part4);
+		List<ConsultaServicioExterno> listaMedicinas = getServicioConsultaServicioExterno()
+				.buscarPorConsultaYProveedor(consuta, part5);
+		String servicio = "";
+		for (int i = 0; i < listaMedicinas.size(); i++) {
+			servicio += listaMedicinas.get(i).getServicioExterno().getNombre()
+					+ "; ";
+		}
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
@@ -5651,17 +5696,16 @@ public class CConsulta extends CGenerico {
 		p.put("doctorApellido",
 				user.getPrimerApellido() + "   " + user.getSegundoApellido());
 		p.put("doctorCedula", user.getCedula());
-		p.put("servicio", servicioConsultas.getServicioExterno().getNombre());
-		p.put("centro", servicioConsultas.getProveedor().getNombre());
-		p.put("enfermedad", servicioConsultas.getObservacion());
-		p.put("observacion", servicioConsultas.getObservacion());
-		p.put("prioridad", servicioConsultas.getPrioridad());
+		p.put("servicio", servicio);
+		p.put("centro", listaMedicinas.get(0).getProveedor().getNombre());
+		p.put("prioridad", listaMedicinas.get(0).getPrioridad());
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipeServicio.jasper"));
-		fichero = JasperRunManager.runReportToPdf(reporte, p);
+		fichero = JasperRunManager.runReportToPdf(reporte, p,
+				new JRBeanCollectionDataSource(listaMedicinas));
 		return fichero;
 	}
 

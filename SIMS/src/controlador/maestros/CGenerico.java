@@ -53,6 +53,7 @@ import servicio.maestros.SCargo;
 import servicio.maestros.SCategoriaDiagnostico;
 import servicio.maestros.SCategoriaMedicina;
 import servicio.maestros.SCiudad;
+import servicio.maestros.SClasificacionDiagnostico;
 import servicio.maestros.SConsultorio;
 import servicio.maestros.SDiagnostico;
 import servicio.maestros.SEmpresa;
@@ -79,7 +80,6 @@ import servicio.maestros.SProveedorServicio;
 import servicio.maestros.SRecipe;
 import servicio.maestros.SServicioExterno;
 import servicio.maestros.SUnidadMedicina;
-import servicio.maestros.SUnidadUsuario;
 import servicio.maestros.SVacuna;
 import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
@@ -101,7 +101,6 @@ import servicio.transacciones.SHistoria;
 import servicio.transacciones.SHistoriaAccidente;
 import servicio.transacciones.SHistoriaIntervencion;
 import servicio.transacciones.SHistoriaVacuna;
-
 import componentes.Mensaje;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -142,6 +141,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SCondicion servicioCondicion;
 	@WireVariable("SConsultorio")
 	protected SConsultorio servicioConsultorio;
+	@WireVariable("SClasificacionDiagnostico")
+	protected SClasificacionDiagnostico servicioClasificacion;
 	@WireVariable("SConsulta")
 	protected SConsulta servicioConsulta;
 	@WireVariable("SConsultaParteCuerpo")
@@ -212,8 +213,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SRecipe servicioRecipe;
 	@WireVariable("SServicioExterno")
 	protected SServicioExterno servicioServicioExterno;
-	@WireVariable("SUnidadUsuario")
-	protected SUnidadUsuario servicioUnidadUsuario;
 	@WireVariable("SUnidadMedicina")
 	protected SUnidadMedicina servicioUnidadMedicina;
 	@WireVariable("SGrupo")

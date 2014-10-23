@@ -53,4 +53,9 @@ public class SConsultaServicioExterno {
 	public double sumPorConsulta(Consulta consulta) {
 		return consultaServicioExternoDAO.sumByConsulta(consulta);
 	}
+
+	public List<ConsultaServicioExterno> buscarPorConsultaYProveedor(
+			Consulta consuta, Long part5) {
+		return consultaServicioExternoDAO.findByConsultaAndProveedorIdProveedor(consuta, part5);
+	}
 }

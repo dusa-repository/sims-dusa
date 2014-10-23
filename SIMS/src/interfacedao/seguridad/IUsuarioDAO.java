@@ -3,7 +3,6 @@ package interfacedao.seguridad;
 import java.util.List;
 
 import modelo.maestros.Especialidad;
-import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
@@ -12,8 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 
 	Usuario findByLogin(String nombre);
-
-	List<Usuario> findByUnidad(UnidadUsuario unidad);
 
 	List<Usuario> findByEspecialidad(Especialidad especialidad);
 

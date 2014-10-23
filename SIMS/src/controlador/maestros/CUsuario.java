@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 
 import modelo.maestros.Cita;
 import modelo.maestros.Especialidad;
-import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
