@@ -6066,7 +6066,6 @@ public class CConsulta extends CGenerico {
 	public byte[] reporteConstancia(Long part2) throws JRException {
 		byte[] fichero = null;
 		Consulta consuta = getServicioConsulta().buscar(part2);
-
 		Paciente paciente = consuta.getPaciente();
 		Usuario user = consuta.getUsuario();
 		Map p = new HashMap();
@@ -6090,8 +6089,6 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteNombre", paciente.getPrimerNombre());
 		p.put("pacienteApellido", paciente.getPrimerApellido());
 		p.put("doctorNombre", consuta.getDoctor());
-		p.put("doctorApellido", user.getPrimerApellido());
-		p.put("doctorCedula", user.getCedula());
 		p.put("fecha", consuta.getFechaConsulta());
 		p.put("area", area);
 		p.put("pacienteCedula", paciente.getFicha());

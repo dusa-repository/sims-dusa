@@ -30,8 +30,7 @@
 						</hbox>
 						<cell colspan="6">
 							<datebox width="100%" readonly="true" id="dtbHasta"
-								constraint="no future" onCreate="self.value = new Date()"
-								tooltiptext="Seleccione el fin del Periodo a buscar" />
+								onCreate="self.value = new Date()" tooltiptext="Seleccione el fin del Periodo a buscar" />
 
 						</cell>
 					</row>

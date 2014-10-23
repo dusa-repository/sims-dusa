@@ -9,47 +9,57 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="42">
+		<band height="35">
 			<staticText>
-				<reportElement x="234" y="15" width="125" height="20" uuid="ce860fd6-6a70-48b6-97fc-9301b354dcc1"/>
-				<textElement>
-					<font size="12" isBold="true"/>
+				<reportElement x="176" y="11" width="235" height="20" uuid="ce860fd6-6a70-48b6-97fc-9301b354dcc1"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
-				<text><![CDATA[Medicinas recetadas]]></text>
+				<text><![CDATA[Medicinas Recetadas]]></text>
 			</staticText>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="2" width="572" height="15" backcolor="#DBD7D7" uuid="4af901f8-a1e8-468d-9cc0-a1bde93daef5"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
 			<staticText>
 				<reportElement x="0" y="0" width="297" height="20" uuid="e8e766e6-d99b-4acc-8ce8-abbd68f068b7"/>
-				<textElement>
-					<font size="12" isBold="true"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="297" y="0" width="275" height="20" uuid="93fef873-5a84-4930-9c5d-6f6f82187462"/>
-				<textElement>
-					<font size="12" isBold="true"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Dosis]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="44" splitType="Stretch">
+		<band height="19" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="8" y="8" width="289" height="20" uuid="dc108679-91f5-4d7c-87b7-8b259ddb970d"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="-1" width="297" height="20" uuid="dc108679-91f5-4d7c-87b7-8b259ddb970d"/>
+				<box leftPadding="4">
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
 				<textElement>
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medicina.nombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="301" y="8" width="265" height="20" uuid="70a963a7-0d5f-42a4-9277-ad5c53c47eb8"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="297" y="-1" width="275" height="20" uuid="70a963a7-0d5f-42a4-9277-ad5c53c47eb8"/>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dosis}]]></textFieldExpression>
 			</textField>

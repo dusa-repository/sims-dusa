@@ -25,8 +25,7 @@
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
 						<datebox width="100%" readonly="true" id="dtbHasta"
-							 onCreate="self.value = new Date()"
-							tooltiptext="Seleccione el fin del Periodo a buscar" />
+							onCreate="self.value = new Date()" tooltiptext="Seleccione el fin del Periodo a buscar" />
 					</row>
 					<row>
 						<hbox>
