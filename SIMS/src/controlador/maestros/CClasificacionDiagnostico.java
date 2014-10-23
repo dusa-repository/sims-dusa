@@ -1,10 +1,11 @@
 package controlador.maestros;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.maestros.UnidadUsuario;
-import modelo.seguridad.Usuario;
+import modelo.maestros.CategoriaDiagnostico;
+import modelo.maestros.ClasificacionDiagnostico;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -20,60 +21,63 @@ import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
 
-public class CUnidadUsuario extends CGenerico {
+public class CClasificacionDiagnostico extends CGenerico {
 
-	private static final long serialVersionUID = -1573821851840127496L;
+	private static final long serialVersionUID = -4054354641778709932L;
 	@Wire
-	private Div botoneraUnidadUsuario;
+	private Div botoneraClasificacionDiagnostico;
 	@Wire
-	private Textbox txtNombreUnidad;
+	private Textbox txtNombre;
 	@Wire
-	private Button btnBuscarUnidad;
+	private Button btnBuscarClasificacionDiagnostico;
 	@Wire
-	private Div catalogoUnidadUsuario;
+	private Div catalogoClasificacionDiagnostico;
 	@Wire
-	private Div divUnidadUsuario;
+	private Div divClasificacionDiagnostico;
 	private long id = 0;
-	Catalogo<UnidadUsuario> catalogo;
+	Catalogo<ClasificacionDiagnostico> catalogo;
+	String nombre = "";
 
 	@Override
-	public void inicializar() {
+	public void inicializar() throws IOException {
 		HashMap<String, Object> mapa = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("mapaGeneral");
 		if (mapa != null) {
 			if (mapa.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				nombre = (String) mapa.get("nombre");
 				mapa.clear();
 				mapa = null;
 			}
 		}
 		Botonera botonera = new Botonera() {
+
+			@Override
+			public void salir() {
+				cerrarVentana(divClasificacionDiagnostico, nombre, tabs);
+			}
+
+			@Override
+			public void limpiar() {
+				txtNombre.setValue("");
+				id = 0;
+			}
+
 			@Override
 			public void guardar() {
 				if (validar()) {
-					UnidadUsuario unidad = new UnidadUsuario(id, fechaHora,
-							horaAuditoria, txtNombreUnidad.getValue(),
+					ClasificacionDiagnostico unidad = new ClasificacionDiagnostico(
+							id, fechaHora, horaAuditoria, txtNombre.getValue(),
 							nombreUsuarioSesion());
-					servicioUnidadUsuario.guardar(unidad);
+					servicioClasificacion.guardar(unidad);
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 
 			@Override
-			public void limpiar() {
-				txtNombreUnidad.setValue("");
-				id = 0;
-			}
-
-			@Override
-			public void salir() {
-				cerrarVentana(divUnidadUsuario, "Unidad Usuario", tabs);
-			}
-
-			@Override
 			public void eliminar() {
-				if (id != 0 && txtNombreUnidad.getText().compareTo("") != 0) {
+				if (id != 0 && txtNombre.getText().compareTo("") != 0) {
 					Messagebox.show("¿Esta Seguro de Eliminar la Unidad?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
@@ -81,15 +85,12 @@ public class CUnidadUsuario extends CGenerico {
 								public void onEvent(Event evt)
 										throws InterruptedException {
 									if (evt.getName().equals("onOK")) {
-										UnidadUsuario unidad = servicioUnidadUsuario
-												.buscar(id);
-										List<Usuario> usuarios = servicioUsuario
-												.buscarPorUnidad(unidad);
+										List<CategoriaDiagnostico> usuarios = servicioCategoriaDiagnostico
+												.buscarPorClasificacion(id);
 										if (!usuarios.isEmpty()) {
 											msj.mensajeError(Mensaje.noEliminar);
 										} else {
-											servicioUnidadUsuario
-													.eliminar(unidad);
+											servicioClasificacion.eliminar(id);
 											limpiar();
 											msj.mensajeInformacion(Mensaje.eliminado);
 										}
@@ -101,14 +102,13 @@ public class CUnidadUsuario extends CGenerico {
 					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 			}
-
 		};
-		botoneraUnidadUsuario.appendChild(botonera);
+		botoneraClasificacionDiagnostico.appendChild(botonera);
 	}
 
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (txtNombreUnidad.getText().compareTo("") == 0) {
+		if (txtNombre.getText().compareTo("") == 0) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
@@ -118,50 +118,55 @@ public class CUnidadUsuario extends CGenerico {
 	/* Muestra el catalogo de las categorias */
 	@Listen("onClick = #btnBuscarUnidad")
 	public void mostrarCatalogo() {
-		List<UnidadUsuario> unidades = servicioUnidadUsuario.buscarTodas();
-		catalogo = new Catalogo<UnidadUsuario>(catalogoUnidadUsuario,
-				"Catalogo de Unidades", unidades, "Nombre") {
+		List<ClasificacionDiagnostico> unidades = servicioClasificacion
+				.buscarTodas();
+		catalogo = new Catalogo<ClasificacionDiagnostico>(
+				catalogoClasificacionDiagnostico, "Catalogo de Unidades",
+				unidades, "Nombre") {
 
 			@Override
-			protected List<UnidadUsuario> buscar(String valor, String combo) {
+			protected List<ClasificacionDiagnostico> buscar(String valor,
+					String combo) {
 				if (combo.equals("Nombre"))
-					return servicioUnidadUsuario.filtroNombre(valor);
+					return servicioClasificacion.filtroNombre(valor);
 				else
-					return servicioUnidadUsuario.buscarTodas();
+					return servicioClasificacion.buscarTodas();
 			}
 
 			@Override
-			protected String[] crearRegistros(UnidadUsuario objeto) {
+			protected String[] crearRegistros(ClasificacionDiagnostico objeto) {
 				String[] registros = new String[1];
 				registros[0] = objeto.getNombre();
 				return registros;
 			}
 
 		};
-		catalogo.setParent(catalogoUnidadUsuario);
+		catalogo.setParent(catalogoClasificacionDiagnostico);
 		catalogo.doModal();
 	}
 
 	/* Permite la seleccion de un item del catalogo */
-	@Listen("onSeleccion = #catalogoUnidadUsuario")
+	@Listen("onSeleccion = #catalogoClasificacionDiagnostico")
 	public void seleccinar() {
-		UnidadUsuario unidad = catalogo.objetoSeleccionadoDelCatalogo();
+		ClasificacionDiagnostico unidad = catalogo
+				.objetoSeleccionadoDelCatalogo();
 		llenarCampos(unidad);
 		catalogo.setParent(null);
 	}
 
 	/* Busca si existe una unidad con el mismo nombre escrito */
-	@Listen("onChange = #txtNombreUnidad")
+	@Listen("onChange = #txtNombre")
 	public void buscarPorNombre() {
-		UnidadUsuario unidad = servicioUnidadUsuario
-				.buscarPorNombre(txtNombreUnidad.getValue());
+		ClasificacionDiagnostico unidad = servicioClasificacion
+				.buscarPorNombre(txtNombre.getValue());
 		if (unidad != null)
 			llenarCampos(unidad);
 	}
 
 	/* LLena los campos del formulario dada una unidad */
-	private void llenarCampos(UnidadUsuario unidad) {
-		txtNombreUnidad.setValue(unidad.getNombre());
-		id = unidad.getIdUnidadUsuario();
+	private void llenarCampos(ClasificacionDiagnostico unidad) {
+		txtNombre.setValue(unidad.getNombre());
+		id = unidad.getIdClasificacion();
 	}
+
 }

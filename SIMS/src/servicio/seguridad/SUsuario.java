@@ -5,7 +5,6 @@ import interfacedao.seguridad.IUsuarioDAO;
 import java.util.List;
 
 import modelo.maestros.Especialidad;
-import modelo.maestros.UnidadUsuario;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
@@ -31,11 +30,6 @@ public class SUsuario {
 	@Transactional
 	public Usuario buscarUsuarioPorNombre(String nombre) {
 		return usuarioDAO.findByLogin(nombre);
-	}
-
-	@Transactional
-	public List<Usuario> buscarPorUnidad(UnidadUsuario unidad) {
-		return usuarioDAO.findByUnidad(unidad);
 	}
 
 	@Transactional

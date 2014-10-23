@@ -26,4 +26,7 @@ public interface IConsultaServicioExternoDAO extends JpaRepository<ConsultaServi
 	@Query("select coalesce((SUM(c.costo)),'0') from ConsultaServicioExterno c where c.consulta=?1")
 	double sumByConsulta(Consulta consulta);
 
+	List<ConsultaServicioExterno> findByConsultaAndProveedorIdProveedor(
+			Consulta consuta, Long part5);
+
 }

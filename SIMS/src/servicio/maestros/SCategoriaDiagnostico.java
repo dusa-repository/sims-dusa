@@ -5,6 +5,7 @@ import interfacedao.maestros.ICategoriaDiagnosticoDAO;
 import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
+import modelo.maestros.ClasificacionDiagnostico;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +27,8 @@ public class SCategoriaDiagnostico {
 	public CategoriaDiagnostico buscar(long id) {
 		return categoriaDAO.findOne(id);
 	}
-	
-	public void eliminar(CategoriaDiagnostico categoria){
+
+	public void eliminar(CategoriaDiagnostico categoria) {
 		categoriaDAO.delete(categoria);
 	}
 
@@ -37,5 +38,9 @@ public class SCategoriaDiagnostico {
 
 	public List<CategoriaDiagnostico> filtroNombre(String valor) {
 		return categoriaDAO.findByNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<CategoriaDiagnostico> buscarPorClasificacion(long id) {
+		return categoriaDAO.findByClasificacionIdClasificacion(id);
 	}
 }

@@ -6,9 +6,12 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -43,17 +46,22 @@ public class CategoriaDiagnostico implements Serializable {
 	@OneToMany(mappedBy="categoria")
 	private Set<Diagnostico> diagnosticos;
 
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_clasificacion_diagnostico")
+	private ClasificacionDiagnostico clasificacion;
+
 	public CategoriaDiagnostico() {
 	}
 	
 	public CategoriaDiagnostico(long idCategoria, Timestamp fechaAuditoria,
-			String horaAuditoria, String nombre, String usuarioAuditoria) {
+			String horaAuditoria, String nombre, String usuarioAuditoria, ClasificacionDiagnostico clasificacion) {
 		super();
 		this.idCategoriaDiagnostico = idCategoria;
 		this.fechaAuditoria = fechaAuditoria;
 		this.horaAuditoria = horaAuditoria;
 		this.nombre = nombre;
 		this.usuarioAuditoria = usuarioAuditoria;
+		this.clasificacion = clasificacion;
 	}
 
 
@@ -117,6 +125,14 @@ public class CategoriaDiagnostico implements Serializable {
 		diagnostico.setCategoria(null);
 
 		return diagnostico;
+	}
+
+	public ClasificacionDiagnostico getClasificacion() {
+		return clasificacion;
+	}
+
+	public void setClasificacion(ClasificacionDiagnostico clasificacion) {
+		this.clasificacion = clasificacion;
 	}
 
 }

@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div id="divUnidadUsuario" apply="controlador.maestros.CUnidadUsuario">
-		<groupbox width="50%" mold="3d" title="Unidad Usuario">
+	<div id="divClasificacionDiagnostico" apply="controlador.maestros.CClasificacionDiagnostico">
+		<groupbox width="50%" mold="3d" title="Clasificacion de Categorias de Diagnostico">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />
@@ -15,7 +15,7 @@
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
-						<textbox class="multilinea" id="txtNombreUnidad" hflex="1"
+						<textbox class="multilinea" id="txtNombre" hflex="1"
 							maxlength="500" tooltiptext="Ingrese el Nombre de la Unidad"
 							multiline="true" />
 						<button autodisable="self" id="btnBuscarUnidad" class="btn"
@@ -24,8 +24,8 @@
 				</rows>
 			</grid>
 			<separator />
-			<div id="botoneraUnidadUsuario" />
-			<div id="catalogoUnidadUsuario" />
+			<div id="botoneraClasificacionDiagnostico" />
+			<div id="catalogoClasificacionDiagnostico" />
 		</groupbox>
 	</div>
 </zk>

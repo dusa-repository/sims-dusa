@@ -4,18 +4,27 @@ import java.util.HashMap;
 import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
+import modelo.maestros.ClasificacionDiagnostico;
 import modelo.maestros.Diagnostico;
+import modelo.maestros.Estado;
+import modelo.maestros.Pais;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Include;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
+import arbol.CArbol;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
@@ -33,11 +42,19 @@ public class CCategoriaDiagnostico extends CGenerico {
 	private Div catalogoCategoriaDiagnostico;
 	@Wire
 	private Div divCategoriaDiagnostico;
+	@Wire
+	private Combobox cmbClasificacion;
 	private long id = 0;
 	Catalogo<CategoriaDiagnostico> catalogo;
+	CArbol cArbol = new CArbol();
 
 	@Override
 	public void inicializar() {
+		contenido = (Include) divCategoriaDiagnostico.getParent();
+		Tabbox tabox = (Tabbox) divCategoriaDiagnostico.getParent().getParent()
+				.getParent().getParent();
+		tabBox = tabox;
+		tab = (Tab) tabox.getTabs().getLastChild();
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
 				.getCurrent().getAttribute("mapaGeneral");
 		if (map != null) {
@@ -53,9 +70,11 @@ public class CCategoriaDiagnostico extends CGenerico {
 			public void guardar() {
 				if (validar()) {
 					String nombre = txtNombreCategoriaDiagnostico.getValue();
+					ClasificacionDiagnostico clasificacion = servicioClasificacion
+							.buscarPorNombre(cmbClasificacion.getValue());
 					CategoriaDiagnostico categoria = new CategoriaDiagnostico(
 							id, fechaHora, horaAuditoria, nombre,
-							nombreUsuarioSesion());
+							nombreUsuarioSesion(), clasificacion);
 					servicioCategoriaDiagnostico.guardar(categoria);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
@@ -65,6 +84,7 @@ public class CCategoriaDiagnostico extends CGenerico {
 			@Override
 			public void limpiar() {
 				txtNombreCategoriaDiagnostico.setValue("");
+				cmbClasificacion.setValue("");
 				id = 0;
 			}
 
@@ -112,7 +132,8 @@ public class CCategoriaDiagnostico extends CGenerico {
 
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (txtNombreCategoriaDiagnostico.getText().compareTo("") == 0) {
+		if (txtNombreCategoriaDiagnostico.getText().compareTo("") == 0
+				|| cmbClasificacion.getText().compareTo("") == 0) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
@@ -170,5 +191,29 @@ public class CCategoriaDiagnostico extends CGenerico {
 	private void llenarCampos(CategoriaDiagnostico categoria) {
 		txtNombreCategoriaDiagnostico.setValue(categoria.getNombre());
 		id = categoria.getIdCategoriaDiagnostico();
+		if (categoria.getClasificacion() != null) {
+			cmbClasificacion.setValue(categoria.getClasificacion().getNombre());
+//			cmbClasificacion.getSelectedItem().setContext(
+//					String.valueOf(categoria.getClasificacion()
+//							.getIdClasificacion()));
+		}
+	}/* Llena el combo de estado cada vez que se abre */
+
+	@Listen("onOpen = #cmbClasificacion")
+	public void llenarCombo() {
+		List<ClasificacionDiagnostico> estados = servicioClasificacion
+				.buscarTodas();
+		cmbClasificacion.setModel(new ListModelList<ClasificacionDiagnostico>(
+				estados));
+	}
+
+	@Listen("onClick = #btnAbrirClasificacion")
+	public void abrirEstado() {
+		List<Arbol> arboles = servicioArbol
+				.buscarPorNombreArbol("Clasificacion Categoria Diagnostico");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
 	}
 }
