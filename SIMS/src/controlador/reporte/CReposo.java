@@ -314,8 +314,23 @@ public class CReposo extends CGenerico {
 			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
 					.buscarPorConsulta(cons);
 			Calendar c = Calendar.getInstance();
-			c.setTime(cons.getFechaConsulta());
-			c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+			if (cons.getFechaReposo() != null)
+				c.setTime(cons.getFechaReposo());
+			else {
+				cons.setFechaReposo(cons.getFechaConsulta());
+				c.setTime(cons.getFechaConsulta());
+			}
+
+			if (cons.getTipoReposo() != null) {
+				if (cons.getTipoReposo().equals("Dias")) {
+					c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+				} else
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Horas");
+			} else {
+				c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+				cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+			}
 			Date fechaHasta = c.getTime();
 			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
 			cons.setFechaAuditoria(fechaHasta2);
@@ -405,14 +420,30 @@ public class CReposo extends CGenerico {
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
-		List<Long> consuta = getServicioConsultaDiagnostico().cantidadConsultas(consutaDiag);
-		p.put("total",consuta.size());
-		
+		List<Long> consuta = getServicioConsultaDiagnostico()
+				.cantidadConsultas(consutaDiag);
+		p.put("total", consuta.size());
+
 		for (int i = 0; i < consutaDiag.size(); i++) {
 			Consulta cons = consutaDiag.get(i).getConsulta();
 			Calendar c = Calendar.getInstance();
-			c.setTime(cons.getFechaConsulta());
-			c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+			if (cons.getFechaReposo() != null)
+				c.setTime(cons.getFechaReposo());
+			else {
+				cons.setFechaReposo(cons.getFechaConsulta());
+				c.setTime(cons.getFechaConsulta());
+			}
+			if (cons.getTipoReposo() != null) {
+				if (cons.getTipoReposo().equals("Dias")) {
+					c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+					consutaDiag.get(i).getConsulta().setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+				} else
+					consutaDiag.get(i).getConsulta().setUsuarioAuditoria(cons.getDiasReposo() + " Horas");
+			} else {
+				c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+				consutaDiag.get(i).getConsulta()
+						.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+			}
 			Date fechaHasta = c.getTime();
 			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
 			cons.setFechaAuditoria(fechaHasta2);
@@ -531,8 +562,22 @@ public class CReposo extends CGenerico {
 			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
 					.buscarPorConsulta(cons);
 			Calendar c = Calendar.getInstance();
-			c.setTime(cons.getFechaConsulta());
-			c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+			if (cons.getFechaReposo() != null)
+				c.setTime(cons.getFechaReposo());
+			else {
+				cons.setFechaReposo(cons.getFechaConsulta());
+				c.setTime(cons.getFechaConsulta());
+			}
+			if (cons.getTipoReposo() != null) {
+				if (cons.getTipoReposo().equals("Dias")) {
+					c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+				} else
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Horas");
+			} else {
+				c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+				cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+			}
 			Date fechaHasta = c.getTime();
 			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
 			// Timestamp fechaHasta = (Timestamp) c.getTime();

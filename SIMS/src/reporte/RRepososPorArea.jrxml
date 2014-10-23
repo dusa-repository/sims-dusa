@@ -13,11 +13,13 @@
 	<field name="diasReposo" class="java.lang.Integer"/>
 	<field name="fechaConsulta" class="java.sql.Timestamp"/>
 	<field name="fechaAuditoria" class="java.sql.Timestamp"/>
+	<field name="fechaReposo" class="java.sql.Timestamp"/>
+	<field name="usuarioAuditoria" class="java.lang.String"/>
 	<variable name="totalArea" class="java.lang.Integer" resetType="Group" resetGroup="area" calculation="Count">
 		<variableExpression><![CDATA[$F{paciente.area.nombre}]]></variableExpression>
 	</variable>
 	<variable name="total" class="java.lang.Integer" calculation="Count">
-		<variableExpression><![CDATA[$F{fechaConsulta}]]></variableExpression>
+		<variableExpression><![CDATA[$F{fechaReposo}]]></variableExpression>
 	</variable>
 	<group name="area">
 		<groupExpression><![CDATA[$F{paciente.area.nombre}]]></groupExpression>
@@ -132,28 +134,28 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="469" y="4" width="52" height="13" backcolor="#CCCCCC" uuid="3c29b0bf-86b3-4744-93d6-c16b66b39fa9"/>
+				<reportElement x="459" y="4" width="52" height="13" backcolor="#CCCCCC" uuid="3c29b0bf-86b3-4744-93d6-c16b66b39fa9"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hasta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="413" y="4" width="56" height="13" backcolor="#CCCCCC" uuid="46af539e-5d53-4a2d-bbe4-f4fa2ce28cb3"/>
+				<reportElement x="403" y="4" width="56" height="13" backcolor="#CCCCCC" uuid="46af539e-5d53-4a2d-bbe4-f4fa2ce28cb3"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Desde]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="521" y="4" width="32" height="13" uuid="22059238-d423-4263-b744-309969ace2bb"/>
+				<reportElement x="512" y="4" width="41" height="13" uuid="22059238-d423-4263-b744-309969ace2bb"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Dias]]></text>
+				<text><![CDATA[Tiempo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="224" y="4" width="189" height="13" backcolor="#CCCCCC" uuid="a113a75c-adbd-4c45-a523-d686e96b8ff1"/>
+				<reportElement x="224" y="4" width="179" height="13" backcolor="#CCCCCC" uuid="a113a75c-adbd-4c45-a523-d686e96b8ff1"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -188,25 +190,25 @@
 				<textFieldExpression><![CDATA[$F{paciente.primerNombre}+" "+$F{paciente.primerApellido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="224" y="5" width="189" height="20" uuid="5b985485-c7a0-4627-9544-a7abb9d56136"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="224" y="5" width="179" height="20" uuid="5b985485-c7a0-4627-9544-a7abb9d56136"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{enfermedadActual}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="413" y="5" width="57" height="20" uuid="c139f176-65a9-41c2-ad43-2637ea0bac88"/>
+				<reportElement x="403" y="5" width="57" height="20" uuid="c139f176-65a9-41c2-ad43-2637ea0bac88"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaReposo})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="5" width="52" height="20" uuid="7107368a-1521-4b19-ae61-83d80dabfd7a"/>
+				<reportElement x="460" y="5" width="52" height="20" uuid="7107368a-1521-4b19-ae61-83d80dabfd7a"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaAuditoria})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="523" y="5" width="32" height="20" uuid="aeedeb35-0fe1-47de-b3b2-a19d02fb1206"/>
+				<reportElement x="512" y="5" width="43" height="20" uuid="aeedeb35-0fe1-47de-b3b2-a19d02fb1206"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{diasReposo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{usuarioAuditoria}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRepososPorDoctor" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ca51a26e-3ae3-4a27-8a3c-7627f65a48c0">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="432"/>
+	<property name="ireport.y" value="125"/>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
 	<parameter name="unidad" class="java.lang.String"/>
@@ -18,6 +18,8 @@
 	<field name="usuario.primerNombre" class="java.lang.String"/>
 	<field name="usuario.primerApellido" class="java.lang.String"/>
 	<field name="usuario.especialidad.descripcion" class="java.lang.String"/>
+	<field name="fechaReposo" class="java.sql.Timestamp"/>
+	<field name="usuarioAuditoria" class="java.lang.String"/>
 	<variable name="totalDoctor" class="java.lang.Integer" resetType="Group" resetGroup="doctor" calculation="Count">
 		<variableExpression><![CDATA[$F{usuario.cedula}]]></variableExpression>
 	</variable>
@@ -25,7 +27,7 @@
 		<variableExpression><![CDATA[$F{usuario.unidad}]]></variableExpression>
 	</variable>
 	<variable name="total" class="java.lang.Integer" calculation="Count">
-		<variableExpression><![CDATA[$F{fechaConsulta}]]></variableExpression>
+		<variableExpression><![CDATA[$F{fechaReposo}]]></variableExpression>
 	</variable>
 	<group name="unidad">
 		<groupExpression><![CDATA[$F{usuario.unidad}]]></groupExpression>
@@ -230,7 +232,7 @@
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="245" y="4" width="169" height="13" backcolor="#CCCCCC" uuid="229ac918-ea9c-4107-93ff-8716170bbc20"/>
+				<reportElement x="245" y="4" width="155" height="13" backcolor="#CCCCCC" uuid="229ac918-ea9c-4107-93ff-8716170bbc20"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -244,21 +246,21 @@
 				<text><![CDATA[Cedula]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="470" y="4" width="52" height="13" backcolor="#CCCCCC" uuid="672d4b48-8ac2-4f08-abdb-6be705462a2a"/>
+				<reportElement x="459" y="4" width="47" height="13" backcolor="#CCCCCC" uuid="672d4b48-8ac2-4f08-abdb-6be705462a2a"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Hasta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="522" y="4" width="27" height="13" uuid="c31b2972-2698-4069-920e-686934e4585a"/>
+				<reportElement x="515" y="4" width="39" height="13" uuid="c31b2972-2698-4069-920e-686934e4585a"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Dias]]></text>
+				<text><![CDATA[Tiempo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="414" y="4" width="56" height="13" backcolor="#CCCCCC" uuid="2a0e434c-1665-4018-95b8-65e77f01e479"/>
+				<reportElement x="399" y="4" width="56" height="13" backcolor="#CCCCCC" uuid="2a0e434c-1665-4018-95b8-65e77f01e479"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -279,27 +281,27 @@
 				<textFieldExpression><![CDATA[$F{paciente.primerNombre}+ " " +$F{paciente.primerApellido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="245" y="4" width="165" height="20" uuid="e4492b8b-5bc6-47bb-b35a-eb64a3e41da5"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="245" y="4" width="155" height="20" uuid="e4492b8b-5bc6-47bb-b35a-eb64a3e41da5"/>
 				<box leftPadding="3" rightPadding="3"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{enfermedadActual}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="410" y="4" width="60" height="20" uuid="7b56e7ec-bcef-40f0-bdf6-96d8a28607ec"/>
+				<reportElement x="399" y="4" width="60" height="20" uuid="7b56e7ec-bcef-40f0-bdf6-96d8a28607ec"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaReposo})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="4" width="52" height="20" uuid="64b88c45-06e5-42dd-ac06-fd0d6232b6a8"/>
+				<reportElement x="458" y="4" width="59" height="20" uuid="64b88c45-06e5-42dd-ac06-fd0d6232b6a8"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaAuditoria})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="522" y="4" width="32" height="20" uuid="84629827-2045-4b9d-9a0d-d8bcc27ab60b"/>
+				<reportElement x="517" y="4" width="39" height="20" uuid="84629827-2045-4b9d-9a0d-d8bcc27ab60b"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{diasReposo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{usuarioAuditoria}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

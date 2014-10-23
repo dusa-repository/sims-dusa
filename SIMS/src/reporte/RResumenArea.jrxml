@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RResumenArea" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" uuid="fc0daea8-b562-40ef-8ad5-f72900b4076d">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="308"/>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
 	<field name="nombre1" class="java.lang.String"/>
@@ -541,13 +541,15 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="564" splitType="Stretch">
+		<band height="588" splitType="Stretch">
 			<bar3DChart>
 				<chart isShowLegend="false">
-					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="34" y="66" width="512" height="488" isRemoveLineWhenBlank="true" uuid="1a0bae0b-8e97-44f8-b424-7d2072366c46"/>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="22" y="43" width="524" height="541" isRemoveLineWhenBlank="true" uuid="1a0bae0b-8e97-44f8-b424-7d2072366c46"/>
 					<chartTitle/>
 					<chartSubtitle/>
-					<chartLegend/>
+					<chartLegend>
+						<font size="5"/>
+					</chartLegend>
 				</chart>
 				<categoryDataset>
 					<categorySeries>

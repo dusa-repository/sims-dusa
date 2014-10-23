@@ -10,61 +10,75 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="47">
+		<band height="40">
 			<staticText>
-				<reportElement x="205" y="17" width="125" height="20" uuid="af45bd4b-075b-4157-a048-66d5fe3e9218"/>
+				<reportElement x="205" y="16" width="209" height="20" uuid="af45bd4b-075b-4157-a048-66d5fe3e9218"/>
 				<textElement textAlignment="Center">
-					<font size="12" isBold="true"/>
+					<font size="11" isBold="true" isUnderline="true"/>
 				</textElement>
-				<text><![CDATA[Examenes enviados]]></text>
+				<text><![CDATA[Examenes Enviados]]></text>
 			</staticText>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="20">
+			<rectangle>
+				<reportElement x="0" y="2" width="572" height="15" backcolor="#DBD7D7" uuid="be774c48-1ff1-467f-9ab1-fce2aacf6d6c"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
 			<staticText>
 				<reportElement x="0" y="0" width="205" height="20" uuid="bdf44189-1578-40b3-a29f-c875818f6238"/>
-				<textElement>
-					<font size="12" isBold="true"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="205" y="0" width="209" height="20" uuid="fd559788-c0f2-4a34-8539-ec565253ac61"/>
-				<textElement>
-					<font size="12" isBold="true"/>
+				<reportElement x="205" y="0" width="166" height="20" uuid="fd559788-c0f2-4a34-8539-ec565253ac61"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Observacion]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="414" y="0" width="158" height="20" uuid="11a01021-ff58-4ac7-b04b-11ba916315d1"/>
-				<textElement>
-					<font size="12" isBold="true"/>
+				<reportElement x="371" y="0" width="201" height="20" uuid="11a01021-ff58-4ac7-b04b-11ba916315d1"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Proveedor]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="43" splitType="Stretch">
+		<band height="19" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="9" y="9" width="196" height="20" uuid="4f60670b-5c21-40c1-a9df-7433d73ebff3"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="-1" width="205" height="20" uuid="4f60670b-5c21-40c1-a9df-7433d73ebff3"/>
+				<box leftPadding="4"/>
 				<textElement>
-					<font size="12"/>
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{examen.nombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="208" y="9" width="193" height="20" uuid="48f16bc8-c117-4490-9a61-480156542b19"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="205" y="-1" width="166" height="20" uuid="48f16bc8-c117-4490-9a61-480156542b19"/>
+				<box leftPadding="3" rightPadding="3">
+					<pen lineStyle="Dashed"/>
+					<topPen lineStyle="Dashed"/>
+					<leftPen lineWidth="0.5" lineStyle="Dashed"/>
+					<bottomPen lineStyle="Dashed"/>
+					<rightPen lineWidth="0.5" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="419" y="9" width="143" height="20" uuid="e28ccb66-5fe9-41e9-b504-b7117286fb41"/>
-				<textElement>
-					<font size="12"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="371" y="-1" width="201" height="20" uuid="e28ccb66-5fe9-41e9-b504-b7117286fb41"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{proveedor.nombre}]]></textFieldExpression>
 			</textField>
