@@ -24,6 +24,7 @@ import modelo.inventario.F4101;
 import modelo.inventario.F41021;
 import modelo.inventario.F41021PK;
 import modelo.transacciones.ConsultaMedicina;
+import modelo.transacciones.PacienteMedicina;
 
 /**
  * The persistent class for the medicina database table.
@@ -86,6 +87,9 @@ public class Medicina implements Serializable {
 
 	@OneToMany(mappedBy = "medicina")
 	private Set<MedicinaPresentacionUnidad> medicinasPresentacion;
+
+	@OneToMany(mappedBy = "medicina")
+	private Set<PacienteMedicina> pacientesMedicinas;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_categoria_medicina")
@@ -320,6 +324,14 @@ public class Medicina implements Serializable {
 				return 0;
 		} else
 			return 0;
+	}
+
+	public Set<PacienteMedicina> getPacientesMedicinas() {
+		return pacientesMedicinas;
+	}
+
+	public void setPacientesMedicinas(Set<PacienteMedicina> pacientesMedicinas) {
+		this.pacientesMedicinas = pacientesMedicinas;
 	}
 
 }

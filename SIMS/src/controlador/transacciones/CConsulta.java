@@ -5341,6 +5341,102 @@ public class CConsulta extends CGenerico {
 		rowReposo.setVisible(false);
 	}
 
+	@Listen("onClick = #btnRefrescarServicio")
+	public void refrescarServicio() {
+
+		Consulta consulta = servicioConsulta.buscar(idConsulta);
+		serviciosDisponibles = servicioServicioExterno
+				.buscarDisponibles(consulta);
+		ltbServicioExterno.setModel(new ListModelList<ServicioExterno>(
+				serviciosDisponibles));
+		serviciosAgregados = servicioConsultaServicioExterno
+				.buscarPorConsulta(consulta);
+		ltbServicioExternoAgregados
+				.setModel(new ListModelList<ConsultaServicioExterno>(
+						serviciosAgregados));
+		serviciosResumen = serviciosAgregados;
+		ltbResumenServicios
+				.setModel(new ListModelList<ConsultaServicioExterno>(
+						serviciosResumen));
+		listasMultiples();
+	}
+
+	@Listen("onClick = #btnRefrescarMedicina")
+	public void refrescarMedicina() {
+		Consulta consulta = servicioConsulta.buscar(idConsulta);
+		medicinasDisponibles = servicioMedicina.buscarDisponibles(consulta);
+		ltbMedicinas
+				.setModel(new ListModelList<Medicina>(medicinasDisponibles));
+		medicinasAgregadas = servicioConsultaMedicina
+				.buscarPorConsulta(consulta);
+		ltbMedicinasAgregadas.setModel(new ListModelList<ConsultaMedicina>(
+				medicinasAgregadas));
+		medicinasResumen = medicinasAgregadas;
+		ltbResumenMedicinas.setModel(new ListModelList<ConsultaMedicina>(
+				medicinasResumen));
+		listasMultiples();
+
+	}
+
+	@Listen("onClick = #btnRefrescarDiagnostico")
+	public void refrescarDiagnostico() {
+		Consulta consulta = servicioConsulta.buscar(idConsulta);
+		diagnosticosDisponibles = servicioDiagnostico
+				.buscarDisponibles(consulta);
+		ltbDiagnosticos.setModel(new ListModelList<Diagnostico>(
+				diagnosticosDisponibles));
+		diagnosticosAgregados = servicioConsultaDiagnostico
+				.buscarPorConsulta(consulta);
+		ltbDiagnosticosAgregados
+				.setModel(new ListModelList<ConsultaDiagnostico>(
+						diagnosticosAgregados));
+		diagnosticosResumen = diagnosticosAgregados;
+		ltbResumenDiagnosticos.setModel(new ListModelList<ConsultaDiagnostico>(
+				diagnosticosResumen));
+		listaDetalle.clear();
+		listasMultiples();
+	}
+
+	@Listen("onClick = #btnRefrescarExamen")
+	public void refrescarExamen() {
+		Consulta consulta = servicioConsulta.buscar(idConsulta);
+		examenesDisponibles = servicioExamen.buscarDisponibles(consulta);
+		ltbExamenes.setModel(new ListModelList<Examen>(examenesDisponibles));
+		examenesAgregado = servicioConsultaExamen.buscarPorConsulta(consulta);
+		ltbExamenesAgregados.setModel(new ListModelList<ConsultaExamen>(
+				examenesAgregado));
+		examenesResumen = examenesAgregado;
+		ltbResumenExamenes.setModel(new ListModelList<ConsultaExamen>(
+				examenesResumen));
+		listasMultiples();
+	}
+
+	@Listen("onClick = #btnRefrescarEspecialista")
+	public void refrescarEspecialista() {
+		Consulta consulta = servicioConsulta.buscar(idConsulta);
+		especialistasDisponibles = servicioEspecialista
+				.buscarDisponibles(consulta);
+		for (int i = 0; i < especialistasDisponibles.size(); i++) {
+
+			String nombre = especialistasDisponibles.get(i).getNombre();
+			String apellido = especialistasDisponibles.get(i).getApellido();
+			Especialista especialista = especialistasDisponibles.get(i);
+			especialista.setNombre(nombre + " " + apellido);
+		}
+		ltbEspecialistas.setModel(new ListModelList<Especialista>(
+				especialistasDisponibles));
+		especialistasAgregados = servicioConsultaEspecialista
+				.buscarPorConsulta(consulta);
+		ltbEspecialistasAgregados
+				.setModel(new ListModelList<ConsultaEspecialista>(
+						especialistasAgregados));
+		especialistasResumen = especialistasAgregados;
+		ltbResumenEspecialistas
+				.setModel(new ListModelList<ConsultaEspecialista>(
+						especialistasResumen));
+		listasMultiples();
+	}
+
 	// VENTANA DE ACCIDENTE
 
 	public void ventana(Combobox a) {

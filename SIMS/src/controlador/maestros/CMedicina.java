@@ -117,12 +117,13 @@ public class CMedicina extends CGenerico {
 	long id = 0;
 	private boolean consulta = false;
 	private CConsulta cConsulta = new CConsulta();
+	private boolean paciente = false;
+	private CPaciente cPaciente = new CPaciente();
 	List<Medicina> medicinaConsulta = new ArrayList<Medicina>();
 	Listbox listaConsulta;
 
 	@Override
 	public void inicializar() throws IOException {
-		System.out.println(servicioF4101.buscarTodosOrdenados().size());
 		contenido = (Include) divMedicina.getParent();
 		Tabbox tabox = (Tabbox) divMedicina.getParent().getParent().getParent()
 				.getParent();
@@ -142,6 +143,8 @@ public class CMedicina extends CGenerico {
 		if (map != null) {
 			if (map.get("id") != null) {
 				consulta = true;
+				if (map.get("id").equals("paciente"))
+					paciente = true;
 				medicinaConsulta = (List<Medicina>) map.get("lista");
 				listaConsulta = (Listbox) map.get("listbox");
 				map.clear();
@@ -214,10 +217,10 @@ public class CMedicina extends CGenerico {
 								efectos, embarazo, fechaHora, horaAuditoria,
 								indicaciones, nombre, posologia, precauciones,
 								nombreUsuarioSesion(), laboratorio, ca);
-						long valor =0;
+						long valor = 0;
 						if (id == 0) {
 							valor = servicioMedicina.buscarUltimaReferencia();
-							medicina.setIdReferencia(valor+1);
+							medicina.setIdReferencia(valor + 1);
 						}
 						servicioMedicina.guardar(medicina);
 						if (id != 0)
@@ -242,8 +245,14 @@ public class CMedicina extends CGenerico {
 							cConsulta.recibirMedicina(medicinaConsulta,
 									listaConsulta);
 						}
+						if(paciente){
+							if (id == 0)
+								medicinaConsulta.add(medicina);
+							cPaciente.recibirMedicina(medicinaConsulta,
+									listaConsulta);
+						}
 						if (id == 0)
-							guardarInventario(nombre,valor+1);
+							guardarInventario(nombre, valor + 1);
 						msj.mensajeInformacion(Mensaje.guardado);
 						limpiar();
 					} else {

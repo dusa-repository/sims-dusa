@@ -49,7 +49,7 @@
 				</textField>
 				<staticText>
 					<reportElement x="2" y="5" width="19" height="20" uuid="6f345962-0df3-4118-bd7d-c95ca9ba9dd6"/>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[>>]]></text>
@@ -100,7 +100,7 @@
 				</rectangle>
 				<staticText>
 					<reportElement x="21" y="4" width="16" height="20" uuid="a6491777-90d0-4393-bc95-b7c997ed1383"/>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font size="12" isBold="true"/>
 					</textElement>
 					<text><![CDATA[>]]></text>
