@@ -297,21 +297,21 @@
 				<textFieldExpression><![CDATA[$P{diag}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="404" y="181" width="93" height="20" uuid="83176990-a3cb-460a-88f0-971d59a60a3e"/>
+				<reportElement x="399" y="181" width="79" height="20" uuid="83176990-a3cb-460a-88f0-971d59a60a3e"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<text><![CDATA[Por un Total de:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="497" y="181" width="25" height="20" uuid="dec0c901-8862-4648-b84c-e7161aaab055"/>
+				<reportElement x="477" y="181" width="25" height="20" uuid="dec0c901-8862-4648-b84c-e7161aaab055"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{diasReposo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="522" y="181" width="45" height="20" uuid="240f433f-167e-45c2-9571-1948301e7ef9">
+				<reportElement x="505" y="181" width="45" height="20" uuid="240f433f-167e-45c2-9571-1948301e7ef9">
 					<printWhenExpression><![CDATA[$P{tipoReposo}.equals( "Dias" )]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -320,7 +320,7 @@
 				<text><![CDATA[Dias]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="523" y="544" width="45" height="20" uuid="957865ef-5997-4528-9971-0d44f49fef8a">
+				<reportElement x="505" y="544" width="45" height="20" uuid="957865ef-5997-4528-9971-0d44f49fef8a">
 					<printWhenExpression><![CDATA[$P{tipoReposo}.equals( "Dias" )]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -329,14 +329,14 @@
 				<text><![CDATA[Dias]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="405" y="544" width="93" height="20" uuid="3267a7b3-1d7b-4a2f-847d-776d4f0b6979"/>
+				<reportElement x="398" y="544" width="79" height="20" uuid="3267a7b3-1d7b-4a2f-847d-776d4f0b6979"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<text><![CDATA[Por un Total de:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="498" y="544" width="25" height="20" uuid="515b6076-dd04-4c9f-a97f-d4b44357b621"/>
+				<reportElement x="476" y="544" width="25" height="20" uuid="515b6076-dd04-4c9f-a97f-d4b44357b621"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -371,7 +371,7 @@
 				<text><![CDATA[Fecha de Reintegro:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="523" y="181" width="41" height="20" uuid="4e606d1c-2a97-4faf-8354-8d4379a84cc8">
+				<reportElement x="505" y="181" width="41" height="20" uuid="4e606d1c-2a97-4faf-8354-8d4379a84cc8">
 					<printWhenExpression><![CDATA[$P{tipoReposo}.equals( "Horas" )]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -380,7 +380,7 @@
 				<text><![CDATA[Horas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="527" y="544" width="45" height="20" uuid="a19e09e3-e4c2-451c-bd74-112c2c8c699b">
+				<reportElement x="505" y="544" width="45" height="20" uuid="a19e09e3-e4c2-451c-bd74-112c2c8c699b">
 					<printWhenExpression><![CDATA[$P{tipoReposo}.equals( "Horas" )]]></printWhenExpression>
 				</reportElement>
 				<textElement>

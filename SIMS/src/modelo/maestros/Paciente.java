@@ -18,261 +18,281 @@ import javax.persistence.Table;
 import modelo.sha.Area;
 import modelo.sha.Informe;
 import modelo.transacciones.Historia;
+import modelo.transacciones.PacienteMedicina;
 
 import org.hibernate.annotations.Type;
-
 
 /**
  * The persistent class for the paciente database table.
  * 
  */
 @Entity
-@Table(name="paciente", schema="dusa_sims.dbo")
+@Table(name = "paciente", schema = "dusa_sims.dbo")
 public class Paciente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_paciente", length=15, unique=true, nullable=false)
+	@Column(name = "id_paciente", length = 15, unique = true, nullable = false)
 	private String cedula;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String ficha;
 
-	@Column(name="primer_apellido", length=100)
+	@Column(name = "primer_apellido", length = 100)
 	private String primerApellido;
 
-	@Column(name="primer_nombre", length=100)
+	@Column(name = "primer_nombre", length = 100)
 	private String primerNombre;
-	
-	@Column(name="segundo_apellido", length=100)
+
+	@Column(name = "segundo_apellido", length = 100)
 	private String segundoApellido;
 
-	@Column(name="segundo_nombre", length=100)
+	@Column(name = "segundo_nombre", length = 100)
 	private String segundoNombre;
-	
+
 	@Column
-	@Type(type="org.hibernate.type.NumericBooleanType")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean trabajador;
-	
+
 	@Column
-	@Type(type="org.hibernate.type.NumericBooleanType")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean discapacidad;
-	
+
 	@Column
-	@Type(type="org.hibernate.type.NumericBooleanType")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean estatus;
-	
+
 	@Column
-	@Type(type="org.hibernate.type.NumericBooleanType")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean muerte;
-	
+
 	@Column
-	@Type(type="org.hibernate.type.NumericBooleanType")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean alergia;
-	
+
 	@Column
-	@Type(type="org.hibernate.type.NumericBooleanType")
+	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean lentes;
-	
-	@Column(name="fecha_nacimiento")
+
+	@Column(name = "fecha_nacimiento")
 	private Timestamp fechaNacimiento;
 
-	@Column(length=500, name="lugar_nacimiento")
+	@Column(length = 500, name = "lugar_nacimiento")
 	private String lugarNacimiento;
-	
-	@Column(length=500, name="observacion_estatus")
+
+	@Column(length = 500, name = "observacion_estatus")
 	private String observacionEstatus;
-	
-	@Column(length=10)
+
+	@Column(length = 10)
 	private String sexo;
-	
-	@Column(length=12, name="estado_civil")
+
+	@Column(length = 12, name = "estado_civil")
 	private String estadoCivil;
 
-	@Column(length=130)
+	@Column(length = 130)
 	private Integer edad;
-	
-	@Column(length=3, name="grupo_sanguineo")
+
+	@Column(length = 3, name = "grupo_sanguineo")
 	private String grupoSanguineo;
-	
-	@Column(length=500, name="observacion_alergias")
+
+	@Column(length = 500, name = "observacion_alergias")
 	private String observacionAlergias;
-	
-	@Column(length=10)
+
+	@Column(length = 10)
 	private String mano;
-	
+
 	@Column
 	private Double estatura;
-	
+
 	@Column
 	private Double peso;
-	
-	@Column(length=10, name="origen_discapacidad")
+
+	@Column(length = 10, name = "origen_discapacidad")
 	private String origenDiscapacidad;
-	
-	@Column(length=10, name="tipo_discapacidad")
+
+	@Column(length = 10, name = "tipo_discapacidad")
 	private String tipoDiscapacidad;
-	
-	@Column(length=500, name="observacion_discapacidad")
+
+	@Column(length = 500, name = "observacion_discapacidad")
 	private String observacionDiscapacidad;
-	
-	@Column(name="fecha_auditoria")
+
+	@Column(name = "fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
-	@Column(name="hora_auditoria", length=10)
+	@Column(name = "hora_auditoria", length = 10)
 	private String horaAuditoria;
-	
-	@Column(name="usuario_auditoria", length=50)
+
+	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
-	
+
 	@Lob
 	private byte[] imagen;
-	
-	@Column(length=1000)
+
+	@Column(length = 1000)
 	private String direccion;
 
-	@Column(length=50)
+	@Column(length = 50)
 	private String email;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String telefono1;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String telefono2;
-	
-	/*Datos en caso de emergencia*/
-	
-	@Column(name="nombres_emergencia", length=200)
+
+	/* Datos en caso de emergencia */
+
+	@Column(name = "nombres_emergencia", length = 200)
 	private String nombresEmergencia;
-	
-	@Column(name="apellidos_emergencia", length=200)
+
+	@Column(name = "apellidos_emergencia", length = 200)
 	private String apellidosEmergencia;
-	
-	@Column(length=15)
+
+	@Column(length = 15)
 	private String parentescoEmergencia;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String telefono1Emergencia;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String telefono2Emergencia;
-	
-	/*Datos en caso de ser familiar*/
-	
-	@Column(length=15)
+
+	/* Datos en caso de ser familiar */
+
+	@Column(length = 15)
 	private String cedulaFamiliar;
-	
-	@Column(length=15)
+
+	@Column(length = 15)
 	private String parentescoFamiliar;
-	
+
 	//
-	@Column(length=15)
+	@Column(length = 15)
 	private String nacionalidad;
-	
-	@Column(name="nivel_educativo")
+
+	@Column(name = "nivel_educativo")
 	private String nivelEducativo;
-	
+
 	@Column
 	private String profesion;
-	
-	@Column(name="retiro_ivss")
+
+	@Column(name = "retiro_ivss")
 	private String retiroIVSS;
-	
+
 	@Column
 	private String turno;
-	
-	@Column(name="nro_inpsasel")
+
+	@Column(name = "nro_inpsasel")
 	private String NroInpsasel;
-	
-	@Column(name="fecha_muerte")
+
+	@Column(name = "fecha_muerte")
 	private Timestamp fechaMuerte;
 
-	
-	@Column(name="fecha_ingreso")
+	@Column(name = "fecha_ingreso")
 	private Timestamp fechaIngreso;
 
-	@Column(name="fecha_egreso")
+	@Column(name = "fecha_egreso")
 	private Timestamp fechaEgreso;
-	
-	@Column(name="fecha_inscripcion_ivss")
+
+	@Column(name = "fecha_inscripcion_ivss")
 	private Timestamp fechaInscripcionIVSS;
-	
-	@Column(length=100)
+
+	@Column(length = 100)
 	private Integer carga;
-	
+
 	//
-	
-	//bi-directional many-to-one association to Cita
-	@OneToMany(mappedBy="paciente")
+
+	// bi-directional many-to-one association to Cita
+	@OneToMany(mappedBy = "paciente")
 	private Set<Cita> citas;
-	
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_empresa")
+
+	// bi-directional many-to-one association to Usuario
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_empresa")
 	private Empresa empresa;
-	
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_ciudad")
+
+	// bi-directional many-to-one association to Usuario
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_ciudad")
 	private Ciudad ciudadVivienda;
 
-	@OneToMany(mappedBy="paciente")
+	@OneToMany(mappedBy = "paciente")
 	private Set<PacienteAntecedente> antecedentesPacientes;
-	
+
 	@OneToOne(mappedBy = "paciente")
 	private Historia historia;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cargo")
 	private Cargo cargoReal;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_nomina")
 	private Nomina nomina;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_area")
 	private Area area;
-	
+
 	@OneToMany(mappedBy = "paciente")
 	private Set<Informe> informesA;
-	
+
 	@OneToMany(mappedBy = "pacienteB")
 	private Set<Informe> informesB;
-	
+
 	@OneToMany(mappedBy = "pacienteC")
 	private Set<Informe> informesC;
-	
+
 	@OneToMany(mappedBy = "pacienteD")
 	private Set<Informe> informesD;
-	
+
 	@OneToMany(mappedBy = "pacienteE")
 	private Set<Informe> informesE;
-	
+
 	@OneToMany(mappedBy = "pacienteF")
 	private Set<Informe> informeF;
-	
+
 	@OneToMany(mappedBy = "pacienteG")
 	private Set<Informe> informesG;
-	
+
 	@OneToMany(mappedBy = "pacienteH")
 	private Set<Informe> informesH;
-	
+
 	@OneToMany(mappedBy = "pacienteI")
 	private Set<Informe> informesI;
-	
+
 	@OneToMany(mappedBy = "pacienteJ")
 	private Set<Informe> informesJ;
-	
+
 	@OneToMany(mappedBy = "pacienteK")
 	private Set<Informe> informesK;
-	
+
 	@OneToMany(mappedBy = "pacienteL")
 	private Set<Informe> informesL;
-	
+
 	@OneToMany(mappedBy = "pacienteM")
 	private Set<Informe> informesM;
 	
+	@OneToMany(mappedBy = "paciente")
+	private Set<PacienteMedicina> pacientesMedicinass;
+
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean visita;
+
+	@Column(name = "fecha_visita")
+	private Timestamp fechaVisita;
+
+	@Column(name = "resumen_visita", length = 1000)
+	private String resumenVisita;
+
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean brigadista;
+
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean cronico;
+
 	public Paciente() {
 	}
 
@@ -285,13 +305,19 @@ public class Paciente implements Serializable {
 			double peso, String origenDiscapacidad, String tipoDiscapacidad,
 			String observacionDiscapacidad, Timestamp fechaAuditoria,
 			String horaAuditoria, String usuarioAuditoria, byte[] imagen,
-		 String direccion, String email, String telefono1,
-			String telefono2, String nombresEmergencia,
-			String apellidosEmergencia, String parentescoEmergencia,
-			String telefono1Emergencia, String telefono2Emergencia,
-			String cedulaFamiliar, String parentescoFamiliar,
-			Empresa empresa, Ciudad ciudadVivienda, Cargo cargoa, Area area) {
+			String direccion, String email, String telefono1, String telefono2,
+			String nombresEmergencia, String apellidosEmergencia,
+			String parentescoEmergencia, String telefono1Emergencia,
+			String telefono2Emergencia, String cedulaFamiliar,
+			String parentescoFamiliar, Empresa empresa, Ciudad ciudadVivienda,
+			Cargo cargoa, Area area, Boolean visita, Timestamp fechaVisita,
+			String resumenVisita, Boolean brigadista, Boolean cronico) {
 		super();
+		this.cronico = cronico;
+		this.visita = visita;
+		this.fechaVisita = fechaVisita;
+		this.resumenVisita = resumenVisita;
+		this.brigadista = brigadista;
 		this.cedula = cedula;
 		this.ficha = ficha;
 		this.primerApellido = primerApellido;
@@ -360,7 +386,6 @@ public class Paciente implements Serializable {
 		this.horaAuditoria = horaAuditoria;
 	}
 
-
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -368,8 +393,6 @@ public class Paciente implements Serializable {
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-
-
 
 	public String getPrimerApellido() {
 		return this.primerApellido;
@@ -417,31 +440,25 @@ public class Paciente implements Serializable {
 		return cita;
 	}
 
-
 	public String getSegundoApellido() {
 		return segundoApellido;
 	}
-
 
 	public void setSegundoApellido(String segundoApellido) {
 		this.segundoApellido = segundoApellido;
 	}
 
-
 	public String getSegundoNombre() {
 		return segundoNombre;
 	}
-
 
 	public void setSegundoNombre(String segundoNombre) {
 		this.segundoNombre = segundoNombre;
 	}
 
-
 	public byte[] getImagen() {
 		return imagen;
 	}
-
 
 	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
@@ -776,7 +793,7 @@ public class Paciente implements Serializable {
 		this.carga = carga;
 	}
 
-public Historia getHistoria() {
+	public Historia getHistoria() {
 		return historia;
 	}
 
@@ -943,7 +960,53 @@ public Historia getHistoria() {
 	public void setFechaMuerte(Timestamp fechaMuerte) {
 		this.fechaMuerte = fechaMuerte;
 	}
-	
 
+	public Boolean getVisita() {
+		return visita;
+	}
+
+	public void setVisita(Boolean visita) {
+		this.visita = visita;
+	}
+
+	public Timestamp getFechaVisita() {
+		return fechaVisita;
+	}
+
+	public void setFechaVisita(Timestamp fechaVisita) {
+		this.fechaVisita = fechaVisita;
+	}
+
+	public String getResumenVisita() {
+		return resumenVisita;
+	}
+
+	public void setResumenVisita(String resumenVisita) {
+		this.resumenVisita = resumenVisita;
+	}
+
+	public Boolean getBrigadista() {
+		return brigadista;
+	}
+
+	public void setBrigadista(Boolean brigadista) {
+		this.brigadista = brigadista;
+	}
+
+	public Set<PacienteMedicina> getPacientesMedicinass() {
+		return pacientesMedicinass;
+	}
+
+	public void setPacientesMedicinass(Set<PacienteMedicina> pacientesMedicinass) {
+		this.pacientesMedicinass = pacientesMedicinass;
+	}
+
+	public Boolean getCronico() {
+		return cronico;
+	}
+
+	public void setCronico(Boolean cronico) {
+		this.cronico = cronico;
+	}
 
 }

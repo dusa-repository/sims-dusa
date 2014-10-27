@@ -101,6 +101,7 @@ import servicio.transacciones.SHistoria;
 import servicio.transacciones.SHistoriaAccidente;
 import servicio.transacciones.SHistoriaIntervencion;
 import servicio.transacciones.SHistoriaVacuna;
+import servicio.transacciones.SPacienteMedicina;
 import componentes.Mensaje;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -193,6 +194,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SMotivoCita servicioMotivoCita;
 	@WireVariable("SPaciente")
 	protected SPaciente servicioPaciente;
+	@WireVariable("SPacienteMedicina")
+	protected SPacienteMedicina servicioPacienteMedicina;
 	@WireVariable("SPacienteAntecedente")
 	protected SPacienteAntecedente servicioPacienteAntecedente;
 	@WireVariable("SPais")

@@ -15,12 +15,15 @@ import modelo.maestros.Cargo;
 import modelo.maestros.Cita;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
+import modelo.maestros.Medicina;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Arbol;
 import modelo.sha.Area;
 import modelo.sha.Informe;
 import modelo.transacciones.Consulta;
+import modelo.transacciones.ConsultaMedicina;
+import modelo.transacciones.PacienteMedicina;
 
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
@@ -39,6 +42,8 @@ import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
@@ -51,6 +56,7 @@ import org.zkoss.zul.Textbox;
 import arbol.CArbol;
 
 import componentes.Botonera;
+import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
 import componentes.Validador;
@@ -63,6 +69,8 @@ public class CPaciente extends CGenerico {
 	private Tab tabDatosBasicos;
 	@Wire
 	private Tab tabDatosContacto;
+	@Wire
+	private Tab tabDatosCronico;
 	@Wire
 	private Button btnBuscarPaciente;
 	@Wire
@@ -228,7 +236,29 @@ public class CPaciente extends CGenerico {
 	private Label lblFichaI;
 	@Wire
 	private Label lblFecha;
-
+	@Wire
+	private Radio rdoSiBrigadista;
+	@Wire
+	private Radio rdoNoBrigadista;
+	@Wire
+	private Radio rdoSiSocial;
+	@Wire
+	private Radio rdoNoSocial;
+	@Wire
+	private Datebox dtbSocial;
+	@Wire
+	private Textbox txtResumenVisita;
+	@Wire
+	private Radio rdoSiCronico;
+	@Wire
+	private Radio rdoNoCronico;
+	@Wire
+	private Listbox ltbMedicinas;
+	@Wire
+	private Listbox ltbMedicinasAgregadas;
+	@Wire
+	private Textbox txtBuscadorMedicina;
+	Buscar<Medicina> buscarMedicina;
 
 	URL url = getClass().getResource("usuario.png");
 	private CArbol cArbol = new CArbol();
@@ -236,6 +266,9 @@ public class CPaciente extends CGenerico {
 	String cedTrabajador = "";
 	Catalogo<Paciente> catalogo;
 	Catalogo<Paciente> catalogoFamiliar;
+
+	List<Medicina> medicinasDisponibles = new ArrayList<Medicina>();
+	List<PacienteMedicina> medicinasAgregadas = new ArrayList<PacienteMedicina>();
 
 	private String idBoton = "";
 
@@ -260,11 +293,13 @@ public class CPaciente extends CGenerico {
 				mapa = null;
 			}
 		}
+		buscadorMedicina();
 		llenarComboCiudad();
 		llenarComboEmpresa();
 		llenarComboArea();
 		llenarComboCargo();
 		llenarComboNomina();
+		llenarMedicinas();
 		rdoActivo.setChecked(true);
 		Botonera botonera = new Botonera() {
 
@@ -419,6 +454,18 @@ public class CPaciente extends CGenerico {
 							.buscar(Long.parseLong(cmbCiudad.getSelectedItem()
 									.getContext()));
 
+					String resumenVisita = txtResumenVisita.getValue();
+					Boolean brigadista = false;
+					Boolean visita = false;
+					if (rdoSiBrigadista.isChecked())
+						brigadista = true;
+					if (rdoSiSocial.isChecked())
+						visita = true;
+					Timestamp fechaVisita = new Timestamp(dtbSocial.getValue()
+							.getTime());
+					Boolean cronico = false;
+					if (rdoSiCronico.isChecked())
+						cronico = true;
 					Paciente paciente = new Paciente(cedula, ficha, apellido1,
 							nombre1, apellido2, nombre2, trabajador,
 							discapacidad, alergia, lentes, fechaNac, lugarNac,
@@ -429,7 +476,8 @@ public class CPaciente extends CGenerico {
 							direccion, correo, telefono1, telefono2, nombresE,
 							apellidosE, parentescoE, telefono1E, telefono2E,
 							cedulaFamiliar, parentescoFamiliar, empresa,
-							ciudad, cargo, area);
+							ciudad, cargo, area, visita, fechaVisita,
+							resumenVisita, brigadista, cronico);
 
 					paciente.setNacionalidad(nacionalidad);
 					paciente.setCarga(carga);
@@ -452,6 +500,7 @@ public class CPaciente extends CGenerico {
 						paciente = servicioPaciente.buscarPorCedula(cedula);
 						inhabilitarTrabajadorYTodosFamiliares(paciente);
 					}
+					guardarMedicinas(paciente);
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
 				}
@@ -496,6 +545,158 @@ public class CPaciente extends CGenerico {
 			}
 		};
 		botoneraPaciente.appendChild(botonera);
+	}
+
+	protected void guardarMedicinas(Paciente paciente) {
+		servicioPacienteMedicina.limpiarMedicinas(paciente);
+		List<PacienteMedicina> listaMedicina = new ArrayList<PacienteMedicina>();
+		for (int i = 0; i < ltbMedicinasAgregadas.getItemCount(); i++) {
+			Listitem listItem = ltbMedicinasAgregadas.getItemAtIndex(i);
+			Integer idMedicina = ((Spinner) ((listItem.getChildren().get(2)))
+					.getFirstChild()).getValue();
+			Medicina medicina = servicioMedicina.buscar(idMedicina);
+			String valor = ((Textbox) ((listItem.getChildren().get(1)))
+					.getFirstChild()).getValue();
+			PacienteMedicina consultaMedicina = new PacienteMedicina(paciente,
+					medicina, valor);
+			listaMedicina.add(consultaMedicina);
+		}
+		servicioPacienteMedicina.guardar(listaMedicina);
+	}
+
+	private void llenarMedicinas() {
+		Paciente paciente = servicioPaciente.buscarPorCedula(id);
+		medicinasDisponibles = servicioMedicina
+				.buscarDisponiblesPaciente(paciente);
+		ltbMedicinas
+				.setModel(new ListModelList<Medicina>(medicinasDisponibles));
+
+		medicinasAgregadas = servicioPacienteMedicina
+				.buscarPorPaciente(paciente);
+		ltbMedicinasAgregadas.setModel(new ListModelList<PacienteMedicina>(
+				medicinasAgregadas));
+		listasMultiples();
+	}
+
+	public void recibirMedicina(List<Medicina> lista, Listbox l) {
+		ltbMedicinas = l;
+		medicinasDisponibles = lista;
+		ltbMedicinas
+				.setModel(new ListModelList<Medicina>(medicinasDisponibles));
+		ltbMedicinas.setMultiple(false);
+		ltbMedicinas.setCheckmark(false);
+		ltbMedicinas.setMultiple(true);
+		ltbMedicinas.setCheckmark(true);
+	}
+
+	@Listen("onClick = #btnAbrirMedicina")
+	public void divMedicina() {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", "paciente");
+		map.put("lista", medicinasDisponibles);
+		map.put("listbox", ltbMedicinas);
+		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
+		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Medicina");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
+	}
+
+	private void buscadorMedicina() {
+		buscarMedicina = new Buscar<Medicina>(ltbMedicinas, txtBuscadorMedicina) {
+
+			@Override
+			protected List<Medicina> buscar(String valor) {
+				List<Medicina> medicinasFiltradas = new ArrayList<Medicina>();
+				List<Medicina> medicinas = servicioMedicina.filtroNombre(valor);
+				for (int i = 0; i < medicinasDisponibles.size(); i++) {
+					Medicina medicina = medicinasDisponibles.get(i);
+					for (int j = 0; j < medicinas.size(); j++) {
+						if (medicina.getIdMedicina() == medicinas.get(j)
+								.getIdMedicina())
+							medicinasFiltradas.add(medicina);
+					}
+				}
+				return medicinasFiltradas;
+			}
+		};
+	}
+
+	@Listen("onClick = #pasar1Medicina")
+	public void derechaMedicina() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem = ltbMedicinas.getItems();
+		if (listItem.size() != 0) {
+			for (int i = 0; i < listItem.size(); i++) {
+				if (listItem.get(i).isSelected()) {
+					Medicina medicina = listItem.get(i).getValue();
+					medicinasDisponibles.remove(medicina);
+					PacienteMedicina pacienteMedicina = new PacienteMedicina();
+					pacienteMedicina.setMedicina(medicina);
+					medicinasAgregadas.clear();
+					for (int j = 0; j < ltbMedicinasAgregadas.getItemCount(); j++) {
+						Listitem listItemj = ltbMedicinasAgregadas
+								.getItemAtIndex(j);
+						Integer idMedicina = ((Spinner) ((listItemj
+								.getChildren().get(2))).getFirstChild())
+								.getValue();
+						Medicina medicinaj = servicioMedicina
+								.buscar(idMedicina);
+						String valor = ((Textbox) ((listItemj.getChildren()
+								.get(1))).getFirstChild()).getValue();
+						PacienteMedicina pacienteMedicinaj = new PacienteMedicina(
+								null, medicinaj, valor);
+						medicinasAgregadas.add(pacienteMedicinaj);
+					}
+					medicinasAgregadas.add(pacienteMedicina);
+					ltbMedicinasAgregadas
+							.setModel(new ListModelList<PacienteMedicina>(
+									medicinasAgregadas));
+					ltbMedicinasAgregadas.renderAll();
+					listitemEliminar.add(listItem.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbMedicinas.removeItemAt(listitemEliminar.get(i).getIndex());
+		}
+		listasMultiples();
+	}
+
+	private void listasMultiples() {
+		ltbMedicinas.setMultiple(false);
+		ltbMedicinas.setCheckmark(false);
+		ltbMedicinas.setMultiple(true);
+		ltbMedicinas.setCheckmark(true);
+		ltbMedicinasAgregadas.setMultiple(false);
+		ltbMedicinasAgregadas.setCheckmark(false);
+		ltbMedicinasAgregadas.setMultiple(true);
+		ltbMedicinasAgregadas.setCheckmark(true);
+	}
+
+	@Listen("onClick = #pasar2Medicina")
+	public void izquierdaMedicina() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem2 = ltbMedicinasAgregadas.getItems();
+		if (listItem2.size() != 0) {
+			for (int i = 0; i < listItem2.size(); i++) {
+				if (listItem2.get(i).isSelected()) {
+					PacienteMedicina consultaMedicina = listItem2.get(i)
+							.getValue();
+					medicinasAgregadas.remove(consultaMedicina);
+					medicinasDisponibles.add(consultaMedicina.getMedicina());
+					ltbMedicinas.setModel(new ListModelList<Medicina>(
+							medicinasDisponibles));
+					listitemEliminar.add(listItem2.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbMedicinasAgregadas.removeItemAt(listitemEliminar.get(i)
+					.getIndex());
+		}
+		listasMultiples();
 	}
 
 	/* Permite validar que todos los campos esten completos */
@@ -681,8 +882,8 @@ public class CPaciente extends CGenerico {
 		final List<Paciente> pacientes = servicioPaciente
 				.buscarTodosTrabajadores();
 		catalogoFamiliar = new Catalogo<Paciente>(divCatalogoFamiliar,
-				"Catalogo de Pacientes", pacientes, "Cedula","Ficha", "Nombre",
-				"Apellido") {
+				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Nombre", "Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -850,6 +1051,7 @@ public class CPaciente extends CGenerico {
 		Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
 		if (!idBoton.equals("btnVer")) {
 			llenarCampos(paciente);
+			llenarMedicinas();
 			ficha = paciente.getFicha();
 		}
 		catalogo.setParent(null);
@@ -988,6 +1190,31 @@ public class CPaciente extends CGenerico {
 				cedTrabajador = familiar.getCedula();
 			}
 		}
+		if (paciente.getBrigadista() != null) {
+			if (paciente.getBrigadista())
+				rdoSiBrigadista.setChecked(true);
+			else
+				rdoNoBrigadista.setChecked(true);
+		}
+		if (paciente.getVisita() != null) {
+			if (paciente.getVisita())
+				rdoSiSocial.setChecked(true);
+			else
+				rdoNoSocial.setChecked(true);
+		}
+		if (paciente.getFechaVisita() != null) {
+			dtbSocial.setValue(paciente.getFechaVisita());
+		}
+		if (paciente.getResumenVisita() != null) {
+			txtResumenVisita.setValue(paciente.getResumenVisita());
+		}
+		if (paciente.getCronico() != null) {
+			if (paciente.getCronico())
+				rdoSiCronico.setChecked(true);
+			else
+				rdoNoCronico.setChecked(true);
+		}
+
 	}
 
 	/* Permite subir una imagen a la vista */
@@ -1060,6 +1287,16 @@ public class CPaciente extends CGenerico {
 		tabDatosBasicos.setSelected(true);
 	}
 
+	@Listen("onClick = #btnAnterior2")
+	public void anteriorPestanna2() {
+		tabDatosContacto.setSelected(true);
+	}
+
+	@Listen("onClick = #btnSiguiente2")
+	public void siguientePestanna2() {
+		tabDatosCronico.setSelected(true);
+	}
+
 	/* Busca si existe un diagnostico con el mismo codigo escrito */
 	@Listen("onChange = #dtbFechaNac")
 	public void cambioEdad() {
@@ -1072,6 +1309,7 @@ public class CPaciente extends CGenerico {
 				.getValue());
 		if (paciente != null) {
 			llenarCampos(paciente);
+			llenarMedicinas();
 		} else {
 			limpiarCampos();
 			msj.mensajeError(Mensaje.cedulaNoExiste);
@@ -1147,6 +1385,14 @@ public class CPaciente extends CGenerico {
 		spnCarga.setValue(0);
 		dtbFechaEgreso.setValue(fecha);
 		dtbFechaIngreso.setValue(fecha);
+		dtbSocial.setValue(fecha);
+		txtResumenVisita.setValue("");
+		rdoNoBrigadista.setChecked(false);
+		rdoSiBrigadista.setChecked(false);
+		rdoSiSocial.setChecked(false);
+		rdoNoSocial.setChecked(false);
+		rdoSiCronico.setChecked(false);
+		rdoNoCronico.setChecked(false);
 		dtbInscripcionIVSS.setValue(fecha);
 		dtbFechaMuerte.setValue(fecha);
 		dtbFechaMuerte.setVisible(false);
@@ -1168,6 +1414,7 @@ public class CPaciente extends CGenerico {
 		rdoE.setDisabled(false);
 		rdoV.setDisabled(false);
 		tabDatosBasicos.setSelected(true);
+		llenarMedicinas();
 	}
 
 }
