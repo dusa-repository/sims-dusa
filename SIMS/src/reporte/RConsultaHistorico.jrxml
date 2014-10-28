@@ -204,7 +204,7 @@
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
 				</box>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tipoConsultaSecundaria}]]></textFieldExpression>

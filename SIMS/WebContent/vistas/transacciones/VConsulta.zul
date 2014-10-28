@@ -582,7 +582,7 @@
 													<listcell label="${each.nombre}">
 													</listcell>
 													<listcell>
-														<textbox maxlength="100" width="100%"
+														<textbox multiline="true" class="multilinea" maxlength="100" width="100%"
 															placeholder="Ingrese la observacion"
 															tooltiptext="Ingrese la observacion que resulto luego de realizar el examen de esta parte del cuerpo"></textbox>
 													</listcell>
@@ -601,7 +601,7 @@
 										<button class="abrir" id="btnAbrirDiagnostico" label=""
 											tooltiptext="Crear un Nuevo Diagnostico" image="/public/imagenes/botones/agregar.png" />
 										<button class="abrir" id="btnRefrescarDiagnostico" label=""
-											tooltiptext="Presione para actualizar la lista de las medicinas (actualizara tambien la lista de las medicinas agregadas)"
+											tooltiptext="Presione para actualizar la lista de los diagnosticos (actualizara tambien la lista de los diagnosticos agregados)"
 											image="/public/imagenes/botones/refresh2.png" />
 									</hbox>
 									<hbox widths="25%,5%,50%,20">
@@ -935,7 +935,7 @@
 										<button class="abrir" id="btnAbrirExamen" label=""
 											tooltiptext="Crear un Nuevo Examen" image="/public/imagenes/botones/agregar.png" />
 										<button class="abrir" id="btnRefrescarExamen" label=""
-											tooltiptext="Presione para actualizar la lista de las medicinas (actualizara tambien la lista de las medicinas agregadas)"
+											tooltiptext="Presione para actualizar la lista de los examenes (actualizara tambien la lista de los examenes agregados)"
 											image="/public/imagenes/botones/refresh2.png" />
 									</hbox>
 									<hbox widths="25%,5%,50%,20">
@@ -1077,7 +1077,7 @@
 										<button class="abrir" id="btnAbrirEspecialista" label=""
 											tooltiptext="Crear un Nuevo Especialista" image="/public/imagenes/botones/agregar.png" />
 										<button class="abrir" id="btnRefrescarEspecialista" label=""
-											tooltiptext="Presione para actualizar la lista de las medicinas (actualizara tambien la lista de las medicinas agregadas)"
+											tooltiptext="Presione para actualizar la lista de los especialistas (actualizara tambien la lista de los especialistas agregados)"
 											image="/public/imagenes/botones/refresh2.png" />
 									</hbox>
 									<hbox widths="25%,5%,50%,20">
@@ -1189,7 +1189,7 @@
 										<button class="abrir" id="btnAbrirServicioExterno"
 											label="" tooltiptext="Crear un Nuevo Estudio Externo" image="/public/imagenes/botones/agregar.png" />
 										<button class="abrir" id="btnRefrescarServicio" label=""
-											tooltiptext="Presione para actualizar la lista de las medicinas (actualizara tambien la lista de las medicinas agregadas)"
+											tooltiptext="Presione para actualizar la lista de los estudios externos (actualizara tambien la lista de los estudios externos agregados)"
 											image="/public/imagenes/botones/refresh2.png" />
 									</hbox>
 									<hbox widths="25%,5%,50%,20">
