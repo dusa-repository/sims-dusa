@@ -1919,7 +1919,8 @@ public class CConsulta extends CGenerico {
 				.valueOf(idPaciente));
 		List<Paciente> carga = servicioPaciente.buscarParientes(String
 				.valueOf(idPaciente));
-		ltbCargaFamiliar.setModel(new ListModelList<Paciente>(carga));
+		if (!idPaciente.equals(""))
+			ltbCargaFamiliar.setModel(new ListModelList<Paciente>(carga));
 
 		medicinasDisponibles = servicioMedicina.buscarDisponibles(consulta);
 		ltbMedicinas

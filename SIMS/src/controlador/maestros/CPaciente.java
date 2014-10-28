@@ -1195,24 +1195,35 @@ public class CPaciente extends CGenerico {
 				rdoSiBrigadista.setChecked(true);
 			else
 				rdoNoBrigadista.setChecked(true);
+		} else {
+			rdoNoBrigadista.setChecked(false);
+			rdoSiBrigadista.setChecked(false);
 		}
 		if (paciente.getVisita() != null) {
 			if (paciente.getVisita())
 				rdoSiSocial.setChecked(true);
 			else
 				rdoNoSocial.setChecked(true);
+		} else {
+			rdoNoSocial.setChecked(false);
+			rdoSiSocial.setChecked(false);
 		}
 		if (paciente.getFechaVisita() != null) {
 			dtbSocial.setValue(paciente.getFechaVisita());
-		}
+		} else
+			dtbSocial.setValue(fecha);
 		if (paciente.getResumenVisita() != null) {
 			txtResumenVisita.setValue(paciente.getResumenVisita());
-		}
+		} else
+			txtResumenVisita.setValue("");
 		if (paciente.getCronico() != null) {
 			if (paciente.getCronico())
 				rdoSiCronico.setChecked(true);
 			else
 				rdoNoCronico.setChecked(true);
+		} else {
+			rdoNoCronico.setChecked(false);
+			rdoSiCronico.setChecked(false);
 		}
 
 	}
