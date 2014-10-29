@@ -1,5 +1,6 @@
 package controlador.reporte;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,15 +15,20 @@ import modelo.generico.Resumen;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Listheader;
@@ -53,6 +59,9 @@ public class CResumen extends CGenerico {
 	private Div botoneraResumen;
 	@Wire
 	private Row row;
+	@Wire
+	private Combobox cmbTipo;
+
 	private String nombre;
 	private String tipo;
 
@@ -103,6 +112,7 @@ public class CResumen extends CGenerico {
 				if (validar()) {
 					Date desde = dtbDesde.getValue();
 					Date hasta = dtbHasta.getValue();
+					String tipoReporte = cmbTipo.getValue();
 					DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
 					String parentesco = "";
 					boolean trabajador = false;
@@ -134,6 +144,8 @@ public class CResumen extends CGenerico {
 									+ fecha1
 									+ "&valor7="
 									+ fecha2
+									+ "&valor20="
+									+ tipoReporte
 									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 						else
 							msj.mensajeAlerta(Mensaje.noHayRegistros);
@@ -159,6 +171,8 @@ public class CResumen extends CGenerico {
 									+ parentesco
 									+ "&valor9="
 									+ trabaja
+									+ "&valor20="
+									+ tipoReporte
 									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 						else
 							msj.mensajeAlerta(Mensaje.noHayRegistros);
@@ -184,6 +198,8 @@ public class CResumen extends CGenerico {
 									+ parentesco
 									+ "&valor9="
 									+ trabaja
+									+ "&valor20="
+									+ tipoReporte
 									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 						else
 							msj.mensajeAlerta(Mensaje.noHayRegistros);
@@ -215,7 +231,8 @@ public class CResumen extends CGenerico {
 			return true;
 	}
 
-	public byte[] reporteAreaTipoDiagnostico(String par6, String par7) {
+	public byte[] reporteAreaTipoDiagnostico(String par6, String par7,
+			String tipoReporte) {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -299,17 +316,40 @@ public class CResumen extends CGenerico {
 			msj.mensajeError("Recurso no Encontrado");
 		}
 
-		try {
-			fichero = JasperRunManager.runReportToPdf(reporte, p,
-					new JRBeanCollectionDataSource(lista));
-		} catch (JRException e) {
-			msj.mensajeError("Error en Reporte");
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(lista));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(lista));
+			} catch (JRException e) {
+				msj.mensajeError("Error en Reporte");
+			}
+			return fichero;
 		}
-		return fichero;
 	}
 
 	public byte[] reporteDiagnostico(String par6, String par7, String par8,
-			String par9) {
+			String par9, String tipoReporte) {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -384,17 +424,40 @@ public class CResumen extends CGenerico {
 			msj.mensajeError("Recurso no Encontrado");
 		}
 
-		try {
-			fichero = JasperRunManager.runReportToPdf(reporte, p,
-					new JRBeanCollectionDataSource(lista));
-		} catch (JRException e) {
-			msj.mensajeError("Error en Reporte");
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(lista));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(lista));
+			} catch (JRException e) {
+				msj.mensajeError("Error en Reporte");
+			}
+			return fichero;
 		}
-		return fichero;
 	}
 
 	public byte[] reporteTipoConsulta(String par6, String par7, String par8,
-			String par9) {
+			String par9, String tipoReporte) {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -429,7 +492,7 @@ public class CResumen extends CGenerico {
 			consultasSolas = getServicioConsulta()
 					.buscarTipoDeConsultaEntreFechasYTrabajadorResumen(fecha1,
 							fecha2, trabajador);
-		
+
 		String tipoConsulta = consultasSolas.get(0).getTipoConsulta();
 		String tipoConsultaSecundaria = consultasSolas.get(0)
 				.getTipoConsultaSecundaria();
@@ -500,14 +563,37 @@ public class CResumen extends CGenerico {
 		} catch (JRException e) {
 			msj.mensajeError("Recurso no Encontrado");
 		}
+		if (tipoReporte.equals("EXCEL")) {
 
-		try {
-			fichero = JasperRunManager.runReportToPdf(reporte, p,
-					new JRBeanCollectionDataSource(lista));
-		} catch (JRException e) {
-			msj.mensajeError("Error en Reporte");
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(lista));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(lista));
+			} catch (JRException e) {
+				msj.mensajeError("Error en Reporte");
+			}
+
+			return fichero;
 		}
-
-		return fichero;
 	}
 }

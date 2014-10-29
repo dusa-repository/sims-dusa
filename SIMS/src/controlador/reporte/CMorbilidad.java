@@ -1,6 +1,10 @@
 package controlador.reporte;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -20,11 +24,18 @@ import modelo.sha.Area;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.zkoss.zk.ui.Execution;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -105,6 +116,8 @@ public class CMorbilidad extends CGenerico {
 	private Label lblNombreDoctor;
 	@Wire
 	private Div divCatalogoPaciente;
+	@Wire
+	private Combobox cmbTipo;
 
 	private String tipo = "";
 	private String titulo = "";
@@ -349,6 +362,7 @@ public class CMorbilidad extends CGenerico {
 		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
 		String fecha1 = fecha.format(desde);
 		String fecha2 = fecha.format(hasta);
+		String tipoReporte = cmbTipo.getValue();
 		String area = "";
 		Area area2 = new Area();
 		if (cmbArea.getValue().equals("TODAS"))
@@ -364,23 +378,31 @@ public class CMorbilidad extends CGenerico {
 						.buscarEntreFechasyArea(desde, hasta, area2).isEmpty()))
 			msj.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
-			Clients.evalJavaScript("window.open('"
-					+ damePath()
-					+ "Reportero?valor=9&valor6="
-					+ fecha1
-					+ "&valor7="
-					+ fecha2
-					+ "&valor8="
-					+ area
-					+ "&valor9="
-					+ cmbCargo.getValue()
-					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+//			if (tipoReporte.equals("EXCEL")) {
+//				Executions.sendRedirect(damePath() + "Reportero?valor=9&valor6="
+//						+ fecha1 + "&valor7=" + fecha2 + "&valor8=" + area
+//						+ "&valor9=" + cmbCargo.getValue() + "&valor10="
+//						+ tipoReporte);
+//			} else
+				Clients.evalJavaScript("window.open('"
+						+ damePath()
+						+ "Reportero?valor=9&valor6="
+						+ fecha1
+						+ "&valor7="
+						+ fecha2
+						+ "&valor8="
+						+ area
+						+ "&valor9="
+						+ cmbCargo.getValue()
+						+ "&valor20="
+						+ tipoReporte
+						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		}
 
 	}
 
 	public byte[] reporteMorbilidadPorArea(String part1, String part2,
-			String area, String cargo) throws JRException {
+			String area, String cargo, String tipoReporte) throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -431,9 +453,33 @@ public class CMorbilidad extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorArea.jasper"));
-		fichero = JasperRunManager.runReportToPdf(reporte, p,
-				new JRBeanCollectionDataSource(consuta));
-		return fichero;
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consuta));
+			return fichero;
+		}
 	}
 
 	public void reporteTipoConsulta() {
@@ -444,6 +490,7 @@ public class CMorbilidad extends CGenerico {
 		String fecha2 = fecha.format(hasta);
 		String tipoC = "";
 		String subTipo = "";
+		String tipoReporte = cmbTipo.getValue();
 
 		if (cmbTipoConsulta.getValue().equals("TODAS"))
 			tipoC = "";
@@ -475,13 +522,15 @@ public class CMorbilidad extends CGenerico {
 					+ tipoC
 					+ "&valor9="
 					+ subTipo
+					+ "&valor20="
+					+ tipoReporte
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		}
 
 	}
 
 	public byte[] reporteMorbilidadPorTipo(String part1, String part2,
-			String tipo, String subTipo) throws JRException {
+			String tipo, String subTipo, String tipoReporte) throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -539,9 +588,32 @@ public class CMorbilidad extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorTipoConsulta.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consuta));
 		return fichero;
+		}
 	}
 
 	public void reporteDiagnostico() {
@@ -552,6 +624,7 @@ public class CMorbilidad extends CGenerico {
 		String fecha2 = fecha.format(hasta);
 		String diagnostico = "";
 		String radio = "";
+		String tipoReporte = cmbTipo.getValue();
 		if (cmbDiagnostico.getValue().equals("TODOS"))
 			diagnostico = "";
 		else
@@ -605,13 +678,15 @@ public class CMorbilidad extends CGenerico {
 					+ a
 					+ "&valor11="
 					+ de
+					+ "&valor20="
+					+ tipoReporte
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		}
 
 	}
 
 	public byte[] reporteMorbilidadPorDiagnostico(String part1, String part2,
-			String diagnostico, String familiar, String a, String de)
+			String diagnostico, String familiar, String a, String de, String tipoReporte)
 			throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -676,9 +751,10 @@ public class CMorbilidad extends CGenerico {
 		p.put("edad1", dea);
 		p.put("edad2", aa);
 		p.put("paciente", familiar);
-		
-		List<Long> consuta = getServicioConsultaDiagnostico().cantidadConsultas(consutaDiag);
-		p.put("total",consuta.size());
+
+		List<Long> consuta = getServicioConsultaDiagnostico()
+				.cantidadConsultas(consutaDiag);
+		p.put("total", consuta.size());
 
 		for (int i = 0; i < consutaDiag.size(); i++) {
 			Consulta cons = consutaDiag.get(i).getConsulta();
@@ -689,11 +765,35 @@ public class CMorbilidad extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorDiagnostico.jasper"));
+		
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consutaDiag));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
 
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consutaDiag));
 
 		return fichero;
+		}
 	}
 
 	public void reporteDoctor() {
@@ -703,7 +803,8 @@ public class CMorbilidad extends CGenerico {
 		String fecha1 = fecha.format(desde);
 		String fecha2 = fecha.format(hasta);
 		String unidad = "";
-
+		String tipoReporte = cmbTipo.getValue();
+		
 		if (cmbUnidad.getValue().equals("TODAS"))
 			unidad = "";
 		else
@@ -734,13 +835,15 @@ public class CMorbilidad extends CGenerico {
 					+ unidad
 					+ "&valor9="
 					+ idDoctor
+					+ "&valor20="
+					+ tipoReporte
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		}
 
 	}
 
 	public byte[] reporteMorbilidadPorDoctor(String part1, String part2,
-			String unidad, String doctor) throws JRException {
+			String unidad, String doctor, String tipoReporte) throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -808,10 +911,35 @@ public class CMorbilidad extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorDoctor.jasper"));
+		
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consuta));
 		// }
 		return fichero;
+		}
 	}
 
 	/* Muestra un catalogo de Usuarios */
@@ -934,5 +1062,4 @@ public class CMorbilidad extends CGenerico {
 	// idPaciente = paciente.getCedula();
 	// catalogo.setParent(null);
 	// }
-
 }

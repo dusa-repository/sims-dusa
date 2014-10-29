@@ -1,5 +1,6 @@
 package controlador.reporte;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -18,9 +19,13 @@ import modelo.sha.Area;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.zkoss.zk.ui.Sessions;
@@ -78,6 +83,8 @@ public class CReposo extends CGenerico {
 	private Label lblNombreDoctor;
 	@Wire
 	private Div divCatalogoPaciente;
+	@Wire
+	private Combobox cmbTipo;
 
 	private String tipo = "";
 	private String titulo = "";
@@ -246,6 +253,7 @@ public class CReposo extends CGenerico {
 		String fecha1 = fecha.format(desde);
 		String fecha2 = fecha.format(hasta);
 		String area = "";
+		String tipoReporte = cmbTipo.getValue();
 		Area area2 = new Area();
 		if (cmbArea.getValue().equals("TODAS"))
 			area = "";
@@ -271,12 +279,14 @@ public class CReposo extends CGenerico {
 					+ fecha2
 					+ "&valor8="
 					+ area
+					+ "&valor20="
+					+ tipoReporte
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		}
 
 	}
 
-	public byte[] reporteReposoPorArea(String part1, String part2, String area)
+	public byte[] reporteReposoPorArea(String part1, String part2, String area, String tipoReporte)
 			throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -350,9 +360,33 @@ public class CReposo extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRepososPorArea.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consuta));
 		return fichero;
+		}
 	}
 
 	public void reporteDiagnostico() {
@@ -362,6 +396,7 @@ public class CReposo extends CGenerico {
 		String fecha1 = fecha.format(desde);
 		String fecha2 = fecha.format(hasta);
 		String diagnostico = "";
+		String tipoReporte = cmbTipo.getValue();
 		if (cmbDiagnostico.getValue().equals("TODOS"))
 			diagnostico = "";
 		else
@@ -383,13 +418,15 @@ public class CReposo extends CGenerico {
 					+ fecha2
 					+ "&valor8="
 					+ diagnostico
+					+ "&valor20="
+					+ tipoReporte
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		}
 
 	}
 
 	public byte[] reporteReposoPorDiagnostico(String part1, String part2,
-			String diagnostico) throws JRException {
+			String diagnostico, String tipoReporte) throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -451,11 +488,33 @@ public class CReposo extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRepososPorDiagnostico.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
 
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consutaDiag));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consutaDiag));
 
 		return fichero;
+		}
 	}
 
 	public void reporteDoctor() {
@@ -465,7 +524,8 @@ public class CReposo extends CGenerico {
 		String fecha1 = fecha.format(desde);
 		String fecha2 = fecha.format(hasta);
 		String unidad = "";
-
+		String tipoReporte = cmbTipo.getValue();
+		
 		if (cmbUnidad.getValue().equals("TODAS"))
 			unidad = "";
 		else
@@ -499,12 +559,14 @@ public class CReposo extends CGenerico {
 					+ unidad
 					+ "&valor9="
 					+ idDoctor
+					+ "&valor20="
+					+ tipoReporte
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 
 	}
 
 	public byte[] reporteReposoPorDoctor(String part1, String part2,
-			String unidad, String doctor) throws JRException {
+			String unidad, String doctor, String tipoReporte) throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -597,10 +659,34 @@ public class CReposo extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRepososPorDoctor.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
 				new JRBeanCollectionDataSource(consuta));
-		// }
 		return fichero;
+		}
+		
 	}
 
 	/* Muestra un catalogo de Usuarios */

@@ -1,5 +1,6 @@
 package controlador.reporte;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,9 +15,13 @@ import modelo.sha.Area;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.zkoss.zk.ui.Sessions;
@@ -47,6 +52,8 @@ public class CCosto extends CGenerico {
 	private Div divCosto;
 	@Wire
 	private Div botoneraCosto;
+	@Wire
+	private Combobox cmbTipo;
 	String nombre;
 
 	@Override
@@ -86,6 +93,7 @@ public class CCosto extends CGenerico {
 					String fecha1 = fecha.format(desde);
 					String fecha2 = fecha.format(hasta);
 					String diagnostico = cmbDiagnostico.getValue();
+					String tipoReporte = cmbTipo.getValue();
 					Area area = null;
 					if (!cmbArea.getValue().equals("TODOS"))
 						area = servicioArea.buscar(Long.parseLong(cmbArea
@@ -123,6 +131,8 @@ public class CCosto extends CGenerico {
 								+ String.valueOf(idArea)
 								+ "&valor9="
 								+ cmbDiagnostico.getValue()
+								+ "&valor20="
+								+ tipoReporte
 								+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 					else
 						msj.mensajeAlerta(Mensaje.noHayRegistros);
@@ -163,7 +173,7 @@ public class CCosto extends CGenerico {
 		cmbArea.setModel(new ListModelList<Area>(areas));
 	}
 
-	public byte[] reporteCosto(String par6, String par7, Long part2, String par9) {
+	public byte[] reporteCosto(String par6, String par7, Long part2, String par9, String tipoReporte) {
 
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
@@ -264,7 +274,28 @@ public class CCosto extends CGenerico {
 		} catch (JRException e) {
 			msj.mensajeError("Recurso no Encontrado");
 		}
+		if (tipoReporte.equals("EXCEL")) {
 
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consultasFinales));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
 		try {
 			fichero = JasperRunManager.runReportToPdf(reporte, p,
 					new JRBeanCollectionDataSource(consultasFinales));
@@ -272,5 +303,6 @@ public class CCosto extends CGenerico {
 			msj.mensajeError("Error en Reporte");
 		}
 		return fichero;
+		}
 	}
 }

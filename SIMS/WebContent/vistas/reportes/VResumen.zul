@@ -54,6 +54,23 @@
 						<hbox />
 						<hbox />
 					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Reporte de Tipo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox id="cmbTipo" readonly="true" tabindex="1"
+							value="PDF" width="100%" tooltiptext="Seleccione un Tipo"
+							placeholder="Seleccione un Tipo">
+							<comboitem label="PDF" />
+							<comboitem label="EXCEL" />
+						</combobox>
+						<hbox />
+						<hbox />
+						<hbox />
+						<hbox />
+					</row>
 				</rows>
 			</grid>
 			<separator />

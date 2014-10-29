@@ -61,6 +61,7 @@ public class Reportero extends HttpServlet {
 		String par9 = request.getParameter("valor9");
 		String par10 = request.getParameter("valor10");
 		String par11 = request.getParameter("valor11");
+		String tipo = request.getParameter("valor20");
 
 		// Reporte Tipo Consulta
 
@@ -93,40 +94,44 @@ public class Reportero extends HttpServlet {
 				break;
 			case "9":
 				fichero = morbilidad.reporteMorbilidadPorArea(par6, par7, par8,
-						par9);
+						par9, tipo);
 				break;
 			case "10":
 				fichero = morbilidad.reporteMorbilidadPorTipo(par6, par7, par8,
-						par9);
+						par9, tipo);
 				break;
 			case "11":
 				fichero = morbilidad.reporteMorbilidadPorDiagnostico(par6,
-						par7, par8, par9, par10, par11);
+						par7, par8, par9, par10, par11, tipo);
 				break;
 			case "12":
 				fichero = morbilidad.reporteMorbilidadPorDoctor(par6, par7,
-						par8, par9);
+						par8, par9, tipo);
 				break;
 			case "13":
-				fichero = reposo.reporteReposoPorArea(par6, par7, par8);
+				fichero = reposo.reporteReposoPorArea(par6, par7, par8, tipo);
 				break;
 			case "14":
-				fichero = reposo.reporteReposoPorDoctor(par6, par7, par8, par9);
+				fichero = reposo.reporteReposoPorDoctor(par6, par7, par8, par9,
+						tipo);
 				break;
 			case "15":
-				fichero = reposo.reporteReposoPorDiagnostico(par6, par7, par8);
+				fichero = reposo.reporteReposoPorDiagnostico(par6, par7, par8,
+						tipo);
 				break;
 			case "16":
-				fichero = resumen.reporteAreaTipoDiagnostico(par6, par7);
+				fichero = resumen.reporteAreaTipoDiagnostico(par6, par7, tipo);
 				break;
 			case "17":
-				fichero = resumen.reporteDiagnostico(par6, par7, par8, par9);
+				fichero = resumen.reporteDiagnostico(par6, par7, par8, par9,
+						tipo);
 				break;
 			case "18":
-				fichero = resumen.reporteTipoConsulta(par6, par7, par8, par9);
+				fichero = resumen.reporteTipoConsulta(par6, par7, par8, par9,
+						tipo);
 				break;
 			case "19":
-				fichero = costo.reporteCosto(par6, par7, part2, par9);
+				fichero = costo.reporteCosto(par6, par7, part2, par9, tipo);
 			default:
 				break;
 			}
@@ -134,9 +139,22 @@ public class Reportero extends HttpServlet {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		response.setContentType("application/pdf");
-		response.setHeader("Content-disposition",
-				"inline; filename=Reporte.pdf");
+
+		if (tipo != null) {
+			if (tipo.equals("EXCEL")) {
+				response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+				response.setHeader("Content-Disposition",
+						"inline; filename=Reporte.xlsx");
+			} else {
+				response.setContentType("application/pdf");
+				response.setHeader("Content-disposition",
+						"inline; filename=Reporte.pdf");
+			}
+		} else {
+			response.setContentType("application/pdf");
+			response.setHeader("Content-disposition",
+					"inline; filename=Reporte.pdf");
+		}
 		response.setHeader("Cache-Control", "max-age=30");
 		response.setHeader("Pragma", "No-cache");
 		response.setDateHeader("Expires", 0);
