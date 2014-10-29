@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import modelo.transacciones.Orden;
+
 
 /**
  * The persistent class for the motivo_cita database table.
@@ -42,6 +44,19 @@ public class MotivoCita implements Serializable {
 	//bi-directional many-to-one association to Cita
 	@OneToMany(mappedBy="motivoCita")
 	private Set<Cita> citas;
+	
+	@OneToMany(mappedBy="motivo")
+	private Set<Orden> ordenes;
+
+	public Set<Orden> getOrdenes() {
+		return ordenes;
+	}
+
+
+	public void setOrdenes(Set<Orden> ordenes) {
+		this.ordenes = ordenes;
+	}
+
 
 	public MotivoCita() {
 	}

@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaServicioExterno;
+import modelo.transacciones.OrdenExamen;
+import modelo.transacciones.OrdenServicioExterno;
 
 @Entity
 @Table(name="proveedor", schema="dusa_sims.dbo")
@@ -62,6 +64,12 @@ public class Proveedor implements Serializable {
 	
 	@OneToMany(mappedBy = "proveedor")
 	private Set<ProveedorServicio> proveedoresServicios;
+	
+	@OneToMany(mappedBy = "proveedor")
+	private Set<OrdenExamen> ordenExamenes;
+	
+	@OneToMany(mappedBy = "proveedor")
+	private Set<OrdenServicioExterno> ordenServicios;
 	
 	@Column(name="costo")
 	private Double costo;
@@ -184,6 +192,22 @@ public class Proveedor implements Serializable {
 
 	public Double getCosto() {
 		return costo;
+	}
+
+	public Set<OrdenExamen> getOrdenExamenes() {
+		return ordenExamenes;
+	}
+
+	public void setOrdenExamenes(Set<OrdenExamen> ordenExamenes) {
+		this.ordenExamenes = ordenExamenes;
+	}
+
+	public Set<OrdenServicioExterno> getOrdenServicios() {
+		return ordenServicios;
+	}
+
+	public void setOrdenServicios(Set<OrdenServicioExterno> ordenServicios) {
+		this.ordenServicios = ordenServicios;
 	}
 
 	public void setCosto(Double costo) {

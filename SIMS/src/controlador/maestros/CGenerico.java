@@ -1,6 +1,5 @@
 package controlador.maestros;
 
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -103,6 +102,11 @@ import servicio.transacciones.SHistoria;
 import servicio.transacciones.SHistoriaAccidente;
 import servicio.transacciones.SHistoriaIntervencion;
 import servicio.transacciones.SHistoriaVacuna;
+import servicio.transacciones.SOrden;
+import servicio.transacciones.SOrdenEspecialista;
+import servicio.transacciones.SOrdenExamen;
+import servicio.transacciones.SOrdenMedicina;
+import servicio.transacciones.SOrdenServicioExterno;
 import servicio.transacciones.SPacienteMedicina;
 import componentes.Mensaje;
 
@@ -196,6 +200,16 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SMotivoCita servicioMotivoCita;
 	@WireVariable("SPaciente")
 	protected SPaciente servicioPaciente;
+	@WireVariable("SOrden")
+	protected SOrden servicioOrden;
+	@WireVariable("SOrdenServicioExterno")
+	protected SOrdenServicioExterno servicioOrdenServicio;
+	@WireVariable("SOrdenEspecialista")
+	protected SOrdenEspecialista servicioOrdenEspecialista;
+	@WireVariable("SOrdenExamen")
+	protected SOrdenExamen servicioOrdenExamen;
+	@WireVariable("SOrdenMedicina")
+	protected SOrdenMedicina servicioOrdenMedicina;
 	@WireVariable("SPacienteMedicina")
 	protected SPacienteMedicina servicioPacienteMedicina;
 	@WireVariable("SPacienteAntecedente")
@@ -287,11 +301,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public static SConsulta getServicioConsulta() {
 		return applicationContext.getBean(SConsulta.class);
 	}
-	
+
 	public static SUsuario getServicioUsuario() {
 		return applicationContext.getBean(SUsuario.class);
 	}
-
 
 	public static SConsultaEspecialista getServicioConsultaEspecialista() {
 		return applicationContext.getBean(SConsultaEspecialista.class);
@@ -319,6 +332,26 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 
 	public static SConsultaMedicina getServicioConsultaMedicina() {
 		return applicationContext.getBean(SConsultaMedicina.class);
+	}
+
+	public static SOrden getServicioOrden() {
+		return applicationContext.getBean(SOrden.class);
+	}
+
+	public static SOrdenMedicina getServicioOrdenMedicina() {
+		return applicationContext.getBean(SOrdenMedicina.class);
+	}
+
+	public static SOrdenEspecialista getServicioOrdenEspecialista() {
+		return applicationContext.getBean(SOrdenEspecialista.class);
+	}
+
+	public static SOrdenServicioExterno getServicioOrdenServicioExterno() {
+		return applicationContext.getBean(SOrdenServicioExterno.class);
+	}
+
+	public static SOrdenExamen getServicioOrdenExamen() {
+		return applicationContext.getBean(SOrdenExamen.class);
 	}
 
 	public String nombreUsuarioSesion() {
@@ -414,7 +447,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		}
 		servicioPaciente.guardarVarios(inactivos);
 	}
-	
+
 	public BigDecimal transformarGregorianoAJulia(Date fecha) {
 		String valor = "";
 
@@ -438,7 +471,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		BigDecimal a = BigDecimal.valueOf(al);
 		return a;
 	}
-	
+
 	protected double nextNumber(String numero, String user) {
 		synchronized (this) {
 			while (!nextNumber) {
@@ -457,7 +490,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 					id = numeroNext + 1;
 					F00021 f021 = servicioF00021.buscar(numero, user);
 					f021.setNln001(id);
-					System.out.println("id"+id);
+					System.out.println("id" + id);
 					servicioF00021.guardar(f021);
 				} else {
 					id = 1;
@@ -485,23 +518,23 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		}
 	}
 
-public List<String> obtenerPropiedades() {
-	List<String> arreglo = new ArrayList<String>();
-	DriverManagerDataSource ds = (DriverManagerDataSource) applicationContext
-			.getBean("dataSource");
-	arreglo.add(ds.getUsername());
-	arreglo.add(ds.getPassword());
-	arreglo.add(ds.getUrl());
-	return arreglo;
-}
+	public List<String> obtenerPropiedades() {
+		List<String> arreglo = new ArrayList<String>();
+		DriverManagerDataSource ds = (DriverManagerDataSource) applicationContext
+				.getBean("dataSource");
+		arreglo.add(ds.getUsername());
+		arreglo.add(ds.getPassword());
+		arreglo.add(ds.getUrl());
+		return arreglo;
+	}
 
 	class SMTPAuthenticator extends javax.mail.Authenticator {
 		public PasswordAuthentication getPasswordAuthentication() {
 			return new PasswordAuthentication("cdusa", "cartucho");
 		}
 	}
-	
-	public String damePath(){
-		return Executions.getCurrent().getContextPath()+"/";
+
+	public String damePath() {
+		return Executions.getCurrent().getContextPath() + "/";
 	}
 }

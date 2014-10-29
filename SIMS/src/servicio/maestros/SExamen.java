@@ -2,6 +2,7 @@ package servicio.maestros;
 
 import interfacedao.maestros.IExamenDAO;
 import interfacedao.transacciones.IConsultaExamenDAO;
+import interfacedao.transacciones.IOrdenExamenDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
 import modelo.maestros.Examen;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaExamen;
+import modelo.transacciones.Orden;
+import modelo.transacciones.OrdenExamen;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,8 @@ public class SExamen {
 	private IExamenDAO examenDAO;
 	@Autowired
 	private IConsultaExamenDAO consultaExamenDAO;
+	@Autowired
+	private IOrdenExamenDAO ordenExamenDAO;
 
 	public void guardar(Examen examen) {
 		examenDAO.save(examen);
@@ -96,5 +101,19 @@ public class SExamen {
 
 	public Examen buscarPorReferencia(long idRefD) {
 		return examenDAO.findByIdReferencia(idRefD);
+	}
+
+	public List<Examen> buscarDisponiblesOrden(Orden orden) {
+		List<OrdenExamen> consultasExamen = ordenExamenDAO
+				.findByOrden(orden);
+		List<Long> ids = new ArrayList<Long>();
+		if (consultasExamen.isEmpty())
+			return examenDAO.findAll();
+		else {
+			for (int i = 0; i < consultasExamen.size(); i++) {
+				ids.add(consultasExamen.get(i).getExamen().getIdExamen());
+			}
+			return examenDAO.findByIdExamenNotIn(ids);
+		}
 	}
 }

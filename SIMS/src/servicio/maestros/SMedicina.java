@@ -2,6 +2,7 @@ package servicio.maestros;
 
 import interfacedao.maestros.IMedicinaDAO;
 import interfacedao.transacciones.IConsultaMedicinaDAO;
+import interfacedao.transacciones.IOrdenMedicinaDAO;
 import interfacedao.transacciones.IPacienteMedicinaDAO;
 
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ import modelo.maestros.Medicina;
 import modelo.maestros.Paciente;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaMedicina;
+import modelo.transacciones.Orden;
+import modelo.transacciones.OrdenMedicina;
 import modelo.transacciones.PacienteMedicina;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,8 @@ public class SMedicina {
 	private IMedicinaDAO medicinaDAO;
 	@Autowired
 	private IConsultaMedicinaDAO consultaMedicinaDAO;
+	@Autowired
+	private IOrdenMedicinaDAO ordenMedicinaDAO;
 	@Autowired
 	private IPacienteMedicinaDAO pacienteMedicinaDAO;
 
@@ -122,5 +127,27 @@ public class SMedicina {
 			}
 			return medicinaDAO.findByIdMedicinaNotIn(ids);
 		}
+	}
+
+	public List<Medicina> buscarDisponiblesOrden(Orden orden, Paciente paciente) {
+		List<OrdenMedicina> consultasMedicina = ordenMedicinaDAO
+				.findByOrden(orden);
+		List<PacienteMedicina> medicinas = new ArrayList<PacienteMedicina>();
+		List<Long> ids = new ArrayList<Long>();
+		List<Medicina> med = new ArrayList<Medicina>();
+		if (consultasMedicina.isEmpty()) {
+			medicinas = pacienteMedicinaDAO.findByPaciente(paciente);
+		} else {
+			for (int i = 0; i < consultasMedicina.size(); i++) {
+				ids.add(consultasMedicina.get(i).getMedicina().getIdMedicina());
+			}
+			medicinas = pacienteMedicinaDAO
+					.findByMedicinaIdMedicinaNotInAndPaciente(ids, paciente);
+		}
+
+		for (int i = 0; i < medicinas.size(); i++) {
+			med.add(medicinas.get(i).getMedicina());
+		}
+		return med;
 	}
 }

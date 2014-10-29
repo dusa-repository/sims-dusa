@@ -24,6 +24,7 @@ import modelo.inventario.F4101;
 import modelo.inventario.F41021;
 import modelo.inventario.F41021PK;
 import modelo.transacciones.ConsultaMedicina;
+import modelo.transacciones.OrdenMedicina;
 import modelo.transacciones.PacienteMedicina;
 
 /**
@@ -97,6 +98,9 @@ public class Medicina implements Serializable {
 
 	@OneToMany(mappedBy = "medicina")
 	private Set<ConsultaMedicina> medicinas;
+
+	@OneToMany(mappedBy = "medicina")
+	private Set<OrdenMedicina> ordenesMedicinas;
 
 	@Column(name = "id_referencia")
 	private Long idReferencia;
@@ -332,6 +336,14 @@ public class Medicina implements Serializable {
 
 	public void setPacientesMedicinas(Set<PacienteMedicina> pacientesMedicinas) {
 		this.pacientesMedicinas = pacientesMedicinas;
+	}
+
+	public Set<OrdenMedicina> getOrdenesMedicinas() {
+		return ordenesMedicinas;
+	}
+
+	public void setOrdenesMedicinas(Set<OrdenMedicina> ordenesMedicinas) {
+		this.ordenesMedicinas = ordenesMedicinas;
 	}
 
 }

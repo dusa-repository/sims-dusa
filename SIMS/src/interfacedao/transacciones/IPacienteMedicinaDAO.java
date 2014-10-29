@@ -13,4 +13,7 @@ public interface IPacienteMedicinaDAO extends JpaRepository<PacienteMedicina, Pa
 
 	List<PacienteMedicina> findByPaciente(Paciente paciente);
 
+	List<PacienteMedicina> findByMedicinaIdMedicinaNotInAndPaciente(
+			List<Long> ids, Paciente paciente);
+
 }

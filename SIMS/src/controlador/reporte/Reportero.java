@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JRException;
 import controlador.transacciones.CConsulta;
+import controlador.transacciones.COrden;
 
 /**
  * Servlet implementation class Reportero
@@ -39,6 +40,7 @@ public class Reportero extends HttpServlet {
 		CReposo reposo = new CReposo();
 		CResumen resumen = new CResumen();
 		CCosto costo = new CCosto();
+		COrden orden = new COrden();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
@@ -132,6 +134,19 @@ public class Reportero extends HttpServlet {
 				break;
 			case "19":
 				fichero = costo.reporteCosto(par6, par7, part2, par9, tipo);
+				break;
+			case "20":
+				fichero = orden.reporteRecipe(part2);
+				break;
+			case "21":
+				fichero = orden.reporteEspecialista(part2, par3);
+				break;
+			case "22":
+				fichero = orden.reporteServicio(part2, part5);
+				break;
+			case "23":
+				fichero = orden.reporteExamen(part2, part5);
+				break;
 			default:
 				break;
 			}

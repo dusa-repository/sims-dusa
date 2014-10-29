@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.transacciones.ConsultaServicioExterno;
+import modelo.transacciones.OrdenEspecialista;
+import modelo.transacciones.OrdenServicioExterno;
 
 @Entity
 @Table(name="servicio_externo", schema="dusa_sims.dbo")
@@ -39,6 +41,9 @@ public class ServicioExterno implements Serializable {
 	
 	@OneToMany(mappedBy = "servicioExterno")
 	private Set<ConsultaServicioExterno> servicios;
+	
+	@OneToMany(mappedBy = "servicioExterno")
+	private Set<OrdenServicioExterno> ordenesServicioExterno;
 	
 	@OneToMany(mappedBy = "servicioExterno")
 	private Set<ProveedorServicio> proveedoresServicios;
@@ -116,6 +121,17 @@ public class ServicioExterno implements Serializable {
 
 	public void setProveedoresServicios(Set<ProveedorServicio> proveedoresServicios) {
 		this.proveedoresServicios = proveedoresServicios;
+	}
+
+
+	public Set<OrdenServicioExterno> getOrdenesServicioExterno() {
+		return ordenesServicioExterno;
+	}
+
+
+	public void setOrdenesServicioExterno(
+			Set<OrdenServicioExterno> ordenesServicioExterno) {
+		this.ordenesServicioExterno = ordenesServicioExterno;
 	}
 	
 }
