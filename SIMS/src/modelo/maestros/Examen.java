@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.transacciones.ConsultaExamen;
+import modelo.transacciones.OrdenExamen;
+import modelo.transacciones.OrdenMedicina;
 
 @Entity
 @Table(name="examen", schema="dusa_sims.dbo")
@@ -54,6 +56,9 @@ public class Examen implements Serializable {
 
 	@OneToMany(mappedBy = "examen")
 	private Set<ConsultaExamen> examenes;
+	
+	@OneToMany(mappedBy = "examen")
+	private Set<OrdenExamen> ordenesExamenes;
 	
 	@OneToMany(mappedBy = "examen")
 	private Set<ProveedorExamen> proveedoresExamenes;
@@ -184,6 +189,14 @@ public class Examen implements Serializable {
 
 	public void setIdReferencia(Long idReferencia) {
 		this.idReferencia = idReferencia;
+	}
+
+	public Set<OrdenExamen> getOrdenesExamenes() {
+		return ordenesExamenes;
+	}
+
+	public void setOrdenesExamenes(Set<OrdenExamen> ordenesExamenes) {
+		this.ordenesExamenes = ordenesExamenes;
 	}
 	
 }

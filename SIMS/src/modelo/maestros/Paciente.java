@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import modelo.sha.Area;
 import modelo.sha.Informe;
 import modelo.transacciones.Historia;
+import modelo.transacciones.Orden;
 import modelo.transacciones.PacienteMedicina;
 
 import org.hibernate.annotations.Type;
@@ -204,6 +205,10 @@ public class Paciente implements Serializable {
 	// bi-directional many-to-one association to Cita
 	@OneToMany(mappedBy = "paciente")
 	private Set<Cita> citas;
+	
+	@OneToMany(mappedBy = "paciente")
+	private Set<Orden> ordenes;
+
 
 	// bi-directional many-to-one association to Usuario
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -1007,6 +1012,14 @@ public class Paciente implements Serializable {
 
 	public void setCronico(Boolean cronico) {
 		this.cronico = cronico;
+	}
+
+	public Set<Orden> getOrdenes() {
+		return ordenes;
+	}
+
+	public void setOrdenes(Set<Orden> ordenes) {
+		this.ordenes = ordenes;
 	}
 
 }

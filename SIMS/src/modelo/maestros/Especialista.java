@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaEspecialista;
+import modelo.transacciones.OrdenEspecialista;
+import modelo.transacciones.OrdenExamen;
 
 @Entity
 @Table(name = "especialista", schema="dusa_sims.dbo")
@@ -56,6 +58,9 @@ public class Especialista implements Serializable {
 
 	@OneToMany(mappedBy = "especialista")
 	private Set<ConsultaEspecialista> especialistas;
+	
+	@OneToMany(mappedBy = "especialista")
+	private Set<OrdenEspecialista> ordenesEspecialista;
 
 	@OneToMany(mappedBy = "especialista")
 	private Set<Consulta> especialistasConsulta;
@@ -175,6 +180,14 @@ public class Especialista implements Serializable {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public Set<OrdenEspecialista> getOrdenesEspecialista() {
+		return ordenesEspecialista;
+	}
+
+	public void setOrdenesEspecialista(Set<OrdenEspecialista> ordenesEspecialista) {
+		this.ordenesEspecialista = ordenesEspecialista;
 	}
 
 }

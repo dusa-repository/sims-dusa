@@ -27,13 +27,12 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
-
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
 import componentes.Validador;
-
 import controlador.transacciones.CConsulta;
+import controlador.transacciones.COrden;
 
 public class CEspecialista extends CGenerico {
 
@@ -65,6 +64,8 @@ public class CEspecialista extends CGenerico {
 	long id = 0;
 	Catalogo<Especialista> catalogo;
 	private boolean consulta = false;
+	private boolean orden = false;
+	private COrden cOrden = new COrden();
 	private CConsulta cConsulta = new CConsulta();
 	List<Especialista> especialistaConsulta = new ArrayList<Especialista>();
 	Listbox listaConsulta;
@@ -90,7 +91,10 @@ public class CEspecialista extends CGenerico {
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
 			if (map.get("id") != null) {
-				consulta = true;
+				if (map.get("id").equals("orden"))
+					orden = true;
+				else
+					consulta = true;
 				especialistaConsulta = (List<Especialista>) map.get("lista");
 				listaConsulta = (Listbox) map.get("listbox");
 				map.clear();
@@ -141,6 +145,13 @@ public class CEspecialista extends CGenerico {
 								+ especialista.getApellido());
 						especialistaConsulta.add(especialista);
 						cConsulta.recibir(especialistaConsulta, listaConsulta);
+					}
+					if (orden) {
+						especialista = servicioEspecialista.buscar(cedula);
+						especialista.setNombre(especialista.getNombre() + " "
+								+ especialista.getApellido());
+						especialistaConsulta.add(especialista);
+						cOrden.recibir(especialistaConsulta, listaConsulta);
 					}
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);

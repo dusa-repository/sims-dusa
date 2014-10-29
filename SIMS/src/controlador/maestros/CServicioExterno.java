@@ -25,8 +25,8 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-
 import controlador.transacciones.CConsulta;
+import controlador.transacciones.COrden;
 
 public class CServicioExterno extends CGenerico {
 
@@ -45,10 +45,12 @@ public class CServicioExterno extends CGenerico {
 	long id = 0;
 	Catalogo<ServicioExterno> catalogo;
 	private boolean consulta = false;
+	private boolean orden = false;
 	private boolean proveedor = false;
+	private COrden cOrden = new COrden();
 	private CConsulta cConsulta = new CConsulta();
 	private CProveedor cProveedor = new CProveedor();
-	List<ServicioExterno> servicioConsultas = new ArrayList<ServicioExterno>();
+	List<ServicioExterno> serviciosConsultas = new ArrayList<ServicioExterno>();
 	Listbox listaConsulta;
 
 	@Override
@@ -71,8 +73,11 @@ public class CServicioExterno extends CGenerico {
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
 			if (map.get("id") != null) {
-				consulta = true;
-				servicioConsultas = (List<ServicioExterno>) map.get("lista");
+				if (map.get("id").equals("orden"))
+					orden = true;
+				else
+					consulta = true;
+				serviciosConsultas = (List<ServicioExterno>) map.get("lista");
 				listaConsulta = (Listbox) map.get("listbox");
 				if (map.get("id").equals("proveedor"))
 					proveedor = true;
@@ -109,13 +114,16 @@ public class CServicioExterno extends CGenerico {
 						else {
 							servicioExterno = servicioServicioExterno
 									.buscarUltimo();
-							servicioConsultas.add(servicioExterno);
 						}
+						serviciosConsultas.add(servicioExterno);
 						if (proveedor)
-							cProveedor.recibirServicio(servicioConsultas,
+							cProveedor.recibirServicio(serviciosConsultas,
 									listaConsulta);
-						else
-							cConsulta.recibirServicio(servicioConsultas,
+						if (consulta)
+							cConsulta.recibirServicio(serviciosConsultas,
+									listaConsulta);
+						if (orden)
+							cOrden.recibirServicio(serviciosConsultas,
 									listaConsulta);
 					}
 					limpiar();

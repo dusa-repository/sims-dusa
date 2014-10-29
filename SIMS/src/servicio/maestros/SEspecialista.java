@@ -2,6 +2,7 @@ package servicio.maestros;
 
 import interfacedao.maestros.IEspecialistaDAO;
 import interfacedao.transacciones.IConsultaEspecialistaDAO;
+import interfacedao.transacciones.IOrdenEspecialistaDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,8 @@ import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaEspecialista;
+import modelo.transacciones.Orden;
+import modelo.transacciones.OrdenEspecialista;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,8 @@ public class SEspecialista {
 	private IEspecialistaDAO especialistaDAO;
 	@Autowired
 	private IConsultaEspecialistaDAO consultaEspecialistaDAO;
+	@Autowired
+	private IOrdenEspecialistaDAO ordenEspecialistaDAO;
 
 	public void guardar(Especialista especialista) {
 		especialistaDAO.save(especialista);
@@ -81,6 +86,21 @@ public class SEspecialista {
 	public List<Especialista> filtroTodo(String valor) {
 		return especialistaDAO
 				.findByEspecialidadDescripcionStartingWithOrApellidoStartingWithOrNombreStartingWithAllIgnoreCase(valor,valor,valor);
+	}
+
+	public List<Especialista> buscarDisponiblesOrden(Orden orden) {
+		List<OrdenEspecialista> consultasEspecialista = ordenEspecialistaDAO
+				.findByOrden(orden);
+		List<String> ids = new ArrayList<String>();
+		if (consultasEspecialista.isEmpty())
+			return especialistaDAO.findAll();
+		else {
+			for (int i = 0; i < consultasEspecialista.size(); i++) {
+				ids.add(consultasEspecialista.get(i).getEspecialista()
+						.getCedula());
+			}
+			return especialistaDAO.findByCedulaNotIn(ids);
+		}
 	}
 
 }

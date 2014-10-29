@@ -25,8 +25,8 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-
 import controlador.transacciones.CConsulta;
+import controlador.transacciones.COrden;
 
 public class CExamen extends CGenerico {
 
@@ -54,6 +54,8 @@ public class CExamen extends CGenerico {
 	private long id = 0;
 	Catalogo<Examen> catalogo;
 	private boolean consulta = false;
+	private boolean orden = false;
+	private COrden cOrden = new COrden();
 	private CConsulta cConsulta = new CConsulta();
 	private CProveedor cProveedor = new CProveedor();
 	private boolean proveedor = false;
@@ -75,7 +77,10 @@ public class CExamen extends CGenerico {
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
 			if (map.get("id") != null) {
-				consulta = true;
+				if (map.get("id").equals("orden"))
+					orden = true;
+				else
+					consulta = true;
 				examenConsulta = (List<Examen>) map.get("lista");
 				listaConsulta = (Listbox) map.get("listbox");
 				if (map.get("id").equals("proveedor"))
@@ -122,14 +127,16 @@ public class CExamen extends CGenerico {
 							examen = servicioExamen.buscar(id);
 						else {
 							examen = servicioExamen.buscarUltimo();
-							examenConsulta.add(examen);
 						}
+						examenConsulta.add(examen);
 						if (proveedor)
 							cProveedor.recibirExamen(examenConsulta,
 									listaConsulta);
-						else
+						if (consulta)
 							cConsulta.recibirExamen(examenConsulta,
 									listaConsulta);
+						if (orden)
+							cOrden.recibirExamen(examenConsulta, listaConsulta);
 					}
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();

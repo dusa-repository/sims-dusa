@@ -35,13 +35,12 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
-
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
-
 import controlador.transacciones.CConsulta;
+import controlador.transacciones.COrden;
 
 public class CMedicina extends CGenerico {
 
@@ -142,7 +141,8 @@ public class CMedicina extends CGenerico {
 				.getCurrent().getAttribute("itemsCatalogo");
 		if (map != null) {
 			if (map.get("id") != null) {
-				consulta = true;
+				if (map.get("id").equals("consulta"))
+					consulta = true;
 				if (map.get("id").equals("paciente"))
 					paciente = true;
 				medicinaConsulta = (List<Medicina>) map.get("lista");
@@ -245,7 +245,7 @@ public class CMedicina extends CGenerico {
 							cConsulta.recibirMedicina(medicinaConsulta,
 									listaConsulta);
 						}
-						if(paciente){
+						if (paciente) {
 							if (id == 0)
 								medicinaConsulta.add(medicina);
 							cPaciente.recibirMedicina(medicinaConsulta,

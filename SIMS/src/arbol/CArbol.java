@@ -75,8 +75,8 @@ public class CArbol extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-		 Clients.confirmClose("Mensaje de la Aplicacion:");
-//		 Close session spring security in java
+		Clients.confirmClose("Mensaje de la Aplicacion:");
+		// Close session spring security in java
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 
@@ -206,7 +206,10 @@ public class CArbol extends CGenerico {
 			if (!arbolItem.getUrl().equals("inicio")) {
 				mapGeneral.put("titulo", arbolItem.getNombre());
 				if (String.valueOf(arbolMenu.getSelectedItem().getValue())
-						.equals("Consulta"))
+						.equals("Consulta")
+						|| String.valueOf(
+								arbolMenu.getSelectedItem().getValue()).equals(
+								"Ordenes"))
 					west.setOpen(false);
 				for (int i = 0; i < tabs.size(); i++) {
 					if (tabs.get(i).getLabel().equals(arbolItem.getNombre())) {
@@ -227,7 +230,9 @@ public class CArbol extends CGenerico {
 								public void onEvent(Event arg0)
 										throws Exception {
 									if (arbolItem.getNombre()
-											.equals("Consulta"))
+											.equals("Consulta")
+											|| arbolItem.getNombre().equals(
+													"Ordenes"))
 										west.setOpen(true);
 									for (int i = 0; i < tabs.size(); i++) {
 										if (tabs.get(i).getLabel()
@@ -290,7 +295,7 @@ public class CArbol extends CGenerico {
 				String ruta = "/vistas/" + arbolItem.getUrl() + ".zul";
 				contenido2 = new Include();
 				contenido2.setSrc(null);
-				contenido2.setSrc(ruta);				
+				contenido2.setSrc(ruta);
 				Tab newTab = new Tab(arbolItem.getNombre());
 				newTab.setClosable(true);
 				newTab.addEventListener(Events.ON_CLOSE,
