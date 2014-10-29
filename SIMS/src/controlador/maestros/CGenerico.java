@@ -1,5 +1,6 @@
 package controlador.maestros;
 
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -29,6 +30,7 @@ import modelo.seguridad.Usuario;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.Component;
@@ -482,7 +484,16 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			return id;
 		}
 	}
-	
+
+public List<String> obtenerPropiedades() {
+	List<String> arreglo = new ArrayList<String>();
+	DriverManagerDataSource ds = (DriverManagerDataSource) applicationContext
+			.getBean("dataSource");
+	arreglo.add(ds.getUsername());
+	arreglo.add(ds.getPassword());
+	arreglo.add(ds.getUrl());
+	return arreglo;
+}
 
 	class SMTPAuthenticator extends javax.mail.Authenticator {
 		public PasswordAuthentication getPasswordAuthentication() {
