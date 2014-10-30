@@ -291,12 +291,13 @@
 					<tabpanel>
 						<grid width="100%">
 							<columns visible="false">
-								<column label="" width="16%" />
-								<column label="" width="16%" />
+								<column label="" width="13%" />
+								<column label="" width="14%" />
 								<column label="" width="17%" />
-								<column label="" width="17%" />
-								<column label="" width="17%" />
-								<column label="" width="17%" />
+								<column label="" width="14%" />
+								<column label="" width="14%" />
+								<column label="" width="14%" />
+								<column label="" width="14%" />
 							</columns>
 							<rows>
 								<row>
@@ -331,6 +332,10 @@
 											<comboitem label="${each}" />
 										</template>
 									</combobox>
+									<button visible="false" class="btn" autodisable="self" label="Inf. Pre-Empleo"
+										id="btnPreEmpleo" image="/public/imagenes/botones/generar.png"
+										tooltiptext="Generar el reporte de la informacion preempleo del paciente"
+										vflex="1" hflex="1" />
 								</row>
 								<row id="rowPromocion" visible="false">
 									<hbox>
@@ -359,6 +364,7 @@
 									</combobox>
 									<hbox />
 									<hbox />
+									<hbox />
 								</row>
 								<row id="rowAsociada" visible="false">
 									<hbox>
@@ -373,7 +379,9 @@
 										vflex="1" hflex="1" />
 									<label class="etiqueta" id="lblEnfermedadAsociada"
 										value="Enfermedad de Consulta Asociada:" />
-									<label id="lblEnfermedadAsociada2" value="" />
+									<cell colspan="2">
+										<label id="lblEnfermedadAsociada2" value="" />
+									</cell>
 									<label class="etiqueta" id="lblDiagnosticoAsociado"
 										value="Diagnostico de Consulta Asociada:" />
 									<label id="lblDiagnosticoAsociado2" value="" />
@@ -392,7 +400,7 @@
 												context="${each.cedula}" description="${each.especialidad.descripcion}" />
 										</template>
 									</combobox>
-									<cell colspan="4">
+									<cell colspan="5">
 										<hbox />
 									</cell>
 								</row>
@@ -582,8 +590,8 @@
 													<listcell label="${each.nombre}">
 													</listcell>
 													<listcell>
-														<textbox multiline="true" class="multilinea" maxlength="100" width="100%"
-															placeholder="Ingrese la observacion"
+														<textbox multiline="true" class="multilinea"
+															maxlength="100" width="100%" placeholder="Ingrese la observacion"
 															tooltiptext="Ingrese la observacion que resulto luego de realizar el examen de esta parte del cuerpo"></textbox>
 													</listcell>
 												</listitem>
@@ -600,7 +608,8 @@
 										<separator />
 										<button class="abrir" id="btnAbrirDiagnostico" label=""
 											tooltiptext="Crear un Nuevo Diagnostico" image="/public/imagenes/botones/agregar.png" />
-										<button class="abrir" id="btnRefrescarDiagnostico" label=""
+										<button class="abrir" id="btnRefrescarDiagnostico"
+											label=""
 											tooltiptext="Presione para actualizar la lista de los diagnosticos (actualizara tambien la lista de los diagnosticos agregados)"
 											image="/public/imagenes/botones/refresh2.png" />
 									</hbox>
@@ -1076,7 +1085,8 @@
 										<separator />
 										<button class="abrir" id="btnAbrirEspecialista" label=""
 											tooltiptext="Crear un Nuevo Especialista" image="/public/imagenes/botones/agregar.png" />
-										<button class="abrir" id="btnRefrescarEspecialista" label=""
+										<button class="abrir" id="btnRefrescarEspecialista"
+											label=""
 											tooltiptext="Presione para actualizar la lista de los especialistas (actualizara tambien la lista de los especialistas agregados)"
 											image="/public/imagenes/botones/refresh2.png" />
 									</hbox>

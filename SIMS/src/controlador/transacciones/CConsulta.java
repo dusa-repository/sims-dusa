@@ -792,6 +792,8 @@ public class CConsulta extends CGenerico {
 	@Wire
 	private Button btnGenerarReposo;
 	@Wire
+	private Button btnPreEmpleo;
+	@Wire
 	private Combobox cmbPrioridadServicio;
 	@Wire
 	private Combobox cmbPrioridadEspecialista;
@@ -1099,6 +1101,9 @@ public class CConsulta extends CGenerico {
 					botonera.getChildren().get(0).setVisible(false);
 					actualizarConsultas(paciente);
 					btnConstancia.setVisible(true);
+					if (consulta.getTipoConsultaSecundaria().equals(
+							"Pre-Empleo"))
+						btnPreEmpleo.setVisible(true);
 					if (paciente.getFechaNacimiento() != null)
 						paciente.setEdad(calcularEdad(paciente
 								.getFechaNacimiento()));
@@ -2411,7 +2416,11 @@ public class CConsulta extends CGenerico {
 				if (listItem != null) {
 					btnConstancia.setVisible(true);
 					botonera.getChildren().get(0).setVisible(false);
+					btnPreEmpleo.setVisible(false);
 					Consulta consulta = listItem.getValue();
+					if (consulta.getTipoConsultaSecundaria().equals(
+							"Pre-Empleo"))
+						btnPreEmpleo.setVisible(true);
 					idConsulta = consulta.getIdConsulta();
 					idPaciente = consulta.getPaciente().getCedula();
 					llenarCamposConsulta(consulta);
@@ -3676,6 +3685,7 @@ public class CConsulta extends CGenerico {
 		if (!botonera.getChildren().get(0).isVisible()) {
 			botonera.getChildren().get(0).setVisible(true);
 		}
+		btnPreEmpleo.setVisible(false);
 		cmbReposo.setValue("");
 		rowValido.setVisible(true);
 		btnConstancia.setVisible(false);
