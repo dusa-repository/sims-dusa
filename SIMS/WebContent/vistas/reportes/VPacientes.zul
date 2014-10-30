@@ -1,0 +1,152 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divRPacientes" apply="controlador.reporte.CPacientes">
+		<groupbox width="75%" mold="3d" title="Reporte de Pacientes">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="20%" />
+					<column label="" width="7%" />
+					<column label="" width="10%" />
+					<column label="" width="5%" />
+					<column label="" width="10%" />
+					<column label="" width="8%" />
+					<column label="" width="15%" />
+					<column label="" width="25%" />
+				</columns>
+				<rows>
+					<row id="rowTrabajador">
+						<hbox>
+							<label class="etiqueta" value="Trabajador:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<cell colspan="3">
+							<label id="lblTrabajador" />
+						</cell>
+						<cell colspan="2">
+							<button id="btnBuscarTrabajador" label="Buscar" class="btn"
+								image="/public/imagenes/botones/buscar.png" />
+						</cell>
+						<hbox>
+							<label class="etiqueta" value="Parentesco:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox tooltiptext="Seleccione un Parentesco"
+							placeholder="Seleccione un Parentesco" id="cmbParentesco" width="100%"
+							readonly="true" value="TODOS">
+							<comboitem label="TODOS" />
+							<comboitem label="Hermano(a)" />
+							<comboitem label="Conyuge" />
+							<comboitem label="Concubino(a)" />
+							<comboitem label="Hijastro(a)" />
+							<comboitem label="Hijo(a)" />
+							<comboitem label="Padre" />
+							<comboitem label="Madre" />
+							<comboitem label="Nieto(a)" />
+							<comboitem label="Yerno/Nuera" />
+							<comboitem label="Suegro(a)" />
+							<comboitem label="Abuelo(a)" />
+							<comboitem label="Otro" />
+						</combobox>
+					</row>
+					<row id="rowEdad">
+						<hbox>
+							<label class="etiqueta" value="Grupo Etario:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<label class="etiqueta" value="De:" width="100%" />
+						<spinner id="spnDe" step="1" constraint="min 0 max 100"
+							value="0" width="100%" />
+						<label class="etiqueta" value="A:" width="100%" />
+						<spinner width="100%" value="100" id="spnA" step="1"
+							constraint="min 0 max 100" />
+						<label class="etiqueta" value="Años" width="100%" />
+						<hbox>
+							<label class="etiqueta" value="Sexo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox tooltiptext="Seleccione un sexo" placeholder="Seleccione un sexo"
+							id="cmbSexo" width="100%" readonly="true" value="TODOS">
+							<comboitem label="TODOS" />
+							<comboitem label="Femenino" />
+							<comboitem label="Masculino" />
+						</combobox>
+					</row>
+					<row id="rowDiscapacitado">
+						<cell colspan="2">
+							<hbox>
+								<label class="etiqueta" value="¿Pacientes Discapacitados?:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+						</cell>
+						<cell colspan="6">
+							<hbox>
+								<radiogroup id="rdgDiscapacitado">
+									<hbox>
+										<radio label="SI" id="rdoSi" />
+										<separator />
+										<separator />
+										<radio label="NO" id="rdoNo" />
+										<separator />
+										<separator />
+										<radio label="Todos" id="rdoTodosDiscapacitado" />
+									</hbox>
+								</radiogroup>
+							</hbox>
+						</cell>
+					</row>
+					<row id="rowFamiliar">
+						<cell colspan="2">
+							<hbox>
+								<label class="etiqueta" value="Consulta de:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+						</cell>
+						<cell colspan="6">
+							<hbox>
+								<radiogroup id="rdgFamiliar">
+									<hbox>
+										<radio label="Familiares" value="familiares" id="rdoFamiliares" />
+										<separator />
+										<separator />
+										<radio label="Trabajadores" value="trabajadores" id="rdoTrabajadores" />
+										<separator />
+										<separator />
+										<radio label="Todos" value="todos" id="rdoTodos" />
+									</hbox>
+								</radiogroup>
+							</hbox>
+						</cell>
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Reporte de Tipo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<cell colspan="3">
+							<combobox id="cmbTipo" readonly="true" tabindex="1"
+								value="PDF" width="100%" tooltiptext="Seleccione un Tipo"
+								placeholder="Seleccione un Tipo">
+								<comboitem label="PDF" />
+								<comboitem label="EXCEL" />
+							</combobox>
+						</cell>
+						<hbox />
+						<hbox />
+						<hbox />
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraRPacientes" />
+			<div id="divCatalogoTrabajador" />
+		</groupbox>
+	</div>
+</zk>

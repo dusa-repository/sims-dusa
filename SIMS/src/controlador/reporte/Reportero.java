@@ -40,6 +40,7 @@ public class Reportero extends HttpServlet {
 		CReposo reposo = new CReposo();
 		CResumen resumen = new CResumen();
 		CCosto costo = new CCosto();
+		CPacientes pacientes = new CPacientes();
 		COrden orden = new COrden();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
@@ -147,6 +148,10 @@ public class Reportero extends HttpServlet {
 			case "23":
 				fichero = orden.reporteExamen(part2, part5);
 				break;
+			case "24":
+				fichero = pacientes.reporteFamiliares(par6, par7, par8, par9, par10, tipo);
+				break;
+				
 			default:
 				break;
 			}
