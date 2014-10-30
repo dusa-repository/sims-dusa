@@ -2,6 +2,7 @@ package servicio.maestros;
 
 import interfacedao.maestros.IPacienteDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.maestros.Cargo;
@@ -14,6 +15,7 @@ import modelo.sha.Area;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service("SPaciente")
@@ -195,6 +197,15 @@ public class SPaciente {
 
 	public Paciente buscarPorCedulaFamiliarActivo(String value) {
 		return pacienteDAO.findByCedulaAndEstatusTrueAndTrabajadorFalse(value);
+	}
+
+	public List<Paciente> buscarPorEdades(int dea, int aa) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorFalse(dea,aa,o);
+		
 	}
 	
 }

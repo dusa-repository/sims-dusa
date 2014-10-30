@@ -10,6 +10,7 @@ import modelo.maestros.Paciente;
 import modelo.sha.Area;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -114,4 +115,6 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
 	List<Paciente> findByTrabajadorFalseAndEstatusTrueOrderByCedulaAsc(
 			Pageable topTen);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorFalse(int dea, int aa, Sort o);
 }
