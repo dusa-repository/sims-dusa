@@ -378,12 +378,6 @@ public class CMorbilidad extends CGenerico {
 						.buscarEntreFechasyArea(desde, hasta, area2).isEmpty()))
 			msj.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
-//			if (tipoReporte.equals("EXCEL")) {
-//				Executions.sendRedirect(damePath() + "Reportero?valor=9&valor6="
-//						+ fecha1 + "&valor7=" + fecha2 + "&valor8=" + area
-//						+ "&valor9=" + cmbCargo.getValue() + "&valor10="
-//						+ tipoReporte);
-//			} else
 				Clients.evalJavaScript("window.open('"
 						+ damePath()
 						+ "Reportero?valor=9&valor6="

@@ -228,26 +228,59 @@ public class CPacientes extends CGenerico {
 
 	private void reporteFamiliar() {
 		String sexo = cmbSexo.getValue();
+		int dea = spnDe.getValue();
+		int aa = spnA.getValue();
 		String de = String.valueOf(spnDe.getValue());
 		String a = String.valueOf(spnA.getValue());
 		String parentesco = cmbParentesco.getValue();
 		String tipoReporte = cmbTipo.getValue();
 
-		Clients.evalJavaScript("window.open('"
-				+ damePath()
-				+ "Reportero?valor=24&valor6="
-				+ de
-				+ "&valor7="
-				+ a
-				+ "&valor8="
-				+ sexo
-				+ "&valor9="
-				+ parentesco
-				+ "&valor10="
-				+ idTrabajador
-				+ "&valor20="
-				+ tipoReporte
-				+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		if ((sexo.equals("TODOS") && parentesco.equals("TODOS")
+				&& idTrabajador.equals("TODOS") && getServicioPaciente()
+				.buscarPorEdadesTrabajador(dea, aa, false).isEmpty())
+				|| (!sexo.equals("TODOS") && !parentesco.equals("TODOS")
+						&& idTrabajador.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesParentescoySexo(dea, aa, parentesco,
+								sexo).isEmpty())
+				|| (!sexo.equals("TODOS") && parentesco.equals("TODOS")
+						&& idTrabajador.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesySexo(dea, aa, sexo).isEmpty())
+				|| (sexo.equals("TODOS") && !parentesco.equals("TODOS")
+						&& idTrabajador.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesyParentesco(dea, aa, parentesco)
+						.isEmpty())
+				|| (sexo.equals("TODOS") && parentesco.equals("TODOS")
+						&& !idTrabajador.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesyTrabajador(dea, aa, idTrabajador)
+						.isEmpty())
+				|| (!sexo.equals("TODOS") && parentesco.equals("TODOS")
+						&& !idTrabajador.equals("TODOS") && getServicioPaciente()
+						.buscarCono(dea, aa, idTrabajador, sexo).isEmpty())
+				|| (!sexo.equals("TODOS") && !parentesco.equals("TODOS")
+						&& !idTrabajador.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorParentescoSexo(dea, aa,
+								idTrabajador, parentesco, sexo).isEmpty())
+				|| (!parentesco.equals("TODOS")
+						&& !idTrabajador.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadoryParentesco(dea, aa,
+								idTrabajador, parentesco).isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=24&valor6="
+					+ de
+					+ "&valor7="
+					+ a
+					+ "&valor8="
+					+ sexo
+					+ "&valor9="
+					+ parentesco
+					+ "&valor10="
+					+ idTrabajador
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 
 	}
 
@@ -263,12 +296,54 @@ public class CPacientes extends CGenerico {
 
 		if (sexo.equals("TODOS") && parentesco.equals("TODOS")
 				&& idTrabajador.equals("TODOS"))
-			pacientes = getServicioPaciente().buscarPorEdades(dea, aa);
-		else
-		{
-			if (sexo.equals("TODOS") && parentesco.equals("TODOS")
+			pacientes = getServicioPaciente().buscarPorEdadesTrabajador(dea,
+					aa, false);
+		else {
+			if (!sexo.equals("TODOS") && !parentesco.equals("TODOS")
 					&& idTrabajador.equals("TODOS"))
-				pacientes = getServicioPaciente().buscarPorEdades(dea, aa);
+				pacientes = getServicioPaciente()
+						.buscarPorEdadesParentescoySexo(dea, aa, parentesco,
+								sexo);
+			else {
+				if (!sexo.equals("TODOS") && parentesco.equals("TODOS")
+						&& idTrabajador.equals("TODOS"))
+					pacientes = getServicioPaciente().buscarPorEdadesySexo(dea,
+							aa, sexo);
+				else {
+					if (sexo.equals("TODOS") && !parentesco.equals("TODOS")
+							&& idTrabajador.equals("TODOS"))
+						pacientes = getServicioPaciente()
+								.buscarPorEdadesyParentesco(dea, aa, parentesco);
+					else {
+						if (sexo.equals("TODOS") && parentesco.equals("TODOS")
+								&& !idTrabajador.equals("TODOS"))
+							pacientes = getServicioPaciente()
+									.buscarPorEdadesyTrabajador(dea, aa,
+											idTrabajador);
+						else {
+							if (!sexo.equals("TODOS")
+									&& parentesco.equals("TODOS")
+									&& !idTrabajador.equals("TODOS"))
+								pacientes = getServicioPaciente().buscarCono(
+										dea, aa, idTrabajador, sexo);
+							else {
+								if (!sexo.equals("TODOS")
+										&& !parentesco.equals("TODOS")
+										&& !idTrabajador.equals("TODOS"))
+									pacientes = getServicioPaciente()
+											.buscarPorEdadesTrabajadorParentescoSexo(
+													dea, aa, idTrabajador,
+													parentesco, sexo);
+								else
+									pacientes = getServicioPaciente()
+											.buscarPorEdadesTrabajadoryParentesco(
+													dea, aa, idTrabajador,
+													parentesco);
+							}
+						}
+					}
+				}
+			}
 		}
 
 		Map p = new HashMap();
@@ -326,8 +401,366 @@ public class CPacientes extends CGenerico {
 	}
 
 	private void reportePaciente() {
-		// TODO Auto-generated method stub
+		String sexo = cmbSexo.getValue();
+		int dea = spnDe.getValue();
+		int aa = spnA.getValue();
+		String de = String.valueOf(spnDe.getValue());
+		String a = String.valueOf(spnA.getValue());
+		String tipoReporte = cmbTipo.getValue();
+		String tipoPaciente = "";
+		String discapacitados = "";
+		if (rdoFamiliares.isChecked())
+			tipoPaciente = "Familiares";
+		else {
+			if (rdoTrabajadores.isChecked())
+				tipoPaciente = "Trabajadores";
+			else
+				tipoPaciente = "TODOS";
+		}
 
+		if (rdoSi.isChecked())
+			discapacitados = "SI";
+		else {
+			if (rdoNo.isChecked())
+				discapacitados = "NO";
+			else
+				discapacitados = "TODOS";
+		}
+
+		if ((tipoPaciente.equals("TODOS") && discapacitados.equals("TODOS")
+				&& sexo.equals("TODOS") && getServicioPaciente()
+				.buscarPorEdadesTodos(dea, aa).isEmpty())
+				|| (tipoPaciente.equals("TODOS")
+						&& discapacitados.equals("TODOS")
+						&& !sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesySexo(dea, aa, sexo).isEmpty())
+				|| (discapacitados.equals("TODOS")
+						&& tipoPaciente.equals("Familiares")
+						&& sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajador(dea, aa, false).isEmpty())
+				|| (discapacitados.equals("TODOS")
+						&& tipoPaciente.equals("Trabajadores")
+						&& sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajador(dea, aa, true).isEmpty())
+				|| (discapacitados.equals("TODOS")
+						&& tipoPaciente.equals("Familiares")
+						&& !sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorSexo(dea, aa, false, sexo)
+						.isEmpty())
+				|| (discapacitados.equals("TODOS")
+						&& tipoPaciente.equals("Trabajadores")
+						&& !sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorSexo(dea, aa, true, sexo)
+						.isEmpty())
+				|| (discapacitados.equals("SI")
+						&& tipoPaciente.equals("Familiares")
+						&& sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorDiscapacidad(dea, aa, false,
+								true).isEmpty())
+				|| (discapacitados.equals("SI")
+						&& tipoPaciente.equals("Trabajadores")
+						&& sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorDiscapacidad(dea, aa, true,
+								true).isEmpty())
+				|| (discapacitados.equals("NO")
+						&& tipoPaciente.equals("Familiares")
+						&& sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorDiscapacidad(dea, aa, false,
+								false).isEmpty())
+				|| (discapacitados.equals("NO")
+						&& tipoPaciente.equals("Trabajadores")
+						&& sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorDiscapacidad(dea, aa, true,
+								false).isEmpty())
+				|| (discapacitados.equals("SI")
+						&& tipoPaciente.equals("Familiares")
+						&& !sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorDiscapacidadSexo(dea, aa,
+								false, true, sexo).isEmpty())
+				|| (discapacitados.equals("SI")
+						&& tipoPaciente.equals("Trabajadores")
+						&& !sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorDiscapacidadSexo(dea, aa,
+								true, true, sexo).isEmpty())
+				|| (discapacitados.equals("NO")
+						&& tipoPaciente.equals("Familiares")
+						&& !sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorDiscapacidadSexo(dea, aa,
+								false, false, sexo).isEmpty())
+				|| (discapacitados.equals("NO")
+						&& tipoPaciente.equals("Trabajadores")
+						&& !sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesTrabajadorDiscapacidadSexo(dea, aa,
+								true, false, sexo).isEmpty())
+				|| (discapacitados.equals("SI") && tipoPaciente.equals("TODOS")
+						&& sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesDiscapacidad(dea, aa, true).isEmpty())
+				|| (discapacitados.equals("NO") && tipoPaciente.equals("TODOS")
+						&& sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesDiscapacidad(dea, aa, false).isEmpty())
+				|| (discapacitados.equals("SI") && tipoPaciente.equals("TODOS")
+						&& !sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesDiscapacidadSexo(dea, aa, true, sexo)
+						.isEmpty())
+				|| (discapacitados.equals("NO") && tipoPaciente.equals("TODOS")
+						&& !sexo.equals("TODOS") && getServicioPaciente()
+						.buscarPorEdadesDiscapacidadSexo(dea, aa, false, sexo)
+						.isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=26&valor6="
+					+ de
+					+ "&valor7="
+					+ a
+					+ "&valor8="
+					+ sexo
+					+ "&valor9="
+					+ tipoPaciente
+					+ "&valor10="
+					+ discapacitados
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+
+	}
+
+	public byte[] reportePaciente(String de, String a, String sexo,
+			String tipoPaciente, String discapacitados, String tipoReporte)
+			throws JRException {
+		byte[] fichero = null;
+		int dea = Integer.valueOf(de);
+		int aa = Integer.valueOf(a);
+
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+
+		if (tipoPaciente.equals("TODOS") && discapacitados.equals("TODOS")
+				&& sexo.equals("TODOS"))
+			pacientes = getServicioPaciente().buscarPorEdadesTodos(dea, aa);
+		else {
+			if (tipoPaciente.equals("TODOS") && discapacitados.equals("TODOS")
+					&& !sexo.equals("TODOS"))
+				pacientes = getServicioPaciente().buscarPorEdadesySexo(dea, aa,
+						sexo);
+			else {
+				if (discapacitados.equals("TODOS")
+						&& tipoPaciente.equals("Familiares")
+						&& sexo.equals("TODOS"))
+					pacientes = getServicioPaciente()
+							.buscarPorEdadesTrabajador(dea, aa, false);
+				else {
+					if (discapacitados.equals("TODOS")
+							&& tipoPaciente.equals("Trabajadores")
+							&& sexo.equals("TODOS"))
+						pacientes = getServicioPaciente()
+								.buscarPorEdadesTrabajador(dea, aa, true);
+					else {
+						if (discapacitados.equals("TODOS")
+								&& tipoPaciente.equals("Familiares")
+								&& !sexo.equals("TODOS"))
+							pacientes = getServicioPaciente()
+									.buscarPorEdadesTrabajadorSexo(dea, aa,
+											false, sexo);
+						else {
+							if (discapacitados.equals("TODOS")
+									&& tipoPaciente.equals("Trabajadores")
+									&& !sexo.equals("TODOS"))
+								pacientes = getServicioPaciente()
+										.buscarPorEdadesTrabajadorSexo(dea, aa,
+												true, sexo);
+							else { //
+								if (discapacitados.equals("SI")
+										&& tipoPaciente.equals("Familiares")
+										&& sexo.equals("TODOS"))
+									pacientes = getServicioPaciente()
+											.buscarPorEdadesTrabajadorDiscapacidad(
+													dea, aa, false, true);
+								else {
+									if (discapacitados.equals("SI")
+											&& tipoPaciente
+													.equals("Trabajadores")
+											&& sexo.equals("TODOS"))
+										pacientes = getServicioPaciente()
+												.buscarPorEdadesTrabajadorDiscapacidad(
+														dea, aa, true, true);
+									else {
+										if (discapacitados.equals("NO")
+												&& tipoPaciente
+														.equals("Familiares")
+												&& sexo.equals("TODOS"))
+											pacientes = getServicioPaciente()
+													.buscarPorEdadesTrabajadorDiscapacidad(
+															dea, aa, false,
+															false);
+										else {
+											if (discapacitados.equals("NO")
+													&& tipoPaciente
+															.equals("Trabajadores")
+													&& sexo.equals("TODOS"))
+												pacientes = getServicioPaciente()
+														.buscarPorEdadesTrabajadorDiscapacidad(
+																dea, aa, true,
+																false);
+											else { // //
+												if (discapacitados.equals("SI")
+														&& tipoPaciente
+																.equals("Familiares")
+														&& !sexo.equals("TODOS"))
+													pacientes = getServicioPaciente()
+															.buscarPorEdadesTrabajadorDiscapacidadSexo(
+																	dea, aa,
+																	false,
+																	true, sexo);
+												else {
+													if (discapacitados
+															.equals("SI")
+															&& tipoPaciente
+																	.equals("Trabajadores")
+															&& !sexo.equals("TODOS"))
+														pacientes = getServicioPaciente()
+																.buscarPorEdadesTrabajadorDiscapacidadSexo(
+																		dea,
+																		aa,
+																		true,
+																		true,
+																		sexo);
+													else {
+														if (discapacitados
+																.equals("NO")
+																&& tipoPaciente
+																		.equals("Familiares")
+																&& !sexo.equals("TODOS"))
+															pacientes = getServicioPaciente()
+																	.buscarPorEdadesTrabajadorDiscapacidadSexo(
+																			dea,
+																			aa,
+																			false,
+																			false,
+																			sexo);
+														else {
+															if (discapacitados
+																	.equals("NO")
+																	&& tipoPaciente
+																			.equals("Trabajadores")
+																	&& !sexo.equals("TODOS"))
+																pacientes = getServicioPaciente()
+																		.buscarPorEdadesTrabajadorDiscapacidadSexo(
+																				dea,
+																				aa,
+																				true,
+																				false,
+																				sexo);
+															else {
+																if (discapacitados
+																		.equals("SI")
+																		&& tipoPaciente
+																				.equals("TODOS")
+																		&& sexo.equals("TODOS"))
+																	pacientes = getServicioPaciente()
+																			.buscarPorEdadesDiscapacidad(
+																					dea,
+																					aa,
+																					true);
+																else {
+																	if (discapacitados
+																			.equals("NO")
+																			&& tipoPaciente
+																					.equals("TODOS")
+																			&& sexo.equals("TODOS"))
+																		pacientes = getServicioPaciente()
+																				.buscarPorEdadesDiscapacidad(
+																						dea,
+																						aa,
+																						false);
+																	else {
+																		if (discapacitados
+																				.equals("SI")
+																				&& tipoPaciente
+																						.equals("TODOS")
+																				&& !sexo.equals("TODOS"))
+																			pacientes = getServicioPaciente()
+																					.buscarPorEdadesDiscapacidadSexo(
+																							dea,
+																							aa,
+																							true,
+																							sexo);
+																		else {
+																			if (discapacitados
+																					.equals("NO")
+																					&& tipoPaciente
+																							.equals("TODOS")
+																					&& !sexo.equals("TODOS"))
+																				pacientes = getServicioPaciente()
+																						.buscarPorEdadesDiscapacidadSexo(
+																								dea,
+																								aa,
+																								false,
+																								sexo);
+																		}
+
+																	}
+																}
+
+															}
+
+														}
+
+													}
+												}
+											}
+										}
+
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		Map p = new HashMap();
+		p.put("de", de);
+		p.put("a", a);
+		p.put("tipoP", tipoPaciente);
+
+		for (int i = 0; i < pacientes.size(); i++) {
+			Paciente pa = pacientes.get(i);
+			if (pacientes.get(i).isDiscapacidad()) {
+				pa.setMano("SI");
+			} else
+				pa.setMano("NO");
+		}
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RPacientes.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(pacientes));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(pacientes));
+			return fichero;
+		}
 	}
 
 	@Listen("onClick = #btnBuscarTrabajador")

@@ -157,6 +157,10 @@ public class Reportero extends HttpServlet {
 				fichero = reposo.reporteReposoPorPaciente(par6, par7, par8,
 						tipo);
 				break;
+			case "26":
+				fichero = pacientes.reportePaciente(par6, par7, par8, par9,
+						par10, tipo);
+				break;
 			case "28":
 				fichero = gasto.reporteGastoPorFamiliar(par6, par7, par8, par9,
 						tipo);
