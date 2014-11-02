@@ -14,53 +14,52 @@ import javax.persistence.Table;
 
 import modelo.transacciones.Orden;
 
-
 /**
  * The persistent class for the motivo_cita database table.
  * 
  */
 @Entity
-@Table(name="motivo_cita", schema="dusa_sims.dbo")
+@Table(name = "motivo_cita", schema = "dusa_sims.dbo")
 public class MotivoCita implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_motivo_cita", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_motivo_cita", unique = true, nullable = false)
 	private long idMotivoCita;
 
-	@Column(length=500)
+	@Column(length = 500)
 	private String descripcion;
 
-	@Column(name="fecha_auditoria")
+	@Column(length = 5)
+	private String tipo;
+
+	@Column(name = "fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
-	@Column(name="hora_auditoria", length=10)
+	@Column(name = "hora_auditoria", length = 10)
 	private String horaAuditoria;
 
-	@Column(name="usuario_auditoria", length=50)
+	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
 
-	//bi-directional many-to-one association to Cita
-	@OneToMany(mappedBy="motivoCita")
+	// bi-directional many-to-one association to Cita
+	@OneToMany(mappedBy = "motivoCita")
 	private Set<Cita> citas;
-	
-	@OneToMany(mappedBy="motivo")
+
+	@OneToMany(mappedBy = "motivo")
 	private Set<Orden> ordenes;
 
 	public Set<Orden> getOrdenes() {
 		return ordenes;
 	}
 
-
 	public void setOrdenes(Set<Orden> ordenes) {
 		this.ordenes = ordenes;
 	}
 
-
 	public MotivoCita() {
 	}
-	
 
 	public MotivoCita(long idMotivoCita, String descripcion,
 			Timestamp fechaAuditoria, String horaAuditoria,
@@ -72,7 +71,6 @@ public class MotivoCita implements Serializable {
 		this.horaAuditoria = horaAuditoria;
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
-
 
 	public long getIdMotivoCita() {
 		return this.idMotivoCita;
@@ -134,6 +132,14 @@ public class MotivoCita implements Serializable {
 		cita.setMotivoCita(null);
 
 		return cita;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

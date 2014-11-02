@@ -14,6 +14,8 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Radio;
+import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
@@ -25,6 +27,12 @@ public class CMotivoCita extends CGenerico {
 
 	private static final long serialVersionUID = 8064356600535312313L;
 
+	@Wire
+	private Radiogroup rdgMotivo;
+	@Wire
+	private Radio rdoCita;
+	@Wire
+	private Radio rdoOrden;
 	@Wire
 	private Textbox txtDescripcionMotivoCita;
 	@Wire
@@ -61,6 +69,8 @@ public class CMotivoCita extends CGenerico {
 			@Override
 			public void limpiar() {
 				txtDescripcionMotivoCita.setText("");
+				rdoCita.setChecked(false);
+				rdoOrden.setChecked(false);
 				id = 0;
 
 			}
@@ -69,9 +79,15 @@ public class CMotivoCita extends CGenerico {
 			public void guardar() {
 				if (validar()) {
 					String Descripcion = txtDescripcionMotivoCita.getValue();
-
+					String tipo ="";
+					if(rdoCita.isChecked())
+						tipo="Cita";
+					else
+						tipo="Orden";
+				
 					MotivoCita motivoCita = new MotivoCita(id, Descripcion,
 							fechaHora, horaAuditoria, nombreUsuarioSesion());
+					motivoCita.setTipo(tipo);
 					servicioMotivoCita.guardar(motivoCita);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
@@ -84,7 +100,7 @@ public class CMotivoCita extends CGenerico {
 				if (id != 0
 						&& txtDescripcionMotivoCita.getText().compareTo("") != 0) {
 					Messagebox.show(
-							"¿Esta Seguro de Eliminar la el Motivo de Cita?",
+							"¿Esta Seguro de Eliminar la el Motivo?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -95,7 +111,10 @@ public class CMotivoCita extends CGenerico {
 												.buscar(id);
 										List<Cita> citas = servicioCita
 												.buscarPorMotivo(motivoCita);
-										if (!citas.isEmpty()) {
+//										List<Cita> citass = servicioOrden
+//												.buscarPorMotivo(motivoCita);
+	//									|| !citass.isEmpty()
+										if (!citas.isEmpty() ) {
 											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioMotivoCita
@@ -121,7 +140,7 @@ public class CMotivoCita extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		List<MotivoCita> motivoCitas = servicioMotivoCita.buscarTodos();
 		catalogo = new Catalogo<MotivoCita>(catalogoMotivoCita,
-				"Catalogo de Motivos de Cita", motivoCitas, "Descripcion") {
+				"Catalogo de Motivos", motivoCitas, "Descripcion") {
 
 			@Override
 			protected String[] crearRegistros(MotivoCita motivoCita) {
@@ -145,7 +164,7 @@ public class CMotivoCita extends CGenerico {
 	/* Validaciones de pantalla para poder realizar el guardar */
 	public boolean validar() {
 
-		if (txtDescripcionMotivoCita.getText().compareTo("") == 0) {
+		if (txtDescripcionMotivoCita.getText().compareTo("") == 0 || (!rdoCita.isChecked() && !rdoOrden.isChecked())) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
@@ -172,6 +191,10 @@ public class CMotivoCita extends CGenerico {
 	/* LLena los campos del formulario dada un motivo de cita */
 	public void llenarCampos(MotivoCita motivoCita) {
 		txtDescripcionMotivoCita.setValue(motivoCita.getDescripcion());
+		if(motivoCita.getTipo().equals("Orden"))
+			rdoOrden.setChecked(true);
+		else
+			rdoCita.setChecked(true);
 		id = motivoCita.getIdMotivoCita();
 	}
 }

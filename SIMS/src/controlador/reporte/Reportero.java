@@ -151,7 +151,9 @@ public class Reportero extends HttpServlet {
 			case "24":
 				fichero = pacientes.reporteFamiliares(par6, par7, par8, par9, par10, tipo);
 				break;
-				
+			case "25":
+				fichero = reposo.reporteReposoPorPaciente(par6, par7, par8, tipo);
+				break;
 			default:
 				break;
 			}
