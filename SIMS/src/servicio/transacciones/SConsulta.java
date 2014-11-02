@@ -276,4 +276,22 @@ public class SConsulta {
 				desde, hasta, trabajador, order);
 	}
 
+	public List<Consulta> buscarEntreFechasOrdenadasPorPacienteReposoyTrabajadores(
+			Date fecha1, Date fecha2) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO.findByFechaConsultaBetweenAndReposoAndPacienteTrabajador(fecha1, fecha2,true,true, o);
+	}
+
+	public List<Consulta> buscarEntreFechasPorPacienteReposoyTrabajadores(
+			Date fecha1, Date fecha2, String idPaciente) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO.findByFechaConsultaBetweenAndPacienteCedulaAndReposoAndPacienteTrabajador(fecha1, fecha2,idPaciente,true,true, o);
+	}
+
 }

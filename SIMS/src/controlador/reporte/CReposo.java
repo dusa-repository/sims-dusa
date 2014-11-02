@@ -133,6 +133,13 @@ public class CReposo extends CGenerico {
 			rowPaciente.setVisible(false);
 			tipo = "doctor";
 			break;
+		case "Reposos Por Paciente":
+			rowArea.setVisible(false);
+			rowDiagnostico.setVisible(false);
+			rowDoctor.setVisible(false);
+			rowPaciente.setVisible(true);
+			tipo = "paciente";
+			break;
 		}
 
 		Botonera botonera = new Botonera() {
@@ -157,7 +164,12 @@ public class CReposo extends CGenerico {
 					break;
 				case "doctor":
 					idDoctor = "";
+					lblNombreDoctor.setValue("");
 					cmbUnidad.setValue("TODAS");
+					break;
+				case "paciente":
+					idPaciente = "";
+					lblPaciente.setValue("");
 					break;
 				}
 			}
@@ -177,6 +189,10 @@ public class CReposo extends CGenerico {
 					case "doctor":
 						if (validarDoctor())
 							reporteDoctor();
+						break;
+					case "paciente":
+						if (!idPaciente.equals(""))
+							reportePaciente();
 						break;
 					}
 				}
@@ -286,8 +302,8 @@ public class CReposo extends CGenerico {
 
 	}
 
-	public byte[] reporteReposoPorArea(String part1, String part2, String area, String tipoReporte)
-			throws JRException {
+	public byte[] reporteReposoPorArea(String part1, String part2, String area,
+			String tipoReporte) throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -383,9 +399,9 @@ public class CReposo extends CGenerico {
 			return xlsReport.toByteArray();
 		} else {
 
-		fichero = JasperRunManager.runReportToPdf(reporte, p,
-				new JRBeanCollectionDataSource(consuta));
-		return fichero;
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consuta));
+			return fichero;
 		}
 	}
 
@@ -473,9 +489,16 @@ public class CReposo extends CGenerico {
 			if (cons.getTipoReposo() != null) {
 				if (cons.getTipoReposo().equals("Dias")) {
 					c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
-					consutaDiag.get(i).getConsulta().setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+					consutaDiag
+							.get(i)
+							.getConsulta()
+							.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
 				} else
-					consutaDiag.get(i).getConsulta().setUsuarioAuditoria(cons.getDiasReposo() + " Horas");
+					consutaDiag
+							.get(i)
+							.getConsulta()
+							.setUsuarioAuditoria(
+									cons.getDiasReposo() + " Horas");
 			} else {
 				c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
 				consutaDiag.get(i).getConsulta()
@@ -510,10 +533,10 @@ public class CReposo extends CGenerico {
 			}
 			return xlsReport.toByteArray();
 		} else {
-		fichero = JasperRunManager.runReportToPdf(reporte, p,
-				new JRBeanCollectionDataSource(consutaDiag));
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consutaDiag));
 
-		return fichero;
+			return fichero;
 		}
 	}
 
@@ -525,7 +548,7 @@ public class CReposo extends CGenerico {
 		String fecha2 = fecha.format(hasta);
 		String unidad = "";
 		String tipoReporte = cmbTipo.getValue();
-		
+
 		if (cmbUnidad.getValue().equals("TODAS"))
 			unidad = "";
 		else
@@ -565,8 +588,144 @@ public class CReposo extends CGenerico {
 
 	}
 
+	private void reportePaciente() {
+		Date desde = dtbDesde.getValue();
+		Date hasta = dtbHasta.getValue();
+		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha1 = fecha.format(desde);
+		String fecha2 = fecha.format(hasta);
+		String tipoReporte = cmbTipo.getValue();
+
+		if ((idPaciente.equals("TODOS") && getServicioConsulta()
+				.buscarEntreFechasOrdenadasPorPacienteReposoyTrabajadores(
+						desde, hasta).isEmpty())
+				|| !idPaciente.equals("TODOS")
+				&& getServicioConsulta()
+						.buscarEntreFechasPorPacienteReposoyTrabajadores(desde,
+								hasta, idPaciente).isEmpty())
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=25&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ idPaciente
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
+
+	}
+
+	public byte[] reporteReposoPorPaciente(String part1, String part2,
+			String idPaciente, String tipoReporte) throws JRException {
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(part1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(part2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		List<Consulta> consuta = new ArrayList<Consulta>();
+
+		if (idPaciente.equals("TODOS"))
+			consuta = getServicioConsulta()
+					.buscarEntreFechasOrdenadasPorPacienteReposoyTrabajadores(
+							fecha1, fecha2);
+		else {
+			consuta = getServicioConsulta()
+					.buscarEntreFechasPorPacienteReposoyTrabajadores(fecha1,
+							fecha2, idPaciente);
+		}
+
+		Map p = new HashMap();
+		p.put("desde", part1);
+		p.put("hasta", part2);
+
+		for (int i = 0; i < consuta.size(); i++) {
+			Consulta cons = consuta.get(i);
+			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
+					.buscarPorConsulta(cons);
+			Calendar c = Calendar.getInstance();
+			if (cons.getFechaReposo() != null)
+				c.setTime(cons.getFechaReposo());
+			else {
+				cons.setFechaReposo(cons.getFechaConsulta());
+				c.setTime(cons.getFechaConsulta());
+			}
+			if (cons.getTipoReposo() != null) {
+				if (cons.getTipoReposo().equals("Dias")) {
+					c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+				} else
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Horas");
+			} else {
+				c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+				cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+			}
+			Date fechaHasta = c.getTime();
+			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
+			// Timestamp fechaHasta = (Timestamp) c.getTime();
+			cons.setFechaAuditoria(fechaHasta2);
+			if (!dig.isEmpty()) {
+				if (dig.get(0) != null) {
+					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
+							.getNombre());
+					cons.setMotivoConsulta(dig.get(0).getTipo());
+
+				}
+			} else {
+				cons.setEnfermedadActual("");
+				cons.setMotivoConsulta("");
+			}
+		}
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RRepososPorPaciente.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consuta));
+			return fichero;
+		}
+
+	}
+
 	public byte[] reporteReposoPorDoctor(String part1, String part2,
-			String unidad, String doctor, String tipoReporte) throws JRException {
+			String unidad, String doctor, String tipoReporte)
+			throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -682,11 +841,11 @@ public class CReposo extends CGenerico {
 			return xlsReport.toByteArray();
 		} else {
 
-		fichero = JasperRunManager.runReportToPdf(reporte, p,
-				new JRBeanCollectionDataSource(consuta));
-		return fichero;
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consuta));
+			return fichero;
 		}
-		
+
 	}
 
 	/* Muestra un catalogo de Usuarios */
@@ -753,61 +912,61 @@ public class CReposo extends CGenerico {
 	}
 
 	// /* Muestra el catalogo de los Pacientes */
-	// @Listen("onClick = #btnBuscarPaciente")
-	// public void mostrarCatalogo() {
-	// final List<Paciente> pacientes = new ArrayList<Paciente>();
-	//
-	// Paciente pacienteT = new Paciente();
-	// pacienteT.setCedula("TODOS");
-	// pacienteT.setFicha("TODOS");
-	// pacienteT.setPrimerNombre("TODOS");
-	// pacienteT.setPrimerApellido("TODOS");
-	// pacientes.add(pacienteT);
-	// pacientes.addAll(servicioPaciente.buscarTodosActivos());
-	//
-	// catalogo = new Catalogo<Paciente>(divCatalogoPaciente,
-	// "Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
-	// "Nombre", "Apellido") {
-	//
-	// @Override
-	// protected List<Paciente> buscar(String valor, String combo) {
-	//
-	// switch (combo) {
-	// case "Nombre":
-	// return servicioPaciente.filtroNombre1Activos(valor);
-	// case "Cedula":
-	// return servicioPaciente.filtroCedulaActivos(valor);
-	// case "Ficha":
-	// return servicioPaciente.filtroFichaActivos(valor);
-	// case "Apellido":
-	// return servicioPaciente.filtroApellido1Activos(valor);
-	// default:
-	// return pacientes;
-	// }
-	// }
-	//
-	// @Override
-	// protected String[] crearRegistros(Paciente objeto) {
-	// String[] registros = new String[4];
-	// registros[0] = objeto.getCedula();
-	// registros[1] = objeto.getFicha();
-	// registros[2] = objeto.getPrimerNombre();
-	// registros[3] = objeto.getPrimerApellido();
-	// return registros;
-	// }
-	//
-	// };
-	// catalogo.setParent(divCatalogoPaciente);
-	// catalogo.doModal();
-	// }
-	//
-	// @Listen("onSeleccion = #divCatalogoPaciente")
-	// public void seleccionar() {
-	// Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
-	// lblPaciente.setValue(paciente.getPrimerNombre() + " "
-	// + paciente.getPrimerApellido());
-	// idPaciente = paciente.getCedula();
-	// catalogo.setParent(null);
-	// }
+	@Listen("onClick = #btnBuscarPaciente")
+	public void mostrarCatalogoPaciente() {
+		final List<Paciente> pacientes = new ArrayList<Paciente>();
+
+		Paciente pacienteT = new Paciente();
+		pacienteT.setCedula("TODOS");
+		pacienteT.setFicha("TODOS");
+		pacienteT.setPrimerNombre("TODOS");
+		pacienteT.setPrimerApellido("TODOS");
+		pacientes.add(pacienteT);
+		pacientes.addAll(servicioPaciente.buscarTodosActivos());
+
+		catalogo = new Catalogo<Paciente>(divCatalogoPaciente,
+				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Nombre", "Apellido") {
+
+			@Override
+			protected List<Paciente> buscar(String valor, String combo) {
+
+				switch (combo) {
+				case "Nombre":
+					return servicioPaciente.filtroNombre1Activos(valor);
+				case "Cedula":
+					return servicioPaciente.filtroCedulaActivos(valor);
+				case "Ficha":
+					return servicioPaciente.filtroFichaActivos(valor);
+				case "Apellido":
+					return servicioPaciente.filtroApellido1Activos(valor);
+				default:
+					return pacientes;
+				}
+			}
+
+			@Override
+			protected String[] crearRegistros(Paciente objeto) {
+				String[] registros = new String[4];
+				registros[0] = objeto.getCedula();
+				registros[1] = objeto.getFicha();
+				registros[2] = objeto.getPrimerNombre();
+				registros[3] = objeto.getPrimerApellido();
+				return registros;
+			}
+
+		};
+		catalogo.setParent(divCatalogoPaciente);
+		catalogo.doModal();
+	}
+
+	@Listen("onSeleccion = #divCatalogoPaciente")
+	public void seleccionar() {
+		Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
+		lblPaciente.setValue(paciente.getPrimerNombre() + " "
+				+ paciente.getPrimerApellido());
+		idPaciente = paciente.getCedula();
+		catalogo.setParent(null);
+	}
 
 }

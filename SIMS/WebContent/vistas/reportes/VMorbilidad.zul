@@ -52,18 +52,6 @@
 							</template>
 						</combobox>
 					</row>
-					<row id="rowPaciente">
-						<hbox>
-							<label class="etiqueta" value="Paciente:" />
-							<space />
-							<label value="*" style="font-weight:bold;color:red" />
-						</hbox>
-						<label id="lblPaciente" />
-						<button id="btnBuscarPaciente" label="Buscar" class="btn"
-							image="/public/imagenes/botones/buscar.png" />
-
-						<hbox />
-					</row>
 					<row id="rowTipoConsulta">
 						<hbox>
 							<label class="etiqueta" value="Tipo de Consulta:" />
@@ -165,6 +153,17 @@
 								</radiogroup>
 							</hbox>
 						</cell>
+					</row>
+					<row id="rowPaciente">
+						<hbox>
+							<label class="etiqueta" value="Paciente:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<label id="lblPaciente" />
+						<button id="btnBuscarPaciente" label="Buscar" class="btn"
+							image="/public/imagenes/botones/buscar.png" />
+						<hbox />
 					</row>
 					<row>
 						<hbox>
