@@ -421,6 +421,8 @@ public class COrden extends CGenerico {
 				f4211.setSdkco("DUSA");
 				f4211.setSddoc(idC.doubleValue());
 				f4211.setSddrqj(transformarGregorianoAJulia(dtbFecha.getValue()));
+				f4211.setSdzon(orden.getPaciente().getPrimerNombre() + " "
+						+ orden.getPaciente().getPrimerApellido());
 				f4211.setSditm(f4101.getImitm());
 				f4211.setSduncs(costoIndividual);
 				f4211.setSdemcu("Planta");

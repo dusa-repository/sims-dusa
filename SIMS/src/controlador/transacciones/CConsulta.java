@@ -39,6 +39,7 @@ import modelo.maestros.Vacuna;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
+import modelo.sha.Informe;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
 import modelo.transacciones.ConsultaEspecialista;
@@ -1624,8 +1625,40 @@ public class CConsulta extends CGenerico {
 					consultaDatos, diagnostico, accidente, tipo, valor, lugar,
 					motivo, fecha, clasificacion);
 			listaDiagnostico.add(consultaDiagnostico);
+			if (tipo.equals("Accidente Laboral"))
+				reportarSha(consultaDiagnostico);
 		}
 		servicioConsultaDiagnostico.guardar(listaDiagnostico);
+	}
+
+	private void reportarSha(ConsultaDiagnostico consultaDiagnostico) {
+		Informe informe = new Informe();
+		informe.setIdInforme(0);
+		informe.setPacienteA(consultaDiagnostico.getConsulta().getPaciente());
+		if (consultaDiagnostico.getConsulta().getPaciente().getEmpresa() != null)
+			informe.setEmpresaA(consultaDiagnostico.getConsulta().getPaciente()
+					.getEmpresa());
+		informe.setFa(consultaDiagnostico.getFecha());
+		Date semanaInforme = new Date();
+		if (consultaDiagnostico.getFecha() != null) {
+			semanaInforme.setTime(consultaDiagnostico.getFecha().getTime());
+			calendario2.setTime(semanaInforme);
+			informe.setFb(diaSemanaString(calendario2));
+		}
+		if (consultaDiagnostico.getAccidente() != null) {
+			informe.setClasificacion(consultaDiagnostico.getAccidente()
+					.getClasificacion());
+			informe.setFga(consultaDiagnostico.getAccidente().getNombre());
+		}
+		informe.setFf(consultaDiagnostico.getLugar());
+		String reposo = "No Amerito";
+		if (consultaDiagnostico.getConsulta().getReposo()) {
+			reposo = consultaDiagnostico.getConsulta().getDiasReposo() + " "
+					+ consultaDiagnostico.getConsulta().getTipoReposo();
+		}
+		informe.setFgj(reposo);
+		informe.setFgad(consultaDiagnostico.getMotivo());
+		servicioInforme.guardar(informe);
 	}
 
 	public void guardarMedicinas(Consulta consultaDatos) {
@@ -6281,6 +6314,8 @@ public class CConsulta extends CGenerico {
 				Integer a = i + 1;
 				clave.setSdlnid(a.doubleValue());
 				f4211.setId(clave);
+				f4211.setSdzon(consulta.getPaciente().getPrimerNombre() + " "
+						+ consulta.getPaciente().getPrimerApellido());
 				f4211.setSdmcu("Planta");
 				f4211.setSdkco("DUSA");
 				f4211.setSddoc(idC.doubleValue());

@@ -181,6 +181,7 @@
 										<comboitem label="Viudo" />
 										<comboitem label="Divorciado" />
 										<comboitem label="Otro" />
+										<comboitem label="N/A" />
 									</combobox>
 									<hbox />
 									<hbox />
@@ -202,6 +203,7 @@
 										<comboitem label="Tecnica" />
 										<comboitem label="Superior" />
 										<comboitem label="Post-Grado" />
+										<comboitem label="N/A" />
 									</combobox>
 									<hbox>
 										<label class="etiqueta" value="Fecha Ingreso:" />
@@ -242,6 +244,7 @@
 										<comboitem label="AB-" />
 										<comboitem label="O-" />
 										<comboitem label="O+" />
+										<comboitem label="N/A" />
 									</combobox>
 									<hbox>
 										<label class="etiqueta" value="¿Es Alergico?" />
@@ -275,6 +278,7 @@
 										readonly="true">
 										<comboitem label="Derecho" />
 										<comboitem label="Zurdo" />
+										<comboitem label="N/A" />
 									</combobox>
 									<hbox>
 										<label class="etiqueta" value="Estatura:" />
@@ -431,6 +435,7 @@
 										<comboitem label="Turno Fijo Noches" />
 										<comboitem label="Turno Rotativo" />
 										<comboitem label="Turno Mixto" />
+										<comboitem label="N/A" />
 									</combobox>
 									<cell colspan="2">
 										<label class="etiqueta" value="N° Registro INPSASEL:" />
