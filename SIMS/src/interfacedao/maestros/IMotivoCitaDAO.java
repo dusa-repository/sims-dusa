@@ -12,4 +12,6 @@ public interface IMotivoCitaDAO extends JpaRepository<MotivoCita, Long> {
 
 	MotivoCita findByDescripcion(String value);
 
+	List<MotivoCita> findByTipo(String value);
+
 }

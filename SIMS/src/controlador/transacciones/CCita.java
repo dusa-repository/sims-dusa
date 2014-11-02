@@ -242,8 +242,8 @@ public class CCita extends CGenerico {
 				registros[1] = objeto.getFicha();
 				registros[2] = objeto.getPrimerNombre();
 				registros[3] = objeto.getPrimerApellido();
-				if(objeto.getEspecialidad()!=null)
-				registros[4] = objeto.getEspecialidad().getDescripcion();
+				if (objeto.getEspecialidad() != null)
+					registros[4] = objeto.getEspecialidad().getDescripcion();
 				return registros;
 			}
 
@@ -385,7 +385,8 @@ public class CCita extends CGenerico {
 	/* Llena el combo de Motivos cada vez que se abre */
 	@Listen("onOpen = #cmbMotivo")
 	public void llenarComboMotivo() {
-		List<MotivoCita> motivoCitas = servicioMotivoCita.buscarTodos();
+		List<MotivoCita> motivoCitas = servicioMotivoCita
+				.buscarTodosDeTipo("Cita");
 		cmbMotivo.setModel(new ListModelList<MotivoCita>(motivoCitas));
 	}
 

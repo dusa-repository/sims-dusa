@@ -288,8 +288,6 @@ public class COrden extends CGenerico {
 		buscadorEspecialista();
 		cmbDoctor.setModel(new ListModelList<Usuario>(servicioUsuario
 				.buscarDoctores()));
-		cmbMotivo.setModel(new ListModelList<MotivoCita>(servicioMotivoCita
-				.buscarTodos()));
 		botonera = new Botonera() {
 
 			@Override
@@ -1089,7 +1087,7 @@ public class COrden extends CGenerico {
 	@Listen("onOpen = #cmbMotivo")
 	public void llenarComboMotivo() {
 		cmbMotivo.setModel(new ListModelList<MotivoCita>(servicioMotivoCita
-				.buscarTodos()));
+				.buscarTodosDeTipo("Orden")));
 	}
 
 	@Listen("onClick = #btnAbrirMotivo")

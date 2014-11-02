@@ -6,6 +6,7 @@ import java.util.List;
 
 import modelo.maestros.Cita;
 import modelo.maestros.MotivoCita;
+import modelo.transacciones.Orden;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -79,12 +80,12 @@ public class CMotivoCita extends CGenerico {
 			public void guardar() {
 				if (validar()) {
 					String Descripcion = txtDescripcionMotivoCita.getValue();
-					String tipo ="";
-					if(rdoCita.isChecked())
-						tipo="Cita";
+					String tipo = "";
+					if (rdoCita.isChecked())
+						tipo = "Cita";
 					else
-						tipo="Orden";
-				
+						tipo = "Orden";
+
 					MotivoCita motivoCita = new MotivoCita(id, Descripcion,
 							fechaHora, horaAuditoria, nombreUsuarioSesion());
 					motivoCita.setTipo(tipo);
@@ -99,8 +100,7 @@ public class CMotivoCita extends CGenerico {
 			public void eliminar() {
 				if (id != 0
 						&& txtDescripcionMotivoCita.getText().compareTo("") != 0) {
-					Messagebox.show(
-							"¿Esta Seguro de Eliminar la el Motivo?",
+					Messagebox.show("¿Esta Seguro de Eliminar la el Motivo?",
 							"Alerta", Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -111,10 +111,10 @@ public class CMotivoCita extends CGenerico {
 												.buscar(id);
 										List<Cita> citas = servicioCita
 												.buscarPorMotivo(motivoCita);
-//										List<Cita> citass = servicioOrden
-//												.buscarPorMotivo(motivoCita);
-	//									|| !citass.isEmpty()
-										if (!citas.isEmpty() ) {
+										List<Orden> citass = servicioOrden
+												.buscarPorMotivo(motivoCita);
+										if (!citas.isEmpty()
+												|| !citass.isEmpty()) {
 											msj.mensajeError(Mensaje.noEliminar);
 										} else {
 											servicioMotivoCita
@@ -164,7 +164,8 @@ public class CMotivoCita extends CGenerico {
 	/* Validaciones de pantalla para poder realizar el guardar */
 	public boolean validar() {
 
-		if (txtDescripcionMotivoCita.getText().compareTo("") == 0 || (!rdoCita.isChecked() && !rdoOrden.isChecked())) {
+		if (txtDescripcionMotivoCita.getText().compareTo("") == 0
+				|| (!rdoCita.isChecked() && !rdoOrden.isChecked())) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
@@ -191,7 +192,7 @@ public class CMotivoCita extends CGenerico {
 	/* LLena los campos del formulario dada un motivo de cita */
 	public void llenarCampos(MotivoCita motivoCita) {
 		txtDescripcionMotivoCita.setValue(motivoCita.getDescripcion());
-		if(motivoCita.getTipo().equals("Orden"))
+		if (motivoCita.getTipo().equals("Orden"))
 			rdoOrden.setChecked(true);
 		else
 			rdoCita.setChecked(true);

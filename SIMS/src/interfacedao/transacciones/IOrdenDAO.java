@@ -2,6 +2,7 @@ package interfacedao.transacciones;
 
 import java.util.List;
 
+import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
 import modelo.transacciones.Orden;
 
@@ -14,5 +15,7 @@ public interface IOrdenDAO extends JpaRepository<Orden, Long>  {
 
 	@Query("select coalesce(max(consulta.idOrden), '0') from Orden consulta")
 	long findMaxIdOrden();
+
+	List<Orden> findByMotivo(MotivoCita motivoCita);
 
 }
