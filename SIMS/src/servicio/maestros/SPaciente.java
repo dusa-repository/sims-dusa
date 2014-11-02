@@ -50,12 +50,12 @@ public class SPaciente {
 	}
 
 	public void guardar(Paciente paciente) {
-		pacienteDAO.save(paciente);		
+		pacienteDAO.save(paciente);
 	}
 
 	public void eliminar(Paciente paciente) {
 		pacienteDAO.delete(paciente);
-		
+
 	}
 
 	public List<Paciente> buscarPorEmpresa(Empresa empresa) {
@@ -84,7 +84,7 @@ public class SPaciente {
 	}
 
 	public List<Paciente> buscarPorFicha(String value) {
-		
+
 		return pacienteDAO.findByFicha(value);
 	}
 
@@ -102,7 +102,8 @@ public class SPaciente {
 	}
 
 	public List<Paciente> filtroParentesco(String valor) {
-		return pacienteDAO.findByParentescoFamiliarStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByParentescoFamiliarStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> buscarTodosTrabajadores() {
@@ -111,75 +112,97 @@ public class SPaciente {
 	}
 
 	public List<Paciente> filtroNombre1C(String valor, String value) {
-		return pacienteDAO.findByCedulaFamiliarAndPrimerNombreStartingWithAllIgnoreCase(value,valor);
+		return pacienteDAO
+				.findByCedulaFamiliarAndPrimerNombreStartingWithAllIgnoreCase(
+						value, valor);
 	}
 
 	public List<Paciente> filtroCedulaC(String valor, String value) {
-		return pacienteDAO.findByCedulaFamiliarAndCedulaStartingWithAllIgnoreCase(value,valor);
+		return pacienteDAO
+				.findByCedulaFamiliarAndCedulaStartingWithAllIgnoreCase(value,
+						valor);
 	}
 
 	public List<Paciente> filtroApellido1C(String valor, String value) {
-		return pacienteDAO.findByCedulaFamiliarAndPrimerApellidoStartingWithAllIgnoreCase(value,valor);
+		return pacienteDAO
+				.findByCedulaFamiliarAndPrimerApellidoStartingWithAllIgnoreCase(
+						value, valor);
 	}
 
 	public List<Paciente> filtroCedulaT(String valor) {
-		return pacienteDAO.findByTrabajadorTrueAndCedulaStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorTrueAndCedulaStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroNombre1T(String valor) {
-		return pacienteDAO.findByTrabajadorTrueAndPrimerNombreStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorTrueAndPrimerNombreStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroApellido1T(String valor) {
-		return pacienteDAO.findByTrabajadorTrueAndPrimerApellidoStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorTrueAndPrimerApellidoStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroParentescoC(String valor, String valor2) {
-		return pacienteDAO.findByCedulaFamiliarAndParentescoFamiliarStartingWithAllIgnoreCase(valor2,valor);
+		return pacienteDAO
+				.findByCedulaFamiliarAndParentescoFamiliarStartingWithAllIgnoreCase(
+						valor2, valor);
 	}
 
 	public List<Paciente> filtroNombrePariente(String valor) {
-		return pacienteDAO.findByTrabajadorFalseAndPrimerNombreStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorFalseAndPrimerNombreStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroCedulaPariente(String valor) {
-		return pacienteDAO.findByTrabajadorFalseAndCedulaStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorFalseAndCedulaStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroApellidoPariente(String valor) {
-		return pacienteDAO.findByTrabajadorFalseAndPrimerApellidoStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorFalseAndPrimerApellidoStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroNombre1Activos(String valor) {
-		return pacienteDAO.findByPrimerNombreStartingWithAndEstatusTrueAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByPrimerNombreStartingWithAndEstatusTrueAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroCedulaActivos(String valor) {
-		return pacienteDAO.findByCedulaStartingWithAndEstatusTrueAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByCedulaStartingWithAndEstatusTrueAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroApellido1Activos(String valor) {
-		return pacienteDAO.findByPrimerApellidoStartingWithAndEstatusTrueAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByPrimerApellidoStartingWithAndEstatusTrueAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroNombreParienteActivos(String valor) {
-		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueAndPrimerNombreStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorFalseAndEstatusTrueAndPrimerNombreStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroCedulaParienteActivos(String valor) {
-		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueAndCedulaStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorFalseAndEstatusTrueAndCedulaStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroApellidoParienteActivos(String valor) {
-		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueAndPrimerApellidoStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorFalseAndEstatusTrueAndPrimerApellidoStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroFichaActivos(String valor) {
-		return pacienteDAO.findByFichaStartingWithAndEstatusTrueAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByFichaStartingWithAndEstatusTrueAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroFichaParienteActivos(String valor) {
-		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueAndFichaStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorFalseAndEstatusTrueAndFichaStartingWithAllIgnoreCase(valor);
 	}
 
 	public Paciente buscarPorCedulaActivo(String value) {
@@ -187,25 +210,154 @@ public class SPaciente {
 	}
 
 	public List<Paciente> filtroFichaT(String valor) {
-		return pacienteDAO.findByTrabajadorTrueAndFichaStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findByTrabajadorTrueAndFichaStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> buscarFamiliaresActivos() {
 		Pageable topTen = new PageRequest(0, 10);
-		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueOrderByCedulaAsc(topTen);
+		return pacienteDAO
+				.findByTrabajadorFalseAndEstatusTrueOrderByCedulaAsc(topTen);
 	}
 
 	public Paciente buscarPorCedulaFamiliarActivo(String value) {
 		return pacienteDAO.findByCedulaAndEstatusTrueAndTrabajadorFalse(value);
 	}
 
-	public List<Paciente> buscarPorEdades(int dea, int aa) {
+	public List<Paciente> buscarPorEdadesTrabajador(int dea, int aa, boolean b) {
 		List<String> ordenar = new ArrayList<String>();
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorFalse(dea,aa,o);
-		
+		return pacienteDAO.findByEdadBetweenAndTrabajador(dea, aa,b, o);
+
 	}
-	
+
+	public List<Paciente> buscarPorEdadesParentescoySexo(int dea, int aa,
+			String parentesco, String sexo) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO
+				.findByEdadBetweenAndTrabajadorFalseAndSexoAndParentescoFamiliar(
+						dea, aa, sexo, parentesco, o);
+	}
+
+	public List<Paciente> buscarPorEdadesySexo(int dea, int aa, String sexo) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorFalseAndSexo(dea, aa,
+				sexo, o);
+	}
+
+	public List<Paciente> buscarPorEdadesyParentesco(int dea, int aa,
+			String parentesco) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO
+				.findByEdadBetweenAndTrabajadorFalseAndParentescoFamiliar(dea,
+						aa, parentesco, o);
+	}
+
+	public List<Paciente> buscarPorEdadesyTrabajador(int dea, int aa,
+			String idTrabajador) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO
+				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliar(dea, aa,
+						idTrabajador, o);
+	}
+
+	public List<Paciente> buscarCono(int dea, int aa,
+			String sexo, String idTrabajador) {
+//		List<String> ordenar = new ArrayList<String>();
+//		ordenar.add("cedulaFamiliar");
+//		ordenar.add("cedula");
+//		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO
+				.findByEdadBetweenAndTrabajadorAndCedulaFamiliarAndSexo(
+						dea, aa, false, idTrabajador, sexo);
+	}
+
+	public List<Paciente> buscarPorEdadesTrabajadoryParentesco(int dea, int aa,
+			String idTrabajador, String parentesco) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO
+				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliar(
+						dea, aa, idTrabajador, parentesco, o);
+	}
+
+	public List<Paciente> buscarPorEdadesTrabajadorParentescoSexo(int dea,
+			int aa, String idTrabajador, String parentesco, String sexo) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO
+				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliarAndSexo(
+						dea, aa, idTrabajador, parentesco,sexo, o);
+	}
+
+	public List<Paciente> buscarPorEdadesTodos(int dea, int aa) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByEdadBetween(dea, aa, o);
+	}
+
+	public List<Paciente> buscarPorEdadesTrabajadorSexo(int dea, int aa,
+			boolean b, String sexo) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorAndSexo(dea, aa,b,sexo, o);
+	}
+
+	public List<Paciente> buscarPorEdadesTrabajadorDiscapacidad(int dea,
+			int aa, boolean b, boolean c) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorAndDiscapacidad(dea, aa,b,c, o);
+	}
+
+	public List<Paciente> buscarPorEdadesTrabajadorDiscapacidadSexo(int dea,
+			int aa, boolean b, boolean c, String sexo) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorAndDiscapacidadAndSexo(dea, aa,b,c,sexo, o);
+	}
+
+	public List<Paciente> buscarPorEdadesDiscapacidad(int dea, int aa, boolean b) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByEdadBetweenAndDiscapacidad(dea, aa,b, o);
+	}
+
+	public List<Paciente> buscarPorEdadesDiscapacidadSexo(int dea, int aa,
+			boolean b, String sexo) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByEdadBetweenAndDiscapacidadAndSexo(dea, aa,b,sexo, o);
+	}
+
 }

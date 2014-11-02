@@ -117,4 +117,47 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 			Pageable topTen);
 
 	List<Paciente> findByEdadBetweenAndTrabajadorFalse(int dea, int aa, Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndSexoAndParentescoFamiliar(
+			int dea, int aa, String sexo, String parentesco, Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndSexo(int dea, int aa,
+			String sexo, Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndParentescoFamiliar(
+			int dea, int aa, String parentesco, Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliar(
+			int dea, int aa, String idTrabajador, Sort o);
+	
+@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
+	List<Paciente> findByEdadBetweenAndTrabajadorAndCedulaFamiliarAndSexo(
+			int dea, int aa, boolean a, String idTrabajador, String sexo);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliar(
+			int dea, int aa, String idTrabajador, String parentesco, Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliarAndSexo(
+			int dea, int aa, String idTrabajador, String parentesco,
+			String sexo, Sort o);
+
+	List<Paciente> findByEdadBetween(int dea, int aa, Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajador(int dea, int aa, boolean b,
+			Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorAndSexo(int dea, int aa,
+			boolean b, String sexo, Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorAndDiscapacidad(int dea,
+			int aa, boolean b, boolean c, Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorAndDiscapacidadAndSexo(
+			int dea, int aa, boolean b, boolean c, String sexo, Sort o);
+
+	List<Paciente> findByEdadBetweenAndDiscapacidad(int dea, int aa, boolean b,
+			Sort o);
+
+	List<Paciente> findByEdadBetweenAndDiscapacidadAndSexo(int dea, int aa,
+			boolean b, String sexo, Sort o);
 }
