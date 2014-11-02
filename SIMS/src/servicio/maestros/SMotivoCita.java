@@ -2,6 +2,7 @@ package servicio.maestros;
 
 import interfacedao.maestros.IMotivoCitaDAO;
 
+import java.util.Collection;
 import java.util.List;
 
 import modelo.maestros.MotivoCita;
@@ -39,6 +40,10 @@ public class SMotivoCita {
 	public void guardar(MotivoCita motivoCita) {
 		motivoCitaDAO.save(motivoCita);
 		
+	}
+
+	public List<MotivoCita> buscarTodosDeTipo(String value) {
+		return motivoCitaDAO.findByTipo(value);
 	}
 
 

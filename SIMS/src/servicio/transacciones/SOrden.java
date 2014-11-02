@@ -3,6 +3,8 @@ package servicio.transacciones;
 import java.util.List;
 
 import interfacedao.transacciones.IOrdenDAO;
+import modelo.maestros.Cita;
+import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
 import modelo.transacciones.Orden;
 
@@ -32,5 +34,9 @@ public class SOrden {
 		if (id != 0)
 			return ordenDAO.findOne(id);
 		return null;
+	}
+
+	public List<Orden> buscarPorMotivo(MotivoCita motivoCita) {
+		return ordenDAO.findByMotivo(motivoCita);
 	}
 }
