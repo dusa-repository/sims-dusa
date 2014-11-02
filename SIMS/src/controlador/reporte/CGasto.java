@@ -1,16 +1,29 @@
 package controlador.reporte;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.maestros.Paciente;
 import modelo.sha.Area;
+import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -71,8 +84,8 @@ public class CGasto extends CGenerico {
 			tipo = 1;
 			break;
 		case "Gastos por Trabajador":
-			boxParentesco.setVisible(true);
-			cmbParentescoFamiliar.setVisible(true);
+			boxParentesco.setVisible(false);
+			cmbParentescoFamiliar.setVisible(false);
 			tipo = 2;
 			break;
 		}
@@ -102,22 +115,32 @@ public class CGasto extends CGenerico {
 					String paciente = lblPaciente.getValue();
 					String parentesco = cmbParentescoFamiliar.getValue();
 					String tipoReporte = cmbTipo.getValue();
-					List<ConsultaDiagnostico> consultas = new ArrayList<ConsultaDiagnostico>();
+					List<Consulta> consultas = new ArrayList<Consulta>();
 					switch (tipo) {
 					// Reporte 1
+
+					// No se toma en cuenta si tiene un familiar trabajando en
+					// la empresa
 					case 1:
 						if (parentesco.equals("TODOS")) {
 							if (paciente.equals("TODOS"))
-								System.out.println("TODOS TODOS");
+								consultas = servicioConsulta
+										.buscarEntreFechasFamiliaresTodosTrabajadores(
+												desde, hasta);
 							else
-								System.out.println("TODOS y un paciente");
+								consultas = servicioConsulta
+										.buscarEntreFechasFamiliaresYUnTrabajador(
+												desde, hasta, paciente);
 						} else {
 							if (paciente.equals("TODOS"))
-								System.out
-										.println("un parentesco y todos los paciente");
+								consultas = servicioConsulta
+										.buscarEntreFechasFamiliaresTodosTrabajadoresUnParentesco(
+												desde, hasta, parentesco);
 							else
-								System.out
-										.println("un parentesco y un paciente");
+								consultas = servicioConsulta
+										.buscarEntreFechasFamiliaresUnTrabajadorYunParentesco(
+												desde, hasta, paciente,
+												parentesco);
 						}
 						if (!consultas.isEmpty())
 							Clients.evalJavaScript("window.open('"
@@ -138,10 +161,13 @@ public class CGasto extends CGenerico {
 						break;
 					// Reporte 2
 					case 2:
-						if (paciente.equals("todos"))
-							System.out.println("todos");
+						if (paciente.equals("TODOS"))
+							consultas = servicioConsulta
+									.buscarEntreFechasTrabajadores(desde, hasta);
 						else
-							System.out.println("no todos");
+							consultas = servicioConsulta
+									.buscarEntreFechasUnTrabajador(desde,
+											hasta, paciente);
 						if (!consultas.isEmpty())
 							Clients.evalJavaScript("window.open('"
 									+ damePath()
@@ -241,6 +267,236 @@ public class CGasto extends CGenerico {
 		Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
 		lblPaciente.setValue(paciente.getCedula());
 		catalogo.setParent(null);
+	}
+
+	public byte[] reporteGastoPorFamiliar(String par6, String par7,
+			String par8, String par9, String tipo2) {
+		msj = new Mensaje();
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(par6);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(par7);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		List<Consulta> consultas = new ArrayList<Consulta>();
+		if (par8.equals("TODOS")) {
+			if (par9.equals("TODOS"))
+				consultas = getServicioConsulta()
+						.buscarEntreFechasFamiliaresTodosTrabajadores(fecha1,
+								fecha2);
+			else
+				consultas = getServicioConsulta()
+						.buscarEntreFechasFamiliaresYUnTrabajador(fecha1,
+								fecha2, par9);
+		} else {
+			if (par9.equals("TODOS"))
+				consultas = getServicioConsulta()
+						.buscarEntreFechasFamiliaresTodosTrabajadoresUnParentesco(
+								fecha1, fecha2, par8);
+			else
+				consultas = getServicioConsulta()
+						.buscarEntreFechasFamiliaresUnTrabajadorYunParentesco(
+								fecha1, fecha2, par9, par8);
+		}
+		List<Consulta> consultasFinales = new ArrayList<Consulta>();
+		for (int i = 0; i < consultas.size(); i++) {
+			Paciente trabajador = getServicioPaciente().buscarPorCedula(
+					consultas.get(i).getPaciente().getCedulaFamiliar());
+			if (trabajador != null) {
+				consultas
+						.get(i)
+						.getPaciente()
+						.setCedulaFamiliar(
+								trabajador.getCedula() + " "
+										+ trabajador.getPrimerNombre() + " "
+										+ trabajador.getPrimerApellido());
+				double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
+				// Suma lo que ha entregado
+				costoMedicinas = getServicioF4111().sumarPorOrden(
+						consultas.get(i).getIdConsulta());
+				costoExamenes = getServicioConsultaExamen().sumPorConsulta(
+						consultas.get(i));
+				costoEspecialistas = getServicioConsultaEspecialista()
+						.sumPorConsulta(consultas.get(i));
+				costoEstudios = getServicioConsultaServicioExterno()
+						.sumPorConsulta(consultas.get(i));
+				costoConsultas = (costoMedicinas * -1) + costoExamenes
+						+ costoEspecialistas + costoEstudios;
+				consultas.get(i).setEstatura(costoMedicinas * -1);
+				consultas.get(i).setPeso(costoExamenes);
+				consultas.get(i).setPerimetroForzada(costoEspecialistas);
+				consultas.get(i).setPerimetroOmbligo(costoEstudios);
+				consultas.get(i).setPerimetroPlena(costoConsultas);
+				consultas
+						.get(i)
+						.getPaciente()
+						.setEdad(
+								calcularEdad(consultas.get(i).getPaciente()
+										.getFechaNacimiento()));
+				consultasFinales.add(consultas.get(i));
+				consultas.get(i).getPaciente()
+						.setCedulaFamiliar(trabajador.getCedula());
+			} else {
+				consultas.remove(i);
+				i--;
+			}
+		}
+		Map p = new HashMap();
+		p.put("desde", par6);
+		p.put("hasta", par7);
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RGastosFamiliar.jasper"));
+		} catch (JRException e) {
+			msj = new Mensaje();
+			msj.mensajeError("Recurso no Encontrado");
+		}
+		if (tipo2.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consultasFinales));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(consultasFinales));
+			} catch (JRException e) {
+				msj.mensajeError("Error en Reporte");
+			}
+			return fichero;
+		}
+	}
+
+	public byte[] reporteGastoPorTrabajador(String par6, String par7,
+			String par9, String tipo2) {
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(par6);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(par7);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		List<Consulta> consultas = new ArrayList<Consulta>();
+		if (par9.equals("TODOS"))
+			consultas = getServicioConsulta().buscarEntreFechasTrabajadores(
+					fecha1, fecha2);
+		else
+			consultas = getServicioConsulta().buscarEntreFechasUnTrabajador(
+					fecha1, fecha2, par9);
+		List<Consulta> consultasFinales = new ArrayList<Consulta>();
+		for (int i = 0; i < consultas.size(); i++) {
+			Consulta consulta = consultas.get(i);
+			Paciente trabajador = consulta.getPaciente();
+			consultas
+					.get(i)
+					.getPaciente()
+					.setCedulaFamiliar(
+							trabajador.getCedula() + " "
+									+ trabajador.getPrimerNombre() + " "
+									+ trabajador.getPrimerApellido());
+			double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
+			// Suma lo que ha entregado
+			costoMedicinas = getServicioF4111().sumarPorOrden(
+					consulta.getIdConsulta());
+			costoExamenes = getServicioConsultaExamen()
+					.sumPorConsulta(consulta);
+			costoEspecialistas = getServicioConsultaEspecialista()
+					.sumPorConsulta(consulta);
+			costoEstudios = getServicioConsultaServicioExterno()
+					.sumPorConsulta(consulta);
+			costoConsultas = (costoMedicinas * -1) + costoExamenes
+					+ costoEspecialistas + costoEstudios;
+			consultas.get(i).setEstatura(costoMedicinas * -1);
+			consultas.get(i).setPeso(costoExamenes);
+			consultas.get(i).setPerimetroForzada(costoEspecialistas);
+			consultas.get(i).setPerimetroOmbligo(costoEstudios);
+			consultas.get(i).setPerimetroPlena(costoConsultas);
+			consultas
+					.get(i)
+					.getPaciente()
+					.setEdad(
+							calcularEdad(consultas.get(i).getPaciente()
+									.getFechaNacimiento()));
+			consultasFinales.add(consultas.get(i));
+		}
+		Map p = new HashMap();
+		p.put("desde", par6);
+		p.put("hasta", par7);
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RGastosTrabajador.jasper"));
+		} catch (JRException e) {
+			msj.mensajeError("Recurso no Encontrado");
+		}
+		if (tipo2.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consultasFinales));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(consultasFinales));
+			} catch (JRException e) {
+				msj.mensajeError("Error en Reporte");
+			}
+			return fichero;
+		}
 	}
 
 }

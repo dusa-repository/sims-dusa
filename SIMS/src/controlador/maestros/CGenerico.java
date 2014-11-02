@@ -325,6 +325,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public static SConsultaDiagnostico getServicioConsultaDiagnostico() {
 		return applicationContext.getBean(SConsultaDiagnostico.class);
 	}
+
 	public static SPaciente getServicioPaciente() {
 		return applicationContext.getBean(SPaciente.class);
 	}
@@ -519,6 +520,38 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			notifyAll();
 			return id;
 		}
+	}
+
+	public String diaSemanaString(Calendar calendar) {
+		int dia = calendar.get(Calendar.DAY_OF_WEEK);
+		String diaSemana = "";
+		System.out.println("int"+dia);
+		switch (dia) {
+		case 2:
+			diaSemana = "Lunes";
+			break;
+		case 3:
+			diaSemana = "Martes";
+			break;
+
+		case 4:
+			diaSemana = "Miercoles";
+			break;
+		case 5:
+			diaSemana = "Jueves";
+			break;
+		case 6:
+			diaSemana = "Viernes";
+			break;
+		case 7:
+			diaSemana = "Sabado";
+			break;
+		case 1:
+			diaSemana = "Domingo";
+			break;
+		}
+		System.out.println("Dia semana" + diaSemana);
+		return diaSemana;
 	}
 
 	public List<String> obtenerPropiedades() {

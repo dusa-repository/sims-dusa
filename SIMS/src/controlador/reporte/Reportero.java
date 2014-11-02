@@ -42,6 +42,7 @@ public class Reportero extends HttpServlet {
 		CCosto costo = new CCosto();
 		CPacientes pacientes = new CPacientes();
 		COrden orden = new COrden();
+		CGasto gasto = new CGasto();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
@@ -149,10 +150,20 @@ public class Reportero extends HttpServlet {
 				fichero = orden.reporteExamen(part2, part5);
 				break;
 			case "24":
-				fichero = pacientes.reporteFamiliares(par6, par7, par8, par9, par10, tipo);
+				fichero = pacientes.reporteFamiliares(par6, par7, par8, par9,
+						par10, tipo);
 				break;
 			case "25":
-				fichero = reposo.reporteReposoPorPaciente(par6, par7, par8, tipo);
+				fichero = reposo.reporteReposoPorPaciente(par6, par7, par8,
+						tipo);
+				break;
+			case "28":
+				fichero = gasto.reporteGastoPorFamiliar(par6, par7, par8, par9,
+						tipo);
+				break;
+			case "29":
+				fichero = gasto.reporteGastoPorTrabajador(par6, par7, par9,
+						tipo);
 				break;
 			default:
 				break;

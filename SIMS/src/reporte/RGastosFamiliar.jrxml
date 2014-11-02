@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RGastosFamiliar" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="NoDataSection" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="4308e129-546e-4f2f-8a29-77fae40c97b4">
+	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="desde" class="java.lang.String"/>
+	<parameter name="hasta" class="java.lang.String"/>
+	<field name="paciente.cedulaFamiliar" class="java.lang.String"/>
+	<field name="paciente.cedula" class="java.lang.String"/>
+	<field name="fechaConsulta" class="java.sql.Timestamp"/>
+	<field name="tipoConsultaSecundaria" class="java.lang.String"/>
+	<field name="paciente.primerNombre" class="java.lang.String"/>
+	<field name="paciente.primerApellido" class="java.lang.String"/>
+	<field name="paciente.sexo" class="java.lang.String"/>
+	<field name="paciente.parentescoFamiliar" class="java.lang.String"/>
+	<field name="estatura" class="java.lang.Double"/>
+	<field name="peso" class="java.lang.Double"/>
+	<field name="perimetroForzada" class="java.lang.Double"/>
+	<field name="perimetroOmbligo" class="java.lang.Double"/>
+	<field name="perimetroPlena" class="java.lang.Double"/>
+	<field name="paciente.edad" class="java.lang.Integer"/>
+	<variable name="medicina_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
+		<variableExpression><![CDATA[$F{estatura}]]></variableExpression>
+	</variable>
+	<variable name="medicina_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
+		<variableExpression><![CDATA[$F{estatura}]]></variableExpression>
+	</variable>
+	<variable name="medicina_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{estatura}]]></variableExpression>
+	</variable>
+	<variable name="examen_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
+		<variableExpression><![CDATA[$F{peso}]]></variableExpression>
+	</variable>
+	<variable name="examen_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
+		<variableExpression><![CDATA[$F{peso}]]></variableExpression>
+	</variable>
+	<variable name="examen_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{peso}]]></variableExpression>
+	</variable>
+	<variable name="esp_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
+		<variableExpression><![CDATA[$F{perimetroForzada}]]></variableExpression>
+	</variable>
+	<variable name="esp_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
+		<variableExpression><![CDATA[$F{perimetroForzada}]]></variableExpression>
+	</variable>
+	<variable name="esp_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{perimetroForzada}]]></variableExpression>
+	</variable>
+	<variable name="est_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
+		<variableExpression><![CDATA[$F{perimetroOmbligo}]]></variableExpression>
+	</variable>
+	<variable name="est_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
+		<variableExpression><![CDATA[$F{perimetroOmbligo}]]></variableExpression>
+	</variable>
+	<variable name="est_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{perimetroOmbligo}]]></variableExpression>
+	</variable>
+	<variable name="total_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
+		<variableExpression><![CDATA[$F{perimetroPlena}]]></variableExpression>
+	</variable>
+	<variable name="total_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
+		<variableExpression><![CDATA[$F{perimetroPlena}]]></variableExpression>
+	</variable>
+	<variable name="total_total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{perimetroPlena}]]></variableExpression>
+	</variable>
+	<group name="trabajador">
+		<groupExpression><![CDATA[$F{paciente.cedulaFamiliar}]]></groupExpression>
+		<groupHeader>
+			<band height="29">
+				<rectangle>
+					<reportElement x="0" y="5" width="572" height="20" backcolor="#DBD7D7" uuid="e7a16e69-23d5-4ee5-bc05-557229fd2c75"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="28" y="5" width="402" height="20" uuid="4b3d5864-13e9-4b0d-91ff-79f22e56054d"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{paciente.cedulaFamiliar}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="6" y="5" width="22" height="20" uuid="c71f92b4-a29e-44ff-98aa-325a2fb97247"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[>>]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="27">
+				<staticText>
+					<reportElement x="85" y="4" width="100" height="20" uuid="7637739c-3b99-4401-a5f5-6a1f7301442b"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Trabajador:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="185" y="4" width="68" height="20" uuid="6072eb78-2ca7-4d6d-a989-062261dfa066"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{medicina_trabajador}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="253" y="4" width="73" height="20" uuid="3bb89e2d-312a-4eec-9f9e-87b4e79eaebe"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{examen_trabajador}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="326" y="4" width="85" height="20" uuid="8900d5d3-61cb-4646-be51-d295f31ba58f"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{esp_trabajador}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="411" y="4" width="74" height="20" uuid="90f7f9bb-63cd-4286-aed9-661851ff8f9f"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{est_trabajador}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="485" y="4" width="88" height="20" uuid="1853b0a5-7887-431b-b251-011619d55b9a"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{total_trabajador}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="familiar">
+		<groupExpression><![CDATA[$F{paciente.cedula}]]></groupExpression>
+		<groupHeader>
+			<band height="29">
+				<rectangle>
+					<reportElement x="0" y="4" width="572" height="20" backcolor="#F1EDED" uuid="25cf1749-2b00-48da-9cf5-2fb9d042a815"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement x="28" y="4" width="82" height="20" uuid="6c0e285e-60cc-4fc5-97f5-05568c5faec0"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{paciente.cedula}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="110" y="4" width="151" height="20" uuid="836d153f-63fa-491a-a056-9911dbd54f9f"/>
+					<textElement>
+						<font size="11"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{paciente.primerNombre}+" "+$F{paciente.primerApellido}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="12" y="4" width="16" height="20" uuid="a8ca6ae1-36df-4cc6-8a38-fdc5011565e8"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[>]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="355" y="4" width="67" height="20" uuid="b8a45d44-e496-4207-addd-97ff569568e5"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{paciente.sexo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="294" y="4" width="24" height="20" uuid="89b01769-f263-4ba1-a189-f8762e6033a3"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{paciente.edad}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="261" y="4" width="33" height="20" uuid="e9bb7657-fca8-4cf8-b8a7-60be4f90b3c5"/>
+					<textElement>
+						<font size="11" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Edad:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="318" y="4" width="37" height="20" uuid="4ab1b67d-b901-482b-95eb-2412465c1394"/>
+					<textElement>
+						<font size="11" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Sexo:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="422" y="4" width="68" height="20" uuid="7ed3089e-13e7-4950-b08f-3f19afb97662"/>
+					<textElement>
+						<font size="11" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Parentesco:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="490" y="4" width="83" height="20" uuid="e2165f79-c164-4fff-9f0d-2857a6a1011d"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{paciente.parentescoFamiliar}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="28">
+				<staticText>
+					<reportElement x="85" y="4" width="100" height="20" uuid="abc34274-14e8-41ee-aeb5-802cc32d68ee"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Familiar:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="185" y="4" width="68" height="20" uuid="32794f78-65a0-4751-8546-d53df2ae7abf"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{medicina_familiar}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="253" y="4" width="73" height="20" uuid="f6519916-f99b-41e7-9955-71dee60156d2"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{examen_familiar}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="326" y="4" width="85" height="20" uuid="2ccce305-c4f3-4b76-89ed-1f167f01e19c"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{esp_familiar}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="411" y="4" width="74" height="20" uuid="5e16d39e-0c77-45b6-a019-bc9663f2d6c1"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{est_familiar}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="485" y="4" width="88" height="20" uuid="6916b39d-68f0-4431-95b4-efd703385919"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{total_familiar}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="93" splitType="Stretch">
+			<image>
+				<reportElement x="22" y="16" width="100" height="50" uuid="7760a4c1-8c24-4917-8cfe-767123e642f9"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="185" y="28" width="204" height="20" uuid="f63cc7fb-10e8-412f-8719-16b6fbd63039"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GASTOS POR FAMILIARES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="298" y="73" width="42" height="20" uuid="3bf42f72-db45-46a7-b9e3-59e19bf1faa9"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="73" width="43" height="20" uuid="aa29a959-50d8-42a7-b688-f1f9f5c092c4"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="73" width="90" height="20" uuid="4ba5dd11-9018-4caa-8216-a591330db1d8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{desde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="73" width="89" height="20" uuid="e8cab944-bad2-49e9-9a8e-25eec11caae1"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hasta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="573" height="40" backcolor="#CCCCCC" uuid="b3c92d47-e18b-45aa-807a-bd251fae8040"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="78" height="40" uuid="f1851f00-3bcb-453f-8ee8-bb846963bb40"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Consulta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="0" width="107" height="40" uuid="9f578b86-6d6e-417d-a015-cbf567ff6a28"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Consulta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="20" width="68" height="20" uuid="f5656e6b-2456-4812-abb5-67aca8a06ecd"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Medicinas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="20" width="73" height="20" uuid="95b6a41d-5a7a-46b1-a369-213569d12344"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Examenes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="20" width="85" height="20" uuid="a770d647-9617-45cb-8de3-ebc27787bb72"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especialistas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="20" width="73" height="20" uuid="563a2b81-b805-43f0-9d87-16b151fa8ec1"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estudios]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="20" width="88" height="20" uuid="520662e3-2ad3-444f-8e2b-c8dbc4c23048"/>
+				<box>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="185" y="0" width="387" height="20" uuid="05c1513e-f995-4b4b-b138-87fd53bd5022"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Gastos por Concepto:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="78" height="20" uuid="718348a1-524c-4dae-8afd-80f4d08b4c1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="78" y="0" width="107" height="20" uuid="14b6f4b1-c490-4fc5-b84d-c9868230f158"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipoConsultaSecundaria}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="185" y="0" width="68" height="20" uuid="70f4adff-6cdc-4d4f-a0ca-2051e590b17e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{estatura}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="253" y="0" width="73" height="20" uuid="418dab5f-9bd5-4771-800b-156b3c611411"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{peso}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="326" y="0" width="85" height="20" uuid="772a1c92-ef34-4a18-9454-34ad0420710d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{perimetroForzada}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="411" y="0" width="74" height="20" uuid="29c54b76-183e-4ee8-a498-fe2f5f2c8c77"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{perimetroOmbligo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="485" y="0" width="87" height="20" uuid="e772e284-4d5c-487e-b628-ee4b40c66112"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{perimetroPlena}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="273" y="0" width="25" height="20" uuid="a2ccc48b-ac7a-431c-a21a-9e19bafa663a"/>
+				<text><![CDATA[Pag.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="298" y="0" width="28" height="20" uuid="099fb279-7c15-4e79-9147-1d6c3b8454e1"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="350" y="0" width="38" height="20" uuid="05c8736a-e65a-474e-9a2f-981d27bd0f8e"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="0" width="28" height="20" uuid="69a5cf65-8553-44b4-bac5-2b4402cd93e5"/>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="388" y="0" width="84" height="20" uuid="b550a98b-be82-4314-814c-6ecce9a65baa"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="510" y="0" width="63" height="20" uuid="5601f89a-2dd9-4ad9-8058-e3812d370616"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="20">
+			<staticText>
+				<reportElement x="44" y="0" width="141" height="20" uuid="56f7707e-7bc8-4792-a507-38fe3a51dad1"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Gastos por Familiares:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="185" y="0" width="68" height="20" uuid="85ef5d7a-0c84-403a-a337-869a0c0d36a7"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{medicina_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="0" width="73" height="20" uuid="50220192-dee2-4f7d-9b02-e18efcd8b892"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{examen_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="0" width="85" height="20" uuid="9003f8bf-f2d2-4fa2-94ed-9f081dd28e5e"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{esp_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="411" y="0" width="74" height="20" uuid="678aac58-2c1d-43b3-b8c4-72982a8fef04"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{est_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="0" width="88" height="20" uuid="cf3f0c60-839f-42b9-a648-a586a7d55db6"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

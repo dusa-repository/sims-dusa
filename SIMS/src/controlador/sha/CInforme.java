@@ -931,7 +931,7 @@ public class CInforme extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divInforme, "Informe",tabs);
+				cerrarVentana(divInforme, "Informe", tabs);
 			}
 
 			@Override
@@ -950,23 +950,20 @@ public class CInforme extends CGenerico {
 							.buscarPorCedula(lbl53.getValue());
 					informe.setPacienteA(pacientePrincipal);
 
-					if (rdg523.getSelectedItem() != null)
-					{
+					if (rdg523.getSelectedItem() != null) {
 						informe.setEbc(rdg523.getSelectedItem().getLabel());
-					informe.setEbcf(txt5236.getValue());
+						informe.setEbcf(txt5236.getValue());
 					}
 					if (rdg524.getSelectedItem() != null)
 						informe.setEbd(rdg524.getSelectedItem().getLabel());
-					if (rdg525.getSelectedItem() != null)
-						{
+					if (rdg525.getSelectedItem() != null) {
 						informe.setEbe(rdg525.getSelectedItem().getLabel());
-				    	informe.setEbeg(txt5257.getValue());
-						}
+						informe.setEbeg(txt5257.getValue());
+					}
 					if (rdg526.getSelectedItem() != null)
 						informe.setEbf(rdg526.getSelectedItem().getLabel());
-					
-					if (rdg527.getSelectedItem() != null)
-					{
+
+					if (rdg527.getSelectedItem() != null) {
 						informe.setEbg(rdg527.getSelectedItem().getLabel());
 						informe.setEbge(txt5275.getValue());
 					}
@@ -1673,8 +1670,7 @@ public class CInforme extends CGenerico {
 		lbl53.setValue(paciente.getCedula());
 		lbl54.setValue(paciente.getNacionalidad());
 		lbl55.setValue(paciente.getSexo());
-		if (paciente.getFechaNacimiento() != null)
-		{
+		if (paciente.getFechaNacimiento() != null) {
 			lbl57.setValue(String.valueOf(formatoFecha.format(paciente
 					.getFechaNacimiento())));
 			lbl56.setValue(String.valueOf(calcularEdad(paciente
@@ -1987,11 +1983,14 @@ public class CInforme extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Informe objeto) {
+				String nombreEmpresa = "";
+				if (objeto.getEmpresaA() != null)
+					nombreEmpresa = objeto.getEmpresaA().getNombre();
 				String[] registros = new String[4];
 				registros[0] = objeto.getCodigo();
 				registros[1] = objeto.getPacienteA().getPrimerNombre();
 				registros[2] = objeto.getPacienteA().getPrimerApellido();
-				registros[3] = objeto.getEmpresaA().getNombre();
+				registros[3] = nombreEmpresa;
 				return registros;
 			}
 
@@ -2005,7 +2004,8 @@ public class CInforme extends CGenerico {
 		Informe informe = catalogoI.objetoSeleccionadoDelCatalogo();
 		txt1.setValue(informe.getCodigo());
 		setear5(informe.getPacienteA());
-		setear3(informe.getEmpresaA());
+		if (informe.getEmpresaA() != null)
+			setear3(informe.getEmpresaA());
 		if (informe.getPacienteB() != null)
 			setear21(informe.getPacienteB());
 		if (informe.getPacienteC() != null)
@@ -2026,9 +2026,9 @@ public class CInforme extends CGenerico {
 	}
 
 	private void llenarCampos(Informe informe) {
-		
-		//seccion 5
-		
+
+		// seccion 5
+
 		if (informe.getEbc() != null) {
 			Radio radio = new Radio();
 			switch (informe.getEbc()) {
@@ -2067,7 +2067,7 @@ public class CInforme extends CGenerico {
 				break;
 			}
 		}
-		
+
 		if (informe.getEbd() != null) {
 			Radio radio = new Radio();
 			switch (informe.getEbd()) {
@@ -2110,7 +2110,7 @@ public class CInforme extends CGenerico {
 				break;
 			}
 		}
-		
+
 		if (informe.getEbe() != null) {
 			Radio radio = new Radio();
 			switch (informe.getEbe()) {
@@ -2154,8 +2154,7 @@ public class CInforme extends CGenerico {
 				break;
 			}
 		}
-		
-		
+
 		if (informe.getEbf() != null) {
 			Radio radio = new Radio();
 			switch (informe.getEbf()) {
@@ -2188,7 +2187,7 @@ public class CInforme extends CGenerico {
 				break;
 			}
 		}
-		
+
 		if (informe.getEbg() != null) {
 			Radio radio = new Radio();
 			switch (informe.getEbg()) {
@@ -2216,14 +2215,13 @@ public class CInforme extends CGenerico {
 				radio = (Radio) rdg527.getChildren().get(0).getChildren()
 						.get(10);
 				radio.setChecked(true);
-				txt5275.setValue(informe.getEbge());				
+				txt5275.setValue(informe.getEbge());
 				break;
 			default:
 				break;
 			}
 		}
-		
-		
+
 		// seccion 6 y 7
 		if (informe.getFa() != null)
 			dtb61.setValue(informe.getFa());
@@ -2250,15 +2248,17 @@ public class CInforme extends CGenerico {
 		txt674.setValue(informe.getFgd());
 		txt675.setValue(informe.getFge());
 		cmb676.setValue(informe.getFgf());
-		if (informe.getFgga())
-			rdo6771.setChecked(true);
-		else
-			rdo6772.setChecked(true);
-		if (informe.getFgha()) {
-			rdo6781.setChecked(true);
-			txt678.setValue(informe.getFgh());
-		} else
-			rdo6782.setChecked(true);
+		if (informe.getFgga() != null)
+			if (informe.getFgga())
+				rdo6771.setChecked(true);
+			else
+				rdo6772.setChecked(true);
+		if (informe.getFgha() != null)
+			if (informe.getFgha()) {
+				rdo6781.setChecked(true);
+				txt678.setValue(informe.getFgh());
+			} else
+				rdo6782.setChecked(true);
 		if (informe.getFgi() != null && informe.getFgi().equals("Publico"))
 			rdo6791.setChecked(true);
 		else {
@@ -2278,10 +2278,11 @@ public class CInforme extends CGenerico {
 		txt811.setValue(informe.getHaa());
 		txt812.setValue(informe.getHab());
 		txt813.setValue(informe.getHac());
-		if (informe.getHada())
-			rdo8141.setChecked(true);
-		else
-			rdo8142.setChecked(true);
+		if (informe.getHada() != null)
+			if (informe.getHada())
+				rdo8141.setChecked(true);
+			else
+				rdo8142.setChecked(true);
 		if (informe.getHaea() != null
 				&& informe.getHaea()
 						.equals("Porque la Habitual Estaba Agotada"))
@@ -2294,11 +2295,12 @@ public class CInforme extends CGenerico {
 		txt821.setValue(informe.getHba());
 		// lista822
 		txt823.setValue(informe.getHbc());
-		if (informe.getHbd()) {
-			rdo8241.setChecked(true);
-			txt8241.setValue(informe.getHbda());
-		} else
-			rdo8242.setChecked(true);
+		if (informe.getHbd() != null)
+			if (informe.getHbd()) {
+				rdo8241.setChecked(true);
+				txt8241.setValue(informe.getHbda());
+			} else
+				rdo8242.setChecked(true);
 		if (informe.getHbe() != null
 				&& informe.getHbe().equals(
 						"El Trabajador o Trabajadora Accidentado"))
@@ -2312,14 +2314,16 @@ public class CInforme extends CGenerico {
 				txt825.setValue(informe.getHbea());
 			}
 		}
-		if (informe.getHbf())
-			rdo8262.setChecked(true);
-		else
-			rdo8261.setChecked(true);
-		if (informe.getHbg())
-			rdo8272.setChecked(true);
-		else
-			rdo8271.setChecked(true);
+		if (informe.getHbf() != null)
+			if (informe.getHbf())
+				rdo8262.setChecked(true);
+			else
+				rdo8261.setChecked(true);
+		if (informe.getHbg() != null)
+			if (informe.getHbg())
+				rdo8272.setChecked(true);
+			else
+				rdo8271.setChecked(true);
 
 		if (informe.getHbh() != null
 				&& informe.getHbh().equals("Inexistencia del/la  Mismo/a"))
@@ -2341,32 +2345,37 @@ public class CInforme extends CGenerico {
 				}
 			}
 		}
-		if (informe.getHbaaa()) {
-			rdo82112.setChecked(true);
-			txt8211.setValue(informe.getHbaa());
-		} else
-			rdo82111.setChecked(true);
-		if (informe.getHbaab()) {
-			rdo82122.setChecked(true);
-			txt8212.setValue(informe.getHbab());
-		} else
-			rdo82121.setChecked(true);
+		if (informe.getHbaaa() != null)
+			if (informe.getHbaaa()) {
+				rdo82112.setChecked(true);
+				txt8211.setValue(informe.getHbaa());
+			} else
+				rdo82111.setChecked(true);
+		if (informe.getHbaab() != null)
+			if (informe.getHbaab()) {
+				rdo82122.setChecked(true);
+				txt8212.setValue(informe.getHbab());
+			} else
+				rdo82121.setChecked(true);
 
 		txt831.setValue(informe.getHca());
-		if (informe.getHcb())
-			rdo8322.setChecked(true);
-		else
-			rdo8321.setChecked(true);
+		if (informe.getHcb() != null)
+			if (informe.getHcb())
+				rdo8322.setChecked(true);
+			else
+				rdo8321.setChecked(true);
 
-		if (informe.getHcc())
-			rdo8332.setChecked(true);
-		else
-			rdo8331.setChecked(true);
+		if (informe.getHcc() != null)
+			if (informe.getHcc())
+				rdo8332.setChecked(true);
+			else
+				rdo8331.setChecked(true);
 
-		if (informe.getHcd())
-			rdo8341.setChecked(true);
-		else
-			rdo8342.setChecked(true);
+		if (informe.getHcd() != null)
+			if (informe.getHcd())
+				rdo8341.setChecked(true);
+			else
+				rdo8342.setChecked(true);
 		if (informe.getHce() != null
 				&& informe.getHce().equals(
 						"Desconocia la Forma Habitual de Realizarla"))
@@ -2394,10 +2403,11 @@ public class CInforme extends CGenerico {
 				txt836.setValue(informe.getHcfa());
 			}
 		}
-		if (informe.getHcg())
-			rdo8371.setChecked(true);
-		else
-			rdo8372.setChecked(true);
+		if (informe.getHcg() != null)
+			if (informe.getHcg())
+				rdo8371.setChecked(true);
+			else
+				rdo8372.setChecked(true);
 
 		if (informe.getHch() != null && informe.getHch().equals("Escritas"))
 			rdo8381.setChecked(true);
@@ -2426,24 +2436,28 @@ public class CInforme extends CGenerico {
 				txt839.setValue(informe.getHcia());
 			}
 		}
-		if (informe.getHcj())
-			rdo83101.setChecked(true);
-		else
-			rdo83102.setChecked(true);
-		if (informe.getHcaa()) {
-			rdo83111.setChecked(true);
-			txt8311.setValue(informe.getHcaaa());
-		} else
-			rdo83112.setChecked(true);
-		if (informe.getHcab()) {
-			rdo83122.setChecked(true);
-			txt8312.setValue(informe.getHcaba());
-		} else
-			rdo83121.setChecked(true);
-		if (informe.getHcac())
-			rdo83131.setChecked(true);
-		else
-			rdo83132.setChecked(true);
+		if (informe.getHcj() != null)
+			if (informe.getHcj())
+				rdo83101.setChecked(true);
+			else
+				rdo83102.setChecked(true);
+		if (informe.getHcaa() != null)
+			if (informe.getHcaa()) {
+				rdo83111.setChecked(true);
+				txt8311.setValue(informe.getHcaaa());
+			} else
+				rdo83112.setChecked(true);
+		if (informe.getHcab() != null)
+			if (informe.getHcab()) {
+				rdo83122.setChecked(true);
+				txt8312.setValue(informe.getHcaba());
+			} else
+				rdo83121.setChecked(true);
+		if (informe.getHcac() != null)
+			if (informe.getHcac())
+				rdo83131.setChecked(true);
+			else
+				rdo83132.setChecked(true);
 		txt8314.setValue(informe.getHcad());
 
 		if (informe.getHcae() != null) {
@@ -2500,61 +2514,71 @@ public class CInforme extends CGenerico {
 		}
 		txt8315.setValue(informe.getHcaea());
 		txt8316.setValue(informe.getHcaf());
-		if (informe.getHcaga())
-			rdo831711.setChecked(true);
-		else
-			rdo831712.setChecked(true);
+		if (informe.getHcaga() != null)
+			if (informe.getHcaga())
+				rdo831711.setChecked(true);
+			else
+				rdo831712.setChecked(true);
 
-		if (informe.getHcagb())
-			rdo831721.setChecked(true);
-		else
-			rdo831722.setChecked(true);
+		if (informe.getHcagb() != null)
+			if (informe.getHcagb())
+				rdo831721.setChecked(true);
+			else
+				rdo831722.setChecked(true);
 
-		if (informe.getHcagc())
-			rdo831731.setChecked(true);
-		else
-			rdo831732.setChecked(true);
+		if (informe.getHcagc() != null)
+			if (informe.getHcagc())
+				rdo831731.setChecked(true);
+			else
+				rdo831732.setChecked(true);
 
-		if (informe.getHcagd())
-			rdo831741.setChecked(true);
-		else
-			rdo831742.setChecked(true);
+		if (informe.getHcagd() != null)
+			if (informe.getHcagd())
+				rdo831741.setChecked(true);
+			else
+				rdo831742.setChecked(true);
 
-		if (informe.getHcage())
-			rdo831751.setChecked(true);
-		else
-			rdo831752.setChecked(true);
+		if (informe.getHcage() != null)
+			if (informe.getHcage())
+				rdo831751.setChecked(true);
+			else
+				rdo831752.setChecked(true);
 
-		if (informe.getHcagf()) {
-			rdo831762.setChecked(true);
-			txt83176.setValue(informe.getHcagfa());
-		} else {
-			if (!informe.getHcagf())
-				rdo831761.setChecked(true);
-		}
+		if (informe.getHcagf() != null)
+			if (informe.getHcagf()) {
+				rdo831762.setChecked(true);
+				txt83176.setValue(informe.getHcagfa());
+			} else {
+				if (!informe.getHcagf())
+					rdo831761.setChecked(true);
+			}
 
-		if (informe.getHcagg())
-			rdo831771.setChecked(true);
-		else
-			rdo831772.setChecked(true);
+		if (informe.getHcagg() != null)
+			if (informe.getHcagg())
+				rdo831771.setChecked(true);
+			else
+				rdo831772.setChecked(true);
 
-		if (informe.getHcagh())
-			rdo831781.setChecked(true);
-		else
-			rdo831782.setChecked(true);
+		if (informe.getHcagh() != null)
+			if (informe.getHcagh())
+				rdo831781.setChecked(true);
+			else
+				rdo831782.setChecked(true);
 
-		if (informe.getHcagi())
-			rdo831791.setChecked(true);
-		else
-			rdo831792.setChecked(true);
+		if (informe.getHcagi() != null)
+			if (informe.getHcagi())
+				rdo831791.setChecked(true);
+			else
+				rdo831792.setChecked(true);
 
 		txt841.setValue(informe.getHda());
-		if (informe.getHdb())
-			rdo8421.setChecked(true);
-		else {
-			rdo8422.setChecked(true);
-			txt842.setValue(informe.getHdba());
-		}
+		if (informe.getHdb() != null)
+			if (informe.getHdb())
+				rdo8421.setChecked(true);
+			else {
+				rdo8422.setChecked(true);
+				txt842.setValue(informe.getHdba());
+			}
 
 		if (informe.getHdc() != null
 				&& informe
@@ -2576,83 +2600,99 @@ public class CInforme extends CGenerico {
 		txt846.setValue(informe.getHdf());
 
 		// Seccion 9
-		if (informe.getIaa())
-			rdo9111.setChecked(true);
-		else
-			rdo9112.setChecked(true);
-		if (informe.getIab())
-			rdo9121.setChecked(true);
-		else
-			rdo9122.setChecked(true);
-		if (informe.getIac())
-			rdo9131.setChecked(true);
-		else
-			rdo9132.setChecked(true);
-		if (informe.getIad()) {
-			txt914.setValue(informe.getIada());
-			rdo9142.setChecked(true);
-		} else
-			rdo9141.setChecked(true);
+		if (informe.getIaa() != null)
+			if (informe.getIaa())
+				rdo9111.setChecked(true);
+			else
+				rdo9112.setChecked(true);
+		if (informe.getIab() != null)
+			if (informe.getIab())
+				rdo9121.setChecked(true);
+			else
+				rdo9122.setChecked(true);
+		if (informe.getIac() != null)
+			if (informe.getIac())
+				rdo9131.setChecked(true);
+			else
+				rdo9132.setChecked(true);
+		if (informe.getIad() != null)
+			if (informe.getIad()) {
+				txt914.setValue(informe.getIada());
+				rdo9142.setChecked(true);
+			} else
+				rdo9141.setChecked(true);
 		if (informe.getIae() != null)
 			dtb915.setValue(informe.getIae());
-		if (informe.getIaf())
-			rdo9161.setChecked(true);
-		else
-			rdo9162.setChecked(true);
-		if (informe.getIag()) {
-			rdo9172.setChecked(true);
-			txt917.setValue(informe.getIaga());
-		} else
-			rdo9171.setChecked(true);
-		if (informe.getIah())
-			rdo9181.setChecked(true);
-		else
-			rdo9182.setChecked(true);
+		if (informe.getIaf() != null)
+			if (informe.getIaf())
+				rdo9161.setChecked(true);
+			else
+				rdo9162.setChecked(true);
+		if (informe.getIag() != null)
+			if (informe.getIag()) {
+				rdo9172.setChecked(true);
+				txt917.setValue(informe.getIaga());
+			} else
+				rdo9171.setChecked(true);
+		if (informe.getIah() != null)
+			if (informe.getIah())
+				rdo9181.setChecked(true);
+			else
+				rdo9182.setChecked(true);
 		txt919.setValue(informe.getIai());
 		txt9110.setValue(informe.getIaj());
-		if (informe.getIba())
-			rdo9211.setChecked(true);
-		else
-			rdo9212.setChecked(true);
+		if (informe.getIba() != null)
+			if (informe.getIba())
+				rdo9211.setChecked(true);
+			else
+				rdo9212.setChecked(true);
 		if (informe.getIbb() != null)
 			dtb922.setValue(informe.getIbb());
 		txt923.setValue(informe.getIbc());
 		if (informe.getIbd() != null)
 			dtb924.setValue(informe.getIbd());
-		if (informe.getIbe())
-			rdo9251.setChecked(true);
-		else
-			rdo9252.setChecked(true);
-		if (informe.getIbf())
-			rdo9261.setChecked(true);
-		else
-			rdo9262.setChecked(true);
-		if (informe.getIbg())
-			rdo9271.setChecked(true);
-		else
-			rdo9272.setChecked(true);
-		if (informe.getIbh())
-			rdo9281.setChecked(true);
-		else
-			rdo9282.setChecked(true);
-		if (informe.getIbi())
-			rdo9291.setChecked(true);
-		else
-			rdo9292.setChecked(true);
-		if (informe.getIbj())
-			rdo92101.setChecked(true);
-		else
-			rdo92102.setChecked(true);
-		if (informe.getIbaa())
-			rdo92111.setChecked(true);
-		else
-			rdo92112.setChecked(true);
+		if (informe.getIbe() != null)
+			if (informe.getIbe())
+				rdo9251.setChecked(true);
+			else
+				rdo9252.setChecked(true);
+		if (informe.getIbf() != null)
+			if (informe.getIbf())
+				rdo9261.setChecked(true);
+			else
+				rdo9262.setChecked(true);
+		if (informe.getIbg() != null)
+			if (informe.getIbg())
+				rdo9271.setChecked(true);
+			else
+				rdo9272.setChecked(true);
+		if (informe.getIbh() != null)
+			if (informe.getIbh())
+				rdo9281.setChecked(true);
+			else
+				rdo9282.setChecked(true);
+		if (informe.getIbi() != null)
+			if (informe.getIbi())
+				rdo9291.setChecked(true);
+			else
+				rdo9292.setChecked(true);
+		if (informe.getIbj() != null)
+			if (informe.getIbj())
+				rdo92101.setChecked(true);
+			else
+				rdo92102.setChecked(true);
+		if (informe.getIbaa() != null)
+			if (informe.getIbaa())
+				rdo92111.setChecked(true);
+			else
+				rdo92112.setChecked(true);
 		txt9212.setValue(informe.getIbab());
 		txt9213.setValue(informe.getIbac());
-		if (informe.getIca())
-			rdo9311.setChecked(true);
-		else
-			rdo9312.setChecked(true);
+		if (informe.getIca() != null)
+			if (informe.getIca())
+				rdo9311.setChecked(true);
+			else
+				rdo9312.setChecked(true);
 		if (informe.getIcb() != null)
 			dtb932.setValue(informe.getIcb());
 		txt933.setValue(informe.getIcc());
@@ -2664,26 +2704,31 @@ public class CInforme extends CGenerico {
 					&& informe.getIcd().equals("Mancomunado"))
 				rdo9342.setChecked(true);
 		}
-		if (informe.getIce())
-			rdo9351.setChecked(true);
-		else
-			rdo9352.setChecked(true);
-		if (informe.getIcf())
-			rdo9361.setChecked(true);
-		else
-			rdo9362.setChecked(true);
-		if (informe.getIcg())
-			rdo9371.setChecked(true);
-		else
-			rdo9372.setChecked(true);
-		if (informe.getIch())
-			rdo9381.setChecked(true);
-		else
-			rdo9382.setChecked(true);
-		if (informe.getIci())
-			rdo9391.setChecked(true);
-		else
-			rdo9392.setChecked(true);
+		if (informe.getIce() != null)
+			if (informe.getIce())
+				rdo9351.setChecked(true);
+			else
+				rdo9352.setChecked(true);
+		if (informe.getIcf() != null)
+			if (informe.getIcf())
+				rdo9361.setChecked(true);
+			else
+				rdo9362.setChecked(true);
+		if (informe.getIcg() != null)
+			if (informe.getIcg())
+				rdo9371.setChecked(true);
+			else
+				rdo9372.setChecked(true);
+		if (informe.getIch() != null)
+			if (informe.getIch())
+				rdo9381.setChecked(true);
+			else
+				rdo9382.setChecked(true);
+		if (informe.getIci() != null)
+			if (informe.getIci())
+				rdo9391.setChecked(true);
+			else
+				rdo9392.setChecked(true);
 		if (informe.getIcj() != null)
 			dtb9310.setValue(informe.getIcj());
 		txt9311.setValue(informe.getIcaa());
@@ -2742,53 +2787,64 @@ public class CInforme extends CGenerico {
 			setear93146(informe.getPacienteM());
 		txt9315.setValue(informe.getIcae());
 
-		if (informe.getIda())
-			rdo9411.setChecked(true);
-		else
-			rdo9412.setChecked(true);
-		if (informe.getIdb())
-			rdo9421.setChecked(true);
-		else
-			rdo9422.setChecked(true);
-		if (informe.getIdc())
-			rdo9431.setChecked(true);
-		else
-			rdo9432.setChecked(true);
-		if (informe.getIdd())
-			rdo9441.setChecked(true);
-		else
-			rdo9442.setChecked(true);
-		if (informe.getIde())
-			rdo9451.setChecked(true);
-		else
-			rdo9452.setChecked(true);
-		if (informe.getIdf())
-			rdo9461.setChecked(true);
-		else
-			rdo9462.setChecked(true);
-		if (informe.getIdg())
-			rdo9471.setChecked(true);
-		else
-			rdo9472.setChecked(true);
-		if (informe.getIdh())
-			rdo9481.setChecked(true);
-		else
-			rdo9482.setChecked(true);
-		if (informe.getIdi())
-			rdo9491.setChecked(true);
-		else
-			rdo9492.setChecked(true);
-		if (informe.getIdj())
-			rdo94101.setChecked(true);
-		else
-			rdo94102.setChecked(true);
+		if (informe.getIda() != null)
+			if (informe.getIda())
+				rdo9411.setChecked(true);
+			else
+				rdo9412.setChecked(true);
+		if (informe.getIdb() != null)
+			if (informe.getIdb())
+				rdo9421.setChecked(true);
+			else
+				rdo9422.setChecked(true);
+		if (informe.getIdc() != null)
+			if (informe.getIdc())
+				rdo9431.setChecked(true);
+			else
+				rdo9432.setChecked(true);
+		if (informe.getIdd() != null)
+			if (informe.getIdd())
+				rdo9441.setChecked(true);
+			else
+				rdo9442.setChecked(true);
+		if (informe.getIde() != null)
+			if (informe.getIde())
+				rdo9451.setChecked(true);
+			else
+				rdo9452.setChecked(true);
+		if (informe.getIdf() != null)
+			if (informe.getIdf())
+				rdo9461.setChecked(true);
+			else
+				rdo9462.setChecked(true);
+		if (informe.getIdg() != null)
+			if (informe.getIdg())
+				rdo9471.setChecked(true);
+			else
+				rdo9472.setChecked(true);
+		if (informe.getIdh() != null)
+			if (informe.getIdh())
+				rdo9481.setChecked(true);
+			else
+				rdo9482.setChecked(true);
+		if (informe.getIdi() != null)
+			if (informe.getIdi())
+				rdo9491.setChecked(true);
+			else
+				rdo9492.setChecked(true);
+		if (informe.getIdj() != null)
+			if (informe.getIdj())
+				rdo94101.setChecked(true);
+			else
+				rdo94102.setChecked(true);
 		if (informe.getIdaa() != null)
 			dtb9411.setValue(informe.getIdaa());
 		txt9412.setValue(informe.getIdab());
-		if (informe.getIdac())
-			rdo94131.setChecked(true);
-		else
-			rdo94132.setChecked(true);
+		if (informe.getIdac() != null)
+			if (informe.getIdac())
+				rdo94131.setChecked(true);
+			else
+				rdo94132.setChecked(true);
 		txt9414.setValue(informe.getIdad());
 
 		// Setear Condiciones
@@ -2900,109 +2956,76 @@ public class CInforme extends CGenerico {
 	// Cosas relacionadas al limpiar
 
 	public void limpiarCampos() {
-		
-			Radio radio = new Radio();
-				radio = (Radio) rdg523.getChildren().get(2).getChildren()
-						.get(0);
-				radio.setChecked(false);
-				radio = (Radio) rdg523.getChildren().get(2).getChildren()
-						.get(1);
-				radio.setChecked(false);
-				radio = (Radio) rdg523.getChildren().get(2).getChildren()
-						.get(2);
-				radio.setChecked(false);
-				radio = (Radio) rdg523.getChildren().get(2).getChildren()
-						.get(3);
-				radio.setChecked(false);
-				radio = (Radio) rdg523.getChildren().get(2).getChildren()
-						.get(4);
-				radio.setChecked(false);
-				radio = (Radio) rdg523.getChildren().get(2).getChildren()
-						.get(5);
-				radio.setChecked(false);
-				txt5236.setValue("");
 
-		
-				radio = (Radio) rdg524.getChildren().get(3).getChildren()
-						.get(0);
-				radio.setChecked(false);
-				radio = (Radio) rdg524.getChildren().get(3).getChildren()
-						.get(1);
-				radio.setChecked(false);
-				radio = (Radio) rdg524.getChildren().get(3).getChildren()
-						.get(2);
-				radio.setChecked(false);
-				radio = (Radio) rdg524.getChildren().get(3).getChildren()
-						.get(3);
-				radio.setChecked(false);
-				radio = (Radio) rdg524.getChildren().get(3).getChildren()
-						.get(4);
-				radio.setChecked(false);
-				radio = (Radio) rdg524.getChildren().get(3).getChildren()
-						.get(5);
-				radio.setChecked(false);
-				radio = (Radio) rdg524.getChildren().get(3).getChildren()
-						.get(6);
-				radio.setChecked(false);
+		Radio radio = new Radio();
+		radio = (Radio) rdg523.getChildren().get(2).getChildren().get(0);
+		radio.setChecked(false);
+		radio = (Radio) rdg523.getChildren().get(2).getChildren().get(1);
+		radio.setChecked(false);
+		radio = (Radio) rdg523.getChildren().get(2).getChildren().get(2);
+		radio.setChecked(false);
+		radio = (Radio) rdg523.getChildren().get(2).getChildren().get(3);
+		radio.setChecked(false);
+		radio = (Radio) rdg523.getChildren().get(2).getChildren().get(4);
+		radio.setChecked(false);
+		radio = (Radio) rdg523.getChildren().get(2).getChildren().get(5);
+		radio.setChecked(false);
+		txt5236.setValue("");
 
-		
-				radio = (Radio) rdg525.getChildren().get(0).getChildren()
-						.get(1);
-				radio.setChecked(false);
-				radio = (Radio) rdg525.getChildren().get(0).getChildren()
-						.get(2);
-				radio.setChecked(false);
-				radio = (Radio) rdg525.getChildren().get(0).getChildren()
-						.get(3);
-				radio.setChecked(false);
-				radio = (Radio) rdg525.getChildren().get(0).getChildren()
-						.get(4);
-				radio.setChecked(false);
-				radio = (Radio) rdg525.getChildren().get(0).getChildren()
-						.get(5);
-				radio.setChecked(false);
-				radio = (Radio) rdg525.getChildren().get(0).getChildren()
-						.get(6);
-				radio.setChecked(false);
-				radio = (Radio) rdg525.getChildren().get(0).getChildren()
-						.get(7);
-				radio.setChecked(false);
-				txt5257.setValue("");
+		radio = (Radio) rdg524.getChildren().get(3).getChildren().get(0);
+		radio.setChecked(false);
+		radio = (Radio) rdg524.getChildren().get(3).getChildren().get(1);
+		radio.setChecked(false);
+		radio = (Radio) rdg524.getChildren().get(3).getChildren().get(2);
+		radio.setChecked(false);
+		radio = (Radio) rdg524.getChildren().get(3).getChildren().get(3);
+		radio.setChecked(false);
+		radio = (Radio) rdg524.getChildren().get(3).getChildren().get(4);
+		radio.setChecked(false);
+		radio = (Radio) rdg524.getChildren().get(3).getChildren().get(5);
+		radio.setChecked(false);
+		radio = (Radio) rdg524.getChildren().get(3).getChildren().get(6);
+		radio.setChecked(false);
 
-				radio = (Radio) rdg526.getChildren().get(0).getChildren()
-						.get(3);
-				radio.setChecked(false);
-				radio = (Radio) rdg526.getChildren().get(0).getChildren()
-						.get(5);
-				radio.setChecked(false);
-				radio = (Radio) rdg526.getChildren().get(0).getChildren()
-						.get(7);
-				radio.setChecked(false);
-				radio = (Radio) rdg526.getChildren().get(0).getChildren()
-						.get(9);
-				radio.setChecked(false);
-				radio = (Radio) rdg526.getChildren().get(0).getChildren()
-						.get(11);
-				radio.setChecked(false);
-		
-				radio = (Radio) rdg527.getChildren().get(0).getChildren()
-						.get(2);
-				radio.setChecked(false);
-				radio = (Radio) rdg527.getChildren().get(0).getChildren()
-						.get(4);
-				radio.setChecked(false);
-				radio = (Radio) rdg527.getChildren().get(0).getChildren()
-						.get(6);
-				radio.setChecked(false);
-				radio = (Radio) rdg527.getChildren().get(0).getChildren()
-						.get(8);
-				radio.setChecked(false);
-				radio = (Radio) rdg527.getChildren().get(0).getChildren()
-						.get(10);
-				radio.setChecked(false);
-				txt5275.setValue("");				
-		
-		
+		radio = (Radio) rdg525.getChildren().get(0).getChildren().get(1);
+		radio.setChecked(false);
+		radio = (Radio) rdg525.getChildren().get(0).getChildren().get(2);
+		radio.setChecked(false);
+		radio = (Radio) rdg525.getChildren().get(0).getChildren().get(3);
+		radio.setChecked(false);
+		radio = (Radio) rdg525.getChildren().get(0).getChildren().get(4);
+		radio.setChecked(false);
+		radio = (Radio) rdg525.getChildren().get(0).getChildren().get(5);
+		radio.setChecked(false);
+		radio = (Radio) rdg525.getChildren().get(0).getChildren().get(6);
+		radio.setChecked(false);
+		radio = (Radio) rdg525.getChildren().get(0).getChildren().get(7);
+		radio.setChecked(false);
+		txt5257.setValue("");
+
+		radio = (Radio) rdg526.getChildren().get(0).getChildren().get(3);
+		radio.setChecked(false);
+		radio = (Radio) rdg526.getChildren().get(0).getChildren().get(5);
+		radio.setChecked(false);
+		radio = (Radio) rdg526.getChildren().get(0).getChildren().get(7);
+		radio.setChecked(false);
+		radio = (Radio) rdg526.getChildren().get(0).getChildren().get(9);
+		radio.setChecked(false);
+		radio = (Radio) rdg526.getChildren().get(0).getChildren().get(11);
+		radio.setChecked(false);
+
+		radio = (Radio) rdg527.getChildren().get(0).getChildren().get(2);
+		radio.setChecked(false);
+		radio = (Radio) rdg527.getChildren().get(0).getChildren().get(4);
+		radio.setChecked(false);
+		radio = (Radio) rdg527.getChildren().get(0).getChildren().get(6);
+		radio.setChecked(false);
+		radio = (Radio) rdg527.getChildren().get(0).getChildren().get(8);
+		radio.setChecked(false);
+		radio = (Radio) rdg527.getChildren().get(0).getChildren().get(10);
+		radio.setChecked(false);
+		txt5275.setValue("");
+
 		txt1.setValue("");
 		limpiar5();
 		limpiar3();

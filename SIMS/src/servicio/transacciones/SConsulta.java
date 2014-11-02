@@ -24,8 +24,6 @@ public class SConsulta {
 	@Autowired
 	private IConsultaDAO consultaDAO;
 
-
-
 	public Consulta buscar(long idConsulta) {
 		return consultaDAO.findOne(idConsulta);
 	}
@@ -119,7 +117,7 @@ public class SConsulta {
 
 	public List<Consulta> buscarEntreFechas(Date fecha1, Date fecha2) {
 		return consultaDAO.findByFechaConsultaBetweenOrderByFechaConsultaDesc(
-				fecha1, fecha2,true);
+				fecha1, fecha2, true);
 	}
 
 	public List<Consulta> buscarEntreFechasyArea(Date fecha1, Date fecha2,
@@ -129,8 +127,9 @@ public class SConsulta {
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndPacienteAreaAndPacienteTrabajador(fecha1,
-				fecha2, area2,true, o);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteAreaAndPacienteTrabajador(
+						fecha1, fecha2, area2, true, o);
 	}
 
 	public List<Consulta> buscarEntreFechasyTipoConsulta(Date fecha1,
@@ -171,7 +170,7 @@ public class SConsulta {
 
 	public List<Consulta> buscarEntreFechasOrdenadasPorUnidad(Date fecha1,
 			Date fecha2) {
-		
+
 		List<String> ordenar = new ArrayList<String>();
 		ordenar.add("usuarioUnidad");
 		ordenar.add("usuarioCedula");
@@ -189,7 +188,8 @@ public class SConsulta {
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndUsuarioUnidad(fecha1, fecha2,unidad, o);
+		return consultaDAO.findByFechaConsultaBetweenAndUsuarioUnidad(fecha1,
+				fecha2, unidad, o);
 	}
 
 	public List<Consulta> buscarEntreFechasPorDoctor(Date fecha1, Date fecha2,
@@ -200,17 +200,20 @@ public class SConsulta {
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndUsuario(fecha1, fecha2,doc, o);
+		return consultaDAO.findByFechaConsultaBetweenAndUsuario(fecha1, fecha2,
+				doc, o);
 	}
 
-	public List<Consulta> buscarEntreFechasReposoyTrabajadores(Date fecha1, Date fecha2) {
+	public List<Consulta> buscarEntreFechasReposoyTrabajadores(Date fecha1,
+			Date fecha2) {
 		List<String> ordenar = new ArrayList<String>();
 		ordenar.add("pacienteAreaNombre");
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndReposoAndPacienteTrabajador(fecha1,
-				fecha2, true,true, o);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndReposoAndPacienteTrabajador(
+						fecha1, fecha2, true, true, o);
 	}
 
 	public List<Consulta> buscarEntreFechasReposoAreayTrabajadores(Date fecha1,
@@ -220,19 +223,22 @@ public class SConsulta {
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndReposoAndPacienteAreaAndPacienteTrabajador(fecha1,
-				fecha2, true,area2,true ,o);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndReposoAndPacienteAreaAndPacienteTrabajador(
+						fecha1, fecha2, true, area2, true, o);
 	}
 
 	public List<Consulta> buscarEntreFechasOrdenadasPorUnidadReposoyTrabajadores(
-			Date fecha1, Date fecha2) {	
+			Date fecha1, Date fecha2) {
 		List<String> ordenar = new ArrayList<String>();
 		ordenar.add("usuarioUnidad");
 		ordenar.add("usuarioCedula");
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndReposoAndPacienteTrabajador(fecha1, fecha2,true,true ,o);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndReposoAndPacienteTrabajador(
+						fecha1, fecha2, true, true, o);
 	}
 
 	public List<Consulta> buscarEntreFechasPorUnidadReposoyTrabajadores(
@@ -243,7 +249,9 @@ public class SConsulta {
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndReposoAndPacienteTrabajadorAndUsuarioUnidad(fecha1, fecha2,true,true,unidad,o);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndReposoAndPacienteTrabajadorAndUsuarioUnidad(
+						fecha1, fecha2, true, true, unidad, o);
 	}
 
 	public List<Consulta> buscarEntreFechasPorDoctorReposoyTrabajadores(
@@ -254,9 +262,11 @@ public class SConsulta {
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndUsuarioAndReposoAndPacienteTrabajador(fecha1, fecha2,doc,true,true, o);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndUsuarioAndReposoAndPacienteTrabajador(
+						fecha1, fecha2, doc, true, true, o);
 	}
-	
+
 	public List<Consulta> buscarTipoDeConsultaEntreFechasResumen(Date desde,
 			Date hasta) {
 		List<String> lista = new ArrayList<String>();
@@ -282,7 +292,9 @@ public class SConsulta {
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndReposoAndPacienteTrabajador(fecha1, fecha2,true,true, o);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndReposoAndPacienteTrabajador(
+						fecha1, fecha2, true, true, o);
 	}
 
 	public List<Consulta> buscarEntreFechasPorPacienteReposoyTrabajadores(
@@ -291,7 +303,75 @@ public class SConsulta {
 		ordenar.add("pacienteCedula");
 		ordenar.add("fechaConsulta");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return consultaDAO.findByFechaConsultaBetweenAndPacienteCedulaAndReposoAndPacienteTrabajador(fecha1, fecha2,idPaciente,true,true, o);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteCedulaAndReposoAndPacienteTrabajador(
+						fecha1, fecha2, idPaciente, true, true, o);
+	}
+
+	public List<Consulta> buscarEntreFechasFamiliaresTodosTrabajadores(
+			Date desde, Date hasta) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedulaFamiliar");
+		ordenar.add("pacienteCedula");
+		ordenar.add("pacienteParentescoFamiliar");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO.findByFechaConsultaBetweenAndPacienteTrabajador(
+				desde, hasta, false, o);
+	}
+
+	public List<Consulta> buscarEntreFechasFamiliaresYUnTrabajador(Date desde,
+			Date hasta, String paciente) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedula");
+		ordenar.add("pacienteParentescoFamiliar");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteTrabajadorAndPacienteCedulaFamiliar(
+						desde, hasta, false, paciente, o);
+	}
+
+	public List<Consulta> buscarEntreFechasFamiliaresTodosTrabajadoresUnParentesco(
+			Date desde, Date hasta, String parentesco) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedulaFamiliar");
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteTrabajadorAndPacienteParentescoFamiliar(
+						desde, hasta, false, parentesco, o);
+	}
+
+	public List<Consulta> buscarEntreFechasFamiliaresUnTrabajadorYunParentesco(
+			Date desde, Date hasta, String paciente, String parentesco) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteTrabajadorAndPacienteParentescoFamiliarAndPacienteCedulaFamiliar(
+						desde, hasta, false, parentesco, paciente, o);
+	}
+
+	public List<Consulta> buscarEntreFechasTrabajadores(Date desde, Date hasta) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO.findByFechaConsultaBetweenAndPacienteTrabajador(
+				desde, hasta, true, o);
+	}
+
+	public List<Consulta> buscarEntreFechasUnTrabajador(Date desde, Date hasta,
+			String paciente) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteTrabajadorAndPacienteCedula(
+						desde, hasta, true, paciente, o);
 	}
 
 }
