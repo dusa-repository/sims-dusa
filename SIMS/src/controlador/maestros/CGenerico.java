@@ -330,6 +330,12 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		return applicationContext.getBean(SPaciente.class);
 	}
 
+
+	public static SPacienteMedicina getServicioPacienteMedicina() {
+		return applicationContext.getBean(SPacienteMedicina.class);
+	}
+
+	
 	public static SProveedor getServicioProveedor() {
 		return applicationContext.getBean(SProveedor.class);
 	}

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
+import modelo.transacciones.PacienteMedicina;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -290,8 +291,7 @@ public class CPacientes extends CGenerico {
 		byte[] fichero = null;
 		int dea = Integer.valueOf(de);
 		int aa = Integer.valueOf(a);
-		// Paciente trabajador =
-		// getServicioPaciente().buscarPorCedula(idTrabajador);
+
 		List<Paciente> pacientes = new ArrayList<Paciente>();
 
 		if (sexo.equals("TODOS") && parentesco.equals("TODOS")
@@ -393,11 +393,6 @@ public class CPacientes extends CGenerico {
 					new JRBeanCollectionDataSource(pacientes));
 			return fichero;
 		}
-	}
-
-	private void reporteCronico() {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void reportePaciente() {
@@ -763,6 +758,85 @@ public class CPacientes extends CGenerico {
 		}
 	}
 
+	private void reporteCronico() {
+		String tipoReporte = cmbTipo.getValue();
+		String tipoPaciente = "";
+		if (rdoFamiliares.isChecked())
+			tipoPaciente = "Familiares";
+		else {
+			if (rdoTrabajadores.isChecked())
+				tipoPaciente = "Trabajadores";
+			else
+				tipoPaciente = "TODOS";
+		}
+
+		if ((tipoPaciente.equals("TODOS") && getServicioPacienteMedicina()
+				.buscarTodasCronico().isEmpty())
+				|| (tipoPaciente.equals("Trabajadores") && getServicioPacienteMedicina()
+						.buscarPorTrabajadores(true).isEmpty())
+				|| (tipoPaciente.equals("Familiares") && getServicioPacienteMedicina()
+						.buscarPorTrabajadores(false).isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=27&valor6="
+					+ tipoPaciente
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+
+	}
+
+	public byte[] reporteCronico(String tipoPaciente, String tipoReporte)
+			throws JRException {
+		byte[] fichero = null;
+		List<PacienteMedicina> pacienteMed = new ArrayList<PacienteMedicina>();
+
+		if (tipoPaciente.equals("TODOS"))
+			pacienteMed = getServicioPacienteMedicina().buscarTodasCronico();
+		else {
+			if (tipoPaciente.equals("Trabajadores"))
+				pacienteMed = getServicioPacienteMedicina()
+						.buscarPorTrabajadores(true);
+			else
+				pacienteMed = getServicioPacienteMedicina()
+						.buscarPorTrabajadores(false);
+		}
+
+		Map p = new HashMap();
+		p.put("tipoP", tipoPaciente);
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RCronicos.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(pacienteMed));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(pacienteMed));
+			return fichero;
+		}
+	}
+
 	@Listen("onClick = #btnBuscarTrabajador")
 	public void mostrarCatalogoFamiliar() {
 
@@ -820,4 +894,5 @@ public class CPacientes extends CGenerico {
 				+ trabajador.getPrimerApellido());
 		catalogo.setParent(null);
 	}
+
 }
