@@ -6283,6 +6283,79 @@ public class CConsulta extends CGenerico {
 		return fichero;
 	}
 
+	@Listen("onClick = #btnPreEmpleo")
+	public void reportePreempleo() {
+		if (idConsulta != 0) {
+			Long id = idConsulta;
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=30&valor6="
+					+ id
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		} else
+			msj.mensajeAlerta("Seleccionar la Consulta");
+
+	}
+
+	public byte[] reporteroPreempleo(Long id) throws JRException {
+		byte[] fichero = null;
+		Consulta consuta = getServicioConsulta().buscar(id);
+		Paciente paciente = consuta.getPaciente();
+
+		Map p = new HashMap();
+		p.put("empresaNombre", "DESTILERIAS UNIDAS 	S.A.");
+		p.put("pacienteNombre",
+				paciente.getPrimerNombre() + " " + paciente.getPrimerApellido());
+		p.put("fecha", consuta.getFechaConsulta());
+		p.put("edad", paciente.getEdad());
+		p.put("cedula", paciente.getCedula());
+		p.put("sexo", paciente.getSexo());
+		if (paciente.isDiscapacidad())
+			p.put("discapacidad",
+					"Si, Discapacidad" + " " + paciente.getTipoDiscapacidad());
+		else
+			p.put("discapacidad", "No");
+		if (consuta.getCargoDeseado() != null)
+			p.put("cargo", consuta.getCargoDeseado().getNombre());
+		else
+			p.put("cargo", "Sin Informacion");
+		if (consuta.getAreaDeseada() != null)
+			p.put("area", consuta.getAreaDeseada().getNombre());
+		else
+			p.put("area", "Sin Informacion");
+		p.put("enfermedad", consuta.getEnfermedadActual());
+		if (consuta.getEstatura() != null)
+			p.put("estatura", consuta.getEstatura());
+		if (consuta.getPeso() != null)
+			p.put("peso", consuta.getPeso());
+
+		Double imc = (double) 0;
+		if (consuta.getEstatura() != 0 && consuta.getEstatura() != null
+				&& consuta.getPeso() != null) {
+			imc = (double) Math.round((consuta.getPeso() / (consuta
+					.getEstatura() * consuta.getEstatura())) * 100) / 100;
+		}
+		if(imc != null)
+		p.put("masa", imc);
+		else
+			p.put("masa","");
+		p.put("examenes", consuta.getExamenPreempleo());
+		if (consuta.getApto())
+			p.put("apto", "SI");
+		else
+			p.put("apto", "NO");
+	
+		List<ConsultaParteCuerpo> partes = new ArrayList<ConsultaParteCuerpo>();
+		partes= getServicioConsultaParteCuerpo().buscarPorConsulta(consuta);
+		
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RPreempleo.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p,
+				new JRBeanCollectionDataSource(partes));
+		return fichero;
+
+	}
+
 	public void guardarOrden(List<ConsultaMedicina> lista) {
 		Consulta consulta = lista.get(0).getConsulta();
 		Long idC = consulta.getIdConsulta();

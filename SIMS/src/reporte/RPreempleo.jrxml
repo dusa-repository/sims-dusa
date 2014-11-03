@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPreempleo" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad748ed4-6dcf-4a1b-a7a1-04d153c6d8a7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="309"/>
+	<parameter name="empresaNombre" class="java.lang.String"/>
+	<parameter name="pacienteNombre" class="java.lang.String"/>
+	<parameter name="fecha" class="java.sql.Timestamp"/>
+	<parameter name="edad" class="java.lang.Integer"/>
+	<parameter name="cedula" class="java.lang.String"/>
+	<parameter name="sexo" class="java.lang.String"/>
+	<parameter name="discapacidad" class="java.lang.String"/>
+	<parameter name="cargo" class="java.lang.String"/>
+	<parameter name="area" class="java.lang.String"/>
+	<parameter name="estatura" class="java.lang.Double"/>
+	<parameter name="peso" class="java.lang.Double"/>
+	<parameter name="masa" class="java.lang.Double"/>
+	<parameter name="examenes" class="java.lang.String"/>
+	<parameter name="apto" class="java.lang.String"/>
+	<parameter name="enfermedad" class="java.lang.String"/>
+	<field name="parte.nombre" class="java.lang.String"/>
+	<field name="observacion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="598" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="10" width="107" height="52" uuid="b8a1f39d-53b4-4867-8c1a-dc9ca934313c"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="141" y="47" width="315" height="25" uuid="d5ce8ed0-44a5-4b96-bca9-5ba2356999d8"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE CONSULTA  PRE-EMPLEO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="139" y="13" width="315" height="20" uuid="e5e78ef4-cf23-4bb3-bb9f-73cab1d02577"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresaNombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="82" width="100" height="18" uuid="e9308195-318d-46d3-866c-ec8516a9490c"/>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="82" width="100" height="18" uuid="0beee1e5-55f2-4756-a42f-ccba8026ca31"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Consulta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="103" width="52" height="18" uuid="24a53793-041b-4492-8fbc-d4a4177989e3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="62" y="103" width="493" height="18" uuid="05a079e2-f07a-4dd0-acb5-9a1062e2e045"/>
+				<textFieldExpression><![CDATA[$P{pacienteNombre}+"  C.I. "+$P{cedula}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="124" width="33" height="18" uuid="e333d77e-b705-4744-9b66-d4768ba20627"/>
+				<textFieldExpression><![CDATA[$P{edad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="124" width="39" height="18" uuid="b047ab15-6534-4ddf-909b-249d94735653"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="124" width="38" height="18" uuid="887af782-d7de-4fd5-9500-0af42cfdad6f"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="123" y="124" width="67" height="18" uuid="098abb4a-9aa4-4c04-ae7a-f97ae23921a7"/>
+				<textFieldExpression><![CDATA[$P{sexo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="194" y="124" width="100" height="18" uuid="65711848-328c-447d-aa3d-9be65a8eed81"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Es Discapacitado?]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="294" y="124" width="250" height="18" uuid="fd6d6d9d-b0d1-48e1-9638-443295ee1d3f"/>
+				<textFieldExpression><![CDATA[$P{discapacidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="145" width="89" height="18" uuid="bf5fc07f-4521-4893-8cd5-12e8cd9b9153"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Area Pretendida:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="145" width="455" height="18" uuid="ae394a1a-ecad-4307-8560-4d716362536f"/>
+				<textFieldExpression><![CDATA[$P{area}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="166" width="89" height="18" uuid="dbae928c-1240-439b-bbba-b09162b31014"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo Pretendido:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="166" width="455" height="18" uuid="4398f9c9-37ce-44eb-af00-7277ce584786"/>
+				<textFieldExpression><![CDATA[$P{cargo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="213" width="100" height="20" uuid="4f6fa2f8-92cc-4c38-b28b-903d7ba5acc1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Enfermedad Actual:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="110" y="213" width="444" height="227" uuid="be9b73b3-9a48-4e65-9da6-cfe535337555"/>
+				<textFieldExpression><![CDATA[$P{enfermedad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="188" width="50" height="18" uuid="434f6a51-7ec4-4712-9bc4-b49e1fa1e830"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estatura:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="188" width="39" height="18" uuid="51f15a00-76f9-4854-ab3a-de761a61e79e"/>
+				<textFieldExpression><![CDATA[$P{estatura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="107" y="188" width="34" height="18" uuid="9a42b1c9-7d0c-4c6b-9399-be1d0626a857"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peso:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="143" y="188" width="33" height="18" uuid="dd3e660b-a6be-4ded-a6a1-f6e51106e66f"/>
+				<textFieldExpression><![CDATA[$P{peso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="188" width="109" height="18" uuid="33cfc035-b62c-46a5-a998-bf0fc7f67d98"/>
+				<textFieldExpression><![CDATA[$P{masa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="181" y="188" width="130" height="18" uuid="e80d10a5-79f4-4f6f-aba5-8f02d979f807"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Indice de Masa Corporal:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="123" y="442" width="431" height="109" uuid="d0649ff6-7eb3-405e-a056-c6c60926781d"/>
+				<box leftPadding="3"/>
+				<textFieldExpression><![CDATA[$P{examenes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="442" width="113" height="22" uuid="7ff312a5-efbf-4f42-bf35-85d7db68e089"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Examenes Preempleo:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="582" width="554" height="15" backcolor="#F1EDED" uuid="f437f979-a934-4c6c-b544-4b65fc358359"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="581" width="209" height="17" uuid="d13bf95f-e2e7-46b9-b24f-a9e9e3be966b"/>
+				<box>
+					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parte del Cuerpo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="581" width="344" height="17" uuid="e5a79746-cc57-40b6-9bef-e4e5f8410bc2"/>
+				<box>
+					<leftPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Observacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="557" width="144" height="20" uuid="2410930a-4625-48c4-bdd4-6f5c26a34d2d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[¿Es apto para el empleo?]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="154" y="557" width="390" height="20" uuid="12ea3bc6-b3ff-4a42-8db5-5a27a30c0d71"/>
+				<textFieldExpression><![CDATA[$P{apto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="21">
+			<textField>
+				<reportElement x="1" y="1" width="209" height="20" uuid="96e7e872-8676-4fc1-89cd-f465657cd1f1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{parte.nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="1" width="344" height="20" uuid="e0d3bb48-3e92-43ac-9224-203d08944b33"/>
+				<box leftPadding="5">
+					<leftPen lineWidth="1.0" lineStyle="Dashed"/>
+					<rightPen lineStyle="Dashed"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21">
+			<staticText>
+				<reportElement x="205" y="1" width="28" height="20" uuid="e4f4ec90-8522-4f30-8869-75eec9fefb4e"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Pag.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="1" width="30" height="20" uuid="e6edd5af-a843-496e-8a4f-588e938edfb5"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement x="510" y="1" width="45" height="20" uuid="363252ba-d78c-4547-99cc-c5c8a7802c3b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="365" y="1" width="41" height="20" uuid="9e091c37-5bdb-4469-bd9a-7c39e4edba1d"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="233" y="1" width="100" height="20" uuid="2aa47d25-e987-43e7-845c-3b779fe62da2"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="406" y="1" width="66" height="20" uuid="eafc6535-4e2d-4cf9-92ad-8a3fdeab1439"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
