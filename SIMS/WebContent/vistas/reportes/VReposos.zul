@@ -4,10 +4,10 @@
 		<groupbox width="75%" mold="3d" title="Reporte de Reposos">
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="18%" />
-					<column label="" width="32%" />
-					<column label="" width="18%" />
-					<column label="" width="32%" />
+					<column label="" width="16%" />
+					<column label="" width="34%" />
+					<column label="" width="16%" />
+					<column label="" width="34%" />
 				</columns>
 				<rows>
 					<row>
@@ -92,6 +92,7 @@
 						<hbox>
 							<button id="btnBuscarDoctor" label="Buscar" class="btn"
 								image="/public/imagenes/botones/buscar.png" />
+							<separator />
 							<label id="lblNombreDoctor" />
 						</hbox>
 						<hbox>
