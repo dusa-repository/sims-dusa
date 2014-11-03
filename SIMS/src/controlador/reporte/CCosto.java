@@ -64,7 +64,7 @@ public class CCosto extends CGenerico {
 		if (mapa != null) {
 			if (mapa.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) mapa.get("tabsGenerales");
-				nombre = (String) mapa.get("nombre");
+				nombre = (String) mapa.get("titulo");
 				mapa.clear();
 				mapa = null;
 			}

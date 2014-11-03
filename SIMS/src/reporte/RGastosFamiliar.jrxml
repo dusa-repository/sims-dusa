@@ -159,7 +159,7 @@
 					</graphicElement>
 				</rectangle>
 				<textField>
-					<reportElement x="45" y="1" width="67" height="20" uuid="6c0e285e-60cc-4fc5-97f5-05568c5faec0"/>
+					<reportElement x="41" y="1" width="67" height="20" uuid="6c0e285e-60cc-4fc5-97f5-05568c5faec0"/>
 					<textElement>
 						<font size="11" isBold="true"/>
 					</textElement>
@@ -173,7 +173,7 @@
 					<textFieldExpression><![CDATA[$F{paciente.primerNombre}+" "+$F{paciente.primerApellido}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="29" y="1" width="16" height="20" uuid="a8ca6ae1-36df-4cc6-8a38-fdc5011565e8"/>
+					<reportElement x="25" y="1" width="16" height="20" uuid="a8ca6ae1-36df-4cc6-8a38-fdc5011565e8"/>
 					<textElement textAlignment="Center">
 						<font size="11" isBold="true"/>
 					</textElement>

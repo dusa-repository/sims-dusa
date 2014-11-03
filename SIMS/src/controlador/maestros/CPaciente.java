@@ -1063,7 +1063,11 @@ public class CPaciente extends CGenerico {
 		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedulaPaciente
 				.getValue());
 		if (paciente != null)
+		{
 			llenarCampos(paciente);
+			llenarMedicinas();
+			ficha = paciente.getFicha();
+		}
 	}
 
 	/* LLena los campos del formulario dado un paciente */
@@ -1321,6 +1325,7 @@ public class CPaciente extends CGenerico {
 		if (paciente != null) {
 			llenarCampos(paciente);
 			llenarMedicinas();
+			ficha = paciente.getFicha();
 		} else {
 			limpiarCampos();
 			msj.mensajeError(Mensaje.cedulaNoExiste);

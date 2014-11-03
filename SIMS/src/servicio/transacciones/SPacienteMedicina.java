@@ -38,13 +38,13 @@ public class SPacienteMedicina {
 		List<String> ordenar = new ArrayList<String>();
 		ordenar.add("pacienteCedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteMedicinaDAO.findByPacienteCronico(true,o);
+		return pacienteMedicinaDAO.findByPacienteCronicoAndPacienteEstatusTrue(true,o);
 	}
 
 	public List<PacienteMedicina> buscarPorTrabajadores(boolean b) {
 		List<String> ordenar = new ArrayList<String>();
 		ordenar.add("pacienteCedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteMedicinaDAO.findByPacienteCronicoAndPacienteTrabajador(true,b,o);
+		return pacienteMedicinaDAO.findByPacienteCronicoAndPacienteTrabajadorAndPacienteEstatusTrue(true,b,o);
 	}
 }

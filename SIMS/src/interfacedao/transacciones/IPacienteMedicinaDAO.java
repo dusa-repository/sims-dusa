@@ -17,9 +17,10 @@ public interface IPacienteMedicinaDAO extends JpaRepository<PacienteMedicina, Pa
 	List<PacienteMedicina> findByMedicinaIdMedicinaNotInAndPaciente(
 			List<Long> ids, Paciente paciente);
 
-	List<PacienteMedicina> findByPacienteCronico(boolean b, Sort o);
+	List<PacienteMedicina> findByPacienteCronicoAndPacienteEstatusTrue(
+			boolean b, Sort o);
 
-	List<PacienteMedicina> findByPacienteCronicoAndPacienteTrabajador(
+	List<PacienteMedicina> findByPacienteCronicoAndPacienteTrabajadorAndPacienteEstatusTrue(
 			boolean b, boolean b2, Sort o);
 
 }

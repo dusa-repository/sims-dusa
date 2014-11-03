@@ -27,22 +27,22 @@
 	<group name="especialidad">
 		<groupExpression><![CDATA[$F{especialista.especialidad.descripcion}]]></groupExpression>
 		<groupHeader>
-			<band height="31">
+			<band height="20">
 				<rectangle>
-					<reportElement x="0" y="6" width="572" height="20" backcolor="#DBD7D7" uuid="d87f19c3-6e07-475e-8043-26a753986cf4"/>
+					<reportElement x="0" y="3" width="572" height="16" backcolor="#DBD7D7" uuid="d87f19c3-6e07-475e-8043-26a753986cf4"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
 				</rectangle>
 				<staticText>
-					<reportElement x="0" y="6" width="19" height="20" uuid="1765cd18-3f0b-4a59-a44c-3faa4aa0b9de"/>
+					<reportElement x="0" y="3" width="19" height="17" uuid="1765cd18-3f0b-4a59-a44c-3faa4aa0b9de"/>
 					<textElement textAlignment="Center">
 						<font size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[>>]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="19" y="6" width="551" height="20" uuid="8e979598-add7-4fae-91c0-efeeea8cf4d8"/>
+					<reportElement x="19" y="3" width="551" height="17" uuid="8e979598-add7-4fae-91c0-efeeea8cf4d8"/>
 					<textElement>
 						<font size="11" isBold="true"/>
 					</textElement>
@@ -51,23 +51,23 @@
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="27">
+			<band height="21">
 				<staticText>
-					<reportElement x="239" y="4" width="27" height="20" uuid="57fc1ec2-04dc-4717-9090-9ae7d71d5557"/>
-					<textElement textAlignment="Right">
+					<reportElement x="318" y="1" width="27" height="20" uuid="57fc1ec2-04dc-4717-9090-9ae7d71d5557"/>
+					<textElement textAlignment="Center">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="266" y="4" width="230" height="20" uuid="ffd2bbd8-63f4-4037-8706-188dce8af720"/>
+					<reportElement x="345" y="1" width="151" height="20" uuid="ffd2bbd8-63f4-4037-8706-188dce8af720"/>
 					<textElement textAlignment="Right">
-						<font isBold="true"/>
+						<font isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{especialista.especialidad.descripcion}]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0.00;-###0.00">
-					<reportElement x="501" y="4" width="67" height="20" uuid="a609961f-a2e7-4477-96c4-1a5927f9d055"/>
+					<reportElement x="501" y="1" width="67" height="20" uuid="a609961f-a2e7-4477-96c4-1a5927f9d055"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 					</box>
@@ -82,29 +82,29 @@
 	<group name="especialista">
 		<groupExpression><![CDATA[$F{especialista.cedula}]]></groupExpression>
 		<groupHeader>
-			<band height="30">
+			<band height="19">
 				<rectangle>
-					<reportElement x="0" y="6" width="572" height="20" backcolor="#F1EDED" uuid="3f8cc4c2-194e-4e52-a951-f6251b6e5624"/>
+					<reportElement x="0" y="2" width="572" height="16" backcolor="#F1EDED" uuid="3f8cc4c2-194e-4e52-a951-f6251b6e5624"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
 				</rectangle>
 				<staticText>
-					<reportElement x="15" y="6" width="12" height="20" uuid="1c01d1c8-d2c9-4a20-a2c3-d2879ec962cb"/>
+					<reportElement x="15" y="2" width="12" height="17" uuid="1c01d1c8-d2c9-4a20-a2c3-d2879ec962cb"/>
 					<textElement textAlignment="Center">
 						<font size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[>]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="27" y="6" width="88" height="20" uuid="432ad1a0-9a85-4d37-94a7-35122a2c7288"/>
+					<reportElement x="27" y="2" width="88" height="17" uuid="432ad1a0-9a85-4d37-94a7-35122a2c7288"/>
 					<textElement>
 						<font size="11" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{especialista.cedula}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="119" y="6" width="451" height="20" uuid="8024ab63-b257-40b0-bc3a-3558ba85f5ea"/>
+					<reportElement x="117" y="2" width="451" height="17" uuid="8024ab63-b257-40b0-bc3a-3558ba85f5ea"/>
 					<textElement>
 						<font size="11" isBold="true"/>
 					</textElement>
@@ -113,30 +113,23 @@
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="30">
+			<band height="21">
 				<staticText>
-					<reportElement x="183" y="5" width="31" height="20" uuid="ba7a30e5-de70-41a0-9d59-dbd6e546b82a"/>
-					<textElement textAlignment="Right">
+					<reportElement x="275" y="1" width="31" height="20" uuid="ba7a30e5-de70-41a0-9d59-dbd6e546b82a"/>
+					<textElement textAlignment="Center">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="214" y="5" width="89" height="20" uuid="7bf4ae07-15b8-4933-938c-73472016aecb"/>
+					<reportElement x="306" y="1" width="190" height="20" uuid="fe0df82c-a1db-4731-b782-0d5579d79bed"/>
 					<textElement textAlignment="Right">
-						<font isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{especialista.cedula}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="303" y="5" width="193" height="20" uuid="fe0df82c-a1db-4731-b782-0d5579d79bed"/>
-					<textElement textAlignment="Right">
-						<font isBold="true"/>
+						<font isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{especialista.nombre}+" "+$F{especialista.apellido}]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0.00;-###0.00">
-					<reportElement x="501" y="5" width="67" height="20" uuid="388bca1f-2600-4dbd-8e10-d91bce1dccca"/>
+					<reportElement x="501" y="1" width="67" height="20" uuid="388bca1f-2600-4dbd-8e10-d91bce1dccca"/>
 					<box>
 						<topPen lineWidth="0.5"/>
 					</box>
@@ -165,28 +158,28 @@
 				<text><![CDATA[ORDENES POR ESPECIALISTA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="321" y="69" width="42" height="20" uuid="1491609a-ddf1-4320-bead-0db198244eb9"/>
+				<reportElement x="321" y="67" width="42" height="20" uuid="1491609a-ddf1-4320-bead-0db198244eb9"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Desde:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="457" y="69" width="39" height="20" uuid="34b63b7a-ff43-440c-8c41-921198cc7add"/>
+				<reportElement x="457" y="67" width="39" height="20" uuid="34b63b7a-ff43-440c-8c41-921198cc7add"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Hasta:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="363" y="69" width="83" height="20" uuid="0dd64037-6c80-430e-a864-74699cce87b5"/>
+				<reportElement x="363" y="67" width="83" height="20" uuid="0dd64037-6c80-430e-a864-74699cce87b5"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{desde}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="496" y="69" width="76" height="20" uuid="3b712d2c-00fc-4321-8f16-9b426e586bb2"/>
+				<reportElement x="496" y="67" width="76" height="20" uuid="3b712d2c-00fc-4321-8f16-9b426e586bb2"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -195,74 +188,74 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="20" splitType="Stretch">
+		<band height="14" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="0" width="572" height="20" backcolor="#CCCCCC" uuid="20d061da-4fa0-4ec6-9de5-0de54647d7c7"/>
+				<reportElement x="0" y="0" width="572" height="14" backcolor="#CCCCCC" uuid="20d061da-4fa0-4ec6-9de5-0de54647d7c7"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="83" height="20" uuid="14c9238f-204e-4d53-a781-351f2be2499e"/>
+				<reportElement x="0" y="0" width="83" height="14" uuid="14c9238f-204e-4d53-a781-351f2be2499e"/>
 				<textElement textAlignment="Center">
-					<font size="10" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha Consulta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="83" y="0" width="96" height="20" uuid="86a56939-7c52-40b5-b6a8-f03b04a33732"/>
+				<reportElement x="83" y="0" width="96" height="14" uuid="86a56939-7c52-40b5-b6a8-f03b04a33732"/>
 				<textElement textAlignment="Center">
-					<font size="10" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tipo Consulta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="179" y="0" width="73" height="20" uuid="1c445b52-3b94-441a-b645-218da86209f3"/>
+				<reportElement x="179" y="0" width="73" height="14" uuid="1c445b52-3b94-441a-b645-218da86209f3"/>
 				<textElement textAlignment="Center">
-					<font size="10" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Cedula Paciente]]></text>
+				<text><![CDATA[ Paciente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="252" y="0" width="231" height="20" uuid="6f4e6c49-ba6b-4028-96dc-ca3cfc2cdcaf"/>
+				<reportElement x="252" y="0" width="244" height="14" uuid="6f4e6c49-ba6b-4028-96dc-ca3cfc2cdcaf"/>
 				<textElement textAlignment="Center">
-					<font size="10" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Nombre y Apellido Paciente]]></text>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="483" y="0" width="89" height="20" uuid="eb672fd4-ae75-42af-9f51-88638620a187"/>
+				<reportElement x="497" y="0" width="75" height="14" uuid="eb672fd4-ae75-42af-9f51-88638620a187"/>
 				<textElement textAlignment="Center">
-					<font size="10" isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Costo Servicio]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="20" splitType="Stretch">
+		<band height="18" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="100" height="20" uuid="2197cd0d-5d1d-4ee1-919c-c0bb74b0897a"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="83" height="18" uuid="2197cd0d-5d1d-4ee1-919c-c0bb74b0897a"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="100" y="0" width="83" height="20" uuid="88ba5e58-006d-42ec-bddd-b33c1eade8d7"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="83" y="0" width="96" height="18" uuid="88ba5e58-006d-42ec-bddd-b33c1eade8d7"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{consulta.tipoConsultaSecundaria}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="183" y="0" width="83" height="20" uuid="da5f3657-820b-4e68-8c24-49e30875ecda"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="179" y="0" width="83" height="18" uuid="da5f3657-820b-4e68-8c24-49e30875ecda"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{consulta.paciente.cedula}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="266" y="0" width="230" height="20" uuid="29129184-6aab-4f02-b8bd-d2b22d926cbb"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="262" y="0" width="234" height="18" uuid="29129184-6aab-4f02-b8bd-d2b22d926cbb"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{consulta.paciente.primerNombre}+" "+$F{consulta.paciente.primerApellido}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="496" y="0" width="76" height="20" uuid="3fe81dbb-81e8-48d2-b858-f45fc89d16ec"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="496" y="0" width="76" height="18" uuid="3fe81dbb-81e8-48d2-b858-f45fc89d16ec"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{especialista.costo}]]></textFieldExpression>
 			</textField>
@@ -275,11 +268,11 @@
 				<text><![CDATA[Pag.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="353" y="0" width="34" height="20" uuid="62792ba3-de6e-4fa5-bb36-61bbafb98999"/>
+				<reportElement x="369" y="0" width="34" height="20" uuid="62792ba3-de6e-4fa5-bb36-61bbafb98999"/>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="470" y="0" width="26" height="20" uuid="09a1302e-51a7-4d7b-b0c3-e2d921203eb6"/>
+				<reportElement x="491" y="0" width="26" height="20" uuid="09a1302e-51a7-4d7b-b0c3-e2d921203eb6"/>
 				<text><![CDATA[Hora:]]></text>
 			</staticText>
 			<textField>
@@ -287,19 +280,19 @@
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="387" y="0" width="83" height="20" uuid="f9206f63-c267-47ef-a53d-d7e0da849681"/>
+				<reportElement x="403" y="0" width="83" height="20" uuid="f9206f63-c267-47ef-a53d-d7e0da849681"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<textField pattern="HH.mm">
-				<reportElement x="496" y="0" width="76" height="20" uuid="13c54ea5-4e67-48b8-acbf-75c29fa43e48"/>
+			<textField pattern="h.mm a">
+				<reportElement x="516" y="0" width="56" height="20" uuid="13c54ea5-4e67-48b8-acbf-75c29fa43e48"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
 	<lastPageFooter>
-		<band height="20">
+		<band height="41">
 			<staticText>
-				<reportElement x="374" y="0" width="122" height="20" uuid="151c739d-497e-4100-8b57-fcebb3f26c39"/>
+				<reportElement x="375" y="0" width="122" height="20" uuid="151c739d-497e-4100-8b57-fcebb3f26c39"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
@@ -312,6 +305,30 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$V{costo_total}]]></textFieldExpression>
 			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="516" y="21" width="55" height="20" uuid="c3d6acf8-4fa2-42bf-9b18-08b81e8e19a6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="255" y="21" width="26" height="20" uuid="1d8e2397-fcf6-4b7e-ab03-ab4a3f3e62d4"/>
+				<text><![CDATA[Pag.]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="402" y="21" width="83" height="20" uuid="d6c544f7-2f5d-46b9-9f29-5b649ee3d28f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="21" width="27" height="20" uuid="8e3fa2ac-04b9-4423-b51d-1db5d87f7fe1"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="368" y="21" width="34" height="20" uuid="1b68f494-f9dd-47b8-ad58-fc4078533c6b"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="491" y="21" width="26" height="20" uuid="91826bf7-d6bd-47df-8eb4-22924b286154"/>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
 		</band>
 	</lastPageFooter>
 </jasperReport>
