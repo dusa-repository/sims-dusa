@@ -134,8 +134,8 @@
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="68" y="3" width="277" height="20" uuid="3b8ff40a-49db-43c4-8eae-d3fa398853e1"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="68" y="3" width="277" height="20" uuid="3b8ff40a-49db-43c4-8eae-d3fa398853e1"/>
 				<box leftPadding="2" rightPadding="2"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{primerNombre}+" "+$F{primerApellido}]]></textFieldExpression>

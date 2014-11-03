@@ -7,6 +7,7 @@ import modelo.pk.PacienteMedicinaId;
 import modelo.transacciones.ConsultaMedicina;
 import modelo.transacciones.PacienteMedicina;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IPacienteMedicinaDAO extends JpaRepository<PacienteMedicina, PacienteMedicinaId> {
@@ -15,5 +16,10 @@ public interface IPacienteMedicinaDAO extends JpaRepository<PacienteMedicina, Pa
 
 	List<PacienteMedicina> findByMedicinaIdMedicinaNotInAndPaciente(
 			List<Long> ids, Paciente paciente);
+
+	List<PacienteMedicina> findByPacienteCronico(boolean b, Sort o);
+
+	List<PacienteMedicina> findByPacienteCronicoAndPacienteTrabajador(
+			boolean b, boolean b2, Sort o);
 
 }
