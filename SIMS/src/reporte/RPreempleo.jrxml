@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPreempleo" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad748ed4-6dcf-4a1b-a7a1-04d153c6d8a7">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="309"/>
+	<property name="ireport.y" value="353"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="pacienteNombre" class="java.lang.String"/>
 	<parameter name="fecha" class="java.sql.Timestamp"/>
@@ -239,40 +239,60 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="21">
+		<band height="48">
 			<staticText>
-				<reportElement x="205" y="1" width="28" height="20" uuid="e4f4ec90-8522-4f30-8869-75eec9fefb4e"/>
+				<reportElement x="205" y="27" width="28" height="20" uuid="e4f4ec90-8522-4f30-8869-75eec9fefb4e"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Pag.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="1" width="30" height="20" uuid="e6edd5af-a843-496e-8a4f-588e938edfb5"/>
+				<reportElement x="480" y="27" width="30" height="20" uuid="e6edd5af-a843-496e-8a4f-588e938edfb5"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Hora:]]></text>
 			</staticText>
 			<textField pattern="h.mm a">
-				<reportElement x="510" y="1" width="45" height="20" uuid="363252ba-d78c-4547-99cc-c5c8a7802c3b"/>
+				<reportElement x="510" y="27" width="45" height="20" uuid="363252ba-d78c-4547-99cc-c5c8a7802c3b"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="365" y="1" width="41" height="20" uuid="9e091c37-5bdb-4469-bd9a-7c39e4edba1d"/>
+				<reportElement x="365" y="27" width="41" height="20" uuid="9e091c37-5bdb-4469-bd9a-7c39e4edba1d"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="233" y="1" width="100" height="20" uuid="2aa47d25-e987-43e7-845c-3b779fe62da2"/>
+				<reportElement x="233" y="27" width="100" height="20" uuid="2aa47d25-e987-43e7-845c-3b779fe62da2"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="406" y="1" width="66" height="20" uuid="eafc6535-4e2d-4cf9-92ad-8a3fdeab1439"/>
+				<reportElement x="406" y="27" width="66" height="20" uuid="eafc6535-4e2d-4cf9-92ad-8a3fdeab1439"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="60" y="3" width="89" height="20" uuid="1476a836-bf8f-417f-9447-f47215837acb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma Paciente:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="3" width="84" height="20" uuid="2e7572d3-641e-4a0b-91bd-3fc67f3ed9a2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma Doctor:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="149" y="19" width="147" height="1" uuid="859076fd-652d-4acd-8022-9e821bbaa906"/>
+			</line>
+			<line>
+				<reportElement x="405" y="20" width="147" height="1" uuid="1dcd343c-3939-450c-bad2-10e621681245"/>
+			</line>
 		</band>
 	</pageFooter>
 </jasperReport>
