@@ -2,6 +2,8 @@ package servicio.transacciones;
 
 import interfacedao.transacciones.IConsultaServicioExternoDAO;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Proveedor;
@@ -10,6 +12,7 @@ import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaServicioExterno;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service("SConsultaServicioExterno")
@@ -23,8 +26,9 @@ public class SConsultaServicioExterno {
 	}
 
 	public void borrarServiciosDeConsulta(Consulta consulta) {
-		List<ConsultaServicioExterno> lista = consultaServicioExternoDAO.findByConsulta(consulta);
-		if(!lista.isEmpty()){
+		List<ConsultaServicioExterno> lista = consultaServicioExternoDAO
+				.findByConsulta(consulta);
+		if (!lista.isEmpty()) {
 			consultaServicioExternoDAO.delete(lista);
 		}
 	}
@@ -36,7 +40,9 @@ public class SConsultaServicioExterno {
 	public ConsultaServicioExterno buscarPorConsultaYIdServicio(
 			Consulta consuta, Long part4) {
 		// TODO Auto-generated method stub
-		return consultaServicioExternoDAO.findByConsultaAndServicioExternoIdServicioExterno(consuta,part4);
+		return consultaServicioExternoDAO
+				.findByConsultaAndServicioExternoIdServicioExterno(consuta,
+						part4);
 	}
 
 	public List<ConsultaServicioExterno> buscarPorProveedor(Proveedor proveedor) {
@@ -47,7 +53,8 @@ public class SConsultaServicioExterno {
 	public List<ConsultaServicioExterno> buscarPorServicio(
 			ServicioExterno servicioExterno) {
 		// TODO Auto-generated method stub
-		return consultaServicioExternoDAO.findByServicioExterno(servicioExterno);
+		return consultaServicioExternoDAO
+				.findByServicioExterno(servicioExterno);
 	}
 
 	public double sumPorConsulta(Consulta consulta) {
@@ -56,6 +63,30 @@ public class SConsultaServicioExterno {
 
 	public List<ConsultaServicioExterno> buscarPorConsultaYProveedor(
 			Consulta consuta, Long part5) {
-		return consultaServicioExternoDAO.findByConsultaAndProveedorIdProveedor(consuta, part5);
+		return consultaServicioExternoDAO
+				.findByConsultaAndProveedorIdProveedor(consuta, part5);
+	}
+
+	public List<ConsultaServicioExterno> buscarPorProveedorEntreFechas(
+			Date desde, Date hasta, Proveedor proveedor) {
+
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("proveedorIdProveedor");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaServicioExternoDAO
+				.findByProveedorAndConsultaFechaConsultaBetween(proveedor,
+						desde, hasta, o);
+	}
+
+	public List<ConsultaServicioExterno> buscarEntreFechas(Date desde,
+			Date hasta) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("proveedorIdProveedor");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaServicioExternoDAO
+				.findByConsultaFechaConsultaBetweenAndProveedorNotNull(desde,
+						hasta, o);
 	}
 }
