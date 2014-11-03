@@ -17,7 +17,7 @@
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
 						<datebox width="100%" readonly="true" id="dtbDesde"
-							constraint="no future" onCreate="self.value = new Date()"
+							onCreate="self.value = new Date()"
 							tooltiptext="Seleccione el inicio del Periodo a buscar" />
 						<hbox>
 							<label class="etiqueta" value="Hasta:" />
