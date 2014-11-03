@@ -78,7 +78,6 @@ public class CDiagnostico extends CGenerico {
 		if (mapa != null) {
 			if (mapa.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) mapa.get("tabsGenerales");
-				System.out.println(tabs.size());
 				mapa.clear();
 				mapa = null;
 			}

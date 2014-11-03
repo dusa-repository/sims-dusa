@@ -243,7 +243,7 @@ public class COrdenProveedor extends CGenerico {
 		if (!examenes.isEmpty()) {
 			lista.addAll(examenes);
 			for (int j = 0; j < lista.size(); j++) {
-				lista.get(j).setResultado("Examenes");
+				lista.get(j).setResultado("EXAMENES");
 			}
 			for (int i = 0; i < estudios.size(); i++) {
 				ConsultaExamen consultaExamen = new ConsultaExamen();
@@ -254,7 +254,7 @@ public class COrdenProveedor extends CGenerico {
 				examen.setNombre(estudios.get(i).getServicioExterno()
 						.getNombre());
 				consultaExamen.setExamen(examen);
-				consultaExamen.setResultado("Estudios");
+				consultaExamen.setResultado("ESTUDIOS");
 				long id = consultaExamen.getProveedor().getIdProveedor();
 				boolean entro = false;
 				for (int j = 0; j < lista.size(); j++) {

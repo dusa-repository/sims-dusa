@@ -116,48 +116,49 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 	List<Paciente> findByTrabajadorFalseAndEstatusTrueOrderByCedulaAsc(
 			Pageable topTen);
 
-	List<Paciente> findByEdadBetweenAndTrabajadorFalse(int dea, int aa, Sort o);
+	List<Paciente> findByEdadBetweenAndTrabajadorAndEstatusTrue(int dea,
+			int aa, boolean b, Sort o);
 
-	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndSexoAndParentescoFamiliar(
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndSexoAndParentescoFamiliarAndEstatusTrue(
 			int dea, int aa, String sexo, String parentesco, Sort o);
 
-	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndSexo(int dea, int aa,
-			String sexo, Sort o);
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndSexoAndEstatusTrue(
+			int dea, int aa, String sexo, Sort o);
 
-	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndParentescoFamiliar(
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndParentescoFamiliarAndEstatusTrue(
 			int dea, int aa, String parentesco, Sort o);
 
-	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliar(
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndEstatusTrue(
 			int dea, int aa, String idTrabajador, Sort o);
-	
-@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
-	List<Paciente> findByEdadBetweenAndTrabajadorAndCedulaFamiliarAndSexo(
-			int dea, int aa, boolean a, String idTrabajador, String sexo);
 
-	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliar(
+	List<Paciente> findByEdadBetweenAndSexoAndCedulaFamiliarAndEstatusTrue(
+			int dea, int aa, String sexo, String idTrabajador, Sort o);
+
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliarAndEstatusTrue(
 			int dea, int aa, String idTrabajador, String parentesco, Sort o);
 
-	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliarAndSexo(
+	List<Paciente> findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliarAndSexoAndEstatusTrue(
 			int dea, int aa, String idTrabajador, String parentesco,
 			String sexo, Sort o);
 
-	List<Paciente> findByEdadBetween(int dea, int aa, Sort o);
+	List<Paciente> findByEdadBetweenAndEstatusTrue(int dea, int aa, Sort o);
 
-	List<Paciente> findByEdadBetweenAndTrabajador(int dea, int aa, boolean b,
-			Sort o);
+	List<Paciente> findByEdadBetweenAndTrabajadorAndSexoAndEstatusTrue(int dea,
+			int aa, boolean b, String sexo, Sort o);
 
-	List<Paciente> findByEdadBetweenAndTrabajadorAndSexo(int dea, int aa,
-			boolean b, String sexo, Sort o);
+	List<Paciente> findByEdadBetweenAndTrabajadorAndDiscapacidadAndEstatusTrue(
+			int dea, int aa, boolean b, boolean c, Sort o);
 
-	List<Paciente> findByEdadBetweenAndTrabajadorAndDiscapacidad(int dea,
-			int aa, boolean b, boolean c, Sort o);
-
-	List<Paciente> findByEdadBetweenAndTrabajadorAndDiscapacidadAndSexo(
+	List<Paciente> findByEdadBetweenAndTrabajadorAndDiscapacidadAndSexoAndEstatusTrue(
 			int dea, int aa, boolean b, boolean c, String sexo, Sort o);
 
-	List<Paciente> findByEdadBetweenAndDiscapacidad(int dea, int aa, boolean b,
-			Sort o);
+	List<Paciente> findByEdadBetweenAndDiscapacidadAndEstatusTrue(int dea,
+			int aa, boolean b, Sort o);
 
-	List<Paciente> findByEdadBetweenAndDiscapacidadAndSexo(int dea, int aa,
-			boolean b, String sexo, Sort o);
+	List<Paciente> findByEdadBetweenAndDiscapacidadAndSexoAndEstatusTrue(
+			int dea, int aa, boolean b, String sexo, Sort o);
+
+	List<Paciente> findByTrabajadorTrueAndEstatusTrue(Pageable topTen);
+	
+//@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
 }

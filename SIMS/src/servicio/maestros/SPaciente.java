@@ -108,7 +108,7 @@ public class SPaciente {
 
 	public List<Paciente> buscarTodosTrabajadores() {
 		Pageable topTen = new PageRequest(0, 10);
-		return pacienteDAO.findByTrabajadorTrue(topTen);
+		return pacienteDAO.findByTrabajadorTrueAndEstatusTrue(topTen);
 	}
 
 	public List<Paciente> filtroNombre1C(String valor, String value) {
@@ -229,7 +229,7 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajador(dea, aa,b, o);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorAndEstatusTrue(dea, aa,b, o);
 
 	}
 
@@ -240,7 +240,7 @@ public class SPaciente {
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return pacienteDAO
-				.findByEdadBetweenAndTrabajadorFalseAndSexoAndParentescoFamiliar(
+				.findByEdadBetweenAndTrabajadorFalseAndSexoAndParentescoFamiliarAndEstatusTrue(
 						dea, aa, sexo, parentesco, o);
 	}
 
@@ -249,7 +249,7 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorFalseAndSexo(dea, aa,
+		return pacienteDAO.findByEdadBetweenAndTrabajadorFalseAndSexoAndEstatusTrue(dea, aa,
 				sexo, o);
 	}
 
@@ -260,7 +260,7 @@ public class SPaciente {
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return pacienteDAO
-				.findByEdadBetweenAndTrabajadorFalseAndParentescoFamiliar(dea,
+				.findByEdadBetweenAndTrabajadorFalseAndParentescoFamiliarAndEstatusTrue(dea,
 						aa, parentesco, o);
 	}
 
@@ -271,19 +271,17 @@ public class SPaciente {
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return pacienteDAO
-				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliar(dea, aa,
+				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndEstatusTrue(dea, aa,
 						idTrabajador, o);
 	}
 
 	public List<Paciente> buscarCono(int dea, int aa,
 			String sexo, String idTrabajador) {
-//		List<String> ordenar = new ArrayList<String>();
-//		ordenar.add("cedulaFamiliar");
-//		ordenar.add("cedula");
-//		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO
-				.findByEdadBetweenAndTrabajadorAndCedulaFamiliarAndSexo(
-						dea, aa, false, idTrabajador, sexo);
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("cedulaFamiliar");
+		ordenar.add("cedula");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByEdadBetweenAndSexoAndCedulaFamiliarAndEstatusTrue(dea,aa,sexo,idTrabajador,o);
 	}
 
 	public List<Paciente> buscarPorEdadesTrabajadoryParentesco(int dea, int aa,
@@ -293,7 +291,7 @@ public class SPaciente {
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return pacienteDAO
-				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliar(
+				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliarAndEstatusTrue(
 						dea, aa, idTrabajador, parentesco, o);
 	}
 
@@ -304,7 +302,7 @@ public class SPaciente {
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return pacienteDAO
-				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliarAndSexo(
+				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliarAndSexoAndEstatusTrue(
 						dea, aa, idTrabajador, parentesco,sexo, o);
 	}
 
@@ -313,7 +311,7 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetween(dea, aa, o);
+		return pacienteDAO.findByEdadBetweenAndEstatusTrue(dea, aa, o);
 	}
 
 	public List<Paciente> buscarPorEdadesTrabajadorSexo(int dea, int aa,
@@ -322,7 +320,7 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorAndSexo(dea, aa,b,sexo, o);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorAndSexoAndEstatusTrue(dea, aa,b,sexo, o);
 	}
 
 	public List<Paciente> buscarPorEdadesTrabajadorDiscapacidad(int dea,
@@ -331,7 +329,7 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorAndDiscapacidad(dea, aa,b,c, o);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorAndDiscapacidadAndEstatusTrue(dea, aa,b,c, o);
 	}
 
 	public List<Paciente> buscarPorEdadesTrabajadorDiscapacidadSexo(int dea,
@@ -340,7 +338,7 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorAndDiscapacidadAndSexo(dea, aa,b,c,sexo, o);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorAndDiscapacidadAndSexoAndEstatusTrue(dea, aa,b,c,sexo, o);
 	}
 
 	public List<Paciente> buscarPorEdadesDiscapacidad(int dea, int aa, boolean b) {
@@ -348,7 +346,7 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndDiscapacidad(dea, aa,b, o);
+		return pacienteDAO.findByEdadBetweenAndDiscapacidadAndEstatusTrue(dea, aa,b, o);
 	}
 
 	public List<Paciente> buscarPorEdadesDiscapacidadSexo(int dea, int aa,
@@ -357,7 +355,7 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndDiscapacidadAndSexo(dea, aa,b,sexo, o);
+		return pacienteDAO.findByEdadBetweenAndDiscapacidadAndSexoAndEstatusTrue(dea, aa,b,sexo, o);
 	}
 
 }
