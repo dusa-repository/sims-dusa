@@ -1,5 +1,6 @@
 package interfacedao.transacciones;
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Proveedor;
@@ -8,6 +9,7 @@ import modelo.pk.ConsultaServicioExternoId;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaServicioExterno;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -28,5 +30,11 @@ public interface IConsultaServicioExternoDAO extends JpaRepository<ConsultaServi
 
 	List<ConsultaServicioExterno> findByConsultaAndProveedorIdProveedor(
 			Consulta consuta, Long part5);
+
+	List<ConsultaServicioExterno> findByProveedorAndConsultaFechaConsultaBetween(
+			Proveedor proveedor, Date desde, Date hasta, Sort o);
+
+	List<ConsultaServicioExterno> findByConsultaFechaConsultaBetweenAndProveedorNotNull(
+			Date desde, Date hasta, Sort o);
 
 }

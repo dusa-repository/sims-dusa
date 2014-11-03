@@ -312,6 +312,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		return applicationContext.getBean(SConsultaEspecialista.class);
 	}
 
+	public static SEspecialista getServicioEspecialista() {
+		return applicationContext.getBean(SEspecialista.class);
+	}
+
 	public static SConsultaServicioExterno getServicioConsultaServicioExterno() {
 		return applicationContext.getBean(SConsultaServicioExterno.class);
 	}
@@ -332,12 +336,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		return applicationContext.getBean(SPaciente.class);
 	}
 
-
 	public static SPacienteMedicina getServicioPacienteMedicina() {
 		return applicationContext.getBean(SPacienteMedicina.class);
 	}
 
-	
 	public static SProveedor getServicioProveedor() {
 		return applicationContext.getBean(SProveedor.class);
 	}
@@ -533,7 +535,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public String diaSemanaString(Calendar calendar) {
 		int dia = calendar.get(Calendar.DAY_OF_WEEK);
 		String diaSemana = "";
-		System.out.println("int"+dia);
+		System.out.println("int" + dia);
 		switch (dia) {
 		case 2:
 			diaSemana = "Lunes";
