@@ -149,7 +149,9 @@ public class COrdenProveedor extends CGenerico {
 							estudios = servicioConsultaServicioExterno
 									.buscarEntreFechas(desde, hasta);
 						}
-						if (!examenes.isEmpty() && !estudios.isEmpty())
+						if (examenes.isEmpty() && estudios.isEmpty())
+							msj.mensajeAlerta(Mensaje.noHayRegistros);
+						else
 							Clients.evalJavaScript("window.open('"
 									+ damePath()
 									+ "Reportero?valor=31&valor6="
@@ -161,8 +163,6 @@ public class COrdenProveedor extends CGenerico {
 									+ "&valor20="
 									+ tipoReporte
 									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
-						else
-							msj.mensajeAlerta(Mensaje.noHayRegistros);
 						break;
 
 					case 2:
@@ -266,7 +266,6 @@ public class COrdenProveedor extends CGenerico {
 					}
 				}
 				if (!entro) {
-					System.out.println("dis dif");
 					ConsultaExamen removida = lista.set(lista.size() - 1,
 							consultaExamen);
 					lista.add(lista.size() - 1, removida);
@@ -282,6 +281,7 @@ public class COrdenProveedor extends CGenerico {
 				examen.setNombre(estudios.get(i).getServicioExterno()
 						.getNombre());
 				consultaExamen.setExamen(examen);
+				consultaExamen.setResultado("ESTUDIOS");
 				lista.add(consultaExamen);
 			}
 		}
