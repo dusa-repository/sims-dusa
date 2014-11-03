@@ -4,10 +4,10 @@
 		<groupbox width="75%" mold="3d" title="Gastos por Consulta">
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="18%" />
-					<column label="" width="32%" />
-					<column label="" width="18%" />
-					<column label="" width="32%" />
+					<column label="" width="15%" />
+					<column label="" width="35%" />
+					<column label="" width="15%" />
+					<column label="" width="35%" />
 				</columns>
 				<rows>
 					<row>
@@ -29,14 +29,15 @@
 					</row>
 					<row>
 						<hbox>
-							<label class="etiqueta" value="Cedula:" />
+							<label class="etiqueta" value="Trabajador:" />
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
 						<hbox>
-							<label id="lblPaciente" />
 							<button autodisable="self" id="btnBuscarPaciente" class="btn"
 								label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+							<separator />
+							<label id="lblPaciente" />
 						</hbox>
 						<hbox id="boxParentesco">
 							<label class="etiqueta" value="Parentesco:" />

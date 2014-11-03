@@ -64,6 +64,7 @@ public class CGasto extends CGenerico {
 	private Div divCatalogoPaciente;
 	Catalogo<Paciente> catalogo;
 	String nombre;
+	String idPaciente="";
 	int tipo;
 
 	@Override
@@ -112,7 +113,7 @@ public class CGasto extends CGenerico {
 					DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
 					String fecha1 = fecha.format(desde);
 					String fecha2 = fecha.format(hasta);
-					String paciente = lblPaciente.getValue();
+					String paciente = idPaciente;
 					String parentesco = cmbParentescoFamiliar.getValue();
 					String tipoReporte = cmbTipo.getValue();
 					List<Consulta> consultas = new ArrayList<Consulta>();
@@ -265,7 +266,8 @@ public class CGasto extends CGenerico {
 	@Listen("onSeleccion = #divCatalogoPaciente")
 	public void seleccinarTrabajador() {
 		Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
-		lblPaciente.setValue(paciente.getCedula());
+		lblPaciente.setValue(paciente.getPrimerNombre()+" "+paciente.getPrimerApellido());
+		idPaciente = paciente.getCedula();
 		catalogo.setParent(null);
 	}
 
@@ -320,6 +322,10 @@ public class CGasto extends CGenerico {
 						.setCedulaFamiliar(
 								trabajador.getCedula() + " "
 										+ trabajador.getPrimerNombre() + " "
+										+ trabajador.getPrimerApellido());
+				consultas
+				.get(i)
+				.getPaciente().setDireccion(trabajador.getPrimerNombre() + " "
 										+ trabajador.getPrimerApellido());
 				double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
 				// Suma lo que ha entregado
