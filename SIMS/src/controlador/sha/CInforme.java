@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import modelo.maestros.Empresa;
@@ -16,12 +17,17 @@ import modelo.sha.Area;
 import modelo.sha.ClasificacionAccidente;
 import modelo.sha.Condicion;
 import modelo.sha.Informe;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
@@ -45,6 +51,9 @@ import controlador.maestros.CGenerico;
 public class CInforme extends CGenerico {
 
 	private static final long serialVersionUID = -6378965001066569507L;
+	
+	@Wire
+	private Button btnReporte;
 	@Wire
 	private Div divInforme;
 	@Wire
@@ -3492,4 +3501,59 @@ public class CInforme extends CGenerico {
 		ltb822.setModel(getCondicionesF());
 		listasMultiples();
 	}
+	@Listen("onClick =#btnReporte")
+	public void reporte() 
+	{
+		System.out.println("metodo");
+		if(idInforme!=0)
+		{
+			System.out.println("entro");
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=33&valor6="
+					+ String.valueOf(idInforme)
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
+	}
+
+	public byte[] reporteInpsasel(String par6) throws JRException {
+		
+		System.out.println("codigo  "+ par6);
+		byte[] fichero = null;
+		Informe informe = getServicioInforme().buscar(Long.parseLong(par6));
+
+		Map p = new HashMap();
+		p.put("codigo", informe.getCodigo());
+		
+		if(informe.getPacienteA()!=null)
+		{
+		p.put("nombre211", informe.getPacienteA().getPrimerNombre()+ " "+informe.getPacienteA().getPrimerApellido());
+		p.put("cedula211",informe.getPacienteA().getCedula());
+		p.put("a", informe.getPacienteA().getNroInpsasel());
+		}
+		if(informe.getPacienteB()!=null)
+		p.put("nombre212", informe.getPacienteB().getPrimerNombre());
+		
+		if(informe.getEmpresaA()!=null)
+		{
+			p.put("razonA", informe.getEmpresaA().getRazon());
+		}
+		p.put("fa", informe.getFa());
+		p.put("fb", informe.getFb());
+		p.put("fc", informe.getFc());
+		p.put("fgac", informe.getArea());
+		
+		p.put("fgad", informe.getFgad());
+		if(informe.getFgga())
+		p.put("fgg", "SI");
+		else
+			p.put("fgg", "NO");
+		
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RReporteSHA.jasper"));
+		fichero = JasperRunManager.runReportToPdf(reporte, p);
+		return fichero;
+	}
+	
+	
 }

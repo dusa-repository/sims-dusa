@@ -38,4 +38,6 @@ public interface IInformeDAO extends JpaRepository<Informe, Long> {
 
 	List<Informe> findByEmpresaB(Empresa empresa);
 
+	Informe findByIdInforme(long parseLong);
+
 }
