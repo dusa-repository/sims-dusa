@@ -13,6 +13,11 @@
 						<button autodisable="self" id="btnBuscar1" class="btn"
 							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
+						<row>
+						<label class="etiqueta" value="Imprimir" />
+						<button autodisable="self" id="btnReporte" class="btn"
+							label="Reporte" tooltiptext="Reporte" image="/public/imagenes/botones/reporte.png" />
+					</row>
 				</rows>
 			</grid>
 			<!-- <grid width="auto"> <columns visible="false"> <column label="" width="15%" 

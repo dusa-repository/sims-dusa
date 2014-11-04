@@ -70,6 +70,10 @@ public class SInforme {
 		return informeDAO.findByEmpresaB(empresa);
 	}
 
+	public Informe buscar(long parseLong) {
+		return informeDAO.findByIdInforme(parseLong);
+	}
+
 
 
 	}

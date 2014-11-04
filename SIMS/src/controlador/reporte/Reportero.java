@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jasperreports.engine.JRException;
+import controlador.sha.CInforme;
 import controlador.transacciones.CConsulta;
 import controlador.transacciones.COrden;
 
@@ -38,6 +39,7 @@ public class Reportero extends HttpServlet {
 		CConsulta consulta = new CConsulta();
 		CMorbilidad morbilidad = new CMorbilidad();
 		CReposo reposo = new CReposo();
+		CInforme informe = new CInforme();
 		CResumen resumen = new CResumen();
 		CCosto costo = new CCosto();
 		CPacientes pacientes = new CPacientes();
@@ -183,6 +185,9 @@ public class Reportero extends HttpServlet {
 			case "32":
 				fichero = ordenProveedor.reporteEspecialista(par6, par7, par8,
 						tipo);
+				break;
+			case "33":
+				fichero = informe.reporteInpsasel(par6);
 				break;
 			default:
 				break;
