@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPreempleo" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad748ed4-6dcf-4a1b-a7a1-04d153c6d8a7">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="353"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="pacienteNombre" class="java.lang.String"/>
 	<parameter name="fecha" class="java.sql.Timestamp"/>
@@ -18,6 +18,8 @@
 	<parameter name="examenes" class="java.lang.String"/>
 	<parameter name="apto" class="java.lang.String"/>
 	<parameter name="enfermedad" class="java.lang.String"/>
+	<parameter name="imprime" class="java.lang.String"/>
+	<parameter name="imprime2" class="java.lang.String"/>
 	<field name="parte.nombre" class="java.lang.String"/>
 	<field name="observacion" class="java.lang.String"/>
 	<background>
@@ -45,7 +47,7 @@
 			</textField>
 			<textField>
 				<reportElement x="110" y="82" width="100" height="18" uuid="e9308195-318d-46d3-866c-ec8516a9490c"/>
-				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="82" width="100" height="18" uuid="0beee1e5-55f2-4756-a42f-ccba8026ca31"/>
@@ -165,25 +167,33 @@
 				<text><![CDATA[Indice de Masa Corporal:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="123" y="442" width="431" height="109" uuid="d0649ff6-7eb3-405e-a056-c6c60926781d"/>
+				<reportElement stretchType="RelativeToBandHeight" x="123" y="442" width="431" height="109" uuid="d0649ff6-7eb3-405e-a056-c6c60926781d">
+					<printWhenExpression><![CDATA[$P{imprime2}.equals("si")]]></printWhenExpression>
+				</reportElement>
 				<box leftPadding="3"/>
 				<textFieldExpression><![CDATA[$P{examenes}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="10" y="442" width="113" height="22" uuid="7ff312a5-efbf-4f42-bf35-85d7db68e089"/>
+				<reportElement x="10" y="442" width="113" height="22" uuid="7ff312a5-efbf-4f42-bf35-85d7db68e089">
+					<printWhenExpression><![CDATA[$P{imprime2}.equals("si")]]></printWhenExpression>
+				</reportElement>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Examenes Preempleo:]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="0" y="582" width="554" height="15" backcolor="#F1EDED" uuid="f437f979-a934-4c6c-b544-4b65fc358359"/>
+				<reportElement x="0" y="582" width="554" height="15" backcolor="#F1EDED" uuid="f437f979-a934-4c6c-b544-4b65fc358359">
+					<printWhenExpression><![CDATA[$P{imprime}.equals("si")]]></printWhenExpression>
+				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="1" y="581" width="209" height="17" uuid="d13bf95f-e2e7-46b9-b24f-a9e9e3be966b"/>
+				<reportElement x="1" y="581" width="209" height="17" uuid="d13bf95f-e2e7-46b9-b24f-a9e9e3be966b">
+					<printWhenExpression><![CDATA[$P{imprime}.equals("si")]]></printWhenExpression>
+				</reportElement>
 				<box>
 					<rightPen lineWidth="1.0" lineStyle="Dashed"/>
 				</box>
@@ -193,7 +203,9 @@
 				<text><![CDATA[Parte del Cuerpo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="581" width="344" height="17" uuid="e5a79746-cc57-40b6-9bef-e4e5f8410bc2"/>
+				<reportElement x="210" y="581" width="344" height="17" uuid="e5a79746-cc57-40b6-9bef-e4e5f8410bc2">
+					<printWhenExpression><![CDATA[$P{imprime}.equals("si")]]></printWhenExpression>
+				</reportElement>
 				<box>
 					<leftPen lineWidth="1.0" lineStyle="Dashed"/>
 				</box>
