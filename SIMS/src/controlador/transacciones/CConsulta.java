@@ -6414,7 +6414,17 @@ public class CConsulta extends CGenerico {
 
 		List<ConsultaParteCuerpo> partes = new ArrayList<ConsultaParteCuerpo>();
 		partes = getServicioConsultaParteCuerpo().buscarPorConsulta(consuta);
-
+		
+		if(partes.isEmpty())
+		p.put("imprime", "no");
+		else
+			p.put("imprime", "si");
+		
+		if(consuta.getExamenPreempleo().equals(""))
+		p.put("imprime2", "no");
+		else
+			p.put("imprime2", "si");
+		
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RPreempleo.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,

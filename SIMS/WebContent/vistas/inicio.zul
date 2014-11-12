@@ -71,7 +71,7 @@
 								<listbox style="border:none" width="200px" id="ltbRoles">
 									<template name="model">
 										<listitem>
-											<listcell style="color:white;font-weight: bold; background:#661313"
+											<listcell style="font-size:14px;color:white;font-weight: bold; background:#661313"
 												label="${each.nombre}">
 											</listcell>
 										</listitem>
