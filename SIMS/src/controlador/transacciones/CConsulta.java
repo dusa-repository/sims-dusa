@@ -22,6 +22,7 @@ import modelo.inventario.F4211PK;
 import modelo.maestros.Accidente;
 import modelo.maestros.Antecedente;
 import modelo.maestros.Cargo;
+import modelo.maestros.Cita;
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialista;
 import modelo.maestros.Examen;
@@ -802,6 +803,10 @@ public class CConsulta extends CGenerico {
 	private Combobox cmbPrioridadExamen;
 	@Wire
 	private Button btnConstancia;
+	@Wire
+	private Textbox txtCedulaCita;
+	@Wire
+	private Button btnBuscarPacienteCita;
 	// -----------------------------
 	@Wire("#wdwRegistro")
 	private Window wdwRegistro;
@@ -876,6 +881,8 @@ public class CConsulta extends CGenerico {
 	private West west;
 	private List<DetalleAccidente> listaDetalle = new ArrayList<DetalleAccidente>();
 	private boolean isPlanta = false;
+	private String idBoton = "";
+	private long idCita = 0;
 
 	@Override
 	public void inicializar() throws IOException {
@@ -1109,6 +1116,11 @@ public class CConsulta extends CGenerico {
 						paciente.setEdad(calcularEdad(paciente
 								.getFechaNacimiento()));
 					servicioPaciente.guardar(paciente);
+					if(idCita!=0){
+						Cita cita = servicioCita.buscar(idCita);
+						cita.setEstado("Finalizada");
+						servicioCita.guardar(cita);
+					}
 				}
 			}
 
@@ -2277,13 +2289,19 @@ public class CConsulta extends CGenerico {
 	}
 
 	/* Muestra un catalogo de Pacientes */
-	@Listen("onClick = #btnBuscarPaciente")
-	public void mostrarCatalogoPaciente() throws IOException {
+	@Listen("onClick = #btnBuscarPaciente, #btnBuscarPacienteCita")
+	public void mostrarCatalogoPaciente(Event evento) throws IOException {
+		final Usuario usuario = servicioUsuario.buscarPorLogin(nombreUsuarioSesion());
+		idBoton = evento.getTarget().getId();
 		List<Paciente> pacientesBuscar = new ArrayList<Paciente>();
-		if (isPlanta)
-			pacientesBuscar = servicioPaciente.buscarTodosActivos();
-		else
-			pacientesBuscar = servicioPaciente.buscarFamiliaresActivos();
+		if (idBoton.equals("btnBuscarPaciente")) {
+			if (isPlanta)
+				pacientesBuscar = servicioPaciente.buscarTodosActivos();
+			else
+				pacientesBuscar = servicioPaciente.buscarFamiliaresActivos();
+		} else
+			pacientesBuscar = servicioPaciente.buscarPacientesDeCita(usuario,fecha);
+
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
@@ -2291,37 +2309,53 @@ public class CConsulta extends CGenerico {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
-				if (isPlanta) {
+				if (idBoton.equals("btnBuscarPaciente")) {
+					if (isPlanta) {
+						switch (combo) {
+						case "Ficha":
+							return servicioPaciente.filtroFichaActivos(valor);
+						case "Nombre":
+							return servicioPaciente.filtroNombre1Activos(valor);
+						case "Cedula":
+							return servicioPaciente.filtroCedulaActivos(valor);
+						case "Apellido":
+							return servicioPaciente
+									.filtroApellido1Activos(valor);
+						default:
+							return pacientes;
+						}
+					} else {
+						switch (combo) {
+						case "Ficha":
+							return servicioPaciente
+									.filtroFichaParienteActivos(valor);
+						case "Nombre":
+							return servicioPaciente
+									.filtroNombreParienteActivos(valor);
+						case "Cedula":
+							return servicioPaciente
+									.filtroCedulaParienteActivos(valor);
+						case "Apellido":
+							return servicioPaciente
+									.filtroApellidoParienteActivos(valor);
+						default:
+							return pacientes;
+						}
+					}
+				} else
 					switch (combo) {
 					case "Ficha":
-						return servicioPaciente.filtroFichaActivos(valor);
+						return servicioPaciente.filtroFichaCitaActivos(usuario,valor, fecha);
 					case "Nombre":
-						return servicioPaciente.filtroNombre1Activos(valor);
+						return servicioPaciente.filtroNombreCitaActivos(usuario,valor, fecha);
 					case "Cedula":
-						return servicioPaciente.filtroCedulaActivos(valor);
+						return servicioPaciente.filtroCedulaCitaActivos(usuario, valor, fecha);
 					case "Apellido":
-						return servicioPaciente.filtroApellido1Activos(valor);
+						return servicioPaciente
+								.filtroApellidoCitaActivos(usuario, valor, fecha);
 					default:
 						return pacientes;
 					}
-				} else {
-					switch (combo) {
-					case "Ficha":
-						return servicioPaciente
-								.filtroFichaParienteActivos(valor);
-					case "Nombre":
-						return servicioPaciente
-								.filtroNombreParienteActivos(valor);
-					case "Cedula":
-						return servicioPaciente
-								.filtroCedulaParienteActivos(valor);
-					case "Apellido":
-						return servicioPaciente
-								.filtroApellidoParienteActivos(valor);
-					default:
-						return pacientes;
-					}
-				}
 			}
 
 			@Override
@@ -2419,6 +2453,12 @@ public class CConsulta extends CGenerico {
 	public void seleccionarPaciente() {
 		limpiarCampos();
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
+		if (idBoton.equals("btnBuscarPacienteCita")) {
+			txtCedulaCita.setValue(paciente.getCedula());
+			idCita = Long.valueOf(paciente.getUsuarioAuditoria());
+		} else
+			txtCedulaCita.setValue("");
+
 		llenarCampos(paciente);
 		idPaciente = paciente.getCedula();
 		List<Consulta> consultas = servicioConsulta.buscarPorPaciente(paciente);
@@ -3718,6 +3758,7 @@ public class CConsulta extends CGenerico {
 		if (!botonera.getChildren().get(0).isVisible()) {
 			botonera.getChildren().get(0).setVisible(true);
 		}
+		idCita = 0;
 		btnPreEmpleo.setVisible(false);
 		cmbReposo.setValue("");
 		rowValido.setVisible(true);
@@ -4272,6 +4313,7 @@ public class CConsulta extends CGenerico {
 					.getValue());
 		limpiarCampos();
 		if (paciente != null) {
+			txtCedulaCita.setValue("");
 			llenarCampos(paciente);
 			idPaciente = paciente.getCedula();
 			List<Consulta> consultas = servicioConsulta
@@ -4284,6 +4326,31 @@ public class CConsulta extends CGenerico {
 			llenarListas();
 		} else {
 			msj.mensajeError(Mensaje.pacienteNoExiste);
+		}
+	}
+
+	@Listen("onOK = #txtCedulaCita")
+	public void buscarCedulaCita() {
+		Usuario usuario = servicioUsuario.buscarPorLogin(nombreUsuarioSesion());
+		Paciente paciente = servicioPaciente.buscarPorCitaActivo(usuario,
+				txtCedulaCita.getValue(),fecha);
+		limpiarCampos();
+		if (paciente != null) {
+			txtCedula.setValue("");
+			idCita = Long.valueOf(paciente.getUsuarioAuditoria());
+			txtCedulaCita.setValue(paciente.getCedula());
+			llenarCampos(paciente);
+			idPaciente = paciente.getCedula();
+			List<Consulta> consultas = servicioConsulta
+					.buscarPorPaciente(paciente);
+			if (!consultas.isEmpty())
+				if (consultas.get(0).getTipoConsultaSecundaria()
+						.equals("Pre-Vacacional"))
+					msj.mensajeAlerta("La ultima consulta de este paciente fue de tipo Pre-Vacacional, por lo tanto la consulta actual debe ser de tipo Post-Vacacional");
+			ltbConsultas.setModel(new ListModelList<Consulta>(consultas));
+			llenarListas();
+		} else {
+			msj.mensajeError("El paciente que selecciono no posee citas programadas para hoy");
 		}
 	}
 
@@ -6335,19 +6402,19 @@ public class CConsulta extends CGenerico {
 			imc = (double) Math.round((consuta.getPeso() / (consuta
 					.getEstatura() * consuta.getEstatura())) * 100) / 100;
 		}
-		if(imc != null)
-		p.put("masa", imc);
+		if (imc != null)
+			p.put("masa", imc);
 		else
-			p.put("masa","");
+			p.put("masa", "");
 		p.put("examenes", consuta.getExamenPreempleo());
 		if (consuta.getApto())
 			p.put("apto", "SI");
 		else
 			p.put("apto", "NO");
-	
+
 		List<ConsultaParteCuerpo> partes = new ArrayList<ConsultaParteCuerpo>();
-		partes= getServicioConsultaParteCuerpo().buscarPorConsulta(consuta);
-		
+		partes = getServicioConsultaParteCuerpo().buscarPorConsulta(consuta);
+
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RPreempleo.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,

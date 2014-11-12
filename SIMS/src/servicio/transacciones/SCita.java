@@ -68,4 +68,9 @@ public class SCita {
 		else
 			return 0;
 	}
+
+	public Cita buscar(long idCita) {
+		Cita cita = citaDAO.findOne(idCita);
+		return cita;
+	}
 }

@@ -1,15 +1,22 @@
 package servicio.maestros;
 
 import interfacedao.maestros.IPacienteDAO;
+import interfacedao.transacciones.ICitaDAO;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import modelo.maestros.Cargo;
+import modelo.maestros.Cita;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
+import modelo.seguridad.Usuario;
 import modelo.sha.Area;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +30,8 @@ public class SPaciente {
 
 	@Autowired
 	private IPacienteDAO pacienteDAO;
+	@Autowired
+	private ICitaDAO citaDAO;
 
 	public List<Paciente> buscarTodos() {
 		Pageable topTen = new PageRequest(0, 10);
@@ -229,7 +238,8 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorAndEstatusTrue(dea, aa,b, o);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorAndEstatusTrue(dea,
+				aa, b, o);
 
 	}
 
@@ -249,8 +259,9 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorFalseAndSexoAndEstatusTrue(dea, aa,
-				sexo, o);
+		return pacienteDAO
+				.findByEdadBetweenAndTrabajadorFalseAndSexoAndEstatusTrue(dea,
+						aa, sexo, o);
 	}
 
 	public List<Paciente> buscarPorEdadesyParentesco(int dea, int aa,
@@ -260,8 +271,8 @@ public class SPaciente {
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return pacienteDAO
-				.findByEdadBetweenAndTrabajadorFalseAndParentescoFamiliarAndEstatusTrue(dea,
-						aa, parentesco, o);
+				.findByEdadBetweenAndTrabajadorFalseAndParentescoFamiliarAndEstatusTrue(
+						dea, aa, parentesco, o);
 	}
 
 	public List<Paciente> buscarPorEdadesyTrabajador(int dea, int aa,
@@ -271,17 +282,19 @@ public class SPaciente {
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return pacienteDAO
-				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndEstatusTrue(dea, aa,
-						idTrabajador, o);
+				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndEstatusTrue(
+						dea, aa, idTrabajador, o);
 	}
 
-	public List<Paciente> buscarCono(int dea, int aa,
-			String sexo, String idTrabajador) {
+	public List<Paciente> buscarCono(int dea, int aa, String sexo,
+			String idTrabajador) {
 		List<String> ordenar = new ArrayList<String>();
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndSexoAndCedulaFamiliarAndEstatusTrue(dea,aa,sexo,idTrabajador,o);
+		return pacienteDAO
+				.findByEdadBetweenAndSexoAndCedulaFamiliarAndEstatusTrue(dea,
+						aa, sexo, idTrabajador, o);
 	}
 
 	public List<Paciente> buscarPorEdadesTrabajadoryParentesco(int dea, int aa,
@@ -303,7 +316,7 @@ public class SPaciente {
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return pacienteDAO
 				.findByEdadBetweenAndTrabajadorFalseAndCedulaFamiliarAndParentescoFamiliarAndSexoAndEstatusTrue(
-						dea, aa, idTrabajador, parentesco,sexo, o);
+						dea, aa, idTrabajador, parentesco, sexo, o);
 	}
 
 	public List<Paciente> buscarPorEdadesTodos(int dea, int aa) {
@@ -320,7 +333,8 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorAndSexoAndEstatusTrue(dea, aa,b,sexo, o);
+		return pacienteDAO.findByEdadBetweenAndTrabajadorAndSexoAndEstatusTrue(
+				dea, aa, b, sexo, o);
 	}
 
 	public List<Paciente> buscarPorEdadesTrabajadorDiscapacidad(int dea,
@@ -329,7 +343,9 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorAndDiscapacidadAndEstatusTrue(dea, aa,b,c, o);
+		return pacienteDAO
+				.findByEdadBetweenAndTrabajadorAndDiscapacidadAndEstatusTrue(
+						dea, aa, b, c, o);
 	}
 
 	public List<Paciente> buscarPorEdadesTrabajadorDiscapacidadSexo(int dea,
@@ -338,7 +354,9 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndTrabajadorAndDiscapacidadAndSexoAndEstatusTrue(dea, aa,b,c,sexo, o);
+		return pacienteDAO
+				.findByEdadBetweenAndTrabajadorAndDiscapacidadAndSexoAndEstatusTrue(
+						dea, aa, b, c, sexo, o);
 	}
 
 	public List<Paciente> buscarPorEdadesDiscapacidad(int dea, int aa, boolean b) {
@@ -346,7 +364,8 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndDiscapacidadAndEstatusTrue(dea, aa,b, o);
+		return pacienteDAO.findByEdadBetweenAndDiscapacidadAndEstatusTrue(dea,
+				aa, b, o);
 	}
 
 	public List<Paciente> buscarPorEdadesDiscapacidadSexo(int dea, int aa,
@@ -355,7 +374,147 @@ public class SPaciente {
 		ordenar.add("cedulaFamiliar");
 		ordenar.add("cedula");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
-		return pacienteDAO.findByEdadBetweenAndDiscapacidadAndSexoAndEstatusTrue(dea, aa,b,sexo, o);
+		return pacienteDAO
+				.findByEdadBetweenAndDiscapacidadAndSexoAndEstatusTrue(dea, aa,
+						b, sexo, o);
+	}
+
+	public List<Paciente> buscarPacientesDeCita(Usuario usuario, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<Cita> citas = citaDAO.findByUsuarioAndEstadoAndFechaCita(usuario,
+				"Pendiente", fecha);
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		if (!citas.isEmpty())
+			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
+				Cita cita = (Cita) iterator.next();
+				cita.getPaciente().setUsuarioAuditoria(
+						String.valueOf(cita.getIdCita()));
+				pacientes.add(cita.getPaciente());
+			}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroFichaCitaActivos(Usuario usuario, String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<Cita> citas = citaDAO
+				.findByUsuarioAndPacienteFichaStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		if (!citas.isEmpty())
+			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
+				Cita cita = (Cita) iterator.next();
+				cita.getPaciente().setUsuarioAuditoria(
+						String.valueOf(cita.getIdCita()));
+				pacientes.add(cita.getPaciente());
+			}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroNombreCitaActivos(Usuario usuario, String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<Cita> citas = citaDAO
+				.findByUsuarioAndPacientePrimerNombreStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		if (!citas.isEmpty())
+			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
+				Cita cita = (Cita) iterator.next();
+				cita.getPaciente().setUsuarioAuditoria(
+						String.valueOf(cita.getIdCita()));
+				pacientes.add(cita.getPaciente());
+			}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroCedulaCitaActivos(Usuario usuario, String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<Cita> citas = citaDAO
+				.findByUsuarioAndPacienteCedulaStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		if (!citas.isEmpty())
+			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
+				Cita cita = (Cita) iterator.next();
+				cita.getPaciente().setUsuarioAuditoria(
+						String.valueOf(cita.getIdCita()));
+				pacientes.add(cita.getPaciente());
+			}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroApellidoCitaActivos(Usuario usuario, String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<Cita> citas = citaDAO
+				.findByUsuarioAndPacientePrimerApellidoStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		if (!citas.isEmpty())
+			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
+				Cita cita = (Cita) iterator.next();
+				cita.getPaciente().setUsuarioAuditoria(
+						String.valueOf(cita.getIdCita()));
+				pacientes.add(cita.getPaciente());
+			}
+		return pacientes;
+	}
+
+	public Paciente buscarPorCitaActivo(Usuario usuario, String value, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<Cita> citas = citaDAO
+				.findByUsuarioAndEstadoAndFechaCitaAndPacienteCedulaAndPacienteEstatusTrue(
+						usuario, "Pendiente", fecha, value);
+		if (!citas.isEmpty())
+			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
+				Cita cita = (Cita) iterator.next();
+				cita.getPaciente().setUsuarioAuditoria(
+						String.valueOf(cita.getIdCita()));
+				return cita.getPaciente();
+			}
+		return null;
 	}
 
 }
