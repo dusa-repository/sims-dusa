@@ -746,9 +746,9 @@ public class CMorbilidad extends CGenerico {
 		p.put("edad2", aa);
 		p.put("paciente", familiar);
 
-		List<Long> consuta = getServicioConsultaDiagnostico()
-				.cantidadConsultas(consutaDiag);
-		p.put("total", consuta.size());
+//		List<Long> consuta = getServicioConsultaDiagnostico()
+//				.cantidadConsultas(consutaDiag);
+//		p.put("total", consuta.size());
 
 		for (int i = 0; i < consutaDiag.size(); i++) {
 			Consulta cons = consutaDiag.get(i).getConsulta();

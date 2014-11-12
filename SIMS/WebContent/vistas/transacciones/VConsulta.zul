@@ -44,6 +44,21 @@
 							label="Constancia" tooltiptext="Catalogo" visible="false"
 							image="/public/imagenes/botones/generar.png" width="110px" />
 					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Buscar Paciente con cita:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox maxlength="500" id="txtCedulaCita" hflex="1"
+							tooltiptext="Ingrese la Cedula del Paciente" />
+						<button class="btn" autodisable="self" id="btnBuscarPacienteCita"
+							label="Buscar Paciente" tooltiptext="Catalogo"
+							image="/public/imagenes/botones/buscar.png" width="130px" />
+						<cell colspan="6">
+							<hbox />
+						</cell>
+					</row>
 				</rows>
 			</grid>
 			<separator />
@@ -332,8 +347,9 @@
 											<comboitem label="${each}" />
 										</template>
 									</combobox>
-									<button visible="false" class="btn" autodisable="self" label="Inf. Pre-Empleo"
-										id="btnPreEmpleo" image="/public/imagenes/botones/generar.png"
+									<button visible="false" class="btn" autodisable="self"
+										label="Inf. Pre-Empleo" id="btnPreEmpleo"
+										image="/public/imagenes/botones/generar.png"
 										tooltiptext="Generar el reporte de la informacion preempleo del paciente"
 										vflex="1" hflex="1" />
 								</row>

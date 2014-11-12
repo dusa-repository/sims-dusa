@@ -467,6 +467,55 @@ public class CCita extends CGenerico {
 			msj.mensajeAlerta(Mensaje.noCitasCancelacion);
 	}
 
+	@Listen("onClick = #btnFinalizarCita")
+	public void finalizarCita(){
+		Boolean hayCitas = false;
+		if (ltbCitas.getItemCount() != 0) {
+			final List<Listitem> list1 = ltbCitas.getItems();
+			for (int i = 0; i < list1.size(); i++) {
+				if (list1.get(i).isSelected())
+					hayCitas = true;
+			}
+			if (hayCitas) {
+				hayCitas = false;
+				Messagebox.show("¿Esta Seguro de Finalizar la(s) Citas(s)?",
+						"Alerta", Messagebox.OK | Messagebox.CANCEL,
+						Messagebox.QUESTION, new EventListener<Event>() {
+							public void onEvent(Event evt) {
+								switch (((Integer) evt.getData()).intValue()) {
+								case Messagebox.OK:
+									respuestaOk();
+									break;
+								case Messagebox.CANCEL:
+									respuestaCancelar();
+									break;
+								}
+							}
+
+							private void respuestaCancelar() {
+							}
+
+							private void respuestaOk() {
+								for (int i = 0; i < list1.size(); i++) {
+									if (list1.get(i).isSelected()) {
+										Cita cita = list1.get(i).getValue();
+										cita.setEstado("Finalizada");
+										servicioCita.guardar(cita);
+									}
+								}
+								Usuario usuario = servicioUsuario
+										.buscarPorCedula(String
+												.valueOf(idDoctor));
+								llenarListaCitas(usuario);
+								msj.mensajeInformacion("Se ha(n) Finalizado la(s) Cita(s)");
+							}
+						});
+			} else
+				msj.mensajeAlerta("Seleccione al menos una Cita para Finalizar");
+		} else
+			msj.mensajeAlerta("Actualmente No hay Citas para su Finalizacion");
+	}
+	
 	/*
 	 * Se ejecuta al darle click al boton de cancelar en la pestanna de
 	 * consultar citas, anula la cita seleccionada

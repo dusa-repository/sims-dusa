@@ -8,7 +8,6 @@
 	<parameter name="edad1" class="java.lang.Integer"/>
 	<parameter name="edad2" class="java.lang.Integer"/>
 	<parameter name="paciente" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="total" class="java.lang.Integer"/>
 	<field name="diagnostico.nombre" class="java.lang.String"/>
 	<field name="tipo" class="java.lang.String"/>
 	<field name="consulta.paciente.primerNombre" class="java.lang.String"/>
@@ -19,6 +18,7 @@
 	<field name="consulta.fechaConsulta" class="java.sql.Timestamp"/>
 	<field name="consulta.paciente.cedula" class="java.lang.String"/>
 	<field name="consulta.tipoConsultaSecundaria" class="java.lang.String"/>
+	<field name="consulta.idConsulta" class="java.lang.String"/>
 	<variable name="totalDiag" class="java.lang.Integer" resetType="Group" resetGroup="diagnostico" calculation="Count">
 		<variableExpression><![CDATA[$F{consulta.fechaConsulta}]]></variableExpression>
 	</variable>
@@ -26,6 +26,9 @@
 		<variableExpression><![CDATA[$F{tipo}]]></variableExpression>
 	</variable>
 	<variable name="total" class="java.lang.Integer"/>
+	<variable name="suma" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+	</variable>
 	<group name="tipoDiagnostico">
 		<groupExpression><![CDATA[$F{tipo}]]></groupExpression>
 		<groupHeader>
@@ -387,12 +390,11 @@
 				<text><![CDATA[Total de Consultas :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="520" y="4" width="34" height="20" uuid="d549b2c0-1675-413f-97a4-b452e3db179b"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+				<reportElement x="518" y="4" width="37" height="20" uuid="bd485868-6908-4b1f-8211-5402c8dfee4c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{suma}]]></textFieldExpression>
 			</textField>
 		</band>
 	</lastPageFooter>

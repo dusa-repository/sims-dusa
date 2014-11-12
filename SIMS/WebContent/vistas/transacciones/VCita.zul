@@ -205,6 +205,10 @@
 										<button class="btn" width="150px" label="Anular Citas"
 											id="btnAnularCita" image="/public/imagenes/botones/anular.png"
 											tooltiptext="Anular Citas Seleccionadas" />
+										<separator />
+										<button class="btn" width="150px" label="Finalizar Citas"
+											id="btnFinalizarCita" image="/public/imagenes/botones/seleccionar.png"
+											tooltiptext="Finalizar Citas Seleccionadas" />
 									</div>
 								</vbox>
 							</hbox>

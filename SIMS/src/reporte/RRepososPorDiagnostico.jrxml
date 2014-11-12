@@ -5,7 +5,6 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
-	<parameter name="total" class="java.lang.Integer"/>
 	<field name="diagnostico.nombre" class="java.lang.String"/>
 	<field name="tipo" class="java.lang.String"/>
 	<field name="consulta.paciente.primerApellido" class="java.lang.String"/>
@@ -16,11 +15,15 @@
 	<field name="consulta.paciente.cedula" class="java.lang.String"/>
 	<field name="consulta.fechaReposo" class="java.sql.Timestamp"/>
 	<field name="consulta.usuarioAuditoria" class="java.lang.String"/>
+	<field name="consulta.idConsulta" class="java.lang.Long"/>
 	<variable name="totalTipo" class="java.lang.Integer" resetType="Group" resetGroup="tipo" calculation="Count">
 		<variableExpression><![CDATA[$F{tipo}]]></variableExpression>
 	</variable>
 	<variable name="totalDiag" class="java.lang.Integer" resetType="Group" resetGroup="diagnostico" calculation="Count">
 		<variableExpression><![CDATA[$F{diagnostico.nombre}]]></variableExpression>
+	</variable>
+	<variable name="suma" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
 	</variable>
 	<group name="tipo">
 		<groupExpression><![CDATA[$F{tipo}]]></groupExpression>
@@ -303,14 +306,6 @@
 	</pageFooter>
 	<lastPageFooter>
 		<band height="26">
-			<textField>
-				<reportElement x="520" y="6" width="34" height="20" uuid="c24de49a-b21e-442e-bd1d-4238c9081659"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="419" y="6" width="99" height="20" uuid="1417b4ac-abd1-4a96-84b6-7438801ba3e6"/>
 				<textElement>
@@ -318,6 +313,13 @@
 				</textElement>
 				<text><![CDATA[Total de Consultas :]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="518" y="6" width="38" height="20" uuid="3eb5a27d-c663-4a9b-b920-01f22240ac70"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{suma}]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
 </jasperReport>

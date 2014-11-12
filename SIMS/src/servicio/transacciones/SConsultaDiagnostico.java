@@ -199,8 +199,8 @@ public class SConsultaDiagnostico {
 						desde, hasta, area, diagnostico);
 	}
 
-	public List<Long> cantidadConsultas(List<ConsultaDiagnostico> consutaDiag) {
-		// TODO Auto-generated method stub
-		return consultaDiagnosticoDAO.buscarConsultas(consutaDiag);
-	}
+//	public List<Long> cantidadConsultas(List<ConsultaDiagnostico> consutaDiag) {
+//		// TODO Auto-generated method stub
+//		return consultaDiagnosticoDAO.buscarConsultas(consutaDiag);
+//	}
 }
