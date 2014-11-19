@@ -15,6 +15,14 @@ public abstract class Validador {
 		return matcher.matches();
 	}
 
+	/* Valida que lo digitos ingresados sean números */
+	public static boolean validarDouble(String numero) {
+		String PATTERN = "\\d+\\.\\d+";
+		Pattern pattern = Pattern.compile(PATTERN);
+		Matcher matcher = pattern.matcher(numero);
+		return matcher.matches();
+	}
+
 	/*
 	 * Valida que el correo electronico que se ingresa sea del formato
 	 * xxxxx@XXXXX.com

@@ -7,7 +7,8 @@
 				<columns visible="false">
 					<column label="" width="20%" />
 					<column label="" width="45%" />
-					<column label="" width="35%" />
+					<column label="" width="20%" />
+					<column label="" width="15%" />
 				</columns>
 				<rows>
 					<row>
@@ -18,8 +19,10 @@
 						</hbox>
 						<textbox id="txtNombreProveedor" hflex="1" maxlength="500"
 							tooltiptext="Ingrese el Nombre del Proveedor" multiline="true" />
-						<button autodisable="self" id="btnBuscarProveedor" class="btn"
-							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						<cell colspan="2">
+							<button autodisable="self" id="btnBuscarProveedor" class="btn"
+								label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+						</cell>
 					</row>
 					<row>
 						<hbox>
@@ -30,7 +33,7 @@
 						<textbox id="txtTelefonoProveedor" hflex="1" maxlength="20"
 							tooltiptext="Ingrese el Numero de telefono (0426-9999999)" />
 						<hbox />
-
+						<hbox />
 					</row>
 					<row>
 						<hbox>
@@ -45,8 +48,10 @@
 								<comboitem context="${each.idCiudad}" label="${each.nombre}" />
 							</template>
 						</combobox>
-						<button id="btnAbrirCiudad" class="abrir" label="" tooltiptext="Crear una Nueva Ciudad"
-							image="/public/imagenes/botones/agregar.png" />
+						<cell colspan="2">
+							<button id="btnAbrirCiudad" class="abrir" label=""
+								tooltiptext="Crear una Nueva Ciudad" image="/public/imagenes/botones/agregar.png" />
+						</cell>
 					</row>
 					<row>
 						<hbox>
@@ -58,6 +63,24 @@
 							class="multilinea" tooltiptext="Ingrese la Direccion del Proveedor"
 							multiline="true" width="60px" />
 						<hbox />
+						<hbox />
+					</row>
+					<row id="rowBajar" visible = "false">
+						<label class="etiqueta" value="Exportar Precios:" />
+						<button autodisable="self" id="btnExportar"
+							style="	background: #952C2C;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px; -webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+							label="Exportar" tooltiptext="Exportar precios de los Examenes y Estudios Ofrecidos por el Proveedor"
+							image="/public/imagenes/botones/exportar.png" />
+						<hbox />
+						<hbox />
+					</row>
+					<row id="rowSubir" visible = "false">
+						<label class="etiqueta" value="Importar Precios:" />
+						<button autodisable="self" id="btnImportar"
+							style="	background: #952C2C;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px; -webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+							upload="true" label="Buscar" tooltiptext="Importar Precios de estudios y examenes del Proveedor"
+							image="/public/imagenes/botones/importar.png" />
+						<label id="lblNombre" />
 					</row>
 				</rows>
 			</grid>
@@ -78,8 +101,8 @@
 								tooltiptext="Crear un Nuevo Estudio" image="/public/imagenes/botones/agregar.png" />
 						</hbox>
 						<hbox widths="42%,3%,55%" width="100%">
-							<listbox mold="paging" pageSize="6" id="ltbEstudios" width="100%" height="100%"
-								emptyMessage="No hay Estudios Registrados">
+							<listbox mold="paging" pageSize="6" id="ltbEstudios"
+								width="100%" height="100%" emptyMessage="No hay Estudios Registrados">
 								<listhead>
 									<listheader label="Estudio" width="100%" />
 								</listhead>
@@ -108,8 +131,8 @@
 									image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Estudio"
 									width="30px" />
 							</vbox>
-							<listbox mold="paging" pageSize="10" id="ltbEstudiosAgregados" width="100%" height="100%"
-								emptyMessage="No ha Seleccionado Ningún Estudio">
+							<listbox mold="paging" pageSize="10" id="ltbEstudiosAgregados"
+								width="100%" height="100%" emptyMessage="No ha Seleccionado Ningún Estudio">
 								<listhead>
 									<listheader label="Estudio" width="60%" />
 									<listheader label="Costo" width="40%" />
@@ -148,8 +171,8 @@
 								tooltiptext="Crear un Nuevo Examen" image="/public/imagenes/botones/agregar.png" />
 						</hbox>
 						<hbox width="100%" widths="42%,3%,55%">
-							<listbox mold="paging" pageSize="6" id="ltbExamen" width="100%" height="100%"
-								emptyMessage="No hay Examenes Registrados">
+							<listbox mold="paging" pageSize="6" id="ltbExamen" width="100%"
+								height="100%" emptyMessage="No hay Examenes Registrados">
 								<listhead>
 									<listheader label="Examen" width="100%" />
 								</listhead>
@@ -178,8 +201,8 @@
 									image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Examen"
 									width="30px" />
 							</vbox>
-							<listbox mold="paging" pageSize="10" id="ltbExamenesAgregados" width="100%" height="100%"
-								emptyMessage="No ha Seleccionado Ningún Examen">
+							<listbox mold="paging" pageSize="10" id="ltbExamenesAgregados"
+								width="100%" height="100%" emptyMessage="No ha Seleccionado Ningún Examen">
 								<listhead>
 									<listheader label="Examen" width="60%" />
 									<listheader label="Costo" width="40%" />
@@ -202,7 +225,7 @@
 								</template>
 							</listbox>
 						</hbox>
-						<separator/>
+						<separator />
 						<div align="left" style="float: right;">
 							<button class="btn" label="Anterior" id="btnAnteriorPestanna"
 								image="/public/imagenes/botones/atras.png" />
