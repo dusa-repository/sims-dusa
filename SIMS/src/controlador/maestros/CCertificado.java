@@ -84,8 +84,7 @@ public class CCertificado extends CGenerico {
 
 			@Override
 			public void salir() {
-				// TODO Auto-generated method stub
-
+				cerrarVentana(divCertificado, nombre, tabs);
 			}
 
 			@Override
