@@ -159,6 +159,10 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 			int dea, int aa, boolean b, String sexo, Sort o);
 
 	List<Paciente> findByTrabajadorTrueAndEstatusTrue(Pageable topTen);
+
+	List<Paciente> findByTrabajadorTrueAndEstatusTrue();
+
+	List<Paciente> findByCedulaNotIn(List<String> ids);
 	
 //@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
 }

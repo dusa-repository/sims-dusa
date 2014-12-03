@@ -279,6 +279,9 @@ public class Paciente implements Serializable {
 	
 	@OneToMany(mappedBy = "paciente")
 	private Set<PacienteMedicina> pacientesMedicinass;
+	
+	@OneToMany(mappedBy = "paciente")
+	private Set<PeriodoPaciente> pacientesPeriodos;
 
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
@@ -1020,6 +1023,14 @@ public class Paciente implements Serializable {
 
 	public void setOrdenes(Set<Orden> ordenes) {
 		this.ordenes = ordenes;
+	}
+
+	public Set<PeriodoPaciente> getPacientesPeriodos() {
+		return pacientesPeriodos;
+	}
+
+	public void setPacientesPeriodos(Set<PeriodoPaciente> pacientesPeriodos) {
+		this.pacientesPeriodos = pacientesPeriodos;
 	}
 
 }

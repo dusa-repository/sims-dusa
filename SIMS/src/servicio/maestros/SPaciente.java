@@ -1,6 +1,7 @@
 package servicio.maestros;
 
 import interfacedao.maestros.IPacienteDAO;
+import interfacedao.maestros.IPeriodoPacienteDAO;
 import interfacedao.transacciones.ICitaDAO;
 
 import java.sql.Timestamp;
@@ -16,8 +17,11 @@ import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
+import modelo.maestros.Periodo;
+import modelo.maestros.PeriodoPaciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
+import modelo.transacciones.ConsultaMedicina;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -32,6 +36,8 @@ public class SPaciente {
 	private IPacienteDAO pacienteDAO;
 	@Autowired
 	private ICitaDAO citaDAO;
+	@Autowired
+	private IPeriodoPacienteDAO periodoPacienteDAO;
 
 	public List<Paciente> buscarTodos() {
 		Pageable topTen = new PageRequest(0, 10);
@@ -515,6 +521,20 @@ public class SPaciente {
 				return cita.getPaciente();
 			}
 		return null;
+	}
+
+	public List<Paciente> buscarDisponiblesPeriodo(Periodo periodo) {
+		List<PeriodoPaciente> periodoPaciente = periodoPacienteDAO
+				.findByPeriodo(periodo);
+		List<String> ids = new ArrayList<String>();
+		if (periodoPaciente.isEmpty())
+			return pacienteDAO.findByTrabajadorTrueAndEstatusTrue();
+		else {
+			for (int i = 0; i < periodoPaciente.size(); i++) {
+				ids.add(periodoPaciente.get(i).getPaciente().getCedula());
+			}
+			return pacienteDAO.findByCedulaNotIn(ids);
+		}
 	}
 
 }
