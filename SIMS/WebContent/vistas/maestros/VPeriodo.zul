@@ -1,0 +1,47 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divPeriodo" apply="controlador.maestros.CPeriodo">
+		<groupbox width="75%" mold="3d" title="Periodo">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="25%" />
+					<column label="" width="25%" />
+					<column label="" width="25%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox class="multilinea" id="txtNombre" hflex="1"
+							maxlength="100" tooltiptext="Ingrese el Nombre del Periodo"
+							multiline="true" />
+						<button autodisable="self" id="btnBuscar" class="btn"
+							label="Buscar" tooltiptext="Catalogo Periodos" image="/public/imagenes/botones/buscar.png" />
+						<hbox />
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Fecha Inicio:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<datebox id="dtbInicio" onCreate="self.value = new Date()" width="100%" readonly="true" />
+						<hbox>
+							<label class="etiqueta" value="Fecha Fin:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<datebox id="dtbFin" onCreate="self.value = new Date()" width="100%" readonly="true" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraPeriodo" />
+			<div id="catalogoPeriodo" />
+		</groupbox>
+	</div>
+</zk>

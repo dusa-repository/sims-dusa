@@ -73,6 +73,8 @@ import servicio.maestros.SPaciente;
 import servicio.maestros.SPacienteAntecedente;
 import servicio.maestros.SPais;
 import servicio.maestros.SParteCuerpo;
+import servicio.maestros.SPeriodo;
+import servicio.maestros.SPeriodoPaciente;
 import servicio.maestros.SPresentacionComercial;
 import servicio.maestros.SPresentacionMedicina;
 import servicio.maestros.SProveedor;
@@ -218,6 +220,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SPais servicioPais;
 	@WireVariable("SParteCuerpo")
 	protected SParteCuerpo servicioParteCuerpo;
+	@WireVariable("SPeriodo")
+	protected SPeriodo servicioPeriodo;
+	@WireVariable("SPeriodoPaciente")
+	protected SPeriodoPaciente servicioPeriodoPaciente;
 	@WireVariable("SPresentacionComercial")
 	protected SPresentacionComercial servicioPresentacion;
 	@WireVariable("SPresentacionMedicina")
@@ -329,7 +335,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public static SArea getServicioArea() {
 		return applicationContext.getBean(SArea.class);
 	}
-	
+
 	public static SInforme getServicioInforme() {
 		return applicationContext.getBean(SInforme.class);
 	}
@@ -587,5 +593,14 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 
 	public String damePath() {
 		return Executions.getCurrent().getContextPath() + "/";
+	}
+
+	public String traerFecha2(Timestamp fecha) {
+		String valor = "";
+		if (fecha != null) {
+			DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+			valor = String.valueOf(formatoFecha.format(fecha));
+		}
+		return valor;
 	}
 }
