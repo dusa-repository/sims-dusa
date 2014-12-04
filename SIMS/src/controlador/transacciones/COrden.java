@@ -1374,9 +1374,9 @@ public class COrden extends CGenerico {
 				if (listItem2.get(i).isSelected()) {
 					OrdenExamen consultaExamen = listItem2.get(i).getValue();
 					examenesAgregado.remove(consultaExamen);
-//					examenesDisponibles.add(consultaExamen.getExamen());
-//					ltbExamenes.setModel(new ListModelList<Examen>(
-//							examenesDisponibles));
+					// examenesDisponibles.add(consultaExamen.getExamen());
+					// ltbExamenes.setModel(new ListModelList<Examen>(
+					// examenesDisponibles));
 					listitemEliminar.add(listItem2.get(i));
 				}
 			}
@@ -1528,11 +1528,11 @@ public class COrden extends CGenerico {
 					OrdenServicioExterno consultaServicio = listItem2.get(i)
 							.getValue();
 					serviciosAgregados.remove(consultaServicio);
-//					serviciosDisponibles.add(consultaServicio
-//							.getServicioExterno());
-//					ltbServicioExterno
-//							.setModel(new ListModelList<ServicioExterno>(
-//									serviciosDisponibles));
+					// serviciosDisponibles.add(consultaServicio
+					// .getServicioExterno());
+					// ltbServicioExterno
+					// .setModel(new ListModelList<ServicioExterno>(
+					// serviciosDisponibles));
 					listitemEliminar.add(listItem2.get(i));
 				}
 			}
@@ -1575,7 +1575,7 @@ public class COrden extends CGenerico {
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
-				"Nombre", "Apellido") {
+				"Nombre", "Apellido", "Trabajador Asociado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -1589,6 +1589,8 @@ public class COrden extends CGenerico {
 					return servicioPaciente.filtroCedulaActivos(valor);
 				case "Apellido":
 					return servicioPaciente.filtroApellido1Activos(valor);
+				case "Trabajador Asociado":
+					return servicioPaciente.filtroCedulaFamiliar1Activos(valor);
 				default:
 					return pacientes;
 				}
@@ -1614,11 +1616,12 @@ public class COrden extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[4];
+				String[] registros = new String[5];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
 				registros[2] = objeto.getPrimerNombre();
 				registros[3] = objeto.getPrimerApellido();
+				registros[4] = objeto.getCedulaFamiliar();
 				return registros;
 			}
 

@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface IMedicinaDAO extends JpaRepository<Medicina, Long> {
 
-	Medicina findByNombre(String value);
+	List<Medicina> findByNombre(String value);
 
 	List<Medicina> findByLaboratorio(Laboratorio laboratorio);
 

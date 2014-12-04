@@ -826,7 +826,7 @@ public class CPaciente extends CGenerico {
 		final List<Paciente> pacientes = pacientes2;
 		catalogo = new Catalogo<Paciente>(catalogoPaciente,
 				"Catalogo de Pacientes", pacientes, "Cedula", segundo,
-				"Nombre", "Apellido") {
+				"Nombre", "Apellido", "Trabajador Asociado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -852,6 +852,11 @@ public class CPaciente extends CGenerico {
 						return servicioPaciente.filtroApellido1C(valor,
 								txtCedulaPaciente.getValue());
 					return servicioPaciente.filtroApellido1(valor);
+				case "Trabajador Asociado":
+					if (!idBoton.equals("btnBuscarPaciente"))
+						return servicioPaciente.filtroCedulaAsociadoC(valor,
+								txtCedulaPaciente.getValue());
+					return servicioPaciente.filtroCedulaAsociado(valor);
 				default:
 					return pacientes;
 				}
@@ -863,11 +868,12 @@ public class CPaciente extends CGenerico {
 				if (!idBoton.equals("btnBuscarPaciente")) {
 					valor = objeto.getParentescoFamiliar();
 				}
-				String[] registros = new String[4];
+				String[] registros = new String[5];
 				registros[0] = objeto.getCedula();
 				registros[1] = valor;
 				registros[2] = objeto.getPrimerNombre();
 				registros[3] = objeto.getPrimerApellido();
+				registros[4] = objeto.getCedulaFamiliar();
 				return registros;
 			}
 

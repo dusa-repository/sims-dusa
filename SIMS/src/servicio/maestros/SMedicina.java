@@ -47,7 +47,11 @@ public class SMedicina {
 	}
 
 	public Medicina buscarPorNombre(String value) {
-		return medicinaDAO.findByNombre(value);
+		List<Medicina> objetos = medicinaDAO.findByNombre(value);
+		if (!objetos.isEmpty())
+			return objetos.get(0);
+		else
+			return null;
 	}
 
 	public List<Medicina> buscarPorLaboratorio(Laboratorio laboratorio) {
