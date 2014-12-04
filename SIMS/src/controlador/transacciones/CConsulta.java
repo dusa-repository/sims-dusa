@@ -1116,7 +1116,7 @@ public class CConsulta extends CGenerico {
 						paciente.setEdad(calcularEdad(paciente
 								.getFechaNacimiento()));
 					servicioPaciente.guardar(paciente);
-					if(idCita!=0){
+					if (idCita != 0) {
 						Cita cita = servicioCita.buscar(idCita);
 						cita.setEstado("Finalizada");
 						servicioCita.guardar(cita);
@@ -2291,7 +2291,8 @@ public class CConsulta extends CGenerico {
 	/* Muestra un catalogo de Pacientes */
 	@Listen("onClick = #btnBuscarPaciente, #btnBuscarPacienteCita")
 	public void mostrarCatalogoPaciente(Event evento) throws IOException {
-		final Usuario usuario = servicioUsuario.buscarPorLogin(nombreUsuarioSesion());
+		final Usuario usuario = servicioUsuario
+				.buscarPorLogin(nombreUsuarioSesion());
 		idBoton = evento.getTarget().getId();
 		List<Paciente> pacientesBuscar = new ArrayList<Paciente>();
 		if (idBoton.equals("btnBuscarPaciente")) {
@@ -2300,12 +2301,13 @@ public class CConsulta extends CGenerico {
 			else
 				pacientesBuscar = servicioPaciente.buscarFamiliaresActivos();
 		} else
-			pacientesBuscar = servicioPaciente.buscarPacientesDeCita(usuario,fecha);
+			pacientesBuscar = servicioPaciente.buscarPacientesDeCita(usuario,
+					fecha);
 
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
-				"Nombre", "Apellido") {
+				"Nombre", "Apellido", "Trabajador Asociado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -2321,6 +2323,9 @@ public class CConsulta extends CGenerico {
 						case "Apellido":
 							return servicioPaciente
 									.filtroApellido1Activos(valor);
+						case "Trabajador Asociado":
+							return servicioPaciente
+									.filtroCedulaFamiliar1Activos(valor);
 						default:
 							return pacientes;
 						}
@@ -2338,6 +2343,9 @@ public class CConsulta extends CGenerico {
 						case "Apellido":
 							return servicioPaciente
 									.filtroApellidoParienteActivos(valor);
+						case "Trabajador Asociado":
+							return servicioPaciente
+									.filtroCedulaFamiliarParienteActivos(valor);
 						default:
 							return pacientes;
 						}
@@ -2345,14 +2353,21 @@ public class CConsulta extends CGenerico {
 				} else
 					switch (combo) {
 					case "Ficha":
-						return servicioPaciente.filtroFichaCitaActivos(usuario,valor, fecha);
+						return servicioPaciente.filtroFichaCitaActivos(usuario,
+								valor, fecha);
 					case "Nombre":
-						return servicioPaciente.filtroNombreCitaActivos(usuario,valor, fecha);
+						return servicioPaciente.filtroNombreCitaActivos(
+								usuario, valor, fecha);
 					case "Cedula":
-						return servicioPaciente.filtroCedulaCitaActivos(usuario, valor, fecha);
+						return servicioPaciente.filtroCedulaCitaActivos(
+								usuario, valor, fecha);
 					case "Apellido":
+						return servicioPaciente.filtroApellidoCitaActivos(
+								usuario, valor, fecha);
+					case "Trabajador Asociado":
 						return servicioPaciente
-								.filtroApellidoCitaActivos(usuario, valor, fecha);
+								.filtroCedulaFamiliarCitaActivos(usuario,
+										valor, fecha);
 					default:
 						return pacientes;
 					}
@@ -2360,11 +2375,12 @@ public class CConsulta extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[4];
+				String[] registros = new String[5];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
 				registros[2] = objeto.getPrimerNombre();
 				registros[3] = objeto.getPrimerApellido();
+				registros[4] = objeto.getCedulaFamiliar();
 				return registros;
 			}
 
@@ -4333,7 +4349,7 @@ public class CConsulta extends CGenerico {
 	public void buscarCedulaCita() {
 		Usuario usuario = servicioUsuario.buscarPorLogin(nombreUsuarioSesion());
 		Paciente paciente = servicioPaciente.buscarPorCitaActivo(usuario,
-				txtCedulaCita.getValue(),fecha);
+				txtCedulaCita.getValue(), fecha);
 		limpiarCampos();
 		if (paciente != null) {
 			txtCedula.setValue("");
@@ -6414,17 +6430,17 @@ public class CConsulta extends CGenerico {
 
 		List<ConsultaParteCuerpo> partes = new ArrayList<ConsultaParteCuerpo>();
 		partes = getServicioConsultaParteCuerpo().buscarPorConsulta(consuta);
-		
-		if(partes.isEmpty())
-		p.put("imprime", "no");
+
+		if (partes.isEmpty())
+			p.put("imprime", "no");
 		else
 			p.put("imprime", "si");
-		
-		if(consuta.getExamenPreempleo().equals(""))
-		p.put("imprime2", "no");
+
+		if (consuta.getExamenPreempleo().equals(""))
+			p.put("imprime2", "no");
 		else
 			p.put("imprime2", "si");
-		
+
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RPreempleo.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,

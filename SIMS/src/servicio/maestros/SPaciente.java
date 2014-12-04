@@ -537,4 +537,48 @@ public class SPaciente {
 		}
 	}
 
+	public List<Paciente> filtroCedulaAsociado(String valor) {
+		return pacienteDAO.findByCedulaFamiliarStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroCedulaAsociadoC(String valor, String value) {
+		return pacienteDAO
+				.findByCedulaFamiliarAndCedulaFamiliarStartingWithAllIgnoreCase(
+						value, valor);
+	}
+
+	public List<Paciente> filtroCedulaFamiliar1Activos(String valor) {
+		return pacienteDAO
+				.findByCedulaFamiliarStartingWithAndEstatusTrueAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroCedulaFamiliarParienteActivos(String valor) {
+		return pacienteDAO
+				.findByTrabajadorFalseAndEstatusTrueAndCedulaFamiliarStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroCedulaFamiliarCitaActivos(Usuario usuario,
+			String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<Cita> citas = citaDAO
+				.findByUsuarioAndPacienteCedulaFamiliarStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		if (!citas.isEmpty())
+			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
+				Cita cita = (Cita) iterator.next();
+				cita.getPaciente().setUsuarioAuditoria(
+						String.valueOf(cita.getIdCita()));
+				pacientes.add(cita.getPaciente());
+			}
+		return pacientes;
+	}
+
 }

@@ -299,7 +299,7 @@ public class CCita extends CGenerico {
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
-				"Nombre", "Apellido") {
+				"Nombre", "Apellido", "Trabajador Asociado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -313,6 +313,9 @@ public class CCita extends CGenerico {
 						return servicioPaciente.filtroCedulaActivos(valor);
 					case "Apellido":
 						return servicioPaciente.filtroApellido1Activos(valor);
+					case "Trabajador Asociado":
+						return servicioPaciente
+								.filtroCedulaFamiliar1Activos(valor);
 					default:
 						return pacientes;
 					}
@@ -330,6 +333,9 @@ public class CCita extends CGenerico {
 					case "Apellido":
 						return servicioPaciente
 								.filtroApellidoParienteActivos(valor);
+					case "Trabajador Asociado":
+						return servicioPaciente
+								.filtroCedulaFamiliarParienteActivos(valor);
 					default:
 						return pacientes;
 					}
@@ -338,11 +344,12 @@ public class CCita extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[4];
+				String[] registros = new String[5];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
 				registros[2] = objeto.getPrimerNombre();
 				registros[3] = objeto.getPrimerApellido();
+				registros[4] = objeto.getCedulaFamiliar();
 				return registros;
 			}
 
@@ -468,7 +475,7 @@ public class CCita extends CGenerico {
 	}
 
 	@Listen("onClick = #btnFinalizarCita")
-	public void finalizarCita(){
+	public void finalizarCita() {
 		Boolean hayCitas = false;
 		if (ltbCitas.getItemCount() != 0) {
 			final List<Listitem> list1 = ltbCitas.getItems();
@@ -515,7 +522,7 @@ public class CCita extends CGenerico {
 		} else
 			msj.mensajeAlerta("Actualmente No hay Citas para su Finalizacion");
 	}
-	
+
 	/*
 	 * Se ejecuta al darle click al boton de cancelar en la pestanna de
 	 * consultar citas, anula la cita seleccionada

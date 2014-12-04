@@ -8,6 +8,8 @@ import org.zkoss.zul.Hbox;
 
 public abstract class Botonera extends Hbox {
 
+	private static final long serialVersionUID = 1L;
+
 	public Botonera() {
 		super();
 		Button btnGuardar = new Button();
@@ -20,12 +22,12 @@ public abstract class Botonera extends Hbox {
 		this.appendChild(btnSalir);
 		
 		btnGuardar
-				.setSrc("/public/imagenes/botones/guardar.png");
+				.setImage("/public/imagenes/botones/guardar.png");
 		btnEliminar
-				.setSrc("/public/imagenes/botones/eliminar.png");
+				.setImage("/public/imagenes/botones/eliminar.png");
 		btnLimpiar
-				.setSrc("/public/imagenes/botones/limpiar.png");
-		btnSalir.setSrc("/public/imagenes/botones/salir.png");
+				.setImage("/public/imagenes/botones/limpiar.png");
+		btnSalir.setImage("/public/imagenes/botones/salir.png");
 		
 		btnGuardar.setLabel("Guardar");
 		btnEliminar.setLabel("Eliminar");
