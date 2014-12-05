@@ -13,10 +13,11 @@
 						<button autodisable="self" id="btnBuscar1" class="btn"
 							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
 					</row>
-						<row>
+					<row>
 						<label class="etiqueta" value="Imprimir" />
 						<button autodisable="self" id="btnReporte" class="btn"
-							label="Reporte" tooltiptext="Reporte" image="/public/imagenes/botones/reporte.png" />
+							label="Reporte" tooltiptext="Reporte"
+							image="/public/imagenes/botones/reporte.png" />
 					</row>
 				</rows>
 			</grid>
@@ -42,16 +43,38 @@
 				</tabs>
 				<tabpanels>
 					<tabpanel>
-						<hbox>
-							<hbox>
-								<label class="etiqueta"
-									value="CÓDIGO  DECLARACIÓN DEL ACCIDENTE ANTE EL INPSASEL:" />
-								<space />
-								<label value="*" style="font-weight:bold;color:red" />
-							</hbox>
-							<textbox width="100%" id="txt1" tooltiptext="Ingrese el Codigo"
-								maxlength="50" />
-						</hbox>
+						<grid width="100%">
+							<columns visible="false">
+								<column label="" width="25%" />
+								<column label="" width="15%" />
+								<column label="" width="35%" />
+								<column label="" width="25%" />
+							</columns>
+							<rows>
+								<row>
+									<cell colspan="2">
+										<hbox>
+											<label class="etiqueta"
+												value="CÓDIGO  DECLARACIÓN DEL ACCIDENTE ANTE EL INPSASEL:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red" />
+										</hbox>
+									</cell>
+									<textbox width="100%" id="txt1" tooltiptext="Ingrese el Codigo"
+										maxlength="50" />
+									<cell colspan="1">
+										<hbox />
+									</cell>
+								</row>
+								<row id="row">
+									<label class="etiqueta" value="PLAN DE ACCION:" />
+									<button autodisable="self" id="btnBuscarPlan" class="btn"
+										label="Buscar" tooltiptext="Catalogo"
+										image="/public/imagenes/botones/buscar.png" />
+									<label width="100%" id="lblPlan" />
+								</row>
+							</rows>
+						</grid>
 						<separator />
 						<label class="etiqueta" value="INVESTIGACION DEL ACCIDENTE" />
 						<separator />
@@ -331,7 +354,7 @@
 							<rows>
 								<row>
 									<cell colspan="8">
-	
+
 										<label class="etiqueta" value="DATOS DE LA EMPRESA BENEFICIARIA" />
 										<separator />
 									</cell>
@@ -2374,6 +2397,7 @@
 			</tabbox>
 			<separator />
 			<div id="botoneraInforme" />
+			<div id="divCatalogoPlan" />
 			<div id="catalogoPaciente" />
 			<div id="catalogoEmpresa" />
 			<div id="catalogoInforme" />

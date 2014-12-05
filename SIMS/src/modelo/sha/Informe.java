@@ -100,6 +100,10 @@ public class Informe implements Serializable {
 	@JoinColumn(name = "id_clasificacion_accidente", referencedColumnName = "id_clasificacion_accidente")
 	private ClasificacionAccidente clasificacion;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_plan_accion", referencedColumnName = "id_plan_accion")
+	private PlanAccion plan;
+	
 	@ManyToMany
 	@JoinTable(
 		name="informe_condicion_a", schema="dusa_sims.dbo"
@@ -725,7 +729,7 @@ public class Informe implements Serializable {
 			String icaa, String icab, String icac, String icae, Boolean ida,
 			Boolean idb, Boolean idc, Boolean idd, Boolean ide, Boolean idf,
 			Boolean idg, Boolean idh, Boolean idi, Boolean idj, Timestamp idaa,
-			String idab, Boolean idac, String idad, Timestamp fecha, String hora, String usuario) {
+			String idab, Boolean idac, String idad, Timestamp fecha, String hora, String usuario, PlanAccion plan) {
 		super();
 		this.idInforme = idInforme;
 		this.paciente = pacienteA;
@@ -893,6 +897,7 @@ public class Informe implements Serializable {
 		this.fechaAuditoria = fecha;
 		this.horaAuditoria = hora;
 		this.usuarioAuditoria = usuario;
+		this.plan = plan;
 	}
 
 	public long getIdInforme() {
@@ -2293,6 +2298,14 @@ public class Informe implements Serializable {
 
 	public void setEbge(String ebge) {
 		this.ebge = ebge;
+	}
+
+	public PlanAccion getPlan() {
+		return plan;
+	}
+
+	public void setPlan(PlanAccion plan) {
+		this.plan = plan;
 	}
 	
 }
