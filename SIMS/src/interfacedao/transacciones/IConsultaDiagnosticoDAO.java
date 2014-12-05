@@ -74,4 +74,34 @@ public interface IConsultaDiagnosticoDAO extends
 			Date fecha1, Date fecha2, String diagnostico, boolean b, boolean c,
 			Sort o);
 
+	@Query("select distinct(d.diagnostico) from ConsultaDiagnostico d where d.consulta.reposo = ?1 and d.consulta.paciente.trabajador = ?2")
+	List<Diagnostico> findDiagnosticoDistinctByConsultaReposoAndConsultaPacienteTrabajador(
+			boolean b, boolean c);
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaReposoAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
+			Date desde, Date hasta, boolean b, boolean c,
+			List<Long> diagnosticosAgregados, Sort o);
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndTipoAndConsultaReposoAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
+			Date desde, Date hasta, String diagnostico, boolean b, boolean c,
+			List<Long> ids, Sort o);
+	
+	@Query("select distinct(d.diagnostico) from ConsultaDiagnostico d")
+	List<Diagnostico> findDiagnosticoDistinct();
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndDiagnosticoIdDiagnosticoIn(
+			Date desde, Date hasta, int dea, int aa, List<Long> ids, Sort o);
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndTipoAndDiagnosticoIdDiagnosticoIn(
+			Date desde, Date hasta, int dea, int aa, String diagnostico,
+			List<Long> ids, Sort o);
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
+			Date desde, Date hasta, int dea, int aa, boolean b, List<Long> ids,
+			Sort o);
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndTipoAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
+			Date desde, Date hasta, int dea, int aa, String diagnostico,
+			boolean b, List<Long> ids, Sort o);
+
 }

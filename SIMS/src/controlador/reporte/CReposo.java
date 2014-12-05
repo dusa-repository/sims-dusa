@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import modelo.maestros.Accidente;
+import modelo.maestros.Diagnostico;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
@@ -28,6 +31,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -36,15 +41,19 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Row;
+import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-
 import controlador.maestros.CGenerico;
 
 public class CReposo extends CGenerico {
@@ -85,6 +94,14 @@ public class CReposo extends CGenerico {
 	private Div divCatalogoPaciente;
 	@Wire
 	private Combobox cmbTipo;
+	@Wire
+	private Hbox box;
+	@Wire
+	private Listbox ltbDiagnosticos;
+	@Wire
+	private Listbox ltbDiagnosticosAgregados;
+	List<Diagnostico> diagnosticosDisponibles = new ArrayList<Diagnostico>();
+	List<Diagnostico> diagnosticosAgregados = new ArrayList<Diagnostico>();
 
 	private String tipo = "";
 	private String titulo = "";
@@ -124,6 +141,8 @@ public class CReposo extends CGenerico {
 			rowDiagnostico.setVisible(true);
 			rowDoctor.setVisible(false);
 			rowPaciente.setVisible(false);
+			box.setVisible(true);
+			cargarLista();
 			tipo = "diagnostico";
 			break;
 		case "Reposos Por Doctor":
@@ -161,6 +180,7 @@ public class CReposo extends CGenerico {
 					break;
 				case "diagnostico":
 					cmbDiagnostico.setValue("TODOS");
+					cargarLista();
 					break;
 				case "doctor":
 					idDoctor = "";
@@ -250,8 +270,13 @@ public class CReposo extends CGenerico {
 		if (cmbDiagnostico.getText().compareTo("") == 0) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
+		} else {
+			if (ltbDiagnosticosAgregados.getItemCount() == 0) {
+				msj.mensajeError("Debe seleccionar al menos un diagnostico");
+				return false;
+			} else
+				return true;
 		}
-		return true;
 	}
 
 	public boolean validarDoctor() {
@@ -417,13 +442,40 @@ public class CReposo extends CGenerico {
 			diagnostico = "";
 		else
 			diagnostico = cmbDiagnostico.getValue();
-
-		if ((diagnostico.equals("") && servicioConsultaDiagnostico
+		String diagnosticoReal = "";
+		JSONObject json = new JSONObject();
+		List<Long> ids = new ArrayList<Long>();
+		for (int i = 0; i < diagnosticosAgregados.size(); i++) {
+			Diagnostico object = diagnosticosAgregados.get(i);
+			ids.add(object.getIdDiagnostico());
+			try {
+				json.put("valor" + i, object.getIdDiagnostico());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			if (object.getIdDiagnostico() == 0) {
+				diagnosticoReal = "TODOS";
+				json = new JSONObject();
+				try {
+					json.put("valor", 0);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				i = diagnosticosAgregados.size();
+			}
+		}
+		if ((diagnostico.equals("") && diagnosticoReal.equals("TODOS") && servicioConsultaDiagnostico
 				.buscarEntreFechasOrdenadoPorDiagnostico(desde, hasta)
 				.isEmpty())
-				|| (!diagnostico.equals("") && servicioConsultaDiagnostico
+				|| (diagnostico.equals("") && diagnosticoReal.equals("") && servicioConsultaDiagnostico
+						.buscarEntreFechasOrdenadoPorDiagnosticoYDiagnosticos(
+								desde, hasta, ids).isEmpty())
+				|| (!diagnostico.equals("") && diagnosticoReal.equals("TODOS") && servicioConsultaDiagnostico
 						.buscarEntreFechasyTipoDiagnostico(desde, hasta,
-								diagnostico).isEmpty()))
+								diagnostico).isEmpty())
+				|| (!diagnostico.equals("") && diagnosticoReal.equals("") && servicioConsultaDiagnostico
+						.buscarEntreFechasyTipoDiagnosticoYDiagnosticos(desde,
+								hasta, diagnostico, ids).isEmpty()))
 			msj.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 			Clients.evalJavaScript("window.open('"
@@ -434,6 +486,8 @@ public class CReposo extends CGenerico {
 					+ fecha2
 					+ "&valor8="
 					+ diagnostico
+					+ "&valor40="
+					+ json.toString()
 					+ "&valor20="
 					+ tipoReporte
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
@@ -442,7 +496,8 @@ public class CReposo extends CGenerico {
 	}
 
 	public byte[] reporteReposoPorDiagnostico(String part1, String part2,
-			String diagnostico, String tipoReporte) throws JRException {
+			String diagnostico, String tipoReporte, JSONObject jObj)
+			throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -457,25 +512,49 @@ public class CReposo extends CGenerico {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
+		List<Long> ids = new ArrayList<Long>();
+		String diagnosticoReal = "";
+		Iterator<?> it = jObj.keys();
+		while (it.hasNext()) {
+			String key = (String) it.next();
+			Integer o;
+			try {
+				o = (Integer) jObj.get(key);
+				ids.add(Long.valueOf(o));
+				if (o == 0)
+					diagnosticoReal = "TODOS";
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
 		List<ConsultaDiagnostico> consutaDiag = new ArrayList<ConsultaDiagnostico>();
 
-		if (diagnostico.equals(""))
-			consutaDiag = getServicioConsultaDiagnostico()
-					.buscarEntreFechasOrdenadoPorDiagnostico(fecha1, fecha2);
-		else {
-			consutaDiag = getServicioConsultaDiagnostico()
-					.buscarEntreFechasyTipoDiagnostico(fecha1, fecha2,
-							diagnostico);
+		if (diagnostico.equals("")) {
+			if (diagnosticoReal.equals("TODOS"))
+				consutaDiag = getServicioConsultaDiagnostico()
+						.buscarEntreFechasOrdenadoPorDiagnostico(fecha1, fecha2);
+			else
+				consutaDiag = getServicioConsultaDiagnostico()
+						.buscarEntreFechasOrdenadoPorDiagnosticoYDiagnosticos(
+								fecha1, fecha2, ids);
+		} else {
+			if (diagnosticoReal.equals("TODOS"))
+				consutaDiag = getServicioConsultaDiagnostico()
+						.buscarEntreFechasyTipoDiagnostico(fecha1, fecha2,
+								diagnostico);
+			else
+				consutaDiag = getServicioConsultaDiagnostico()
+						.buscarEntreFechasyTipoDiagnosticoYDiagnosticos(fecha1,
+								fecha2, diagnostico, ids);
 		}
 
 		Map p = new HashMap();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
-//		List<Long> consuta = getServicioConsultaDiagnostico()
-//				.cantidadConsultas(consutaDiag);
-//		p.put("total", consuta.size());
+		// List<Long> consuta = getServicioConsultaDiagnostico()
+		// .cantidadConsultas(consutaDiag);
+		// p.put("total", consuta.size());
 
 		for (int i = 0; i < consutaDiag.size(); i++) {
 			Consulta cons = consutaDiag.get(i).getConsulta();
@@ -967,6 +1046,84 @@ public class CReposo extends CGenerico {
 				+ paciente.getPrimerApellido());
 		idPaciente = paciente.getCedula();
 		catalogo.setParent(null);
+	}
+
+	@Listen("onClick = #pasar1")
+	public void derechaDiagnostico() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem = ltbDiagnosticos.getItems();
+		if (listItem.size() != 0) {
+			for (int i = 0; i < listItem.size(); i++) {
+				if (listItem.get(i).isSelected()) {
+					Diagnostico diagnostico = listItem.get(i).getValue();
+					diagnosticosDisponibles.remove(diagnostico);
+					diagnosticosAgregados.add(diagnostico);
+					ltbDiagnosticosAgregados
+							.setModel(new ListModelList<Diagnostico>(
+									diagnosticosAgregados));
+					ltbDiagnosticosAgregados.renderAll();
+					listitemEliminar.add(listItem.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbDiagnosticos.removeItemAt(listitemEliminar.get(i).getIndex());
+			ltbDiagnosticos.renderAll();
+		}
+		listasMultiples();
+	}
+
+	@Listen("onClick = #pasar2")
+	public void izquierdaDiagnostico() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem2 = ltbDiagnosticosAgregados.getItems();
+		if (listItem2.size() != 0) {
+			for (int i = 0; i < listItem2.size(); i++) {
+				if (listItem2.get(i).isSelected()) {
+					Diagnostico diagnostico = listItem2.get(i).getValue();
+					diagnosticosAgregados.remove(diagnostico);
+					diagnosticosDisponibles.add(diagnostico);
+					ltbDiagnosticos.setModel(new ListModelList<Diagnostico>(
+							diagnosticosDisponibles));
+					ltbDiagnosticos.renderAll();
+					listitemEliminar.add(listItem2.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbDiagnosticosAgregados.removeItemAt(listitemEliminar.get(i)
+					.getIndex());
+			ltbDiagnosticosAgregados.renderAll();
+		}
+		listasMultiples();
+	}
+
+	private void listasMultiples() {
+		ltbDiagnosticosAgregados.setMultiple(false);
+		ltbDiagnosticosAgregados.setCheckmark(false);
+		ltbDiagnosticosAgregados.setMultiple(true);
+		ltbDiagnosticosAgregados.setCheckmark(true);
+		ltbDiagnosticos.setMultiple(false);
+		ltbDiagnosticos.setCheckmark(false);
+		ltbDiagnosticos.setMultiple(true);
+		ltbDiagnosticos.setCheckmark(true);
+	}
+
+	private void cargarLista() {
+		if (box.isVisible()) {
+			diagnosticosDisponibles.clear();
+			Diagnostico diag = new Diagnostico();
+			diag.setNombre("TODOS");
+			diag.setIdDiagnostico(0);
+			diagnosticosDisponibles.add(diag);
+			diagnosticosDisponibles.addAll(servicioConsultaDiagnostico
+					.buscarDiagnosticosExistentes());
+			ltbDiagnosticos.setModel(new ListModelList<Diagnostico>(
+					diagnosticosDisponibles));
+			diagnosticosAgregados.clear();
+			ltbDiagnosticosAgregados.getItems().clear();
+			listasMultiples();
+		}
 	}
 
 }

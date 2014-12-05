@@ -3,7 +3,9 @@ package servicio.transacciones;
 import interfacedao.transacciones.IConsultaDiagnosticoDAO;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import modelo.maestros.Accidente;
@@ -199,8 +201,100 @@ public class SConsultaDiagnostico {
 						desde, hasta, area, diagnostico);
 	}
 
-//	public List<Long> cantidadConsultas(List<ConsultaDiagnostico> consutaDiag) {
-//		// TODO Auto-generated method stub
-//		return consultaDiagnosticoDAO.buscarConsultas(consutaDiag);
-//	}
+	public List<Diagnostico> buscarDiagnosticosExistentes() {
+		return consultaDiagnosticoDAO
+				.findDiagnosticoDistinctByConsultaReposoAndConsultaPacienteTrabajador(
+						true, true);
+	}
+
+	public List<ConsultaDiagnostico> buscarEntreFechasOrdenadoPorDiagnosticoYDiagnosticos(
+			Date desde, Date hasta, List<Long> diagnosticosAgregados) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("tipo");
+		ordenar.add("diagnosticoNombre");
+		ordenar.add("consultaPacienteCedula");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaReposoAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
+						desde, hasta, true, true, diagnosticosAgregados, o);
+	}
+
+	public List<ConsultaDiagnostico> buscarEntreFechasyTipoDiagnosticoYDiagnosticos(
+			Date desde, Date hasta, String diagnostico, List<Long> ids) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("tipo");
+		ordenar.add("diagnosticoNombre");
+		ordenar.add("consultaPacienteCedula");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndTipoAndConsultaReposoAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
+						desde, hasta, diagnostico, true, true, ids, o);
+	}
+
+	public List<Diagnostico> buscarDiagnosticosExistentesSimples() {
+		return consultaDiagnosticoDAO.findDiagnosticoDistinct();
+	}
+
+	public List<ConsultaDiagnostico> buscarEntreFechasEntreEdadesYDiagnosticos(
+			Date desde, Date hasta, int dea, int aa, List<Long> ids) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("tipo");
+		ordenar.add("diagnosticoNombre");
+		ordenar.add("consultaPacienteCedula");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndDiagnosticoIdDiagnosticoIn(
+						desde, hasta, dea, aa, ids, o);
+	}
+
+	public List<ConsultaDiagnostico> buscarEntreFechasEntreEdadesyTipoDiagnosticoYDiagnosticos(
+			Date desde, Date hasta, int dea, int aa, String diagnostico,
+			List<Long> ids) {
+
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("tipo");
+		ordenar.add("diagnosticoNombre");
+		ordenar.add("consultaPacienteCedula");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndTipoAndDiagnosticoIdDiagnosticoIn(
+						desde, hasta, dea, aa, diagnostico, ids, o);
+	}
+
+	public List<ConsultaDiagnostico> buscarEntreFechasEntreEdadesyFamiliarYDiagnosticos(
+			Date desde, Date hasta, int dea, int aa, boolean b, List<Long> ids) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("tipo");
+		ordenar.add("diagnosticoNombre");
+		ordenar.add("consultaPacienteCedula");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
+						desde, hasta, dea, aa, b, ids, o);
+	}
+
+	public List<ConsultaDiagnostico> buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliarYDiagnosticos(
+			Date desde, Date hasta, int dea, int aa, String diagnostico,
+			boolean b, List<Long> ids) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("tipo");
+		ordenar.add("diagnosticoNombre");
+		ordenar.add("consultaPacienteCedula");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndTipoAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
+						desde, hasta, dea, aa, diagnostico, b, ids, o);
+	}
+
+	// public List<Long> cantidadConsultas(List<ConsultaDiagnostico>
+	// consutaDiag) {
+	// // TODO Auto-generated method stub
+	// return consultaDiagnosticoDAO.buscarConsultas(consutaDiag);
+	// }
 }
