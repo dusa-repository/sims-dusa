@@ -91,6 +91,7 @@ import servicio.sha.SArea;
 import servicio.sha.SClasificacionAccidente;
 import servicio.sha.SCondicion;
 import servicio.sha.SInforme;
+import servicio.sha.SPlanAccion;
 import servicio.transacciones.SCita;
 import servicio.transacciones.SConsulta;
 import servicio.transacciones.SConsultaDiagnostico;
@@ -224,6 +225,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SPeriodo servicioPeriodo;
 	@WireVariable("SPeriodoPaciente")
 	protected SPeriodoPaciente servicioPeriodoPaciente;
+	@WireVariable("SPlanAccion")
+	protected SPlanAccion servicioPlanAccion;
 	@WireVariable("SPresentacionComercial")
 	protected SPresentacionComercial servicioPresentacion;
 	@WireVariable("SPresentacionMedicina")

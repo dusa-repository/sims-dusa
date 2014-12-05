@@ -40,4 +40,6 @@ public interface IInformeDAO extends JpaRepository<Informe, Long> {
 
 	Informe findByIdInforme(long parseLong);
 
+	List<Informe> findByPlanIdPlan(long id);
+
 }

@@ -17,6 +17,7 @@ import modelo.sha.Area;
 import modelo.sha.ClasificacionAccidente;
 import modelo.sha.Condicion;
 import modelo.sha.Informe;
+import modelo.sha.PlanAccion;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
@@ -25,9 +26,11 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.A;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
@@ -38,6 +41,7 @@ import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
+import org.zkoss.zul.Row;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
@@ -45,13 +49,12 @@ import org.zkoss.zul.Timebox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-
 import controlador.maestros.CGenerico;
 
 public class CInforme extends CGenerico {
 
 	private static final long serialVersionUID = -6378965001066569507L;
-	
+
 	@Wire
 	private Button btnReporte;
 	@Wire
@@ -898,7 +901,14 @@ public class CInforme extends CGenerico {
 	@Wire
 	private Div catalogoInforme;
 	@Wire
+	private Div divCatalogoPlan;
+	@Wire
+	private Label lblPlan;
+	@Wire
 	private Div botoneraInforme;
+	@Wire
+	private Row row;
+	Catalogo<PlanAccion> catalogoPlan;
 	Catalogo<Paciente> catalogoP;
 	Catalogo<Empresa> catalogoE;
 	Catalogo<Informe> catalogoI;
@@ -910,6 +920,7 @@ public class CInforme extends CGenerico {
 	ListModelList<Condicion> condicionesF;
 	String idBotonPaciente = "";
 	String idBotonEmpresa = "";
+	Long idPlan = null;
 	List<Listbox> listas = new ArrayList<Listbox>();
 	long idInforme = 0;
 	long idEmpresa = 0;
@@ -1443,6 +1454,10 @@ public class CInforme extends CGenerico {
 					else
 						informe.setIdac(false);
 					informe.setIdad(txt9414.getValue());
+					PlanAccion plan = null;
+					if (idPlan != null)
+						plan = servicioPlanAccion.buscar(idPlan);
+					informe.setPlan(plan);
 					servicioInforme.guardar(informe);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiarCampos();
@@ -2011,6 +2026,13 @@ public class CInforme extends CGenerico {
 	@Listen("onSeleccion = #catalogoInforme")
 	public void seleccion() {
 		Informe informe = catalogoI.objetoSeleccionadoDelCatalogo();
+		if (informe.getPlan() != null) {
+			PlanAccion plan = informe.getPlan();
+			llenarCamposPlan(plan);
+		} else {
+			idPlan = null;
+			lblPlan.setValue("");
+		}
 		txt1.setValue(informe.getCodigo());
 		setear5(informe.getPacienteA());
 		if (informe.getEmpresaA() != null)
@@ -2965,7 +2987,12 @@ public class CInforme extends CGenerico {
 	// Cosas relacionadas al limpiar
 
 	public void limpiarCampos() {
-
+		if (row.getChildren().size() == 4) {
+			A linea = (A) row.getChildren().get(3);
+			Events.postEvent("onClick", linea, null);
+		}
+		idPlan = null;
+		lblPlan.setValue("");
 		Radio radio = new Radio();
 		radio = (Radio) rdg523.getChildren().get(2).getChildren().get(0);
 		radio.setChecked(false);
@@ -3501,12 +3528,76 @@ public class CInforme extends CGenerico {
 		ltb822.setModel(getCondicionesF());
 		listasMultiples();
 	}
+
+	@Listen("onClick = #btnBuscarPlan")
+	public void mostrarCatalogo() {
+		final List<PlanAccion> planes = servicioPlanAccion.buscarTodos();
+		catalogoPlan = new Catalogo<PlanAccion>(divCatalogoPlan,
+				"Catalogo de Planes de Accion", planes, "Descripcion", "Quien",
+				"Donde", "Cuando", "Como") {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			protected List<PlanAccion> buscar(String valor, String combo) {
+				switch (combo) {
+				case "Descripcion":
+					return servicioPlanAccion.filtroDescripcion(valor);
+				case "Quien":
+					return servicioPlanAccion.filtroQuien(valor);
+				case "Donde":
+					return servicioPlanAccion.filtroDonde(valor);
+				case "Cuando":
+					return servicioPlanAccion.filtroCuando(valor);
+				case "Como":
+					return servicioPlanAccion.filtroComo(valor);
+				default:
+					return planes;
+				}
+			}
+
+			@Override
+			protected String[] crearRegistros(PlanAccion object) {
+				String[] registros = new String[5];
+				registros[0] = object.getDescripcion();
+				registros[1] = object.getQuien();
+				registros[2] = object.getDonde();
+				registros[3] = object.getCuando();
+				registros[4] = object.getComo();
+				return registros;
+			}
+		};
+		catalogoPlan.setParent(divCatalogoPlan);
+		catalogoPlan.doModal();
+	}
+
+	@Listen("onSeleccion = #divCatalogoPlan")
+	public void seleccinar() {
+		PlanAccion object = catalogoPlan.objetoSeleccionadoDelCatalogo();
+		llenarCamposPlan(object);
+		catalogoPlan.setParent(null);
+	}
+
+	/* LLena los campos del formulario dado un pais */
+	private void llenarCamposPlan(PlanAccion object) {
+		lblPlan.setValue(object.getDescripcion());
+		idPlan = object.getIdPlan();
+		final A rm = new A("Remover");
+		rm.addEventListener(Events.ON_CLICK,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
+					public void onEvent(Event event) throws Exception {
+						lblPlan.setValue("");
+						idPlan = null;
+						rm.detach();
+					}
+				});
+		row.appendChild(rm);
+	}
+
 	@Listen("onClick =#btnReporte")
-	public void reporte() 
-	{
+	public void reporte() {
 		System.out.println("metodo");
-		if(idInforme!=0)
-		{
+		if (idInforme != 0) {
 			System.out.println("entro");
 			Clients.evalJavaScript("window.open('"
 					+ damePath()
@@ -3517,43 +3608,41 @@ public class CInforme extends CGenerico {
 	}
 
 	public byte[] reporteInpsasel(String par6) throws JRException {
-		
-		System.out.println("codigo  "+ par6);
+
+		System.out.println("codigo  " + par6);
 		byte[] fichero = null;
 		Informe informe = getServicioInforme().buscar(Long.parseLong(par6));
 
 		Map p = new HashMap();
 		p.put("codigo", informe.getCodigo());
-		
-		if(informe.getPacienteA()!=null)
-		{
-		p.put("nombre211", informe.getPacienteA().getPrimerNombre()+ " "+informe.getPacienteA().getPrimerApellido());
-		p.put("cedula211",informe.getPacienteA().getCedula());
-		p.put("a", informe.getPacienteA().getNroInpsasel());
+
+		if (informe.getPacienteA() != null) {
+			p.put("nombre211", informe.getPacienteA().getPrimerNombre() + " "
+					+ informe.getPacienteA().getPrimerApellido());
+			p.put("cedula211", informe.getPacienteA().getCedula());
+			p.put("a", informe.getPacienteA().getNroInpsasel());
 		}
-		if(informe.getPacienteB()!=null)
-		p.put("nombre212", informe.getPacienteB().getPrimerNombre());
-		
-		if(informe.getEmpresaA()!=null)
-		{
+		if (informe.getPacienteB() != null)
+			p.put("nombre212", informe.getPacienteB().getPrimerNombre());
+
+		if (informe.getEmpresaA() != null) {
 			p.put("razonA", informe.getEmpresaA().getRazon());
 		}
 		p.put("fa", informe.getFa());
 		p.put("fb", informe.getFb());
 		p.put("fc", informe.getFc());
 		p.put("fgac", informe.getArea());
-		
+
 		p.put("fgad", informe.getFgad());
-		if(informe.getFgga())
-		p.put("fgg", "SI");
+		if (informe.getFgga())
+			p.put("fgg", "SI");
 		else
 			p.put("fgg", "NO");
-		
+
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RReporteSHA.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p);
 		return fichero;
 	}
-	
-	
+
 }

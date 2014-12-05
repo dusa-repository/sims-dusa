@@ -74,6 +74,10 @@ public class SInforme {
 		return informeDAO.findByIdInforme(parseLong);
 	}
 
+	public List<Informe> buscarPorIdPlan(long id) {
+		return informeDAO.findByPlanIdPlan(id);
+	}
+
 
 
 	}
