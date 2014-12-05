@@ -1,6 +1,9 @@
 package controlador.reporte;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -9,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import modelo.transacciones.ConsultaDiagnostico;
 import net.sf.jasperreports.engine.JRException;
 import controlador.sha.CInforme;
 import controlador.transacciones.CConsulta;
@@ -69,6 +76,14 @@ public class Reportero extends HttpServlet {
 		String par10 = request.getParameter("valor10");
 		String par11 = request.getParameter("valor11");
 		String tipo = request.getParameter("valor20");
+		JSONObject jObj = new JSONObject();
+		if (request.getParameter("valor40") != null) {
+			try {
+				jObj = new JSONObject(request.getParameter("valor40"));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
 
 		// Reporte Tipo Consulta
 
@@ -109,7 +124,7 @@ public class Reportero extends HttpServlet {
 				break;
 			case "11":
 				fichero = morbilidad.reporteMorbilidadPorDiagnostico(par6,
-						par7, par8, par9, par10, par11, tipo);
+						par7, par8, par9, par10, par11, tipo, jObj);
 				break;
 			case "12":
 				fichero = morbilidad.reporteMorbilidadPorDoctor(par6, par7,
@@ -124,7 +139,7 @@ public class Reportero extends HttpServlet {
 				break;
 			case "15":
 				fichero = reposo.reporteReposoPorDiagnostico(par6, par7, par8,
-						tipo);
+						tipo,jObj);
 				break;
 			case "16":
 				fichero = resumen.reporteAreaTipoDiagnostico(par6, par7, tipo);

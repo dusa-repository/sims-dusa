@@ -13,11 +13,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import modelo.maestros.Cargo;
 import modelo.maestros.CategoriaDiagnostico;
+import modelo.maestros.Diagnostico;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
@@ -33,6 +35,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -45,8 +49,11 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
@@ -118,6 +125,14 @@ public class CMorbilidad extends CGenerico {
 	private Div divCatalogoPaciente;
 	@Wire
 	private Combobox cmbTipo;
+	@Wire
+	private Hbox box;
+	@Wire
+	private Listbox ltbDiagnosticos;
+	@Wire
+	private Listbox ltbDiagnosticosAgregados;
+	List<Diagnostico> diagnosticosDisponibles = new ArrayList<Diagnostico>();
+	List<Diagnostico> diagnosticosAgregados = new ArrayList<Diagnostico>();
 
 	private String tipo = "";
 	private String titulo = "";
@@ -177,6 +192,8 @@ public class CMorbilidad extends CGenerico {
 			rowFamiliar.setVisible(true);
 			rowPaciente.setVisible(false);
 			rowTipoConsulta.setVisible(false);
+			box.setVisible(true);
+			cargarLista();
 			tipo = "diagnostico";
 			break;
 		case "Morbilidad Por Doctor":
@@ -220,6 +237,7 @@ public class CMorbilidad extends CGenerico {
 					rdoFamiliares.setChecked(false);
 					rdoTodos.setChecked(false);
 					rdoTrabajadores.setChecked(false);
+					cargarLista();
 					break;
 				case "doctor":
 					idDoctor = "";
@@ -344,8 +362,13 @@ public class CMorbilidad extends CGenerico {
 						.isChecked())) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
+		} else {
+			if (ltbDiagnosticosAgregados.getItemCount() == 0) {
+				msj.mensajeError("Debe seleccionar al menos un diagnostico");
+				return false;
+			} else
+				return true;
 		}
-		return true;
 	}
 
 	public boolean validarDoctor() {
@@ -378,19 +401,19 @@ public class CMorbilidad extends CGenerico {
 						.buscarEntreFechasyArea(desde, hasta, area2).isEmpty()))
 			msj.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
-				Clients.evalJavaScript("window.open('"
-						+ damePath()
-						+ "Reportero?valor=9&valor6="
-						+ fecha1
-						+ "&valor7="
-						+ fecha2
-						+ "&valor8="
-						+ area
-						+ "&valor9="
-						+ cmbCargo.getValue()
-						+ "&valor20="
-						+ tipoReporte
-						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=9&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ area
+					+ "&valor9="
+					+ cmbCargo.getValue()
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		}
 
 	}
@@ -604,9 +627,9 @@ public class CMorbilidad extends CGenerico {
 			}
 			return xlsReport.toByteArray();
 		} else {
-		fichero = JasperRunManager.runReportToPdf(reporte, p,
-				new JRBeanCollectionDataSource(consuta));
-		return fichero;
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consuta));
+			return fichero;
 		}
 	}
 
@@ -624,6 +647,29 @@ public class CMorbilidad extends CGenerico {
 		else
 			diagnostico = cmbDiagnostico.getValue();
 
+		String diagnosticoReal = "";
+		JSONObject json = new JSONObject();
+		List<Long> ids = new ArrayList<Long>();
+		for (int i = 0; i < diagnosticosAgregados.size(); i++) {
+			Diagnostico object = diagnosticosAgregados.get(i);
+			ids.add(object.getIdDiagnostico());
+			try {
+				json.put("valor" + i, object.getIdDiagnostico());
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			if (object.getIdDiagnostico() == 0) {
+				diagnosticoReal = "TODOS";
+				json = new JSONObject();
+				try {
+					json.put("valor", 0);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				i = diagnosticosAgregados.size();
+			}
+		}
+
 		if (rdoFamiliares.isChecked())
 			radio = "Familiares";
 		if (rdoTodos.isChecked())
@@ -636,24 +682,58 @@ public class CMorbilidad extends CGenerico {
 		String a = String.valueOf(aa);
 		String de = String.valueOf(dea);
 
-		if ((diagnostico.equals("") && radio.equals("Todos") && servicioConsultaDiagnostico
+		if ((diagnostico.equals("") && diagnosticoReal.equals("TODOS")
+				&& radio.equals("Todos") && servicioConsultaDiagnostico
 				.buscarEntreFechasEntreEdades(desde, hasta, dea, aa).isEmpty())
-				|| (!diagnostico.equals("") && radio.equals("Todos") && servicioConsultaDiagnostico
+				|| (!diagnostico.equals("") && diagnosticoReal.equals("TODOS")
+						&& radio.equals("Todos") && servicioConsultaDiagnostico
 						.buscarEntreFechasEntreEdadesyTipoDiagnostico(desde,
 								hasta, dea, aa, diagnostico).isEmpty())
-				|| (diagnostico.equals("") && radio.equals("Familiares") && servicioConsultaDiagnostico
+				|| (diagnostico.equals("") && diagnosticoReal.equals("TODOS")
+						&& radio.equals("Familiares") && servicioConsultaDiagnostico
 						.buscarEntreFechasEntreEdadesyFamiliar(desde, hasta,
 								dea, aa, false).isEmpty())
-				|| (diagnostico.equals("") && radio.equals("Trabajadores") && servicioConsultaDiagnostico
+				|| (diagnostico.equals("") && diagnosticoReal.equals("TODOS")
+						&& radio.equals("Trabajadores") && servicioConsultaDiagnostico
 						.buscarEntreFechasEntreEdadesyFamiliar(desde, hasta,
 								dea, aa, true).isEmpty())
-				|| (!diagnostico.equals("") && radio.equals("Familiares") && servicioConsultaDiagnostico
+				|| (!diagnostico.equals("") && diagnosticoReal.equals("TODOS")
+						&& radio.equals("Familiares") && servicioConsultaDiagnostico
 						.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliar(
 								desde, hasta, dea, aa, diagnostico, false)
 						.isEmpty())
-				|| (!diagnostico.equals("") && radio.equals("Trabajadores") && servicioConsultaDiagnostico
+				|| (!diagnostico.equals("") && diagnosticoReal.equals("TODOS")
+						&& radio.equals("Trabajadores") && servicioConsultaDiagnostico
 						.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliar(
 								desde, hasta, dea, aa, diagnostico, true)
+						.isEmpty())
+
+				|| (diagnostico.equals("") && diagnosticoReal.equals("")
+						&& radio.equals("Todos") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesYDiagnosticos(desde,
+								hasta, dea, aa, ids).isEmpty())
+				|| (!diagnostico.equals("") && diagnosticoReal.equals("")
+						&& radio.equals("Todos") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesyTipoDiagnosticoYDiagnosticos(
+								desde, hasta, dea, aa, diagnostico, ids)
+						.isEmpty())
+				|| (diagnostico.equals("") && diagnosticoReal.equals("")
+						&& radio.equals("Familiares") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesyFamiliarYDiagnosticos(
+								desde, hasta, dea, aa, false, ids).isEmpty())
+				|| (diagnostico.equals("") && diagnosticoReal.equals("")
+						&& radio.equals("Trabajadores") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesyFamiliarYDiagnosticos(
+								desde, hasta, dea, aa, true, ids).isEmpty())
+				|| (!diagnostico.equals("") && diagnosticoReal.equals("")
+						&& radio.equals("Familiares") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliarYDiagnosticos(
+								desde, hasta, dea, aa, diagnostico, false, ids)
+						.isEmpty())
+				|| (!diagnostico.equals("") && diagnosticoReal.equals("")
+						&& radio.equals("Trabajadores") && servicioConsultaDiagnostico
+						.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliarYDiagnosticos(
+								desde, hasta, dea, aa, diagnostico, true, ids)
 						.isEmpty()))
 			msj.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
@@ -672,6 +752,8 @@ public class CMorbilidad extends CGenerico {
 					+ a
 					+ "&valor11="
 					+ de
+					+ "&valor40="
+					+ json.toString()
 					+ "&valor20="
 					+ tipoReporte
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
@@ -680,8 +762,8 @@ public class CMorbilidad extends CGenerico {
 	}
 
 	public byte[] reporteMorbilidadPorDiagnostico(String part1, String part2,
-			String diagnostico, String familiar, String a, String de, String tipoReporte)
-			throws JRException {
+			String diagnostico, String familiar, String a, String de,
+			String tipoReporte, JSONObject jObj) throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -697,42 +779,101 @@ public class CMorbilidad extends CGenerico {
 			e.printStackTrace();
 		}
 
+		List<Long> ids = new ArrayList<Long>();
+		String diagnosticoReal = "";
+		Iterator<?> it = jObj.keys();
+		while (it.hasNext()) {
+			String key = (String) it.next();
+			Integer o;
+			try {
+				o = (Integer) jObj.get(key);
+				ids.add(Long.valueOf(o));
+				if (o == 0)
+					diagnosticoReal = "TODOS";
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+
 		List<ConsultaDiagnostico> consutaDiag = new ArrayList<ConsultaDiagnostico>();
 		int dea = Integer.valueOf(de);
 		int aa = Integer.valueOf(a);
-		if (diagnostico.equals("") && familiar.equals("Todos"))
-			consutaDiag = getServicioConsultaDiagnostico()
-					.buscarEntreFechasEntreEdades(fecha1, fecha2, dea, aa);
-		else {
-			if (!diagnostico.equals("") && familiar.equals("Todos"))
+		if (diagnosticoReal.equals("TODOS")) {
+			if (diagnostico.equals("") && familiar.equals("Todos"))
 				consutaDiag = getServicioConsultaDiagnostico()
-						.buscarEntreFechasEntreEdadesyTipoDiagnostico(fecha1,
-								fecha2, dea, aa, diagnostico);
+						.buscarEntreFechasEntreEdades(fecha1, fecha2, dea, aa);
 			else {
-				if (diagnostico.equals("") && familiar.equals("Familiares"))
+				if (!diagnostico.equals("") && familiar.equals("Todos"))
 					consutaDiag = getServicioConsultaDiagnostico()
-							.buscarEntreFechasEntreEdadesyFamiliar(fecha1,
-									fecha2, dea, aa, false);
+							.buscarEntreFechasEntreEdadesyTipoDiagnostico(
+									fecha1, fecha2, dea, aa, diagnostico);
 				else {
-					if (diagnostico.equals("")
-							&& familiar.equals("Trabajadores"))
+					if (diagnostico.equals("") && familiar.equals("Familiares"))
 						consutaDiag = getServicioConsultaDiagnostico()
 								.buscarEntreFechasEntreEdadesyFamiliar(fecha1,
-										fecha2, dea, aa, true);
+										fecha2, dea, aa, false);
 					else {
-						if (!diagnostico.equals("")
-								&& familiar.equals("Familiares"))
+						if (diagnostico.equals("")
+								&& familiar.equals("Trabajadores"))
 							consutaDiag = getServicioConsultaDiagnostico()
-									.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliar(
-											fecha1, fecha2, dea, aa,
-											diagnostico, false);
+									.buscarEntreFechasEntreEdadesyFamiliar(
+											fecha1, fecha2, dea, aa, true);
 						else {
 							if (!diagnostico.equals("")
-									&& familiar.equals("Trabajadores"))
+									&& familiar.equals("Familiares"))
 								consutaDiag = getServicioConsultaDiagnostico()
 										.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliar(
 												fecha1, fecha2, dea, aa,
-												diagnostico, true);
+												diagnostico, false);
+							else {
+								if (!diagnostico.equals("")
+										&& familiar.equals("Trabajadores"))
+									consutaDiag = getServicioConsultaDiagnostico()
+											.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliar(
+													fecha1, fecha2, dea, aa,
+													diagnostico, true);
+							}
+						}
+					}
+				}
+			}
+		} else {
+
+			if (diagnostico.equals("") && familiar.equals("Todos"))
+				consutaDiag = getServicioConsultaDiagnostico()
+						.buscarEntreFechasEntreEdadesYDiagnosticos(fecha1,
+								fecha2, dea, aa, ids);
+			else {
+				if (!diagnostico.equals("") && familiar.equals("Todos"))
+					consutaDiag = getServicioConsultaDiagnostico()
+							.buscarEntreFechasEntreEdadesyTipoDiagnosticoYDiagnosticos(
+									fecha1, fecha2, dea, aa, diagnostico, ids);
+				else {
+					if (diagnostico.equals("") && familiar.equals("Familiares"))
+						consutaDiag = getServicioConsultaDiagnostico()
+								.buscarEntreFechasEntreEdadesyFamiliarYDiagnosticos(
+										fecha1, fecha2, dea, aa, false, ids);
+					else {
+						if (diagnostico.equals("")
+								&& familiar.equals("Trabajadores"))
+							consutaDiag = getServicioConsultaDiagnostico()
+									.buscarEntreFechasEntreEdadesyFamiliarYDiagnosticos(
+											fecha1, fecha2, dea, aa, true, ids);
+						else {
+							if (!diagnostico.equals("")
+									&& familiar.equals("Familiares"))
+								consutaDiag = getServicioConsultaDiagnostico()
+										.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliarYDiagnosticos(
+												fecha1, fecha2, dea, aa,
+												diagnostico, false, ids);
+							else {
+								if (!diagnostico.equals("")
+										&& familiar.equals("Trabajadores"))
+									consutaDiag = getServicioConsultaDiagnostico()
+											.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliarYDiagnosticos(
+													fecha1, fecha2, dea, aa,
+													diagnostico, true, ids);
+							}
 						}
 					}
 				}
@@ -746,9 +887,9 @@ public class CMorbilidad extends CGenerico {
 		p.put("edad2", aa);
 		p.put("paciente", familiar);
 
-//		List<Long> consuta = getServicioConsultaDiagnostico()
-//				.cantidadConsultas(consutaDiag);
-//		p.put("total", consuta.size());
+		// List<Long> consuta = getServicioConsultaDiagnostico()
+		// .cantidadConsultas(consutaDiag);
+		// p.put("total", consuta.size());
 
 		for (int i = 0; i < consutaDiag.size(); i++) {
 			Consulta cons = consutaDiag.get(i).getConsulta();
@@ -759,7 +900,7 @@ public class CMorbilidad extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorDiagnostico.jasper"));
-		
+
 		if (tipoReporte.equals("EXCEL")) {
 
 			JasperPrint jasperPrint = null;
@@ -783,10 +924,10 @@ public class CMorbilidad extends CGenerico {
 			return xlsReport.toByteArray();
 		} else {
 
-		fichero = JasperRunManager.runReportToPdf(reporte, p,
-				new JRBeanCollectionDataSource(consutaDiag));
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consutaDiag));
 
-		return fichero;
+			return fichero;
 		}
 	}
 
@@ -798,7 +939,7 @@ public class CMorbilidad extends CGenerico {
 		String fecha2 = fecha.format(hasta);
 		String unidad = "";
 		String tipoReporte = cmbTipo.getValue();
-		
+
 		if (cmbUnidad.getValue().equals("TODAS"))
 			unidad = "";
 		else
@@ -837,7 +978,8 @@ public class CMorbilidad extends CGenerico {
 	}
 
 	public byte[] reporteMorbilidadPorDoctor(String part1, String part2,
-			String unidad, String doctor, String tipoReporte) throws JRException {
+			String unidad, String doctor, String tipoReporte)
+			throws JRException {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -905,7 +1047,7 @@ public class CMorbilidad extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorDoctor.jasper"));
-		
+
 		if (tipoReporte.equals("EXCEL")) {
 
 			JasperPrint jasperPrint = null;
@@ -929,10 +1071,10 @@ public class CMorbilidad extends CGenerico {
 			return xlsReport.toByteArray();
 		} else {
 
-		fichero = JasperRunManager.runReportToPdf(reporte, p,
-				new JRBeanCollectionDataSource(consuta));
-		// }
-		return fichero;
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consuta));
+			// }
+			return fichero;
 		}
 	}
 
@@ -997,6 +1139,93 @@ public class CMorbilidad extends CGenerico {
 				+ usuario.getPrimerApellido());
 		idDoctor = usuario.getCedula();
 		catalogoDoctor.setParent(null);
+	}
+
+	@Listen("onSeleccion = #divCatalogoPaciente")
+	public void seleccionar() {
+		Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
+		lblPaciente.setValue(paciente.getPrimerNombre() + " "
+				+ paciente.getPrimerApellido());
+		idPaciente = paciente.getCedula();
+		catalogo.setParent(null);
+	}
+
+	@Listen("onClick = #pasar1")
+	public void derechaDiagnostico() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem = ltbDiagnosticos.getItems();
+		if (listItem.size() != 0) {
+			for (int i = 0; i < listItem.size(); i++) {
+				if (listItem.get(i).isSelected()) {
+					Diagnostico diagnostico = listItem.get(i).getValue();
+					diagnosticosDisponibles.remove(diagnostico);
+					diagnosticosAgregados.add(diagnostico);
+					ltbDiagnosticosAgregados
+							.setModel(new ListModelList<Diagnostico>(
+									diagnosticosAgregados));
+					ltbDiagnosticosAgregados.renderAll();
+					listitemEliminar.add(listItem.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbDiagnosticos.removeItemAt(listitemEliminar.get(i).getIndex());
+			ltbDiagnosticos.renderAll();
+		}
+		listasMultiples();
+	}
+
+	@Listen("onClick = #pasar2")
+	public void izquierdaDiagnostico() {
+		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
+		List<Listitem> listItem2 = ltbDiagnosticosAgregados.getItems();
+		if (listItem2.size() != 0) {
+			for (int i = 0; i < listItem2.size(); i++) {
+				if (listItem2.get(i).isSelected()) {
+					Diagnostico diagnostico = listItem2.get(i).getValue();
+					diagnosticosAgregados.remove(diagnostico);
+					diagnosticosDisponibles.add(diagnostico);
+					ltbDiagnosticos.setModel(new ListModelList<Diagnostico>(
+							diagnosticosDisponibles));
+					ltbDiagnosticos.renderAll();
+					listitemEliminar.add(listItem2.get(i));
+				}
+			}
+		}
+		for (int i = 0; i < listitemEliminar.size(); i++) {
+			ltbDiagnosticosAgregados.removeItemAt(listitemEliminar.get(i)
+					.getIndex());
+			ltbDiagnosticosAgregados.renderAll();
+		}
+		listasMultiples();
+	}
+
+	private void listasMultiples() {
+		ltbDiagnosticosAgregados.setMultiple(false);
+		ltbDiagnosticosAgregados.setCheckmark(false);
+		ltbDiagnosticosAgregados.setMultiple(true);
+		ltbDiagnosticosAgregados.setCheckmark(true);
+		ltbDiagnosticos.setMultiple(false);
+		ltbDiagnosticos.setCheckmark(false);
+		ltbDiagnosticos.setMultiple(true);
+		ltbDiagnosticos.setCheckmark(true);
+	}
+
+	private void cargarLista() {
+		if (box.isVisible()) {
+			diagnosticosDisponibles.clear();
+			Diagnostico diag = new Diagnostico();
+			diag.setNombre("TODOS");
+			diag.setIdDiagnostico(0);
+			diagnosticosDisponibles.add(diag);
+			diagnosticosDisponibles.addAll(servicioConsultaDiagnostico
+					.buscarDiagnosticosExistentesSimples());
+			ltbDiagnosticos.setModel(new ListModelList<Diagnostico>(
+					diagnosticosDisponibles));
+			diagnosticosAgregados.clear();
+			ltbDiagnosticosAgregados.getItems().clear();
+			listasMultiples();
+		}
 	}
 
 	// /* Muestra el catalogo de los Pacientes */
