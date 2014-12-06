@@ -221,6 +221,9 @@ public class CMedicina extends CGenerico {
 						if (id == 0) {
 							valor = servicioMedicina.buscarUltimaReferencia();
 							medicina.setIdReferencia(valor + 1);
+						} else {
+							Medicina buscada = servicioMedicina.buscar(id);
+							medicina.setIdReferencia(buscada.getIdReferencia());
 						}
 						servicioMedicina.guardar(medicina);
 						if (id != 0)
