@@ -224,6 +224,9 @@ public class CMedicina extends CGenerico {
 						} else {
 							Medicina buscada = servicioMedicina.buscar(id);
 							medicina.setIdReferencia(buscada.getIdReferencia());
+							F4101 object = servicioF4101.buscarPorReferencia(buscada.getIdReferencia());
+							object.setImdsc1(nombre);
+							servicioF4101.guardar(object);
 						}
 						servicioMedicina.guardar(medicina);
 						if (id != 0)
