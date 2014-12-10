@@ -6,13 +6,8 @@
 		<borderlayout height="100%" style="background-color:#fff;">
 			<north height="10%" class="banner">
 				<hbox hflex="1">
-					<separator />
-					<separator />
-					<separator />
 					<vbox>
-						<separator />
-						<image src="../public/imagenes/generales/LogoDusa.png"
-							height="4em" width="18em" />
+						<image src="../public/imagenes/generales/LogoInicio.jpg"/>
 					</vbox>
 					<separator />
 					<separator />
@@ -22,8 +17,6 @@
 						<separator />
 						<separator />
 						<hbox>
-							<separator />
-							<separator />
 							<separator />
 							<separator />
 							<separator />
@@ -67,12 +60,13 @@
 							<separator />
 							<separator />
 							<separator />
-							<vbox>
+								<vbox>
 								<listbox style="border:none" width="200px" id="ltbRoles">
 									<template name="model">
 										<listitem>
-											<listcell style="font-size:14px;color:white;font-weight: bold; background:#661313"
-												label="${each.nombre}">
+											<listcell
+												style="border:none;font-size:14px;color:white;font-weight: bold"
+												class="gruposUsuario" label="${each.nombre}">
 											</listcell>
 										</listitem>
 									</template>
@@ -115,13 +109,9 @@
 					</center>
 				</borderlayout>
 			</center>
-			<south class="banner" vflex="2" border="0" height="5%"
+			<south class="banner" vflex="2" border="0" height="3%"
 				collapsible="false">
 				<div align="center" sclass="footer">
-					<a style="color: white" href="../j_spring_security_logout">
-						<label value="INICIO">
-						</label>
-					</a>
 					<separator></separator>
 					<label style="padding-center:35%;color: white"
 							value="© 2014 Destilería Unidas S.A | RIF: J-30940783-0 | Todos los derechos reservados | Desarrollado por BIZAPPS,C.A">
