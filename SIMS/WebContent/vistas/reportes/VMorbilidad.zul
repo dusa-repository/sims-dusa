@@ -183,6 +183,17 @@
 				</rows>
 			</grid>
 			<separator />
+			<hbox>
+				<textbox tooltiptext="Ingrese el Nombre del Diagnostico"
+					placeholder="Ingrese el Diagnostico a Buscar" width="195px"
+					id="txtBuscadorDiagnostico"></textbox>
+				<separator />
+				<button class="abrir" id="btnAbrirDiagnostico" label=""
+					tooltiptext="Crear un Nuevo Diagnostico" image="/public/imagenes/botones/agregar.png" />
+				<button class="abrir" id="btnRefrescarDiagnostico" label=""
+					tooltiptext="Presione para actualizar la lista de los diagnosticos (actualizara tambien la lista de los diagnosticos agregados)"
+					image="/public/imagenes/botones/refresh2.png" />
+			</hbox>
 			<hbox id="box" widths="48%,4%,48%" visible="false">
 				<listbox mold="paging" pageSize="8" id="ltbDiagnosticos"
 					height="370px" width="100%" emptyMessage="No hay Diagnosticos Registrados">

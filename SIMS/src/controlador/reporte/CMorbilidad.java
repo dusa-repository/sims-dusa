@@ -59,14 +59,18 @@ import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
+import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
+import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
 import controlador.maestros.CGenerico;
 
 public class CMorbilidad extends CGenerico {
 
+	@Wire
+	private Textbox txtBuscadorDiagnostico;
 	@Wire
 	private Div catalogoUsuarios;
 	@Wire
@@ -133,7 +137,7 @@ public class CMorbilidad extends CGenerico {
 	private Listbox ltbDiagnosticosAgregados;
 	List<Diagnostico> diagnosticosDisponibles = new ArrayList<Diagnostico>();
 	List<Diagnostico> diagnosticosAgregados = new ArrayList<Diagnostico>();
-
+	Buscar<Diagnostico> buscarDiagnostico;
 	private String tipo = "";
 	private String titulo = "";
 	private String idPaciente = "";
@@ -186,6 +190,7 @@ public class CMorbilidad extends CGenerico {
 			tipo = "tipoConsulta";
 			break;
 		case "Morbilidad Por Diagnostico":
+			buscadorDiagnostico();
 			rowArea.setVisible(false);
 			rowDiagnostico.setVisible(true);
 			rowDoctor.setVisible(false);
@@ -281,6 +286,31 @@ public class CMorbilidad extends CGenerico {
 		guardar.setSrc("/public/imagenes/botones/reporte.png");
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraMorbilidad.appendChild(botonera);
+	}
+
+	private void buscadorDiagnostico() {
+		buscarDiagnostico = new Buscar<Diagnostico>(ltbDiagnosticos,
+				txtBuscadorDiagnostico) {
+			@Override
+			protected List<Diagnostico> buscar(String valor) {
+				List<Diagnostico> diagnosticosFiltradas = new ArrayList<Diagnostico>();
+				List<Diagnostico> diagnosticos = servicioDiagnostico
+						.filtroNombre(valor);
+				Diagnostico diag = new Diagnostico();
+				diag.setNombre("TODOS");
+				diag.setIdDiagnostico(0);
+				diagnosticosFiltradas.add(diag);
+				for (int i = 0; i < diagnosticosDisponibles.size(); i++) {
+					Diagnostico diagnostico = diagnosticosDisponibles.get(i);
+					for (int j = 0; j < diagnosticos.size(); j++) {
+						if (diagnostico.getIdDiagnostico() == diagnosticos.get(
+								j).getIdDiagnostico())
+							diagnosticosFiltradas.add(diagnostico);
+					}
+				}
+				return diagnosticosFiltradas;
+			}
+		};
 	}
 
 	private void cargarCombos() {
@@ -1219,13 +1249,19 @@ public class CMorbilidad extends CGenerico {
 			diag.setIdDiagnostico(0);
 			diagnosticosDisponibles.add(diag);
 			diagnosticosDisponibles.addAll(servicioConsultaDiagnostico
-					.buscarDiagnosticosExistentesSimples());
+					.buscarDiagnosticosExistentesSimples(dtbDesde.getValue(),
+							dtbHasta.getValue()));
 			ltbDiagnosticos.setModel(new ListModelList<Diagnostico>(
 					diagnosticosDisponibles));
 			diagnosticosAgregados.clear();
 			ltbDiagnosticosAgregados.getItems().clear();
 			listasMultiples();
 		}
+	}
+	
+	@Listen("onChange = #dtbDesde, #dtbHasta")
+	public void changeList(){
+		cargarLista();
 	}
 
 	// /* Muestra el catalogo de los Pacientes */

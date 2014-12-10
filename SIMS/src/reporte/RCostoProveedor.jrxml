@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RCostoProveedor" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5395e779-b886-443c-953b-c4f983c0bb74">
 	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="20"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
 	<field name="proveedor.idProveedor" class="java.lang.Long"/>
@@ -27,6 +27,12 @@
 	</variable>
 	<variable name="total_tipo" class="java.lang.Double" resetType="Group" resetGroup="tipo" calculation="Sum">
 		<variableExpression><![CDATA[$F{costo}]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.Integer" resetType="Group" resetGroup="proveedor" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.paciente.cedula}]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.paciente.cedula}]]></variableExpression>
 	</variable>
 	<group name="proveedor">
 		<groupExpression><![CDATA[$F{proveedor.idProveedor}]]></groupExpression>
@@ -76,9 +82,30 @@
 						<topPen lineWidth="0.5"/>
 					</box>
 					<textElement textAlignment="Center">
-						<font isBold="true"/>
+						<font size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{total_proveedor}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="47" height="19" uuid="990bdc0f-55dd-4c5e-9a62-1b4d74f6b39b"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="47" y="1" width="130" height="18" uuid="7c8f4318-0bbb-492e-a3cc-6cc3350692bb"/>
+					<textElement textAlignment="Center">
+						<font size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{proveedor.nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="177" y="0" width="43" height="18" uuid="259c6352-02df-4d15-85c7-d0d8d08ab5d8"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -118,7 +145,7 @@
 						<topPen lineWidth="0.5"/>
 					</box>
 					<textElement textAlignment="Center">
-						<font size="11" isBold="true"/>
+						<font size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{total_tipo}]]></textFieldExpression>
 				</textField>
@@ -361,6 +388,20 @@
 			<textField>
 				<reportElement x="292" y="20" width="34" height="20" uuid="09bda89d-2363-4b3c-a558-edb47ec542a3"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="177" height="20" uuid="08275caa-c08f-4d15-87b3-99e249c24b8b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad Total por Proveedor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="177" y="0" width="43" height="20" uuid="a5f9ee55-4fe1-4146-8126-08d0060dcf12"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
 			</textField>
 		</band>
 	</lastPageFooter>
