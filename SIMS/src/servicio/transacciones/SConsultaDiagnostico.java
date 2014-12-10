@@ -201,10 +201,10 @@ public class SConsultaDiagnostico {
 						desde, hasta, area, diagnostico);
 	}
 
-	public List<Diagnostico> buscarDiagnosticosExistentes() {
+	public List<Diagnostico> buscarDiagnosticosExistentes(Date date, Date date2) {
 		return consultaDiagnosticoDAO
 				.findDiagnosticoDistinctByConsultaReposoAndConsultaPacienteTrabajador(
-						true, true);
+						true, true,date, date2);
 	}
 
 	public List<ConsultaDiagnostico> buscarEntreFechasOrdenadoPorDiagnosticoYDiagnosticos(
@@ -233,8 +233,8 @@ public class SConsultaDiagnostico {
 						desde, hasta, diagnostico, true, true, ids, o);
 	}
 
-	public List<Diagnostico> buscarDiagnosticosExistentesSimples() {
-		return consultaDiagnosticoDAO.findDiagnosticoDistinct();
+	public List<Diagnostico> buscarDiagnosticosExistentesSimples(Date date, Date date2) {
+		return consultaDiagnosticoDAO.findDiagnosticoDistinct(date, date2);
 	}
 
 	public List<ConsultaDiagnostico> buscarEntreFechasEntreEdadesYDiagnosticos(

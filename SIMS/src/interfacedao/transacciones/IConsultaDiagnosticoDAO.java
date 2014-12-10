@@ -74,9 +74,10 @@ public interface IConsultaDiagnosticoDAO extends
 			Date fecha1, Date fecha2, String diagnostico, boolean b, boolean c,
 			Sort o);
 
-	@Query("select distinct(d.diagnostico) from ConsultaDiagnostico d where d.consulta.reposo = ?1 and d.consulta.paciente.trabajador = ?2")
+	@Query("select distinct(d.diagnostico) from ConsultaDiagnostico d where d.consulta.reposo = ?1 "
+			+ "and d.consulta.paciente.trabajador = ?2 and d.consulta.fechaConsulta between ?3 and ?4")
 	List<Diagnostico> findDiagnosticoDistinctByConsultaReposoAndConsultaPacienteTrabajador(
-			boolean b, boolean c);
+			boolean b, boolean c, Date date, Date date2);
 
 	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaReposoAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
 			Date desde, Date hasta, boolean b, boolean c,
@@ -86,8 +87,8 @@ public interface IConsultaDiagnosticoDAO extends
 			Date desde, Date hasta, String diagnostico, boolean b, boolean c,
 			List<Long> ids, Sort o);
 	
-	@Query("select distinct(d.diagnostico) from ConsultaDiagnostico d")
-	List<Diagnostico> findDiagnosticoDistinct();
+	@Query("select distinct(d.diagnostico) from ConsultaDiagnostico d where d.consulta.fechaConsulta between ?1 and ?2")
+	List<Diagnostico> findDiagnosticoDistinct(Date date, Date date2);
 
 	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndDiagnosticoIdDiagnosticoIn(
 			Date desde, Date hasta, int dea, int aa, List<Long> ids, Sort o);

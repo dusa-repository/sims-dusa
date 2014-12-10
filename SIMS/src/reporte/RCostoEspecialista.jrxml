@@ -24,6 +24,15 @@
 	<variable name="costo_total" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{especialista.costo}]]></variableExpression>
 	</variable>
+	<variable name="contador1" class="java.lang.Integer" resetType="Group" resetGroup="especialista" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.paciente.cedula}]]></variableExpression>
+	</variable>
+	<variable name="contador2" class="java.lang.Integer" resetType="Group" resetGroup="especialidad" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.paciente.cedula}]]></variableExpression>
+	</variable>
+	<variable name="contador3" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.paciente.cedula}]]></variableExpression>
+	</variable>
 	<group name="especialidad">
 		<groupExpression><![CDATA[$F{especialista.especialidad.descripcion}]]></groupExpression>
 		<groupHeader>
@@ -75,6 +84,27 @@
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{costo_especialidad}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="49" height="21" uuid="5017ddb0-8980-4551-805b-f61a6addef3e"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="179" y="0" width="47" height="21" uuid="250b011e-c164-4478-a9f1-2c51c8a9dd6c"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{contador2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="49" y="0" width="130" height="21" uuid="4bfac27d-b621-4b1f-ac2f-de9b26eb50d3"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{especialista.especialidad.descripcion}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -137,6 +167,27 @@
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{costo_especialista}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="49" height="21" uuid="f3e1359d-ec81-4c50-858e-fd6fb0042163"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="179" y="0" width="47" height="21" uuid="f74df5f9-0be0-4f7d-b790-7960deb92039"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{contador1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="49" y="1" width="130" height="20" uuid="343846a8-ed8b-4cd8-8122-525b7116667e"/>
+					<textElement>
+						<font isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{especialista.nombre}+" "+$F{especialista.apellido}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -329,6 +380,20 @@
 				<reportElement x="491" y="21" width="26" height="20" uuid="91826bf7-d6bd-47df-8eb4-22924b286154"/>
 				<text><![CDATA[Hora:]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="179" height="20" uuid="23fea19f-432a-4834-ba8f-f0bbd736093c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad Total por Especialistas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="179" y="0" width="47" height="20" uuid="f8ab273b-a09e-413c-a4e2-f7104b772ca0"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{contador3}]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
 </jasperReport>
