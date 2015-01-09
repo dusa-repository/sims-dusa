@@ -1,10 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="19e9f5ec-c399-4e95-8509-470aae44a9f4">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="19e9f5ec-c399-4e95-8509-470aae44a9f4">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="154"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table  Dataset 1" uuid="d07f88a1-bc72-4e0b-93b5-6e2e2611194b">
+		<field name="paciente.area.nombre" class="java.lang.String"/>
+		<field name="fechaConsulta" class="java.sql.Timestamp"/>
+		<variable name="porArea" class="java.lang.Integer" resetType="Group" resetGroup="area" calculation="Count">
+			<variableExpression><![CDATA[$F{fechaConsulta}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<variable name="all" class="java.lang.Integer" calculation="Count">
+			<variableExpression><![CDATA[$F{fechaConsulta}]]></variableExpression>
+			<initialValueExpression><![CDATA[0]]></initialValueExpression>
+		</variable>
+		<group name="area">
+			<groupExpression><![CDATA[$F{paciente.area.nombre}]]></groupExpression>
+		</group>
+	</subDataset>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
+	<parameter name="data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<field name="paciente.area.nombre" class="java.lang.String"/>
 	<field name="paciente.cargoReal.nombre" class="java.lang.String"/>
 	<field name="paciente.cedula" class="java.lang.String"/>
@@ -311,4 +347,80 @@
 			</staticText>
 		</band>
 	</lastPageFooter>
+	<summary>
+		<band height="150">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="10" width="553" height="111" uuid="ad4dcc43-5da5-45a8-972c-6302792b4ebc"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="Table  Dataset 1" uuid="eb87f72b-833b-4e6a-8dcf-7788e67f37ff">
+						<dataSourceExpression><![CDATA[$P{data}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="477" uuid="be562e6a-3c87-4431-8d0a-c8d927a041ec">
+						<jr:tableHeader style="table_TH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="477" height="31" uuid="c620aafc-b767-4c4d-8dc3-f66afab2a63b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Area]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="477" height="30" uuid="851135a0-b8df-4899-8c2b-9e127cefb47d"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total:  ]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="area">
+							<jr:cell height="23" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="477" height="23" uuid="f76b6050-975c-4c2a-9cce-0b713013cbcc"/>
+									<textElement verticalAlignment="Middle">
+										<font size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{paciente.area.nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="73" uuid="990eeb46-278f-4422-8ee1-16fa98f51758">
+						<jr:tableHeader style="table_TH" height="31" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="73" height="31" uuid="1c40b465-ec44-415e-826a-9130c1440b89"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter style="table_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="73" height="30" uuid="a9b8d908-6a54-4fee-9c02-15a8d16a83f8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{all}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="area">
+							<jr:cell height="23" rowSpan="1">
+								<textField>
+									<reportElement x="0" y="0" width="73" height="23" uuid="7a76b23d-93cb-4e65-9443-a4fc99041fa5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{porArea}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
 </jasperReport>
