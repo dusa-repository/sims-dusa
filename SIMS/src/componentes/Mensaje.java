@@ -59,16 +59,16 @@ public class Mensaje {
 	public static String pacienteNoExiste="La Cedula del Paciente no Existe  o el Paciente se Encuentra Inactivo";
 	public static String fechaPosterior="La Fecha Inicio no puede ser Posterior a la Fecha Final ";
 
-	public void mensajeInformacion(String msj) {
+	public static void mensajeInformacion(String msj) {
 		Messagebox.show(msj, "Informacion", Messagebox.OK,
 				Messagebox.INFORMATION);
 	}
 
-	public void mensajeAlerta(String msj) {
+	public static void mensajeAlerta(String msj) {
 		Messagebox.show(msj, "Alerta", Messagebox.OK, Messagebox.EXCLAMATION);
 	}
 
-	public void mensajeError(String msj) {
+	public static void mensajeError(String msj) {
 		Messagebox.show(msj, "Error", Messagebox.OK, Messagebox.ERROR);
 	}
 }
