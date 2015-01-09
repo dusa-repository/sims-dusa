@@ -22,7 +22,6 @@ public class SArbol {
 	}
 
 	public Arbol buscar(long id) {
-
 		return arbolDAO.findOne(id);
 	}
 
@@ -35,15 +34,12 @@ public class SArbol {
 	}
 
 	public List<Arbol> ordenarPorID(ArrayList<Long> ids) {
-
 		List<Arbol> arboles;
 		arboles = arbolDAO.buscar(ids);
 		return arboles;
-
 	}
 
 	public Arbol buscarPorId(Long id) {
-
 		Arbol arbol;
 		arbol = arbolDAO.findOne(id);
 		return arbol;

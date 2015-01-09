@@ -9,6 +9,7 @@ import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
@@ -17,7 +18,6 @@ import org.zkoss.zul.Window;
 import componentes.Botonera;
 import componentes.Mensaje;
 import componentes.Validador;
-
 import controlador.maestros.CGenerico;
 
 public class CReinicioPassword extends CGenerico {
@@ -56,14 +56,11 @@ public class CReinicioPassword extends CGenerico {
 				String password = KeyGenerators.string().generateKey();
 				String correo;
 				if (validar()) {
-					Usuario usuario = servicioUsuario
-							.buscarPorCedula(txtCedulaUsuario.getValue());
+					Usuario usuario = servicioUsuario.buscarPorCedulayCorreo(
+							txtCedulaUsuario.getValue(),
+							txtCorreoUsuario.getValue());
 					if (usuario != null) {
-						if (usuario.getEmail() != null) {
-							correo = usuario.getEmail();
-						} else {
-							correo = txtCorreoUsuario.getValue();
-						}
+						correo = usuario.getEmail();
 						usuario.setPassword(password);
 						servicioUsuario.guardar(usuario);
 						enviarEmailNotificacion(
@@ -73,10 +70,10 @@ public class CReinicioPassword extends CGenerico {
 										+ usuario.getLogin()
 										+ "  " + " Password: " + password);
 						limpiar();
-						msj.mensajeInformacion(Mensaje.reinicioContrasenna);
+						Mensaje.mensajeInformacion(Mensaje.reinicioContrasenna);
 						salir();
 					} else {
-						msj.mensajeError(Mensaje.cedulaNoExiste);
+						Mensaje.mensajeError(Mensaje.cedulaNoExiste);
 					}
 				}
 			}
@@ -84,8 +81,12 @@ public class CReinicioPassword extends CGenerico {
 			@Override
 			public void eliminar() {
 			}
+
 		};
-		botonera.getChildren().get(1).setVisible(false);
+
+		botonera.getChildren().get(1).setVisible(false);	
+		Button guardar = (Button) botonera.getChildren().get(0);
+		guardar.setLabel("Enviar");
 		botoneraReinicio.appendChild(botonera);
 	}
 

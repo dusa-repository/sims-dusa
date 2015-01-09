@@ -397,7 +397,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public boolean enviarEmailNotificacion(String correo, String mensajes) {
 		try {
 
-			String cc = "CAMBIO DE CONTRASEÑA SIMS";
+			String cc = "NOTIFICACION SIMS";
 			Properties props = new Properties();
 			props.setProperty("mail.smtp.host", "172.23.20.66");
 			props.setProperty("mail.smtp.starttls.enable", "true");

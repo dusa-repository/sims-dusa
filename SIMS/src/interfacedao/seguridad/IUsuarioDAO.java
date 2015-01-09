@@ -50,4 +50,6 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 	List<Usuario> findByDoctorAndPrimerApellidoStartingWithAllIgnoreCase(
 			boolean b, String valor);
 
+	Usuario findByCedulaAndEmail(String value, String value2);
+
 }
