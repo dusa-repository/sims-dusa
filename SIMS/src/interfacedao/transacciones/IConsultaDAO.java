@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Cargo;
+import modelo.maestros.Diagnostico;
+import modelo.maestros.Empresa;
+import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
@@ -106,5 +109,14 @@ public interface IConsultaDAO extends JpaRepository<Consulta, Long> {
 
 	List<Consulta> findByFechaConsultaBetweenAndPacienteTrabajadorAndPacienteCedula(
 			Date desde, Date hasta, boolean b, String paciente, Sort o);
+
+	List<Consulta> findByFechaConsultaBetweenAndPacienteCargoRealAndPacienteTrabajador(
+			Date desde, Date hasta, Cargo cargo2, boolean b, Sort o);
+
+	List<Consulta> findByFechaConsultaBetweenAndPacienteEmpresaAndPacienteTrabajador(
+			Date desde, Date hasta, Empresa empresa2, boolean b, Sort o);
+
+	List<Consulta> findByFechaConsultaBetweenAndPacienteNominaAndPacienteTrabajador(
+			Date desde, Date hasta, Nomina nomina2, boolean b, Sort o);
 
 }

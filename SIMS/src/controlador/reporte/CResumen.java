@@ -28,6 +28,7 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
@@ -61,6 +62,8 @@ public class CResumen extends CGenerico {
 	private Row row;
 	@Wire
 	private Combobox cmbTipo;
+	@Wire
+	private Checkbox chkSolo;
 
 	private String nombre;
 	private String tipo;
@@ -80,6 +83,7 @@ public class CResumen extends CGenerico {
 		switch (nombre) {
 		case "Morbilidad por Area y Tipo de Diagnostico":
 			row.setVisible(false);
+			chkSolo.setVisible(false);
 			tipo = "1";
 			break;
 		case "Morbilidad por Diagnostico":
@@ -88,6 +92,7 @@ public class CResumen extends CGenerico {
 			break;
 		case "Morbilidad por Tipo de Consulta":
 			row.setVisible(true);
+			chkSolo.setVisible(false);
 			tipo = "3";
 			break;
 		}
@@ -105,6 +110,8 @@ public class CResumen extends CGenerico {
 				rdoFamiliar.setChecked(false);
 				rdoTrabajador.setChecked(false);
 				rdoTodos.setChecked(false);
+				if (chkSolo.isVisible())
+					chkSolo.setChecked(false);
 			}
 
 			@Override
@@ -116,6 +123,9 @@ public class CResumen extends CGenerico {
 					DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
 					String parentesco = "";
 					boolean trabajador = false;
+					String todos = "si";
+					if (chkSolo.isChecked())
+						todos = "no";
 					String trabaja = "";
 					if (rdoFamiliar.isChecked()) {
 						parentesco = "familiar";
@@ -144,6 +154,8 @@ public class CResumen extends CGenerico {
 									+ fecha1
 									+ "&valor7="
 									+ fecha2
+									+ "&valor10="
+									+ todos
 									+ "&valor20="
 									+ tipoReporte
 									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
@@ -171,6 +183,8 @@ public class CResumen extends CGenerico {
 									+ parentesco
 									+ "&valor9="
 									+ trabaja
+									+ "&valor10="
+									+ todos
 									+ "&valor20="
 									+ tipoReporte
 									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
@@ -194,6 +208,8 @@ public class CResumen extends CGenerico {
 									+ fecha1
 									+ "&valor7="
 									+ fecha2
+									+ "&valor10="
+									+ todos
 									+ "&valor8="
 									+ parentesco
 									+ "&valor9="
@@ -308,6 +324,28 @@ public class CResumen extends CGenerico {
 				lista.add(objeto);
 			}
 		}
+
+		List<Resumen> lista2 = new ArrayList<Resumen>();
+		int max = 0;
+		int indice = 0;
+		for (int i = 0; i < lista.size(); i++) {
+			if ((lista.get(i).getValor1() + lista.get(i).getValor2()
+					+ lista.get(i).getValor3() + lista.get(i).getValor4()
+					+ lista.get(i).getValor5() + lista.get(i).getValor6()) >= max) {
+				max = lista.get(i).getValor1() + lista.get(i).getValor2()
+						+ lista.get(i).getValor3() + lista.get(i).getValor4()
+						+ lista.get(i).getValor5() + lista.get(i).getValor6();
+				indice = i;
+			}
+			if (i == lista.size() - 1) {
+				Resumen object = lista.remove(indice);
+				lista2.add(object);
+				max = 0;
+				i = -1;
+				indice = 0;
+			}
+		}
+
 		JasperReport reporte = null;
 		try {
 			reporte = (JasperReport) JRLoader.loadObject(getClass()
@@ -321,7 +359,7 @@ public class CResumen extends CGenerico {
 			JasperPrint jasperPrint = null;
 			try {
 				jasperPrint = JasperFillManager.fillReport(reporte, p,
-						new JRBeanCollectionDataSource(lista));
+						new JRBeanCollectionDataSource(lista2));
 			} catch (JRException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -340,7 +378,7 @@ public class CResumen extends CGenerico {
 		} else {
 			try {
 				fichero = JasperRunManager.runReportToPdf(reporte, p,
-						new JRBeanCollectionDataSource(lista));
+						new JRBeanCollectionDataSource(lista2));
 			} catch (JRException e) {
 				msj.mensajeError("Error en Reporte");
 			}
@@ -349,7 +387,7 @@ public class CResumen extends CGenerico {
 	}
 
 	public byte[] reporteDiagnostico(String par6, String par7, String par8,
-			String par9, String tipoReporte) {
+			String par9, String tipoReporte, String todos) {
 		byte[] fichero = null;
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		Date fecha1 = null;
@@ -410,11 +448,30 @@ public class CResumen extends CGenerico {
 			}
 		}
 
+		List<Resumen> lista2 = new ArrayList<Resumen>();
+		int max = 0;
+		int indice = 0;
+		for (int i = 0; i < lista.size(); i++) {
+			if (lista.get(i).getValor1() >= max) {
+				max = lista.get(i).getValor1();
+				indice = i;
+			}
+			if (i == lista.size() - 1) {
+				Resumen object = lista.remove(indice);
+				lista2.add(object);
+				max = 0;
+				i = -1;
+				indice = 0;
+				if (todos.equals("no"))
+					if (lista2.size() == 20)
+						i = lista.size();
+			}
+		}
 		Map p = new HashMap();
 		p.put("desde", par6);
 		p.put("hasta", par7);
 		p.put("tipoPaciente", tipoPaciente);
-		p.put("cantidad", lista.size());
+		p.put("cantidad", lista2.size());
 
 		JasperReport reporte = null;
 		try {
@@ -429,7 +486,7 @@ public class CResumen extends CGenerico {
 			JasperPrint jasperPrint = null;
 			try {
 				jasperPrint = JasperFillManager.fillReport(reporte, p,
-						new JRBeanCollectionDataSource(lista));
+						new JRBeanCollectionDataSource(lista2));
 			} catch (JRException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -448,7 +505,7 @@ public class CResumen extends CGenerico {
 		} else {
 			try {
 				fichero = JasperRunManager.runReportToPdf(reporte, p,
-						new JRBeanCollectionDataSource(lista));
+						new JRBeanCollectionDataSource(lista2));
 			} catch (JRException e) {
 				msj.mensajeError("Error en Reporte");
 			}
@@ -550,6 +607,7 @@ public class CResumen extends CGenerico {
 				lista.add(objeto);
 			}
 		}
+
 		Map p = new HashMap();
 		p.put("desde", par6);
 		p.put("hasta", par7);

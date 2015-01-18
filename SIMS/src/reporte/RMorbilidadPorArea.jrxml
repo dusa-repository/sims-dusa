@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="19e9f5ec-c399-4e95-8509-470aae44a9f4">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="154"/>
+	<property name="ireport.y" value="64"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -348,36 +348,52 @@
 		</band>
 	</lastPageFooter>
 	<summary>
-		<band height="150">
+		<band height="164">
 			<componentElement>
-				<reportElement key="table" style="table" x="0" y="10" width="553" height="111" uuid="ad4dcc43-5da5-45a8-972c-6302792b4ebc"/>
+				<reportElement key="table" style="table" positionType="Float" stretchType="RelativeToTallestObject" x="2" y="42" width="553" height="111" isRemoveLineWhenBlank="true" uuid="ad4dcc43-5da5-45a8-972c-6302792b4ebc"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
 					<datasetRun subDataset="Table  Dataset 1" uuid="eb87f72b-833b-4e6a-8dcf-7788e67f37ff">
 						<dataSourceExpression><![CDATA[$P{data}]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="477" uuid="be562e6a-3c87-4431-8d0a-c8d927a041ec">
-						<jr:tableHeader style="table_TH" height="31" rowSpan="1">
+					<jr:column width="437" uuid="be562e6a-3c87-4431-8d0a-c8d927a041ec">
+						<jr:tableHeader height="31" rowSpan="1">
+							<rectangle>
+								<reportElement x="0" y="0" width="437" height="31" backcolor="#CCCCCC" uuid="e9c14079-1f07-468a-b5f8-313789c837bb"/>
+							</rectangle>
 							<staticText>
-								<reportElement x="0" y="0" width="477" height="31" uuid="c620aafc-b767-4c4d-8dc3-f66afab2a63b"/>
+								<reportElement x="0" y="0" width="437" height="31" uuid="c620aafc-b767-4c4d-8dc3-f66afab2a63b"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Area]]></text>
+								<text><![CDATA[AREA]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter style="table_TH" height="30" rowSpan="1">
+						<jr:tableFooter height="30" rowSpan="1">
+							<box>
+								<topPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="477" height="30" uuid="851135a0-b8df-4899-8c2b-9e127cefb47d"/>
+								<reportElement x="0" y="0" width="437" height="30" uuid="851135a0-b8df-4899-8c2b-9e127cefb47d"/>
+								<box>
+									<rightPen lineWidth="1.0"/>
+								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Total:  ]]></text>
+								<text><![CDATA[Total Consultas:  ]]></text>
 							</staticText>
 						</jr:tableFooter>
 						<jr:groupFooter groupName="area">
 							<jr:cell height="23" rowSpan="1">
-								<textField>
-									<reportElement x="0" y="0" width="477" height="23" uuid="f76b6050-975c-4c2a-9cce-0b713013cbcc"/>
+								<box>
+									<bottomPen lineWidth="1.0"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="22" y="0" width="415" height="23" uuid="f76b6050-975c-4c2a-9cce-0b713013cbcc"/>
+									<box>
+										<rightPen lineWidth="1.0"/>
+									</box>
 									<textElement verticalAlignment="Middle">
 										<font size="11"/>
 									</textElement>
@@ -387,19 +403,26 @@
 						</jr:groupFooter>
 						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
 					</jr:column>
-					<jr:column width="73" uuid="990eeb46-278f-4422-8ee1-16fa98f51758">
-						<jr:tableHeader style="table_TH" height="31" rowSpan="1">
+					<jr:column width="114" uuid="990eeb46-278f-4422-8ee1-16fa98f51758">
+						<jr:tableHeader height="31" rowSpan="1">
+							<rectangle>
+								<reportElement x="0" y="0" width="114" height="31" backcolor="#CCCCCC" uuid="635b4e10-d83d-45b1-96f1-f9b2243171cb"/>
+							</rectangle>
 							<staticText>
-								<reportElement x="0" y="0" width="73" height="31" uuid="1c40b465-ec44-415e-826a-9130c1440b89"/>
+								<reportElement x="0" y="0" width="114" height="31" uuid="1c40b465-ec44-415e-826a-9130c1440b89"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Total]]></text>
+								<text><![CDATA[CONSULTAS]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter style="table_TH" height="30" rowSpan="1">
+						<jr:tableFooter height="30" rowSpan="1">
+							<box>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
 							<textField>
-								<reportElement x="0" y="0" width="73" height="30" uuid="a9b8d908-6a54-4fee-9c02-15a8d16a83f8"/>
+								<reportElement x="0" y="0" width="114" height="30" uuid="a9b8d908-6a54-4fee-9c02-15a8d16a83f8"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
@@ -408,11 +431,13 @@
 						</jr:tableFooter>
 						<jr:groupFooter groupName="area">
 							<jr:cell height="23" rowSpan="1">
+								<box bottomPadding="0">
+									<leftPen lineWidth="0.0"/>
+									<bottomPen lineWidth="1.0"/>
+								</box>
 								<textField>
-									<reportElement x="0" y="0" width="73" height="23" uuid="7a76b23d-93cb-4e65-9443-a4fc99041fa5"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle">
-										<font size="11"/>
-									</textElement>
+									<reportElement x="0" y="0" width="114" height="23" uuid="7a76b23d-93cb-4e65-9443-a4fc99041fa5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$V{porArea}]]></textFieldExpression>
 								</textField>
 							</jr:cell>
@@ -421,6 +446,13 @@
 					</jr:column>
 				</jr:table>
 			</componentElement>
+			<staticText>
+				<reportElement x="229" y="11" width="68" height="20" uuid="29aa6228-9606-4603-aa2d-d3395698d152"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESUMEN]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>

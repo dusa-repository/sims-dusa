@@ -100,6 +100,8 @@ public class CReposo extends CGenerico {
 	@Wire
 	private Hbox box;
 	@Wire
+	private Hbox box2;
+	@Wire
 	private Listbox ltbDiagnosticos;
 	@Wire
 	private Listbox ltbDiagnosticosAgregados;
@@ -146,6 +148,7 @@ public class CReposo extends CGenerico {
 			rowDoctor.setVisible(false);
 			rowPaciente.setVisible(false);
 			box.setVisible(true);
+			box2.setVisible(true);
 			cargarLista();
 			tipo = "diagnostico";
 			break;
