@@ -430,6 +430,7 @@ public class CReposo extends CGenerico {
 				cons.setMotivoConsulta("");
 			}
 		}
+		p.put("data", new JRBeanCollectionDataSource(consuta));
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRepososPorArea.jasper"));
@@ -619,6 +620,7 @@ public class CReposo extends CGenerico {
 			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
 			cons.setFechaAuditoria(fechaHasta2);
 		}
+		p.put("data", new JRBeanCollectionDataSource(consutaDiag));
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRepososPorDiagnostico.jasper"));
@@ -801,6 +803,7 @@ public class CReposo extends CGenerico {
 				cons.setMotivoConsulta("");
 			}
 		}
+		p.put("data", new JRBeanCollectionDataSource(consuta));
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRepososPorPaciente.jasper"));
@@ -926,6 +929,7 @@ public class CReposo extends CGenerico {
 				cons.setMotivoConsulta("");
 			}
 		}
+		p.put("data", new JRBeanCollectionDataSource(consuta));
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRepososPorDoctor.jasper"));
