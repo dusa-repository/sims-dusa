@@ -68,8 +68,9 @@
 						</combobox>
 						<hbox />
 						<hbox />
-						<hbox />
-						<hbox />
+						<cell colspan="2">
+							<checkbox id="chkSolo" label="Mostrar solo Primeros 20" />
+						</cell>
 					</row>
 				</rows>
 			</grid>

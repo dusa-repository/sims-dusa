@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import modelo.maestros.Accidente;
+import modelo.maestros.CategoriaDiagnostico;
+import modelo.maestros.ClasificacionDiagnostico;
 import modelo.maestros.Diagnostico;
 import modelo.sha.Area;
 import modelo.transacciones.Consulta;
@@ -204,7 +206,7 @@ public class SConsultaDiagnostico {
 	public List<Diagnostico> buscarDiagnosticosExistentes(Date date, Date date2) {
 		return consultaDiagnosticoDAO
 				.findDiagnosticoDistinctByConsultaReposoAndConsultaPacienteTrabajador(
-						true, true,date, date2);
+						true, true, date, date2);
 	}
 
 	public List<ConsultaDiagnostico> buscarEntreFechasOrdenadoPorDiagnosticoYDiagnosticos(
@@ -233,7 +235,8 @@ public class SConsultaDiagnostico {
 						desde, hasta, diagnostico, true, true, ids, o);
 	}
 
-	public List<Diagnostico> buscarDiagnosticosExistentesSimples(Date date, Date date2) {
+	public List<Diagnostico> buscarDiagnosticosExistentesSimples(Date date,
+			Date date2) {
 		return consultaDiagnosticoDAO.findDiagnosticoDistinct(date, date2);
 	}
 
@@ -290,6 +293,46 @@ public class SConsultaDiagnostico {
 		return consultaDiagnosticoDAO
 				.findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndTipoAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
 						desde, hasta, dea, aa, diagnostico, b, ids, o);
+	}
+
+	public List<ConsultaDiagnostico> buscarEntreFechasyCategoria(Date desde,
+			Date hasta, long l) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("diagnosticoCategoriaClasificacionNombre");
+		ordenar.add("diagnosticoCategoriaNombre");
+		ordenar.add("diagnosticoNombre");
+		ordenar.add("consultaPacienteCedula");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndDiagnosticoCategoriaIdCategoriaDiagnostico(
+						desde, hasta, l, o);
+	}
+
+	public List<ConsultaDiagnostico> buscarEntreFechasyClasificacion(
+			Date desde, Date hasta, long l) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("diagnosticoCategoriaClasificacionNombre");
+		ordenar.add("diagnosticoCategoriaNombre");
+		ordenar.add("diagnosticoNombre");
+		ordenar.add("consultaPacienteCedula");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDiagnosticoDAO
+				.findByConsultaFechaConsultaBetweenAndDiagnosticoCategoriaClasificacionIdClasificacion(
+						desde, hasta, l, o);
+	}
+
+	public List<ConsultaDiagnostico> buscarEntreFechas(Date desde, Date hasta) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("diagnosticoCategoriaClasificacionNombre");
+		ordenar.add("diagnosticoCategoriaNombre");
+		ordenar.add("diagnosticoNombre");
+		ordenar.add("consultaPacienteCedula");
+		ordenar.add("consultaFechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDiagnosticoDAO.findByConsultaFechaConsultaBetween(desde,
+				hasta, o);
 	}
 
 	// public List<Long> cantidadConsultas(List<ConsultaDiagnostico>

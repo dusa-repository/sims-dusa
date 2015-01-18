@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Accidente;
+import modelo.maestros.CategoriaDiagnostico;
+import modelo.maestros.ClasificacionDiagnostico;
 import modelo.maestros.Diagnostico;
 import modelo.pk.ConsultaDiagnosticoId;
 import modelo.sha.Area;
@@ -104,5 +106,11 @@ public interface IConsultaDiagnosticoDAO extends
 	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndConsultaPacienteEdadBetweenAndTipoAndConsultaPacienteTrabajadorAndDiagnosticoIdDiagnosticoIn(
 			Date desde, Date hasta, int dea, int aa, String diagnostico,
 			boolean b, List<Long> ids, Sort o);
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndDiagnosticoCategoriaClasificacionIdClasificacion(
+			Date desde, Date hasta, long l, Sort o);
+
+	List<ConsultaDiagnostico> findByConsultaFechaConsultaBetweenAndDiagnosticoCategoriaIdCategoriaDiagnostico(
+			Date desde, Date hasta, long l, Sort o);
 
 }

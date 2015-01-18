@@ -2,15 +2,10 @@ package controlador.reporte;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -19,7 +14,10 @@ import java.util.Map;
 
 import modelo.maestros.Cargo;
 import modelo.maestros.CategoriaDiagnostico;
+import modelo.maestros.ClasificacionDiagnostico;
 import modelo.maestros.Diagnostico;
+import modelo.maestros.Empresa;
+import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
@@ -37,11 +35,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.zkoss.zk.ui.Execution;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
-import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
@@ -69,6 +63,7 @@ import controlador.maestros.CGenerico;
 
 public class CMorbilidad extends CGenerico {
 
+	private static final long serialVersionUID = 7679068123639788205L;
 	@Wire
 	private Textbox txtBuscadorDiagnostico;
 	@Wire
@@ -77,6 +72,16 @@ public class CMorbilidad extends CGenerico {
 	private Combobox cmbArea;
 	@Wire
 	private Combobox cmbCargo;
+	@Wire
+	private Combobox cmbCargo2;
+	@Wire
+	private Combobox cmbEmpresa;
+	@Wire
+	private Combobox cmbNomina;
+	@Wire
+	private Combobox cmbClasificacion;
+	@Wire
+	private Combobox cmbCategoria;
 	@Wire
 	private Datebox dtbDesde;
 	@Wire
@@ -101,6 +106,14 @@ public class CMorbilidad extends CGenerico {
 	private Row rowDoctor;
 	@Wire
 	private Row rowFamiliar;
+	@Wire
+	private Row rowCargo;
+	@Wire
+	private Row rowEmpresa;
+	@Wire
+	private Row rowNomina;
+	@Wire
+	private Row rowClasificacion;
 	@Wire
 	private Button btnBuscarPaciente;
 	@Wire
@@ -131,6 +144,8 @@ public class CMorbilidad extends CGenerico {
 	private Combobox cmbTipo;
 	@Wire
 	private Hbox box;
+	@Wire
+	private Hbox box2;
 	@Wire
 	private Listbox ltbDiagnosticos;
 	@Wire
@@ -169,8 +184,86 @@ public class CMorbilidad extends CGenerico {
 				mapa = null;
 			}
 		}
-
+		String todos = "TODAS";
 		switch (titulo) {
+		case "Morbilidad Por Clasificacion de Diagnostico":
+			rowClasificacion.setVisible(true);
+			rowArea.setVisible(false);
+			rowDiagnostico.setVisible(false);
+			rowDoctor.setVisible(false);
+			rowFamiliar.setVisible(false);
+			rowPaciente.setVisible(false);
+			rowTipoConsulta.setVisible(false);
+			tipo = "clasificacion";
+			ClasificacionDiagnostico clasificacion = new ClasificacionDiagnostico();
+			clasificacion.setNombre(todos);
+			clasificacion.setIdClasificacion(0);
+			List<ClasificacionDiagnostico> clasificaciones = new ArrayList<ClasificacionDiagnostico>();
+			clasificaciones.add(clasificacion);
+			clasificaciones.addAll(servicioClasificacion.buscarTodas());
+			cmbClasificacion
+					.setModel(new ListModelList<ClasificacionDiagnostico>(
+							clasificaciones));
+			CategoriaDiagnostico categoria = new CategoriaDiagnostico();
+			categoria.setNombre(todos);
+			categoria.setIdCategoriaDiagnostico(0);
+			List<CategoriaDiagnostico> categorias = new ArrayList<CategoriaDiagnostico>();
+			categorias.add(categoria);
+			categorias.addAll(servicioCategoriaDiagnostico.buscarTodas());
+			cmbCategoria.setModel(new ListModelList<CategoriaDiagnostico>(
+					categorias));
+			break;
+		case "Morbilidad Por Nomina":
+			rowNomina.setVisible(true);
+			rowArea.setVisible(false);
+			rowDiagnostico.setVisible(false);
+			rowDoctor.setVisible(false);
+			rowFamiliar.setVisible(false);
+			rowPaciente.setVisible(false);
+			rowTipoConsulta.setVisible(false);
+			tipo = "nomina";
+			Nomina nomina = new Nomina();
+			nomina.setNombre(todos);
+			nomina.setIdNomina(0);
+			List<Nomina> nominas = new ArrayList<Nomina>();
+			nominas.add(nomina);
+			nominas.addAll(servicioNomina.buscarTodos());
+			cmbNomina.setModel(new ListModelList<Nomina>(nominas));
+			break;
+		case "Morbilidad Por Empresa":
+			rowEmpresa.setVisible(true);
+			rowArea.setVisible(false);
+			rowDiagnostico.setVisible(false);
+			rowDoctor.setVisible(false);
+			rowFamiliar.setVisible(false);
+			rowPaciente.setVisible(false);
+			rowTipoConsulta.setVisible(false);
+			tipo = "empresa";
+			Empresa empresa = new Empresa();
+			empresa.setNombre(todos);
+			empresa.setIdEmpresa(0);
+			List<Empresa> empresas = new ArrayList<Empresa>();
+			empresas.add(empresa);
+			empresas.addAll(servicioEmpresa.buscarTodas());
+			cmbEmpresa.setModel(new ListModelList<Empresa>(empresas));
+			break;
+		case "Morbilidad Por Cargo":
+			rowCargo.setVisible(true);
+			rowArea.setVisible(false);
+			rowDiagnostico.setVisible(false);
+			rowDoctor.setVisible(false);
+			rowFamiliar.setVisible(false);
+			rowPaciente.setVisible(false);
+			rowTipoConsulta.setVisible(false);
+			tipo = "cargo";
+			Cargo cargo = new Cargo();
+			cargo.setNombre("TODOS");
+			cargo.setIdCargo(0);
+			List<Cargo> cargos = new ArrayList<Cargo>();
+			cargos.add(cargo);
+			cargos.addAll(servicioCargo.buscarTodos());
+			cmbCargo.setModel(new ListModelList<Cargo>(cargos));
+			break;
 		case "Morbilidad Por Area":
 			rowArea.setVisible(true);
 			rowDiagnostico.setVisible(false);
@@ -198,6 +291,7 @@ public class CMorbilidad extends CGenerico {
 			rowPaciente.setVisible(false);
 			rowTipoConsulta.setVisible(false);
 			box.setVisible(true);
+			box2.setVisible(true);
 			cargarLista();
 			tipo = "diagnostico";
 			break;
@@ -213,6 +307,7 @@ public class CMorbilidad extends CGenerico {
 		}
 
 		Botonera botonera = new Botonera() {
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void salir() {
@@ -271,21 +366,254 @@ public class CMorbilidad extends CGenerico {
 						if (validarDoctor())
 							reporteDoctor();
 						break;
+					case "empresa":
+						if (validarEmpresa())
+							reporteEmpresa();
+						break;
+					case "cargo":
+						if (validarCargo())
+							reporteCargo();
+						break;
+					case "nomina":
+						if (validarNomina())
+							reporteNomina();
+						break;
+					case "clasificacion":
+						if (validarClasificacion())
+							reporteClasificacion();
+						break;
 					}
 				}
 			}
 
 			@Override
 			public void eliminar() {
-				// TODO Auto-generated method stub
 
 			}
 		};
 		Button guardar = (Button) botonera.getChildren().get(0);
 		guardar.setLabel("Reporte");
-		guardar.setSrc("/public/imagenes/botones/reporte.png");
+		guardar.setImage("/public/imagenes/botones/reporte.png");
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraMorbilidad.appendChild(botonera);
+	}
+
+	protected void reporteClasificacion() {
+		Date desde = dtbDesde.getValue();
+		Date hasta = dtbHasta.getValue();
+		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha1 = fecha.format(desde);
+		String fecha2 = fecha.format(hasta);
+		String tipoReporte = cmbTipo.getValue();
+		String clasificacion = "";
+		// ClasificacionDiagnostico clasificacion2 = new
+		// ClasificacionDiagnostico();
+		if (cmbClasificacion.getValue().equals("TODAS"))
+			clasificacion = "";
+		else {
+			clasificacion = cmbClasificacion.getSelectedItem().getContext();
+			// clasificacion2 = getServicioClasificacion().buscar(
+			// Long.parseLong(clasificacion));
+		}
+		String categoria = "";
+		// CategoriaDiagnostico categoria2 = new CategoriaDiagnostico();
+		if (cmbCategoria.getValue().equals("TODAS"))
+			categoria = "";
+		else {
+			categoria = cmbCategoria.getSelectedItem().getContext();
+			// categoria2 = getServicioCategoria().buscar(
+			// Long.parseLong(categoria));
+		}
+
+		if ((clasificacion.equals("") && categoria.equals("") && servicioConsultaDiagnostico
+				.buscarEntreFechas(desde, hasta).isEmpty())
+				|| (clasificacion.equals("") && !categoria.equals("") && servicioConsultaDiagnostico
+						.buscarEntreFechasyCategoria(desde, hasta,
+								Long.parseLong(categoria)).isEmpty())
+				|| (!clasificacion.equals("") && categoria.equals("") && servicioConsultaDiagnostico
+						.buscarEntreFechasyClasificacion(desde, hasta,
+								Long.parseLong(clasificacion)).isEmpty())
+				|| (!clasificacion.equals("") && !categoria.equals("") && servicioConsultaDiagnostico
+						.buscarEntreFechasyCategoria(desde, hasta,
+								Long.parseLong(categoria)).isEmpty()))
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=37&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ clasificacion
+					+ "&valor9="
+					+ categoria
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
+	}
+
+	protected boolean validarClasificacion() {
+		if (cmbClasificacion.getText().compareTo("") == 0
+				|| cmbCategoria.getText().compareTo("") == 0) {
+			Mensaje.mensajeError(Mensaje.camposVacios);
+			return false;
+		}
+		return true;
+	}
+
+	protected void reporteNomina() {
+		Date desde = dtbDesde.getValue();
+		Date hasta = dtbHasta.getValue();
+		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha1 = fecha.format(desde);
+		String fecha2 = fecha.format(hasta);
+		String tipoReporte = cmbTipo.getValue();
+		String nomina = "";
+		Nomina nomina2 = new Nomina();
+		if (cmbNomina.getValue().equals("TODAS"))
+			nomina = "";
+		else {
+			nomina = cmbNomina.getSelectedItem().getContext();
+			nomina2 = getServicioNomina().buscar(Long.parseLong(nomina));
+		}
+
+		if ((nomina.equals("") && servicioConsulta.buscarEntreFechas(desde,
+				hasta).isEmpty())
+				|| (!nomina.equals("") && servicioConsulta
+						.buscarEntreFechasyNomina(desde, hasta, nomina2)
+						.isEmpty()))
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=36&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ nomina
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
+	}
+
+	protected boolean validarNomina() {
+		if (cmbNomina.getText().compareTo("") == 0) {
+			Mensaje.mensajeError(Mensaje.camposVacios);
+			return false;
+		}
+		return true;
+	}
+
+	protected void reporteCargo() {
+		Date desde = dtbDesde.getValue();
+		Date hasta = dtbHasta.getValue();
+		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha1 = fecha.format(desde);
+		String fecha2 = fecha.format(hasta);
+		String tipoReporte = cmbTipo.getValue();
+		String cargo = "";
+		Cargo cargo2 = new Cargo();
+		if (cmbCargo2.getValue().equals("TODOS"))
+			cargo = "";
+		else {
+			cargo = cmbCargo2.getSelectedItem().getContext();
+			cargo2 = getServicioCargo().buscar(Long.parseLong(cargo));
+		}
+
+		if ((cargo.equals("") && servicioConsulta.buscarEntreFechas(desde,
+				hasta).isEmpty())
+				|| (!cargo.equals("") && servicioConsulta
+						.buscarEntreFechasyCargo(desde, hasta, cargo2)
+						.isEmpty()))
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=34&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ cargo
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
+	}
+
+	protected boolean validarCargo() {
+		if (cmbCargo2.getText().compareTo("") == 0) {
+			Mensaje.mensajeError(Mensaje.camposVacios);
+			return false;
+		}
+		return true;
+	}
+
+	protected void reporteEmpresa() {
+		Date desde = dtbDesde.getValue();
+		Date hasta = dtbHasta.getValue();
+		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha1 = fecha.format(desde);
+		String fecha2 = fecha.format(hasta);
+		String tipoReporte = cmbTipo.getValue();
+		String empresa = "";
+		Empresa empresa2 = new Empresa();
+		if (cmbEmpresa.getValue().equals("TODAS"))
+			empresa = "";
+		else {
+			empresa = cmbEmpresa.getSelectedItem().getContext();
+			empresa2 = getServicioEmpresa().buscar(Long.parseLong(empresa));
+		}
+
+		if ((empresa.equals("") && servicioConsulta.buscarEntreFechas(desde,
+				hasta).isEmpty())
+				|| (!empresa.equals("") && servicioConsulta
+						.buscarEntreFechasyEmpresa(desde, hasta, empresa2)
+						.isEmpty()))
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=35&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ empresa
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
+	}
+
+	protected boolean validarEmpresa() {
+		if (cmbEmpresa.getText().compareTo("") == 0) {
+			Mensaje.mensajeError(Mensaje.camposVacios);
+			return false;
+		}
+		return true;
+	}
+
+	@Listen("onSelect = #cmbClasificacion")
+	public void selectClasification() {
+		List<CategoriaDiagnostico> categorias = new ArrayList<CategoriaDiagnostico>();
+		CategoriaDiagnostico categoria = new CategoriaDiagnostico();
+		categoria.setNombre("TODAS");
+		categoria.setIdCategoriaDiagnostico(0);
+		categorias.add(categoria);
+		if (!cmbClasificacion.getValue().equals("TODAS")) {
+			long clave = Long.parseLong(cmbClasificacion.getSelectedItem()
+					.getContext());
+			categorias.addAll(servicioCategoriaDiagnostico
+					.buscarPorClasificacion(clave));
+		} else
+			categorias.addAll(servicioCategoriaDiagnostico.buscarTodas());
+		cmbCategoria.setModel(new ListModelList<CategoriaDiagnostico>(
+				categorias));
 	}
 
 	private void buscadorDiagnostico() {
@@ -322,13 +650,14 @@ public class CMorbilidad extends CGenerico {
 		areas.add(area);
 		areas.addAll(servicioArea.buscarTodos());
 		Cargo cargo = new Cargo();
-		cargo.setNombre(todos);
+		cargo.setNombre("TODOS");
 		cargo.setIdCargo(0);
 		List<Cargo> cargos = new ArrayList<Cargo>();
 		cargos.add(cargo);
 		cargos.addAll(servicioCargo.buscarTodos());
 		cmbArea.setModel(new ListModelList<Area>(areas));
 		cmbCargo.setModel(new ListModelList<Cargo>(cargos));
+		cmbCargo2.setModel(new ListModelList<Cargo>(cargos));
 	}
 
 	@Listen("onSelect = #cmbTipoConsulta")
@@ -354,11 +683,11 @@ public class CMorbilidad extends CGenerico {
 	public boolean validar() {
 		if (dtbDesde.getText().compareTo("") == 0
 				|| dtbHasta.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (dtbDesde.getValue().after(dtbHasta.getValue())) {
-				msj.mensajeError(Mensaje.fechaPosterior);
+				Mensaje.mensajeError(Mensaje.fechaPosterior);
 				return false;
 
 			} else
@@ -369,7 +698,7 @@ public class CMorbilidad extends CGenerico {
 
 	public boolean validarArea() {
 		if (cmbArea.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;
@@ -378,7 +707,7 @@ public class CMorbilidad extends CGenerico {
 	public boolean validarTipoConsulta() {
 		if (cmbTipoConsulta.getText().compareTo("") == 0
 				|| cmbTipoPreventiva.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;
@@ -390,11 +719,11 @@ public class CMorbilidad extends CGenerico {
 				|| spnDe.getText().compareTo("") == 0
 				|| (!rdoFamiliares.isChecked() && !rdoTrabajadores.isChecked() && !rdoTodos
 						.isChecked())) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (ltbDiagnosticosAgregados.getItemCount() == 0) {
-				msj.mensajeError("Debe seleccionar al menos un diagnostico");
+				Mensaje.mensajeError("Debe seleccionar al menos un diagnostico");
 				return false;
 			} else
 				return true;
@@ -403,7 +732,7 @@ public class CMorbilidad extends CGenerico {
 
 	public boolean validarDoctor() {
 		if (cmbUnidad.getText().compareTo("") == 0 || idDoctor.equals("")) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;
@@ -429,7 +758,7 @@ public class CMorbilidad extends CGenerico {
 				.buscarEntreFechas(desde, hasta).isEmpty())
 				|| (!area.equals("") && servicioConsulta
 						.buscarEntreFechasyArea(desde, hasta, area2).isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 			Clients.evalJavaScript("window.open('"
 					+ damePath()
@@ -474,7 +803,7 @@ public class CMorbilidad extends CGenerico {
 			consuta = getServicioConsulta().buscarEntreFechasyArea(fecha1,
 					fecha2, area2);
 		}
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 		p.put("area", area);
@@ -498,7 +827,6 @@ public class CMorbilidad extends CGenerico {
 			}
 		}
 
-
 		p.put("data", new JRBeanCollectionDataSource(consuta));
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorArea.jasper"));
@@ -509,7 +837,6 @@ public class CMorbilidad extends CGenerico {
 				jasperPrint = JasperFillManager.fillReport(reporte, p,
 						new JRBeanCollectionDataSource(consuta));
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
@@ -519,7 +846,6 @@ public class CMorbilidad extends CGenerico {
 			try {
 				exporter.exportReport();
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return xlsReport.toByteArray();
@@ -559,7 +885,7 @@ public class CMorbilidad extends CGenerico {
 				|| (!tipoC.equals("") && !subTipo.equals("") && servicioConsulta
 						.buscarEntreFechasTipoConsultaySubTipo(desde, hasta,
 								tipoC, subTipo).isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 			Clients.evalJavaScript("window.open('"
 					+ damePath()
@@ -613,7 +939,7 @@ public class CMorbilidad extends CGenerico {
 
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
@@ -644,7 +970,6 @@ public class CMorbilidad extends CGenerico {
 				jasperPrint = JasperFillManager.fillReport(reporte, p,
 						new JRBeanCollectionDataSource(consuta));
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
@@ -654,7 +979,6 @@ public class CMorbilidad extends CGenerico {
 			try {
 				exporter.exportReport();
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return xlsReport.toByteArray();
@@ -767,7 +1091,7 @@ public class CMorbilidad extends CGenerico {
 						.buscarEntreFechasEntreEdadesTipoDiagnosticoyFamiliarYDiagnosticos(
 								desde, hasta, dea, aa, diagnostico, true, ids)
 						.isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 
 			Clients.evalJavaScript("window.open('"
@@ -912,12 +1236,13 @@ public class CMorbilidad extends CGenerico {
 			}
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 		p.put("edad1", dea);
 		p.put("edad2", aa);
 		p.put("paciente", familiar);
+		p.put("data", new JRBeanCollectionDataSource(consutaDiag));
 
 		// List<Long> consuta = getServicioConsultaDiagnostico()
 		// .cantidadConsultas(consutaDiag);
@@ -940,7 +1265,6 @@ public class CMorbilidad extends CGenerico {
 				jasperPrint = JasperFillManager.fillReport(reporte, p,
 						new JRBeanCollectionDataSource(consutaDiag));
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
@@ -950,7 +1274,6 @@ public class CMorbilidad extends CGenerico {
 			try {
 				exporter.exportReport();
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return xlsReport.toByteArray();
@@ -990,7 +1313,7 @@ public class CMorbilidad extends CGenerico {
 						.buscarEntreFechasPorDoctor(desde, hasta,
 								servicioUsuario.buscarPorCedula(idDoctor))
 						.isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 			Clients.evalJavaScript("window.open('"
 					+ damePath()
@@ -1052,7 +1375,7 @@ public class CMorbilidad extends CGenerico {
 			}
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 		if (unidad.equals(""))
@@ -1087,7 +1410,6 @@ public class CMorbilidad extends CGenerico {
 				jasperPrint = JasperFillManager.fillReport(reporte, p,
 						new JRBeanCollectionDataSource(consuta));
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
@@ -1097,7 +1419,6 @@ public class CMorbilidad extends CGenerico {
 			try {
 				exporter.exportReport();
 			} catch (JRException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return xlsReport.toByteArray();
@@ -1127,6 +1448,7 @@ public class CMorbilidad extends CGenerico {
 		catalogoDoctor = new Catalogo<Usuario>(catalogoUsuarios,
 				"Catalogo de Doctores", usuarios, "Cedula", "Ficha", "Nombre",
 				"Apellido", "Especialidad") {
+			private static final long serialVersionUID = 1L;
 
 			@Override
 			protected List<Usuario> buscar(String valor, String combo) {
@@ -1260,67 +1582,367 @@ public class CMorbilidad extends CGenerico {
 			listasMultiples();
 		}
 	}
-	
+
 	@Listen("onChange = #dtbDesde, #dtbHasta")
-	public void changeList(){
+	public void changeList() {
 		cargarLista();
 	}
 
-	// /* Muestra el catalogo de los Pacientes */
-	// @Listen("onClick = #btnBuscarPaciente")
-	// public void mostrarCatalogo() {
-	// final List<Paciente> pacientes = new ArrayList<Paciente>();
-	//
-	// Paciente pacienteT = new Paciente();
-	// pacienteT.setCedula("TODOS");
-	// pacienteT.setFicha("TODOS");
-	// pacienteT.setPrimerNombre("TODOS");
-	// pacienteT.setPrimerApellido("TODOS");
-	// pacientes.add(pacienteT);
-	// pacientes.addAll(servicioPaciente.buscarTodosActivos());
-	//
-	// catalogo = new Catalogo<Paciente>(divCatalogoPaciente,
-	// "Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
-	// "Nombre", "Apellido") {
-	//
-	// @Override
-	// protected List<Paciente> buscar(String valor, String combo) {
-	//
-	// switch (combo) {
-	// case "Nombre":
-	// return servicioPaciente.filtroNombre1Activos(valor);
-	// case "Cedula":
-	// return servicioPaciente.filtroCedulaActivos(valor);
-	// case "Ficha":
-	// return servicioPaciente.filtroFichaActivos(valor);
-	// case "Apellido":
-	// return servicioPaciente.filtroApellido1Activos(valor);
-	// default:
-	// return pacientes;
-	// }
-	// }
-	//
-	// @Override
-	// protected String[] crearRegistros(Paciente objeto) {
-	// String[] registros = new String[4];
-	// registros[0] = objeto.getCedula();
-	// registros[1] = objeto.getFicha();
-	// registros[2] = objeto.getPrimerNombre();
-	// registros[3] = objeto.getPrimerApellido();
-	// return registros;
-	// }
-	//
-	// };
-	// catalogo.setParent(divCatalogoPaciente);
-	// catalogo.doModal();
-	// }
-	//
-	// @Listen("onSeleccion = #divCatalogoPaciente")
-	// public void seleccionar() {
-	// Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
-	// lblPaciente.setValue(paciente.getPrimerNombre() + " "
-	// + paciente.getPrimerApellido());
-	// idPaciente = paciente.getCedula();
-	// catalogo.setParent(null);
-	// }
+	public byte[] reporteMorbilidadPorCargo(String part1, String part2,
+			String cargo, String tipo2) {
+
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(part1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(part2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		List<Consulta> consuta = new ArrayList<Consulta>();
+
+		if (cargo.equals(""))
+			consuta = getServicioConsulta().buscarEntreFechas(fecha1, fecha2);
+		else {
+			Cargo cargo2 = getServicioCargo().buscar(Long.parseLong(cargo));
+			consuta = getServicioConsulta().buscarEntreFechasyCargo(fecha1,
+					fecha2, cargo2);
+		}
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("desde", part1);
+		p.put("hasta", part2);
+		p.put("cargo", cargo);
+
+		for (int i = 0; i < consuta.size(); i++) {
+			Consulta cons = consuta.get(i);
+			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
+					.buscarPorConsulta(cons);
+			if (!dig.isEmpty()) {
+				if (dig.get(0) != null) {
+					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
+							.getNombre());
+					cons.setMotivoConsulta(dig.get(0).getTipo());
+					Paciente paciente = cons.getPaciente();
+					paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
+				}
+			} else {
+				cons.setEnfermedadActual("");
+				cons.setMotivoConsulta("");
+			}
+		}
+
+		p.put("data", new JRBeanCollectionDataSource(consuta));
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RMorbilidadPorCargo.jasper"));
+		} catch (JRException e1) {
+			e1.printStackTrace();
+		}
+		if (tipo2.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			return fichero;
+		}
+	}
+
+	public byte[] reporteMorbilidadPorEmpresa(String part1, String part2,
+			String empresa, String tipo2) {
+
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(part1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(part2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		List<Consulta> consuta = new ArrayList<Consulta>();
+
+		if (empresa.equals(""))
+			consuta = getServicioConsulta().buscarEntreFechas(fecha1, fecha2);
+		else {
+			Empresa empresa2 = getServicioEmpresa().buscar(
+					Long.parseLong(empresa));
+			consuta = getServicioConsulta().buscarEntreFechasyEmpresa(fecha1,
+					fecha2, empresa2);
+		}
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("desde", part1);
+		p.put("hasta", part2);
+		p.put("empresa", empresa);
+
+		for (int i = 0; i < consuta.size(); i++) {
+			Consulta cons = consuta.get(i);
+			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
+					.buscarPorConsulta(cons);
+			if (!dig.isEmpty()) {
+				if (dig.get(0) != null) {
+					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
+							.getNombre());
+					cons.setMotivoConsulta(dig.get(0).getTipo());
+					Paciente paciente = cons.getPaciente();
+					paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
+				}
+			} else {
+				cons.setEnfermedadActual("");
+				cons.setMotivoConsulta("");
+			}
+		}
+
+		p.put("data", new JRBeanCollectionDataSource(consuta));
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RMorbilidadPorEmpresa.jasper"));
+		} catch (JRException e1) {
+			e1.printStackTrace();
+		}
+		if (tipo2.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			return fichero;
+		}
+	}
+
+	public byte[] reporteMorbilidadPorNomina(String part1, String part2,
+			String nomina, String tipo2) {
+
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(part1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(part2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		List<Consulta> consuta = new ArrayList<Consulta>();
+
+		if (nomina.equals(""))
+			consuta = getServicioConsulta().buscarEntreFechas(fecha1, fecha2);
+		else {
+			Nomina nomina2 = getServicioNomina().buscar(Long.parseLong(nomina));
+			consuta = getServicioConsulta().buscarEntreFechasyNomina(fecha1,
+					fecha2, nomina2);
+		}
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("desde", part1);
+		p.put("hasta", part2);
+		p.put("nomina", nomina);
+
+		for (int i = 0; i < consuta.size(); i++) {
+			Consulta cons = consuta.get(i);
+			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
+					.buscarPorConsulta(cons);
+			if (!dig.isEmpty()) {
+				if (dig.get(0) != null) {
+					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
+							.getNombre());
+					cons.setMotivoConsulta(dig.get(0).getTipo());
+					Paciente paciente = cons.getPaciente();
+					paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
+				}
+			} else {
+				cons.setEnfermedadActual("");
+				cons.setMotivoConsulta("");
+			}
+		}
+
+		p.put("data", new JRBeanCollectionDataSource(consuta));
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RMorbilidadPorNomina.jasper"));
+		} catch (JRException e1) {
+			e1.printStackTrace();
+		}
+		if (tipo2.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			return fichero;
+		}
+	}
+
+	public byte[] reporteMorbilidadPorClasificacion(String part1, String part2,
+			String clasificacion, String categoria, String tipoReporte) {
+
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date desde = null;
+		try {
+			desde = formato.parse(part1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Date hasta = null;
+		try {
+			hasta = formato.parse(part2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		List<ConsultaDiagnostico> consutaDiag = new ArrayList<ConsultaDiagnostico>();
+		if (clasificacion.equals("") && categoria.equals(""))
+			consutaDiag = getServicioConsultaDiagnostico().buscarEntreFechas(
+					desde, hasta);
+		else {
+			if (!clasificacion.equals("") && categoria.equals("")) {
+				consutaDiag = getServicioConsultaDiagnostico()
+						.buscarEntreFechasyClasificacion(desde, hasta,
+								Long.parseLong(clasificacion));
+			} else
+				consutaDiag = getServicioConsultaDiagnostico()
+						.buscarEntreFechasyCategoria(desde, hasta,
+								Long.parseLong(categoria));
+		}
+
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("desde", part1);
+		p.put("hasta", part2);
+
+		p.put("data", new JRBeanCollectionDataSource(consutaDiag));
+		// List<Long> consuta = getServicioConsultaDiagnostico()
+		// .cantidadConsultas(consutaDiag);
+		// p.put("total", consuta.size());
+
+		for (int i = 0; i < consutaDiag.size(); i++) {
+			Consulta cons = consutaDiag.get(i).getConsulta();
+			Paciente paciente = cons.getPaciente();
+			paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
+
+		}
+
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader
+					.loadObject(getClass().getResource(
+							"/reporte/RMorbilidadPorClasificacion.jasper"));
+		} catch (JRException e1) {
+			e1.printStackTrace();
+		}
+
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consutaDiag));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(consutaDiag));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+
+			return fichero;
+		}
+	}
 }

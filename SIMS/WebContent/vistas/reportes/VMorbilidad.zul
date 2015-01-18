@@ -165,6 +165,75 @@
 							image="/public/imagenes/botones/buscar.png" />
 						<hbox />
 					</row>
+					<row id="rowCargo" visible="false">
+						<hbox>
+							<label class="etiqueta" value="Cargo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox hflex="1" id="cmbCargo2" value="TODOS" placeholder="Seleccione un Cargo"
+							readonly="true" tooltiptext="Seleccione un Cargo" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idCargo}" />
+							</template>
+						</combobox>
+						<hbox />
+						<hbox />
+					</row>
+					<row id="rowEmpresa" visible="false">
+						<hbox>
+							<label class="etiqueta" value="Empresa:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox hflex="1" id="cmbEmpresa" value="TODAS" placeholder="Seleccione una Empresa"
+							readonly="true" tooltiptext="Seleccione una Empresa" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idEmpresa}" />
+							</template>
+						</combobox>
+						<hbox />
+						<hbox />
+					</row>
+					<row id="rowNomina" visible="false">
+						<hbox>
+							<label class="etiqueta" value="Nomina:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox hflex="1" id="cmbNomina" value="TODAS" placeholder="Seleccione una Nomina"
+							readonly="true" tooltiptext="Seleccione una Nomina" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idNomina}" />
+							</template>
+						</combobox>
+						<hbox />
+						<hbox />
+					</row>
+					<row id="rowClasificacion" visible="false">
+						<hbox>
+							<label class="etiqueta" value="Clasificacion Categoria:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox hflex="1" id="cmbClasificacion" value="TODAS" placeholder="Seleccione una Clasificacion"
+							readonly="true" tooltiptext="Seleccione una Clasificacion" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idClasificacion}" />
+							</template>
+						</combobox>
+						<hbox>
+							<label class="etiqueta" value="Categoria:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox hflex="1" id="cmbCategoria" value="TODAS" placeholder="Seleccione una Categoria"
+							readonly="true" tooltiptext="Seleccione una Categoria" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idCategoriaDiagnostico}" />
+							</template>
+						</combobox>
+					</row>
 					<row>
 						<hbox>
 							<label class="etiqueta" value="Reporte de Tipo:" />
@@ -183,7 +252,7 @@
 				</rows>
 			</grid>
 			<separator />
-			<hbox>
+			<hbox id="box2" visible="false">
 				<textbox tooltiptext="Ingrese el Nombre del Diagnostico"
 					placeholder="Ingrese el Diagnostico a Buscar" width="195px"
 					id="txtBuscadorDiagnostico"></textbox>

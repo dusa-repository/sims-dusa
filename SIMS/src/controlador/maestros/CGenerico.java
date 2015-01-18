@@ -339,6 +339,27 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		return applicationContext.getBean(SArea.class);
 	}
 
+	public static SNomina getServicioNomina() {
+		return applicationContext.getBean(SNomina.class);
+	}
+
+	public static SCategoriaDiagnostico getServicioCategoria() {
+		return applicationContext.getBean(SCategoriaDiagnostico.class);
+	}
+
+	public static SClasificacionDiagnostico getServicioClasificacion() {
+		return applicationContext.getBean(SClasificacionDiagnostico.class);
+	}
+
+
+	public static SCargo getServicioCargo() {
+		return applicationContext.getBean(SCargo.class);
+	}
+
+	public static SEmpresa getServicioEmpresa() {
+		return applicationContext.getBean(SEmpresa.class);
+	}
+
 	public static SInforme getServicioInforme() {
 		return applicationContext.getBean(SInforme.class);
 	}

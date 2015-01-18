@@ -7,8 +7,12 @@ import java.util.Date;
 import java.util.List;
 
 import javassist.expr.NewArray;
-
 import modelo.maestros.Cargo;
+import modelo.maestros.CategoriaDiagnostico;
+import modelo.maestros.ClasificacionDiagnostico;
+import modelo.maestros.Diagnostico;
+import modelo.maestros.Empresa;
+import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
@@ -372,6 +376,43 @@ public class SConsulta {
 		return consultaDAO
 				.findByFechaConsultaBetweenAndPacienteTrabajadorAndPacienteCedula(
 						desde, hasta, true, paciente, o);
+	}
+
+	public List<Consulta> buscarEntreFechasyCargo(Date desde, Date hasta,
+			Cargo cargo2) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCargoRealNombre");
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteCargoRealAndPacienteTrabajador(
+						desde, hasta, cargo2, true, o);
+	}
+
+	public List<Consulta> buscarEntreFechasyEmpresa(Date desde, Date hasta,
+			Empresa empresa2) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteEmpresaNombre");
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteEmpresaAndPacienteTrabajador(
+						desde, hasta, empresa2, true, o);
+	}
+
+	public List<Consulta> buscarEntreFechasyNomina(Date desde, Date hasta,
+			Nomina nomina2) {
+
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteNominaNombre");
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaConsulta");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteNominaAndPacienteTrabajador(
+						desde, hasta, nomina2, true, o);
 	}
 
 }

@@ -146,7 +146,7 @@ public class Reportero extends HttpServlet {
 				break;
 			case "17":
 				fichero = resumen.reporteDiagnostico(par6, par7, par8, par9,
-						tipo);
+						tipo, par10);
 				break;
 			case "18":
 				fichero = resumen.reporteTipoConsulta(par6, par7, par8, par9,
@@ -203,6 +203,18 @@ public class Reportero extends HttpServlet {
 				break;
 			case "33":
 				fichero = informe.reporteInpsasel(par6);
+				break;
+			case "34":
+				fichero = morbilidad.reporteMorbilidadPorCargo(par6, par7, par8, tipo);
+				break;
+			case "35":
+				fichero = morbilidad.reporteMorbilidadPorEmpresa(par6, par7, par8, tipo);
+				break;
+			case "36":
+				fichero = morbilidad.reporteMorbilidadPorNomina(par6, par7, par8, tipo);
+				break;
+			case "37":
+				fichero = morbilidad.reporteMorbilidadPorClasificacion(par6, par7, par8, par9, tipo);
 				break;
 			default:
 				break;

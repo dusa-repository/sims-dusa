@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RMorbilidadPorClasificacion" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="3a0630a7-268f-4dab-9800-a81760ad10e5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="24"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="bfd3fe0d-037c-4370-8419-e225347928a5">
+		<field name="diagnostico.nombre" class="java.lang.String"/>
+		<field name="diagnostico.categoria.nombre" class="java.lang.String"/>
+		<field name="diagnostico.categoria.clasificacion.nombre" class="java.lang.String"/>
+		<field name="consulta.idConsulta" class="java.lang.Long"/>
+		<variable name="variable1" class="java.lang.Integer" resetType="Group" resetGroup="diagnostico" calculation="Count">
+			<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+		</variable>
+		<variable name="variable2" class="java.lang.Integer" resetType="Group" resetGroup="categoria" calculation="Count">
+			<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+		</variable>
+		<variable name="variable3" class="java.lang.Integer" resetType="Group" resetGroup="clasificacion" calculation="Count">
+			<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+		</variable>
+		<variable name="variable4" class="java.lang.Integer" calculation="Count">
+			<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+		</variable>
+		<group name="clasificacion">
+			<groupExpression><![CDATA[$F{diagnostico.categoria.clasificacion.nombre}]]></groupExpression>
+		</group>
+		<group name="categoria">
+			<groupExpression><![CDATA[$F{diagnostico.categoria.nombre}]]></groupExpression>
+		</group>
+		<group name="diagnostico">
+			<groupExpression><![CDATA[$F{diagnostico.nombre}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="desde" class="java.lang.String"/>
+	<parameter name="hasta" class="java.lang.String"/>
+	<parameter name="data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="diagnostico.categoria.nombre" class="java.lang.String"/>
+	<field name="diagnostico.categoria.clasificacion.nombre" class="java.lang.String"/>
+	<field name="consulta.paciente.cedula" class="java.lang.String"/>
+	<field name="consulta.paciente.ficha" class="java.lang.String"/>
+	<field name="consulta.paciente.edad" class="java.lang.Integer"/>
+	<field name="consulta.paciente.primerNombre" class="java.lang.String"/>
+	<field name="consulta.paciente.primerApellido" class="java.lang.String"/>
+	<field name="consulta.paciente.sexo" class="java.lang.String"/>
+	<field name="consulta.fechaConsulta" class="java.sql.Timestamp"/>
+	<field name="consulta.motivoConsulta" class="java.lang.String"/>
+	<field name="consulta.enfermedadActual" class="java.lang.String"/>
+	<field name="consulta.tipoConsultaSecundaria" class="java.lang.String"/>
+	<field name="consulta.idConsulta" class="java.lang.Long"/>
+	<field name="diagnostico.nombre" class="java.lang.String"/>
+	<variable name="diagnostico" class="java.lang.Integer" resetType="Group" resetGroup="diagnostico" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+	</variable>
+	<variable name="categoria" class="java.lang.Integer" resetType="Group" resetGroup="categoria" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+	</variable>
+	<variable name="clasificacion" class="java.lang.Integer" resetType="Group" resetGroup="clasificacion" calculation="Count">
+		<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+	</variable>
+	<variable name="total" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+	</variable>
+	<group name="clasificacion">
+		<groupExpression><![CDATA[$F{diagnostico.categoria.clasificacion.nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="29">
+				<rectangle>
+					<reportElement x="0" y="5" width="572" height="20" backcolor="#CCCCCC" uuid="6933fbc9-1527-4f16-b6ee-d94bfa7ad17a"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="12" y="5" width="23" height="20" uuid="d63b67da-5856-46db-9288-08b9fbe96242"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[>>>]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="35" y="5" width="496" height="20" uuid="0578c639-8cc2-4ba7-bfa5-5bb9bf99c37d"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diagnostico.categoria.clasificacion.nombre}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<staticText>
+					<reportElement x="261" y="0" width="28" height="20" uuid="b4b22f9b-3ccf-4f4c-bfda-5993db3c9a5c"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="289" y="0" width="242" height="20" uuid="d97f5b87-a8b3-4298-bd41-3f19611ee781"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diagnostico.categoria.clasificacion.nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="531" y="0" width="41" height="20" uuid="5e3270a1-fe3a-49f4-91d6-fe36e2ab9f45"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{clasificacion}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="categoria">
+		<groupExpression><![CDATA[$F{diagnostico.categoria.nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="27">
+				<rectangle>
+					<reportElement x="0" y="4" width="572" height="20" backcolor="#E3E3E3" uuid="39d90f5b-65d6-468e-aa65-77e0b25e2f74"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="24" y="4" width="17" height="20" uuid="22123f47-eb3f-41f2-b3cd-2a8213d0252f"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[>>]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="41" y="4" width="490" height="20" uuid="2f8861a6-84df-4953-b746-47334a9f18fb"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diagnostico.categoria.nombre}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<staticText>
+					<reportElement x="261" y="0" width="28" height="20" uuid="dbd86762-999e-4463-8a41-3042426a9a20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="289" y="0" width="242" height="20" uuid="13342c11-d18b-4885-8727-c30453c22eaa"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diagnostico.categoria.nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="531" y="0" width="41" height="20" uuid="4dddfa4e-1d6d-4860-97c0-b0032a0618b3"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{categoria}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="diagnostico">
+		<groupExpression><![CDATA[$F{diagnostico.nombre}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<rectangle>
+					<reportElement x="0" y="4" width="572" height="20" backcolor="#F0F0F0" uuid="a9757412-404f-4fd1-9a45-779cc7f428ef"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="36" y="4" width="12" height="20" uuid="705748a3-0d02-4bb5-aa42-71f9adbe698d"/>
+					<textElement textAlignment="Center">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[>]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="48" y="4" width="483" height="20" uuid="fdcebf37-55be-4adc-9f85-07a1198a3434"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diagnostico.nombre}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<staticText>
+					<reportElement x="261" y="0" width="28" height="20" uuid="a4f59e14-68f5-4470-9e90-ff357f98111c"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="289" y="0" width="242" height="20" uuid="d0bab23a-c7d8-4d22-808e-53db00559c12"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{diagnostico.nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="531" y="0" width="41" height="20" uuid="589b3fc8-b068-43c0-a90a-d98d23df2cc5"/>
+					<box>
+						<topPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{diagnostico}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="paciente">
+		<groupExpression><![CDATA[$F{consulta.paciente.cedula}]]></groupExpression>
+		<groupHeader>
+			<band height="44">
+				<textField>
+					<reportElement x="0" y="3" width="100" height="20" uuid="5eed5b80-0bab-41be-842a-4e614bde6fdd"/>
+					<textFieldExpression><![CDATA[$F{consulta.paciente.cedula}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="100" y="3" width="68" height="20" uuid="70929fe7-5fd0-4e60-973b-9a33683721fb"/>
+					<textFieldExpression><![CDATA[$F{consulta.paciente.ficha}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="168" y="3" width="261" height="20" uuid="bdf82f69-5879-4278-9647-467a2747e5df"/>
+					<textFieldExpression><![CDATA[$F{consulta.paciente.primerNombre}+" "+$F{consulta.paciente.primerApellido}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="429" y="3" width="68" height="20" uuid="15d7ce80-bb37-4300-8a10-21a5a33cace6"/>
+					<textFieldExpression><![CDATA[$F{consulta.paciente.edad}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="497" y="3" width="75" height="20" uuid="760f63ac-fd60-4c53-b188-37026a5b3c6d"/>
+					<textFieldExpression><![CDATA[$F{consulta.paciente.sexo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="39" y="27" width="50" height="15" uuid="34429b03-7f0a-40f9-95da-47f2ed37a208"/>
+					<textElement>
+						<font isBold="true" isUnderline="true"/>
+					</textElement>
+					<text><![CDATA[Consultas:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="12" y="10" width="100" height="50" uuid="5d939439-ff48-4b6f-adaf-4461864e5e57"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="112" y="10" width="393" height="20" uuid="a4c0653a-eee5-40c9-a9cd-dd654e97fa85"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MORBILIDAD SEGUN CLASIFICACION DE DIAGNOSTICOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="47" width="41" height="20" uuid="227ae7c8-dccd-4a96-becf-573fcb7fddbc"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="47" width="41" height="20" uuid="2fedbafc-d0f0-4185-875a-6869376d1899"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="378" y="47" width="68" height="20" uuid="fe98bbe4-23bc-4729-afe6-fdfc8de215f6"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{desde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="497" y="47" width="75" height="20" uuid="e7bb7d0f-fd9e-4b11-a517-8e7688cf6424"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hasta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="572" height="20" backcolor="#CCCCCC" uuid="00c83676-0614-4eb6-8be6-bce0fc39b292"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="168" y="3" width="261" height="13" uuid="1b1386b3-d656-4b60-b446-31967b621446"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="3" width="68" height="13" uuid="e965e103-a585-4ebe-aa49-5d460b719ed1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="497" y="3" width="75" height="13" uuid="fa7b42f4-5695-4307-aad0-f6a990c236e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="3" width="100" height="13" uuid="ff49265e-bcbc-400d-90bb-2799c54c69fc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="3" width="68" height="13" uuid="3e04bbe2-9132-41ea-8e2e-3a1b25e5f33a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ficha]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="0" width="17" height="20" uuid="5685100a-7d21-4c7b-8647-f2ecffccda92"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[-]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="29" y="0" width="106" height="20" uuid="a56c28f5-1827-4df9-a02a-cda26c65cb00"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="135" y="0" width="117" height="20" uuid="cef4d72a-5ec9-4dc9-8595-80e7b5ef3678"/>
+				<textFieldExpression><![CDATA[$F{consulta.tipoConsultaSecundaria}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="252" y="0" width="224" height="20" uuid="2359b08d-c58d-4ac1-bb92-40bb440d4de6"/>
+				<textFieldExpression><![CDATA[$F{consulta.enfermedadActual}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="476" y="0" width="96" height="20" uuid="ff67cc3a-c04f-4df9-b378-754e0e7162b0"/>
+				<textFieldExpression><![CDATA[$F{consulta.motivoConsulta}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="211" y="2" width="26" height="20" uuid="54099b1f-c541-41ee-9c21-2d8c105320f3"/>
+				<text><![CDATA[Pag.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="237" y="2" width="39" height="20" uuid="8a9a6e96-dd21-48a5-a170-81e2f4130e85"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="311" y="2" width="35" height="20" uuid="a89540f7-9a6c-49a8-8017-ad15c3ea892a"/>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="2" width="30" height="20" uuid="e3db974a-1ff8-4949-a4a6-e6df10d3e746"/>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="346" y="2" width="100" height="20" uuid="202cb9b6-87e5-43a7-baaa-1226d90a7443"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="476" y="2" width="96" height="20" uuid="3b80f97d-f3df-4106-8f79-2973df7904d5"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="20">
+			<staticText>
+				<reportElement x="420" y="0" width="100" height="20" uuid="94db77de-2ebe-4c20-842a-8f2bc50579cb"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Consultas:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="520" y="0" width="52" height="20" uuid="0f7e589d-6532-4975-966b-18d16fa1a9b5"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="252" splitType="Stretch">
+			<staticText>
+				<reportElement x="226" y="0" width="74" height="20" uuid="e9c55456-586d-4654-ab89-a8cb0b94554c"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESUMEN]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table 1" style="table 1" x="0" y="20" width="572" height="214" uuid="f831efb6-5b3e-4032-9e40-1452a6cb1e93"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="6b444043-43ba-4317-a852-3aafaf81d3f4">
+						<dataSourceExpression><![CDATA[$P{data}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="480" uuid="3b6ef056-ee29-4491-a168-1c659553b1db">
+						<jr:tableHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="480" height="30" backcolor="#CCCCCC" uuid="18423723-b72f-49b9-be19-848a6b0cbbb8"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="480" height="30" uuid="181ea635-56c6-4f4f-b9e7-1e2f32323bb9"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Clasificacion de Diagnostico]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="480" height="30" uuid="0c1b1855-52ac-49b5-9686-a05c6f32dc18"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total Consultas]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:groupHeader groupName="clasificacion">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<rectangle>
+									<reportElement x="0" y="0" width="480" height="30" backcolor="#E3E3E3" uuid="f022e7f0-9e3e-4d19-afd1-2d47de32dafe"/>
+									<graphicElement>
+										<pen lineWidth="0.0"/>
+									</graphicElement>
+								</rectangle>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="19" y="0" width="461" height="30" uuid="c2f902d8-9051-4528-b97e-4b6d19997af7"/>
+									<textElement>
+										<font size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{diagnostico.categoria.clasificacion.nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="categoria">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<rectangle>
+									<reportElement x="0" y="0" width="480" height="30" backcolor="#F0F0F0" uuid="f9b5d19c-b8a8-485a-acbd-dac4a7b2fa68"/>
+									<graphicElement>
+										<pen lineWidth="0.0"/>
+									</graphicElement>
+								</rectangle>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="47" y="0" width="433" height="30" uuid="42086cf2-1276-4365-b0a0-5132d0462992"/>
+									<textElement>
+										<font size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{diagnostico.categoria.nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="diagnostico">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="70" y="0" width="410" height="30" uuid="3d8fb7ec-c0a5-44a8-931f-6baf7012bdf7"/>
+									<textElement>
+										<font size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{diagnostico.nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="categoria">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<staticText>
+									<reportElement x="3" y="0" width="44" height="30" uuid="b55a159b-1f09-4ac6-acb7-bec8f5ea03ce"/>
+									<textElement>
+										<font size="11" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Total]]></text>
+								</staticText>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="47" y="0" width="433" height="30" uuid="17fc2fb7-516e-4a73-bc4f-814a81c65c7c"/>
+									<textElement>
+										<font size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{diagnostico.categoria.nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="clasificacion">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<staticText>
+									<reportElement x="0" y="0" width="47" height="30" uuid="b4bb108a-5557-4f1d-b4bf-0a7d783381f6"/>
+									<textElement>
+										<font size="11" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Total]]></text>
+								</staticText>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="47" y="0" width="433" height="30" uuid="90e655b3-7a3a-4365-8785-9caea5bece62"/>
+									<textElement>
+										<font size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{diagnostico.categoria.clasificacion.nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table 1_TD" height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="90" uuid="e1742092-26cf-4ac3-a78a-684d0d296a67">
+						<jr:tableHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="90" height="30" backcolor="#CCCCCC" uuid="a62fd305-0c3e-477b-a2c6-59439a6a9002"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="e14f9284-3df7-4442-92a8-e97c09265459"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Consultas]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="1.0"/>
+								<topPen lineWidth="1.0"/>
+								<leftPen lineWidth="1.0"/>
+								<bottomPen lineWidth="1.0"/>
+								<rightPen lineWidth="1.0"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="30" uuid="538735a6-96b8-44ae-a56b-e4106dcd4f69"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{variable4}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:groupHeader groupName="clasificacion">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<rectangle>
+									<reportElement x="0" y="0" width="90" height="30" backcolor="#E3E3E3" uuid="58b3016b-05af-47cc-9286-e4f7e5221bd4"/>
+									<graphicElement>
+										<pen lineWidth="0.0"/>
+									</graphicElement>
+								</rectangle>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupHeader groupName="categoria">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<rectangle>
+									<reportElement x="0" y="0" width="90" height="30" backcolor="#F0F0F0" uuid="9f5e64e4-6976-4930-8b78-3deeec00c112"/>
+									<graphicElement>
+										<pen lineWidth="0.0"/>
+									</graphicElement>
+								</rectangle>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="diagnostico">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="30" uuid="8ed468ad-5fb0-4094-b9ed-94c904e2f5d4"/>
+									<textElement textAlignment="Center">
+										<font size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="categoria">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="30" uuid="62d47fb4-afdd-4fde-bf99-e3f84af9d8da"/>
+									<textElement textAlignment="Center">
+										<font size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="clasificacion">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="1.0"/>
+									<topPen lineWidth="1.0"/>
+									<leftPen lineWidth="1.0"/>
+									<bottomPen lineWidth="1.0"/>
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="30" uuid="5b7b503e-e675-4eda-8321-ee3f84ba3947"/>
+									<textElement textAlignment="Center">
+										<font size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table 1_TD" height="0" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>
