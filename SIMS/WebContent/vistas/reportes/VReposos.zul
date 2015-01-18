@@ -126,7 +126,7 @@
 				</rows>
 			</grid>
 			<separator />
-			<hbox id="box2">
+			<hbox id="box2" visible = "false">
 				<textbox tooltiptext="Ingrese el Nombre del Diagnostico"
 					placeholder="Ingrese el Diagnostico a Buscar" width="195px"
 					id="txtBuscadorDiagnostico"></textbox>
