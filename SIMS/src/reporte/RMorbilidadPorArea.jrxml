@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="19e9f5ec-c399-4e95-8509-470aae44a9f4">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="64"/>
+	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -263,11 +263,12 @@
 	<detail>
 		<band height="21" splitType="Stretch">
 			<textField>
-				<reportElement x="45" y="1" width="67" height="20" uuid="60ce900b-8a61-4a32-a2fb-f35f6a46f89d"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})]]></textFieldExpression>
+				<reportElement x="22" y="1" width="101" height="20" uuid="60ce900b-8a61-4a32-a2fb-f35f6a46f89d"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="112" y="1" width="78" height="20" uuid="7dc8a99c-d468-43bb-8368-a43c792bd167"/>
+				<reportElement x="123" y="1" width="67" height="20" uuid="7dc8a99c-d468-43bb-8368-a43c792bd167"/>
 				<textFieldExpression><![CDATA[$F{tipoConsultaSecundaria}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -281,7 +282,7 @@
 				<textFieldExpression><![CDATA[$F{motivoConsulta}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="29" y="1" width="16" height="20" uuid="2dd77036-669f-4f85-b3a9-83b874291761"/>
+				<reportElement x="6" y="1" width="16" height="20" uuid="2dd77036-669f-4f85-b3a9-83b874291761"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>

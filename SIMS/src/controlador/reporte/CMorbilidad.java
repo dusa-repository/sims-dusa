@@ -961,6 +961,7 @@ public class CMorbilidad extends CGenerico {
 			}
 		}
 
+		p.put("data", new JRBeanCollectionDataSource(consuta));
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorTipoConsulta.jasper"));
 		if (tipoReporte.equals("EXCEL")) {
