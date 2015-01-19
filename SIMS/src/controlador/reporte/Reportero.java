@@ -216,6 +216,15 @@ public class Reportero extends HttpServlet {
 			case "37":
 				fichero = morbilidad.reporteMorbilidadPorClasificacion(par6, par7, par8, par9, tipo);
 				break;
+			case "38":
+				fichero = reposo.reporteReposoPorCargo(par6, par7, par8, tipo);
+				break;
+			case "39":
+				fichero = reposo.reporteReposoPorNomina(par6, par7, par8, tipo);
+				break;
+			case "40":
+				fichero = reposo.reporteReposoPorEmpresa(par6, par7, par8, tipo);
+				break;
 			default:
 				break;
 			}
