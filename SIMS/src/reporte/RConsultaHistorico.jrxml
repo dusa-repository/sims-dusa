@@ -107,7 +107,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="58" height="20" uuid="181393e1-6b40-4ca3-8631-9a9fc31627d3"/>
+				<reportElement x="0" y="0" width="102" height="20" uuid="181393e1-6b40-4ca3-8631-9a9fc31627d3"/>
 				<box>
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
@@ -118,7 +118,7 @@
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="144" y="0" width="228" height="20" uuid="95e7f111-94b3-4e5a-9026-8270d1c74ea0"/>
+				<reportElement x="188" y="0" width="211" height="20" uuid="95e7f111-94b3-4e5a-9026-8270d1c74ea0"/>
 				<box>
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
@@ -129,7 +129,7 @@
 				<text><![CDATA[Enfermedad Actual]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="58" y="0" width="86" height="20" uuid="9573520e-69ea-48f3-9897-7846129e8cf5"/>
+				<reportElement x="102" y="0" width="86" height="20" uuid="9573520e-69ea-48f3-9897-7846129e8cf5"/>
 				<box>
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
@@ -140,7 +140,7 @@
 				<text><![CDATA[Tipo Consulta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="371" y="0" width="172" height="20" uuid="8326d1e7-b92a-437e-be7a-ee9f716c2446"/>
+				<reportElement x="399" y="0" width="155" height="20" uuid="8326d1e7-b92a-437e-be7a-ee9f716c2446"/>
 				<box>
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
@@ -151,7 +151,7 @@
 				<text><![CDATA[Diagnostico]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="542" y="0" width="117" height="20" uuid="a17d79e8-4c4f-4b97-afca-9aa5a32db7ae"/>
+				<reportElement x="554" y="0" width="105" height="20" uuid="a17d79e8-4c4f-4b97-afca-9aa5a32db7ae"/>
 				<box>
 					<leftPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0"/>
@@ -177,7 +177,7 @@
 	<detail>
 		<band height="28" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="4" width="58" height="20" uuid="91d9752a-5003-4faf-9374-f384121c3f78"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="4" width="102" height="20" uuid="91d9752a-5003-4faf-9374-f384121c3f78"/>
 				<box>
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
@@ -185,10 +185,11 @@
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="144" y="4" width="228" height="20" uuid="43fcabd4-ebdc-43fa-a00b-cbe7e7b43ba5"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="188" y="4" width="211" height="20" uuid="43fcabd4-ebdc-43fa-a00b-cbe7e7b43ba5"/>
 				<box leftPadding="5">
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
@@ -199,7 +200,7 @@
 				<textFieldExpression><![CDATA[$F{enfermedadActual}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="58" y="4" width="86" height="20" uuid="98129b1f-6cd6-4523-81e2-ff06801835c0"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="102" y="4" width="86" height="20" uuid="98129b1f-6cd6-4523-81e2-ff06801835c0"/>
 				<box leftPadding="3">
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
@@ -210,7 +211,7 @@
 				<textFieldExpression><![CDATA[$F{tipoConsultaSecundaria}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="371" y="4" width="172" height="20" uuid="861438bd-ef54-4411-8d2e-0d127edfc22d"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="399" y="4" width="155" height="20" uuid="861438bd-ef54-4411-8d2e-0d127edfc22d"/>
 				<box leftPadding="5">
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0" lineStyle="Dashed"/>
@@ -221,7 +222,7 @@
 				<textFieldExpression><![CDATA[$F{observacion}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="542" y="4" width="117" height="20" uuid="e50ce5b2-00c6-4c90-8097-7ff3f2abbeb4"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="554" y="4" width="105" height="20" uuid="e50ce5b2-00c6-4c90-8097-7ff3f2abbeb4"/>
 				<box leftPadding="5">
 					<bottomPen lineWidth="0.0"/>
 					<rightPen lineWidth="0.0" lineStyle="Dashed"/>

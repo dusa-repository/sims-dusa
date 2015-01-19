@@ -329,15 +329,16 @@
 				<textFieldExpression><![CDATA[$F{motivoConsulta}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="72" y="2" width="74" height="20" uuid="9dac73cd-18eb-4221-97a0-0cd7c8297c89"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})]]></textFieldExpression>
+				<reportElement x="39" y="2" width="107" height="20" uuid="9dac73cd-18eb-4221-97a0-0cd7c8297c89"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="146" y="2" width="278" height="20" uuid="055bec68-e7e1-4117-bc23-acc6325d333f"/>
 				<textFieldExpression><![CDATA[$F{enfermedadActual}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="55" y="2" width="17" height="20" uuid="4356eb9d-20f7-4661-b6c6-035eda4cb64c"/>
+				<reportElement x="22" y="2" width="17" height="20" uuid="4356eb9d-20f7-4661-b6c6-035eda4cb64c"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>

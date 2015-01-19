@@ -368,15 +368,16 @@
 	<detail>
 		<band height="24" splitType="Stretch">
 			<staticText>
-				<reportElement x="78" y="4" width="12" height="20" uuid="5a7b5935-f1ea-4945-9132-bfa2c4873cc5"/>
+				<reportElement x="62" y="4" width="12" height="20" uuid="5a7b5935-f1ea-4945-9132-bfa2c4873cc5"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="90" y="4" width="100" height="20" uuid="2be4c037-a178-4846-923e-e20c873f743e"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})]]></textFieldExpression>
+				<reportElement x="74" y="4" width="116" height="20" uuid="2be4c037-a178-4846-923e-e20c873f743e"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="190" y="4" width="193" height="20" uuid="6c94987f-3472-45cb-8b6a-1cfc59d410bd"/>

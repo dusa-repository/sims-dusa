@@ -113,7 +113,7 @@
 		<groupHeader>
 			<band height="39">
 				<staticText>
-					<reportElement x="33" y="24" width="100" height="15" uuid="52d3884d-205c-4fdf-832a-1e2a3a43bd68"/>
+					<reportElement x="16" y="24" width="100" height="15" uuid="52d3884d-205c-4fdf-832a-1e2a3a43bd68"/>
 					<textElement>
 						<font isUnderline="true"/>
 					</textElement>
@@ -236,15 +236,14 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<staticText>
-				<reportElement x="32" y="0" width="24" height="20" uuid="6e691af6-c3cd-45e3-8dc6-c3cf282140e3"/>
+				<reportElement x="16" y="0" width="24" height="20" uuid="6e691af6-c3cd-45e3-8dc6-c3cf282140e3"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="55" y="0" width="85" height="20" uuid="fa2aaedf-0aaa-4ec9-a200-3f2f39c8ddc2"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="40" y="0" width="100" height="20" uuid="fa2aaedf-0aaa-4ec9-a200-3f2f39c8ddc2"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})+" "+
 new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 			</textField>

@@ -247,14 +247,14 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="83" height="14" uuid="14c9238f-204e-4d53-a781-351f2be2499e"/>
+				<reportElement x="0" y="0" width="94" height="14" uuid="14c9238f-204e-4d53-a781-351f2be2499e"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha Consulta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="83" y="0" width="96" height="14" uuid="86a56939-7c52-40b5-b6a8-f03b04a33732"/>
+				<reportElement x="94" y="0" width="85" height="14" uuid="86a56939-7c52-40b5-b6a8-f03b04a33732"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -286,12 +286,12 @@
 	<detail>
 		<band height="18" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="83" height="18" uuid="2197cd0d-5d1d-4ee1-919c-c0bb74b0897a"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})]]></textFieldExpression>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="94" height="18" uuid="2197cd0d-5d1d-4ee1-919c-c0bb74b0897a"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="83" y="0" width="96" height="18" uuid="88ba5e58-006d-42ec-bddd-b33c1eade8d7"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="94" y="0" width="85" height="18" uuid="88ba5e58-006d-42ec-bddd-b33c1eade8d7"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{consulta.tipoConsultaSecundaria}]]></textFieldExpression>
 			</textField>
