@@ -39,18 +39,8 @@
 								<comboitem label="${each.nombre}" context="${each.idArea}" />
 							</template>
 						</combobox>
-						<hbox visible="false">
-							<label class="etiqueta" value="Cargo:" />
-							<space />
-							<label value="*" style="font-weight:bold;color:red" />
-						</hbox>
-						<combobox visible="false" tooltiptext="Seleccione un Cargo"
-							placeholder="Seleccione un Cargo" id="cmbCargo" readonly="true"
-							width="100%">
-							<template name="model">
-								<comboitem label="${each.nombre}" context="${each.idCargo}" />
-							</template>
-						</combobox>
+						<hbox />
+						<hbox />
 					</row>
 					<row id="rowPaciente">
 						<hbox>
@@ -62,6 +52,53 @@
 						<button id="btnBuscarPaciente" label="Buscar" class="btn"
 							image="/public/imagenes/botones/buscar.png" />
 
+						<hbox />
+					</row>
+					<row id="rowCargo">
+						<hbox>
+							<label class="etiqueta" value="Cargo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox tooltiptext="Seleccione un Cargo" placeholder="Seleccione un Cargo"
+							id="cmbCargo" readonly="true" width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idCargo}" />
+							</template>
+						</combobox>
+						<hbox />
+						<hbox />
+					</row>
+					<row id="rowEmpresa">
+						<hbox>
+							<label class="etiqueta" value="Empresa:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox tooltiptext="Seleccione una Empresa"
+							placeholder="Seleccione una Empresa" id="cmbEmpresa" readonly="true"
+							width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idEmpresa}" />
+							</template>
+						</combobox>
+						<hbox />
+						<hbox />
+					</row>
+					<row id="rowNomina">
+						<hbox>
+							<label class="etiqueta" value="Nomina:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox tooltiptext="Seleccione una Nomina"
+							placeholder="Seleccione una Nomina" id="cmbNomina" readonly="true"
+							width="100%">
+							<template name="model">
+								<comboitem label="${each.nombre}" context="${each.idNomina}" />
+							</template>
+						</combobox>
+						<hbox />
 						<hbox />
 					</row>
 					<row id="rowDiagnostico">
@@ -126,7 +163,7 @@
 				</rows>
 			</grid>
 			<separator />
-			<hbox id="box2" visible = "false">
+			<hbox id="box2" visible="false">
 				<textbox tooltiptext="Ingrese el Nombre del Diagnostico"
 					placeholder="Ingrese el Diagnostico a Buscar" width="195px"
 					id="txtBuscadorDiagnostico"></textbox>

@@ -15,7 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 import modelo.maestros.Accidente;
+import modelo.maestros.Cargo;
+import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
+import modelo.maestros.Empresa;
+import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
@@ -105,6 +109,19 @@ public class CReposo extends CGenerico {
 	private Listbox ltbDiagnosticos;
 	@Wire
 	private Listbox ltbDiagnosticosAgregados;
+	@Wire
+	private Row rowCargo;
+	@Wire
+	private Row rowEmpresa;
+	@Wire
+	private Row rowNomina;
+	@Wire
+	private Combobox cmbCargo;
+	@Wire
+	private Combobox cmbEmpresa;
+	@Wire
+	private Combobox cmbNomina;
+
 	List<Diagnostico> diagnosticosDisponibles = new ArrayList<Diagnostico>();
 	List<Diagnostico> diagnosticosAgregados = new ArrayList<Diagnostico>();
 	Buscar<Diagnostico> buscarDiagnostico;
@@ -134,11 +151,44 @@ public class CReposo extends CGenerico {
 		}
 
 		switch (titulo) {
+		case "Reposos Por Nomina":
+			rowArea.setVisible(false);
+			rowDiagnostico.setVisible(false);
+			rowDoctor.setVisible(false);
+			rowPaciente.setVisible(false);
+			rowEmpresa.setVisible(false);
+			rowNomina.setVisible(true);
+			rowCargo.setVisible(false);
+			tipo = "nomina";
+			break;
+		case "Reposos Por Empresa":
+			rowArea.setVisible(false);
+			rowDiagnostico.setVisible(false);
+			rowDoctor.setVisible(false);
+			rowPaciente.setVisible(false);
+			rowEmpresa.setVisible(true);
+			rowNomina.setVisible(false);
+			rowCargo.setVisible(false);
+			tipo = "empresa";
+			break;
+		case "Reposos Por Cargo":
+			rowArea.setVisible(false);
+			rowDiagnostico.setVisible(false);
+			rowDoctor.setVisible(false);
+			rowPaciente.setVisible(false);
+			rowEmpresa.setVisible(false);
+			rowNomina.setVisible(false);
+			rowCargo.setVisible(true);
+			tipo = "cargo";
+			break;
 		case "Reposos Por Area":
 			rowArea.setVisible(true);
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(false);
 			rowPaciente.setVisible(false);
+			rowEmpresa.setVisible(false);
+			rowNomina.setVisible(false);
+			rowCargo.setVisible(false);
 			tipo = "area";
 			break;
 		case "Reposos Por Diagnostico":
@@ -147,6 +197,9 @@ public class CReposo extends CGenerico {
 			rowDiagnostico.setVisible(true);
 			rowDoctor.setVisible(false);
 			rowPaciente.setVisible(false);
+			rowEmpresa.setVisible(false);
+			rowNomina.setVisible(false);
+			rowCargo.setVisible(false);
 			box.setVisible(true);
 			box2.setVisible(true);
 			cargarLista();
@@ -157,6 +210,9 @@ public class CReposo extends CGenerico {
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(true);
 			rowPaciente.setVisible(false);
+			rowEmpresa.setVisible(false);
+			rowNomina.setVisible(false);
+			rowCargo.setVisible(false);
 			tipo = "doctor";
 			break;
 		case "Reposos Por Paciente":
@@ -164,6 +220,9 @@ public class CReposo extends CGenerico {
 			rowDiagnostico.setVisible(false);
 			rowDoctor.setVisible(false);
 			rowPaciente.setVisible(true);
+			rowEmpresa.setVisible(false);
+			rowNomina.setVisible(false);
+			rowCargo.setVisible(false);
 			tipo = "paciente";
 			break;
 		}
@@ -198,6 +257,15 @@ public class CReposo extends CGenerico {
 					idPaciente = "";
 					lblPaciente.setValue("");
 					break;
+				case "empresa":
+					cmbEmpresa.setValue("TODAS");
+					break;
+				case "nomina":
+					cmbNomina.setValue("TODAS");
+					break;
+				case "cargo":
+					cmbCargo.setValue("TODOS");
+					break;
 				}
 			}
 
@@ -220,6 +288,18 @@ public class CReposo extends CGenerico {
 					case "paciente":
 						if (!idPaciente.equals(""))
 							reportePaciente();
+						break;
+					case "cargo":
+						if (validarCargo())
+							reporteCargo();
+						break;
+					case "nomina":
+						if (validarNomina())
+							reporteNomina();
+						break;
+					case "empresa":
+						if (validarEmpresa())
+							reporteEmpresa();
 						break;
 					}
 				}
@@ -272,7 +352,29 @@ public class CReposo extends CGenerico {
 		areas.add(area);
 		areas.addAll(servicioArea.buscarTodos());
 		cmbArea.setModel(new ListModelList<Area>(areas));
+		Empresa empresa = new Empresa();
+		empresa.setNombre(todos);
+		empresa.setIdEmpresa(0);
+		List<Empresa> empresas = new ArrayList<Empresa>();
+		empresas.add(empresa);
+		empresas.addAll(servicioEmpresa.buscarTodas());
+		cmbEmpresa.setModel(new ListModelList<Empresa>(empresas));
+		Nomina nomina = new Nomina();
+		nomina.setNombre(todos);
+		nomina.setIdNomina(0);
+		List<Nomina> nominas = new ArrayList<Nomina>();
+		nominas.add(nomina);
+		nominas.addAll(servicioNomina.buscarTodos());
+		cmbNomina.setModel(new ListModelList<Nomina>(nominas));
+		Cargo cargo = new Cargo();
+		cargo.setNombre("TODOS");
+		cargo.setIdCargo(0);
+		List<Cargo> cargos = new ArrayList<Cargo>();
+		cargos.add(cargo);
+		cargos.addAll(servicioCargo.buscarTodos());
+		cmbCargo.setModel(new ListModelList<Cargo>(cargos));		
 	}
+	
 
 	public boolean validar() {
 		if (dtbDesde.getText().compareTo("") == 0
@@ -292,6 +394,30 @@ public class CReposo extends CGenerico {
 
 	public boolean validarArea() {
 		if (cmbArea.getText().compareTo("") == 0) {
+			msj.mensajeError(Mensaje.camposVacios);
+			return false;
+		}
+		return true;
+	}
+
+	public boolean validarCargo() {
+		if (cmbCargo.getText().compareTo("") == 0) {
+			msj.mensajeError(Mensaje.camposVacios);
+			return false;
+		}
+		return true;
+	}
+
+	public boolean validarEmpresa() {
+		if (cmbEmpresa.getText().compareTo("") == 0) {
+			msj.mensajeError(Mensaje.camposVacios);
+			return false;
+		}
+		return true;
+	}
+
+	public boolean validarNomina() {
+		if (cmbNomina.getText().compareTo("") == 0) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
@@ -963,7 +1089,439 @@ public class CReposo extends CGenerico {
 
 	}
 
-	/* Muestra un catalogo de Usuarios */
+	public void reporteEmpresa() {
+		Date desde = dtbDesde.getValue();
+		Date hasta = dtbHasta.getValue();
+		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha1 = fecha.format(desde);
+		String fecha2 = fecha.format(hasta);
+		String empresa = "";
+		String tipoReporte = cmbTipo.getValue();
+		Empresa empresa2 = new Empresa();
+		if (cmbEmpresa.getValue().equals("TODAS"))
+			empresa = "";
+		else {
+			empresa = cmbEmpresa.getSelectedItem().getContext();
+			empresa2 = getServicioEmpresa().buscar(Long.parseLong(empresa));
+		}
+
+		if ((empresa.equals("") && servicioConsulta
+				.buscarEntreFechasReposoyTrabajadores(desde, hasta).isEmpty())
+				|| (!empresa.equals("") && servicioConsulta
+						.buscarEntreFechasReposoEmpresayTrabajadores(desde, hasta,
+								servicioEmpresa.buscar(Long.parseLong(empresa)))
+						.isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=40&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ empresa
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
+
+	}
+
+	public byte[] reporteReposoPorEmpresa(String part1, String part2, String empresa,
+			String tipoReporte) throws JRException {
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(part1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(part2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		List<Consulta> consuta = new ArrayList<Consulta>();
+
+		if (empresa.equals(""))
+			consuta = getServicioConsulta()
+					.buscarEntreFechasReposoyTrabajadores(fecha1, fecha2);
+		else {
+			Empresa empresa2 = getServicioEmpresa().buscar(Long.parseLong(empresa));
+			consuta = getServicioConsulta()
+					.buscarEntreFechasReposoEmpresayTrabajadores(fecha1, fecha2,
+							empresa2);
+		}
+
+		Map p = new HashMap();
+		p.put("desde", part1);
+		p.put("hasta", part2);
+
+		for (int i = 0; i < consuta.size(); i++) {
+			Consulta cons = consuta.get(i);
+			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
+					.buscarPorConsulta(cons);
+			Calendar c = Calendar.getInstance();
+			if (cons.getFechaReposo() != null)
+				c.setTime(cons.getFechaReposo());
+			else {
+				cons.setFechaReposo(cons.getFechaConsulta());
+				c.setTime(cons.getFechaConsulta());
+			}
+
+			if (cons.getTipoReposo() != null) {
+				if (cons.getTipoReposo().equals("Dias")) {
+					c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+				} else
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Horas");
+			} else {
+				c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+				cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+			}
+			Date fechaHasta = c.getTime();
+			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
+			cons.setFechaAuditoria(fechaHasta2);
+			if (!dig.isEmpty()) {
+				if (dig.get(0) != null) {
+
+					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
+							.getNombre());
+					cons.setMotivoConsulta(dig.get(0).getTipo());
+
+				}
+			} else {
+				cons.setEnfermedadActual("");
+				cons.setMotivoConsulta("");
+			}
+		}
+		p.put("data", new JRBeanCollectionDataSource(consuta));
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RRepososPorEmpresa.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consuta));
+			return fichero;
+		}
+	}
+	
+	public void reporteCargo() {
+		Date desde = dtbDesde.getValue();
+		Date hasta = dtbHasta.getValue();
+		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha1 = fecha.format(desde);
+		String fecha2 = fecha.format(hasta);
+		String cargo = "";
+		String tipoReporte = cmbTipo.getValue();
+		Cargo cargo2 = new Cargo();
+		if (cmbCargo.getValue().equals("TODOS"))
+			cargo = "";
+		else {
+			cargo = cmbCargo.getSelectedItem().getContext();
+		cargo2 = getServicioCargo().buscar(Long.parseLong(cargo));
+		}
+
+		if ((cargo.equals("") && servicioConsulta
+				.buscarEntreFechasReposoyTrabajadores(desde, hasta).isEmpty())
+				|| (!cargo.equals("") && servicioConsulta
+						.buscarEntreFechasReposoCargoyTrabajadores(desde, hasta,
+								servicioCargo.buscar(Long.parseLong(cargo)))
+						.isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=38&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ cargo
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
+
+	}
+
+	public byte[] reporteReposoPorCargo(String part1, String part2, String cargo,
+			String tipoReporte) throws JRException {
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(part1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(part2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		List<Consulta> consuta = new ArrayList<Consulta>();
+
+		if (cargo.equals(""))
+			consuta = getServicioConsulta()
+					.buscarEntreFechasReposoyTrabajadores(fecha1, fecha2);
+		else {
+			Cargo cargo2 = getServicioCargo().buscar(Long.parseLong(cargo));
+			consuta = getServicioConsulta()
+					.buscarEntreFechasReposoCargoyTrabajadores(fecha1, fecha2,
+							cargo2);
+		}
+
+		Map p = new HashMap();
+		p.put("desde", part1);
+		p.put("hasta", part2);
+
+		for (int i = 0; i < consuta.size(); i++) {
+			Consulta cons = consuta.get(i);
+			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
+					.buscarPorConsulta(cons);
+			Calendar c = Calendar.getInstance();
+			if (cons.getFechaReposo() != null)
+				c.setTime(cons.getFechaReposo());
+			else {
+				cons.setFechaReposo(cons.getFechaConsulta());
+				c.setTime(cons.getFechaConsulta());
+			}
+
+			if (cons.getTipoReposo() != null) {
+				if (cons.getTipoReposo().equals("Dias")) {
+					c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+				} else
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Horas");
+			} else {
+				c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+				cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+			}
+			Date fechaHasta = c.getTime();
+			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
+			cons.setFechaAuditoria(fechaHasta2);
+			if (!dig.isEmpty()) {
+				if (dig.get(0) != null) {
+
+					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
+							.getNombre());
+					cons.setMotivoConsulta(dig.get(0).getTipo());
+
+				}
+			} else {
+				cons.setEnfermedadActual("");
+				cons.setMotivoConsulta("");
+			}
+		}
+		p.put("data", new JRBeanCollectionDataSource(consuta));
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RRepososPorCargo.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consuta));
+			return fichero;
+		}
+	}
+	
+	public void reporteNomina() {
+		Date desde = dtbDesde.getValue();
+		Date hasta = dtbHasta.getValue();
+		DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
+		String fecha1 = fecha.format(desde);
+		String fecha2 = fecha.format(hasta);
+		String nomina = "";
+		String tipoReporte = cmbTipo.getValue();
+		Nomina cargo2 = new Nomina();
+		if (cmbNomina.getValue().equals("TODAS"))
+			nomina = "";
+		else {
+			nomina = cmbNomina.getSelectedItem().getContext();
+		cargo2 = getServicioNomina().buscar(Long.parseLong(nomina));
+		}
+
+		if ((nomina.equals("") && servicioConsulta
+				.buscarEntreFechasReposoyTrabajadores(desde, hasta).isEmpty())
+				|| (!nomina.equals("") && servicioConsulta
+						.buscarEntreFechasReposoNominayTrabajadores(desde, hasta,
+								servicioNomina.buscar(Long.parseLong(nomina)))
+						.isEmpty()))
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=39&valor6="
+					+ fecha1
+					+ "&valor7="
+					+ fecha2
+					+ "&valor8="
+					+ nomina
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		}
+
+	}
+
+	public byte[] reporteReposoPorNomina(String part1, String part2, String nomina,
+			String tipoReporte) throws JRException {
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(part1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(part2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		List<Consulta> consuta = new ArrayList<Consulta>();
+
+		if (nomina.equals(""))
+			consuta = getServicioConsulta()
+					.buscarEntreFechasReposoyTrabajadores(fecha1, fecha2);
+		else {
+			Nomina nomina2 = getServicioNomina().buscar(Long.parseLong(nomina));
+			consuta = getServicioConsulta()
+					.buscarEntreFechasReposoNominayTrabajadores(fecha1, fecha2,
+							nomina2);
+		}
+
+		Map p = new HashMap();
+		p.put("desde", part1);
+		p.put("hasta", part2);
+
+		for (int i = 0; i < consuta.size(); i++) {
+			Consulta cons = consuta.get(i);
+			List<ConsultaDiagnostico> dig = getServicioConsultaDiagnostico()
+					.buscarPorConsulta(cons);
+			Calendar c = Calendar.getInstance();
+			if (cons.getFechaReposo() != null)
+				c.setTime(cons.getFechaReposo());
+			else {
+				cons.setFechaReposo(cons.getFechaConsulta());
+				c.setTime(cons.getFechaConsulta());
+			}
+
+			if (cons.getTipoReposo() != null) {
+				if (cons.getTipoReposo().equals("Dias")) {
+					c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+				} else
+					cons.setUsuarioAuditoria(cons.getDiasReposo() + " Horas");
+			} else {
+				c.add(Calendar.DAY_OF_YEAR, cons.getDiasReposo());
+				cons.setUsuarioAuditoria(cons.getDiasReposo() + " Dias");
+			}
+			Date fechaHasta = c.getTime();
+			Timestamp fechaHasta2 = new Timestamp(fechaHasta.getTime());
+			cons.setFechaAuditoria(fechaHasta2);
+			if (!dig.isEmpty()) {
+				if (dig.get(0) != null) {
+
+					cons.setEnfermedadActual(dig.get(0).getDiagnostico()
+							.getNombre());
+					cons.setMotivoConsulta(dig.get(0).getTipo());
+
+				}
+			} else {
+				cons.setEnfermedadActual("");
+				cons.setMotivoConsulta("");
+			}
+		}
+		p.put("data", new JRBeanCollectionDataSource(consuta));
+
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RRepososPorNomina.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(consuta));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(consuta));
+			return fichero;
+		}
+	}
+	
+	
 	@Listen("onClick = #btnBuscarDoctor")
 	public void mostrarCatalogo() throws IOException {
 
@@ -1162,9 +1720,9 @@ public class CReposo extends CGenerico {
 			listasMultiples();
 		}
 	}
-	
+
 	@Listen("onChange = #dtbDesde, #dtbHasta")
-	public void changeList(){
+	public void changeList() {
 		cargarLista();
 	}
 
