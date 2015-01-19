@@ -46,8 +46,9 @@
 				<textFieldExpression><![CDATA[$P{empresaNombre}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="110" y="82" width="100" height="18" uuid="e9308195-318d-46d3-866c-ec8516a9490c"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})]]></textFieldExpression>
+				<reportElement x="110" y="82" width="144" height="18" uuid="e9308195-318d-46d3-866c-ec8516a9490c"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})+" "+
+new SimpleDateFormat("h:m a").format($P{fecha})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="10" y="82" width="100" height="18" uuid="0beee1e5-55f2-4756-a42f-ccba8026ca31"/>

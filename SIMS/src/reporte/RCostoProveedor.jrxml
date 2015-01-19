@@ -163,17 +163,18 @@
 					</graphicElement>
 				</rectangle>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="76" y="2" width="72" height="17" uuid="6732fbe6-9199-4832-ac74-1aa5975b2741"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="69" y="2" width="105" height="17" uuid="6732fbe6-9199-4832-ac74-1aa5975b2741"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement verticalAlignment="Middle">
 						<font size="11" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="148" y="2" width="91" height="17" uuid="bd7b2820-a273-4108-8b27-d0e2d8342965"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="174" y="2" width="80" height="17" uuid="bd7b2820-a273-4108-8b27-d0e2d8342965"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -183,7 +184,7 @@
 					<textFieldExpression><![CDATA[$F{consulta.tipoConsultaSecundaria}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="239" y="2" width="333" height="17" uuid="8feab1f6-2e46-46e0-a983-4bcc695a2322"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="254" y="2" width="318" height="17" uuid="8feab1f6-2e46-46e0-a983-4bcc695a2322"/>
 					<box leftPadding="3">
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -193,7 +194,7 @@
 					<textFieldExpression><![CDATA[$F{consulta.paciente.cedula}+" "+$F{consulta.paciente.primerNombre}+" "+$F{consulta.paciente.primerApellido}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="22" y="2" width="54" height="17" uuid="b96e9006-fc97-4b9d-bc6a-2197e897941d"/>
+					<reportElement x="16" y="2" width="53" height="17" uuid="b96e9006-fc97-4b9d-bc6a-2197e897941d"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -203,7 +204,7 @@
 					<text><![CDATA[Consulta:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="10" y="2" width="12" height="17" uuid="faec1fb1-e36e-4595-9ded-22ece082cc51"/>
+					<reportElement x="4" y="2" width="12" height="17" uuid="faec1fb1-e36e-4595-9ded-22ece082cc51"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>

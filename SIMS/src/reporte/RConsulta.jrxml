@@ -113,7 +113,7 @@
 				<textFieldExpression><![CDATA[$P{tipoDiagnostico}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="232" y="216" width="102" height="20" uuid="6e8a2790-4ae9-4b85-abeb-8ced00cf28eb"/>
+				<reportElement x="272" y="216" width="102" height="20" uuid="6e8a2790-4ae9-4b85-abeb-8ced00cf28eb"/>
 				<textElement>
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
@@ -148,14 +148,15 @@
 				<textFieldExpression><![CDATA[$P{enfermedad}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="135" y="216" width="89" height="20" uuid="82ee76c5-ac52-4b86-aa50-6207b3a93e65"/>
+				<reportElement x="135" y="216" width="127" height="20" uuid="82ee76c5-ac52-4b86-aa50-6207b3a93e65"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaConsulta})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($P{fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="334" y="216" width="185" height="20" uuid="d02bf364-ae18-46a5-a11a-4599325abeab"/>
+				<reportElement x="374" y="216" width="185" height="20" uuid="d02bf364-ae18-46a5-a11a-4599325abeab"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>

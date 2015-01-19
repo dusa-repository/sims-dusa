@@ -260,7 +260,7 @@
 					<textFieldExpression><![CDATA[$F{paciente.cedula}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="52" y="24" width="100" height="15" uuid="fe70a8cf-95c9-443a-b179-4d27721cc05a"/>
+					<reportElement x="28" y="24" width="100" height="15" uuid="fe70a8cf-95c9-443a-b179-4d27721cc05a"/>
 					<textElement>
 						<font size="10" isUnderline="true"/>
 					</textElement>
@@ -399,15 +399,16 @@
 	<detail>
 		<band height="23" splitType="Stretch">
 			<staticText>
-				<reportElement x="68" y="3" width="15" height="20" uuid="d608ae11-d567-46ea-ac56-1e9b766e67bd"/>
+				<reportElement x="23" y="3" width="15" height="20" uuid="d608ae11-d567-46ea-ac56-1e9b766e67bd"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="83" y="3" width="56" height="20" uuid="9557c444-1299-495c-920a-73a452767ca3"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})]]></textFieldExpression>
+				<reportElement x="38" y="3" width="101" height="20" uuid="9557c444-1299-495c-920a-73a452767ca3"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="139" y="3" width="79" height="20" uuid="5f7f74f5-52d5-450f-98f3-0d1339a0723f"/>

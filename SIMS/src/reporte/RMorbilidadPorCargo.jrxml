@@ -247,7 +247,6 @@
 		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="26" y="0" width="103" height="20" uuid="2c493f9b-2ae0-43bf-9466-0b0508ba9af6"/>
-				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})+" "+
 new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 			</textField>

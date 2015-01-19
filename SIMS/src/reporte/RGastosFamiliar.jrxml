@@ -191,7 +191,7 @@
 					<textElement textAlignment="Center">
 						<font size="11" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{paciente.edad}+ "  Años" ]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{paciente.edad}+ "  Años"]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="485" y="1" width="88" height="20" uuid="e2165f79-c164-4fff-9f0d-2857a6a1011d"/>
@@ -307,7 +307,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="78" height="40" uuid="f1851f00-3bcb-453f-8ee8-bb846963bb40"/>
+				<reportElement x="0" y="0" width="96" height="40" uuid="f1851f00-3bcb-453f-8ee8-bb846963bb40"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -319,7 +319,7 @@
 				<text><![CDATA[Fecha Consulta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="78" y="0" width="107" height="40" uuid="9f578b86-6d6e-417d-a015-cbf567ff6a28"/>
+				<reportElement x="96" y="0" width="89" height="40" uuid="9f578b86-6d6e-417d-a015-cbf567ff6a28"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -408,12 +408,13 @@
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="78" height="20" uuid="718348a1-524c-4dae-8afd-80f4d08b4c1f"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})]]></textFieldExpression>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="96" height="20" uuid="718348a1-524c-4dae-8afd-80f4d08b4c1f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})+" "+
+new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="78" y="0" width="107" height="20" uuid="14b6f4b1-c490-4fc5-b84d-c9868230f158"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="96" y="0" width="89" height="20" uuid="14b6f4b1-c490-4fc5-b84d-c9868230f158"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{tipoConsultaSecundaria}]]></textFieldExpression>
 			</textField>

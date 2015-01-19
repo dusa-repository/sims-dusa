@@ -28,7 +28,8 @@
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})+" "+
+new SimpleDateFormat("h:m a").format($P{fecha})]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="472" y="9" width="100" height="20" uuid="ccb750f3-146f-40cf-983e-e9995e54cc2e"/>
@@ -192,7 +193,8 @@
 				<textElement>
 					<font size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fecha})+" "+
+new SimpleDateFormat("h:m a").format($P{fecha})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="7" y="507" width="304" height="20" uuid="f094ecea-6295-4523-8ed2-a6c088e941a9"/>
