@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_procesosPeligrosos" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="39b5ba9b-56f8-4e24-838c-478410aa2fa0">
+	<property name="ireport.zoom" value="1.2100000000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1050"/>
+	<parameter name="haa" class="java.lang.String"/>
+	<parameter name="hab" class="java.lang.String"/>
+	<parameter name="hac" class="java.lang.String"/>
+	<parameter name="had" class="java.lang.String"/>
+	<parameter name="hadSI" class="java.lang.String"/>
+	<parameter name="hadNO" class="java.lang.String"/>
+	<parameter name="haeSI" class="java.lang.String"/>
+	<parameter name="haeNO" class="java.lang.String"/>
+	<parameter name="haf" class="java.lang.String"/>
+	<parameter name="hba" class="java.lang.String"/>
+	<parameter name="hbc" class="java.lang.String"/>
+	<parameter name="hbdSI" class="java.lang.String"/>
+	<parameter name="hbdNO" class="java.lang.String"/>
+	<parameter name="hbe1" class="java.lang.String"/>
+	<parameter name="hbe2" class="java.lang.String"/>
+	<parameter name="hbe3" class="java.lang.String"/>
+	<parameter name="hbfSI" class="java.lang.String"/>
+	<parameter name="hbfNO" class="java.lang.String"/>
+	<parameter name="hbgSI" class="java.lang.String"/>
+	<parameter name="hbgNO" class="java.lang.String"/>
+	<parameter name="hbh1" class="java.lang.String"/>
+	<parameter name="hbh2" class="java.lang.String"/>
+	<parameter name="hbh3" class="java.lang.String"/>
+	<parameter name="hbh4" class="java.lang.String"/>
+	<parameter name="hbe" class="java.lang.String"/>
+	<parameter name="condicionA" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="783">
+			<staticText>
+				<reportElement x="0" y="0" width="518" height="20" uuid="fa4f01e2-91d6-4b85-b274-23aa27c3533e"/>
+				<text><![CDATA[8.- PROCESOS PELIGROSOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="31" width="518" height="65" uuid="a7fa0126-9dd5-499c-b002-84b004045db3"/>
+				<text><![CDATA[8.1.- OBJETO DE TRABAJO: SON LAS MATERIAS PRIMAS, PRODUCTOS INTERMEDIOS O PRODUCTOS FINALES QUE SON TRANSFORMADOS EN BIENES Y SERVICIOS EN EL PROCESO DE TRABAJO UTILIZADO POR LA TRABAJADORA O TRABAJADOR. CUANDO EL PROCESO DE TRANSFORMACIÓN SE REALIZA SOBRE LOS INDIVIDUOS TAL COMO EL PROCESO EDUCATIVO, ESTAREMOS HABLANDO DE SUJETO DE TRABAJO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="218" width="521" height="110" uuid="bbecbab5-1a62-4474-80c6-1866d100cb60"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MATERIA PRIMA/ SUSTANCIA / PRODUCTOS /SUJETO:
+8.1.2.- ¿QUÉ MATERIA PRIMA, SUSTANCIA, PRODUCTO O SUJETO ESTABA UTILIZANDO EL TRABAJADOR AL MOMENTO DE LA OCURRENCIA DEL ACCIDENTE? EN EL CASO DE EXISTIR SUJETO, INDÍQUESE.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="328" width="521" height="112" uuid="3048ab27-60b0-4cdb-996f-efbf44a6d287"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MATERIA PRIMA/ SUSTANCIA / PRODUCTOS /SUJETO:
+8.1.3.- ¿DESCRIBA CUALES SON LAS CARACTERÍSTICAS DE LA  MATERIA PRIMA, SUSTANCIA, PRODUCTO O SUJETO, DEL PROCESO DE TRABAJO QUE EJECUTABA EL TRABAJADOR O TRABAJADORA  AL MOMENTO DE LA OCURRENCIA DEL ACCIDENTE?
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="440" width="269" height="112" uuid="3adfcd05-f971-4f82-8481-0d986c9c775c"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ 8.1.4.-  ¿ERA HABITUAL LA UTILIZACIÓN O PRESENCIA DE ESA MATERIA PRIMA / SUSTANCIA / PRODUCTO/ SUJETO PARA EL DESARROLLO DEL PROCESO PRODUCTIVO?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="440" width="252" height="112" uuid="6ccf7cae-df11-4336-85bb-c8f251d6c965"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.1.5.-  ¿POR QUÉ SE ESTABA MANIPULANDO ESA  MATERIA PRIMA / SUSTANCIA / PRODUCTO / SUJETO QUE NO ERA DE USO HABITUAL?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="44" y="491" width="20" height="20" uuid="7d6ee604-6ac1-475e-8d8d-220ede2c0caf"/>
+				<text><![CDATA[SÍ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="491" width="184" height="20" uuid="a786ee45-6fa1-45b3-aa1b-38c83d6d5a10"/>
+				<text><![CDATA[ NO (PASAR A LA PREGUNTA 8.1.5)   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="491" width="218" height="20" uuid="0c2ec209-334f-4fe9-83e3-6c832f02a782"/>
+				<text><![CDATA[PORQUE LA HABITUAL ESTABA AGOTADA.  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="521" width="100" height="20" uuid="f88e0a05-c4f0-456c-bba0-0457ae0eeeb8"/>
+				<text><![CDATA[OTROS (ESPECIFIQUE): ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="552" width="521" height="94" uuid="eb790087-7425-4605-951e-1bf4bf3711aa"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.1.6.- OBSERVACIONES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="663" width="518" height="92" uuid="61d8492b-9979-4e14-bdc5-a9c9e8c39557"/>
+				<text><![CDATA[8.2.- MEDIOS DE TRABAJO: SON TODAS AQUELLAS MAQUINARIAS, EQUIPOS, INSTRUMENTOS, HERRAMIENTAS, SUSTANCIAS QUE NO FORMAN PARTE DEL PRODUCTO O INFRAESTRUCTURA, EMPLEADOS EN EL PROCESO DE TRABAJO PARA LA PRODUCCIÓN DE BIENES DE USO Y CONSUMO, O PARA LA PRESTACIÓN DE UN SERVICIO.
+-	EN SENTIDO ESTRICTO: INSTRUMENTOS, HERRAMIENTAS, EQUIPOS
+-	EN SENTIDO AMPLIO: CONDICIONES, MATERIALES INDISPENSABLES PARA EL PROCESO DE  TRABAJO. (EJ: SERVICIOS, TRANSPORTE, INSTALACIONES.)
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="762" width="521" height="20" uuid="6fa3d643-5776-4745-86ea-31ad20df97ed"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INSTALACIONES:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="108" width="521" height="110" uuid="61bbaee7-38e2-4593-a0b7-c7993a58c053"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.1.1.-  DESCRIPCIÓN ESPECIFICA DE LA FORMA EN QUE SE UTILIZABA LA MATERIA PRIMA AL MOMENTO DE LA  OCURRENCIA DEL ACCIDENTE:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="140" width="513" height="68" uuid="2f152855-ccd8-42ba-8085-97a347c00f3a"/>
+				<textFieldExpression><![CDATA[$P{haa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="263" width="513" height="60" uuid="37838670-cc8a-435d-9369-2ba490aec81d"/>
+				<textFieldExpression><![CDATA[$P{hab}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="382" width="513" height="58" uuid="904b2203-a78b-4873-b149-b11b2efbcdb9"/>
+				<textFieldExpression><![CDATA[$P{hac}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="27" y="495" width="7" height="10" uuid="2905a2e4-f33f-469c-95c7-b0632329909f"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="495" width="7" height="10" uuid="e464037a-b6f8-443c-9988-871faac7c0d9"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="495" width="7" height="10" uuid="667b9c5c-da5d-4053-8f3e-db06c1dd17dd"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="524" width="7" height="10" uuid="663c6db5-b04d-4e88-babd-e113d36ff7e1"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="28" y="493" width="8" height="18" uuid="f07a69a4-c781-4a33-9241-ef73a88d635d"/>
+				<textFieldExpression><![CDATA[$P{hadSI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="75" y="493" width="6" height="18" uuid="3dbfaba7-e926-4e5c-9917-0aba3c7ba102"/>
+				<textFieldExpression><![CDATA[$P{hadNO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="285" y="494" width="7" height="18" uuid="811050e0-cc86-4a78-9fa6-6555830c206f"/>
+				<textFieldExpression><![CDATA[$P{haeSI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="287" y="522" width="6" height="18" uuid="e21bb96f-be22-4781-8404-fdf8a3ebfdb3"/>
+				<textFieldExpression><![CDATA[$P{haeNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="571" width="514" height="75" uuid="adf8b243-3635-4978-ab52-4898dc9550f4"/>
+				<textFieldExpression><![CDATA[$P{haf}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="-1" width="521" height="85" uuid="6a5f329f-18c6-4b7f-844d-821cdceb7583"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.2.1.-  DESCRIPCIÓN ESPECIFICA DE LAS INSTALACIONES EN LAS QUE OCURRIÓ EL ACCIDENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="84" width="521" height="279" uuid="025a94fc-6340-4eff-bf99-27f4286ec17b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.2.2.- ¿EXISTÍA ALGUNA DE LAS SIGUIENTES CONDICIONES EN LAS INSTALACIONES DONDE OCURRIÓ EL ACCIDENTE?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="363" width="521" height="20" uuid="1a32f48e-5961-463d-9885-f01aa67a5d00"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EQUIPOS DE TRABAJO (MAQUINARIAS, EQUIPOS, INSTRUMENTOS, HERRAMIENTAS, SUSTANCIAS, ETC.)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="383" width="521" height="85" uuid="9150fae2-28c3-407b-a370-1203fc83dff8"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.2.3.-  DESCRIPCIÓN ESPECIFICA DE LAS MAQUINARIAS, EQUIPOS, INSTRUMENTOS, HERRAMIENTAS, SUSTANCIAS QUE SE EMPLEAN EN EL MOMENTO EN EL QUE OCURRIÓ EL ACCIDENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="468" width="268" height="112" uuid="0bb96a8c-93b9-459c-a343-5bb7becef00b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.2.5.-  ¿QUIEN MANIPULABA EL EQUIPO, MAQUINA O HERRAMIENTA?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="468" width="253" height="112" uuid="49ccac49-cda7-406e-9858-39d49ab6901b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.2.4.- ¿ESTUVO INVOLUCRADO ALGÚN EQUIPO, MAQUINA O HERRAMIENTA CON   LA OCURRENCIA DEL ACCIDENTE?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="518" width="100" height="20" uuid="00a7f72a-b45a-4359-ba4e-fd03a6e1f7a3"/>
+				<text><![CDATA[SÍ, INDIQUE CUAL: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="549" width="100" height="20" uuid="d63b47a8-9c50-42c3-8bdc-b657d215c003"/>
+				<text><![CDATA[NO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="508" width="191" height="20" uuid="4be1ee4f-df03-4b86-8a61-9f58fd0cadad"/>
+				<text><![CDATA[ EL TRABAJADOR O TRABAJADORA ACCIDENTADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="532" width="205" height="20" uuid="d1e0323d-ce3d-4aec-a98e-6f72c8b3773f"/>
+				<text><![CDATA[OTRO TRABAJADOR O TRABAJADORA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="555" width="86" height="14" uuid="cc49c206-26aa-4aa1-acca-0893a635f2ff"/>
+				<text><![CDATA[OTRO, INDIQUE:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="374" y="565" width="100" height="1" uuid="692c6f21-d34e-4cb0-baa3-ebac84fa6d4d"/>
+			</line>
+			<staticText>
+				<reportElement x="254" y="580" width="267" height="112" uuid="1fac6d49-60cf-4bb7-bde2-f2a7a7589552"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.2.7.-  ¿EL EQUIPO, MAQUINA O HERRAMIENTA  UTILIZADO POR EL TRABAJADOR ERA EL ADECUADO PARA EL DESARROLLO DE LA TAREA (EL QUE SE UTILIZA NORMALMENTE PARA ESA TAREA)?   ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="580" width="254" height="112" uuid="25dd7903-d637-4cad-a04d-4430e8e644a1"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8.2.6.- ¿EL TRABAJADOR RECIBIÓ FORMACIÓN O CAPACITACIÓN TEÓRICA PRACTICA PARA LA UTILIZACIÓN DEL EQUIPO, MAQUINA O HERRAMIENTA EMPLEADA EN LA TAREA?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="34" y="641" width="30" height="20" uuid="c130d2ec-cd1f-4fa4-9e03-b03b300d0d82"/>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="641" width="100" height="20" uuid="d5477aec-0ae0-42b4-b77f-4c89328e7c25"/>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="338" y="641" width="26" height="20" uuid="8d5255b8-7809-4a30-a0f1-9ce00ed6783c"/>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="641" width="36" height="20" uuid="d9c2ad0c-b428-4564-9645-e3b3186d838d"/>
+				<text><![CDATA[SI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="365" y="641" width="132" height="30" uuid="1bb63022-7e91-46e3-ab89-becce61fef25"/>
+				<text><![CDATA[(PASAR A LA PREGUNTA 7.2.6)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="692" width="521" height="110" uuid="d1d5e2ac-c110-4771-8401-e2c07440e2c0"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[8 .2.8.- ¿POR QUÉ NO SE  UTILIZABA EL EQUIPO, MAQUINA O HERRAMIENTA ADECUADA?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="739" width="104" height="31" uuid="6f9eb51f-4fda-4508-87d6-d183c1436ed2"/>
+				<text><![CDATA[INEXISTENCIA DEL/LA  MISMO/A           ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="739" width="116" height="45" uuid="94d16540-ba30-4f73-8146-2a506ddbc9fa"/>
+				<text><![CDATA[LO ESTABA UTILIZANDO OTRA PERSONA.     ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="739" width="114" height="31" uuid="c6d97fb3-5c0c-4559-be9d-4be46978ffe3"/>
+				<text><![CDATA[DETERIORADO/A O EN MAL ESTADO    ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="741" width="78" height="29" uuid="e06fa513-2825-4683-a3ab-160a7d34c994"/>
+				<text><![CDATA[OTROS (ESPECIFIQUE):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="520" width="7" height="10" uuid="98f92dad-d38c-479c-be74-a611209770f1"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="552" width="7" height="10" uuid="c7e82c8a-e3cf-46dd-874e-fb0801bacc6a"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="267" y="511" width="7" height="10" uuid="a04dac24-7d48-43f0-9a58-9420c5fdb9ef"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="267" y="535" width="7" height="10" uuid="761751a6-978f-413a-a1e3-d436e6d132c6"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="267" y="556" width="7" height="10" uuid="011abb1e-a0ce-441d-b385-074a125e513a"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="643" width="7" height="10" uuid="2ec39d76-c8ae-4ad4-8a74-9e2dcb4241ea"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="115" y="643" width="7" height="10" uuid="be12b1b2-1739-4960-84bd-b20a34df147d"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="644" width="7" height="10" uuid="b7997537-f9fd-446a-99ca-7e4cd3a32b89"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="644" width="7" height="10" uuid="c8a999c0-ae54-4f53-92e7-684f91f055e0"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="745" width="7" height="10" uuid="df295db9-729a-427e-a55c-d4266a0f97a5"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="745" width="7" height="10" uuid="6fecd8ec-cb29-4545-862c-2eb0100ce5fa"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="286" y="745" width="7" height="10" uuid="81215207-3c45-45a8-bfb8-d28c164c0f56"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="745" width="7" height="10" uuid="b9558b89-a454-44b6-ad88-d4f1f08d4f2a"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="17" width="513" height="57" uuid="e29a6471-d7da-466c-9cc1-781225d726ad"/>
+				<textFieldExpression><![CDATA[$P{hba}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="412" width="513" height="46" uuid="de87d458-1864-4c24-8180-67e9ba4766a0"/>
+				<textFieldExpression><![CDATA[$P{hbc}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="20" y="518" width="7" height="17" uuid="7df28568-a73a-4124-bebd-076ab4a09fb3"/>
+				<textFieldExpression><![CDATA[$P{hbdSI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="21" y="550" width="7" height="15" uuid="537960f0-2ba7-41b3-93f8-bc7510a5a1f9"/>
+				<textFieldExpression><![CDATA[$P{hbdNO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="268" y="509" width="6" height="19" uuid="e95d8bd9-2201-4fa5-bf00-31ad12102af5"/>
+				<textFieldExpression><![CDATA[$P{hbe1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="268" y="533" width="6" height="16" uuid="51518afd-3da1-407d-948e-1a4c2f2fcc43"/>
+				<textFieldExpression><![CDATA[$P{hbe2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="268" y="554" width="8" height="14" uuid="1e8c6c68-ccdb-420c-a286-dc0091981c89"/>
+				<textFieldExpression><![CDATA[$P{hbe3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="20" y="641" width="7" height="20" uuid="ac043b7f-5497-4f0c-b382-ed6501a31297"/>
+				<textFieldExpression><![CDATA[$P{hbfSI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="116" y="641" width="6" height="20" uuid="0b9c5eb5-4beb-4209-9d71-3595517c4684"/>
+				<textFieldExpression><![CDATA[$P{hbfNO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="642" width="6" height="19" uuid="9521a1d1-2bf0-4ca8-b37e-407f6dfbe5c3"/>
+				<textFieldExpression><![CDATA[$P{hbgSI}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="327" y="642" width="6" height="20" uuid="cd7e0164-998a-4639-b374-ec3b1a9b8425"/>
+				<textFieldExpression><![CDATA[$P{hbgNO}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="14" y="743" width="7" height="20" uuid="0599af18-60cb-4fb0-9b7d-9a69d8891f21"/>
+				<textFieldExpression><![CDATA[$P{hbh1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="148" y="744" width="6" height="20" uuid="1b59229a-565e-47b7-b014-d6dab5a7ade0"/>
+				<textFieldExpression><![CDATA[$P{hbh2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="287" y="744" width="6" height="20" uuid="9cb14d1e-0fd0-4f4e-9c24-77fa081ee313"/>
+				<textFieldExpression><![CDATA[$P{hbh3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="430" y="743" width="6" height="20" uuid="86f33b13-cf91-474b-b899-8c65bd27946f"/>
+				<textFieldExpression><![CDATA[$P{hbh4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="377" y="553" width="113" height="20" uuid="81711b51-b547-4b4e-b9b6-80f904a2f654"/>
+				<textFieldExpression><![CDATA[$P{hbe}]]></textFieldExpression>
+			</textField>
+			<subreport runToBottom="false">
+				<reportElement x="25" y="112" width="482" height="251" uuid="447b8142-07e6-40cf-adb2-6c5fa36c3c18"/>
+				<dataSourceExpression><![CDATA[$P{condicionA}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/reporte/reporteSHA_ListaCondicionA.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</summary>
+</jasperReport>

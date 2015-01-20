@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_informePrevencion2" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e49d4714-a4eb-4005-a321-e2e3cf52df2e">
+	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="395"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="494" height="20" uuid="d12f612c-a7b6-469e-ba95-744f24e4bf22"/>
+				<textElement>
+					<font isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[SE ANEXA AL PRESENTE INFORME DE INVESTIGACIÓN, LA SIGUIENTE DOCUMENTACIÓN:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="373" height="20" uuid="3ddf0434-a3aa-404e-b1cc-dde81722e490"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[RELACIONADOS CON LA EMPRESA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="50" width="358" height="20" uuid="f1aae1f1-62b1-48cf-815c-dd1b5be13b79"/>
+				<text><![CDATA[* REGISTRO MERCANTIL. (ART. 136 LOPCYMAT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="70" width="358" height="20" uuid="aa7320ef-c2f9-4424-8390-2252f09fc0e3"/>
+				<text><![CDATA[*SOLVENCIA LABORAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="90" width="358" height="20" uuid="1cb27f0f-3d3e-4fd1-9d5d-676461c68398"/>
+				<text><![CDATA[*RIF Y NIL (ART. 136 LOPCYMAT). ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="130" width="358" height="35" uuid="2045b737-ddfc-4791-9d6b-8551eeb1113b"/>
+				<text><![CDATA[* NÓMINA GENERAL DE LA EMPRESA (NOMBRE, C.I., CARGO, CONDICIÓN LABORAL)  (ART. 136 LOPCYMAT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="110" width="358" height="20" uuid="ae0f9dc7-fc4b-4f6f-9c89-bd6d356db6d1"/>
+				<text><![CDATA[* REGISTRO MERCANTIL. (ART. 136 LOPCYMAT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="165" width="358" height="31" uuid="2990ff3b-08ba-4ebb-8eb1-8e1d50940fdc"/>
+				<text><![CDATA[* COPIA DE INSCRIPCIÓN DE LA EMPRESA ANTE EL IVSS (FORMA 14-01).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="242" width="358" height="30" uuid="31f58928-9d69-40cc-a3bb-73f28c2199c4"/>
+				<text><![CDATA[* EVALUACIÓN TÉCNICA DE LAS CONDICIONES Y RIESGOS ESPECÍFICOS. (ART. 39 PARÁGRAFO SEGUNDO LOPCYMAT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="196" width="358" height="46" uuid="b9b475d0-068c-4d79-b1df-0632b685bd30"/>
+				<text><![CDATA[* ORGANIZACIÓN DEL SERVICIO DE SALUD Y SEGURIDAD EN EL TRABAJO: ORGANIGRAMA DEL SERVICIO MÉDICO Y DEL DPTO. DE SEGURIDAD INDUSTRIAL, Y HORARIOS DE LOS MISMOS.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="272" width="358" height="30" uuid="fcf8e2a6-59f8-4e7c-8a91-700d54f90f11"/>
+				<text><![CDATA[* PROGRAMA DE SEGURIDAD Y SALUD EN EL TRABAJO (ART. 56 NUMERAL 7 Y ART.  61 DE LA LOPCYMAT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="302" width="358" height="30" uuid="2a99c5e9-5abd-4beb-8357-b749d10d06b6"/>
+				<text><![CDATA[* COMITÉ DE SEGURIDAD Y SALUD LABORAL, REGISTRO, ACTA CONSTITUTIVA Y LIBRO DE ACTAS (ART. 46 LOPCYMAT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="332" width="358" height="30" uuid="95fc30f5-5623-4c80-9218-fa3e8b60ef0f"/>
+				<text><![CDATA[* PROGRAMA DE INSTRUCCIÓN, CAPACITACIÓN Y CHARLAS (ART. 53 NUMERAL 2 Y ART. 40 NÚM. 18 LOPCYMAT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="362" width="358" height="32" uuid="b61f01af-7591-4a0c-8de9-63428a66d835"/>
+				<text><![CDATA[* ESTUDIO DEL PUESTO DE TRABAJO (ART. 40 NÚM. 3 Y ART. 60 LOPCYMAT) Y EVALUACIONES AMBIENTALES (ART. 62 LOPCYMAT) ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="394" width="358" height="45" uuid="35b17b65-033c-497a-bb66-6c02e6774d6d"/>
+				<text><![CDATA[* PROGRAMA DE MANTENIMIENTO PREVENTIVO A MÁQUINAS, EQUIPOS Y HERRAMIENTAS (ART. 56 NÚM. 7 Y ART. 61 DE LA LOPCYMAT) ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="30" width="58" height="20" uuid="ee100e5f-05b0-4db7-87b8-1e26b2126470"/>
+				<text><![CDATA[CONSIG.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="30" width="58" height="20" uuid="a787d519-673c-4306-85a3-a72eb8e22c77"/>
+				<text><![CDATA[PRESENT.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="694" width="358" height="59" uuid="1c4b3a80-54ea-4e77-9b1f-daa4f810b8e2"/>
+				<text><![CDATA[* ANÁLISIS SEGURO DE TRABAJO POR CARGO OCUPADO (POLÍTICAS DE RECONOCIMIENTO, EVALUACIÓN Y CONTROL DE LAS CONDICIONES PELIGROSAS DE TRABAJO ART. 40 NÚM. 3 Y ART. 62 DE LA LOPCYMAT)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="457" width="373" height="20" uuid="d1331d1b-be64-4d8c-a7aa-e531a150bff0"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[RELACIONADOS CON EL/LA TRABAJADOR/TRABAJADORA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="510" width="358" height="45" uuid="bca5033c-d467-4ce5-b354-3abed80f1064"/>
+				<text><![CDATA[* CONSTANCIAS DE EXÁMENES MÉDICOS PRE - EMPLEO, PERIÓDICO, PRE – VACACIONAL, POST VACACIONAL Y POST EMPLEO (ART 496  DEL RCHYST Y 603 DE LA LOT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="457" width="58" height="20" uuid="45dc0822-4d89-41ca-810e-3916e3526221"/>
+				<text><![CDATA[CONSIG.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="477" width="358" height="33" uuid="cadb50c5-8f01-4d7f-953a-9bb658d8ba7e"/>
+				<text><![CDATA[* COPIA DE LA INSCRIPCIÓN DEL TRABAJADOR EN EL IVSS (14-02). (ART. 63 DEL REGLAMENTO DE LEY DEL SEGURO SOCIAL).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="457" width="58" height="20" uuid="a5b50ee6-de0e-4f94-a4ed-981654e61cb4"/>
+				<text><![CDATA[PRESENT.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="664" width="358" height="15" uuid="b9ee8741-58de-4d63-b0ca-7b77afa2c5ad"/>
+				<text><![CDATA[* DESCRIPCIONES DE CARGOS OCUPADOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="555" width="358" height="47" uuid="0aa5bd55-1a84-4d22-888f-6512d869a680"/>
+				<text><![CDATA[* NOTIFICACIÓN DE RIESGOS Y CONDICIONES INSEGURAS O INSALUBRES (ART. 56 NUMERALES 3 Y 4 DE LA LOPCYMAT Y 2 DEL RCHYST).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="629" width="358" height="35" uuid="a1a72f75-4c79-4f7f-91c7-61c68dfa4424"/>
+				<text><![CDATA[* NÓMINA GENERAL DE LA EMPRESA (NOMBRE, C.I., CARGO, CONDICIÓN LABORAL)  (ART. 136 LOPCYMAT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="679" width="358" height="15" uuid="a93b9a3b-cce3-42b8-86cb-44f5a68ccfcc"/>
+				<text><![CDATA[* DESCRIPCIÓN DE TAREAS PRESCRITAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="602" width="358" height="27" uuid="38384992-3dd1-47c4-a3ba-55b6657cb2ad"/>
+				<text><![CDATA[* ENTREGA Y RECEPCIÓN DE EQUIPOS DE PROTECCIÓN PERSONAL AL TRABAJADOR (ART. 53 NUMERAL 4 DE LA LOPCYMAT).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="753" width="358" height="29" uuid="e778f2a6-083f-47e4-9263-a10b5cc747e9"/>
+				<text><![CDATA[* INFORME SOBRE LAS MEJORAS DEL AMBIENTE LABORAL DONDE OCURRIERON LOS HECHOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="802" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="14" width="317" height="12" uuid="afe4801e-dae4-4af2-80a3-e06d0d9b8c4f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SE DEJA CONSTANCIA POR MEDIO DEL PRESENTE INFORME QUE LA EMPRESA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="14" width="116" height="12" uuid="2f100da6-d1ee-4de1-810e-2bb1fd4cb0bf"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[, REPRESENTADA EN ESTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="52" height="12" uuid="b05c4909-5c32-459e-909a-d3152a519bc1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ACTO POR: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="26" width="31" height="12" uuid="1ee8e248-8c46-4441-b07a-86588c8df152"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[C.I. N°: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="26" width="250" height="12" uuid="b7fe451f-1888-4a5f-a3b7-8fa6182db1f6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[,  DECLARA QUE LA INFORMACIÓN Y LOS CORRESPONDIENTES ANEXOS AL MISMO SON ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="38" width="515" height="44" uuid="54fd7029-225a-4b12-ae97-f866775f73b2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ANEXOS AL MISMO SON VERDADEROS, PUDIENDO EN TODO MOMENTO CORROBORARSE SU AUTENTICIDAD POR PARTE DEL INPSASEL, IGUALMENTE, SE DEJA CONSTANCIA DEL PLENO CONOCIMIENTO SOBRE LAS IMPLICACIONES LEGALES PREVISTAS EN EL NUMERAL 7 DEL ARTÍCULO 120 DE LA LOPCYMAT QUE PUDIERA ACARREAR LA PRESENTACIÓN DE DOCUMENTACIÓN FALSA, INEXACTA O ERRADA. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="96" width="150" height="12" uuid="c93db90c-fdb8-447c-925a-3991b806dbc1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ES TODO, SE PROCEDE A LA FIRMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="127" width="100" height="20" uuid="2a9d61e7-b212-4891-b52e-a54b8852a21a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[POR LA EMPRESA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="147" width="100" height="20" uuid="b70eb37a-a0fc-4e8b-a1da-5fb5f2bb6f42"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS Y NOMBRES: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="207" width="69" height="20" uuid="3416e04e-f7c2-407e-802e-05c03cd6576f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="187" width="69" height="20" uuid="b0c534a6-0a40-488d-ab90-78f1684748ea"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="167" width="100" height="20" uuid="2ec5ff7a-829f-4d7d-b0a5-91868ab1b1d4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CÉDULA DE IDENTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="227" width="100" height="20" uuid="6e6cf32b-0809-4b23-9363-ecfae7a78bba"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SELLO DE LA EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="266" width="196" height="40" uuid="0d169465-073e-4778-b1ec-80289b785bd2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[PERSONAL QUE INVESTIGA EL ACCIDENTE: POR EL SSST (SALUD)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="306" width="100" height="20" uuid="9e9711b1-5bfc-4f0c-bf2a-0ac471538a14"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS Y NOMBRES: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="326" width="100" height="20" uuid="5c1e856d-8945-446d-8bf1-fc67d6442374"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CÉDULA DE IDENTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="386" width="100" height="20" uuid="5964ad17-ab7e-4de0-8f75-3a4064574335"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SELLO DE LA EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="346" width="69" height="20" uuid="889f93e7-e1c6-4e1b-b5f6-917a4c40d6f2"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="366" width="69" height="20" uuid="de6dd046-276a-4fe4-a9dc-6d13929ae6e9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="326" width="100" height="20" uuid="2d2ed9e7-cb90-487c-9263-823da4c5b7d1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CÉDULA DE IDENTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="366" width="69" height="20" uuid="60298772-8ccc-452e-b68f-4552c3fdade7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="286" width="100" height="20" uuid="2bf91048-451b-4778-880d-64acab451bb6"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[POR EL SSST (HIGIENE)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="386" width="100" height="20" uuid="a77c79d0-e170-4066-ba27-c43d61d97f56"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SELLO DE LA EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="306" width="100" height="20" uuid="0cf6e562-aca1-478e-9d09-6c0df0770b96"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS Y NOMBRES: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="346" width="69" height="20" uuid="6d3ef3b2-acc8-4f70-ac5f-d651e4effcd7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="454" width="100" height="20" uuid="ecff4a54-079b-4748-bc76-f59c31c6ac45"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CÉDULA DE IDENTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="414" width="234" height="20" uuid="50537387-2511-496a-bbd9-393e108b7fa3"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[REPRESENTANTE DEL EMPLEADOR ANTE EL CSSL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="494" width="69" height="20" uuid="cada0a89-3d2d-4b70-8d9a-dba0eaaf0203"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="434" width="100" height="20" uuid="408933d9-d89d-47f0-8370-cc2da84b5d07"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS Y NOMBRES: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="514" width="100" height="20" uuid="191b98ab-68de-48a3-9248-9f9b55db9e59"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SELLO DE LA EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="494" width="69" height="20" uuid="30f86896-ec1c-4d96-ae6e-35b632c57756"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="454" width="100" height="20" uuid="2ab9a088-994b-45c1-8179-442509534a76"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CÉDULA DE IDENTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="414" width="158" height="20" uuid="356dd4a3-4ad9-40d1-bc88-fdeece028e17"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[DELEGADO DE PREVENCIÓN  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="434" width="100" height="20" uuid="b202c006-e5f0-4362-a9dd-6c6eba5843e0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS Y NOMBRES: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="474" width="69" height="20" uuid="130a0795-697a-4929-9bd6-ba97255e23e6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="514" width="100" height="20" uuid="b1e152fa-c51b-42c4-a2d6-c8d9d4c3242e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SELLO DE LA EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="474" width="69" height="20" uuid="b32d4bee-3285-40d7-8cd6-f3dbe4b9fcbc"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="624" width="69" height="20" uuid="e47fcc01-f70f-429d-834d-3262b351f487"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="644" width="100" height="20" uuid="d306ef05-6163-49e4-bea2-e2e9048e2701"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SELLO DE LA EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="604" width="69" height="20" uuid="e2075c2b-e1ea-4e1b-8192-f20584c29209"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="624" width="69" height="20" uuid="5e62c3a1-a6c1-43b4-90cf-bca065727b71"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="564" width="100" height="20" uuid="92dcd455-92ad-437c-94b2-0d8a6a5e4736"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS Y NOMBRES: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="584" width="100" height="20" uuid="b72d5945-5aa3-40f1-8c3b-f3a6e9c08f19"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CÉDULA DE IDENTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="544" width="166" height="20" uuid="58e0ce5a-78c7-4e61-aefe-66bfd01a6a83"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[TRABAJADOR AFECTADO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="644" width="100" height="20" uuid="5c8f0b1c-6a62-4cef-b804-9013897e12e9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SELLO DE LA EMPRESA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="544" width="187" height="20" uuid="8a410b17-b6d4-40a7-8418-80afbb0576da"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[TESTIGO (PRESENCIAL/REFERENCIAL)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="584" width="100" height="20" uuid="577921b3-52b2-4375-bafb-5693356c90e7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CÉDULA DE IDENTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="604" width="69" height="20" uuid="ff30249a-21c0-4e62-b590-33d6d237255f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="564" width="100" height="20" uuid="627cac7d-5548-4000-bf0d-fae1fa5e07bb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS Y NOMBRES: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="681" width="216" height="20" uuid="f629b852-9a64-4e00-aeab-b2a9ed8761a5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RECEPCIÓN POR PARTE DEL INPSASEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="701" width="37" height="20" uuid="f8f6dd45-95f2-4c55-bd0d-a577bbef8976"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="701" width="30" height="20" uuid="5c19414f-2a49-4b02-811f-073089e98bc3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ HORA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="273" y="701" width="64" height="20" uuid="e6a4b55b-8eb5-4364-9272-8ae438a54c81"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DEPENDENCIA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="721" width="234" height="20" uuid="4107d465-bf10-48d8-89fe-3bd377601971"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[APELLIDOS Y NOMBRES DEL FUNCIONARIO RECEPTOR: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="741" width="119" height="20" uuid="60702759-a702-4bd6-a5a1-a37830d2eab5"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CÉDULA DE IDENTIDAD N°:	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="761" width="37" height="20" uuid="a003370d-215c-4893-b778-557714bd35d7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CARGO: 	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="15" y="781" width="37" height="20" uuid="912d922f-1b27-4c4d-86dd-c4152e8142cb"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[FIRMA:	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="251" y="781" width="37" height="20" uuid="b481af9e-76c0-4734-adaf-179bcec0cc9d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SELLO:	]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

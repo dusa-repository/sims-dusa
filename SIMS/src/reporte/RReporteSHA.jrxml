@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReporteSHA" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="26b4a361-1750-425d-8b6a-d836f40c9973">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="274"/>
 	<parameter name="codigo" class="java.lang.String"/>
 	<parameter name="nombre211" class="java.lang.String"/>
 	<parameter name="cedula211" class="java.lang.String"/>
@@ -10,11 +10,444 @@
 	<parameter name="fa" class="java.sql.Timestamp"/>
 	<parameter name="fgad" class="java.lang.String"/>
 	<parameter name="fgg" class="java.lang.String"/>
+	<parameter name="cedula212" class="java.lang.String"/>
+	<parameter name="nro211" class="java.lang.String"/>
+	<parameter name="nro212" class="java.lang.String"/>
+	<parameter name="nro213" class="java.lang.String"/>
+	<parameter name="nro214" class="java.lang.String"/>
+	<parameter name="nro215" class="java.lang.String"/>
+	<parameter name="nro216" class="java.lang.String"/>
+	<parameter name="cedula213" class="java.lang.String"/>
+	<parameter name="cedula214" class="java.lang.String"/>
+	<parameter name="cedula215" class="java.lang.String"/>
+	<parameter name="cedula216" class="java.lang.String"/>
+	<parameter name="nombre213" class="java.lang.String"/>
+	<parameter name="nombre214" class="java.lang.String"/>
+	<parameter name="nombre215" class="java.lang.String"/>
+	<parameter name="nombre216" class="java.lang.String"/>
+	<parameter name="razonA" class="java.lang.String"/>
+	<parameter name="razonB" class="java.lang.String"/>
+	<parameter name="centroTrabajoA" class="java.lang.String"/>
+	<parameter name="centroTrabajoB" class="java.lang.String"/>
+	<parameter name="direccionCentroA" class="java.lang.String"/>
+	<parameter name="direccionCentroB" class="java.lang.String"/>
+	<parameter name="direccionRazonA" class="java.lang.String"/>
+	<parameter name="direccionRazonB" class="java.lang.String"/>
+	<parameter name="rifA" class="java.lang.String"/>
+	<parameter name="rifB" class="java.lang.String"/>
+	<parameter name="nillA" class="java.lang.String"/>
+	<parameter name="nillB" class="java.lang.String"/>
+	<parameter name="nroIvssA" class="java.lang.String"/>
+	<parameter name="nroIvssB" class="java.lang.String"/>
+	<parameter name="actividadEconomicaA" class="java.lang.String"/>
+	<parameter name="actividadEconomicaB" class="java.lang.String"/>
+	<parameter name="codigoCiiuA" class="java.lang.String"/>
+	<parameter name="codigoCiiuB" class="java.lang.String"/>
+	<parameter name="telefonoFaxA" class="java.lang.String"/>
+	<parameter name="telefonoFaxB" class="java.lang.String"/>
+	<parameter name="correoA" class="java.lang.String"/>
+	<parameter name="correoB" class="java.lang.String"/>
+	<parameter name="registroMercantilA" class="java.lang.String"/>
+	<parameter name="registroMercantilB" class="java.lang.String"/>
+	<parameter name="fechaRegistroA" class="java.lang.String"/>
+	<parameter name="fechaRegistroB" class="java.lang.String"/>
+	<parameter name="nroRegistroA" class="java.lang.String"/>
+	<parameter name="nroRegistroB" class="java.lang.String"/>
+	<parameter name="tomoRegistroA" class="java.lang.String"/>
+	<parameter name="tomoRegistroB" class="java.lang.String"/>
+	<parameter name="representanteA1" class="java.lang.String"/>
+	<parameter name="representanteB1" class="java.lang.String"/>
+	<parameter name="cedulaRepresentanteA1" class="java.lang.String"/>
+	<parameter name="cedulaRepresentanteB1" class="java.lang.String"/>
+	<parameter name="telefonoRepresentanteA1" class="java.lang.String"/>
+	<parameter name="telefonoRepresentanteB1" class="java.lang.String"/>
+	<parameter name="cargoRepresentanteA1" class="java.lang.String"/>
+	<parameter name="cargoRepresentanteB1" class="java.lang.String"/>
+	<parameter name="nroTrabajadoresA" class="java.lang.String"/>
+	<parameter name="nroTrabajadoresB" class="java.lang.String"/>
+	<parameter name="hombresA" class="java.lang.String"/>
+	<parameter name="hombresB" class="java.lang.String"/>
+	<parameter name="mujeresA" class="java.lang.String"/>
+	<parameter name="mujeresB" class="java.lang.String"/>
+	<parameter name="adolescentesA" class="java.lang.String"/>
+	<parameter name="adolescentesB" class="java.lang.String"/>
+	<parameter name="aprendicesA" class="java.lang.String"/>
+	<parameter name="aprendicesB" class="java.lang.String"/>
+	<parameter name="trabajadoresLocymatA" class="java.lang.String"/>
+	<parameter name="trabajadoresLocymatB" class="java.lang.String"/>
+	<parameter name="trabajadoresConapdisA" class="java.lang.String"/>
+	<parameter name="trabajadoresConapdisB" class="java.lang.String"/>
+	<parameter name="extranjerosA" class="java.lang.String"/>
+	<parameter name="extranjerosB" class="java.lang.String"/>
+	<parameter name="condicionA" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
+	<parameter name="condicionB" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="condicionC" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="condicionD" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="condicionE" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="condicionF" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="apellidoTrabajador" class="java.lang.String"/>
+	<parameter name="nombreTrabajador" class="java.lang.String"/>
+	<parameter name="cedulaTrabajador" class="java.lang.String"/>
+	<parameter name="nacionalidadTrabajador" class="java.lang.String"/>
+	<parameter name="sexoTrabajador" class="java.lang.String"/>
+	<parameter name="edadTrabajador" class="java.lang.String"/>
+	<parameter name="fechaNacTrabajador" class="java.lang.String"/>
+	<parameter name="lugarNacTrabajador" class="java.lang.String"/>
+	<parameter name="estadoCivilTrabajador" class="java.lang.String"/>
+	<parameter name="manoTrabajador" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador" class="java.lang.String"/>
+	<parameter name="fechaIngresoTrabajador" class="java.lang.String"/>
+	<parameter name="inscripcionIvss" class="java.lang.String"/>
+	<parameter name="retiroIvss" class="java.lang.String"/>
+	<parameter name="fechaEgresoTrabajador" class="java.lang.String"/>
+	<parameter name="direccionTrabajador" class="java.lang.String"/>
+	<parameter name="estadoT" class="java.lang.String"/>
+	<parameter name="telefonoHabT" class="java.lang.String"/>
+	<parameter name="telefonoCelT" class="java.lang.String"/>
+	<parameter name="familiarContactoT" class="java.lang.String"/>
+	<parameter name="telefonoContactoT" class="java.lang.String"/>
+	<parameter name="cargaT" class="java.lang.String"/>
+	<parameter name="ebc" class="java.lang.String"/>
+	<parameter name="ebd" class="java.lang.String"/>
+	<parameter name="ebe" class="java.lang.String"/>
+	<parameter name="ebf" class="java.lang.String"/>
+	<parameter name="hbab" class="java.lang.String"/>
+	<parameter name="representanteA2" class="java.lang.String"/>
+	<parameter name="cedulaRepresentanteA2" class="java.lang.String"/>
+	<parameter name="telefonoRepresentanteA2" class="java.lang.String"/>
+	<parameter name="cargoRepresentanteA2" class="java.lang.String"/>
+	<parameter name="representanteB2" class="java.lang.String"/>
+	<parameter name="cedulaRepresentanteB2" class="java.lang.String"/>
+	<parameter name="telefonoRepresentanteB2" class="java.lang.String"/>
+	<parameter name="cargoRepresentanteB2" class="java.lang.String"/>
+	<parameter name="nroRegistroA1" class="java.lang.String"/>
+	<parameter name="tomoRegistroA1" class="java.lang.String"/>
+	<parameter name="nroRegistroB1" class="java.lang.String"/>
+	<parameter name="tomoRegistroB1" class="java.lang.String"/>
+	<parameter name="fechaActualizacionB" class="java.lang.String"/>
+	<parameter name="fechaActualizacionA" class="java.lang.String"/>
+	<parameter name="fb" class="java.lang.String"/>
+	<parameter name="fc" class="java.lang.String"/>
+	<parameter name="fd" class="java.lang.String"/>
+	<parameter name="fe" class="java.lang.String"/>
+	<parameter name="ff" class="java.lang.String"/>
+	<parameter name="fga" class="java.lang.String"/>
+	<parameter name="fgb" class="java.lang.String"/>
+	<parameter name="fgc" class="java.lang.String"/>
+	<parameter name="fgd" class="java.lang.String"/>
+	<parameter name="fge" class="java.lang.String"/>
+	<parameter name="fgf" class="java.lang.String"/>
+	<parameter name="auxilioInmediato" class="java.lang.String"/>
+	<parameter name="fgh" class="java.lang.String"/>
+	<parameter name="fgi" class="java.lang.String"/>
+	<parameter name="fgj" class="java.lang.String"/>
+	<parameter name="fgaa" class="java.lang.String"/>
+	<parameter name="fgab" class="java.lang.String"/>
+	<parameter name="fgac" class="java.lang.String"/>
+	<parameter name="gaa" class="java.lang.String"/>
+	<parameter name="haa" class="java.lang.String"/>
+	<parameter name="hab" class="java.lang.String"/>
+	<parameter name="hac" class="java.lang.String"/>
+	<parameter name="had" class="java.lang.String"/>
+	<parameter name="ebg" class="java.lang.String"/>
+	<parameter name="fgf1" class="java.lang.String"/>
+	<parameter name="fgf2" class="java.lang.String"/>
+	<parameter name="fgf3" class="java.lang.String"/>
+	<parameter name="fgf4" class="java.lang.String"/>
+	<parameter name="fgf5" class="java.lang.String"/>
+	<parameter name="manoTrabajador1" class="java.lang.String"/>
+	<parameter name="manoTrabajador2" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador1" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador2" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador3" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador4" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador5" class="java.lang.String"/>
+	<parameter name="ebc1" class="java.lang.String"/>
+	<parameter name="ebc2" class="java.lang.String"/>
+	<parameter name="ebc3" class="java.lang.String"/>
+	<parameter name="ebc4" class="java.lang.String"/>
+	<parameter name="ebc5" class="java.lang.String"/>
+	<parameter name="ebd7" class="java.lang.String"/>
+	<parameter name="ebd1" class="java.lang.String"/>
+	<parameter name="ebd2" class="java.lang.String"/>
+	<parameter name="ebd3" class="java.lang.String"/>
+	<parameter name="ebd4" class="java.lang.String"/>
+	<parameter name="ebd5" class="java.lang.String"/>
+	<parameter name="ebd6" class="java.lang.String"/>
+	<parameter name="ebe1" class="java.lang.String"/>
+	<parameter name="ebe2" class="java.lang.String"/>
+	<parameter name="ebe3" class="java.lang.String"/>
+	<parameter name="ebe4" class="java.lang.String"/>
+	<parameter name="ebe5" class="java.lang.String"/>
+	<parameter name="ebe6" class="java.lang.String"/>
+	<parameter name="ebe7" class="java.lang.String"/>
+	<parameter name="ebf1" class="java.lang.String"/>
+	<parameter name="ebf2" class="java.lang.String"/>
+	<parameter name="ebf3" class="java.lang.String"/>
+	<parameter name="ebf4" class="java.lang.String"/>
+	<parameter name="ebf5" class="java.lang.String"/>
+	<parameter name="ebg1" class="java.lang.String"/>
+	<parameter name="ebg2" class="java.lang.String"/>
+	<parameter name="ebg3" class="java.lang.String"/>
+	<parameter name="ebg4" class="java.lang.String"/>
+	<parameter name="ebg5" class="java.lang.String"/>
+	<parameter name="fb1" class="java.lang.String"/>
+	<parameter name="fb2" class="java.lang.String"/>
+	<parameter name="fb3" class="java.lang.String"/>
+	<parameter name="fb4" class="java.lang.String"/>
+	<parameter name="fb5" class="java.lang.String"/>
+	<parameter name="fb6" class="java.lang.String"/>
+	<parameter name="fb7" class="java.lang.String"/>
+	<parameter name="auxilioInmediatoSI" class="java.lang.String"/>
+	<parameter name="auxilioInmediatoNO" class="java.lang.String"/>
+	<parameter name="fgi1" class="java.lang.String"/>
+	<parameter name="fgi2" class="java.lang.String"/>
+	<parameter name="fghSI" class="java.lang.String"/>
+	<parameter name="fghNO" class="java.lang.String"/>
+	<parameter name="haeSI" class="java.lang.String"/>
+	<parameter name="haeNO" class="java.lang.String"/>
+	<parameter name="haf" class="java.lang.String"/>
+	<parameter name="hba" class="java.lang.String"/>
+	<parameter name="hbc" class="java.lang.String"/>
+	<parameter name="hbdSI" class="java.lang.String"/>
+	<parameter name="hbdNO" class="java.lang.String"/>
+	<parameter name="hbe1" class="java.lang.String"/>
+	<parameter name="hbe2" class="java.lang.String"/>
+	<parameter name="hbe3" class="java.lang.String"/>
+	<parameter name="hbfSI" class="java.lang.String"/>
+	<parameter name="hbfNO" class="java.lang.String"/>
+	<parameter name="hbgSI" class="java.lang.String"/>
+	<parameter name="hbgNO" class="java.lang.String"/>
+	<parameter name="hbh1" class="java.lang.String"/>
+	<parameter name="hbh2" class="java.lang.String"/>
+	<parameter name="hbh3" class="java.lang.String"/>
+	<parameter name="hbh4" class="java.lang.String"/>
+	<parameter name="hbe" class="java.lang.String"/>
+	<parameter name="hbaaSI" class="java.lang.String"/>
+	<parameter name="hbaaNO" class="java.lang.String"/>
+	<parameter name="hbabSI" class="java.lang.String"/>
+	<parameter name="hbabNO" class="java.lang.String"/>
+	<parameter name="hca" class="java.lang.String"/>
+	<parameter name="hcb" class="java.lang.String"/>
+	<parameter name="hcbSI" class="java.lang.String"/>
+	<parameter name="hcbNO" class="java.lang.String"/>
+	<parameter name="hccSI" class="java.lang.String"/>
+	<parameter name="hccNO" class="java.lang.String"/>
+	<parameter name="hcdNO" class="java.lang.String"/>
+	<parameter name="hcdSI" class="java.lang.String"/>
+	<parameter name="hce1" class="java.lang.String"/>
+	<parameter name="hce2" class="java.lang.String"/>
+	<parameter name="hce3" class="java.lang.String"/>
+	<parameter name="hcf1" class="java.lang.String"/>
+	<parameter name="hcf2" class="java.lang.String"/>
+	<parameter name="hcf3" class="java.lang.String"/>
+	<parameter name="hcgSI" class="java.lang.String"/>
+	<parameter name="hcgNO" class="java.lang.String"/>
+	<parameter name="hch1" class="java.lang.String"/>
+	<parameter name="hch2" class="java.lang.String"/>
+	<parameter name="hch3" class="java.lang.String"/>
+	<parameter name="hch4" class="java.lang.String"/>
+	<parameter name="hci1" class="java.lang.String"/>
+	<parameter name="hci2" class="java.lang.String"/>
+	<parameter name="hci3" class="java.lang.String"/>
+	<parameter name="hcjSI" class="java.lang.String"/>
+	<parameter name="hcjNO" class="java.lang.String"/>
+	<parameter name="hcaaSI" class="java.lang.String"/>
+	<parameter name="hcaaNO" class="java.lang.String"/>
+	<parameter name="hcabSI" class="java.lang.String"/>
+	<parameter name="hcabNO" class="java.lang.String"/>
+	<parameter name="hcacSI" class="java.lang.String"/>
+	<parameter name="hcacNO" class="java.lang.String"/>
+	<parameter name="hcad" class="java.lang.String"/>
+	<parameter name="hcae1" class="java.lang.String"/>
+	<parameter name="hcae2" class="java.lang.String"/>
+	<parameter name="hcae3" class="java.lang.String"/>
+	<parameter name="hcae4" class="java.lang.String"/>
+	<parameter name="hcae5" class="java.lang.String"/>
+	<parameter name="hcae6" class="java.lang.String"/>
+	<parameter name="hcae7" class="java.lang.String"/>
+	<parameter name="hcae8" class="java.lang.String"/>
+	<parameter name="hcae9" class="java.lang.String"/>
+	<parameter name="hcaf" class="java.lang.String"/>
+	<parameter name="hcagaSI" class="java.lang.String"/>
+	<parameter name="hcagaNO" class="java.lang.String"/>
+	<parameter name="hcagbSI" class="java.lang.String"/>
+	<parameter name="hcagbNO" class="java.lang.String"/>
+	<parameter name="hcagcSI" class="java.lang.String"/>
+	<parameter name="hcagcNO" class="java.lang.String"/>
+	<parameter name="hcagdSI" class="java.lang.String"/>
+	<parameter name="hcagdNO" class="java.lang.String"/>
+	<parameter name="hcageSI" class="java.lang.String"/>
+	<parameter name="hcageNO" class="java.lang.String"/>
+	<parameter name="hcagfSI" class="java.lang.String"/>
+	<parameter name="hcagfNO" class="java.lang.String"/>
+	<parameter name="hcaggSI" class="java.lang.String"/>
+	<parameter name="hcaggNO" class="java.lang.String"/>
+	<parameter name="hcaghSI" class="java.lang.String"/>
+	<parameter name="hcaghNO" class="java.lang.String"/>
+	<parameter name="hcagiSI" class="java.lang.String"/>
+	<parameter name="hcagiNO" class="java.lang.String"/>
+	<parameter name="hcafa" class="java.lang.String"/>
+	<parameter name="hda" class="java.lang.String"/>
+	<parameter name="hdbSI" class="java.lang.String"/>
+	<parameter name="hdbNO" class="java.lang.String"/>
+	<parameter name="hdcSI" class="java.lang.String"/>
+	<parameter name="hdcNO" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Vanessa\\workspace\\SIMS\\src\\reporte\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<parameter name="hadSI" class="java.lang.String"/>
+	<parameter name="hadNO" class="java.lang.String"/>
+	<parameter name="clasificacion" class="java.lang.String"/>
+	<parameter name="hdea" class="java.lang.String"/>
+	<parameter name="hdeb" class="java.lang.String"/>
+	<parameter name="hdec" class="java.lang.String"/>
+	<parameter name="hded" class="java.lang.String"/>
+	<parameter name="hdf" class="java.lang.String"/>
+	<parameter name="iaaSI" class="java.lang.String"/>
+	<parameter name="iaaNO" class="java.lang.String"/>
+	<parameter name="iabSI" class="java.lang.String"/>
+	<parameter name="iabNO" class="java.lang.String"/>
+	<parameter name="iacSI" class="java.lang.String"/>
+	<parameter name="iacNO" class="java.lang.String"/>
+	<parameter name="iadSI" class="java.lang.String"/>
+	<parameter name="iadNO" class="java.lang.String"/>
+	<parameter name="iae" class="java.lang.String"/>
+	<parameter name="iafSI" class="java.lang.String"/>
+	<parameter name="iafNO" class="java.lang.String"/>
+	<parameter name="iagSI" class="java.lang.String"/>
+	<parameter name="iagNO" class="java.lang.String"/>
+	<parameter name="iahSI" class="java.lang.String"/>
+	<parameter name="iahNO" class="java.lang.String"/>
+	<parameter name="iai" class="java.lang.String"/>
+	<parameter name="iaj" class="java.lang.String"/>
+	<parameter name="ibaSI" class="java.lang.String"/>
+	<parameter name="ibaNO" class="java.lang.String"/>
+	<parameter name="ibb" class="java.lang.String"/>
+	<parameter name="ibc" class="java.lang.String"/>
+	<parameter name="ibd" class="java.lang.String"/>
+	<parameter name="ibeSI" class="java.lang.String"/>
+	<parameter name="ibeNO" class="java.lang.String"/>
+	<parameter name="ibfSI" class="java.lang.String"/>
+	<parameter name="ibfNO" class="java.lang.String"/>
+	<parameter name="ibgSI" class="java.lang.String"/>
+	<parameter name="ibgNO" class="java.lang.String"/>
+	<parameter name="ibhSI" class="java.lang.String"/>
+	<parameter name="ibhNO" class="java.lang.String"/>
+	<parameter name="ibiSI" class="java.lang.String"/>
+	<parameter name="ibiNO" class="java.lang.String"/>
+	<parameter name="ibjSI" class="java.lang.String"/>
+	<parameter name="ibjNO" class="java.lang.String"/>
+	<parameter name="ibaaSI" class="java.lang.String"/>
+	<parameter name="ibaaNO" class="java.lang.String"/>
+	<parameter name="ibab" class="java.lang.String"/>
+	<parameter name="ibac" class="java.lang.String"/>
+	<parameter name="nombrePacienteH" class="java.lang.String"/>
+	<parameter name="nombrePacienteI" class="java.lang.String"/>
+	<parameter name="nombrePacienteJ" class="java.lang.String"/>
+	<parameter name="nombrePacienteK" class="java.lang.String"/>
+	<parameter name="nombrePacienteL" class="java.lang.String"/>
+	<parameter name="nombrePacienteM" class="java.lang.String"/>
+	<parameter name="cedulaPacienteH" class="java.lang.String"/>
+	<parameter name="cedulaPacienteI" class="java.lang.String"/>
+	<parameter name="cedulaPacienteJ" class="java.lang.String"/>
+	<parameter name="cedulaPacienteK" class="java.lang.String"/>
+	<parameter name="cedulaPacienteL" class="java.lang.String"/>
+	<parameter name="cedulaPacienteM" class="java.lang.String"/>
+	<parameter name="profesionPacienteH" class="java.lang.String"/>
+	<parameter name="profesionPacienteI" class="java.lang.String"/>
+	<parameter name="profesionPacienteJ" class="java.lang.String"/>
+	<parameter name="profesionPacienteK" class="java.lang.String"/>
+	<parameter name="profesionPacienteL" class="java.lang.String"/>
+	<parameter name="profesionPacienteM" class="java.lang.String"/>
+	<parameter name="cargoPacienteH" class="java.lang.String"/>
+	<parameter name="cargoPacienteI" class="java.lang.String"/>
+	<parameter name="cargoPacienteJ" class="java.lang.String"/>
+	<parameter name="cargoPacienteK" class="java.lang.String"/>
+	<parameter name="cargoPacienteL" class="java.lang.String"/>
+	<parameter name="cargoPacienteM" class="java.lang.String"/>
+	<parameter name="turnoPacienteH" class="java.lang.String"/>
+	<parameter name="turnoPacienteI" class="java.lang.String"/>
+	<parameter name="turnoPacienteJ" class="java.lang.String"/>
+	<parameter name="turnoPacienteK" class="java.lang.String"/>
+	<parameter name="turnoPacienteL" class="java.lang.String"/>
+	<parameter name="turnoPacienteM" class="java.lang.String"/>
+	<parameter name="registroPacienteH" class="java.lang.String"/>
+	<parameter name="registroPacienteI" class="java.lang.String"/>
+	<parameter name="registroPacienteJ" class="java.lang.String"/>
+	<parameter name="registroPacienteK" class="java.lang.String"/>
+	<parameter name="registroPacienteL" class="java.lang.String"/>
+	<parameter name="registroPacienteM" class="java.lang.String"/>
+	<parameter name="icaSI" class="java.lang.String"/>
+	<parameter name="icaNO" class="java.lang.String"/>
+	<parameter name="icb" class="java.lang.String"/>
+	<parameter name="icc" class="java.lang.String"/>
+	<parameter name="icd1" class="java.lang.String"/>
+	<parameter name="icd2" class="java.lang.String"/>
+	<parameter name="iceSI" class="java.lang.String"/>
+	<parameter name="iceNO" class="java.lang.String"/>
+	<parameter name="icfSI" class="java.lang.String"/>
+	<parameter name="icfNO" class="java.lang.String"/>
+	<parameter name="icgSI" class="java.lang.String"/>
+	<parameter name="icgNO" class="java.lang.String"/>
+	<parameter name="ichSI" class="java.lang.String"/>
+	<parameter name="ichNO" class="java.lang.String"/>
+	<parameter name="iciSI" class="java.lang.String"/>
+	<parameter name="iciNO" class="java.lang.String"/>
+	<parameter name="icj" class="java.lang.String"/>
+	<parameter name="icaa" class="java.lang.String"/>
+	<parameter name="icab1" class="java.lang.String"/>
+	<parameter name="icab2" class="java.lang.String"/>
+	<parameter name="icac1" class="java.lang.String"/>
+	<parameter name="icac2" class="java.lang.String"/>
+	<parameter name="icac3" class="java.lang.String"/>
+	<parameter name="icac4" class="java.lang.String"/>
+	<parameter name="icac5" class="java.lang.String"/>
+	<parameter name="icae" class="java.lang.String"/>
+	<parameter name="idaSI" class="java.lang.String"/>
+	<parameter name="idaNO" class="java.lang.String"/>
+	<parameter name="idbSI" class="java.lang.String"/>
+	<parameter name="idbNO" class="java.lang.String"/>
+	<parameter name="idcSI" class="java.lang.String"/>
+	<parameter name="idcNO" class="java.lang.String"/>
+	<parameter name="iddSI" class="java.lang.String"/>
+	<parameter name="iddNO" class="java.lang.String"/>
+	<parameter name="ideSI" class="java.lang.String"/>
+	<parameter name="ideNO" class="java.lang.String"/>
+	<parameter name="idfSI" class="java.lang.String"/>
+	<parameter name="idfNO" class="java.lang.String"/>
+	<parameter name="idgSI" class="java.lang.String"/>
+	<parameter name="idgNO" class="java.lang.String"/>
+	<parameter name="idhSI" class="java.lang.String"/>
+	<parameter name="idhNO" class="java.lang.String"/>
+	<parameter name="idiSI" class="java.lang.String"/>
+	<parameter name="idiNO" class="java.lang.String"/>
+	<parameter name="idjSI" class="java.lang.String"/>
+	<parameter name="idjNO" class="java.lang.String"/>
+	<parameter name="idaa" class="java.lang.String"/>
+	<parameter name="idab" class="java.lang.String"/>
+	<parameter name="idacSI" class="java.lang.String"/>
+	<parameter name="idacNO" class="java.lang.String"/>
+	<parameter name="idad" class="java.lang.String"/>
+	<parameter name="parameter2_16_3_1" class="java.lang.String"/>
+	<parameter name="parameter2_1_6_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_15_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_9_7_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_8_7_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_7_7_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_6_7_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_5_7_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_4_7_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_3_7_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_2_7_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_1_7_3_2" class="java.lang.String"/>
+	<parameter name="parameter2_16_3_2" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="439" splitType="Stretch">
+		<band height="590" splitType="Stretch">
 			<staticText>
 				<reportElement x="413" y="10" width="36" height="20" uuid="43d19177-31f0-4b7d-84f7-72c7c7f2c62b"/>
 				<textElement>
@@ -34,133 +467,1658 @@
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="201" y="49" width="100" height="20" uuid="723eb150-232b-4821-8710-6211f8b71c5d"/>
+				<reportElement x="143" y="39" width="259" height="20" uuid="723eb150-232b-4821-8710-6211f8b71c5d"/>
 				<textElement textAlignment="Center"/>
-				<text><![CDATA[INFORME]]></text>
+				<text><![CDATA[I.- INFORME DE  INVESTIGACIÓN DE ACCIDENTE ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="22" y="99" width="147" height="20" uuid="b903de60-bdd1-4b39-acbb-2d0a8b5b4c8a"/>
+				<reportElement x="22" y="89" width="328" height="20" uuid="b903de60-bdd1-4b39-acbb-2d0a8b5b4c8a"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[1. Codigo Declaracion.....]]></text>
+				<text><![CDATA[1.- CÓDIGO  DECLARACIÓN DEL ACCIDENTE ANTE EL INPSASEL]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="169" y="99" width="381" height="20" uuid="b350b28c-308f-4a59-b371-b6f9dd582291"/>
+				<reportElement x="351" y="89" width="199" height="20" uuid="b350b28c-308f-4a59-b371-b6f9dd582291"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$P{codigo}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="22" y="128" width="179" height="20" uuid="87f28942-e309-4732-bc6f-e1f6b916c0ee"/>
-				<box leftPadding="4">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[2. Investigacion....]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="22" y="148" width="100" height="20" uuid="e715c606-8be7-491f-84b7-e0759415f6f1"/>
-				<box leftPadding="4">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Apellidos]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="122" y="148" width="100" height="20" uuid="64a88edd-de3c-4a6e-beef-aaead4f196e1"/>
-				<box leftPadding="4">
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cedula]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="22" y="168" width="100" height="20" uuid="d6387498-b4df-4bff-bec1-a380a1fbba5a"/>
-				<box leftPadding="4">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textFieldExpression><![CDATA[$P{nombre211}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="122" y="168" width="100" height="20" uuid="6eb5ef5c-3e47-40e6-99f0-b4ea5ce2bf44"/>
-				<box leftPadding="4">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textFieldExpression><![CDATA[$P{cedula211}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="22" y="188" width="100" height="20" uuid="faf1e089-ff98-441d-9cdc-5b92cbcbb6bf"/>
-				<box leftPadding="4">
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textFieldExpression><![CDATA[$P{nombre212}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="22" y="238" width="100" height="20" uuid="d8b00f4a-1bef-4ed0-a736-5a3e8f9407f8"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fecha Accidente:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="122" y="238" width="100" height="20" uuid="20c680a2-665c-4464-818b-27febb87bc06"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fa})]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="22" y="273" width="100" height="20" uuid="90acefec-9137-4d4c-9259-7067484de294"/>
-				<textElement>
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Descripcion]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="122" y="273" width="428" height="96" uuid="0794a30e-668b-4100-8484-96627b147e27"/>
-				<textFieldExpression><![CDATA[$P{fgad}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="22" y="371" width="100" height="20" uuid="4231695a-fd9b-492d-a4df-15f64a41f953"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<text><![CDATA[Auxilio Inmediato:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="22" y="391" width="100" height="20" uuid="62c3167d-c9a9-4a31-a7ee-bd2e5fd8bcc6"/>
-				<box>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textFieldExpression><![CDATA[$P{fgg}]]></textFieldExpression>
-			</textField>
+			<subreport isUsingCache="true">
+				<reportElement x="22" y="112" width="517" height="47" uuid="d6ca5079-ad0b-478a-b3b6-5dd4e5b1f7f3"/>
+				<subreportParameter name="fechaRegistroA">
+					<subreportParameterExpression><![CDATA[$P{fechaRegistroA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="rifA">
+					<subreportParameterExpression><![CDATA[$P{rifA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="codigoCiiuA">
+					<subreportParameterExpression><![CDATA[$P{codigoCiiuA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoRepresentanteA1">
+					<subreportParameterExpression><![CDATA[$P{telefonoRepresentanteA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroRegistroA">
+					<subreportParameterExpression><![CDATA[$P{nroRegistroA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="trabajadoresLocymatA">
+					<subreportParameterExpression><![CDATA[$P{trabajadoresLocymatA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="actividadEconomicaA">
+					<subreportParameterExpression><![CDATA[$P{actividadEconomicaA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroTrabajadoresA">
+					<subreportParameterExpression><![CDATA[$P{nroTrabajadoresA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="centroTrabajoA">
+					<subreportParameterExpression><![CDATA[$P{centroTrabajoA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="trabajadoresConapdisA">
+					<subreportParameterExpression><![CDATA[$P{trabajadoresConapdisA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="correoA">
+					<subreportParameterExpression><![CDATA[$P{correoA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="registroMercantilA">
+					<subreportParameterExpression><![CDATA[$P{registroMercantilA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre213">
+					<subreportParameterExpression><![CDATA[$P{nombre213}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre212">
+					<subreportParameterExpression><![CDATA[$P{nombre212}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre211">
+					<subreportParameterExpression><![CDATA[$P{nro211}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre216">
+					<subreportParameterExpression><![CDATA[$P{nombre216}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre215">
+					<subreportParameterExpression><![CDATA[$P{nombre215}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre214">
+					<subreportParameterExpression><![CDATA[$P{nombre214}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tomoRegistroA">
+					<subreportParameterExpression><![CDATA[$P{tomoRegistroA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroIvssA">
+					<subreportParameterExpression><![CDATA[$P{nroIvssA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro211">
+					<subreportParameterExpression><![CDATA[$P{nro211}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula213">
+					<subreportParameterExpression><![CDATA[$P{cedula213}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula214">
+					<subreportParameterExpression><![CDATA[$P{cedula214}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula215">
+					<subreportParameterExpression><![CDATA[$P{cedula215}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro216">
+					<subreportParameterExpression><![CDATA[$P{nro216}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula216">
+					<subreportParameterExpression><![CDATA[$P{cedula216}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro214">
+					<subreportParameterExpression><![CDATA[$P{nro214}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro215">
+					<subreportParameterExpression><![CDATA[$P{nro215}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula211">
+					<subreportParameterExpression><![CDATA[$P{cedula211}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro212">
+					<subreportParameterExpression><![CDATA[$P{nro212}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula212">
+					<subreportParameterExpression><![CDATA[$P{cedula212}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro213">
+					<subreportParameterExpression><![CDATA[$P{nro213}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mujeresA">
+					<subreportParameterExpression><![CDATA[$P{mujeresA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="representanteA1">
+					<subreportParameterExpression><![CDATA[$P{representanteA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="direccionCentroA">
+					<subreportParameterExpression><![CDATA[$P{direccionCentroA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="aprendicesA">
+					<subreportParameterExpression><![CDATA[$P{aprendicesA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionD">
+					<subreportParameterExpression><![CDATA[$P{condicionD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionE">
+					<subreportParameterExpression><![CDATA[$P{condicionE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionF">
+					<subreportParameterExpression><![CDATA[$P{condicionF}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionA">
+					<subreportParameterExpression><![CDATA[$P{condicionA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionB">
+					<subreportParameterExpression><![CDATA[$P{condicionB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionC">
+					<subreportParameterExpression><![CDATA[$P{condicionC}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoRepresentanteA1">
+					<subreportParameterExpression><![CDATA[$P{cargoRepresentanteA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="codigo">
+					<subreportParameterExpression><![CDATA[$P{codigo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hombresA">
+					<subreportParameterExpression><![CDATA[$P{hombresA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaRepresentanteA1">
+					<subreportParameterExpression><![CDATA[$P{cedulaRepresentanteA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="adolescentesA">
+					<subreportParameterExpression><![CDATA[$P{adolescentesA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nillA">
+					<subreportParameterExpression><![CDATA[$P{nillA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="razonA">
+					<subreportParameterExpression><![CDATA[$P{razonA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="extranjerosA">
+					<subreportParameterExpression><![CDATA[$P{extranjerosA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoFaxA">
+					<subreportParameterExpression><![CDATA[$P{telefonoFaxA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="direccionRazonA">
+					<subreportParameterExpression><![CDATA[$P{direccionRazonA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/reporte/reporteSHA_datos.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport isUsingCache="false">
+				<reportElement x="22" y="182" width="517" height="41" uuid="57d69458-4474-4264-bbd2-058be618138e"/>
+				<subreportParameter name="ebd">
+					<subreportParameterExpression><![CDATA[$P{ebd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebc">
+					<subreportParameterExpression><![CDATA[$P{ebc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebf">
+					<subreportParameterExpression><![CDATA[$P{ebf}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebe">
+					<subreportParameterExpression><![CDATA[$P{ebe}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebg">
+					<subreportParameterExpression><![CDATA[$P{ebg}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaTrabajador">
+					<subreportParameterExpression><![CDATA[$P{cedulaTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaRegistroA">
+					<subreportParameterExpression><![CDATA[$P{fechaRegistroA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbab">
+					<subreportParameterExpression><![CDATA[$P{hbab}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaRegistroB">
+					<subreportParameterExpression><![CDATA[$P{fechaRegistroB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clasificacion">
+					<subreportParameterExpression><![CDATA[$P{clasificacion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ff">
+					<subreportParameterExpression><![CDATA[$P{ff}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroRegistroA1">
+					<subreportParameterExpression><![CDATA[$P{nroRegistroA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="rifB">
+					<subreportParameterExpression><![CDATA[$P{rifB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="rifA">
+					<subreportParameterExpression><![CDATA[$P{rifA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroRegistroB1">
+					<subreportParameterExpression><![CDATA[$P{nroRegistroB1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nivelEducativoTrabajador">
+					<subreportParameterExpression><![CDATA[$P{nivelEducativoTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="familiarContactoT">
+					<subreportParameterExpression><![CDATA[$P{familiarContactoT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoHabT">
+					<subreportParameterExpression><![CDATA[$P{telefonoHabT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fa">
+					<subreportParameterExpression><![CDATA[$P{fa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fd">
+					<subreportParameterExpression><![CDATA[$P{fd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fe">
+					<subreportParameterExpression><![CDATA[$P{fe}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fb">
+					<subreportParameterExpression><![CDATA[$P{fb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fc">
+					<subreportParameterExpression><![CDATA[$P{fc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="auxilioInmediato">
+					<subreportParameterExpression><![CDATA[$P{auxilioInmediato}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgc">
+					<subreportParameterExpression><![CDATA[$P{fgc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgd">
+					<subreportParameterExpression><![CDATA[$P{fgd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fga">
+					<subreportParameterExpression><![CDATA[$P{fga}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgb">
+					<subreportParameterExpression><![CDATA[$P{fgb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgg">
+					<subreportParameterExpression><![CDATA[$P{fgg}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgh">
+					<subreportParameterExpression><![CDATA[$P{fgh}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebg1">
+					<subreportParameterExpression><![CDATA[$P{ebg1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fge">
+					<subreportParameterExpression><![CDATA[$P{fge}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf">
+					<subreportParameterExpression><![CDATA[$P{fgf}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebg4">
+					<subreportParameterExpression><![CDATA[$P{ebg4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebg5">
+					<subreportParameterExpression><![CDATA[$P{ebg5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgi">
+					<subreportParameterExpression><![CDATA[$P{fgi}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebg2">
+					<subreportParameterExpression><![CDATA[$P{ebg2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgj">
+					<subreportParameterExpression><![CDATA[$P{fgj}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebg3">
+					<subreportParameterExpression><![CDATA[$P{ebg3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="codigoCiiuB">
+					<subreportParameterExpression><![CDATA[$P{codigoCiiuB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="codigoCiiuA">
+					<subreportParameterExpression><![CDATA[$P{codigoCiiuA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoRepresentanteA1">
+					<subreportParameterExpression><![CDATA[$P{telefonoRepresentanteA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoRepresentanteA2">
+					<subreportParameterExpression><![CDATA[$P{telefonoRepresentanteA2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroRegistroB">
+					<subreportParameterExpression><![CDATA[$P{nroRegistroB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroRegistroA">
+					<subreportParameterExpression><![CDATA[$P{nroRegistroA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="trabajadoresLocymatA">
+					<subreportParameterExpression><![CDATA[$P{trabajadoresLocymatA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="actividadEconomicaA">
+					<subreportParameterExpression><![CDATA[$P{actividadEconomicaA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="trabajadoresLocymatB">
+					<subreportParameterExpression><![CDATA[$P{trabajadoresLocymatB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="actividadEconomicaB">
+					<subreportParameterExpression><![CDATA[$P{actividadEconomicaB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hab">
+					<subreportParameterExpression><![CDATA[$P{hab}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="haa">
+					<subreportParameterExpression><![CDATA[$P{haa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="had">
+					<subreportParameterExpression><![CDATA[$P{had}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hac">
+					<subreportParameterExpression><![CDATA[$P{hac}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="inscripcionIvss">
+					<subreportParameterExpression><![CDATA[$P{inscripcionIvss}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoRepresentanteB1">
+					<subreportParameterExpression><![CDATA[$P{telefonoRepresentanteB1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoRepresentanteB2">
+					<subreportParameterExpression><![CDATA[$P{telefonoRepresentanteB2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroTrabajadoresB">
+					<subreportParameterExpression><![CDATA[$P{nroTrabajadoresB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroTrabajadoresA">
+					<subreportParameterExpression><![CDATA[$P{nroTrabajadoresA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargaT">
+					<subreportParameterExpression><![CDATA[$P{cargaT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="manoTrabajador2">
+					<subreportParameterExpression><![CDATA[$P{manoTrabajador2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="manoTrabajador1">
+					<subreportParameterExpression><![CDATA[$P{manoTrabajador1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="centroTrabajoB">
+					<subreportParameterExpression><![CDATA[$P{centroTrabajoB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="centroTrabajoA">
+					<subreportParameterExpression><![CDATA[$P{centroTrabajoA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="trabajadoresConapdisB">
+					<subreportParameterExpression><![CDATA[$P{trabajadoresConapdisB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="trabajadoresConapdisA">
+					<subreportParameterExpression><![CDATA[$P{trabajadoresConapdisA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="correoA">
+					<subreportParameterExpression><![CDATA[$P{correoA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="correoB">
+					<subreportParameterExpression><![CDATA[$P{correoB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf5">
+					<subreportParameterExpression><![CDATA[$P{fgf5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf1">
+					<subreportParameterExpression><![CDATA[$P{fgf1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf2">
+					<subreportParameterExpression><![CDATA[$P{fgf2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf3">
+					<subreportParameterExpression><![CDATA[$P{fgf3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf4">
+					<subreportParameterExpression><![CDATA[$P{fgf4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="registroMercantilB">
+					<subreportParameterExpression><![CDATA[$P{nroRegistroB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parameter1">
+					<subreportParameterExpression><![CDATA[$P{parameter1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="registroMercantilA">
+					<subreportParameterExpression><![CDATA[$P{registroMercantilA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre213">
+					<subreportParameterExpression><![CDATA[$P{nombre213}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre212">
+					<subreportParameterExpression><![CDATA[$P{nombre212}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre211">
+					<subreportParameterExpression><![CDATA[$P{nombre211}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="retiroIvss">
+					<subreportParameterExpression><![CDATA[$P{retiroIvss}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre216">
+					<subreportParameterExpression><![CDATA[$P{nombre216}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre215">
+					<subreportParameterExpression><![CDATA[$P{nombre215}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombre214">
+					<subreportParameterExpression><![CDATA[$P{nombre214}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tomoRegistroB1">
+					<subreportParameterExpression><![CDATA[$P{tomoRegistroB1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tomoRegistroB">
+					<subreportParameterExpression><![CDATA[$P{tomoRegistroB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoCelT">
+					<subreportParameterExpression><![CDATA[$P{telefonoCelT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tomoRegistroA">
+					<subreportParameterExpression><![CDATA[$P{tomoRegistroA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hadNO">
+					<subreportParameterExpression><![CDATA[$P{hadNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="edadTrabajador">
+					<subreportParameterExpression><![CDATA[$P{edadTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="tomoRegistroA1">
+					<subreportParameterExpression><![CDATA[$P{tomoRegistroA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroIvssA">
+					<subreportParameterExpression><![CDATA[$P{nroIvssA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nroIvssB">
+					<subreportParameterExpression><![CDATA[$P{nroIvssB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="representanteB1">
+					<subreportParameterExpression><![CDATA[$P{representanteB1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro211">
+					<subreportParameterExpression><![CDATA[$P{nro211}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="representanteB2">
+					<subreportParameterExpression><![CDATA[$P{representanteB2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoRepresentanteB2">
+					<subreportParameterExpression><![CDATA[$P{cargoRepresentanteB2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoRepresentanteB1">
+					<subreportParameterExpression><![CDATA[$P{cargoRepresentanteB1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula213">
+					<subreportParameterExpression><![CDATA[$P{cedula213}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula214">
+					<subreportParameterExpression><![CDATA[$P{cedula214}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula215">
+					<subreportParameterExpression><![CDATA[$P{cedula215}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro216">
+					<subreportParameterExpression><![CDATA[$P{nro216}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula216">
+					<subreportParameterExpression><![CDATA[$P{cedula216}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro214">
+					<subreportParameterExpression><![CDATA[$P{nro214}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro215">
+					<subreportParameterExpression><![CDATA[$P{nro215}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro212">
+					<subreportParameterExpression><![CDATA[$P{nro212}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula211">
+					<subreportParameterExpression><![CDATA[$P{cedula211}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nro213">
+					<subreportParameterExpression><![CDATA[$P{nro213}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedula212">
+					<subreportParameterExpression><![CDATA[$P{cedula212}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="direccionTrabajador">
+					<subreportParameterExpression><![CDATA[$P{direccionTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombreTrabajador">
+					<subreportParameterExpression><![CDATA[$P{nombreTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mujeresB">
+					<subreportParameterExpression><![CDATA[$P{mujeresB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mujeresA">
+					<subreportParameterExpression><![CDATA[$P{mujeresA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="gaa">
+					<subreportParameterExpression><![CDATA[$P{gaa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="representanteA2">
+					<subreportParameterExpression><![CDATA[$P{representanteA2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="representanteA1">
+					<subreportParameterExpression><![CDATA[$P{representanteA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="direccionCentroA">
+					<subreportParameterExpression><![CDATA[$P{direccionCentroA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="direccionCentroB">
+					<subreportParameterExpression><![CDATA[$P{centroTrabajoB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="aprendicesA">
+					<subreportParameterExpression><![CDATA[$P{aprendicesA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="aprendicesB">
+					<subreportParameterExpression><![CDATA[$P{aprendicesB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="manoTrabajador">
+					<subreportParameterExpression><![CDATA[$P{manoTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionD">
+					<subreportParameterExpression><![CDATA[$P{condicionD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionE">
+					<subreportParameterExpression><![CDATA[$P{condicionE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionF">
+					<subreportParameterExpression><![CDATA[$P{condicionF}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionA">
+					<subreportParameterExpression><![CDATA[$P{condicionA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionB">
+					<subreportParameterExpression><![CDATA[$P{condicionB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionC">
+					<subreportParameterExpression><![CDATA[$P{condicionC}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgad">
+					<subreportParameterExpression><![CDATA[$P{fgad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgaa">
+					<subreportParameterExpression><![CDATA[$P{fgaa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgac">
+					<subreportParameterExpression><![CDATA[$P{fgac}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgab">
+					<subreportParameterExpression><![CDATA[$P{fgab}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="apellidoTrabajador">
+					<subreportParameterExpression><![CDATA[$P{apellidoTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoRepresentanteA1">
+					<subreportParameterExpression><![CDATA[$P{cargoRepresentanteA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoRepresentanteA2">
+					<subreportParameterExpression><![CDATA[$P{cargoRepresentanteA2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hadSI">
+					<subreportParameterExpression><![CDATA[$P{hadSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaEgresoTrabajador">
+					<subreportParameterExpression><![CDATA[$P{fechaEgresoTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebe1">
+					<subreportParameterExpression><![CDATA[$P{ebe1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebe3">
+					<subreportParameterExpression><![CDATA[$P{ebe3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebe2">
+					<subreportParameterExpression><![CDATA[$P{ebe2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="sexoTrabajador">
+					<subreportParameterExpression><![CDATA[$P{sexoTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebe5">
+					<subreportParameterExpression><![CDATA[$P{ebe5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebe4">
+					<subreportParameterExpression><![CDATA[$P{ebe4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebe7">
+					<subreportParameterExpression><![CDATA[$P{ebe7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebe6">
+					<subreportParameterExpression><![CDATA[$P{ebe6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="codigo">
+					<subreportParameterExpression><![CDATA[$P{codigo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaIngresoTrabajador">
+					<subreportParameterExpression><![CDATA[$P{fechaIngresoTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaActualizacionA">
+					<subreportParameterExpression><![CDATA[$P{fechaActualizacionA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaActualizacionB">
+					<subreportParameterExpression><![CDATA[$P{fechaActualizacionB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaRepresentanteB1">
+					<subreportParameterExpression><![CDATA[$P{cedulaRepresentanteB1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaRepresentanteB2">
+					<subreportParameterExpression><![CDATA[$P{cedulaRepresentanteB2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebf4">
+					<subreportParameterExpression><![CDATA[$P{ebf4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebf3">
+					<subreportParameterExpression><![CDATA[$P{ebf3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebf2">
+					<subreportParameterExpression><![CDATA[$P{ebf2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebf1">
+					<subreportParameterExpression><![CDATA[$P{ebf1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebf5">
+					<subreportParameterExpression><![CDATA[$P{ebf5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hombresB">
+					<subreportParameterExpression><![CDATA[$P{hombresB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hombresA">
+					<subreportParameterExpression><![CDATA[$P{hombresA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaRepresentanteA2">
+					<subreportParameterExpression><![CDATA[$P{cedulaRepresentanteA2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaRepresentanteA1">
+					<subreportParameterExpression><![CDATA[$P{cedulaRepresentanteA1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="adolescentesB">
+					<subreportParameterExpression><![CDATA[$P{adolescentesB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="adolescentesA">
+					<subreportParameterExpression><![CDATA[$P{adolescentesA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebc3">
+					<subreportParameterExpression><![CDATA[$P{ebc3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebc2">
+					<subreportParameterExpression><![CDATA[$P{ebc2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebc5">
+					<subreportParameterExpression><![CDATA[$P{ebc5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebc4">
+					<subreportParameterExpression><![CDATA[$P{ebc4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebc1">
+					<subreportParameterExpression><![CDATA[$P{ebc1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="lugarNacTrabajador">
+					<subreportParameterExpression><![CDATA[$P{lugarNacTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nillA">
+					<subreportParameterExpression><![CDATA[$P{nillA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nillB">
+					<subreportParameterExpression><![CDATA[$P{nillB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="razonA">
+					<subreportParameterExpression><![CDATA[$P{razonA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="extranjerosA">
+					<subreportParameterExpression><![CDATA[$P{extranjerosA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="extranjerosB">
+					<subreportParameterExpression><![CDATA[$P{extranjerosB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="razonB">
+					<subreportParameterExpression><![CDATA[$P{razonB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoFaxA">
+					<subreportParameterExpression><![CDATA[$P{telefonoFaxA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoFaxB">
+					<subreportParameterExpression><![CDATA[$P{telefonoFaxB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebd6">
+					<subreportParameterExpression><![CDATA[$P{ebd6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebd5">
+					<subreportParameterExpression><![CDATA[$P{ebd5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebd4">
+					<subreportParameterExpression><![CDATA[$P{ebd4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nacionalidadTrabajador">
+					<subreportParameterExpression><![CDATA[$P{nacionalidadTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebd3">
+					<subreportParameterExpression><![CDATA[$P{ebd3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebd2">
+					<subreportParameterExpression><![CDATA[$P{ebd2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebd1">
+					<subreportParameterExpression><![CDATA[$P{ebd1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="estadoT">
+					<subreportParameterExpression><![CDATA[$P{estadoT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="direccionRazonA">
+					<subreportParameterExpression><![CDATA[$P{direccionRazonA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="estadoCivilTrabajador">
+					<subreportParameterExpression><![CDATA[$P{estadoCivilTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nivelEducativoTrabajador3">
+					<subreportParameterExpression><![CDATA[$P{nivelEducativoTrabajador3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nivelEducativoTrabajador2">
+					<subreportParameterExpression><![CDATA[$P{nivelEducativoTrabajador2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="direccionRazonB">
+					<subreportParameterExpression><![CDATA[$P{direccionCentroB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nivelEducativoTrabajador5">
+					<subreportParameterExpression><![CDATA[$P{nivelEducativoTrabajador5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nivelEducativoTrabajador4">
+					<subreportParameterExpression><![CDATA[$P{nivelEducativoTrabajador4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="telefonoContactoT">
+					<subreportParameterExpression><![CDATA[$P{telefonoContactoT}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ebd7">
+					<subreportParameterExpression><![CDATA[$P{ebd7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nivelEducativoTrabajador1">
+					<subreportParameterExpression><![CDATA[$P{nivelEducativoTrabajador1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fechaNacTrabajador">
+					<subreportParameterExpression><![CDATA[$P{fechaNacTrabajador}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/reporte/reporteSHA_datosEmpresa_trabajador.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="22" y="253" width="517" height="41" uuid="a10cbab0-1d12-4253-a973-5f7eba9ff30b"/>
+				<subreportParameter name="auxilioInmediatoNO">
+					<subreportParameterExpression><![CDATA[$P{auxilioInmediatoNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf5">
+					<subreportParameterExpression><![CDATA[$P{fgf5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf1">
+					<subreportParameterExpression><![CDATA[$P{fgf1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf2">
+					<subreportParameterExpression><![CDATA[$P{fgf2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf3">
+					<subreportParameterExpression><![CDATA[$P{fgf3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf4">
+					<subreportParameterExpression><![CDATA[$P{fgf4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fb3">
+					<subreportParameterExpression><![CDATA[$P{fb3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ff">
+					<subreportParameterExpression><![CDATA[$P{ff}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="clasificacion">
+					<subreportParameterExpression><![CDATA[$P{clasificacion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fb2">
+					<subreportParameterExpression><![CDATA[$P{fb2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fb1">
+					<subreportParameterExpression><![CDATA[$P{fb1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fb7">
+					<subreportParameterExpression><![CDATA[$P{fb7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fb6">
+					<subreportParameterExpression><![CDATA[$P{fb6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fb5">
+					<subreportParameterExpression><![CDATA[$P{fb5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fb4">
+					<subreportParameterExpression><![CDATA[$P{fb4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgad">
+					<subreportParameterExpression><![CDATA[$P{fgad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="auxilioInmediatoSI">
+					<subreportParameterExpression><![CDATA[$P{auxilioInmediatoSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgaa">
+					<subreportParameterExpression><![CDATA[$P{fgaa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgac">
+					<subreportParameterExpression><![CDATA[$P{fgac}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgab">
+					<subreportParameterExpression><![CDATA[$P{fgab}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fghSI">
+					<subreportParameterExpression><![CDATA[$P{fghSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fa">
+					<subreportParameterExpression><![CDATA[$P{fa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fd">
+					<subreportParameterExpression><![CDATA[$P{fd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fe">
+					<subreportParameterExpression><![CDATA[$P{fe}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fb">
+					<subreportParameterExpression><![CDATA[$P{fb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fc">
+					<subreportParameterExpression><![CDATA[$P{fc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="gaa">
+					<subreportParameterExpression><![CDATA[$P{gaa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgi2">
+					<subreportParameterExpression><![CDATA[$P{fgi2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgc">
+					<subreportParameterExpression><![CDATA[$P{fgc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="auxilioInmediato">
+					<subreportParameterExpression><![CDATA[$P{auxilioInmediato}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgd">
+					<subreportParameterExpression><![CDATA[$P{fgd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fga">
+					<subreportParameterExpression><![CDATA[$P{fga}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgi1">
+					<subreportParameterExpression><![CDATA[$P{fgi1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgb">
+					<subreportParameterExpression><![CDATA[$P{fgb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgg">
+					<subreportParameterExpression><![CDATA[$P{fgg}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgh">
+					<subreportParameterExpression><![CDATA[$P{fgh}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fge">
+					<subreportParameterExpression><![CDATA[$P{fge}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgf">
+					<subreportParameterExpression><![CDATA[$P{fgf}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgi">
+					<subreportParameterExpression><![CDATA[$P{fgi}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fgj">
+					<subreportParameterExpression><![CDATA[$P{fgj}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="fghNO">
+					<subreportParameterExpression><![CDATA[$P{fghNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/reporte/reporteSHA_datosAccidente.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="238" width="100" height="1" uuid="77abada6-b938-48cf-b1e9-efb15f665d67"/>
+			</break>
+			<break>
+				<reportElement x="0" y="243" width="100" height="1" uuid="1a244b9a-ba5a-444e-882b-7a73cbf1be8d"/>
+			</break>
+			<subreport>
+				<reportElement x="22" y="308" width="517" height="38" uuid="c1a1462a-7704-4aab-a577-5178139c55df"/>
+				<subreportParameter name="hbfNO">
+					<subreportParameterExpression><![CDATA[$P{hbfNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbh1">
+					<subreportParameterExpression><![CDATA[$P{hbh1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbgNO">
+					<subreportParameterExpression><![CDATA[$P{hbgNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbh4">
+					<subreportParameterExpression><![CDATA[$P{hbh4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbh3">
+					<subreportParameterExpression><![CDATA[$P{hbh3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbh2">
+					<subreportParameterExpression><![CDATA[$P{hbh2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="haf">
+					<subreportParameterExpression><![CDATA[$P{haf}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbfSI">
+					<subreportParameterExpression><![CDATA[$P{hbfSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hab">
+					<subreportParameterExpression><![CDATA[$P{hab}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionA">
+					<subreportParameterExpression><![CDATA[$P{condicionA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="haeSI">
+					<subreportParameterExpression><![CDATA[$P{haeSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="haa">
+					<subreportParameterExpression><![CDATA[$P{haa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="had">
+					<subreportParameterExpression><![CDATA[$P{had}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hac">
+					<subreportParameterExpression><![CDATA[$P{hac}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbdSI">
+					<subreportParameterExpression><![CDATA[$P{hbdSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hadNO">
+					<subreportParameterExpression><![CDATA[$P{hadNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbgSI">
+					<subreportParameterExpression><![CDATA[$P{hbgSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hba">
+					<subreportParameterExpression><![CDATA[$P{hba}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbe1">
+					<subreportParameterExpression><![CDATA[$P{hbe1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbe2">
+					<subreportParameterExpression><![CDATA[$P{hbe2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="haeNO">
+					<subreportParameterExpression><![CDATA[$P{haeNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbe3">
+					<subreportParameterExpression><![CDATA[$P{hbe3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbe">
+					<subreportParameterExpression><![CDATA[$P{hbe}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hadSI">
+					<subreportParameterExpression><![CDATA[$P{hadSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbc">
+					<subreportParameterExpression><![CDATA[$P{hbc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbdNO">
+					<subreportParameterExpression><![CDATA[$P{hbdNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/reporte/reporteSHA_procesosPeligrosos.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="299" width="100" height="1" uuid="fac18752-73e8-4051-a8f1-b0e4c5bb5b15"/>
+			</break>
+			<break>
+				<reportElement x="0" y="354" width="100" height="1" uuid="a4290bd3-593c-4516-b13c-358e05cc9d43"/>
+			</break>
+			<subreport>
+				<reportElement x="22" y="366" width="517" height="38" uuid="18e69aa5-56e3-4353-b6d7-a5c4191e58cd"/>
+				<subreportParameter name="hcdSI">
+					<subreportParameterExpression><![CDATA[$P{hcdSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbabSI">
+					<subreportParameterExpression><![CDATA[$P{hbabSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcbNO">
+					<subreportParameterExpression><![CDATA[$P{hcbNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcbSI">
+					<subreportParameterExpression><![CDATA[$P{hcbSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbaaNO">
+					<subreportParameterExpression><![CDATA[$P{hbaaNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionD">
+					<subreportParameterExpression><![CDATA[$P{condicionD}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbabNO">
+					<subreportParameterExpression><![CDATA[$P{hbabNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcb">
+					<subreportParameterExpression><![CDATA[$P{hcb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hce2">
+					<subreportParameterExpression><![CDATA[$P{hce2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hca">
+					<subreportParameterExpression><![CDATA[$P{hca}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hce3">
+					<subreportParameterExpression><![CDATA[$P{hce3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hccSI">
+					<subreportParameterExpression><![CDATA[$P{hccSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hce1">
+					<subreportParameterExpression><![CDATA[$P{hce1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbaaSI">
+					<subreportParameterExpression><![CDATA[$P{hbaaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hccNO">
+					<subreportParameterExpression><![CDATA[$P{hccNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcdNO">
+					<subreportParameterExpression><![CDATA[$P{hcdNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionB">
+					<subreportParameterExpression><![CDATA[$P{condicionB}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionC">
+					<subreportParameterExpression><![CDATA[$P{condicionC}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/reporte/reporteSHA_procesosPeligrosos2.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="414" width="100" height="1" uuid="def201a8-06ec-4fc1-92bb-26f4cdc4d55f"/>
+			</break>
+			<subreport>
+				<reportElement x="22" y="426" width="517" height="38" uuid="2478631b-718e-4e42-9870-24a114aff2e7"/>
+				<subreportParameter name="hcf3">
+					<subreportParameterExpression><![CDATA[$P{hcf3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcf1">
+					<subreportParameterExpression><![CDATA[$P{hcf1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagiNO">
+					<subreportParameterExpression><![CDATA[$P{hcagiNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcf2">
+					<subreportParameterExpression><![CDATA[$P{hcf2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcgSI">
+					<subreportParameterExpression><![CDATA[$P{hcgSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcageNO">
+					<subreportParameterExpression><![CDATA[$P{hcageNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaggNO">
+					<subreportParameterExpression><![CDATA[$P{hcaggNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae9">
+					<subreportParameterExpression><![CDATA[$P{hcae9}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae7">
+					<subreportParameterExpression><![CDATA[$P{hcae7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae8">
+					<subreportParameterExpression><![CDATA[$P{hcae8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae5">
+					<subreportParameterExpression><![CDATA[$P{hcae5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae6">
+					<subreportParameterExpression><![CDATA[$P{hcae6}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagcNO">
+					<subreportParameterExpression><![CDATA[$P{hcagcNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae3">
+					<subreportParameterExpression><![CDATA[$P{hcae3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae4">
+					<subreportParameterExpression><![CDATA[$P{hcae4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae1">
+					<subreportParameterExpression><![CDATA[$P{hcae1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae2">
+					<subreportParameterExpression><![CDATA[$P{hcae2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagaNO">
+					<subreportParameterExpression><![CDATA[$P{hcagaNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdcNO">
+					<subreportParameterExpression><![CDATA[$P{hdcNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcad">
+					<subreportParameterExpression><![CDATA[$P{hcad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaf">
+					<subreportParameterExpression><![CDATA[$P{hcaf}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaggSI">
+					<subreportParameterExpression><![CDATA[$P{hcaggSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagfNO">
+					<subreportParameterExpression><![CDATA[$P{hcagfNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcacNO">
+					<subreportParameterExpression><![CDATA[$P{hcacNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagbNO">
+					<subreportParameterExpression><![CDATA[$P{hcagbNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcjSI">
+					<subreportParameterExpression><![CDATA[$P{hcjSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hda">
+					<subreportParameterExpression><![CDATA[$P{hda}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagcSI">
+					<subreportParameterExpression><![CDATA[$P{hcagcSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagaSI">
+					<subreportParameterExpression><![CDATA[$P{hcagaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagbSI">
+					<subreportParameterExpression><![CDATA[$P{hcagbSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaghSI">
+					<subreportParameterExpression><![CDATA[$P{hcaghSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaaSI">
+					<subreportParameterExpression><![CDATA[$P{hcaaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagdSI">
+					<subreportParameterExpression><![CDATA[$P{hcagdSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcjNO">
+					<subreportParameterExpression><![CDATA[$P{hcjNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagfSI">
+					<subreportParameterExpression><![CDATA[$P{hcagfSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcacSI">
+					<subreportParameterExpression><![CDATA[$P{hcacSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdbSI">
+					<subreportParameterExpression><![CDATA[$P{hdbSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcabNO">
+					<subreportParameterExpression><![CDATA[$P{hcabNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcgNO">
+					<subreportParameterExpression><![CDATA[$P{hcgNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaghNO">
+					<subreportParameterExpression><![CDATA[$P{hcaghNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagiSI">
+					<subreportParameterExpression><![CDATA[$P{hcagiSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hch4">
+					<subreportParameterExpression><![CDATA[$P{hch4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hch3">
+					<subreportParameterExpression><![CDATA[$P{hch3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hch2">
+					<subreportParameterExpression><![CDATA[$P{hch2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcageSI">
+					<subreportParameterExpression><![CDATA[$P{hcageSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hch1">
+					<subreportParameterExpression><![CDATA[$P{hch1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagdNO">
+					<subreportParameterExpression><![CDATA[$P{hcagdNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcabSI">
+					<subreportParameterExpression><![CDATA[$P{hcabSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hci3">
+					<subreportParameterExpression><![CDATA[$P{hci3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hci2">
+					<subreportParameterExpression><![CDATA[$P{hci2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaaNO">
+					<subreportParameterExpression><![CDATA[$P{hcaaNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcafa">
+					<subreportParameterExpression><![CDATA[$P{hcafa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hci1">
+					<subreportParameterExpression><![CDATA[$P{hci1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdbNO">
+					<subreportParameterExpression><![CDATA[$P{hdbNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdcSI">
+					<subreportParameterExpression><![CDATA[$P{hdcSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/reporte/reporteSHA_procesosPeligrosos3.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="472" width="100" height="1" uuid="1df2083a-ee76-408e-8ba1-13a6eabe6e57"/>
+			</break>
+			<subreport>
+				<reportElement x="22" y="485" width="517" height="38" uuid="d3b6b9b2-137d-4643-9a10-ba0be7ddc210"/>
+				<subreportParameter name="iai">
+					<subreportParameterExpression><![CDATA[$P{iai}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iagNO">
+					<subreportParameterExpression><![CDATA[$P{iagNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iadSI">
+					<subreportParameterExpression><![CDATA[$P{iadSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iaj">
+					<subreportParameterExpression><![CDATA[$P{iaj}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iadNO">
+					<subreportParameterExpression><![CDATA[$P{iadNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iacNO">
+					<subreportParameterExpression><![CDATA[$P{iacNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iafNO">
+					<subreportParameterExpression><![CDATA[$P{iafNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iabSI">
+					<subreportParameterExpression><![CDATA[$P{iabSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iahNO">
+					<subreportParameterExpression><![CDATA[$P{iahNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iacSI">
+					<subreportParameterExpression><![CDATA[$P{iacSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iahSI">
+					<subreportParameterExpression><![CDATA[$P{iahSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionE">
+					<subreportParameterExpression><![CDATA[$P{condicionE}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionF">
+					<subreportParameterExpression><![CDATA[$P{condicionF}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iaaNO">
+					<subreportParameterExpression><![CDATA[$P{iaaNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdf">
+					<subreportParameterExpression><![CDATA[$P{hdf}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iafSI">
+					<subreportParameterExpression><![CDATA[$P{iafSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iabNO">
+					<subreportParameterExpression><![CDATA[$P{iabNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdeb">
+					<subreportParameterExpression><![CDATA[$P{hdeb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iaaSI">
+					<subreportParameterExpression><![CDATA[$P{iaaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdea">
+					<subreportParameterExpression><![CDATA[$P{hdea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iae">
+					<subreportParameterExpression><![CDATA[$P{iae}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hded">
+					<subreportParameterExpression><![CDATA[$P{hded}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdec">
+					<subreportParameterExpression><![CDATA[$P{hdec}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iagSI">
+					<subreportParameterExpression><![CDATA[$P{iagSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/reporte/reporteSHA_procesosPeligrosos4.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="22" y="537" width="517" height="39" uuid="40148a10-813a-4791-a59a-ec3fd4ba6a04"/>
+				<subreportParameter name="idiNO">
+					<subreportParameterExpression><![CDATA[$P{idiNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="profesionPacienteH">
+					<subreportParameterExpression><![CDATA[$P{profesionPacienteH}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="profesionPacienteI">
+					<subreportParameterExpression><![CDATA[$P{profesionPacienteI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idgNO">
+					<subreportParameterExpression><![CDATA[$P{idgNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="profesionPacienteL">
+					<subreportParameterExpression><![CDATA[$P{profesionPacienteL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icgNO">
+					<subreportParameterExpression><![CDATA[$P{icgNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="profesionPacienteM">
+					<subreportParameterExpression><![CDATA[$P{profesionPacienteM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="profesionPacienteJ">
+					<subreportParameterExpression><![CDATA[$P{profesionPacienteJ}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="profesionPacienteK">
+					<subreportParameterExpression><![CDATA[$P{profesionPacienteK}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icd2">
+					<subreportParameterExpression><![CDATA[$P{icd2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icfSI">
+					<subreportParameterExpression><![CDATA[$P{icfSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iciNO">
+					<subreportParameterExpression><![CDATA[$P{iciNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icd1">
+					<subreportParameterExpression><![CDATA[$P{icd1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibfSI">
+					<subreportParameterExpression><![CDATA[$P{ibfSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ichSI">
+					<subreportParameterExpression><![CDATA[$P{ichSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idacSI">
+					<subreportParameterExpression><![CDATA[$P{idacSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ideSI">
+					<subreportParameterExpression><![CDATA[$P{ideSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="registroPacienteH">
+					<subreportParameterExpression><![CDATA[$P{registroPacienteH}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="registroPacienteI">
+					<subreportParameterExpression><![CDATA[$P{registroPacienteI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="turnoPacienteH">
+					<subreportParameterExpression><![CDATA[$P{turnoPacienteH}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="registroPacienteJ">
+					<subreportParameterExpression><![CDATA[$P{registroPacienteJ}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="turnoPacienteI">
+					<subreportParameterExpression><![CDATA[$P{turnoPacienteI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="turnoPacienteJ">
+					<subreportParameterExpression><![CDATA[$P{turnoPacienteJ}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="registroPacienteK">
+					<subreportParameterExpression><![CDATA[$P{registroPacienteK}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iceNO">
+					<subreportParameterExpression><![CDATA[$P{iceNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibc">
+					<subreportParameterExpression><![CDATA[$P{ibc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibd">
+					<subreportParameterExpression><![CDATA[$P{ibd}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibb">
+					<subreportParameterExpression><![CDATA[$P{ibb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="turnoPacienteK">
+					<subreportParameterExpression><![CDATA[$P{turnoPacienteK}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="registroPacienteL">
+					<subreportParameterExpression><![CDATA[$P{registroPacienteL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="turnoPacienteL">
+					<subreportParameterExpression><![CDATA[$P{turnoPacienteL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="registroPacienteM">
+					<subreportParameterExpression><![CDATA[$P{registroPacienteM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="turnoPacienteM">
+					<subreportParameterExpression><![CDATA[$P{turnoPacienteM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaPacienteH">
+					<subreportParameterExpression><![CDATA[$P{cedulaPacienteH}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoPacienteM">
+					<subreportParameterExpression><![CDATA[$P{cargoPacienteM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icaa">
+					<subreportParameterExpression><![CDATA[$P{icaa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icae">
+					<subreportParameterExpression><![CDATA[$P{icae}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idjSI">
+					<subreportParameterExpression><![CDATA[$P{idjSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibaNO">
+					<subreportParameterExpression><![CDATA[$P{ibaNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibiSI">
+					<subreportParameterExpression><![CDATA[$P{ibiSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibjNO">
+					<subreportParameterExpression><![CDATA[$P{ibjNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icab2">
+					<subreportParameterExpression><![CDATA[$P{icab2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icab1">
+					<subreportParameterExpression><![CDATA[$P{icab1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idbSI">
+					<subreportParameterExpression><![CDATA[$P{idbSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idacNO">
+					<subreportParameterExpression><![CDATA[$P{idacNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idgSI">
+					<subreportParameterExpression><![CDATA[$P{idgSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibgNO">
+					<subreportParameterExpression><![CDATA[$P{ibgNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idcNO">
+					<subreportParameterExpression><![CDATA[$P{idcNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idfSI">
+					<subreportParameterExpression><![CDATA[$P{idfSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iddSI">
+					<subreportParameterExpression><![CDATA[$P{iddSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibfNO">
+					<subreportParameterExpression><![CDATA[$P{ibfNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaPacienteM">
+					<subreportParameterExpression><![CDATA[$P{cedulaPacienteM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaPacienteL">
+					<subreportParameterExpression><![CDATA[$P{cedulaPacienteL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaPacienteK">
+					<subreportParameterExpression><![CDATA[$P{cedulaPacienteK}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaPacienteJ">
+					<subreportParameterExpression><![CDATA[$P{cedulaPacienteJ}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibeNO">
+					<subreportParameterExpression><![CDATA[$P{ibeNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cedulaPacienteI">
+					<subreportParameterExpression><![CDATA[$P{cedulaPacienteI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombrePacienteH">
+					<subreportParameterExpression><![CDATA[$P{nombrePacienteH}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icaNO">
+					<subreportParameterExpression><![CDATA[$P{icaNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombrePacienteI">
+					<subreportParameterExpression><![CDATA[$P{nombrePacienteI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iabSI">
+					<subreportParameterExpression><![CDATA[$P{iabSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idaNO">
+					<subreportParameterExpression><![CDATA[$P{idaNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icac1">
+					<subreportParameterExpression><![CDATA[$P{icac1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icac3">
+					<subreportParameterExpression><![CDATA[$P{icac3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icac2">
+					<subreportParameterExpression><![CDATA[$P{icac2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idhSI">
+					<subreportParameterExpression><![CDATA[$P{idhSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ideNO">
+					<subreportParameterExpression><![CDATA[$P{ideNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombrePacienteK">
+					<subreportParameterExpression><![CDATA[$P{nombrePacienteK}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parameter2_8_7_3_2">
+					<subreportParameterExpression><![CDATA[$P{parameter2_8_7_3_2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombrePacienteJ">
+					<subreportParameterExpression><![CDATA[$P{nombrePacienteJ}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombrePacienteM">
+					<subreportParameterExpression><![CDATA[$P{nombrePacienteM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="nombrePacienteL">
+					<subreportParameterExpression><![CDATA[$P{nombrePacienteL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoPacienteH">
+					<subreportParameterExpression><![CDATA[$P{cargoPacienteH}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icac5">
+					<subreportParameterExpression><![CDATA[$P{icac5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoPacienteI">
+					<subreportParameterExpression><![CDATA[$P{cargoPacienteI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icac4">
+					<subreportParameterExpression><![CDATA[$P{icac4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoPacienteJ">
+					<subreportParameterExpression><![CDATA[$P{cargoPacienteJ}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoPacienteK">
+					<subreportParameterExpression><![CDATA[$P{cargoPacienteK}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idiSI">
+					<subreportParameterExpression><![CDATA[$P{idiSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoPacienteL">
+					<subreportParameterExpression><![CDATA[$P{cargoPacienteL}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idfNO">
+					<subreportParameterExpression><![CDATA[$P{idfNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idhNO">
+					<subreportParameterExpression><![CDATA[$P{idhNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ichNO">
+					<subreportParameterExpression><![CDATA[$P{ichNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibgSI">
+					<subreportParameterExpression><![CDATA[$P{ibgSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idjNO">
+					<subreportParameterExpression><![CDATA[$P{idjNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parameter2_3_7_3_2">
+					<subreportParameterExpression><![CDATA[$P{parameter2_3_7_3_2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iceSI">
+					<subreportParameterExpression><![CDATA[$P{iceSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icgSI">
+					<subreportParameterExpression><![CDATA[$P{icgSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibaaNO">
+					<subreportParameterExpression><![CDATA[$P{ibaaNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="parameter2_1_6_3_2">
+					<subreportParameterExpression><![CDATA[$P{parameter2_1_6_3_2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icfNO">
+					<subreportParameterExpression><![CDATA[$P{icfNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iciSI">
+					<subreportParameterExpression><![CDATA[$P{iciSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibiNO">
+					<subreportParameterExpression><![CDATA[$P{ibiNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibhNO">
+					<subreportParameterExpression><![CDATA[$P{ibhNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibeSI">
+					<subreportParameterExpression><![CDATA[$P{ibeSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idab">
+					<subreportParameterExpression><![CDATA[$P{idab}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idad">
+					<subreportParameterExpression><![CDATA[$P{idad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idaa">
+					<subreportParameterExpression><![CDATA[$P{idaa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iddNO">
+					<subreportParameterExpression><![CDATA[$P{iddNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idcSI">
+					<subreportParameterExpression><![CDATA[$P{idcSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibaaSI">
+					<subreportParameterExpression><![CDATA[$P{ibaaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icj">
+					<subreportParameterExpression><![CDATA[$P{icj}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibjSI">
+					<subreportParameterExpression><![CDATA[$P{ibjSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibaSI">
+					<subreportParameterExpression><![CDATA[$P{ibaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icc">
+					<subreportParameterExpression><![CDATA[$P{icc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icb">
+					<subreportParameterExpression><![CDATA[$P{icb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibhSI">
+					<subreportParameterExpression><![CDATA[$P{ibhSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idbNO">
+					<subreportParameterExpression><![CDATA[$P{idbNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibac">
+					<subreportParameterExpression><![CDATA[$P{ibac}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibab">
+					<subreportParameterExpression><![CDATA[$P{ibab}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icaSI">
+					<subreportParameterExpression><![CDATA[$P{icaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idaSI">
+					<subreportParameterExpression><![CDATA[$P{idaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/reporte/reporteSHA_gestionSeguridadSalud.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="175" width="100" height="1" uuid="80fd1222-51c0-4319-83c9-3f890a333a86"/>
+			</break>
+			<break>
+				<reportElement x="0" y="416" width="100" height="1" uuid="0f33d1ea-0575-4e55-905e-82b62963c602"/>
+			</break>
+			<break>
+				<reportElement x="0" y="478" width="100" height="1" uuid="34dd4729-9f5b-4a8b-a697-fcdc135162b5"/>
+			</break>
+			<break>
+				<reportElement x="0" y="469" width="100" height="1" uuid="360ea771-cbe3-4100-8ef5-d88900b0b378"/>
+			</break>
+			<break>
+				<reportElement x="0" y="528" width="100" height="1" uuid="74e66e69-6211-4210-97a5-79a40e467b73"/>
+			</break>
 		</band>
 	</title>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 </jasperReport>

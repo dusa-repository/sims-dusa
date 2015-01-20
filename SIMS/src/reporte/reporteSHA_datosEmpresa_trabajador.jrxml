@@ -1,0 +1,1637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_datosEmpresa_trabajador" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7e592949-8b55-4cad-9b25-bff17651f757">
+	<property name="ireport.zoom" value="0.9090909090909108"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="489"/>
+	<parameter name="razonB" class="java.lang.String"/>
+	<parameter name="centroTrabajoB" class="java.lang.String"/>
+	<parameter name="direccionCentroB" class="java.lang.String"/>
+	<parameter name="direccionRazonB" class="java.lang.String"/>
+	<parameter name="rifB" class="java.lang.String"/>
+	<parameter name="nillB" class="java.lang.String"/>
+	<parameter name="nroIvssB" class="java.lang.String"/>
+	<parameter name="actividadEconomicaB" class="java.lang.String"/>
+	<parameter name="codigoCiiuB" class="java.lang.String"/>
+	<parameter name="telefonoFaxB" class="java.lang.String"/>
+	<parameter name="correoB" class="java.lang.String"/>
+	<parameter name="registroMercantilB" class="java.lang.String"/>
+	<parameter name="fechaRegistroB" class="java.lang.String"/>
+	<parameter name="nroRegistroB" class="java.lang.String"/>
+	<parameter name="tomoRegistroB" class="java.lang.String"/>
+	<parameter name="representanteB1" class="java.lang.String"/>
+	<parameter name="cedulaRepresentanteB1" class="java.lang.String"/>
+	<parameter name="telefonoRepresentanteB1" class="java.lang.String"/>
+	<parameter name="cargoRepresentanteB1" class="java.lang.String"/>
+	<parameter name="nroTrabajadoresB" class="java.lang.String"/>
+	<parameter name="hombresB" class="java.lang.String"/>
+	<parameter name="mujeresB" class="java.lang.String"/>
+	<parameter name="adolescentesB" class="java.lang.String"/>
+	<parameter name="aprendicesB" class="java.lang.String"/>
+	<parameter name="trabajadoresLocymatB" class="java.lang.String"/>
+	<parameter name="trabajadoresConapdisB" class="java.lang.String"/>
+	<parameter name="extranjerosB" class="java.lang.String"/>
+	<parameter name="apellidoTrabajador" class="java.lang.String"/>
+	<parameter name="nombreTrabajador" class="java.lang.String"/>
+	<parameter name="cedulaTrabajador" class="java.lang.String"/>
+	<parameter name="nacionalidadTrabajador" class="java.lang.String"/>
+	<parameter name="sexoTrabajador" class="java.lang.String"/>
+	<parameter name="edadTrabajador" class="java.lang.String"/>
+	<parameter name="fechaNacTrabajador" class="java.lang.String"/>
+	<parameter name="lugarNacTrabajador" class="java.lang.String"/>
+	<parameter name="estadoCivilTrabajador" class="java.lang.String"/>
+	<parameter name="manoTrabajador" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador" class="java.lang.String"/>
+	<parameter name="fechaIngresoTrabajador" class="java.lang.String"/>
+	<parameter name="inscripcionIvss" class="java.lang.String"/>
+	<parameter name="retiroIvss" class="java.lang.String"/>
+	<parameter name="fechaEgresoTrabajador" class="java.lang.String"/>
+	<parameter name="direccionTrabajador" class="java.lang.String"/>
+	<parameter name="estadoT" class="java.lang.String"/>
+	<parameter name="telefonoHabT" class="java.lang.String"/>
+	<parameter name="telefonoCelT" class="java.lang.String"/>
+	<parameter name="familiarContactoT" class="java.lang.String"/>
+	<parameter name="telefonoContactoT" class="java.lang.String"/>
+	<parameter name="cargaT" class="java.lang.String"/>
+	<parameter name="ebc" class="java.lang.String"/>
+	<parameter name="ebd" class="java.lang.String"/>
+	<parameter name="ebe" class="java.lang.String"/>
+	<parameter name="ebf" class="java.lang.String"/>
+	<parameter name="representanteB2" class="java.lang.String"/>
+	<parameter name="cedulaRepresentanteB2" class="java.lang.String"/>
+	<parameter name="telefonoRepresentanteB2" class="java.lang.String"/>
+	<parameter name="cargoRepresentanteB2" class="java.lang.String"/>
+	<parameter name="tomoRegistroB1" class="java.lang.String"/>
+	<parameter name="nroRegistroB1" class="java.lang.String"/>
+	<parameter name="fechaActualizacionB" class="java.lang.String"/>
+	<parameter name="ebg" class="java.lang.String"/>
+	<parameter name="parameter1_61" class="java.lang.String"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<parameter name="ebc2" class="java.lang.String"/>
+	<parameter name="ebc1" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador5" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador4" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador3" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador2" class="java.lang.String"/>
+	<parameter name="nivelEducativoTrabajador1" class="java.lang.String"/>
+	<parameter name="manoTrabajador2" class="java.lang.String"/>
+	<parameter name="manoTrabajador1" class="java.lang.String"/>
+	<parameter name="ebc3" class="java.lang.String"/>
+	<parameter name="ebc4" class="java.lang.String"/>
+	<parameter name="ebc5" class="java.lang.String"/>
+	<parameter name="ebd7" class="java.lang.String"/>
+	<parameter name="ebd1" class="java.lang.String"/>
+	<parameter name="ebd2" class="java.lang.String"/>
+	<parameter name="ebd3" class="java.lang.String"/>
+	<parameter name="ebd4" class="java.lang.String"/>
+	<parameter name="ebd5" class="java.lang.String"/>
+	<parameter name="ebd6" class="java.lang.String"/>
+	<parameter name="ebe1" class="java.lang.String"/>
+	<parameter name="ebe2" class="java.lang.String"/>
+	<parameter name="ebe3" class="java.lang.String"/>
+	<parameter name="ebe4" class="java.lang.String"/>
+	<parameter name="ebe5" class="java.lang.String"/>
+	<parameter name="ebe6" class="java.lang.String"/>
+	<parameter name="ebe7" class="java.lang.String"/>
+	<parameter name="ebf1" class="java.lang.String"/>
+	<parameter name="ebf2" class="java.lang.String"/>
+	<parameter name="ebf3" class="java.lang.String"/>
+	<parameter name="ebf4" class="java.lang.String"/>
+	<parameter name="ebf5" class="java.lang.String"/>
+	<parameter name="ebg1" class="java.lang.String"/>
+	<parameter name="ebg2" class="java.lang.String"/>
+	<parameter name="ebg3" class="java.lang.String"/>
+	<parameter name="ebg4" class="java.lang.String"/>
+	<parameter name="ebg5" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="439">
+			<staticText>
+				<reportElement x="0" y="258" width="224" height="29" uuid="e51d9290-5d46-42ed-bacf-be41822df725"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.20.- ULTIMA ACTUALIZACIÓN EN FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="28" width="257" height="32" uuid="c4184860-d1df-4f3d-a1d4-15ce5b05efd6"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.1.- RAZÓN SOCIAL:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="172" width="518" height="20" uuid="f490bd69-7395-4f41-a57d-76705c63a25d"/>
+				<textFieldExpression><![CDATA[$P{registroMercantilB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="133" y="93" width="162" height="33" uuid="3d72dd8a-4c51-493c-a2e1-fea9319b20af"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.6.- NIL: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="258" width="202" height="29" uuid="b21aef07-e69b-48c7-a623-3b4bf1740253"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.22.- TOMO:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="377" y="139" width="143" height="20" uuid="4debb0c8-0ff1-4540-a9fb-5dc080e1e213"/>
+				<textFieldExpression><![CDATA[$P{correoB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="364" width="118" height="20" uuid="bd431399-1066-41f0-b80d-31f5e333c9b1"/>
+				<textFieldExpression><![CDATA[$P{adolescentesB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="139" width="142" height="20" uuid="cc87d4c4-a569-4357-9aad-b0948b1f4b6e"/>
+				<textFieldExpression><![CDATA[$P{actividadEconomicaB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="136" y="106" width="157" height="20" uuid="3c2b491d-7161-44fd-98d6-9b8ab86cd71a"/>
+				<textFieldExpression><![CDATA[$P{nillB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="238" width="154" height="20" uuid="d8d301cc-263d-4ff1-8d89-9430fb2d4dc5"/>
+				<textFieldExpression><![CDATA[$P{cedulaRepresentanteB1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="12" width="518" height="20" uuid="7322de7f-5f4a-4676-9e45-93f349716ad3"/>
+				<text><![CDATA[4.- DATOS DE LA EMPRESA BENEFICIARIA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="101" y="205" width="100" height="20" uuid="71f5a701-8f1b-4bc3-8cac-b4d69882bda7"/>
+				<textFieldExpression><![CDATA[$P{nroRegistroB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="73" width="516" height="20" uuid="26690828-cf6b-4560-844d-0a2008ef4f83"/>
+				<textFieldExpression><![CDATA[$P{direccionCentroB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="351" width="134" height="33" uuid="a19081d1-40b4-45f8-bcb6-e2a0ad4357e6"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.28.- HOMBRES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="126" width="122" height="33" uuid="6ca90a27-8250-40d0-8a9e-4a0e471939a3"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.10.- TELÉFONO / FAX:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="266" y="40" width="253" height="20" uuid="9b7f6cad-c9a0-406e-822f-36a7c5c4160a"/>
+				<textFieldExpression><![CDATA[$P{centroTrabajoB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="384" width="158" height="47" uuid="dc881ef4-e194-4080-99a9-bec7e49d432b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.32.- Trabajadores con Discapacidad LOPCYMAT:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="106" width="131" height="20" uuid="77a295ea-811a-43aa-a198-9935cd426717"/>
+				<textFieldExpression><![CDATA[$P{rifB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="364" width="129" height="20" uuid="1389c762-9859-481f-a052-273f1dd7c0c9"/>
+				<textFieldExpression><![CDATA[$P{hombresB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="205" width="100" height="20" uuid="b7ced429-8793-4294-a3f2-c4688e516e96"/>
+				<textFieldExpression><![CDATA[$P{fechaRegistroB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="149" y="139" width="100" height="20" uuid="52f18e81-698a-4524-b49c-8c8a892be1f2"/>
+				<textFieldExpression><![CDATA[$P{codigoCiiuB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="40" width="252" height="20" uuid="d637ed57-5e8e-4be8-8605-5a4b9ba4fcc1"/>
+				<textFieldExpression><![CDATA[$P{razonB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="93" width="134" height="33" uuid="6d27d26d-1756-4fdc-a61c-af120ad47915"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.5.- RIF:  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="384" width="225" height="47" uuid="3b4008ee-29c4-4db7-b491-ebac45d81cb1"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.34.- EXTRANJEROS / EXTRANJERAS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="225" width="225" height="33" uuid="bbb3862a-5c5f-4d47-89e2-42f36f224ff4"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.19.- CARGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="192" width="100" height="33" uuid="ef01ae2b-d897-48bb-93f8-1458dadb8ab4"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.13.- EN FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="192" width="227" height="33" uuid="c45de9ad-5e89-44f8-b072-78ea436bbfb7"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.16.- REPRESENTANTE LEGAL/APODERADO]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="297" y="238" width="223" height="20" uuid="1eca6d95-4cfe-469d-bdb4-7ca2d58089e8"/>
+				<textFieldExpression><![CDATA[$P{cargoRepresentanteB1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="351" width="132" height="33" uuid="5242b8d8-881e-46df-b67c-afc2d4469b5a"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.31.- APRENDICES:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="136" y="364" width="131" height="20" uuid="3793f605-25d9-4fbb-b696-7234ad64f16e"/>
+				<textFieldExpression><![CDATA[$P{mujeresB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="60" width="523" height="33" uuid="8819131b-db91-4461-9423-1d1a3b144d34"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.3.- DIRECCIÓN DEL CENTRO DE TRABAJO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="267" y="351" width="123" height="33" uuid="27054c27-432e-4740-a2bc-e798fda1e9a8"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.30.- ADOLESCENTES: ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="256" y="139" width="119" height="20" uuid="6661bcb4-a6a5-422a-b0a6-b3ccccb32af4"/>
+				<textFieldExpression><![CDATA[$P{telefonoFaxB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="160" y="238" width="133" height="20" uuid="34aed5d2-ddbd-454a-96fa-09e254ce649c"/>
+				<textFieldExpression><![CDATA[$P{telefonoRepresentanteB1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="224" y="258" width="96" height="29" uuid="d6d6c684-d846-4f07-8d00-96fbfb42f637"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.21.- BAJO EL N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="225" width="139" height="33" uuid="200adb31-957d-4fe7-a294-44ea53d6928b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.18.- TELÉFONO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="126" width="147" height="33" uuid="15b7746d-09de-43c5-8382-cfdcbe0f3dad"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.11.- CORREO ELECTRÓNICO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="192" width="100" height="33" uuid="75c5b09f-4a33-4c4e-90b2-a9c0de6c9772"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.14.- BAJO EL N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="225" width="158" height="33" uuid="b342d194-5a85-499a-b496-42421eb36605"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.17.- CÉDULA DE IDENTIDAD:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="126" width="147" height="33" uuid="a6f768cc-54fb-4903-9d3e-511f0e10ddf4"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.8.- ACTIVIDAD ECONÓMICA: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="159" width="523" height="33" uuid="15e02614-5d8c-499d-a88e-448ab3d33bd8"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.12.- REGISTRO MERCANTIL:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="297" y="205" width="222" height="20" uuid="e7f48acd-a350-4d66-be48-7a011e9f482a"/>
+				<textFieldExpression><![CDATA[$P{representanteB1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="401" width="132" height="20" uuid="e5cafa0e-c96b-4691-b97f-1b58453ef773"/>
+				<textFieldExpression><![CDATA[$P{extranjerosB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="320" width="522" height="31" uuid="80c0376f-2f55-4550-9c85-26aec72ad733"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.27.- N° DE TRABAJADORES DE LA EMPRESA PARA LA CUAL LABORA O LABORABA  LA/EL TRABAJADOR/A,  SEGÚN NÓMINA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="134" y="351" width="133" height="33" uuid="4f4417c8-1ebb-44e2-bfba-4b50fcf1e50d"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.29.- MUJERES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="384" width="139" height="47" uuid="ca3b3565-1242-4bd2-9e1c-b17a828634de"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.33.- Trabajadores con Discapacidad (CONAPDIS):]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="28" width="266" height="32" uuid="c98f158f-b623-4ccf-8b25-7a799e66ae4f"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.2.- CENTRO DE TRABAJO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="93" width="227" height="33" uuid="4cc91dd9-f713-4ceb-a5fe-96af05b86408"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.7.- N° PATRONAL IVSS]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="390" y="364" width="129" height="20" uuid="3187c946-b9e8-40e9-9bb6-4899748d9441"/>
+				<textFieldExpression><![CDATA[$P{aprendicesB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="146" y="126" width="107" height="33" uuid="d44fbe3d-249e-44d3-80df-aad318be3e86"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.9.- CÓDIGO CIIU:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="204" y="205" width="89" height="20" uuid="5fd5ef97-12bc-4026-b5a4-1249f05ed5fe"/>
+				<textFieldExpression><![CDATA[$P{tomoRegistroB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="331" width="421" height="20" uuid="0b6031ff-6e3f-44a1-835f-523aed45a5cc"/>
+				<textFieldExpression><![CDATA[$P{nroTrabajadoresB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="297" y="106" width="222" height="20" uuid="f9e6e143-2e2d-440a-99c7-1da73566b37f"/>
+				<textFieldExpression><![CDATA[$P{nroIvssB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="199" y="192" width="96" height="33" uuid="fac0e93c-106b-4afc-b906-03657c13869d"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.15.- TOMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="287" width="153" height="33" uuid="d64c7261-be00-40d0-8e67-5854876fc3da"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.24.- CÉDULA DE IDENTIDAD:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="287" width="163" height="33" uuid="7165aafc-c244-461d-8c1d-7e386e0f943b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.23.- REPRESENTANTE LEGAL/APODERADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="287" width="96" height="33" uuid="84d6b22b-33ae-4786-98e8-3d21644bea8b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.26.- CARGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="287" width="110" height="33" uuid="d3c1adea-be03-4b01-8ec9-3dbfdd0097ef"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.25.- TELÉFONO:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="411" width="154" height="20" uuid="383482d3-d2b0-4583-9bf0-4bfed0807753"/>
+				<textFieldExpression><![CDATA[$P{trabajadoresLocymatB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="163" y="411" width="133" height="20" uuid="7048654b-d5f0-4927-8ebe-35ca223cdf1f"/>
+				<textFieldExpression><![CDATA[$P{trabajadoresConapdisB}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="300" width="155" height="20" uuid="b9433293-1de3-4d4b-8fe7-753aaa02b422"/>
+				<textFieldExpression><![CDATA[$P{representanteB2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="167" y="300" width="149" height="20" uuid="2ce3afd7-9d03-4869-a99a-feffb978422a"/>
+				<textFieldExpression><![CDATA[$P{cedulaRepresentanteB2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="320" y="300" width="106" height="20" uuid="8b8c19cd-9781-4c0e-b890-ece464cf46d3"/>
+				<textFieldExpression><![CDATA[$P{telefonoRepresentanteB2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="430" y="300" width="88" height="20" uuid="157f7b43-a1f1-4ebb-876e-9b33fb353d06"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cargoRepresentanteB2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="321" y="270" width="197" height="20" uuid="23d89d21-6332-4fc4-9c33-90717aeed910"/>
+				<textFieldExpression><![CDATA[$P{tomoRegistroB1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="228" y="270" width="92" height="20" uuid="33bb213a-731b-4748-8c82-05f49f2c0458"/>
+				<textFieldExpression><![CDATA[$P{nroRegistroB1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="270" width="201" height="20" uuid="56a6f1a0-af9a-4fcc-85df-a2a454025225"/>
+				<textFieldExpression><![CDATA[$P{fechaActualizacionB}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="539" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="308" y="247" width="117" height="20" uuid="9a0921df-cadf-49b4-8469-8426278f3a79"/>
+				<textFieldExpression><![CDATA[$P{telefonoContactoT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="266" y="129" width="256" height="31" uuid="8122f255-a0b1-42bd-beff-a27027753972"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.15.- FECHA DE EGRESO: DD/MM/AA: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="191" width="174" height="33" uuid="cdcf08fc-a457-487f-af34-d5d84c4baca0"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.19.- ESTADO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="224" width="96" height="43" uuid="adcd3394-a376-4e61-95e4-a3b0bc3ad612"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.22.- CARGA FAMILIAR]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="182" y="248" width="125" height="20" uuid="69edbf84-4ee7-48a7-8080-16afa44c5df4"/>
+				<textFieldExpression><![CDATA[$P{familiarContactoT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="426" y="33" width="95" height="20" uuid="483c49cb-56bb-4bb5-a327-af4b0a9f514a"/>
+				<textFieldExpression><![CDATA[$P{nacionalidadTrabajador}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="275" y="140" width="244" height="20" uuid="87f7fd3e-be14-48a9-bfa1-1578d7530414"/>
+				<textFieldExpression><![CDATA[$P{fechaEgresoTrabajador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="297" y="86" width="100" height="43" uuid="e0f8110a-7907-4318-be51-780e2e0a1297"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.12.- FECHA DE INGRESO DD/MM/AA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="53" width="142" height="33" uuid="6abc02df-91c3-492d-9548-85eca6cf8ede"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.8.- LUGAR DE NACIMIENTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="224" width="131" height="43" uuid="ff1e14ab-aeec-46ef-bc41-d4d208decc13"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.20.- FAMILIAR O PERSONA DE CONTACTO:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="270" y="33" width="154" height="20" uuid="0c8e097d-0d8b-4341-b3dc-91812d3378f7"/>
+				<textFieldExpression><![CDATA[$P{cedulaTrabajador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="521" height="20" uuid="56099820-7dad-4ab0-9c28-5f479eb85916"/>
+				<text><![CDATA[5.- DATOS DEL TRABAJADOR / TRABAJADORA - ACCIDENTADO / ACCIDENTADA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="191" width="172" height="33" uuid="8add9a0a-8496-4305-b0bb-dcbe8520ede3"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.18.- MUNICIPIO:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="66" width="92" height="20" uuid="27873caf-43ef-41de-a6dc-6fa9cc762471"/>
+				<textFieldExpression><![CDATA[$P{sexoTrabajador}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="348" y="204" width="171" height="20" uuid="ed32b6fe-ada0-40de-827c-a12065416758"/>
+				<textFieldExpression><![CDATA[$P{estadoT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="92" y="53" width="57" height="33" uuid="eb9775e7-f97a-45c7-adb9-f2680d6333b8"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.6.- EDAD:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="53" width="92" height="33" uuid="eefaec90-76c2-4fec-a6e2-958fba9b4be0"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.5.- SEXO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="224" width="119" height="43" uuid="625aae35-ada9-4987-ae7e-d80d3a020125"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.21.- TELÉFONO DEL CONTACTO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="53" width="133" height="33" uuid="64defa19-4eef-4ad2-9e47-9f99eec6822e"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.7.- FECHA DE NACIMIENTO ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="171" width="505" height="20" uuid="b1aae208-300f-43c4-a89d-542c2386ff7c"/>
+				<textFieldExpression><![CDATA[$P{direccionTrabajador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="129" width="266" height="31" uuid="cafdfdf9-2c87-4ca9-a436-bd9bb9e1d8f5"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.14.- RETIRO DEL  IVSS (FORMATO 14.03): ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="93" y="224" width="83" height="43" uuid="e1e54ea8-23b4-4d05-b1a4-c8f53a56413a"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.19.- TELÉFONO CEL:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="299" y="109" width="97" height="20" uuid="d711e8e8-854d-4be0-be98-5c76579d1046"/>
+				<textFieldExpression><![CDATA[$P{fechaIngresoTrabajador}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="282" y="66" width="144" height="20" uuid="6229b276-a313-4514-a03f-c8db06add1d1"/>
+				<textFieldExpression><![CDATA[$P{lugarNacTrabajador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="424" y="20" width="98" height="33" uuid="72995457-810d-4304-8470-ba3f10120fe3"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.4.- NACIONALIDAD:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="86" width="85" height="43" uuid="b7057eaa-7d0a-4b62-9033-e8b248d481bf"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.10.- MANO DOMINANTE]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="140" width="241" height="20" uuid="ca9a3d9b-2899-48eb-b4f5-db5543a303d8"/>
+				<textFieldExpression><![CDATA[$P{retiroIvss}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="33" width="129" height="20" uuid="d3af1168-7519-46f0-a3aa-5b9252fcd0a7"/>
+				<textFieldExpression><![CDATA[$P{apellidoTrabajador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="160" width="522" height="31" uuid="5925a42e-e7f3-4ea1-84b3-45d9e539a292"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.16.- DIRECCIÓN DE HABITACIÓN: (AVENIDA, CALLE,  N°,  CASA,)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="424" y="53" width="98" height="33" uuid="9e53c92a-69aa-428b-9bba-cc574f6db942"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.9.- ESTADO CIVIL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="133" height="33" uuid="7a8810d2-d11f-45b1-a592-65b1ca06bbd2"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.1.- APELLIDOS:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="5" y="248" width="87" height="20" uuid="44eedf05-0ec7-4549-87a3-184801f846e6"/>
+				<textFieldExpression><![CDATA[$P{telefonoHabT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="397" y="86" width="125" height="43" uuid="ea3e1e47-28e7-47e0-b672-410a68b65c79"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.13.- INSCRIPCIÓN ANTE EL IVSS (FORMATO 14.02):]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="97" y="66" width="49" height="20" uuid="dd554256-6656-47ce-95a3-d4071e40d093"/>
+				<textElement markup="none">
+					<font isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{edadTrabajador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="224" width="92" height="43" uuid="4a5e614d-5b59-4c1d-b140-7fd21e8d32c8"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.18.- TELÉFONO DE HAB:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="191" width="175" height="33" uuid="8512f650-990b-4a1b-ac6c-918289b886bd"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.17.- PARROQUIA :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="20" width="158" height="33" uuid="9b97d6af-0ad9-4d03-b9c2-1c14fc7a0daf"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.3.- CÉDULA DE IDENTIDAD N°:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="428" y="248" width="93" height="20" uuid="e930ee86-d401-4951-a65e-89d8a5526405"/>
+				<textFieldExpression><![CDATA[$P{cargaT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="151" y="66" width="131" height="20" uuid="bb8f5cb5-b233-4e05-a4be-0559675e4c20"/>
+				<textFieldExpression><![CDATA[$P{fechaNacTrabajador}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="430" y="66" width="91" height="20" uuid="277d21aa-a83d-4c39-b0d0-ae6d162e4cf8"/>
+				<textFieldExpression><![CDATA[$P{estadoCivilTrabajador}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="404" y="109" width="115" height="20" uuid="e63a6b39-e813-4944-b0c1-aa22773a9be5"/>
+				<textFieldExpression><![CDATA[$P{inscripcionIvss}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="93" y="248" width="83" height="20" uuid="02d56925-7da5-40bc-a334-9afb7ff0e998"/>
+				<textFieldExpression><![CDATA[$P{telefonoCelT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="136" y="33" width="130" height="20" uuid="caa8faad-4435-45a8-940a-6f81443b5dc9"/>
+				<textFieldExpression><![CDATA[$P{nombreTrabajador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="133" y="20" width="133" height="33" uuid="b166e780-0a05-425b-af5a-8b18c8dcca88"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.2.- NOMBRES:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="267" width="120" height="217" uuid="3c89685e-7bc8-4c6d-91fb-9a4c3032ac3e"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.23- CONDICIÓN LABORAL ACTUAL ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="267" width="150" height="217" uuid="18e83ef2-f025-4db8-a056-1d042a2f5b23"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.24.- TIPO DE JORNADA/TURNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="484" width="522" height="53" uuid="65913b56-6b4e-4776-b8f0-248b43655e91"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.27.-  FRECUENCIA DE PAGO:        ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="267" width="126" height="217" uuid="0c817d75-8532-47d2-aaa4-67b4f583b192"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.25.- TIPO DE CONTRATO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="267" width="125" height="217" uuid="dab400cf-5b64-4a7b-be4b-bea81b3f7483"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.26.-  TIPOS DE SALARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="298" width="92" height="20" uuid="5a60f687-bdce-4276-aa09-3b5b402a9b56"/>
+				<text><![CDATA[TRABAJANDO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="318" width="92" height="20" uuid="2bdea3d0-01dc-4b0b-a84d-dc9282026bd9"/>
+				<text><![CDATA[REPOSO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="338" width="92" height="20" uuid="95624d31-6e13-45b0-a4d2-f1493039b7f5"/>
+				<text><![CDATA[RETIRADO  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="378" width="92" height="20" uuid="a2f15c6b-488a-4a63-9205-738520169b43"/>
+				<text><![CDATA[ REUBICADO  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="358" width="92" height="20" uuid="5e9ad9c1-08fd-4235-9f61-d0ff82b15fc3"/>
+				<text><![CDATA[DESPEDIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="398" width="92" height="20" uuid="f4757f1e-aee8-407e-ae04-e9e11574beb2"/>
+				<text><![CDATA[OTRO (INDIQUE): ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="358" width="112" height="20" uuid="5f3f5a44-28c0-4c12-b745-288d51c7df19"/>
+				<text><![CDATA[TURNO FIJO TARDES. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="398" width="105" height="20" uuid="510828f5-a973-4b8a-8632-f0b1fbf62f34"/>
+				<text><![CDATA[TURNO ROTATIVO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="318" width="105" height="20" uuid="d35bebba-fc8e-4dde-9d9d-2c756cd989b2"/>
+				<text><![CDATA[JORNADA PARCIAL.  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="298" width="112" height="20" uuid="c48b75e4-e78e-4bdd-82ef-80e8c31ae06f"/>
+				<text><![CDATA[JORNADA COMPLETA.      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="338" width="117" height="20" uuid="94a3e6b0-541b-44d8-bf77-34f5232ed286"/>
+				<text><![CDATA[TURNO FIJO MAÑANAS.    ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="378" width="112" height="20" uuid="fc874b30-b778-42e2-bbfc-42a270c532b2"/>
+				<text><![CDATA[TURNO FIJO NOCHES.    ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="154" y="418" width="105" height="20" uuid="3dc71631-3f74-4805-81c9-0f53d0de682f"/>
+				<text><![CDATA[TURNO MIXTO  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="298" width="101" height="20" uuid="63447cab-de29-4049-b58c-6422b8198a08"/>
+				<text><![CDATA[FIJO NÓMINA. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="318" width="101" height="40" uuid="c15c6173-3303-45d7-a7a1-8a15216a0f4a"/>
+				<text><![CDATA[CONTRATO TIEMPO DETERMINADO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="349" width="101" height="40" uuid="d996f2f0-e318-489e-badf-256478b99da7"/>
+				<text><![CDATA[CONTRATO OBRA DETERMINADA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="378" width="101" height="39" uuid="e3b23e36-afc4-4a3f-a6b3-3ed27199b721"/>
+				<text><![CDATA[CONTRATO DESTAJO. ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="408" width="101" height="20" uuid="f41c20c7-c15a-494f-9e1b-128dec28082b"/>
+				<text><![CDATA[APRENDIZ ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="428" width="101" height="20" uuid="b0497113-26fe-4a42-9acc-7f9d8558fdbf"/>
+				<text><![CDATA[OCASIONAL ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="448" width="101" height="20" uuid="c7c151cb-1163-41d9-8e51-644296889010"/>
+				<text><![CDATA[OTRO (INDIQUE) ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="290" width="101" height="28" uuid="85618d75-0a5d-42e0-b3e9-b8feacb12ffd"/>
+				<text><![CDATA[POR UNIDAD DE TIEMPO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="320" width="101" height="28" uuid="0b4fc1ae-10b1-42b3-b4d3-4810b9e6918e"/>
+				<text><![CDATA[POR UNIDAD DE OBRA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="349" width="101" height="28" uuid="25c7abab-b565-4da6-8e48-43505b245ab8"/>
+				<text><![CDATA[POR PIEZA O A DESTAJO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="378" width="101" height="28" uuid="9589b75b-bc5f-4c28-8c94-c44b0bc83b56"/>
+				<text><![CDATA[POR TAREA ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="410" width="101" height="28" uuid="a781130e-b74a-4c9e-bdfd-2fd31ed8270c"/>
+				<text><![CDATA[POR PRODUCTIVIDAD ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="107" y="502" width="48" height="20" uuid="d8732747-685b-432b-8fad-18b978c00775"/>
+				<text><![CDATA[DIARIO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="502" width="48" height="20" uuid="b745ac29-8066-4a47-8851-c81158d29274"/>
+				<text><![CDATA[SEMANAL         ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="502" width="62" height="20" uuid="0c625fb5-4afc-4139-8939-78c44479a295"/>
+				<text><![CDATA[QUINCENAL         ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="502" width="54" height="20" uuid="5f14eeb1-5dcc-4163-865d-75d50376fa90"/>
+				<text><![CDATA[MENSUAL      ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="502" width="48" height="35" uuid="60f18912-1e6d-46b7-9920-e74723b126ff"/>
+				<text><![CDATA[OTRO (INDIQUE): ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="10" y="320" width="13" height="11" uuid="09c98b6f-0a8e-4733-85db-e7f77d5815e8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="10" y="340" width="13" height="11" uuid="c056c028-d62e-41e6-920e-ba5a2fe1eda4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="10" y="358" width="13" height="11" uuid="ded8a078-69d1-4d7e-b8ea-2356c338627a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="10" y="378" width="13" height="11" uuid="d8ca16a4-5113-4e31-bf4a-719b2f0179ad"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="11" y="399" width="13" height="11" uuid="48f6cb2c-0c1d-4591-a390-da6cdc039a4b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="131" y="300" width="13" height="11" uuid="92671c2f-6abb-41b4-9eac-4e4f6d58e080"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="131" y="320" width="13" height="11" uuid="b04fcea5-738b-45d6-a746-59833d096b1a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="131" y="340" width="13" height="11" uuid="ad1a75ed-1f4c-4fb2-97a9-f9011e9ff087"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="131" y="361" width="13" height="11" uuid="119a9f77-f19e-4ce4-8699-4f485e248ecd"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="131" y="381" width="13" height="11" uuid="75f77dce-8b88-4a43-8868-08d0b66e3a98"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="402" width="13" height="11" uuid="b7e38c03-6af8-4d3d-903d-ab21b58ae7e4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="132" y="422" width="13" height="11" uuid="ce7dc543-46f0-47e2-b25f-413c6b600834"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="275" y="300" width="13" height="11" uuid="68f7b8cd-96f6-4bb3-ad95-5f5cafaa47db"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="275" y="326" width="13" height="11" uuid="6a2a20d0-89a0-4c47-b14b-448ceec54052"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="276" y="358" width="13" height="11" uuid="959c4971-53e9-4b46-aa23-8578d42462df"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="276" y="380" width="13" height="11" uuid="a2a4bc7b-0bef-48ca-9123-d118c1609e43"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="276" y="410" width="13" height="11" uuid="54385747-b39d-4ea1-b57e-3c65600ef434"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="276" y="431" width="13" height="11" uuid="66fd9bfe-01fb-49a6-90c0-b5ab381cb72c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="276" y="452" width="13" height="11" uuid="3d3c776f-2bc5-4bda-9990-311f2edd09c2"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="401" y="298" width="13" height="11" uuid="4734eca2-2a06-4288-b87e-4e23a8e634de"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="401" y="324" width="13" height="11" uuid="69db39ee-cff8-4b89-b412-40d6d7ec0588"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="402" y="358" width="13" height="11" uuid="b0764fff-5193-4b58-a9d0-a50b05b64ef4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="402" y="381" width="13" height="11" uuid="854ce134-8569-4f69-86e9-3c5e8eea5309"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="402" y="420" width="13" height="11" uuid="832a979b-cbf5-4447-aae1-aa6040f516b1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="88" y="505" width="13" height="11" uuid="7edc244c-ac3f-4858-88ad-31ad74916909"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="167" y="505" width="13" height="11" uuid="829b1ddb-046f-482c-982d-9001b1509761"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="240" y="505" width="13" height="11" uuid="a0727e08-1df3-4d7d-b326-662200470573"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="330" y="505" width="13" height="11" uuid="3300f8a9-93c9-4a8e-91af-365da2ef7b0c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="418" y="507" width="13" height="11" uuid="77129918-31e4-492c-bef5-041f1df4b421"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="20" y="107" width="22" height="20" uuid="e6c93403-a9a9-4b6b-a4ad-3d281b66b14b"/>
+				<text><![CDATA[Izq.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="86" width="212" height="43" uuid="55fe9db7-ab6a-45b0-b867-7fb2cea1867b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.11.- NIVEL EDUCATIVO ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="111" width="9" height="10" uuid="53e0795f-0c25-4edf-8062-d00a6f3c3d5f"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="107" width="22" height="20" uuid="6435522e-9087-4e32-a665-9425d1168b26"/>
+				<text><![CDATA[Der.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="101" width="41" height="13" uuid="0122b8c1-6cba-4c87-83d5-d26e73192a28"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ILETRADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="101" width="41" height="12" uuid="f34e9a21-03c2-4c3a-acba-9b29df5c80ef"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[PRIMARIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="101" width="53" height="11" uuid="8c4f8e93-3ba4-4a77-a8bb-4e2d8dd15ebd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SECUNDARIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="116" width="41" height="12" uuid="ca77f250-15a4-4c3d-b39e-2cdd54880768"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[TECNICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="175" y="116" width="57" height="12" uuid="ad4a3199-fd73-4db9-8d39-b2f4ca6d2f3d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SUPERIOR]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="51" y="109" width="9" height="13" uuid="59b80167-b605-4d20-b029-0f7dae4f5988"/>
+				<textFieldExpression><![CDATA[$P{manoTrabajador1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="9" y="109" width="11" height="13" uuid="350116f6-b13d-4a55-aff7-25adffb0893e"/>
+				<textFieldExpression><![CDATA[$P{manoTrabajador2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="92" y="100" width="6" height="13" uuid="36eebf0f-b8e4-4d1e-b888-c5fe8f89129d"/>
+				<textFieldExpression><![CDATA[$P{nivelEducativoTrabajador1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="158" y="100" width="8" height="14" uuid="112cca21-4ebf-4bf6-af21-39cdc05dbdef"/>
+				<textFieldExpression><![CDATA[$P{nivelEducativoTrabajador2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="228" y="101" width="9" height="13" uuid="ce1c39ea-83f0-4fd0-b5d3-b0a583a95650"/>
+				<textFieldExpression><![CDATA[$P{nivelEducativoTrabajador3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="93" y="114" width="8" height="15" uuid="50301110-be8a-46a8-a904-2ed20ce6f0c8"/>
+				<textFieldExpression><![CDATA[$P{nivelEducativoTrabajador4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="159" y="115" width="8" height="14" uuid="08102b46-653a-46f2-824b-c895683dfe0d"/>
+				<textFieldExpression><![CDATA[$P{nivelEducativoTrabajador5}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="14" y="319" width="9" height="20" uuid="4a0f9eb4-cdc8-47d0-8a09-72c13ca5b182"/>
+				<textFieldExpression><![CDATA[$P{ebc2}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="10" y="301" width="13" height="11" uuid="634653a6-7e20-4a75-a72d-10f8c7bb07e7"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="14" y="300" width="8" height="18" uuid="6fedba83-9ab5-4b16-932e-25d46e15c43d"/>
+				<textFieldExpression><![CDATA[$P{ebc1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="14" y="339" width="9" height="13" uuid="a6d438dc-1245-45a0-8fbe-93f090d4b5de"/>
+				<textFieldExpression><![CDATA[$P{ebc3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="14" y="357" width="9" height="15" uuid="40d8182a-7a4a-4be4-83ac-4484697b1345"/>
+				<textFieldExpression><![CDATA[$P{ebc4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="14" y="377" width="8" height="14" uuid="4cfd469e-8816-4d5e-b3f0-c28d1ce451c4"/>
+				<textFieldExpression><![CDATA[$P{ebc5}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="135" y="299" width="9" height="13" uuid="39728a56-439a-4aae-af96-d2dd9dcbd3c0"/>
+				<textFieldExpression><![CDATA[$P{ebd1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="135" y="319" width="9" height="16" uuid="157ef296-9250-472e-8ead-53de4775c664"/>
+				<textFieldExpression><![CDATA[$P{ebd2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="135" y="339" width="9" height="13" uuid="48a0faa0-7276-4054-9f88-159272e8e594"/>
+				<textFieldExpression><![CDATA[$P{ebd3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="135" y="360" width="9" height="17" uuid="ec2cc1de-7062-438e-bc0d-b0ce77af2ddd"/>
+				<textFieldExpression><![CDATA[$P{ebd4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="135" y="380" width="8" height="18" uuid="337981ac-d09e-4046-9254-9007e55e6c8d"/>
+				<textFieldExpression><![CDATA[$P{ebd5}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="136" y="401" width="10" height="16" uuid="a7d8ecc6-1718-4bc2-865d-5c33a059bb45"/>
+				<textFieldExpression><![CDATA[$P{ebd6}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="136" y="421" width="8" height="17" uuid="fb6d6ffd-f3e2-4441-8a80-478689cae51c"/>
+				<textFieldExpression><![CDATA[$P{ebd7}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="279" y="298" width="10" height="14" uuid="6fa3050a-decc-4e1f-94ae-d8d832273d51"/>
+				<textFieldExpression><![CDATA[$P{ebe1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="279" y="325" width="9" height="13" uuid="b534e19c-a1f6-4cae-a9ca-563b0365a7f2"/>
+				<textFieldExpression><![CDATA[$P{ebe2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="357" width="8" height="15" uuid="d9f3b101-d3f3-46c6-9066-b277893aba7d"/>
+				<textFieldExpression><![CDATA[$P{ebe3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="379" width="7" height="13" uuid="061de400-04b1-40d2-8a82-418cd6e19f8e"/>
+				<textFieldExpression><![CDATA[$P{ebe4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="409" width="8" height="13" uuid="7ee69138-b2b2-42e3-bd2d-2e7ab3cba669"/>
+				<textFieldExpression><![CDATA[$P{ebe5}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="430" width="8" height="18" uuid="c5c4578e-b0b7-4077-bf91-b5b263be8edd"/>
+				<textFieldExpression><![CDATA[$P{ebe6}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="280" y="451" width="7" height="17" uuid="ba9cfba8-a56c-402c-b2c5-12c5702627c6"/>
+				<textFieldExpression><![CDATA[$P{ebe7}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="405" y="297" width="9" height="14" uuid="6d380866-1455-4b2a-8f84-b30f5a1619d4"/>
+				<textFieldExpression><![CDATA[$P{ebf1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="405" y="322" width="8" height="16" uuid="46600d3a-a96c-49a6-bb76-378b9a1e2de1"/>
+				<textFieldExpression><![CDATA[$P{ebf2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="406" y="357" width="8" height="15" uuid="fc83058a-a119-4364-a4ca-b9742c6b3946"/>
+				<textFieldExpression><![CDATA[$P{ebf3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="406" y="380" width="8" height="18" uuid="b32c9ca7-706a-4fe2-8c8c-0d72941cd8f6"/>
+				<textFieldExpression><![CDATA[$P{ebf4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="406" y="419" width="7" height="14" uuid="0e440489-9802-4267-9041-d517ea4d8036"/>
+				<textFieldExpression><![CDATA[$P{ebf5}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="91" y="503" width="10" height="15" uuid="aa43ecb6-5d8c-4c01-a9b4-62a32320350c"/>
+				<textFieldExpression><![CDATA[$P{ebg1}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="171" y="504" width="11" height="14" uuid="45631ad3-3556-4e65-a8e7-bbbe102544a9"/>
+				<textFieldExpression><![CDATA[$P{ebg2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="244" y="503" width="9" height="15" uuid="51eb6250-1a6d-447e-987d-972d46b1a88b"/>
+				<textFieldExpression><![CDATA[$P{ebg3}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="334" y="503" width="9" height="15" uuid="62c12095-dcb1-4361-a056-e331043a4eb5"/>
+				<textFieldExpression><![CDATA[$P{ebg4}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="422" y="506" width="8" height="16" uuid="4af02c38-0f55-4ba8-8ee5-f9c162c46d19"/>
+				<textFieldExpression><![CDATA[$P{ebg5}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="49" y="111" width="9" height="10" uuid="ffd6d785-fd83-41f9-b05a-a51fffdbea4e"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="102" width="9" height="10" uuid="766ab127-3d31-497c-a18b-3f14744e9612"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="115" width="9" height="10" uuid="3ed266ad-59f5-4708-9271-5e57d3397c2b"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="103" width="9" height="10" uuid="b950ea02-8b20-42e7-a052-4c9661efbc83"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="116" width="9" height="10" uuid="47fb0824-c3af-4a4d-989e-e4f97cc79f7c"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="103" width="9" height="10" uuid="e5bd5260-685c-4971-bd5f-58bee84c999e"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
