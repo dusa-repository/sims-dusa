@@ -51,7 +51,7 @@ public class Mensaje {
 	public static String seleccioneCitaAnular = "Seleccione al menos una Cita para Anular";
 	public static String noCitasAnulacion = "Actualmente No hay Citas para su Anulacion";
 	public static String fichaExistente = "La Ficha ha sido Usada por Otro Registro.";
-	public static String pacienteMayor = "El Paciente que ha Seleccionado es Mayor de Edad y es Hijo de un Trabajador, Verifique si Cumple los Requisitos para Rermanecer Activo";
+	public static String pacienteMayor = "El Paciente que ha Seleccionado es Mayor de Edad y es Hijo de un Trabajador, Verifique si Cumple los Requisitos para Permanecer Activo";
 	public static String pacienteFallecido = "El Representante del Paciente en la Empresa ha fallecido y la Fecha es Mayor a un Año, Ferifique si Cumple los Requisitos para Permanecer Activo";
 	public static String archivoExcel = "Los Archivos deben ser de Tipo .xlsx";
 	public static String guardadosArchivos ="La Data ha sido Guardada Exitosamente";
