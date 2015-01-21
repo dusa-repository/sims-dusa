@@ -2509,7 +2509,10 @@ public class CConsulta extends CGenerico {
 					Consulta consulta = listItem.getValue();
 					if (consulta.getTipoConsultaSecundaria().equals(
 							"Pre-Empleo"))
+					{
 						btnPreEmpleo.setVisible(true);
+						txtExamenPreempleo.setValue(consulta.getExamenPreempleo());
+					}
 					idConsulta = consulta.getIdConsulta();
 					idPaciente = consulta.getPaciente().getCedula();
 					llenarCamposConsulta(consulta);
@@ -4172,6 +4175,7 @@ public class CConsulta extends CGenerico {
 		txtObservacionPrenatal.setValue("");
 		txtResultadoComplicacionNeo.setValue("");
 		tabIdentificacion.setSelected(true);
+		txtExamenPreempleo.setValue("");
 	}
 
 	@Listen("onClick = #btnAbrirIntervencion")
