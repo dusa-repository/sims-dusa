@@ -313,7 +313,7 @@ public class CReposo extends CGenerico {
 		};
 		Button guardar = (Button) botonera.getChildren().get(0);
 		guardar.setLabel("Reporte");
-		guardar.setSrc("/public/imagenes/botones/reporte.png");
+		guardar.setImage("/public/imagenes/botones/reporte.png");
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraReposo.appendChild(botonera);
 	}
@@ -379,11 +379,11 @@ public class CReposo extends CGenerico {
 	public boolean validar() {
 		if (dtbDesde.getText().compareTo("") == 0
 				|| dtbHasta.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (dtbDesde.getValue().after(dtbHasta.getValue())) {
-				msj.mensajeError(Mensaje.fechaPosterior);
+				Mensaje.mensajeError(Mensaje.fechaPosterior);
 				return false;
 
 			} else
@@ -394,7 +394,7 @@ public class CReposo extends CGenerico {
 
 	public boolean validarArea() {
 		if (cmbArea.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;
@@ -402,7 +402,7 @@ public class CReposo extends CGenerico {
 
 	public boolean validarCargo() {
 		if (cmbCargo.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;
@@ -410,7 +410,7 @@ public class CReposo extends CGenerico {
 
 	public boolean validarEmpresa() {
 		if (cmbEmpresa.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;
@@ -418,7 +418,7 @@ public class CReposo extends CGenerico {
 
 	public boolean validarNomina() {
 		if (cmbNomina.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;
@@ -426,11 +426,11 @@ public class CReposo extends CGenerico {
 
 	public boolean validarDiagnostico() {
 		if (cmbDiagnostico.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (ltbDiagnosticosAgregados.getItemCount() == 0) {
-				msj.mensajeError("Debe seleccionar al menos un diagnostico");
+				Mensaje.mensajeError("Debe seleccionar al menos un diagnostico");
 				return false;
 			} else
 				return true;
@@ -439,7 +439,7 @@ public class CReposo extends CGenerico {
 
 	public boolean validarDoctor() {
 		if (cmbUnidad.getText().compareTo("") == 0 || idDoctor.equals("")) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;
@@ -467,7 +467,7 @@ public class CReposo extends CGenerico {
 						.buscarEntreFechasReposoAreayTrabajadores(desde, hasta,
 								servicioArea.buscar(Long.parseLong(area)))
 						.isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 
 			Clients.evalJavaScript("window.open('"
@@ -514,7 +514,7 @@ public class CReposo extends CGenerico {
 							area2);
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
@@ -635,7 +635,7 @@ public class CReposo extends CGenerico {
 				|| (!diagnostico.equals("") && diagnosticoReal.equals("") && servicioConsultaDiagnostico
 						.buscarEntreFechasyTipoDiagnosticoYDiagnosticos(desde,
 								hasta, diagnostico, ids).isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 			Clients.evalJavaScript("window.open('"
 					+ damePath()
@@ -707,7 +707,7 @@ public class CReposo extends CGenerico {
 								fecha2, diagnostico, ids);
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
@@ -809,7 +809,7 @@ public class CReposo extends CGenerico {
 								hasta,
 								servicioUsuario.buscarPorCedula(idDoctor))
 						.isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else
 			Clients.evalJavaScript("window.open('"
 					+ damePath()
@@ -842,7 +842,7 @@ public class CReposo extends CGenerico {
 				&& getServicioConsulta()
 						.buscarEntreFechasPorPacienteReposoyTrabajadores(desde,
 								hasta, idPaciente).isEmpty())
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 			Clients.evalJavaScript("window.open('"
 					+ damePath()
@@ -888,7 +888,7 @@ public class CReposo extends CGenerico {
 							fecha2, idPaciente);
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
@@ -1010,7 +1010,7 @@ public class CReposo extends CGenerico {
 			}
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 		if (unidad.equals(""))
@@ -1111,7 +1111,7 @@ public class CReposo extends CGenerico {
 						.buscarEntreFechasReposoEmpresayTrabajadores(desde, hasta,
 								servicioEmpresa.buscar(Long.parseLong(empresa)))
 						.isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 
 			Clients.evalJavaScript("window.open('"
@@ -1158,7 +1158,7 @@ public class CReposo extends CGenerico {
 							empresa2);
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
@@ -1255,7 +1255,7 @@ public class CReposo extends CGenerico {
 						.buscarEntreFechasReposoCargoyTrabajadores(desde, hasta,
 								servicioCargo.buscar(Long.parseLong(cargo)))
 						.isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 
 			Clients.evalJavaScript("window.open('"
@@ -1302,7 +1302,7 @@ public class CReposo extends CGenerico {
 							cargo2);
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
@@ -1399,7 +1399,7 @@ public class CReposo extends CGenerico {
 						.buscarEntreFechasReposoNominayTrabajadores(desde, hasta,
 								servicioNomina.buscar(Long.parseLong(nomina)))
 						.isEmpty()))
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 		else {
 
 			Clients.evalJavaScript("window.open('"
@@ -1446,7 +1446,7 @@ public class CReposo extends CGenerico {
 							nomina2);
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", part1);
 		p.put("hasta", part2);
 
