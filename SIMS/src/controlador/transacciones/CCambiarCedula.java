@@ -179,6 +179,17 @@ public class CCambiarCedula extends CGenerico {
 		pacienteNuevo.setFechaMuerte(pacienteAModificar.getFechaMuerte());
 		getServicioPaciente().guardar(pacienteNuevo);
 		pacienteNuevo = getServicioPaciente().buscarPorCedula(nuevaCedula);
+		if (pacienteNuevo.isTrabajador()) {
+			List<Paciente> familiares = getServicioPaciente().buscarParientes(
+					pacienteAModificar.getCedula());
+			if (!familiares.isEmpty()) {
+				for (int i = 0; i < familiares.size(); i++) {
+					familiares.get(i).setCedulaFamiliar(
+							pacienteNuevo.getCedula());
+					getServicioPaciente().guardar(familiares.get(i));
+				}
+			}
+		}
 		List<Informe> informes = getServicioInforme().buscarPorPaciente(
 				pacienteAModificar);
 		if (!informes.isEmpty()) {
@@ -299,7 +310,7 @@ public class CCambiarCedula extends CGenerico {
 		}
 		List<PeriodoPaciente> periodos = getServicioPeriodoPaciente()
 				.buscarPorPaciente(pacienteAModificar);
-		 getServicioPeriodoPaciente().limpiar(pacienteAModificar);
+		getServicioPeriodoPaciente().limpiar(pacienteAModificar);
 		if (!periodos.isEmpty()) {
 			for (Iterator<PeriodoPaciente> iterator = periodos.iterator(); iterator
 					.hasNext();) {
@@ -323,7 +334,8 @@ public class CCambiarCedula extends CGenerico {
 		}
 		List<PacienteAntecedente> antecedentes = getServicioPacienteAntecedente()
 				.buscarAntecedentesPorPaciente(pacienteAModificar);
-		getServicioPacienteAntecedente().borrarAntecedentesPaciente(pacienteAModificar);
+		getServicioPacienteAntecedente().borrarAntecedentesPaciente(
+				pacienteAModificar);
 		if (!antecedentes.isEmpty()) {
 			for (Iterator<PacienteAntecedente> iterator = antecedentes
 					.iterator(); iterator.hasNext();) {
