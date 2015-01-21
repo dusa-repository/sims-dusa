@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRepososPorNomina" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e073bef-9a84-4bcc-8343-0810bb05f34b">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRepososPorNomina" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="9e073bef-9a84-4bcc-8343-0810bb05f34b">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="e19deba1-e65e-4953-923f-0f0ecc01c915">
+		<field name="fechaConsulta" class="java.sql.Timestamp"/>
+		<field name="paciente.nomina.nombre" class="java.lang.String"/>
+		<variable name="variable1" class="java.lang.Integer" resetType="Group" resetGroup="nomina" calculation="Count">
+			<variableExpression><![CDATA[$F{fechaConsulta}]]></variableExpression>
+		</variable>
+		<variable name="variable2" class="java.lang.Integer" calculation="Count">
+			<variableExpression><![CDATA[$F{fechaConsulta}]]></variableExpression>
+		</variable>
+		<group name="nomina">
+			<groupExpression><![CDATA[$F{paciente.nomina.nombre}]]></groupExpression>
+		</group>
+	</subDataset>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
+	<parameter name="data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<field name="paciente.nomina.nombre" class="java.lang.String"/>
 	<field name="paciente.primerNombre" class="java.lang.String"/>
 	<field name="paciente.primerApellido" class="java.lang.String"/>
@@ -272,7 +306,7 @@
 		</band>
 	</lastPageFooter>
 	<summary>
-		<band height="42" splitType="Stretch">
+		<band height="144" splitType="Stretch">
 			<staticText>
 				<reportElement x="224" y="10" width="100" height="20" uuid="1ac2a5e0-de5e-4e4f-a6ee-5a99cbc965ad"/>
 				<textElement textAlignment="Center">
@@ -280,6 +314,132 @@
 				</textElement>
 				<text><![CDATA[RESUMEN]]></text>
 			</staticText>
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="48" width="556" height="96" uuid="14ae450f-2d7c-406a-bb35-963da11dc537"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="1a922774-9606-4d77-8d9e-59d3314932ad">
+						<dataSourceExpression><![CDATA[$P{data}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="465" uuid="c93bd12c-7530-4659-9eec-04c09e97b71a">
+						<jr:tableHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.75"/>
+								<topPen lineWidth="0.75"/>
+								<leftPen lineWidth="0.75"/>
+								<bottomPen lineWidth="0.75"/>
+								<rightPen lineWidth="0.75"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="465" height="30" backcolor="#CCCCCC" uuid="b258a484-cfdb-4f3f-884a-4c11b12545a1"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="465" height="30" uuid="65e9dc17-97d4-45b1-aa13-9729f1eda92a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Nominas]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.75"/>
+								<topPen lineWidth="0.75"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.75"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="465" height="30" uuid="fe2b9b3a-6cba-48d7-b9ec-4ca074b8435a"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total Reposos]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="nomina">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.75"/>
+									<topPen lineWidth="0.75"/>
+									<leftPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+									<rightPen lineWidth="0.75"/>
+								</box>
+								<textField>
+									<reportElement x="28" y="0" width="437" height="30" uuid="6c2b5190-0666-4c2b-aa62-20801ee658be"/>
+									<textElement verticalAlignment="Middle">
+										<font size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{paciente.nomina.nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="90" uuid="a3a7568e-345e-4f42-ba50-678f0bdce768">
+						<jr:tableHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.75"/>
+								<topPen lineWidth="0.75"/>
+								<leftPen lineWidth="0.75"/>
+								<bottomPen lineWidth="0.75"/>
+								<rightPen lineWidth="0.75"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="90" height="30" backcolor="#CCCCCC" uuid="503c1aa6-af4e-436d-8d24-15d95e891454"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="793557b3-7b74-4d22-987f-1ee139b99a7c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Reposos]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.75"/>
+								<topPen lineWidth="0.75"/>
+								<leftPen lineWidth="0.75"/>
+								<bottomPen lineWidth="0.75"/>
+								<rightPen lineWidth="0.75"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="16bcce9a-a2c3-4179-8dde-00a32d0b8d82"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="nomina">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.75"/>
+									<topPen lineWidth="0.75"/>
+									<leftPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+									<rightPen lineWidth="0.75"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="90" height="30" uuid="60cbf0dd-4042-49a7-823c-45caf509d6f6"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
 		</band>
 	</summary>
 </jasperReport>

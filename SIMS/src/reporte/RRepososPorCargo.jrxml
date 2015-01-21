@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRepososPorCargo" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a33a0b7b-cbed-41fa-92c5-b9d68c78f9d2">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRepososPorCargo" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="a33a0b7b-cbed-41fa-92c5-b9d68c78f9d2">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="55a8fa8a-37ea-4c94-96d0-593b4968944f">
+		<field name="paciente.cargoReal.nombre" class="java.lang.String"/>
+		<field name="fechaConsulta" class="java.sql.Timestamp"/>
+		<variable name="variable1" class="java.lang.Integer" resetType="Group" resetGroup="cargo" calculation="Count">
+			<variableExpression><![CDATA[$F{fechaConsulta}]]></variableExpression>
+		</variable>
+		<variable name="variable2" class="java.lang.Integer" calculation="Count">
+			<variableExpression><![CDATA[$F{fechaConsulta}]]></variableExpression>
+		</variable>
+		<group name="cargo">
+			<groupExpression><![CDATA[$F{paciente.cargoReal.nombre}]]></groupExpression>
+		</group>
+	</subDataset>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
+	<parameter name="data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<field name="paciente.cargoReal.nombre" class="java.lang.String"/>
 	<field name="paciente.primerNombre" class="java.lang.String"/>
 	<field name="paciente.primerApellido" class="java.lang.String"/>
@@ -271,14 +305,134 @@
 		</band>
 	</lastPageFooter>
 	<summary>
-		<band height="42" splitType="Stretch">
+		<band height="151" splitType="Stretch">
 			<staticText>
-				<reportElement x="237" y="19" width="100" height="20" uuid="563d8b3c-d7b6-428f-8d7d-96af4a0e6044"/>
+				<reportElement x="237" y="9" width="100" height="20" uuid="563d8b3c-d7b6-428f-8d7d-96af4a0e6044"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[RESUMEN]]></text>
 			</staticText>
+			<componentElement>
+				<reportElement key="table" style="table" x="1" y="43" width="554" height="108" uuid="a78a0ff3-5c0c-4cd5-a763-eea063260d85"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="6c32fb7a-c9f8-4659-be95-ff3ed55dd58e">
+						<dataSourceExpression><![CDATA[$P{data}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="463" uuid="b28aaeab-c8f4-48ab-8af7-0ce77d2b9b6f">
+						<jr:tableHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.75"/>
+								<topPen lineWidth="0.75"/>
+								<leftPen lineWidth="0.75"/>
+								<bottomPen lineWidth="0.75"/>
+								<rightPen lineWidth="0.75"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="463" height="30" backcolor="#CCCCCC" uuid="aafd0480-b897-48a0-ac4e-a3a42f124fea"/>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="463" height="30" uuid="f8f051d5-230f-422a-90af-784cec3c0bdf"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Cargos]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.75"/>
+								<topPen lineWidth="0.75"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.75"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="463" height="30" uuid="b5fa1c4b-a989-48de-9843-dd1406106408"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total Reposos]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="cargo">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.75"/>
+									<topPen lineWidth="0.75"/>
+									<leftPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+									<rightPen lineWidth="0.75"/>
+								</box>
+								<textField>
+									<reportElement x="35" y="0" width="428" height="30" uuid="37729176-d963-4065-b44d-fc4e8270d0b6"/>
+									<textElement verticalAlignment="Middle">
+										<font size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{paciente.cargoReal.nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="90" uuid="36bd24b2-b175-4b7f-b972-10a9e5bf2eba">
+						<jr:tableHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.75"/>
+								<topPen lineWidth="0.75"/>
+								<leftPen lineWidth="0.75"/>
+								<bottomPen lineWidth="0.75"/>
+								<rightPen lineWidth="0.75"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="90" height="30" backcolor="#CCCCCC" uuid="8fa277b7-c0f0-4a8e-84d7-ea2d2a534c18"/>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="1f032579-c5c0-4dab-9a3a-c007e057c0d8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Reposos]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.75"/>
+								<topPen lineWidth="0.75"/>
+								<leftPen lineWidth="0.75"/>
+								<bottomPen lineWidth="0.75"/>
+								<rightPen lineWidth="0.75"/>
+							</box>
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="215c3d3e-144d-40a8-836d-68d627c51222"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:groupFooter groupName="cargo">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.75"/>
+									<topPen lineWidth="0.75"/>
+									<leftPen lineWidth="0.75"/>
+									<bottomPen lineWidth="0.75"/>
+									<rightPen lineWidth="0.75"/>
+								</box>
+								<textField>
+									<reportElement x="0" y="0" width="90" height="30" uuid="cc8c1ba8-99c2-4b24-846b-24a7c0986cf3"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
 		</band>
 	</summary>
 </jasperReport>
