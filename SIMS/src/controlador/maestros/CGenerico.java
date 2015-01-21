@@ -255,7 +255,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SClasificacionAccidente servicioClasificacionAccidente;
 	@WireVariable("SNomina")
 	protected SNomina servicioNomina;
-
 	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 			"/META-INF/ConfiguracionAplicacion.xml");
 	public Mensaje msj = new Mensaje();
@@ -263,7 +262,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public Include contenido;
 	public Tab tab;
 	protected DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-	// public static List<Tab> tabs = new ArrayList<Tab>();
 	public List<Tab> tabs = new ArrayList<Tab>();
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	protected DateFormat formatoImportar = new SimpleDateFormat("yyyy-MM-dd");
@@ -291,7 +289,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public void cerrarVentana(Div div, String id, List<Tab> tabs2) {
 		div.setVisible(false);
 		tabs = tabs2;
-		System.out.println(tabs.size());
 		for (int i = 0; i < tabs.size(); i++) {
 			if (tabs.get(i).getLabel().equals(id)) {
 				if (i == (tabs.size() - 1) && tabs.size() > 1) {
@@ -339,6 +336,14 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		return applicationContext.getBean(SArea.class);
 	}
 
+	public static SCita getServicioCita() {
+		return applicationContext.getBean(SCita.class);
+	}
+
+	public static SHistoria getServicioHistoria() {
+		return applicationContext.getBean(SHistoria.class);
+	}
+
 	public static SNomina getServicioNomina() {
 		return applicationContext.getBean(SNomina.class);
 	}
@@ -376,8 +381,16 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		return applicationContext.getBean(SCondicion.class);
 	}
 
+	public static SPacienteAntecedente getServicioPacienteAntecedente() {
+		return applicationContext.getBean(SPacienteAntecedente.class);
+	}
+
 	public static SPacienteMedicina getServicioPacienteMedicina() {
 		return applicationContext.getBean(SPacienteMedicina.class);
+	}
+
+	public static SPeriodoPaciente getServicioPeriodoPaciente() {
+		return applicationContext.getBean(SPeriodoPaciente.class);
 	}
 
 	public static SProveedor getServicioProveedor() {

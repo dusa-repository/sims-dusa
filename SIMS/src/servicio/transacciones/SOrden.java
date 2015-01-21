@@ -39,4 +39,8 @@ public class SOrden {
 	public List<Orden> buscarPorMotivo(MotivoCita motivoCita) {
 		return ordenDAO.findByMotivo(motivoCita);
 	}
+
+	public void guardarVarias(List<Orden> ordenes) {
+		ordenDAO.save(ordenes);
+	}
 }

@@ -54,12 +54,12 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
-
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
 import componentes.Validador;
+import controlador.transacciones.CCambiarCedula;
 
 public class CPaciente extends CGenerico {
 
@@ -262,6 +262,7 @@ public class CPaciente extends CGenerico {
 
 	URL url = getClass().getResource("usuario.png");
 	private CArbol cArbol = new CArbol();
+	CCambiarCedula cambiar = new CCambiarCedula();
 	String id = "";
 	String cedTrabajador = "";
 	Catalogo<Paciente> catalogo;
@@ -414,9 +415,9 @@ public class CPaciente extends CGenerico {
 					Cargo cargo = null;
 					Nomina nomina = null;
 					cedTrabajador = lblCedula.getValue();
-
 					if (rdoSiAlergico.isChecked())
 						alergia = true;
+					boolean cambioDeRepresentante = false;
 					if (rdoTrabajador.isChecked()) {
 						trabajador = true;
 						if (cmbCargo.getSelectedItem().getContext() != null)
@@ -438,6 +439,13 @@ public class CPaciente extends CGenerico {
 					} else {
 						cedulaFamiliar = cedTrabajador;
 						ficha = "";
+						if (!id.equals("")) {
+							Paciente familiar = servicioPaciente
+									.buscarPorCedula(id);
+							if (!cedulaFamiliar.equals(familiar
+									.getCedulaFamiliar()))
+								cambioDeRepresentante = true;
+						}
 					}
 
 					if (rdoSiDiscapacidad.isChecked())
@@ -501,6 +509,40 @@ public class CPaciente extends CGenerico {
 						inhabilitarTrabajadorYTodosFamiliares(paciente);
 					}
 					guardarMedicinas(paciente);
+					if (cambioDeRepresentante) {
+						String cedulaNueva = paciente.getCedulaFamiliar();
+						String cedulaVieja = paciente.getCedula();
+						String ultimosDigitos = "";
+						for (int i = 0; i < cedulaVieja.length(); i++) {
+							char a = cedulaVieja.charAt(i);
+							if (a == '-') {
+								ultimosDigitos = cedulaVieja.substring(i);
+								i = cedulaVieja.length();
+							}
+						}
+						if (!ultimosDigitos.equals("")) {
+							Paciente pacienteRepetido = servicioPaciente
+									.buscarPorCedula(cedulaNueva
+											+ ultimosDigitos);
+							if (pacienteRepetido == null)
+								cedulaNueva += ultimosDigitos;
+							else {
+								boolean noRepetido = false;
+								int cont = 0;
+								do {
+									cont++;
+									pacienteRepetido = servicioPaciente
+											.buscarPorCedula(cedulaNueva + "-"
+													+ cont);
+									if (pacienteRepetido == null)
+										noRepetido = true;
+								} while (!noRepetido);
+								cedulaNueva += "-" + cont;
+							}
+							cambiar.modificarHistoriaPaciente(paciente,
+									cedulaNueva);
+						}
+					}
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
 				}
@@ -1068,8 +1110,7 @@ public class CPaciente extends CGenerico {
 	public void buscarPorCedula() {
 		Paciente paciente = servicioPaciente.buscarPorCedula(txtCedulaPaciente
 				.getValue());
-		if (paciente != null)
-		{
+		if (paciente != null) {
 			llenarCampos(paciente);
 			llenarMedicinas();
 			ficha = paciente.getFicha();
@@ -1339,6 +1380,7 @@ public class CPaciente extends CGenerico {
 	}
 
 	public void limpiarCampos() {
+		cedTrabajador = "";
 		idBoton = "";
 		txtObservacionEstatus.setValue("");
 		txtNombre1Paciente.setValue("");

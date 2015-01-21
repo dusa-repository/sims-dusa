@@ -73,4 +73,12 @@ public class SCita {
 		Cita cita = citaDAO.findOne(idCita);
 		return cita;
 	}
+
+	public void eliminarCitas(List<Cita> citas) {
+		citaDAO.delete(citas);
+	}
+
+	public void guardarVarias(List<Cita> citasNuevas) {
+		citaDAO.save(citasNuevas);
+	}
 }

@@ -2,6 +2,7 @@ package interfacedao.maestros;
 
 import java.util.List;
 
+import modelo.maestros.Paciente;
 import modelo.maestros.Periodo;
 import modelo.maestros.PeriodoPaciente;
 import modelo.pk.PeriodoPacienteId;
@@ -13,5 +14,7 @@ public interface IPeriodoPacienteDAO extends JpaRepository<PeriodoPaciente, Peri
 	List<PeriodoPaciente> findByPeriodoIdPeriodo(long id);
 
 	List<PeriodoPaciente> findByPeriodo(Periodo periodo);
+
+	List<PeriodoPaciente> findByPaciente(Paciente pacienteAModificar);
 
 }
