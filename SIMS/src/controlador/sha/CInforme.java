@@ -3994,7 +3994,9 @@ public class CInforme extends CGenerico {
 			p.put("fgf4","");
 			p.put("fgf5","x");
 		}
+		if (informe.getClasificacion() != null){
 		p.put("clasificacion", informe.getClasificacion().getNombre());
+		}
 		p.put("auxilioInmediato", informe.getFgga());
 		if (informe.getFgga()){
 			p.put("auxilioInmediatoSI", "x");
@@ -4002,7 +4004,9 @@ public class CInforme extends CGenerico {
 		else {
 			p.put("auxilioInmediatoNO", "x");
 		}
+		if (informe.getArea()!= null){
 		p.put("area", informe.getArea().getNombre());
+		}
 		//p.put("fgh",informe.getFgh());
 		p.put("fgi",informe.getFgi());
 		if (informe.getFgi() != null){
@@ -4017,7 +4021,9 @@ public class CInforme extends CGenerico {
 		p.put("fgaa", informe.getFgaa());
 		p.put("fgab", informe.getFgab());
 		p.put("fgad", informe.getFgad());
+		if (informe.getArea() != null){
 		p.put("fgac",informe.getArea().getNombre());
+		}
 		//p.put("fgac", informe.getArea());
 		//p.put("fgad", informe.getFgad());
 		if (informe.getFgga())
