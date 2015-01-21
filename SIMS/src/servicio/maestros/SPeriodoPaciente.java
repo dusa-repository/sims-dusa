@@ -3,6 +3,7 @@ package servicio.maestros;
 import java.util.List;
 
 import interfacedao.maestros.IPeriodoPacienteDAO;
+import modelo.maestros.Paciente;
 import modelo.maestros.Periodo;
 import modelo.maestros.PeriodoPaciente;
 
@@ -29,6 +30,16 @@ public class SPeriodoPaciente {
 
 	public void eliminar(Periodo periodo) {
 		List<PeriodoPaciente> lista = periodoPacienteDAO.findByPeriodo(periodo);
+		if (!lista.isEmpty())
+			periodoPacienteDAO.delete(lista);
+	}
+
+	public List<PeriodoPaciente> buscarPorPaciente(Paciente pacienteAModificar) {
+		return periodoPacienteDAO.findByPaciente(pacienteAModificar);
+	}
+
+	public void limpiar(Paciente pacienteAModificar) {
+		List<PeriodoPaciente> lista = periodoPacienteDAO.findByPaciente(pacienteAModificar);
 		if (!lista.isEmpty())
 			periodoPacienteDAO.delete(lista);
 	}

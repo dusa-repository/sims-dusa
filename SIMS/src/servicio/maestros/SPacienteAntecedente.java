@@ -37,7 +37,11 @@ public class SPacienteAntecedente {
 
 	public List<PacienteAntecedente> buscarPorAntecedente(
 			Antecedente antecedente) {
-		// TODO Auto-generated method stub
 		return pacienteAntecedenteDAO.findByAntecedente(antecedente);
+	}
+
+	public List<PacienteAntecedente> buscarAntecedentesPorPaciente(
+			Paciente pacienteAModificar) {
+		return pacienteAntecedenteDAO.findByPaciente(pacienteAModificar);
 	}
 }

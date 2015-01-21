@@ -78,6 +78,58 @@ public class SInforme {
 		return informeDAO.findByPlanIdPlan(id);
 	}
 
+	public void guardarVarios(List<Informe> informes) {
+		informeDAO.save(informes);
+	}
+
+	public List<Informe> buscarPorPacienteB(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteB(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteC(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteC(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteD(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteD(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteE(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteE(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteF(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteF(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteG(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteG(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteH(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteH(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteI(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteI(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteJ(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteJ(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteK(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteK(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteL(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteL(pacienteAModificar);
+	}
+
+	public List<Informe> buscarPorPacienteM(Paciente pacienteAModificar) {
+		return informeDAO.findByPacienteM(pacienteAModificar);
+	}
+
 
 
 	}

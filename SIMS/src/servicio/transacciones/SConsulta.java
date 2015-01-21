@@ -452,5 +452,9 @@ public class SConsulta {
 				.findByFechaConsultaBetweenAndReposoAndPacienteEmpresaAndPacienteTrabajador(
 						desde, hasta, true, buscar, true, o);
 	}
+	
+	public void guardarVarias(List<Consulta> consultas) {
+		consultaDAO.save(consultas);
+	}
 
 }

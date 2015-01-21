@@ -1,0 +1,46 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divCambiarCedula" apply="controlador.transacciones.CCambiarCedula">
+		<groupbox width="50%" mold="3d" title="Modificar Cedula del Paciente">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="25%" />
+					<column label="" width="25%" />
+					<column label="" width="25%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Cedula:" />
+						<cell colspan="2">
+							<textbox maxlength="15" id="txtCedulaPaciente" hflex="1"
+								tooltiptext="Ingrese la Cedula del Paciente" />
+						</cell>
+						<button autodisable="self" id="btnBuscarPaciente" class="btn"
+							label="Buscar" tooltiptext="Catalogo de Pacientes" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Nombres:" />
+						<label id="lblNombrePaciente" />
+						<label class="etiqueta" value="Apellidos:" />
+						<label id="lblApellidoPaciente" />
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Nueva Cedula:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox maxlength="15" id="txtCedulaPaciente2" hflex="1"
+							tooltiptext="Ingrese la Nueva Cedula del Paciente" />
+						<hbox />
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraCambiarCedula" />
+			<div id="divCatalogoPacientes" />
+		</groupbox>
+	</div>
+</zk>

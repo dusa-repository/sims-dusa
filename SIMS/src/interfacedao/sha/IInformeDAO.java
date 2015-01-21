@@ -42,4 +42,28 @@ public interface IInformeDAO extends JpaRepository<Informe, Long> {
 
 	List<Informe> findByPlanIdPlan(long id);
 
+	List<Informe> findByPacienteB(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteM(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteL(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteK(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteJ(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteI(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteH(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteG(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteF(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteE(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteD(Paciente pacienteAModificar);
+
+	List<Informe> findByPacienteC(Paciente pacienteAModificar);
+
 }
