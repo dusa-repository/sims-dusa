@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RMorbilidadPorDiagnostico" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="f2a13e5d-26e4-4def-a1b2-25eb369263d3">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="32"/>
+	<property name="ireport.y" value="128"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -449,7 +449,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 						<dataSourceExpression><![CDATA[$P{data}]]></dataSourceExpression>
 					</datasetRun>
 					<jr:column width="463" uuid="14ff2d1b-ada7-49b9-babe-f60b44c853e8">
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<topPen lineWidth="0.5"/>
 								<leftPen lineWidth="0.0"/>
@@ -457,8 +457,8 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 								<rightPen lineWidth="0.5"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="463" height="30" uuid="ce84488f-5064-4750-8720-a7557685d8c6"/>
-								<box>
+								<reportElement x="0" y="0" width="463" height="25" uuid="ce84488f-5064-4750-8720-a7557685d8c6"/>
+								<box rightPadding="5">
 									<topPen lineWidth="0.0"/>
 									<leftPen lineWidth="0.0"/>
 									<bottomPen lineWidth="0.0"/>
@@ -467,7 +467,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Total Consultas]]></text>
+								<text><![CDATA[Total Consultas:  ]]></text>
 							</staticText>
 						</jr:tableFooter>
 						<jr:groupHeader groupName="tipo">
@@ -487,6 +487,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 								</rectangle>
 								<textField isStretchWithOverflow="true">
 									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="463" height="30" uuid="450e1411-b472-4f1f-a872-39a69f0a6278"/>
+									<box leftPadding="5"/>
 									<textElement verticalAlignment="Middle">
 										<font size="12" isBold="true"/>
 									</textElement>
@@ -498,7 +499,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 							<jr:cell height="0" rowSpan="1"/>
 						</jr:groupHeader>
 						<jr:groupFooter groupName="tipo">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="25" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.5"/>
 									<leftPen lineWidth="0.5"/>
@@ -506,15 +507,15 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 									<rightPen lineWidth="0.5"/>
 								</box>
 								<staticText>
-									<reportElement x="46" y="0" width="43" height="30" uuid="7948aded-ce49-47a5-a61a-d04971ba61e6"/>
+									<reportElement x="203" y="0" width="43" height="25" uuid="7948aded-ce49-47a5-a61a-d04971ba61e6"/>
 									<textElement textAlignment="Right" verticalAlignment="Middle">
 										<font size="11" isBold="true"/>
 									</textElement>
-									<text><![CDATA[Total]]></text>
+									<text><![CDATA[Total ]]></text>
 								</staticText>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="99" y="0" width="364" height="30" uuid="f8794ee2-fc7a-4b29-a1ce-4526897ad9df"/>
-									<textElement verticalAlignment="Middle">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="246" y="0" width="217" height="25" uuid="f8794ee2-fc7a-4b29-a1ce-4526897ad9df"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="11" isBold="true"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
@@ -522,7 +523,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 							</jr:cell>
 						</jr:groupFooter>
 						<jr:groupFooter groupName="diagnostico">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.5"/>
 									<leftPen lineWidth="0.5"/>
@@ -530,7 +531,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 									<rightPen lineWidth="0.5"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="46" y="0" width="417" height="30" uuid="59a40b24-53a6-4caf-ad74-14032e876b61"/>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="46" y="0" width="417" height="20" uuid="59a40b24-53a6-4caf-ad74-14032e876b61"/>
 									<textElement verticalAlignment="Middle">
 										<font size="12"/>
 									</textElement>
@@ -557,13 +558,13 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Diagnosticos]]></text>
+								<text><![CDATA[DIAGNOSTICOS]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
 					</jr:column>
 					<jr:column width="90" uuid="710529ef-f58a-4627-856c-8e9a04845574">
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<topPen lineWidth="0.5"/>
 								<leftPen lineWidth="0.5"/>
@@ -571,7 +572,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 								<rightPen lineWidth="0.5"/>
 							</box>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="ef47e4a1-2504-4642-8d53-4d1f594d2ff7"/>
+								<reportElement x="0" y="0" width="90" height="25" uuid="ef47e4a1-2504-4642-8d53-4d1f594d2ff7"/>
 								<box>
 									<topPen lineWidth="0.5"/>
 									<leftPen lineWidth="0.5"/>
@@ -605,7 +606,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 							<jr:cell height="0" rowSpan="1"/>
 						</jr:groupHeader>
 						<jr:groupFooter groupName="tipo">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="25" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.5"/>
 									<leftPen lineWidth="0.5"/>
@@ -613,7 +614,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 									<rightPen lineWidth="0.5"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="30" uuid="e4be15d1-d4a4-4095-8364-1455c633d609"/>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="25" uuid="e4be15d1-d4a4-4095-8364-1455c633d609"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="11" isBold="true"/>
 									</textElement>
@@ -622,7 +623,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 							</jr:cell>
 						</jr:groupFooter>
 						<jr:groupFooter groupName="diagnostico">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.5"/>
 									<leftPen lineWidth="0.5"/>
@@ -630,7 +631,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 									<rightPen lineWidth="0.5"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="30" uuid="cc047fdd-b0cb-43ab-99c3-0459670c8e6f"/>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="20" uuid="cc047fdd-b0cb-43ab-99c3-0459670c8e6f"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="11"/>
 									</textElement>
@@ -657,7 +658,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Consultas]]></text>
+								<text><![CDATA[CONSULTAS]]></text>
 							</staticText>
 						</jr:columnHeader>
 						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>

@@ -61,7 +61,7 @@
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
 						<combobox tooltiptext="Seleccione un Cargo" placeholder="Seleccione un Cargo"
-							id="cmbCargo" readonly="true" width="100%">
+							id="cmbCargo" readonly="true" width="100%" value="TODOS">
 							<template name="model">
 								<comboitem label="${each.nombre}" context="${each.idCargo}" />
 							</template>
@@ -77,7 +77,7 @@
 						</hbox>
 						<combobox tooltiptext="Seleccione una Empresa"
 							placeholder="Seleccione una Empresa" id="cmbEmpresa" readonly="true"
-							width="100%">
+							width="100%" value="TODAS">
 							<template name="model">
 								<comboitem label="${each.nombre}" context="${each.idEmpresa}" />
 							</template>
@@ -93,7 +93,7 @@
 						</hbox>
 						<combobox tooltiptext="Seleccione una Nomina"
 							placeholder="Seleccione una Nomina" id="cmbNomina" readonly="true"
-							width="100%">
+							width="100%" value="TODAS">
 							<template name="model">
 								<comboitem label="${each.nombre}" context="${each.idNomina}" />
 							</template>

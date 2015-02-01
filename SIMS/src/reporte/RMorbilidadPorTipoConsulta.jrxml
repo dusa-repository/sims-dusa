@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RMorbilidadPorTipoConsulta" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="0b2b28da-c3bf-41bf-b885-c0d17e3637df">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="96"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -439,10 +439,10 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Tipos de Consulta]]></text>
+								<text><![CDATA[TIPOS DE CONSULTA]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<pen lineWidth="0.75"/>
 								<topPen lineWidth="0.75"/>
@@ -451,11 +451,12 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<rightPen lineWidth="0.75"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="464" height="30" uuid="126fa676-1b71-4354-a41a-1f19426b3659"/>
+								<reportElement x="0" y="0" width="464" height="25" uuid="126fa676-1b71-4354-a41a-1f19426b3659"/>
+								<box rightPadding="5"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Total Consultas]]></text>
+								<text><![CDATA[Total Consultas:  ]]></text>
 							</staticText>
 						</jr:tableFooter>
 						<jr:groupHeader groupName="tipo">
@@ -483,7 +484,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 							</jr:cell>
 						</jr:groupHeader>
 						<jr:groupFooter groupName="tipo">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="25" rowSpan="1">
 								<box>
 									<pen lineWidth="0.75"/>
 									<topPen lineWidth="0.75"/>
@@ -492,15 +493,15 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<staticText>
-									<reportElement x="0" y="0" width="36" height="30" uuid="95195d7e-d675-466e-9265-fbc4422dd1ac"/>
+									<reportElement x="311" y="0" width="36" height="25" uuid="95195d7e-d675-466e-9265-fbc4422dd1ac"/>
 									<textElement verticalAlignment="Middle">
 										<font size="11" isBold="true"/>
 									</textElement>
 									<text><![CDATA[Total]]></text>
 								</staticText>
 								<textField>
-									<reportElement x="47" y="0" width="417" height="30" uuid="a271375f-8d4d-4a8e-9479-3eba49802439"/>
-									<textElement verticalAlignment="Middle">
+									<reportElement x="347" y="0" width="117" height="25" uuid="a271375f-8d4d-4a8e-9479-3eba49802439"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="11" isBold="true"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$F{tipoConsulta}]]></textFieldExpression>
@@ -508,7 +509,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 							</jr:cell>
 						</jr:groupFooter>
 						<jr:groupFooter groupName="secundaria">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<pen lineWidth="0.75"/>
 									<topPen lineWidth="0.75"/>
@@ -517,7 +518,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField>
-									<reportElement x="47" y="0" width="417" height="30" uuid="ba016384-21e0-4420-8f48-7af7fa6bfc0e"/>
+									<reportElement x="47" y="0" width="417" height="20" uuid="ba016384-21e0-4420-8f48-7af7fa6bfc0e"/>
 									<textElement verticalAlignment="Middle">
 										<font size="11"/>
 									</textElement>
@@ -547,10 +548,10 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Consultas]]></text>
+								<text><![CDATA[CONSULTAS]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<pen lineWidth="0.75"/>
 								<topPen lineWidth="0.75"/>
@@ -559,7 +560,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<rightPen lineWidth="0.75"/>
 							</box>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="f08529d4-bbee-4aef-ad03-b5cdfd918648"/>
+								<reportElement x="0" y="0" width="90" height="25" uuid="f08529d4-bbee-4aef-ad03-b5cdfd918648"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -584,7 +585,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 							</jr:cell>
 						</jr:groupHeader>
 						<jr:groupFooter groupName="tipo">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="25" rowSpan="1">
 								<box>
 									<pen lineWidth="0.75"/>
 									<topPen lineWidth="0.75"/>
@@ -593,7 +594,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField>
-									<reportElement x="0" y="0" width="90" height="30" uuid="bb79a2a2-5213-4b98-b796-4421c103e759"/>
+									<reportElement x="0" y="0" width="90" height="25" uuid="bb79a2a2-5213-4b98-b796-4421c103e759"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="11" isBold="true"/>
 									</textElement>
@@ -602,7 +603,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 							</jr:cell>
 						</jr:groupFooter>
 						<jr:groupFooter groupName="secundaria">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<pen lineWidth="0.75"/>
 									<topPen lineWidth="0.75"/>
@@ -611,7 +612,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField>
-									<reportElement x="0" y="0" width="90" height="30" uuid="0ccff6ab-736f-4f36-b8bd-5a64f9bfded3"/>
+									<reportElement x="0" y="0" width="90" height="20" uuid="0ccff6ab-736f-4f36-b8bd-5a64f9bfded3"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="11"/>
 									</textElement>
