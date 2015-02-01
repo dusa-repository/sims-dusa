@@ -155,7 +155,7 @@ public class CCiudad extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		final List<Ciudad> ciudades = servicioCiudad.buscarTodas();
 		catalogo = new Catalogo<Ciudad>(catalogoCiudad, "Catalogo de Ciudades",
-				ciudades, "Nombre", "Estado", "Pais") {
+				ciudades,false, "Nombre", "Estado", "Pais") {
 
 			@Override
 			protected String[] crearRegistros(Ciudad ciudad) {

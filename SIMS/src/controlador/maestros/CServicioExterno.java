@@ -184,7 +184,7 @@ public class CServicioExterno extends CGenerico {
 		final List<ServicioExterno> serviciosExternos = servicioServicioExterno
 				.buscarTodas();
 		catalogo = new Catalogo<ServicioExterno>(catalogoServicioExterno,
-				"Catalogo de Servicios Externos", serviciosExternos, "Nombre") {
+				"Catalogo de Servicios Externos", serviciosExternos,false, "Nombre") {
 
 			@Override
 			protected List<ServicioExterno> buscar(String valor, String combo) {

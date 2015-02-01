@@ -867,8 +867,8 @@ public class CPaciente extends CGenerico {
 		}
 		final List<Paciente> pacientes = pacientes2;
 		catalogo = new Catalogo<Paciente>(catalogoPaciente,
-				"Catalogo de Pacientes", pacientes, "Cedula", segundo,
-				"Nombre", "Apellido", "Trabajador Asociado") {
+				"Catalogo de Pacientes", pacientes, false,"Cedula", segundo,
+				"Nombre", "Apellido", "Trabajador Asociado", "Estado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -910,12 +910,16 @@ public class CPaciente extends CGenerico {
 				if (!idBoton.equals("btnBuscarPaciente")) {
 					valor = objeto.getParentescoFamiliar();
 				}
-				String[] registros = new String[5];
+				String activo = "Activo";
+				if (!objeto.isEstatus())
+					activo = "Inactivo";
+				String[] registros = new String[6];
 				registros[0] = objeto.getCedula();
 				registros[1] = valor;
 				registros[2] = objeto.getPrimerNombre();
 				registros[3] = objeto.getPrimerApellido();
 				registros[4] = objeto.getCedulaFamiliar();
+				registros[5] = activo;
 				return registros;
 			}
 
@@ -930,7 +934,7 @@ public class CPaciente extends CGenerico {
 		final List<Paciente> pacientes = servicioPaciente
 				.buscarTodosTrabajadores();
 		catalogoFamiliar = new Catalogo<Paciente>(divCatalogoFamiliar,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Catalogo de Pacientes", pacientes,false, "Cedula", "Ficha",
 				"Nombre", "Apellido") {
 
 			@Override

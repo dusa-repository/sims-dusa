@@ -12,12 +12,12 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
+import modelo.control.ControlOrden;
 import modelo.inventario.F4101;
 import modelo.inventario.F4105;
 import modelo.inventario.F4105PK;
 import modelo.inventario.F4211;
 import modelo.inventario.F4211PK;
-import modelo.maestros.Diagnostico;
 import modelo.maestros.Especialista;
 import modelo.maestros.Examen;
 import modelo.maestros.Medicina;
@@ -42,6 +42,7 @@ import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.json.JSONException;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
@@ -222,6 +223,10 @@ public class COrden extends CGenerico {
 	private Button btnGenerarRecipe;
 	@Wire
 	private Button btnGenerarOrdenServicios;
+	@Wire
+	private Button btnBuscarPacienteCita;
+	@Wire
+	private Textbox txtCedulaCita;
 
 	List<Medicina> medicinasDisponibles = new ArrayList<Medicina>();
 	List<OrdenMedicina> medicinasAgregadas = new ArrayList<OrdenMedicina>();
@@ -253,6 +258,8 @@ public class COrden extends CGenerico {
 	Botonera botonera;
 
 	private CArbol cArbol = new CArbol();
+	private Long idControlOrden = null;
+	private String idBoton;
 
 	@Override
 	public void inicializar() throws IOException {
@@ -332,7 +339,7 @@ public class COrden extends CGenerico {
 					guardarExamenes(orden);
 					guardarEspecialistas(orden);
 					guardarEstudios(orden);
-					msj.mensajeInformacion("Registro Guardado Exitosamente, Ahora puede Generar las Ordenes Respectivas");
+					Mensaje.mensajeInformacion("Registro Guardado Exitosamente, Ahora puede Generar las Ordenes Respectivas");
 					idOrden = orden.getIdOrden();
 					botonera.getChildren().get(0).setVisible(false);
 					btnGenerarOrden.setVisible(true);
@@ -340,7 +347,16 @@ public class COrden extends CGenerico {
 					btnGenerarOrdenServicios.setVisible(true);
 					btnGenerarRecipe.setVisible(true);
 					actualizarOrdenes(paciente);
-
+					if (idControlOrden != null) {
+						ControlOrden control = servicioControlOrden
+								.buscar(idControlOrden);
+						control.setEstado("Aprobado");
+						control.setHoraAuditoria(horaAuditoria);
+						control.setFechaAuditoria(fechaHora);
+						control.setUsuarioAuditoria(nombreUsuarioSesion());
+						servicioControlOrden.guardar(control);
+						idControlOrden = null;
+					}
 				}
 			}
 
@@ -513,47 +529,47 @@ public class COrden extends CGenerico {
 
 	protected boolean validar() {
 		if (txtCedula.getText().compareTo("") == 0) {
-			msj.mensajeError("Debe Seleccionar un Paciente");
+			Mensaje.mensajeError("Debe Seleccionar un Paciente");
 			return false;
 		} else {
 			if (dtbFecha.getText().compareTo("") == 0
 					|| cmbDoctor.getText().compareTo("") == 0
 					|| cmbMotivo.getText().compareTo("") == 0) {
-				msj.mensajeError(Mensaje.camposVacios);
+				Mensaje.mensajeError(Mensaje.camposVacios);
 				return false;
 			} else {
 				if (!agregarMedicina()) {
-					msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Medicinas");
+					Mensaje.mensajeError("Debe Llenar Todos los Campos de la Lista de Medicinas");
 					return false;
 				} else {
 					if (!agregarExamen()) {
-						msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Examenes");
+						Mensaje.mensajeError("Debe Llenar Todos los Campos de la Lista de Examenes");
 						return false;
 					} else {
 						if (!agregarEspecialista()) {
-							msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Especialistas");
+							Mensaje.mensajeError("Debe Llenar Todos los Campos de la Lista de Especialistas");
 							return false;
 						} else {
 							if (!agregarServicio()) {
-								msj.mensajeError("Debe Llenar Todos los Campos de la Lista de Servicios Externos");
+								Mensaje.mensajeError("Debe Llenar Todos los Campos de la Lista de Servicios Externos");
 								return false;
 							} else {
 								if (ltbMedicinasAgregadas.getItemCount() != 0
 										&& cmbPrioridadMedicina.getText()
 												.compareTo("") == 0) {
-									msj.mensajeError("Debe Seleccionar la Prioridad del Recipe");
+									Mensaje.mensajeError("Debe Seleccionar la Prioridad del Recipe");
 									return false;
 								} else {
 									if (ltbMedicinasAgregadas.getItemCount() != 0
 											&& cmbTratamiento.getText()
 													.compareTo("") == 0) {
-										msj.mensajeError("Debe indicar el tipo de tratamiento");
+										Mensaje.mensajeError("Debe indicar el tipo de tratamiento");
 										return false;
 									} else {
 										if (ltbExamenesAgregados.getItemCount() != 0
 												&& cmbProveedor.getText()
 														.compareTo("") == 0) {
-											msj.mensajeError("Debe Seleccionar el Laboratorio que Realizara los Examenes");
+											Mensaje.mensajeError("Debe Seleccionar el Laboratorio que Realizara los Examenes");
 											return false;
 										} else {
 											if (ltbServicioExternoAgregados
@@ -561,7 +577,7 @@ public class COrden extends CGenerico {
 													&& cmbPrioridadServicio
 															.getText()
 															.compareTo("") == 0) {
-												msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Estudios Externos");
+												Mensaje.mensajeError("Debe Seleccionar la Prioridad de la orden de los Estudios Externos");
 												return false;
 											} else {
 												if (ltbExamenesAgregados
@@ -569,7 +585,7 @@ public class COrden extends CGenerico {
 														&& cmbPrioridadExamen
 																.getText()
 																.compareTo("") == 0) {
-													msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Examenes");
+													Mensaje.mensajeError("Debe Seleccionar la Prioridad de la orden de los Examenes");
 													return false;
 												} else {
 													if (ltbEspecialistasAgregados
@@ -578,7 +594,7 @@ public class COrden extends CGenerico {
 																	.getText()
 																	.compareTo(
 																			"") == 0) {
-														msj.mensajeError("Debe Seleccionar la Prioridad de la orden de los Especialistas");
+														Mensaje.mensajeError("Debe Seleccionar la Prioridad de la orden de los Especialistas");
 														return false;
 													} else
 														return true;
@@ -605,6 +621,7 @@ public class COrden extends CGenerico {
 		if (!botonera.getChildren().get(0).isVisible()) {
 			botonera.getChildren().get(0).setVisible(true);
 		}
+		idControlOrden = null;
 		btnGenerarOrden.setVisible(false);
 		btnGenerarRecipe.setVisible(false);
 		btnGenerarReferencia.setVisible(false);
@@ -1544,6 +1561,30 @@ public class COrden extends CGenerico {
 		listasMultiples();
 	}
 
+	@Listen("onOK = #txtCedulaCita")
+	public void buscarCedulaOrden() {
+		Paciente paciente = new Paciente();
+		// if (isPlanta)
+		paciente = servicioPaciente.buscarPorCitaCedula(txtCedulaCita.getValue(),
+				fecha);
+		// else
+		// paciente = servicioPaciente.buscarPorCedulaFamiliarActivo(txtCedula
+		// .getValue());
+		limpiarCampos();
+		if (paciente != null) {
+			txtCedula.setValue("");
+			idControlOrden = Long.valueOf(paciente.getUsuarioAuditoria());
+			txtCedulaCita.setValue(paciente.getCedula());
+			llenarCampos(paciente);
+			idPaciente = paciente.getCedula();
+			List<Orden> ordenes = servicioOrden.buscarPorPaciente(paciente);
+			ltbOrdenes.setModel(new ListModelList<Orden>(ordenes));
+			llenarListas();
+		} else {
+			Mensaje.mensajeError(Mensaje.pacienteNoExiste);
+		}
+	}
+
 	@Listen("onOK = #txtCedula")
 	public void buscarCedula() {
 		Paciente paciente = new Paciente();
@@ -1560,39 +1601,66 @@ public class COrden extends CGenerico {
 			ltbOrdenes.setModel(new ListModelList<Orden>(ordenes));
 			llenarListas();
 		} else {
-			msj.mensajeError(Mensaje.pacienteNoExiste);
+			Mensaje.mensajeError(Mensaje.pacienteNoExiste);
 		}
 	}
 
 	/* Muestra un catalogo de Pacientes */
-	@Listen("onClick = #btnBuscarPaciente")
-	public void mostrarCatalogoPaciente() throws IOException {
+	@Listen("onClick = #btnBuscarPaciente, #btnBuscarPacienteCita")
+	public void mostrarCatalogoPaciente(Event evento) throws IOException {
+		idBoton = evento.getTarget().getId();
 		List<Paciente> pacientesBuscar = new ArrayList<Paciente>();
 		// if (isPlanta)
-		pacientesBuscar = servicioPaciente.buscarTodosActivos();
+		if (idBoton.equals("btnBuscarPaciente"))
+			pacientesBuscar = servicioPaciente.buscarTodosActivos();
+		else
+			pacientesBuscar = servicioPaciente.buscarPorOrden(fecha);
 		// else
 		// pacientesBuscar = servicioPaciente.buscarFamiliaresActivos();
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Catalogo de Pacientes", pacientes, false, "Cedula", "Ficha",
 				"Nombre", "Apellido", "Trabajador Asociado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
 				// if (isPlanta) {
-				switch (combo) {
-				case "Ficha":
-					return servicioPaciente.filtroFichaActivos(valor);
-				case "Nombre":
-					return servicioPaciente.filtroNombre1Activos(valor);
-				case "Cedula":
-					return servicioPaciente.filtroCedulaActivos(valor);
-				case "Apellido":
-					return servicioPaciente.filtroApellido1Activos(valor);
-				case "Trabajador Asociado":
-					return servicioPaciente.filtroCedulaFamiliar1Activos(valor);
-				default:
-					return pacientes;
+				if (idBoton.equals("btnBuscarPaciente")) {
+					switch (combo) {
+					case "Ficha":
+						return servicioPaciente.filtroFichaActivos(valor);
+					case "Nombre":
+						return servicioPaciente.filtroNombre1Activos(valor);
+					case "Cedula":
+						return servicioPaciente.filtroCedulaActivos(valor);
+					case "Apellido":
+						return servicioPaciente.filtroApellido1Activos(valor);
+					case "Trabajador Asociado":
+						return servicioPaciente
+								.filtroCedulaFamiliar1Activos(valor);
+					default:
+						return pacientes;
+					}
+				} else {
+					switch (combo) {
+					case "Ficha":
+						return servicioPaciente.filtroOrdenFichaActivos(valor,
+								fecha);
+					case "Nombre":
+						return servicioPaciente.filtroOrdenNombre1Activos(
+								valor, fecha);
+					case "Cedula":
+						return servicioPaciente.filtroOrdenCedulaActivos(valor,
+								fecha);
+					case "Apellido":
+						return servicioPaciente.filtroOrdenApellido1Activos(
+								valor, fecha);
+					case "Trabajador Asociado":
+						return servicioPaciente
+								.filtroOrdenCedulaFamiliar1Activos(valor, fecha);
+					default:
+						return pacientes;
+					}
 				}
 				// } else {
 				// switch (combo) {
@@ -1636,6 +1704,11 @@ public class COrden extends CGenerico {
 	public void seleccionarPaciente() {
 		limpiarCampos();
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
+		if (idBoton.equals("btnBuscarPacienteCita")) {
+			txtCedulaCita.setValue(paciente.getCedula());
+			idControlOrden = Long.valueOf(paciente.getUsuarioAuditoria());
+		} else
+			txtCedulaCita.setValue("");
 		llenarCampos(paciente);
 		idPaciente = paciente.getCedula();
 		List<Orden> ordenes = servicioOrden.buscarPorPaciente(paciente);
@@ -1740,10 +1813,10 @@ public class COrden extends CGenerico {
 					.getCedulaFamiliar());
 			if (representante.isMuerte()) {
 				if (calcularEdad(representante.getFechaMuerte()) >= 1)
-					msj.mensajeAlerta(Mensaje.pacienteFallecido);
+					Mensaje.mensajeAlerta(Mensaje.pacienteFallecido);
 			} else {
 				if (calcularEdad(paciente.getFechaNacimiento()) >= 18)
-					msj.mensajeAlerta(Mensaje.pacienteMayor);
+					Mensaje.mensajeAlerta(Mensaje.pacienteMayor);
 			}
 		}
 	}
@@ -1768,9 +1841,9 @@ public class COrden extends CGenerico {
 					btnGenerarRecipe.setVisible(true);
 				}
 			} else
-				msj.mensajeError("Debe Seleccionar una Consulta");
+				Mensaje.mensajeError("Debe Seleccionar una Consulta");
 		} else
-			msj.mensajeError("No existen Regitros de Consulta");
+			Mensaje.mensajeError("No existen Regitros de Consulta");
 	}
 
 	private void llenarCamposOrden(Orden orden) {
@@ -1789,7 +1862,7 @@ public class COrden extends CGenerico {
 					+ id
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 
 	}
 
@@ -1805,7 +1878,7 @@ public class COrden extends CGenerico {
 		dias = formatoFecha.format(fechaRecipe);
 
 		Paciente paciente = orden.getPaciente();
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
 		String direccionEmpresa = "";
 		String rifEmpresa = "J-30940783-0";
@@ -1872,7 +1945,7 @@ public class COrden extends CGenerico {
 						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 			}
 		} else
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 
 	}
 
@@ -1885,7 +1958,7 @@ public class COrden extends CGenerico {
 		List<OrdenEspecialista> lista = getServicioOrdenEspecialista()
 				.buscarPorOrden(orden);
 		Paciente paciente = orden.getPaciente();
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
 		String direccionEmpresa = "";
 		String rifEmpresa = "J-30940783-0";
@@ -1965,7 +2038,7 @@ public class COrden extends CGenerico {
 						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 			}
 		} else
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 
 	}
 
@@ -1980,7 +2053,7 @@ public class COrden extends CGenerico {
 					+ "; ";
 		}
 		Paciente paciente = orden.getPaciente();
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
 		String direccionEmpresa = "";
 		String rifEmpresa = "J-30940783-0";
@@ -2052,7 +2125,7 @@ public class COrden extends CGenerico {
 						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 			}
 		} else
-			msj.mensajeAlerta(Mensaje.noHayRegistros);
+			Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 
 	}
 
@@ -2062,7 +2135,7 @@ public class COrden extends CGenerico {
 		List<OrdenExamen> listaMedicinas = getServicioOrdenExamen()
 				.buscarPorOrdenYProveedor(orden, part5);
 		Paciente paciente = orden.getPaciente();
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
 		String direccionEmpresa = "";
 		String rifEmpresa = "J-30940783-0";

@@ -122,7 +122,7 @@ public class CClasificacionDiagnostico extends CGenerico {
 				.buscarTodas();
 		catalogo = new Catalogo<ClasificacionDiagnostico>(
 				catalogoClasificacionDiagnostico, "Catalogo de Unidades",
-				unidades, "Nombre") {
+				unidades,false, "Nombre") {
 
 			@Override
 			protected List<ClasificacionDiagnostico> buscar(String valor,

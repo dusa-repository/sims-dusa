@@ -485,7 +485,7 @@ public class CGrupo extends CGenerico {
 		metodoLimpiar();
 		List<Grupo> grupos = servicioGrupo.buscarTodos();
 		catalogo = new Catalogo<Grupo>(catalogoGrupo, "Catalogo de Grupos",
-				grupos, "Nombre") {
+				grupos, false,"Nombre") {
 			@Override
 			protected String[] crearRegistros(Grupo grupo) {
 				String[] registros = new String[1];

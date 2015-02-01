@@ -129,7 +129,7 @@ public class CCargo extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Cargo> cargos = servicioCargo.buscarTodos();
 		catalogo = new Catalogo<Cargo>(catalogoCargo, "Catalogo de Areas",
-				cargos, "Nombre") {
+				cargos,false, "Nombre") {
 
 			@Override
 			protected List<Cargo> buscar(String valor, String combo) {

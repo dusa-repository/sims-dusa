@@ -388,7 +388,7 @@ public class CMedicina extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		List<Medicina> medicinas = servicioMedicina.buscarTodas();
 		catalogo = new Catalogo<Medicina>(catalogoMedicina,
-				"Catalogo de Medicinas", medicinas, "Nombre", "Laboratorio",
+				"Catalogo de Medicinas", medicinas,false, "Nombre", "Laboratorio",
 				"Denominacion Generica") {
 
 			@Override

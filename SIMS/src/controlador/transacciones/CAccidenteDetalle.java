@@ -179,7 +179,7 @@ public class CAccidenteDetalle extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		final List<Accidente> accidentes = servicioAccidente.buscarTodos();
 		catalogo = new Catalogo<Accidente>(catalogoAccidente,
-				"Catalogo de Accidentes", accidentes, "Codigo", "Nombre",
+				"Catalogo de Accidentes", accidentes, false,"Codigo", "Nombre",
 				"Clasificacion") {
 
 			@Override

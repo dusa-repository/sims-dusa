@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
+import modelo.maestros.Accidente;
 import modelo.maestros.Paciente;
 import modelo.maestros.Periodo;
 import modelo.maestros.PeriodoPaciente;
@@ -33,6 +35,7 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
+import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
 import componentes.Validador;
@@ -58,6 +61,9 @@ public class CCertificado extends CGenerico {
 	private Listbox ltbPacientesAgregados;
 	@Wire
 	private Label lblNombre;
+	@Wire
+	private Textbox txtBuscadorPaciente;
+	Buscar<Paciente> buscarPaciente;
 	List<Paciente> pacientes = new ArrayList<Paciente>();
 	List<PeriodoPaciente> pacientesAgregados = new ArrayList<PeriodoPaciente>();
 	private long idPeriodo = 0;
@@ -80,6 +86,7 @@ public class CCertificado extends CGenerico {
 			}
 		}
 		llenarListas();
+		cargarBuscador();
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -102,11 +109,10 @@ public class CCertificado extends CGenerico {
 			public void guardar() {
 				if (validar()) {
 					Periodo periodo = servicioPeriodo.buscar(idPeriodo);
-					if (media == null){
+					if (media == null) {
 						guardarLista(periodo);
 						msj.mensajeInformacion(Mensaje.guardado);
-					}
-					else
+					} else
 						guardarArchivo(periodo);
 					limpiar();
 				}
@@ -118,6 +124,26 @@ public class CCertificado extends CGenerico {
 		};
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraCertificado.appendChild(botonera);
+	}
+
+	private void cargarBuscador() {
+		buscarPaciente = new Buscar<Paciente>(ltbPacientes, txtBuscadorPaciente) {
+			@Override
+			protected List<Paciente> buscar(String valor) {
+				List<Paciente> pacientesFiltrados = new ArrayList<Paciente>();
+				List<Paciente> pacientesBuscados = servicioPaciente
+						.filtroCedulaOFichaTrabajadorActivo(valor);
+				for (int i = 0; i < pacientes.size(); i++) {
+					Paciente paciente = pacientes.get(i);
+					for (int j = 0; j < pacientesBuscados.size(); j++) {
+						if (paciente.getCedula().equals(
+								pacientesBuscados.get(j).getCedula()))
+							pacientesFiltrados.add(paciente);
+					}
+				}
+				return pacientesFiltrados;
+			}
+		};
 	}
 
 	protected void guardarArchivo(Periodo periodo) {
@@ -356,7 +382,7 @@ public class CCertificado extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Periodo> periodos = servicioPeriodo.buscarTodos();
 		catalogo = new Catalogo<Periodo>(catalogoPeriodo,
-				"Catalogo de Periodos", periodos, "Nombre", "Fecha Inicio",
+				"Catalogo de Periodos", periodos,false, "Nombre", "Fecha Inicio",
 				"Fecha Fin") {
 			private static final long serialVersionUID = 2968389472159832753L;
 

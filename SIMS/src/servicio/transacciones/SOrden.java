@@ -43,4 +43,20 @@ public class SOrden {
 	public void guardarVarias(List<Orden> ordenes) {
 		ordenDAO.save(ordenes);
 	}
+
+	public List<Orden> filtroFecha(String valor, Paciente paciente) {
+		return ordenDAO.findByPacienteAndFechaOrdenStartingWithAllIgnoreCase(
+				paciente, valor);
+	}
+
+	public List<Orden> filtroDoctor(String valor, Paciente paciente) {
+		return ordenDAO.findByPacienteAndDoctorStartingWithAllIgnoreCase(
+				paciente, valor);
+	}
+
+	public List<Orden> filtroMotivo(String valor, Paciente paciente) {
+		return ordenDAO
+				.findByPacienteAndMotivoDescripcionStartingWithAllIgnoreCase(
+						paciente, valor);
+	}
 }

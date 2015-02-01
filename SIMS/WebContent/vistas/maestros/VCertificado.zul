@@ -35,6 +35,13 @@
 				</rows>
 			</grid>
 			<separator />
+			<hbox>
+				<separator />
+				<textbox tooltiptext="Ingrese la Cedula o Ficha del Paciente"
+					placeholder="Ingrese la Cedula o Ficha del Paciente" width="195px"
+					id="txtBuscadorPaciente" />
+			</hbox>
+			<separator />
 			<hbox widths="37%,3%,60%" width="100%">
 				<listbox mold="paging" pageSize="10" id="ltbPacientes"
 					width="100%" height="100%" rows="6" emptyMessage="No hay Estudios Registrados">

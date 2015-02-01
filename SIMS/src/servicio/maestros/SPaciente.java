@@ -1,5 +1,6 @@
 package servicio.maestros;
 
+import interfacedao.control.IControlOrdenDAO;
 import interfacedao.maestros.IPacienteDAO;
 import interfacedao.maestros.IPeriodoPacienteDAO;
 import interfacedao.transacciones.ICitaDAO;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import modelo.control.ControlOrden;
 import modelo.maestros.Cargo;
 import modelo.maestros.Cita;
 import modelo.maestros.Ciudad;
@@ -21,7 +23,6 @@ import modelo.maestros.Periodo;
 import modelo.maestros.PeriodoPaciente;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
-import modelo.transacciones.ConsultaMedicina;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -38,6 +39,8 @@ public class SPaciente {
 	private ICitaDAO citaDAO;
 	@Autowired
 	private IPeriodoPacienteDAO periodoPacienteDAO;
+	@Autowired
+	private IControlOrdenDAO controlOrdenDAO;
 
 	public List<Paciente> buscarTodos() {
 		Pageable topTen = new PageRequest(0, 10);
@@ -408,7 +411,8 @@ public class SPaciente {
 		return pacientes;
 	}
 
-	public List<Paciente> filtroFichaCitaActivos(Usuario usuario, String valor, Date fechaT) {
+	public List<Paciente> filtroFichaCitaActivos(Usuario usuario, String valor,
+			Date fechaT) {
 		Calendar calendario = Calendar.getInstance();
 		calendario.setTime(fechaT);
 		calendario.set(Calendar.HOUR, 0);
@@ -419,7 +423,8 @@ public class SPaciente {
 		fechaT = calendario.getTime();
 		Timestamp fecha = new Timestamp(fechaT.getTime());
 		List<Cita> citas = citaDAO
-				.findByUsuarioAndPacienteFichaStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+				.findByUsuarioAndPacienteFichaStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
+						usuario, valor, fecha, "Pendiente");
 		List<Paciente> pacientes = new ArrayList<Paciente>();
 		if (!citas.isEmpty())
 			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
@@ -431,7 +436,8 @@ public class SPaciente {
 		return pacientes;
 	}
 
-	public List<Paciente> filtroNombreCitaActivos(Usuario usuario, String valor, Date fechaT) {
+	public List<Paciente> filtroNombreCitaActivos(Usuario usuario,
+			String valor, Date fechaT) {
 		Calendar calendario = Calendar.getInstance();
 		calendario.setTime(fechaT);
 		calendario.set(Calendar.HOUR, 0);
@@ -442,7 +448,8 @@ public class SPaciente {
 		fechaT = calendario.getTime();
 		Timestamp fecha = new Timestamp(fechaT.getTime());
 		List<Cita> citas = citaDAO
-				.findByUsuarioAndPacientePrimerNombreStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+				.findByUsuarioAndPacientePrimerNombreStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
+						usuario, valor, fecha, "Pendiente");
 		List<Paciente> pacientes = new ArrayList<Paciente>();
 		if (!citas.isEmpty())
 			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
@@ -454,7 +461,8 @@ public class SPaciente {
 		return pacientes;
 	}
 
-	public List<Paciente> filtroCedulaCitaActivos(Usuario usuario, String valor, Date fechaT) {
+	public List<Paciente> filtroCedulaCitaActivos(Usuario usuario,
+			String valor, Date fechaT) {
 		Calendar calendario = Calendar.getInstance();
 		calendario.setTime(fechaT);
 		calendario.set(Calendar.HOUR, 0);
@@ -465,7 +473,8 @@ public class SPaciente {
 		fechaT = calendario.getTime();
 		Timestamp fecha = new Timestamp(fechaT.getTime());
 		List<Cita> citas = citaDAO
-				.findByUsuarioAndPacienteCedulaStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+				.findByUsuarioAndPacienteCedulaStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
+						usuario, valor, fecha, "Pendiente");
 		List<Paciente> pacientes = new ArrayList<Paciente>();
 		if (!citas.isEmpty())
 			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
@@ -477,7 +486,8 @@ public class SPaciente {
 		return pacientes;
 	}
 
-	public List<Paciente> filtroApellidoCitaActivos(Usuario usuario, String valor, Date fechaT) {
+	public List<Paciente> filtroApellidoCitaActivos(Usuario usuario,
+			String valor, Date fechaT) {
 		Calendar calendario = Calendar.getInstance();
 		calendario.setTime(fechaT);
 		calendario.set(Calendar.HOUR, 0);
@@ -488,7 +498,8 @@ public class SPaciente {
 		fechaT = calendario.getTime();
 		Timestamp fecha = new Timestamp(fechaT.getTime());
 		List<Cita> citas = citaDAO
-				.findByUsuarioAndPacientePrimerApellidoStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+				.findByUsuarioAndPacientePrimerApellidoStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
+						usuario, valor, fecha, "Pendiente");
 		List<Paciente> pacientes = new ArrayList<Paciente>();
 		if (!citas.isEmpty())
 			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
@@ -500,7 +511,8 @@ public class SPaciente {
 		return pacientes;
 	}
 
-	public Paciente buscarPorCitaActivo(Usuario usuario, String value, Date fechaT) {
+	public Paciente buscarPorCitaActivo(Usuario usuario, String value,
+			Date fechaT) {
 		Calendar calendario = Calendar.getInstance();
 		calendario.setTime(fechaT);
 		calendario.set(Calendar.HOUR, 0);
@@ -569,7 +581,8 @@ public class SPaciente {
 		fechaT = calendario.getTime();
 		Timestamp fecha = new Timestamp(fechaT.getTime());
 		List<Cita> citas = citaDAO
-				.findByUsuarioAndPacienteCedulaFamiliarStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(usuario,valor,fecha,"Pendiente");
+				.findByUsuarioAndPacienteCedulaFamiliarStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
+						usuario, valor, fecha, "Pendiente");
 		List<Paciente> pacientes = new ArrayList<Paciente>();
 		if (!citas.isEmpty())
 			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
@@ -581,4 +594,179 @@ public class SPaciente {
 		return pacientes;
 	}
 
+	public List<Paciente> filtroCedulaOFichaTrabajadorActivo(String valor) {
+		return pacienteDAO
+				.findByTrabajadorTrueAndEstatusTrueAndCedulaStartingWithOrFichaStartingWithAllIgnoreCase(
+						valor, valor);
+	}
+
+	public List<Paciente> buscarPorOrden(Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("idControlOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		List<ControlOrden> lista = controlOrdenDAO
+				.findByFechaRecepcionAndEstado(fecha, "Pendiente", o);
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		for (Iterator<ControlOrden> iterator = lista.iterator(); iterator
+				.hasNext();) {
+			ControlOrden control = (ControlOrden) iterator.next();
+			control.getPaciente().setUsuarioAuditoria(
+					String.valueOf(control.getIdControlOrden()));
+			pacientes.add(control.getPaciente());
+		}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroOrdenFichaActivos(String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<ControlOrden> lista = controlOrdenDAO
+				.findByFechaRecepcionAndPacienteFichaStartingWithAllIgnoreCase(
+						fecha, valor);
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		for (Iterator<ControlOrden> iterator = lista.iterator(); iterator
+				.hasNext();) {
+			ControlOrden control = (ControlOrden) iterator.next();
+			control.getPaciente().setUsuarioAuditoria(
+					String.valueOf(control.getIdControlOrden()));
+			pacientes.add(control.getPaciente());
+		}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroOrdenNombre1Activos(String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<ControlOrden> lista = controlOrdenDAO
+				.findByFechaRecepcionAndPacientePrimerNombreStartingWithAllIgnoreCase(
+						fecha, valor);
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		for (Iterator<ControlOrden> iterator = lista.iterator(); iterator
+				.hasNext();) {
+			ControlOrden control = (ControlOrden) iterator.next();
+			control.getPaciente().setUsuarioAuditoria(
+					String.valueOf(control.getIdControlOrden()));
+			pacientes.add(control.getPaciente());
+		}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroOrdenCedulaActivos(String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<ControlOrden> lista = controlOrdenDAO
+				.findByFechaRecepcionAndPacienteCedulaStartingWithAllIgnoreCase(
+						fecha, valor);
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		for (Iterator<ControlOrden> iterator = lista.iterator(); iterator
+				.hasNext();) {
+			ControlOrden control = (ControlOrden) iterator.next();
+			control.getPaciente().setUsuarioAuditoria(
+					String.valueOf(control.getIdControlOrden()));
+			pacientes.add(control.getPaciente());
+		}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroOrdenApellido1Activos(String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<ControlOrden> lista = controlOrdenDAO
+				.findByFechaRecepcionAndPacientePrimerApellidoStartingWithAllIgnoreCase(
+						fecha, valor);
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		for (Iterator<ControlOrden> iterator = lista.iterator(); iterator
+				.hasNext();) {
+			ControlOrden control = (ControlOrden) iterator.next();
+			control.getPaciente().setUsuarioAuditoria(
+					String.valueOf(control.getIdControlOrden()));
+			pacientes.add(control.getPaciente());
+		}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroOrdenCedulaFamiliar1Activos(String valor,
+			Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<ControlOrden> lista = controlOrdenDAO
+				.findByFechaRecepcionAndPacienteCedulaFamiliarStartingWithAllIgnoreCase(
+						fecha, valor);
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		for (Iterator<ControlOrden> iterator = lista.iterator(); iterator
+				.hasNext();) {
+			ControlOrden control = (ControlOrden) iterator.next();
+			control.getPaciente().setUsuarioAuditoria(
+					String.valueOf(control.getIdControlOrden()));
+			pacientes.add(control.getPaciente());
+		}
+		return pacientes;
+	}
+
+	public Paciente buscarPorCitaCedula(String value, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<ControlOrden> lista = controlOrdenDAO
+				.findByFechaRecepcionAndEstadoAndPacienteCedula(fecha,
+						"Pendiente", value);
+		for (Iterator<ControlOrden> iterator = lista.iterator(); iterator
+				.hasNext();) {
+			ControlOrden control = (ControlOrden) iterator.next();
+			control.getPaciente().setUsuarioAuditoria(
+					String.valueOf(control.getIdControlOrden()));
+			return control.getPaciente();
+		}
+		return null;
+	}
 }

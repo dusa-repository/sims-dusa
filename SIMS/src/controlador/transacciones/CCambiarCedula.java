@@ -402,7 +402,7 @@ public class CCambiarCedula extends CGenerico {
 		List<Paciente> pacientesBuscar = servicioPaciente.buscarTodosActivos();
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Catalogo de Pacientes", pacientes, false,"Cedula", "Ficha",
 				"Nombre", "Apellido", "Trabajador Asociado") {
 
 			@Override

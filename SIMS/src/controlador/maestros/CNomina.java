@@ -151,7 +151,7 @@ public class CNomina extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Nomina> nominas = servicioNomina.buscarTodos();
 		catalogo = new Catalogo<Nomina>(catalogoNomina, "Catalogo de Nominas",
-				nominas, "Nombre") {
+				nominas,false, "Nombre") {
 
 			@Override
 			protected List<Nomina> buscar(String valor, String combo) {

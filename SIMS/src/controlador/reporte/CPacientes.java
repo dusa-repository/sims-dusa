@@ -851,7 +851,7 @@ public class CPacientes extends CGenerico {
 		pacientes.addAll(servicioPaciente.buscarTodosTrabajadores());
 
 		catalogo = new Catalogo<Paciente>(divCatalogoTrabajador,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Catalogo de Pacientes", pacientes,false, "Cedula", "Ficha",
 				"Nombre", "Apellido") {
 
 			@Override

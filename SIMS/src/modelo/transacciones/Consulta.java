@@ -45,6 +45,10 @@ public class Consulta implements Serializable {
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_orden", nullable = true)
+	private Orden orden;
+
 	@Column(name = "fecha_consulta")
 	private Timestamp fechaConsulta;
 
@@ -254,7 +258,8 @@ public class Consulta implements Serializable {
 			Integer dias, String condicion, String doctor,
 			Especialista especialista, String tipoReposo,
 			String reposoEmbarazo, Timestamp fechaReposo,
-			Integer frecuenciaRespiratoria, Boolean respiratoriaRitmica) {
+			Integer frecuenciaRespiratoria, Boolean respiratoriaRitmica,
+			Orden orden) {
 		super();
 		this.frecuenciaRespiratoria = frecuenciaRespiratoria;
 		this.respiratoriaRitmica = respiratoriaRitmica;
@@ -308,6 +313,7 @@ public class Consulta implements Serializable {
 		this.tipoReposo = tipoReposo;
 		this.reposoEmbarazo = reposoEmbarazo;
 		this.fechaReposo = fechaReposo;
+		this.orden = orden;
 	}
 
 	public long getIdConsulta() {
@@ -801,6 +807,14 @@ public class Consulta implements Serializable {
 
 	public void setRespiratoriaRitmica(Boolean respiratoriaRitmica) {
 		this.respiratoriaRitmica = respiratoriaRitmica;
+	}
+
+	public Orden getOrden() {
+		return orden;
+	}
+
+	public void setOrden(Orden orden) {
+		this.orden = orden;
 	}
 
 }

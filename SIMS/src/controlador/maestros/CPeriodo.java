@@ -137,7 +137,7 @@ public class CPeriodo extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Periodo> periodos = servicioPeriodo.buscarTodos();
 		catalogo = new Catalogo<Periodo>(catalogoPeriodo,
-				"Catalogo de Periodos", periodos, "Nombre", "Fecha Inicio",
+				"Catalogo de Periodos", periodos, false,"Nombre", "Fecha Inicio",
 				"Fecha Fin") {
 			private static final long serialVersionUID = 2968389472159832753L;
 

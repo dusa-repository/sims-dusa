@@ -137,7 +137,7 @@ public class CPlanAccion extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<PlanAccion> planes = servicioPlanAccion.buscarTodos();
 		catalogo = new Catalogo<PlanAccion>(catalogoPlan,
-				"Catalogo de Planes de Accion", planes, "Descripcion", "Quien",
+				"Catalogo de Planes de Accion", planes,false, "Descripcion", "Quien",
 				"Donde", "Cuando", "Como") {
 
 			private static final long serialVersionUID = 1L;

@@ -118,7 +118,7 @@ public class CPais extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Pais> paises = servicioPais.buscarTodos();
 		catalogo = new Catalogo<Pais>(catalogoPais, "Catalogo de Paises",
-				paises, "Nombre") {
+				paises, false,"Nombre") {
 
 			@Override
 			protected List<Pais> buscar(String valor, String combo) {

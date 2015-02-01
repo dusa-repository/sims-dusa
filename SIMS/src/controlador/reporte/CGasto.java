@@ -228,7 +228,7 @@ public class CGasto extends CGenerico {
 		lista.addAll(servicioPaciente.buscarTodosTrabajadores());
 		final List<Paciente> pacientes = lista;
 		catalogo = new Catalogo<Paciente>(divCatalogoPaciente,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Catalogo de Pacientes", pacientes,false, "Cedula", "Ficha",
 				"Nombre", "Apellido") {
 
 			@Override

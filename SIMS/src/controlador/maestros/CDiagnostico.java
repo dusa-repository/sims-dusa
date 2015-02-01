@@ -198,7 +198,7 @@ public class CDiagnostico extends CGenerico {
 		final List<Diagnostico> diagnosticos = servicioDiagnostico
 				.buscarTodas();
 		catalogo = new Catalogo<Diagnostico>(catalogoDiagnostico,
-				"Catalogo de Diagnosticos", diagnosticos, "Codigo", "Nombre",
+				"Catalogo de Diagnosticos", diagnosticos, false,"Codigo", "Nombre",
 				"Grupo", "Categoria") {
 
 			@Override

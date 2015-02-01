@@ -214,7 +214,7 @@ public class CCita extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		final List<Usuario> usuarios = servicioUsuario.buscarDoctores();
 		catalogo = new Catalogo<Usuario>(catalogoUsuarios,
-				"Catalogo de Doctores", usuarios, "Cedula", "Ficha", "Nombre",
+				"Catalogo de Doctores", usuarios, false,"Cedula", "Ficha", "Nombre",
 				"Apellido", "Especialidad") {
 
 			@Override
@@ -298,7 +298,7 @@ public class CCita extends CGenerico {
 			pacientesBuscar = servicioPaciente.buscarFamiliaresActivos();
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Catalogo de Pacientes", pacientes,false, "Cedula", "Ficha",
 				"Nombre", "Apellido", "Trabajador Asociado") {
 
 			@Override
