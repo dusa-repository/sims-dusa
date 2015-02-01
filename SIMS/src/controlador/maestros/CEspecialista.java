@@ -227,7 +227,7 @@ public class CEspecialista extends CGenerico {
 		final List<Especialista> especialistas = servicioEspecialista
 				.buscarTodos();
 		catalogo = new Catalogo<Especialista>(catalogoEspecialista,
-				"Catalogo de Especialistas", especialistas, "Cedula", "Nombre",
+				"Catalogo de Especialistas", especialistas,false, "Cedula", "Nombre",
 				"Apellido", "Costo Servicio", "Especialidad") {
 
 			@Override

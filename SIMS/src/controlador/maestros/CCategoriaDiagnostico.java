@@ -147,7 +147,7 @@ public class CCategoriaDiagnostico extends CGenerico {
 				.buscarTodas();
 		catalogo = new Catalogo<CategoriaDiagnostico>(
 				catalogoCategoriaDiagnostico, "Catalogo de Categorias",
-				categorias, "Nombre") {
+				categorias, false,"Nombre") {
 
 			@Override
 			protected List<CategoriaDiagnostico> buscar(String valor,

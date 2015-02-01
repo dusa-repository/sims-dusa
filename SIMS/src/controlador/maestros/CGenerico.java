@@ -42,6 +42,8 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 
+import servicio.control.SControlConsulta;
+import servicio.control.SControlOrden;
 import servicio.inventario.SF00021;
 import servicio.inventario.SF4101;
 import servicio.inventario.SF41021;
@@ -145,6 +147,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SCategoriaMedicina servicioCategoriaMedicina;
 	@WireVariable("SCita")
 	protected SCita servicioCita;
+	@WireVariable("SControlConsulta")
+	protected SControlConsulta servicioControlConsulta;
+	@WireVariable("SControlOrden")
+	protected SControlOrden servicioControlOrden;
 	@WireVariable("SCiudad")
 	protected SCiudad servicioCiudad;
 	@WireVariable("SCondicion")
@@ -356,7 +362,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		return applicationContext.getBean(SClasificacionDiagnostico.class);
 	}
 
-
 	public static SCargo getServicioCargo() {
 		return applicationContext.getBean(SCargo.class);
 	}
@@ -376,7 +381,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public static SPaciente getServicioPaciente() {
 		return applicationContext.getBean(SPaciente.class);
 	}
-	
+
 	public static SCondicion getServicioCondicion() {
 		return applicationContext.getBean(SCondicion.class);
 	}

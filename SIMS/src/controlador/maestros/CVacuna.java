@@ -146,7 +146,7 @@ public class CVacuna extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Vacuna> paises = servicioVacuna.buscarTodos();
 		catalogo = new Catalogo<Vacuna>(catalogoVacuna,
-				"Catalogo de Intervenciones", paises, "Nombre") {
+				"Catalogo de Intervenciones", paises,false, "Nombre") {
 
 			@Override
 			protected List<Vacuna> buscar(String valor, String combo) {

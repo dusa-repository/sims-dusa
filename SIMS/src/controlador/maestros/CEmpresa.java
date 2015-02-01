@@ -568,7 +568,7 @@ public class CEmpresa extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Empresa> empresas = servicioEmpresa.buscarTodas();
 		catalogo = new Catalogo<Empresa>(catalogoEmpresa,
-				"Catalogo de Empresas", empresas, "Rif", "Nombre", "Direccion") {
+				"Catalogo de Empresas", empresas, false,"Rif", "Nombre", "Direccion") {
 
 			@Override
 			protected List<Empresa> buscar(String valor, String combo) {

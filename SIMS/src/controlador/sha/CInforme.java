@@ -1538,7 +1538,7 @@ public class CInforme extends CGenerico {
 		}
 		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
 		catalogoP = new Catalogo<Paciente>(catalogoPaciente,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Nombre",
+				"Catalogo de Pacientes", pacientes,false, "Cedula", "Nombre",
 				"Apellido") {
 
 			@Override
@@ -1777,7 +1777,7 @@ public class CInforme extends CGenerico {
 		}
 		final List<Empresa> empresas = servicioEmpresa.buscarTodas();
 		catalogoE = new Catalogo<Empresa>(catalogoEmpresa,
-				"Catalogo de Empresas", empresas, "Rif", "Nombre", "Direccion") {
+				"Catalogo de Empresas", empresas,false, "Rif", "Nombre", "Direccion") {
 
 			@Override
 			protected List<Empresa> buscar(String valor, String combo) {
@@ -1985,7 +1985,7 @@ public class CInforme extends CGenerico {
 
 		final List<Informe> informes = servicioInforme.buscarTodos();
 		catalogoI = new Catalogo<Informe>(catalogoInforme,
-				"Catalogo de Informes", informes, "Codigo",
+				"Catalogo de Informes", informes, false,"Codigo",
 				"Nombre Trabajador", "Apellido Trabajador", "Empresa") {
 
 			@Override
@@ -3534,7 +3534,7 @@ public class CInforme extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<PlanAccion> planes = servicioPlanAccion.buscarTodos();
 		catalogoPlan = new Catalogo<PlanAccion>(divCatalogoPlan,
-				"Catalogo de Planes de Accion", planes, "Descripcion", "Quien",
+				"Catalogo de Planes de Accion", planes, false,"Descripcion", "Quien",
 				"Donde", "Cuando", "Como") {
 
 			private static final long serialVersionUID = 1L;

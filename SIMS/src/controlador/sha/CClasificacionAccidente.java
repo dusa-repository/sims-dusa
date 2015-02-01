@@ -139,7 +139,7 @@ public class CClasificacionAccidente extends CGenerico {
 				.buscarTodos();
 		catalogo = new Catalogo<ClasificacionAccidente>(
 				catalogoClasificacionAccidente,
-				"Catalogo de Clasificaciones de Accidente", clasificaciones,
+				"Catalogo de Clasificaciones de Accidente", clasificaciones,false,
 				"Nombre") {
 
 			@Override

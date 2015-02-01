@@ -140,7 +140,7 @@ public class CMotivoCita extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		List<MotivoCita> motivoCitas = servicioMotivoCita.buscarTodos();
 		catalogo = new Catalogo<MotivoCita>(catalogoMotivoCita,
-				"Catalogo de Motivos", motivoCitas, "Descripcion") {
+				"Catalogo de Motivos", motivoCitas, false,"Descripcion") {
 
 			@Override
 			protected String[] crearRegistros(MotivoCita motivoCita) {

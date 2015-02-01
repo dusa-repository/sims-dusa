@@ -144,7 +144,7 @@ public class CEstado extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Estado> estados = servicioEstado.buscarTodos();
 		catalogo = new Catalogo<Estado>(catalogoEstado, "Catalogo de Estados",
-				estados, "Nombre", "Pais") {
+				estados,false, "Nombre", "Pais") {
 
 			@Override
 			protected List<Estado> buscar(String valor, String combo) {

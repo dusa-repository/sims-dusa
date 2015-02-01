@@ -18,4 +18,13 @@ public interface IOrdenDAO extends JpaRepository<Orden, Long>  {
 
 	List<Orden> findByMotivo(MotivoCita motivoCita);
 
+	List<Orden> findByPacienteAndFechaOrdenStartingWithAllIgnoreCase(
+			Paciente paciente, String valor);
+
+	List<Orden> findByPacienteAndDoctorStartingWithAllIgnoreCase(
+			Paciente paciente, String valor);
+
+	List<Orden> findByPacienteAndMotivoDescripcionStartingWithAllIgnoreCase(
+			Paciente paciente, String valor);
+
 }

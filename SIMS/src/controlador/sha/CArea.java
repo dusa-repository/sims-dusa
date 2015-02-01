@@ -145,7 +145,7 @@ public class CArea extends CGenerico {
 	@Listen("onClick = #btnBuscarArea")
 	public void mostrarCatalogo() {
 		final List<Area> areas = servicioArea.buscarTodos();
-		catalogo = new Catalogo<Area>(catalogoArea, "Catalogo de Areas", areas,
+		catalogo = new Catalogo<Area>(catalogoArea, "Catalogo de Areas", areas,false,
 				"Nombre") {
 
 			@Override

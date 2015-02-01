@@ -136,7 +136,7 @@ public class CPresentacionComercial extends CGenerico {
 		List<PresentacionComercial> presentaciones = servicioPresentacion
 				.buscarTodas();
 		catalogo = new Catalogo<PresentacionComercial>(catalogoPresentacion,
-				"Catalogo de Presentaciones", presentaciones, "Nombre",
+				"Catalogo de Presentaciones", presentaciones, false,"Nombre",
 				"Medicina") {
 
 			@Override

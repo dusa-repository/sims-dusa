@@ -56,6 +56,9 @@ public class Orden implements Serializable {
 	
 	@OneToMany(mappedBy = "orden")
 	private Set<OrdenEspecialista> especialistas;
+	
+	@OneToMany(mappedBy = "orden")
+	private Set<Consulta> consultas;
 
 	@OneToMany(mappedBy = "orden")
 	private Set<OrdenExamen> examenes;
@@ -182,6 +185,14 @@ public class Orden implements Serializable {
 		this.doctor = doctor;
 	}
 	
+	public Set<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(Set<Consulta> consultas) {
+		this.consultas = consultas;
+	}
+
 	public String traerFecha() {
 		DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 		return String.valueOf(formatoFecha.format(fechaOrden));

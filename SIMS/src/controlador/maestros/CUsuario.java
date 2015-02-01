@@ -525,7 +525,7 @@ public class CUsuario extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		final List<Usuario> usuarios = servicioUsuario.buscarTodos();
 		catalogo = new Catalogo<Usuario>(catalogoUsuario,
-				"Catalogo de Usuarios", usuarios, "Cedula", "Ficha", "Nombre",
+				"Catalogo de Usuarios", usuarios,false, "Cedula", "Ficha", "Nombre",
 				"Apellido", "Doctor", "Login") {
 
 			@Override

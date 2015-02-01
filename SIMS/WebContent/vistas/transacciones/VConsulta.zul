@@ -402,6 +402,25 @@
 										value="Diagnostico de Consulta Asociada:" />
 									<label id="lblDiagnosticoAsociado2" value="" />
 								</row>
+								<row id="rowAsociadaOrden" visible="false">
+									<hbox>
+										<label class="etiqueta" id="lblOrden"
+											value="Orden Asociada al Control:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<button class="btn" autodisable="self" label="Orden Asociada"
+										id="btnOrdenAsociada" image="/public/imagenes/botones/buscar.png"
+										tooltiptext="Seleccione la order asociada a la consulta de control que esta realizando"
+										vflex="1" hflex="1" />
+									<label class="etiqueta" id="lblMotivoOrden"
+										value="Motivo de la Orden:" />
+									<cell colspan="2">
+										<label id="lblMotivoOrden2" value="" />
+									</cell>
+									<hbox/>
+									<hbox/>
+								</row>
 								<row id="rowEspecialista" visible="false">
 									<hbox>
 										<label class="etiqueta" value="Especialista de la IC:" />
@@ -2937,6 +2956,7 @@
 				</tabpanels>
 			</tabbox>
 			<div id="divCatalogoPacientes" />
+			<div id="divCatalogoOrden" />
 			<div id="botoneraConsultaGeneral" />
 			<div id="catalogoConsulta" />
 		</groupbox>

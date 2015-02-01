@@ -232,7 +232,7 @@ public class CConsultorio extends CGenerico {
 		final List<Consultorio> consultorios = servicioConsultorio
 				.buscarTodas();
 		catalogo = new Catalogo<Consultorio>(catalogoConsultorio,
-				"Catalogo de Consultorios", consultorios, "Nombre",
+				"Catalogo de Consultorios", consultorios, false,"Nombre",
 				"Direccion", "Descripcion", "Correo", "Telefono", "Ciudad") {
 
 			@Override

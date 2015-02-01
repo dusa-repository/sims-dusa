@@ -160,7 +160,7 @@ public class CPresentacionMedicina extends CGenerico {
 		catalogo = new Catalogo<PresentacionMedicina>(
 				catalogoPresentacionMedicina,
 				"Catalogo de Presentaciones de Medicina",
-				presentacionMedicinas, "Nombre") {
+				presentacionMedicinas,false, "Nombre") {
 
 			@Override
 			protected List<PresentacionMedicina> buscar(String valor,

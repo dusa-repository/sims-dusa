@@ -117,7 +117,7 @@ public class CUnidadMedicina extends CGenerico{
 	public void mostrarCatalogo() {
 		final List<UnidadMedicina> unidadesMedicinas = servicioUnidadMedicina.buscarTodas();
 		catalogo = new Catalogo<UnidadMedicina>(catalogoUnidadMedicina, "Catalogo de Unidades de Medicina",
-				unidadesMedicinas, "Nombre") {
+				unidadesMedicinas,false, "Nombre") {
 
 			@Override
 			protected List<UnidadMedicina> buscar(String valor,String combo) {

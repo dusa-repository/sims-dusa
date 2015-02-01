@@ -149,7 +149,7 @@ public class CCondicion extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Condicion> condiciones = servicioCondicion.buscarTodos();
 		catalogo = new Catalogo<Condicion>(catalogoCondicion,
-				"Catalogo de Condiciones", condiciones, "Nombre", "Tipo") {
+				"Catalogo de Condiciones", condiciones, false,"Nombre", "Tipo") {
 
 			@Override
 			protected List<Condicion> buscar(String valor, String combo) {

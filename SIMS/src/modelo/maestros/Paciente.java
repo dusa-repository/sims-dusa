@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import modelo.control.ControlConsulta;
+import modelo.control.ControlOrden;
 import modelo.sha.Area;
 import modelo.sha.Informe;
 import modelo.transacciones.Historia;
@@ -208,6 +210,12 @@ public class Paciente implements Serializable {
 	
 	@OneToMany(mappedBy = "paciente")
 	private Set<Orden> ordenes;
+	
+	@OneToMany(mappedBy = "paciente")
+	private Set<ControlOrden> controlOrden;
+	
+	@OneToMany(mappedBy = "paciente")
+	private Set<ControlConsulta> controlConsulta;
 
 
 	// bi-directional many-to-one association to Usuario
@@ -1031,6 +1039,22 @@ public class Paciente implements Serializable {
 
 	public void setPacientesPeriodos(Set<PeriodoPaciente> pacientesPeriodos) {
 		this.pacientesPeriodos = pacientesPeriodos;
+	}
+
+	public Set<ControlOrden> getControlOrden() {
+		return controlOrden;
+	}
+
+	public void setControlOrden(Set<ControlOrden> controlOrden) {
+		this.controlOrden = controlOrden;
+	}
+
+	public Set<ControlConsulta> getControlConsulta() {
+		return controlConsulta;
+	}
+
+	public void setControlConsulta(Set<ControlConsulta> controlConsulta) {
+		this.controlConsulta = controlConsulta;
 	}
 
 }

@@ -1,6 +1,14 @@
 package componentes;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
@@ -9,6 +17,7 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.event.InputEvent;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -27,12 +36,12 @@ public abstract class Catalogo<Clase> extends Window {
 	Listbox lsbCatalogo;
 
 	public Catalogo(final Component cGenerico, String titulo,
-			List<Clase> lista, String... campos) {
+			List<Clase> lista, boolean multiple, String... campos) {
 		super(titulo, "2", true);
-		this.setId("cmpCatalogo");
+		this.setId("cmbCatalogo"+titulo);
 		this.setStyle("background-header:#661313; background: #f4f2f2");
 		setWidth("60%");
-		crearLista(lista, campos);
+		crearLista(lista, campos, multiple);
 		lsbCatalogo.addEventListener(Events.ON_SELECT,
 				new EventListener<Event>() {
 
@@ -43,7 +52,8 @@ public abstract class Catalogo<Clase> extends Window {
 				});
 	}
 
-	public void crearLista(List<Clase> lista, String[] campos) {
+	public void crearLista(List<Clase> lista, String[] campos,
+			final boolean multiple) {
 		Hbox hbxBusqueda = new Hbox();
 		final Label lblBuscar = new Label();
 		final Textbox txtBuscar = new Textbox();
@@ -58,9 +68,16 @@ public abstract class Catalogo<Clase> extends Window {
 				new EventListener<InputEvent>() {
 					@Override
 					public void onEvent(InputEvent e) throws Exception {
-						List<Clase> listaNueva = buscar(e.getValue(), cmbBuscarPor.getValue());
+						List<Clase> listaNueva = buscar(e.getValue(),
+								cmbBuscarPor.getValue());
 						lsbCatalogo.setModel(new ListModelList<Clase>(
 								listaNueva));
+						if (multiple) {
+							lsbCatalogo.setMultiple(false);
+							lsbCatalogo.setCheckmark(false);
+							lsbCatalogo.setMultiple(true);
+							lsbCatalogo.setCheckmark(true);
+						}
 					}
 				});
 		lsbCatalogo = new Listbox();
@@ -84,14 +101,28 @@ public abstract class Catalogo<Clase> extends Window {
 				String[] registros = crearRegistros(objeto);
 				for (int i = 0; i < registros.length; i++) {
 					Listcell celda = new Listcell(registros[i]);
+					if (registros[i] != null) {
+						if (registros[i]
+								.contains("/WEB-INF/classes/controlador/")) {
+							celda.setLabel(null);
+							Image imagen = new Image();
+							if (traerImagen(registros[i]) != null) {
+								imagen.setContent(traerImagen(registros[i]));
+								imagen.setParent(celda);
+							} else
+								celda.setLabel(registros[i]);
+						}
+					}
 					celda.setParent(fila);
+					// Listcell celda = new Listcell(registros[i]);
+					// celda.setParent(fila);
 				}
 			}
 		});
 		lsbCatalogo.setWidth("100%");
 		lsbCatalogo.setSpan("true");
 		this.appendChild(separador1);
-		this.appendChild(hbxBusqueda);		
+		this.appendChild(hbxBusqueda);
 		lblBuscar.setValue("   Buscar Por :  ");
 		lblBuscar.setSclass("etiqueta");
 		hbxBusqueda.appendChild(lblBuscar);
@@ -100,6 +131,19 @@ public abstract class Catalogo<Clase> extends Window {
 		hbxBusqueda.appendChild(txtBuscar);
 		this.appendChild(separador2);
 		this.appendChild(lsbCatalogo);
+		if (multiple) {
+			setWidth("100%");
+			this.setTitle(null);
+//			lsbCatalogo.setHflex("1");
+			lsbCatalogo.setPageSize(15);
+//			this.setHflex("1");
+			lsbCatalogo.setHeight("450px");
+			this.setClosable(false);
+			lsbCatalogo.setMultiple(false);
+			lsbCatalogo.setCheckmark(false);
+			lsbCatalogo.setMultiple(true);
+			lsbCatalogo.setCheckmark(true);
+		}
 	}
 
 	/**
@@ -121,5 +165,49 @@ public abstract class Catalogo<Clase> extends Window {
 
 	public Listbox getListbox() {
 		return lsbCatalogo;
+	}
+
+	private BufferedImage traerImagen(String string) throws IOException {
+		BufferedImage imagenes;
+		URI uri = null;
+		try {
+			uri = new URI(string);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		File fnew = new File(uri);
+		imagenes = ImageIO.read(fnew);
+		return imagenes;
+	}
+
+	public void actualizarLista(List<Clase> lista, boolean check) {
+		lsbCatalogo.setModel(new ListModelList<Clase>(lista));
+		if (check) {
+			lsbCatalogo.setMultiple(false);
+			lsbCatalogo.setCheckmark(false);
+			lsbCatalogo.setMultiple(true);
+			lsbCatalogo.setCheckmark(true);
+		}
+	}
+
+	public List<Clase> obtenerSeleccionados() {
+		List<Clase> valores = new ArrayList<Clase>();
+		boolean entro = false;
+		if (lsbCatalogo.getItemCount() != 0) {
+			final List<Listitem> list1 = lsbCatalogo.getItems();
+			for (int i = 0; i < list1.size(); i++) {
+				if (list1.get(i).isSelected()) {
+					Clase clase = list1.get(i).getValue();
+					entro = true;
+					valores.add(clase);
+				}
+			}
+			if (!entro) {
+				valores.clear();
+				return valores;
+			}
+			return valores;
+		} else
+			return null;
 	}
 }

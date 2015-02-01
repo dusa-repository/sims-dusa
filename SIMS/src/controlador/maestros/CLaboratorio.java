@@ -113,7 +113,7 @@ public class CLaboratorio extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		List<Laboratorio> laboratorios = servicioLaboratorio.buscarTodos();
 		catalogo = new Catalogo<Laboratorio>(catalogoLaboratorio,
-				"Catalogo de Laboratorios", laboratorios, "Nombre") {
+				"Catalogo de Laboratorios", laboratorios, false,"Nombre") {
 
 			@Override
 			protected String[] crearRegistros(Laboratorio laboratorio) {

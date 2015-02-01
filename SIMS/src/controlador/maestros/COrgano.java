@@ -142,7 +142,7 @@ public class COrgano extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<ParteCuerpo> paises = servicioParteCuerpo.buscarTodos();
 		catalogo = new Catalogo<ParteCuerpo>(catalogoOrgano,
-				"Catalogo de Organos/Sistemas", paises, "Nombre") {
+				"Catalogo de Organos/Sistemas", paises, false,"Nombre") {
 
 			@Override
 			protected List<ParteCuerpo> buscar(String valor, String combo) {

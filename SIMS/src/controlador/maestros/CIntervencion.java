@@ -148,7 +148,7 @@ public class CIntervencion extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Intervencion> paises = servicioIntervencion.buscarTodos();
 		catalogo = new Catalogo<Intervencion>(catalogoIntervencion,
-				"Catalogo de Intervenciones", paises, "Nombre") {
+				"Catalogo de Intervenciones", paises,false, "Nombre") {
 
 			@Override
 			protected List<Intervencion> buscar(String valor, String combo) {

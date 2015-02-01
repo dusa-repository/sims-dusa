@@ -1536,7 +1536,7 @@ public class CReposo extends CGenerico {
 		usuarios.addAll(servicioUsuario.buscarDoctores());
 
 		catalogoDoctor = new Catalogo<Usuario>(catalogoUsuarios,
-				"Catalogo de Doctores", usuarios, "Cedula", "Ficha", "Nombre",
+				"Catalogo de Doctores", usuarios,false, "Cedula", "Ficha", "Nombre",
 				"Apellido", "Especialidad") {
 
 			@Override
@@ -1598,7 +1598,7 @@ public class CReposo extends CGenerico {
 		pacientes.addAll(servicioPaciente.buscarTodosActivos());
 
 		catalogo = new Catalogo<Paciente>(divCatalogoPaciente,
-				"Catalogo de Pacientes", pacientes, "Cedula", "Ficha",
+				"Catalogo de Pacientes", pacientes, false,"Cedula", "Ficha",
 				"Nombre", "Apellido") {
 
 			@Override

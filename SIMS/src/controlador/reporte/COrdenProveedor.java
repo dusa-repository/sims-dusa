@@ -418,7 +418,7 @@ public class COrdenProveedor extends CGenerico {
 		especialistas.add(especialista);
 		especialistas.addAll(servicioEspecialista.buscarTodos());
 		catalogoE = new Catalogo<Especialista>(catalogoEspecialista,
-				"Catalogo de Especialistas", especialistas, "Cedula", "Nombre",
+				"Catalogo de Especialistas", especialistas,false, "Cedula", "Nombre",
 				"Apellido", "Costo Servicio", "Especialidad") {
 
 			@Override
@@ -477,7 +477,7 @@ public class COrdenProveedor extends CGenerico {
 		proveedores.add(proveedor);
 		proveedores.addAll(servicioProveedor.buscarTodos());
 		catalogoP = new Catalogo<Proveedor>(catalogoProveedor,
-				"Catalogo de Proveedores", proveedores, "Nombre", "Direccion",
+				"Catalogo de Proveedores", proveedores, false,"Nombre", "Direccion",
 				"Telefono", "Ciudad") {
 
 			@Override

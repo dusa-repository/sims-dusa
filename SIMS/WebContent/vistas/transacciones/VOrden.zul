@@ -37,6 +37,21 @@
 					</row>
 					<row>
 						<hbox>
+							<label class="etiqueta" value="Buscar Paciente con solicitud de Orden:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox maxlength="500" id="txtCedulaCita" hflex="1"
+							tooltiptext="Ingrese la Cedula del Paciente" />
+						<button class="btn" autodisable="self" id="btnBuscarPacienteCita"
+							label="Buscar Paciente" tooltiptext="Catalogo"
+							image="/public/imagenes/botones/buscar.png" width="130px" />
+						<cell colspan="4">
+							<hbox />
+						</cell>
+					</row>
+					<row>
+						<hbox>
 							<label class="etiqueta" value="Fecha de Orden:" />
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />

@@ -1,0 +1,127 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divVControl" apply="controlador.control.CControl" width="100%">
+		<groupbox id="gxpGeneral" width="100%" mold="3d">
+			<separator />
+			<vbox>
+				<div width="50%" id="botoneraControl" align="left" style="float: left;" />
+			</vbox>
+			<separator />
+			<groupbox width="100%" title="">
+				<caption label="Datos del Paciente"
+					style="color:black; font-size: 12px; font-weight:bold" />
+				<separator />
+				<grid width="100%">
+					<columns visible="false">
+						<column label="" width="25%" />
+						<column label="" width="25%" />
+						<column label="" width="25%" />
+						<column label="" width="25%" />
+					</columns>
+					<rows>
+						<row>
+							<hbox>
+								<label class="etiqueta" value="Fecha:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<datebox readonly="true" id="dtbFecha" onCreate="self.value = new Date()"
+								tooltiptext="Seleccione la Fecha correspondiente a la Solicitud o 
+											Seleccione una Fecha para Visualizar los registros asociados a ese dia" />
+							<hbox />
+							<hbox />
+						</row>
+						<row>
+							<hbox>
+								<label class="etiqueta" value="Cedula:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<textbox maxlength="15" id="txtCedulaPaciente" hflex="1"
+								tooltiptext="Ingrese la Cedula del Paciente" />
+							<button autodisable="self" id="btnBuscarPaciente" class="btn"
+								label="Buscar" tooltiptext="Catalogo de Pacientes" image="/public/imagenes/botones/buscar.png" />
+							<hbox />
+						</row>
+						<row>
+							<label class="etiqueta" value="Nombres:" />
+							<label id="lblNombrePaciente" />
+							<label class="etiqueta" value="Apellidos:" />
+							<label id="lblApellidoPaciente" />
+						</row>
+						<row id="row" visible="false">
+							<hbox>
+								<label class="etiqueta" value="Tipo de Consulta:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<combobox tooltiptext="Seleccione el Tipo de la Consulta"
+								placeholder="Seleccione el Tipo" id="cmbTipoConsulta" width="100%"
+								readonly="true">
+								<comboitem label="Preventiva" />
+								<comboitem label="Curativa" />
+							</combobox>
+							<hbox>
+								<label visible="false" id="lblPreventiva" class="etiqueta"
+									value="Tipo de Consulta Preventiva:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<combobox tooltiptext="Seleccione el Tipo de Consulta Preventiva"
+								placeholder="Seleccione el Tipo" id="cmbTipoPreventiva" width="100%"
+								readonly="true" visible="false">
+								<template name="model">
+									<comboitem label="${each}" />
+								</template>
+							</combobox>
+						</row>
+						<row>
+							<hbox>
+								<label class="etiqueta" value="Observacion:" />
+								<space />
+								<label id="lblRequerido" value="*"
+									style="font-weight:bold;color:red" />
+							</hbox>
+							<textbox class="multilinea" multiline="true" maxlength="500"
+								id="txtObservacion" hflex="1" tooltiptext="Ingrese la Observacion" />
+							<hbox />
+							<hbox />
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			<groupbox width="100%" title="">
+				<caption id="caption" style="color:black; font-size: 12px; font-weight:bold" />
+				<separator />
+				<hbox>
+					<div id="divCatalogoControlOrdenes"
+						tooltiptext="Solicitudes de Ordenes Registradas a la fecha, 
+									utilice el panel de la derecha para realizar alguna accion sobre estas" />
+					<div id="divCatalogoControlConsultas"
+						tooltiptext="Solicitudes de Consultas Registradas a la fecha, 
+									utilice el panel de la derecha para realizar alguna accion sobre estas" />
+					<vbox>
+						<div align="center">
+							<separator height="80px" />
+							<button class="btn" width="150px" label="Ver Orden" id="btnVer"
+								image="/public/imagenes/botones/ver.png" tooltiptext="Seleccione un Registro para ver la Solicitud de orden" />
+							<separator />
+							<button class="btn" width="150px" label="Entregar Orden"
+								id="btnAprobar" image="/public/imagenes/botones/seleccionar.png"
+								tooltiptext="Seleccione uno o varios registros para indicar que se han entregado las solicitudes de ordenes" />
+							<separator />
+							<button class="btn" width="150px" label="Cancelar Orden"
+								id="btnCancelar" image="/public/imagenes/botones/anular.png"
+								tooltiptext="Seleccione uno o varios registros para indicar que se han cancelado las solicitudes de ordenes" />
+							<separator />
+							<button class="btn" width="150px" label="Eliminar Orden"
+								id="btnEliminar" image="/public/imagenes/botones/eliminar.png"
+								tooltiptext="Seleccione uno o varios registros para eliminadar las solicitudes de ordenes" />
+						</div>
+					</vbox>
+				</hbox>
+			</groupbox>
+		</groupbox>
+	</div>
+	<div id="divCatalogoPacientes" />
+</zk>

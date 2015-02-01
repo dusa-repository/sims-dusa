@@ -196,7 +196,7 @@ public class CExamen extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Examen> examenes = servicioExamen.buscarTodos();
 		catalogo = new Catalogo<Examen>(catalogoExamen, "Catalogo de Examenes",
-				examenes, "Nombre", "Tipo", "Resultado", "Costo",
+				examenes, false,"Nombre", "Tipo", "Resultado", "Costo",
 				"Valor Minimo", "Valor Maximo") {
 
 			@Override

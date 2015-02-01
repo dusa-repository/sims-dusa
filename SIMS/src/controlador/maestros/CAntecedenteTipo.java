@@ -149,7 +149,7 @@ public class CAntecedenteTipo extends CGenerico {
 		final List<AntecedenteTipo> antecedenteTipos = servicioAntecedenteTipo
 				.buscarTodos();
 		catalogo = new Catalogo<AntecedenteTipo>(catalogoAntecedenteTipo,
-				"Catalogo de Clasificaciones", antecedenteTipos, "Nombre",
+				"Catalogo de Clasificaciones", antecedenteTipos,false, "Nombre",
 				"Clasificacion") {
 
 			@Override

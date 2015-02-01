@@ -1448,7 +1448,7 @@ public class CMorbilidad extends CGenerico {
 		usuarios.addAll(servicioUsuario.buscarDoctores());
 
 		catalogoDoctor = new Catalogo<Usuario>(catalogoUsuarios,
-				"Catalogo de Doctores", usuarios, "Cedula", "Ficha", "Nombre",
+				"Catalogo de Doctores", usuarios,false, "Cedula", "Ficha", "Nombre",
 				"Apellido", "Especialidad") {
 			private static final long serialVersionUID = 1L;
 

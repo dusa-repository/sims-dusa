@@ -120,7 +120,7 @@ public class CCategoriaMedicina extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<CategoriaMedicina> categoriasMedicinas = servicioCategoriaMedicina.buscarTodas();
 		catalogo = new Catalogo<CategoriaMedicina>(catalogoCategoriaMedicina, "Catalogo de Categorias de Medicina",
-				categoriasMedicinas, "Nombre") {
+				categoriasMedicinas,false,"Nombre") {
 
 			@Override
 			protected List<CategoriaMedicina> buscar(String valor,String combo) {
