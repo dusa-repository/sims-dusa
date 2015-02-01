@@ -59,9 +59,9 @@
 	<group name="empresa">
 		<groupExpression><![CDATA[$F{paciente.empresa.nombre}]]></groupExpression>
 		<groupHeader>
-			<band height="30">
+			<band height="26">
 				<rectangle>
-					<reportElement x="0" y="6" width="572" height="20" backcolor="#E3E3E3" uuid="3d59ba07-1fb0-44e5-ab80-eb4e9513f83f"/>
+					<reportElement x="0" y="6" width="572" height="15" backcolor="#E3E3E3" uuid="3d59ba07-1fb0-44e5-ab80-eb4e9513f83f"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
@@ -83,24 +83,27 @@
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="26">
+			<band height="23">
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="532" y="3" width="40" height="20" uuid="c888a1ed-5946-40b8-b573-63914768813f"/>
-					<textElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{cont1}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="225" y="3" width="34" height="20" uuid="e92212fb-a97b-4c96-ab20-fbb627dc21d4"/>
-					<textElement>
+					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Total]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="259" y="3" width="273" height="20" uuid="1beb7d71-1845-4846-a506-8f8ffabce613"/>
-					<textElement>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{paciente.empresa.nombre}]]></textFieldExpression>
@@ -111,30 +114,40 @@
 	<group name="paciente">
 		<groupExpression><![CDATA[$F{paciente.cedula}]]></groupExpression>
 		<groupHeader>
-			<band height="41">
+			<band height="37">
 				<textField>
 					<reportElement x="0" y="0" width="89" height="20" uuid="bcbcbc10-6236-48f0-960a-4cbc460a4fb4"/>
-					<textElement textAlignment="Center"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{paciente.cedula}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="89" y="0" width="72" height="20" uuid="0c018e68-7de6-455e-abfb-5fcf100c8efa"/>
-					<textElement textAlignment="Center"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{paciente.ficha}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="161" y="0" width="258" height="20" uuid="74c696cb-8f14-4bbe-8e01-f921e8713608"/>
-					<textElement textAlignment="Center"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{paciente.primerNombre}+" "+$F{paciente.primerApellido}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="419" y="0" width="63" height="20" uuid="20c2ce01-0364-4444-bc61-67f1263bdfff"/>
-					<textElement textAlignment="Center"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{paciente.edad}]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="482" y="0" width="90" height="20" uuid="4a69f83f-efa8-4efe-a86e-0d1ac7ac5852"/>
-					<textElement textAlignment="Center"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{paciente.sexo}]]></textFieldExpression>
 				</textField>
 				<staticText>
@@ -194,43 +207,43 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="18" splitType="Stretch">
+		<band height="15" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="1" width="572" height="17" backcolor="#CCCCCC" uuid="f01e2b12-398f-4ec2-b0d0-7cfd2ed8b631"/>
+				<reportElement x="0" y="1" width="572" height="13" backcolor="#CCCCCC" uuid="f01e2b12-398f-4ec2-b0d0-7cfd2ed8b631"/>
 				<graphicElement>
 					<pen lineWidth="0.0" lineStyle="Double"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="1" width="89" height="17" uuid="ddcdb3e5-3f05-4b93-9c5f-e874221d8d68"/>
+				<reportElement x="0" y="1" width="89" height="13" uuid="ddcdb3e5-3f05-4b93-9c5f-e874221d8d68"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cedula]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="89" y="1" width="72" height="17" uuid="3541d497-d28d-4090-9548-41014afb68ab"/>
+				<reportElement x="89" y="1" width="72" height="13" uuid="3541d497-d28d-4090-9548-41014afb68ab"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ficha]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="161" y="1" width="258" height="17" uuid="0027f83f-eb84-4b74-8de5-847b4cf08c27"/>
+				<reportElement x="161" y="1" width="258" height="13" uuid="0027f83f-eb84-4b74-8de5-847b4cf08c27"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="419" y="1" width="63" height="17" uuid="358ca954-8d1b-46e1-b561-23eade08d536"/>
+				<reportElement x="419" y="1" width="63" height="13" uuid="358ca954-8d1b-46e1-b561-23eade08d536"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Edad]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="482" y="2" width="90" height="16" uuid="83d75a06-0eee-4299-8b93-6f22bdfcbfd8"/>
+				<reportElement x="482" y="2" width="90" height="13" uuid="83d75a06-0eee-4299-8b93-6f22bdfcbfd8"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -298,13 +311,17 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 		<band height="20">
 			<staticText>
 				<reportElement x="432" y="0" width="100" height="20" uuid="56d807f1-2b12-4bfe-bb98-1a03d969a842"/>
-				<textElement textAlignment="Right">
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Total Consultas:]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="532" y="0" width="40" height="20" uuid="21dad752-cce4-45e2-bf80-6326060c8cc1"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$V{cont2}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -319,7 +336,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 					</datasetRun>
 					<jr:column width="480" uuid="a06fc565-1c10-459e-8d3d-388dcbff0e45">
 						<jr:groupFooter groupName="empresa">
-							<jr:cell height="22" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.5"/>
 									<leftPen lineWidth="0.5"/>
@@ -327,7 +344,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 									<rightPen lineWidth="0.5"/>
 								</box>
 								<textField>
-									<reportElement x="33" y="0" width="447" height="22" uuid="76ecd56f-f419-47d1-907a-485f868febc2"/>
+									<reportElement x="33" y="0" width="447" height="20" uuid="76ecd56f-f419-47d1-907a-485f868febc2"/>
 									<textElement verticalAlignment="Middle">
 										<font size="11"/>
 									</textElement>
@@ -350,10 +367,10 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Empresas]]></text>
+								<text><![CDATA[EMPRESAS]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter height="24" rowSpan="1">
+						<jr:columnFooter height="25" rowSpan="1">
 							<box>
 								<topPen lineWidth="0.5"/>
 								<leftPen lineWidth="0.0"/>
@@ -361,18 +378,19 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<rightPen lineWidth="0.5"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="480" height="24" uuid="e3eafffc-a9a6-411c-ace5-35d82a268fdc"/>
+								<reportElement x="0" y="0" width="480" height="25" uuid="e3eafffc-a9a6-411c-ace5-35d82a268fdc"/>
+								<box rightPadding="5"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Total Consultas:]]></text>
+								<text><![CDATA[Total Consultas:  ]]></text>
 							</staticText>
 						</jr:columnFooter>
 						<jr:detailCell style="table_TD" height="0" rowSpan="1"/>
 					</jr:column>
 					<jr:column width="90" uuid="83f2967b-809c-4230-86fa-b2fdcf7fbd26">
 						<jr:groupFooter groupName="empresa">
-							<jr:cell height="22" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.5"/>
 									<leftPen lineWidth="0.5"/>
@@ -380,7 +398,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 									<rightPen lineWidth="0.5"/>
 								</box>
 								<textField>
-									<reportElement x="0" y="0" width="90" height="22" uuid="50302e4d-8004-425f-81b8-bbfa3b5896d3"/>
+									<reportElement x="0" y="0" width="90" height="20" uuid="50302e4d-8004-425f-81b8-bbfa3b5896d3"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="11"/>
 									</textElement>
@@ -403,10 +421,10 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Consultas]]></text>
+								<text><![CDATA[CONSULTAS]]></text>
 							</staticText>
 						</jr:columnHeader>
-						<jr:columnFooter height="24" rowSpan="1">
+						<jr:columnFooter height="25" rowSpan="1">
 							<box>
 								<topPen lineWidth="0.5"/>
 								<leftPen lineWidth="0.5"/>
@@ -414,7 +432,7 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<rightPen lineWidth="0.5"/>
 							</box>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="24" uuid="4d9e8105-955d-440a-8fe1-eeb4dd8eba8a"/>
+								<reportElement x="0" y="0" width="90" height="25" uuid="4d9e8105-955d-440a-8fe1-eeb4dd8eba8a"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>

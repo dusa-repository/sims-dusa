@@ -331,10 +331,10 @@
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Areas]]></text>
+								<text><![CDATA[AREAS]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<topPen lineWidth="0.75"/>
 								<leftPen lineWidth="0.0"/>
@@ -342,15 +342,16 @@
 								<rightPen lineWidth="0.75"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="464" height="30" uuid="8d011c40-4d25-412e-af67-18e3717dc80b"/>
+								<reportElement x="0" y="0" width="464" height="25" uuid="8d011c40-4d25-412e-af67-18e3717dc80b"/>
+								<box rightPadding="5"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Total Reposos]]></text>
+								<text><![CDATA[Total Reposos:]]></text>
 							</staticText>
 						</jr:tableFooter>
 						<jr:groupFooter groupName="area">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.75"/>
 									<leftPen lineWidth="0.75"/>
@@ -358,7 +359,7 @@
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField>
-									<reportElement x="31" y="0" width="433" height="30" uuid="39bab473-60ec-4606-af93-94ab74780522"/>
+									<reportElement x="31" y="0" width="433" height="20" uuid="39bab473-60ec-4606-af93-94ab74780522"/>
 									<textElement verticalAlignment="Middle">
 										<font size="11"/>
 									</textElement>
@@ -387,10 +388,10 @@
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Reposos]]></text>
+								<text><![CDATA[REPOSOS]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<topPen lineWidth="0.75"/>
 								<leftPen lineWidth="0.75"/>
@@ -398,7 +399,7 @@
 								<rightPen lineWidth="0.75"/>
 							</box>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="39ad7ab1-9a15-4c74-95d7-893b1461da8b"/>
+								<reportElement x="0" y="0" width="90" height="25" uuid="39ad7ab1-9a15-4c74-95d7-893b1461da8b"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -406,7 +407,7 @@
 							</textField>
 						</jr:tableFooter>
 						<jr:groupFooter groupName="area">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.75"/>
 									<leftPen lineWidth="0.75"/>
@@ -414,7 +415,7 @@
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField>
-									<reportElement x="0" y="0" width="90" height="30" uuid="153a51ed-f1b4-4591-92ba-7e52aad42492"/>
+									<reportElement x="0" y="0" width="90" height="20" uuid="153a51ed-f1b4-4591-92ba-7e52aad42492"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="11"/>
 									</textElement>

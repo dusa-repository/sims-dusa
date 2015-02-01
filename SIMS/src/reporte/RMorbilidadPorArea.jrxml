@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="19e9f5ec-c399-4e95-8509-470aae44a9f4">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="132"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -369,15 +369,15 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<text><![CDATA[AREA]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<topPen lineWidth="1.0"/>
 								<rightPen lineWidth="1.0"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="437" height="30" uuid="851135a0-b8df-4899-8c2b-9e127cefb47d"/>
-								<box>
-									<rightPen lineWidth="1.0"/>
+								<reportElement x="0" y="0" width="437" height="25" uuid="851135a0-b8df-4899-8c2b-9e127cefb47d"/>
+								<box rightPadding="5">
+									<rightPen lineWidth="0.0"/>
 								</box>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
@@ -386,13 +386,14 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 							</staticText>
 						</jr:tableFooter>
 						<jr:groupFooter groupName="area">
-							<jr:cell height="23" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<bottomPen lineWidth="1.0"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="22" y="0" width="415" height="23" uuid="f76b6050-975c-4c2a-9cce-0b713013cbcc"/>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="22" y="0" width="415" height="20" uuid="f76b6050-975c-4c2a-9cce-0b713013cbcc"/>
 									<box>
+										<bottomPen lineWidth="1.0"/>
 										<rightPen lineWidth="1.0"/>
 									</box>
 									<textElement verticalAlignment="Middle">
@@ -417,13 +418,16 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 								<text><![CDATA[CONSULTAS]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<bottomPen lineWidth="1.0"/>
 								<rightPen lineWidth="1.0"/>
 							</box>
 							<textField>
-								<reportElement x="0" y="0" width="114" height="30" uuid="a9b8d908-6a54-4fee-9c02-15a8d16a83f8"/>
+								<reportElement x="0" y="0" width="114" height="25" uuid="a9b8d908-6a54-4fee-9c02-15a8d16a83f8"/>
+								<box>
+									<leftPen lineWidth="1.0"/>
+								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="11" isBold="true"/>
 								</textElement>
@@ -431,13 +435,13 @@ new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
 							</textField>
 						</jr:tableFooter>
 						<jr:groupFooter groupName="area">
-							<jr:cell height="23" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box bottomPadding="0">
 									<leftPen lineWidth="0.0"/>
 									<bottomPen lineWidth="1.0"/>
 								</box>
 								<textField>
-									<reportElement x="0" y="0" width="114" height="23" uuid="7a76b23d-93cb-4e65-9443-a4fc99041fa5"/>
+									<reportElement x="0" y="0" width="114" height="20" uuid="7a76b23d-93cb-4e65-9443-a4fc99041fa5"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$V{porArea}]]></textFieldExpression>
 								</textField>

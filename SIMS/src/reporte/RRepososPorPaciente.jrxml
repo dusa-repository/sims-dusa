@@ -306,24 +306,25 @@
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Pacientes]]></text>
+								<text><![CDATA[PACIENTES]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<topPen lineWidth="0.75"/>
 								<rightPen lineWidth="0.75"/>
 							</box>
 							<staticText>
-								<reportElement x="0" y="0" width="463" height="30" uuid="4e69df03-793a-4499-84e8-0d5eae0d028c"/>
+								<reportElement x="0" y="0" width="463" height="25" uuid="4e69df03-793a-4499-84e8-0d5eae0d028c"/>
+								<box rightPadding="5"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Total Reposos]]></text>
+								<text><![CDATA[Total Reposos:]]></text>
 							</staticText>
 						</jr:tableFooter>
 						<jr:groupFooter groupName="paciente">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.75"/>
 									<leftPen lineWidth="0.75"/>
@@ -331,8 +332,9 @@
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="29" y="0" width="434" height="30" uuid="9f451868-b292-45e1-b9a5-c3d832d7e717"/>
-									<textFieldExpression><![CDATA[$F{paciente.cedula}+"-"+$F{paciente.primerNombre}+"-"+$F{paciente.primerApellido}]]></textFieldExpression>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="29" y="0" width="434" height="20" uuid="9f451868-b292-45e1-b9a5-c3d832d7e717"/>
+									<textElement verticalAlignment="Middle"/>
+									<textFieldExpression><![CDATA[$F{paciente.cedula}+"   "+$F{paciente.primerNombre}+"-"+$F{paciente.primerApellido}]]></textFieldExpression>
 								</textField>
 							</jr:cell>
 						</jr:groupFooter>
@@ -357,10 +359,10 @@
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Reposos]]></text>
+								<text><![CDATA[REPOSOS]]></text>
 							</staticText>
 						</jr:tableHeader>
-						<jr:tableFooter height="30" rowSpan="1">
+						<jr:tableFooter height="25" rowSpan="1">
 							<box>
 								<topPen lineWidth="0.75"/>
 								<leftPen lineWidth="0.75"/>
@@ -368,7 +370,7 @@
 								<rightPen lineWidth="0.75"/>
 							</box>
 							<textField>
-								<reportElement x="0" y="0" width="90" height="30" uuid="a8c9e165-2646-4d2b-988e-7c719a98dbcf"/>
+								<reportElement x="0" y="0" width="90" height="25" uuid="a8c9e165-2646-4d2b-988e-7c719a98dbcf"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -376,7 +378,7 @@
 							</textField>
 						</jr:tableFooter>
 						<jr:groupFooter groupName="paciente">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.75"/>
 									<leftPen lineWidth="0.75"/>
@@ -384,8 +386,8 @@
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="30" uuid="673d0614-6420-4657-96b9-136a79cfff27"/>
-									<textElement textAlignment="Center"/>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="90" height="20" uuid="673d0614-6420-4657-96b9-136a79cfff27"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
 								</textField>
 							</jr:cell>
