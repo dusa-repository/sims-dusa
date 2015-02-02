@@ -21,16 +21,6 @@
 					</row>
 				</rows>
 			</grid>
-			<!-- <grid width="auto"> <columns visible="false"> <column label="" width="15%" 
-				/> <column label="" width="30%" /> <column label="" width="3%" /> <column 
-				label="" width="52%" /> </columns> <rows> <row> <label class="etiqueta" value="Ir 
-				a la Seccion:" /> <combobox tooltiptext="Seleccione una Seccion" placeholder="Seleccione 
-				la Seccion" id="cmbSeccion" width="100%" readonly="true"> <comboitem label="Seccion 
-				1 y 2" /> <comboitem label="Seccion 3 y 4" /> <comboitem label="Seccion 5" 
-				/> <comboitem label="Seccion 6 y 7" /> <comboitem label="Seccion 8" /> <comboitem 
-				label="Seccion 9" /> </combobox> <image class="imgAyuda" width="100%" height="100%" 
-				style="cursor: help" tooltip="seccion" src="/public/imagenes/botones/signoInterrogacion.png" 
-				/> <hbox /> </row> </rows> </grid> -->
 			<tabbox height="auto" width="auto" id="taxSecciones" orient="horizontal">
 				<tabs>
 					<tab tooltip="seccion" label="Seccion 1 y 2" id="tab1y2" />
@@ -40,6 +30,7 @@
 					<tab tooltip="seccion" label="Seccion 6 y 7" id="tab6y7" />
 					<tab tooltip="seccion" label="Seccion 8" id="tab8" />
 					<tab tooltip="seccion" label="Seccion 9" id="tab9" />
+					<tab tooltip="seccion" label="Plan de Accion" id="tab10" />
 				</tabs>
 				<tabpanels>
 					<tabpanel>
@@ -65,13 +56,6 @@
 									<cell colspan="1">
 										<hbox />
 									</cell>
-								</row>
-								<row id="row">
-									<label class="etiqueta" value="PLAN DE ACCION:" />
-									<button autodisable="self" id="btnBuscarPlan" class="btn"
-										label="Buscar" tooltiptext="Catalogo"
-										image="/public/imagenes/botones/buscar.png" />
-									<label width="100%" id="lblPlan" />
 								</row>
 							</rows>
 						</grid>
@@ -2389,6 +2373,109 @@
 						<hbox>
 							<div align="left">
 								<button class="btn" id="btnAtras7" label="Anterior"
+									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
+							</div>
+							<space width="700px" />
+							<div align="right">
+								<button class="btn" id="btnSiguiente7" label="Siguiente"
+									image="/public/imagenes/botones/adelante.png" tooltiptext="Siguiente Pestaña" />
+							</div>
+						</hbox>
+					</tabpanel>
+					<tabpanel>
+						<grid width="100%">
+							<columns visible="false">
+								<column label="" width="15%" />
+								<column label="" width="35%" />
+								<column label="" width="15%" />
+								<column label="" width="35%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Descripcion:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<textbox id="txtDescripcion" hflex="1" maxlength="1000"
+										tooltiptext="Ingrese la Descripcion" multiline="true" class="multilinea" />
+									<hbox>
+										<label class="etiqueta" value="Quien:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<textbox id="txtQuien" hflex="1" maxlength="1000"
+										tooltiptext="Ingrese la Quienes realizan el Plan de Accion"
+										multiline="true" class="multilinea" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Como:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<textbox id="txtComo" hflex="1" maxlength="1000"
+										tooltiptext="Ingrese la Como se realiza el Plan de Accion"
+										multiline="true" class="multilinea" />
+									<hbox>
+										<label class="etiqueta" value="Donde:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<textbox id="txtDonde" hflex="1" maxlength="1000"
+										tooltiptext="Ingrese la Donde se realiza el Plan de Accion"
+										multiline="true" class="multilinea" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Cuando:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<datebox width="100%" readonly="true" id="dtbCuando"
+										onCreate="self.value = new Date()" tooltiptext="Indique la Fecha del Plan" />
+									<label class="etiqueta" value="Agregar Accion:" />
+									<button autodisable="self" id="btnAgregarItems" class="btn"
+										label="Agregar Accion" tooltiptext="Agregar items al Plan de Accion"
+										image="/public/imagenes/botones/annadir.png" width="150px" />
+								</row>
+							</rows>
+						</grid>
+						<hbox width="100%" widths="87%,13%">
+							<div width="100%">
+								<listbox span="true" rows="10" id="ltbPlan" width="100%" emptyMessage="No se han asignado Planes de Accion">
+									<listhead>
+										<listheader label="Quien" width="30%" />
+										<listheader label="Quien" width="10%" />
+										<listheader label="Cuando" width="10%" />
+										<listheader label="Donde" width="30%" />
+										<listheader label="Como" width="30%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.descripcion}" />
+											<listcell label="${each.quien}" />
+											<listcell label="${each.traerFechaCuando()}" />
+											<listcell label="${each.donde}" />
+											<listcell label="${each.como}" />
+										</listitem>
+									</template>
+								</listbox>
+							</div>
+							<vbox width="100%">
+								<button autodisable="self" label="Editar" id="btnEditar"
+									image="/public/imagenes/botones/generar.png"
+									tooltiptext="Seleccione un item y presione este boton para editar la informacion existente"
+									hflex="1" height="32px" class="btn" />
+								<button autodisable="self" label="Remover" id="btnRemover"
+									image="/public/imagenes/botones/anular.png"
+									tooltiptext="Seleccione un item y presione este boton para removerlo de la lista"
+									hflex="1" height="32px" class="btn" />
+							</vbox>
+						</hbox>
+						<hbox>
+							<div align="left">
+								<button class="btn" id="btnAtras8" label="Anterior"
 									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
 							</div>
 						</hbox>

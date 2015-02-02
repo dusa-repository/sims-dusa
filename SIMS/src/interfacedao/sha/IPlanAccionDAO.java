@@ -2,6 +2,7 @@ package interfacedao.sha;
 
 import java.util.List;
 
+import modelo.sha.Informe;
 import modelo.sha.PlanAccion;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,5 +20,7 @@ public interface IPlanAccionDAO extends JpaRepository<PlanAccion, Long> {
 	List<PlanAccion> findByComoStartingWithAllIgnoreCase(String valor);
 
 	List<PlanAccion> findByDescripcion(String value);
+
+	List<PlanAccion> findByInforme(Informe informe);
 
 }

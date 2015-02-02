@@ -22,11 +22,11 @@ public class SInforme {
 
 	public void guardar(Informe informe) {
 		informeDAO.save(informe);
-		
+
 	}
 
 	public List<Informe> buscarTodos() {
-	return	informeDAO.findAll();
+		return informeDAO.findAll();
 	}
 
 	public List<Informe> filtroCodigo(String valor) {
@@ -34,11 +34,13 @@ public class SInforme {
 	}
 
 	public List<Informe> filtroNombreTrabajador(String valor) {
-		return informeDAO.findByPacientePrimerNombreStartingWithAllIgnoreCase(valor);
+		return informeDAO
+				.findByPacientePrimerNombreStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Informe> filtroApellidoTrabajador(String valor) {
-		return informeDAO.findByPacientePrimerApellidoStartingWithAllIgnoreCase(valor);
+		return informeDAO
+				.findByPacientePrimerApellidoStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Informe> filtroEmpresa(String valor) {
@@ -46,7 +48,10 @@ public class SInforme {
 	}
 
 	public List<Informe> buscarPorCondicion(Condicion condicion) {
-		return informeDAO.findByCondicionAOrCondicionBOrCondicionCOrCondicionDOrCondicionEOrCondicionF(condicion,condicion,condicion,condicion,condicion,condicion);
+		return informeDAO
+				.findByCondicionAOrCondicionBOrCondicionCOrCondicionDOrCondicionEOrCondicionF(
+						condicion, condicion, condicion, condicion, condicion,
+						condicion);
 	}
 
 	public List<Informe> buscarPorArea(Area area) {
@@ -72,10 +77,6 @@ public class SInforme {
 
 	public Informe buscar(long parseLong) {
 		return informeDAO.findByIdInforme(parseLong);
-	}
-
-	public List<Informe> buscarPorIdPlan(long id) {
-		return informeDAO.findByPlanIdPlan(id);
 	}
 
 	public void guardarVarios(List<Informe> informes) {
@@ -130,6 +131,11 @@ public class SInforme {
 		return informeDAO.findByPacienteM(pacienteAModificar);
 	}
 
-
-
+	public Informe buscarUltimo() {
+		long id = informeDAO.findMaxIdInforme();
+		if (id != 0)
+			return informeDAO.findOne(id);
+		return null;
 	}
+
+}

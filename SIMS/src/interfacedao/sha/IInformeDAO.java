@@ -10,6 +10,7 @@ import modelo.sha.Condicion;
 import modelo.sha.Informe;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 public interface IInformeDAO extends JpaRepository<Informe, Long> {
 
@@ -40,8 +41,6 @@ public interface IInformeDAO extends JpaRepository<Informe, Long> {
 
 	Informe findByIdInforme(long parseLong);
 
-	List<Informe> findByPlanIdPlan(long id);
-
 	List<Informe> findByPacienteB(Paciente pacienteAModificar);
 
 	List<Informe> findByPacienteM(Paciente pacienteAModificar);
@@ -65,5 +64,8 @@ public interface IInformeDAO extends JpaRepository<Informe, Long> {
 	List<Informe> findByPacienteD(Paciente pacienteAModificar);
 
 	List<Informe> findByPacienteC(Paciente pacienteAModificar);
+	
+	@Query("select coalesce(max(consulta.idInforme), '0') from Informe consulta")
+	long findMaxIdInforme();
 
 }
