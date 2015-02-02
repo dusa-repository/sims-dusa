@@ -3,6 +3,7 @@ package servicio.sha;
 import java.util.List;
 
 import interfacedao.sha.IPlanAccionDAO;
+import modelo.sha.Informe;
 import modelo.sha.PlanAccion;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,13 @@ public class SPlanAccion {
 
 	public PlanAccion buscar(Long idPlan) {
 		return planDAO.findOne(idPlan);
+	}
+
+	public void guardarVarios(List<PlanAccion> planesAccion) {
+		planDAO.save(planesAccion);
+	}
+
+	public List<PlanAccion> buscarPorInforme(Informe informe) {
+		return planDAO.findByInforme(informe);
 	}
 }

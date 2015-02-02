@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.maestros.Empresa;
@@ -22,7 +23,7 @@ import modelo.maestros.Paciente;
 import org.hibernate.annotations.Type;
 
 @Entity
-@Table(name = "informe", schema="dusa_sims.dbo")
+@Table(name = "informe", schema = "dusa_sims.dbo")
 public class Informe implements Serializable {
 
 	private static final long serialVersionUID = -5110967796816980541L;
@@ -31,653 +32,601 @@ public class Informe implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_informe", unique = true, nullable = false)
 	private long idInforme;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_a", referencedColumnName = "id_paciente")
 	private Paciente paciente;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_b", referencedColumnName = "id_paciente")
 	private Paciente pacienteB;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_c", referencedColumnName = "id_paciente")
 	private Paciente pacienteC;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_d", referencedColumnName = "id_paciente")
 	private Paciente pacienteD;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_e", referencedColumnName = "id_paciente")
 	private Paciente pacienteE;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_f", referencedColumnName = "id_paciente")
 	private Paciente pacienteF;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_g", referencedColumnName = "id_paciente")
 	private Paciente pacienteG;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_h", referencedColumnName = "id_paciente")
 	private Paciente pacienteH;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_i", referencedColumnName = "id_paciente")
 	private Paciente pacienteI;
-		
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_j", referencedColumnName = "id_paciente")
 	private Paciente pacienteJ;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_k", referencedColumnName = "id_paciente")
 	private Paciente pacienteK;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_l", referencedColumnName = "id_paciente")
 	private Paciente pacienteL;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente_m", referencedColumnName = "id_paciente")
 	private Paciente pacienteM;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_area", referencedColumnName = "id_area")
 	private Area area;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_empresa_a", referencedColumnName = "id_empresa")
 	private Empresa empresa;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_empresa_b", referencedColumnName = "id_empresa")
 	private Empresa empresaB;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_clasificacion_accidente", referencedColumnName = "id_clasificacion_accidente")
 	private ClasificacionAccidente clasificacion;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_plan_accion", referencedColumnName = "id_plan_accion")
-	private PlanAccion plan;
-	
+
 	@ManyToMany
-	@JoinTable(
-		name="informe_condicion_a", schema="dusa_sims.dbo"
-		, joinColumns={
-			@JoinColumn(name="id_informe", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_condicion", nullable=false)
-			}
-		)
+	@JoinTable(name = "informe_condicion_a", schema = "dusa_sims.dbo", joinColumns = { @JoinColumn(name = "id_informe", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "id_condicion", nullable = false) })
 	private Set<Condicion> condicionA;
-	
+
 	@ManyToMany
-	@JoinTable(
-		name="informe_condicion_b", schema="dusa_sims.dbo"
-		, joinColumns={
-			@JoinColumn(name="id_informe", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_condicion", nullable=false)
-			}
-		)
+	@JoinTable(name = "informe_condicion_b", schema = "dusa_sims.dbo", joinColumns = { @JoinColumn(name = "id_informe", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "id_condicion", nullable = false) })
 	private Set<Condicion> condicionB;
-	
+
 	@ManyToMany
-	@JoinTable(
-		name="informe_condicion_c", schema="dusa_sims.dbo"
-		, joinColumns={
-			@JoinColumn(name="id_informe", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_condicion", nullable=false)
-			}
-		)
+	@JoinTable(name = "informe_condicion_c", schema = "dusa_sims.dbo", joinColumns = { @JoinColumn(name = "id_informe", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "id_condicion", nullable = false) })
 	private Set<Condicion> condicionC;
-	
+
 	@ManyToMany
-	@JoinTable(
-		name="informe_condicion_d", schema="dusa_sims.dbo"
-		, joinColumns={
-			@JoinColumn(name="id_informe", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_condicion", nullable=false)
-			}
-		)
+	@JoinTable(name = "informe_condicion_d", schema = "dusa_sims.dbo", joinColumns = { @JoinColumn(name = "id_informe", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "id_condicion", nullable = false) })
 	private Set<Condicion> condicionD;
-	
+
 	@ManyToMany
-	@JoinTable(
-		name="informe_condicion_e", schema="dusa_sims.dbo"
-		, joinColumns={
-			@JoinColumn(name="id_informe", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_condicion", nullable=false)
-			}
-		)
+	@JoinTable(name = "informe_condicion_e", schema = "dusa_sims.dbo", joinColumns = { @JoinColumn(name = "id_informe", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "id_condicion", nullable = false) })
 	private Set<Condicion> condicionE;
-	
+
 	@ManyToMany
-	@JoinTable(
-		name="informe_condicion_f", schema="dusa_sims.dbo"
-		, joinColumns={
-			@JoinColumn(name="id_informe", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_condicion", nullable=false)
-			}
-		)
+	@JoinTable(name = "informe_condicion_f", schema = "dusa_sims.dbo", joinColumns = { @JoinColumn(name = "id_informe", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "id_condicion", nullable = false) })
 	private Set<Condicion> condicionF;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String ebc;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String ebcf;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String ebd;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String ebe;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String ebeg;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String ebf;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String ebg;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String ebge;
 
-	@Column(length=50)
+	@Column(length = 50)
 	private String codigo;
-	
-	@Column(name="fa")
+
+	@Column(name = "fa")
 	private Timestamp fa;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	private String fb;
-	
-	@Column(length=10)
+
+	@Column(length = 10)
 	private String fc;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fd;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fe;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String ff;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fga;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgb;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgc;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgd;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fge;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgf;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean fgga;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean fgha;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgh;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgi;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgj;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgaa;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgab;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String fgad;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String gaa;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String haa;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hab;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hac;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hada;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String haea;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hae;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String haf;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hba;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hbc;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hbd;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hbda;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hbe;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hbea;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hbf;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hbg;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hbh;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hbaaa;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hbaa;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hbaab;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hbab;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hca;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcb;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcc;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcd;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcea;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hce;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcfa;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcf;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcg;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcha;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hch;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcia;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hci;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcj;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcaa;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcaaa;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcab;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcaba;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcac;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcad;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcae;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcaea;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcaf;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcafa;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcaga;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcagb;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcagc;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcagd;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcage;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcagf;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hcagfa;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcagg;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcagh;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hcagi;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hda;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean hdb;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hdba;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hdc;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hdca;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hdd;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hdea;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hdeb;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hdec;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hded;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String hdf;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean iaa;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean iab;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean iac;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean iad;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String iada;
-	
-	@Column(name="iae")
+
+	@Column(name = "iae")
 	private Timestamp iae;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean iaf;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean iag;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String iaga;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean iah;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String iai;
 
-	@Column(length=250)
+	@Column(length = 250)
 	private String iaj;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean iba;
-	
-	@Column(name="ibb")
+
+	@Column(name = "ibb")
 	private Timestamp ibb;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String ibc;
-	
-	@Column(name="ibd")
+
+	@Column(name = "ibd")
 	private Timestamp ibd;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ibe;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ibf;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ibg;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ibh;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ibi;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ibj;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ibaa;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String ibab;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String ibac;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ica;
-	
-	@Column(name="icb")
+
+	@Column(name = "icb")
 	private Timestamp icb;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String icc;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String icd;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ice;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean icf;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean icg;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ich;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ici;
-	
-	@Column(name="icj")
+
+	@Column(name = "icj")
 	private Timestamp icj;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String icaa;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String icab;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String icac;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String icae;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ida;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean idb;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean idc;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean idd;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean ide;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean idf;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean idg;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean idh;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean idi;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean idj;
-	
-	@Column(name="idaa")
+
+	@Column(name = "idaa")
 	private Timestamp idaa;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String idab;
-	
+
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean idac;
-	
-	@Column(length=250)
+
+	@Column(length = 250)
 	private String idad;
-	
+
 	@Column(name = "fecha_auditoria")
 	private Timestamp fechaAuditoria;
 
@@ -686,6 +635,9 @@ public class Informe implements Serializable {
 
 	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
+
+	@OneToMany(mappedBy = "informe")
+	private Set<PlanAccion> planes;
 
 	public Informe() {
 		super();
@@ -729,7 +681,8 @@ public class Informe implements Serializable {
 			String icaa, String icab, String icac, String icae, Boolean ida,
 			Boolean idb, Boolean idc, Boolean idd, Boolean ide, Boolean idf,
 			Boolean idg, Boolean idh, Boolean idi, Boolean idj, Timestamp idaa,
-			String idab, Boolean idac, String idad, Timestamp fecha, String hora, String usuario, PlanAccion plan) {
+			String idab, Boolean idac, String idad, Timestamp fecha,
+			String hora, String usuario) {
 		super();
 		this.idInforme = idInforme;
 		this.paciente = pacienteA;
@@ -897,7 +850,6 @@ public class Informe implements Serializable {
 		this.fechaAuditoria = fecha;
 		this.horaAuditoria = hora;
 		this.usuarioAuditoria = usuario;
-		this.plan = plan;
 	}
 
 	public long getIdInforme() {
@@ -2235,7 +2187,7 @@ public class Informe implements Serializable {
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
-	
+
 	public String getEbc() {
 		return ebc;
 	}
@@ -2300,12 +2252,12 @@ public class Informe implements Serializable {
 		this.ebge = ebge;
 	}
 
-	public PlanAccion getPlan() {
-		return plan;
+	public Set<PlanAccion> getPlanes() {
+		return planes;
 	}
 
-	public void setPlan(PlanAccion plan) {
-		this.plan = plan;
+	public void setPlanes(Set<PlanAccion> planes) {
+		this.planes = planes;
 	}
-	
+
 }
