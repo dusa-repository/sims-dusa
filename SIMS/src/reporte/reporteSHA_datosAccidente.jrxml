@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_datosAccidente" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="99a0b002-3419-413c-87b7-28f557dc8177">
 	<property name="ireport.zoom" value="1.3310000000000035"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="122"/>
 	<parameter name="fa" class="java.sql.Timestamp"/>
 	<parameter name="fgad" class="java.lang.String"/>
 	<parameter name="fgg" class="java.lang.String"/>
@@ -44,6 +44,7 @@
 	<parameter name="fgi1" class="java.lang.String"/>
 	<parameter name="fgi2" class="java.lang.String"/>
 	<parameter name="fghSI" class="java.lang.String"/>
+	<parameter name="hae" class="java.lang.String"/>
 	<title>
 		<band height="630" splitType="Stretch">
 			<staticText>
@@ -99,7 +100,7 @@
 				<text><![CDATA[6.4.- HORARIO DE LA JORNADA DE L/LA TRABAJADOR/A EL DÍA DEL ACCIDENTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="291" width="214" height="44" uuid="872c0f47-24b0-4525-8265-2a0cad310459"/>
+				<reportElement x="1" y="291" width="214" height="51" uuid="872c0f47-24b0-4525-8265-2a0cad310459"/>
 				<box leftPadding="4">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -112,7 +113,7 @@
 				<text><![CDATA[6.7.11..- PUESTO DE TRABAJO QUE OCUPABA PARA EL MOMENTO DEL ACCIDENTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="215" y="291" width="174" height="44" uuid="543aaea9-f48b-4ab7-a182-7c5d222846db"/>
+				<reportElement x="215" y="291" width="174" height="51" uuid="543aaea9-f48b-4ab7-a182-7c5d222846db"/>
 				<box leftPadding="4">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -177,7 +178,7 @@
 				<text><![CDATA[6.7.2.- AGENTE CAUSAL DEL ACCIDENTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="335" width="521" height="110" uuid="ee8401fc-c133-4fe7-ad4d-3521cdca90e1"/>
+				<reportElement x="1" y="342" width="521" height="110" uuid="ee8401fc-c133-4fe7-ad4d-3521cdca90e1"/>
 				<box leftPadding="4">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -203,7 +204,7 @@
 				<text><![CDATA[6.7.3.- AGENTE CAUSAL DE LA LESIÓN:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="389" y="291" width="133" height="44" uuid="1977f6dc-41ab-4e0b-8ad6-0a2d9efd2d6a"/>
+				<reportElement x="389" y="291" width="133" height="51" uuid="1977f6dc-41ab-4e0b-8ad6-0a2d9efd2d6a"/>
 				<box leftPadding="4">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -661,7 +662,7 @@
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement x="3" y="54" width="90" height="20" uuid="0d2bfaf9-77b3-476e-b7b5-2c88761b062c"/>
-				<textFieldExpression><![CDATA[$P{fa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fa})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="214" y="54" width="78" height="20" uuid="5b1d272e-a599-40eb-b1c6-2d50bd65846b"/>
@@ -683,16 +684,16 @@
 				<reportElement x="3" y="119" width="501" height="20" uuid="3538418e-4e98-498b-8a12-bde58e116527"/>
 				<textFieldExpression><![CDATA[$P{clasificacion}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="34" y="166" width="100" height="20" uuid="f94c6c2f-2700-405d-b7f1-4f9ba4a323b5"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="5" y="152" width="164" height="34" uuid="f94c6c2f-2700-405d-b7f1-4f9ba4a323b5"/>
 				<textFieldExpression><![CDATA[$P{fga}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="202" y="167" width="100" height="20" uuid="4cbcfe83-5329-4c39-9963-146a15207c7a"/>
+				<reportElement x="184" y="165" width="165" height="20" uuid="4cbcfe83-5329-4c39-9963-146a15207c7a"/>
 				<textFieldExpression><![CDATA[$P{fgb}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="389" y="165" width="100" height="20" uuid="cfb1d85c-2cf5-4819-87cd-7fbda53f4f9b"/>
+				<reportElement x="353" y="156" width="165" height="29" uuid="cfb1d85c-2cf5-4819-87cd-7fbda53f4f9b"/>
 				<textFieldExpression><![CDATA[$P{fgc}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -715,8 +716,8 @@
 				<reportElement x="217" y="314" width="172" height="20" uuid="1cee7dc2-4fac-4f94-acff-158f1633750e"/>
 				<textFieldExpression><![CDATA[$P{fgab}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="422" y="301" width="99" height="35" uuid="cdc16cde-8de1-443a-ac60-3889407c2f11"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="392" y="316" width="125" height="20" uuid="cdc16cde-8de1-443a-ac60-3889407c2f11"/>
 				<textFieldExpression><![CDATA[$P{fgac}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">

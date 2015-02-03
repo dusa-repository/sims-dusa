@@ -599,7 +599,7 @@
 												tooltiptext="Marque para indicar la Condicion" />
 											<radio label="Otro (Indique)" id="rdo5236"
 												tooltiptext="Marque para indicar la Condicion" />
-											<textbox id="txt5236" multiline="true" />
+											<textbox id="txt5236" multiline="true" maxlength="50" />
 										</vbox>
 									</radiogroup>
 									<cell align="center" colspan="2">
@@ -645,7 +645,7 @@
 													tooltiptext="Marque para indicar el tipo de contrato" />
 												<radio label="Otra (Indique)" id="rdo5257"
 													tooltiptext="Marque para indicar el tipo de contrato" />
-												<textbox id="txt5257" multiline="true" />
+												<textbox id="txt5257" multiline="true" maxlength="50"  />
 											</vbox>
 										</radiogroup>
 									</cell>
@@ -692,7 +692,7 @@
 											<separator />
 											<radio label="Otro (Indique)" id="rdo5275"
 												tooltiptext="Marque para indicar la frecuencia de pagoo" />
-											<textbox id="txt5275" multiline="true" />
+											<textbox id="txt5275" multiline="true" maxlength="50" />
 										</vbox>
 									</radiogroup>
 								</row>
@@ -751,16 +751,16 @@
 										tooltiptext="Seleccione la Hora de la Ocurrencia" />
 									<label class="etiqueta" value="Horario de la Jornada del Trabajador/a:" />
 									<textbox id="txt64"
-										tooltiptext="Ingrese el Horario del trabajador/a el dia del Accidente" />
+										tooltiptext="Ingrese el Horario del trabajador/a el dia del Accidente" maxlength="250" />
 								</row>
 								<row>
 									<label class="etiqueta" value="Horas laboradas al momento del Accidente:" />
 									<textbox id="txt65"
-										tooltiptext="Indique las Horas laboradas al momento del Accidente" />
+										tooltiptext="Indique las Horas laboradas al momento del Accidente" maxlength="10" />
 									<label class="etiqueta" value="Lugar o Area donde Ocurrio el Accidente:" />
 									<cell colspan="2">
 										<textbox multiline="true" id="txt66" width="99%"
-											tooltiptext="Indique el Lugar o Area donde Ocurrio el Accidente" />
+											tooltiptext="Indique el Lugar o Area donde Ocurrio el Accidente" maxlength="250"  />
 									</cell>
 									<label class="etiqueta" value="Clasificacion del Accidente:" />
 									<cell colspan="2">
@@ -778,24 +778,24 @@
 									<label class="etiqueta" value="Tipo de Accidente:" />
 									<cell colspan="2">
 										<textbox multiline="true" id="txt671" width="99%"
-											tooltiptext="Indique el Tipo de Accidente" />
+											tooltiptext="Indique el Tipo de Accidente" maxlength="250"  />
 									</cell>
 									<label class="etiqueta" value="Agente Causal del Accidente:" />
 									<cell colspan="2">
 										<textbox multiline="true" id="txt672" width="99%"
-											tooltiptext="Indique el Agente Causal del Accidente" />
+											tooltiptext="Indique el Agente Causal del Accidente" maxlength="250" />
 									</cell>
 									<label class="etiqueta" value="Agente Causal de la Lesion:" />
 									<textbox multiline="true" id="txt673"
-										tooltiptext="Indique el Agente Causal de la Lesion" />
+										tooltiptext="Indique el Agente Causal de la Lesion" maxlength="250" />
 								</row>
 								<row>
 									<label class="etiqueta" value="Parte del Cuerpo Lesionada:" />
 									<textbox multiline="true" id="txt674"
-										tooltiptext="Indique la Parte del Cuerpo Lesionada" />
+										tooltiptext="Indique la Parte del Cuerpo Lesionada" maxlength="250" />
 									<label class="etiqueta" value="Naturaleza de la Lesion:" />
 									<textbox multiline="true" id="txt675"
-										tooltiptext="Indique la Naturaleza de la Lesion" />
+										tooltiptext="Indique la Naturaleza de la Lesion" maxlength="250" />
 									<label class="etiqueta" value="Gravedad de la Lesion:" />
 									<combobox tooltiptext="Seleccione la Gravedad de la Lesion"
 										placeholder="Seleccione la Gravedad" id="cmb676" width="100%"
@@ -820,7 +820,7 @@
 									</radiogroup>
 									<label class="etiqueta" value="¿Cual?" />
 									<textbox multiline="true" id="txt678"
-										tooltiptext="Indique la Naturaleza de la Lesion" />
+										tooltiptext="Indique la Naturaleza de la Lesion" maxlength="250" />
 									<label class="etiqueta" value="Tipo" />
 									<radiogroup id="rdg679">
 										<radio label="Publico" id="rdo6791"
@@ -830,17 +830,17 @@
 									</radiogroup>
 									<label class="etiqueta" value="Tiempo de Reposo:" />
 									<textbox multiline="true" id="txt6710"
-										tooltiptext="Indique el Tiempo de Reposo" />
+										tooltiptext="Indique el Tiempo de Reposo" maxlength="250" />
 								</row>
 								<row>
 									<label class="etiqueta" value="Puesto de Trabajo que Ocupaba:" />
 									<cell colspan="2">
 										<textbox multiline="true" id="txt6711" width="99%"
-											tooltiptext="Indique el Puesto de Trabajo que Ocupaba al Momento del Accidente" />
+											tooltiptext="Indique el Puesto de Trabajo que Ocupaba al Momento del Accidente" maxlength="250"  />
 									</cell>
 									<label class="etiqueta" value="Tiempo en el Puesto de Trabajo:" />
 									<textbox multiline="true" id="txt6712"
-										tooltiptext="Indique el Tiempo en el Puesto de Trabajo" />
+										tooltiptext="Indique el Tiempo en el Puesto de Trabajo" maxlength="250" />
 									<label class="etiqueta" value="Departamento / Area" />
 									<cell colspan="2">
 										<combobox tooltiptext="Seleccione un Area"
@@ -861,7 +861,7 @@
 								<row>
 									<cell colspan="8">
 										<textbox multiline="true" id="txt6714" height="50px"
-											width="99%" tooltiptext="Indique la Descripcion" />
+											width="99%" tooltiptext="Indique la Descripcion" maxlength="250"/>
 									</cell>
 								</row>
 								<row>
@@ -880,7 +880,7 @@
 								<row>
 									<cell colspan="8">
 										<textbox multiline="true" id="txt711" height="50px"
-											width="99%" tooltiptext="Indique la Descripcion" />
+											width="99%" tooltiptext="Indique la Descripcion"  maxlength="250"/>
 									</cell>
 								</row>
 							</rows>
@@ -930,7 +930,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt811" height="50px"
-														width="99%" tooltiptext="Indique la Descripcion" />
+														width="99%" tooltiptext="Indique la Descripcion" maxlength="250"/>
 												</cell>
 											</row>
 											<row>
@@ -948,7 +948,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt812" height="50px"
-														width="99%" tooltiptext="Indique la Descripcion" />
+														width="99%" tooltiptext="Indique la Descripcion" maxlength="250"/>
 												</cell>
 											</row>
 											<row>
@@ -966,7 +966,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt813" height="50px"
-														width="99%" tooltiptext="Indique la Descripcion" />
+														width="99%" tooltiptext="Indique la Descripcion" maxlength="250"/>
 												</cell>
 											</row>
 											<row>
@@ -992,7 +992,7 @@
 																tooltiptext="Marque para Responder" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt815" />
+													<textbox multiline="true" id="txt815" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1003,7 +1003,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt816" height="50px"
-														width="99%" tooltiptext="Indique las Observaciones" />
+														width="99%" tooltiptext="Indique las Observaciones" maxlength="250" />
 												</cell>
 											</row>
 										</rows>
@@ -1032,7 +1032,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt821" height="50px"
-														width="99%" tooltiptext="Indique la Descripcion" />
+														width="99%" tooltiptext="Indique la Descripcion" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1069,7 +1069,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt823" height="50px"
-														width="99%" tooltiptext="Indique la Descripcion" />
+														width="99%" tooltiptext="Indique la Descripcion" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1083,7 +1083,7 @@
 																tooltiptext="Marque para Afirmar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt8241" />
+													<textbox multiline="true" id="txt8241" maxlength="250" />
 												</cell>
 												<cell colspan="2">
 													<label class="etiqueta"
@@ -1098,7 +1098,7 @@
 																tooltiptext="Marque para Responder" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt825" />
+													<textbox multiline="true" id="txt825" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1182,7 +1182,7 @@
 																tooltiptext="Marque para Afirmar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt8211" />
+													<textbox multiline="true" id="txt8211" maxlength="250" />
 												</cell>
 												<cell colspan="2">
 													<label class="etiqueta"
@@ -1194,7 +1194,7 @@
 																tooltiptext="Marque para Afirmar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt8212" />
+													<textbox multiline="true" id="txt8212" maxlength="250"  />
 												</cell>
 											</row>
 											<row>
@@ -1244,7 +1244,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt831" height="50px"
-														width="99%" tooltiptext="Indique la Descripcion" />
+														width="99%" tooltiptext="Indique la Descripcion" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1294,7 +1294,7 @@
 																tooltiptext="Marque para Responder" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt835" />
+													<textbox multiline="true" id="txt835" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1311,7 +1311,7 @@
 																tooltiptext="Marque para Responder" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt836" />
+													<textbox multiline="true" id="txt836" maxlength="250" />
 												</cell>
 												<cell colspan="2">
 													<label class="etiqueta"
@@ -1336,7 +1336,7 @@
 																tooltiptext="Marque para Responder" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt838" />
+													<textbox multiline="true" id="txt838" maxlength="250" />
 												</cell>
 												<cell colspan="2">
 													<label class="etiqueta" value="¿De quién Recibió las Instrucciones?" />
@@ -1350,7 +1350,7 @@
 																tooltiptext="Marque para Responder" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt839" />
+													<textbox multiline="true" id="txt839" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1374,7 +1374,7 @@
 															<radio label="NO" id="rdo83112" tooltiptext="Marque para Negar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt8311" />
+													<textbox multiline="true" id="txt8311" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1388,7 +1388,7 @@
 																tooltiptext="Marque para Afirmar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt8312" />
+													<textbox multiline="true" id="txt8312" maxlength="250" />
 												</cell>
 												<cell colspan="2">
 													<label class="etiqueta"
@@ -1409,7 +1409,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt8314" height="50px"
-														width="99%" tooltiptext="Indique las Observaciones" />
+														width="99%" tooltiptext="Indique las Observaciones" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1444,7 +1444,7 @@
 																tooltiptext="Marque para Responder" />
 														</hbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt8315" />
+													<textbox multiline="true" id="txt8315" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1455,7 +1455,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt8316" height="50px"
-														width="99%" tooltiptext="Indique las Observaciones" />
+														width="99%" tooltiptext="Indique las Observaciones" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1527,7 +1527,7 @@
 																tooltiptext="Marque para Afirmar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt83176" />
+													<textbox multiline="true" id="txt83176" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1578,7 +1578,7 @@
 												<cell colspan="1">
 													<label class="etiqueta"
 														value="¿Cuál es el Lugar o Puesto de Trabajo Habitual del Trabajador / Trabajadora?" />
-													<textbox multiline="true" id="txt841" />
+													<textbox multiline="true" id="txt841" maxlength="250" />
 												</cell>
 												<cell colspan="2">
 													<label class="etiqueta"
@@ -1590,7 +1590,7 @@
 																tooltiptext="Marque para Negar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt842" />
+													<textbox multiline="true" id="txt842" maxlength="250" />
 												</cell>
 												<cell colspan="1">
 													<label class="etiqueta"
@@ -1604,7 +1604,7 @@
 																tooltiptext="Marque para Negar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt843" />
+													<textbox multiline="true" id="txt843" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1634,7 +1634,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt844" height="50px"
-														width="99%" tooltiptext="Indique" />
+														width="99%" tooltiptext="Indique" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1646,21 +1646,21 @@
 											<row>
 												<cell colspan="1">
 													<label class="etiqueta" value="El Dia del Accidente:" />
-													<textbox id="txt8451" />
+													<textbox id="txt8451" maxlength="250"  />
 												</cell>
 												<cell colspan="1">
 													<label class="etiqueta"
 														value="Las tres Últimas Semanas Antes del Accidente:" />
-													<textbox id="txt8452" />
+													<textbox id="txt8452" maxlength="250" />
 												</cell>
 												<cell colspan="1">
 													<label class="etiqueta"
 														value="El Último Trimestre Antes del Accidente:" />
-													<textbox id="txt8453" />
+													<textbox id="txt8453" maxlength="250" />
 												</cell>
 												<cell colspan="1">
 													<label class="etiqueta" value="El Ultimo  Año Antes del Accidente:" />
-													<textbox id="txt8454" />
+													<textbox id="txt8454" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1671,7 +1671,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt846" height="50px"
-														width="99%" tooltiptext="Indique las Observaciones" />
+														width="99%" tooltiptext="Indique las Observaciones" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1778,7 +1778,7 @@
 																tooltiptext="Marque para Afirmar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt914" />
+													<textbox multiline="true" id="txt914" maxlength="250" />
 												</cell>
 												<cell colspan="1">
 													<vbox>
@@ -1807,7 +1807,7 @@
 																tooltiptext="Marque para Afirmar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt917" />
+													<textbox multiline="true" id="txt917" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1825,7 +1825,7 @@
 													<label class="etiqueta"
 														value="De ser  Si,  Especifique  de que Manera, De  ser  No, Especifique Por Qué?:" />
 													<textbox multiline="true" id="txt919" width="99%"
-														tooltiptext="Indique" />
+														tooltiptext="Indique" maxlength="250"  />
 												</cell>
 											</row>
 											<row>
@@ -1836,7 +1836,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt9110" height="50px"
-														width="99%" tooltiptext="Indique las Observaciones" />
+														width="99%" tooltiptext="Indique las Observaciones" maxlength="250" />
 												</cell>
 											</row>
 										</rows>
@@ -1871,7 +1871,7 @@
 													<separator />
 													<hbox>
 														<label class="etiqueta" value="N° De Registro:" />
-														<textbox multiline="true" id="txt923" />
+														<textbox multiline="true" id="txt923" maxlength="250" />
 													</hbox>
 													<separator />
 													<hbox>
@@ -1958,7 +1958,7 @@
 												<cell colspan="2">
 													<label class="etiqueta" value="De  ser  No, Especifique Por Qué? " />
 													<textbox multiline="true" id="txt9212" width="99%"
-														tooltiptext="Indique" />
+														tooltiptext="Indique" maxlength="250" />
 												</cell>
 											</row>
 											<row>
@@ -1969,7 +1969,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt9213" height="50px"
-														width="99%" tooltiptext="Indique las Observaciones" />
+														width="99%" tooltiptext="Indique las Observaciones" maxlength="250" />
 												</cell>
 											</row>
 										</rows>
@@ -2004,7 +2004,7 @@
 													<separator />
 													<hbox>
 														<label class="etiqueta" value="N° de Registro Ante el INPSASEL?:" />
-														<textbox multiline="true" id="txt933" />
+														<textbox multiline="true" id="txt933" maxlength="250" />
 													</hbox>
 													<separator />
 													<hbox>
@@ -2080,7 +2080,7 @@
 												<cell colspan="1">
 													<hbox>
 														<label class="etiqueta" value="N° de Registro Ante el INPSASEL?:" />
-														<textbox multiline="true" id="txt9311" />
+														<textbox multiline="true" id="txt9311" maxlength="250" />
 													</hbox>
 												</cell>
 											</row>
@@ -2208,7 +2208,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt9315" height="50px"
-														width="99%" tooltiptext="Indique las Observaciones" />
+														width="99%" tooltiptext="Indique las Observaciones" maxlength="250" />
 												</cell>
 											</row>
 										</rows>
@@ -2340,7 +2340,7 @@
 												<cell colspan="1">
 													<hbox>
 														<label class="etiqueta" value="N° de Registro Ante el INPSASEL?:" />
-														<textbox multiline="true" id="txt9412" />
+														<textbox multiline="true" id="txt9412" maxlength="250" />
 													</hbox>
 												</cell>
 												<cell colspan="1">
@@ -2362,7 +2362,7 @@
 											<row>
 												<cell colspan="4">
 													<textbox multiline="true" id="txt9414" height="50px"
-														width="99%" tooltiptext="Indique las Observaciones" />
+														width="99%" tooltiptext="Indique las Observaciones" maxlength="250" />
 												</cell>
 											</row>
 										</rows>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_datosEmpresa_trabajador" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7e592949-8b55-4cad-9b25-bff17651f757">
 	<property name="ireport.zoom" value="0.9090909090909108"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="489"/>
+	<property name="ireport.y" value="391"/>
 	<parameter name="razonB" class="java.lang.String"/>
 	<parameter name="centroTrabajoB" class="java.lang.String"/>
 	<parameter name="direccionCentroB" class="java.lang.String"/>
@@ -15,7 +15,7 @@
 	<parameter name="telefonoFaxB" class="java.lang.String"/>
 	<parameter name="correoB" class="java.lang.String"/>
 	<parameter name="registroMercantilB" class="java.lang.String"/>
-	<parameter name="fechaRegistroB" class="java.lang.String"/>
+	<parameter name="fechaRegistroB" class="java.sql.Timestamp"/>
 	<parameter name="nroRegistroB" class="java.lang.String"/>
 	<parameter name="tomoRegistroB" class="java.lang.String"/>
 	<parameter name="representanteB1" class="java.lang.String"/>
@@ -36,15 +36,15 @@
 	<parameter name="nacionalidadTrabajador" class="java.lang.String"/>
 	<parameter name="sexoTrabajador" class="java.lang.String"/>
 	<parameter name="edadTrabajador" class="java.lang.String"/>
-	<parameter name="fechaNacTrabajador" class="java.lang.String"/>
+	<parameter name="fechaNacTrabajador" class="java.sql.Timestamp"/>
 	<parameter name="lugarNacTrabajador" class="java.lang.String"/>
 	<parameter name="estadoCivilTrabajador" class="java.lang.String"/>
 	<parameter name="manoTrabajador" class="java.lang.String"/>
 	<parameter name="nivelEducativoTrabajador" class="java.lang.String"/>
-	<parameter name="fechaIngresoTrabajador" class="java.lang.String"/>
-	<parameter name="inscripcionIvss" class="java.lang.String"/>
+	<parameter name="fechaIngresoTrabajador" class="java.sql.Timestamp"/>
+	<parameter name="inscripcionIvss" class="java.sql.Timestamp"/>
 	<parameter name="retiroIvss" class="java.lang.String"/>
-	<parameter name="fechaEgresoTrabajador" class="java.lang.String"/>
+	<parameter name="fechaEgresoTrabajador" class="java.sql.Timestamp"/>
 	<parameter name="direccionTrabajador" class="java.lang.String"/>
 	<parameter name="estadoT" class="java.lang.String"/>
 	<parameter name="telefonoHabT" class="java.lang.String"/>
@@ -62,7 +62,7 @@
 	<parameter name="cargoRepresentanteB2" class="java.lang.String"/>
 	<parameter name="tomoRegistroB1" class="java.lang.String"/>
 	<parameter name="nroRegistroB1" class="java.lang.String"/>
-	<parameter name="fechaActualizacionB" class="java.lang.String"/>
+	<parameter name="fechaActualizacionB" class="java.sql.Timestamp"/>
 	<parameter name="ebg" class="java.lang.String"/>
 	<parameter name="parameter1_61" class="java.lang.String"/>
 	<parameter name="parameter1" class="java.lang.String"/>
@@ -102,6 +102,7 @@
 	<parameter name="ebg3" class="java.lang.String"/>
 	<parameter name="ebg4" class="java.lang.String"/>
 	<parameter name="ebg5" class="java.lang.String"/>
+	<parameter name="ebge" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -248,7 +249,7 @@
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="1" y="205" width="100" height="20" uuid="b7ced429-8793-4294-a3f2-c4688e516e96"/>
-				<textFieldExpression><![CDATA[$P{fechaRegistroB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaRegistroB})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="149" y="139" width="100" height="20" uuid="52f18e81-698a-4524-b49c-8c8a892be1f2"/>
@@ -673,7 +674,7 @@
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="10" y="270" width="201" height="20" uuid="56a6f1a0-af9a-4fcc-85df-a2a454025225"/>
-				<textFieldExpression><![CDATA[$P{fechaActualizacionB}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaActualizacionB})]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -732,7 +733,7 @@
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="275" y="140" width="244" height="20" uuid="87f7fd3e-be14-48a9-bfa1-1578d7530414"/>
-				<textFieldExpression><![CDATA[$P{fechaEgresoTrabajador}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaEgresoTrabajador})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="297" y="86" width="100" height="43" uuid="e0f8110a-7907-4318-be51-780e2e0a1297"/>
@@ -886,7 +887,7 @@
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement x="299" y="109" width="97" height="20" uuid="d711e8e8-854d-4be0-be98-5c76579d1046"/>
-				<textFieldExpression><![CDATA[$P{fechaIngresoTrabajador}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaIngresoTrabajador})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="282" y="66" width="144" height="20" uuid="6229b276-a313-4514-a03f-c8db06add1d1"/>
@@ -1035,7 +1036,7 @@
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="151" y="66" width="131" height="20" uuid="bb8f5cb5-b233-4e05-a4be-0559675e4c20"/>
-				<textFieldExpression><![CDATA[$P{fechaNacTrabajador}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaNacTrabajador})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="430" y="66" width="91" height="20" uuid="277d21aa-a83d-4c39-b0d0-ae6d162e4cf8"/>
@@ -1043,7 +1044,7 @@
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="404" y="109" width="115" height="20" uuid="e63a6b39-e813-4944-b0c1-aa22773a9be5"/>
-				<textFieldExpression><![CDATA[$P{inscripcionIvss}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{inscripcionIvss})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="93" y="248" width="83" height="20" uuid="02d56925-7da5-40bc-a334-9afb7ff0e998"/>
@@ -1248,7 +1249,7 @@
 				<text><![CDATA[MENSUAL      ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="436" y="502" width="48" height="35" uuid="60f18912-1e6d-46b7-9920-e74723b126ff"/>
+				<reportElement x="436" y="502" width="86" height="17" uuid="60f18912-1e6d-46b7-9920-e74723b126ff"/>
 				<text><![CDATA[OTRO (INDIQUE): ]]></text>
 			</staticText>
 			<rectangle>
@@ -1632,6 +1633,10 @@
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="436" y="517" width="84" height="18" uuid="d4cff446-a06c-4d68-b81a-2cd332dabb75"/>
+				<textFieldExpression><![CDATA[$P{ebge}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
