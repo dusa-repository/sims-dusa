@@ -423,7 +423,7 @@ public class CCertificado extends CGenerico {
 	}
 
 	/* Busca si existe un pais con el mismo nombre escrito */
-	@Listen("onChange = #txtNombre")
+	@Listen("onChange = #txtPeriodo")
 	public void buscarPorNombre() {
 		Periodo periodo = servicioPeriodo
 				.buscarPorNombre(txtPeriodo.getValue());
