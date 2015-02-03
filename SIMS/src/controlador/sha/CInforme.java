@@ -1069,15 +1069,15 @@ public class CInforme extends CGenerico {
 					}
 					informe.setCondicionA(condiciones);
 
-					condiciones = new HashSet<Condicion>();
+					Set<Condicion> condiciones2 = new HashSet<Condicion>();
 					for (int i = 0; i < ltb829.getItemCount(); i++) {
 						Listitem listItem = ltb829.getItemAtIndex(i);
 						if (listItem.isSelected()) {
 							Condicion condicion = listItem.getValue();
-							condiciones.add(condicion);
+							condiciones2.add(condicion);
 						}
 					}
-					informe.setCondicionB(condiciones);
+					informe.setCondicionB(condiciones2);
 
 					condiciones = new HashSet<Condicion>();
 					for (int i = 0; i < ltb8210.getItemCount(); i++) {
@@ -3978,7 +3978,7 @@ public class CInforme extends CGenerico {
 			p.put("fgf4", "");
 			p.put("fgf5", "x");
 		}
-		if(!informe.getFgf().equals("Mortal")||!informe.getFgf().equals("Muy Grave")||!informe.getFgf().equals("Grave")||!informe.getFgf().equals("Moderado")||!informe.getFgf().equals("Leve"))
+		if(!informe.getFgf().equals("Mortal")&&!informe.getFgf().equals("Muy Grave")&&!informe.getFgf().equals("Grave")&&!informe.getFgf().equals("Moderado")&&!informe.getFgf().equals("Leve"))
 		{
 			p.put("fgf1", "");
 			p.put("fgf2", "");

@@ -2,8 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_datos" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f4c9bcac-def9-4b9f-b9da-1377b8db4387">
 	<property name="ireport.zoom" value="0.9090909090909096"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<parameter name="nombre211" class="java.lang.String"/>
+	<property name="ireport.y" value="255"/>
 	<parameter name="cedula211" class="java.lang.String"/>
 	<parameter name="nro211" class="java.lang.String"/>
 	<parameter name="nombre212" class="java.lang.String"/>
@@ -39,7 +38,7 @@
 	<parameter name="telefonoFaxA" class="java.lang.String"/>
 	<parameter name="correoA" class="java.lang.String"/>
 	<parameter name="registroMercantilA" class="java.lang.String"/>
-	<parameter name="fechaRegistroA" class="java.lang.String"/>
+	<parameter name="fechaRegistroA" class="java.sql.Timestamp"/>
 	<parameter name="nroRegistroA" class="java.lang.String"/>
 	<parameter name="tomoRegistroA" class="java.lang.String"/>
 	<parameter name="representanteA1" class="java.lang.String"/>
@@ -60,7 +59,8 @@
 	<parameter name="cargoRepresentanteA2" class="java.lang.String"/>
 	<parameter name="nroRegistroA1" class="java.lang.String"/>
 	<parameter name="tomoRegistroA1" class="java.lang.String"/>
-	<parameter name="fechaActualizacionA" class="java.lang.String"/>
+	<parameter name="fechaActualizacionA" class="java.sql.Timestamp"/>
+	<parameter name="nombre211" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -528,7 +528,7 @@
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement x="3" y="434" width="100" height="20" uuid="839ec4a1-216d-41fc-97a7-db45d9782967"/>
-				<textFieldExpression><![CDATA[$P{fechaRegistroA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaRegistroA})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="298" y="420" width="227" height="33" uuid="d8b2e8a0-bd69-42f6-997d-7c8aedf760fb"/>
@@ -869,7 +869,7 @@
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="50" y="496" width="153" height="20" uuid="f9dc88e2-dab6-4a3a-abf2-af2bbf77407b"/>
-				<textFieldExpression><![CDATA[$P{fechaActualizacionA}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaActualizacionA})]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
