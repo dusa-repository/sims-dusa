@@ -68,4 +68,6 @@ public interface IInformeDAO extends JpaRepository<Informe, Long> {
 	@Query("select coalesce(max(consulta.idInforme), '0') from Informe consulta")
 	long findMaxIdInforme();
 
+	List<Informe> findByCodigoNotNull();
+
 }

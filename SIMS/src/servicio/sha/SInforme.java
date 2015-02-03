@@ -138,4 +138,8 @@ public class SInforme {
 		return null;
 	}
 
+	public List<Informe> buscarConCodigo() {
+		return informeDAO.findByCodigoNotNull();
+	}
+
 }

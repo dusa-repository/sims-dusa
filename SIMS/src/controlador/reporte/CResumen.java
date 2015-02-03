@@ -232,7 +232,7 @@ public class CResumen extends CGenerico {
 		};
 		Button guardar = (Button) botonera.getChildren().get(0);
 		guardar.setLabel("Reporte");
-		guardar.setSrc("/public/imagenes/botones/reporte.png");
+		guardar.setImage("/public/imagenes/botones/reporte.png");
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraResumen.appendChild(botonera);
 	}
