@@ -1163,34 +1163,34 @@ public class CInforme extends CGenerico {
 					informe.setHba(txt821.getValue());
 					informe.setHbc(txt823.getValue());
 
-					if (rdo8242.isChecked())
-						informe.setHbd(false);
-					else
+					if (rdo8241.isChecked())
 						informe.setHbd(true);
+					else
+						informe.setHbd(false);
 					informe.setHbda(txt8241.getValue());
 					if (rdg825.getSelectedItem() != null)
 						informe.setHbe(rdg825.getSelectedItem().getLabel());
 					informe.setHbea(txt825.getValue());
-					if (rdo8261.isChecked())
-						informe.setHbf(false);
-					else
+					if (rdo8262.isChecked())
 						informe.setHbf(true);
-					if (rdo8271.isChecked())
-						informe.setHbg(false);
 					else
+						informe.setHbf(false);
+					if (rdo8272.isChecked())
 						informe.setHbg(true);
+					else
+						informe.setHbg(false);
 					if (rdg828.getSelectedItem() != null)
 						informe.setHbh(rdg828.getSelectedItem().getLabel());
-					if (rdo82111.isChecked())
-						informe.setHbaaa(false);
-					else {
+					if (rdo82112.isChecked())
 						informe.setHbaaa(true);
+					else {
+						informe.setHbaaa(false);
 						informe.setHbaa(txt8211.getValue());
 					}
-					if (rdo82121.isChecked())
-						informe.setHbaab(false);
-					else {
+					if (rdo82122.isChecked())
 						informe.setHbaab(true);
+					else {
+						informe.setHbaab(false);
 						informe.setHbab(txt8212.getValue());
 					}
 
@@ -3542,14 +3542,13 @@ public class CInforme extends CGenerico {
 
 	public void llenarListas() {
 		ltb822.setModel(getCondicionesA());
-		ltb822.setModel(getCondicionesB());
-		ltb822.setModel(getCondicionesC());
-		ltb822.setModel(getCondicionesD());
-		ltb822.setModel(getCondicionesE());
-		ltb822.setModel(getCondicionesF());
+		ltb829.setModel(getCondicionesB());
+		ltb8210.setModel(getCondicionesC());
+		ltb8213.setModel(getCondicionesD());
+		ltb84.setModel(getCondicionesE());
+		ltb841.setModel(getCondicionesF());
 		listasMultiples();
 	}
-
 	@Listen("onClick =#btnReporte")
 	public void reporte() {
 
