@@ -3559,7 +3559,8 @@ public class CInforme extends CGenerico {
 					+ "Reportero?valor=33&valor6="
 					+ String.valueOf(idInforme)
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
-		}
+		} else
+			msj.mensajeAlerta(Mensaje.seleccionarInforme);
 	}
 
 	public byte[] reporteInpsasel(String par6) throws JRException {
@@ -3570,41 +3571,41 @@ public class CInforme extends CGenerico {
 		Map p = new HashMap();
 		p.put("codigo", informe.getCodigo());
 
-		if (informe.getPacienteA() != null) {
-			p.put("nombre211", informe.getPacienteA().getPrimerNombre() + " "
-					+ informe.getPacienteA().getPrimerApellido());
-			p.put("cedula211", informe.getPacienteA().getCedula());
-			p.put("nro211", informe.getPacienteA().getNroInpsasel());
-		}
 		if (informe.getPacienteB() != null) {
-			p.put("nombre212", informe.getPacienteB().getPrimerNombre() + " "
+			p.put("nombre211", informe.getPacienteB().getPrimerNombre() + " "
 					+ informe.getPacienteB().getPrimerApellido());
-			p.put("cedula212", informe.getPacienteB().getCedula());
-			p.put("nro212", informe.getPacienteB().getNroInpsasel());
+			p.put("cedula211", informe.getPacienteB().getCedula());
+			p.put("nro211", informe.getPacienteB().getNroInpsasel());
 		}
 		if (informe.getPacienteC() != null) {
-			p.put("nombre213", informe.getPacienteC().getPrimerNombre() + " "
+			p.put("nombre212", informe.getPacienteC().getPrimerNombre() + " "
 					+ informe.getPacienteC().getPrimerApellido());
-			p.put("cedula213", informe.getPacienteC().getCedula());
-			p.put("nro213", informe.getPacienteC().getNroInpsasel());
+			p.put("cedula212", informe.getPacienteC().getCedula());
+			p.put("nro212", informe.getPacienteC().getNroInpsasel());
 		}
 		if (informe.getPacienteD() != null) {
-			p.put("nombre214", informe.getPacienteD().getPrimerNombre() + " "
+			p.put("nombre213", informe.getPacienteD().getPrimerNombre() + " "
 					+ informe.getPacienteD().getPrimerApellido());
-			p.put("cedula214", informe.getPacienteD().getCedula());
-			p.put("nro214", informe.getPacienteD().getNroInpsasel());
+			p.put("cedula213", informe.getPacienteD().getCedula());
+			p.put("nro213", informe.getPacienteD().getNroInpsasel());
 		}
 		if (informe.getPacienteE() != null) {
-			p.put("nombre215", informe.getPacienteE().getPrimerNombre() + " "
+			p.put("nombre214", informe.getPacienteE().getPrimerNombre() + " "
 					+ informe.getPacienteE().getPrimerApellido());
-			p.put("cedula215", informe.getPacienteE().getCedula());
-			p.put("nro215", informe.getPacienteE().getNroInpsasel());
+			p.put("cedula214", informe.getPacienteE().getCedula());
+			p.put("nro214", informe.getPacienteE().getNroInpsasel());
 		}
 		if (informe.getPacienteF() != null) {
-			p.put("nombre216", informe.getPacienteF().getPrimerNombre() + " "
+			p.put("nombre215", informe.getPacienteF().getPrimerNombre() + " "
 					+ informe.getPacienteF().getPrimerApellido());
-			p.put("cedula216", informe.getPacienteF().getCedula());
-			p.put("nro216", informe.getPacienteF().getNroInpsasel());
+			p.put("cedula215", informe.getPacienteF().getCedula());
+			p.put("nro215", informe.getPacienteF().getNroInpsasel());
+		}
+		if (informe.getPacienteG() != null) {
+			p.put("nombre216", informe.getPacienteG().getPrimerNombre() + " "
+					+ informe.getPacienteG().getPrimerApellido());
+			p.put("cedula216", informe.getPacienteG().getCedula());
+			p.put("nro216", informe.getPacienteG().getNroInpsasel());
 		}
 
 		if (informe.getEmpresaA() != null) {
@@ -3709,12 +3710,13 @@ public class CInforme extends CGenerico {
 					+ " "
 					+ informe.getPacienteA().getSegundoApellido());
 			p.put("nombreTrabajador", informe.getPacienteA().getPrimerNombre()
-					+ " " + informe.getPacienteA().getSegundoApellido());
+					+ " " + informe.getPacienteA().getSegundoNombre());
 			p.put("cedulaTrabajador", informe.getPacienteA().getCedula());
 			p.put("nacionalidadTrabajador", informe.getPacienteA()
 					.getNacionalidad());
 			p.put("sexoTrabajador", informe.getPacienteA().getSexo());
-			p.put("edadTrabajador", informe.getPacienteA().getEdad());
+			p.put("edadTrabajador", calcularEdad(informe.getPacienteA()
+					.getFechaNacimiento()));
 			p.put("fechaNacTrabajador", informe.getPacienteA()
 					.getFechaNacimiento());
 			p.put("lugarNacTrabajador", informe.getPacienteA()
@@ -3722,10 +3724,10 @@ public class CInforme extends CGenerico {
 			p.put("estadoCivilTrabajador", informe.getPacienteA()
 					.getEstadoCivil());
 
-			if (informe.getPacienteA().getMano().equals("Derecha")) {
+			if (informe.getPacienteA().getMano().equals("Derecho")) {
 				p.put("manoTrabajador1", "x");
 				p.put("manoTrabajador2", "");
-			} else if (informe.getPacienteA().getMano().equals("Izquierda")) {
+			} else if (informe.getPacienteA().getMano().equals("Zurdo")) {
 				p.put("manoTrabajador1", "");
 				p.put("manoTrabajador2", "x");
 			} else {
@@ -3783,9 +3785,9 @@ public class CInforme extends CGenerico {
 			p.put("retiroIvss", informe.getPacienteA().getRetiroIVSS());
 			p.put("fechaEgresoTrabajador", informe.getPacienteA()
 					.getFechaEgreso());
-			p.put("direccionTrabajador", informe.getPacienteA().getDireccion());
+			p.put("direccionTrabajador", informe.getPacienteA().getDireccion()+"  "+informe.getPacienteA().getCiudadVivienda().getNombre());
 			p.put("estadoT", informe.getPacienteA().getCiudadVivienda()
-					.getEstado());
+					.getEstado().getNombre());
 			p.put("telefonoHabT", informe.getPacienteA().getTelefono1());
 			p.put("telefonoCelT", informe.getPacienteA().getTelefono2());
 			p.put("familiarContactoT", informe.getPacienteA()
@@ -3977,14 +3979,24 @@ public class CInforme extends CGenerico {
 			p.put("fgf4", "");
 			p.put("fgf5", "x");
 		}
+		if(!informe.getFgf().equals("Mortal")||!informe.getFgf().equals("Muy Grave")||!informe.getFgf().equals("Grave")||!informe.getFgf().equals("Moderado")||!informe.getFgf().equals("Leve"))
+		{
+			p.put("fgf1", "");
+			p.put("fgf2", "");
+			p.put("fgf3", "");
+			p.put("fgf4", "");
+			p.put("fgf5", "");
+		}
 		if (informe.getClasificacion() != null) {
 			p.put("clasificacion", informe.getClasificacion().getNombre());
 		}
 		p.put("auxilioInmediato", informe.getFgga());
 		if (informe.getFgga()) {
 			p.put("auxilioInmediatoSI", "x");
+			p.put("auxilioInmediatoNO", "");
 		} else {
 			p.put("auxilioInmediatoNO", "x");
+			p.put("auxilioInmediatoSI", "");
 		}
 		if (informe.getArea() != null) {
 			p.put("area", informe.getArea().getNombre());
@@ -3994,8 +4006,10 @@ public class CInforme extends CGenerico {
 		if (informe.getFgi() != null) {
 			if (informe.getFgi().equals("Publico")) {
 				p.put("fgi1", "x");
+				p.put("fgi2", "");
 			} else {
 				p.put("fgi2", "x");
+				p.put("fgi1", "");
 			}
 		}
 		p.put("fgj", informe.getFgj());
@@ -4028,11 +4042,17 @@ public class CInforme extends CGenerico {
 			p.put("hadNO", "x");
 		}
 		if (informe.getHaea() != null)
+		{
 			if (informe.getHaea().equals("Porque la Habitual Estaba Agotada")) {
 				p.put("haeSI", "x");
 			} else if (informe.getHaea().equals("Otros")) {
 				p.put("haeNO", "x");
 			}
+		}
+		if(informe.getHae()!=null)
+		p.put("hae",informe.getHae());
+		else
+			p.put("hae","");
 		p.put("haf", informe.getHaf());
 		p.put("hba", informe.getHba());
 		p.put("hbc", informe.getHbc());
