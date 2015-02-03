@@ -52,6 +52,7 @@ public class Reportero extends HttpServlet {
 		CPacientes pacientes = new CPacientes();
 		COrden orden = new COrden();
 		CGasto gasto = new CGasto();
+		CReporteCertificado certificado = new CReporteCertificado();
 		COrdenProveedor ordenProveedor = new COrdenProveedor();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
@@ -139,7 +140,7 @@ public class Reportero extends HttpServlet {
 				break;
 			case "15":
 				fichero = reposo.reporteReposoPorDiagnostico(par6, par7, par8,
-						tipo,jObj);
+						tipo, jObj);
 				break;
 			case "16":
 				fichero = resumen.reporteAreaTipoDiagnostico(par6, par7, tipo);
@@ -205,16 +206,20 @@ public class Reportero extends HttpServlet {
 				fichero = informe.reporteInpsasel(par6);
 				break;
 			case "34":
-				fichero = morbilidad.reporteMorbilidadPorCargo(par6, par7, par8, tipo);
+				fichero = morbilidad.reporteMorbilidadPorCargo(par6, par7,
+						par8, tipo);
 				break;
 			case "35":
-				fichero = morbilidad.reporteMorbilidadPorEmpresa(par6, par7, par8, tipo);
+				fichero = morbilidad.reporteMorbilidadPorEmpresa(par6, par7,
+						par8, tipo);
 				break;
 			case "36":
-				fichero = morbilidad.reporteMorbilidadPorNomina(par6, par7, par8, tipo);
+				fichero = morbilidad.reporteMorbilidadPorNomina(par6, par7,
+						par8, tipo);
 				break;
 			case "37":
-				fichero = morbilidad.reporteMorbilidadPorClasificacion(par6, par7, par8, par9, tipo);
+				fichero = morbilidad.reporteMorbilidadPorClasificacion(par6,
+						par7, par8, par9, tipo);
 				break;
 			case "38":
 				fichero = reposo.reporteReposoPorCargo(par6, par7, par8, tipo);
@@ -223,7 +228,12 @@ public class Reportero extends HttpServlet {
 				fichero = reposo.reporteReposoPorNomina(par6, par7, par8, tipo);
 				break;
 			case "40":
-				fichero = reposo.reporteReposoPorEmpresa(par6, par7, par8, tipo);
+				fichero = reposo
+						.reporteReposoPorEmpresa(par6, par7, par8, tipo);
+				break;
+			case "41":
+				fichero = certificado.reporteCertificado(part2, par7, par8,
+						par9, tipo);
 				break;
 			default:
 				break;

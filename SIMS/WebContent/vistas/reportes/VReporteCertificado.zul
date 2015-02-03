@@ -1,0 +1,78 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divReporteCertificado" apply="controlador.reporte.CReporteCertificado">
+		<groupbox width="75%" mold="3d" title="Reportes de Certificados Medicos">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="20%" />
+					<column label="" width="20%" />
+					<column label="" width="20%" />
+					<column label="" width="20%" />
+					<column label="" width="20%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Periodo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox id="txtPeriodo" hflex="1" maxlength="100"
+							tooltiptext="Ingrese el Nombre del Periodo" />
+						<button autodisable="self" id="btnBuscar" class="btn"
+							label="Buscar" tooltiptext="Catalogo de Periodos" image="/public/imagenes/botones/buscar.png" />
+						<hbox>
+							<label class="etiqueta"
+								value="¿Mostrar solo los Trabajadores que presentaron examenes?" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<radiogroup id="rdgSi">
+							<hbox>
+								<radio label="Si" value="si" id="rdoSi" checked="true" />
+								<separator />
+								<radio label="No" value="no" id="rdoNo" />
+							</hbox>
+						</radiogroup>
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Resultados a Mostrar:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<cell colspan="2">
+							<combobox id="cmbResultados" readonly="true" tabindex="1"
+								value="TODOS" width="100%" tooltiptext="Seleccione el Resultado"
+								placeholder="Seleccione el Resultado">
+								<comboitem label="TODOS" />
+								<comboitem label="NORMALES" />
+								<comboitem label="ANORMALES" />
+								<comboitem label="VDRL NORMALES" />
+								<comboitem label="VDRL ANORMALES" />
+								<comboitem label="HECES NORMALES" />
+								<comboitem label="HECES ANORMALES" />
+								<comboitem label="CITOLOGIA NORMALES" />
+								<comboitem label="CITOLOGIA ANORMALES" />
+							</combobox>
+						</cell>
+						<hbox>
+							<label class="etiqueta" value="Reporte de Tipo:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<combobox id="cmbTipo" readonly="true" tabindex="1"
+							value="PDF" width="100%" tooltiptext="Seleccione un Tipo"
+							placeholder="Seleccione un Tipo">
+							<comboitem label="PDF" />
+							<comboitem label="EXCEL" />
+						</combobox>
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraReporteCertificado" />
+			<div id="catalogoPeriodo" />
+		</groupbox>
+	</div>
+</zk>
