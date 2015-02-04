@@ -111,7 +111,7 @@ public class CCertificado extends CGenerico {
 					Periodo periodo = servicioPeriodo.buscar(idPeriodo);
 					if (media == null) {
 						guardarLista(periodo);
-						msj.mensajeInformacion(Mensaje.guardado);
+						Mensaje.mensajeInformacion(Mensaje.guardado);
 					} else
 						guardarArchivo(periodo);
 					limpiar();
@@ -199,7 +199,7 @@ public class CCertificado extends CGenerico {
 								errorLong = true;
 							} else {
 								paciente = servicioPaciente
-										.buscarPorCedula(idPaciente);
+										.buscarPorCedulaYTrabajadorYActivo(idPaciente);
 								if (paciente == null) {
 									mostrarError = mensajeErrorNoEncontrado(
 											mostrarError, idPaciente,
@@ -289,12 +289,12 @@ public class CCertificado extends CGenerico {
 			if (!error && !errorLong) {
 				servicioPeriodoPaciente.eliminar(periodo);
 				servicioPeriodoPaciente.guardarVarios(periodosPacientes);
-				msj.mensajeInformacion("Archivo importado con exito" + "\n"
+				Mensaje.mensajeInformacion("Archivo importado con exito" + "\n"
 						+ "Cantidad de Filas evaluadas:" + (contadorRow - 1)
 						+ "\n" + "Cantidad de Filas insertadas:"
 						+ (contadorRow - 1));
 			} else
-				msj.mensajeError("El archivo no ha podido ser importado, causas:"
+				Mensaje.mensajeError("El archivo no ha podido ser importado, causas:"
 						+ "\n"
 						+ mostrarError
 						+ "\n"
@@ -331,7 +331,7 @@ public class CCertificado extends CGenerico {
 
 	protected boolean validar() {
 		if (idPeriodo == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -374,7 +374,7 @@ public class CCertificado extends CGenerico {
 					});
 			row.appendChild(rm);
 		} else
-			msj.mensajeError(Mensaje.archivoExcel);
+			Mensaje.mensajeError(Mensaje.archivoExcel);
 	}
 
 	/* Muestra el catalogo de los paises */

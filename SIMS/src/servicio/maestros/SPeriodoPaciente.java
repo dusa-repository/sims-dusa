@@ -71,7 +71,7 @@ public class SPeriodoPaciente {
 						.next();
 				cedulas.add(periodoPaciente.getPaciente().getCedula());
 			}
-			pacientes = pacienteDAO.findByCedulaNotIn(cedulas);
+			pacientes = pacienteDAO.findByCedulaNotInAndTrabajadorTrueAndEstatusTrue(cedulas);
 		}
 		lista.clear();
 		for (Iterator<Paciente> iterator = pacientes.iterator(); iterator

@@ -545,7 +545,7 @@ public class SPaciente {
 			for (int i = 0; i < periodoPaciente.size(); i++) {
 				ids.add(periodoPaciente.get(i).getPaciente().getCedula());
 			}
-			return pacienteDAO.findByCedulaNotIn(ids);
+			return pacienteDAO.findByCedulaNotInAndTrabajadorTrueAndEstatusTrue(ids);
 		}
 	}
 
@@ -768,5 +768,9 @@ public class SPaciente {
 			return control.getPaciente();
 		}
 		return null;
+	}
+
+	public Paciente buscarPorCedulaYTrabajadorYActivo(String idPaciente) {
+		return pacienteDAO.findByCedulaAndTrabajadorTrueAndEstatusTrue(idPaciente);
 	}
 }
