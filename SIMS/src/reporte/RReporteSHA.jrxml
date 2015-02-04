@@ -313,7 +313,7 @@
 	<parameter name="iacNO" class="java.lang.String"/>
 	<parameter name="iadSI" class="java.lang.String"/>
 	<parameter name="iadNO" class="java.lang.String"/>
-	<parameter name="iae" class="java.lang.String"/>
+	<parameter name="iae" class="java.sql.Timestamp"/>
 	<parameter name="iafSI" class="java.lang.String"/>
 	<parameter name="iafNO" class="java.lang.String"/>
 	<parameter name="iagSI" class="java.lang.String"/>
@@ -324,9 +324,8 @@
 	<parameter name="iaj" class="java.lang.String"/>
 	<parameter name="ibaSI" class="java.lang.String"/>
 	<parameter name="ibaNO" class="java.lang.String"/>
-	<parameter name="ibb" class="java.lang.String"/>
+	<parameter name="ibb" class="java.sql.Timestamp"/>
 	<parameter name="ibc" class="java.lang.String"/>
-	<parameter name="ibd" class="java.lang.String"/>
 	<parameter name="ibeSI" class="java.lang.String"/>
 	<parameter name="ibeNO" class="java.lang.String"/>
 	<parameter name="ibfSI" class="java.lang.String"/>
@@ -381,7 +380,7 @@
 	<parameter name="registroPacienteM" class="java.lang.String"/>
 	<parameter name="icaSI" class="java.lang.String"/>
 	<parameter name="icaNO" class="java.lang.String"/>
-	<parameter name="icb" class="java.lang.String"/>
+	<parameter name="icb" class="java.sql.Timestamp"/>
 	<parameter name="icc" class="java.lang.String"/>
 	<parameter name="icd1" class="java.lang.String"/>
 	<parameter name="icd2" class="java.lang.String"/>
@@ -395,7 +394,7 @@
 	<parameter name="ichNO" class="java.lang.String"/>
 	<parameter name="iciSI" class="java.lang.String"/>
 	<parameter name="iciNO" class="java.lang.String"/>
-	<parameter name="icj" class="java.lang.String"/>
+	<parameter name="icj" class="java.sql.Timestamp"/>
 	<parameter name="icaa" class="java.lang.String"/>
 	<parameter name="icab1" class="java.lang.String"/>
 	<parameter name="icab2" class="java.lang.String"/>
@@ -425,7 +424,7 @@
 	<parameter name="idiNO" class="java.lang.String"/>
 	<parameter name="idjSI" class="java.lang.String"/>
 	<parameter name="idjNO" class="java.lang.String"/>
-	<parameter name="idaa" class="java.lang.String"/>
+	<parameter name="idaa" class="java.sql.Timestamp"/>
 	<parameter name="idab" class="java.lang.String"/>
 	<parameter name="idacSI" class="java.lang.String"/>
 	<parameter name="idacNO" class="java.lang.String"/>
@@ -445,6 +444,19 @@
 	<parameter name="parameter2_16_3_2" class="java.lang.String"/>
 	<parameter name="ebge" class="java.lang.String"/>
 	<parameter name="hae" class="java.lang.String"/>
+	<parameter name="hbd" class="java.lang.String"/>
+	<parameter name="hce" class="java.lang.String"/>
+	<parameter name="hcf" class="java.lang.String"/>
+	<parameter name="hch" class="java.lang.String"/>
+	<parameter name="hci" class="java.lang.String"/>
+	<parameter name="hcab" class="java.lang.String"/>
+	<parameter name="hcae" class="java.lang.String"/>
+	<parameter name="hcagfa" class="java.lang.String"/>
+	<parameter name="hcaa" class="java.lang.String"/>
+	<parameter name="hdb" class="java.lang.String"/>
+	<parameter name="hdc" class="java.lang.String"/>
+	<parameter name="iad" class="java.lang.String"/>
+	<parameter name="iag" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -1414,20 +1426,23 @@
 				<subreportParameter name="haf">
 					<subreportParameterExpression><![CDATA[$P{haf}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="hae">
+					<subreportParameterExpression><![CDATA[$P{hae}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="hbfSI">
 					<subreportParameterExpression><![CDATA[$P{hbfSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="hab">
 					<subreportParameterExpression><![CDATA[$P{hab}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="condicionA">
-					<subreportParameterExpression><![CDATA[$P{condicionA}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="haeSI">
 					<subreportParameterExpression><![CDATA[$P{haeSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="haa">
 					<subreportParameterExpression><![CDATA[$P{haa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="condicionA">
+					<subreportParameterExpression><![CDATA[$P{condicionA}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="had">
 					<subreportParameterExpression><![CDATA[$P{had}]]></subreportParameterExpression>
@@ -1461,6 +1476,9 @@
 				</subreportParameter>
 				<subreportParameter name="hbe">
 					<subreportParameterExpression><![CDATA[$P{hbe}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hbd">
+					<subreportParameterExpression><![CDATA[$P{hbd}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="hadSI">
 					<subreportParameterExpression><![CDATA[$P{hadSI}]]></subreportParameterExpression>
@@ -1518,14 +1536,17 @@
 				<subreportParameter name="hccSI">
 					<subreportParameterExpression><![CDATA[$P{hccSI}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="hce1">
-					<subreportParameterExpression><![CDATA[$P{hce1}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="hbaaSI">
 					<subreportParameterExpression><![CDATA[$P{hbaaSI}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="hce1">
+					<subreportParameterExpression><![CDATA[$P{hce1}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="hccNO">
 					<subreportParameterExpression><![CDATA[$P{hccNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hce">
+					<subreportParameterExpression><![CDATA[$P{hce}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="hcdNO">
 					<subreportParameterExpression><![CDATA[$P{hcdNO}]]></subreportParameterExpression>
@@ -1544,6 +1565,24 @@
 			</break>
 			<subreport>
 				<reportElement x="22" y="426" width="517" height="38" uuid="2478631b-718e-4e42-9870-24a114aff2e7"/>
+				<subreportParameter name="hcagaSI">
+					<subreportParameterExpression><![CDATA[$P{hcagaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaa">
+					<subreportParameterExpression><![CDATA[$P{hcaa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcab">
+					<subreportParameterExpression><![CDATA[$P{hcab}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagbSI">
+					<subreportParameterExpression><![CDATA[$P{hcagbSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcad">
+					<subreportParameterExpression><![CDATA[$P{hcad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae">
+					<subreportParameterExpression><![CDATA[$P{hcae}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="hcf3">
 					<subreportParameterExpression><![CDATA[$P{hcf3}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -1556,116 +1595,23 @@
 				<subreportParameter name="hcf2">
 					<subreportParameterExpression><![CDATA[$P{hcf2}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="hcgSI">
-					<subreportParameterExpression><![CDATA[$P{hcgSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcageNO">
-					<subreportParameterExpression><![CDATA[$P{hcageNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcaggNO">
-					<subreportParameterExpression><![CDATA[$P{hcaggNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcae9">
-					<subreportParameterExpression><![CDATA[$P{hcae9}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcae7">
-					<subreportParameterExpression><![CDATA[$P{hcae7}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcae8">
-					<subreportParameterExpression><![CDATA[$P{hcae8}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcae5">
-					<subreportParameterExpression><![CDATA[$P{hcae5}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcae6">
-					<subreportParameterExpression><![CDATA[$P{hcae6}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcagcNO">
-					<subreportParameterExpression><![CDATA[$P{hcagcNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcae3">
-					<subreportParameterExpression><![CDATA[$P{hcae3}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcae4">
-					<subreportParameterExpression><![CDATA[$P{hcae4}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcae1">
-					<subreportParameterExpression><![CDATA[$P{hcae1}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcae2">
-					<subreportParameterExpression><![CDATA[$P{hcae2}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcagaNO">
-					<subreportParameterExpression><![CDATA[$P{hcagaNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hdcNO">
-					<subreportParameterExpression><![CDATA[$P{hdcNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcad">
-					<subreportParameterExpression><![CDATA[$P{hcad}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcaf">
-					<subreportParameterExpression><![CDATA[$P{hcaf}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcaggSI">
-					<subreportParameterExpression><![CDATA[$P{hcaggSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcagfNO">
-					<subreportParameterExpression><![CDATA[$P{hcagfNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcacNO">
-					<subreportParameterExpression><![CDATA[$P{hcacNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcagbNO">
-					<subreportParameterExpression><![CDATA[$P{hcagbNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcjSI">
-					<subreportParameterExpression><![CDATA[$P{hcjSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hda">
-					<subreportParameterExpression><![CDATA[$P{hda}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcagcSI">
-					<subreportParameterExpression><![CDATA[$P{hcagcSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcagaSI">
-					<subreportParameterExpression><![CDATA[$P{hcagaSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcagbSI">
-					<subreportParameterExpression><![CDATA[$P{hcagbSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcaghSI">
-					<subreportParameterExpression><![CDATA[$P{hcaghSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcaaSI">
-					<subreportParameterExpression><![CDATA[$P{hcaaSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcagdSI">
-					<subreportParameterExpression><![CDATA[$P{hcagdSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcjNO">
-					<subreportParameterExpression><![CDATA[$P{hcjNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcagfSI">
-					<subreportParameterExpression><![CDATA[$P{hcagfSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcacSI">
-					<subreportParameterExpression><![CDATA[$P{hcacSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hdbSI">
-					<subreportParameterExpression><![CDATA[$P{hdbSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hcabNO">
-					<subreportParameterExpression><![CDATA[$P{hcabNO}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="hcgNO">
 					<subreportParameterExpression><![CDATA[$P{hcgNO}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="hcaghNO">
 					<subreportParameterExpression><![CDATA[$P{hcaghNO}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="hcaghSI">
+					<subreportParameterExpression><![CDATA[$P{hcaghSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaf">
+					<subreportParameterExpression><![CDATA[$P{hcaf}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="hcagiSI">
 					<subreportParameterExpression><![CDATA[$P{hcagiSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcgSI">
+					<subreportParameterExpression><![CDATA[$P{hcgSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="hch4">
 					<subreportParameterExpression><![CDATA[$P{hch4}]]></subreportParameterExpression>
@@ -1676,17 +1622,53 @@
 				<subreportParameter name="hch2">
 					<subreportParameterExpression><![CDATA[$P{hch2}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="hch1">
+					<subreportParameterExpression><![CDATA[$P{hch1}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="hcageSI">
 					<subreportParameterExpression><![CDATA[$P{hcageSI}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="hch1">
-					<subreportParameterExpression><![CDATA[$P{hch1}]]></subreportParameterExpression>
+				<subreportParameter name="hcaaSI">
+					<subreportParameterExpression><![CDATA[$P{hcaaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagdSI">
+					<subreportParameterExpression><![CDATA[$P{hcagdSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcageNO">
+					<subreportParameterExpression><![CDATA[$P{hcageNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaggSI">
+					<subreportParameterExpression><![CDATA[$P{hcaggSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="hcagdNO">
 					<subreportParameterExpression><![CDATA[$P{hcagdNO}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="hcjNO">
+					<subreportParameterExpression><![CDATA[$P{hcjNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagfNO">
+					<subreportParameterExpression><![CDATA[$P{hcagfNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcf">
+					<subreportParameterExpression><![CDATA[$P{hcf}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="hcabSI">
 					<subreportParameterExpression><![CDATA[$P{hcabSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hch">
+					<subreportParameterExpression><![CDATA[$P{hch}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcaggNO">
+					<subreportParameterExpression><![CDATA[$P{hcaggNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagfSI">
+					<subreportParameterExpression><![CDATA[$P{hcagfSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hci">
+					<subreportParameterExpression><![CDATA[$P{hci}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcacSI">
+					<subreportParameterExpression><![CDATA[$P{hcacSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="hci3">
 					<subreportParameterExpression><![CDATA[$P{hci3}]]></subreportParameterExpression>
@@ -1700,14 +1682,80 @@
 				<subreportParameter name="hcafa">
 					<subreportParameterExpression><![CDATA[$P{hcafa}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="hcae9">
+					<subreportParameterExpression><![CDATA[$P{hcae9}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="hci1">
 					<subreportParameterExpression><![CDATA[$P{hci1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae7">
+					<subreportParameterExpression><![CDATA[$P{hcae7}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae8">
+					<subreportParameterExpression><![CDATA[$P{hcae8}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae5">
+					<subreportParameterExpression><![CDATA[$P{hcae5}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae6">
+					<subreportParameterExpression><![CDATA[$P{hcae6}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="hdbNO">
 					<subreportParameterExpression><![CDATA[$P{hdbNO}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="hcae3">
+					<subreportParameterExpression><![CDATA[$P{hcae3}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagcNO">
+					<subreportParameterExpression><![CDATA[$P{hcagcNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae4">
+					<subreportParameterExpression><![CDATA[$P{hcae4}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcacNO">
+					<subreportParameterExpression><![CDATA[$P{hcacNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagfa">
+					<subreportParameterExpression><![CDATA[$P{hcagfa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae1">
+					<subreportParameterExpression><![CDATA[$P{hcae1}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcae2">
+					<subreportParameterExpression><![CDATA[$P{hcae2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagbNO">
+					<subreportParameterExpression><![CDATA[$P{hcagbNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagaNO">
+					<subreportParameterExpression><![CDATA[$P{hcagaNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdcNO">
+					<subreportParameterExpression><![CDATA[$P{hdcNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdc">
+					<subreportParameterExpression><![CDATA[$P{hdc}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdb">
+					<subreportParameterExpression><![CDATA[$P{hdb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcjSI">
+					<subreportParameterExpression><![CDATA[$P{hcjSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hda">
+					<subreportParameterExpression><![CDATA[$P{hda}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdbSI">
+					<subreportParameterExpression><![CDATA[$P{hdbSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcagcSI">
+					<subreportParameterExpression><![CDATA[$P{hcagcSI}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="hdcSI">
 					<subreportParameterExpression><![CDATA[$P{hdcSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hcabNO">
+					<subreportParameterExpression><![CDATA[$P{hcabNO}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[]]></dataSourceExpression>
 				<subreportExpression><![CDATA["/reporte/reporteSHA_procesosPeligrosos3.jasper"]]></subreportExpression>
@@ -1729,17 +1777,8 @@
 				<subreportParameter name="iaj">
 					<subreportParameterExpression><![CDATA[$P{iaj}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="iadNO">
-					<subreportParameterExpression><![CDATA[$P{iadNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="iacNO">
-					<subreportParameterExpression><![CDATA[$P{iacNO}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="iafNO">
 					<subreportParameterExpression><![CDATA[$P{iafNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="iabSI">
-					<subreportParameterExpression><![CDATA[$P{iabSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="iahNO">
 					<subreportParameterExpression><![CDATA[$P{iahNO}]]></subreportParameterExpression>
@@ -1747,14 +1786,47 @@
 				<subreportParameter name="iacSI">
 					<subreportParameterExpression><![CDATA[$P{iacSI}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="iahSI">
-					<subreportParameterExpression><![CDATA[$P{iahSI}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="condicionE">
 					<subreportParameterExpression><![CDATA[$P{condicionE}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="condicionF">
 					<subreportParameterExpression><![CDATA[$P{condicionF}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iaaSI">
+					<subreportParameterExpression><![CDATA[$P{iaaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdeb">
+					<subreportParameterExpression><![CDATA[$P{hdeb}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iad">
+					<subreportParameterExpression><![CDATA[$P{iad}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdea">
+					<subreportParameterExpression><![CDATA[$P{hdea}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iae">
+					<subreportParameterExpression><![CDATA[$P{iae}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hded">
+					<subreportParameterExpression><![CDATA[$P{hded}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iag">
+					<subreportParameterExpression><![CDATA[$P{iag}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hdec">
+					<subreportParameterExpression><![CDATA[$P{hdec}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iadNO">
+					<subreportParameterExpression><![CDATA[$P{iadNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iacNO">
+					<subreportParameterExpression><![CDATA[$P{iacNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iabSI">
+					<subreportParameterExpression><![CDATA[$P{iabSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="iahSI">
+					<subreportParameterExpression><![CDATA[$P{iahSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="iaaNO">
 					<subreportParameterExpression><![CDATA[$P{iaaNO}]]></subreportParameterExpression>
@@ -1767,24 +1839,6 @@
 				</subreportParameter>
 				<subreportParameter name="iabNO">
 					<subreportParameterExpression><![CDATA[$P{iabNO}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hdeb">
-					<subreportParameterExpression><![CDATA[$P{hdeb}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="iaaSI">
-					<subreportParameterExpression><![CDATA[$P{iaaSI}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hdea">
-					<subreportParameterExpression><![CDATA[$P{hdea}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="iae">
-					<subreportParameterExpression><![CDATA[$P{iae}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hded">
-					<subreportParameterExpression><![CDATA[$P{hded}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="hdec">
-					<subreportParameterExpression><![CDATA[$P{hdec}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="iagSI">
 					<subreportParameterExpression><![CDATA[$P{iagSI}]]></subreportParameterExpression>
@@ -1871,9 +1925,6 @@
 				</subreportParameter>
 				<subreportParameter name="ibc">
 					<subreportParameterExpression><![CDATA[$P{ibc}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="ibd">
-					<subreportParameterExpression><![CDATA[$P{ibd}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="ibb">
 					<subreportParameterExpression><![CDATA[$P{ibb}]]></subreportParameterExpression>

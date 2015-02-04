@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_procesosPeligrosos4" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cc5755f4-6cfd-4392-9461-91cffe67aaca">
 	<property name="ireport.zoom" value="1.2100000000000006"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="1450"/>
 	<parameter name="hdea" class="java.lang.String"/>
 	<parameter name="hdeb" class="java.lang.String"/>
 	<parameter name="hdec" class="java.lang.String"/>
@@ -16,7 +16,7 @@
 	<parameter name="iacNO" class="java.lang.String"/>
 	<parameter name="iadSI" class="java.lang.String"/>
 	<parameter name="iadNO" class="java.lang.String"/>
-	<parameter name="iae" class="java.lang.String"/>
+	<parameter name="iae" class="java.sql.Timestamp"/>
 	<parameter name="iafSI" class="java.lang.String"/>
 	<parameter name="iafNO" class="java.lang.String"/>
 	<parameter name="iagSI" class="java.lang.String"/>
@@ -27,6 +27,8 @@
 	<parameter name="iaj" class="java.lang.String"/>
 	<parameter name="condicionE" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="condicionF" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="iad" class="java.lang.String"/>
+	<parameter name="iag" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -289,19 +291,19 @@
 				<text><![CDATA[9.1.7.- ¿LAS DELEGADAS O DELEGADOS DE PREVENCIÓN HAN RECIBIDO POR PARTE DEL PATRÓN/A, CAPACITACIÓN EN MATERIA DE SST?]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="27" y="511" width="89" height="28" uuid="9b4dc70b-9275-4029-b93a-5c2ad0c62ef7"/>
+				<reportElement x="27" y="511" width="89" height="13" uuid="9b4dc70b-9275-4029-b93a-5c2ad0c62ef7"/>
 				<text><![CDATA[SI, ¿CUÁNTOS? ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="27" y="554" width="89" height="37" uuid="32dcfca8-717f-46c2-ac9c-18b0c9ee3e6d"/>
+				<reportElement x="27" y="563" width="89" height="27" uuid="32dcfca8-717f-46c2-ac9c-18b0c9ee3e6d"/>
 				<text><![CDATA[NO, (PASAR A LA PREGUNTA 9.2.)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="417" y="539" width="89" height="28" uuid="e84f3318-0bc8-4dc0-8231-f3d2badd6a81"/>
+				<reportElement x="410" y="527" width="89" height="13" uuid="e84f3318-0bc8-4dc0-8231-f3d2badd6a81"/>
 				<text><![CDATA[SI, ¿CUÁNTOS? ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="417" y="567" width="89" height="24" uuid="605e418a-0f24-49a8-9bb2-24cfba53225d"/>
+				<reportElement x="415" y="571" width="89" height="13" uuid="605e418a-0f24-49a8-9bb2-24cfba53225d"/>
 				<text><![CDATA[NO]]></text>
 			</staticText>
 			<staticText>
@@ -453,7 +455,7 @@ DE  SER  NO, ESPECIFIQUE POR QUÉ?:
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="12" y="557" width="7" height="10" uuid="b7ab66a5-d609-43f3-9092-a875bd50ea1c"/>
+				<reportElement x="13" y="565" width="7" height="10" uuid="b7ab66a5-d609-43f3-9092-a875bd50ea1c"/>
 				<box leftPadding="4">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -546,12 +548,12 @@ DE  SER  NO, ESPECIFIQUE POR QUÉ?:
 				<textFieldExpression><![CDATA[$P{iadSI}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="13" y="555" width="10" height="20" uuid="4499a398-c453-4a72-8f5a-0572cee62fb5"/>
+				<reportElement x="13" y="564" width="10" height="20" uuid="4499a398-c453-4a72-8f5a-0572cee62fb5"/>
 				<textFieldExpression><![CDATA[$P{iadNO}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="129" y="491" width="129" height="66" uuid="12b2b28d-d931-4cce-ae97-cfddac2e4bba"/>
-				<textFieldExpression><![CDATA[$P{iae}]]></textFieldExpression>
+				<reportElement x="137" y="491" width="121" height="66" uuid="12b2b28d-d931-4cce-ae97-cfddac2e4bba"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{iae})]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
 				<reportElement x="281" y="528" width="7" height="20" uuid="702b224a-0265-4a05-97a5-c841df839c6b"/>
@@ -562,7 +564,7 @@ DE  SER  NO, ESPECIFIQUE POR QUÉ?:
 				<textFieldExpression><![CDATA[$P{iafNO}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="401" y="542" width="6" height="20" uuid="824017e4-55a7-4959-8d6b-dd3fa3870b33"/>
+				<reportElement x="401" y="528" width="6" height="20" uuid="824017e4-55a7-4959-8d6b-dd3fa3870b33"/>
 				<textFieldExpression><![CDATA[$P{iagSI}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
@@ -586,7 +588,7 @@ DE  SER  NO, ESPECIFIQUE POR QUÉ?:
 				<textFieldExpression><![CDATA[$P{iaj}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="400" y="544" width="7" height="10" uuid="168dbaac-3172-4f2f-b7d4-293090f8a94e"/>
+				<reportElement x="400" y="529" width="7" height="10" uuid="168dbaac-3172-4f2f-b7d4-293090f8a94e"/>
 				<box leftPadding="4">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -616,6 +618,20 @@ DE  SER  NO, ESPECIFIQUE POR QUÉ?:
 				<dataSourceExpression><![CDATA[$P{condicionF}]]></dataSourceExpression>
 				<subreportExpression><![CDATA["/reporte/reporteSHA_ListaCondicionF.jasper"]]></subreportExpression>
 			</subreport>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="20" y="530" width="109" height="27" uuid="edbf36f8-26e2-419a-83fc-fc0b794020b3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{iad}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="407" y="543" width="114" height="27" uuid="e46417ec-e294-4f19-ae4b-9d9aa653ab4e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{iag}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
