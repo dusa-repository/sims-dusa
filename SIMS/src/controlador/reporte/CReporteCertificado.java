@@ -173,16 +173,16 @@ public class CReporteCertificado extends CGenerico {
 		p.put("desde", periodo.getFechaInicio());
 		p.put("hasta", periodo.getFechaFin());
 		if (todos.equalsIgnoreCase("Si"))
-			if (!resultado.equals("ANORMALES"))
-				if (resultado.equals("NORMALES"))
+			if (!resultado.contains("ANORMALES"))
+				if (resultado.contains("NORMAL"))
 					p.put("pacientes",
-							"Con entrega de resultados (SOLO VALORES NORMALES)");
+							"Con entrega de resultados (VALORES "+resultado+")");
 				else
 					p.put("pacientes",
 							"Con entrega de resultados (TODOS LOS VALORES)");
 			else
 				p.put("pacientes",
-						"Con entrega de resultados (SOLO VALORES ANORMALES)");
+						"Con entrega de resultados (VALORES "+resultado+")");
 		else
 			p.put("pacientes", "Sin entrega de resultados");
 		// p.put("data", new JRBeanCollectionDataSource(consuta));
