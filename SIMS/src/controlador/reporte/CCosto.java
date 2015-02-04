@@ -135,7 +135,7 @@ public class CCosto extends CGenerico {
 								+ tipoReporte
 								+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 					else
-						msj.mensajeAlerta(Mensaje.noHayRegistros);
+						Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 				}
 			}
 
@@ -147,7 +147,7 @@ public class CCosto extends CGenerico {
 		};
 		Button guardar = (Button) botonera.getChildren().get(0);
 		guardar.setLabel("Reporte");
-		guardar.setSrc("/public/imagenes/botones/reporte.png");
+		guardar.setImage("/public/imagenes/botones/reporte.png");
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraCosto.appendChild(botonera);
 
@@ -156,7 +156,7 @@ public class CCosto extends CGenerico {
 	protected boolean validar() {
 		if (cmbArea.getText().compareTo("") == 0
 				|| cmbDiagnostico.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
@@ -272,7 +272,7 @@ public class CCosto extends CGenerico {
 			reporte = (JasperReport) JRLoader.loadObject(getClass()
 					.getResource("/reporte/RResumenCosto.jasper"));
 		} catch (JRException e) {
-			msj.mensajeError("Recurso no Encontrado");
+			Mensaje.mensajeError("Recurso no Encontrado");
 		}
 		if (tipoReporte.equals("EXCEL")) {
 
@@ -300,7 +300,7 @@ public class CCosto extends CGenerico {
 			fichero = JasperRunManager.runReportToPdf(reporte, p,
 					new JRBeanCollectionDataSource(consultasFinales));
 		} catch (JRException e) {
-			msj.mensajeError("Error en Reporte");
+			Mensaje.mensajeError("Error en Reporte");
 		}
 		return fichero;
 		}
