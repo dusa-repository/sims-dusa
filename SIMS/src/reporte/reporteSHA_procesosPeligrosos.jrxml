@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_procesosPeligrosos" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="39b5ba9b-56f8-4e24-838c-478410aa2fa0">
 	<property name="ireport.zoom" value="1.2100000000000017"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="1528"/>
 	<parameter name="haa" class="java.lang.String"/>
 	<parameter name="hab" class="java.lang.String"/>
 	<parameter name="hac" class="java.lang.String"/>
@@ -30,6 +30,7 @@
 	<parameter name="hbe" class="java.lang.String"/>
 	<parameter name="condicionA" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
 	<parameter name="hae" class="java.lang.String"/>
+	<parameter name="hbd" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -332,11 +333,17 @@
 				<text><![CDATA[8.2.4.- ¿ESTUVO INVOLUCRADO ALGÚN EQUIPO, MAQUINA O HERRAMIENTA CON   LA OCURRENCIA DEL ACCIDENTE?]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="36" y="518" width="100" height="20" uuid="00a7f72a-b45a-4359-ba4e-fd03a6e1f7a3"/>
+				<reportElement x="36" y="518" width="79" height="15" uuid="00a7f72a-b45a-4359-ba4e-fd03a6e1f7a3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[SÍ, INDIQUE CUAL: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="36" y="549" width="100" height="20" uuid="d63b47a8-9c50-42c3-8bdc-b657d215c003"/>
+				<reportElement x="36" y="549" width="100" height="15" uuid="d63b47a8-9c50-42c3-8bdc-b657d215c003"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[NO ]]></text>
 			</staticText>
 			<staticText>
@@ -351,9 +358,6 @@
 				<reportElement x="285" y="555" width="86" height="14" uuid="cc49c206-26aa-4aa1-acca-0893a635f2ff"/>
 				<text><![CDATA[OTRO, INDIQUE:]]></text>
 			</staticText>
-			<line>
-				<reportElement x="374" y="565" width="100" height="1" uuid="692c6f21-d34e-4cb0-baa3-ebac84fa6d4d"/>
-			</line>
 			<staticText>
 				<reportElement x="254" y="580" width="267" height="112" uuid="1fac6d49-60cf-4bb7-bde2-f2a7a7589552"/>
 				<box leftPadding="4">
@@ -427,7 +431,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="444" y="741" width="78" height="29" uuid="e06fa513-2825-4683-a3ab-160a7d34c994"/>
-				<text><![CDATA[OTROS (ESPECIFIQUE):]]></text>
+				<text><![CDATA[OTROS ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="20" y="520" width="7" height="10" uuid="98f92dad-d38c-479c-be74-a611209770f1"/>
@@ -658,8 +662,11 @@
 				<reportElement x="430" y="743" width="6" height="20" uuid="86f33b13-cf91-474b-b899-8c65bd27946f"/>
 				<textFieldExpression><![CDATA[$P{hbh4}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="377" y="553" width="113" height="20" uuid="81711b51-b547-4b4e-b9b6-80f904a2f654"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="377" y="553" width="141" height="27" uuid="81711b51-b547-4b4e-b9b6-80f904a2f654"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{hbe}]]></textFieldExpression>
 			</textField>
 			<subreport runToBottom="false">
@@ -667,6 +674,13 @@
 				<dataSourceExpression><![CDATA[$P{condicionA}]]></dataSourceExpression>
 				<subreportExpression><![CDATA["/reporte/reporteSHA_ListaCondicionA.jasper"]]></subreportExpression>
 			</subreport>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="116" y="516" width="138" height="29" uuid="7f9e81a3-1090-4b80-89fc-979a0cfabaf3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hbd}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

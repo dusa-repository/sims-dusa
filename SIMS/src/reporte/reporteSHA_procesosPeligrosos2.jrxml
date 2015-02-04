@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_procesosPeligrosos2" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="848ce136-a5cf-4eb8-b154-324a20163bfa">
-	<property name="ireport.zoom" value="1.4641000000000006"/>
-	<property name="ireport.x" value="32"/>
-	<property name="ireport.y" value="251"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1153"/>
 	<parameter name="hbaaSI" class="java.lang.String"/>
 	<parameter name="hbaaNO" class="java.lang.String"/>
 	<parameter name="hbabSI" class="java.lang.String"/>
@@ -21,6 +21,7 @@
 	<parameter name="condicionB" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="condicionD" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource" isForPrompting="false"/>
 	<parameter name="condicionC" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<parameter name="hce" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -317,7 +318,10 @@
 				<text><![CDATA[HABÍA RECIBIDO INSTRUCCIONES PARA REALIZARLA DE ESA MANERA.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="279" y="777" width="244" height="25" uuid="3a56c9d1-d6ce-4653-bced-cc39e7422700"/>
+				<reportElement x="279" y="777" width="98" height="13" uuid="3a56c9d1-d6ce-4653-bced-cc39e7422700"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
 				<text><![CDATA[OTROS, ESPECIFIQUE:]]></text>
 			</staticText>
 			<staticText>
@@ -482,6 +486,13 @@
 				<dataSourceExpression><![CDATA[$P{condicionD}]]></dataSourceExpression>
 				<subreportExpression><![CDATA["/reporte/reporteSHA_ListaCondicionD.jasper"]]></subreportExpression>
 			</subreport>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="378" y="777" width="143" height="25" uuid="64ae5679-05a4-4dc1-84b7-dbd5156ec51a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hce}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

@@ -1178,11 +1178,11 @@
 													<radiogroup id="rdg8211">
 														<vbox>
 															<radio label="NO" id="rdo82111" tooltiptext="Marque para Negar" />
-															<radio label="SI (Indique Cual)" id="rdo82112"
+															<radio label="SI (CONSIGNAR ESTUDIOS)" id="rdo82112"
 																tooltiptext="Marque para Afirmar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt8211" maxlength="250" />
+													<textbox multiline="true" id="txt8211" maxlength="250" visible="false"/>
 												</cell>
 												<cell colspan="2">
 													<label class="etiqueta"
@@ -1190,11 +1190,11 @@
 													<radiogroup id="rdg8212">
 														<vbox>
 															<radio label="NO" id="rdo82121" tooltiptext="Marque para Negar" />
-															<radio label="SI (Indique Cual)" id="rdo82122"
+															<radio label="SI (CONSIGNAR SUSTENTO FÍSICO)" id="rdo82122"
 																tooltiptext="Marque para Afirmar" />
 														</vbox>
 													</radiogroup>
-													<textbox multiline="true" id="txt8212" maxlength="250"  />
+													<textbox multiline="true" id="txt8212" maxlength="250" visible="false" />
 												</cell>
 											</row>
 											<row>
