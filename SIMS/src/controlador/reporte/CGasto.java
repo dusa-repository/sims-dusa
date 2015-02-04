@@ -110,9 +110,8 @@ public class CGasto extends CGenerico {
 				if (validar()) {
 					Date desde = dtbDesde.getValue();
 					Date hasta = dtbHasta.getValue();
-					DateFormat fecha = new SimpleDateFormat("dd-MM-yyyy");
-					String fecha1 = fecha.format(desde);
-					String fecha2 = fecha.format(hasta);
+					String fecha1 = formatoReporte.format(desde);
+					String fecha2 = formatoReporte.format(hasta);
 					String paciente = idPaciente;
 					String parentesco = cmbParentescoFamiliar.getValue();
 					String tipoReporte = cmbTipo.getValue();
@@ -158,7 +157,7 @@ public class CGasto extends CGenerico {
 									+ tipoReporte
 									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 						else
-							msj.mensajeAlerta(Mensaje.noHayRegistros);
+							Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 						break;
 					// Reporte 2
 					case 2:
@@ -182,7 +181,7 @@ public class CGasto extends CGenerico {
 									+ tipoReporte
 									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 						else
-							msj.mensajeAlerta(Mensaje.noHayRegistros);
+							Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 						break;
 					}
 				}
@@ -204,11 +203,11 @@ public class CGasto extends CGenerico {
 	protected boolean validar() {
 		if ((tipo == 1 && (lblPaciente.getValue().compareTo("") == 0 || cmbParentescoFamiliar
 				.getValue().compareTo("") == 0))) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (tipo == 2 && lblPaciente.getValue().compareTo("") == 0) {
-				msj.mensajeError(Mensaje.camposVacios);
+				Mensaje.mensajeError(Mensaje.camposVacios);
 				return false;
 			} else
 				return true;
@@ -367,7 +366,7 @@ public class CGasto extends CGenerico {
 					.getResource("/reporte/RGastosFamiliar.jasper"));
 		} catch (JRException e) {
 			msj = new Mensaje();
-			msj.mensajeError("Recurso no Encontrado");
+			Mensaje.mensajeError("Recurso no Encontrado");
 		}
 		if (tipo2.equals("EXCEL")) {
 
@@ -395,7 +394,7 @@ public class CGasto extends CGenerico {
 				fichero = JasperRunManager.runReportToPdf(reporte, p,
 						new JRBeanCollectionDataSource(consultasFinales));
 			} catch (JRException e) {
-				msj.mensajeError("Error en Reporte");
+				Mensaje.mensajeError("Error en Reporte");
 			}
 			return fichero;
 		}
@@ -471,7 +470,7 @@ public class CGasto extends CGenerico {
 			reporte = (JasperReport) JRLoader.loadObject(getClass()
 					.getResource("/reporte/RGastosTrabajador.jasper"));
 		} catch (JRException e) {
-			msj.mensajeError("Recurso no Encontrado");
+			Mensaje.mensajeError("Recurso no Encontrado");
 		}
 		if (tipo2.equals("EXCEL")) {
 
@@ -499,7 +498,7 @@ public class CGasto extends CGenerico {
 				fichero = JasperRunManager.runReportToPdf(reporte, p,
 						new JRBeanCollectionDataSource(consultasFinales));
 			} catch (JRException e) {
-				msj.mensajeError("Error en Reporte");
+				Mensaje.mensajeError("Error en Reporte");
 			}
 			return fichero;
 		}

@@ -1,5 +1,7 @@
 package servicio.transacciones;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import interfacedao.transacciones.IOrdenEspecialistaDAO;
@@ -8,6 +10,7 @@ import modelo.transacciones.Orden;
 import modelo.transacciones.OrdenEspecialista;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service("SOrdenEspecialista")
@@ -34,6 +37,15 @@ public class SOrdenEspecialista {
 			String par3) {
 		return ordenEspecialistaDAO.findByOrdenAndEspecialistaCedula(orden,
 				par3);
+	}
+
+	public List<OrdenEspecialista> buscarEntreFechas(Date desde, Date hasta) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("especialistaEspecialidadDescripcion");
+		ordenar.add("especialistaCedula");
+		ordenar.add("ordenFechaOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenEspecialistaDAO.findByOrdenFechaOrdenBetween(desde, hasta, o);
 	}
 
 }

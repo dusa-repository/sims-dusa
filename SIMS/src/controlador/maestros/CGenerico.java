@@ -268,6 +268,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public Include contenido;
 	public Tab tab;
 	protected DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+	protected DateFormat formatoReporte = new SimpleDateFormat("dd-MM-yyyy");
 	public List<Tab> tabs = new ArrayList<Tab>();
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	protected DateFormat formatoImportar = new SimpleDateFormat("yyyy-MM-dd");
