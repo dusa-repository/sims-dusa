@@ -1920,6 +1920,17 @@ public class COrden extends CGenerico {
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
+		
+		p.put("mostrar", "si");
+		Usuario usuario = new Usuario();
+		String u ="";
+		if(getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria())!=null)
+		{
+			usuario=getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria());
+			u=usuario.getPrimerNombre()+"  "+usuario.getPrimerApellido();
+		}
+		p.put("usuario", u);
+		
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipe.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p,
@@ -1998,6 +2009,17 @@ public class COrden extends CGenerico {
 		p.put("observacion", especialistaConsulta.getObservacion());
 		p.put("prioridad", especialistaConsulta.getPrioridad());
 		p.put("cedula", paciente.getCedula());
+		
+		p.put("mostrar", "si");
+		Usuario usuario = new Usuario();
+		String u ="";
+		if(getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria())!=null)
+		{
+			usuario=getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria());
+			u=usuario.getPrimerNombre()+"  "+usuario.getPrimerApellido();
+		}
+		p.put("usuario", u);
+		
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipeEspecialista.jasper"));
@@ -2081,6 +2103,17 @@ public class COrden extends CGenerico {
 		p.put("prioridad", listaMedicinas.get(0).getPrioridad());
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
+		p.put("direccion", listaMedicinas.get(0).getProveedor().getDireccion());
+		p.put("mostrar", "si");
+		Usuario usuario = new Usuario();
+		String u ="";
+		if(getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria())!=null)
+		{
+			usuario=getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria());
+			u=usuario.getPrimerNombre()+"  "+usuario.getPrimerApellido();
+		}
+		p.put("usuario", u);
+		
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipeServicio.jasper"));
@@ -2169,6 +2202,17 @@ public class COrden extends CGenerico {
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("pacienteNacimiento", paciente.getFechaNacimiento());
+		
+		p.put("mostrar", "si");
+		Usuario usuario = new Usuario();
+		String u ="";
+		if(getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria())!=null)
+		{
+			usuario=getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria());
+			u=usuario.getPrimerNombre()+"  "+usuario.getPrimerApellido();
+		}
+		p.put("usuario", u);
+		
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RRecipeExamen.jasper"));

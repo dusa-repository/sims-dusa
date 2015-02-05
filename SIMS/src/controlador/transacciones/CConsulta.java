@@ -5796,6 +5796,8 @@ public class CConsulta extends CGenerico {
 			p.put("impresion", "si");
 		else
 			p.put("impresion", "no");
+		
+		p.put("mostrar", "no");
 
 		String ced = "";
 		if (consuta.getTipoConsultaSecundaria().equals("IC")) {
@@ -5878,7 +5880,7 @@ public class CConsulta extends CGenerico {
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
 			rifEmpresa = paciente.getEmpresa().getRif();
 		}
-
+		p.put("mostrar", "no");
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);
@@ -6002,6 +6004,8 @@ public class CConsulta extends CGenerico {
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
 			rifEmpresa = paciente.getEmpresa().getRif();
 		}
+		
+		p.put("mostrar", "no");
 		p.put("cedula", paciente.getCedula());
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
@@ -6019,6 +6023,7 @@ public class CConsulta extends CGenerico {
 		p.put("doctorCedula", user.getCedula());
 		p.put("servicio", servicio);
 		p.put("centro", listaMedicinas.get(0).getProveedor().getNombre());
+		p.put("direccion", listaMedicinas.get(0).getProveedor().getDireccion());
 		p.put("prioridad", listaMedicinas.get(0).getPrioridad());
 		p.put("edad",
 				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
@@ -6093,6 +6098,7 @@ public class CConsulta extends CGenerico {
 			rifEmpresa = paciente.getEmpresa().getRif();
 		}
 
+		p.put("mostrar", "no");
 		p.put("empresaNombre", nombreEmpresa);
 		p.put("empresaDireccion", direccionEmpresa);
 		p.put("empresaRif", rifEmpresa);

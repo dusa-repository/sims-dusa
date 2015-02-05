@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRecipeExamen" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="46495055-59d9-47c7-b0f8-12c1088ffc60">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="38"/>
 	<parameter name="doctorNombre" class="java.lang.String"/>
 	<parameter name="doctorApellido" class="java.lang.String"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
@@ -15,13 +15,15 @@
 	<parameter name="proveedor" class="java.lang.String"/>
 	<parameter name="pacienteNacimiento" class="java.sql.Timestamp"/>
 	<parameter name="edad" class="java.lang.String"/>
+	<parameter name="mostrar" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
 	<field name="observacion" class="java.lang.String"/>
 	<field name="examen.nombre" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="275" splitType="Stretch">
+		<band height="302" splitType="Stretch">
 			<image>
 				<reportElement x="21" y="31" width="108" height="67" uuid="ed22ca57-f4dc-49b4-85f8-7689796fb6e9"/>
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
@@ -48,7 +50,7 @@
 				<text><![CDATA[Dr:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="77" y="252" width="416" height="20" uuid="1ae0a843-e3d4-4960-876f-e7c6711f3566"/>
+				<reportElement x="77" y="275" width="416" height="20" uuid="1ae0a843-e3d4-4960-876f-e7c6711f3566"/>
 				<textElement textAlignment="Center">
 					<font fontName="SansSerif" size="12" isBold="true" isUnderline="true"/>
 				</textElement>
@@ -97,14 +99,14 @@
 				<text><![CDATA[Dirigido a:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="21" y="228" width="66" height="20" uuid="35b353d4-a30e-4b87-8a9d-3e0540a6965a"/>
+				<reportElement x="21" y="227" width="66" height="20" uuid="35b353d4-a30e-4b87-8a9d-3e0540a6965a"/>
 				<textElement>
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Prioridad:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="86" y="228" width="138" height="20" uuid="d8de9e36-3f98-4d10-a403-572e7a424f07"/>
+				<reportElement x="86" y="227" width="138" height="20" uuid="d8de9e36-3f98-4d10-a403-572e7a424f07"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
@@ -151,6 +153,24 @@
 					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Años]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="143" y="251" width="257" height="20" uuid="8baa5e4e-18c1-4f69-b03e-7fc3139833bd">
+					<printWhenExpression><![CDATA[$P{mostrar}.equals( "si" )]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="22" y="251" width="119" height="20" uuid="539269e2-27b4-4b96-9630-c46d3aa267d2">
+					<printWhenExpression><![CDATA[$P{mostrar}.equals("si")]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orden Generada por:]]></text>
 			</staticText>
 		</band>
 	</title>

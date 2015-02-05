@@ -8,11 +8,28 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="25" splitType="Stretch">
-			<textField isBlankWhenNull="true">
-				<reportElement x="13" y="0" width="542" height="20" uuid="e415d4ad-6aae-42ed-bb53-d069128b6889"/>
+		<band height="23" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="24" y="3" width="529" height="20" uuid="e415d4ad-6aae-42ed-bb53-d069128b6889"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="10" y="6" width="7" height="10" uuid="e31bb910-fdc0-474e-ab9c-e58cd46254be"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="11" y="4" width="6" height="19" uuid="962286d9-7c78-4afd-9176-037ea9b4ee32"/>
+				<text><![CDATA[x]]></text>
+			</staticText>
 		</band>
 	</detail>
 </jasperReport>
