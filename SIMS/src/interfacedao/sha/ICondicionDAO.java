@@ -28,5 +28,15 @@ public interface ICondicionDAO extends JpaRepository<Condicion, Long> {
 
 	Condicion findByNombre(String value);
 
+	List<Condicion> findByInformesFAndTipo(Informe informe, String string);
+
+	List<Condicion> findByInformesEAndTipo(Informe informe, String string);
+
+	List<Condicion> findByInformesDAndTipo(Informe informe, String string);
+
+	List<Condicion> findByInformesCAndTipo(Informe informe, String string);
+
+	List<Condicion> findByInformesBAndTipo(Informe informe, String string);
+
 
 }

@@ -41,7 +41,6 @@ import org.zkoss.zul.Tab;
 
 import componentes.Botonera;
 import componentes.Mensaje;
-
 import controlador.maestros.CGenerico;
 
 public class COrdenesConsulta extends CGenerico {
@@ -180,15 +179,16 @@ public class COrdenesConsulta extends CGenerico {
 			especialistas = getServicioConsultaEspecialista()
 					.buscarEntreFechas(fecha1, fecha2);
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", par6);
 		p.put("hasta", par7);
+		p.put("data", new JRBeanCollectionDataSource(especialistas));
 		JasperReport reporte = null;
 		try {
 			reporte = (JasperReport) JRLoader.loadObject(getClass()
 					.getResource("/reporte/ROrdenesConsultaEspecialista.jasper"));
 		} catch (JRException e) {
-			msj.mensajeError("Recurso no Encontrado");
+			Mensaje.mensajeError("Recurso no Encontrado");
 		}
 
 		if (tipo.equals("EXCEL")) {
@@ -217,7 +217,7 @@ public class COrdenesConsulta extends CGenerico {
 				fichero = JasperRunManager.runReportToPdf(reporte, p,
 						new JRBeanCollectionDataSource(especialistas));
 			} catch (JRException e) {
-				msj.mensajeError("Error en Reporte");
+				Mensaje.mensajeError("Error en Reporte");
 			}
 			return fichero;
 		}
@@ -293,15 +293,16 @@ public class COrdenesConsulta extends CGenerico {
 			}
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", par6);
 		p.put("hasta", par7);
+		p.put("data", new JRBeanCollectionDataSource(lista));
 		JasperReport reporte = null;
 		try {
 			reporte = (JasperReport) JRLoader.loadObject(getClass()
 					.getResource("/reporte/ROrdenesConsultaProveedor.jasper"));
 		} catch (JRException e) {
-			msj.mensajeError("Recurso no Encontrado");
+			Mensaje.mensajeError("Recurso no Encontrado");
 		}
 
 		if (tipo.equals("EXCEL")) {
@@ -330,7 +331,7 @@ public class COrdenesConsulta extends CGenerico {
 				fichero = JasperRunManager.runReportToPdf(reporte, p,
 						new JRBeanCollectionDataSource(lista));
 			} catch (JRException e) {
-				msj.mensajeError("Error en Reporte");
+				Mensaje.mensajeError("Error en Reporte");
 			}
 			return fichero;
 		}

@@ -24,6 +24,26 @@ public class SCondicion {
 		return condicionDAO.findByInformesAAndTipo(informe,string);
 	}
 
+	public List<Condicion> buscarPorInformeBYTipo(Informe informe, String string) {
+		return condicionDAO.findByInformesBAndTipo(informe,string);
+	}
+
+	public List<Condicion> buscarPorInformeCYTipo(Informe informe, String string) {
+		return condicionDAO.findByInformesCAndTipo(informe,string);
+	}
+
+	public List<Condicion> buscarPorInformeDYTipo(Informe informe, String string) {
+		return condicionDAO.findByInformesDAndTipo(informe,string);
+	}
+
+	public List<Condicion> buscarPorInformeEYTipo(Informe informe, String string) {
+		return condicionDAO.findByInformesEAndTipo(informe,string);
+	}
+
+	public List<Condicion> buscarPorInformeFYTipo(Informe informe, String string) {
+		return condicionDAO.findByInformesFAndTipo(informe,string);
+	}
+
 	public List<Condicion> buscarPorTipo(String string) {
 		return condicionDAO.findByTipo(string);
 	}

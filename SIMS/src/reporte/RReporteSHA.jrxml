@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RReporteSHA" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="26b4a361-1750-425d-8b6a-d836f40c9973">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="117"/>
 	<parameter name="codigo" class="java.lang.String"/>
 	<parameter name="nombre211" class="java.lang.String"/>
 	<parameter name="cedula211" class="java.lang.String"/>
@@ -457,6 +457,7 @@
 	<parameter name="hdc" class="java.lang.String"/>
 	<parameter name="iad" class="java.lang.String"/>
 	<parameter name="iag" class="java.lang.String"/>
+	<parameter name="teta" class="java.sql.Timestamp"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -1848,14 +1849,17 @@
 			</subreport>
 			<subreport>
 				<reportElement x="22" y="537" width="517" height="39" uuid="40148a10-813a-4791-a59a-ec3fd4ba6a04"/>
-				<subreportParameter name="idiNO">
-					<subreportParameterExpression><![CDATA[$P{idiNO}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="profesionPacienteH">
 					<subreportParameterExpression><![CDATA[$P{profesionPacienteH}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="idiNO">
+					<subreportParameterExpression><![CDATA[$P{idiNO}]]></subreportParameterExpression>
+				</subreportParameter>
 				<subreportParameter name="profesionPacienteI">
 					<subreportParameterExpression><![CDATA[$P{profesionPacienteI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="teta">
+					<subreportParameterExpression><![CDATA[$P{teta}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="idgNO">
 					<subreportParameterExpression><![CDATA[$P{idgNO}]]></subreportParameterExpression>
@@ -1863,11 +1867,11 @@
 				<subreportParameter name="profesionPacienteL">
 					<subreportParameterExpression><![CDATA[$P{profesionPacienteL}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="icgNO">
-					<subreportParameterExpression><![CDATA[$P{icgNO}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="profesionPacienteM">
 					<subreportParameterExpression><![CDATA[$P{profesionPacienteM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="icgNO">
+					<subreportParameterExpression><![CDATA[$P{icgNO}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="profesionPacienteJ">
 					<subreportParameterExpression><![CDATA[$P{profesionPacienteJ}]]></subreportParameterExpression>
@@ -1929,17 +1933,17 @@
 				<subreportParameter name="ibb">
 					<subreportParameterExpression><![CDATA[$P{ibb}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="turnoPacienteK">
-					<subreportParameterExpression><![CDATA[$P{turnoPacienteK}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="registroPacienteL">
 					<subreportParameterExpression><![CDATA[$P{registroPacienteL}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="turnoPacienteL">
-					<subreportParameterExpression><![CDATA[$P{turnoPacienteL}]]></subreportParameterExpression>
+				<subreportParameter name="turnoPacienteK">
+					<subreportParameterExpression><![CDATA[$P{turnoPacienteK}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="registroPacienteM">
 					<subreportParameterExpression><![CDATA[$P{registroPacienteM}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="turnoPacienteL">
+					<subreportParameterExpression><![CDATA[$P{turnoPacienteL}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="turnoPacienteM">
 					<subreportParameterExpression><![CDATA[$P{turnoPacienteM}]]></subreportParameterExpression>
@@ -1947,11 +1951,11 @@
 				<subreportParameter name="cedulaPacienteH">
 					<subreportParameterExpression><![CDATA[$P{cedulaPacienteH}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="cargoPacienteM">
-					<subreportParameterExpression><![CDATA[$P{cargoPacienteM}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="icaa">
 					<subreportParameterExpression><![CDATA[$P{icaa}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="cargoPacienteM">
+					<subreportParameterExpression><![CDATA[$P{cargoPacienteM}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="icae">
 					<subreportParameterExpression><![CDATA[$P{icae}]]></subreportParameterExpression>
@@ -1974,17 +1978,17 @@
 				<subreportParameter name="icab1">
 					<subreportParameterExpression><![CDATA[$P{icab1}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="idbSI">
-					<subreportParameterExpression><![CDATA[$P{idbSI}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="idacNO">
 					<subreportParameterExpression><![CDATA[$P{idacNO}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="idgSI">
-					<subreportParameterExpression><![CDATA[$P{idgSI}]]></subreportParameterExpression>
+				<subreportParameter name="idbSI">
+					<subreportParameterExpression><![CDATA[$P{idbSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="ibgNO">
 					<subreportParameterExpression><![CDATA[$P{ibgNO}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idgSI">
+					<subreportParameterExpression><![CDATA[$P{idgSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="idcNO">
 					<subreportParameterExpression><![CDATA[$P{idcNO}]]></subreportParameterExpression>
@@ -2136,14 +2140,14 @@
 				<subreportParameter name="idad">
 					<subreportParameterExpression><![CDATA[$P{idad}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="idaa">
-					<subreportParameterExpression><![CDATA[$P{idaa}]]></subreportParameterExpression>
+				<subreportParameter name="idcSI">
+					<subreportParameterExpression><![CDATA[$P{idcSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="iddNO">
 					<subreportParameterExpression><![CDATA[$P{iddNO}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="idcSI">
-					<subreportParameterExpression><![CDATA[$P{idcSI}]]></subreportParameterExpression>
+				<subreportParameter name="idaa">
+					<subreportParameterExpression><![CDATA[$P{idaa}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="ibaaSI">
 					<subreportParameterExpression><![CDATA[$P{ibaaSI}]]></subreportParameterExpression>
@@ -2151,11 +2155,11 @@
 				<subreportParameter name="icj">
 					<subreportParameterExpression><![CDATA[$P{icj}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="ibjSI">
-					<subreportParameterExpression><![CDATA[$P{ibjSI}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="ibaSI">
 					<subreportParameterExpression><![CDATA[$P{ibaSI}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ibjSI">
+					<subreportParameterExpression><![CDATA[$P{ibjSI}]]></subreportParameterExpression>
 				</subreportParameter>
 				<subreportParameter name="icc">
 					<subreportParameterExpression><![CDATA[$P{icc}]]></subreportParameterExpression>

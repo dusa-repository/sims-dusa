@@ -2912,15 +2912,15 @@ public class CInforme extends CGenerico {
 		// Setear Condiciones
 		List<Condicion> condicionesA = servicioCondicion.buscarPorInformeYTipo(
 				informe, "Instalaciones");
-		List<Condicion> condicionesB = servicioCondicion.buscarPorInformeYTipo(
+		List<Condicion> condicionesB = servicioCondicion.buscarPorInformeBYTipo(
 				informe, "Equipos");
-		List<Condicion> condicionesC = servicioCondicion.buscarPorInformeYTipo(
+		List<Condicion> condicionesC = servicioCondicion.buscarPorInformeCYTipo(
 				informe, "Materiales");
-		List<Condicion> condicionesD = servicioCondicion.buscarPorInformeYTipo(
+		List<Condicion> condicionesD = servicioCondicion.buscarPorInformeDYTipo(
 				informe, "Ambiente");
-		List<Condicion> condicionesE = servicioCondicion.buscarPorInformeYTipo(
+		List<Condicion> condicionesE = servicioCondicion.buscarPorInformeEYTipo(
 				informe, "Organizacion");
-		List<Condicion> condicionesF = servicioCondicion.buscarPorInformeYTipo(
+		List<Condicion> condicionesF = servicioCondicion.buscarPorInformeFYTipo(
 				informe, "Disergonomicos");
 
 		if (!condicionesA.isEmpty()) {
@@ -3564,7 +3564,7 @@ public class CInforme extends CGenerico {
 					+ String.valueOf(idInforme)
 					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 		} else
-			msj.mensajeAlerta(Mensaje.seleccionarInforme);
+			Mensaje.mensajeAlerta(Mensaje.seleccionarInforme);
 	}
 
 	public byte[] reporteInpsasel(String par6) throws JRException {
@@ -4386,7 +4386,7 @@ public class CInforme extends CGenerico {
 		}
 		p.put("ibb", informe.getIbb());
 		p.put("ibc", informe.getIbc());
-		p.put("ibd", informe.getIbd());
+		p.put("teta", informe.getIbd());
 
 		p.put("ibe", informe.getIbe());
 		if (informe.getIbe()) {
@@ -4636,15 +4636,15 @@ public class CInforme extends CGenerico {
 		List<Condicion> condicionesA = getServicioCondicion()
 				.buscarPorInformeYTipo(informe, "Instalaciones");
 		List<Condicion> condicionesB = getServicioCondicion()
-				.buscarPorInformeYTipo(informe, "Equipos");
+				.buscarPorInformeBYTipo(informe, "Equipos");
 		List<Condicion> condicionesC = getServicioCondicion()
-				.buscarPorInformeYTipo(informe, "Materiales");
+				.buscarPorInformeCYTipo(informe, "Materiales");
 		List<Condicion> condicionesD = getServicioCondicion()
-				.buscarPorInformeYTipo(informe, "Ambiente");
+				.buscarPorInformeDYTipo(informe, "Ambiente");
 		List<Condicion> condicionesE = getServicioCondicion()
-				.buscarPorInformeYTipo(informe, "Organizacion");
+				.buscarPorInformeEYTipo(informe, "Organizacion");
 		List<Condicion> condicionesF = getServicioCondicion()
-				.buscarPorInformeYTipo(informe, "Disergonomicos");
+				.buscarPorInformeFYTipo(informe, "Disergonomicos");
 		p.put("condicionA", new JRBeanCollectionDataSource(condicionesA));
 		p.put("condicionB", new JRBeanCollectionDataSource(condicionesB));
 		p.put("condicionC", new JRBeanCollectionDataSource(condicionesC));

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_gestionSeguridadSalud" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9ae75995-4931-4d32-b724-9b40f7bd2bcc">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="1201"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="ibaSI" class="java.lang.String"/>
 	<parameter name="ibaNO" class="java.lang.String"/>
 	<parameter name="ibb" class="java.sql.Timestamp"/>
@@ -110,6 +110,7 @@
 	<parameter name="idacSI" class="java.lang.String"/>
 	<parameter name="idacNO" class="java.lang.String"/>
 	<parameter name="idad" class="java.lang.String"/>
+	<parameter name="teta" class="java.sql.Timestamp"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -1096,6 +1097,10 @@
 			<textField isBlankWhenNull="true">
 				<reportElement x="404" y="748" width="115" height="45" uuid="005a9de0-3d99-48e5-85ad-cb05bce321f6"/>
 				<textFieldExpression><![CDATA[$P{icaa}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="419" y="58" width="100" height="54" uuid="1dcd94ac-5509-4020-b2f2-2f8aec0200a9"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{teta})]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
