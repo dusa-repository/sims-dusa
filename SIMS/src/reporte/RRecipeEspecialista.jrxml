@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRecipeEspecialista" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ed592c1-ffc9-486d-b23e-4c1b7ea46e29">
-	<property name="ireport.zoom" value="0.5"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
@@ -22,6 +22,8 @@
 	<parameter name="cedula" class="java.lang.String"/>
 	<parameter name="especialistaTelefono" class="java.lang.String"/>
 	<parameter name="especialistaDireccion" class="java.lang.String"/>
+	<parameter name="mostrar" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -116,7 +118,7 @@
 				<textFieldExpression><![CDATA[$P{edad}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="395" y="293" width="159" height="20" uuid="f2d6394a-2dfb-47ba-84bc-c9829bd7ed8b"/>
+				<reportElement x="397" y="295" width="159" height="20" uuid="f2d6394a-2dfb-47ba-84bc-c9829bd7ed8b"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
@@ -299,6 +301,24 @@
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{especialistaTelefono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="264" width="114" height="20" uuid="11cbbf05-716f-4371-a032-c012ffee9377">
+					<printWhenExpression><![CDATA[$P{mostrar}.equals("si")]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orden Generada por:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="264" width="257" height="20" uuid="1d116a92-58ed-48bd-bf72-e4518fa2194e">
+					<printWhenExpression><![CDATA[$P{mostrar}.equals( "si" )]]></printWhenExpression>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

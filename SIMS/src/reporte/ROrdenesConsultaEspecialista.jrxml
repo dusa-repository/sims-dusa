@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RCostoEspecialista" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="d0889a25-059e-4b57-8850-705b7d9510a4">
 	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="50"/>
+	<property name="ireport.y" value="269"/>
 	<subDataset name="New Dataset 1" uuid="ac8021c4-bcca-47b6-a33b-f11ab61d167a">
 		<field name="especialista.especialidad.descripcion" class="java.lang.String"/>
 		<field name="especialista.cedula" class="java.lang.String"/>
@@ -341,7 +341,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 	<summary>
 		<band height="229">
 			<componentElement>
-				<reportElement key="table" x="1" y="49" width="569" height="147" uuid="3d15a6b0-d13c-444c-9324-0ca034b86639"/>
+				<reportElement key="table" x="1" y="49" width="569" height="130" uuid="3d15a6b0-d13c-444c-9324-0ca034b86639"/>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="New Dataset 1" uuid="5d20c1ee-21d0-4949-8be3-6af2fb8777e6">
 						<dataSourceExpression><![CDATA[$P{data}]]></dataSourceExpression>
@@ -410,7 +410,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 							</jr:cell>
 						</jr:groupHeader>
 						<jr:groupFooter groupName="especialidad">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.75"/>
 									<leftPen lineWidth="0.75"/>
@@ -418,14 +418,14 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="188" y="0" width="274" height="30" uuid="d476d077-82d4-4c5f-bb8c-bd8dd4e929da"/>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="188" y="0" width="274" height="20" uuid="d476d077-82d4-4c5f-bb8c-bd8dd4e929da"/>
 									<textElement verticalAlignment="Middle">
 										<font size="11" isBold="true"/>
 									</textElement>
 									<textFieldExpression><![CDATA[$F{especialista.especialidad.descripcion}]]></textFieldExpression>
 								</textField>
 								<staticText>
-									<reportElement x="143" y="0" width="45" height="30" uuid="a7da7dbd-282e-4c5e-893c-8069e4b43394"/>
+									<reportElement x="143" y="0" width="45" height="20" uuid="a7da7dbd-282e-4c5e-893c-8069e4b43394"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="11" isBold="true"/>
 									</textElement>
@@ -434,7 +434,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 							</jr:cell>
 						</jr:groupFooter>
 						<jr:groupFooter groupName="especialista">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.75"/>
 									<leftPen lineWidth="0.75"/>
@@ -442,7 +442,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="61" y="0" width="401" height="30" uuid="3d6591fd-c58e-42db-b514-ecb96ffb18cc"/>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="61" y="0" width="401" height="20" uuid="3d6591fd-c58e-42db-b514-ecb96ffb18cc"/>
 									<textElement verticalAlignment="Middle">
 										<font size="11"/>
 									</textElement>
@@ -506,7 +506,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 							</jr:cell>
 						</jr:groupHeader>
 						<jr:groupFooter groupName="especialidad">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.75"/>
 									<leftPen lineWidth="0.75"/>
@@ -514,7 +514,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="103" height="30" uuid="4fefc5a3-d760-4797-a6ed-31388a8b632f"/>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="103" height="20" uuid="4fefc5a3-d760-4797-a6ed-31388a8b632f"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10" isBold="true"/>
 									</textElement>
@@ -523,7 +523,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 							</jr:cell>
 						</jr:groupFooter>
 						<jr:groupFooter groupName="especialista">
-							<jr:cell height="30" rowSpan="1">
+							<jr:cell height="20" rowSpan="1">
 								<box>
 									<topPen lineWidth="0.75"/>
 									<leftPen lineWidth="0.75"/>
@@ -531,7 +531,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 									<rightPen lineWidth="0.75"/>
 								</box>
 								<textField isStretchWithOverflow="true">
-									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="103" height="30" uuid="fc051fc8-72d3-4b6f-984c-13fcb2f0f3b2"/>
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="103" height="20" uuid="fc051fc8-72d3-4b6f-984c-13fcb2f0f3b2"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="10" isBold="false"/>
 									</textElement>

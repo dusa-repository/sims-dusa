@@ -8,9 +8,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="40" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement x="10" y="12" width="7" height="10" uuid="c65feb54-ad61-4686-916b-50deba7a639d"/>
+				<reportElement x="10" y="9" width="7" height="10" uuid="c65feb54-ad61-4686-916b-50deba7a639d"/>
 				<box leftPadding="4">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -23,13 +23,13 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="11" y="10" width="6" height="19" uuid="c86c9b60-826f-4425-bd91-921e1e7f0043"/>
+				<reportElement x="11" y="7" width="6" height="19" uuid="c86c9b60-826f-4425-bd91-921e1e7f0043"/>
 				<text><![CDATA[x]]></text>
 			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="38" y="9" width="517" height="20" uuid="537f87a2-7a3b-4065-96c1-a46136cc0fd3"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="27" y="6" width="528" height="20" uuid="537f87a2-7a3b-4065-96c1-a46136cc0fd3"/>
 				<textElement>
-					<font isBold="true"/>
+					<font isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
