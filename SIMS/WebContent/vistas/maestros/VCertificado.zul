@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div vflex="1" id="divCertificado" apply="controlador.maestros.CCertificado">
-		<groupbox vflex="1" width="100%" mold="3d" title="Certificado de Salud">
+	<div  height="100%" id="divCertificado" apply="controlador.maestros.CCertificado">
+		<groupbox  height="100%" width="100%" mold="3d" title="Certificado de Salud">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="25%" />
@@ -43,7 +43,7 @@
 			</hbox>
 			<separator />
 			<hbox widths="37%,3%,60%" width="100%">
-				<listbox mold="paging" pageSize="10" id="ltbPacientes"
+				<listbox mold="paging" pageSize="9" id="ltbPacientes"
 					width="100%" height="100%" rows="6" emptyMessage="No hay Estudios Registrados">
 					<listhead>
 						<listheader label="Ficha" width="20%" />
@@ -107,7 +107,7 @@
 						image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Estudio"
 						width="30px" />
 				</vbox>
-				<listbox mold="paging" pageSize="10" rows="6"
+				<listbox mold="paging" pageSize="9" rows="6"
 					id="ltbPacientesAgregados" width="100%" height="100%"
 					emptyMessage="No ha Seleccionado Ningún Estudio">
 					<listhead>

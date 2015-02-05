@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RCostoProveedor" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5395e779-b886-443c-953b-c4f983c0bb74">
-	<property name="ireport.zoom" value="1.1000000000000005"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="desde" class="java.lang.String"/>
@@ -189,7 +189,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="90" splitType="Stretch">
+		<band height="96" splitType="Stretch">
 			<image>
 				<reportElement x="19" y="17" width="104" height="53" uuid="3b2efeb9-5f99-4481-96c2-e9d1a7d5537c"/>
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
@@ -240,12 +240,25 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="1" y="0" width="526" height="14" uuid="e23c8311-6d6c-46be-abcb-05ad320f3f69"/>
-				<box rightPadding="5"/>
-				<textElement textAlignment="Right">
+				<reportElement x="177" y="-1" width="79" height="15" uuid="958a7bda-a1c7-4dd3-8ff1-f89dae8a049e"/>
+				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Servicio]]></text>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="-1" width="316" height="15" uuid="718c970b-7194-465a-9799-132b0050805b"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="-1" width="108" height="15" uuid="6c43b579-0a25-456b-a106-fb4709420847"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
