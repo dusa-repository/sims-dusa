@@ -14,16 +14,6 @@
 	<field name="consulta.paciente.cedula" class="java.lang.String"/>
 	<field name="consulta.paciente.primerNombre" class="java.lang.String"/>
 	<field name="consulta.paciente.primerApellido" class="java.lang.String"/>
-	<field name="especialista.costo" class="java.lang.Double"/>
-	<variable name="costo_especialista" class="java.lang.Double" resetType="Group" resetGroup="especialista" calculation="Sum">
-		<variableExpression><![CDATA[$F{especialista.costo}]]></variableExpression>
-	</variable>
-	<variable name="costo_especialidad" class="java.lang.Double" resetType="Group" resetGroup="especialidad" calculation="Sum">
-		<variableExpression><![CDATA[$F{especialista.costo}]]></variableExpression>
-	</variable>
-	<variable name="costo_total" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{especialista.costo}]]></variableExpression>
-	</variable>
 	<variable name="contador1" class="java.lang.Integer" resetType="Group" resetGroup="especialista" calculation="Count">
 		<variableExpression><![CDATA[$F{consulta.paciente.cedula}]]></variableExpression>
 	</variable>
@@ -75,15 +65,15 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{especialista.especialidad.descripcion}]]></textFieldExpression>
 				</textField>
-				<textField pattern="###0.00;-###0.00">
-					<reportElement x="501" y="1" width="67" height="20" uuid="a609961f-a2e7-4477-96c4-1a5927f9d055"/>
+				<textField>
+					<reportElement x="501" y="0" width="47" height="21" uuid="250b011e-c164-4478-a9f1-2c51c8a9dd6c"/>
 					<box>
-						<topPen lineWidth="0.5"/>
+						<topPen lineWidth="1.0"/>
 					</box>
 					<textElement textAlignment="Center">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{costo_especialidad}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{contador2}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -137,15 +127,15 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{especialista.nombre}+" "+$F{especialista.apellido}]]></textFieldExpression>
 				</textField>
-				<textField pattern="###0.00;-###0.00">
-					<reportElement x="501" y="1" width="67" height="20" uuid="388bca1f-2600-4dbd-8e10-d91bce1dccca"/>
+				<textField>
+					<reportElement x="501" y="0" width="47" height="21" uuid="f74df5f9-0be0-4f7d-b790-7960deb92039"/>
 					<box>
-						<topPen lineWidth="0.5"/>
+						<topPen lineWidth="1.0"/>
 					</box>
 					<textElement textAlignment="Center">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{costo_especialista}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{contador1}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -160,11 +150,11 @@
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="183" y="31" width="211" height="20" uuid="fe2a1c50-c908-407c-b098-b9ce45e5b5ac"/>
+				<reportElement x="149" y="31" width="419" height="20" uuid="fe2a1c50-c908-407c-b098-b9ce45e5b5ac"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ORDENES POR ESPECIALISTA]]></text>
+				<text><![CDATA[ORDENES POR ESPECIALISTA  (Generadas desde Consulta)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="321" y="67" width="42" height="20" uuid="1491609a-ddf1-4320-bead-0db198244eb9"/>
@@ -232,41 +222,30 @@
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="497" y="0" width="75" height="14" uuid="eb672fd4-ae75-42af-9f51-88638620a187"/>
-				<textElement textAlignment="Center">
-					<font size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Costo Servicio]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="18" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="105" height="18" uuid="2197cd0d-5d1d-4ee1-919c-c0bb74b0897a"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="111" height="18" uuid="2197cd0d-5d1d-4ee1-919c-c0bb74b0897a"/>
+				<box rightPadding="3"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})+" "+
 new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="105" y="0" width="85" height="18" uuid="88ba5e58-006d-42ec-bddd-b33c1eade8d7"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="111" y="0" width="85" height="18" uuid="88ba5e58-006d-42ec-bddd-b33c1eade8d7"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{consulta.tipoConsultaSecundaria}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="190" y="0" width="83" height="18" uuid="da5f3657-820b-4e68-8c24-49e30875ecda"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="196" y="0" width="83" height="18" uuid="da5f3657-820b-4e68-8c24-49e30875ecda"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{consulta.paciente.cedula}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="275" y="0" width="221" height="18" uuid="29129184-6aab-4f02-b8bd-d2b22d926cbb"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="279" y="0" width="293" height="18" uuid="29129184-6aab-4f02-b8bd-d2b22d926cbb"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{consulta.paciente.primerNombre}+" "+$F{consulta.paciente.primerApellido}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="496" y="0" width="76" height="18" uuid="3fe81dbb-81e8-48d2-b858-f45fc89d16ec"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{especialista.costo}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -301,19 +280,12 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 	<lastPageFooter>
 		<band height="41">
 			<staticText>
-				<reportElement x="375" y="0" width="122" height="20" uuid="151c739d-497e-4100-8b57-fcebb3f26c39"/>
+				<reportElement x="306" y="0" width="191" height="20" uuid="151c739d-497e-4100-8b57-fcebb3f26c39"/>
 				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[Total por Especialistas]]></text>
+				<text><![CDATA[Total de Ordenes para Especialistas]]></text>
 			</staticText>
-			<textField pattern="###0.00;-###0.00">
-				<reportElement x="501" y="0" width="67" height="20" uuid="344daaa1-0462-4ce0-a235-a47e0855ebbb"/>
-				<textElement textAlignment="Center">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{costo_total}]]></textFieldExpression>
-			</textField>
 			<textField pattern="h.mm a">
 				<reportElement x="516" y="21" width="55" height="20" uuid="c3d6acf8-4fa2-42bf-9b18-08b81e8e19a6"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
@@ -338,6 +310,16 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 				<reportElement x="491" y="21" width="26" height="20" uuid="91826bf7-d6bd-47df-8eb4-22924b286154"/>
 				<text><![CDATA[Hora:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="501" y="0" width="47" height="20" uuid="f8ab273b-a09e-413c-a4e2-f7104b772ca0"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{contador3}]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
 </jasperReport>

@@ -55,6 +55,7 @@ public class Reportero extends HttpServlet {
 		CReporteCertificado certificado = new CReporteCertificado();
 		COrdenProveedor ordenProveedor = new COrdenProveedor();
 		CReporteOrden reporteOrden = new CReporteOrden();
+		COrdenesConsulta ordenesConsulta = new COrdenesConsulta();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
@@ -244,6 +245,12 @@ public class Reportero extends HttpServlet {
 				break;
 			case "44":
 				fichero = reporteOrden.jasperEspecialista(par6, par7, tipo);
+				break;
+			case "45":
+				fichero = ordenesConsulta.jasperProveedor(par6, par7, tipo);
+				break;
+			case "46":
+				fichero = ordenesConsulta.jasperEspecialista(par6, par7, tipo);
 				break;
 			default:
 				break;
