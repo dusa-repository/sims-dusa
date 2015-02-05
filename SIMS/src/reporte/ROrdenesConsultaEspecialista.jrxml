@@ -209,18 +209,11 @@
 				<text><![CDATA[Tipo Consulta]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="179" y="0" width="73" height="14" uuid="1c445b52-3b94-441a-b645-218da86209f3"/>
+				<reportElement x="179" y="0" width="389" height="14" uuid="1c445b52-3b94-441a-b645-218da86209f3"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ Paciente]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="252" y="0" width="244" height="14" uuid="6f4e6c49-ba6b-4028-96dc-ca3cfc2cdcaf"/>
-				<textElement textAlignment="Center">
-					<font size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Nombre]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

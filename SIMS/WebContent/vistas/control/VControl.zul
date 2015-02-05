@@ -95,11 +95,9 @@
 				<separator />
 				<hbox>
 					<div id="divCatalogoControlOrdenes"
-						tooltiptext="Solicitudes de Ordenes Registradas a la fecha, 
-									utilice el panel de la derecha para realizar alguna accion sobre estas" />
+						tooltiptext="Solicitudes de Ordenes Registradas a la fecha, utilice el panel de la derecha para realizar alguna accion sobre estas" />
 					<div id="divCatalogoControlConsultas"
-						tooltiptext="Solicitudes de Consultas Registradas a la fecha, 
-									utilice el panel de la derecha para realizar alguna accion sobre estas" />
+						tooltiptext="Solicitudes de Consultas Registradas a la fecha, utilice el panel de la derecha para realizar alguna accion sobre estas" />
 					<vbox>
 						<div align="center">
 							<separator height="80px" />

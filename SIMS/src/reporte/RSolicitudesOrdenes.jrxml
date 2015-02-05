@@ -23,21 +23,21 @@
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="306" y="12" width="203" height="20" uuid="a1c5a108-9d72-4ac4-8322-c6fc85c19a4b"/>
+				<reportElement x="277" y="22" width="203" height="20" uuid="a1c5a108-9d72-4ac4-8322-c6fc85c19a4b"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SOLICITUDES DE ORDENES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="306" y="42" width="65" height="20" uuid="38ab1e3b-434f-43dc-b1ab-894c066dc43e"/>
+				<reportElement x="547" y="42" width="65" height="20" uuid="38ab1e3b-434f-43dc-b1ab-894c066dc43e"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[A la Fecha:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="371" y="42" width="138" height="20" uuid="31ccc4ad-db6b-4660-9963-fd1361808e02"/>
+				<reportElement x="612" y="42" width="138" height="20" uuid="31ccc4ad-db6b-4660-9963-fd1361808e02"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -46,9 +46,9 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="32" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<rectangle>
-				<reportElement x="0" y="5" width="752" height="20" backcolor="#DBD7D7" uuid="c01eeb0b-5f3e-4966-b47e-daaad1364af2"/>
+				<reportElement x="0" y="5" width="752" height="17" backcolor="#DBD7D7" uuid="c01eeb0b-5f3e-4966-b47e-daaad1364af2"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
