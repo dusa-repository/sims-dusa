@@ -1,5 +1,6 @@
 package controlador.control;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -9,18 +10,30 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import modelo.control.ControlConsulta;
 import modelo.control.ControlOrden;
 import modelo.maestros.Cita;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;
+import modelo.transacciones.OrdenEspecialista;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Caption;
 import org.zkoss.zul.Combobox;
@@ -687,5 +700,142 @@ public class CControl extends CGenerico {
 		lblPreventiva.setVisible(true);
 		cmbTipoPreventiva.setValue("");
 
+	}
+
+	@Listen("onClick = #btnPdf, #btnExcel")
+	public void exportar(Event e) {
+		String fechaControl = formatoReporte.format(dtbFecha.getValue());
+		String idBoton = e.getTarget().getId();
+		if(idBoton.equals("btnExcel"))
+			idBoton = "EXCEL";
+		int valor = 0;
+		if (ordenConsulta) {
+			if (!controlesConsulta.isEmpty()) {
+				valor = 47;
+			} else
+				Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+
+		} else {
+			if (!controlesOrden.isEmpty()) {
+				valor = 48;
+			} else
+				Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+		}
+		if (valor != 0)
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor6="
+					+ fechaControl
+					+ "&valor="
+					+ valor
+					+ "&valor20="
+					+ idBoton
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+	}
+
+	public byte[] jasperConsulta(String par6, String tipo) {
+
+		byte[] fichero = null;
+		Date fecha1 = null;
+		try {
+			fecha1 = formatoReporte.parse(par6);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		List<ControlConsulta> especialistas = getServicioControlConsulta()
+				.buscarPorFecha(fecha1);
+
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("fecha", new Timestamp(fecha1.getTime()));
+
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RSolicitudesConsulta.jasper"));
+		} catch (JRException e) {
+			Mensaje.mensajeError("Recurso no Encontrado");
+		}
+		if (tipo.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(especialistas));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(especialistas));
+			} catch (JRException e) {
+				Mensaje.mensajeError("Error en Reporte");
+			}
+			return fichero;
+		}
+	}
+
+	public byte[] jasperOrden(String par6, String tipo) {
+
+		byte[] fichero = null;
+		Date fecha1 = null;
+		try {
+			fecha1 = formatoReporte.parse(par6);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		List<ControlOrden> especialistas = getServicioControlOrden()
+				.buscarPorFecha(fecha1);
+
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("fecha", new Timestamp(fecha1.getTime()));
+
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RSolicitudesOrdenes.jasper"));
+		} catch (JRException e) {
+			Mensaje.mensajeError("Recurso no Encontrado");
+		}
+
+		if (tipo.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(especialistas));
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(especialistas));
+			} catch (JRException e) {
+				Mensaje.mensajeError("Error en Reporte");
+			}
+			return fichero;
+		}
 	}
 }

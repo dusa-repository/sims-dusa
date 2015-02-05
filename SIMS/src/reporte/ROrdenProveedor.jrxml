@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ROrdenProveedor" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="a252ce70-5ec1-4739-abca-cead233dc32c">
 	<property name="ireport.zoom" value="0.9090909090909095"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="40"/>
+	<property name="ireport.y" value="48"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -35,10 +35,10 @@
 		<variable name="variable2" class="java.lang.Integer" resetType="Group" resetGroup="tipo" calculation="DistinctCount">
 			<variableExpression><![CDATA[$F{orden.idOrden}]]></variableExpression>
 		</variable>
-		<variable name="variable3" class="java.lang.Integer" resetType="Group" resetGroup="proveedor" calculation="DistinctCount">
+		<variable name="variable3" class="java.lang.Integer" resetType="Group" resetGroup="proveedor" incrementType="Group" incrementGroup="orden" calculation="Count">
 			<variableExpression><![CDATA[$F{orden.idOrden}]]></variableExpression>
 		</variable>
-		<variable name="variable4" class="java.lang.Integer" calculation="DistinctCount">
+		<variable name="variable4" class="java.lang.Integer" incrementType="Group" incrementGroup="orden" calculation="Count">
 			<variableExpression><![CDATA[$F{orden.idOrden}]]></variableExpression>
 		</variable>
 		<group name="proveedor">
@@ -72,10 +72,10 @@
 	<variable name="variable2" class="java.lang.Integer" resetType="Group" resetGroup="tipo" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{orden.idOrden}]]></variableExpression>
 	</variable>
-	<variable name="variable3" class="java.lang.Integer" resetType="Group" resetGroup="proveedor" incrementType="Group" incrementGroup="orden" calculation="DistinctCount">
+	<variable name="variable3" class="java.lang.Integer" resetType="Group" resetGroup="proveedor" incrementType="Group" incrementGroup="orden" calculation="Count">
 		<variableExpression><![CDATA[$F{orden.idOrden}]]></variableExpression>
 	</variable>
-	<variable name="variable4" class="java.lang.Integer" calculation="Count">
+	<variable name="variable4" class="java.lang.Integer" incrementType="Group" incrementGroup="orden" calculation="Count">
 		<variableExpression><![CDATA[$F{orden.idOrden}]]></variableExpression>
 	</variable>
 	<group name="proveedor">
