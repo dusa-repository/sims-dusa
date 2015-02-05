@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RCostoProveedor" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5395e779-b886-443c-953b-c4f983c0bb74">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RCostoProveedor" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="5395e779-b886-443c-953b-c4f983c0bb74">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="21"/>
+	<subDataset name="d" uuid="61989e1b-f00d-4d44-968d-241bdfecdec7">
+		<field name="proveedor.idProveedor" class="java.lang.Long"/>
+		<field name="resultado" class="java.lang.String"/>
+		<field name="consulta.idConsulta" class="java.lang.Long"/>
+		<field name="proveedor.nombre" class="java.lang.String"/>
+		<variable name="variable1" class="java.lang.Integer" resetType="Group" resetGroup="tipo" calculation="DistinctCount">
+			<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+		</variable>
+		<variable name="variable2" class="java.lang.Integer" resetType="Group" resetGroup="proveedor" incrementType="Group" incrementGroup="consulta" calculation="Count">
+			<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+		</variable>
+		<variable name="variable3" class="java.lang.Integer" incrementType="Group" incrementGroup="consulta" calculation="Count">
+			<variableExpression><![CDATA[$F{consulta.idConsulta}]]></variableExpression>
+		</variable>
+		<group name="proveedor">
+			<groupExpression><![CDATA[$F{proveedor.idProveedor}]]></groupExpression>
+		</group>
+		<group name="tipo">
+			<groupExpression><![CDATA[$F{resultado}]]></groupExpression>
+		</group>
+		<group name="consulta">
+			<groupExpression><![CDATA[$F{consulta.idConsulta}]]></groupExpression>
+		</group>
+	</subDataset>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
+	<parameter name="data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<field name="proveedor.idProveedor" class="java.lang.Long"/>
 	<field name="proveedor.nombre" class="java.lang.String"/>
 	<field name="consulta.idConsulta" class="java.lang.Long"/>
@@ -344,4 +369,221 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 			</textField>
 		</band>
 	</lastPageFooter>
+	<summary>
+		<band height="182">
+			<componentElement>
+				<reportElement key="table" x="1" y="35" width="569" height="147" uuid="77b66c0b-0ac1-4533-8710-48713203bd46"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="d" uuid="9e6dc9bc-c1e7-44b4-ac6e-e6d2337ee505">
+						<dataSourceExpression><![CDATA[$P{data}]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="462" uuid="3ce729b4-cd97-4629-b5ba-aa688244e826">
+						<jr:tableHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="462" height="30" backcolor="#CCCCCC" uuid="8bb94208-1462-4cf9-a9b3-441b80fc93bb"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="12" y="0" width="450" height="30" uuid="23bb83d4-b519-4712-98d2-d770a4c90b14"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PROVEEDOR]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="25" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.0"/>
+								<bottomPen lineWidth="0.0"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<staticText>
+								<reportElement x="292" y="0" width="170" height="25" uuid="cfa7b335-f9ea-41e5-994f-cd4edd1facde"/>
+								<box rightPadding="5">
+									<rightPen lineWidth="1.0"/>
+								</box>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Total Ordenes:]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:groupHeader groupName="proveedor">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<rectangle>
+									<reportElement x="0" y="0" width="462" height="30" backcolor="#F1EDED" uuid="4c8bb7e2-6b61-4200-be14-bae3e58f2d05"/>
+									<graphicElement>
+										<pen lineWidth="0.0"/>
+									</graphicElement>
+								</rectangle>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="54" y="0" width="408" height="30" uuid="01dd7317-3609-424e-b97e-17bcdc3f9a90"/>
+									<textElement verticalAlignment="Middle">
+										<font size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{proveedor.nombre}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="proveedor">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="219" y="0" width="243" height="30" uuid="36d1e9f4-b216-4680-af6c-cd8a876caa71"/>
+									<textElement verticalAlignment="Middle">
+										<font size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{proveedor.nombre}]]></textFieldExpression>
+								</textField>
+								<staticText>
+									<reportElement x="150" y="0" width="69" height="30" uuid="7b46690c-23e7-4427-9cc6-f7e99a1f676b"/>
+									<textElement verticalAlignment="Middle">
+										<font size="11" isBold="true"/>
+									</textElement>
+									<text><![CDATA[Total]]></text>
+								</staticText>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="tipo">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="84" y="0" width="378" height="30" uuid="67474057-e439-4a4c-b306-572d2e894de8"/>
+									<textElement verticalAlignment="Middle">
+										<font size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{resultado}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="0" rowSpan="1"/>
+					</jr:column>
+					<jr:column width="103" uuid="de0f708d-c476-4efa-8abb-b648d1c6d62c">
+						<jr:tableHeader height="30" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<rectangle>
+								<reportElement x="0" y="0" width="102" height="30" backcolor="#CCCCCC" uuid="060c5b1c-1f01-4b74-8a3d-5dc619db0e5b"/>
+								<graphicElement>
+									<pen lineWidth="0.0"/>
+								</graphicElement>
+							</rectangle>
+							<staticText>
+								<reportElement x="0" y="0" width="102" height="30" uuid="6c2f8631-d595-4851-aa9e-219672f930a2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ORDENES]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:tableFooter height="25" rowSpan="1">
+							<box>
+								<pen lineWidth="0.5"/>
+								<topPen lineWidth="0.5"/>
+								<leftPen lineWidth="0.5"/>
+								<bottomPen lineWidth="0.5"/>
+								<rightPen lineWidth="0.5"/>
+							</box>
+							<textField isStretchWithOverflow="true">
+								<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="103" height="25" uuid="5d29d1dd-cb6f-4763-a248-895615cd2718"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:groupHeader groupName="proveedor">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<rectangle>
+									<reportElement x="0" y="0" width="103" height="30" backcolor="#F1EDED" uuid="8240a1fd-3817-4818-a672-8c4dad333e3f"/>
+									<graphicElement>
+										<pen lineWidth="0.0"/>
+									</graphicElement>
+								</rectangle>
+							</jr:cell>
+						</jr:groupHeader>
+						<jr:groupFooter groupName="proveedor">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="103" height="30" uuid="e5c18209-26df-4869-969d-5f71530f13ba"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:groupFooter groupName="tipo">
+							<jr:cell height="30" rowSpan="1">
+								<box>
+									<pen lineWidth="0.5"/>
+									<topPen lineWidth="0.5"/>
+									<leftPen lineWidth="0.5"/>
+									<bottomPen lineWidth="0.5"/>
+									<rightPen lineWidth="0.5"/>
+								</box>
+								<textField isStretchWithOverflow="true">
+									<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="103" height="30" uuid="4cb1645d-4f08-45e0-a5be-3d5b4fa6349c"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="false"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+								</textField>
+							</jr:cell>
+						</jr:groupFooter>
+						<jr:detailCell height="0" rowSpan="1"/>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
 </jasperReport>

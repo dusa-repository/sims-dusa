@@ -150,7 +150,7 @@ public class COrdenProveedor extends CGenerico {
 									.buscarEntreFechas(desde, hasta);
 						}
 						if (examenes.isEmpty() && estudios.isEmpty())
-							msj.mensajeAlerta(Mensaje.noHayRegistros);
+							Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 						else
 							Clients.evalJavaScript("window.open('"
 									+ damePath()
@@ -188,7 +188,7 @@ public class COrdenProveedor extends CGenerico {
 									+ tipoReporte
 									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 						else
-							msj.mensajeAlerta(Mensaje.noHayRegistros);
+							Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 						break;
 					}
 				}
@@ -202,7 +202,7 @@ public class COrdenProveedor extends CGenerico {
 		};
 		Button guardar = (Button) botonera.getChildren().get(0);
 		guardar.setLabel("Reporte");
-		guardar.setSrc("/public/imagenes/botones/reporte.png");
+		guardar.setImage("/public/imagenes/botones/reporte.png");
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraOrdenProveedor.appendChild(botonera);
 	}
@@ -286,7 +286,7 @@ public class COrdenProveedor extends CGenerico {
 			}
 		}
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", par6);
 		p.put("hasta", par7);
 		JasperReport reporte = null;
@@ -294,7 +294,7 @@ public class COrdenProveedor extends CGenerico {
 			reporte = (JasperReport) JRLoader.loadObject(getClass()
 					.getResource("/reporte/RCostoProveedor.jasper"));
 		} catch (JRException e) {
-			msj.mensajeError("Recurso no Encontrado");
+			Mensaje.mensajeError("Recurso no Encontrado");
 		}
 
 		if (tipo2.equals("EXCEL")) {
@@ -323,7 +323,7 @@ public class COrdenProveedor extends CGenerico {
 				fichero = JasperRunManager.runReportToPdf(reporte, p,
 						new JRBeanCollectionDataSource(lista));
 			} catch (JRException e) {
-				msj.mensajeError("Error en Reporte");
+				Mensaje.mensajeError("Error en Reporte");
 			}
 			return fichero;
 		}
@@ -358,7 +358,7 @@ public class COrdenProveedor extends CGenerico {
 			especialistas = getServicioConsultaEspecialista()
 					.buscarEntreFechas(fecha1, fecha2);
 
-		Map p = new HashMap();
+		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", par6);
 		p.put("hasta", par7);
 		JasperReport reporte = null;
@@ -366,7 +366,7 @@ public class COrdenProveedor extends CGenerico {
 			reporte = (JasperReport) JRLoader.loadObject(getClass()
 					.getResource("/reporte/RCostoEspecialista.jasper"));
 		} catch (JRException e) {
-			msj.mensajeError("Recurso no Encontrado");
+			Mensaje.mensajeError("Recurso no Encontrado");
 		}
 
 		if (tipo2.equals("EXCEL")) {
@@ -395,7 +395,7 @@ public class COrdenProveedor extends CGenerico {
 				fichero = JasperRunManager.runReportToPdf(reporte, p,
 						new JRBeanCollectionDataSource(especialistas));
 			} catch (JRException e) {
-				msj.mensajeError("Error en Reporte");
+				Mensaje.mensajeError("Error en Reporte");
 			}
 			return fichero;
 		}
@@ -404,7 +404,7 @@ public class COrdenProveedor extends CGenerico {
 	protected boolean validar() {
 		if ((tipo == 1 && idProveedor == null)
 				|| (tipo == 2 && idEspecialista == null)) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
 			return true;
