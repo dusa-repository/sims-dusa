@@ -35,7 +35,7 @@ public class SOrdenMedicina {
 	public List<OrdenMedicina> buscarOrdenesEntreFechas(Date desde, Date hasta) {
 		List<String> ordenar = new ArrayList<String>();
 		ordenar.add("ordenPacienteCedula");
-		ordenar.add("fechaOrden");
+		ordenar.add("ordenFechaOrden");
 		ordenar.add("medicinaNombre");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return ordenMedicinaDAO.findByOrdenFechaOrdenBetween(desde, hasta, o);

@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import modelo.transacciones.ConsultaDiagnostico;
 import net.sf.jasperreports.engine.JRException;
+import controlador.control.CControl;
 import controlador.sha.CInforme;
 import controlador.transacciones.CConsulta;
 import controlador.transacciones.COrden;
@@ -43,6 +44,7 @@ public class Reportero extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		CControl control = new CControl();
 		CConsulta consulta = new CConsulta();
 		CMorbilidad morbilidad = new CMorbilidad();
 		CReposo reposo = new CReposo();
@@ -251,6 +253,12 @@ public class Reportero extends HttpServlet {
 				break;
 			case "46":
 				fichero = ordenesConsulta.jasperEspecialista(par6, par7, tipo);
+				break;
+			case "47":
+				fichero = control.jasperConsulta(par6, tipo);
+				break;
+			case "48":
+				fichero = control.jasperOrden(par6, tipo);
 				break;
 			default:
 				break;

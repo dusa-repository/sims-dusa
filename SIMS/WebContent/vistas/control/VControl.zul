@@ -117,6 +117,14 @@
 							<button class="btn" width="150px" label="Eliminar Orden"
 								id="btnEliminar" image="/public/imagenes/botones/eliminar.png"
 								tooltiptext="Seleccione uno o varios registros para eliminadar las solicitudes de ordenes" />
+							<separator />
+							<button class="btn" width="150px" label="Exportar PDF"
+								id="btnPdf" image="/public/imagenes/botones/pdf.png"
+								tooltiptext="Presione para exportar todas las solicitudes a un archivo PDF" />
+							<separator />
+							<button class="btn" width="150px" label="Exportar Excel"
+								id="btnExcel" image="/public/imagenes/botones/excel.png"
+								tooltiptext="Presione para exportar todas las solicitudes a un archivo EXCEL" />
 						</div>
 					</vbox>
 				</hbox>
