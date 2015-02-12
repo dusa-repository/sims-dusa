@@ -142,4 +142,9 @@ public class SInforme {
 		return informeDAO.findByCodigoNotNull();
 	}
 
+	public List<Informe> filtroFecha(String valor) {
+		return informeDAO
+				.findByFaStartingWithAllIgnoreCase(valor);
+	}
+
 }

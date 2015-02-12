@@ -1668,6 +1668,8 @@ public class CConsulta extends CGenerico {
 	private void reportarSha(ConsultaDiagnostico consultaDiagnostico) {
 		Informe informe = new Informe();
 		informe.setIdInforme(0);
+//		if(consultaDiagnostico.getConsulta()!=null)
+//		informe.setCodigo(String.valueOf(consultaDiagnostico.getConsulta().getIdConsulta()));
 		informe.setPacienteA(consultaDiagnostico.getConsulta().getPaciente());
 		if (consultaDiagnostico.getConsulta().getPaciente().getEmpresa() != null)
 			informe.setEmpresaA(consultaDiagnostico.getConsulta().getPaciente()
