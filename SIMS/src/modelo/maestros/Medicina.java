@@ -312,22 +312,15 @@ public class Medicina implements Serializable {
 		return applicationContext.getBean(SF4101.class);
 	}
 
-	public long inventario() {
+	public Double inventario() {
 		Long valor = idReferencia;
 		F4101 objeto = getServicioF4101().buscarPorReferencia(valor);
 		if (objeto != null) {
-			F41021PK claveSaldo = new F41021PK();
-			claveSaldo.setLilocn("LOC001");
-			claveSaldo.setLiitm(objeto.getImitm());
-			claveSaldo.setLilotn("");
-			claveSaldo.setLimcu("Planta");
-			F41021 f41021 = getServicioF41021().buscar(claveSaldo);
-			if (f41021 != null)
-				return f41021.getLipqoh().longValue();
-			else
-				return 0;
+			Double cantidad = getServicioF41021().sumar(objeto.getImitm(),
+					"Planta");
+			return cantidad;
 		} else
-			return 0;
+			return (double) 0;
 	}
 
 	public Set<PacienteMedicina> getPacientesMedicinas() {

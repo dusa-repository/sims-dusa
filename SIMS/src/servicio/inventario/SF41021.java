@@ -23,4 +23,9 @@ public class SF41021 {
 	public void guardar(F41021 f41021) {
 		iF41021DAO.saveAndFlush(f41021);
 	}
+	
+	@Transactional("segundo")
+	public Double sumar(Double imitm, String string) {
+		return iF41021DAO.sumByItemAndMcu(imitm, string);
+	}
 }
