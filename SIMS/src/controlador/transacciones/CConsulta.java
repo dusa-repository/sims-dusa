@@ -740,6 +740,10 @@ public class CConsulta extends CGenerico {
 	@Wire
 	private Row rowReposo;
 	@Wire
+	private Row rowPostVacacional;
+	@Wire
+	private Datebox dtbFechaPostVacacional;
+	@Wire
 	private Row rowValido;
 	@Wire
 	private Label lblCargo1;
@@ -1097,6 +1101,9 @@ public class CConsulta extends CGenerico {
 							doctorGuardar, especialista, tipoReposo,
 							reposoEmbarazo, fechaReposo,
 							frecuenciaRespiratoria, ritmicaRespiratoria, orden);
+					Timestamp  fechaPost = new Timestamp(dtbFechaPostVacacional.getValue()
+							.getTime());
+					consulta.setFechaPostVacacional(fechaPost);
 					servicioConsulta.guardar(consulta);
 					Consulta consultaDatos = new Consulta();
 					if (idConsulta != 0)
@@ -2661,6 +2668,15 @@ public class CConsulta extends CGenerico {
 			lblPreventivaArea.setVisible(true);
 		if (consulta.getTipoConsultaSecundaria().equals("Pre-Empleo"))
 			row.setVisible(true);
+		
+		if(consulta.getTipoConsultaSecundaria().equals("Pre-Vacacional"))
+		{
+			rowPostVacacional.setVisible(true);
+			dtbFechaPostVacacional.setValue(consulta.getFechaPostVacacional());
+		}
+		else
+			rowPostVacacional.setVisible(false);
+		
 		txtMotivo.setValue(consulta.getMotivoConsulta());
 		txtEnfermedad.setValue(consulta.getEnfermedadActual());
 		spnReposo.setValue(consulta.getDiasReposo());
@@ -3863,6 +3879,7 @@ public class CConsulta extends CGenerico {
 	}
 
 	public void limpiarCampos() {
+		rowPostVacacional.setVisible(false);
 		if (!botonera.getChildren().get(0).isVisible()) {
 			botonera.getChildren().get(0).setVisible(true);
 		}
@@ -4465,6 +4482,10 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onSelect = #cmbTipoPreventiva")
 	public void buscarExamenesPreempleo() {
+		if(cmbTipoPreventiva.getValue().equals("Pre-Vacacional"))
+			rowPostVacacional.setVisible(true);
+		else
+			rowPostVacacional.setVisible(false);
 		if (cmbTipoPreventiva.getValue().equals("Por Area"))
 			lblPreventivaArea.setVisible(true);
 		else

@@ -353,6 +353,20 @@
 										tooltiptext="Generar el reporte de la informacion preempleo del paciente"
 										vflex="1" hflex="1" />
 								</row>
+								<row id="rowPostVacacional" visible="false">
+									<hbox />
+									<hbox />
+									<hbox />
+									<hbox />
+									<hbox>
+										<label class="etiqueta" value="Fecha de Consulta Post-Vacacional:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+										<datebox readonly="true" width="100%" id="dtbFechaPostVacacional"
+										onCreate="self.value = new Date()" cols="8" />
+									<hbox />
+								</row>
 								<row id="rowPromocion" visible="false">
 									<hbox>
 										<label class="etiqueta" value="Cargo Pretendido:" />
@@ -404,8 +418,7 @@
 								</row>
 								<row id="rowAsociadaOrden" visible="false">
 									<hbox>
-										<label class="etiqueta" id="lblOrden"
-											value="Orden Asociada al Control:" />
+										<label class="etiqueta" id="lblOrden" value="Orden Asociada al Control:" />
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
@@ -413,13 +426,12 @@
 										id="btnOrdenAsociada" image="/public/imagenes/botones/buscar.png"
 										tooltiptext="Seleccione la order asociada a la consulta de control que esta realizando"
 										vflex="1" hflex="1" />
-									<label class="etiqueta" id="lblMotivoOrden"
-										value="Motivo de la Orden:" />
+									<label class="etiqueta" id="lblMotivoOrden" value="Motivo de la Orden:" />
 									<cell colspan="2">
 										<label id="lblMotivoOrden2" value="" />
 									</cell>
-									<hbox/>
-									<hbox/>
+									<hbox />
+									<hbox />
 								</row>
 								<row id="rowEspecialista" visible="false">
 									<hbox>

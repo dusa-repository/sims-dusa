@@ -260,6 +260,22 @@ public class Reportero extends HttpServlet {
 			case "48":
 				fichero = control.jasperOrden(par6, tipo);
 				break;
+			case "49":
+				fichero = ordenProveedor.reporteProveedorOrden(par6, par7, part2,
+						tipo);
+				break;
+			case "50":
+				fichero = ordenProveedor.reporteEspecialistaOrden(par6, par7, par8,
+						tipo);
+				break;
+			case "51":
+				fichero = gasto.reporteGastoPorFamiliarOrden(par6, par7, par8, par9,
+						tipo);
+				break;
+			case "52":
+				fichero = gasto.reporteGastoPorTrabajadorOrden(par6, par7, par9,
+						tipo);
+				break;
 			default:
 				break;
 			}

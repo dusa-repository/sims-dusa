@@ -7,63 +7,63 @@
 	<parameter name="hasta" class="java.lang.String"/>
 	<field name="paciente.cedulaFamiliar" class="java.lang.String"/>
 	<field name="paciente.cedula" class="java.lang.String"/>
-	<field name="fechaConsulta" class="java.sql.Timestamp"/>
-	<field name="tipoConsultaSecundaria" class="java.lang.String"/>
+	<field name="fechaOrden" class="java.sql.Timestamp"/>
+	<field name="motivo.descripcion" class="java.lang.String"/>
 	<field name="paciente.primerNombre" class="java.lang.String"/>
 	<field name="paciente.primerApellido" class="java.lang.String"/>
 	<field name="paciente.sexo" class="java.lang.String"/>
 	<field name="paciente.parentescoFamiliar" class="java.lang.String"/>
-	<field name="estatura" class="java.lang.Double"/>
-	<field name="peso" class="java.lang.Double"/>
-	<field name="perimetroForzada" class="java.lang.Double"/>
-	<field name="perimetroOmbligo" class="java.lang.Double"/>
-	<field name="perimetroPlena" class="java.lang.Double"/>
+	<field name="costoA" class="java.lang.Double"/>
+	<field name="costoB" class="java.lang.Double"/>
+	<field name="costoC" class="java.lang.Double"/>
+	<field name="costoD" class="java.lang.Double"/>
+	<field name="costoE" class="java.lang.Double"/>
 	<field name="paciente.edad" class="java.lang.Integer"/>
 	<field name="paciente.direccion" class="java.lang.String"/>
 	<variable name="medicina_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
-		<variableExpression><![CDATA[$F{estatura}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoA}]]></variableExpression>
 	</variable>
 	<variable name="medicina_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
-		<variableExpression><![CDATA[$F{estatura}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoA}]]></variableExpression>
 	</variable>
 	<variable name="medicina_total" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{estatura}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoA}]]></variableExpression>
 	</variable>
 	<variable name="examen_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
-		<variableExpression><![CDATA[$F{peso}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoB}]]></variableExpression>
 	</variable>
 	<variable name="examen_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
-		<variableExpression><![CDATA[$F{peso}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoB}]]></variableExpression>
 	</variable>
 	<variable name="examen_total" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{peso}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoB}]]></variableExpression>
 	</variable>
 	<variable name="esp_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
-		<variableExpression><![CDATA[$F{perimetroForzada}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoC}]]></variableExpression>
 	</variable>
 	<variable name="esp_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
-		<variableExpression><![CDATA[$F{perimetroForzada}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoC}]]></variableExpression>
 	</variable>
 	<variable name="esp_total" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{perimetroForzada}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoC}]]></variableExpression>
 	</variable>
 	<variable name="est_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
-		<variableExpression><![CDATA[$F{perimetroOmbligo}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoD}]]></variableExpression>
 	</variable>
 	<variable name="est_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
-		<variableExpression><![CDATA[$F{perimetroOmbligo}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoD}]]></variableExpression>
 	</variable>
 	<variable name="est_total" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{perimetroOmbligo}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoD}]]></variableExpression>
 	</variable>
 	<variable name="total_familiar" class="java.lang.Double" resetType="Group" resetGroup="familiar" calculation="Sum">
-		<variableExpression><![CDATA[$F{perimetroPlena}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoE}]]></variableExpression>
 	</variable>
 	<variable name="total_trabajador" class="java.lang.Double" resetType="Group" resetGroup="trabajador" calculation="Sum">
-		<variableExpression><![CDATA[$F{perimetroPlena}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoE}]]></variableExpression>
 	</variable>
 	<variable name="total_total" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{perimetroPlena}]]></variableExpression>
+		<variableExpression><![CDATA[$F{costoE}]]></variableExpression>
 	</variable>
 	<group name="trabajador">
 		<groupExpression><![CDATA[$F{paciente.cedulaFamiliar}]]></groupExpression>
@@ -262,12 +262,12 @@
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="179" y="24" width="226" height="38" uuid="f63cc7fb-10e8-412f-8719-16b6fbd63039"/>
+				<reportElement x="176" y="25" width="233" height="38" uuid="f63cc7fb-10e8-412f-8719-16b6fbd63039"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[GASTOS POR FAMILIARES
-(Generadas desde Consulta)]]></text>
+(Generadas desde Ordenes)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="298" y="73" width="42" height="20" uuid="3bf42f72-db45-46a7-b9e3-59e19bf1faa9"/>
@@ -317,7 +317,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Fecha Consulta]]></text>
+				<text><![CDATA[Fecha Orden]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="96" y="0" width="89" height="40" uuid="9f578b86-6d6e-417d-a015-cbf567ff6a28"/>
@@ -329,7 +329,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tipo Consulta]]></text>
+				<text><![CDATA[Motivo]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="185" y="20" width="68" height="20" uuid="f5656e6b-2456-4812-abb5-67aca8a06ecd"/>
@@ -411,38 +411,38 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="96" height="20" uuid="718348a1-524c-4dae-8afd-80f4d08b4c1f"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaConsulta})+" "+
-new SimpleDateFormat("h:m a").format($F{fechaConsulta})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaOrden})+" "+
+new SimpleDateFormat("h:m a").format($F{fechaOrden})]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="96" y="0" width="89" height="20" uuid="14b6f4b1-c490-4fc5-b84d-c9868230f158"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{tipoConsultaSecundaria}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{motivo.descripcion}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="185" y="0" width="68" height="20" uuid="70f4adff-6cdc-4d4f-a0ca-2051e590b17e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{estatura}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{costoA}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="253" y="0" width="73" height="20" uuid="418dab5f-9bd5-4771-800b-156b3c611411"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{peso}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{costoB}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="326" y="0" width="85" height="20" uuid="772a1c92-ef34-4a18-9454-34ad0420710d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{perimetroForzada}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{costoC}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="411" y="0" width="74" height="20" uuid="29c54b76-183e-4ee8-a498-fe2f5f2c8c77"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{perimetroOmbligo}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{costoD}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="485" y="0" width="87" height="20" uuid="e772e284-4d5c-487e-b628-ee4b40c66112"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{perimetroPlena}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{costoE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
