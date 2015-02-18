@@ -68,6 +68,16 @@ public class Orden implements Serializable {
 
 	@OneToMany(mappedBy = "orden")
 	private Set<OrdenServicioExterno> servicios;	
+	@Column
+	private Double costoA;
+	@Column
+	private Double costoB;
+	@Column
+	private Double costoC;
+	@Column
+	private Double costoD;
+	@Column
+	private Double costoE;
 
 	public Orden() {
 		super();
@@ -197,6 +207,47 @@ public class Orden implements Serializable {
 		DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 		return String.valueOf(formatoFecha.format(fechaOrden));
 	}
+
+	public Double getCostoA() {
+		return costoA;
+	}
+
+	public void setCostoA(Double costoA) {
+		this.costoA = costoA;
+	}
+
+	public Double getCostoB() {
+		return costoB;
+	}
+
+	public void setCostoB(Double costoB) {
+		this.costoB = costoB;
+	}
+
+	public Double getCostoC() {
+		return costoC;
+	}
+
+	public void setCostoC(Double costoC) {
+		this.costoC = costoC;
+	}
+
+	public Double getCostoD() {
+		return costoD;
+	}
+
+	public void setCostoD(Double costoD) {
+		this.costoD = costoD;
+	}
+
+	public Double getCostoE() {
+		return costoE;
+	}
+
+	public void setCostoE(Double costoE) {
+		this.costoE = costoE;
+	}
+	
 
 	
 }

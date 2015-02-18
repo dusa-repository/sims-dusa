@@ -1,14 +1,18 @@
 package servicio.transacciones;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import interfacedao.transacciones.IOrdenDAO;
 import modelo.maestros.Cita;
 import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
+import modelo.transacciones.Consulta;
 import modelo.transacciones.Orden;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service("SOrden")
@@ -58,5 +62,71 @@ public class SOrden {
 		return ordenDAO
 				.findByPacienteAndMotivoDescripcionStartingWithAllIgnoreCase(
 						paciente, valor);
+	}
+
+	public List<Orden> buscarEntreFechasFamiliaresTodosTrabajadores(
+			Date desde, Date hasta) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedulaFamiliar");
+		ordenar.add("pacienteCedula");
+		ordenar.add("pacienteParentescoFamiliar");
+		ordenar.add("fechaOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenDAO.findByFechaOrdenBetweenAndPacienteTrabajador(
+				desde, hasta, false, o);
+	}
+
+	public List<Orden> buscarEntreFechasFamiliaresYUnTrabajador(Date desde,
+			Date hasta, String paciente) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedula");
+		ordenar.add("pacienteParentescoFamiliar");
+		ordenar.add("fechaOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenDAO
+				.findByFechaOrdenBetweenAndPacienteTrabajadorAndPacienteCedulaFamiliar(
+						desde, hasta, false, paciente, o);
+	}
+
+	public List<Orden> buscarEntreFechasFamiliaresTodosTrabajadoresUnParentesco(
+			Date desde, Date hasta, String parentesco) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedulaFamiliar");
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenDAO
+				.findByFechaOrdenBetweenAndPacienteTrabajadorAndPacienteParentescoFamiliar(
+						desde, hasta, false, parentesco, o);
+	}
+
+	public List<Orden> buscarEntreFechasFamiliaresUnTrabajadorYunParentesco(
+			Date desde, Date hasta, String paciente, String parentesco) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenDAO
+				.findByFechaOrdenBetweenAndPacienteTrabajadorAndPacienteParentescoFamiliarAndPacienteCedulaFamiliar(
+						desde, hasta, false, parentesco, paciente, o);
+	}
+
+	public List<Orden> buscarEntreFechasTrabajadores(Date desde, Date hasta) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteCedula");
+		ordenar.add("fechaOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenDAO.findByFechaOrdenBetweenAndPacienteTrabajador(
+				desde, hasta, true, o);
+	}
+
+	public List<Orden> buscarEntreFechasUnTrabajador(Date desde, Date hasta,
+			String paciente) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("fechaOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenDAO
+				.findByFechaOrdenBetweenAndPacienteTrabajadorAndPacienteCedula(
+						desde, hasta, true, paciente, o);
 	}
 }

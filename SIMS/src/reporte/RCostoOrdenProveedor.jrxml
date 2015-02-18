@@ -7,15 +7,15 @@
 	<parameter name="hasta" class="java.lang.String"/>
 	<field name="proveedor.idProveedor" class="java.lang.Long"/>
 	<field name="proveedor.nombre" class="java.lang.String"/>
-	<field name="consulta.idConsulta" class="java.lang.Long"/>
-	<field name="consulta.fechaConsulta" class="java.sql.Timestamp"/>
-	<field name="consulta.tipoConsultaSecundaria" class="java.lang.String"/>
-	<field name="consulta.paciente.cedula" class="java.lang.String"/>
-	<field name="consulta.paciente.primerNombre" class="java.lang.String"/>
-	<field name="consulta.paciente.primerApellido" class="java.lang.String"/>
+	<field name="orden.idOrden" class="java.lang.Long"/>
+	<field name="orden.fechaOrden" class="java.sql.Timestamp"/>
+	<field name="orden.motivo.descripcion" class="java.lang.String"/>
+	<field name="orden.paciente.cedula" class="java.lang.String"/>
+	<field name="orden.paciente.primerNombre" class="java.lang.String"/>
+	<field name="orden.paciente.primerApellido" class="java.lang.String"/>
 	<field name="costo" class="java.lang.Double"/>
 	<field name="examen.nombre" class="java.lang.String"/>
-	<field name="resultado" class="java.lang.String"/>
+	<field name="prioridad" class="java.lang.String"/>
 	<variable name="total_consulta" class="java.lang.Double" resetType="Group" resetGroup="consulta" calculation="Sum">
 		<variableExpression><![CDATA[$F{costo}]]></variableExpression>
 	</variable>
@@ -29,10 +29,10 @@
 		<variableExpression><![CDATA[$F{costo}]]></variableExpression>
 	</variable>
 	<variable name="variable1" class="java.lang.Integer" resetType="Group" resetGroup="proveedor" calculation="Count">
-		<variableExpression><![CDATA[$F{consulta.paciente.cedula}]]></variableExpression>
+		<variableExpression><![CDATA[$F{orden.paciente.cedula}]]></variableExpression>
 	</variable>
 	<variable name="variable2" class="java.lang.Integer" calculation="Count">
-		<variableExpression><![CDATA[$F{consulta.paciente.cedula}]]></variableExpression>
+		<variableExpression><![CDATA[$F{orden.paciente.cedula}]]></variableExpression>
 	</variable>
 	<group name="proveedor">
 		<groupExpression><![CDATA[$F{proveedor.idProveedor}]]></groupExpression>
@@ -90,7 +90,7 @@
 		</groupFooter>
 	</group>
 	<group name="tipo">
-		<groupExpression><![CDATA[$F{resultado}]]></groupExpression>
+		<groupExpression><![CDATA[$F{prioridad}]]></groupExpression>
 		<groupHeader>
 			<band height="18">
 				<textField>
@@ -98,7 +98,7 @@
 					<textElement textAlignment="Center">
 						<font size="11" isBold="true" isUnderline="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{resultado}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{prioridad}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -116,7 +116,7 @@
 					<textElement>
 						<font size="11" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{resultado}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{prioridad}]]></textFieldExpression>
 				</textField>
 				<textField pattern="###0.00;-###0.00">
 					<reportElement x="487" y="2" width="76" height="18" uuid="58571ce6-5c39-4e9a-b223-38d5743930ed"/>
@@ -132,7 +132,7 @@
 		</groupFooter>
 	</group>
 	<group name="consulta">
-		<groupExpression><![CDATA[$F{consulta.idConsulta}]]></groupExpression>
+		<groupExpression><![CDATA[$F{orden.idOrden}]]></groupExpression>
 		<groupHeader>
 			<band height="19">
 				<rectangle>
@@ -149,8 +149,8 @@
 					<textElement verticalAlignment="Middle">
 						<font size="11" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{consulta.fechaConsulta})+" "+
-new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{orden.fechaOrden})+" "+
+new SimpleDateFormat("h:m a").format($F{orden.fechaOrden})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="178" y="2" width="80" height="17" uuid="bd7b2820-a273-4108-8b27-d0e2d8342965"/>
@@ -160,7 +160,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="11" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{consulta.tipoConsultaSecundaria}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{orden.motivo.descripcion}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
 					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="258" y="2" width="318" height="17" uuid="8feab1f6-2e46-46e0-a983-4bcc695a2322"/>
@@ -170,7 +170,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 					<textElement verticalAlignment="Middle">
 						<font size="11" isBold="false"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{consulta.paciente.cedula}+" "+$F{consulta.paciente.primerNombre}+" "+$F{consulta.paciente.primerApellido}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{orden.paciente.cedula}+" "+$F{orden.paciente.primerNombre}+" "+$F{orden.paciente.primerApellido}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="14" y="2" width="53" height="17" uuid="b96e9006-fc97-4b9d-bc6a-2197e897941d"/>
@@ -180,7 +180,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 					<textElement verticalAlignment="Middle">
 						<font size="11" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Consulta:]]></text>
+					<text><![CDATA[Orden:]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="2" y="2" width="12" height="17" uuid="faec1fb1-e36e-4595-9ded-22ece082cc51"/>
@@ -201,7 +201,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 					<textElement textAlignment="Right">
 						<font size="11" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Total Consulta:]]></text>
+					<text><![CDATA[Total Orden:]]></text>
 				</staticText>
 				<textField pattern="###0.00;-###0.00">
 					<reportElement x="487" y="1" width="76" height="18" uuid="561e992b-6535-41f5-8c65-7ba4a692b0b4"/>
@@ -226,12 +226,12 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="153" y="23" width="280" height="43" uuid="de6e73c5-bcd1-46ee-80bc-f62c2700a9e6"/>
+				<reportElement x="159" y="24" width="228" height="43" uuid="de6e73c5-bcd1-46ee-80bc-f62c2700a9e6"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ORDENES POR PROVEEDOR
-(Generadas desde Consultas)]]></text>
+(Generadas desde Ordenes)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="326" y="70" width="44" height="20" uuid="6268f65f-3f70-4cf7-84be-d9bdb79fb69c"/>

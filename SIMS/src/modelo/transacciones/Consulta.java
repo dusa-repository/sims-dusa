@@ -51,6 +51,9 @@ public class Consulta implements Serializable {
 
 	@Column(name = "fecha_consulta")
 	private Timestamp fechaConsulta;
+	
+	@Column(name = "fecha_post_vacacional")
+	private Timestamp fechaPostVacacional;
 
 	@Column(length = 500)
 	private String motivoConsulta;
@@ -815,6 +818,14 @@ public class Consulta implements Serializable {
 
 	public void setOrden(Orden orden) {
 		this.orden = orden;
+	}
+
+	public Timestamp getFechaPostVacacional() {
+		return fechaPostVacacional;
+	}
+
+	public void setFechaPostVacacional(Timestamp fechaPostVacacional) {
+		this.fechaPostVacacional = fechaPostVacacional;
 	}
 
 }

@@ -15,6 +15,7 @@ import modelo.maestros.Paciente;
 import modelo.sha.Area;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
+import modelo.transacciones.Orden;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -89,6 +90,14 @@ public class CGasto extends CGenerico {
 			cmbParentescoFamiliar.setVisible(false);
 			tipo = 2;
 			break;
+		case "Gastos de Ordenes por Familiares":
+			tipo = 3;
+			break;
+		case "Gastos de Ordenes por Trabajador":
+			boxParentesco.setVisible(false);
+			cmbParentescoFamiliar.setVisible(false);
+			tipo = 4;
+			break;
 		}
 		Botonera botonera = new Botonera() {
 
@@ -116,6 +125,7 @@ public class CGasto extends CGenerico {
 					String parentesco = cmbParentescoFamiliar.getValue();
 					String tipoReporte = cmbTipo.getValue();
 					List<Consulta> consultas = new ArrayList<Consulta>();
+					List<Orden> ordenes = new ArrayList<Orden>();
 					switch (tipo) {
 					// Reporte 1
 
@@ -172,6 +182,68 @@ public class CGasto extends CGenerico {
 							Clients.evalJavaScript("window.open('"
 									+ damePath()
 									+ "Reportero?valor=29&valor6="
+									+ fecha1
+									+ "&valor7="
+									+ fecha2
+									+ "&valor9="
+									+ paciente
+									+ "&valor20="
+									+ tipoReporte
+									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+						else
+							Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+						break;
+					case 3:
+						if (parentesco.equals("TODOS")) {
+							if (paciente.equals("TODOS"))
+								ordenes = servicioOrden
+										.buscarEntreFechasFamiliaresTodosTrabajadores(
+												desde, hasta);
+							else
+								ordenes = servicioOrden
+										.buscarEntreFechasFamiliaresYUnTrabajador(
+												desde, hasta, paciente);
+						} else {
+							if (paciente.equals("TODOS"))
+								ordenes = servicioOrden
+										.buscarEntreFechasFamiliaresTodosTrabajadoresUnParentesco(
+												desde, hasta, parentesco);
+							else
+								ordenes = servicioOrden
+										.buscarEntreFechasFamiliaresUnTrabajadorYunParentesco(
+												desde, hasta, paciente,
+												parentesco);
+						}
+						if (!ordenes.isEmpty())
+							Clients.evalJavaScript("window.open('"
+									+ damePath()
+									+ "Reportero?valor=51&valor6="
+									+ fecha1
+									+ "&valor7="
+									+ fecha2
+									+ "&valor8="
+									+ parentesco
+									+ "&valor9="
+									+ paciente
+									+ "&valor20="
+									+ tipoReporte
+									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+						else
+							Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+						break;
+						
+					case 4:
+						if (paciente.equals("TODOS"))
+							ordenes = servicioOrden
+									.buscarEntreFechasTrabajadores(desde, hasta);
+						else
+							ordenes = servicioOrden
+									.buscarEntreFechasUnTrabajador(desde,
+											hasta, paciente);
+						if (!ordenes.isEmpty())
+							Clients.evalJavaScript("window.open('"
+									+ damePath()
+									+ "Reportero?valor=52&valor6="
 									+ fecha1
 									+ "&valor7="
 									+ fecha2
@@ -503,5 +575,242 @@ public class CGasto extends CGenerico {
 			return fichero;
 		}
 	}
+	
+	public byte[] reporteGastoPorFamiliarOrden(String par6, String par7,
+			String par8, String par9, String tipo2) {
+		msj = new Mensaje();
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(par6);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(par7);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		List<Orden> ordenes = new ArrayList<Orden>();
+		if (par8.equals("TODOS")) {
+			if (par9.equals("TODOS"))
+				ordenes = getServicioOrden()
+						.buscarEntreFechasFamiliaresTodosTrabajadores(fecha1,
+								fecha2);
+			else
+				ordenes = getServicioOrden()
+						.buscarEntreFechasFamiliaresYUnTrabajador(fecha1,
+								fecha2, par9);
+		} else {
+			if (par9.equals("TODOS"))
+				ordenes = getServicioOrden()
+						.buscarEntreFechasFamiliaresTodosTrabajadoresUnParentesco(
+								fecha1, fecha2, par8);
+			else
+				ordenes = getServicioOrden()
+						.buscarEntreFechasFamiliaresUnTrabajadorYunParentesco(
+								fecha1, fecha2, par9, par8);
+		}
+		List<Orden> ordenesFinales = new ArrayList<Orden>();
+		for (int i = 0; i < ordenes.size(); i++) {
+			Paciente trabajador = getServicioPaciente().buscarPorCedula(
+					ordenes.get(i).getPaciente().getCedulaFamiliar());
+			if (trabajador != null) {
+				ordenes
+						.get(i)
+						.getPaciente()
+						.setCedulaFamiliar(
+								trabajador.getCedula() + " "
+										+ trabajador.getPrimerNombre() + " "
+										+ trabajador.getPrimerApellido());
+				ordenes
+				.get(i)
+				.getPaciente().setDireccion(trabajador.getPrimerNombre() + " "
+										+ trabajador.getPrimerApellido());
+				double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
+				// Suma lo que ha entregado
+				costoMedicinas = getServicioF4111().sumarPorOrden(
+						ordenes.get(i).getIdOrden());
+				costoExamenes = getServicioOrdenExamen().sumPorOrden(
+						ordenes.get(i));
+				costoEspecialistas = getServicioOrdenEspecialista()
+						.sumPorOrden(ordenes.get(i));
+				costoEstudios = getServicioOrdenServicioExterno()
+						.sumPorOrden(ordenes.get(i));
+				costoConsultas = (costoMedicinas * -1) + costoExamenes
+						+ costoEspecialistas + costoEstudios;
+
+				ordenes.get(i).setCostoA(costoMedicinas * -1);
+				ordenes.get(i).setCostoB(costoExamenes);
+				ordenes.get(i).setCostoC(costoEspecialistas);
+				ordenes.get(i).setCostoD(costoEstudios);
+				ordenes.get(i).setCostoE(costoConsultas);
+				
+				ordenes
+						.get(i)
+						.getPaciente()
+						.setEdad(
+								calcularEdad(ordenes.get(i).getPaciente()
+										.getFechaNacimiento()));
+				ordenesFinales.add(ordenes.get(i));
+				ordenes.get(i).getPaciente()
+						.setCedulaFamiliar(trabajador.getCedula());
+			} else {
+				ordenes.remove(i);
+				i--;
+			}
+		}
+		Map p = new HashMap();
+		p.put("desde", par6);
+		p.put("hasta", par7);
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RGastosFamiliarOrden.jasper"));
+		} catch (JRException e) {
+			msj = new Mensaje();
+			Mensaje.mensajeError("Recurso no Encontrado");
+		}
+		if (tipo2.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(ordenesFinales));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(ordenesFinales));
+			} catch (JRException e) {
+				Mensaje.mensajeError("Error en Reporte");
+			}
+			return fichero;
+		}
+	}
+	
+	public byte[] reporteGastoPorTrabajadorOrden(String par6, String par7,
+			String par9, String tipo2) {
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(par6);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(par7);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		List<Orden> ordenes = new ArrayList<Orden>();
+		if (par9.equals("TODOS"))
+			ordenes = getServicioOrden().buscarEntreFechasTrabajadores(
+					fecha1, fecha2);
+		else
+			ordenes = getServicioOrden().buscarEntreFechasUnTrabajador(
+					fecha1, fecha2, par9);
+		List<Orden> ordenesFinales = new ArrayList<Orden>();
+		for (int i = 0; i < ordenes.size(); i++) {
+			Orden orden = ordenes.get(i);
+			Paciente trabajador = orden.getPaciente();
+			ordenes
+					.get(i)
+					.getPaciente()
+					.setCedulaFamiliar(
+							trabajador.getCedula() + " "
+									+ trabajador.getPrimerNombre() + " "
+									+ trabajador.getPrimerApellido());
+			double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
+			// Suma lo que ha entregado
+			costoMedicinas = getServicioF4111().sumarPorOrden(
+					orden.getIdOrden());
+			costoExamenes = getServicioOrdenExamen()
+					.sumPorOrden(orden);
+			costoEspecialistas = getServicioOrdenEspecialista()
+					.sumPorOrden(orden);
+			costoEstudios = getServicioOrdenServicioExterno()
+					.sumPorOrden(orden);
+			costoConsultas = (costoMedicinas * -1) + costoExamenes
+					+ costoEspecialistas + costoEstudios;
+			ordenes.get(i).setCostoA(costoMedicinas * -1);
+			ordenes.get(i).setCostoB(costoExamenes);
+			ordenes.get(i).setCostoC(costoEspecialistas);
+			ordenes.get(i).setCostoD(costoEstudios);
+			ordenes.get(i).setCostoE(costoConsultas);
+			ordenes
+					.get(i)
+					.getPaciente()
+					.setEdad(
+							calcularEdad(ordenes.get(i).getPaciente()
+									.getFechaNacimiento()));
+			ordenesFinales.add(ordenes.get(i));
+		}
+		Map p = new HashMap();
+		p.put("desde", par6);
+		p.put("hasta", par7);
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RGastosTrabajadorOrden.jasper"));
+		} catch (JRException e) {
+			Mensaje.mensajeError("Recurso no Encontrado");
+		}
+		if (tipo2.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(ordenesFinales));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(ordenesFinales));
+			} catch (JRException e) {
+				Mensaje.mensajeError("Error en Reporte");
+			}
+			return fichero;
+		}
+	}
+	
 
 }

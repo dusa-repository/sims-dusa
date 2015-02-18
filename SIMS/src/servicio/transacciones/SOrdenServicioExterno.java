@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import interfacedao.transacciones.IOrdenServicioExternoDAO;
+import modelo.maestros.Proveedor;
 import modelo.transacciones.ConsultaServicioExterno;
 import modelo.transacciones.Orden;
 import modelo.transacciones.OrdenServicioExterno;
@@ -44,5 +45,21 @@ public class SOrdenServicioExterno {
 		ordenar.add("ordenFechaOrden");
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return ordenServicioDAO.findByOrdenFechaOrdenBetween(desde, hasta, o);
+	}
+
+	public List<OrdenServicioExterno> buscarPorProveedorEntreFechas(Date desde,
+			Date hasta, Proveedor proveedor) {
+
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("proveedorIdProveedor");
+		ordenar.add("OrdenFechaOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenServicioDAO
+				.findByProveedorAndOrdenFechaOrdenBetween(proveedor,
+						desde, hasta, o);
+	}
+
+	public double sumPorOrden(Orden orden) {
+		return ordenServicioDAO.sumByOrden(orden);
 	}
 }

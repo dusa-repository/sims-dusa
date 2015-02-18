@@ -19,6 +19,9 @@ import modelo.seguridad.Usuario;
 import modelo.transacciones.ConsultaEspecialista;
 import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaServicioExterno;
+import modelo.transacciones.OrdenEspecialista;
+import modelo.transacciones.OrdenExamen;
+import modelo.transacciones.OrdenServicioExterno;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -100,6 +103,14 @@ public class COrdenProveedor extends CGenerico {
 			rowEspecialista.setVisible(true);
 			tipo = 2;
 			break;
+		case "Gastos por Ordenes a Proveedor":
+			rowProveedor.setVisible(true);
+			tipo = 3;
+			break;
+		case "Gastos por Ordenes a Especialista":
+			rowEspecialista.setVisible(true);
+			tipo = 4;
+			break;
 		}
 
 		Botonera botonera = new Botonera() {
@@ -132,6 +143,9 @@ public class COrdenProveedor extends CGenerico {
 					List<ConsultaEspecialista> especialistas = new ArrayList<ConsultaEspecialista>();
 					List<ConsultaExamen> examenes = new ArrayList<ConsultaExamen>();
 					List<ConsultaServicioExterno> estudios = new ArrayList<ConsultaServicioExterno>();
+					List<OrdenExamen> examenesOrden = new ArrayList<OrdenExamen>();
+					List<OrdenServicioExterno> estudiosOrden = new ArrayList<OrdenServicioExterno>();
+					List<OrdenEspecialista> especialistasOrden = new ArrayList<OrdenEspecialista>();
 					switch (tipo) {
 					case 1:
 						Proveedor proveedor = servicioProveedor
@@ -179,6 +193,62 @@ public class COrdenProveedor extends CGenerico {
 							Clients.evalJavaScript("window.open('"
 									+ damePath()
 									+ "Reportero?valor=32&valor6="
+									+ fecha1
+									+ "&valor7="
+									+ fecha2
+									+ "&valor8="
+									+ idEspecialista
+									+ "&valor20="
+									+ tipoReporte
+									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+						else
+							Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+						break;
+					case 3:
+						Proveedor proveedor2 = servicioProveedor
+								.buscar(idProveedor);
+						if (idProveedor != 0) {
+							examenesOrden = servicioOrdenExamen
+									.buscarPorProveedorEntreFechas(desde,
+											hasta, proveedor2);
+							estudiosOrden = servicioOrdenServicio
+									.buscarPorProveedorEntreFechas(desde,
+											hasta, proveedor2);
+						} else {
+							examenesOrden = servicioOrdenExamen
+									.buscarEntreFechas(desde, hasta);
+							estudiosOrden = servicioOrdenServicio
+									.buscarEntreFechas(desde, hasta);
+						}
+						if (examenesOrden.isEmpty() && estudiosOrden.isEmpty())
+							Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
+						else
+							Clients.evalJavaScript("window.open('"
+									+ damePath()
+									+ "Reportero?valor=49&valor6="
+									+ fecha1
+									+ "&valor7="
+									+ fecha2
+									+ "&valor2="
+									+ idProveedor
+									+ "&valor20="
+									+ tipoReporte
+									+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+						break;
+					case 4:
+						Especialista especialista2 = servicioEspecialista
+								.buscar(idEspecialista);
+						if (!idEspecialista.equals("0"))
+							especialistasOrden = servicioOrdenEspecialista
+									.buscarPorEspecialistaEntreFechas(desde,
+											hasta, especialista2);
+						else
+							especialistasOrden = servicioOrdenEspecialista
+									.buscarEntreFechas(desde, hasta);
+						if (!especialistasOrden.isEmpty())
+							Clients.evalJavaScript("window.open('"
+									+ damePath()
+									+ "Reportero?valor=50&valor6="
 									+ fecha1
 									+ "&valor7="
 									+ fecha2
@@ -400,7 +470,204 @@ public class COrdenProveedor extends CGenerico {
 			return fichero;
 		}
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public byte[] reporteProveedorOrden(String par6, String par7, Long part2,
+			String tipo2) {
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(par6);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(par7);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<OrdenExamen> examenesOrden = new ArrayList<OrdenExamen>();
+		List<OrdenServicioExterno> estudiosOrden = new ArrayList<OrdenServicioExterno>();
+		List<OrdenExamen> listaOrden = new ArrayList<OrdenExamen>();
+		Proveedor proveedor = getServicioProveedor().buscar(part2);
+		if (part2 != 0) {
+			examenesOrden = getServicioOrdenExamen()
+					.buscarPorProveedorEntreFechas(fecha1, fecha2, proveedor);
+			estudiosOrden = getServicioOrdenServicioExterno()
+					.buscarPorProveedorEntreFechas(fecha1, fecha2, proveedor);
+		} else {
+			examenesOrden = getServicioOrdenExamen().buscarEntreFechas(fecha1,
+					fecha2);
+			estudiosOrden = getServicioOrdenServicioExterno().buscarEntreFechas(
+					fecha1, fecha2);
+		}
+		if (!examenesOrden.isEmpty()) {
+			listaOrden.addAll(examenesOrden);
+			for (int j = 0; j < listaOrden.size(); j++) {
+				listaOrden.get(j).setPrioridad("EXAMENES");
+			}
+			for (int i = 0; i < estudiosOrden.size(); i++) {
+				OrdenExamen ordenExamen = new OrdenExamen();
+				ordenExamen.setOrden(estudiosOrden.get(i).getOrden());
+				ordenExamen.setProveedor(estudiosOrden.get(i).getProveedor());
+				ordenExamen.setCosto(estudiosOrden.get(i).getCosto());
+				Examen examen = new Examen();
+				examen.setNombre(estudiosOrden.get(i).getServicioExterno()
+						.getNombre());
+				ordenExamen.setExamen(examen);
+				ordenExamen.setPrioridad("ESTUDIOS");
+				long id = ordenExamen.getProveedor().getIdProveedor();
+				boolean entro = false;
+				for (int j = 0; j < listaOrden.size(); j++) {
+					long id2 = listaOrden.get(j).getProveedor().getIdProveedor();
+					if (id == id2) {
+						entro = true;
+						listaOrden.add(j, ordenExamen);
+						j = listaOrden.size();
+					}
+				}
+				if (!entro) {
+					OrdenExamen removida = listaOrden.set(listaOrden.size() - 1,
+							ordenExamen);
+					listaOrden.add(listaOrden.size() - 1, removida);
+				}
+			}
+		} else {
+			for (int i = 0; i < estudiosOrden.size(); i++) {
+				OrdenExamen consultaExamen = new OrdenExamen();
+				consultaExamen.setOrden(estudiosOrden.get(i).getOrden());
+				consultaExamen.setProveedor(estudiosOrden.get(i).getProveedor());
+				consultaExamen.setCosto(estudiosOrden.get(i).getCosto());
+				Examen examen = new Examen();
+				examen.setNombre(estudiosOrden.get(i).getServicioExterno()
+						.getNombre());
+				consultaExamen.setExamen(examen);
+				consultaExamen.setPrioridad("ESTUDIOS");
+				listaOrden.add(consultaExamen);
+			}
+		}
 
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("desde", par6);
+		p.put("hasta", par7);
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RCostoOrdenProveedor.jasper"));
+		} catch (JRException e) {
+			Mensaje.mensajeError("Recurso no Encontrado");
+		}
+
+		if (tipo2.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(examenesOrden));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(listaOrden));
+			} catch (JRException e) {
+				Mensaje.mensajeError("Error en Reporte");
+			}
+			return fichero;
+		}
+	}
+
+	public byte[] reporteEspecialistaOrden(String par6, String par7, String par8,
+			String tipo2) {
+		byte[] fichero = null;
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+		Date fecha1 = null;
+		try {
+			fecha1 = formato.parse(par6);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Date fecha2 = null;
+		try {
+			fecha2 = formato.parse(par7);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		List<OrdenEspecialista> especialistas = new ArrayList<OrdenEspecialista>();
+		Especialista especialista = getServicioEspecialista().buscar(par8);
+		if (!par8.equals("0"))
+			especialistas = getServicioOrdenEspecialista()
+					.buscarPorEspecialistaEntreFechas(fecha1, fecha2,
+							especialista);
+		else
+			especialistas = getServicioOrdenEspecialista()
+					.buscarEntreFechas(fecha1, fecha2);
+
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("desde", par6);
+		p.put("hasta", par7);
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RCostoOrdenEspecialista.jasper"));
+		} catch (JRException e) {
+			Mensaje.mensajeError("Recurso no Encontrado");
+		}
+
+		if (tipo2.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(especialistas));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			try {
+				fichero = JasperRunManager.runReportToPdf(reporte, p,
+						new JRBeanCollectionDataSource(especialistas));
+			} catch (JRException e) {
+				Mensaje.mensajeError("Error en Reporte");
+			}
+			return fichero;
+		}
+	}
+	
+	
 	protected boolean validar() {
 		if ((tipo == 1 && idProveedor == null)
 				|| (tipo == 2 && idEspecialista == null)) {

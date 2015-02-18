@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import interfacedao.transacciones.IOrdenExamenDAO;
+import modelo.maestros.Proveedor;
+import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.Orden;
 import modelo.transacciones.OrdenExamen;
 
@@ -43,5 +45,21 @@ public class SOrdenExamen {
 		Sort o = new Sort(Sort.Direction.ASC, ordenar);
 		return ordenExamenDAO.findByOrdenFechaOrdenBetween(desde, hasta, o);
 	}
+
+	public List<OrdenExamen> buscarPorProveedorEntreFechas(Date desde,
+			Date hasta, Proveedor proveedor) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("proveedorIdProveedor");
+		ordenar.add("odenFechaOrden");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenExamenDAO
+				.findByProveedorAndOrdenFechaOrdenBetween(proveedor,
+						desde, hasta, o);
+	}
+
+	public double sumPorOrden(Orden orden) {
+		return ordenExamenDAO.sumByOrden(orden);
+	}
+
 
 }
