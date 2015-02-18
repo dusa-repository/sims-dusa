@@ -567,42 +567,37 @@ public class CControl extends CGenerico {
 								}
 							});
 				}
-			} else {
-				if (validarSeleccionOrden(catalogoControlOrden)) {
-					List<ControlOrden> lista = catalogoControlOrden
-							.obtenerSeleccionados();
-					final List<ControlOrden> seleccionados = cambiarEstadoOrden(
-							lista, estado, fechaFinal, horaFinal);
-					if (!seleccionados.isEmpty()) {
-						Messagebox
-								.show("¿Desea Entregar las "
-										+ seleccionados.size() + " Ordenes?",
-										"Alerta",
-										Messagebox.OK | Messagebox.CANCEL,
-										Messagebox.QUESTION,
-										new org.zkoss.zk.ui.event.EventListener<Event>() {
-											public void onEvent(Event evt)
-													throws InterruptedException {
-												if (evt.getName()
-														.equals("onOK")) {
-													if (!eliminar)
-														servicioControlOrden
-																.guardarVarios(seleccionados);
-													else
-														servicioControlOrden
-																.eliminarVarios(seleccionados);
-													controlesOrden = servicioControlOrden
-															.buscarPorFecha(dtbFecha
-																	.getValue());
-													catalogoControlOrden
-															.actualizarLista(
-																	controlesOrden,
-																	true);
-													Mensaje.mensajeInformacion("Operacion Realizada con Exito");
-												}
-											}
-										});
-					}
+			}
+		} else {
+			if (validarSeleccionOrden(catalogoControlOrden)) {
+				List<ControlOrden> lista = catalogoControlOrden
+						.obtenerSeleccionados();
+				final List<ControlOrden> seleccionados = cambiarEstadoOrden(
+						lista, estado, fechaFinal, horaFinal);
+				if (!seleccionados.isEmpty()) {
+					Messagebox.show(
+							"¿Desea Entregar las " + seleccionados.size()
+									+ " Ordenes?", "Alerta", Messagebox.OK
+									| Messagebox.CANCEL, Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+										if (!eliminar)
+											servicioControlOrden
+													.guardarVarios(seleccionados);
+										else
+											servicioControlOrden
+													.eliminarVarios(seleccionados);
+										controlesOrden = servicioControlOrden
+												.buscarPorFecha(dtbFecha
+														.getValue());
+										catalogoControlOrden.actualizarLista(
+												controlesOrden, true);
+										Mensaje.mensajeInformacion("Operacion Realizada con Exito");
+									}
+								}
+							});
 				}
 			}
 		}
@@ -706,7 +701,7 @@ public class CControl extends CGenerico {
 	public void exportar(Event e) {
 		String fechaControl = formatoReporte.format(dtbFecha.getValue());
 		String idBoton = e.getTarget().getId();
-		if(idBoton.equals("btnExcel"))
+		if (idBoton.equals("btnExcel"))
 			idBoton = "EXCEL";
 		int valor = 0;
 		if (ordenConsulta) {
