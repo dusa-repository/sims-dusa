@@ -4824,16 +4824,6 @@ public class CInforme extends CGenerico {
 		for (int i = 0; i < ltbPlan.getItemCount(); i++) {
 			Listitem listItem = ltbPlan.getItemAtIndex(i);
 			PlanAccion planItem = listItem.getValue();
-			// String fechaString = ((Listcell)
-			// ((listItem.getChildren().get(2)))
-			// .getFirstChild()).getLabel();
-			// Date fechaPrevia = null;
-			// try {
-			// fechaPrevia = formatoFecha.parse(fechaString);
-			// } catch (ParseException e) {
-			// e.printStackTrace();
-			// }
-			// Timestamp fechaPlan = new Timestamp(fechaPrevia.getTime());
 
 			PlanAccion planAccion = new PlanAccion(0, informe,
 					planItem.getDescripcion(), planItem.getQuien(),

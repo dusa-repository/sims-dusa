@@ -189,41 +189,11 @@ public class CGrupo extends CGenerico {
 	}
 
 	private Nodos getFooRoot() {
-
 		Nodos root = new Nodos(null, 0, "");
-
-//		Authentication auth = SecurityContextHolder.getContext()
-//				.getAuthentication();
-//		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(
-//				auth.getAuthorities());
-//
-//		ArrayList<Arbol> arbole = new ArrayList<Arbol>();
-//		List<Arbol> arboles = new ArrayList<Arbol>();
-//		ArrayList<Long> ids = new ArrayList<Long>();
-//		for (int k = 0; k < authorities.size(); k++) {
-//
-//			Arbol arbol;
-//			String nombre = authorities.get(k).toString();
-//			if (Validador.validarNumero(nombre)) {
-//				arbol = servicioArbol.buscar(Long.parseLong(nombre));
-//				if (arbol != null)
-//					ids.add(arbol.getIdArbol());
-//				arbole.add(arbol);
-//			}
-//		}
-//
-//		Collections.sort(ids);
-//		for (int t = 0; t < ids.size(); t++) {
-//			Arbol a;
-//			a = servicioArbol.buscarPorId(ids.get(t));
-//			arboles.add(a);
-//		}
 		List<Arbol> arboles = servicioArbol.listarArbol();
-
 		List<Long> idsPadre = new ArrayList<Long>();
 		List<Nodos> nodos = new ArrayList<Nodos>();
 		return crearArbol(root, nodos, arboles, 0, idsPadre);
-
 	}
 
 	private Nodos crearArbol(Nodos roote, List<Nodos> nodos,
