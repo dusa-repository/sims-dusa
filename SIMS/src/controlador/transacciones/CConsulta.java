@@ -40,6 +40,7 @@ import modelo.maestros.Vacuna;
 import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
+import modelo.sha.GrupoInspectores;
 import modelo.sha.Informe;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaDiagnostico;
@@ -1101,8 +1102,8 @@ public class CConsulta extends CGenerico {
 							doctorGuardar, especialista, tipoReposo,
 							reposoEmbarazo, fechaReposo,
 							frecuenciaRespiratoria, ritmicaRespiratoria, orden);
-					Timestamp  fechaPost = new Timestamp(dtbFechaPostVacacional.getValue()
-							.getTime());
+					Timestamp fechaPost = new Timestamp(dtbFechaPostVacacional
+							.getValue().getTime());
 					consulta.setFechaPostVacacional(fechaPost);
 					servicioConsulta.guardar(consulta);
 					Consulta consultaDatos = new Consulta();
@@ -1675,8 +1676,8 @@ public class CConsulta extends CGenerico {
 	private void reportarSha(ConsultaDiagnostico consultaDiagnostico) {
 		Informe informe = new Informe();
 		informe.setIdInforme(0);
-//		if(consultaDiagnostico.getConsulta()!=null)
-//		informe.setCodigo(String.valueOf(consultaDiagnostico.getConsulta().getIdConsulta()));
+		// if(consultaDiagnostico.getConsulta()!=null)
+		// informe.setCodigo(String.valueOf(consultaDiagnostico.getConsulta().getIdConsulta()));
 		informe.setPacienteA(consultaDiagnostico.getConsulta().getPaciente());
 		if (consultaDiagnostico.getConsulta().getPaciente().getEmpresa() != null)
 			informe.setEmpresaA(consultaDiagnostico.getConsulta().getPaciente()
@@ -1702,6 +1703,14 @@ public class CConsulta extends CGenerico {
 		informe.setFgj(reposo);
 		informe.setFgad(consultaDiagnostico.getMotivo());
 		servicioInforme.guardar(informe);
+
+		String correo = "";
+		GrupoInspectores g = servicioGrupoInspectores.buscar(1);
+		if (g != null) {
+			correo = g.getGrupo();
+			enviarEmailNotificacion(correo,
+					"Se ha reportado un Nuevo Accidente en el Sistema Medico Integral y de Seguridad");
+		}
 	}
 
 	public void guardarMedicinas(Consulta consultaDatos) {
@@ -2668,15 +2677,16 @@ public class CConsulta extends CGenerico {
 			lblPreventivaArea.setVisible(true);
 		if (consulta.getTipoConsultaSecundaria().equals("Pre-Empleo"))
 			row.setVisible(true);
-		
-		if(consulta.getTipoConsultaSecundaria().equals("Pre-Vacacional"))
-		{
+
+		if (consulta.getTipoConsultaSecundaria().equals("Pre-Vacacional")
+				&& consulta.getFechaPostVacacional() != null) {
 			rowPostVacacional.setVisible(true);
-			dtbFechaPostVacacional.setValue(consulta.getFechaPostVacacional());
-		}
-		else
+			if (consulta.getFechaPostVacacional() != null)
+				dtbFechaPostVacacional.setValue(consulta
+						.getFechaPostVacacional());
+		} else
 			rowPostVacacional.setVisible(false);
-		
+
 		txtMotivo.setValue(consulta.getMotivoConsulta());
 		txtEnfermedad.setValue(consulta.getEnfermedadActual());
 		spnReposo.setValue(consulta.getDiasReposo());
@@ -4482,7 +4492,7 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onSelect = #cmbTipoPreventiva")
 	public void buscarExamenesPreempleo() {
-		if(cmbTipoPreventiva.getValue().equals("Pre-Vacacional"))
+		if (cmbTipoPreventiva.getValue().equals("Pre-Vacacional"))
 			rowPostVacacional.setVisible(true);
 		else
 			rowPostVacacional.setVisible(false);
@@ -5819,7 +5829,7 @@ public class CConsulta extends CGenerico {
 			p.put("impresion", "si");
 		else
 			p.put("impresion", "no");
-		
+
 		p.put("mostrar", "no");
 
 		String ced = "";
@@ -6027,7 +6037,7 @@ public class CConsulta extends CGenerico {
 			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
 			rifEmpresa = paciente.getEmpresa().getRif();
 		}
-		
+
 		p.put("mostrar", "no");
 		p.put("cedula", paciente.getCedula());
 		p.put("empresaNombre", nombreEmpresa);

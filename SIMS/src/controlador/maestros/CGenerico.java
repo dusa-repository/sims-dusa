@@ -92,6 +92,8 @@ import servicio.seguridad.SUsuario;
 import servicio.sha.SArea;
 import servicio.sha.SClasificacionAccidente;
 import servicio.sha.SCondicion;
+import servicio.sha.SGrupoInspectores;
+import servicio.sha.SHorasHombre;
 import servicio.sha.SInforme;
 import servicio.sha.SPlanAccion;
 import servicio.transacciones.SCita;
@@ -119,6 +121,8 @@ import componentes.Mensaje;
 public abstract class CGenerico extends SelectorComposer<Component> {
 
 	private static final long serialVersionUID = -2264423023637489596L;
+	@WireVariable("SHorasHombre")
+	protected SHorasHombre servicioHorasHombre;
 	@WireVariable("SF00021")
 	protected SF00021 servicioF00021;
 	@WireVariable("SF4101")
@@ -261,6 +265,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SClasificacionAccidente servicioClasificacionAccidente;
 	@WireVariable("SNomina")
 	protected SNomina servicioNomina;
+	@WireVariable("SGrupoInspectores")
+	protected SGrupoInspectores servicioGrupoInspectores;
 	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 			"/META-INF/ConfiguracionAplicacion.xml");
 	public Mensaje msj = new Mensaje();
@@ -268,6 +274,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public Include contenido;
 	public Tab tab;
 	protected DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+	protected DateFormat formatoHorasHombre = new SimpleDateFormat("MM/yyyy");
 	protected DateFormat formatoReporte = new SimpleDateFormat("dd-MM-yyyy");
 	public List<Tab> tabs = new ArrayList<Tab>();
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");

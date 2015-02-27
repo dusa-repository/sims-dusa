@@ -1,0 +1,40 @@
+<zk>
+	<div id="divHorasHombre" apply="controlador.sha.CHorasHombre">
+		<groupbox width="60%" mold="3d" title="Horas Hombre">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Horas Hombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<doublespinner id="dbsHoras" value="0"
+							constraint="min 0 max 100000000" tooltiptext="Ingrese la Cantidad de Horas Hombre"
+							step="0.1" format="#.##" width="98%" />
+						<button autodisable="self" id="btnBuscarHorasHombre" class="btn"
+							label="Buscar" tooltiptext="Catalogo de Horas Hombre" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Mes/Año:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<datebox id="dtbFecha" format="MM/yyyy" tooltiptext="Seleccione el Mes y Año"
+							onCreate="self.value = new Date()" />
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraHorasHombre" />
+			<div id="catalogoHorasHombre" />
+		</groupbox>
+	</div>
+</zk>

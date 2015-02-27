@@ -1,0 +1,29 @@
+<zk>
+	<script src="/public/progress.js" />
+	<div id="divGrupoInspectores" apply="controlador.sha.CGrupoInspectores">
+		<groupbox width="50%" mold="3d" title="Grupo Inspectores">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="40%" />
+					<column label="" width="40%" />
+					<column label="" width="20%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Grupo de Inspectores:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox  id="txtGrupo" hflex="1"
+							maxlength="100" tooltiptext="Ingrese el Grupo de los Inspectores (xxxxx@googlegroups.com)"
+							 />
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraGrupoInspectores" />
+		</groupbox>
+	</div>
+</zk>
