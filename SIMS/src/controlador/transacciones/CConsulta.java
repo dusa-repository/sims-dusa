@@ -6624,6 +6624,7 @@ public class CConsulta extends CGenerico {
 				f4211.setSddoc(idC.doubleValue());
 				f4211.setSddrqj(transformarGregorianoAJulia(dtbFechaConsulta
 						.getValue()));
+				System.out.println(f4211.getSddrqj()+"fecha");
 				f4211.setSditm(f4101.getImitm());
 				f4211.setSduncs(costoIndividual);
 				f4211.setSdemcu("Planta");

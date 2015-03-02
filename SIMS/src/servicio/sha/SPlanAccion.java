@@ -66,4 +66,8 @@ public class SPlanAccion {
 	public List<PlanAccion> buscarPorInforme(Informe informe) {
 		return planDAO.findByInforme(informe);
 	}
+
+	public void eliminarVarios(List<PlanAccion> planesAccion) {
+		planDAO.delete(planesAccion);
+	}
 }
