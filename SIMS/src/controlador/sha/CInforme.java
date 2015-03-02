@@ -4819,7 +4819,10 @@ public class CInforme extends CGenerico {
 	}
 
 	protected void guardarPlanes(Informe informe) {
-		List<PlanAccion> planesAccion = new ArrayList<PlanAccion>();
+		List<PlanAccion> planesAccion = servicioPlanAccion.buscarPorInforme(informe);
+		if(!planesAccion.isEmpty())
+			servicioPlanAccion.eliminarVarios(planesAccion);
+		planesAccion = new ArrayList<PlanAccion>();
 		ltbPlan.renderAll();
 		for (int i = 0; i < ltbPlan.getItemCount(); i++) {
 			Listitem listItem = ltbPlan.getItemAtIndex(i);
