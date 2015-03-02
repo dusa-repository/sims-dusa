@@ -1332,9 +1332,9 @@ public class CInforme extends CGenerico {
 						informe.setIaf(false);
 					if (rdo9171.isChecked())
 						informe.setIag(false);
-					else 
+					else
 						informe.setIag(true);
-					
+
 					informe.setIaga(txt917.getValue());
 					if (rdo9181.isChecked())
 						informe.setIah(true);
@@ -1381,7 +1381,7 @@ public class CInforme extends CGenerico {
 						informe.setIbaa(true);
 					else {
 						informe.setIbaa(false);
-						
+
 					}
 					informe.setIbab(txt9212.getValue());
 					informe.setIbac(txt9213.getValue());
@@ -2012,7 +2012,7 @@ public class CInforme extends CGenerico {
 
 		final List<Informe> informes = servicioInforme.buscarTodos();
 		catalogoI = new Catalogo<Informe>(catalogoInforme,
-				"Catalogo de Informes", informes, false, "Fecha","Codigo",
+				"Catalogo de Informes", informes, false, "Fecha", "Codigo",
 				"Nombre Trabajador", "Apellido Trabajador", "Empresa") {
 
 			@Override
@@ -2060,6 +2060,7 @@ public class CInforme extends CGenerico {
 	@Listen("onSeleccion = #catalogoInforme")
 	public void seleccion() {
 		Informe informe = catalogoI.objetoSeleccionadoDelCatalogo();
+		ltbPlan.getItems().clear();
 		planes = servicioPlanAccion.buscarPorInforme(informe);
 		if (!planes.isEmpty()) {
 			ltbPlan.setModel(new ListModelList<PlanAccion>(planes));
@@ -2470,10 +2471,10 @@ public class CInforme extends CGenerico {
 		}
 		txt836.setValue(informe.getHcfa());
 		if (informe.getHcg() != null)
-		if (informe.getHcg())
-			rdo8371.setChecked(true);
-		else
-			rdo8372.setChecked(true);
+			if (informe.getHcg())
+				rdo8371.setChecked(true);
+			else
+				rdo8372.setChecked(true);
 
 		if (informe.getHch() != null && informe.getHch().equals("Escritas"))
 			rdo8381.setChecked(true);
@@ -2615,10 +2616,10 @@ public class CInforme extends CGenerico {
 				rdo831752.setChecked(true);
 
 		if (informe.getHcagf() != null)
-		if (informe.getHcagf())
-			rdo831762.setChecked(true);
-		else
-			rdo831761.setChecked(true);
+			if (informe.getHcagf())
+				rdo831762.setChecked(true);
+			else
+				rdo831761.setChecked(true);
 		txt83176.setValue(informe.getHcagfa());
 		if (informe.getHcagg() != null)
 			if (informe.getHcagg())
@@ -2699,7 +2700,7 @@ public class CInforme extends CGenerico {
 		if (informe.getIag() != null)
 			if (informe.getIag()) {
 				rdo9172.setChecked(true);
-			
+
 			} else
 				rdo9171.setChecked(true);
 		txt917.setValue(informe.getIaga());
@@ -2919,16 +2920,16 @@ public class CInforme extends CGenerico {
 		// Setear Condiciones
 		List<Condicion> condicionesA = servicioCondicion.buscarPorInformeYTipo(
 				informe, "Instalaciones");
-		List<Condicion> condicionesB = servicioCondicion.buscarPorInformeBYTipo(
-				informe, "Equipos");
-		List<Condicion> condicionesC = servicioCondicion.buscarPorInformeCYTipo(
-				informe, "Materiales");
-		List<Condicion> condicionesD = servicioCondicion.buscarPorInformeDYTipo(
-				informe, "Ambiente");
-		List<Condicion> condicionesE = servicioCondicion.buscarPorInformeEYTipo(
-				informe, "Organizacion");
-		List<Condicion> condicionesF = servicioCondicion.buscarPorInformeFYTipo(
-				informe, "Disergonomicos");
+		List<Condicion> condicionesB = servicioCondicion
+				.buscarPorInformeBYTipo(informe, "Equipos");
+		List<Condicion> condicionesC = servicioCondicion
+				.buscarPorInformeCYTipo(informe, "Materiales");
+		List<Condicion> condicionesD = servicioCondicion
+				.buscarPorInformeDYTipo(informe, "Ambiente");
+		List<Condicion> condicionesE = servicioCondicion
+				.buscarPorInformeEYTipo(informe, "Organizacion");
+		List<Condicion> condicionesF = servicioCondicion
+				.buscarPorInformeFYTipo(informe, "Disergonomicos");
 
 		if (!condicionesA.isEmpty()) {
 			for (int i = 0; i < condicionesA.size(); i++) {
@@ -3957,77 +3958,74 @@ public class CInforme extends CGenerico {
 		p.put("fgd", informe.getFgd());
 		p.put("fge", informe.getFge());
 		p.put("fgf", informe.getFgf());
-		if(informe.getFgf()!=null)
-		{
-		if (informe.getFgf().equals("Leve")) {
-			p.put("fgf1", "x");
-			p.put("fgf2", "");
-			p.put("fgf3", "");
-			p.put("fgf4", "");
-			p.put("fgf5", "");
-		}
-		if (informe.getFgf().equals("Moderado")) {
-			p.put("fgf1", "");
-			p.put("fgf2", "x");
-			p.put("fgf3", "");
-			p.put("fgf4", "");
-			p.put("fgf5", "");
-		}
-		if (informe.getFgf().equals("Grave")) {
-			p.put("fgf1", "");
-			p.put("fgf2", "");
-			p.put("fgf3", "x");
-			p.put("fgf4", "");
-			p.put("fgf5", "");
-		}
-		if (informe.getFgf().equals("Muy Grave")) {
-			p.put("fgf1", "");
-			p.put("fgf2", "");
-			p.put("fgf3", "");
-			p.put("fgf4", "x");
-			p.put("fgf5", "");
-		}
-		if (informe.getFgf().equals("Mortal")) {
-			p.put("fgf1", "");
-			p.put("fgf2", "");
-			p.put("fgf3", "");
-			p.put("fgf4", "");
-			p.put("fgf5", "x");
-		}
-		if (!informe.getFgf().equals("Mortal")
-				&& !informe.getFgf().equals("Muy Grave")
-				&& !informe.getFgf().equals("Grave")
-				&& !informe.getFgf().equals("Moderado")
-				&& !informe.getFgf().equals("Leve")) {
-			p.put("fgf1", "");
-			p.put("fgf2", "");
-			p.put("fgf3", "");
-			p.put("fgf4", "");
-			p.put("fgf5", "");
-		}
-		}else
-		{
+		if (informe.getFgf() != null) {
+			if (informe.getFgf().equals("Leve")) {
+				p.put("fgf1", "x");
+				p.put("fgf2", "");
+				p.put("fgf3", "");
+				p.put("fgf4", "");
+				p.put("fgf5", "");
+			}
+			if (informe.getFgf().equals("Moderado")) {
+				p.put("fgf1", "");
+				p.put("fgf2", "x");
+				p.put("fgf3", "");
+				p.put("fgf4", "");
+				p.put("fgf5", "");
+			}
+			if (informe.getFgf().equals("Grave")) {
+				p.put("fgf1", "");
+				p.put("fgf2", "");
+				p.put("fgf3", "x");
+				p.put("fgf4", "");
+				p.put("fgf5", "");
+			}
+			if (informe.getFgf().equals("Muy Grave")) {
+				p.put("fgf1", "");
+				p.put("fgf2", "");
+				p.put("fgf3", "");
+				p.put("fgf4", "x");
+				p.put("fgf5", "");
+			}
+			if (informe.getFgf().equals("Mortal")) {
+				p.put("fgf1", "");
+				p.put("fgf2", "");
+				p.put("fgf3", "");
+				p.put("fgf4", "");
+				p.put("fgf5", "x");
+			}
+			if (!informe.getFgf().equals("Mortal")
+					&& !informe.getFgf().equals("Muy Grave")
+					&& !informe.getFgf().equals("Grave")
+					&& !informe.getFgf().equals("Moderado")
+					&& !informe.getFgf().equals("Leve")) {
+				p.put("fgf1", "");
+				p.put("fgf2", "");
+				p.put("fgf3", "");
+				p.put("fgf4", "");
+				p.put("fgf5", "");
+			}
+		} else {
 			p.put("fgf1", "");
 			p.put("fgf2", "");
 			p.put("fgf3", "");
 			p.put("fgf4", "");
 			p.put("fgf5", "");
 		}
-			
+
 		if (informe.getClasificacion() != null) {
 			p.put("clasificacion", informe.getClasificacion().getNombre());
 		}
 		p.put("auxilioInmediato", informe.getFgga());
-		if(informe.getFgga()!=null)
-		{
-		if (informe.getFgga()) {
-			p.put("auxilioInmediatoSI", "x");
-			p.put("auxilioInmediatoNO", "");
-		} else {
-			p.put("auxilioInmediatoNO", "x");
-			p.put("auxilioInmediatoSI", "");
+		if (informe.getFgga() != null) {
+			if (informe.getFgga()) {
+				p.put("auxilioInmediatoSI", "x");
+				p.put("auxilioInmediatoNO", "");
+			} else {
+				p.put("auxilioInmediatoNO", "x");
+				p.put("auxilioInmediatoSI", "");
+			}
 		}
-	}
 		if (informe.getArea() != null) {
 			p.put("area", informe.getArea().getNombre());
 		}
@@ -4051,32 +4049,29 @@ public class CInforme extends CGenerico {
 		}
 		// p.put("fgac", informe.getArea());
 		// p.put("fgad", informe.getFgad());
-		if(informe.getFgga()!=null)
-		{
-		if (informe.getFgga())
-			p.put("fgg", "SI");
-		else
-			p.put("fgg", "NO");
-		p.put("fgh", "SI");
+		if (informe.getFgga() != null) {
+			if (informe.getFgga())
+				p.put("fgg", "SI");
+			else
+				p.put("fgg", "NO");
+			p.put("fgh", "SI");
 		}
-		if(informe.getFgha()!=null)
-		{
-		if (informe.getFgha())
-			p.put("fghSI", "x");
-		else
-			p.put("fghNO", "x");
+		if (informe.getFgha() != null) {
+			if (informe.getFgha())
+				p.put("fghSI", "x");
+			else
+				p.put("fghNO", "x");
 		}
 		p.put("gaa", informe.getGaa());
 		p.put("haa", informe.getHaa());
 		p.put("hab", informe.getHab());
 		p.put("hac", informe.getHac());
-		if(informe.getHada()!=null)
-		{
-		if (informe.getHada()) {
-			p.put("hadSI", "x");
-		} else {
-			p.put("hadNO", "x");
-		}
+		if (informe.getHada() != null) {
+			if (informe.getHada()) {
+				p.put("hadSI", "x");
+			} else {
+				p.put("hadNO", "x");
+			}
 		}
 		if (informe.getHaea() != null) {
 			if (informe.getHaea().equals("Porque la Habitual Estaba Agotada")) {
@@ -4141,11 +4136,11 @@ public class CInforme extends CGenerico {
 			}
 
 		}
-		if(informe.getHbaaa()!=null)
-		if (informe.getHbaaa())
-			p.put("hbaaSI", "x");
-		else
-			p.put("hbaaNO", "x");
+		if (informe.getHbaaa() != null)
+			if (informe.getHbaaa())
+				p.put("hbaaSI", "x");
+			else
+				p.put("hbaaNO", "x");
 
 		// p.put("hbab", informe.getHbab());
 		if (informe.getHbaab() != null) {
@@ -4158,27 +4153,27 @@ public class CInforme extends CGenerico {
 
 		p.put("hca", informe.getHca());
 		p.put("hcb", informe.getHcb());
-		if(informe.getHcb()!=null)
-		if (informe.getHcb()) {
-			p.put("hcbSI", "x");
-		} else {
-			p.put("hcbNO", "x");
-		}
+		if (informe.getHcb() != null)
+			if (informe.getHcb()) {
+				p.put("hcbSI", "x");
+			} else {
+				p.put("hcbNO", "x");
+			}
 		p.put("hcc", informe.getHcc());
-		
-		if(informe.getHcc()!=null)
-		if (informe.getHcc()) {
-			p.put("hccSI", "x");
-		} else {
-			p.put("hccNO", "x");
-		}
+
+		if (informe.getHcc() != null)
+			if (informe.getHcc()) {
+				p.put("hccSI", "x");
+			} else {
+				p.put("hccNO", "x");
+			}
 		p.put("hcd", informe.getHcd());
-		if(informe.getHcd()!=null)
-		if (informe.getHcd()) {
-			p.put("hcdSI", "x");
-		} else {
-			p.put("hcdNO", "x");
-		}
+		if (informe.getHcd() != null)
+			if (informe.getHcd()) {
+				p.put("hcdSI", "x");
+			} else {
+				p.put("hcdNO", "x");
+			}
 
 		p.put("hce", informe.getHcea());
 		if (informe.getHce() != null) {
@@ -4234,36 +4229,36 @@ public class CInforme extends CGenerico {
 			}
 		}
 		p.put("hcj", informe.getHcj());
-		
-		if (informe.getHcj()!=null) 
-		if (informe.getHcj()) {
-			p.put("hcjSI", "x");
-		} else {
-			p.put("hcjNO", "x");
-		}
+
+		if (informe.getHcj() != null)
+			if (informe.getHcj()) {
+				p.put("hcjSI", "x");
+			} else {
+				p.put("hcjNO", "x");
+			}
 		p.put("hcaa", informe.getHcaaa());
 
-		if (informe.getHcaa()!=null) 
-		if (informe.getHcaa()) {
-			p.put("hcaaSI", "x");
-		} else {
-			p.put("hcaaNO", "x");
-		}
+		if (informe.getHcaa() != null)
+			if (informe.getHcaa()) {
+				p.put("hcaaSI", "x");
+			} else {
+				p.put("hcaaNO", "x");
+			}
 		p.put("hcab", informe.getHcaba());
-		
-		if (informe.getHcab()!=null)
-		if (informe.getHcab()) {
-			p.put("hcabSI", "x");
-		} else {
-			p.put("hcabNO", "x");
-		}
+
+		if (informe.getHcab() != null)
+			if (informe.getHcab()) {
+				p.put("hcabSI", "x");
+			} else {
+				p.put("hcabNO", "x");
+			}
 		p.put("hcac", informe.getHcac());
-		if (informe.getHcac()!=null) 
-		if (informe.getHcac()) {
-			p.put("hcacSI", "x");
-		} else {
-			p.put("hcacNO", "x");
-		}
+		if (informe.getHcac() != null)
+			if (informe.getHcac()) {
+				p.put("hcacSI", "x");
+			} else {
+				p.put("hcacNO", "x");
+			}
 		p.put("hcad", informe.getHcad());
 		p.put("hcae", informe.getHcaea());
 		if (informe.getHcae() != null) {
@@ -4294,79 +4289,79 @@ public class CInforme extends CGenerico {
 		p.put("hcaf", informe.getHcaf());
 
 		p.put("hcaga", informe.getHcaga());
-		if (informe.getHcaga()!=null)
-		if (informe.getHcaga()) {
-			p.put("hcagaSI", "x");
-		} else {
-			p.put("hcagaNO", "x");
-		}
+		if (informe.getHcaga() != null)
+			if (informe.getHcaga()) {
+				p.put("hcagaSI", "x");
+			} else {
+				p.put("hcagaNO", "x");
+			}
 		p.put("hcagb", informe.getHcagb());
-		if (informe.getHcagb()!=null)
-		if (informe.getHcagb()) {
-			p.put("hcagbSI", "x");
-		} else {
-			p.put("hcagbNO", "x");
-		}
+		if (informe.getHcagb() != null)
+			if (informe.getHcagb()) {
+				p.put("hcagbSI", "x");
+			} else {
+				p.put("hcagbNO", "x");
+			}
 		p.put("hcagc", informe.getHcagc());
-		if (informe.getHcagc()!=null)
-		if (informe.getHcagc()) {
-			p.put("hcagcSI", "x");
-		} else {
-			p.put("hcagcNO", "x");
-		}
+		if (informe.getHcagc() != null)
+			if (informe.getHcagc()) {
+				p.put("hcagcSI", "x");
+			} else {
+				p.put("hcagcNO", "x");
+			}
 		p.put("hcagd", informe.getHcagd());
-		if (informe.getHcagd()!=null) 
-		if (informe.getHcagd()) {
-			p.put("hcagdSI", "x");
-		} else {
-			p.put("hcagdNO", "x");
-		}
+		if (informe.getHcagd() != null)
+			if (informe.getHcagd()) {
+				p.put("hcagdSI", "x");
+			} else {
+				p.put("hcagdNO", "x");
+			}
 		p.put("hcage", informe.getHcage());
-		if (informe.getHcage()!=null)
-		if (informe.getHcage()) {
-			p.put("hcageSI", "x");
-		} else {
-			p.put("hcageNO", "x");
-		}
+		if (informe.getHcage() != null)
+			if (informe.getHcage()) {
+				p.put("hcageSI", "x");
+			} else {
+				p.put("hcageNO", "x");
+			}
 		p.put("hcagfa", informe.getHcagfa());
 
-		if (informe.getHcagf()!=null)
-		if (informe.getHcagf())
-			p.put("hcagfSI", "x");
-		else
-			p.put("hcagfNO", "x");
+		if (informe.getHcagf() != null)
+			if (informe.getHcagf())
+				p.put("hcagfSI", "x");
+			else
+				p.put("hcagfNO", "x");
 
 		p.put("hcagg", informe.getHcagg());
-		if (informe.getHcagg()!=null)
-		if (informe.getHcagg()) {
-			p.put("hcaggSI", "x");
-		} else {
-			p.put("hcaggNO", "x");
-		}
+		if (informe.getHcagg() != null)
+			if (informe.getHcagg()) {
+				p.put("hcaggSI", "x");
+			} else {
+				p.put("hcaggNO", "x");
+			}
 		p.put("hcagh", informe.getHcagh());
-		if (informe.getHcagh()!=null) 
-		if (informe.getHcagh()) {
-			p.put("hcaghSI", "x");
-		} else {
-			p.put("hcaghNO", "x");
-		}
+		if (informe.getHcagh() != null)
+			if (informe.getHcagh()) {
+				p.put("hcaghSI", "x");
+			} else {
+				p.put("hcaghNO", "x");
+			}
 		p.put("hcagi", informe.getHcagi());
-		if (informe.getHcagi()!=null) 
-		if (informe.getHcagi()) {
-			p.put("hcagiSI", "x");
-		} else {
-			p.put("hcagiNO", "x");
-		}
+		if (informe.getHcagi() != null)
+			if (informe.getHcagi()) {
+				p.put("hcagiSI", "x");
+			} else {
+				p.put("hcagiNO", "x");
+			}
 		p.put("hcafa", informe.getHcafa());
 		p.put("hda", informe.getHda());
 		p.put("hdb", informe.getHdba());
-		
-		if (informe.getHdb()!=null)
-		if (informe.getHdb()) {
-			p.put("hdbSI", "x");
-		} else {
-			p.put("hdbNO", "x");
-		}
+
+		if (informe.getHdb() != null)
+			if (informe.getHdb()) {
+				p.put("hdbSI", "x");
+			} else {
+				p.put("hdbNO", "x");
+			}
 		p.put("hdc", informe.getHdca());
 		if (informe.getHdc() != null) {
 			if (informe.getHdc().equals(
@@ -4383,119 +4378,119 @@ public class CInforme extends CGenerico {
 		p.put("hded", informe.getHded());
 		p.put("hdf", informe.getHdf());
 		p.put("iaa", informe.getIaa());
-		if (informe.getIaa()!=null)
-		if (informe.getIaa()) {
-			p.put("iaaSI", "x");
-		} else {
-			p.put("iaaNO", "x");
-		}
+		if (informe.getIaa() != null)
+			if (informe.getIaa()) {
+				p.put("iaaSI", "x");
+			} else {
+				p.put("iaaNO", "x");
+			}
 		p.put("iab", informe.getIab());
-		if (informe.getIab()!=null)
-		if (informe.getIab()) {
-			p.put("iabSI", "x");
-		} else {
-			p.put("iabNO", "x");
-		}
+		if (informe.getIab() != null)
+			if (informe.getIab()) {
+				p.put("iabSI", "x");
+			} else {
+				p.put("iabNO", "x");
+			}
 		p.put("iac", informe.getIac());
-		if (informe.getIac()!=null)
-		if (informe.getIac()) {
-			p.put("iacSI", "x");
-		} else {
-			p.put("iacNO", "x");
-		}
+		if (informe.getIac() != null)
+			if (informe.getIac()) {
+				p.put("iacSI", "x");
+			} else {
+				p.put("iacNO", "x");
+			}
 		p.put("iad", informe.getIada());
-		if (informe.getIad()!=null) 
-		if (informe.getIad()) {
-			p.put("iadSI", "x");
-		} else {
-			p.put("iadNO", "x");
-		}
+		if (informe.getIad() != null)
+			if (informe.getIad()) {
+				p.put("iadSI", "x");
+			} else {
+				p.put("iadNO", "x");
+			}
 		p.put("iae", informe.getIae());
 		p.put("iaf", informe.getIaf());
-		if (informe.getIaf()!=null) 
-		if (informe.getIaf()) {
-			p.put("iafSI", "x");
-		} else {
-			p.put("iafNO", "x");
-		}
+		if (informe.getIaf() != null)
+			if (informe.getIaf()) {
+				p.put("iafSI", "x");
+			} else {
+				p.put("iafNO", "x");
+			}
 		p.put("iag", informe.getIaga());
-		if (informe.getIag()!=null) 
-		if (informe.getIag()) {
-			p.put("iagSI", "x");
-		} else {
-			p.put("iagNO", "x");
-		}
+		if (informe.getIag() != null)
+			if (informe.getIag()) {
+				p.put("iagSI", "x");
+			} else {
+				p.put("iagNO", "x");
+			}
 		p.put("iah", informe.getIah());
-		if (informe.getIah()!=null) 
-		if (informe.getIah()) {
-			p.put("iahSI", "x");
-		} else {
-			p.put("iahNO", "x");
-		}
+		if (informe.getIah() != null)
+			if (informe.getIah()) {
+				p.put("iahSI", "x");
+			} else {
+				p.put("iahNO", "x");
+			}
 		p.put("iai", informe.getIai());
 		p.put("iaj", informe.getIaj());
 		// aqui
 		p.put("iba", informe.getIba());
-		if (informe.getIba()!=null) 
-		if (informe.getIba()) {
-			p.put("ibaSI", "x");
-		} else {
-			p.put("ibaNO", "x");
-		}
+		if (informe.getIba() != null)
+			if (informe.getIba()) {
+				p.put("ibaSI", "x");
+			} else {
+				p.put("ibaNO", "x");
+			}
 		p.put("ibb", informe.getIbb());
 		p.put("ibc", informe.getIbc());
 		p.put("teta", informe.getIbd());
 
 		p.put("ibe", informe.getIbe());
-		if (informe.getIbe()!=null)
-		if (informe.getIbe()) {
-			p.put("ibeSI", "x");
-		} else {
-			p.put("ibeNO", "x");
-		}
+		if (informe.getIbe() != null)
+			if (informe.getIbe()) {
+				p.put("ibeSI", "x");
+			} else {
+				p.put("ibeNO", "x");
+			}
 		p.put("ibf", informe.getIbf());
-		if (informe.getIbf()!=null)
-		if (informe.getIbf()) {
-			p.put("ibfSI", "x");
-		} else {
-			p.put("ibfNO", "x");
-		}
+		if (informe.getIbf() != null)
+			if (informe.getIbf()) {
+				p.put("ibfSI", "x");
+			} else {
+				p.put("ibfNO", "x");
+			}
 		p.put("ibg", informe.getIbg());
-		if (informe.getIbg()!=null) 
-		if (informe.getIbg()) {
-			p.put("ibgSI", "x");
-		} else {
-			p.put("ibgNO", "x");
-		}
+		if (informe.getIbg() != null)
+			if (informe.getIbg()) {
+				p.put("ibgSI", "x");
+			} else {
+				p.put("ibgNO", "x");
+			}
 		p.put("ibh", informe.getIbh());
-		
-		if (informe.getIbh()!=null)
-		if (informe.getIbh()) {
-			p.put("ibhSI", "x");
-		} else {
-			p.put("ibhNO", "x");
-		}
+
+		if (informe.getIbh() != null)
+			if (informe.getIbh()) {
+				p.put("ibhSI", "x");
+			} else {
+				p.put("ibhNO", "x");
+			}
 		p.put("ibi", informe.getIbi());
-		if (informe.getIbi()!=null) 
-		if (informe.getIbi()) {
-			p.put("ibiSI", "x");
-		} else {
-			p.put("ibiNO", "x");
-		}
+		if (informe.getIbi() != null)
+			if (informe.getIbi()) {
+				p.put("ibiSI", "x");
+			} else {
+				p.put("ibiNO", "x");
+			}
 		p.put("ibj", informe.getIbj());
-		if (informe.getIbj()!=null)
-		if (informe.getIbj()) {
-			p.put("ibjSI", "x");
-		} else {
-			p.put("ibjNO", "x");
-		}
+		if (informe.getIbj() != null)
+			if (informe.getIbj()) {
+				p.put("ibjSI", "x");
+			} else {
+				p.put("ibjNO", "x");
+			}
 		p.put("ibaa", informe.getIbaa());
-		if (informe.getIbaa()!=null) 
-		if (informe.getIbaa()) {
-			p.put("ibaaSI", "x");
-		} else {
-			p.put("ibaaNO", "x");
-		}
+		if (informe.getIbaa() != null)
+			if (informe.getIbaa()) {
+				p.put("ibaaSI", "x");
+			} else {
+				p.put("ibaaNO", "x");
+			}
 		p.put("ibab", informe.getIbab());
 		p.put("ibac", informe.getIbac());
 		if (informe.getPacienteH() != null) {
@@ -4503,8 +4498,9 @@ public class CInforme extends CGenerico {
 					+ " " + informe.getPacienteH().getPrimerApellido());
 			p.put("cedulaPacienteH", informe.getPacienteH().getCedula());
 			p.put("profesionPacienteH", informe.getPacienteH().getProfesion());
-			if(informe.getPacienteH().getCargoReal()!=null)
-			p.put("cargoPacienteH", informe.getPacienteH().getCargoReal().getNombre());
+			if (informe.getPacienteH().getCargoReal() != null)
+				p.put("cargoPacienteH", informe.getPacienteH().getCargoReal()
+						.getNombre());
 			p.put("turnoPacienteH", informe.getPacienteH().getTurno());
 			p.put("registroPacienteH", informe.getPacienteH().getNroInpsasel());
 		}
@@ -4513,8 +4509,9 @@ public class CInforme extends CGenerico {
 					+ " " + informe.getPacienteI().getPrimerApellido());
 			p.put("cedulaPacienteI", informe.getPacienteI().getCedula());
 			p.put("profesionPacienteI", informe.getPacienteI().getProfesion());
-			if(informe.getPacienteI().getCargoReal()!=null)
-			p.put("cargoPacienteI", informe.getPacienteI().getCargoReal().getNombre());
+			if (informe.getPacienteI().getCargoReal() != null)
+				p.put("cargoPacienteI", informe.getPacienteI().getCargoReal()
+						.getNombre());
 			p.put("turnoPacienteI", informe.getPacienteI().getTurno());
 			p.put("registroPacienteI", informe.getPacienteI().getNroInpsasel());
 		}
@@ -4523,8 +4520,9 @@ public class CInforme extends CGenerico {
 					+ " " + informe.getPacienteJ().getPrimerApellido());
 			p.put("cedulaPacienteJ", informe.getPacienteJ().getCedula());
 			p.put("profesionPacienteJ", informe.getPacienteJ().getProfesion());
-			if(informe.getPacienteJ().getCargoReal()!=null)
-			p.put("cargoPacienteJ", informe.getPacienteJ().getCargoReal().getNombre());
+			if (informe.getPacienteJ().getCargoReal() != null)
+				p.put("cargoPacienteJ", informe.getPacienteJ().getCargoReal()
+						.getNombre());
 			p.put("turnoPacienteJ", informe.getPacienteJ().getTurno());
 			p.put("registroPacienteJ", informe.getPacienteJ().getNroInpsasel());
 		}
@@ -4533,8 +4531,9 @@ public class CInforme extends CGenerico {
 					+ " " + informe.getPacienteK().getPrimerApellido());
 			p.put("cedulaPacienteK", informe.getPacienteK().getCedula());
 			p.put("profesionPacienteK", informe.getPacienteK().getProfesion());
-			if(informe.getPacienteK().getCargoReal()!=null)
-			p.put("cargoPacienteK", informe.getPacienteK().getCargoReal().getNombre());
+			if (informe.getPacienteK().getCargoReal() != null)
+				p.put("cargoPacienteK", informe.getPacienteK().getCargoReal()
+						.getNombre());
 			p.put("turnoPacienteK", informe.getPacienteK().getTurno());
 			p.put("registroPacienteK", informe.getPacienteK().getNroInpsasel());
 		}
@@ -4543,8 +4542,9 @@ public class CInforme extends CGenerico {
 					+ " " + informe.getPacienteL().getPrimerApellido());
 			p.put("cedulaPacienteL", informe.getPacienteL().getCedula());
 			p.put("profesionPacienteL", informe.getPacienteL().getProfesion());
-			if(informe.getPacienteL().getCargoReal()!=null)
-			p.put("cargoPacienteL", informe.getPacienteL().getCargoReal().getNombre());
+			if (informe.getPacienteL().getCargoReal() != null)
+				p.put("cargoPacienteL", informe.getPacienteL().getCargoReal()
+						.getNombre());
 			p.put("turnoPacienteL", informe.getPacienteL().getTurno());
 			p.put("registroPacienteL", informe.getPacienteL().getNroInpsasel());
 		}
@@ -4553,18 +4553,19 @@ public class CInforme extends CGenerico {
 					+ " " + informe.getPacienteM().getPrimerApellido());
 			p.put("cedulaPacienteM", informe.getPacienteM().getCedula());
 			p.put("profesionPacienteM", informe.getPacienteM().getProfesion());
-			if(informe.getPacienteM().getCargoReal()!=null)
-			p.put("cargoPacienteM", informe.getPacienteM().getCargoReal().getNombre());
+			if (informe.getPacienteM().getCargoReal() != null)
+				p.put("cargoPacienteM", informe.getPacienteM().getCargoReal()
+						.getNombre());
 			p.put("turnoPacienteM", informe.getPacienteM().getTurno());
 			p.put("registroPacienteM", informe.getPacienteM().getNroInpsasel());
 		}
 		p.put("ica", informe.getIca());
-		if (informe.getIca()!=null)
-		if (informe.getIca()) {
-			p.put("icaSI", "x");
-		} else {
-			p.put("icaNO", "x");
-		}
+		if (informe.getIca() != null)
+			if (informe.getIca()) {
+				p.put("icaSI", "x");
+			} else {
+				p.put("icaNO", "x");
+			}
 		p.put("icb", informe.getIcb());
 		p.put("icc", informe.getIcc());
 		p.put("icd", informe.getIcd());
@@ -4576,40 +4577,40 @@ public class CInforme extends CGenerico {
 			}
 		}
 		p.put("ice", informe.getIce());
-		if (informe.getIce()!=null) 
-		if (informe.getIce()) {
-			p.put("iceSI", "x");
-		} else {
-			p.put("iceNO", "x");
-		}
+		if (informe.getIce() != null)
+			if (informe.getIce()) {
+				p.put("iceSI", "x");
+			} else {
+				p.put("iceNO", "x");
+			}
 		p.put("icf", informe.getIcf());
-		if (informe.getIcf()!=null)
-		if (informe.getIcf()) {
-			p.put("icfSI", "x");
-		} else {
-			p.put("icfNO", "x");
-		}
+		if (informe.getIcf() != null)
+			if (informe.getIcf()) {
+				p.put("icfSI", "x");
+			} else {
+				p.put("icfNO", "x");
+			}
 		p.put("icg", informe.getIcg());
-		if (informe.getIcg()!=null)
-		if (informe.getIcg()) {
-			p.put("icgSI", "x");
-		} else {
-			p.put("icgNO", "x");
-		}
+		if (informe.getIcg() != null)
+			if (informe.getIcg()) {
+				p.put("icgSI", "x");
+			} else {
+				p.put("icgNO", "x");
+			}
 		p.put("ich", informe.getIch());
-		if (informe.getIch()!=null)
-		if (informe.getIch()) {
-			p.put("ichSI", "x");
-		} else {
-			p.put("ichNO", "x");
-		}
+		if (informe.getIch() != null)
+			if (informe.getIch()) {
+				p.put("ichSI", "x");
+			} else {
+				p.put("ichNO", "x");
+			}
 		p.put("ici", informe.getIci());
-		if (informe.getIci()!=null)
-		if (informe.getIci()) {
-			p.put("iciSI", "x");
-		} else {
-			p.put("iciNO", "x");
-		}
+		if (informe.getIci() != null)
+			if (informe.getIci()) {
+				p.put("iciSI", "x");
+			} else {
+				p.put("iciNO", "x");
+			}
 		p.put("icj", informe.getIcj());
 		p.put("icaa", informe.getIcaa());
 		p.put("icab", informe.getIcab());
@@ -4636,84 +4637,84 @@ public class CInforme extends CGenerico {
 		}
 		p.put("icae", informe.getIcae());
 		p.put("ida", informe.getIda());
-		if (informe.getIda()!=null) 
-		if (informe.getIda()) {
-			p.put("idaSI", "x");
-		} else {
-			p.put("idaNO", "x");
-		}
+		if (informe.getIda() != null)
+			if (informe.getIda()) {
+				p.put("idaSI", "x");
+			} else {
+				p.put("idaNO", "x");
+			}
 		p.put("ibd", informe.getIdb());
-		if (informe.getIdb()!=null) 
-		if (informe.getIdb()) {
-			p.put("idbSI", "x");
-		} else {
-			p.put("idbNO", "x");
-		}
+		if (informe.getIdb() != null)
+			if (informe.getIdb()) {
+				p.put("idbSI", "x");
+			} else {
+				p.put("idbNO", "x");
+			}
 		p.put("idc", informe.getIdc());
-		if (informe.getIdc()!=null)
-		if (informe.getIdc()) {
-			p.put("idcSI", "x");
-		} else {
-			p.put("idcNO", "x");
-		}
+		if (informe.getIdc() != null)
+			if (informe.getIdc()) {
+				p.put("idcSI", "x");
+			} else {
+				p.put("idcNO", "x");
+			}
 		p.put("idd", informe.getIdd());
-		if (informe.getIdd()!=null) 
-		if (informe.getIdd()) {
-			p.put("iddSI", "x");
-		} else {
-			p.put("iddNO", "x");
-		}
+		if (informe.getIdd() != null)
+			if (informe.getIdd()) {
+				p.put("iddSI", "x");
+			} else {
+				p.put("iddNO", "x");
+			}
 		p.put("ide", informe.getIde());
-		if (informe.getIde()!=null) 
-		if (informe.getIde()) {
-			p.put("ideSI", "x");
-		} else {
-			p.put("ideNO", "x");
-		}
+		if (informe.getIde() != null)
+			if (informe.getIde()) {
+				p.put("ideSI", "x");
+			} else {
+				p.put("ideNO", "x");
+			}
 		p.put("idf", informe.getIdf());
-		if (informe.getIdf()!=null)
-		if (informe.getIdf()) {
-			p.put("idfSI", "x");
-		} else {
-			p.put("idfNO", "x");
-		}
+		if (informe.getIdf() != null)
+			if (informe.getIdf()) {
+				p.put("idfSI", "x");
+			} else {
+				p.put("idfNO", "x");
+			}
 		p.put("idg", informe.getIdg());
-		if (informe.getIdg()!=null)
-		if (informe.getIdg()) {
-			p.put("idgSI", "x");
-		} else {
-			p.put("idgNO", "x");
-		}
+		if (informe.getIdg() != null)
+			if (informe.getIdg()) {
+				p.put("idgSI", "x");
+			} else {
+				p.put("idgNO", "x");
+			}
 		p.put("idh", informe.getIdh());
-		if (informe.getIdh()!=null) 
-		if (informe.getIdh()) {
-			p.put("idhSI", "x");
-		} else {
-			p.put("idhNO", "x");
-		}
+		if (informe.getIdh() != null)
+			if (informe.getIdh()) {
+				p.put("idhSI", "x");
+			} else {
+				p.put("idhNO", "x");
+			}
 		p.put("idi", informe.getIdi());
-		if (informe.getIdi()!=null)
-		if (informe.getIdi()) {
-			p.put("idiSI", "x");
-		} else {
-			p.put("idiNO", "x");
-		}
+		if (informe.getIdi() != null)
+			if (informe.getIdi()) {
+				p.put("idiSI", "x");
+			} else {
+				p.put("idiNO", "x");
+			}
 		p.put("idj", informe.getIdj());
-		if (informe.getIdj()!=null)
-		if (informe.getIdj()) {
-			p.put("idjSI", "x");
-		} else {
-			p.put("idjNO", "x");
-		}
+		if (informe.getIdj() != null)
+			if (informe.getIdj()) {
+				p.put("idjSI", "x");
+			} else {
+				p.put("idjNO", "x");
+			}
 		p.put("idaa", informe.getIdaa());
 		p.put("idab", informe.getIdab());
 		p.put("idac", informe.getIdac());
-		if (informe.getIdc()!=null)
-		if (informe.getIdc()) {
-			p.put("idacSI", "x");
-		} else {
-			p.put("idacNO", "x");
-		}
+		if (informe.getIdc() != null)
+			if (informe.getIdc()) {
+				p.put("idacSI", "x");
+			} else {
+				p.put("idacNO", "x");
+			}
 		p.put("idad", informe.getIdad());
 
 		List<Condicion> condicionesA = getServicioCondicion()
@@ -4746,17 +4747,26 @@ public class CInforme extends CGenerico {
 		if (ltbPlan.getItemCount() != 0) {
 			if (ltbPlan.getSelectedItems().size() == 1) {
 				Listitem listItem = ltbPlan.getSelectedItem();
+				boolean error = false;
 				if (listItem != null) {
 					PlanAccion plan = listItem.getValue();
-					planes.remove(plan);
-					ltbPlan.setModel(new ListModelList<PlanAccion>(planes));
-					ltbPlan.setCheckmark(false);
-					ltbPlan.setCheckmark(true);
-					txtDonde.setValue(plan.getDonde());
-					txtComo.setValue(plan.getComo());
-					txtQuien.setValue(plan.getQuien());
-					dtbCuando.setValue(plan.getCuando());
-					txtDescripcion.setValue(plan.getDescripcion());
+					if (plan.getEstado() != null) {
+						if (plan.getEstado().equals("Finalizado")) {
+							Mensaje.mensajeAlerta("No se pueden editar Acciones que ya han sido Finalizadas");
+							error = true;
+						}
+					}
+					if (!error) {
+						planes.remove(plan);
+						ltbPlan.setModel(new ListModelList<PlanAccion>(planes));
+						ltbPlan.setCheckmark(false);
+						ltbPlan.setCheckmark(true);
+						txtDonde.setValue(plan.getDonde());
+						txtComo.setValue(plan.getComo());
+						txtQuien.setValue(plan.getQuien());
+						dtbCuando.setValue(plan.getCuando());
+						txtDescripcion.setValue(plan.getDescripcion());
+					}
 				}
 			} else
 				Mensaje.mensajeError("Debe Seleccionar una Consulta");
@@ -4769,12 +4779,21 @@ public class CInforme extends CGenerico {
 		if (ltbPlan.getItemCount() != 0) {
 			if (ltbPlan.getSelectedItems().size() == 1) {
 				Listitem listItem = ltbPlan.getSelectedItem();
+				boolean error = false;
 				if (listItem != null) {
 					PlanAccion plan = listItem.getValue();
-					planes.remove(plan);
-					ltbPlan.setModel(new ListModelList<PlanAccion>(planes));
-					ltbPlan.setCheckmark(false);
-					ltbPlan.setCheckmark(true);
+					if (plan.getEstado() != null) {
+						if (plan.getEstado().equals("Finalizado")) {
+							Mensaje.mensajeAlerta("No se pueden remover Acciones que ya han sido Finalizadas");
+							error = true;
+						}
+					}
+					if (!error) {
+						planes.remove(plan);
+						ltbPlan.setModel(new ListModelList<PlanAccion>(planes));
+						ltbPlan.setCheckmark(false);
+						ltbPlan.setCheckmark(true);
+					}
 				}
 			} else
 				Mensaje.mensajeError("Debe Seleccionar un Item");
@@ -4819,21 +4838,30 @@ public class CInforme extends CGenerico {
 	}
 
 	protected void guardarPlanes(Informe informe) {
-		List<PlanAccion> planesAccion = servicioPlanAccion.buscarPorInforme(informe);
-		if(!planesAccion.isEmpty())
+		List<PlanAccion> planesAccion = servicioPlanAccion
+				.buscarPorInformeYEstado(informe, "Programado");
+		if (!planesAccion.isEmpty())
 			servicioPlanAccion.eliminarVarios(planesAccion);
+		planesAccion.clear();
 		planesAccion = new ArrayList<PlanAccion>();
 		ltbPlan.renderAll();
 		for (int i = 0; i < ltbPlan.getItemCount(); i++) {
 			Listitem listItem = ltbPlan.getItemAtIndex(i);
 			PlanAccion planItem = listItem.getValue();
-
-			PlanAccion planAccion = new PlanAccion(0, informe,
-					planItem.getDescripcion(), planItem.getQuien(),
-					planItem.getComo(), planItem.getDonde(),
-					planItem.getCuando(), null, "", "Programado", fechaHora,
-					horaAuditoria, nombreUsuarioSesion());
-			planesAccion.add(planAccion);
+			PlanAccion planAccion = new PlanAccion();
+			boolean registro = true;
+			if (planItem.getEstado() != null) {
+				if (planItem.getEstado().equals("Finalizado"))
+					registro = false;
+			}
+			if (registro) {
+				planAccion = new PlanAccion(0, informe,
+						planItem.getDescripcion(), planItem.getQuien(),
+						planItem.getComo(), planItem.getDonde(),
+						planItem.getCuando(), null, "", "Programado",
+						fechaHora, horaAuditoria, nombreUsuarioSesion());
+				planesAccion.add(planAccion);
+			}
 		}
 		servicioPlanAccion.guardarVarios(planesAccion);
 	}
