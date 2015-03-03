@@ -31,8 +31,8 @@
 					<tab tooltip="seccion" label="Seccion 8" id="tab8" />
 					<tab tooltip="seccion" label="Seccion 9" id="tab9" />
 					<tab tooltip="seccion" label="Plan de Accion" id="tab10" />
-					<tab tooltip="seccion" label="Plan de Accion Inspector Insapsel"
-						id="tab11" />
+					<tab label="Plan de Accion Inspector Insapsel" id="tab11" />
+					<tab label="Imagenes" id="tab12" />
 				</tabs>
 				<tabpanels>
 					<tabpanel>
@@ -2633,6 +2633,119 @@
 								<button class="btn" id="btnAtras9" label="Anterior"
 									image="/public/imagenes/botones/atras.png" tooltiptext="Anterior Pestaña" />
 							</div>
+						</hbox>
+					</tabpanel>
+					<tabpanel>
+						<hbox align="bottom" pack="center" height="100%" width="100%">
+							<vbox>
+								<label class="etiqueta" value="Observacion:" />
+								<textbox id="txtImagen1" hflex="1" maxlength="1000"
+									tooltiptext="Ingrese Alguna Observacion sobre la imagen"
+									multiline="true" class="multilinea" />
+								<separator />
+								<label class="etiqueta" value="Marque para mostrar en Informe" />
+								<checkbox id="chk1" />
+								<image
+									tooltiptext="Tamaños permitidos: Minimo 512KB y Maximo 2MB  &#x0d;Formatos permitidos: .png y .jpeg"
+									style="border: 1px outset #A0A0A0;" id="imagen1" width="185px"
+									height="185px" />
+								<space />
+								<fileupload
+									style="	background: #800400;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+									image="/public/imagenes/botones/cargar.png" id="fudImagen1"
+									label="Cargar Imagen">
+								</fileupload>
+								<button id="btnRemover1" label="Remover Imagen" class="btn"
+									tooltiptext="Presione para Remover la Imagen" image="/public/imagenes/botones/anular.png" />
+							</vbox>
+							<space />
+							<vbox>
+								<label class="etiqueta" value="Observacion:" />
+								<textbox id="txtImagen2" hflex="1" maxlength="1000"
+									tooltiptext="Ingrese Alguna Observacion sobre la imagen"
+									multiline="true" class="multilinea" />
+								<separator />
+								<label class="etiqueta" value="Marque para mostrar en Informe" />
+								<checkbox id="chk2" />
+								<image
+									tooltiptext="Tamaños permitidos: Minimo 512KB y Maximo 2MB &#x0d;Formatos permitidos: .png y .jpeg"
+									style="border: 1px outset #A0A0A0;" id="imagen2" width="185px"
+									height="185px" />
+
+								<space />
+								<fileupload image="/public/imagenes/botones/cargar.png"
+									id="fudImagen2" label="Cargar Imagen"
+									style="	background: #800400;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;">
+								</fileupload>
+								<button id="btnRemover2" label="Remover Imagen" class="btn"
+									tooltiptext="Presione para Remover la Imagen" image="/public/imagenes/botones/anular.png" />
+							</vbox>
+							<space />
+							<vbox>
+								<label class="etiqueta" value="Observacion:" />
+								<textbox id="txtImagen3" hflex="1" maxlength="1000"
+									tooltiptext="Ingrese Alguna Observacion sobre la imagen"
+									multiline="true" class="multilinea" />
+								<separator />
+								<label class="etiqueta" value="Marque para mostrar en Informe" />
+								<checkbox id="chk3" />
+								<image
+									tooltiptext="Tamaños permitidos: Minimo 512KB y Maximo 2MB &#x0d;Formatos permitidos: .png y .jpeg"
+									style="border: 1px outset #A0A0A0;" id="imagen3" width="185px"
+									height="185px" />
+								<space />
+								<fileupload image="/public/imagenes/botones/cargar.png"
+									id="fudImagen3" label="Cargar Imagen"
+									style="	background: #800400;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;">
+								</fileupload>
+								<button id="btnRemover3" label="Remover Imagen" class="btn"
+									tooltiptext="Presione para Remover la Imagen" image="/public/imagenes/botones/anular.png" />
+							</vbox>
+							<space />
+							<vbox>
+								<label class="etiqueta" value="Observacion:" />
+								<textbox id="txtImagen4" hflex="1" maxlength="1000"
+									tooltiptext="Ingrese Alguna Observacion sobre la imagen"
+									multiline="true" class="multilinea" />
+								<separator />
+								<label class="etiqueta" value="Marque para mostrar en Informe" />
+								<checkbox id="chk4" />
+								<image
+									tooltiptext="Tamaños permitidos: Minimo 512KB y Maximo 2MB  &#x0d;Formatos permitidos: .png y .jpeg"
+									style="border: 1px outset #A0A0A0;" id="imagen4" width="185px"
+									height="185px" />
+								<space />
+								<fileupload image="/public/imagenes/botones/cargar.png"
+									id="fudImagen4" label="Cargar Imagen"
+									style="	background: #800400;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;">
+								</fileupload>
+								<button class="btn" id="btnRemover4" label="Remover Imagen"
+									tooltiptext="Presione para Remover la Imagen" image="/public/imagenes/botones/anular.png" />
+							</vbox>
+							<space />
+							<vbox>
+								<label class="etiqueta" value="Observacion:" />
+								<textbox id="txtImagen5" hflex="1" maxlength="1000"
+									tooltiptext="Ingrese Alguna Observacion sobre la imagen"
+									multiline="true" class="multilinea" />
+								<separator />
+								<label class="etiqueta" value="Marque para mostrar en Informe" />
+								<checkbox id="chk5" />
+								<image
+									tooltiptext="Tamaños permitidos: Minimo 512KB y Maximo 2MB &#x0d;Formatos permitidos: .png y .jpeg"
+									style="border: 1px outset #A0A0A0;" id="imagen5" width="185px"
+									height="185px" />
+								<space />
+								<fileupload image="/public/imagenes/botones/cargar.png"
+									id="fudImagen5" label="Cargar Imagen"
+									style="	background: #800400;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;">
+								</fileupload>
+								<button id="btnRemover5" label="Remover Imagen" class="btn"
+									tooltiptext="Presione para Remover la Imagen" image="/public/imagenes/botones/anular.png" />
+							</vbox>
+							<separator />
+							<separator />
+							<separator />
 						</hbox>
 					</tabpanel>
 				</tabpanels>

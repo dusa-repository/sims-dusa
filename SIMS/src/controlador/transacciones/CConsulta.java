@@ -1702,8 +1702,14 @@ public class CConsulta extends CGenerico {
 		}
 		informe.setFgj(reposo);
 		informe.setFgad(consultaDiagnostico.getMotivo());
+		String c = servicioInforme.buscarMaxCodigo();
+		int n = c.length();
+		char car = c.charAt(n - 1);
+		String nro = Character.toString(car);
+		Integer co = Integer.parseInt(nro);
+		String finaal = String.valueOf(co + 1);
+		informe.setCodigo(finaal);
 		servicioInforme.guardar(informe);
-
 		String correo = "";
 		GrupoInspectores g = servicioGrupoInspectores.buscar(1);
 		if (g != null) {
@@ -2678,12 +2684,13 @@ public class CConsulta extends CGenerico {
 		if (consulta.getTipoConsultaSecundaria().equals("Pre-Empleo"))
 			row.setVisible(true);
 
-		if (consulta.getTipoConsultaSecundaria().equals("Pre-Vacacional")
-				&& consulta.getFechaPostVacacional() != null) {
+		if (consulta.getTipoConsultaSecundaria().equals("Pre-Vacacional")) {
 			rowPostVacacional.setVisible(true);
 			if (consulta.getFechaPostVacacional() != null)
 				dtbFechaPostVacacional.setValue(consulta
 						.getFechaPostVacacional());
+			else
+				dtbFechaPostVacacional.setValue(null);
 		} else
 			rowPostVacacional.setVisible(false);
 

@@ -1,5 +1,7 @@
 package controlador.sha;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -10,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.imageio.ImageIO;
 
 import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
@@ -24,16 +28,21 @@ import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
+import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Fileupload;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -934,6 +943,56 @@ public class CInforme extends CGenerico {
 	private Textbox txtOrdenamientos;
 	@Wire
 	private Datebox dtbFechaVisita;
+	@Wire
+	private Image imagen1;
+	@Wire
+	private Fileupload fudImagen1;
+	@Wire
+	private Media media1;
+	@Wire
+	private Image imagen2;
+	@Wire
+	private Fileupload fudImagen2;
+	@Wire
+	private Media media2;
+	@Wire
+	private Image imagen3;
+	@Wire
+	private Fileupload fudImagen3;
+	@Wire
+	private Media media3;
+	@Wire
+	private Image imagen4;
+	@Wire
+	private Fileupload fudImagen4;
+	@Wire
+	private Media media4;
+	@Wire
+	private Image imagen5;
+	@Wire
+	private Fileupload fudImagen5;
+	@Wire
+	private Media media5;
+	@Wire
+	private Textbox txtImagen1;
+	@Wire
+	private Checkbox chk1;
+	@Wire
+	private Textbox txtImagen2;
+	@Wire
+	private Checkbox chk2;
+	@Wire
+	private Textbox txtImagen3;
+	@Wire
+	private Checkbox chk3;
+	@Wire
+	private Textbox txtImagen4;
+	@Wire
+	private Checkbox chk4;
+	@Wire
+	private Textbox txtImagen5;
+	@Wire
+	private Checkbox chk5;
 
 	Catalogo<Paciente> catalogoP;
 	Catalogo<Empresa> catalogoE;
@@ -984,7 +1043,6 @@ public class CInforme extends CGenerico {
 		String finaal = String.valueOf(co + 1);
 		txt1.setValue(cod + finaal);
 
-
 		botonera = new Botonera() {
 
 			@Override
@@ -1010,8 +1068,22 @@ public class CInforme extends CGenerico {
 				limpiarCampos();
 				limpiarCamposPlan();
 				limpiarCamposPlan2();
-				
-
+				org.zkoss.image.Image imagenUsuario1 = null;
+				imagen1.setContent(imagenUsuario1);
+				imagen2.setContent(imagenUsuario1);
+				imagen3.setContent(imagenUsuario1);
+				imagen4.setContent(imagenUsuario1);
+				imagen5.setContent(imagenUsuario1);
+				txtImagen1.setValue("");
+				txtImagen2.setValue("");
+				txtImagen3.setValue("");
+				txtImagen4.setValue("");
+				txtImagen5.setValue("");
+				chk1.setChecked(false);
+				chk2.setChecked(false);
+				chk3.setChecked(false);
+				chk4.setChecked(false);
+				chk5.setChecked(false);
 			}
 
 			@Override
@@ -1531,6 +1603,7 @@ public class CInforme extends CGenerico {
 							informe = servicioInforme.buscarUltimo();
 						guardarPlanes2(informe);
 					}
+					guardarImagenes(informe);
 					Mensaje.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 					listasMultiples();
@@ -1596,8 +1669,25 @@ public class CInforme extends CGenerico {
 				|| lbl31.getValue() == "") {
 			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
-		} else
-			return true;
+		} else {
+			int n = 0;
+			if (chk1.isChecked())
+				n = n + 1;
+			if (chk2.isChecked())
+				n = n + 1;
+			if (chk3.isChecked())
+				n = n + 1;
+			if (chk4.isChecked())
+				n = n + 1;
+			if (chk5.isChecked())
+				n = n + 1;
+			if (n > 2) {
+				Mensaje.mensajeError("Solo puede Seleccionar dos (2) imagenes para el informe");
+				return false;
+			} else
+				return true;
+		}
+
 	}
 
 	@Listen("onClick =  #btnBuscar21,#btnBuscar22,#btnBuscar23,#btnBuscar24,#btnBuscar25,#btnBuscar26,#btnBuscar5,#btnBuscar93141,#btnBuscar93142,#btnBuscar93143,#btnBuscar93144,#btnBuscar93145,#btnBuscar93146")
@@ -2128,6 +2218,8 @@ public class CInforme extends CGenerico {
 			botonera.getChildren().get(0).setVisible(false);
 		else
 			botonera.getChildren().get(0).setVisible(true);
+
+		setearImagenes(informe);
 		txtOrdenamientos.setValue(informe.getOrdenamientos());
 		txtFuncionario.setValue(informe.getFuncionario());
 		if (informe.getFechaVisita() != null)
@@ -5062,4 +5154,284 @@ public class CInforme extends CGenerico {
 			return true;
 	}
 
+	public void guardarImagenes(Informe informe) {
+		byte[] imagenUsuario1 = null;
+		if (media1 instanceof org.zkoss.image.Image
+				&& imagen1.getContent() != null) {
+			imagenUsuario1 = imagen1.getContent().getByteData();
+		}
+		byte[] imagenUsuario2 = null;
+		if (media2 instanceof org.zkoss.image.Image
+				&& imagen2.getContent() != null) {
+			imagenUsuario2 = imagen2.getContent().getByteData();
+		}
+		byte[] imagenUsuario3 = null;
+		if (media3 instanceof org.zkoss.image.Image
+				&& imagen3.getContent() != null) {
+			imagenUsuario3 = imagen3.getContent().getByteData();
+		}
+		byte[] imagenUsuario4 = null;
+		if (media4 instanceof org.zkoss.image.Image
+				&& imagen4.getContent() != null) {
+			imagenUsuario4 = imagen4.getContent().getByteData();
+		}
+		byte[] imagenUsuario5 = null;
+		if (media5 instanceof org.zkoss.image.Image
+				&& imagen5.getContent() != null) {
+			imagenUsuario5 = imagen5.getContent().getByteData();
+		}
+		informe.setImagenA(imagenUsuario1);
+		informe.setImagenB(imagenUsuario2);
+		informe.setImagenC(imagenUsuario3);
+		informe.setImagenD(imagenUsuario4);
+		informe.setImagenE(imagenUsuario5);
+		informe.setObsImagenA(txtImagen1.getValue());
+		informe.setObsImagenB(txtImagen2.getValue());
+		informe.setObsImagenC(txtImagen3.getValue());
+		informe.setObsImagenD(txtImagen4.getValue());
+		informe.setObsImagenE(txtImagen5.getValue());
+		String a = "";
+		String b = "";
+		if (chk1.isChecked() && a.equals(""))
+			a = "A";
+		if (chk2.isChecked() && a.equals(""))
+			a = "B";
+		if (chk3.isChecked() && a.equals(""))
+			a = "C";
+		if (chk4.isChecked() && a.equals(""))
+			a = "D";
+		if (chk5.isChecked() && a.equals(""))
+			a = "E";
+		
+		if (chk2.isChecked() && b.equals("") && !a.equals("B"))
+			b = "B";
+		if (chk3.isChecked() && b.equals("")&& !a.equals("C"))
+			b = "C";
+		if (chk4.isChecked() && b.equals("")&& !a.equals("D"))
+			b = "D";
+		if (chk5.isChecked() && b.equals("")&& !a.equals("E"))
+			b = "E";
+		informe.setSeleccionadaA(a);
+		informe.setSeleccionadaB(b);
+		servicioInforme.guardar(informe);
+	}
+
+	private void setearImagenes(Informe informe) {
+		BufferedImage imag1;
+		if (informe.getImagenA() != null) {
+			try {
+				imag1 = ImageIO.read(new ByteArrayInputStream(informe
+						.getImagenA()));
+				imagen1.setContent(imag1);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		BufferedImage imag2;
+		if (informe.getImagenB() != null) {
+			try {
+				imag2 = ImageIO.read(new ByteArrayInputStream(informe
+						.getImagenB()));
+				imagen2.setContent(imag2);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		BufferedImage imag3;
+		if (informe.getImagenC() != null) {
+			try {
+				imag3 = ImageIO.read(new ByteArrayInputStream(informe
+						.getImagenC()));
+				imagen3.setContent(imag3);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		BufferedImage imag4;
+		if (informe.getImagenD() != null) {
+			try {
+				imag4 = ImageIO.read(new ByteArrayInputStream(informe
+						.getImagenD()));
+				imagen4.setContent(imag4);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		BufferedImage imag5;
+		if (informe.getImagenE() != null) {
+			try {
+				imag5 = ImageIO.read(new ByteArrayInputStream(informe
+						.getImagenE()));
+				imagen5.setContent(imag5);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		txtImagen1.setValue(informe.getObsImagenA());
+		txtImagen2.setValue(informe.getObsImagenB());
+		txtImagen3.setValue(informe.getObsImagenC());
+		txtImagen4.setValue(informe.getObsImagenD());
+		txtImagen5.setValue(informe.getObsImagenE());
+
+		if (informe.getSeleccionadaA() != null) {
+			switch (informe.getSeleccionadaA()) {
+			case "A":
+				chk1.setChecked(true);
+				break;
+			case "B":
+				chk2.setChecked(true);
+				break;
+			case "C":
+				chk3.setChecked(true);
+				break;
+			case "D":
+				chk4.setChecked(true);
+				break;
+			case "E":
+				chk5.setChecked(true);
+				break;
+			}
+		}
+		if (informe.getSeleccionadaB() != null) {
+			switch (informe.getSeleccionadaB()) {
+			case "A":
+				chk1.setChecked(true);
+				break;
+			case "B":
+				chk2.setChecked(true);
+				break;
+			case "C":
+				chk3.setChecked(true);
+				break;
+			case "D":
+				chk4.setChecked(true);
+				break;
+			case "E":
+				chk5.setChecked(true);
+				break;
+			}
+		}
+	}
+	
+
+	@Listen("onUpload = #fudImagen1")
+	public void processMedia1(UploadEvent event) {
+		media1 = event.getMedia();
+		if (media1 != null) {
+			if (media1.getContentType().equals("image/jpeg")
+					|| media1.getContentType().equals("image/png")) {
+				if (media1.getByteData().length >= 512000
+						&& media1.getByteData().length <= 2048000) {
+					imagen1.setContent((org.zkoss.image.Image) media1);
+				} else {
+					msj.mensajeAlerta(Mensaje.tamanioMuyGrande);
+				}
+			} else {
+				msj.mensajeAlerta(Mensaje.noPermitido);
+			}
+		}
+	}
+
+	@Listen("onUpload = #fudImagen2")
+	public void processMedia2(UploadEvent event) {
+		media2 = event.getMedia();
+		if (media2 != null) {
+			if (media2.getContentType().equals("image/jpeg")
+					|| media2.getContentType().equals("image/png")) {
+				if (media2.getByteData().length >= 512000
+						&& media2.getByteData().length <= 2048000) {
+					imagen2.setContent((org.zkoss.image.Image) media2);
+				} else {
+					msj.mensajeAlerta(Mensaje.tamanioMuyGrande);
+				}
+			} else {
+				msj.mensajeAlerta(Mensaje.noPermitido);
+			}
+		}
+	}
+
+	@Listen("onUpload = #fudImagen3")
+	public void processMedia3(UploadEvent event) {
+		media3 = event.getMedia();
+		if (media3 != null) {
+			if (media3.getContentType().equals("image/jpeg")
+					|| media3.getContentType().equals("image/png")) {
+				if (media3.getByteData().length >= 512000
+						&& media3.getByteData().length <= 2048000) {
+					imagen3.setContent((org.zkoss.image.Image) media3);
+				} else {
+					msj.mensajeAlerta(Mensaje.tamanioMuyGrande);
+				}
+			} else {
+				msj.mensajeAlerta(Mensaje.noPermitido);
+			}
+		}
+	}
+
+	@Listen("onUpload = #fudImagen4")
+	public void processMedia4(UploadEvent event) {
+		media4 = event.getMedia();
+		if (media4 != null) {
+			if (media4.getContentType().equals("image/jpeg")
+					|| media4.getContentType().equals("image/png")) {
+				if (media4.getByteData().length >= 512000
+						&& media4.getByteData().length <= 2048000) {
+					imagen4.setContent((org.zkoss.image.Image) media4);
+				} else {
+					msj.mensajeAlerta(Mensaje.tamanioMuyGrande);
+				}
+			} else {
+				msj.mensajeAlerta(Mensaje.noPermitido);
+			}
+		}
+	}
+	
+	@Listen("onUpload = #fudImagen5")
+	public void processMedia5(UploadEvent event) {
+		media5 = event.getMedia();
+		if (media5 != null) {
+			if (media5.getContentType().equals("image/jpeg")
+					|| media5.getContentType().equals("image/png")) {
+				if (media5.getByteData().length >= 512000
+						&& media5.getByteData().length <= 2048000) {
+					imagen5.setContent((org.zkoss.image.Image) media5);
+				} else {
+					msj.mensajeAlerta(Mensaje.tamanioMuyGrande);
+				}
+			} else {
+				msj.mensajeAlerta(Mensaje.noPermitido);
+			}
+		}
+	}
+
+	@Listen("onClick = #btnRemover1")
+	public void limpiarI1() {
+		org.zkoss.image.Image imagenUsuario1 = null;
+		imagen1.setContent(imagenUsuario1);
+	}
+
+	@Listen("onClick = #btnRemover2")
+	public void limpiarI2() {
+		org.zkoss.image.Image imagenUsuario1 = null;
+		imagen2.setContent(imagenUsuario1);
+	}
+
+	@Listen("onClick = #btnRemover3")
+	public void limpiarI3() {
+		org.zkoss.image.Image imagenUsuario1 = null;
+		imagen3.setContent(imagenUsuario1);
+	}
+
+	@Listen("onClick = #btnRemover4")
+	public void limpiarI4() {
+		org.zkoss.image.Image imagenUsuario1 = null;
+		imagen4.setContent(imagenUsuario1);
+	}
+
+	@Listen("onClick = #btnRemover5")
+	public void limpiarI5() {
+		org.zkoss.image.Image imagenUsuario1 = null;
+		imagen5.setContent(imagenUsuario1);
+	}
 }
