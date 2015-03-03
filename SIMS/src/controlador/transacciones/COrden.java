@@ -328,7 +328,7 @@ public class COrden extends CGenerico {
 							.buscarPorCedula(idPaciente);
 					String doctor = cmbDoctor.getValue();
 					Orden orden = new Orden(idOrden, paciente, doctor,
-							fechaOrden, motivo, horaAuditoria, fechaHora,
+							fechaOrden, motivo, metodoHora(), metodoFecha(),
 							nombreUsuarioSesion());
 					servicioOrden.guardar(orden);
 					if (idOrden != 0)
@@ -351,8 +351,8 @@ public class COrden extends CGenerico {
 						ControlOrden control = servicioControlOrden
 								.buscar(idControlOrden);
 						control.setEstado("Aprobado");
-						control.setHoraAuditoria(horaAuditoria);
-						control.setFechaAuditoria(fechaHora);
+						control.setHoraAuditoria(metodoHora());
+						control.setFechaAuditoria(metodoFecha());
 						control.setUsuarioAuditoria(nombreUsuarioSesion());
 						servicioControlOrden.guardar(control);
 						idControlOrden = null;

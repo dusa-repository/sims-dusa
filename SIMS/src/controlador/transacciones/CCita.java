@@ -167,8 +167,8 @@ public class CCita extends CGenerico {
 					String estado = "Pendiente";
 					Date hora = tmbHoraCita.getValue();
 					String horaCita = df.format(hora);
-					Cita cita = new Cita(id, estado, fechaHora, fechaCrea,
-							fechaHora, horaAuditoria, horaCita, usuario,
+					Cita cita = new Cita(id, estado, metodoFecha(), fechaCrea,
+							metodoFecha(), metodoHora(), horaCita, usuario,
 							observacion, nombreUsuarioSesion(), motivo,
 							paciente);
 

@@ -189,7 +189,7 @@ public class CControl extends CGenerico {
 					}
 					Timestamp fechaConsulta = new Timestamp(
 							fechaNueva.getTime());
-					String hora = horaAuditoria;
+					String hora = metodoHora();
 					if (ordenConsulta) {
 						if (id != null) {
 							ControlConsulta control = servicioControlConsulta
@@ -202,7 +202,7 @@ public class CControl extends CGenerico {
 						String secundaria = cmbTipoPreventiva.getValue();
 						ControlConsulta control = new ControlConsulta(id,
 								paciente, observacion, estado, fechaConsulta,
-								hora, null, null, fechaHora, horaAuditoria,
+								hora, null, null, fechaHora, metodoHora(),
 								nombreUsuarioSesion(),
 								cmbTipoConsulta.getValue(), secundaria);
 						servicioControlConsulta.guardar(control);
@@ -221,7 +221,7 @@ public class CControl extends CGenerico {
 							id = (long) 0;
 						ControlOrden control = new ControlOrden(id, paciente,
 								observacion, estado, fechaConsulta, hora, null,
-								null, fechaHora, horaAuditoria,
+								null, fechaHora, metodoHora(),
 								nombreUsuarioSesion());
 						servicioControlOrden.guardar(control);
 						controlesOrden = servicioControlOrden
@@ -521,16 +521,20 @@ public class CControl extends CGenerico {
 		boolean borrar = false;
 		Timestamp fechaFinal = null;
 		String horaFinal = null;
+		String nombreTitulo = null;
 		if (evento.getTarget().getId().equals("btnAprobar")) {
 			fechaFinal = new Timestamp(fecha.getTime());
 			estado = "Aprobado";
-			horaFinal = horaAuditoria;
+			horaFinal = metodoHora();
+			nombreTitulo = "Entregar";
 		} else {
-			if (evento.getTarget().getId().equals("btnCancelar"))
+			if (evento.getTarget().getId().equals("btnCancelar")) {
 				estado = "Cancelada";
-			else {
+				nombreTitulo = "Cancelar";
+			} else {
 				borrar = true;
 				estado = "Eliminar";
+				nombreTitulo = "Eliminar";
 			}
 		}
 		final boolean eliminar = borrar;
@@ -541,9 +545,9 @@ public class CControl extends CGenerico {
 				final List<ControlConsulta> seleccionados = cambiarEstadoConsulta(
 						lista, estado, fechaFinal, horaFinal);
 				if (!seleccionados.isEmpty()) {
-					Messagebox.show(
-							"¿Desea Aprobar las " + seleccionados.size()
-									+ " Solicitudes de Consulta?", "Alerta",
+					Messagebox.show("¿Desea " + nombreTitulo + " las "
+							+ seleccionados.size()
+							+ " Solicitudes de Consulta?", "Alerta",
 							Messagebox.OK | Messagebox.CANCEL,
 							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
@@ -575,10 +579,10 @@ public class CControl extends CGenerico {
 				final List<ControlOrden> seleccionados = cambiarEstadoOrden(
 						lista, estado, fechaFinal, horaFinal);
 				if (!seleccionados.isEmpty()) {
-					Messagebox.show(
-							"¿Desea Entregar las " + seleccionados.size()
-									+ " Ordenes?", "Alerta", Messagebox.OK
-									| Messagebox.CANCEL, Messagebox.QUESTION,
+					Messagebox.show("¿Desea " + nombreTitulo + " las "
+							+ seleccionados.size() + " Solicitudes de Ordenes?", "Alerta",
+							Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION,
 							new org.zkoss.zk.ui.event.EventListener<Event>() {
 								public void onEvent(Event evt)
 										throws InterruptedException {
@@ -613,7 +617,7 @@ public class CControl extends CGenerico {
 			controlConsulta.setFechaIngreso(fechaFinal);
 			controlConsulta.setHoraIngreso(horaFinal);
 			controlConsulta.setFechaAuditoria(fechaHora);
-			controlConsulta.setHoraAuditoria(horaAuditoria);
+			controlConsulta.setHoraAuditoria(metodoHora());
 			controlConsulta.setUsuarioAuditoria(nombreUsuarioSesion());
 		}
 		return lista;
@@ -628,7 +632,7 @@ public class CControl extends CGenerico {
 			controlConsulta.setFechaEntrega(fechaFinal);
 			controlConsulta.setHoraEntrega(horaFinal);
 			controlConsulta.setFechaAuditoria(fechaHora);
-			controlConsulta.setHoraAuditoria(horaAuditoria);
+			controlConsulta.setHoraAuditoria(metodoHora());
 			controlConsulta.setUsuarioAuditoria(nombreUsuarioSesion());
 		}
 		return lista;

@@ -1088,8 +1088,8 @@ public class CConsulta extends CGenerico {
 						ritmicaRespiratoria = false;
 					String reposoEmbarazo = cmbReposo.getValue();
 					Consulta consulta = new Consulta(idConsulta, paciente,
-							usuario, fechaConsulta, horaAuditoria,
-							horaAuditoria, fechaHora, nombreUsuarioSesion(),
+							usuario, fechaConsulta, metodoHora(),
+							metodoHora(), metodoFecha(), nombreUsuarioSesion(),
 							accidente, motivo, tipo, enfermedad,
 							idConsultaAsociada, estatura, peso, ombligo, plena,
 							forzada, frecuencia, frecuencia1, frecuencia2,
@@ -1724,8 +1724,8 @@ public class CConsulta extends CGenerico {
 		if (ltbMedicinasAgregadas.getItemCount() != 0) {
 			Date vali = dtbValido.getValue();
 			Timestamp validez = new Timestamp(vali.getTime());
-			recipe = new Recipe(0, cmbPrioridad.getValue(), validez, fechaHora,
-					horaAuditoria, nombreUsuarioSesion(),
+			recipe = new Recipe(0, cmbPrioridad.getValue(), validez, metodoFecha(),
+					metodoHora(), nombreUsuarioSesion(),
 					cmbTratamiento.getValue());
 			servicioRecipe.guardar(recipe);
 			recipe = servicioRecipe.buscarUltimo();
@@ -4873,7 +4873,7 @@ public class CConsulta extends CGenerico {
 				edadDesarrollo, fechaUltimaMenstruacion, embarazos, partos,
 				cesareas, abortos, fechaUltimaCitologia, ovarios, embarazo,
 				semanasGestando, eco, resultadoEco, mamografia,
-				resultadoMamografia, horaAuditoria, fechaHora,
+				resultadoMamografia, metodoHora(), metodoFecha(),
 				nombreUsuarioSesion(), a, b, c, d, e, f, g, h, i, j, k, l, m,
 				n, o, p, q, r, s, t, u, v, w, x, y, z, za, zb, zc, zd, ze, zf,
 				carta, colores, telefonoOdontologo, alturaHombro,
@@ -6534,7 +6534,7 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteNombre",
 				paciente.getPrimerNombre() + " " + paciente.getPrimerApellido());
 		p.put("fecha", consuta.getFechaConsulta());
-		p.put("edad", paciente.getEdad());
+		p.put("edad", String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("cedula", paciente.getCedula());
 		p.put("sexo", paciente.getSexo());
 		if (paciente.isDiscapacidad())
