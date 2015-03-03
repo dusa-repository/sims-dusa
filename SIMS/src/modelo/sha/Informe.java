@@ -125,6 +125,15 @@ public class Informe implements Serializable {
 	@JoinTable(name = "informe_condicion_f", schema = "dusa_sims.dbo", joinColumns = { @JoinColumn(name = "id_informe", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "id_condicion", nullable = false) })
 	private Set<Condicion> condicionF;
 
+	@Column(name = "fecha_visita")
+	private Timestamp fechaVisita;
+	
+	@Column(length = 1000)
+	private String ordenamientos;
+	
+	@Column(length = 1000)
+	private String funcionario;
+
 	@Column(length = 50)
 	private String ebc;
 
@@ -2258,6 +2267,30 @@ public class Informe implements Serializable {
 
 	public void setPlanes(Set<PlanAccion> planes) {
 		this.planes = planes;
+	}
+
+	public Timestamp getFechaVisita() {
+		return fechaVisita;
+	}
+
+	public void setFechaVisita(Timestamp fechaVisita) {
+		this.fechaVisita = fechaVisita;
+	}
+
+	public String getOrdenamientos() {
+		return ordenamientos;
+	}
+
+	public void setOrdenamientos(String ordenamientos) {
+		this.ordenamientos = ordenamientos;
+	}
+
+	public String getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(String funcionario) {
+		this.funcionario = funcionario;
 	}
 
 }

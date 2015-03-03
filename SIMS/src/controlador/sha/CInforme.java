@@ -12,30 +12,24 @@ import java.util.Map;
 import java.util.Set;
 
 import modelo.maestros.Empresa;
-import modelo.maestros.Medicina;
 import modelo.maestros.Paciente;
 import modelo.sha.Area;
 import modelo.sha.ClasificacionAccidente;
 import modelo.sha.Condicion;
 import modelo.sha.Informe;
 import modelo.sha.PlanAccion;
-import modelo.transacciones.Consulta;
-import modelo.transacciones.ConsultaMedicina;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
-import org.zkoss.zul.A;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
@@ -43,20 +37,17 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
-import org.zkoss.zul.Row;
-import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
-import org.zkoss.zul.Window;
 
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CInforme extends CGenerico {
@@ -924,6 +915,26 @@ public class CInforme extends CGenerico {
 	private Div catalogoInforme;
 	@Wire
 	private Div botoneraInforme;
+
+	@Wire
+	private Textbox txtDescripcionVisita;
+	@Wire
+	private Textbox txtQuienVisita;
+	@Wire
+	private Textbox txtDondeVisita;
+	@Wire
+	private Textbox txtComoVisita;
+	@Wire
+	private Datebox dtbCuandoVisita;
+	@Wire
+	private Listbox ltbPlanVisita;
+	@Wire
+	private Textbox txtFuncionario;
+	@Wire
+	private Textbox txtOrdenamientos;
+	@Wire
+	private Datebox dtbFechaVisita;
+
 	Catalogo<Paciente> catalogoP;
 	Catalogo<Empresa> catalogoE;
 	Catalogo<Informe> catalogoI;
@@ -941,6 +952,8 @@ public class CInforme extends CGenerico {
 	long idEmpresa2 = 0;
 
 	private List<PlanAccion> planes = new ArrayList<PlanAccion>();
+	private List<PlanAccion> planes2 = new ArrayList<PlanAccion>();
+	Botonera botonera;
 
 	@Override
 	public void inicializar() throws IOException {
@@ -962,8 +975,17 @@ public class CInforme extends CGenerico {
 		listasMultiples();
 		llenarComboCLasificacion();
 		llenarComboArea();
+		txt1.setDisabled(true);
+		String c = servicioInforme.buscarMaxCodigo();
+		int n = c.length();
+		char car = c.charAt(n - 1);
+		String nro = Character.toString(car);
+		Integer co = Integer.parseInt(nro);
+		String finaal = String.valueOf(co + 1);
+		txt1.setValue(cod + finaal);
 
-		Botonera botonera = new Botonera() {
+
+		botonera = new Botonera() {
 
 			@Override
 			public void salir() {
@@ -973,10 +995,23 @@ public class CInforme extends CGenerico {
 			@Override
 			public void limpiar() {
 				idInforme = 0;
+				String c = servicioInforme.buscarMaxCodigo();
+				int n = c.length();
+				char car = c.charAt(n - 1);
+				String nro = Character.toString(car);
+				Integer co = Integer.parseInt(nro);
+				String finaal = String.valueOf(co + 1);
+				txt1.setValue(cod + finaal);
 				ltbPlan.getItems().clear();
 				planes.clear();
+				ltbPlanVisita.getItems().clear();
+				planes2.clear();
+				botonera.getChildren().get(0).setVisible(true);
 				limpiarCampos();
 				limpiarCamposPlan();
+				limpiarCamposPlan2();
+				
+
 			}
 
 			@Override
@@ -985,6 +1020,12 @@ public class CInforme extends CGenerico {
 					Informe informe = new Informe();
 					informe.setIdInforme(idInforme);
 					informe.setCodigo(txt1.getValue());
+					informe.setCodigo(txt1.getValue());
+					informe.setFuncionario(txtFuncionario.getValue());
+					informe.setOrdenamientos(txtOrdenamientos.getValue());
+					Date fecha2 = dtbFechaVisita.getValue();
+					Timestamp fechaN2 = new Timestamp(fecha2.getTime());
+					informe.setFechaVisita(fechaN2);
 					Paciente pacientePrincipal = servicioPaciente
 							.buscarPorCedula(lbl53.getValue());
 					informe.setPacienteA(pacientePrincipal);
@@ -1481,6 +1522,14 @@ public class CInforme extends CGenerico {
 						else
 							informe = servicioInforme.buscarUltimo();
 						guardarPlanes(informe);
+					}
+					if (ltbPlanVisita.getItemCount() != 0) {
+						informe = new Informe();
+						if (idInforme != 0)
+							informe = servicioInforme.buscar(idInforme);
+						else
+							informe = servicioInforme.buscarUltimo();
+						guardarPlanes2(informe);
 					}
 					Mensaje.mensajeInformacion(Mensaje.guardado);
 					limpiar();
@@ -2061,12 +2110,28 @@ public class CInforme extends CGenerico {
 	public void seleccion() {
 		Informe informe = catalogoI.objetoSeleccionadoDelCatalogo();
 		ltbPlan.getItems().clear();
-		planes = servicioPlanAccion.buscarPorInforme(informe);
+		planes = servicioPlanAccion.buscarPorInformeyTipo(informe, "normal");
 		if (!planes.isEmpty()) {
 			ltbPlan.setModel(new ListModelList<PlanAccion>(planes));
 			ltbPlan.setCheckmark(false);
 			ltbPlan.setCheckmark(true);
 		}
+		ltbPlanVisita.getItems().clear();
+		planes2 = servicioPlanAccion
+				.buscarPorInformeyTipo(informe, "inspector");
+		if (!planes2.isEmpty()) {
+			ltbPlanVisita.setModel(new ListModelList<PlanAccion>(planes2));
+			ltbPlanVisita.setCheckmark(false);
+			ltbPlanVisita.setCheckmark(true);
+		}
+		if (servicioPlanAccion.buscarPorActivos(informe))
+			botonera.getChildren().get(0).setVisible(false);
+		else
+			botonera.getChildren().get(0).setVisible(true);
+		txtOrdenamientos.setValue(informe.getOrdenamientos());
+		txtFuncionario.setValue(informe.getFuncionario());
+		if (informe.getFechaVisita() != null)
+			dtbFechaVisita.setValue(informe.getFechaVisita());
 		txt1.setValue(informe.getCodigo());
 		setear5(informe.getPacienteA());
 		if (informe.getEmpresaA() != null)
@@ -3095,7 +3160,9 @@ public class CInforme extends CGenerico {
 		radio.setChecked(false);
 		txt5275.setValue("");
 
-		txt1.setValue("");
+		txtOrdenamientos.setValue("");
+		txtFuncionario.setValue("");
+		dtbFechaVisita.setValue(fechaHora);
 		limpiar5();
 		limpiar3();
 		limpiar21();
@@ -4839,7 +4906,7 @@ public class CInforme extends CGenerico {
 
 	protected void guardarPlanes(Informe informe) {
 		List<PlanAccion> planesAccion = servicioPlanAccion
-				.buscarPorInformeYEstado(informe, "Programado");
+				.buscarPorInformeEstadoyTipo(informe, "Programado", "normal");
 		if (!planesAccion.isEmpty())
 			servicioPlanAccion.eliminarVarios(planesAccion);
 		planesAccion.clear();
@@ -4860,10 +4927,139 @@ public class CInforme extends CGenerico {
 						planItem.getComo(), planItem.getDonde(),
 						planItem.getCuando(), null, "", "Programado",
 						fechaHora, horaAuditoria, nombreUsuarioSesion());
+				planAccion.setTipo("normal");
 				planesAccion.add(planAccion);
 			}
 		}
 		servicioPlanAccion.guardarVarios(planesAccion);
+	}
+
+	protected void guardarPlanes2(Informe informe) {
+		List<PlanAccion> planesAccion = servicioPlanAccion
+				.buscarPorInformeEstadoyTipo(informe, "Programado", "inspector");
+		if (!planesAccion.isEmpty())
+			servicioPlanAccion.eliminarVarios(planesAccion);
+		planesAccion.clear();
+		planesAccion = new ArrayList<PlanAccion>();
+		ltbPlanVisita.renderAll();
+		for (int i = 0; i < ltbPlanVisita.getItemCount(); i++) {
+			Listitem listItem = ltbPlanVisita.getItemAtIndex(i);
+			PlanAccion planItem = listItem.getValue();
+			PlanAccion planAccion = new PlanAccion();
+			boolean registro = true;
+			if (planItem.getEstado() != null) {
+				if (planItem.getEstado().equals("Finalizado"))
+					registro = false;
+			}
+			if (registro) {
+				planAccion = new PlanAccion(0, informe,
+						planItem.getDescripcion(), planItem.getQuien(),
+						planItem.getComo(), planItem.getDonde(),
+						planItem.getCuando(), null, "", "Programado",
+						fechaHora, horaAuditoria, nombreUsuarioSesion());
+				planAccion.setTipo("inspector");
+				planesAccion.add(planAccion);
+			}
+		}
+		servicioPlanAccion.guardarVarios(planesAccion);
+	}
+
+	@Listen("onClick = #btnEditarVisita")
+	public void seleccionarPlanVisita() {
+		if (ltbPlanVisita.getItemCount() != 0) {
+			if (ltbPlanVisita.getSelectedItems().size() == 1) {
+				Listitem listItem = ltbPlanVisita.getSelectedItem();
+				boolean error = false;
+				if (listItem != null) {
+					PlanAccion plan = listItem.getValue();
+					if (plan.getEstado() != null) {
+						if (plan.getEstado().equals("Finalizado")) {
+							Mensaje.mensajeAlerta("No se pueden editar Acciones que ya han sido Finalizadas");
+							error = true;
+						}
+					}
+					if (!error) {
+						planes2.remove(plan);
+						ltbPlanVisita.setModel(new ListModelList<PlanAccion>(
+								planes2));
+						ltbPlanVisita.setCheckmark(false);
+						ltbPlanVisita.setCheckmark(true);
+						txtDondeVisita.setValue(plan.getDonde());
+						txtComoVisita.setValue(plan.getComo());
+						txtQuienVisita.setValue(plan.getQuien());
+						dtbCuandoVisita.setValue(plan.getCuando());
+						txtDescripcionVisita.setValue(plan.getDescripcion());
+					}
+				}
+			} else
+				Mensaje.mensajeError("Debe Seleccionar un Item");
+		} else
+			Mensaje.mensajeError("No existen Regitros");
+	}
+
+	@Listen("onClick = #btnRemoverVisita")
+	public void removerItemVisita() {
+		if (ltbPlanVisita.getItemCount() != 0) {
+			if (ltbPlanVisita.getSelectedItems().size() == 1) {
+				Listitem listItem = ltbPlanVisita.getSelectedItem();
+				boolean error = false;
+				if (listItem != null) {
+					PlanAccion plan = listItem.getValue();
+					if (plan.getEstado() != null) {
+						if (plan.getEstado().equals("Finalizado")) {
+							Mensaje.mensajeAlerta("No se pueden remover Acciones que ya han sido Finalizadas");
+							error = true;
+						}
+					}
+					if (!error) {
+						planes2.remove(plan);
+						ltbPlanVisita.setModel(new ListModelList<PlanAccion>(
+								planes2));
+						ltbPlanVisita.setCheckmark(false);
+						ltbPlanVisita.setCheckmark(true);
+					}
+				}
+			} else
+				Mensaje.mensajeError("Debe Seleccionar un Item");
+		} else
+			Mensaje.mensajeError("No existen Item Registrados");
+	}
+
+	@Listen("onClick = #btnAgregarItemsVisita")
+	public void agregarPlanVisita() {
+		if (validarPlan2()) {
+			Timestamp fechaPlan = new Timestamp(dtbCuandoVisita.getValue()
+					.getTime());
+			PlanAccion planAccion = new PlanAccion(0, null,
+					txtDescripcionVisita.getValue(), txtQuienVisita.getValue(),
+					txtComoVisita.getValue(), txtDondeVisita.getValue(),
+					fechaPlan, null, null, null, null, null, null);
+			planes2.add(planAccion);
+			ltbPlanVisita.setModel(new ListModelList<PlanAccion>(planes2));
+			ltbPlanVisita.setCheckmark(false);
+			ltbPlanVisita.setCheckmark(true);
+			limpiarCamposPlan2();
+		} else
+			Mensaje.mensajeError("Debe llenar todos los campos del plan especifico");
+	}
+
+	private void limpiarCamposPlan2() {
+		txtDondeVisita.setValue("");
+		txtComoVisita.setValue("");
+		txtDescripcionVisita.setValue("");
+		txtQuienVisita.setValue("");
+		dtbCuandoVisita.setValue(fecha);
+	}
+
+	private boolean validarPlan2() {
+		if (txtDescripcionVisita.getText().compareTo("") == 0
+				|| txtQuienVisita.getText().compareTo("") == 0
+				|| txtComoVisita.getText().compareTo("") == 0
+				|| txtDondeVisita.getText().compareTo("") == 0
+				|| dtbCuandoVisita.getText().compareTo("") == 0)
+			return false;
+		else
+			return true;
 	}
 
 }
