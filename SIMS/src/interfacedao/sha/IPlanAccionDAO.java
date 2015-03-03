@@ -25,4 +25,9 @@ public interface IPlanAccionDAO extends JpaRepository<PlanAccion, Long> {
 
 	List<PlanAccion> findByInformeAndEstado(Informe informe, String string);
 
+	List<PlanAccion> findByInformeAndTipo(Informe informe, String string);
+
+	List<PlanAccion> findByInformeAndEstadoAndTipo(Informe informe,
+			String string, String string2);
+
 }

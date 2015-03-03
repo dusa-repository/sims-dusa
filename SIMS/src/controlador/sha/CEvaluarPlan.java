@@ -56,6 +56,14 @@ public class CEvaluarPlan extends CGenerico {
 	private Datebox dtbFecha;
 	@Wire
 	private Listbox ltbAcciones;
+	@Wire
+	private Listbox ltbAccionesInspector;
+	@Wire
+	private Label lblFuncionario;
+	@Wire
+	private Label lblFechaVisita;
+	@Wire
+	private Label lblOrdenamientos;
 	private Catalogo<Informe> catalogo;
 	private Long codigoInforme = null;
 	private String nombre;
@@ -90,6 +98,10 @@ public class CEvaluarPlan extends CGenerico {
 				dtbFecha.setValue(null);
 				codigoInforme = null;
 				ltbAcciones.getItems().clear();
+				ltbAccionesInspector.getItems().clear();
+				lblOrdenamientos.setValue("");
+				lblFuncionario.setValue("");
+				lblFechaVisita.setValue("");
 			}
 
 			@Override
@@ -98,7 +110,8 @@ public class CEvaluarPlan extends CGenerico {
 					Mensaje.mensajeError(Mensaje.camposVacios);
 				else {
 					ltbAcciones.renderAll();
-					if (validarLista()) {
+					ltbAccionesInspector.renderAll();
+					if (validarLista() && validarLista2()) {
 						List<PlanAccion> planes = new ArrayList<PlanAccion>();
 						if (ltbAcciones.getItemCount() != 0) {
 							for (int i = 0; i < ltbAcciones.getItemCount(); i++) {
@@ -130,6 +143,38 @@ public class CEvaluarPlan extends CGenerico {
 							}
 							servicioPlanAccion.guardarVarios(planes);
 						}
+						
+						List<PlanAccion> planes2 = new ArrayList<PlanAccion>();
+						if (ltbAccionesInspector.getItemCount() != 0) {
+							for (int i = 0; i < ltbAccionesInspector.getItemCount(); i++) {
+								Listitem listItem = ltbAccionesInspector
+										.getItemAtIndex(i);
+								PlanAccion plan = listItem.getValue();
+								if (listItem.isSelected()) {
+									Textbox text = (Textbox) listItem
+											.getChildren().get(6).getChildren()
+											.get(0);
+									String observacion = text.getValue();
+									Datebox date = (Datebox) listItem
+											.getChildren().get(5).getChildren()
+											.get(0);
+									Date fecha = date.getValue();
+									plan.setEstado("Finalizado");
+									plan.setObservacion(observacion);
+									plan.setFechaCumplido(new Timestamp(fecha
+											.getTime()));
+								} else {
+									plan.setEstado("Programado");
+									plan.setObservacion(null);
+									plan.setFechaCumplido(null);
+								}
+								plan.setFechaAuditoria(fechaHora);
+								plan.setHoraAuditoria(horaAuditoria);
+								plan.setUsuarioAuditoria(nombreUsuarioSesion());
+								planes2.add(plan);
+							}
+							servicioPlanAccion.guardarVarios(planes2);
+						}
 						Mensaje.mensajeInformacion(Mensaje.guardado);
 						limpiar();
 					} else
@@ -151,6 +196,22 @@ public class CEvaluarPlan extends CGenerico {
 		boolean noVacio = true;
 		for (int i = 0; i < ltbAcciones.getItemCount(); i++) {
 			Listitem listItem = ltbAcciones.getItemAtIndex(i);
+			if (listItem.isSelected()) {
+				Datebox date = (Datebox) listItem.getChildren().get(5)
+						.getChildren().get(0);
+				Date fecha = date.getValue();
+				if (fecha == null)
+					noVacio = false;
+			}
+		}
+		return noVacio;
+	}
+	
+
+	protected boolean validarLista2() {
+		boolean noVacio = true;
+		for (int i = 0; i < ltbAccionesInspector.getItemCount(); i++) {
+			Listitem listItem = ltbAccionesInspector.getItemAtIndex(i);
 			if (listItem.isSelected()) {
 				Datebox date = (Datebox) listItem.getChildren().get(5)
 						.getChildren().get(0);
@@ -209,7 +270,7 @@ public class CEvaluarPlan extends CGenerico {
 	public void seleccion() {
 		Informe informe = catalogo.objetoSeleccionadoDelCatalogo();
 		ltbAcciones.getItems().clear();
-		List<PlanAccion> planes = servicioPlanAccion.buscarPorInforme(informe);
+		List<PlanAccion> planes = servicioPlanAccion.buscarPorInformeyTipo(informe,"normal");
 		if (!planes.isEmpty()) {
 			ltbAcciones.setModel(new ListModelList<PlanAccion>(planes));
 			ltbAcciones.setCheckmark(false);
@@ -228,6 +289,31 @@ public class CEvaluarPlan extends CGenerico {
 				}
 			}
 		}
+		
+		ltbAccionesInspector.getItems().clear();
+		List<PlanAccion> planes2 = servicioPlanAccion.buscarPorInformeyTipo(informe,"inspector");
+		if (!planes.isEmpty()) {
+			ltbAccionesInspector.setModel(new ListModelList<PlanAccion>(planes2));
+			ltbAccionesInspector.setCheckmark(false);
+			ltbAccionesInspector.setMultiple(false);
+			ltbAccionesInspector.setCheckmark(true);
+			ltbAccionesInspector.setMultiple(true);
+			ltbAccionesInspector.renderAll();
+			if (ltbAccionesInspector.getItemCount() != 0) {
+				for (int i = 0; i < ltbAccionesInspector.getItemCount(); i++) {
+					Listitem listItem = ltbAccionesInspector.getItemAtIndex(i);
+					PlanAccion plan = listItem.getValue();
+					if (plan.getEstado().equals("Finalizado"))
+						listItem.setSelected(true);
+					else
+						listItem.setSelected(false);
+				}
+			}
+		}
+		lblOrdenamientos.setValue(informe.getOrdenamientos());
+		lblFuncionario.setValue(informe.getFuncionario());
+		if (informe.getFechaVisita() != null)
+			lblFechaVisita.setValue(formatoFecha.format(informe.getFechaVisita()));
 		lblCodigo.setValue(informe.getCodigo());
 		lblCedula.setValue(informe.getPacienteA().getCedula());
 		lblFicha.setValue(informe.getPacienteA().getFicha());

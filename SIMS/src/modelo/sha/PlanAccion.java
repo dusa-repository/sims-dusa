@@ -58,6 +58,9 @@ public class PlanAccion implements Serializable {
 
 	@Column(length = 100)
 	private String estado;
+	
+	@Column(length = 50)
+	private String tipo;
 
 	@Column(name = "hora_auditoria", length = 10)
 	private String horaAuditoria;
@@ -203,6 +206,14 @@ public class PlanAccion implements Serializable {
 	public String traerFechaFinalizado() {
 		DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 		return String.valueOf(formatoFecha.format(fechaCumplido));
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 }

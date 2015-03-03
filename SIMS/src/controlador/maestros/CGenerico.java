@@ -276,9 +276,12 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 	protected DateFormat formatoHorasHombre = new SimpleDateFormat("MM/yyyy");
 	protected DateFormat formatoReporte = new SimpleDateFormat("dd-MM-yyyy");
+	protected DateFormat formatoYear = new SimpleDateFormat("yyyy");
 	public List<Tab> tabs = new ArrayList<Tab>();
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	protected DateFormat formatoImportar = new SimpleDateFormat("yyyy-MM-dd");
+	public java.util.Date fecha = new Date();
+	public	String cod = formatoYear.format(fecha);
 	public Calendar calendario2 = Calendar.getInstance();
 	public Calendar calendario = Calendar.getInstance();
 	public String horaAuditoria = String.valueOf(calendario
@@ -287,7 +290,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			+ String.valueOf(calendario.get(Calendar.MINUTE))
 			+ ":"
 			+ String.valueOf(calendario.get(Calendar.SECOND));
-	public java.util.Date fecha = new Date();
+
 	public Timestamp fechaHora = new Timestamp(fecha.getTime());
 	public static double id = 0;
 	public static boolean nextNumber = true;

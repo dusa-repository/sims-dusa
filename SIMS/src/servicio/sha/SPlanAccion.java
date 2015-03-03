@@ -75,4 +75,26 @@ public class SPlanAccion {
 			String string) {
 		return planDAO.findByInformeAndEstado(informe, string);
 	}
+	
+	public Boolean buscarPorActivos(Informe informe) {
+		if (planDAO.findByInforme(informe).isEmpty()) {
+			return false;
+		} else {
+			if (planDAO.findByInformeAndEstado(informe, "Programado").isEmpty())
+				return true;
+			else
+				return false;
+		}
+	}
+
+	public List<PlanAccion> buscarPorInformeyTipo(Informe informe, String string) {
+		// TODO Auto-generated method stub
+		return  planDAO.findByInformeAndTipo(informe, string);
+	}
+
+	public List<PlanAccion> buscarPorInformeEstadoyTipo(Informe informe,
+			String string, String string2) {
+		return planDAO.findByInformeAndEstadoAndTipo(informe, string,string2);
+	}
+
 }
