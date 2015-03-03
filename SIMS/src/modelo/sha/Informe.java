@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -647,6 +648,48 @@ public class Informe implements Serializable {
 
 	@OneToMany(mappedBy = "informe")
 	private Set<PlanAccion> planes;
+	
+	@Lob
+	@Column(name = "imagen_a")
+	private byte[] imagenA;
+	
+	@Lob
+	@Column(name = "imagen_b")
+	private byte[] imagenB;
+	
+	@Lob
+	@Column(name = "imagen_c")
+	private byte[] imagenC;
+	
+	@Lob
+	@Column(name = "imagen_d")
+	private byte[] imagenD;
+	
+	@Lob
+	@Column(name = "imagen_e")
+	private byte[] imagenE;
+	
+	@Column(name = "obs_imagen_a", length = 1000)
+	private String obsImagenA;
+	
+	@Column(name = "obs_imagen_b", length = 1000)
+	private String obsImagenB;
+	
+	@Column(name = "obs_imagen_c", length = 1000)
+	private String obsImagenC;
+	
+	@Column(name = "obs_imagen_d", length = 1000)
+	private String obsImagenD;
+	
+	@Column(name = "obs_imagen_e", length = 1000)
+	private String obsImagenE;
+	
+	@Column(name = "seleccionada_a", length = 10)
+	private String seleccionadaA;
+	
+	@Column(name = "seleccionada_b", length = 10)
+	private String seleccionadaB;
+	
 
 	public Informe() {
 		super();
@@ -2293,4 +2336,101 @@ public class Informe implements Serializable {
 		this.funcionario = funcionario;
 	}
 
+	public byte[] getImagenA() {
+		return imagenA;
+	}
+
+	public void setImagenA(byte[] imagenA) {
+		this.imagenA = imagenA;
+	}
+
+	public byte[] getImagenB() {
+		return imagenB;
+	}
+
+	public void setImagenB(byte[] imagenB) {
+		this.imagenB = imagenB;
+	}
+
+	public byte[] getImagenC() {
+		return imagenC;
+	}
+
+	public void setImagenC(byte[] imagenC) {
+		this.imagenC = imagenC;
+	}
+
+	public byte[] getImagenD() {
+		return imagenD;
+	}
+
+	public void setImagenD(byte[] imagenD) {
+		this.imagenD = imagenD;
+	}
+
+	public byte[] getImagenE() {
+		return imagenE;
+	}
+
+	public void setImagenE(byte[] imagenE) {
+		this.imagenE = imagenE;
+	}
+
+	public String getObsImagenA() {
+		return obsImagenA;
+	}
+
+	public void setObsImagenA(String obsImagenA) {
+		this.obsImagenA = obsImagenA;
+	}
+
+	public String getObsImagenB() {
+		return obsImagenB;
+	}
+
+	public void setObsImagenB(String obsImagenB) {
+		this.obsImagenB = obsImagenB;
+	}
+
+	public String getObsImagenC() {
+		return obsImagenC;
+	}
+
+	public void setObsImagenC(String obsImagenC) {
+		this.obsImagenC = obsImagenC;
+	}
+
+	public String getObsImagenD() {
+		return obsImagenD;
+	}
+
+	public void setObsImagenD(String obsImagenD) {
+		this.obsImagenD = obsImagenD;
+	}
+
+	public String getObsImagenE() {
+		return obsImagenE;
+	}
+
+	public void setObsImagenE(String obsImagenE) {
+		this.obsImagenE = obsImagenE;
+	}
+
+	public String getSeleccionadaA() {
+		return seleccionadaA;
+	}
+
+	public void setSeleccionadaA(String seleccionadaA) {
+		this.seleccionadaA = seleccionadaA;
+	}
+
+	public String getSeleccionadaB() {
+		return seleccionadaB;
+	}
+
+	public void setSeleccionadaB(String seleccionadaB) {
+		this.seleccionadaB = seleccionadaB;
+	}
+
+	
 }
