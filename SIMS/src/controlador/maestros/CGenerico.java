@@ -281,7 +281,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	protected DateFormat formatoImportar = new SimpleDateFormat("yyyy-MM-dd");
 	public java.util.Date fecha = new Date();
-	public	String cod = formatoYear.format(fecha);
+	public String cod = formatoYear.format(fecha);
 	public Calendar calendario2 = Calendar.getInstance();
 	public Calendar calendario = Calendar.getInstance();
 	public String horaAuditoria = String.valueOf(calendario
@@ -299,6 +299,19 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		inicializar();
+	}
+
+	public Timestamp metodoFecha() {
+		fecha = new Date();
+		return fechaHora = new Timestamp(fecha.getTime());
+	}
+
+	public String metodoHora() {
+		fecha = new Date();
+		calendario.setTime(fecha);
+		return String.valueOf(calendario.get(Calendar.HOUR_OF_DAY)) + ":"
+				+ String.valueOf(calendario.get(Calendar.MINUTE)) + ":"
+				+ String.valueOf(calendario.get(Calendar.SECOND));
 	}
 
 	public abstract void inicializar() throws IOException;
@@ -392,8 +405,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public static SPaciente getServicioPaciente() {
 		return applicationContext.getBean(SPaciente.class);
 	}
-	
-	
 
 	public static SCondicion getServicioCondicion() {
 		return applicationContext.getBean(SCondicion.class);
@@ -511,8 +522,11 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		if (today.get(Calendar.DAY_OF_YEAR) < birth.get(Calendar.DAY_OF_YEAR)) {
 			factor = -1;
 		}
-		age = (currentDate.getYear() - birthDate.getYear()) + factor;
+		age = (today.get(Calendar.YEAR) - birth.get(Calendar.YEAR)) + factor;
 		if (age == -1)
+			age = 0;
+		if (today.get(Calendar.YEAR) == birth.get(Calendar.YEAR))
+			// age = today.get(Calendar.MONTH) - birth.get(Calendar.MONTH);
 			age = 0;
 		return age;
 	}
