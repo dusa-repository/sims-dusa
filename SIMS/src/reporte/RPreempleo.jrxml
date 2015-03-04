@@ -6,7 +6,7 @@
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="pacienteNombre" class="java.lang.String"/>
 	<parameter name="fecha" class="java.sql.Timestamp"/>
-	<parameter name="edad" class="java.lang.Integer"/>
+	<parameter name="edad" class="java.lang.String"/>
 	<parameter name="cedula" class="java.lang.String"/>
 	<parameter name="sexo" class="java.lang.String"/>
 	<parameter name="discapacidad" class="java.lang.String"/>

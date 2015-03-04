@@ -42,4 +42,10 @@ public interface IControlOrdenDAO extends JpaRepository<ControlOrden, Long> {
 	List<ControlOrden> findByFechaRecepcionAndEstado(Timestamp fecha,
 			String string, Sort o);
 
+	List<ControlOrden> findByFechaRecepcionAndPacienteSegundoNombreStartingWithAllIgnoreCase(
+			Timestamp fecha, String valor);
+
+	List<ControlOrden> findByFechaRecepcionAndPacienteSegundoApellidoStartingWithAllIgnoreCase(
+			Timestamp fecha, String valor);
+
 }

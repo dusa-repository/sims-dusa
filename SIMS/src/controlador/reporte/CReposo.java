@@ -1599,20 +1599,24 @@ public class CReposo extends CGenerico {
 
 		catalogo = new Catalogo<Paciente>(divCatalogoPaciente,
 				"Catalogo de Pacientes", pacientes, false,"Cedula", "Ficha",
-				"Nombre", "Apellido") {
+				"Primer Nombre","Segundo Nombre", "Primer Apellido", "Segundo Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
 
 				switch (combo) {
-				case "Nombre":
+				case "Primer Nombre":
 					return servicioPaciente.filtroNombre1Activos(valor);
+				case "Segundo Nombre":
+					return servicioPaciente.filtroNombre2Activos(valor);
 				case "Cedula":
 					return servicioPaciente.filtroCedulaActivos(valor);
 				case "Ficha":
 					return servicioPaciente.filtroFichaActivos(valor);
-				case "Apellido":
+				case "Primer Apellido":
 					return servicioPaciente.filtroApellido1Activos(valor);
+				case "Segundo Apellido":
+					return servicioPaciente.filtroApellido2Activos(valor);
 				default:
 					return pacientes;
 				}
@@ -1620,11 +1624,13 @@ public class CReposo extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[4];
+				String[] registros = new String[6];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
 				registros[2] = objeto.getPrimerNombre();
-				registros[3] = objeto.getPrimerApellido();
+				registros[3] = objeto.getSegundoNombre();
+				registros[4] = objeto.getPrimerApellido();
+				registros[5] = objeto.getSegundoApellido();
 				return registros;
 			}
 

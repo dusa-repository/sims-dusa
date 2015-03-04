@@ -868,17 +868,22 @@ public class CPaciente extends CGenerico {
 		final List<Paciente> pacientes = pacientes2;
 		catalogo = new Catalogo<Paciente>(catalogoPaciente,
 				"Catalogo de Pacientes", pacientes, false,"Cedula", segundo,
-				"Nombre", "Apellido", "Trabajador Asociado", "Estado") {
+				"Primer Nombre","Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Trabajador Asociado", "Estado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
 
 				switch (combo) {
-				case "Nombre":
+				case "Primer Nombre":
 					if (!idBoton.equals("btnBuscarPaciente"))
 						return servicioPaciente.filtroNombre1C(valor,
 								txtCedulaPaciente.getValue());
 					return servicioPaciente.filtroNombre1(valor);
+				case "Segundo Nombre":
+					if (!idBoton.equals("btnBuscarPaciente"))
+						return servicioPaciente.filtroNombre2C(valor,
+								txtCedulaPaciente.getValue());
+					return servicioPaciente.filtroNombre2(valor);
 				case "Parentesco":
 					return servicioPaciente.filtroParentescoC(valor,
 							txtCedulaPaciente.getValue());
@@ -889,11 +894,16 @@ public class CPaciente extends CGenerico {
 					return servicioPaciente.filtroCedula(valor);
 				case "Ficha":
 					return servicioPaciente.filtroFicha(valor);
-				case "Apellido":
+				case "Primer Apellido":
 					if (!idBoton.equals("btnBuscarPaciente"))
 						return servicioPaciente.filtroApellido1C(valor,
 								txtCedulaPaciente.getValue());
 					return servicioPaciente.filtroApellido1(valor);
+				case "Segundo Apellido":
+					if (!idBoton.equals("btnBuscarPaciente"))
+						return servicioPaciente.filtroApellido2C(valor,
+								txtCedulaPaciente.getValue());
+					return servicioPaciente.filtroApellido2(valor);
 				case "Trabajador Asociado":
 					if (!idBoton.equals("btnBuscarPaciente"))
 						return servicioPaciente.filtroCedulaAsociadoC(valor,
@@ -913,13 +923,15 @@ public class CPaciente extends CGenerico {
 				String activo = "Activo";
 				if (!objeto.isEstatus())
 					activo = "Inactivo";
-				String[] registros = new String[6];
+				String[] registros = new String[8];
 				registros[0] = objeto.getCedula();
 				registros[1] = valor;
 				registros[2] = objeto.getPrimerNombre();
-				registros[3] = objeto.getPrimerApellido();
-				registros[4] = objeto.getCedulaFamiliar();
-				registros[5] = activo;
+				registros[3] = objeto.getSegundoNombre();
+				registros[4] = objeto.getPrimerApellido();
+				registros[5] = objeto.getSegundoApellido();
+				registros[6] = objeto.getCedulaFamiliar();
+				registros[7] = activo;
 				return registros;
 			}
 
@@ -935,20 +947,24 @@ public class CPaciente extends CGenerico {
 				.buscarTodosTrabajadores();
 		catalogoFamiliar = new Catalogo<Paciente>(divCatalogoFamiliar,
 				"Catalogo de Pacientes", pacientes,false, "Cedula", "Ficha",
-				"Nombre", "Apellido") {
+				"Primer Nombre","Segundo Nombre", "Primer Apellido", "Segundo Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
 
 				switch (combo) {
-				case "Nombre":
+				case "Primer Nombre":
 					return servicioPaciente.filtroNombre1T(valor);
+				case "Segundo Nombre":
+					return servicioPaciente.filtroNombre2T(valor);
 				case "Cedula":
 					return servicioPaciente.filtroCedulaT(valor);
 				case "Ficha":
 					return servicioPaciente.filtroFichaT(valor);
-				case "Apellido":
+				case "Primer Apellido":
 					return servicioPaciente.filtroApellido1T(valor);
+				case "Segundo Apellido":
+					return servicioPaciente.filtroApellido2T(valor);
 				default:
 					return pacientes;
 				}
@@ -956,11 +972,13 @@ public class CPaciente extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[4];
+				String[] registros = new String[6];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
 				registros[2] = objeto.getPrimerNombre();
-				registros[3] = objeto.getPrimerApellido();
+				registros[3] = objeto.getSegundoNombre();
+				registros[4] = objeto.getPrimerApellido();
+				registros[5] = objeto.getSegundoApellido();
 				return registros;
 			}
 

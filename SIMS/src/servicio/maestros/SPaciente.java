@@ -773,4 +773,152 @@ public class SPaciente {
 	public Paciente buscarPorCedulaYTrabajadorYActivo(String idPaciente) {
 		return pacienteDAO.findByCedulaAndTrabajadorTrueAndEstatusTrue(idPaciente);
 	}
+
+	public List<Paciente> filtroNombre2T(String valor) {
+		return pacienteDAO
+				.findByTrabajadorTrueAndSegundoNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroApellido2T(String valor) {
+		return pacienteDAO
+				.findByTrabajadorTrueAndSegundoApellidoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroNombre2C(String valor, String value) {
+		return pacienteDAO
+				.findByCedulaFamiliarAndSegundoNombreStartingWithAllIgnoreCase(
+						value, valor);
+	}
+
+	public List<Paciente> filtroNombre2(String valor) {
+		return pacienteDAO.findBySegundoNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroApellido2C(String valor, String value) {
+		return pacienteDAO
+				.findByCedulaFamiliarAndSegundoApellidoStartingWithAllIgnoreCase(
+						value, valor);
+	}
+
+	public List<Paciente> filtroApellido2(String valor) {
+		return pacienteDAO.findBySegundoApellidoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroNombre2Activos(String valor) {
+		return pacienteDAO
+				.findBySegundoNombreStartingWithAndEstatusTrueAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroApellido2Activos(String valor) {
+		return pacienteDAO
+				.findBySegundoApellidoStartingWithAndEstatusTrueAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroNombre2ParienteActivos(String valor) {
+		return pacienteDAO
+				.findByTrabajadorFalseAndEstatusTrueAndSegundoNombreStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroApellido2ParienteActivos(String valor) {
+		return pacienteDAO
+				.findByTrabajadorFalseAndEstatusTrueAndPrimerApellidoStartingWithAllIgnoreCase(valor);
+	}
+
+	public List<Paciente> filtroNombre2CitaActivos(Usuario usuario,
+			String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<Cita> citas = citaDAO
+				.findByUsuarioAndPacienteSegundoNombreStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
+						usuario, valor, fecha, "Pendiente");
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		if (!citas.isEmpty())
+			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
+				Cita cita = (Cita) iterator.next();
+				cita.getPaciente().setUsuarioAuditoria(
+						String.valueOf(cita.getIdCita()));
+				pacientes.add(cita.getPaciente());
+			}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroApellido2CitaActivos(Usuario usuario,
+			String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<Cita> citas = citaDAO
+				.findByUsuarioAndPacienteSegundoApellidoStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
+						usuario, valor, fecha, "Pendiente");
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		if (!citas.isEmpty())
+			for (Iterator<Cita> iterator = citas.iterator(); iterator.hasNext();) {
+				Cita cita = (Cita) iterator.next();
+				cita.getPaciente().setUsuarioAuditoria(
+						String.valueOf(cita.getIdCita()));
+				pacientes.add(cita.getPaciente());
+			}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroOrdenNombre2Activos(String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<ControlOrden> lista = controlOrdenDAO
+				.findByFechaRecepcionAndPacienteSegundoNombreStartingWithAllIgnoreCase(
+						fecha, valor);
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		for (Iterator<ControlOrden> iterator = lista.iterator(); iterator
+				.hasNext();) {
+			ControlOrden control = (ControlOrden) iterator.next();
+			control.getPaciente().setUsuarioAuditoria(
+					String.valueOf(control.getIdControlOrden()));
+			pacientes.add(control.getPaciente());
+		}
+		return pacientes;
+	}
+
+	public List<Paciente> filtroOrdenApellido2Activos(String valor, Date fechaT) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fechaT);
+		calendario.set(Calendar.HOUR, 0);
+		calendario.set(Calendar.HOUR_OF_DAY, 0);
+		calendario.set(Calendar.SECOND, 0);
+		calendario.set(Calendar.MILLISECOND, 0);
+		calendario.set(Calendar.MINUTE, 0);
+		fechaT = calendario.getTime();
+		Timestamp fecha = new Timestamp(fechaT.getTime());
+		List<ControlOrden> lista = controlOrdenDAO
+				.findByFechaRecepcionAndPacienteSegundoApellidoStartingWithAllIgnoreCase(
+						fecha, valor);
+		List<Paciente> pacientes = new ArrayList<Paciente>();
+		for (Iterator<ControlOrden> iterator = lista.iterator(); iterator
+				.hasNext();) {
+			ControlOrden control = (ControlOrden) iterator.next();
+			control.getPaciente().setUsuarioAuditoria(
+					String.valueOf(control.getIdControlOrden()));
+			pacientes.add(control.getPaciente());
+		}
+		return pacientes;
+	}
 }
