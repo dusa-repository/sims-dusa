@@ -182,6 +182,31 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 			List<String> ids);
 
 	Paciente findByCedulaAndTrabajadorTrueAndEstatusTrue(String idPaciente);
+
+	List<Paciente> findByTrabajadorTrueAndSegundoNombreStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByTrabajadorTrueAndSegundoApellidoStartingWithAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByCedulaFamiliarAndSegundoNombreStartingWithAllIgnoreCase(
+			String value, String valor);
+
+	List<Paciente> findBySegundoNombreStartingWithAllIgnoreCase(String valor);
+
+	List<Paciente> findByCedulaFamiliarAndSegundoApellidoStartingWithAllIgnoreCase(
+			String value, String valor);
+
+	List<Paciente> findBySegundoApellidoStartingWithAllIgnoreCase(String valor);
+
+	List<Paciente> findBySegundoApellidoStartingWithAndEstatusTrueAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findBySegundoNombreStartingWithAndEstatusTrueAllIgnoreCase(
+			String valor);
+
+	List<Paciente> findByTrabajadorFalseAndEstatusTrueAndSegundoNombreStartingWithAllIgnoreCase(
+			String valor);
 	
 //@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
 }

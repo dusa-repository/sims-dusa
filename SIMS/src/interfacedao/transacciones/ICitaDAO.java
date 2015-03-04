@@ -62,4 +62,10 @@ public interface ICitaDAO extends JpaRepository<Cita, Long> {
 	List<Cita> findByUsuarioAndPacienteCedulaFamiliarStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
 			Usuario usuario, String valor, Timestamp fecha, String string);
 
+	List<Cita> findByUsuarioAndPacienteSegundoNombreStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
+			Usuario usuario, String valor, Timestamp fecha, String string);
+
+	List<Cita> findByUsuarioAndPacienteSegundoApellidoStartingWithAndPacienteEstatusTrueAndFechaCitaAndEstadoAllIgnoreCase(
+			Usuario usuario, String valor, Timestamp fecha, String string);
+
 }

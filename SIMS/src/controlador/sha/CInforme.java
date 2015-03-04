@@ -1699,21 +1699,24 @@ public class CInforme extends CGenerico {
 		}
 		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
 		catalogoP = new Catalogo<Paciente>(catalogoPaciente,
-				"Catalogo de Pacientes", pacientes, false, "Cedula", "Nombre",
-				"Apellido") {
+				"Catalogo de Pacientes", pacientes, false, "Cedula",
+				"Primer Nombre", "Segundo Nombre", "Primer Apellido",
+				"Segundo Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
 
 				switch (combo) {
-				case "Nombre":
+				case "Primer Nombre":
 					return servicioPaciente.filtroNombre1(valor);
+				case "Segundo Nombre":
+					return servicioPaciente.filtroNombre2(valor);
 				case "Cedula":
 					return servicioPaciente.filtroCedula(valor);
-				case "Apellido":
+				case "Primer Apellido":
 					return servicioPaciente.filtroApellido1(valor);
-					// case "Empresa":
-					// return servicioPaciente.filtroEmpresa(valor);
+				case "Segundo Apellido":
+					return servicioPaciente.filtroApellido2(valor);
 				default:
 					return pacientes;
 				}
@@ -1721,10 +1724,12 @@ public class CInforme extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[3];
+				String[] registros = new String[5];
 				registros[0] = objeto.getCedula();
-				registros[1] = objeto.getPrimerNombre();
-				registros[2] = objeto.getPrimerApellido();
+				registros[2] = objeto.getPrimerNombre();
+				registros[3] = objeto.getSegundoNombre();
+				registros[4] = objeto.getPrimerApellido();
+				registros[5] = objeto.getSegundoApellido();
 				return registros;
 			}
 
@@ -5202,14 +5207,14 @@ public class CInforme extends CGenerico {
 			a = "D";
 		if (chk5.isChecked() && a.equals(""))
 			a = "E";
-		
+
 		if (chk2.isChecked() && b.equals("") && !a.equals("B"))
 			b = "B";
-		if (chk3.isChecked() && b.equals("")&& !a.equals("C"))
+		if (chk3.isChecked() && b.equals("") && !a.equals("C"))
 			b = "C";
-		if (chk4.isChecked() && b.equals("")&& !a.equals("D"))
+		if (chk4.isChecked() && b.equals("") && !a.equals("D"))
 			b = "D";
-		if (chk5.isChecked() && b.equals("")&& !a.equals("E"))
+		if (chk5.isChecked() && b.equals("") && !a.equals("E"))
 			b = "E";
 		informe.setSeleccionadaA(a);
 		informe.setSeleccionadaB(b);
@@ -5313,7 +5318,6 @@ public class CInforme extends CGenerico {
 			}
 		}
 	}
-	
 
 	@Listen("onUpload = #fudImagen1")
 	public void processMedia1(UploadEvent event) {
@@ -5386,7 +5390,7 @@ public class CInforme extends CGenerico {
 			}
 		}
 	}
-	
+
 	@Listen("onUpload = #fudImagen5")
 	public void processMedia5(UploadEvent event) {
 		media5 = event.getMedia();

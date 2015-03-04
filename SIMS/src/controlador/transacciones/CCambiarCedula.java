@@ -403,19 +403,23 @@ public class CCambiarCedula extends CGenerico {
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, false,"Cedula", "Ficha",
-				"Nombre", "Apellido", "Trabajador Asociado") {
+				"Primer Nombre","Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Trabajador Asociado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
 				switch (combo) {
 				case "Ficha":
 					return servicioPaciente.filtroFichaActivos(valor);
-				case "Nombre":
+				case "Primer Nombre":
 					return servicioPaciente.filtroNombre1Activos(valor);
+				case "Segundo Nombre":
+					return servicioPaciente.filtroNombre2Activos(valor);
 				case "Cedula":
 					return servicioPaciente.filtroCedulaActivos(valor);
-				case "Apellido":
+				case "Primer Apellido":
 					return servicioPaciente.filtroApellido1Activos(valor);
+				case "Segundo Apellido":
+					return servicioPaciente.filtroApellido2Activos(valor);
 				case "Trabajador Asociado":
 					return servicioPaciente.filtroCedulaFamiliar1Activos(valor);
 				default:
@@ -425,12 +429,14 @@ public class CCambiarCedula extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[5];
+				String[] registros = new String[7];
 				registros[0] = objeto.getCedula();
 				registros[1] = objeto.getFicha();
 				registros[2] = objeto.getPrimerNombre();
-				registros[3] = objeto.getPrimerApellido();
-				registros[4] = objeto.getCedulaFamiliar();
+				registros[3] = objeto.getSegundoNombre();
+				registros[4] = objeto.getPrimerApellido();
+				registros[5] = objeto.getSegundoApellido();
+				registros[6] = objeto.getCedulaFamiliar();
 				return registros;
 			}
 
