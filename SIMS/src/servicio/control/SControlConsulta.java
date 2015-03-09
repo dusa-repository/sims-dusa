@@ -8,6 +8,7 @@ import java.util.List;
 
 import interfacedao.control.IControlConsultaDAO;
 import modelo.control.ControlConsulta;
+import modelo.maestros.Paciente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -155,5 +156,16 @@ public class SControlConsulta {
 		return controlConsulta
 				.findByFechaLLegadaAndTipoConsultaSecundariaStartingWithAllIgnoreCase(
 						fecha, valor);
+	}
+
+	public List<ControlConsulta> buscarPorPaciente(Paciente pacienteAModificar) {
+		return controlConsulta.findByPaciente(pacienteAModificar);
+	}
+
+	public void limpiar(Paciente pacienteAModificar) {
+		List<ControlConsulta> lista = controlConsulta
+				.findByPaciente(pacienteAModificar);
+		if (!lista.isEmpty())
+			controlConsulta.delete(lista);
 	}
 }

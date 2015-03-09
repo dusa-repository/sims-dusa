@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import modelo.control.ControlOrden;
+import modelo.maestros.Paciente;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -47,5 +48,7 @@ public interface IControlOrdenDAO extends JpaRepository<ControlOrden, Long> {
 
 	List<ControlOrden> findByFechaRecepcionAndPacienteSegundoApellidoStartingWithAllIgnoreCase(
 			Timestamp fecha, String valor);
+
+	List<ControlOrden> findByPaciente(Paciente pacienteAModificar);
 
 }

@@ -1203,7 +1203,7 @@ public class CImportar extends CGenerico {
 							paciente.setProfesion("");
 							paciente.setEdad(0);
 							paciente.setEstatura(0.0);
-							paciente.setEstadoCivil("N/A");
+							paciente.setEstadoCivil(null);
 							paciente.setNivelEducativo("N/A");
 							paciente.setFechaAuditoria(fechaHora);
 							paciente.setFechaNacimiento(fechaNac);

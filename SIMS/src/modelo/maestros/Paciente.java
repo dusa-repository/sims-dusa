@@ -89,8 +89,9 @@ public class Paciente implements Serializable {
 	@Column(length = 10)
 	private String sexo;
 
-	@Column(length = 12, name = "estado_civil")
-	private String estadoCivil;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_estado_civil")
+	private EstadoCivil estadoCivil;
 
 	@Column(length = 130)
 	private Integer edad;
@@ -316,7 +317,7 @@ public class Paciente implements Serializable {
 			String primerNombre, String segundoApellido, String segundoNombre,
 			boolean trabajador, boolean discapacidad, boolean alergia,
 			boolean lentes, Timestamp fechaNacimiento, String lugarNacimiento,
-			String sexo, String estadoCivil, int edad, String grupoSanguineo,
+			String sexo, int edad, String grupoSanguineo,
 			String observacionAlergias, String mano, double estatura,
 			double peso, String origenDiscapacidad, String tipoDiscapacidad,
 			String observacionDiscapacidad, Timestamp fechaAuditoria,
@@ -347,7 +348,6 @@ public class Paciente implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 		this.lugarNacimiento = lugarNacimiento;
 		this.sexo = sexo;
-		this.estadoCivil = estadoCivil;
 		this.edad = edad;
 		this.grupoSanguineo = grupoSanguineo;
 		this.observacionAlergias = observacionAlergias;
@@ -542,14 +542,6 @@ public class Paciente implements Serializable {
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public String getEstadoCivil() {
-		return estadoCivil;
-	}
-
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
 	}
 
 	public Integer getEdad() {
@@ -1055,6 +1047,14 @@ public class Paciente implements Serializable {
 
 	public void setControlConsulta(Set<ControlConsulta> controlConsulta) {
 		this.controlConsulta = controlConsulta;
+	}
+
+	public EstadoCivil getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(EstadoCivil estadoCivil) {
+		this.estadoCivil = estadoCivil;
 	}
 
 }

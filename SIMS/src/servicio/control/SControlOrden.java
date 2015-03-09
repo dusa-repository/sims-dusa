@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 import interfacedao.control.IControlOrdenDAO;
+import modelo.control.ControlConsulta;
 import modelo.control.ControlOrden;
+import modelo.maestros.Paciente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -142,5 +144,17 @@ public class SControlOrden {
 
 	public void guardar(ControlOrden control) {
 		controlOrden.save(control);
+	}
+
+	public List<ControlOrden> buscarPorPaciente(Paciente pacienteAModificar) {
+		return controlOrden.findByPaciente(pacienteAModificar);
+	}
+
+	public void limpiar(Paciente pacienteAModificar) {
+		List<ControlOrden> lista = controlOrden
+				.findByPaciente(pacienteAModificar);
+		if (!lista.isEmpty())
+			controlOrden.delete(lista);
+
 	}
 }

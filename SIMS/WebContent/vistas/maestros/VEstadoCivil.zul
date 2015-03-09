@@ -1,0 +1,31 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divEstadoCivil" apply="controlador.maestros.CEstadoCivil">
+		<groupbox width="50%" mold="3d" title="Estado Civil">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="25%" />
+					<column label="" width="45%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Nombre:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox class="multilinea" id="txtNombreEstadoCivil" hflex="1"
+							maxlength="500" tooltiptext="Ingrese el Nombre del Estado Civil"
+							multiline="true" />
+						<button autodisable="self" id="btnBuscarEstadoCivil" class="btn"
+							label="Buscar" tooltiptext="Catalogo Estado Civiles" image="/public/imagenes/botones/buscar.png" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraEstadoCivil" />
+			<div id="catalogoEstadoCivil" />
+		</groupbox>
+	</div>
+</zk>
