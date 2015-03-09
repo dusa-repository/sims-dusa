@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import modelo.control.ControlConsulta;
+import modelo.control.ControlOrden;
 import modelo.maestros.Cita;
 import modelo.maestros.Paciente;
 import modelo.maestros.PacienteAntecedente;
@@ -130,7 +132,6 @@ public class CCambiarCedula extends CGenerico {
 				pacienteAModificar.getFechaNacimiento(),
 				pacienteAModificar.getLugarNacimiento(),
 				pacienteAModificar.getSexo(),
-				pacienteAModificar.getEstadoCivil(),
 				pacienteAModificar.getEdad(),
 				pacienteAModificar.getGrupoSanguineo(),
 				pacienteAModificar.getObservacionAlergias(),
@@ -172,6 +173,7 @@ public class CCambiarCedula extends CGenerico {
 		pacienteNuevo.setFechaEgreso(pacienteAModificar.getFechaEgreso());
 		pacienteNuevo.setTurno(pacienteAModificar.getTurno());
 		pacienteNuevo.setNomina(pacienteAModificar.getNomina());
+		pacienteNuevo.setEstadoCivil(pacienteAModificar.getEstadoCivil());
 		pacienteNuevo.setEstatus(pacienteAModificar.isEstatus());
 		pacienteNuevo.setObservacionEstatus(pacienteAModificar
 				.getObservacionEstatus());
@@ -319,6 +321,32 @@ public class CCambiarCedula extends CGenerico {
 				periodoPaciente.setPaciente(pacienteNuevo);
 			}
 			getServicioPeriodoPaciente().guardarVarios(periodos);
+		}
+
+		List<ControlConsulta> controlConsulta = getServicioControlConsulta()
+				.buscarPorPaciente(pacienteAModificar);
+		getServicioControlConsulta().limpiar(pacienteAModificar);
+		if (!controlConsulta.isEmpty()) {
+			for (Iterator<ControlConsulta> iterator = controlConsulta.iterator(); iterator
+					.hasNext();) {
+				ControlConsulta periodoPaciente = (ControlConsulta) iterator
+						.next();
+				periodoPaciente.setPaciente(pacienteNuevo);
+			}
+			getServicioControlConsulta().guardarVarios(controlConsulta);
+		}
+
+		List<ControlOrden> controlOrden = getServicioControlOrden()
+				.buscarPorPaciente(pacienteAModificar);
+		getServicioControlOrden().limpiar(pacienteAModificar);
+		if (!controlOrden.isEmpty()) {
+			for (Iterator<ControlOrden> iterator = controlOrden.iterator(); iterator
+					.hasNext();) {
+				ControlOrden periodoPaciente = (ControlOrden) iterator
+						.next();
+				periodoPaciente.setPaciente(pacienteNuevo);
+			}
+			getServicioControlOrden().guardarVarios(controlOrden);
 		}
 		List<PacienteMedicina> medicinas = getServicioPacienteMedicina()
 				.buscarPorPaciente(pacienteAModificar);

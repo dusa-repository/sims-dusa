@@ -15,6 +15,7 @@ import modelo.maestros.Cargo;
 import modelo.maestros.Cita;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
+import modelo.maestros.EstadoCivil;
 import modelo.maestros.Medicina;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
@@ -301,6 +302,7 @@ public class CPaciente extends CGenerico {
 		llenarComboCargo();
 		llenarComboNomina();
 		llenarMedicinas();
+		llenarComboCivil();
 		rdoActivo.setChecked(true);
 		Botonera botonera = new Botonera() {
 
@@ -332,7 +334,7 @@ public class CPaciente extends CGenerico {
 						imagen = imagenPaciente.getContent().getByteData();
 					}
 
-					String profesion, nacionalidad, nivelEducativo, turno, retiroIVSS, nroInpsasel, nombre1, apellido1, cedula, nombre2, apellido2, ficha, detalleAlergia, lugarNac, sexo, estadoCivil, grupoSanguineo, mano, origen, tipoDiscapacidad, otrasDiscapacidad, direccion, telefono1, telefono2, correo, nombresE, apellidosE, telefono1E, telefono2E, parentescoE, parentescoFamiliar;
+					String profesion, nacionalidad, nivelEducativo, turno, retiroIVSS, nroInpsasel, nombre1, apellido1, cedula, nombre2, apellido2, ficha, detalleAlergia, lugarNac, sexo, grupoSanguineo, mano, origen, tipoDiscapacidad, otrasDiscapacidad, direccion, telefono1, telefono2, correo, nombresE, apellidosE, telefono1E, telefono2E, parentescoE, parentescoFamiliar;
 					int edad, carga;
 					boolean trabajador = false, alergia = false, discapacidad = false, lentes = false;
 					double estatura, peso;
@@ -389,7 +391,7 @@ public class CPaciente extends CGenerico {
 					detalleAlergia = txtAlergia.getValue();
 					lugarNac = txtLugarNacimiento.getValue();
 					sexo = cmbSexo.getValue();
-					estadoCivil = cmbEstadoCivil.getValue();
+
 					grupoSanguineo = cmbGrupoSanguineo.getValue();
 					mano = cmbMano.getValue();
 					origen = cmbOrigen.getValue();
@@ -414,10 +416,19 @@ public class CPaciente extends CGenerico {
 					Area area = null;
 					Cargo cargo = null;
 					Nomina nomina = null;
+					EstadoCivil estadoCivil = null;
 					cedTrabajador = lblCedula.getValue();
 					if (rdoSiAlergico.isChecked())
 						alergia = true;
 					boolean cambioDeRepresentante = false;
+
+					if (cmbEstadoCivil.getSelectedItem() != null) {
+						if (cmbEstadoCivil.getSelectedItem().getContext() != null)
+							estadoCivil = servicioEstadoCivil.buscar(Long
+									.parseLong(cmbEstadoCivil.getSelectedItem()
+											.getContext()));
+					}
+
 					if (rdoTrabajador.isChecked()) {
 						trabajador = true;
 						if (cmbCargo.getSelectedItem().getContext() != null)
@@ -474,19 +485,21 @@ public class CPaciente extends CGenerico {
 					Boolean cronico = false;
 					if (rdoSiCronico.isChecked())
 						cronico = true;
+
 					Paciente paciente = new Paciente(cedula, ficha, apellido1,
 							nombre1, apellido2, nombre2, trabajador,
 							discapacidad, alergia, lentes, fechaNac, lugarNac,
-							sexo, estadoCivil, edad, grupoSanguineo,
-							detalleAlergia, mano, estatura, peso, origen,
-							tipoDiscapacidad, otrasDiscapacidad, fechaHora,
-							horaAuditoria, nombreUsuarioSesion(), imagen,
-							direccion, correo, telefono1, telefono2, nombresE,
-							apellidosE, parentescoE, telefono1E, telefono2E,
+							sexo, edad, grupoSanguineo, detalleAlergia, mano,
+							estatura, peso, origen, tipoDiscapacidad,
+							otrasDiscapacidad, fechaHora, horaAuditoria,
+							nombreUsuarioSesion(), imagen, direccion, correo,
+							telefono1, telefono2, nombresE, apellidosE,
+							parentescoE, telefono1E, telefono2E,
 							cedulaFamiliar, parentescoFamiliar, empresa,
 							ciudad, cargo, area, visita, fechaVisita,
 							resumenVisita, brigadista, cronico);
 
+					paciente.setEstadoCivil(estadoCivil);
 					paciente.setNacionalidad(nacionalidad);
 					paciente.setCarga(carga);
 					paciente.setNivelEducativo(nivelEducativo);
@@ -586,6 +599,7 @@ public class CPaciente extends CGenerico {
 
 			}
 		};
+		botonera.getChildren().get(1).setVisible(false);
 		botoneraPaciente.appendChild(botonera);
 	}
 
@@ -867,8 +881,9 @@ public class CPaciente extends CGenerico {
 		}
 		final List<Paciente> pacientes = pacientes2;
 		catalogo = new Catalogo<Paciente>(catalogoPaciente,
-				"Catalogo de Pacientes", pacientes, false,"Cedula", segundo,
-				"Primer Nombre","Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Trabajador Asociado", "Estado") {
+				"Catalogo de Pacientes", pacientes, false, "Cedula", segundo,
+				"Primer Nombre", "Segundo Nombre", "Primer Apellido",
+				"Segundo Apellido", "Trabajador Asociado", "Estado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -946,8 +961,9 @@ public class CPaciente extends CGenerico {
 		final List<Paciente> pacientes = servicioPaciente
 				.buscarTodosTrabajadores();
 		catalogoFamiliar = new Catalogo<Paciente>(divCatalogoFamiliar,
-				"Catalogo de Pacientes", pacientes,false, "Cedula", "Ficha",
-				"Primer Nombre","Segundo Nombre", "Primer Apellido", "Segundo Apellido") {
+				"Catalogo de Pacientes", pacientes, false, "Cedula", "Ficha",
+				"Primer Nombre", "Segundo Nombre", "Primer Apellido",
+				"Segundo Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -1046,6 +1062,13 @@ public class CPaciente extends CGenerico {
 		cmbCiudad.setModel(new ListModelList<Ciudad>(ciudades));
 	}
 
+	/* Llena el combo de Estado cada vez que se abre */
+	@Listen("onOpen = #cmbEstadoCivil")
+	public void llenarComboCivil() {
+		List<EstadoCivil> ciudades = servicioEstadoCivil.buscarTodas();
+		cmbEstadoCivil.setModel(new ListModelList<EstadoCivil>(ciudades));
+	}
+
 	/* Llena el combo de Cargos cada vez que se abre */
 	@Listen("onOpen = #cmbCargo")
 	public void llenarComboCargo() {
@@ -1107,7 +1130,7 @@ public class CPaciente extends CGenerico {
 		cmbCargo.setValue("");
 		cmbCargo.setPlaceholder("Seleccione un Cargo");
 		cmbNomina.setValue("");
-		cmbCargo.setPlaceholder("Seleccione un Tipo de Nomina");
+		cmbNomina.setPlaceholder("Seleccione un Tipo de Nomina");
 		cmbArea.setValue("");
 		cmbArea.setPlaceholder("Seleccione un Area");
 		cmbEmpresa.setValue("");
@@ -1155,7 +1178,8 @@ public class CPaciente extends CGenerico {
 		txtAlergia.setValue(paciente.getObservacionAlergias());
 		txtLugarNacimiento.setValue(paciente.getLugarNacimiento());
 		cmbSexo.setValue(paciente.getSexo());
-		cmbEstadoCivil.setValue(paciente.getEstadoCivil());
+		if (paciente.getEstadoCivil() != null)
+			cmbEstadoCivil.setValue(paciente.getEstadoCivil().getNombre());
 		cmbGrupoSanguineo.setValue(paciente.getGrupoSanguineo());
 		cmbMano.setValue(paciente.getMano());
 		cmbOrigen.setValue(paciente.getOrigenDiscapacidad());
@@ -1353,6 +1377,17 @@ public class CPaciente extends CGenerico {
 	@Listen("onClick = #btnAbrirCiudad")
 	public void abrirCiudad() {
 		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Ciudad");
+		if (!arboles.isEmpty()) {
+			Arbol arbolItem = arboles.get(0);
+			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
+		}
+	}
+
+	/* Abre la vista de Ciudad */
+	@Listen("onClick = #btnAbrirEstadoCivil")
+	public void abrirCivil() {
+		List<Arbol> arboles = servicioArbol
+				.buscarPorNombreArbol("Estado Civil");
 		if (!arboles.isEmpty()) {
 			Arbol arbolItem = arboles.get(0);
 			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);

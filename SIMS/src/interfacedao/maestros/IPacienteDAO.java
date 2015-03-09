@@ -5,6 +5,7 @@ import java.util.List;
 import modelo.maestros.Cargo;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
+import modelo.maestros.EstadoCivil;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.sha.Area;
@@ -207,6 +208,8 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
 	List<Paciente> findByTrabajadorFalseAndEstatusTrueAndSegundoNombreStartingWithAllIgnoreCase(
 			String valor);
+
+	List<Paciente> findByEstadoCivil(EstadoCivil pais);
 	
 //@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
 }

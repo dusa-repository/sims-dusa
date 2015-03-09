@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.control.ControlConsulta;
+import modelo.maestros.Paciente;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -33,5 +34,7 @@ public interface IControlConsultaDAO extends JpaRepository<ControlConsulta, Long
 
 	List<ControlConsulta> findByFechaLLegadaAndTipoConsultaSecundariaStartingWithAllIgnoreCase(
 			Timestamp fecha, String valor);
+
+	List<ControlConsulta> findByPaciente(Paciente pacienteAModificar);
 
 }

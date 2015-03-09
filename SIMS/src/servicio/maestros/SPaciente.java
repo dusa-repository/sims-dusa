@@ -17,6 +17,7 @@ import modelo.maestros.Cargo;
 import modelo.maestros.Cita;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
+import modelo.maestros.EstadoCivil;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
 import modelo.maestros.Periodo;
@@ -920,5 +921,9 @@ public class SPaciente {
 			pacientes.add(control.getPaciente());
 		}
 		return pacientes;
+	}
+
+	public List<Paciente> buscarPorEstadoCivil(EstadoCivil pais) {
+		return pacienteDAO.findByEstadoCivil(pais);
 	}
 }

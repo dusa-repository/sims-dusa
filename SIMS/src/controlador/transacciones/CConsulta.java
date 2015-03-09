@@ -2818,7 +2818,8 @@ public class CConsulta extends CGenerico {
 				.getFechaNacimiento())));
 		lblLugarNac.setValue(paciente.getLugarNacimiento());
 		lblSexo.setValue(paciente.getSexo());
-		lblEstadoCivil.setValue(paciente.getEstadoCivil());
+		if(paciente.getEstadoCivil()!=null)
+		lblEstadoCivil.setValue(paciente.getEstadoCivil().getNombre());
 		lblGrupoSanguineo.setValue(paciente.getGrupoSanguineo());
 		lblMano.setValue(paciente.getMano());
 		lblOrigen.setValue(paciente.getOrigenDiscapacidad());

@@ -172,18 +172,15 @@
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
-									<combobox tooltiptext="Seleccione el Estado Civil"
-										placeholder="Seleccione el Estado Civil" id="cmbEstadoCivil"
-										width="100%" readonly="true">
-										<comboitem label="Casado" />
-										<comboitem label="Concubino" />
-										<comboitem label="Soltero" />
-										<comboitem label="Viudo" />
-										<comboitem label="Divorciado" />
-										<comboitem label="Otro" />
-										<comboitem label="N/A" />
+									<combobox hflex="1" id="cmbEstadoCivil" placeholder="Seleccione un Estado Civil"
+										readonly="true" tooltiptext="Seleccione un Estado Civil"
+										width="250px">
+										<template name="model">
+											<comboitem label="${each.nombre}" context="${each.idEstadoCivil}" />
+										</template>
 									</combobox>
-									<hbox />
+									<button class="abrir" id="btnAbrirEstadoCivil" label=""
+										tooltiptext="Crear un Nuevo Estado Civil" image="/public/imagenes/botones/agregar.png" />
 									<hbox />
 								</row>
 								<row>
@@ -779,8 +776,8 @@
 										<listcell label="${each.medicina.nombre}">
 										</listcell>
 										<listcell>
-											<textbox maxlength="500" value="${each.frecuencia}" width="98%"
-												class="multilinea" multiline="true" />
+											<textbox maxlength="500" value="${each.frecuencia}"
+												width="98%" class="multilinea" multiline="true" />
 										</listcell>
 										<listcell>
 											<spinner value="${each.medicina.idMedicina}" width="98%"

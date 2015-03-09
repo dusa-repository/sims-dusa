@@ -1868,7 +1868,8 @@ public class CInforme extends CGenerico {
 					.getFechaNacimiento())));
 		}
 		lbl58.setValue(paciente.getLugarNacimiento());
-		lbl59.setValue(paciente.getEstadoCivil());
+		if(paciente.getEstadoCivil()!=null)
+		lbl59.setValue(paciente.getEstadoCivil().getNombre());
 		lbl510.setValue(paciente.getMano());
 		lbl511.setValue(paciente.getNivelEducativo());
 		if (paciente.getFechaIngreso() != null)
@@ -3897,8 +3898,10 @@ public class CInforme extends CGenerico {
 					.getFechaNacimiento());
 			p.put("lugarNacTrabajador", informe.getPacienteA()
 					.getLugarNacimiento());
+			if(informe.getPacienteA()
+					.getEstadoCivil()!=null)
 			p.put("estadoCivilTrabajador", informe.getPacienteA()
-					.getEstadoCivil());
+					.getEstadoCivil().getNombre());
 
 			if (informe.getPacienteA().getMano().equals("Derecho")) {
 				p.put("manoTrabajador1", "x");
