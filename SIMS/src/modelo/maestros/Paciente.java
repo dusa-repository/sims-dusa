@@ -19,6 +19,7 @@ import modelo.control.ControlConsulta;
 import modelo.control.ControlOrden;
 import modelo.sha.Area;
 import modelo.sha.Informe;
+import modelo.social.VisitaSocial;
 import modelo.transacciones.Historia;
 import modelo.transacciones.Orden;
 import modelo.transacciones.PacienteMedicina;
@@ -208,6 +209,9 @@ public class Paciente implements Serializable {
 	// bi-directional many-to-one association to Cita
 	@OneToMany(mappedBy = "paciente")
 	private Set<Cita> citas;
+
+	@OneToMany(mappedBy = "paciente")
+	private Set<VisitaSocial> visitas;
 	
 	@OneToMany(mappedBy = "paciente")
 	private Set<Orden> ordenes;
@@ -1055,6 +1059,14 @@ public class Paciente implements Serializable {
 
 	public void setEstadoCivil(EstadoCivil estadoCivil) {
 		this.estadoCivil = estadoCivil;
+	}
+
+	public Set<VisitaSocial> getVisitas() {
+		return visitas;
+	}
+
+	public void setVisitas(Set<VisitaSocial> visitas) {
+		this.visitas = visitas;
 	}
 
 }

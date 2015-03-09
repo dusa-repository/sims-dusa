@@ -97,6 +97,7 @@ import servicio.sha.SGrupoInspectores;
 import servicio.sha.SHorasHombre;
 import servicio.sha.SInforme;
 import servicio.sha.SPlanAccion;
+import servicio.social.SVisitaSocial;
 import servicio.transacciones.SCita;
 import servicio.transacciones.SConsulta;
 import servicio.transacciones.SConsultaDiagnostico;
@@ -262,6 +263,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SUsuario servicioUsuario;
 	@WireVariable("SVacuna")
 	protected SVacuna servicioVacuna;
+	@WireVariable("SVisitaSocial")
+	protected SVisitaSocial servicioVisitaSocial;
 	@WireVariable("SArea")
 	protected SArea servicioArea;
 	@WireVariable("SClasificacionAccidente")
