@@ -1,0 +1,215 @@
+<div id="divSocial" apply="controlador.social.CVisitaSocial">
+<groupbox width="auto" mold="3d" title="Visita Social">
+<tabbox id="tb" height="auto" width="auto">
+    <tabs id="tabs">
+        <tab id="A" label="CARACTERÍSTICAS DE LA VIVIENDA Y SERVICIOS BÁSICOS" />
+        <tab id="B" label="Segundo Panel" />
+    </tabs>
+    <tabpanels>
+        <tabpanel><grid width="100%">
+				<columns visible="false">
+					<column label="" width="20%" />
+					<column label="" width="30%" />
+					<column label="" width="20%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					 <row>
+					 	<hbox>
+							<label class="etiqueta" value="Tipo de vivienda:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                		<combobox id="cmbTipoVivienda" autodrop="true" readonly="true"
+                		placeholder="Seleccione un tipo de vivienda" tooltiptext="Seleccione un tipo de vivienda" hflex="1">
+                        <comboitem label="Quinta" />
+                        <comboitem label="Casa" />
+                        <comboitem label="Apto. En edificio" />
+                        <comboitem label="Apto.  o en casa" />
+                        <comboitem label="Casa de vecindad" />
+                        <comboitem label="Rancho" />
+                        <comboitem label="Otro tipo de vivienda" />
+                        <comboitem label="Vivienda colectiva" />
+                	</combobox>	
+                		<hbox>
+							<label class="etiqueta" value="¿La vivienda posee servicio eléctrico?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<radiogroup id="radiogroupServicioElectrico">
+                    	<hlayout>
+                        <radio id="Si" label="Si"
+                        selected="Si" />
+                        <radio id="No" label="No" 
+                        selected="No" />
+                  		</hlayout>
+                </radiogroup>
+            	</row>
+            	<row>
+            			<hbox>
+							<label class="etiqueta" value="Terreno donde se encuentra la vivienda:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                		<combobox id="cmbTerrenoVivienda" autodrop="true" readonly="true"
+                		placeholder="Seleccione Terreno donde se encuentra la vivienda" 
+                		tooltiptext="Seleccione Terreno donde se encuentra la vivienda" hflex="1">
+                        <comboitem label="Con título de propiedad" />
+                        <comboitem label="Con documento de venta registrado" />
+                        <comboitem label="Con título de posesión" />
+                        <comboitem label="Ejidos" />
+                        <comboitem label="Del estado" />
+                        <comboitem label="Privado" />
+                        <comboitem label="Arrendado" />
+                        <comboitem label="Invadido" />
+                	</combobox>
+                	<hbox>
+							<label class="etiqueta" value="¿Cómo se elimina la basura en la vivienda?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                		<combobox id="cmbEliminaBasura" autodrop="true" readonly="true"
+                		placeholder="Seleccione Cómo se elimina la basura en la vivienda" tooltiptext="Seleccione Cómo se elimina la basura en la vivienda" hflex="1">
+                        <comboitem label="Aseo urbano domiciliario" />
+                        <comboitem label="Contenedor común" />
+                        <comboitem label="Se bota en la calle" />
+                        <comboitem label="Se quema o se entierra" />
+                        <comboitem label="Otro" />
+                	</combobox>
+            	</row>
+            		 <row>
+					 	<hbox>
+							<label class="etiqueta" value="¿En qué condición habita usted esta vivienda?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                		<combobox id="cmbCondicionVivienda" autodrop="true" readonly="true"
+                		placeholder="Seleccione la condición" tooltiptext="Seleccione la condición en la que habita" hflex="1">
+                        <comboitem label="Propietario" />
+                        <comboitem label="forma parte del grupo familiar" />
+                        <comboitem label="Alquilado" />
+                        <comboitem label="Inquilino / sin vivienda" />
+                        <comboitem label="Ocupante" />
+                        <comboitem label="Otro" />
+                	</combobox>
+                	<hbox>
+							<label class="etiqueta" value="¿Qué combustible utiliza para cocinar?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                		<combobox id="cmbCombustibleCocina" autodrop="true" readonly="true"
+                		placeholder="Seleccione el combustible con el que se cocina" tooltiptext="Seleccione el combustible con el que se cocina" hflex="1">
+                        <comboitem label="Gas" />
+                        <comboitem label="Electricidad" />
+                        <comboitem label="Kerosene" />
+                        <comboitem label="Leña / carbón" />
+                	</combobox>
+            	</row>
+            	<row>
+					 	<hbox>
+							<label class="etiqueta" value="¿En qué condiciones estructurales se encuentra la vivienda?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                    <vlayout id="condicionesEstructurales">
+                    <checkbox id="checkEstructura1" label="En buen estado"
+                        checked="En buen estado" />
+                    <checkbox id="checkEstructura2" label="Requiere mejoras en piso, techo y paredes"
+                        checked="Requiere mejoras en piso, techo y paredes" />
+                    <checkbox id="checkEstructura3" label="Requiere construcción de nuevos ambientes"
+                        checked="Requiere construcción de nuevos ambientes" />
+                    <checkbox id="checkEstructura4" label="Requiere Mantenimiento de tuberías o de electricidad"
+                        checked="Requiere Mantenimiento de tuberías o de electricidad" />
+                    <checkbox id="checkEstructura5" label="Se encuentra deteriorada (inhabitable)"
+                        checked="Se encuentra deteriorada (inhabitable)" />
+                    </vlayout>
+                	<hbox>
+							<label class="etiqueta" value="Contando sala comedor y cuartos ¿Cuántos ambientes posee la vivienda?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						 <spinner id="SpinnerCuantosAmbientes" format=",###" constraint="no empty,min 0" tooltiptext="Cantidad de ambientes de la vivienda"/>
+            	</row>
+            		 <row>
+					 	<hbox>
+							<label class="etiqueta" value="¿Cómo se abastece de agua la vivienda?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                		<combobox id="cmbAbasteceAgua" autodrop="true" readonly="true"
+                		placeholder="Seleccione forma de abastecimiento de agua" tooltiptext="Seleccione la de abastecimiento de agua" hflex="1">
+                        <comboitem label="Acueducto tubería" />
+                        <comboitem label="Pila pública" />
+                        <comboitem label="Camión cisterna" />
+                        <comboitem label="Pozo  manantial" />
+                        <comboitem label="Otro" />
+                	</combobox>
+                	<hbox>
+							<label class="etiqueta" value="¿Cuántas personas residen en la vivienda?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                		<combobox id="cmbCantidadPersonas" autodrop="true" readonly="true"
+                		placeholder="Seleccione Cuántas personas residen" tooltiptext="Seleccione Cuántas personas residen" hflex="1">
+                        <comboitem label="Una sola persona" />
+                        <comboitem label="Dos a cuatro personas" />
+                        <comboitem label="de cinco a siete personas" />
+                        <comboitem label="Más de siete personas" />
+                	</combobox>
+            	</row>
+					 <row>
+					 	<hbox>
+							<label class="etiqueta" value="¿Con qué frecuencia dispone de agua la vivienda?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                		<combobox id="cmbFrecuenciaAgua" autodrop="true" readonly="true"
+                		placeholder="Seleccione la frecuencia de agua en la vivienda" tooltiptext="Seleccione la frecuencia de agua en la vivienda" hflex="1">
+                        <comboitem label="Todos los días" />
+                        <comboitem label="Algunos días" />
+                        <comboitem label="Algunas horas al día" />
+                	</combobox>
+                	<hbox>
+							<label class="etiqueta" value="¿Estas personas mantienen gastos separados para comer?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<radiogroup id="radiogroupGastosSeparados">
+                    	<hlayout>
+                        <radio id="rSi" label="Si"
+                        selected="Si" />
+                        <radio id="sNo" label="No" 
+                        selected="No" />
+                  		</hlayout>
+                </radiogroup>
+            	</row>
+					 <row>
+					 	<hbox>
+							<label class="etiqueta" value="¿La vivienda posee…:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+                		<combobox id="cmbViviendaPosee" autodrop="true" readonly="true"
+                		placeholder="Seleccione lo que la vivienda posee" tooltiptext="Seleccione lo que la vivienda posee" hflex="1">
+                        <comboitem label="Acueducto tubería" />
+                        <comboitem label="Pila pública" />
+                        <comboitem label="Camión cisterna" />
+                        <comboitem label="Pozo o manantial" />
+                        <comboitem label="Otro" />
+                	</combobox>
+                	<hbox>
+							<label class="etiqueta" value="¿Cuántos grupos de personas mantienen gastos separados?:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						 <spinner id="SpinnerGruposGastos" format=",###" constraint="no empty,min 0" tooltiptext=" grupos de personas mantienen gastos separados"/>
+            	</row>
+				</rows>
+			</grid></tabpanel>
+        <tabpanel>Segundo Panel</tabpanel>
+    </tabpanels>
+</tabbox>
+			<separator />
+			<div id="botoneraSocial" />
+</groupbox>
+</div>
