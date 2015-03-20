@@ -35,47 +35,47 @@ public class CVisitaSocial extends CGenerico {
 	private Div botoneraSocial;
 	// Combobox
 	@Wire
-	private Combobox cmbTipoVivienda;
+	private Combobox cmb1;
 	@Wire
-	private Combobox cmbTerrenoVivienda;
+	private Combobox cmb2;
 	@Wire
-	private Combobox cmbCondicionVivienda;
+	private Combobox cmb3;
 	@Wire
-	private Combobox cmbAbasteceAgua;
+	private Combobox cmb5;
 	@Wire
-	private Combobox cmbFrecuenciaAgua;
+	private Combobox cmb6;
 	@Wire
-	private Combobox cmbViviendaPosee;
+	private Combobox cmb7;
 	@Wire
-	private Combobox cmbEliminaBasura;
+	private Combobox cmb9;
 	@Wire
-	private Combobox cmbCombustibleCocina;
+	private Combobox cmb10;
 	@Wire
-	private Combobox cmbCantidadPersonas;
+	private Combobox cmb12;
 
 	// Checkbox
 	@Wire
-	private Checkbox checkEstructura1;
+	private Checkbox check4_1;
 	@Wire
-	private Checkbox checkEstructura2;
+	private Checkbox check4_2;
 	@Wire
-	private Checkbox checkEstructura3;
+	private Checkbox check4_3;
 	@Wire
-	private Checkbox checkEstructura4;
+	private Checkbox check4_4;
 	@Wire
-	private Checkbox checkEstructura5;
+	private Checkbox check4_5;
 
 	// Radio
 	@Wire
-	private Radiogroup radiogroupServicioElectrico;
+	private Radiogroup rdg8;
 	@Wire
-	private Radiogroup radiogroupGastosSeparados;
+	private Radiogroup rdg13;
 
 	// Spinner
 	@Wire
-	private Spinner SpinnerCuantosAmbientes;
+	private Spinner spinner11;
 	@Wire
-	private Spinner SpinnerGruposGastos;
+	private Spinner spinner14;
 
 	@Override
 	public void inicializar() throws IOException {
@@ -99,27 +99,26 @@ public class CVisitaSocial extends CGenerico {
 			@Override
 			public void limpiar() {
 				// Combobox
-				cmbTipoVivienda.setValue("");
-				cmbTerrenoVivienda.setValue("");
-				cmbCondicionVivienda.setValue("");
-				cmbAbasteceAgua.setValue("");
-				cmbFrecuenciaAgua.setValue("");
-				cmbViviendaPosee.setValue("");
-				cmbEliminaBasura.setValue("");
-				cmbCombustibleCocina.setValue("");
-				cmbCantidadPersonas.setValue("");
+				cmb1.setValue("");
+				cmb2.setValue("");
+				cmb3.setValue("");
+				cmb5.setValue("");
+				cmb6.setValue("");
+				cmb7.setValue("");
+				cmb9.setValue("");
+				cmb10.setValue("");
+				cmb12.setValue("");
 				// Spinner
-				SpinnerCuantosAmbientes.setValue(0);
-				SpinnerCuantosAmbientes
-						.setPlaceholder("Seleccione una cantidad");
-				SpinnerGruposGastos.setValue(0);
-				SpinnerGruposGastos.setPlaceholder("Seleccione una cantidad");
+				spinner11.setValue(0);
+				spinner11.setPlaceholder("Seleccione una cantidad");
+				spinner14.setValue(0);
+				spinner14.setPlaceholder("Seleccione una cantidad");
 				// Checkbox
-				checkEstructura1.setChecked(false);
-				checkEstructura2.setChecked(false);
-				checkEstructura3.setChecked(false);
-				checkEstructura4.setChecked(false);
-				checkEstructura5.setChecked(false);
+				check4_1.setChecked(false);
+				check4_2.setChecked(false);
+				check4_3.setChecked(false);
+				check4_4.setChecked(false);
+				check4_5.setChecked(false);
 
 			}
 
@@ -127,54 +126,54 @@ public class CVisitaSocial extends CGenerico {
 			public void guardar() {
 				VisitaSocial visitaSocial = new VisitaSocial();
 				// ComboBox
-				String a = cmbTipoVivienda.getValue();
+				String a = cmb1.getValue();
 				visitaSocial.setA(a);
-				String b = cmbTerrenoVivienda.getValue();
+				String b = cmb2.getValue();
 				visitaSocial.setB(b);
-				String c = cmbCondicionVivienda.getValue();
+				String c = cmb3.getValue();
 				visitaSocial.setC(c);
-				String e = cmbAbasteceAgua.getValue();
-				visitaSocial.setC(e);
-				String f = cmbFrecuenciaAgua.getValue();
-				visitaSocial.setC(f);
-				String g = cmbViviendaPosee.getValue();
-				visitaSocial.setC(g);
-				String i = cmbEliminaBasura.getValue();
-				visitaSocial.setC(i);
-				String aj = cmbCombustibleCocina.getValue();
-				visitaSocial.setC(aj);
-				String ab = cmbCantidadPersonas.getValue();
-				visitaSocial.setC(ab);
+				String e = cmb5.getValue();
+				visitaSocial.setE(e);
+				String f = cmb6.getValue();
+				visitaSocial.setF(f);
+				String g = cmb7.getValue();
+				visitaSocial.setG(g);
+				String i = cmb9.getValue();
+				visitaSocial.setI(i);
+				String aj = cmb10.getValue();
+				visitaSocial.setAj(aj);
+				String ab = cmb12.getValue();
+				visitaSocial.setAb(ab);
 				// Radio
-				Radio h = radiogroupServicioElectrico.getSelectedItem();
-				if (h.getId().equals("Si")) {
+				Radio h = rdg8.getSelectedItem();
+				if (h.getId().equals("rdo8_1")) {
 					visitaSocial.setH(true);
 				} else {
 					visitaSocial.setH(false);
 				}
-				Radio ac = radiogroupGastosSeparados.getSelectedItem();
-				if (ac.getId().equals("rSi")) {
+				Radio ac = rdg13.getSelectedItem();
+				if (ac.getId().equals("rdo13_1")) {
 					visitaSocial.setAc(true);
 				} else {
 					visitaSocial.setAc(false);
 				}
 				// Spinner
-				Integer aa = SpinnerCuantosAmbientes.getValue();
+				Integer aa = spinner11.getValue();
 				visitaSocial.setAa(aa);
-				Integer ad = SpinnerGruposGastos.getValue();
+				Integer ad = spinner14.getValue();
 				visitaSocial.setAd(ad);
 
 				String estructura = "";
-				if (checkEstructura1.isChecked())
-					estructura = estructura + "," + checkEstructura1.getLabel();
-				if (checkEstructura2.isChecked())
-					estructura = estructura + "," + checkEstructura2.getLabel();
-				if (checkEstructura3.isChecked())
-					estructura = estructura + "," + checkEstructura3.getLabel();
-				if (checkEstructura4.isChecked())
-					estructura = estructura + "," + checkEstructura4.getLabel();
-				if (checkEstructura5.isChecked())
-					estructura = estructura + "," + checkEstructura5.getLabel();
+				if (check4_1.isChecked())
+					estructura = estructura + "," + check4_1.getLabel();
+				if (check4_2.isChecked())
+					estructura = estructura + "," + check4_2.getLabel();
+				if (check4_3.isChecked())
+					estructura = estructura + "," + check4_3.getLabel();
+				if (check4_4.isChecked())
+					estructura = estructura + "," + check4_4.getLabel();
+				if (check4_5.isChecked())
+					estructura = estructura + "," + check4_5.getLabel();
 
 				visitaSocial.setD(estructura);
 				servicioVisitaSocial.guardar(visitaSocial);
@@ -195,107 +194,88 @@ public class CVisitaSocial extends CGenerico {
 	// Combobox
 	@Listen("onChange = #cmbTipoVivienda")
 	public void tipoDeVivienda() {
-		String tipoVivienda = cmbTipoVivienda.getValue();
-		showNotify("Has seleccionado " + tipoVivienda, cmbTipoVivienda);
+		cmb1.getValue();
 	}
 
 	@Listen("onChange = #cmbTerrenoVivienda")
 	public void terrenoDeVivienda() {
-		String terrenoVivienda = cmbTerrenoVivienda.getValue();
-		showNotify("Has seleccionado " + terrenoVivienda, cmbTerrenoVivienda);
+		cmb2.getValue();
 	}
+
 
 	@Listen("onChange = #cmbCondicionVivienda")
 	public void condicionDeVivienda() {
-		String condicionVivienda = cmbCondicionVivienda.getValue();
-		showNotify("Has seleccionado " + condicionVivienda,
-				cmbCondicionVivienda);
+		cmb3.getValue();
 	}
+
 
 	@Listen("onChange = #cmbAbasteceAgua")
 	public void abastecimientoAgua() {
-		String abasteceAgua = cmbAbasteceAgua.getValue();
-		showNotify("Has seleccionado " + abasteceAgua, cmbAbasteceAgua);
+		cmb5.getValue();
 	}
+
 
 	@Listen("onChange = #cmbFrecuenciaAgua")
 	public void frecuenciaDeAgua() {
-		String frecuenciaAgua = cmbFrecuenciaAgua.getValue();
-		showNotify("Has seleccionado " + frecuenciaAgua, cmbFrecuenciaAgua);
+		cmb6.getValue();
 	}
+
 
 	@Listen("onChange = #cmbViviendaPosee")
 	public void viviendaP() {
-		String viviendaPosee = cmbViviendaPosee.getValue();
-		showNotify("Has seleccionado " + viviendaPosee, cmbViviendaPosee);
+		cmb7.getValue();
 	}
+
 
 	@Listen("onChange = #cmbEliminaBasura")
 	public void eliminarBasura() {
-		String eliminarB = cmbEliminaBasura.getValue();
-		showNotify("Has seleccionado " + eliminarB, cmbEliminaBasura);
+		cmb9.getValue();
 	}
+
 
 	@Listen("onChange = #cmbCombustibleCocina")
 	public void combustibleCocina() {
-		String combustibleC = cmbCombustibleCocina.getValue();
-		showNotify("Has seleccionado " + combustibleC, cmbCombustibleCocina);
+		cmb10.getValue();
 	}
+
 
 	@Listen("onChange = #cmbCantidadPersonas")
 	public void cantidadPerosonas() {
-		String cantidadP = cmbCantidadPersonas.getValue();
-		showNotify("Has seleccionado " + cantidadP, cmbCantidadPersonas);
+		cmb12.getValue();
 	}
 
 	// Checkbox
 	@Listen("onCheck = #condicionesEstructurales > checkbox")
 	public void seleccione(CheckEvent event) {
-		String seleccionados = "";
-		checkEstructura1.isChecked();
-		checkEstructura2.isChecked();
-		checkEstructura3.isChecked();
-		checkEstructura4.isChecked();
-		checkEstructura5.isChecked();
+		check4_1.isChecked();
+		check4_2.isChecked();
+		check4_3.isChecked();
+		check4_4.isChecked();
+		check4_5.isChecked();
 
-		showNotify("Has seleccionado " + seleccionados,
-				checkEstructura1.getParent());
 	}
 
 	// Radio
 	@Listen("onCheck = #radiogroupServicioElectrico")
 	public void servicioElectrico() {
-		Radio selectedItem = radiogroupServicioElectrico.getSelectedItem();
-		showNotify("Has seleccionado " + selectedItem.getLabel(),
-				radiogroupServicioElectrico.getParent());
+		rdg8.getSelectedItem();
 	}
+
 
 	@Listen("onCheck = #radiogroupGastosSeparados")
 	public void gastosSeparados() {
-		Radio selectedItem = radiogroupGastosSeparados.getSelectedItem();
-		showNotify("Has seleccionado " + selectedItem.getLabel(),
-				radiogroupGastosSeparados.getParent());
+		rdg13.getSelectedItem();
 	}
 
 	// Spinner
 	@Listen("onChange = #SpinnerCuantosAmbientes")
 	public void cantidadAmbientes() {
-		Integer cuantosAmbientes = SpinnerCuantosAmbientes.getValue();
-
-		showNotify("Ha Seleccionado: " + cuantosAmbientes,
-				SpinnerCuantosAmbientes);
+		spinner11.getValue();
 	}
 
 	// Spinner
 	@Listen("onChange = #SpinnerGruposGastos")
 	public void gruposGastos() {
-		Integer gruposGasto = SpinnerGruposGastos.getValue();
-
-		showNotify("Ha Seleccionado: " + gruposGasto, SpinnerGruposGastos);
-	}
-
-	// Notificacion
-	private void showNotify(String msg, Component ref) {
-		Clients.showNotification(msg, "info", ref, "end_center", 2000);
+		spinner14.getValue();
 	}
 }
