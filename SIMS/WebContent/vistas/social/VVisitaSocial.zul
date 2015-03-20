@@ -2,10 +2,31 @@
 	<groupbox width="auto" mold="3d" title="Visita Social">
 		<tabbox id="tb" height="auto" width="auto">
 			<tabs id="tabs">
+				<tab id="buscar" label="Buscar" />
 				<tab id="A" label="CARACTERÍSTICAS DE LA VIVIENDA Y SERVICIOS BÁSICOS" />
 				<tab id="B" label="Segundo Panel" />
 			</tabs>
 			<tabpanels>
+			<tabpanel>
+				<grid width="auto">
+				<columns>
+					<column label="" width="30%" />
+					<column label="" width="70%" />
+				</columns>
+				<rows>
+					<row>
+						<label class="etiqueta" value="Buscar Trabajador" />
+						<button autodisable="self" id="btnBuscar1" class="btn"
+							label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Buscar Visita Registrada" />
+						<button autodisable="self" id="btnBuscar2" class="btn"
+							label="Buscar" tooltiptext="Buscar Visita" image="/public/imagenes/botones/buscar.png"/>
+					</row>
+				</rows>
+			</grid>
+			</tabpanel>
 				<tabpanel>
 					<grid width="100%">
 						<columns visible="false">
@@ -21,7 +42,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<combobox id="cmbTipoVivienda" autodrop="true"
+								<combobox id="cmb1" autodrop="true"
 									readonly="true" placeholder="Seleccione un tipo de vivienda"
 									tooltiptext="Seleccione un tipo de vivienda" hflex="1">
 									<comboitem label="Quinta" />
@@ -38,10 +59,10 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<radiogroup id="radiogroupServicioElectrico">
+								<radiogroup id="rdg8">
 									<hlayout>
-										<radio id="Si" label="Si" selected="Si" />
-										<radio id="No" label="No" selected="No" />
+										<radio id="rdo8_1" label="Si" selected="Si" />
+										<radio id="rdo8_2" label="No" selected="No" />
 									</hlayout>
 								</radiogroup>
 							</row>
@@ -51,7 +72,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<combobox id="cmbTerrenoVivienda" autodrop="true"
+								<combobox id="cmb2" autodrop="true"
 									readonly="true" placeholder="Seleccione Terreno donde se encuentra la vivienda"
 									tooltiptext="Seleccione Terreno donde se encuentra la vivienda"
 									hflex="1">
@@ -70,7 +91,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<combobox id="cmbEliminaBasura" autodrop="true"
+								<combobox id="cmb9" autodrop="true"
 									readonly="true" placeholder="Seleccione Cómo se elimina la basura en la vivienda"
 									tooltiptext="Seleccione Cómo se elimina la basura en la vivienda"
 									hflex="1">
@@ -88,7 +109,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<combobox id="cmbCondicionVivienda" autodrop="true"
+								<combobox id="cmb3" autodrop="true"
 									readonly="true" placeholder="Seleccione la condición"
 									tooltiptext="Seleccione la condición en la que habita" hflex="1">
 									<comboitem label="Propietario" />
@@ -103,7 +124,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<combobox id="cmbCombustibleCocina" autodrop="true"
+								<combobox id="cmb10" autodrop="true"
 									readonly="true" placeholder="Seleccione el combustible con el que se cocina"
 									tooltiptext="Seleccione el combustible con el que se cocina"
 									hflex="1">
@@ -121,16 +142,16 @@
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<vlayout id="condicionesEstructurales">
-									<checkbox id="checkEstructura1" label="En buen estado"
+									<checkbox id="check4_1" label="En buen estado"
 										checked="En buen estado" />
-									<checkbox id="checkEstructura2"
+									<checkbox id="check4_2"
 										label="Requiere mejoras en piso techo y paredes" checked="Requiere mejoras en piso, techo y paredes" />
-									<checkbox id="checkEstructura3"
+									<checkbox id="check4_3"
 										label="Requiere construcción de nuevos ambientes" checked="Requiere construcción de nuevos ambientes" />
-									<checkbox id="checkEstructura4"
+									<checkbox id="check4_4"
 										label="Requiere Mantenimiento de tuberías o de electricidad"
 										checked="Requiere Mantenimiento de tuberías o de electricidad" />
-									<checkbox id="checkEstructura5" label="Se encuentra deteriorada (inhabitable)"
+									<checkbox id="check4_5" label="Se encuentra deteriorada (inhabitable)"
 										checked="Se encuentra deteriorada (inhabitable)" />
 								</vlayout>
 								<hbox>
@@ -139,7 +160,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<spinner id="SpinnerCuantosAmbientes" format=",###"
+								<spinner id="spinner11" format=",###"
 									constraint="no empty,min 0" tooltiptext="Cantidad de ambientes de la vivienda" />
 							</row>
 							<row>
@@ -148,7 +169,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<combobox id="cmbAbasteceAgua" autodrop="true"
+								<combobox id="cmb5" autodrop="true"
 									readonly="true" placeholder="Seleccione forma de abastecimiento de agua"
 									tooltiptext="Seleccione la de abastecimiento de agua" hflex="1">
 									<comboitem label="Acueducto tubería" />
@@ -162,7 +183,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<combobox id="cmbCantidadPersonas" autodrop="true"
+								<combobox id="cmb12" autodrop="true"
 									readonly="true" placeholder="Seleccione Cuántas personas residen"
 									tooltiptext="Seleccione Cuántas personas residen" hflex="1">
 									<comboitem label="Una sola persona" />
@@ -178,7 +199,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<combobox id="cmbFrecuenciaAgua" autodrop="true"
+								<combobox id="cmb6" autodrop="true"
 									readonly="true" placeholder="Seleccione la frecuencia de agua en la vivienda"
 									tooltiptext="Seleccione la frecuencia de agua en la vivienda"
 									hflex="1">
@@ -192,10 +213,10 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<radiogroup id="radiogroupGastosSeparados">
+								<radiogroup id="rdg13">
 									<hlayout>
-										<radio id="rSi" label="Si" selected="Si" />
-										<radio id="sNo" label="No" selected="No" />
+										<radio id="rdo13_1" label="Si" selected="Si" />
+										<radio id="rdo13_3" label="No" selected="No" />
 									</hlayout>
 								</radiogroup>
 							</row>
@@ -205,7 +226,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<combobox id="cmbViviendaPosee" autodrop="true"
+								<combobox id="cmb7" autodrop="true"
 									readonly="true" placeholder="Seleccione lo que la vivienda posee"
 									tooltiptext="Seleccione lo que la vivienda posee" hflex="1">
 									<comboitem label="Acueducto tubería" />
@@ -220,7 +241,7 @@
 									<space />
 									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<spinner id="SpinnerGruposGastos" format=",###"
+								<spinner id="spinner14" format=",###"
 									constraint="no empty,min 0" tooltiptext=" grupos de personas mantienen gastos separados" />
 							</row>
 						</rows>
