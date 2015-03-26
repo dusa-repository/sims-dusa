@@ -926,4 +926,9 @@ public class SPaciente {
 	public List<Paciente> buscarPorEstadoCivil(EstadoCivil pais) {
 		return pacienteDAO.findByEstadoCivil(pais);
 	}
+
+	public List<Paciente> buscarTodosFamiliares() {
+		Pageable topTen = new PageRequest(0, 10);
+		return pacienteDAO.findByTrabajadorFalse(topTen);
+	}
 }

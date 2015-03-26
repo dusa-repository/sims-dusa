@@ -156,11 +156,10 @@ public class CCambiarCedula extends CGenerico {
 				pacienteAModificar.getEmpresa(),
 				pacienteAModificar.getCiudadVivienda(),
 				pacienteAModificar.getCargoReal(),
-				pacienteAModificar.getArea(), pacienteAModificar.getVisita(),
-				pacienteAModificar.getFechaVisita(),
-				pacienteAModificar.getResumenVisita(),
-				pacienteAModificar.getBrigadista(),
+				pacienteAModificar.getArea(),
 				pacienteAModificar.getCronico());
+
+		pacienteNuevo.setBrigadista(pacienteAModificar.getBrigadista());
 		pacienteNuevo.setNacionalidad(pacienteAModificar.getNacionalidad());
 		pacienteNuevo.setCarga(pacienteAModificar.getCarga());
 		pacienteNuevo.setNivelEducativo(pacienteAModificar.getNivelEducativo());
