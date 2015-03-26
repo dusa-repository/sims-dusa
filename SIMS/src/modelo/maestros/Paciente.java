@@ -203,9 +203,7 @@ public class Paciente implements Serializable {
 
 	@Column(length = 100)
 	private Integer carga;
-
-	//
-
+	
 	// bi-directional many-to-one association to Cita
 	@OneToMany(mappedBy = "paciente")
 	private Set<Cita> citas;
@@ -298,21 +296,84 @@ public class Paciente implements Serializable {
 
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
-	private Boolean visita;
-
-	@Column(name = "fecha_visita")
-	private Timestamp fechaVisita;
-
-	@Column(name = "resumen_visita", length = 1000)
-	private String resumenVisita;
-
-	@Column
-	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean brigadista;
 
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean cronico;
+	
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean ayuda;
+	
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean estudia;
+	
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean vive;
+	
+	@Column
+	private String rif;
+	
+	@Column
+	private String oficio;
+	
+	@Column
+	private String condicion;
+
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean jefe;
+	
+	@Column(name = "cargo_carrera")
+	private String cargoOCarrera;
+	
+	@Column(name = "lugar_trabajo")
+	private String lugarTrabajo;
+	
+	@Column(name = "descripcion_ayuda")
+	private String descripcionAyuda;
+	
+	@Column(name = "nro_certificado")
+	private String nroCertificado;
+	
+	@Column(name = "observacion")
+	private String observacion;
+	
+	@Column(name = "tipo_rif")
+	private String tipoRif;
+	
+	@Column(name = "certificado")
+	private String certificado;
+	
+	@Column(length = 100)
+	private String municipio;
+	
+	@Column(length = 100)
+	private String parroquia;
+	
+	@Column(length = 100, name = "punto_referencia")
+	private String puntoReferencia;
+	
+	@Column(length = 100)
+	private String sector;
+	
+	@Column(length = 100)
+	private String urb;
+	
+	@Column(length = 100, name = "av_calle")
+	private String avCalle;
+	
+	@Column(length = 15)
+	private String nro;
+	
+	@Column(length = 100, name = "otro_transporte")
+	private String otroTransporte;
+	
+	@Column(length = 500)
+	private String transporte;
 
 	public Paciente() {
 	}
@@ -331,14 +392,9 @@ public class Paciente implements Serializable {
 			String parentescoEmergencia, String telefono1Emergencia,
 			String telefono2Emergencia, String cedulaFamiliar,
 			String parentescoFamiliar, Empresa empresa, Ciudad ciudadVivienda,
-			Cargo cargoa, Area area, Boolean visita, Timestamp fechaVisita,
-			String resumenVisita, Boolean brigadista, Boolean cronico) {
+			Cargo cargoa, Area area, Boolean cronico) {
 		super();
 		this.cronico = cronico;
-		this.visita = visita;
-		this.fechaVisita = fechaVisita;
-		this.resumenVisita = resumenVisita;
-		this.brigadista = brigadista;
 		this.cedula = cedula;
 		this.ficha = ficha;
 		this.primerApellido = primerApellido;
@@ -973,30 +1029,6 @@ public class Paciente implements Serializable {
 		this.fechaMuerte = fechaMuerte;
 	}
 
-	public Boolean getVisita() {
-		return visita;
-	}
-
-	public void setVisita(Boolean visita) {
-		this.visita = visita;
-	}
-
-	public Timestamp getFechaVisita() {
-		return fechaVisita;
-	}
-
-	public void setFechaVisita(Timestamp fechaVisita) {
-		this.fechaVisita = fechaVisita;
-	}
-
-	public String getResumenVisita() {
-		return resumenVisita;
-	}
-
-	public void setResumenVisita(String resumenVisita) {
-		this.resumenVisita = resumenVisita;
-	}
-
 	public Boolean getBrigadista() {
 		return brigadista;
 	}
@@ -1067,6 +1099,191 @@ public class Paciente implements Serializable {
 
 	public void setVisitas(Set<VisitaSocial> visitas) {
 		this.visitas = visitas;
+	}
+
+	public boolean isAyuda() {
+		return ayuda;
+	}
+
+	public void setAyuda(boolean ayuda) {
+		this.ayuda = ayuda;
+	}
+
+	public boolean isEstudia() {
+		return estudia;
+	}
+
+	public void setEstudia(boolean estudia) {
+		this.estudia = estudia;
+	}
+
+	public boolean isVive() {
+		return vive;
+	}
+
+	public void setVive(boolean vive) {
+		this.vive = vive;
+	}
+
+	public String getRif() {
+		return rif;
+	}
+
+	public void setRif(String rif) {
+		this.rif = rif;
+	}
+
+	public String getOficio() {
+		return oficio;
+	}
+
+	public void setOficio(String oficio) {
+		this.oficio = oficio;
+	}
+
+	public String getCargoOCarrera() {
+		return cargoOCarrera;
+	}
+
+	public void setCargoOCarrera(String cargoOCarrera) {
+		this.cargoOCarrera = cargoOCarrera;
+	}
+
+	public String getLugarTrabajo() {
+		return lugarTrabajo;
+	}
+
+	public void setLugarTrabajo(String lugarTrabajo) {
+		this.lugarTrabajo = lugarTrabajo;
+	}
+
+	public String getDescripcionAyuda() {
+		return descripcionAyuda;
+	}
+
+	public void setDescripcionAyuda(String descripcionAyuda) {
+		this.descripcionAyuda = descripcionAyuda;
+	}
+
+	public String getNroCertificado() {
+		return nroCertificado;
+	}
+
+	public void setNroCertificado(String nroCertificado) {
+		this.nroCertificado = nroCertificado;
+	}
+
+	public String getObservacion() {
+		return observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+
+	public String getTipoRif() {
+		return tipoRif;
+	}
+
+	public void setTipoRif(String tipoRif) {
+		this.tipoRif = tipoRif;
+	}
+
+	public String getCertificado() {
+		return certificado;
+	}
+
+	public void setCertificado(String certificado) {
+		this.certificado = certificado;
+	}
+
+	public String getCondicion() {
+		return condicion;
+	}
+
+	public void setCondicion(String condicion) {
+		this.condicion = condicion;
+	}
+
+	public boolean isJefe() {
+		return jefe;
+	}
+
+	public void setJefe(boolean jefe) {
+		this.jefe = jefe;
+	}
+
+	public String getMunicipio() {
+		return municipio;
+	}
+
+	public void setMunicipio(String municipio) {
+		this.municipio = municipio;
+	}
+
+	public String getParroquia() {
+		return parroquia;
+	}
+
+	public void setParroquia(String parroquia) {
+		this.parroquia = parroquia;
+	}
+
+	public String getPuntoReferencia() {
+		return puntoReferencia;
+	}
+
+	public void setPuntoReferencia(String puntoReferencia) {
+		this.puntoReferencia = puntoReferencia;
+	}
+
+	public String getSector() {
+		return sector;
+	}
+
+	public void setSector(String sector) {
+		this.sector = sector;
+	}
+
+	public String getUrb() {
+		return urb;
+	}
+
+	public void setUrb(String urb) {
+		this.urb = urb;
+	}
+
+	public String getAvCalle() {
+		return avCalle;
+	}
+
+	public void setAvCalle(String avCalle) {
+		this.avCalle = avCalle;
+	}
+
+	public String getNro() {
+		return nro;
+	}
+
+	public void setNro(String nro) {
+		this.nro = nro;
+	}
+
+	public String getOtroTransporte() {
+		return otroTransporte;
+	}
+
+	public void setOtroTransporte(String otroTransporte) {
+		this.otroTransporte = otroTransporte;
+	}
+
+
+	public String getTransporte() {
+		return transporte;
+	}
+
+	public void setTransporte(String transporte) {
+		this.transporte = transporte;
 	}
 
 }

@@ -1,10 +1,10 @@
 <zk>
 	<div id="divPaciente" apply="controlador.maestros.CPaciente">
-		<groupbox width="100%" mold="3d" title="Paciente">
+		<groupbox width="100%" mold="3d" title="Pacientes">
 			<tabbox height="auto" id="taxPaciente" orient="horizontal">
 				<tabs id="tbsPaciente">
 					<tab label="Datos Basicos" id="tabDatosBasicos" />
-					<tab label="Datos de Contacto y Visita Social" id="tabDatosContacto" />
+					<tab label="Datos de Contacto" id="tabDatosContacto" />
 					<tab label="Paciente Cronico" id="tabDatosCronico" />
 				</tabs>
 				<tabpanels>
@@ -22,19 +22,8 @@
 							</columns>
 							<rows>
 								<row>
-									<cell colspan="2">
-										<vbox>
-											<hbox>
-												<label class="etiqueta" value="¿Es Trabajador de la Empresa?" />
-												<space />
-												<label value="*" style="font-weight:bold;color:red" />
-											</hbox>
-										</vbox>
-									</cell>
-									<radiogroup id="rdgTipoPaciente">
-										<radio label="SI" value="trabajador" id="rdoTrabajador" />
-										<radio label="NO" value="familiar" id="rdoFamiliar" />
-									</radiogroup>
+
+									<label class="etiqueta" value="Buscar Trabajador" />
 									<button autodisable="self" id="btnBuscarPaciente" class="btn"
 										label="Buscar" tooltiptext="Catalogo"
 										image="/public/imagenes/botones/buscar.png" />
@@ -51,9 +40,12 @@
 												tooltiptext="Indique la Fecha de Nacimiento" constraint="no future,no empty" />
 										</vbox>
 									</cell>
-									<textbox maxlength="100" id="txtObservacionEstatus"
-										hflex="1" multiline="true"
-										tooltiptext="Ingrese una Informacion Adicional del Estatus del Paciente" />
+									<cell colspan="2">
+										<textbox maxlength="100" id="txtObservacionEstatus"
+											hflex="1" multiline="true"
+											tooltiptext="Ingrese una Informacion Adicional del Estatus del Paciente" />
+									</cell>
+									<hbox />
 								</row>
 								<row>
 									<hbox>
@@ -144,10 +136,12 @@
 										</vbox>
 									</cell>
 									<hbox />
-									<button visible="false" autodisable="self" label="Ver Carga Familiar"
-										id="btnVer" image="/public/imagenes/botones/ver.png"
-										tooltiptext="Seleccione una consulta y presione este boton para ver el detalle de la consulta"
+									<button autodisable="self"
+										label="Ver Familiares en Servicios Medicos" id="btnVer"
+										image="/public/imagenes/botones/ver.png"
+										tooltiptext="Familiares del Trabajador que Aplican a Servicios Medicos"
 										hflex="1" height="35px" class="btn" />
+
 								</row>
 								<row>
 									<hbox>
@@ -172,16 +166,19 @@
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
-									<combobox hflex="1" id="cmbEstadoCivil" placeholder="Seleccione un Estado Civil"
-										readonly="true" tooltiptext="Seleccione un Estado Civil"
-										width="250px">
+									<combobox hflex="1" tooltiptext="Seleccione un Estado Civil"
+										placeholder="Seleccione un Estado Civil" id="cmbEstadoCivil"
+										readonly="true" width="100%">
 										<template name="model">
 											<comboitem label="${each.nombre}" context="${each.idEstadoCivil}" />
 										</template>
 									</combobox>
 									<button class="abrir" id="btnAbrirEstadoCivil" label=""
 										tooltiptext="Crear un Nuevo Estado Civil" image="/public/imagenes/botones/agregar.png" />
-									<hbox />
+									<button autodisable="self" label="Ver Carga" id="btnVerFamiliares"
+										image="/public/imagenes/botones/ver.png"
+										tooltiptext="Ver Familiares del Trabajador que no aplican a Servicios Medicos"
+										hflex="1" height="35px" class="btn" />
 								</row>
 								<row>
 									<hbox>
@@ -223,6 +220,27 @@
 									</hbox>
 									<textbox maxlength="100" id="txtProfesion"
 										tooltiptext="Ingrese la Profesion del Paciente" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Condicion del Trabajador:" />
+									<combobox tooltiptext="Seleccione la Condicion del Trabajador"
+										placeholder="Seleccione la Condicion del Trabajador" id="cmbCondicionTrabajador"
+										width="100%" readonly="true">
+										<comboitem label="E" />
+										<comboitem label="NDF" />
+										<comboitem label="NDC" />
+									</combobox>
+									<label class="etiqueta" value="¿Es Jefe del Hogar?" />
+									<radiogroup id="rdgJefe">
+										<radio label="SI" value="jefe" id="rdoJefe" />
+										<radio label="NO" value="no jefe" id="rdoNoJefe" />
+									</radiogroup>
+									<label class="etiqueta" value="Ocupacion u Oficio:" />
+									<cell colspan="2">
+										<textbox id="txtOficio" width="100%" maxlength="500"
+											tooltiptext="Ingrese la Ocupacion u Oficio" multiline="true" />
+									</cell>
+									<hbox />
 								</row>
 								<row>
 									<hbox>
@@ -466,62 +484,6 @@
 								</row>
 							</rows>
 						</grid>
-						<groupbox id="gbxTrabajadorAsociado" width="100%"
-							title="Datos del Trabajador Asociado" visible="false">
-							<grid width="100%">
-								<columns visible="false">
-									<column label="" width="13%" />
-									<column label="" width="20%" />
-									<column label="" width="13%" />
-									<column label="" width="20%" />
-									<column label="" width="13%" />
-									<column label="" width="21%" />
-								</columns>
-								<rows>
-									<row>
-										<hbox>
-											<label class="etiqueta" value="Cedula:" />
-											<space />
-											<label value="*" style="font-weight:bold;color:red" />
-										</hbox>
-										<label id="lblCedula" />
-										<label class="etiqueta" value="Ficha:" />
-										<label id="lblFicha" />
-										<button autodisable="self" id="btnBuscarTrabajadores"
-											class="btn" label="Buscar" tooltiptext="Catalogo de Trabajadores"
-											image="/public/imagenes/botones/buscar.png" />
-										<hbox />
-									</row>
-									<row>
-										<label class="etiqueta" value="Nombres:" />
-										<label id="lblNombres" />
-										<label class="etiqueta" value="Apellidos:" />
-										<label id="lblApellidos" />
-										<hbox>
-											<label class="etiqueta" value="Parentesco:" />
-											<space />
-											<label value="*" style="font-weight:bold;color:red" />
-										</hbox>
-										<combobox tooltiptext="Seleccione un Parentesco"
-											placeholder="Seleccione un Parentesco" id="cmbParentescoFamiliar"
-											width="180px" readonly="true">
-											<comboitem label="Hermano(a)" />
-											<comboitem label="Conyuge" />
-											<comboitem label="Concubino(a)" />
-											<comboitem label="Hijastro(a)" />
-											<comboitem label="Hijo(a)" />
-											<comboitem label="Padre" />
-											<comboitem label="Madre" />
-											<comboitem label="Nieto(a)" />
-											<comboitem label="Yerno/Nuera" />
-											<comboitem label="Suegro(a)" />
-											<comboitem label="Abuelo(a)" />
-											<comboitem label="Otro" />
-										</combobox>
-									</row>
-								</rows>
-							</grid>
-						</groupbox>
 						<div align="right" style="float: right;">
 							<separator />
 							<separator />
@@ -534,44 +496,42 @@
 						<grid width="100%">
 							<columns visible="false">
 								<column label="" width="12%" />
-								<column label="" width="25%" />
+								<column label="" width="20%" />
 								<column label="" width="13%" />
-								<column label="" width="15%" />
+								<column label="" width="20%" />
 								<column label="" width="13%" />
 								<column label="" width="22%" />
 							</columns>
 							<rows>
 								<row>
+									<cell colspan="6">
+										<hbox>
+											<label class="etiqueta" value="Direccion"
+												style="font-weight:bold;color:black" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red" />
+										</hbox>
+									</cell>
+								</row>
+								<row>
+									<cell colspan="2">
+										<textbox id="txtDireccion" maxlength="1000"
+											tooltiptext="Ingrese la Direccion Actual" multiline="true" />
+									</cell>
 									<hbox>
-										<label class="etiqueta" value="Direccion:" />
+										<label class="etiqueta" value="Ciudad:" />
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
-									<cell colspan="2">
-										<hbox hflex="1">
-											<label class="etiqueta" value="Ciudad:" />
-											<space />
-											<label value="*" style="font-weight:bold;color:red" />
-											<space />
-											<combobox tooltiptext="Seleccione una Ciudad"
-												placeholder="Seleccione una Ciudad" id="cmbCiudad" readonly="true"
-												width="200px">
-												<template name="model">
-													<comboitem label="${each.nombre}" context="${each.idCiudad}" />
-												</template>
-											</combobox>
-											<space />
-											<button class="abrir" id="btnAbrirCiudad" label=""
-												tooltiptext="Crear una Nueva Ciudad" image="/public/imagenes/botones/agregar.png" />
-										</hbox>
-										<space />
-										<space />
-										<cell colspan="3">
-											<textbox id="txtDireccion" width="400px" maxlength="1000"
-												tooltiptext="Ingrese la Direccion Actual" multiline="true"
-												class="multilinea" />
-										</cell>
-									</cell>
+									<combobox tooltiptext="Seleccione una Ciudad"
+										placeholder="Seleccione una Ciudad" id="cmbCiudad" readonly="true">
+										<template name="model">
+											<comboitem label="${each.nombre}" context="${each.idCiudad}" />
+										</template>
+									</combobox>
+									<button class="abrir" id="btnAbrirCiudad" label=""
+										tooltiptext="Crear una Nueva Ciudad" image="/public/imagenes/botones/agregar.png" />
+									<label class="etiqueta" value="" id="lblEstado" />
 								</row>
 								<row>
 									<hbox>
@@ -595,7 +555,61 @@
 								</row>
 								<row>
 									<cell colspan="6">
-										<label class="etiqueta" value="En Caso de Emergencia, Comunicarse con:" />
+										<label class="etiqueta" value="Direccion Detallada"
+											style="font-weight:bold;color:black" />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="Municipio:" />
+									<textbox id="txtMunicipio" tooltiptext="Ingrese el Municipio del Paciente"
+										maxlength="100" />
+									<label class="etiqueta" value="Parroquia:" />
+									<textbox id="txtParroquia" hflex="1" maxlength="100"
+										tooltiptext="Ingrese la Parroquia del Paciente" />
+									<label class="etiqueta" value="Punto de Referencia:" />
+									<textbox id="txtPuntoReferencia" hflex="1" maxlength="100"
+										tooltiptext="Ingrese el Punto de Referencia" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Urb/Barrio:" />
+									<textbox id="txtUrb" hflex="1" maxlength="100"
+										tooltiptext="Ingrese la Urb/Barrio del Paciente" />
+									<label class="etiqueta" value="Av/Calle:" />
+									<textbox id="txtAvCalle" hflex="1" maxlength="100"
+										tooltiptext="Ingrese la Av/Calle del Paciente" />
+									<label class="etiqueta" value="Sector:" />
+									<textbox id="txtSector" tooltiptext="Ingrese el Sector del Paciente"
+										maxlength="100" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Nro. Casa:" />
+										<textbox width="20px" id="txtNro" hflex="1" maxlength="100"
+											tooltiptext="Ingrese el Nro de la Casa del Paciente" />
+									</hbox>
+									<label class="etiqueta" value="Medio de Transporte Utilizado:" />
+											<cell colspan="2">
+										<vlayout>		
+									<hlayout>
+										<checkbox id="chkDusa" label="Transporte Dusa" />
+										<checkbox id="chkPrivado" label="Vehiculo Propio" />
+										<checkbox id="chkMoto" label="Moto" />
+									</hlayout>
+										<hlayout>
+										<checkbox id="chkBicicleta" label="Bicicleta" />
+										<checkbox id="chkPublico" label="Transporte Publico" />
+										<checkbox id="chkOtro" label="Otro" />
+									</hlayout>
+									</vlayout>
+									</cell>
+									<label class="etiqueta" value="Cual:" />
+									<textbox id="txtOtroTransporte" tooltiptext="Especifique el Tipo de Transporte"
+										maxlength="100" multiline="true" />
+								</row>
+								<row>
+									<cell colspan="6">
+										<label class="etiqueta" value="En Caso de Emergencia, Comunicarse con:"
+											style="font-weight:bold;color:black" />
 									</cell>
 								</row>
 								<row>
@@ -654,38 +668,6 @@
 										tooltiptext="Ingrese el Numero de telefono de Emergencia (0426-9999999)" />
 									<hbox />
 									<hbox />
-								</row>
-								<row>
-									<cell colspan="6">
-										<label class="etiqueta" value="Visita Social" />
-									</cell>
-								</row>
-								<row>
-									<label class="etiqueta" value="¿Se efectuo Visita Social?:" />
-									<hbox>
-										<radiogroup>
-											<radio label="SI" value="trabajador" id="rdoSiSocial" />
-											<radio label="NO" value="familiar" id="rdoNoSocial" />
-										</radiogroup>
-										<separator />
-										<separator />
-										<separator />
-										<separator />
-										<separator />
-										<separator />
-										<separator />
-										<separator />
-										<label class="etiqueta" value="¿Cuando?" />
-									</hbox>
-									<datebox readonly="true" width="140px" id="dtbSocial"
-										onCreate="self.value = new Date()" tooltiptext="Indique la fecha en que se realizo la visita social"
-										constraint="no future,no empty" />
-									<label class="etiqueta" value="Resumen Visita:" />
-									<cell colspan="2">
-										<textbox multiline="true" height="70px" id="txtResumenVisita"
-											hflex="1" maxlength="1000"
-											tooltiptext="Ingrese lo observado en la visita social" />
-									</cell>
 								</row>
 							</rows>
 						</grid>
@@ -801,7 +783,7 @@
 				</tabpanels>
 			</tabbox>
 			<div id="catalogoPaciente" />
-			<div id="divCatalogoFamiliar" />
+			<div id="divCatalogoModeloFamiliar" />
 		</groupbox>
 	</div>
 </zk>

@@ -66,6 +66,7 @@ import servicio.maestros.SEspecialista;
 import servicio.maestros.SEstado;
 import servicio.maestros.SEstadoCivil;
 import servicio.maestros.SExamen;
+import servicio.maestros.SFamiliar;
 import servicio.maestros.SIntervencion;
 import servicio.maestros.SLaboratorio;
 import servicio.maestros.SMedicina;
@@ -125,6 +126,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	private static final long serialVersionUID = -2264423023637489596L;
 	@WireVariable("SHorasHombre")
 	protected SHorasHombre servicioHorasHombre;
+	@WireVariable("SFamiliar")
+	protected SFamiliar servicioFamiliar;
 	@WireVariable("SEstadoCivil")
 	protected SEstadoCivil servicioEstadoCivil;
 	@WireVariable("SF00021")
