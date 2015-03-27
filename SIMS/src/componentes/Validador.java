@@ -42,6 +42,13 @@ public abstract class Validador {
 		Matcher matcher = pattern.matcher(telefono);
 		return matcher.matches();
 	}
+	
+	public static boolean validarRif(String telefono) {
+		String PATTERN = "[A-Za-z]{1}-\\d{8}-\\d{1}";
+		Pattern pattern = Pattern.compile(PATTERN);
+		Matcher matcher = pattern.matcher(telefono);
+		return matcher.matches();
+	}
 
 	/* Valida que el archivo que se sube sea una Imagen */
 	public static boolean validarTipoImagen(Media media) {

@@ -502,6 +502,7 @@ public class CReposo extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Consulta> consuta = new ArrayList<Consulta>();
 
 		if (area.equals(""))
@@ -671,6 +672,7 @@ public class CReposo extends CGenerico {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		fecha2 = agregarDia(fecha2);
 		List<Long> ids = new ArrayList<Long>();
 		String diagnosticoReal = "";
 		Iterator<?> it = jObj.keys();
@@ -876,6 +878,7 @@ public class CReposo extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Consulta> consuta = new ArrayList<Consulta>();
 
 		if (idPaciente.equals("TODOS"))
@@ -981,6 +984,7 @@ public class CReposo extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Consulta> consuta = new ArrayList<Consulta>();
 
 		if (unidad.equals("") && doctor.equals("TODOS"))
@@ -1146,6 +1150,7 @@ public class CReposo extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Consulta> consuta = new ArrayList<Consulta>();
 
 		if (empresa.equals(""))
@@ -1290,6 +1295,7 @@ public class CReposo extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Consulta> consuta = new ArrayList<Consulta>();
 
 		if (cargo.equals(""))
@@ -1434,6 +1440,7 @@ public class CReposo extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Consulta> consuta = new ArrayList<Consulta>();
 
 		if (nomina.equals(""))

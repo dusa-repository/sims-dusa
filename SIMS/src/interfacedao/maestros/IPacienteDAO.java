@@ -212,6 +212,14 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 	List<Paciente> findByEstadoCivil(EstadoCivil pais);
 
 	List<Paciente> findByTrabajadorFalse(Pageable topTen);
+
+	@Query(value = "select * from paciente p where p.id_paciente in "
+			+ "(select c.id_paciente from consulta c where c.tipo_consulta_secundaria ='Pre-Vacacional' "
+			+ "and c.fecha_post_vacacional < CONVERT(datetime,GETDATE(),103) and not exists "
+			+ "(select * from consulta cc where cc.tipo_consulta_secundaria ='Post-Vacacional' "
+			+ "and cc.fecha_consulta between c.fecha_consulta and  CONVERT(datetime,GETDATE(),103) "
+			+ "and c.id_paciente = cc.id_paciente))", nativeQuery = true)
+	List<Paciente> findByConsultaPendiente();
 	
 //@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
 }

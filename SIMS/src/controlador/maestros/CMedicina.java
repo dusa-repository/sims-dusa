@@ -756,7 +756,6 @@ public class CMedicina extends CGenerico {
 		f4101.setImxdck("N");
 		f4101.setImdual("N");
 		f4101.setImdppo("N");
-		System.out.println("entro");
 		servicioF4101.guardar(f4101);
 	}
 }

@@ -103,4 +103,8 @@ public class SEspecialista {
 		}
 	}
 
+	public Especialista buscarPorRif(String value) {
+		return especialistaDAO.findByRif(value);
+	}
+
 }

@@ -62,7 +62,6 @@ public class CEstado extends CGenerico {
 		if (map != null) {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
-				System.out.println(tabs.size());
 				map.clear();
 				map = null;
 			}

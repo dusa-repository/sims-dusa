@@ -399,7 +399,7 @@
 										</listcell>
 										<listcell>
 											<textbox value="${each.dosis}" width="98%" class="multilinea"
-												multiline="true" />
+												multiline="true" maxlength="1000"/>
 										</listcell>
 										<listcell>
 											<spinner value="${each.medicina.idMedicina}" width="98%"
@@ -523,7 +523,7 @@
 										<listcell label="${each.examen.nombre}">
 										</listcell>
 										<listcell>
-											<textbox value="${each.observacion}" width="98%"
+											<textbox maxlength="300" value="${each.observacion}" width="98%"
 												class="multilinea" multiline="true" />
 										</listcell>
 										<!-- onSelect='$composer.validarExamen(self)' -->
@@ -666,7 +666,7 @@
 										<listcell label="${each.especialista.nombre}">
 										</listcell>
 										<listcell>
-											<textbox maxlength="1500" value="${each.observacion}"
+											<textbox maxlength="500" value="${each.observacion}"
 												class="multilinea" multiline="true" hflex="1" />
 										</listcell>
 										<listcell>

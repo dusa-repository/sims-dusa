@@ -295,6 +295,7 @@ public class COrdenProveedor extends CGenerico {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		fecha2 = agregarDia(fecha2);
 		List<ConsultaExamen> examenes = new ArrayList<ConsultaExamen>();
 		List<ConsultaServicioExterno> estudios = new ArrayList<ConsultaServicioExterno>();
 		List<ConsultaExamen> lista = new ArrayList<ConsultaExamen>();
@@ -418,6 +419,7 @@ public class COrdenProveedor extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<ConsultaEspecialista> especialistas = new ArrayList<ConsultaEspecialista>();
 		Especialista especialista = getServicioEspecialista().buscar(par8);
 		if (!par8.equals("0"))
@@ -491,6 +493,7 @@ public class COrdenProveedor extends CGenerico {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		fecha2 = agregarDia(fecha2);
 		List<OrdenExamen> examenesOrden = new ArrayList<OrdenExamen>();
 		List<OrdenServicioExterno> estudiosOrden = new ArrayList<OrdenServicioExterno>();
 		List<OrdenExamen> listaOrden = new ArrayList<OrdenExamen>();
@@ -614,6 +617,7 @@ public class COrdenProveedor extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<OrdenEspecialista> especialistas = new ArrayList<OrdenEspecialista>();
 		Especialista especialista = getServicioEspecialista().buscar(par8);
 		if (!par8.equals("0"))

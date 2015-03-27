@@ -22,6 +22,16 @@
 					</row>
 					<row>
 						<hbox>
+							<label class="etiqueta" value="Rif:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox maxlength="20" id="txtRif" hflex="1"
+							tooltiptext="Ingrese el Rif del Especialista (J-12345678-0)" />
+						<hbox />
+					</row>
+					<row>
+						<hbox>
 							<label class="etiqueta" value="Nombres:" />
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />

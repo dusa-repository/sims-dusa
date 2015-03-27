@@ -55,9 +55,12 @@
 						<button class="btn" autodisable="self" id="btnBuscarPacienteCita"
 							label="Buscar Paciente" tooltiptext="Catalogo"
 							image="/public/imagenes/botones/buscar.png" width="130px" />
-						<cell colspan="6">
+						<cell colspan="5">
 							<hbox />
 						</cell>
+						<button class="btn" autodisable="self" id="btnFaltantes"
+							label="Post-Pendientes" tooltiptext="Catalogo"
+							image="/public/imagenes/botones/buscar.png" width="130px" />
 					</row>
 				</rows>
 			</grid>
@@ -363,7 +366,7 @@
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
-										<datebox readonly="true" width="100%" id="dtbFechaPostVacacional"
+									<datebox readonly="true" width="100%" id="dtbFechaPostVacacional"
 										onCreate="self.value = new Date()" cols="8" />
 									<hbox />
 								</row>
@@ -729,7 +732,7 @@
 														</combobox>
 													</listcell>
 													<listcell>
-														<textbox value="${each.observacion}" width="98%"
+														<textbox maxlength="100" value="${each.observacion}" width="98%"
 															class="multilinea" multiline="true" />
 													</listcell>
 													<listcell>
@@ -920,7 +923,7 @@
 															value="${each.cantidad}" />
 													</listcell>
 													<listcell>
-														<textbox value="${each.dosis}" width="98%" class="multilinea"
+														<textbox  maxlength="1000" value="${each.dosis}" width="98%" class="multilinea"
 															multiline="true" />
 													</listcell>
 													<listcell>
@@ -1045,7 +1048,7 @@
 													<listcell label="${each.examen.nombre}">
 													</listcell>
 													<listcell>
-														<textbox value="${each.observacion}" width="98%"
+														<textbox maxlength="300" value="${each.observacion}" width="98%"
 															class="multilinea" multiline="true" />
 													</listcell>
 													<!-- onSelect='$composer.validarExamen(self)' -->
@@ -1189,7 +1192,7 @@
 													<listcell label="${each.especialista.nombre}">
 													</listcell>
 													<listcell>
-														<textbox maxlength="1500" value="${each.observacion}"
+														<textbox maxlength="100" value="${each.observacion}"
 															class="multilinea" multiline="true" hflex="1" />
 													</listcell>
 													<listcell>
@@ -2968,6 +2971,7 @@
 				</tabpanels>
 			</tabbox>
 			<div id="divCatalogoPacientes" />
+			<div id="divCatalogoPacientes2" />
 			<div id="divCatalogoOrden" />
 			<div id="botoneraConsultaGeneral" />
 			<div id="catalogoConsulta" />

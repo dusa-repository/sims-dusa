@@ -791,6 +791,8 @@ public class CConsulta extends CGenerico {
 	@Wire
 	private Div divCatalogoOrden;
 	@Wire
+	private Div divCatalogoPacientes2;
+	@Wire
 	private Button btnAbrirAntecedente3;
 	@Wire
 	private Button btnAbrirAntecedente2;
@@ -862,6 +864,7 @@ public class CConsulta extends CGenerico {
 	long idConsultaAsociada = 0;
 
 	Catalogo<Paciente> catalogoPaciente;
+	Catalogo<Paciente> catalogoPaciente2;
 	Catalogo<Consulta> catalogo;
 	Catalogo<Orden> catalogoOrden;
 
@@ -1088,15 +1091,15 @@ public class CConsulta extends CGenerico {
 						ritmicaRespiratoria = false;
 					String reposoEmbarazo = cmbReposo.getValue();
 					Consulta consulta = new Consulta(idConsulta, paciente,
-							usuario, fechaConsulta, metodoHora(),
-							metodoHora(), metodoFecha(), nombreUsuarioSesion(),
-							accidente, motivo, tipo, enfermedad,
-							idConsultaAsociada, estatura, peso, ombligo, plena,
-							forzada, frecuencia, frecuencia1, frecuencia2,
-							frecuencia3, sistolica1, sistolica2, sistolica3,
-							diastolica1, diastolica2, diastolica3, extra1,
-							extra2, extra3, ritmico, ritmico1, ritmico2,
-							ritmico3, paciente.getCargoReal(), cargoDeseado,
+							usuario, fechaConsulta, metodoHora(), metodoHora(),
+							metodoFecha(), nombreUsuarioSesion(), accidente,
+							motivo, tipo, enfermedad, idConsultaAsociada,
+							estatura, peso, ombligo, plena, forzada,
+							frecuencia, frecuencia1, frecuencia2, frecuencia3,
+							sistolica1, sistolica2, sistolica3, diastolica1,
+							diastolica2, diastolica3, extra1, extra2, extra3,
+							ritmico, ritmico1, ritmico2, ritmico3,
+							paciente.getCargoReal(), cargoDeseado,
 							paciente.getArea(), areaDeseado, apto, reposo,
 							tipoSecundaria, examenesPre, dias, condicionApto,
 							doctorGuardar, especialista, tipoReposo,
@@ -1714,7 +1717,8 @@ public class CConsulta extends CGenerico {
 		GrupoInspectores g = servicioGrupoInspectores.buscar(1);
 		if (g != null) {
 			correo = g.getGrupo();
-			enviarEmailNotificacion(correo,
+			enviarEmailNotificacion(
+					correo,
 					"Se ha reportado un Nuevo Accidente en el Sistema Medico Integral y de Seguridad");
 		}
 	}
@@ -1724,8 +1728,8 @@ public class CConsulta extends CGenerico {
 		if (ltbMedicinasAgregadas.getItemCount() != 0) {
 			Date vali = dtbValido.getValue();
 			Timestamp validez = new Timestamp(vali.getTime());
-			recipe = new Recipe(0, cmbPrioridad.getValue(), validez, metodoFecha(),
-					metodoHora(), nombreUsuarioSesion(),
+			recipe = new Recipe(0, cmbPrioridad.getValue(), validez,
+					metodoFecha(), metodoHora(), nombreUsuarioSesion(),
 					cmbTratamiento.getValue());
 			servicioRecipe.guardar(recipe);
 			recipe = servicioRecipe.buscarUltimo();
@@ -2353,7 +2357,8 @@ public class CConsulta extends CGenerico {
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
 				"Catalogo de Pacientes", pacientes, false, "Cedula", "Ficha",
-				"Primer Nombre","Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Trabajador Asociado") {
+				"Primer Nombre", "Segundo Nombre", "Primer Apellido",
+				"Segundo Apellido", "Trabajador Asociado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {
@@ -2369,9 +2374,11 @@ public class CConsulta extends CGenerico {
 						case "Cedula":
 							return servicioPaciente.filtroCedulaActivos(valor);
 						case "Primer Apellido":
-							return servicioPaciente.filtroApellido1Activos(valor);
+							return servicioPaciente
+									.filtroApellido1Activos(valor);
 						case "Segundo Apellido":
-							return servicioPaciente.filtroApellido2Activos(valor);
+							return servicioPaciente
+									.filtroApellido2Activos(valor);
 						case "Trabajador Asociado":
 							return servicioPaciente
 									.filtroCedulaFamiliar1Activos(valor);
@@ -2818,8 +2825,8 @@ public class CConsulta extends CGenerico {
 				.getFechaNacimiento())));
 		lblLugarNac.setValue(paciente.getLugarNacimiento());
 		lblSexo.setValue(paciente.getSexo());
-		if(paciente.getEstadoCivil()!=null)
-		lblEstadoCivil.setValue(paciente.getEstadoCivil().getNombre());
+		if (paciente.getEstadoCivil() != null)
+			lblEstadoCivil.setValue(paciente.getEstadoCivil().getNombre());
 		lblGrupoSanguineo.setValue(paciente.getGrupoSanguineo());
 		lblMano.setValue(paciente.getMano());
 		lblOrigen.setValue(paciente.getOrigenDiscapacidad());
@@ -6538,7 +6545,8 @@ public class CConsulta extends CGenerico {
 		p.put("pacienteNombre",
 				paciente.getPrimerNombre() + " " + paciente.getPrimerApellido());
 		p.put("fecha", consuta.getFechaConsulta());
-		p.put("edad", String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
+		p.put("edad",
+				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
 		p.put("cedula", paciente.getCedula());
 		p.put("sexo", paciente.getSexo());
 		if (paciente.isDiscapacidad())
@@ -6635,7 +6643,6 @@ public class CConsulta extends CGenerico {
 				f4211.setSddoc(idC.doubleValue());
 				f4211.setSddrqj(transformarGregorianoAJulia(dtbFechaConsulta
 						.getValue()));
-				System.out.println(f4211.getSddrqj()+"fecha");
 				f4211.setSditm(f4101.getImitm());
 				f4211.setSduncs(costoIndividual);
 				f4211.setSdemcu("Planta");
@@ -6651,5 +6658,43 @@ public class CConsulta extends CGenerico {
 				servicioF4211.guardar(f4211);
 			}
 		}
+	}
+
+	@Listen("onClick = #btnFaltantes")
+	public void mostrarCatalogoConsultasFaltantes() {
+
+		final List<Paciente> pacientes = servicioPaciente
+				.buscarPostVacacionalPendiente();
+		catalogoPaciente2 = new Catalogo<Paciente>(divCatalogoPacientes2,
+				"Catalogo de Pacientes con consulta post-vacacional pendiente",
+				pacientes, false, "Cedula", "Ficha", "Primer Nombre",
+				"Segundo Nombre", "Primer Apellido", "Segundo Apellido",
+				"Trabajador Asociado") {
+
+			@Override
+			protected List<Paciente> buscar(String valor, String combo) {
+
+				return pacientes;
+
+			}
+
+			@Override
+			protected String[] crearRegistros(Paciente objeto) {
+				String[] registros = new String[7];
+				registros[0] = objeto.getCedula();
+				registros[1] = objeto.getFicha();
+				registros[2] = objeto.getPrimerNombre();
+				registros[3] = objeto.getSegundoNombre();
+				registros[4] = objeto.getPrimerApellido();
+				registros[5] = objeto.getSegundoApellido();
+				registros[6] = objeto.getCedulaFamiliar();
+				return registros;
+			}
+
+		};
+		catalogoPaciente2.setParent(divCatalogoPacientes2);
+		Listbox lsita = (Listbox) catalogoPaciente2.getChildren().get(3);
+		lsita.setEmptyMessage("Utilice el filtro para buscar el paciente que desea buscar");
+		catalogoPaciente2.doModal();
 	}
 }

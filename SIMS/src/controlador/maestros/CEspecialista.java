@@ -46,6 +46,8 @@ public class CEspecialista extends CGenerico {
 	@Wire
 	private Textbox txtNombreEspecialista;
 	@Wire
+	private Textbox txtRif;
+	@Wire
 	private Textbox txtApellidoEspecialista;
 	@Wire
 	private Textbox txtCedulaEspecialista;
@@ -82,7 +84,6 @@ public class CEspecialista extends CGenerico {
 		if (mapa != null) {
 			if (mapa.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) mapa.get("tabsGenerales");
-				System.out.println(tabs.size());
 				mapa.clear();
 				mapa = null;
 			}
@@ -116,6 +117,7 @@ public class CEspecialista extends CGenerico {
 				txtTelefonoEspecialista.setValue("");
 				txtDireccionEspecialista.setValue("");
 				txtNombreEspecialista.setValue("");
+				txtRif.setValue("");
 				cmbEspecialidad.setValue("");
 				cmbEspecialidad.setPlaceholder("Seleccione una Especialidad");
 				dspCosto.setValue(null);
@@ -129,6 +131,7 @@ public class CEspecialista extends CGenerico {
 					nombre = txtNombreEspecialista.getValue();
 					apellido = txtApellidoEspecialista.getValue();
 					cedula = txtCedulaEspecialista.getValue();
+					String rif = txtRif.getValue();
 					double costoServicio = dspCosto.getValue();
 					Especialidad especialidad = servicioEspecialidad
 							.buscar(Long.parseLong(cmbEspecialidad
@@ -138,6 +141,7 @@ public class CEspecialista extends CGenerico {
 							horaAuditoria, nombreUsuarioSesion(), especialidad,
 							txtDireccionEspecialista.getValue(),
 							txtTelefonoEspecialista.getValue());
+					especialista.setRif(rif);
 					servicioEspecialista.guardar(especialista);
 					if (consulta) {
 						especialista = servicioEspecialista.buscar(cedula);
@@ -154,7 +158,7 @@ public class CEspecialista extends CGenerico {
 						cOrden.recibir(especialistaConsulta, listaConsulta);
 					}
 					limpiar();
-					msj.mensajeInformacion(Mensaje.guardado);
+					Mensaje.mensajeInformacion(Mensaje.guardado);
 				}
 			}
 
@@ -174,19 +178,19 @@ public class CEspecialista extends CGenerico {
 										List<ConsultaEspecialista> consultas = servicioConsultaEspecialista
 												.buscarPorEspecialista(especialista);
 										if (!consultas.isEmpty())
-											msj.mensajeError(Mensaje.noEliminar);
+											Mensaje.mensajeError(Mensaje.noEliminar);
 										else {
 											servicioEspecialista
 													.eliminar(especialista);
 											limpiar();
-											msj.mensajeInformacion(Mensaje.eliminado);
+											Mensaje.mensajeInformacion(Mensaje.eliminado);
 										}
 
 									}
 								}
 							});
 				} else {
-					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
+					Mensaje.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 				}
 
 			}
@@ -199,23 +203,30 @@ public class CEspecialista extends CGenerico {
 		if (txtApellidoEspecialista.getText().compareTo("") == 0
 				|| txtCedulaEspecialista.getText().compareTo("") == 0
 				|| txtNombreEspecialista.getText().compareTo("") == 0
+				|| txtRif.getText().compareTo("") == 0
 				|| dspCosto.getText().compareTo("") == 0
 				|| txtDireccionEspecialista.getText().compareTo("") == 0
 				|| txtTelefonoEspecialista.getText().compareTo("") == 0
 				|| cmbEspecialidad.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (!Validador.validarNumero(txtCedulaEspecialista.getValue())) {
-				msj.mensajeError(Mensaje.cedulaInvalida);
+				Mensaje.mensajeError(Mensaje.cedulaInvalida);
 				return false;
 			} else {
 				if (!Validador.validarTelefono(txtTelefonoEspecialista
 						.getValue())) {
-					msj.mensajeError(Mensaje.telefonoInvalido);
+					Mensaje.mensajeError(Mensaje.telefonoInvalido);
 					return false;
+				} else {
+					if (!Validador.validarRif(txtRif.getValue())) {
+						Mensaje.mensajeError(Mensaje.rifInvalido);
+						return false;
+					}
+					return true;
+
 				}
-				return true;
 
 			}
 		}
@@ -227,8 +238,8 @@ public class CEspecialista extends CGenerico {
 		final List<Especialista> especialistas = servicioEspecialista
 				.buscarTodos();
 		catalogo = new Catalogo<Especialista>(catalogoEspecialista,
-				"Catalogo de Especialistas", especialistas,false, "Cedula", "Nombre",
-				"Apellido", "Costo Servicio", "Especialidad") {
+				"Catalogo de Especialistas", especialistas, false, "Cedula",
+				"Nombre", "Apellido", "Costo Servicio", "Especialidad") {
 
 			@Override
 			protected List<Especialista> buscar(String valor, String combo) {
@@ -269,14 +280,21 @@ public class CEspecialista extends CGenerico {
 	@Listen("onChange = #txtCedulaEspecialista")
 	public void validarCedula() {
 		if (!Validador.validarNumero(txtCedulaEspecialista.getValue())) {
-			msj.mensajeAlerta(Mensaje.cedulaInvalida);
+			Mensaje.mensajeAlerta(Mensaje.cedulaInvalida);
 		}
 	}
 
 	@Listen("onChange = #txtTelefonoEspecialista")
 	public void validarTelefono() {
 		if (!Validador.validarTelefono(txtTelefonoEspecialista.getValue())) {
-			msj.mensajeAlerta(Mensaje.telefonoInvalido);
+			Mensaje.mensajeAlerta(Mensaje.telefonoInvalido);
+		}
+	}
+
+	@Listen("onChange = #txtRif")
+	public void validarRif() {
+		if (!Validador.validarRif(txtRif.getValue())) {
+			Mensaje.mensajeAlerta(Mensaje.rifInvalido);
 		}
 	}
 
@@ -305,10 +323,25 @@ public class CEspecialista extends CGenerico {
 			llenarCampos(especialista);
 	}
 
+	@Listen("onChange = #txtRif; onOK = #txtRif")
+	public void buscarPorRif() {
+		Especialista especialista = servicioEspecialista.buscarPorRif(txtRif
+				.getValue());
+		if (especialista != null) {
+			txtRif.setValue("");
+			txtRif.setFocus(true);
+			Mensaje.mensajeAlerta("El Rif esta siendo usado por otro Especialista");
+		}
+	}
+
 	/* LLena los campos del formulario dado un especialista */
 	private void llenarCampos(Especialista especialista) {
 		txtCedulaEspecialista.setValue(especialista.getCedula());
 		txtNombreEspecialista.setValue(especialista.getNombre());
+		if (especialista.getRif() != null)
+			txtRif.setValue(especialista.getRif());
+		else
+			txtRif.setValue("");
 		txtApellidoEspecialista.setValue(especialista.getApellido());
 		txtDireccionEspecialista.setValue(especialista.getDireccion());
 		txtTelefonoEspecialista.setValue(especialista.getTelefono());

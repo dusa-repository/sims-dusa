@@ -191,6 +191,7 @@ public class CCosto extends CGenerico {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		fecha2 = agregarDia(fecha2);
 		Area area = getServicioArea().buscar(part2);
 		String diagnostico = par9;
 		List<ConsultaDiagnostico> consultas = new ArrayList<ConsultaDiagnostico>();

@@ -36,6 +36,9 @@ public class Especialista implements Serializable {
 	
 	@Column(length=20)
 	private String telefono;
+	
+	@Column(length=20)
+	private String rif;
 
 	@Column(name = "nombre", length = 100)
 	private String nombre;
@@ -188,6 +191,14 @@ public class Especialista implements Serializable {
 
 	public void setOrdenesEspecialista(Set<OrdenEspecialista> ordenesEspecialista) {
 		this.ordenesEspecialista = ordenesEspecialista;
+	}
+
+	public String getRif() {
+		return rif;
+	}
+
+	public void setRif(String rif) {
+		this.rif = rif;
 	}
 
 }
