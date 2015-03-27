@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -265,6 +266,7 @@ public class CResumen extends CGenerico {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		fecha2 = agregarDia(fecha2);
 		List<ConsultaDiagnostico> consultas = getServicioConsultaDiagnostico()
 				.buscarEntreFechasResumen(fecha1, fecha2, true);
 		List<Resumen> lista = new ArrayList<Resumen>();
@@ -404,7 +406,8 @@ public class CResumen extends CGenerico {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
+		fecha2 = agregarDia(fecha2);
 		List<ConsultaDiagnostico> consultas = new ArrayList<ConsultaDiagnostico>();
 		List<Resumen> lista = new ArrayList<Resumen>();
 		boolean trabajador = false;
@@ -531,6 +534,7 @@ public class CResumen extends CGenerico {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		fecha2 = agregarDia(fecha2);
 		List<Consulta> consultasSolas = new ArrayList<Consulta>();
 		List<Resumen> lista = new ArrayList<Resumen>();
 		boolean trabajador = false;

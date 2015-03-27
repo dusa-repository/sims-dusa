@@ -339,6 +339,14 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		}
 	}
 
+	public static SF41021 getServicioF41021() {
+		return applicationContext.getBean(SF41021.class);
+	}
+
+	public static SF4101 getServicioF4101() {
+		return applicationContext.getBean(SF4101.class);
+	}
+
 	public static SF4111 getServicioF4111() {
 		return applicationContext.getBean(SF4111.class);
 	}
@@ -606,7 +614,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 					id = numeroNext + 1;
 					F00021 f021 = servicioF00021.buscar(numero, user);
 					f021.setNln001(id);
-					System.out.println("id" + id);
 					servicioF00021.guardar(f021);
 				} else {
 					id = 1;
@@ -623,7 +630,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			} catch (Exception a) {
 				nextNumber = true;
 				a.printStackTrace();
-				System.out.println("error");
 				return 0;
 			}
 		}
@@ -637,7 +643,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public String diaSemanaString(Calendar calendar) {
 		int dia = calendar.get(Calendar.DAY_OF_WEEK);
 		String diaSemana = "";
-		System.out.println("int" + dia);
 		switch (dia) {
 		case 2:
 			diaSemana = "Lunes";
@@ -692,5 +697,12 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			valor = String.valueOf(formatoFecha.format(fecha));
 		}
 		return valor;
+	}
+
+	public Date agregarDia(Date fecha) {
+		Calendar calendario = Calendar.getInstance();
+		calendario.setTime(fecha);
+		calendario.add(Calendar.DAY_OF_YEAR, +1);
+		return fecha = calendario.getTime();
 	}
 }

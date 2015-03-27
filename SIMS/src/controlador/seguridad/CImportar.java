@@ -134,7 +134,6 @@ public class CImportar extends CGenerico {
 		if (mapa != null) {
 			if (mapa.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) mapa.get("tabsGenerales");
-				System.out.println(tabs.size());
 				mapa.clear();
 				mapa = null;
 			}
@@ -246,7 +245,6 @@ public class CImportar extends CGenerico {
 				while (rowIterator.hasNext()) {
 					error = false;
 					contadorRow = contadorRow + 1;
-					System.out.println(contadorRow);
 					Row row = rowIterator.next();
 					Medicina medicina = new Medicina();
 					Consulta consulta = new Consulta();
@@ -390,7 +388,6 @@ public class CImportar extends CGenerico {
 				while (rowIterator.hasNext()) {
 					error = false;
 					contadorRow = contadorRow + 1;
-					System.out.println(contadorRow);
 					Row row = rowIterator.next();
 					Examen examen = new Examen();
 					Consulta consulta = new Consulta();
@@ -523,7 +520,6 @@ public class CImportar extends CGenerico {
 				while (rowIterator.hasNext()) {
 					error = false;
 					contadorRow = contadorRow + 1;
-					System.out.println(contadorRow);
 					Row row = rowIterator.next();
 					Diagnostico diagnostico = new Diagnostico();
 					Consulta consulta = new Consulta();
@@ -1294,7 +1290,6 @@ public class CImportar extends CGenerico {
 				boolean errorLong = false;
 				while (rowIterator.hasNext() && !error && !errorLong) {
 					contadorRow = contadorRow + 1;
-					System.out.println(contadorRow);
 					Row row = rowIterator.next();
 					Consulta consulta = new Consulta();
 					Double cedReferencia = (double) 0;

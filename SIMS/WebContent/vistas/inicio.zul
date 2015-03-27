@@ -120,7 +120,7 @@
 			</south>
 		</borderlayout>
 		<menupopup id="editPopup">
-			<menuitem id="mnuItem" label="Cerrar Todas" apply="arbol.CArbol" />
+			<menuitem id="mnuItem" label="Cerrar Todas" />
 		</menupopup>
 	</window>
 </zk>

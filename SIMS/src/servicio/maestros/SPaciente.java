@@ -931,4 +931,8 @@ public class SPaciente {
 		Pageable topTen = new PageRequest(0, 10);
 		return pacienteDAO.findByTrabajadorFalse(topTen);
 	}
+	
+	public List<Paciente> buscarPostVacacionalPendiente() {
+		return pacienteDAO.findByConsultaPendiente();
+	}
 }

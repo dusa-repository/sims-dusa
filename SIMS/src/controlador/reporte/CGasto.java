@@ -368,6 +368,7 @@ public class CGasto extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Consulta> consultas = new ArrayList<Consulta>();
 		if (par8.equals("TODOS")) {
 			if (par9.equals("TODOS"))
@@ -497,6 +498,7 @@ public class CGasto extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Consulta> consultas = new ArrayList<Consulta>();
 		if (par9.equals("TODOS"))
 			consultas = getServicioConsulta().buscarEntreFechasTrabajadores(
@@ -602,6 +604,7 @@ public class CGasto extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Orden> ordenes = new ArrayList<Orden>();
 		if (par8.equals("TODOS")) {
 			if (par9.equals("TODOS"))
@@ -733,6 +736,7 @@ public class CGasto extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<Orden> ordenes = new ArrayList<Orden>();
 		if (par9.equals("TODOS"))
 			ordenes = getServicioOrden().buscarEntreFechasTrabajadores(

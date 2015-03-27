@@ -55,7 +55,7 @@ public class Consulta implements Serializable {
 	@Column(name = "fecha_post_vacacional")
 	private Timestamp fechaPostVacacional;
 
-	@Column(length = 500)
+	@Column(length = 1000)
 	private String motivoConsulta;
 
 	@Column(length = 2500)

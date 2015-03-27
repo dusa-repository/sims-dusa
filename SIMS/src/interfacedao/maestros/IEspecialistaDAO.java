@@ -27,4 +27,6 @@ public interface IEspecialistaDAO  extends JpaRepository<Especialista, String>{
 	List<Especialista> findByEspecialidadDescripcionStartingWithOrApellidoStartingWithOrNombreStartingWithAllIgnoreCase(
 			String valor, String valor2, String valor3);
 
+	Especialista findByRif(String value);
+
 }

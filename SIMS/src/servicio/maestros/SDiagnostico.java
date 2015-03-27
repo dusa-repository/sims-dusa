@@ -83,7 +83,6 @@ public class SDiagnostico {
 	}
 
 	public void guardarVarios(List<Diagnostico> diagnosticos) {
-		System.out.println(diagnosticos.size());
 		diagnosticoDAO.save(diagnosticos);
 	}
 

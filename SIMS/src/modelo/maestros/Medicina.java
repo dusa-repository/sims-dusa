@@ -15,14 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import servicio.inventario.SF4101;
-import servicio.inventario.SF41021;
+import controlador.maestros.CGenerico;
 import modelo.inventario.F4101;
-import modelo.inventario.F41021;
-import modelo.inventario.F41021PK;
 import modelo.transacciones.ConsultaMedicina;
 import modelo.transacciones.OrdenMedicina;
 import modelo.transacciones.PacienteMedicina;
@@ -299,24 +293,13 @@ public class Medicina implements Serializable {
 
 	public void setIdReferencia(Long idReferencia) {
 		this.idReferencia = idReferencia;
-	}
-
-	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-			"/META-INF/ConfiguracionAplicacion.xml");
-
-	public static SF41021 getServicioF41021() {
-		return applicationContext.getBean(SF41021.class);
-	}
-
-	public static SF4101 getServicioF4101() {
-		return applicationContext.getBean(SF4101.class);
-	}
+	}	
 
 	public Double inventario() {
 		Long valor = idReferencia;
-		F4101 objeto = getServicioF4101().buscarPorReferencia(valor);
+		F4101 objeto = CGenerico.getServicioF4101().buscarPorReferencia(valor);
 		if (objeto != null) {
-			Double cantidad = getServicioF41021().sumar(objeto.getImitm(),
+			Double cantidad = CGenerico.getServicioF41021().sumar(objeto.getImitm(),
 					"Planta");
 			return cantidad;
 		} else

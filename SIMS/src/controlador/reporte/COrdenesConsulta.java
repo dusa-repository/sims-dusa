@@ -175,6 +175,7 @@ public class COrdenesConsulta extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<ConsultaEspecialista> especialistas = new ArrayList<ConsultaEspecialista>();
 			especialistas = getServicioConsultaEspecialista()
 					.buscarEntreFechas(fecha1, fecha2);
@@ -240,6 +241,7 @@ public class COrdenesConsulta extends CGenerico {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		fecha2 = agregarDia(fecha2);
 		List<ConsultaExamen> examenes = new ArrayList<ConsultaExamen>();
 		List<ConsultaServicioExterno> estudios = new ArrayList<ConsultaServicioExterno>();
 		List<ConsultaExamen> lista = new ArrayList<ConsultaExamen>();

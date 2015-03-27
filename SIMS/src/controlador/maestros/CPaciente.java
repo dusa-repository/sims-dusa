@@ -434,13 +434,9 @@ public class CPaciente extends CGenerico {
 					EstadoCivil estadoCivil = null;
 					if (rdoSiAlergico.isChecked())
 						alergia = true;
-					System.out.println("estadp"+cmbEstadoCivil.getValue());
-					System.out.println("estadp"+cmbEstadoCivil.getSelectedItem());
 					if (cmbEstadoCivil
 							.getSelectedItem() != null) {
-						System.out.println("primero");
 						if (cmbEstadoCivil.getSelectedItem().getContext() != null) {
-							System.out.println("segundo");
 							estadoCivil = servicioEstadoCivil.buscar(Long
 									.parseLong(cmbEstadoCivil.getSelectedItem()
 											.getContext()));

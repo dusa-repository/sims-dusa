@@ -175,6 +175,7 @@ public class CReporteOrden extends CGenerico {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		fecha2 = agregarDia(fecha2);
 
 		List<OrdenEspecialista> especialistas = getServicioOrdenEspecialista()
 				.buscarEntreFechas(fecha1, fecha2);
@@ -235,6 +236,7 @@ public class CReporteOrden extends CGenerico {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		fecha2 = agregarDia(fecha2);
 		List<OrdenExamen> examenes = getServicioOrdenExamen()
 				.buscarEntreFechas(fecha1, fecha2);
 		List<OrdenServicioExterno> estudios = getServicioOrdenServicioExterno()
@@ -342,6 +344,7 @@ public class CReporteOrden extends CGenerico {
 			e.printStackTrace();
 		}
 
+		fecha2 = agregarDia(fecha2);
 		List<OrdenMedicina> medicinas = getServicioOrdenMedicina()
 				.buscarOrdenesEntreFechas(fecha1, fecha2);
 		Map<String, Object> p = new HashMap<String, Object>();

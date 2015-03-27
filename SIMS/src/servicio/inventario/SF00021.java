@@ -42,7 +42,6 @@ public class SF00021 {
 	
 	@Transactional("segundo")
 	public void guardar(F00021 f00021) {
-		System.out.println("guardar");
 		f00021DAO.save(f00021);
 	}
 
