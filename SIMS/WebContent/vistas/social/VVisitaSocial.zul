@@ -4,7 +4,9 @@
 			<tabs id="tabs">
 				<tab id="buscar" label="Buscar" />
 				<tab id="A" label="CARACTERÍSTICAS DE LA VIVIENDA Y SERVICIOS BÁSICOS" />
-				<tab id="B" label="Segundo Panel" />
+				<tab id="B" label="CARACTERISTICA DEL HOGAR" />
+				<tab id="c" label="ALIMENTACIÓN / INGRESOS Y EGRESOS." />
+				<tab id="d" label="RECREACIÓN Y USO DEL TIEMPO LIBRE" />
 			</tabs>
 			<tabpanels>
 			<tabpanel>
@@ -39,8 +41,6 @@
 							<row>
 								<hbox>
 									<label class="etiqueta" value="Tipo de vivienda:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<combobox id="cmb1" autodrop="true"
 									readonly="true" placeholder="Seleccione un tipo de vivienda"
@@ -56,8 +56,6 @@
 								</combobox>
 								<hbox>
 									<label class="etiqueta" value="¿La vivienda posee servicio eléctrico?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<radiogroup id="rdg8">
 									<hlayout>
@@ -69,8 +67,6 @@
 							<row>
 								<hbox>
 									<label class="etiqueta" value="Terreno donde se encuentra la vivienda:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<combobox id="cmb2" autodrop="true"
 									readonly="true" placeholder="Seleccione Terreno donde se encuentra la vivienda"
@@ -88,8 +84,6 @@
 								<hbox>
 									<label class="etiqueta"
 										value="¿Cómo se elimina la basura en la vivienda?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<combobox id="cmb9" autodrop="true"
 									readonly="true" placeholder="Seleccione Cómo se elimina la basura en la vivienda"
@@ -106,8 +100,6 @@
 								<hbox>
 									<label class="etiqueta"
 										value="¿En qué condición habita usted esta vivienda?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<combobox id="cmb3" autodrop="true"
 									readonly="true" placeholder="Seleccione la condición"
@@ -121,8 +113,6 @@
 								</combobox>
 								<hbox>
 									<label class="etiqueta" value="¿Qué combustible utiliza para cocinar?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<combobox id="cmb10" autodrop="true"
 									readonly="true" placeholder="Seleccione el combustible con el que se cocina"
@@ -138,8 +128,6 @@
 								<hbox>
 									<label class="etiqueta"
 										value="¿En qué condiciones estructurales se encuentra la vivienda?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<vlayout id="condicionesEstructurales">
 									<checkbox id="check4_1" label="En buen estado"
@@ -157,17 +145,13 @@
 								<hbox>
 									<label class="etiqueta"
 										value="Contando sala comedor y cuartos ¿Cuántos ambientes posee la vivienda?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<spinner id="spinner11" format=",###"
-									constraint="no empty,min 0" tooltiptext="Cantidad de ambientes de la vivienda" />
+								<spinner id="spinner11" format=",###" value="0" readonly="true"
+									constraint="min 0" tooltiptext="Cantidad de ambientes de la vivienda" />
 							</row>
 							<row>
 								<hbox>
 									<label class="etiqueta" value="¿Cómo se abastece de agua la vivienda?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<combobox id="cmb5" autodrop="true"
 									readonly="true" placeholder="Seleccione forma de abastecimiento de agua"
@@ -180,8 +164,6 @@
 								</combobox>
 								<hbox>
 									<label class="etiqueta" value="¿Cuántas personas residen en la vivienda?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<combobox id="cmb12" autodrop="true"
 									readonly="true" placeholder="Seleccione Cuántas personas residen"
@@ -196,8 +178,6 @@
 								<hbox>
 									<label class="etiqueta"
 										value="¿Con qué frecuencia dispone de agua la vivienda?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<combobox id="cmb6" autodrop="true"
 									readonly="true" placeholder="Seleccione la frecuencia de agua en la vivienda"
@@ -210,8 +190,6 @@
 								<hbox>
 									<label class="etiqueta"
 										value="¿Estas personas mantienen gastos separados para comer?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<radiogroup id="rdg13">
 									<hlayout>
@@ -223,8 +201,6 @@
 							<row>
 								<hbox>
 									<label class="etiqueta" value="¿La vivienda posee…:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
 								<combobox id="cmb7" autodrop="true"
 									readonly="true" placeholder="Seleccione lo que la vivienda posee"
@@ -238,16 +214,411 @@
 								<hbox>
 									<label class="etiqueta"
 										value="¿Cuántos grupos de personas mantienen gastos separados?:" />
-									<space />
-									<label value="*" style="font-weight:bold;color:red" />
 								</hbox>
-								<spinner id="spinner14" format=",###"
-									constraint="no empty,min 0" tooltiptext=" grupos de personas mantienen gastos separados" />
+								<spinner id="spinner14" format=",###" value="0" readonly="true"
+									tooltiptext=" grupos de personas mantienen gastos separados" constraint="min 0"/>
 							</row>
 						</rows>
 					</grid>
 				</tabpanel>
-				<tabpanel>Segundo Panel</tabpanel>
+				<tabpanel>
+					<grid width="100%">
+					<columns visible="false">
+							<column label="" width="20%" />
+							<column label="" width="30%" />
+							<column label="" width="20%" />
+							<column label="" width="30%" />
+					</columns>
+					<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Total Miembros del Hogar:" />
+						</hbox>
+							<spinner id="spinner16" format=",###" value="0" readonly="true"
+									tooltiptext=" Número de personas que habitan este hogar" constraint="min 0"/>
+						<hbox>
+							<label class="etiqueta"
+							 value="¿Dónde adquiere los alimentos?:" />
+						</hbox>
+								<combobox id="cmb21" autodrop="true"
+									readonly="true" placeholder="Seleccione la alternativa"
+									tooltiptext="Seleccione la alternativa" hflex="1">
+									<comboitem label="Bodega independiente" />
+									<comboitem label="Bodega Mercal" />
+									<comboitem label="Mercal Tipo I y II" />
+									<comboitem label="Super o Mega Mercal" />
+									<comboitem label="Supermecado" />
+									<comboitem label="Mercado Público" />
+									<comboitem label="Camiones en la calle" />
+									<comboitem label="Cooperativa" />
+								</combobox>
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Para este hogar la vivienda es:" />
+						</hbox>
+								<combobox id="cmb17" autodrop="true"
+									readonly="true" placeholder="Seleccione la alternativa"
+									tooltiptext="Seleccione la alternativa" hflex="1">
+									<comboitem label="Propia pagada" />
+									<comboitem label="Propia Pagándose" />
+									<comboitem label="Alquilada" />
+									<comboitem label="Prestada" />
+									<comboitem label="Invadida" />
+									<comboitem label="Otra forma" />
+								</combobox>
+						<hbox>
+							<label class="etiqueta"
+							 value="¿Cuándo algún miembro del hogar tiene problemas de salud dónde acude?:" />
+						</hbox>
+								<combobox id="cmb22" autodrop="true"
+									readonly="true" placeholder="Seleccione la alternativa"
+									tooltiptext="Seleccione la alternativa" hflex="1">
+									<comboitem label="Hospital" />
+									<comboitem label="Ambulatorio" />
+									<comboitem label="Seguro Social" />
+									<comboitem label="Barrio Adentro" />
+									<comboitem label="Dispensarios" />
+									<comboitem label="CDI" />
+									<comboitem label="Centro privado" />
+									<comboitem label="Servicio Médico Dusa" />
+									<comboitem label="Otros" />
+								</combobox>
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Total de habitaciones que dispone exclusivamente para dormir:" />
+						</hbox>
+							<spinner id="spinner18" format=",###" value="0" readonly="true"
+									tooltiptext=" habitaciones que dispone exclusivamente para dormir" constraint="min 0"/>
+						<hbox>
+							<label class="etiqueta"
+							 value="En los últimos seis meses este hogar o alguno de sus miembros ha sido víctima de un hecho delictivo? ¿Contra quién ocurrió?:" />
+						</hbox>
+								<vlayout id="ultimosMesesHogar">
+									<checkbox id="check23_1" label="Contra las personas"
+										checked="Contra las personas" />
+									<checkbox id="check23_2"
+										label="Contra los bienes" checked="Contra los bienes" />
+									<checkbox id="check23_3"
+										label="No ha ocurrido ninguno" checked="No ha ocurrido ninguno" />
+								</vlayout>
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Este hogar dispone de:" />
+						</hbox>
+						<hbox>
+								<vlayout id="hogarDispone">
+									<checkbox id="check19_1" label="Nevera" checked="Nevera" />
+									<checkbox id="check19_2" label="Ventilador" checked="Ventilador" />
+									<checkbox id="check19_3" label="Cocina a Gas o Eléctrica" checked="Cocina a Gas o Eléctrica" />
+									<checkbox id="check19_4" label="Lavadora" checked="Lavadora" />
+									<checkbox id="check19_5" label="Secadora" checked="Secadora" />
+									<checkbox id="check19_6" label="Microondas" checked="Microondas" />
+								</vlayout><space />
+								<vlayout id="hogarDispone2">
+									<checkbox id="check19_7" label="Filtro de agua" checked="Filtro de agua" />
+									<checkbox id="check19_8" label="Calentador de agua" checked="Calentador de agua" />
+									<checkbox id="check19_9" label="Aire Acondicionado" checked="Aire Acondicionado" />
+									<checkbox id="check19_10" label="Televisor" checked="Televisor" />
+									<checkbox id="check19_11" label="Equipo de Sonido/ Radio" checked="Equipo de Sonido/ Radio" />
+									<checkbox id="check19_12" label="DVD" checked="DVD" />
+								</vlayout><space />
+								<vlayout id="hogarDispone3">
+									<checkbox id="check19_13" label="Teléfono Fijo" checked="Teléfono Fijo" />
+									<checkbox id="check19_14" label="Teléfono Móvil" checked="Teléfono Móvil" />
+									<checkbox id="check19_15" label="TV por cable. /  Satelital." checked="TV por cable. /  Satelital." />
+									<checkbox id="check19_16" label="Computador" checked="Computador" />
+									<checkbox id="check19_17" label="Acceso a Internet" checked="Acceso a Internet" />
+									<checkbox id="check19_18" label="Vehículo" checked="Vehículo" />
+								</vlayout>
+						</hbox>
+						<hbox>
+							<label class="etiqueta"
+							 value="¿Cuántas jóvenes de 10 a 17 años de edad que vivan en este hogar están embarazadas o tienen hijos?:" />
+						</hbox>
+							<spinner id="spinner24" format=",###" value="0" readonly="true"
+									tooltiptext="Coloque el número de mujeres" constraint="min 0"/>
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Sumando sueldos, salarios, pensiones, becas ayudas económicas y cualquier otro beneficio ¿Cuál es el ingreso familiar?:" />
+						</hbox>
+							<doublespinner id="doubleSpinner20" value="0" step="0.1" constraint="min 0"/>
+						<hbox>
+							<label class="etiqueta"
+							 value="De las personas que conforman este hogar ¿Cuántas tienen problemas de consumo de alcohol o drogas?:" />
+						</hbox>
+							<spinner id="spinner25" format=",###" value="0" readonly="true"
+									tooltiptext=" Anote el número de personas"  constraint="min 0"/>
+					</row>
+					</rows>
+					</grid>
+				</tabpanel>
+				<tabpanel>
+					<tabbox id="tabC" height="auto">
+				    <tabs id="tabsC">
+				        <tab id="c1" label="Alimentacion" />
+				        <tab id="c2" label="Egresos" />
+				    </tabs>
+				    <tabpanels>
+				        <tabpanel>Alimentacion</tabpanel>
+				        <tabpanel>
+				        <grid width="auto">
+							<columns>
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Alimentacion:" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_1" value="0" step="0.1" constraint="min 0"/>
+									<hbox>
+										<label class="etiqueta" value="Educacion" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_9" value="0" step="0.1" constraint="min 0"/>	
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Gasolina" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_2" value="0" step="0.1" constraint="min 0"/>
+									<hbox>
+										<label class="etiqueta" value="Gastos Medicos" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_10" value="0" step="0.1" constraint="min 0"/>	
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Alquiler" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_3" value="0" step="0.1" constraint="min 0"/>
+									<hbox>
+										<label class="etiqueta" value="Recreacion" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_11" value="0" step="0.1" constraint="min 0"/>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Agua" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_4" value="0" step="0.1" constraint="min 0"/>
+									<hbox>
+										<label class="etiqueta" value="Creditos" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_12" value="0" step="0.1" constraint="min 0"/>	
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Electricidad" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_5" value="0" step="0.1" constraint="min 0"/>
+									<hbox>
+										<label class="etiqueta" value="Ropa y Calzado" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_13" value="0" step="0.1" constraint="min 0"/>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Telefono Recidencial"  />
+									</hbox>
+									<doublespinner id="doubleSpinner30_6" value="0" step="0.1" constraint="min 0"/>	
+									<hbox>
+										<label class="etiqueta" value="Fondos de Ahorro" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_14" value="0" step="0.1" constraint="min 0"/>	
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Telefono Celular" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_7" value="0" step="0.1" constraint="min 0"/>
+									<hbox>
+										<label class="etiqueta" value="Credito Habitacional" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_15" value="0" step="0.1" constraint="min 0"/>	
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Transporte" />
+									</hbox>
+									<doublespinner id="doubleSpinner30_8" value="0" step="0.1" constraint="min 0"/>	
+									<hbox>
+										<label class="etiqueta" value="Total" />
+									</hbox>
+									<hbox>
+										<label class="etiqueta" id="labelSuma" />
+									</hbox>	
+								</row>
+							</rows>
+						</grid>
+				        </tabpanel>
+				    </tabpanels>
+				</tabbox>
+				</tabpanel>
+				<tabpanel>
+					<grid width="auto">
+						<columns>
+							<column label="" width="25%" />
+							<column label="" width="25%" />
+							<column label="" width="25%" />
+							<column label="" width="25%" />
+						</columns>
+						<rows>
+							<row>
+								<hbox>
+									<label class="etiqueta" value="A qué hora se levanta en la mañana" />
+								</hbox>
+								<textbox id="textBox46_1" />
+								<hbox>
+									<label class="etiqueta" value="¿Hora acostumbrada en la que se acuesta?" />
+								</hbox>
+								<textbox id="textBox46_2" />
+							</row>
+							<row>
+								<hbox>
+									<label class="etiqueta" value="¿Qué hace al levantarse?" />
+								</hbox>
+								<textbox id="textBox46_3"/>
+								<hbox>
+									<label class="etiqueta" value="¿Qué otra actividad realiza?" />
+								</hbox>
+								<textbox id="textBox46_4"/>
+							</row>
+							<row>
+								<hbox>
+									<label class="etiqueta" value="¿Por qué ese orden?" />
+								</hbox>
+								<textbox id="textBox46_5"/>
+								<hbox>
+									<label class="etiqueta" value="¿Y los fines de semana?" />
+								</hbox>
+								<textbox id="textBox46_6"/>
+							</row>
+							<row>
+								<hbox>
+									<label class="etiqueta" value="¿Cuales son las actividades de rutina que siempre realiza?" />
+								</hbox>
+								<textbox id="textBox46_7"/>
+								<hbox>
+									<label class="etiqueta" value="¿Con quién comparte estas actividades?" />
+								</hbox>
+								<textbox id="textBox46_8"/>
+							</row>
+						</rows>
+					</grid>
+					<separator />
+						<tabbox id="tab" height="auto">
+						    <tabs id="tabsO">
+						        <tab id="dinamica" label="Dinamica Familiar" />
+						        <tab id="diagnostico" label="Diagnostico / Observaciones" />
+						    </tabs>
+						    <tabpanels>
+						        <tabpanel>
+							        <grid width="auto">
+										<columns>
+											<column label="" width="50%" />
+											<column label="" width="50%" />
+										</columns>
+										<rows>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="¿Qué actividad diaria realiza conjuntamente con el Grupo Familiar? " />
+												</hbox>
+												<textbox id="textBox47_1"/>
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="¿Cómo considera usted, es el proceso de comunicación entre los miembros de este grupo familiar?" />
+												</hbox>
+												<textbox id="textBox47_2"/>
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="¿Cómo considera usted, se desenvuelven los roles en este grupo familiar? " />
+												</hbox>
+												<textbox id="textBox47_3"/>
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="¿En el grupo familiar, ¿Quién toma las decisiones importantes? " />
+												</hbox>
+												<textbox id="textBox47_4"/>
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="¿Quién del grupo familiar dicta las pautas y normas para la convivencia? " />
+												</hbox>
+												<textbox id="textBox47_5"/>
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="¿Considera usted que ¿el grupo familiar se respeta?" />
+												</hbox>
+												<textbox id="textBox47_6"/>
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="¿Cómo expresa usted sus sentimientos de disgusto, alegría e incomodidad? " />
+												</hbox>
+												<textbox id="textBox47_7"/>
+											</row>
+										</rows>
+									</grid>
+						        </tabpanel>
+						        <tabpanel>
+							        	<grid width="auto">
+											<columns>
+												<column label="" width="50%" />
+												<column label="" width="50%" />
+											</columns>
+											<rows>
+												<row>
+													<hbox>
+														<label class="etiqueta" value="DIAGNOSTICO SOCIAL:" />
+													</hbox>
+													<textbox id="textBox10"/>
+												</row>
+												<row>
+													<hbox>
+														<label class="etiqueta" value="OBSERVACIONES:" />
+													</hbox>
+													<textbox id="textBox11"/>
+												</row>
+											</rows>
+										</grid>
+										<grid width="auto">
+											<columns>
+												<column label="" width="33%" />
+												<column label="" width="33%" />
+												<column label="" width="34%" />
+											</columns>
+											<rows>
+												<row>
+												<hbox>
+													<label class="etiqueta" value="Fecha de Aplicación:" />
+									                <datebox id="dateBoxAplicacion" format="yyyy/MM/dd" readonly="true"/>
+                    							</hbox>
+                    							<hbox>
+													<label class="etiqueta" value="Fecha de Procesamiento:" />
+									                <datebox id="dateBoxProcesamiento" format="yyyy/MM/dd" readonly="true"/>
+                    							</hbox>
+                    							<hbox>
+													<label class="etiqueta" value="Fecha de de Informe:" />
+									                <datebox id="dateBoxInforme" format="yyyy/MM/dd" readonly="true"/>
+                    							</hbox>
+												</row>
+											</rows>
+										</grid>
+						        </tabpanel>
+						    </tabpanels>
+						</tabbox>
+				</tabpanel>
 			</tabpanels>
 		</tabbox>
 		<separator />
