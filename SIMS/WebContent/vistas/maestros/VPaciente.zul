@@ -584,7 +584,7 @@
 								<row>
 									<hbox>
 										<label class="etiqueta" value="Nro. Casa:" />
-										<textbox width="20px" id="txtNro" hflex="1" maxlength="100"
+										<textbox width="20px" id="txtNro" hflex="1" maxlength="15"
 											tooltiptext="Ingrese el Nro de la Casa del Paciente" />
 									</hbox>
 									<label class="etiqueta" value="Medio de Transporte Utilizado:" />
