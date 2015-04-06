@@ -45,9 +45,15 @@ public class CVisitaSocial extends CGenerico {
 	@Wire
 	private Div botoneraSocial;
 	@Wire
+	private Div divCatalogoVisita;
+	@Wire
+	private Div divCatalogoPaciente;
+
+	// Label
+	@Wire
 	private Label labelSuma;
 	@Wire
-	private Div divCatalogoVisita;
+	private Label lblCedula;
 
 	// Botones
 	@Wire
@@ -234,12 +240,13 @@ public class CVisitaSocial extends CGenerico {
 	@Wire
 	private Datebox dateBoxInforme;
 
-	// Catalogo<Paciente> catalogoT;
+	Catalogo<Paciente> catalogoPaciente;
 	Catalogo<VisitaSocial> catalogoVisita;
 
 	// Variables
 	private String nombre;
 	Long idVisita = (long) 0;
+	private String cedula = "";
 
 	@Override
 	public void inicializar() throws IOException {
@@ -264,8 +271,13 @@ public class CVisitaSocial extends CGenerico {
 
 			@Override
 			public void limpiar() {
-				
+
 				idVisita = (long) 0;
+				cedula = "";
+				
+				//Limpiar campos de paciente
+				lblCedula.setValue("");
+				
 				// Combobox
 				cmb1.setValue("");
 				cmb2.setValue("");
@@ -357,263 +369,295 @@ public class CVisitaSocial extends CGenerico {
 
 			@Override
 			public void guardar() {
-				VisitaSocial visitaSocial = new VisitaSocial();
-				// ComboBox
-				String a = cmb1.getValue();
-				visitaSocial.setA(a);
-				String b = cmb2.getValue();
-				visitaSocial.setB(b);
-				String c = cmb3.getValue();
-				visitaSocial.setC(c);
-				String e = cmb5.getValue();
-				visitaSocial.setE(e);
-				String f = cmb6.getValue();
-				visitaSocial.setF(f);
-				String g = cmb7.getValue();
-				visitaSocial.setG(g);
-				String i = cmb9.getValue();
-				visitaSocial.setI(i);
-				String aj = cmb10.getValue();
-				visitaSocial.setAj(aj);
-				String ab = cmb12.getValue();
-				visitaSocial.setAb(ab);
-				String ag = cmb17.getValue();
-				visitaSocial.setAg(ag);
-				String ba = cmb21.getValue();
-				visitaSocial.setBa(ba);
-				String bb = cmb22.getValue();
-				visitaSocial.setBb(bb);
 
-				// Radio
-				if (rdg8.getSelectedItem() != null) {
-					Radio h = rdg8.getSelectedItem();
-					if (h.getId().equals("rdo8_1")) {
-						visitaSocial.setH(true);
-					} else {
-						visitaSocial.setH(false);
+				if (validar()) {
+					VisitaSocial visitaSocial = new VisitaSocial();
+					// ComboBox
+					String a = cmb1.getValue();
+					visitaSocial.setA(a);
+					String b = cmb2.getValue();
+					visitaSocial.setB(b);
+					String c = cmb3.getValue();
+					visitaSocial.setC(c);
+					String e = cmb5.getValue();
+					visitaSocial.setE(e);
+					String f = cmb6.getValue();
+					visitaSocial.setF(f);
+					String g = cmb7.getValue();
+					visitaSocial.setG(g);
+					String i = cmb9.getValue();
+					visitaSocial.setI(i);
+					String aj = cmb10.getValue();
+					visitaSocial.setAj(aj);
+					String ab = cmb12.getValue();
+					visitaSocial.setAb(ab);
+					String ag = cmb17.getValue();
+					visitaSocial.setAg(ag);
+					String ba = cmb21.getValue();
+					visitaSocial.setBa(ba);
+					String bb = cmb22.getValue();
+					visitaSocial.setBb(bb);
+
+					// Radio
+					if (rdg8.getSelectedItem() != null) {
+						Radio h = rdg8.getSelectedItem();
+						if (h.getId().equals("rdo8_1")) {
+							visitaSocial.setH(true);
+						} else {
+							visitaSocial.setH(false);
+						}
 					}
-				}
 
-				if (rdg13.getSelectedItem() != null) {
-					Radio ac = rdg13.getSelectedItem();
-					if (ac.getId().equals("rdo13_1")) {
-						visitaSocial.setAc(true);
-					} else {
-						visitaSocial.setAc(false);
+					if (rdg13.getSelectedItem() != null) {
+						Radio ac = rdg13.getSelectedItem();
+						if (ac.getId().equals("rdo13_1")) {
+							visitaSocial.setAc(true);
+						} else {
+							visitaSocial.setAc(false);
+						}
 					}
-				}
 
-				// Spinner
-				if (spinner11.getValue() != null) {
-					Integer aa = spinner11.getValue();
-					visitaSocial.setAa(aa);
-				}
-				if (spinner14.getValue() != null) {
-					Integer ad = spinner14.getValue();
-					visitaSocial.setAd(ad);
-				}
-				if (spinner16.getValue() != null) {
-					Integer af = spinner16.getValue();
-					visitaSocial.setAf(af);
-				}
-				if (spinner18.getValue() != null) {
-					Integer ah = spinner18.getValue();
-					visitaSocial.setAh(ah);
-				}
-				if (spinner24.getValue() != null) {
-					Integer bd = spinner24.getValue();
-					visitaSocial.setBd(bd);
-				}
-				if (spinner25.getValue() != null) {
-					Integer be = spinner25.getValue();
-					visitaSocial.setBe(be);
-				}
-				// DoubleSpinner
-				if (doubleSpinner20.getValue() != null) {
-					Double bj = doubleSpinner20.getValue();
-					visitaSocial.setBj(bj);
-				}
-				if (doubleSpinner30_1.getValue() != null) {
-					Double cjAlimentacion = doubleSpinner30_1.getValue();
-					visitaSocial.setCjAlimentacion(cjAlimentacion);
-				}
-				if (doubleSpinner30_2.getValue() != null) {
-					Double cjGasolina = doubleSpinner30_2.getValue();
-					visitaSocial.setCjGasolina(cjGasolina);
-				}
-				if (doubleSpinner30_3.getValue() != null) {
-					Double cjAlquiler = doubleSpinner30_3.getValue();
-					visitaSocial.setCjAlquiler(cjAlquiler);
-				}
-				if (doubleSpinner30_4.getValue() != null) {
-					Double cjAgua = doubleSpinner30_4.getValue();
-					visitaSocial.setCjAgua(cjAgua);
-				}
-				if (doubleSpinner30_5.getValue() != null) {
-					Double cjElectricidad = doubleSpinner30_5.getValue();
-					visitaSocial.setCjElectricidad(cjElectricidad);
-				}
-				if (doubleSpinner30_6.getValue() != null) {
-					Double cjResidencia = doubleSpinner30_6.getValue();
-					visitaSocial.setCjResidencia(cjResidencia);
-				}
-				if (doubleSpinner30_7.getValue() != null) {
-					Double cjCelular = doubleSpinner30_7.getValue();
-					visitaSocial.setCjCelular(cjCelular);
-				}
-				if (doubleSpinner30_8.getValue() != null) {
-					Double cjTransporte = doubleSpinner30_8.getValue();
-					visitaSocial.setCjTransporte(cjTransporte);
-				}
-				if (doubleSpinner30_9.getValue() != null) {
-					Double cjEducacion = doubleSpinner30_9.getValue();
-					visitaSocial.setCjEducacion(cjEducacion);
-				}
-				if (doubleSpinner30_10.getValue() != null) {
-					Double cjMedico = doubleSpinner30_10.getValue();
-					visitaSocial.setCjMedico(cjMedico);
-				}
-				if (doubleSpinner30_11.getValue() != null) {
-					Double cjRecreacion = doubleSpinner30_11.getValue();
-					visitaSocial.setCjRecreacion(cjRecreacion);
-				}
-				if (doubleSpinner30_12.getValue() != null) {
-					Double cjCredito = doubleSpinner30_12.getValue();
-					visitaSocial.setCjCredito(cjCredito);
-				}
-				if (doubleSpinner30_13.getValue() != null) {
-					Double cjRopa = doubleSpinner30_13.getValue();
-					visitaSocial.setCjRopa(cjRopa);
-				}
-				if (doubleSpinner30_14.getValue() != null) {
-					Double cjFondo = doubleSpinner30_14.getValue();
-					visitaSocial.setCjFondo(cjFondo);
-				}
-				if (doubleSpinner30_15.getValue() != null) {
-					Double cjHabitacional = doubleSpinner30_15.getValue();
-					visitaSocial.setCjHabitacional(cjHabitacional);
-				}
+					// Spinner
+					if (spinner11.getValue() != null) {
+						Integer aa = spinner11.getValue();
+						visitaSocial.setAa(aa);
+					}
+					if (spinner14.getValue() != null) {
+						Integer ad = spinner14.getValue();
+						visitaSocial.setAd(ad);
+					}
+					if (spinner16.getValue() != null) {
+						Integer af = spinner16.getValue();
+						visitaSocial.setAf(af);
+					}
+					if (spinner18.getValue() != null) {
+						Integer ah = spinner18.getValue();
+						visitaSocial.setAh(ah);
+					}
+					if (spinner24.getValue() != null) {
+						Integer bd = spinner24.getValue();
+						visitaSocial.setBd(bd);
+					}
+					if (spinner25.getValue() != null) {
+						Integer be = spinner25.getValue();
+						visitaSocial.setBe(be);
+					}
+					// DoubleSpinner
+					if (doubleSpinner20.getValue() != null) {
+						Double bj = doubleSpinner20.getValue();
+						visitaSocial.setBj(bj);
+					}
+					if (doubleSpinner30_1.getValue() != null) {
+						Double cjAlimentacion = doubleSpinner30_1.getValue();
+						visitaSocial.setCjAlimentacion(cjAlimentacion);
+					}
+					if (doubleSpinner30_2.getValue() != null) {
+						Double cjGasolina = doubleSpinner30_2.getValue();
+						visitaSocial.setCjGasolina(cjGasolina);
+					}
+					if (doubleSpinner30_3.getValue() != null) {
+						Double cjAlquiler = doubleSpinner30_3.getValue();
+						visitaSocial.setCjAlquiler(cjAlquiler);
+					}
+					if (doubleSpinner30_4.getValue() != null) {
+						Double cjAgua = doubleSpinner30_4.getValue();
+						visitaSocial.setCjAgua(cjAgua);
+					}
+					if (doubleSpinner30_5.getValue() != null) {
+						Double cjElectricidad = doubleSpinner30_5.getValue();
+						visitaSocial.setCjElectricidad(cjElectricidad);
+					}
+					if (doubleSpinner30_6.getValue() != null) {
+						Double cjResidencia = doubleSpinner30_6.getValue();
+						visitaSocial.setCjResidencia(cjResidencia);
+					}
+					if (doubleSpinner30_7.getValue() != null) {
+						Double cjCelular = doubleSpinner30_7.getValue();
+						visitaSocial.setCjCelular(cjCelular);
+					}
+					if (doubleSpinner30_8.getValue() != null) {
+						Double cjTransporte = doubleSpinner30_8.getValue();
+						visitaSocial.setCjTransporte(cjTransporte);
+					}
+					if (doubleSpinner30_9.getValue() != null) {
+						Double cjEducacion = doubleSpinner30_9.getValue();
+						visitaSocial.setCjEducacion(cjEducacion);
+					}
+					if (doubleSpinner30_10.getValue() != null) {
+						Double cjMedico = doubleSpinner30_10.getValue();
+						visitaSocial.setCjMedico(cjMedico);
+					}
+					if (doubleSpinner30_11.getValue() != null) {
+						Double cjRecreacion = doubleSpinner30_11.getValue();
+						visitaSocial.setCjRecreacion(cjRecreacion);
+					}
+					if (doubleSpinner30_12.getValue() != null) {
+						Double cjCredito = doubleSpinner30_12.getValue();
+						visitaSocial.setCjCredito(cjCredito);
+					}
+					if (doubleSpinner30_13.getValue() != null) {
+						Double cjRopa = doubleSpinner30_13.getValue();
+						visitaSocial.setCjRopa(cjRopa);
+					}
+					if (doubleSpinner30_14.getValue() != null) {
+						Double cjFondo = doubleSpinner30_14.getValue();
+						visitaSocial.setCjFondo(cjFondo);
+					}
+					if (doubleSpinner30_15.getValue() != null) {
+						Double cjHabitacional = doubleSpinner30_15.getValue();
+						visitaSocial.setCjHabitacional(cjHabitacional);
+					}
 
-				// Checkbox
-				String estructura = "";
-				if (check4_1.isChecked())
-					estructura = estructura + "," + check4_1.getLabel();
-				if (check4_2.isChecked())
-					estructura = estructura + "," + check4_2.getLabel();
-				if (check4_3.isChecked())
-					estructura = estructura + "," + check4_3.getLabel();
-				if (check4_4.isChecked())
-					estructura = estructura + "," + check4_4.getLabel();
-				if (check4_5.isChecked())
-					estructura = estructura + "," + check4_5.getLabel();
-				visitaSocial.setD(estructura);
+					// Checkbox
+					String estructura = "";
+					if (check4_1.isChecked())
+						estructura = estructura + "," + check4_1.getLabel();
+					if (check4_2.isChecked())
+						estructura = estructura + "," + check4_2.getLabel();
+					if (check4_3.isChecked())
+						estructura = estructura + "," + check4_3.getLabel();
+					if (check4_4.isChecked())
+						estructura = estructura + "," + check4_4.getLabel();
+					if (check4_5.isChecked())
+						estructura = estructura + "," + check4_5.getLabel();
+					visitaSocial.setD(estructura);
 
-				String hogarDispone = "";
-				if (check19_1.isChecked())
-					hogarDispone = hogarDispone + "," + check19_1.getLabel();
-				if (check19_2.isChecked())
-					hogarDispone = hogarDispone + "," + check19_2.getLabel();
-				if (check19_3.isChecked())
-					hogarDispone = hogarDispone + "," + check19_3.getLabel();
-				if (check19_4.isChecked())
-					hogarDispone = hogarDispone + "," + check19_4.getLabel();
-				if (check19_5.isChecked())
-					hogarDispone = hogarDispone + "," + check19_5.getLabel();
-				if (check19_6.isChecked())
-					hogarDispone = hogarDispone + "," + check19_6.getLabel();
-				if (check19_7.isChecked())
-					hogarDispone = hogarDispone + "," + check19_7.getLabel();
-				if (check19_8.isChecked())
-					hogarDispone = hogarDispone + "," + check19_8.getLabel();
-				if (check19_9.isChecked())
-					hogarDispone = hogarDispone + "," + check19_9.getLabel();
-				if (check19_10.isChecked())
-					hogarDispone = hogarDispone + "," + check19_10.getLabel();
-				if (check19_11.isChecked())
-					hogarDispone = hogarDispone + "," + check19_11.getLabel();
-				if (check19_12.isChecked())
-					hogarDispone = hogarDispone + "," + check19_12.getLabel();
-				if (check19_13.isChecked())
-					hogarDispone = hogarDispone + "," + check19_13.getLabel();
-				if (check19_14.isChecked())
-					hogarDispone = hogarDispone + "," + check19_14.getLabel();
-				if (check19_15.isChecked())
-					hogarDispone = hogarDispone + "," + check19_15.getLabel();
-				if (check19_16.isChecked())
-					hogarDispone = hogarDispone + "," + check19_16.getLabel();
-				if (check19_17.isChecked())
-					hogarDispone = hogarDispone + "," + check19_17.getLabel();
-				if (check19_18.isChecked())
-					hogarDispone = hogarDispone + "," + check19_18.getLabel();
-				visitaSocial.setAi(hogarDispone);
+					String hogarDispone = "";
+					if (check19_1.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_1.getLabel();
+					if (check19_2.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_2.getLabel();
+					if (check19_3.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_3.getLabel();
+					if (check19_4.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_4.getLabel();
+					if (check19_5.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_5.getLabel();
+					if (check19_6.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_6.getLabel();
+					if (check19_7.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_7.getLabel();
+					if (check19_8.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_8.getLabel();
+					if (check19_9.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_9.getLabel();
+					if (check19_10.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_10.getLabel();
+					if (check19_11.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_11.getLabel();
+					if (check19_12.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_12.getLabel();
+					if (check19_13.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_13.getLabel();
+					if (check19_14.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_14.getLabel();
+					if (check19_15.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_15.getLabel();
+					if (check19_16.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_16.getLabel();
+					if (check19_17.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_17.getLabel();
+					if (check19_18.isChecked())
+						hogarDispone = hogarDispone + ","
+								+ check19_18.getLabel();
+					visitaSocial.setAi(hogarDispone);
 
-				String dondeAcude = "";
-				if (check23_1.isChecked())
-					dondeAcude = dondeAcude + "," + check23_1.getLabel();
-				if (check23_2.isChecked())
-					dondeAcude = dondeAcude + "," + check23_2.getLabel();
-				if (check23_3.isChecked())
-					dondeAcude = dondeAcude + "," + check23_3.getLabel();
-				visitaSocial.setBc(dondeAcude);
+					String dondeAcude = "";
+					if (check23_1.isChecked())
+						dondeAcude = dondeAcude + "," + check23_1.getLabel();
+					if (check23_2.isChecked())
+						dondeAcude = dondeAcude + "," + check23_2.getLabel();
+					if (check23_3.isChecked())
+						dondeAcude = dondeAcude + "," + check23_3.getLabel();
+					visitaSocial.setBc(dondeAcude);
 
-				// textbox
-				String dfa = textBox46_1.getValue();
-				visitaSocial.setDfa(dfa);
-				String dfb = textBox46_2.getValue();
-				visitaSocial.setDfb(dfb);
-				String dfc = textBox46_3.getValue();
-				visitaSocial.setDfc(dfc);
-				String dfd = textBox46_4.getValue();
-				visitaSocial.setDfd(dfd);
-				String dfe = textBox46_5.getValue();
-				visitaSocial.setDfe(dfe);
-				String dff = textBox46_6.getValue();
-				visitaSocial.setDff(dff);
-				String dfg = textBox46_7.getValue();
-				visitaSocial.setDfg(dfg);
-				String dfh = textBox46_8.getValue();
-				visitaSocial.setDfh(dfh);
-				String dga = textBox47_1.getValue();
-				visitaSocial.setDga(dga);
-				String dgb = textBox47_2.getValue();
-				visitaSocial.setDgb(dgb);
-				String dgc = textBox47_3.getValue();
-				visitaSocial.setDgc(dgc);
-				String dgd = textBox47_4.getValue();
-				visitaSocial.setDgd(dgd);
-				String dge = textBox47_5.getValue();
-				visitaSocial.setDge(dge);
-				String dgf = textBox47_6.getValue();
-				visitaSocial.setDgf(dgf);
-				String dgg = textBox47_7.getValue();
-				visitaSocial.setDgg(dgg);
-				String diagnosticoSocial = textBox10.getValue();
-				visitaSocial.setDiagnosticoSocial(diagnosticoSocial);
-				String observacion = textBox11.getValue();
-				visitaSocial.setObservacion(observacion);
+					// textbox
+					String dfa = textBox46_1.getValue();
+					visitaSocial.setDfa(dfa);
+					String dfb = textBox46_2.getValue();
+					visitaSocial.setDfb(dfb);
+					String dfc = textBox46_3.getValue();
+					visitaSocial.setDfc(dfc);
+					String dfd = textBox46_4.getValue();
+					visitaSocial.setDfd(dfd);
+					String dfe = textBox46_5.getValue();
+					visitaSocial.setDfe(dfe);
+					String dff = textBox46_6.getValue();
+					visitaSocial.setDff(dff);
+					String dfg = textBox46_7.getValue();
+					visitaSocial.setDfg(dfg);
+					String dfh = textBox46_8.getValue();
+					visitaSocial.setDfh(dfh);
+					String dga = textBox47_1.getValue();
+					visitaSocial.setDga(dga);
+					String dgb = textBox47_2.getValue();
+					visitaSocial.setDgb(dgb);
+					String dgc = textBox47_3.getValue();
+					visitaSocial.setDgc(dgc);
+					String dgd = textBox47_4.getValue();
+					visitaSocial.setDgd(dgd);
+					String dge = textBox47_5.getValue();
+					visitaSocial.setDge(dge);
+					String dgf = textBox47_6.getValue();
+					visitaSocial.setDgf(dgf);
+					String dgg = textBox47_7.getValue();
+					visitaSocial.setDgg(dgg);
+					String diagnosticoSocial = textBox10.getValue();
+					visitaSocial.setDiagnosticoSocial(diagnosticoSocial);
+					String observacion = textBox11.getValue();
+					visitaSocial.setObservacion(observacion);
 
-				// datebox
-				Date fechaAplicacion = dateBoxAplicacion.getValue();
-				Timestamp fechaA = new Timestamp(fechaAplicacion.getTime());
-				visitaSocial.setFechaAplicacion(fechaA);
+					// datebox
+					Date fechaAplicacion = dateBoxAplicacion.getValue();
+					Timestamp fechaA = new Timestamp(fechaAplicacion.getTime());
+					visitaSocial.setFechaAplicacion(fechaA);
 
-				Date fechaProcesamiento = dateBoxProcesamiento.getValue();
-				Timestamp fechaP = new Timestamp(fechaProcesamiento.getTime());
-				visitaSocial.setFechaProcesamiento(fechaP);
+					Date fechaProcesamiento = dateBoxProcesamiento.getValue();
+					Timestamp fechaP = new Timestamp(
+							fechaProcesamiento.getTime());
+					visitaSocial.setFechaProcesamiento(fechaP);
 
-				Date fechaInforme = dateBoxInforme.getValue();
-				Timestamp fechaI = new Timestamp(fechaInforme.getTime());
-				visitaSocial.setFechaInforme(fechaI);
+					Date fechaInforme = dateBoxInforme.getValue();
+					Timestamp fechaI = new Timestamp(fechaInforme.getTime());
+					visitaSocial.setFechaInforme(fechaI);
 
-				// En caso de que sea una modificacion la variable idVisita se
-				// lleno con el catalogo por lo q se modificaria en la bd, si no
-				// es una modificacion idVisita es 0, entonces se crea un nuevo
-				// registro
-				visitaSocial.setIdVisita(idVisita);
-				// Guardar
-				servicioVisitaSocial.guardar(visitaSocial);
-				msj.mensajeInformacion(Mensaje.guardado);
-				limpiar();
+					// En caso de que sea una modificacion la variable idVisita
+					// se
+					// lleno con el catalogo por lo q se modificaria en la bd,
+					// si no
+					// es una modificacion idVisita es 0, entonces se crea un
+					// nuevo
+					// registro
+					visitaSocial.setIdVisita(idVisita);
+
+					// Para guardar al paciente es la misma idea, busco el q
+					// seleccione del catalogo y se lo asigno a la visita
+					Paciente paciente = servicioPaciente
+							.buscarPorCedula(cedula);
+					if (paciente != null)
+						visitaSocial.setPaciente(paciente);
+					// Guardar
+					servicioVisitaSocial.guardar(visitaSocial);
+					msj.mensajeInformacion(Mensaje.guardado);
+					limpiar();
+				}
 			}
 
 			@Override
@@ -624,6 +668,14 @@ public class CVisitaSocial extends CGenerico {
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraSocial.appendChild(botonera);
 
+	}
+
+	private boolean validar() {
+		if (cedula.equals("")) {
+			msj.mensajeError(Mensaje.camposVacios);
+			return false;
+		} else
+			return true;
 	}
 
 	@Listen("onClick =  #btnBuscar2")
@@ -677,49 +729,87 @@ public class CVisitaSocial extends CGenerico {
 			while (j < valores.length) {
 				if (valores[j].equals(check4_1.getLabel()))
 					check4_1.setChecked(true);
-				if (valores[j]
-						.equals(check4_2.getLabel()))
+				if (valores[j].equals(check4_2.getLabel()))
 					check4_2.setChecked(true);
-				if (valores[j]
-						.equals(check4_3.getLabel()))
+				if (valores[j].equals(check4_3.getLabel()))
 					check4_3.setChecked(true);
-				if (valores[j]
-						.equals(check4_4.getLabel()))
+				if (valores[j].equals(check4_4.getLabel()))
 					check4_4.setChecked(true);
 				if (valores[j].equals(check4_5.getLabel()))
 					check4_5.setChecked(true);
 				j++;
 			}
 		}
-
+		Paciente paciente = visitaSocial.getPaciente();
+		if(paciente!=null)
+		{
+		cedula=paciente.getCedula();
+		llenarCamposPaciente(paciente);
+		}
 		catalogoVisita.setParent(null);
 	}
 
 	// Botones
-	/*
-	 * @Listen("onClick =  #btnBuscar1") public void buscarTrabajador(Event e) {
-	 * final List<Paciente> pacientes = servicioPaciente.buscarTodos();
-	 * catalogoT = new Catalogo<Paciente>(catalogoTrabajador,
-	 * "Catalogo de Trabajadores", pacientes, false, "Cedula", "Primer Nombre",
-	 * "Segundo Nombre", "Primer Apellido", "Segundo Apellido") {
-	 * 
-	 * @Override protected List<Paciente> buscar(String valor, String combo) {
-	 * 
-	 * switch (combo) { case "Primer Nombre": return
-	 * servicioPaciente.filtroNombre1(valor); case "Segundo Nombre": return
-	 * servicioPaciente.filtroNombre2(valor); case "Cedula": return
-	 * servicioPaciente.filtroCedula(valor); case "Primer Apellido": return
-	 * servicioPaciente.filtroApellido1(valor); case "Segundo Apellido": return
-	 * servicioPaciente.filtroApellido2(valor); default: return pacientes; } }
-	 * 
-	 * @Override protected String[] crearRegistros(Paciente objeto) { String[]
-	 * registros = new String[5]; registros[0] = objeto.getCedula();
-	 * registros[1] = objeto.getPrimerNombre(); registros[2] =
-	 * objeto.getSegundoNombre(); registros[3] = objeto.getPrimerApellido();
-	 * registros[4] = objeto.getSegundoApellido(); return registros; }
-	 * 
-	 * }; catalogoT.setParent(catalogoTrabajador); catalogoT.doModal(); }
-	 */
+
+	@Listen("onClick =  #btnBuscar1")
+	public void buscarTrabajador(Event e) {
+		final List<Paciente> pacientes = servicioPaciente
+				.buscarTodosTrabajadores();
+		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPaciente,
+				"Catalogo de Trabajadores", pacientes, false, "Cedula",
+				"Primer Nombre", "Segundo Nombre", "Primer Apellido",
+				"Segundo Apellido") {
+
+			@Override
+			protected List<Paciente> buscar(String valor, String combo) {
+
+				switch (combo) {
+				case "Primer Nombre":
+					return servicioPaciente.filtroNombre1T(valor);
+				case "Segundo Nombre":
+					return servicioPaciente.filtroNombre2T(valor);
+				case "Cedula":
+					return servicioPaciente.filtroCedulaT(valor);
+				case "Primer Apellido":
+					return servicioPaciente.filtroApellido1T(valor);
+				case "Segundo Apellido":
+					return servicioPaciente.filtroApellido2T(valor);
+				default:
+					return pacientes;
+				}
+			}
+
+			@Override
+			protected String[] crearRegistros(Paciente objeto) {
+				String[] registros = new String[5];
+				registros[0] = objeto.getCedula();
+				registros[1] = objeto.getPrimerNombre();
+				registros[2] = objeto.getSegundoNombre();
+				registros[3] = objeto.getPrimerApellido();
+				registros[4] = objeto.getSegundoApellido();
+				return registros;
+			}
+
+		};
+		catalogoPaciente.setParent(divCatalogoPaciente);
+		catalogoPaciente.doModal();
+	}
+
+	@Listen("onSeleccion = #divCatalogoPaciente")
+	public void seleccionPaciente() {
+		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
+		cedula = paciente.getCedula();
+		llenarCamposPaciente(paciente);
+		lblCedula.setValue(paciente.getCedula());
+		catalogoPaciente.setParent(null);
+	}
+
+	// Metodo q llena los campos de paciente, bien sea porq se selecciono del catalogo o porq se selecciono una visita.
+	private void llenarCamposPaciente(Paciente paciente) {
+		lblCedula.setValue(paciente.getCedula());
+		
+		//Completar todos sus campos
+	}
 
 	// Combobox
 	@Listen("onChange = #cmb1")
