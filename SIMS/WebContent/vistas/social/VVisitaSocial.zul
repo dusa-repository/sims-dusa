@@ -623,5 +623,6 @@
 		</tabbox>
 		<separator />
 		<div id="botoneraSocial" />
+		<div id="divCatalogoVisita" />
 	</groupbox>
 </div>
