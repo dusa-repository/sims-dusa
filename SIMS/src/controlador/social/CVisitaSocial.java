@@ -675,18 +675,18 @@ public class CVisitaSocial extends CGenerico {
 		if (valores.length != 0) {
 			int j = 0;
 			while (j < valores.length) {
-				if (valores[j].equals("En buen estado"))
+				if (valores[j].equals(check4_1.getLabel()))
 					check4_1.setChecked(true);
 				if (valores[j]
-						.equals("Requiere mejoras en piso techo y paredes"))
+						.equals(check4_2.getLabel()))
 					check4_2.setChecked(true);
 				if (valores[j]
-						.equals("Requiere construcción de nuevos ambientes"))
+						.equals(check4_3.getLabel()))
 					check4_3.setChecked(true);
 				if (valores[j]
-						.equals("Requiere Mantenimiento de tuberías o de electricidad"))
+						.equals(check4_4.getLabel()))
 					check4_4.setChecked(true);
-				if (valores[j].equals("Se encuentra deteriorada (inhabitable)"))
+				if (valores[j].equals(check4_5.getLabel()))
 					check4_5.setChecked(true);
 				j++;
 			}
