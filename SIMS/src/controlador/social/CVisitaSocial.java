@@ -9,6 +9,7 @@ import java.util.List;
 import modelo.maestros.Estado;
 import modelo.maestros.Paciente;
 import modelo.maestros.Pais;
+import modelo.sha.Informe;
 import modelo.social.VisitaSocial;
 
 import org.zkoss.zk.ui.Component;
@@ -33,6 +34,7 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import componentes.Botonera;
+import componentes.Catalogo;
 //import componentes.Catalogo;
 import componentes.Mensaje;
 
@@ -44,12 +46,12 @@ public class CVisitaSocial extends CGenerico {
 	private Div botoneraSocial;
 	@Wire
 	private Label labelSuma;
-	/*@Wire
-	private Div catalogoTrabajador;
-	
-	Botones
 	@Wire
-	private Button btnBuscar1;*/
+	private Div divCatalogoVisita;
+	
+	//Botones
+	@Wire
+	private Button btnBuscar1;
 	
 	// Combobox
 	@Wire
@@ -134,6 +136,10 @@ public class CVisitaSocial extends CGenerico {
 	// Radio
 	@Wire
 	private Radiogroup rdg8;
+	@Wire
+	private Radio rdo8_1;
+	@Wire
+	private Radio rdo8_2;
 	@Wire
 	private Radiogroup rdg13;
 
@@ -229,7 +235,9 @@ public class CVisitaSocial extends CGenerico {
 	private Datebox dateBoxInforme;
 	
 	//Catalogo<Paciente> catalogoT;
-
+	Catalogo<VisitaSocial> catalogoVisita;
+	
+	Long idVisita = (long) 0;
 	@Override
 	public void inicializar() throws IOException {
 		// TODO Auto-generated method stub
@@ -606,6 +614,53 @@ public class CVisitaSocial extends CGenerico {
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraSocial.appendChild(botonera);
 
+	}
+	@Listen("onClick =  #btnBuscar2")
+	public void buscarInforme(Event e) {
+
+		final List<VisitaSocial> informes = servicioVisitaSocial.buscarTodas();
+		catalogoVisita = new Catalogo<VisitaSocial>(divCatalogoVisita,
+				"Catalogo de Visitas", informes, false, "Id") {
+
+			@Override
+			protected List<VisitaSocial> buscar(String valor, String combo) {
+
+				switch (combo) {
+				case "Codigo":
+					return servicioVisitaSocial.filtroId(valor);
+				default:
+					return informes;
+				}
+
+			}
+
+			@Override
+			protected String[] crearRegistros(VisitaSocial objeto) {
+				String[] registros = new String[1];
+				registros[0] = String.valueOf(objeto.getIdVisita());
+				return registros;
+			}
+
+		};
+		catalogoVisita.setParent(divCatalogoVisita);
+		catalogoVisita.doModal();
+	}
+	
+	@Listen("onSeleccion = #divCatalogoVisita")
+	public void seleccion() {
+		VisitaSocial visitaSocial = catalogoVisita.objetoSeleccionadoDelCatalogo();
+		idVisita = visitaSocial.getIdVisita();
+		
+	    // LLENAR TODOS LOS CAMPOS
+		
+		cmb1.setValue(visitaSocial.getA());
+		if(visitaSocial.getH()!=null)
+			if(visitaSocial.getH())
+				rdo8_1.setChecked(true);
+			else
+				rdo8_2.setChecked(true);
+	
+		catalogoVisita.setParent(null);
 	}
 	//Botones
 	/*@Listen("onClick =  #btnBuscar1")

@@ -1,5 +1,7 @@
 package servicio.social;
 
+import java.util.List;
+
 import interfacedao.social.IVisitaSocialDAO;
 
 import modelo.social.VisitaSocial;
@@ -15,5 +17,13 @@ public class SVisitaSocial {
 	
 	public void guardar(VisitaSocial visita) {
 		visitaSocialDAO.save(visita);
+	}
+
+	public List<VisitaSocial> buscarTodas() {
+		return visitaSocialDAO.findAll();
+	}
+
+	public List<VisitaSocial> filtroId(String valor) {
+		return visitaSocialDAO.findByIdVisitaStartingWithAllIgnoreCase(valor);
 	}
 }
