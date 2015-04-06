@@ -48,11 +48,11 @@ public class CVisitaSocial extends CGenerico {
 	private Label labelSuma;
 	@Wire
 	private Div divCatalogoVisita;
-	
-	//Botones
+
+	// Botones
 	@Wire
 	private Button btnBuscar1;
-	
+
 	// Combobox
 	@Wire
 	private Combobox cmb1;
@@ -156,8 +156,8 @@ public class CVisitaSocial extends CGenerico {
 	private Spinner spinner24;
 	@Wire
 	private Spinner spinner25;
-	
-	//DoubleSpinner
+
+	// DoubleSpinner
 	@Wire
 	private Doublespinner doubleSpinner20;
 	@Wire
@@ -190,8 +190,8 @@ public class CVisitaSocial extends CGenerico {
 	private Doublespinner doubleSpinner30_14;
 	@Wire
 	private Doublespinner doubleSpinner30_15;
-	
-	//textbox
+
+	// textbox
 	@Wire
 	private Textbox textBox46_1;
 	@Wire
@@ -226,18 +226,21 @@ public class CVisitaSocial extends CGenerico {
 	private Textbox textBox10;
 	@Wire
 	private Textbox textBox11;
-	//datebox
+	// datebox
 	@Wire
 	private Datebox dateBoxAplicacion;
 	@Wire
 	private Datebox dateBoxProcesamiento;
 	@Wire
 	private Datebox dateBoxInforme;
-	
-	//Catalogo<Paciente> catalogoT;
+
+	// Catalogo<Paciente> catalogoT;
 	Catalogo<VisitaSocial> catalogoVisita;
-	
+
+	// Variables
+	private String nombre;
 	Long idVisita = (long) 0;
+
 	@Override
 	public void inicializar() throws IOException {
 		// TODO Auto-generated method stub
@@ -246,21 +249,23 @@ public class CVisitaSocial extends CGenerico {
 		if (mapa != null) {
 			if (mapa.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) mapa.get("tabsGenerales");
+				nombre = (String) mapa.get("titulo");
 				mapa.clear();
 				mapa = null;
 			}
 		}
-		System.out.println("id");
-		System.out.println(rdg8.getId());
+
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				cerrarVentana(botoneraSocial, "Visita Social", tabs);
+				cerrarVentana(botoneraSocial, nombre, tabs);
 			}
 
 			@Override
 			public void limpiar() {
+				
+				idVisita = (long) 0;
 				// Combobox
 				cmb1.setValue("");
 				cmb2.setValue("");
@@ -281,7 +286,7 @@ public class CVisitaSocial extends CGenerico {
 				spinner18.setValue(0);
 				spinner24.setValue(0);
 				spinner25.setValue(0);
-				//DoubleSpinner
+				// DoubleSpinner
 				doubleSpinner20.setValue(0.0);
 				doubleSpinner30_1.setValue(0.0);
 				doubleSpinner30_2.setValue(0.0);
@@ -325,7 +330,7 @@ public class CVisitaSocial extends CGenerico {
 				check23_1.setChecked(false);
 				check23_2.setChecked(false);
 				check23_3.setChecked(false);
-				//textBox
+				// textBox
 				textBox46_1.setValue("");
 				textBox46_2.setValue("");
 				textBox46_3.setValue("");
@@ -343,7 +348,7 @@ public class CVisitaSocial extends CGenerico {
 				textBox47_7.setValue("");
 				textBox10.setValue("");
 				textBox11.setValue("");
-				//datebox
+				// datebox
 				dateBoxAplicacion.setValue(fecha);
 				dateBoxProcesamiento.setValue(fecha);
 				dateBoxInforme.setValue(fecha);
@@ -378,118 +383,118 @@ public class CVisitaSocial extends CGenerico {
 				visitaSocial.setBa(ba);
 				String bb = cmb22.getValue();
 				visitaSocial.setBb(bb);
-				
+
 				// Radio
-				if(rdg8.getSelectedItem()!=null){
-				Radio h = rdg8.getSelectedItem();
-				if (h.getId().equals("rdo8_1")) {
-					visitaSocial.setH(true);
-				} else {
-					visitaSocial.setH(false);
-				}
-				}
-				
-				if(rdg13.getSelectedItem()!=null){
-				Radio ac = rdg13.getSelectedItem();
-				if (ac.getId().equals("rdo13_1")) {
-					visitaSocial.setAc(true);
-				} else {
-					visitaSocial.setAc(false);
-				}
-				}
-				
-				//Spinner
-				if(spinner11.getValue()!=null){
-				Integer aa = spinner11.getValue();
-				visitaSocial.setAa(aa);
+				if (rdg8.getSelectedItem() != null) {
+					Radio h = rdg8.getSelectedItem();
+					if (h.getId().equals("rdo8_1")) {
+						visitaSocial.setH(true);
+					} else {
+						visitaSocial.setH(false);
 					}
-				if(spinner14.getValue()!=null){
-				Integer ad = spinner14.getValue();
-				visitaSocial.setAd(ad);
+				}
+
+				if (rdg13.getSelectedItem() != null) {
+					Radio ac = rdg13.getSelectedItem();
+					if (ac.getId().equals("rdo13_1")) {
+						visitaSocial.setAc(true);
+					} else {
+						visitaSocial.setAc(false);
 					}
-				if(spinner16.getValue()!=null){
+				}
+
+				// Spinner
+				if (spinner11.getValue() != null) {
+					Integer aa = spinner11.getValue();
+					visitaSocial.setAa(aa);
+				}
+				if (spinner14.getValue() != null) {
+					Integer ad = spinner14.getValue();
+					visitaSocial.setAd(ad);
+				}
+				if (spinner16.getValue() != null) {
 					Integer af = spinner16.getValue();
 					visitaSocial.setAf(af);
-					}
-				if(spinner18.getValue()!=null){
+				}
+				if (spinner18.getValue() != null) {
 					Integer ah = spinner18.getValue();
 					visitaSocial.setAh(ah);
-					}
-				if(spinner24.getValue()!=null){
+				}
+				if (spinner24.getValue() != null) {
 					Integer bd = spinner24.getValue();
 					visitaSocial.setBd(bd);
-					}
-				if(spinner25.getValue()!=null){
+				}
+				if (spinner25.getValue() != null) {
 					Integer be = spinner25.getValue();
 					visitaSocial.setBe(be);
-					}
-				//DoubleSpinner
-				if(doubleSpinner20.getValue()!=null){
+				}
+				// DoubleSpinner
+				if (doubleSpinner20.getValue() != null) {
 					Double bj = doubleSpinner20.getValue();
 					visitaSocial.setBj(bj);
-					}
-				if(doubleSpinner30_1.getValue()!=null){
+				}
+				if (doubleSpinner30_1.getValue() != null) {
 					Double cjAlimentacion = doubleSpinner30_1.getValue();
 					visitaSocial.setCjAlimentacion(cjAlimentacion);
-					}
-				if(doubleSpinner30_2.getValue()!=null){
+				}
+				if (doubleSpinner30_2.getValue() != null) {
 					Double cjGasolina = doubleSpinner30_2.getValue();
 					visitaSocial.setCjGasolina(cjGasolina);
-					}
-				if(doubleSpinner30_3.getValue()!=null){
+				}
+				if (doubleSpinner30_3.getValue() != null) {
 					Double cjAlquiler = doubleSpinner30_3.getValue();
 					visitaSocial.setCjAlquiler(cjAlquiler);
-					}
-				if(doubleSpinner30_4.getValue()!=null){
+				}
+				if (doubleSpinner30_4.getValue() != null) {
 					Double cjAgua = doubleSpinner30_4.getValue();
 					visitaSocial.setCjAgua(cjAgua);
-					}
-				if(doubleSpinner30_5.getValue()!=null){
+				}
+				if (doubleSpinner30_5.getValue() != null) {
 					Double cjElectricidad = doubleSpinner30_5.getValue();
 					visitaSocial.setCjElectricidad(cjElectricidad);
-					}
-				if(doubleSpinner30_6.getValue()!=null){
+				}
+				if (doubleSpinner30_6.getValue() != null) {
 					Double cjResidencia = doubleSpinner30_6.getValue();
 					visitaSocial.setCjResidencia(cjResidencia);
-					}
-				if(doubleSpinner30_7.getValue()!=null){
+				}
+				if (doubleSpinner30_7.getValue() != null) {
 					Double cjCelular = doubleSpinner30_7.getValue();
 					visitaSocial.setCjCelular(cjCelular);
-					}
-				if(doubleSpinner30_8.getValue()!=null){
+				}
+				if (doubleSpinner30_8.getValue() != null) {
 					Double cjTransporte = doubleSpinner30_8.getValue();
 					visitaSocial.setCjTransporte(cjTransporte);
-					}
-				if(doubleSpinner30_9.getValue()!=null){
+				}
+				if (doubleSpinner30_9.getValue() != null) {
 					Double cjEducacion = doubleSpinner30_9.getValue();
 					visitaSocial.setCjEducacion(cjEducacion);
-					}
-				if(doubleSpinner30_10.getValue()!=null){
+				}
+				if (doubleSpinner30_10.getValue() != null) {
 					Double cjMedico = doubleSpinner30_10.getValue();
 					visitaSocial.setCjMedico(cjMedico);
-					}
-				if(doubleSpinner30_11.getValue()!=null){
+				}
+				if (doubleSpinner30_11.getValue() != null) {
 					Double cjRecreacion = doubleSpinner30_11.getValue();
 					visitaSocial.setCjRecreacion(cjRecreacion);
-					}
-				if(doubleSpinner30_12.getValue()!=null){
+				}
+				if (doubleSpinner30_12.getValue() != null) {
 					Double cjCredito = doubleSpinner30_12.getValue();
 					visitaSocial.setCjCredito(cjCredito);
-					}
-				if(doubleSpinner30_13.getValue()!=null){
+				}
+				if (doubleSpinner30_13.getValue() != null) {
 					Double cjRopa = doubleSpinner30_13.getValue();
 					visitaSocial.setCjRopa(cjRopa);
-					}
-				if(doubleSpinner30_14.getValue()!=null){
+				}
+				if (doubleSpinner30_14.getValue() != null) {
 					Double cjFondo = doubleSpinner30_14.getValue();
 					visitaSocial.setCjFondo(cjFondo);
-					}
-				if(doubleSpinner30_15.getValue()!=null){
+				}
+				if (doubleSpinner30_15.getValue() != null) {
 					Double cjHabitacional = doubleSpinner30_15.getValue();
 					visitaSocial.setCjHabitacional(cjHabitacional);
-					}
+				}
 
-				//Checkbox
+				// Checkbox
 				String estructura = "";
 				if (check4_1.isChecked())
 					estructura = estructura + "," + check4_1.getLabel();
@@ -502,8 +507,8 @@ public class CVisitaSocial extends CGenerico {
 				if (check4_5.isChecked())
 					estructura = estructura + "," + check4_5.getLabel();
 				visitaSocial.setD(estructura);
-				
-				String hogarDispone="";
+
+				String hogarDispone = "";
 				if (check19_1.isChecked())
 					hogarDispone = hogarDispone + "," + check19_1.getLabel();
 				if (check19_2.isChecked())
@@ -541,8 +546,8 @@ public class CVisitaSocial extends CGenerico {
 				if (check19_18.isChecked())
 					hogarDispone = hogarDispone + "," + check19_18.getLabel();
 				visitaSocial.setAi(hogarDispone);
-				
-				String dondeAcude="";
+
+				String dondeAcude = "";
 				if (check23_1.isChecked())
 					dondeAcude = dondeAcude + "," + check23_1.getLabel();
 				if (check23_2.isChecked())
@@ -550,8 +555,8 @@ public class CVisitaSocial extends CGenerico {
 				if (check23_3.isChecked())
 					dondeAcude = dondeAcude + "," + check23_3.getLabel();
 				visitaSocial.setBc(dondeAcude);
-				
-				//textbox
+
+				// textbox
 				String dfa = textBox46_1.getValue();
 				visitaSocial.setDfa(dfa);
 				String dfb = textBox46_2.getValue();
@@ -586,21 +591,26 @@ public class CVisitaSocial extends CGenerico {
 				visitaSocial.setDiagnosticoSocial(diagnosticoSocial);
 				String observacion = textBox11.getValue();
 				visitaSocial.setObservacion(observacion);
-				
-				//datebox
+
+				// datebox
 				Date fechaAplicacion = dateBoxAplicacion.getValue();
 				Timestamp fechaA = new Timestamp(fechaAplicacion.getTime());
 				visitaSocial.setFechaAplicacion(fechaA);
-				
+
 				Date fechaProcesamiento = dateBoxProcesamiento.getValue();
 				Timestamp fechaP = new Timestamp(fechaProcesamiento.getTime());
 				visitaSocial.setFechaProcesamiento(fechaP);
-				
+
 				Date fechaInforme = dateBoxInforme.getValue();
 				Timestamp fechaI = new Timestamp(fechaInforme.getTime());
 				visitaSocial.setFechaInforme(fechaI);
-				
-				//Guardar
+
+				// En caso de que sea una modificacion la variable idVisita se
+				// lleno con el catalogo por lo q se modificaria en la bd, si no
+				// es una modificacion idVisita es 0, entonces se crea un nuevo
+				// registro
+				visitaSocial.setIdVisita(idVisita);
+				// Guardar
 				servicioVisitaSocial.guardar(visitaSocial);
 				msj.mensajeInformacion(Mensaje.guardado);
 				limpiar();
@@ -615,6 +625,7 @@ public class CVisitaSocial extends CGenerico {
 		botoneraSocial.appendChild(botonera);
 
 	}
+
 	@Listen("onClick =  #btnBuscar2")
 	public void buscarInforme(Event e) {
 
@@ -645,71 +656,75 @@ public class CVisitaSocial extends CGenerico {
 		catalogoVisita.setParent(divCatalogoVisita);
 		catalogoVisita.doModal();
 	}
-	
+
 	@Listen("onSeleccion = #divCatalogoVisita")
 	public void seleccion() {
-		VisitaSocial visitaSocial = catalogoVisita.objetoSeleccionadoDelCatalogo();
+		VisitaSocial visitaSocial = catalogoVisita
+				.objetoSeleccionadoDelCatalogo();
 		idVisita = visitaSocial.getIdVisita();
-		
-	    // LLENAR TODOS LOS CAMPOS
-		
+		// LLENAR TODOS LOS CAMPOS
+
 		cmb1.setValue(visitaSocial.getA());
-		if(visitaSocial.getH()!=null)
-			if(visitaSocial.getH())
+		if (visitaSocial.getH() != null)
+			if (visitaSocial.getH())
 				rdo8_1.setChecked(true);
 			else
 				rdo8_2.setChecked(true);
-	
+
+		String valores[] = visitaSocial.getD().split(",");
+		if (valores.length != 0) {
+			int j = 0;
+			while (j < valores.length) {
+				if (valores[j].equals("En buen estado"))
+					check4_1.setChecked(true);
+				if (valores[j]
+						.equals("Requiere mejoras en piso techo y paredes"))
+					check4_2.setChecked(true);
+				if (valores[j]
+						.equals("Requiere construcción de nuevos ambientes"))
+					check4_3.setChecked(true);
+				if (valores[j]
+						.equals("Requiere Mantenimiento de tuberías o de electricidad"))
+					check4_4.setChecked(true);
+				if (valores[j].equals("Se encuentra deteriorada (inhabitable)"))
+					check4_5.setChecked(true);
+				j++;
+			}
+		}
+
 		catalogoVisita.setParent(null);
 	}
-	//Botones
-	/*@Listen("onClick =  #btnBuscar1")
-	public void buscarTrabajador(Event e) {
-		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
-		catalogoT = new Catalogo<Paciente>(catalogoTrabajador,
-				"Catalogo de Trabajadores", pacientes, false, "Cedula",
-				"Primer Nombre", "Segundo Nombre", "Primer Apellido",
-				"Segundo Apellido") {
 
-			@Override
-			protected List<Paciente> buscar(String valor, String combo) {
-
-				switch (combo) {
-				case "Primer Nombre":
-					return servicioPaciente.filtroNombre1(valor);
-				case "Segundo Nombre":
-					return servicioPaciente.filtroNombre2(valor);
-				case "Cedula":
-					return servicioPaciente.filtroCedula(valor);
-				case "Primer Apellido":
-					return servicioPaciente.filtroApellido1(valor);
-				case "Segundo Apellido":
-					return servicioPaciente.filtroApellido2(valor);
-				default:
-					return pacientes;
-				}
-			}
-
-			@Override
-			protected String[] crearRegistros(Paciente objeto) {
-				String[] registros = new String[5];
-				registros[0] = objeto.getCedula();
-				registros[1] = objeto.getPrimerNombre();
-				registros[2] = objeto.getSegundoNombre();
-				registros[3] = objeto.getPrimerApellido();
-				registros[4] = objeto.getSegundoApellido();
-				return registros;
-			}
-
-		};
-		catalogoT.setParent(catalogoTrabajador);
-		catalogoT.doModal();
-	}*/
+	// Botones
+	/*
+	 * @Listen("onClick =  #btnBuscar1") public void buscarTrabajador(Event e) {
+	 * final List<Paciente> pacientes = servicioPaciente.buscarTodos();
+	 * catalogoT = new Catalogo<Paciente>(catalogoTrabajador,
+	 * "Catalogo de Trabajadores", pacientes, false, "Cedula", "Primer Nombre",
+	 * "Segundo Nombre", "Primer Apellido", "Segundo Apellido") {
+	 * 
+	 * @Override protected List<Paciente> buscar(String valor, String combo) {
+	 * 
+	 * switch (combo) { case "Primer Nombre": return
+	 * servicioPaciente.filtroNombre1(valor); case "Segundo Nombre": return
+	 * servicioPaciente.filtroNombre2(valor); case "Cedula": return
+	 * servicioPaciente.filtroCedula(valor); case "Primer Apellido": return
+	 * servicioPaciente.filtroApellido1(valor); case "Segundo Apellido": return
+	 * servicioPaciente.filtroApellido2(valor); default: return pacientes; } }
+	 * 
+	 * @Override protected String[] crearRegistros(Paciente objeto) { String[]
+	 * registros = new String[5]; registros[0] = objeto.getCedula();
+	 * registros[1] = objeto.getPrimerNombre(); registros[2] =
+	 * objeto.getSegundoNombre(); registros[3] = objeto.getPrimerApellido();
+	 * registros[4] = objeto.getSegundoApellido(); return registros; }
+	 * 
+	 * }; catalogoT.setParent(catalogoTrabajador); catalogoT.doModal(); }
+	 */
 
 	// Combobox
 	@Listen("onChange = #cmb1")
 	public void tipoDeVivienda() {
-      cmb1.getValue();
+		cmb1.getValue();
 	}
 
 	@Listen("onChange = #cmb2")
@@ -717,54 +732,45 @@ public class CVisitaSocial extends CGenerico {
 		cmb2.getValue();
 	}
 
-
 	@Listen("onChange = #cmb3")
 	public void condicionDeVivienda() {
 		cmb3.getValue();
 	}
-
 
 	@Listen("onChange = #cmb5")
 	public void abastecimientoAgua() {
 		cmb5.getValue();
 	}
 
-
 	@Listen("onChange = #cmb6")
 	public void frecuenciaDeAgua() {
 		cmb6.getValue();
 	}
-
 
 	@Listen("onChange = #cmb7")
 	public void viviendaP() {
 		cmb7.getValue();
 	}
 
-
 	@Listen("onChange = #cmb9")
 	public void eliminarBasura() {
 		cmb9.getValue();
 	}
-
 
 	@Listen("onChange = #cmb10")
 	public void combustibleCocina() {
 		cmb10.getValue();
 	}
 
-
 	@Listen("onChange = #cmb17")
 	public void viviendaEs() {
 		cmb17.getValue();
 	}
 
-
 	@Listen("onChange = #cmb21")
 	public void adquiereAlimento() {
 		cmb21.getValue();
 	}
-
 
 	@Listen("onChange = #cmb22")
 	public void acudirEnProblema() {
@@ -781,6 +787,7 @@ public class CVisitaSocial extends CGenerico {
 		check4_5.isChecked();
 
 	}
+
 	@Listen("onCheck = #hogarDispone,#hogarDispone2,#hogarDispone3 > checkbox")
 	public void seleccioneHogarDispone(CheckEvent event) {
 		check19_1.isChecked();
@@ -803,7 +810,7 @@ public class CVisitaSocial extends CGenerico {
 		check19_18.isChecked();
 
 	}
-	
+
 	@Listen("onCheck = #ultimosMesesHogar > checkbox")
 	public void seleccioneContraQuien(CheckEvent event) {
 		check23_1.isChecked();
@@ -818,7 +825,6 @@ public class CVisitaSocial extends CGenerico {
 		rdg8.getSelectedItem();
 	}
 
-
 	@Listen("onCheck = #rdg13")
 	public void gastosSeparados() {
 		rdg13.getSelectedItem();
@@ -829,52 +835,50 @@ public class CVisitaSocial extends CGenerico {
 	public void cantidadAmbientes() {
 		spinner11.getValue();
 	}
+
 	@Listen("onChange = #spinner14")
 	public void gruposGastos() {
 		spinner14.getValue();
 	}
+
 	@Listen("onChange = #spinner16")
 	public void numeroPersonas() {
 		spinner16.getValue();
 	}
+
 	@Listen("onChange = #spinner18")
 	public void numeroCuartos() {
 		spinner18.getValue();
 	}
+
 	@Listen("onChange = #spinner24")
 	public void numeroMujeres() {
 		spinner24.getValue();
 	}
+
 	@Listen("onChange = #spinner25")
 	public void cantidadPersona() {
 		spinner25.getValue();
 	}
-	
-	//DoubleSpinner
+
+	// DoubleSpinner
 	@Listen("onChange = #doubleSpinner20")
 	public void cantidadBolivares() {
 		doubleSpinner20.getValue();
 	}
+
 	@Listen("onChange = #doubleSpinner30_1,#doubleSpinner30_2,#doubleSpinner30_3,#doubleSpinner30_4,#doubleSpinner30_5,#doubleSpinner30_6,#doubleSpinner30_7,#doubleSpinner30_8,#doubleSpinner30_9,#doubleSpinner30_10,#doubleSpinner30_11,#doubleSpinner30_12,#doubleSpinner30_13,#doubleSpinner30_14,#doubleSpinner30_15")
 	public void calcularBolivares() {
-		Double suma=
-		doubleSpinner30_1.getValue()+
-		doubleSpinner30_2.getValue()+
-		doubleSpinner30_3.getValue()+
-		doubleSpinner30_4.getValue()+
-		doubleSpinner30_5.getValue()+
-		doubleSpinner30_6.getValue()+
-		doubleSpinner30_7.getValue()+
-		doubleSpinner30_8.getValue()+
-		doubleSpinner30_9.getValue()+
-		doubleSpinner30_10.getValue()+
-		doubleSpinner30_11.getValue()+
-		doubleSpinner30_12.getValue()+
-		doubleSpinner30_13.getValue()+
-		doubleSpinner30_14.getValue()+
-		doubleSpinner30_15.getValue();
+		Double suma = doubleSpinner30_1.getValue()
+				+ doubleSpinner30_2.getValue() + doubleSpinner30_3.getValue()
+				+ doubleSpinner30_4.getValue() + doubleSpinner30_5.getValue()
+				+ doubleSpinner30_6.getValue() + doubleSpinner30_7.getValue()
+				+ doubleSpinner30_8.getValue() + doubleSpinner30_9.getValue()
+				+ doubleSpinner30_10.getValue() + doubleSpinner30_11.getValue()
+				+ doubleSpinner30_12.getValue() + doubleSpinner30_13.getValue()
+				+ doubleSpinner30_14.getValue() + doubleSpinner30_15.getValue();
 
-		labelSuma.setValue (suma.toString());
+		labelSuma.setValue(suma.toString());
 
 	}
 }
