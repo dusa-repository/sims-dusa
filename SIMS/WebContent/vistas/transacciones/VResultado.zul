@@ -1,6 +1,6 @@
 <zk>
 	<window width="80%" closable="true" id="wdwResultado"
-		apply="controlador.transacciones.CResultado" >
+		apply="controlador.transacciones.CResultado">
 		<caption label="Resultados de la Consulta"
 			style="color:black; font-size: 16px; font-weight:bold; " />
 		<div width="100%" height="100%">
@@ -89,7 +89,13 @@
 					width="500px" />
 			</hbox>
 			<separator />
+			<hbox>
 			<div id="botoneraResultado" />
+			<button autodisable="self" label="Reporte Resultados" id="btnReporteResultados"
+				image="/public/imagenes/botones/generar.png"
+				tooltiptext="Presione este boton para generar el reporte de Resultados"
+				hflex="1" height="32px" class="btn" />
+				</hbox>
 		</div>
 	</window>
 </zk>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPreempleo" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad748ed4-6dcf-4a1b-a7a1-04d153c6d8a7">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="96"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="pacienteNombre" class="java.lang.String"/>
 	<parameter name="fecha" class="java.sql.Timestamp"/>
@@ -124,14 +124,14 @@ new SimpleDateFormat("h:m a").format($P{fecha})]]></textFieldExpression>
 				<textFieldExpression><![CDATA[$P{cargo}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="10" y="213" width="100" height="20" uuid="4f6fa2f8-92cc-4c38-b28b-903d7ba5acc1"/>
+				<reportElement x="10" y="210" width="100" height="20" uuid="4f6fa2f8-92cc-4c38-b28b-903d7ba5acc1"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Enfermedad Actual:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="110" y="213" width="444" height="227" uuid="be9b73b3-9a48-4e65-9da6-cfe535337555"/>
+				<reportElement stretchType="RelativeToBandHeight" x="110" y="210" width="444" height="238" uuid="be9b73b3-9a48-4e65-9da6-cfe535337555"/>
 				<textFieldExpression><![CDATA[$P{enfermedad}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -168,14 +168,14 @@ new SimpleDateFormat("h:m a").format($P{fecha})]]></textFieldExpression>
 				<text><![CDATA[Indice de Masa Corporal:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="123" y="442" width="431" height="109" uuid="d0649ff6-7eb3-405e-a056-c6c60926781d">
+				<reportElement stretchType="RelativeToBandHeight" x="123" y="450" width="431" height="109" uuid="d0649ff6-7eb3-405e-a056-c6c60926781d">
 					<printWhenExpression><![CDATA[$P{imprime2}.equals("si")]]></printWhenExpression>
 				</reportElement>
 				<box leftPadding="3"/>
 				<textFieldExpression><![CDATA[$P{examenes}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="10" y="442" width="113" height="22" uuid="7ff312a5-efbf-4f42-bf35-85d7db68e089">
+				<reportElement x="10" y="450" width="113" height="22" uuid="7ff312a5-efbf-4f42-bf35-85d7db68e089">
 					<printWhenExpression><![CDATA[$P{imprime2}.equals("si")]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -216,14 +216,14 @@ new SimpleDateFormat("h:m a").format($P{fecha})]]></textFieldExpression>
 				<text><![CDATA[Observacion]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="557" width="144" height="20" uuid="2410930a-4625-48c4-bdd4-6f5c26a34d2d"/>
+				<reportElement x="10" y="560" width="144" height="20" uuid="2410930a-4625-48c4-bdd4-6f5c26a34d2d"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[¿Es apto para el empleo?]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="154" y="557" width="390" height="20" uuid="12ea3bc6-b3ff-4a42-8db5-5a27a30c0d71"/>
+				<reportElement x="154" y="560" width="390" height="20" uuid="12ea3bc6-b3ff-4a42-8db5-5a27a30c0d71"/>
 				<textFieldExpression><![CDATA[$P{apto}]]></textFieldExpression>
 			</textField>
 		</band>

@@ -21,6 +21,7 @@ import controlador.control.CControl;
 import controlador.sha.CInforme;
 import controlador.transacciones.CConsulta;
 import controlador.transacciones.COrden;
+import controlador.transacciones.CResultado;
 
 /**
  * Servlet implementation class Reportero
@@ -51,6 +52,7 @@ public class Reportero extends HttpServlet {
 		CInforme informe = new CInforme();
 		CResumen resumen = new CResumen();
 		CCosto costo = new CCosto();
+		CResultado resultado = new CResultado();
 		CPacientes pacientes = new CPacientes();
 		COrden orden = new COrden();
 		CGasto gasto = new CGasto();
@@ -275,6 +277,9 @@ public class Reportero extends HttpServlet {
 			case "52":
 				fichero = gasto.reporteGastoPorTrabajadorOrden(par6, par7, par9,
 						tipo);
+				break;
+			case "53":
+				fichero = resultado.reporteResultado(part2);
 				break;
 			default:
 				break;
