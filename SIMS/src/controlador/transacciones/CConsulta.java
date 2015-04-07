@@ -6697,4 +6697,7 @@ public class CConsulta extends CGenerico {
 		lsita.setEmptyMessage("Utilice el filtro para buscar el paciente que desea buscar");
 		catalogoPaciente2.doModal();
 	}
+	
+
+	
 }
