@@ -35,9 +35,198 @@
 									label="Buscar" tooltiptext="Catalogo"
 									image="/public/imagenes/botones/buscar.png" />
 							</row>
+						</rows>
+					</grid>
+					<separator />
+					<grid width="auto">
+						<columns>
+							<column label="" width="25%" />
+							<column label="" width="25%" />
+							<column label="" width="25%" />
+							<column label="" width="25%" />
+						</columns>
+						<rows>
 							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Datos Personales del Trabajador" style="font-weight:bold;color:black"/>
+								</vlayout>
+								</hbox>
+								<hbox></hbox>
+								<hbox></hbox>
+								<hbox></hbox>
+							</row>
+							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Ficha" />
+								<label id="lblFicha" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
 								<label class="etiqueta" value="Cedula" />
 								<label id="lblCedula" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Nombres y Apellidos" />
+								<label id="lblNombres" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Sexo" />
+								<label id="lblSexo" />
+								</vlayout>
+								</hbox>
+							</row>
+							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Fecha de Nacimiento" />
+								<label id="lblFechaNacimiento" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Edad" />
+								<label id="lblEdad" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Fecha de Ingreso" />
+								<label id="lblFechaIngreso" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Estado Civil" />
+								<label id="lblEstadoCivil" />
+								</vlayout>
+								</hbox>
+							</row>
+							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Grado de Instruccion" />
+								<label id="lblGradoInst" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Ocupacion U Oficio" />
+								<label id="lblOcupacion" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Profesion" />
+								<label id="lblProfesion" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Condicion del Trabajador" />
+								<label id="lblCondicion" />
+								</vlayout>
+								</hbox>
+							</row>
+							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="¿Es usted Jefe del hogar?" />
+								<label id="lblJefe" />
+								</vlayout>
+								</hbox>
+								<hbox></hbox>
+								<hbox></hbox>
+								<hbox></hbox>
+							</row>
+							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Direccion del Trabajador" style="font-weight:bold;color:black"/>
+								</vlayout>
+								</hbox>
+								<hbox></hbox>
+								<hbox></hbox>
+								<hbox></hbox>
+							</row>
+							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Urb./Barrio" />
+								<label id="lblUrb" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Av./Calle" />
+								<label id="lblCalle" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Sector" />
+								<label id="lblSector" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Nro." />
+								<label id="lblNro" />
+								</vlayout>
+								</hbox>
+							</row>
+							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Punto de Referencia" />
+								<label id="lblPuntoRef" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Ciudad" />
+								<label id="lblCiudad" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Parroquia" />
+								<label id="lblParroquia" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Municipio" />
+								<label id="lblMunicipio" />
+								</vlayout>
+								</hbox>
+							</row>
+							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Telefono Residencial" />
+								<label id="lblTelefono1" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Telefono Celular" />
+								<label id="lblTelefono2" />
+								</vlayout>
+								</hbox>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Medio de Transporte Utilizado para ir al trabajo" />
+								<label id="lblTransporte" />
+								</vlayout>
+								</hbox>
+								<hbox></hbox>
 							</row>
 						</rows>
 					</grid>
