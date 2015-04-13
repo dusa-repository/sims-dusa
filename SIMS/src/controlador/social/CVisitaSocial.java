@@ -66,6 +66,8 @@ public class CVisitaSocial extends CGenerico {
 	@Wire
 	private Label lblEdad;
 	@Wire
+	private Label lblLugarNac;
+	@Wire
 	private Label lblFechaIngreso;
 	@Wire
 	private Label lblEstadoCivil;
@@ -415,6 +417,38 @@ public class CVisitaSocial extends CGenerico {
 				dateBoxAplicacion.setValue(fecha);
 				dateBoxProcesamiento.setValue(fecha);
 				dateBoxInforme.setValue(fecha);
+				// Label
+				labelSuma.setValue("");
+				lblCedula.setValue("");
+				lblFicha.setValue("");
+				lblNombres.setValue("");
+				lblSexo.setValue("");
+				lblFechaNacimiento.setValue("");
+				lblEdad.setValue("");
+				lblLugarNac.setValue("");
+				lblFechaIngreso.setValue("");
+				lblEstadoCivil.setValue("");
+				lblGradoInst.setValue("");
+				lblOcupacion.setValue("");
+				lblProfesion.setValue("");
+				lblCondicion.setValue("");
+				lblJefe.setValue("");
+				lblUrb.setValue("");
+				lblCalle.setValue("");
+				lblSector.setValue("");
+				lblNro.setValue("");
+				lblPuntoRef.setValue("");
+				lblCiudad.setValue("");
+				lblParroquia.setValue("");
+				lblMunicipio.setValue("");
+				lblTelefono1.setValue("");
+				lblTelefono2.setValue("");
+				lblTransporte.setValue("");
+				//Radio
+				rdo13_1.setChecked(false);
+				rdo13_2.setChecked(false);
+				rdo8_1.setChecked(false);
+				rdo8_2.setChecked(false);
 
 			}
 
@@ -939,6 +973,16 @@ public class CVisitaSocial extends CGenerico {
 		if (visitaSocial.getCjHabitacional()!= null) {
 			doubleSpinner30_15.setValue(visitaSocial.getCjHabitacional());
 		}
+		//label
+		Double suma = doubleSpinner30_1.getValue()
+				+ doubleSpinner30_2.getValue() + doubleSpinner30_3.getValue()
+				+ doubleSpinner30_4.getValue() + doubleSpinner30_5.getValue()
+				+ doubleSpinner30_6.getValue() + doubleSpinner30_7.getValue()
+				+ doubleSpinner30_8.getValue() + doubleSpinner30_9.getValue()
+				+ doubleSpinner30_10.getValue() + doubleSpinner30_11.getValue()
+				+ doubleSpinner30_12.getValue() + doubleSpinner30_13.getValue()
+				+ doubleSpinner30_14.getValue() + doubleSpinner30_15.getValue();
+		labelSuma.setValue(suma.toString());
 		// Textbox
 		textBox46_1.setValue(visitaSocial.getDfa());
 		textBox46_2.setValue(visitaSocial.getDfb());
@@ -1043,6 +1087,7 @@ public class CVisitaSocial extends CGenerico {
 			lblFechaNacimiento.setValue(String.valueOf(formatoFecha.format(paciente.getFechaNacimiento())));
 		int edad= calcularEdad(paciente.getFechaNacimiento());
 		lblEdad.setValue(String.valueOf(edad));
+		lblLugarNac.setValue(paciente.getLugarNacimiento());
 		if (paciente.getFechaIngreso()!= null)
 			lblFechaIngreso.setValue(String.valueOf(formatoFecha.format(paciente.getFechaIngreso())));
 		lblEstadoCivil.setValue(estadoCivil.getNombre());
@@ -1050,19 +1095,19 @@ public class CVisitaSocial extends CGenerico {
 		lblOcupacion.setValue(paciente.getOficio());
 		lblProfesion.setValue(paciente.getProfesion());
 		lblCondicion.setValue(paciente.getCondicion());
-		/*if(paciente.getJefe()!=null){
+		if(paciente.isJefe()!=false){
 			lblJefe.setValue("Si");
 		}else{
 			lblJefe.setValue("No");
-		};*/
+		};
 		lblUrb.setValue(paciente.getUrb());
 		lblCalle.setValue(paciente.getAvCalle());
 		lblSector.setValue(paciente.getSector());
 		lblNro.setValue(paciente.getNro());
 		lblPuntoRef.setValue(paciente.getPuntoReferencia());
-		lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
+		lblCiudad.setValue("Edo: "+paciente.getCiudadVivienda().getEstado().getNombre());
 		lblParroquia.setValue(paciente.getParroquia());
-		lblMunicipio.setValue("Edo: "+paciente.getCiudadVivienda().getEstado().getNombre());
+		lblMunicipio.setValue(paciente.getMunicipio());
 		lblTelefono1.setValue(paciente.getTelefono1());
 		lblTelefono2.setValue(paciente.getTelefono2());
 		if(paciente.getTransporte()!=""){
@@ -1072,205 +1117,6 @@ public class CVisitaSocial extends CGenerico {
 		}
 		
 		//Completar todos sus campos
-	}
-	private void llenarCamposVisita(VisitaSocial visitaSocial) {
-		
-		//ComboBox
-				cmb1.setValue(visitaSocial.getA());
-				cmb2.setValue(visitaSocial.getB());
-				cmb3.setValue(visitaSocial.getC());
-				cmb5.setValue(visitaSocial.getE());
-				cmb6.setValue(visitaSocial.getF());
-				cmb7.setValue(visitaSocial.getG());
-				cmb9.setValue(visitaSocial.getI());
-				cmb10.setValue(visitaSocial.getAj());
-				cmb12.setValue(visitaSocial.getAb());
-				cmb17.setValue(visitaSocial.getAg());
-				cmb21.setValue(visitaSocial.getBa());
-				cmb22.setValue(visitaSocial.getBb());
-				//Radio
-				if (visitaSocial.getH() != null)
-					if (visitaSocial.getH())
-						rdo8_1.setChecked(true);
-					else
-						rdo8_2.setChecked(true);
-				
-				if (visitaSocial.getAc() != null)
-					if (visitaSocial.getAc())
-						rdo13_1.setChecked(true);
-					else
-						rdo13_2.setChecked(true);
-				
-				//CheckBox
-				String valores[] = visitaSocial.getD().split(",");
-				if (valores.length != 0) {
-					int j = 0;
-					while (j < valores.length) {
-						if (valores[j].equals(check4_1.getLabel()))
-							check4_1.setChecked(true);
-						if (valores[j].equals(check4_2.getLabel()))
-							check4_2.setChecked(true);
-						if (valores[j].equals(check4_3.getLabel()))
-							check4_3.setChecked(true);
-						if (valores[j].equals(check4_4.getLabel()))
-							check4_4.setChecked(true);
-						if (valores[j].equals(check4_5.getLabel()))
-							check4_5.setChecked(true);
-						j++;
-					}
-				}
-				String valores2[] = visitaSocial.getAi().split(",");
-				if (valores.length != 0) {
-					int i = 0;
-					while (i < valores2.length) {
-						if (valores2[i].equals(check19_1.getLabel()))
-							check19_1.setChecked(true);
-						if (valores2[i].equals(check19_2.getLabel()))
-							check19_2.setChecked(true);
-						if (valores2[i].equals(check19_3.getLabel()))
-							check19_3.setChecked(true);
-						if (valores2[i].equals(check19_4.getLabel()))
-							check19_4.setChecked(true);
-						if (valores2[i].equals(check19_5.getLabel()))
-							check19_5.setChecked(true);
-						if (valores2[i].equals(check19_6.getLabel()))
-							check19_6.setChecked(true);
-						if (valores2[i].equals(check19_7.getLabel()))
-							check19_7.setChecked(true);
-						if (valores2[i].equals(check19_8.getLabel()))
-							check19_8.setChecked(true);
-						if (valores2[i].equals(check19_9.getLabel()))
-							check19_9.setChecked(true);
-						if (valores2[i].equals(check19_10.getLabel()))
-							check19_10.setChecked(true);
-						if (valores2[i].equals(check19_11.getLabel()))
-							check19_11.setChecked(true);
-						if (valores2[i].equals(check19_12.getLabel()))
-							check19_12.setChecked(true);
-						if (valores2[i].equals(check19_13.getLabel()))
-							check19_13.setChecked(true);
-						if (valores2[i].equals(check19_14.getLabel()))
-							check19_14.setChecked(true);
-						if (valores2[i].equals(check19_15.getLabel()))
-							check19_15.setChecked(true);
-						if (valores2[i].equals(check19_16.getLabel()))
-							check19_16.setChecked(true);
-						if (valores2[i].equals(check19_17.getLabel()))
-							check19_17.setChecked(true);
-						if (valores2[i].equals(check19_18.getLabel()))
-							check19_18.setChecked(true);
-						i++;
-					}
-				}
-				String valores3[] = visitaSocial.getBc().split(",");
-				if (valores.length != 0) {
-					int a = 0;
-					while (a < valores3.length) {
-						if (valores3[a].equals(check23_1.getLabel()))
-							check23_1.setChecked(true);
-						if (valores3[a].equals(check23_2.getLabel()))
-							check23_2.setChecked(true);
-						if (valores3[a].equals(check23_3.getLabel()))
-							check23_3.setChecked(true);
-						a++;
-					}
-				}
-				//Spinner
-				if(visitaSocial.getAa()!=null){
-					spinner11.setValue(visitaSocial.getAa());
-				}
-				if(visitaSocial.getAd()!=null){
-					spinner14.setValue(visitaSocial.getAd());
-				}
-				if(visitaSocial.getAf()!=null){
-					spinner16.setValue(visitaSocial.getAf());
-				}
-				if(visitaSocial.getAh()!=null){
-					spinner18.setValue(visitaSocial.getAh());
-				}
-				if(visitaSocial.getBd()!=null){
-					spinner24.setValue(visitaSocial.getBd());
-				}
-				if(visitaSocial.getBe()!=null){
-					spinner25.setValue(visitaSocial.getBe());
-				}
-				// DoubleSpinner
-				if (visitaSocial.getBj()!= null) {
-					doubleSpinner20.setValue(visitaSocial.getBj());
-				}
-				if (visitaSocial.getCjAlimentacion()!= null) {
-					doubleSpinner30_1.setValue(visitaSocial.getCjAlimentacion());
-				}
-				if (visitaSocial.getCjGasolina()!= null) {
-					doubleSpinner30_2.setValue(visitaSocial.getCjGasolina());
-				}
-				if (visitaSocial.getCjAlquiler()!= null) {
-					doubleSpinner30_3.setValue(visitaSocial.getCjAlquiler());
-				}
-				if (visitaSocial.getCjAgua()!= null) {
-					doubleSpinner30_4.setValue(visitaSocial.getCjAgua());
-				}
-				if (visitaSocial.getCjElectricidad()!= null) {
-					doubleSpinner30_5.setValue(visitaSocial.getCjElectricidad());
-				}
-				if (visitaSocial.getCjResidencia()!= null) {
-					doubleSpinner30_6.setValue(visitaSocial.getCjResidencia());
-				}
-				if (visitaSocial.getCjCelular()!= null) {
-					doubleSpinner30_7.setValue(visitaSocial.getCjCelular());
-				}
-				if (visitaSocial.getCjTransporte()!= null) {
-					doubleSpinner30_8.setValue(visitaSocial.getCjTransporte());
-				}
-				if (visitaSocial.getCjEducacion()!= null) {
-					doubleSpinner30_9.setValue(visitaSocial.getCjEducacion());
-				}
-				if (visitaSocial.getCjMedico()!= null) {
-					doubleSpinner30_10.setValue(visitaSocial.getCjMedico());
-				}
-				if (visitaSocial.getCjRecreacion()!= null) {
-					doubleSpinner30_11.setValue(visitaSocial.getCjRecreacion());
-				}
-				if (visitaSocial.getCjCredito()!= null) {
-					doubleSpinner30_12.setValue(visitaSocial.getCjCredito());
-				}
-				if (visitaSocial.getCjRopa()!= null) {
-					doubleSpinner30_13.setValue(visitaSocial.getCjRopa());
-				}
-				if (visitaSocial.getCjFondo()!= null) {
-					doubleSpinner30_14.setValue(visitaSocial.getCjFondo());
-				}
-				if (visitaSocial.getCjHabitacional()!= null) {
-					doubleSpinner30_15.setValue(visitaSocial.getCjHabitacional());
-				}
-				// Textbox
-				textBox46_1.setValue(visitaSocial.getDfa());
-				textBox46_2.setValue(visitaSocial.getDfb());
-				textBox46_3.setValue(visitaSocial.getDfc());
-				textBox46_4.setValue(visitaSocial.getDfd());
-				textBox46_5.setValue(visitaSocial.getDfe());
-				textBox46_6.setValue(visitaSocial.getDff());
-				textBox46_7.setValue(visitaSocial.getDfg());
-				textBox46_8.setValue(visitaSocial.getDfh());
-				textBox47_1.setValue(visitaSocial.getDga());
-				textBox47_2.setValue(visitaSocial.getDgb());
-				textBox47_3.setValue(visitaSocial.getDgc());
-				textBox47_4.setValue(visitaSocial.getDgd());
-				textBox47_5.setValue(visitaSocial.getDge());
-				textBox47_6.setValue(visitaSocial.getDgf());
-				textBox47_7.setValue(visitaSocial.getDgg());
-				textBox10.setValue(visitaSocial.getDiagnosticoSocial());
-				textBox11.setValue(visitaSocial.getObservacion());
-				// Datebox
-				if(visitaSocial.getFechaAplicacion()!=null){
-				dateBoxAplicacion.setValue(visitaSocial.getFechaAplicacion());
-				}
-				if(visitaSocial.getFechaProcesamiento()!=null){
-				dateBoxProcesamiento.setValue(visitaSocial.getFechaProcesamiento());
-				}
-				if(visitaSocial.getFechaInforme()!=null){
-				dateBoxInforme.setValue(visitaSocial.getFechaInforme());
-				}
 	}
 
 	// Combobox
