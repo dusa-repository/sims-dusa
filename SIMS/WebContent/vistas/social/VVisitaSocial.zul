@@ -397,7 +397,7 @@
 								<radiogroup id="rdg13">
 									<hlayout>
 										<radio id="rdo13_1" label="Si" selected="Si" />
-										<radio id="rdo13_3" label="No" selected="No" />
+										<radio id="rdo13_2" label="No" selected="No" />
 									</hlayout>
 								</radiogroup>
 							</row>

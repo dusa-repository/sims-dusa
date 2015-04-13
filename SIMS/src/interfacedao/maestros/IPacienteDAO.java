@@ -220,6 +220,8 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 			+ "and cc.fecha_consulta between c.fecha_consulta and  CONVERT(datetime,GETDATE(),103) "
 			+ "and c.id_paciente = cc.id_paciente))", nativeQuery = true)
 	List<Paciente> findByConsultaPendiente();
+
+	Paciente findByCedulaAndTrabajadorTrue(String value);
 	
 //@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
 }

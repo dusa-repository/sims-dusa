@@ -1,0 +1,236 @@
+<zk>
+	<div id="divFichaMaestra" apply="controlador.social.CFichaMaestra"
+		width="100%">
+		<groupbox width="100%" mold="3d" title="Ficha Maestra">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="12.2%" />
+					<column label="" width="13.2%" />
+					<column label="" width="13.2%" />
+					<column label="" width="16.2%" />
+					<column label="" width="16.2%" />
+					<column label="" width="12.2%" />
+					<column label="" width="16.8%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Buscar Cedula:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox maxlength="50" id="txtCedula" hflex="1"
+							tooltiptext="Ingrese la Cedula del Paciente" />
+									<cell colspan="2">
+						<button class="btn" autodisable="self" id="btnBuscarPaciente"
+							label="Buscar Paciente" tooltiptext="Catalogo"
+							image="/public/imagenes/botones/buscar.png" width="130px" />
+							</cell>
+						<hbox />
+						<hbox />
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<tabbox height="auto" orient="horizontal">
+				<tabs>
+					<tab label="Datos Basicos" id="tabBasicos" />
+					<tab label="Datos Especificos" id="tabEspecificos" />
+					<tab label="Cargas Familiares" id="tabCarga" />
+				</tabs>
+				<tabpanels>
+					<tabpanel>
+						<grid width="auto">
+							<columns visible="false">
+								<column label="" width="12%" />
+								<column label="" width="15%" />
+								<column label="" width="12%" />
+								<column label="" width="15%" />
+								<column label="" width="13%" />
+								<column label="" width="15%" />
+								<column label="" width="8%" />
+								<column label="" width="10%" />
+							</columns>
+							<rows>
+								<row>
+									<label class="etiqueta" value="Cedula:" />
+									<label id="lblCedula" />
+									<label class="etiqueta" value="Ficha:" />
+									<label id="lblFicha" />
+									<hbox />
+									<hbox />
+																		<hbox />
+									<hbox />
+								</row>
+								<row>
+									<label class="etiqueta" value="Nombres:" />
+									<label id="lblNombres" />
+									<label class="etiqueta" value="Apellidos:" />
+									<label id="lblApellidos" />
+									<label class="etiqueta" value="Fecha Nacimiento:" />
+									<label id="lblFechaNac" />
+									<hbox />
+									<cell rowspan="3">
+										<vbox>
+											<image id="imagenPaciente" width="80px" height="75px" />
+										</vbox>
+									</cell>
+
+								</row>
+								<row>
+									<label class="etiqueta" value="Lugar Nacimiento:" />
+									<cell colspan="1">
+										<vbox>
+											<label id="lblLugarNac" />
+										</vbox>
+									</cell>
+									<label class="etiqueta" value="Edad:" />
+									<label id="lblEdad" />
+									<label class="etiqueta" value="Sexo:" />
+									<label id="lblSexo" />
+									<hbox />
+									<hbox />
+								</row>
+								<row>
+									<label class="etiqueta" value="Estado Civil:" />
+									<label id="lblEstadoCivil" />
+									<label class="etiqueta" value="Grupo Sanguineo:" />
+									<label id="lblGrupoSanguineo" />
+									<label class="etiqueta" value="Mano Dominante:" />
+									<label id="lblMano" />
+									<hbox />
+									<hbox />
+
+								</row>
+								<row>
+									<cell colspan="3">
+										<label class="etiqueta" value="Estatura:" />
+										<space />
+										<space />
+										<label id="lblEstatura" />
+										<space />
+										<space />
+										<label class="etiqueta" value="Peso:" />
+										<space />
+										<space />
+										<label id="lblPeso" />
+										<space />
+										<space />
+										<label class="etiqueta" value="¿Usa Lentes?" />
+										<space />
+										<space />
+										<label id="lblLentes" />
+									</cell>
+									<cell colspan="5">
+										<label class="etiqueta" value="¿Es Alergico?" />
+										<space />
+										<space />
+										<space />
+										<label id="lblAlergico" />
+										<space />
+										<space />
+										<label class="etiqueta" value="Alergias:" />
+										<space />
+										<space />
+										<label id="lblAlergias" />
+									</cell>
+
+								</row>
+								<row>
+									<cell colspan="8">
+										<label class="etiqueta" value="¿Posee Discapacidad?" />
+										<space />
+										<space />
+										<space />
+										<label id="lblDiscapacidad" />
+										<space />
+										<space />
+										<space />
+										<label class="etiqueta" value="Origen:" />
+										<space />
+										<space />
+										<space />
+										<label id="lblOrigen" />
+										<space />
+										<space />
+										<space />
+										<label class="etiqueta" value="Tipo:" />
+										<space />
+										<space />
+										<space />
+										<label id="lblTipoDiscapacidad" />
+										<space />
+										<space />
+										<space />
+										<label class="etiqueta" value="Adicionales:" />
+										<space />
+										<space />
+										<space />
+										<label id="lblObservacionDiscapacidad" />
+									</cell>
+								</row>
+							</rows>
+						</grid>
+						<separator />
+						<tabbox height="auto" id="taxOtrosDatos" orient="horizontal">
+							<tabs id="tbsOtrosDatos">
+								<tab label="Datos de Contacto" id="tabDatosContacto" />
+							</tabs>
+							<tabpanels>
+								<tabpanel>
+									<grid width="auto">
+										<columns visible="false">
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+											<column label="" width="10%" />
+										</columns>
+										<rows>
+																	<row>
+																	<cell colspan="10">
+												<label class="etiqueta" value="Direccion" />
+												</cell>
+												<label id="lblCiudad" />
+												<label class="etiqueta" value="Telefono Fijo:" />
+												<label id="lblTelefono1" />
+												<label class="etiqueta" value="Telefono Novil:" />
+												<label id="lblTelefono2" />
+												<label class="etiqueta" value="Email:" />
+												<label id="lblCorreo" />
+											</row>
+											<row>
+												<label class="etiqueta" value="Direccion:" />
+												<label id="lblCiudad" />
+												<cell colspan="2">
+													<label id="lblDireccion" />
+												</cell>
+												<label class="etiqueta" value="Telefono Fijo:" />
+												<label id="lblTelefono1" />
+												<label class="etiqueta" value="Telefono Novil:" />
+												<label id="lblTelefono2" />
+												<label class="etiqueta" value="Email:" />
+												<label id="lblCorreo" />
+											</row>
+											<row>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+					</tabpanel>
+					<tabpanel>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+		</groupbox>
+		<div id="divCatalogoPaciente" />
+	</div>
+</zk>
