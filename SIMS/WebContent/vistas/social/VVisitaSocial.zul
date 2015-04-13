@@ -97,8 +97,8 @@
 								</hbox>
 								<hbox>
 								<vlayout>
-								<label class="etiqueta" value="Fecha de Ingreso" />
-								<label id="lblFechaIngreso" />
+								<label class="etiqueta" value="Lugar de Nacimiento" />
+								<label id="lblLugarNac" />
 								</vlayout>
 								</hbox>
 								<hbox>
@@ -109,6 +109,12 @@
 								</hbox>
 							</row>
 							<row>
+								<hbox>
+								<vlayout>
+								<label class="etiqueta" value="Fecha de Ingreso" />
+								<label id="lblFechaIngreso" />
+								</vlayout>
+								</hbox>
 								<hbox>
 								<vlayout>
 								<label class="etiqueta" value="Grado de Instruccion" />
@@ -127,21 +133,20 @@
 								<label id="lblProfesion" />
 								</vlayout>
 								</hbox>
+							</row>
+							<row>
 								<hbox>
 								<vlayout>
 								<label class="etiqueta" value="Condicion del Trabajador" />
 								<label id="lblCondicion" />
 								</vlayout>
 								</hbox>
-							</row>
-							<row>
 								<hbox>
 								<vlayout>
 								<label class="etiqueta" value="¿Es usted Jefe del hogar?" />
 								<label id="lblJefe" />
 								</vlayout>
 								</hbox>
-								<hbox></hbox>
 								<hbox></hbox>
 								<hbox></hbox>
 							</row>
@@ -348,7 +353,7 @@
 									<label class="etiqueta"
 										value="Contando sala comedor y cuartos ¿Cuántos ambientes posee la vivienda?:" />
 								</hbox>
-								<spinner id="spinner11" format=",###" value="0"
+								<spinner id="spinner11" value="0"
 									readonly="true" constraint="min 0"
 									tooltiptext="Cantidad de ambientes de la vivienda" />
 							</row>
@@ -418,7 +423,7 @@
 									<label class="etiqueta"
 										value="¿Cuántos grupos de personas mantienen gastos separados?:" />
 								</hbox>
-								<spinner id="spinner14" format=",###" value="0"
+								<spinner id="spinner14" value="0"
 									readonly="true" tooltiptext=" grupos de personas mantienen gastos separados"
 									constraint="min 0" />
 							</row>
@@ -438,7 +443,7 @@
 								<hbox>
 									<label class="etiqueta" value="Total Miembros del Hogar:" />
 								</hbox>
-								<spinner id="spinner16" format=",###" value="0"
+								<spinner id="spinner16" value="0"
 									readonly="true" tooltiptext=" Número de personas que habitan este hogar"
 									constraint="min 0" />
 								<hbox>
@@ -494,7 +499,7 @@
 									<label class="etiqueta"
 										value="Total de habitaciones que dispone exclusivamente para dormir:" />
 								</hbox>
-								<spinner id="spinner18" format=",###" value="0"
+								<spinner id="spinner18" value="0"
 									readonly="true" tooltiptext=" habitaciones que dispone exclusivamente para dormir"
 									constraint="min 0" />
 								<hbox>
@@ -555,7 +560,7 @@
 									<label class="etiqueta"
 										value="¿Cuántas jóvenes de 10 a 17 años de edad que vivan en este hogar están embarazadas o tienen hijos?:" />
 								</hbox>
-								<spinner id="spinner24" format=",###" value="0"
+								<spinner id="spinner24" value="0"
 									readonly="true" tooltiptext="Coloque el número de mujeres"
 									constraint="min 0" />
 							</row>
@@ -570,7 +575,7 @@
 									<label class="etiqueta"
 										value="De las personas que conforman este hogar ¿Cuántas tienen problemas de consumo de alcohol o drogas?:" />
 								</hbox>
-								<spinner id="spinner25" format=",###" value="0"
+								<spinner id="spinner25"  value="0"
 									readonly="true" tooltiptext=" Anote el número de personas"
 									constraint="min 0" />
 							</row>
