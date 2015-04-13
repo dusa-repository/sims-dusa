@@ -207,7 +207,7 @@ public class VisitaSocial implements Serializable {
 	
 	@Column(length = 1500, name="diagnostico_social")
 	private String diagnosticoSocial;
-	
+		
 	@Column(length = 1500)
 	private String observacion;
 	
@@ -229,6 +229,98 @@ public class VisitaSocial implements Serializable {
 	@Column(name="usuario_auditoria", length=50)
 	private String usuarioAuditoria;
 
+	@Column(length = 100, name="res_frecuencia")
+	private String resFrecuencia;
+	
+	@Column(length = 1000, name="res_donde")
+	private String resDonde;
+	
+	@Column(length = 1000, name="res_como")
+	private String resComo;
+	
+	@Column(length = 100, name="pollo_frecuencia")
+	private String polloFrecuencia;
+	
+	@Column(length = 1000, name="pollo_donde")
+	private String polloDonde;
+	
+	@Column(length = 1000, name="pollo_como")
+	private String polloComo;
+	
+	@Column(length = 100, name="cerdo_frecuencia")
+	private String cerdoFrecuencia;
+	
+	@Column(length = 1000, name="cerdo_donde")
+	private String cerdoDonde;
+	
+	@Column(length = 1000, name="cerdo_como")
+	private String cerdoComo;
+	
+	
+	@Column(length = 100, name="pescado_frecuencia")
+	private String pescadoFrecuencia;
+	
+	@Column(length = 1000, name="pescado_donde")
+	private String pescadoDonde;
+	
+	@Column(length = 1000, name="pescado_como")
+	private String pescadoComo;
+	
+	@Column(length = 100, name="leche_frecuencia")
+	private String lecheFrecuencia;
+	
+	@Column(length = 1000, name="leche_donde")
+	private String lecheDonde;
+	
+	@Column(length = 1000, name="leche_como")
+	private String lecheComo;
+	
+	@Column(length = 100, name="cereales_frecuencia")
+	private String cerealesFrecuencia;
+	
+	@Column(length = 1000, name="cereales_donde")
+	private String cerealesDonde;
+	
+	@Column(length = 1000, name="cereales_como")
+	private String cerealesComo;
+	
+	@Column(length = 100, name="huevos_frecuencia")
+	private String huevosFrecuencia;
+	
+	@Column(length = 1000, name="huevos_donde")
+	private String huevosDonde;
+	
+	@Column(length = 1000, name="huevos_como")
+	private String huevosComo;
+	
+	@Column(length = 100, name="frutas_frecuencia")
+	private String frutasFrecuencia;
+	
+	@Column(length = 1000, name="frutas_donde")
+	private String frutasDonde;
+	
+	@Column(length = 1000, name="frutas_como")
+	private String frutasComo;
+	
+	@Column(length = 100, name="granos_frecuencia")
+	private String granosFrecuencia;
+	
+	@Column(length = 1000, name="granos_donde")
+	private String granosDonde;
+	
+	@Column(length = 1000, name="granos_como")
+	private String granosComo;
+	
+	@Column(length = 100, name="verduras_frecuencia")
+	private String verdurasFrecuencia;
+	
+	@Column(length = 1000, name="verduras_donde")
+	private String verdurasDonde;
+	
+	@Column(length = 1000, name="verduras_como")
+	private String verdurasComo;
+
+	
 	public VisitaSocial() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -760,6 +852,246 @@ public class VisitaSocial implements Serializable {
 
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
+	}
+
+	public String getResFrecuencia() {
+		return resFrecuencia;
+	}
+
+	public void setResFrecuencia(String resFrecuencia) {
+		this.resFrecuencia = resFrecuencia;
+	}
+
+	public String getResDonde() {
+		return resDonde;
+	}
+
+	public void setResDonde(String resDonde) {
+		this.resDonde = resDonde;
+	}
+
+	public String getResComo() {
+		return resComo;
+	}
+
+	public void setResComo(String resComo) {
+		this.resComo = resComo;
+	}
+
+	public String getPolloFrecuencia() {
+		return polloFrecuencia;
+	}
+
+	public void setPolloFrecuencia(String polloFrecuencia) {
+		this.polloFrecuencia = polloFrecuencia;
+	}
+
+	public String getPolloDonde() {
+		return polloDonde;
+	}
+
+	public void setPolloDonde(String polloDonde) {
+		this.polloDonde = polloDonde;
+	}
+
+	public String getPolloComo() {
+		return polloComo;
+	}
+
+	public void setPolloComo(String polloComo) {
+		this.polloComo = polloComo;
+	}
+
+	public String getCerdoFrecuencia() {
+		return cerdoFrecuencia;
+	}
+
+	public void setCerdoFrecuencia(String cerdoFrecuencia) {
+		this.cerdoFrecuencia = cerdoFrecuencia;
+	}
+
+	public String getCerdoDonde() {
+		return cerdoDonde;
+	}
+
+	public void setCerdoDonde(String cerdoDonde) {
+		this.cerdoDonde = cerdoDonde;
+	}
+
+	public String getCerdoComo() {
+		return cerdoComo;
+	}
+
+	public void setCerdoComo(String cerdoComo) {
+		this.cerdoComo = cerdoComo;
+	}
+
+	public String getPescadoFrecuencia() {
+		return pescadoFrecuencia;
+	}
+
+	public void setPescadoFrecuencia(String pescadoFrecuencia) {
+		this.pescadoFrecuencia = pescadoFrecuencia;
+	}
+
+	public String getPescadoDonde() {
+		return pescadoDonde;
+	}
+
+	public void setPescadoDonde(String pescadoDonde) {
+		this.pescadoDonde = pescadoDonde;
+	}
+
+	public String getPescadoComo() {
+		return pescadoComo;
+	}
+
+	public void setPescadoComo(String pescadoComo) {
+		this.pescadoComo = pescadoComo;
+	}
+
+	public String getLecheFrecuencia() {
+		return lecheFrecuencia;
+	}
+
+	public void setLecheFrecuencia(String lecheFrecuencia) {
+		this.lecheFrecuencia = lecheFrecuencia;
+	}
+
+	public String getLecheDonde() {
+		return lecheDonde;
+	}
+
+	public void setLecheDonde(String lecheDonde) {
+		this.lecheDonde = lecheDonde;
+	}
+
+	public String getLecheComo() {
+		return lecheComo;
+	}
+
+	public void setLecheComo(String lecheComo) {
+		this.lecheComo = lecheComo;
+	}
+
+	public String getCerealesFrecuencia() {
+		return cerealesFrecuencia;
+	}
+
+	public void setCerealesFrecuencia(String cerealesFrecuencia) {
+		this.cerealesFrecuencia = cerealesFrecuencia;
+	}
+
+	public String getCerealesDonde() {
+		return cerealesDonde;
+	}
+
+	public void setCerealesDonde(String cerealesDonde) {
+		this.cerealesDonde = cerealesDonde;
+	}
+
+	public String getCerealesComo() {
+		return cerealesComo;
+	}
+
+	public void setCerealesComo(String cerealesComo) {
+		this.cerealesComo = cerealesComo;
+	}
+
+	public String getHuevosFrecuencia() {
+		return huevosFrecuencia;
+	}
+
+	public void setHuevosFrecuencia(String huevosFrecuencia) {
+		this.huevosFrecuencia = huevosFrecuencia;
+	}
+
+	public String getHuevosDonde() {
+		return huevosDonde;
+	}
+
+	public void setHuevosDonde(String huevosDonde) {
+		this.huevosDonde = huevosDonde;
+	}
+
+	public String getHuevosComo() {
+		return huevosComo;
+	}
+
+	public void setHuevosComo(String huevosComo) {
+		this.huevosComo = huevosComo;
+	}
+
+	public String getFrutasFrecuencia() {
+		return frutasFrecuencia;
+	}
+
+	public void setFrutasFrecuencia(String frutasFrecuencia) {
+		this.frutasFrecuencia = frutasFrecuencia;
+	}
+
+	public String getFrutasDonde() {
+		return frutasDonde;
+	}
+
+	public void setFrutasDonde(String frutasDonde) {
+		this.frutasDonde = frutasDonde;
+	}
+
+	public String getFrutasComo() {
+		return frutasComo;
+	}
+
+	public void setFrutasComo(String frutasComo) {
+		this.frutasComo = frutasComo;
+	}
+
+	public String getGranosFrecuencia() {
+		return granosFrecuencia;
+	}
+
+	public void setGranosFrecuencia(String granosFrecuencia) {
+		this.granosFrecuencia = granosFrecuencia;
+	}
+
+	public String getGranosDonde() {
+		return granosDonde;
+	}
+
+	public void setGranosDonde(String granosDonde) {
+		this.granosDonde = granosDonde;
+	}
+
+	public String getGranosComo() {
+		return granosComo;
+	}
+
+	public void setGranosComo(String granosComo) {
+		this.granosComo = granosComo;
+	}
+
+	public String getVerdurasFrecuencia() {
+		return verdurasFrecuencia;
+	}
+
+	public void setVerdurasFrecuencia(String verdurasFrecuencia) {
+		this.verdurasFrecuencia = verdurasFrecuencia;
+	}
+
+	public String getVerdurasDonde() {
+		return verdurasDonde;
+	}
+
+	public void setVerdurasDonde(String verdurasDonde) {
+		this.verdurasDonde = verdurasDonde;
+	}
+
+	public String getVerdurasComo() {
+		return verdurasComo;
+	}
+
+	public void setVerdurasComo(String verdurasComo) {
+		this.verdurasComo = verdurasComo;
 	}
 	
 }
