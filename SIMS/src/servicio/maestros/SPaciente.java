@@ -935,4 +935,8 @@ public class SPaciente {
 	public List<Paciente> buscarPostVacacionalPendiente() {
 		return pacienteDAO.findByConsultaPendiente();
 	}
+
+	public Paciente buscarPorCedulaYTrabajador(String value) {
+		return pacienteDAO.findByCedulaAndTrabajadorTrue(value);
+	}
 }

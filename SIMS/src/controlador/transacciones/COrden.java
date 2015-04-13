@@ -154,9 +154,9 @@ public class COrden extends CGenerico {
 	@Wire
 	private Label lblApellidos;
 	@Wire
-	private Label lblEmpresa;
-	@Wire
 	private Label lblFicha;
+	@Wire
+	private Label lblEmpresa;
 	@Wire
 	private Label lblTrabajador;
 	@Wire
@@ -627,7 +627,7 @@ public class COrden extends CGenerico {
 		btnGenerarRecipe.setVisible(false);
 		btnGenerarReferencia.setVisible(false);
 		btnGenerarOrdenServicios.setVisible(false);
-		txtCedula.setValue("");
+	
 		dtbFecha.setValue(fecha);
 		cmbDoctor.setValue("");
 		cmbMotivo.setValue("");
@@ -641,6 +641,7 @@ public class COrden extends CGenerico {
 		limpiarListBox();
 		limpiarListas();
 		llenarListas();
+		txtCedula.setValue("");
 		lblNombres.setValue("");
 		lblCedula.setValue("");
 		lblApellidos.setValue("");
