@@ -1868,8 +1868,8 @@ public class CInforme extends CGenerico {
 					.getFechaNacimiento())));
 		}
 		lbl58.setValue(paciente.getLugarNacimiento());
-		if(paciente.getEstadoCivil()!=null)
-		lbl59.setValue(paciente.getEstadoCivil().getNombre());
+		if (paciente.getEstadoCivil() != null)
+			lbl59.setValue(paciente.getEstadoCivil().getNombre());
 		lbl510.setValue(paciente.getMano());
 		lbl511.setValue(paciente.getNivelEducativo());
 		if (paciente.getFechaIngreso() != null)
@@ -3898,10 +3898,9 @@ public class CInforme extends CGenerico {
 					.getFechaNacimiento());
 			p.put("lugarNacTrabajador", informe.getPacienteA()
 					.getLugarNacimiento());
-			if(informe.getPacienteA()
-					.getEstadoCivil()!=null)
-			p.put("estadoCivilTrabajador", informe.getPacienteA()
-					.getEstadoCivil().getNombre());
+			if (informe.getPacienteA().getEstadoCivil() != null)
+				p.put("estadoCivilTrabajador", informe.getPacienteA()
+						.getEstadoCivil().getNombre());
 
 			if (informe.getPacienteA().getMano().equals("Derecho")) {
 				p.put("manoTrabajador1", "x");
@@ -4909,6 +4908,10 @@ public class CInforme extends CGenerico {
 		return fichero;
 	}
 
+	// / EJEMPLO DE AGREGAR
+	// ********************************************************************************************************************************************************************
+	
+	//------------------------------------------------------------------------------------------------------------------
 	@Listen("onClick = #btnEditar")
 	public void seleccionarPlan() {
 		if (ltbPlan.getItemCount() != 0) {
@@ -5034,6 +5037,7 @@ public class CInforme extends CGenerico {
 		servicioPlanAccion.guardarVarios(planesAccion);
 	}
 
+	//-------------------------------------------------------------------------------------------------------------------------
 	protected void guardarPlanes2(Informe informe) {
 		List<PlanAccion> planesAccion = servicioPlanAccion
 				.buscarPorInformeEstadoyTipo(informe, "Programado", "inspector");
