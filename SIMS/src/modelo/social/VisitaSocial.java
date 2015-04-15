@@ -2,6 +2,7 @@ package modelo.social;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,19 +12,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
 import modelo.maestros.Paciente;
+import modelo.sha.Informe;
 
 @Entity
 @Table(name = "visita_social", schema = "dusa_sims.dbo")
 public class VisitaSocial implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -320,7 +320,9 @@ public class VisitaSocial implements Serializable {
 	@Column(length = 1000, name="verduras_como")
 	private String verdurasComo;
 
-	
+	@OneToMany(mappedBy = "visita")
+	private Set<ComposicionFamiliar> composicion;
+		
 	public VisitaSocial() {
 		super();
 		// TODO Auto-generated constructor stub
