@@ -1587,6 +1587,8 @@ public class CInforme extends CGenerico {
 						informe.setIdac(false);
 					informe.setIdad(txt9414.getValue());
 					servicioInforme.guardar(informe);
+					
+					//Guardar planes---------------------------------------------------------------------------
 					if (ltbPlan.getItemCount() != 0) {
 						informe = new Informe();
 						if (idInforme != 0)
@@ -4939,9 +4941,9 @@ public class CInforme extends CGenerico {
 					}
 				}
 			} else
-				Mensaje.mensajeError("Debe Seleccionar una Consulta");
+				Mensaje.mensajeError("Debe Seleccionar un Item");
 		} else
-			Mensaje.mensajeError("No existen Regitros de Consulta");
+			Mensaje.mensajeError("No existen Item Registrados");
 	}
 
 	@Listen("onClick = #btnRemover")
@@ -4979,6 +4981,7 @@ public class CInforme extends CGenerico {
 					txtDescripcion.getValue(), txtQuien.getValue(),
 					txtComo.getValue(), txtDonde.getValue(), fechaPlan, null,
 					null, null, null, null, null);
+			
 			planes.add(planAccion);
 			ltbPlan.setModel(new ListModelList<PlanAccion>(planes));
 			ltbPlan.setCheckmark(false);
