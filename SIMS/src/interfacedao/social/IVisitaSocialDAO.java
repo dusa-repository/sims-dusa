@@ -10,6 +10,9 @@ public interface IVisitaSocialDAO  extends JpaRepository<VisitaSocial, Long>{
 
 	List<VisitaSocial> findByIdVisitaStartingWithAllIgnoreCase(String valor);
 
+	List<VisitaSocial> findByPacientePrimerNombreStartingWithAllIgnoreCase(
+			String valor);
+
 
 
 }

@@ -2,6 +2,7 @@ package controlador.social;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,8 @@ import modelo.maestros.EstadoCivil;
 import modelo.maestros.Paciente;
 import modelo.maestros.Pais;
 import modelo.sha.Informe;
+import modelo.sha.PlanAccion;
+import modelo.social.ComposicionFamiliar;
 import modelo.social.VisitaSocial;
 
 import org.zkoss.zk.ui.Component;
@@ -27,6 +30,9 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
@@ -433,6 +439,19 @@ public class CVisitaSocial extends CGenerico {
 	private Checkbox checkGranos_4;
 	@Wire
 	private Checkbox checkGranos_5;
+	//Composicion Familiar
+	@Wire
+	private Textbox txtNombre;
+	@Wire
+	private Listbox ltbComposicion;
+	@Wire
+	private Button btnAgregarItems;
+	@Wire
+	private Button btnEditar;
+	@Wire
+	private Button btnRemover;
+	
+	private List<ComposicionFamiliar> listaComposicion = new ArrayList<ComposicionFamiliar>();
 
 	Catalogo<Paciente> catalogoPaciente;
 	Catalogo<VisitaSocial> catalogoVisita;
@@ -1117,6 +1136,8 @@ public class CVisitaSocial extends CGenerico {
 						visitaSocial.setPaciente(paciente);
 					// Guardar
 					servicioVisitaSocial.guardar(visitaSocial);
+					
+					
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 				}
@@ -1141,18 +1162,20 @@ public class CVisitaSocial extends CGenerico {
 	}
 
 	@Listen("onClick =  #btnBuscar2")
-	public void buscarInforme(Event e) {
+	public void buscarInforme() {
 
 		final List<VisitaSocial> informes = servicioVisitaSocial.buscarTodas();
 		catalogoVisita = new Catalogo<VisitaSocial>(divCatalogoVisita,
-				"Catalogo de Visitas", informes, false, "Id") {
+				"Catalogo de Visitas", informes, false, "Id","Nombre del Paciente") {
 
 			@Override
 			protected List<VisitaSocial> buscar(String valor, String combo) {
 
 				switch (combo) {
-				case "Codigo":
+				case "Id":
 					return servicioVisitaSocial.filtroId(valor);
+				case "Nombre del Paciente":
+					return servicioVisitaSocial.filtroNombrePaciente(valor);
 				default:
 					return informes;
 				}
@@ -1161,8 +1184,10 @@ public class CVisitaSocial extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(VisitaSocial objeto) {
-				String[] registros = new String[1];
+				String[] registros = new String[2];
 				registros[0] = String.valueOf(objeto.getIdVisita());
+				if(objeto.getPaciente()!=null)
+				registros[1] =objeto.getPaciente().getPrimerNombre();
 				return registros;
 			}
 
@@ -1223,7 +1248,7 @@ public class CVisitaSocial extends CGenerico {
 			}
 		}
 		String valores2[] = visitaSocial.getAi().split(",");
-		if (valores.length != 0) {
+		if (valores2.length != 0) {
 			int i = 0;
 			while (i < valores2.length) {
 				if (valores2[i].equals(check19_1.getLabel()))
@@ -1266,7 +1291,7 @@ public class CVisitaSocial extends CGenerico {
 			}
 		}
 		String valores3[] = visitaSocial.getBc().split(",");
-		if (valores.length != 0) {
+		if (valores3.length != 0) {
 			int a = 0;
 			while (a < valores3.length) {
 				if (valores3[a].equals(check23_1.getLabel()))
@@ -1588,7 +1613,7 @@ public class CVisitaSocial extends CGenerico {
 	// Botones
 
 	@Listen("onClick =  #btnBuscar1")
-	public void buscarTrabajador(Event e) {
+	public void buscarTrabajador() {
 		final List<Paciente> pacientes = servicioPaciente
 				.buscarTodosTrabajadores();
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPaciente,
@@ -1642,7 +1667,7 @@ public class CVisitaSocial extends CGenerico {
 
 	// Metodo q llena los campos de paciente, bien sea porq se selecciono del catalogo o porq se selecciono una visita.
 	private void llenarCamposPaciente(Paciente paciente) {
-		EstadoCivil estadoCivil = new EstadoCivil();
+	
 		lblCedula.setValue(paciente.getCedula());
 		lblFicha.setValue(paciente.getFicha());
 		lblNombres.setValue(paciente.getPrimerApellido()+"  "+paciente.getSegundoApellido()+"  "+paciente.getPrimerNombre()+"  "+paciente.getSegundoNombre());
@@ -1654,12 +1679,15 @@ public class CVisitaSocial extends CGenerico {
 		lblLugarNac.setValue(paciente.getLugarNacimiento());
 		if (paciente.getFechaIngreso()!= null)
 			lblFechaIngreso.setValue(String.valueOf(formatoFecha.format(paciente.getFechaIngreso())));
-		lblEstadoCivil.setValue(estadoCivil.getNombre());
+		
+		if(paciente.getEstadoCivil()!=null)
+		lblEstadoCivil.setValue(paciente.getEstadoCivil().getNombre());
+		
 		lblGradoInst.setValue(paciente.getNivelEducativo());
 		lblOcupacion.setValue(paciente.getOficio());
 		lblProfesion.setValue(paciente.getProfesion());
 		lblCondicion.setValue(paciente.getCondicion());
-		if(paciente.isJefe()!=false){
+		if(paciente.isJefe()){
 			lblJefe.setValue("Si");
 		}else{
 			lblJefe.setValue("No");
@@ -1843,4 +1871,52 @@ public class CVisitaSocial extends CGenerico {
 		labelSuma.setValue(suma.toString());
 
 	}
+	@Listen("onClick = #btnAgregarItems")
+	public void agregarFamiliar() {
+		if (validarComposicion()) {
+			//Timestamp fechaPlan = new Timestamp(dtbCuando.getValue().getTime());
+			ComposicionFamiliar composicionFamiliar = new ComposicionFamiliar();
+			composicionFamiliar.setNombre(txtNombre.getValue());
+			
+			listaComposicion.add(composicionFamiliar);
+			ltbComposicion.setModel(new ListModelList<ComposicionFamiliar>(listaComposicion));
+			ltbComposicion.setCheckmark(false);
+			ltbComposicion.setCheckmark(true);
+			limpiarCampos();
+		} else
+			Mensaje.mensajeError("Debe llenar todos los campos del plan especifico");
+	}
+
+	private void limpiarCampos() {
+		txtNombre.setValue("");
+	}
+
+	private boolean validarComposicion() {
+		if (txtNombre.getText().compareTo("") == 0)
+			return false;
+		else
+			return true;
+	}
+	@Listen("onClick = #btnEditar")
+	public void seleccionarFamiliar() {
+		if (ltbComposicion.getItemCount() != 0) {
+			if (ltbComposicion.getSelectedItems().size() == 1) {
+				Listitem listItem = ltbComposicion.getSelectedItem();
+				boolean error = false;
+				if (listItem != null) {
+					ComposicionFamiliar composicion = listItem.getValue();
+					if (!error) {
+						listaComposicion.remove(composicion);
+						ltbComposicion.setModel(new ListModelList<ComposicionFamiliar>(listaComposicion));
+						ltbComposicion.setCheckmark(false);
+						ltbComposicion.setCheckmark(true);
+						txtNombre.setValue(composicion.getNombre());
+					}
+				}
+			} else
+				Mensaje.mensajeError("Debe Seleccionar un Item");
+		} else
+			Mensaje.mensajeError("No existen Item Registrados");
+	}
+	
 }

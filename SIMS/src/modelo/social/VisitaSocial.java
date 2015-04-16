@@ -1095,5 +1095,13 @@ public class VisitaSocial implements Serializable {
 	public void setVerdurasComo(String verdurasComo) {
 		this.verdurasComo = verdurasComo;
 	}
+
+	public Set<ComposicionFamiliar> getComposicion() {
+		return composicion;
+	}
+
+	public void setComposicion(Set<ComposicionFamiliar> composicion) {
+		this.composicion = composicion;
+	}
 	
 }

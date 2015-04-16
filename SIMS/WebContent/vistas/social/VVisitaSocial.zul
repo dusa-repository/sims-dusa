@@ -20,6 +20,7 @@
 				<tab id="B" label="CARACTERISTICA DEL HOGAR" />
 				<tab id="c" label="ALIMENTACIÓN / INGRESOS Y EGRESOS." />
 				<tab id="d" label="RECREACIÓN Y USO DEL TIEMPO LIBRE" />
+				<tab id="e" label="COMPOSICION FAMILIAR" />
 			</tabs>
 			<tabpanels>
 				<tabpanel>
@@ -592,10 +593,10 @@
 							<tabpanel>
 							<listbox>
 						        <listhead>
-						            <listheader label="Tipo de Alimentacion" align="center"/>
-						            <listheader label="Frecuencia con que lo consume" align="center" />
-						            <listheader label="Donde la adquiere" align="center"/>
-						            <listheader label="Como la prepara" align="center"/>
+						            <listheader label="Tipo de Alimentacion" align="center"  width="15%"/>
+						            <listheader label="Frecuencia con que lo consume" align="center"  width="20%"/>
+						            <listheader label="Donde la adquiere" align="center"  width="30%"/>
+						            <listheader label="Como la prepara" align="center"  width="35%"/>
 						        </listhead>
 						            <listitem>
 						                <listcell label="Carne de Res" />
@@ -611,19 +612,19 @@
 										</combobox>
 						                </listcell>
 						                <listcell>
-						                    <textbox hflex="1" id="textBoxRes" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxRes"  maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                <listcell>
 						                <hbox>
-						                    <vlayout id="res">
+						                    <hlayout id="res">
 												<checkbox id="checkRes_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkRes_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkRes_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="res2">
+											</hlayout>
+											 <hlayout id="res2">
 												<checkbox id="checkRes_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkRes_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -913,7 +914,7 @@
 												<label class="etiqueta" value="Alimentacion:" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_1" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 											<hbox>
 												<label class="etiqueta" value="Educacion" />
 											</hbox>
@@ -1179,6 +1180,54 @@
 							</tabpanel>
 						</tabpanels>
 					</tabbox>
+				</tabpanel>
+				<tabpanel>
+				<grid width="100%">
+							<columns visible="false">
+								<column label="" width="25%" />
+								<column label="" width="50%" />
+								<column label="" width="25%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Nombres y Apellidos:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<textbox id="txtNombre" hflex="1" maxlength="1000"
+										tooltiptext="Ingrese el Nombre" multiline="true" class="multilinea" />
+										<button autodisable="self" id="btnAgregarItems" class="btn"
+										label="Agregar Familiar" tooltiptext="Agregar items a la Compposicion Familiar"
+										image="/public/imagenes/botones/annadir.png" width="150px" />
+								</row>
+							</rows>
+						</grid>
+						<hbox width="100%" widths="87%,13%">
+							<div width="100%">
+								<listbox span="true" rows="10" id="ltbComposicion" width="100%"
+									emptyMessage="No se han asignado Familiares">
+									<listhead>
+										<listheader label="Nombres y Apellidos" width="30%" />
+									</listhead>
+									<template name="model">
+										<listitem>
+											<listcell label="${each.nombre}" />
+										</listitem>
+									</template>
+								</listbox>
+							</div>
+							<vbox width="100%">
+								<button autodisable="self" label="Editar" id="btnEditar"
+									image="/public/imagenes/botones/generar.png"
+									tooltiptext="Seleccione un item y presione este boton para editar la informacion existente"
+									hflex="1" height="32px" class="btn" />
+								<button autodisable="self" label="Remover" id="btnRemover"
+									image="/public/imagenes/botones/anular.png"
+									tooltiptext="Seleccione un item y presione este boton para removerlo de la lista"
+									hflex="1" height="32px" class="btn" />
+							</vbox>
+						</hbox>
 				</tabpanel>
 			</tabpanels>
 		</tabbox>

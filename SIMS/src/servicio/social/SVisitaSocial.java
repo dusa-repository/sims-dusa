@@ -26,4 +26,8 @@ public class SVisitaSocial {
 	public List<VisitaSocial> filtroId(String valor) {
 		return visitaSocialDAO.findByIdVisitaStartingWithAllIgnoreCase(valor);
 	}
+
+	public List<VisitaSocial> filtroNombrePaciente(String valor) {
+		return visitaSocialDAO.findByPacientePrimerNombreStartingWithAllIgnoreCase(valor);
+	}
 }
