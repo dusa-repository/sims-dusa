@@ -292,6 +292,147 @@ public class CVisitaSocial extends CGenerico {
 	private Datebox dateBoxProcesamiento;
 	@Wire
 	private Datebox dateBoxInforme;
+	//Campos de Alimentacion
+	@Wire
+	private Combobox cmbRes;
+	@Wire
+	private Textbox textBoxRes;
+	@Wire
+	private Checkbox checkRes_1;
+	@Wire
+	private Checkbox checkRes_2;
+	@Wire
+	private Checkbox checkRes_3;
+	@Wire
+	private Checkbox checkRes_4;
+	@Wire
+	private Checkbox checkRes_5;
+	@Wire
+	private Combobox cmbPollo;
+	@Wire
+	private Textbox textBoxPollo;
+	@Wire
+	private Checkbox checkPollo_1;
+	@Wire
+	private Checkbox checkPollo_2;
+	@Wire
+	private Checkbox checkPollo_3;
+	@Wire
+	private Checkbox checkPollo_4;
+	@Wire
+	private Checkbox checkPollo_5;
+	@Wire
+	private Combobox cmbCerdo;
+	@Wire
+	private Textbox textBoxCerdo;
+	@Wire
+	private Checkbox checkCerdo_1;
+	@Wire
+	private Checkbox checkCerdo_2;
+	@Wire
+	private Checkbox checkCerdo_3;
+	@Wire
+	private Checkbox checkCerdo_4;
+	@Wire
+	private Checkbox checkCerdo_5;
+	@Wire
+	private Combobox cmbPescado;
+	@Wire
+	private Textbox textBoxPescado;
+	@Wire
+	private Checkbox checkPescado_1;
+	@Wire
+	private Checkbox checkPescado_2;
+	@Wire
+	private Checkbox checkPescado_3;
+	@Wire
+	private Checkbox checkPescado_4;
+	@Wire
+	private Checkbox checkPescado_5;
+	@Wire
+	private Combobox cmbLeche;
+	@Wire
+	private Textbox textBoxLeche;
+	@Wire
+	private Checkbox checkLeche_1;
+	@Wire
+	private Checkbox checkLeche_2;
+	@Wire
+	private Checkbox checkLeche_3;
+	@Wire
+	private Checkbox checkLeche_4;
+	@Wire
+	private Checkbox checkLeche_5;
+	@Wire
+	private Combobox cmbHuevos;
+	@Wire
+	private Textbox textBoxHuevos;
+	@Wire
+	private Checkbox checkHuevos_1;
+	@Wire
+	private Checkbox checkHuevos_2;
+	@Wire
+	private Checkbox checkHuevos_3;
+	@Wire
+	private Checkbox checkHuevos_4;
+	@Wire
+	private Checkbox checkHuevos_5;
+	@Wire
+	private Combobox cmbCereales;
+	@Wire
+	private Textbox textBoxCereales;
+	@Wire
+	private Checkbox checkCereales_1;
+	@Wire
+	private Checkbox checkCereales_2;
+	@Wire
+	private Checkbox checkCereales_3;
+	@Wire
+	private Checkbox checkCereales_4;
+	@Wire
+	private Checkbox checkCereales_5;
+	@Wire
+	private Combobox cmbFrutas;
+	@Wire
+	private Textbox textBoxFrutas;
+	@Wire
+	private Checkbox checkFrutas_1;
+	@Wire
+	private Checkbox checkFrutas_2;
+	@Wire
+	private Checkbox checkFrutas_3;
+	@Wire
+	private Checkbox checkFrutas_4;
+	@Wire
+	private Checkbox checkFrutas_5;
+	@Wire
+	private Combobox cmbVerduras;
+	@Wire
+	private Textbox textBoxVerduras;
+	@Wire
+	private Checkbox checkVerduras_1;
+	@Wire
+	private Checkbox checkVerduras_2;
+	@Wire
+	private Checkbox checkVerduras_3;
+	@Wire
+	private Checkbox checkVerduras_4;
+	@Wire
+	private Checkbox checkVerduras_5;
+	@Wire
+	private Combobox cmbGranos;
+	@Wire
+	private Textbox textBoxGranos;
+	@Wire
+	private Checkbox checkGranos_1;
+	@Wire
+	private Checkbox checkGranos_2;
+	@Wire
+	private Checkbox checkGranos_3;
+	@Wire
+	private Checkbox checkGranos_4;
+	@Wire
+	private Checkbox checkGranos_5;
 
 	Catalogo<Paciente> catalogoPaciente;
 	Catalogo<VisitaSocial> catalogoVisita;
@@ -449,6 +590,77 @@ public class CVisitaSocial extends CGenerico {
 				rdo13_2.setChecked(false);
 				rdo8_1.setChecked(false);
 				rdo8_2.setChecked(false);
+				//Campos de Alimentacion
+				cmbRes.setValue("");
+				textBoxRes.setValue("");
+				checkRes_1.setChecked(false);
+				checkRes_2.setChecked(false);
+				checkRes_3.setChecked(false);
+				checkRes_4.setChecked(false);
+				checkRes_5.setChecked(false);
+				cmbPollo.setValue("");
+				textBoxPollo.setValue("");
+				checkPollo_1.setChecked(false);
+				checkPollo_2.setChecked(false);
+				checkPollo_3.setChecked(false);
+				checkPollo_4.setChecked(false);
+				checkPollo_5.setChecked(false);
+				cmbCerdo.setValue("");
+				textBoxCerdo.setValue("");
+				checkCerdo_1.setChecked(false);
+				checkCerdo_2.setChecked(false);
+				checkCerdo_3.setChecked(false);
+				checkCerdo_4.setChecked(false);
+				checkCerdo_5.setChecked(false);
+				cmbPescado.setValue("");
+				textBoxPescado.setValue("");
+				checkPescado_1.setChecked(false);
+				checkPescado_2.setChecked(false);
+				checkPescado_3.setChecked(false);
+				checkPescado_4.setChecked(false);
+				checkPescado_5.setChecked(false);
+				cmbLeche.setValue("");
+				textBoxLeche.setValue("");
+				checkLeche_1.setChecked(false);
+				checkLeche_2.setChecked(false);
+				checkLeche_3.setChecked(false);
+				checkLeche_4.setChecked(false);
+				checkLeche_5.setChecked(false);
+				cmbHuevos.setValue("");
+				textBoxHuevos.setValue("");
+				checkHuevos_1.setChecked(false);
+				checkHuevos_2.setChecked(false);
+				checkHuevos_3.setChecked(false);
+				checkHuevos_4.setChecked(false);
+				checkHuevos_5.setChecked(false);
+				cmbCereales.setValue("");
+				textBoxCereales.setValue("");
+				checkCereales_1.setChecked(false);
+				checkCereales_2.setChecked(false);
+				checkCereales_3.setChecked(false);
+				checkCereales_4.setChecked(false);
+				checkCereales_5.setChecked(false);
+				cmbFrutas.setValue("");
+				textBoxFrutas.setValue("");
+				checkFrutas_1.setChecked(false);
+				checkFrutas_2.setChecked(false);
+				checkFrutas_3.setChecked(false);
+				checkFrutas_4.setChecked(false);
+				checkFrutas_5.setChecked(false);
+				cmbVerduras.setValue("");
+				textBoxVerduras.setValue("");
+				checkVerduras_1.setChecked(false);
+				checkVerduras_2.setChecked(false);
+				checkVerduras_3.setChecked(false);
+				checkVerduras_4.setChecked(false);
+				checkVerduras_5.setChecked(false);
+				cmbGranos.setValue("");
+				textBoxGranos.setValue("");
+				checkGranos_1.setChecked(false);
+				checkGranos_2.setChecked(false);
+				checkGranos_3.setChecked(false);
+				checkGranos_4.setChecked(false);
+				checkGranos_5.setChecked(false);
 
 			}
 
@@ -726,6 +938,167 @@ public class CVisitaSocial extends CGenerico {
 					Timestamp fechaI = new Timestamp(fechaInforme.getTime());
 					visitaSocial.setFechaInforme(fechaI);
 					}
+					//Campos de Alimentacion
+					String resFrecuencia = cmbRes.getValue();
+					visitaSocial.setResFrecuencia(resFrecuencia);
+					String resDonde = textBoxRes.getValue();
+					visitaSocial.setResDonde(resDonde);
+					String resComo="";
+					if (checkRes_1.isChecked())
+						resComo = resComo + "," + checkRes_1.getLabel();
+					if (checkRes_2.isChecked())
+						resComo = resComo + "," + checkRes_2.getLabel();
+					if (checkRes_3.isChecked())
+						resComo = resComo + "," + checkRes_3.getLabel();
+					if (checkRes_4.isChecked())
+						resComo = resComo + "," + checkRes_4.getLabel();
+					if (checkRes_5.isChecked())
+						resComo = resComo + "," + checkRes_5.getLabel();
+					visitaSocial.setResComo(resComo);
+					String polloFrecuencia = cmbPollo.getValue();
+					visitaSocial.setPolloFrecuencia(polloFrecuencia);
+					String polloDonde = textBoxPollo.getValue();
+					visitaSocial.setPolloDonde(polloDonde);
+					String polloComo="";
+					if (checkPollo_1.isChecked())
+						polloComo = polloComo + "," + checkPollo_1.getLabel();
+					if (checkPollo_2.isChecked())
+						polloComo = polloComo + "," + checkPollo_2.getLabel();
+					if (checkPollo_3.isChecked())
+						polloComo = polloComo + "," + checkPollo_3.getLabel();
+					if (checkPollo_4.isChecked())
+						polloComo = polloComo + "," + checkPollo_4.getLabel();
+					if (checkPollo_5.isChecked())
+						polloComo = polloComo + "," + checkPollo_5.getLabel();
+					visitaSocial.setPolloComo(polloComo);
+					String cerdoFrecuencia = cmbCerdo.getValue();
+					visitaSocial.setCerdoFrecuencia(cerdoFrecuencia);
+					String cerdoDonde = textBoxCerdo.getValue();
+					visitaSocial.setCerdoDonde(cerdoDonde);
+					String cerdoComo="";
+					if (checkCerdo_1.isChecked())
+						cerdoComo = cerdoComo + "," + checkCerdo_1.getLabel();
+					if (checkCerdo_2.isChecked())
+						cerdoComo = cerdoComo + "," + checkCerdo_2.getLabel();
+					if (checkCerdo_3.isChecked())
+						cerdoComo = cerdoComo + "," + checkCerdo_3.getLabel();
+					if (checkCerdo_4.isChecked())
+						cerdoComo = cerdoComo + "," + checkCerdo_4.getLabel();
+					if (checkCerdo_5.isChecked())
+						cerdoComo = cerdoComo + "," + checkCerdo_5.getLabel();
+					visitaSocial.setCerdoComo(cerdoComo);
+					String pescadoFrecuencia = cmbPescado.getValue();
+					visitaSocial.setPescadoFrecuencia(pescadoFrecuencia);
+					String pescadoDonde = textBoxPescado.getValue();
+					visitaSocial.setPescadoDonde(pescadoDonde);
+					String pescadoComo="";
+					if (checkPescado_1.isChecked())
+						pescadoComo = pescadoComo + "," + checkPescado_1.getLabel();
+					if (checkPescado_2.isChecked())
+						pescadoComo = pescadoComo + "," + checkPescado_2.getLabel();
+					if (checkPescado_3.isChecked())
+						pescadoComo = pescadoComo + "," + checkPescado_3.getLabel();
+					if (checkPescado_4.isChecked())
+						pescadoComo = pescadoComo + "," + checkPescado_4.getLabel();
+					if (checkPescado_5.isChecked())
+						pescadoComo = pescadoComo + "," + checkPescado_5.getLabel();
+					visitaSocial.setPescadoComo(pescadoComo);
+					String lecheFrecuencia = cmbLeche.getValue();
+					visitaSocial.setLecheFrecuencia(lecheFrecuencia);
+					String lecheDonde = textBoxLeche.getValue();
+					visitaSocial.setLecheDonde(lecheDonde);
+					String lecheComo="";
+					if (checkLeche_1.isChecked())
+						lecheComo = lecheComo + "," + checkLeche_1.getLabel();
+					if (checkLeche_2.isChecked())
+						lecheComo = lecheComo + "," + checkLeche_2.getLabel();
+					if (checkLeche_3.isChecked())
+						lecheComo = lecheComo + "," + checkLeche_3.getLabel();
+					if (checkLeche_4.isChecked())
+						lecheComo = lecheComo + "," + checkLeche_4.getLabel();
+					if (checkLeche_5.isChecked())
+						lecheComo = lecheComo + "," + checkLeche_5.getLabel();
+					visitaSocial.setLecheComo(lecheComo);
+					String huevosFrecuencia = cmbHuevos.getValue();
+					visitaSocial.setHuevosFrecuencia(huevosFrecuencia);
+					String huevosDonde = textBoxHuevos.getValue();
+					visitaSocial.setHuevosDonde(huevosDonde);
+					String huevosComo="";
+					if (checkHuevos_1.isChecked())
+						huevosComo = huevosComo + "," + checkHuevos_1.getLabel();
+					if (checkHuevos_2.isChecked())
+						huevosComo = huevosComo + "," + checkHuevos_2.getLabel();
+					if (checkHuevos_3.isChecked())
+						huevosComo = huevosComo + "," + checkHuevos_3.getLabel();
+					if (checkHuevos_4.isChecked())
+						huevosComo = huevosComo + "," + checkHuevos_4.getLabel();
+					if (checkHuevos_5.isChecked())
+						huevosComo = huevosComo + "," + checkHuevos_5.getLabel();
+					visitaSocial.setHuevosComo(huevosComo);
+					String cerealesFrecuencia = cmbCereales.getValue();
+					visitaSocial.setCerealesFrecuencia(cerealesFrecuencia);
+					String cerealesDonde = textBoxCereales.getValue();
+					visitaSocial.setCerealesDonde(cerealesDonde);
+					String cerealesComo="";
+					if (checkCereales_1.isChecked())
+						cerealesComo = cerealesComo + "," + checkCereales_1.getLabel();
+					if (checkCereales_2.isChecked())
+						cerealesComo = cerealesComo + "," + checkCereales_2.getLabel();
+					if (checkCereales_3.isChecked())
+						cerealesComo = cerealesComo + "," + checkCereales_3.getLabel();
+					if (checkCereales_4.isChecked())
+						cerealesComo = cerealesComo + "," + checkCereales_4.getLabel();
+					if (checkCereales_5.isChecked())
+						cerealesComo = cerealesComo + "," + checkCereales_5.getLabel();
+					visitaSocial.setCerealesComo(cerealesComo);
+					String frutasFrecuencia = cmbFrutas.getValue();
+					visitaSocial.setFrutasFrecuencia(frutasFrecuencia);
+					String frutasDonde = textBoxFrutas.getValue();
+					visitaSocial.setFrutasDonde(frutasDonde);
+					String frutasComo="";
+					if (checkFrutas_1.isChecked())
+						frutasComo = frutasComo + "," + checkFrutas_1.getLabel();
+					if (checkFrutas_2.isChecked())
+						frutasComo = frutasComo + "," + checkFrutas_2.getLabel();
+					if (checkFrutas_3.isChecked())
+						frutasComo = frutasComo + "," + checkFrutas_3.getLabel();
+					if (checkFrutas_4.isChecked())
+						frutasComo = frutasComo + "," + checkFrutas_4.getLabel();
+					if (checkFrutas_5.isChecked())
+						frutasComo = frutasComo + "," + checkFrutas_5.getLabel();
+					visitaSocial.setFrutasComo(frutasComo);
+					String verdurasFrecuencia = cmbVerduras.getValue();
+					visitaSocial.setVerdurasFrecuencia(verdurasFrecuencia);
+					String verdurasDonde = textBoxVerduras.getValue();
+					visitaSocial.setVerdurasComo(verdurasDonde);
+					String verdurasComo="";
+					if (checkVerduras_1.isChecked())
+						verdurasComo = verdurasComo + "," + checkVerduras_1.getLabel();
+					if (checkVerduras_2.isChecked())
+						verdurasComo = verdurasComo + "," + checkVerduras_2.getLabel();
+					if (checkVerduras_3.isChecked())
+						verdurasComo = verdurasComo + "," + checkVerduras_3.getLabel();
+					if (checkVerduras_4.isChecked())
+						verdurasComo = verdurasComo + "," + checkVerduras_4.getLabel();
+					if (checkVerduras_5.isChecked())
+						verdurasComo = verdurasComo + "," + checkVerduras_5.getLabel();
+					visitaSocial.setVerdurasComo(verdurasComo);
+					String granosFrecuencia = cmbGranos.getValue();
+					visitaSocial.setGranosFrecuencia(granosFrecuencia);
+					String granosDonde = textBoxGranos.getValue();
+					visitaSocial.setGranosDonde(granosDonde);
+					String granosComo="";
+					if (checkGranos_1.isChecked())
+						granosComo = granosComo + "," + checkGranos_1.getLabel();
+					if (checkGranos_2.isChecked())
+						granosComo = granosComo + "," + checkGranos_2.getLabel();
+					if (checkGranos_3.isChecked())
+						granosComo = granosComo + "," + checkGranos_3.getLabel();
+					if (checkGranos_4.isChecked())
+						granosComo = granosComo + "," + checkGranos_4.getLabel();
+					if (checkGranos_5.isChecked())
+						granosComo = granosComo + "," + checkGranos_5.getLabel();
+					visitaSocial.setGranosComo(granosComo);
 
 					// En caso de que sea una modificacion la variable idVisita
 					// se
@@ -1010,6 +1383,197 @@ public class CVisitaSocial extends CGenerico {
 		}
 		if(visitaSocial.getFechaInforme()!=null){
 		dateBoxInforme.setValue(visitaSocial.getFechaInforme());
+		}
+		//Campos de Alimentacion
+		cmbRes.setValue(visitaSocial.getResFrecuencia());
+		textBoxRes.setValue(visitaSocial.getResDonde());
+		String valoresRes[] = visitaSocial.getResComo().split(",");
+		if (valoresRes.length != 0) {
+			int r = 0;
+			while (r < valoresRes.length) {
+				if (valoresRes[r].equals(checkRes_1.getLabel()))
+					checkRes_1.setChecked(true);
+				if (valoresRes[r].equals(checkRes_2.getLabel()))
+					checkRes_2.setChecked(true);
+				if (valoresRes[r].equals(checkRes_3.getLabel()))
+					checkRes_3.setChecked(true);
+				if (valoresRes[r].equals(checkRes_4.getLabel()))
+					checkRes_4.setChecked(true);
+				if (valoresRes[r].equals(checkRes_5.getLabel()))
+					checkRes_5.setChecked(true);
+				r++;
+			}
+		}
+		cmbPollo.setValue(visitaSocial.getPolloFrecuencia());
+		textBoxPollo.setValue(visitaSocial.getPolloDonde());
+		String valoresPollo[] = visitaSocial.getPolloComo().split(",");
+		if (valoresPollo.length != 0) {
+			int p = 0;
+			while (p < valoresPollo.length) {
+				if (valoresPollo[p].equals(checkPollo_1.getLabel()))
+					checkPollo_1.setChecked(true);
+				if (valoresPollo[p].equals(checkPollo_2.getLabel()))
+					checkPollo_2.setChecked(true);
+				if (valoresPollo[p].equals(checkPollo_3.getLabel()))
+					checkPollo_3.setChecked(true);
+				if (valoresPollo[p].equals(checkPollo_4.getLabel()))
+					checkPollo_4.setChecked(true);
+				if (valoresPollo[p].equals(checkPollo_5.getLabel()))
+					checkPollo_5.setChecked(true);
+				p++;
+			}
+		}
+		cmbCerdo.setValue(visitaSocial.getCerdoFrecuencia());
+		textBoxCerdo.setValue(visitaSocial.getCerdoDonde());
+		String valoresCerdo[] = visitaSocial.getCerdoComo().split(",");
+		if (valoresCerdo.length != 0) {
+			int c = 0;
+			while (c < valoresCerdo.length) {
+				if (valoresCerdo[c].equals(checkCerdo_1.getLabel()))
+					checkCerdo_1.setChecked(true);
+				if (valoresCerdo[c].equals(checkCerdo_2.getLabel()))
+					checkCerdo_2.setChecked(true);
+				if (valoresCerdo[c].equals(checkCerdo_3.getLabel()))
+					checkCerdo_3.setChecked(true);
+				if (valoresCerdo[c].equals(checkCerdo_4.getLabel()))
+					checkCerdo_4.setChecked(true);
+				if (valoresCerdo[c].equals(checkCerdo_5.getLabel()))
+					checkCerdo_5.setChecked(true);
+				c++;
+			}
+		}
+		cmbPescado.setValue(visitaSocial.getPescadoFrecuencia());
+		textBoxPescado.setValue(visitaSocial.getPescadoDonde());
+		String valoresPescado[] = visitaSocial.getPescadoComo().split(",");
+		if (valoresPescado.length != 0) {
+			int pes = 0;
+			while (pes < valoresPescado.length) {
+				if (valoresPescado[pes].equals(checkPescado_1.getLabel()))
+					checkPescado_1.setChecked(true);
+				if (valoresPescado[pes].equals(checkPescado_2.getLabel()))
+					checkPescado_2.setChecked(true);
+				if (valoresPescado[pes].equals(checkPescado_3.getLabel()))
+					checkPescado_3.setChecked(true);
+				if (valoresPescado[pes].equals(checkPescado_4.getLabel()))
+					checkPescado_4.setChecked(true);
+				if (valoresPescado[pes].equals(checkPescado_5.getLabel()))
+					checkPescado_5.setChecked(true);
+				pes++;
+			}
+		}
+		cmbLeche.setValue(visitaSocial.getLecheFrecuencia());
+		textBoxLeche.setValue(visitaSocial.getLecheDonde());
+		String valoresLeche[] = visitaSocial.getLecheComo().split(",");
+		if (valoresLeche.length != 0) {
+			int l = 0;
+			while (l < valoresLeche.length) {
+				if (valoresLeche[l].equals(checkLeche_1.getLabel()))
+					checkLeche_1.setChecked(true);
+				if (valoresLeche[l].equals(checkLeche_2.getLabel()))
+					checkLeche_2.setChecked(true);
+				if (valoresLeche[l].equals(checkLeche_3.getLabel()))
+					checkLeche_3.setChecked(true);
+				if (valoresLeche[l].equals(checkLeche_4.getLabel()))
+					checkLeche_4.setChecked(true);
+				if (valoresLeche[l].equals(checkLeche_5.getLabel()))
+					checkLeche_5.setChecked(true);
+				l++;
+			}
+		}
+		cmbHuevos.setValue(visitaSocial.getHuevosFrecuencia());
+		textBoxHuevos.setValue(visitaSocial.getHuevosDonde());
+		String valoresHuevos[] = visitaSocial.getHuevosComo().split(",");
+		if (valoresHuevos.length != 0) {
+			int h = 0;
+			while (h < valoresHuevos.length) {
+				if (valoresHuevos[h].equals(checkHuevos_1.getLabel()))
+					checkHuevos_1.setChecked(true);
+				if (valoresHuevos[h].equals(checkHuevos_2.getLabel()))
+					checkHuevos_2.setChecked(true);
+				if (valoresHuevos[h].equals(checkHuevos_3.getLabel()))
+					checkHuevos_3.setChecked(true);
+				if (valoresHuevos[h].equals(checkHuevos_4.getLabel()))
+					checkHuevos_4.setChecked(true);
+				if (valoresHuevos[h].equals(checkHuevos_5.getLabel()))
+					checkHuevos_5.setChecked(true);
+				h++;
+			}
+		}
+		cmbCereales.setValue(visitaSocial.getCerealesFrecuencia());
+		textBoxCereales.setValue(visitaSocial.getCerealesDonde());
+		String valoresCereales[] = visitaSocial.getCerealesComo().split(",");
+		if (valoresCereales.length != 0) {
+			int ce = 0;
+			while (ce < valoresCereales.length) {
+				if (valoresCereales[ce].equals(checkCereales_1.getLabel()))
+					checkCereales_1.setChecked(true);
+				if (valoresCereales[ce].equals(checkCereales_2.getLabel()))
+					checkCereales_2.setChecked(true);
+				if (valoresCereales[ce].equals(checkCereales_3.getLabel()))
+					checkCereales_3.setChecked(true);
+				if (valoresCereales[ce].equals(checkCereales_4.getLabel()))
+					checkCereales_4.setChecked(true);
+				if (valoresCereales[ce].equals(checkCereales_5.getLabel()))
+					checkCereales_5.setChecked(true);
+				ce++;
+			}
+		}
+		cmbFrutas.setValue(visitaSocial.getFrutasFrecuencia());
+		textBoxFrutas.setValue(visitaSocial.getFrutasDonde());
+		String valoresFrutas[] = visitaSocial.getFrutasComo().split(",");
+		if (valoresFrutas.length != 0) {
+			int f = 0;
+			while (f < valoresFrutas.length) {
+				if (valoresFrutas[f].equals(checkFrutas_1.getLabel()))
+					checkFrutas_1.setChecked(true);
+				if (valoresFrutas[f].equals(checkFrutas_2.getLabel()))
+					checkFrutas_2.setChecked(true);
+				if (valoresFrutas[f].equals(checkFrutas_3.getLabel()))
+					checkFrutas_3.setChecked(true);
+				if (valoresFrutas[f].equals(checkFrutas_4.getLabel()))
+					checkFrutas_4.setChecked(true);
+				if (valoresFrutas[f].equals(checkFrutas_5.getLabel()))
+					checkFrutas_5.setChecked(true);
+				f++;
+			}
+		}
+		cmbVerduras.setValue(visitaSocial.getVerdurasFrecuencia());
+		textBoxVerduras.setValue(visitaSocial.getVerdurasDonde());
+		String valoresVerduras[] = visitaSocial.getVerdurasComo().split(",");
+		if (valoresVerduras.length != 0) {
+			int v = 0;
+			while (v < valoresVerduras.length) {
+				if (valoresVerduras[v].equals(checkVerduras_1.getLabel()))
+					checkVerduras_1.setChecked(true);
+				if (valoresVerduras[v].equals(checkVerduras_2.getLabel()))
+					checkVerduras_2.setChecked(true);
+				if (valoresVerduras[v].equals(checkVerduras_3.getLabel()))
+					checkVerduras_3.setChecked(true);
+				if (valoresVerduras[v].equals(checkVerduras_4.getLabel()))
+					checkVerduras_4.setChecked(true);
+				if (valoresVerduras[v].equals(checkVerduras_5.getLabel()))
+					checkVerduras_5.setChecked(true);
+				v++;
+			}
+		}
+		cmbGranos.setValue(visitaSocial.getGranosFrecuencia());
+		textBoxGranos.setValue(visitaSocial.getGranosDonde());
+		String valoresGranos[] = visitaSocial.getGranosComo().split(",");
+		if (valoresGranos.length != 0) {
+			int g = 0;
+			while (g < valoresGranos.length) {
+				if (valoresGranos[g].equals(checkGranos_1.getLabel()))
+					checkGranos_1.setChecked(true);
+				if (valoresGranos[g].equals(checkGranos_2.getLabel()))
+					checkGranos_2.setChecked(true);
+				if (valoresGranos[g].equals(checkGranos_3.getLabel()))
+					checkGranos_3.setChecked(true);
+				if (valoresGranos[g].equals(checkGranos_4.getLabel()))
+					checkGranos_4.setChecked(true);
+				if (valoresGranos[g].equals(checkGranos_5.getLabel()))
+					checkGranos_5.setChecked(true);
+				g++;
+			}
 		}
 		
 		Paciente paciente = visitaSocial.getPaciente();

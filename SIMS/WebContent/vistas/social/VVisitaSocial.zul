@@ -589,7 +589,316 @@
 							<tab id="c2" label="Egresos" />
 						</tabs>
 						<tabpanels>
-							<tabpanel>Alimentacion</tabpanel>
+							<tabpanel>
+							<listbox>
+						        <listhead>
+						            <listheader label="Tipo de Alimentacion" align="center"/>
+						            <listheader label="Frecuencia con que lo consume" align="center" />
+						            <listheader label="Donde la adquiere" align="center"/>
+						            <listheader label="Como la prepara" align="center"/>
+						        </listhead>
+						            <listitem>
+						                <listcell label="Carne de Res" />
+						                <listcell>
+						                <combobox id="cmbRes" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                <listcell>
+						                    <textbox hflex="1" id="textBoxRes" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                <listcell>
+						                <hbox>
+						                    <vlayout id="res">
+												<checkbox id="checkRes_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkRes_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkRes_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="res2">
+												<checkbox id="checkRes_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkRes_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						            <listitem>
+						                <listcell label="Carne de Pollo" />
+						                 <listcell>
+						                <combobox id="cmbPollo" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                 <listcell>
+						                    <textbox hflex="1" id="textBoxPollo" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                <listcell>
+						                <hbox>
+						                    <vlayout id="pollo">
+												<checkbox id="checkPollo_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkPollo_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkPollo_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="pollo2">
+												<checkbox id="checkPollo_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkPollo_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						            <listitem>
+						                <listcell label="Carne de Cerdo" />
+						                 <listcell>
+						                <combobox id="cmbCerdo" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                 <listcell>
+						                    <textbox hflex="1" id="textBoxCerdo" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                <listcell>
+						                <hbox>
+						                    <vlayout id="cerdo">
+												<checkbox id="checkCerdo_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkCerdo_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkCerdo_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="cerdo2">
+												<checkbox id="checkCerdo_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkCerdo_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						            <listitem>
+						                <listcell label="Carne de Pescado" />
+						                 <listcell>
+						                <combobox id="cmbPescado" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                 <listcell>
+						                    <textbox hflex="1" id="textBoxPescado" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                 <listcell>
+						                <hbox>
+						                    <vlayout id="pescado">
+												<checkbox id="checkPescado_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkPescado_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkPescado_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="pescado2">
+												<checkbox id="checkPescado_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkPescado_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						            <listitem>
+						                <listcell label="Leche" />
+						                 <listcell>
+						                <combobox id="cmbLeche" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                 <listcell>
+						                    <textbox hflex="1" id="textBoxLeche" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                 <listcell>
+						                <hbox>
+						                    <vlayout id="leche">
+												<checkbox id="checkLeche_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkLeche_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkLeche_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="leche2">
+												<checkbox id="checkLeche_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkLeche_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						            <listitem>
+						                <listcell label="Cereales" />
+						                 <listcell>
+						                <combobox id="cmbCereales" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                 <listcell>
+						                    <textbox hflex="1" id="textBoxCereales" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                 <listcell>
+						                <hbox>
+						                    <vlayout id="cereales">
+												<checkbox id="checkCereales_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkCereales_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkCereales_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="cereales2">
+												<checkbox id="checkCereales_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkCereales_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						            <listitem>
+						                <listcell label="Huevos" />
+						                 <listcell>
+						                <combobox id="cmbHuevos" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                 <listcell>
+						                    <textbox hflex="1" id="textBoxHuevos" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                 <listcell>
+						                <hbox>
+						                    <vlayout id="huevos">
+												<checkbox id="checkHuevos_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkHuevos_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkHuevos_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="huevos2">
+												<checkbox id="checkHuevos_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkHuevos_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						            <listitem>
+						                <listcell label="Frutas" />
+						                 <listcell>
+						                <combobox id="cmbFrutas" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                 <listcell>
+						                    <textbox hflex="1" id="textBoxFrutas" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                 <listcell>
+						                <hbox>
+						                    <vlayout id="frutas">
+												<checkbox id="checkFrutas_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkFrutas_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkFrutas_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="frutas2">
+												<checkbox id="checkFrutas_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkFrutas_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						            <listitem>
+						                <listcell label="Verduras" />
+						                 <listcell>
+						                <combobox id="cmbVerduras" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                 <listcell>
+						                    <textbox hflex="1" id="textBoxVerduras" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                 <listcell>
+						                <hbox>
+						                    <vlayout id="verduras">
+												<checkbox id="checkVerduras_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkVerduras_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkVerduras_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="verduras2">
+												<checkbox id="checkVerduras_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkVerduras_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						            <listitem>
+						                <listcell label="Leguminosas (granos)" />
+						                 <listcell>
+						                <combobox id="cmbGranos" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Diario" />
+											<comboitem label="Cada tercer dia" />
+											<comboitem label="Una vez a la semana" />
+											<comboitem label="Una vez al mes" />
+											<comboitem label="Ocacionalmente" />
+										</combobox>
+						                </listcell>
+						                 <listcell>
+						                    <textbox hflex="1" id="textBoxGranos" placeholder="Anote sitio que indica" />
+						                </listcell>
+						                 <listcell>
+						                <hbox>
+						                    <vlayout id="granos">
+												<checkbox id="checkGranos_1" label="Hirviendo" checked="Hirviendo" />
+												<checkbox id="checkGranos_2" label="Al vapor" checked="Al vapor" />
+												<checkbox id="checkGranos_3" label="Al horno" checked="Al horno" />
+											</vlayout>
+											 <vlayout id="granos2">
+												<checkbox id="checkGranos_4" label="En aceite" checked="En aceite" />
+												<checkbox id="checkGranos_5" label="Otras" checked="Otras" />
+											</vlayout>
+										</hbox>
+						                </listcell>
+						            </listitem>
+						    </listbox>
+							</tabpanel>
 							<tabpanel>
 								<grid width="auto">
 									<columns>
