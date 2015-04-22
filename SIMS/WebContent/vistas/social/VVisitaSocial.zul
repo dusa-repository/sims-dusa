@@ -354,8 +354,7 @@
 									<label class="etiqueta"
 										value="Contando sala comedor y cuartos ¿Cuántos ambientes posee la vivienda?:" />
 								</hbox>
-								<spinner id="spinner11" value="0"
-									readonly="true" constraint="min 0"
+								<spinner id="spinner11" value="0" constraint="min 0"
 									tooltiptext="Cantidad de ambientes de la vivienda" />
 							</row>
 							<row>
@@ -424,8 +423,7 @@
 									<label class="etiqueta"
 										value="¿Cuántos grupos de personas mantienen gastos separados?:" />
 								</hbox>
-								<spinner id="spinner14" value="0"
-									readonly="true" tooltiptext=" grupos de personas mantienen gastos separados"
+								<spinner id="spinner14" value="0" tooltiptext=" grupos de personas mantienen gastos separados"
 									constraint="min 0" />
 							</row>
 						</rows>
@@ -444,8 +442,7 @@
 								<hbox>
 									<label class="etiqueta" value="Total Miembros del Hogar:" />
 								</hbox>
-								<spinner id="spinner16" value="0"
-									readonly="true" tooltiptext=" Número de personas que habitan este hogar"
+								<spinner id="spinner16" value="0" tooltiptext=" Número de personas que habitan este hogar"
 									constraint="min 0" />
 								<hbox>
 									<label class="etiqueta" value="¿Dónde adquiere los alimentos?:" />
@@ -500,8 +497,7 @@
 									<label class="etiqueta"
 										value="Total de habitaciones que dispone exclusivamente para dormir:" />
 								</hbox>
-								<spinner id="spinner18" value="0"
-									readonly="true" tooltiptext=" habitaciones que dispone exclusivamente para dormir"
+								<spinner id="spinner18" value="0" tooltiptext=" habitaciones que dispone exclusivamente para dormir"
 									constraint="min 0" />
 								<hbox>
 									<label class="etiqueta"
@@ -561,8 +557,7 @@
 									<label class="etiqueta"
 										value="¿Cuántas jóvenes de 10 a 17 años de edad que vivan en este hogar están embarazadas o tienen hijos?:" />
 								</hbox>
-								<spinner id="spinner24" value="0"
-									readonly="true" tooltiptext="Coloque el número de mujeres"
+								<spinner id="spinner24" value="0" tooltiptext="Coloque el número de mujeres"
 									constraint="min 0" />
 							</row>
 							<row>
@@ -571,7 +566,7 @@
 										value="Sumando sueldos, salarios, pensiones, becas ayudas económicas y cualquier otro beneficio ¿Cuál es el ingreso familiar?:" />
 								</hbox>
 								<doublespinner id="doubleSpinner20" value="0"
-									step="0.1" constraint="min 0" />
+									step="1" constraint="min 0" />
 								<hbox>
 									<label class="etiqueta"
 										value="De las personas que conforman este hogar ¿Cuántas tienen problemas de consumo de alcohol o drogas?:" />
@@ -620,8 +615,6 @@
 												<checkbox id="checkRes_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkRes_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkRes_3" label="Al horno" checked="Al horno" />
-											</hlayout>
-											 <hlayout id="res2">
 												<checkbox id="checkRes_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkRes_5" label="Otras" checked="Otras" />
 											</hlayout>
@@ -642,19 +635,17 @@
 										</combobox>
 						                </listcell>
 						                 <listcell>
-						                    <textbox hflex="1" id="textBoxPollo" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxPollo" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                <listcell>
 						                <hbox>
-						                    <vlayout id="pollo">
+						                    <hlayout id="pollo">
 												<checkbox id="checkPollo_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkPollo_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkPollo_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="pollo2">
 												<checkbox id="checkPollo_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkPollo_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -672,19 +663,17 @@
 										</combobox>
 						                </listcell>
 						                 <listcell>
-						                    <textbox hflex="1" id="textBoxCerdo" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxCerdo" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                <listcell>
 						                <hbox>
-						                    <vlayout id="cerdo">
+						                    <hlayout id="cerdo">
 												<checkbox id="checkCerdo_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkCerdo_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkCerdo_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="cerdo2">
 												<checkbox id="checkCerdo_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkCerdo_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -702,19 +691,17 @@
 										</combobox>
 						                </listcell>
 						                 <listcell>
-						                    <textbox hflex="1" id="textBoxPescado" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxPescado" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                 <listcell>
 						                <hbox>
-						                    <vlayout id="pescado">
+						                    <hlayout id="pescado">
 												<checkbox id="checkPescado_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkPescado_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkPescado_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="pescado2">
 												<checkbox id="checkPescado_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkPescado_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -732,19 +719,17 @@
 										</combobox>
 						                </listcell>
 						                 <listcell>
-						                    <textbox hflex="1" id="textBoxLeche" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxLeche" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                 <listcell>
 						                <hbox>
-						                    <vlayout id="leche">
+						                    <hlayout id="leche">
 												<checkbox id="checkLeche_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkLeche_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkLeche_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="leche2">
 												<checkbox id="checkLeche_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkLeche_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -762,19 +747,17 @@
 										</combobox>
 						                </listcell>
 						                 <listcell>
-						                    <textbox hflex="1" id="textBoxCereales" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxCereales" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                 <listcell>
 						                <hbox>
-						                    <vlayout id="cereales">
+						                    <hlayout id="cereales">
 												<checkbox id="checkCereales_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkCereales_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkCereales_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="cereales2">
 												<checkbox id="checkCereales_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkCereales_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -792,19 +775,17 @@
 										</combobox>
 						                </listcell>
 						                 <listcell>
-						                    <textbox hflex="1" id="textBoxHuevos" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxHuevos" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                 <listcell>
 						                <hbox>
-						                    <vlayout id="huevos">
+						                    <hlayout id="huevos">
 												<checkbox id="checkHuevos_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkHuevos_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkHuevos_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="huevos2">
 												<checkbox id="checkHuevos_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkHuevos_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -822,19 +803,17 @@
 										</combobox>
 						                </listcell>
 						                 <listcell>
-						                    <textbox hflex="1" id="textBoxFrutas" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxFrutas" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                 <listcell>
 						                <hbox>
-						                    <vlayout id="frutas">
+						                    <hlayout id="frutas">
 												<checkbox id="checkFrutas_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkFrutas_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkFrutas_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="frutas2">
 												<checkbox id="checkFrutas_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkFrutas_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -852,19 +831,17 @@
 										</combobox>
 						                </listcell>
 						                 <listcell>
-						                    <textbox hflex="1" id="textBoxVerduras" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxVerduras" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                 <listcell>
 						                <hbox>
-						                    <vlayout id="verduras">
+						                    <hlayout id="verduras">
 												<checkbox id="checkVerduras_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkVerduras_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkVerduras_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="verduras2">
 												<checkbox id="checkVerduras_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkVerduras_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -882,19 +859,17 @@
 										</combobox>
 						                </listcell>
 						                 <listcell>
-						                    <textbox hflex="1" id="textBoxGranos" placeholder="Anote sitio que indica" />
+						                    <textbox hflex="1" id="textBoxGranos" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
 						                </listcell>
 						                 <listcell>
 						                <hbox>
-						                    <vlayout id="granos">
+						                    <hlayout id="granos">
 												<checkbox id="checkGranos_1" label="Hirviendo" checked="Hirviendo" />
 												<checkbox id="checkGranos_2" label="Al vapor" checked="Al vapor" />
 												<checkbox id="checkGranos_3" label="Al horno" checked="Al horno" />
-											</vlayout>
-											 <vlayout id="granos2">
 												<checkbox id="checkGranos_4" label="En aceite" checked="En aceite" />
 												<checkbox id="checkGranos_5" label="Otras" checked="Otras" />
-											</vlayout>
+											</hlayout>
 										</hbox>
 						                </listcell>
 						            </listitem>
@@ -919,86 +894,86 @@
 												<label class="etiqueta" value="Educacion" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_9" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta" value="Gasolina" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_2" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 											<hbox>
 												<label class="etiqueta" value="Gastos Medicos" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_10" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta" value="Alquiler" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_3" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 											<hbox>
 												<label class="etiqueta" value="Recreacion" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_11" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta" value="Agua" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_4" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 											<hbox>
 												<label class="etiqueta" value="Creditos" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_12" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta" value="Electricidad" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_5" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 											<hbox>
 												<label class="etiqueta" value="Ropa y Calzado" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_13" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta" value="Telefono Recidencial" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_6" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 											<hbox>
 												<label class="etiqueta" value="Fondos de Ahorro" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_14" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta" value="Telefono Celular" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_7" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 											<hbox>
 												<label class="etiqueta" value="Credito Habitacional" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_15" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta" value="Transporte" />
 											</hbox>
 											<doublespinner id="doubleSpinner30_8" value="0"
-												step="0.1" constraint="min 0" />
+												step="1" constraint="min 0" />
 											<hbox>
 												<label class="etiqueta" value="Total" />
 											</hbox>
@@ -1025,42 +1000,42 @@
 								<hbox>
 									<label class="etiqueta" value="A qué hora se levanta en la mañana" />
 								</hbox>
-								<textbox id="textBox46_1" />
+								<textbox id="textBox46_1" maxlength="1500" multiline="true" />
 								<hbox>
 									<label class="etiqueta" value="¿Hora acostumbrada en la que se acuesta?" />
 								</hbox>
-								<textbox id="textBox46_2" />
+								<textbox id="textBox46_2" maxlength="1500" multiline="true" />
 							</row>
 							<row>
 								<hbox>
 									<label class="etiqueta" value="¿Qué hace al levantarse?" />
 								</hbox>
-								<textbox id="textBox46_3" />
+								<textbox id="textBox46_3" maxlength="1500" multiline="true" />
 								<hbox>
 									<label class="etiqueta" value="¿Qué otra actividad realiza?" />
 								</hbox>
-								<textbox id="textBox46_4" />
+								<textbox id="textBox46_4" maxlength="1500" multiline="true" />
 							</row>
 							<row>
 								<hbox>
 									<label class="etiqueta" value="¿Por qué ese orden?" />
 								</hbox>
-								<textbox id="textBox46_5" />
+								<textbox id="textBox46_5" maxlength="1500" multiline="true" />
 								<hbox>
 									<label class="etiqueta" value="¿Y los fines de semana?" />
 								</hbox>
-								<textbox id="textBox46_6" />
+								<textbox id="textBox46_6" maxlength="1500" multiline="true" />
 							</row>
 							<row>
 								<hbox>
 									<label class="etiqueta"
 										value="¿Cuales son las actividades de rutina que siempre realiza?" />
 								</hbox>
-								<textbox id="textBox46_7" />
+								<textbox id="textBox46_7" maxlength="1500" multiline="true" />
 								<hbox>
 									<label class="etiqueta" value="¿Con quién comparte estas actividades?" />
 								</hbox>
-								<textbox id="textBox46_8" />
+								<textbox id="textBox46_8" maxlength="1500" multiline="true" />
 							</row>
 						</rows>
 					</grid>
@@ -1083,49 +1058,49 @@
 												<label class="etiqueta"
 													value="¿Qué actividad diaria realiza conjuntamente con el Grupo Familiar? " />
 											</hbox>
-											<textbox id="textBox47_1" />
+											<textbox id="textBox47_1" maxlength="1500" multiline="true" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta"
 													value="¿Cómo considera usted, es el proceso de comunicación entre los miembros de este grupo familiar?" />
 											</hbox>
-											<textbox id="textBox47_2" />
+											<textbox id="textBox47_2" maxlength="1500" multiline="true" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta"
 													value="¿Cómo considera usted, se desenvuelven los roles en este grupo familiar? " />
 											</hbox>
-											<textbox id="textBox47_3" />
+											<textbox id="textBox47_3" maxlength="1500" multiline="true" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta"
 													value="¿En el grupo familiar, ¿Quién toma las decisiones importantes? " />
 											</hbox>
-											<textbox id="textBox47_4" />
+											<textbox id="textBox47_4" maxlength="1500" multiline="true" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta"
 													value="¿Quién del grupo familiar dicta las pautas y normas para la convivencia? " />
 											</hbox>
-											<textbox id="textBox47_5" />
+											<textbox id="textBox47_5" maxlength="1500" multiline="true" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta"
 													value="¿Considera usted que ¿el grupo familiar se respeta?" />
 											</hbox>
-											<textbox id="textBox47_6" />
+											<textbox id="textBox47_6" maxlength="1500" multiline="true" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta"
 													value="¿Cómo expresa usted sus sentimientos de disgusto, alegría e incomodidad? " />
 											</hbox>
-											<textbox id="textBox47_7" />
+											<textbox id="textBox47_7" maxlength="1500" multiline="true"/>
 										</row>
 									</rows>
 								</grid>
@@ -1141,13 +1116,13 @@
 											<hbox>
 												<label class="etiqueta" value="DIAGNOSTICO SOCIAL:" />
 											</hbox>
-											<textbox id="textBox10" />
+											<textbox id="textBox10" maxlength="1500" multiline="true" />
 										</row>
 										<row>
 											<hbox>
 												<label class="etiqueta" value="OBSERVACIONES:" />
 											</hbox>
-											<textbox id="textBox11" />
+											<textbox id="textBox11" maxlength="1500" multiline="true" />
 										</row>
 									</rows>
 								</grid>
@@ -1185,7 +1160,8 @@
 				<grid width="100%">
 							<columns visible="false">
 								<column label="" width="25%" />
-								<column label="" width="50%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
 								<column label="" width="25%" />
 							</columns>
 							<rows>
@@ -1196,8 +1172,164 @@
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<textbox id="txtNombre" hflex="1" maxlength="1000"
-										tooltiptext="Ingrese el Nombre" multiline="true" class="multilinea" />
-										<button autodisable="self" id="btnAgregarItems" class="btn"
+										tooltiptext="Ingrese el Nombre" />
+									<hbox>
+										<label class="etiqueta" value="Parentesco con el Jefe de Hogar:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									 <combobox id="cmb32" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Jefe del Hogar" />
+											<comboitem label="Cónyuge" />
+											<comboitem label="Hijo (a) Soltero (a)" />
+											<comboitem label="Hijo (a) Casado (a)" />
+											<comboitem label="Hijos (as) del cónyuge" />
+											<comboitem label="Yerno /Nuera" />
+											<comboitem label="Nieto (a)" />
+											<comboitem label="Padre / Madre" />
+											<comboitem label=" Hermano (a)" />
+											<comboitem label="Suegro(a)" />
+											<comboitem label="Otro pariente" />
+											<comboitem label="Servicio doméstico" />
+									</combobox>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Sexo:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<combobox id="cmb33" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Masculino" />
+											<comboitem label="Feminino" />
+									</combobox>
+									<hbox>
+										<label class="etiqueta" value="Fecha de Nacimiento:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<datebox id="dateBox35" format="yyyy/MM/dd" readonly="true" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Edad:" />
+									</hbox>
+									<hbox>
+									<label id="lbl35" />
+									</hbox>
+									<hbox>
+										<label class="etiqueta" value="Sufre alguna discapacidad ¿cuál?:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<combobox id="cmb36" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Ceguera total" />
+											<comboitem label="Sordera total" />
+											<comboitem label="Retardo mental" />
+											<comboitem label="Mudez" />
+											<comboitem label="Perdida / discapacidad miembros superiores" />
+											<comboitem label="Perdida / discapacidad en miembros inferiores" />
+											<comboitem label="gagos / tartamudos" />
+											<comboitem label="ninguno" />
+											<comboitem label="Otros" />
+									</combobox>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="En los últimos seis meses ha padecido alguna de las siguientes enfermedades o problemas de salud:" />
+									</hbox>
+									<hbox>
+									<vlayout>
+												<checkbox id="check37_1" label="Enfermedad Respiratoria (gripe, tos, asma, bronquitis, bronconeumonía, dolor de oído, otra)" checked="Enfermedad Respiratoria (gripe, tos, asma, bronquitis, bronconeumonía, dolor de oído, otra)" />
+												<checkbox id="check37_2" label="Enfermedades digestiva o intestinal (diarrea, dolor de estómago, gastritis, gastroenteritis, otros)" checked="Enfermedades digestiva o intestinal (diarrea, dolor de estómago, gastritis, gastroenteritis, otros)" />
+												<checkbox id="check37_3" label="Enfermedad del corazón (Tensión alta, infarto, arritmia, marca aso, coronarias, otra)" checked="Enfermedad del corazón (Tensión alta, infarto, arritmia, marca aso, coronarias, otra)" />
+									</vlayout>
+									</hbox>
+									<hbox>
+									<vlayout>
+												<checkbox id="check37_4" label="Enfermedad Renal (calculo renal, infección en orina,)" checked="Enfermedad Renal (calculo renal, infección en orina,)" />
+												<checkbox id="check37_5" label="Infecciones Virales  (lecchina , sarampión, dengue, mononucleosis, hepatitis, otra)" checked="Infecciones Virales  (lecchina , sarampión, dengue, mononucleosis, hepatitis, otra)" />
+												<checkbox id="check37_6" label="Infecciones bacterianas (Piel – Brasa, conjuntivitis, otras)" checked="Infecciones bacterianas (Piel – Brasa, conjuntivitis, otras)" />
+									</vlayout>
+									</hbox>
+									<hbox>
+									<vlayout>
+												
+												<checkbox id="check37_7" label="Diabetes" checked="Diabetes" />
+												<checkbox id="check37_8" label="Cáncer (Útero, Mamas, próstata y otros)" checked="Cáncer (Útero, Mamas, próstata y otros)" />
+												<checkbox id="check37_9" label="Otras" checked="Otras" />
+												<checkbox id="check37_10" label="Ninguna" checked="Ninguna" />
+									</vlayout>
+									</hbox>
+								</row>
+								<row>
+								<hbox>
+										<label class="etiqueta" value="Nivel académico alcanzado:" />
+									</hbox>
+									<combobox id="cmb38" autodrop="true" readonly="true"
+											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+											hflex="1">
+											<comboitem label="Analfabeta" />
+											<comboitem label="Maternal" />
+											<comboitem label="Educación Inicial" />
+											<comboitem label="Básica" />
+											<comboitem label="Media" />
+											<comboitem label="Diversificada. / Técnico Medio" />
+											<comboitem label="T.S.U." />
+											<comboitem label="Universitario" />
+											<comboitem label="Educación especial" />
+											<comboitem label="Estudio en Curso" />
+									</combobox>
+									<hbox>
+										<label class="etiqueta" value="Último grado académico aprobado:" />
+									</hbox>
+									<textbox id="txt38" hflex="1" maxlength="1000"
+										tooltiptext="Ingrese el ultimo grado académico aprobado" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Estudia actualmente:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<radiogroup id="rdg39">
+									<hlayout>
+										<radio id="rdo39_1" label="Si" selected="Si" />
+										<radio id="rdo39_2" label="No" selected="No" />
+									</hlayout>
+								</radiogroup>
+									<hbox>
+										<label class="etiqueta" value="Nº de Cédula de Identidad:" />
+									</hbox>
+									<textbox id="txt40" hflex="1" maxlength="15"
+										tooltiptext="Ingrese el numero de cedula" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="¿A que se dedica atualmente?:" />
+									</hbox>
+									<textbox id="txt41" hflex="1" maxlength="1000"
+										tooltiptext="Ingrese a que se dedica actualmente" />
+									<hbox>
+										<label class="etiqueta" value="Si Trabaja ¿Qué  oficio/ocupación realiza en su trabajo? En caso de Desempleado ¿Para cuál oficio esta preparado:" />
+									</hbox>
+									<textbox id="txt42" hflex="1" maxlength="1000"
+										tooltiptext="Ingrese la ocupacion u oficio que realiza en su trabajo actual" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="¿Donde Trabaja?:" />
+									</hbox>
+									<textbox id="txt43" hflex="1" maxlength="1000"
+										tooltiptext="Ingrese el sitio donde trabaja" />
+								<hbox></hbox>
+								<button autodisable="self" id="btnAgregarItems" class="btn"
 										label="Agregar Familiar" tooltiptext="Agregar items a la Compposicion Familiar"
 										image="/public/imagenes/botones/annadir.png" width="150px" />
 								</row>
@@ -1209,10 +1341,18 @@
 									emptyMessage="No se han asignado Familiares">
 									<listhead>
 										<listheader label="Nombres y Apellidos" width="30%" />
+										<listheader label="Parentesco" width="30%" />
+										<listheader label="Sexo" width="30%" />
+										<listheader label="Fecha de Nacimiento" width="30%" />
+										<listheader label="Discapacidad" width="30%" />
 									</listhead>
 									<template name="model">
 										<listitem>
 											<listcell label="${each.nombre}" />
+											<listcell label="${each.parentesco}" />
+											<listcell label="${each.sexo}" />
+											<listcell label="${each.fechaNacimiento}" />
+											<listcell label="${each.discapacidad}" />
 										</listitem>
 									</template>
 								</listbox>

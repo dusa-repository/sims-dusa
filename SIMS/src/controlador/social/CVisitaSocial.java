@@ -450,6 +450,57 @@ public class CVisitaSocial extends CGenerico {
 	private Button btnEditar;
 	@Wire
 	private Button btnRemover;
+	@Wire
+	private Combobox cmb32;
+	@Wire
+	private Combobox cmb33;
+	@Wire
+	private Datebox dateBox35;
+	@Wire
+	private Label lbl35;
+	@Wire
+	private Combobox cmb36;
+	@Wire
+	private Checkbox check37_1;
+	@Wire
+	private Checkbox check37_2;
+	@Wire
+	private Checkbox check37_3;
+	@Wire
+	private Checkbox check37_4;
+	@Wire
+	private Checkbox check37_5;
+	@Wire
+	private Checkbox check37_6;
+	@Wire
+	private Checkbox check37_7;
+	@Wire
+	private Checkbox check37_8;
+	@Wire
+	private Checkbox check37_9;
+	@Wire
+	private Checkbox check37_10;
+	@Wire
+	private Combobox cmb38;
+	@Wire
+	private Textbox txt38;
+	@Wire
+	private Radiogroup rdg39;
+	@Wire
+	private Radio rdo39_1;
+	@Wire
+	private Radio rdo39_2;
+	@Wire
+	private Textbox txt40;
+
+	@Wire
+	private Textbox txt41;
+
+	@Wire
+	private Textbox txt42;
+
+	@Wire
+	private Textbox txt43;
 	
 	private List<ComposicionFamiliar> listaComposicion = new ArrayList<ComposicionFamiliar>();
 
@@ -680,6 +731,7 @@ public class CVisitaSocial extends CGenerico {
 				checkGranos_3.setChecked(false);
 				checkGranos_4.setChecked(false);
 				checkGranos_5.setChecked(false);
+				ltbComposicion.getItems().clear();
 
 			}
 
@@ -1136,7 +1188,14 @@ public class CVisitaSocial extends CGenerico {
 						visitaSocial.setPaciente(paciente);
 					// Guardar
 					servicioVisitaSocial.guardar(visitaSocial);
-					
+					if (ltbComposicion.getItemCount() != 0) {
+						visitaSocial = new VisitaSocial();
+						if (idVisita != 0)
+							visitaSocial = servicioVisitaSocial.buscar(idVisita);
+						else
+							visitaSocial = servicioVisitaSocial.buscarUltimo();
+						guardarFamiliar(visitaSocial);
+					}
 					
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
@@ -1600,6 +1659,14 @@ public class CVisitaSocial extends CGenerico {
 				g++;
 			}
 		}
+
+		ltbComposicion.getItems().clear();
+		listaComposicion = servicioComposicionFamiliar.buscarPorVisitaSocial(visitaSocial);
+		if (!listaComposicion.isEmpty()) {
+			ltbComposicion.setModel(new ListModelList<ComposicionFamiliar>(listaComposicion));
+			ltbComposicion.setCheckmark(false);
+			ltbComposicion.setCheckmark(true);
+		}
 		
 		Paciente paciente = visitaSocial.getPaciente();
 		if(paciente!=null)
@@ -1877,11 +1944,57 @@ public class CVisitaSocial extends CGenerico {
 			//Timestamp fechaPlan = new Timestamp(dtbCuando.getValue().getTime());
 			ComposicionFamiliar composicionFamiliar = new ComposicionFamiliar();
 			composicionFamiliar.setNombre(txtNombre.getValue());
-			
+			composicionFamiliar.setParentesco(cmb32.getValue());
+			composicionFamiliar.setSexo(cmb33.getValue());
+			if(dateBox35.getValue()!=null){
+				Date fechaNacimiento = dateBox35.getValue();
+				Timestamp fechaN = new Timestamp(fechaNacimiento.getTime());
+				composicionFamiliar.setFechaNacimiento(fechaN);
+				}
+			composicionFamiliar.setDiscapacidad(cmb36.getValue());
+			composicionFamiliar.setNivelEducativo(cmb38.getValue());
+			composicionFamiliar.setUltimoGrado(txt38.getValue());
+			if (rdg39.getSelectedItem() != null) {
+				Radio estudia = rdg39.getSelectedItem();
+				if (estudia.getId().equals("rdo39_1")) {
+					composicionFamiliar.setEstudia(true);
+				} else {
+					composicionFamiliar.setEstudia(false);
+				}
+			}
+			composicionFamiliar.setCedula(txt40.getValue());
+			composicionFamiliar.setDedica(txt41.getValue());
+			composicionFamiliar.setOficio(txt42.getValue());
+			composicionFamiliar.setLugarTrabajo(txt43.getValue());
+			String enfermedades="";
+			if (check37_1.isChecked())
+				enfermedades = enfermedades + "/" + check37_1.getLabel();
+			if (check37_2.isChecked())
+				enfermedades = enfermedades + "/" + check37_2.getLabel();
+			if (check37_3.isChecked())
+				enfermedades = enfermedades + "/" + check37_3.getLabel();
+			if (check37_4.isChecked())
+				enfermedades = enfermedades + "/" + check37_4.getLabel();
+			if (check37_5.isChecked())
+				enfermedades = enfermedades + "/" + check37_5.getLabel();
+			if (check37_6.isChecked())
+				enfermedades = enfermedades + "/" + check37_6.getLabel();
+			if (check37_7.isChecked())
+				enfermedades = enfermedades + "/" + check37_7.getLabel();
+			if (check37_8.isChecked())
+				enfermedades = enfermedades + "/" + check37_8.getLabel();
+			if (check37_9.isChecked())
+				enfermedades = enfermedades + "/" + check37_9.getLabel();
+			if (check37_10.isChecked())
+				enfermedades = enfermedades + "/" + check37_10.getLabel();
+			composicionFamiliar.setEnfermedades(enfermedades);
+			//completar campos
 			listaComposicion.add(composicionFamiliar);
 			ltbComposicion.setModel(new ListModelList<ComposicionFamiliar>(listaComposicion));
 			ltbComposicion.setCheckmark(false);
 			ltbComposicion.setCheckmark(true);
+			int edadComposicionF= calcularEdad(composicionFamiliar.getFechaNacimiento());
+			lbl35.setValue(String.valueOf(edadComposicionF));
 			limpiarCampos();
 		} else
 			Mensaje.mensajeError("Debe llenar todos los campos del plan especifico");
@@ -1889,10 +2002,38 @@ public class CVisitaSocial extends CGenerico {
 
 	private void limpiarCampos() {
 		txtNombre.setValue("");
+		cmb32.setValue("");
+		cmb33.setValue("");
+		dateBox35.setValue(null);
+		lbl35.setValue("");
+		cmb36.setValue("");
+		check37_1.setChecked(false);
+		check37_2.setChecked(false);
+		check37_3.setChecked(false);
+		check37_4.setChecked(false);
+		check37_5.setChecked(false);
+		check37_6.setChecked(false);
+		check37_7.setChecked(false);
+		check37_8.setChecked(false);
+		check37_9.setChecked(false);
+		check37_10.setChecked(false);
+		cmb38.setValue("");
+		txt38.setValue("");
+		rdo39_1.setChecked(false);
+		rdo39_2.setChecked(false);
+		txt40.setValue("");
+		txt41.setValue("");
+		txt42.setValue("");
+		txt43.setValue("");
+		lbl35.setValue("");
 	}
 
 	private boolean validarComposicion() {
-		if (txtNombre.getText().compareTo("") == 0)
+		if (txtNombre.getText().compareTo("") == 0
+				||cmb32.getText().compareTo("") == 0
+				||cmb33.getText().compareTo("") == 0
+				||cmb36.getText().compareTo("") == 0
+				||dateBox35.getText().compareTo("") == 0)
 			return false;
 		else
 			return true;
@@ -1911,6 +2052,51 @@ public class CVisitaSocial extends CGenerico {
 						ltbComposicion.setCheckmark(false);
 						ltbComposicion.setCheckmark(true);
 						txtNombre.setValue(composicion.getNombre());
+						cmb32.setValue(composicion.getParentesco());
+						cmb33.setValue(composicion.getSexo());
+						dateBox35.setValue(composicion.getFechaNacimiento());
+						int edadComposicion= calcularEdad(composicion.getFechaNacimiento());
+						lbl35.setValue(String.valueOf(edadComposicion));
+						cmb36.setValue(composicion.getDiscapacidad());
+						String valoresComposicion[] = composicion.getEnfermedades().split("/");
+						if (valoresComposicion.length != 0) {
+							int i = 0;
+							while (i < valoresComposicion.length) {
+								if (valoresComposicion[i].equals(check37_1.getLabel()))
+									check37_1.setChecked(true);
+								if (valoresComposicion[i].equals(check37_2.getLabel()))
+									check37_2.setChecked(true);
+								if (valoresComposicion[i].equals(check37_3.getLabel()))
+									check37_3.setChecked(true);
+								if (valoresComposicion[i].equals(check37_4.getLabel()))
+									check37_4.setChecked(true);
+								if (valoresComposicion[i].equals(check37_5.getLabel()))
+									check37_5.setChecked(true);
+								if (valoresComposicion[i].equals(check37_6.getLabel()))
+									check37_6.setChecked(true);
+								if (valoresComposicion[i].equals(check37_7.getLabel()))
+									check37_7.setChecked(true);
+								if (valoresComposicion[i].equals(check37_8.getLabel()))
+									check37_8.setChecked(true);
+								if (valoresComposicion[i].equals(check37_9.getLabel()))
+									check37_9.setChecked(true);
+								if (valoresComposicion[i].equals(check37_10.getLabel()))
+									check37_10.setChecked(true);
+								i++;
+							}
+						}
+						if(composicion.isEstudia()){
+							rdo39_1.setChecked(true);
+						}else{
+							rdo39_2.setChecked(true);
+						};
+						cmb38.setValue(composicion.getNivelEducativo());
+						txt38.setValue(composicion.getUltimoGrado());
+						txt40.setValue(composicion.getCedula());
+						txt41.setValue(composicion.getDedica());
+						txt42.setValue(composicion.getOficio());
+						txt43.setValue(composicion.getLugarTrabajo());
+						//completar campos
 					}
 				}
 			} else
@@ -1918,5 +2104,55 @@ public class CVisitaSocial extends CGenerico {
 		} else
 			Mensaje.mensajeError("No existen Item Registrados");
 	}
-	
+	@Listen("onClick = #btnRemover")
+	public void removerItem() {
+		if (ltbComposicion.getItemCount() != 0) {
+			if (ltbComposicion.getSelectedItems().size() == 1) {
+				Listitem listItem = ltbComposicion.getSelectedItem();
+				boolean error = false;
+				if (listItem != null) {
+					ComposicionFamiliar composicionF  = listItem.getValue();
+					if (!error) {
+						listaComposicion.remove(composicionF);
+						ltbComposicion.setModel(new ListModelList<ComposicionFamiliar>(listaComposicion));
+						ltbComposicion.setCheckmark(false);
+						ltbComposicion.setCheckmark(true);
+					}
+				}
+			} else
+				Mensaje.mensajeError("Debe Seleccionar un Item");
+		} else
+			Mensaje.mensajeError("No existen Item Registrados");
+	}
+	protected void guardarFamiliar(VisitaSocial visitaSocial) {
+		List<ComposicionFamiliar> composicionFamiliar = servicioComposicionFamiliar
+				.buscarPorVisitaSocial(visitaSocial);
+		if (!composicionFamiliar.isEmpty())
+			servicioComposicionFamiliar.eliminarVarios(composicionFamiliar);
+		composicionFamiliar.clear();
+		composicionFamiliar = new ArrayList<ComposicionFamiliar>();
+		ltbComposicion.renderAll();
+		for (int i = 0; i < ltbComposicion.getItemCount(); i++) {
+			Listitem listItem = ltbComposicion.getItemAtIndex(i);
+			ComposicionFamiliar composicionItem = listItem.getValue();
+			ComposicionFamiliar composicion = new ComposicionFamiliar();
+			composicion.setIdComposicion(0);
+			composicion.setNombre(composicionItem.getNombre());
+			composicion.setParentesco(composicionItem.getParentesco());
+			composicion.setSexo(composicionItem.getSexo());
+			composicion.setCedula(composicionItem.getCedula());
+			composicion.setDedica(composicionItem.getDedica());
+			composicion.setDiscapacidad(composicionItem.getDiscapacidad());
+			composicion.setEnfermedades(composicionItem.getEnfermedades());
+			composicion.setLugarTrabajo(composicionItem.getLugarTrabajo());
+			composicion.setNivelEducativo(composicionItem.getNivelEducativo());
+			composicion.setOficio(composicionItem.getOficio());
+			composicion.setUltimoGrado(composicionItem.getUltimoGrado());
+			composicion.setFechaNacimiento(composicionItem.getFechaNacimiento());
+			composicion.setVisita(visitaSocial);
+			composicionFamiliar.add(composicion);
+			
+		}
+		servicioComposicionFamiliar.guardarVarios(composicionFamiliar);
+	}
 }
