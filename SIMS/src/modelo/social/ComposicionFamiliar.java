@@ -31,6 +31,9 @@ public class ComposicionFamiliar implements Serializable {
 	private String nombre;
 	
 	@Column(length = 100)
+	private String parentesco;
+	
+	@Column(length = 100)
 	private String sexo;
 	
 	@Column(name = "fecha_nacimiento")
@@ -223,6 +226,22 @@ public class ComposicionFamiliar implements Serializable {
 
 	public void setVacunacion(String vacunacion) {
 		this.vacunacion = vacunacion;
+	}
+
+	public VisitaSocial getVisita() {
+		return visita;
+	}
+
+	public void setVisita(VisitaSocial visita) {
+		this.visita = visita;
+	}
+
+	public String getParentesco() {
+		return parentesco;
+	}
+
+	public void setParentesco(String parentesco) {
+		this.parentesco = parentesco;
 	}
 	
 	

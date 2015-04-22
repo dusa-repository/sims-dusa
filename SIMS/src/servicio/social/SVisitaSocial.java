@@ -30,4 +30,15 @@ public class SVisitaSocial {
 	public List<VisitaSocial> filtroNombrePaciente(String valor) {
 		return visitaSocialDAO.findByPacientePrimerNombreStartingWithAllIgnoreCase(valor);
 	}
+
+	public VisitaSocial buscar(Long idVisita) {
+		return visitaSocialDAO.findByIdVisita(idVisita);
+	}
+
+	public VisitaSocial buscarUltimo() {
+		long id = visitaSocialDAO.findMaxIdVisita();
+		if (id != 0)
+			return visitaSocialDAO.findOne(id);
+		return null;
+	}
 }

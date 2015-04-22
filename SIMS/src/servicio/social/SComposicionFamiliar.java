@@ -1,8 +1,11 @@
 package servicio.social;
 
+import java.util.List;
+
 import interfacedao.social.IComposicionFamiliarDAO;
 
 import modelo.social.ComposicionFamiliar;
+import modelo.social.VisitaSocial;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,22 @@ public class SComposicionFamiliar {
 	
 	public void guardar(ComposicionFamiliar composicion) {
 		composicionFamiliarDAO.save(composicion);
+	}
+
+	public List<ComposicionFamiliar> buscarPorVisitaSocial(
+			VisitaSocial visitaSocial) {
+		
+		return composicionFamiliarDAO.findByVisita(visitaSocial);
+	}
+
+	public void eliminarVarios(List<ComposicionFamiliar> composicionFamiliar) {
+		composicionFamiliarDAO.delete(composicionFamiliar);
+		
+	}
+
+	public void guardarVarios(List<ComposicionFamiliar> composicionFamiliar) {
+		composicionFamiliarDAO.save(composicionFamiliar);
+		
 	}
 
 }
