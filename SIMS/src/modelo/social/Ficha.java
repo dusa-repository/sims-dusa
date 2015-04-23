@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import modelo.maestros.Paciente;
 
 @Entity
-@Table(name = "historia", schema = "dusa_sims.dbo")
+@Table(name = "ficha", schema = "dusa_sims.dbo")
 public class Ficha implements Serializable{
 
 	/**
@@ -35,7 +35,7 @@ public class Ficha implements Serializable{
 	@Column(name = "talla_camisa", length = 5)
 	private String tallaCamisa;
 	
-	@Column(name = "talla_pantalon", length = 5)
+	@Column(name= "talla_pantalon", length = 5)
 	private String tallaPantalon;
 	
 	@Column(name = "talla_botas", length = 5)

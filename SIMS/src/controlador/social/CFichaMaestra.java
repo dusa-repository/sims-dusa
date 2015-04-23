@@ -25,7 +25,7 @@ import componentes.Mensaje;
 import controlador.maestros.CGenerico;
 
 public class CFichaMaestra extends CGenerico {
-	
+
 	@Wire
 	private Image imagenPaciente;
 	@Wire
@@ -71,6 +71,14 @@ public class CFichaMaestra extends CGenerico {
 	@Wire
 	private Label lblCiudad;
 	@Wire
+	private Label lblEstado;
+	@Wire
+	private Label lblPais;
+	@Wire
+	private Label lblParroquia;
+	@Wire
+	private Label lblMunicipio;
+	@Wire
 	private Label lblDireccion;
 	@Wire
 	private Label lblTelefono1;
@@ -79,26 +87,41 @@ public class CFichaMaestra extends CGenerico {
 	@Wire
 	private Label lblCorreo;
 	@Wire
+	private Label lblNivelEducativo;
+	@Wire
+	private Label lblOficio;
+	@Wire
+	private Label lblCarrera;
+	@Wire
+	private Label lblArea;
+	@Wire
+	private Label lblEtiquetaAdicionales;
+	@Wire
+	private Label lblEtiquetaTipo;
+	@Wire
+	private Label lblEtiquetaOrigen;
+	@Wire
+	private Label lblEtiquetaAlergias;	
+	@Wire
 	private Textbox txtCedula;
 	@Wire
 	private Div divCatalogoPaciente;
-	
+
 	String idPaciente = "";
-	
+
 	Catalogo<Paciente> catalogoPaciente;
 
 	@Override
 	public void inicializar() throws IOException {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
-	
+
 	@Listen("onOK = #txtCedula")
 	public void buscarCedula() {
 		Paciente paciente = new Paciente();
-		paciente = servicioPaciente.buscarPorCedulaYTrabajador(txtCedula.getValue());
+		paciente = servicioPaciente.buscarPorCedulaYTrabajador(txtCedula
+				.getValue());
 		limpiarCampos();
 		if (paciente != null) {
 			llenarCampos(paciente);
@@ -111,7 +134,7 @@ public class CFichaMaestra extends CGenerico {
 
 	private void llenarFamiliares() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void llenarCampos(Paciente paciente) {
@@ -122,6 +145,12 @@ public class CFichaMaestra extends CGenerico {
 				+ paciente.getSegundoApellido());
 		lblCedula.setValue(paciente.getCedula());
 		lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
+		lblEstado
+				.setValue(paciente.getCiudadVivienda().getEstado().getNombre());
+		lblPais.setValue(paciente.getCiudadVivienda().getEstado().getPais()
+				.getNombre());
+		lblMunicipio.setValue(paciente.getMunicipio());
+		lblParroquia.setValue(paciente.getParroquia());
 		lblFicha.setValue(paciente.getFicha());
 		lblAlergias.setValue(paciente.getObservacionAlergias());
 		lblFechaNac.setValue(String.valueOf(formatoFecha.format(paciente
@@ -144,16 +173,36 @@ public class CFichaMaestra extends CGenerico {
 				.getFechaNacimiento())));
 		lblEstatura.setValue(String.valueOf(paciente.getEstatura()));
 		lblPeso.setValue(String.valueOf(paciente.getPeso()));
-
+		lblNivelEducativo.setValue(paciente.getNivelEducativo());
+		lblOficio.setValue(paciente.getOficio());
+		lblCarrera.setValue(paciente.getProfesion());
+		if (paciente.getArea() != null)
+			lblArea.setValue(paciente.getArea().getNombre());
 		if (paciente.isAlergia())
+		{
 			lblAlergico.setValue("SI");
+			lblEtiquetaAlergias.setVisible(true);
+		}
 		else
+		{
 			lblAlergico.setValue("NO");
+			lblEtiquetaAlergias.setVisible(false);
+		}
 
 		if (paciente.isDiscapacidad())
+		{
 			lblDiscapacidad.setValue("SI");
+			lblEtiquetaOrigen.setVisible(true);
+			lblEtiquetaAdicionales.setVisible(true);
+			lblEtiquetaTipo.setVisible(true);
+		}
 		else
+		{
 			lblDiscapacidad.setValue("NO");
+			lblEtiquetaOrigen.setVisible(false);
+			lblEtiquetaAdicionales.setVisible(false);
+			lblEtiquetaTipo.setVisible(false);
+		}
 
 		if (paciente.isLentes())
 			lblLentes.setValue("SI");
@@ -173,7 +222,7 @@ public class CFichaMaestra extends CGenerico {
 		} else
 			imagenPaciente.setVisible(false);
 		idPaciente = paciente.getCedula();
-				
+
 	}
 
 	private void limpiarCampos() {
@@ -187,6 +236,10 @@ public class CFichaMaestra extends CGenerico {
 		lblLugarNac.setValue("");
 		lblSexo.setValue("");
 		lblEstadoCivil.setValue("");
+		lblEstado.setValue("");
+		lblPais.setValue("");
+		lblMunicipio.setValue("");
+		lblParroquia.setValue("");
 		lblGrupoSanguineo.setValue("");
 		lblMano.setValue("");
 		lblOrigen.setValue("");
@@ -203,7 +256,11 @@ public class CFichaMaestra extends CGenerico {
 		lblAlergias.setValue("");
 		lblDiscapacidad.setValue("");
 		lblLentes.setValue("");
-		
+		lblArea.setValue("");
+		lblOficio.setValue("");
+		lblCarrera.setValue("");
+		lblNivelEducativo.setValue("");
+
 	}
 
 	@Listen("onClick =  #btnBuscarPaciente")

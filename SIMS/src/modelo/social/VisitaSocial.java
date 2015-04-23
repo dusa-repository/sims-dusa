@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -30,8 +31,8 @@ public class VisitaSocial implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_visita", unique = true, nullable = false)
 	private long idVisita;
-
-	@ManyToOne(fetch = FetchType.LAZY)
+	
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_paciente", referencedColumnName = "id_paciente")
 	private Paciente paciente;
 	
