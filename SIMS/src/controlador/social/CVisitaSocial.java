@@ -1171,13 +1171,6 @@ public class CVisitaSocial extends CGenerico {
 						granosComo = granosComo + "," + checkGranos_5.getLabel();
 					visitaSocial.setGranosComo(granosComo);
 
-					// En caso de que sea una modificacion la variable idVisita
-					// se
-					// lleno con el catalogo por lo q se modificaria en la bd,
-					// si no
-					// es una modificacion idVisita es 0, entonces se crea un
-					// nuevo
-					// registro
 					visitaSocial.setIdVisita(idVisita);
 
 					// Para guardar al paciente es la misma idea, busco el q
@@ -1220,47 +1213,45 @@ public class CVisitaSocial extends CGenerico {
 			return true;
 	}
 
-	@Listen("onClick =  #btnBuscar2")
-	public void buscarInforme() {
+//	@Listen("onClick =  #btnBuscar2")
+//	public void buscarInforme() {
+//
+//		final List<VisitaSocial> informes = servicioVisitaSocial.buscarTodas();
+//		catalogoVisita = new Catalogo<VisitaSocial>(divCatalogoVisita,
+//				"Catalogo de Visitas", informes, false, "Id","Nombre del Paciente") {
+//
+//			@Override
+//			protected List<VisitaSocial> buscar(String valor, String combo) {
+//
+//				switch (combo) {
+//				case "Id":
+//					return servicioVisitaSocial.filtroId(valor);
+//				case "Nombre del Paciente":
+//					return servicioVisitaSocial.filtroNombrePaciente(valor);
+//				default:
+//					return informes;
+//				}
+//
+//			}
+//
+//			@Override
+//			protected String[] crearRegistros(VisitaSocial objeto) {
+//				String[] registros = new String[2];
+//				registros[0] = String.valueOf(objeto.getIdVisita());
+//				if(objeto.getPaciente()!=null)
+//				registros[1] =objeto.getPaciente().getPrimerNombre();
+//				return registros;
+//			}
+//
+//		};
+//		catalogoVisita.setParent(divCatalogoVisita);
+//		catalogoVisita.doModal();
+//	}
+//
 
-		final List<VisitaSocial> informes = servicioVisitaSocial.buscarTodas();
-		catalogoVisita = new Catalogo<VisitaSocial>(divCatalogoVisita,
-				"Catalogo de Visitas", informes, false, "Id","Nombre del Paciente") {
-
-			@Override
-			protected List<VisitaSocial> buscar(String valor, String combo) {
-
-				switch (combo) {
-				case "Id":
-					return servicioVisitaSocial.filtroId(valor);
-				case "Nombre del Paciente":
-					return servicioVisitaSocial.filtroNombrePaciente(valor);
-				default:
-					return informes;
-				}
-
-			}
-
-			@Override
-			protected String[] crearRegistros(VisitaSocial objeto) {
-				String[] registros = new String[2];
-				registros[0] = String.valueOf(objeto.getIdVisita());
-				if(objeto.getPaciente()!=null)
-				registros[1] =objeto.getPaciente().getPrimerNombre();
-				return registros;
-			}
-
-		};
-		catalogoVisita.setParent(divCatalogoVisita);
-		catalogoVisita.doModal();
-	}
-
-	@Listen("onSeleccion = #divCatalogoVisita")
-	public void seleccion() {
-		VisitaSocial visitaSocial = catalogoVisita
-				.objetoSeleccionadoDelCatalogo();
+	public void llenarCamposVisita(VisitaSocial visitaSocial) {
+		
 		idVisita = visitaSocial.getIdVisita();
-		// LLENAR TODOS LOS CAMPOS
 
 		//ComboBox
 		cmb1.setValue(visitaSocial.getA());
@@ -1674,7 +1665,6 @@ public class CVisitaSocial extends CGenerico {
 		cedula=paciente.getCedula();
 		llenarCamposPaciente(paciente);
 		}
-		catalogoVisita.setParent(null);
 	}
 
 	// Botones
@@ -1728,13 +1718,14 @@ public class CVisitaSocial extends CGenerico {
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
 		cedula = paciente.getCedula();
 		llenarCamposPaciente(paciente);
+		if(paciente.getVisita()!=null)
+		llenarCamposVisita(paciente.getVisita());
 		lblCedula.setValue(paciente.getCedula());
 		catalogoPaciente.setParent(null);
 	}
 
 	// Metodo q llena los campos de paciente, bien sea porq se selecciono del catalogo o porq se selecciono una visita.
 	private void llenarCamposPaciente(Paciente paciente) {
-	
 		lblCedula.setValue(paciente.getCedula());
 		lblFicha.setValue(paciente.getFicha());
 		lblNombres.setValue(paciente.getPrimerApellido()+"  "+paciente.getSegundoApellido()+"  "+paciente.getPrimerNombre()+"  "+paciente.getSegundoNombre());
@@ -1997,7 +1988,7 @@ public class CVisitaSocial extends CGenerico {
 			lbl35.setValue(String.valueOf(edadComposicionF));
 			limpiarCampos();
 		} else
-			Mensaje.mensajeError("Debe llenar todos los campos del plan especifico");
+			Mensaje.mensajeError("Debe llenar los datos requeridos del familiar");
 	}
 
 	private void limpiarCampos() {

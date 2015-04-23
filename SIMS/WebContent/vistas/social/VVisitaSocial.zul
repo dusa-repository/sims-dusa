@@ -1,1163 +1,1081 @@
-<div id="divSocial" apply="controlador.social.CVisitaSocial">
-	<groupbox width="auto" mold="3d" title="Visita Social">
-		<grid width="auto">
-			<columns>
-				<column label="" width="30%" />
-				<column label="" width="70%" />
-			</columns>
-			<rows>
-				<row>
-					<label class="etiqueta" value="Buscar Visita Registrada" />
-					<button autodisable="self" id="btnBuscar2" class="btn"
-						label="Buscar" tooltiptext="Buscar Visita" image="/public/imagenes/botones/buscar.png" />
-				</row>
-			</rows>
-		</grid>
-		<tabbox id="tb" height="auto" width="auto">
-			<tabs id="tabs">
-				<tab id="buscar" label="DATOS DEL TRABAJADOR" />
-				<tab id="A" label="CARACTERÍSTICAS DE LA VIVIENDA Y SERVICIOS BÁSICOS" />
-				<tab id="B" label="CARACTERISTICA DEL HOGAR" />
-				<tab id="c" label="ALIMENTACIÓN / INGRESOS Y EGRESOS." />
-				<tab id="d" label="RECREACIÓN Y USO DEL TIEMPO LIBRE" />
-				<tab id="e" label="COMPOSICION FAMILIAR" />
-			</tabs>
-			<tabpanels>
-				<tabpanel>
-					<grid width="auto">
-						<columns>
-							<column label="" width="30%" />
-							<column label="" width="70%" />
-						</columns>
-						<rows>
-							<row>
-								<label class="etiqueta" value="Buscar Trabajador" />
-								<button autodisable="self" id="btnBuscar1" class="btn"
-									label="Buscar" tooltiptext="Catalogo"
-									image="/public/imagenes/botones/buscar.png" />
-							</row>
-						</rows>
-					</grid>
-					<separator />
-					<grid width="auto">
-						<columns>
-							<column label="" width="25%" />
-							<column label="" width="25%" />
-							<column label="" width="25%" />
-							<column label="" width="25%" />
-						</columns>
-						<rows>
-							<row>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Datos Personales del Trabajador" style="font-weight:bold;color:black"/>
-								</vlayout>
-								</hbox>
-								<hbox></hbox>
-								<hbox></hbox>
-								<hbox></hbox>
-							</row>
-							<row>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Ficha" />
-								<label id="lblFicha" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Cedula" />
-								<label id="lblCedula" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Nombres y Apellidos" />
-								<label id="lblNombres" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Sexo" />
-								<label id="lblSexo" />
-								</vlayout>
-								</hbox>
-							</row>
-							<row>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Fecha de Nacimiento" />
-								<label id="lblFechaNacimiento" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Edad" />
-								<label id="lblEdad" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Lugar de Nacimiento" />
-								<label id="lblLugarNac" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Estado Civil" />
-								<label id="lblEstadoCivil" />
-								</vlayout>
-								</hbox>
-							</row>
-							<row>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Fecha de Ingreso" />
-								<label id="lblFechaIngreso" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Grado de Instruccion" />
-								<label id="lblGradoInst" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Ocupacion U Oficio" />
-								<label id="lblOcupacion" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Profesion" />
-								<label id="lblProfesion" />
-								</vlayout>
-								</hbox>
-							</row>
-							<row>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Condicion del Trabajador" />
-								<label id="lblCondicion" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="¿Es usted Jefe del hogar?" />
-								<label id="lblJefe" />
-								</vlayout>
-								</hbox>
-								<hbox></hbox>
-								<hbox></hbox>
-							</row>
-							<row>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Direccion del Trabajador" style="font-weight:bold;color:black"/>
-								</vlayout>
-								</hbox>
-								<hbox></hbox>
-								<hbox></hbox>
-								<hbox></hbox>
-							</row>
-							<row>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Urb./Barrio" />
-								<label id="lblUrb" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Av./Calle" />
-								<label id="lblCalle" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Sector" />
-								<label id="lblSector" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Nro." />
-								<label id="lblNro" />
-								</vlayout>
-								</hbox>
-							</row>
-							<row>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Punto de Referencia" />
-								<label id="lblPuntoRef" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Ciudad" />
-								<label id="lblCiudad" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Parroquia" />
-								<label id="lblParroquia" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Municipio" />
-								<label id="lblMunicipio" />
-								</vlayout>
-								</hbox>
-							</row>
-							<row>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Telefono Residencial" />
-								<label id="lblTelefono1" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Telefono Celular" />
-								<label id="lblTelefono2" />
-								</vlayout>
-								</hbox>
-								<hbox>
-								<vlayout>
-								<label class="etiqueta" value="Medio de Transporte Utilizado para ir al trabajo" />
-								<label id="lblTransporte" />
-								</vlayout>
-								</hbox>
-								<hbox></hbox>
-							</row>
-						</rows>
-					</grid>
-				</tabpanel>
-				<tabpanel>
-					<grid width="100%">
-						<columns visible="false">
-							<column label="" width="20%" />
-							<column label="" width="30%" />
-							<column label="" width="20%" />
-							<column label="" width="30%" />
-						</columns>
-						<rows>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="Tipo de vivienda:" />
-								</hbox>
-								<combobox id="cmb1" autodrop="true" readonly="true"
-									placeholder="Seleccione un tipo de vivienda" tooltiptext="Seleccione un tipo de vivienda"
-									hflex="1">
-									<comboitem label="Quinta" />
-									<comboitem label="Casa" />
-									<comboitem label="Apto. En edificio" />
-									<comboitem label="Apto.  o en casa" />
-									<comboitem label="Casa de vecindad" />
-									<comboitem label="Rancho" />
-									<comboitem label="Otro tipo de vivienda" />
-									<comboitem label="Vivienda colectiva" />
-								</combobox>
-								<hbox>
-									<label class="etiqueta" value="¿La vivienda posee servicio eléctrico?:" />
-								</hbox>
-								<radiogroup id="rdg8">
-									<hlayout>
-										<radio id="rdo8_1" label="Si" selected="Si" />
-										<radio id="rdo8_2" label="No" selected="No" />
-									</hlayout>
-								</radiogroup>
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="Terreno donde se encuentra la vivienda:" />
-								</hbox>
-								<combobox id="cmb2" autodrop="true" readonly="true"
-									placeholder="Seleccione Terreno donde se encuentra la vivienda"
-									tooltiptext="Seleccione Terreno donde se encuentra la vivienda"
-									hflex="1">
-									<comboitem label="Con título de propiedad" />
-									<comboitem label="Con documento de venta registrado" />
-									<comboitem label="Con título de posesión" />
-									<comboitem label="Ejidos" />
-									<comboitem label="Del estado" />
-									<comboitem label="Privado" />
-									<comboitem label="Arrendado" />
-									<comboitem label="Invadido" />
-								</combobox>
-								<hbox>
-									<label class="etiqueta"
-										value="¿Cómo se elimina la basura en la vivienda?:" />
-								</hbox>
-								<combobox id="cmb9" autodrop="true" readonly="true"
-									placeholder="Seleccione Cómo se elimina la basura en la vivienda"
-									tooltiptext="Seleccione Cómo se elimina la basura en la vivienda"
-									hflex="1">
-									<comboitem label="Aseo urbano domiciliario" />
-									<comboitem label="Contenedor común" />
-									<comboitem label="Se bota en la calle" />
-									<comboitem label="Se quema o se entierra" />
-									<comboitem label="Otro" />
-								</combobox>
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta"
-										value="¿En qué condición habita usted esta vivienda?:" />
-								</hbox>
-								<combobox id="cmb3" autodrop="true" readonly="true"
-									placeholder="Seleccione la condición" tooltiptext="Seleccione la condición en la que habita"
-									hflex="1">
-									<comboitem label="Propietario" />
-									<comboitem label="forma parte del grupo familiar" />
-									<comboitem label="Alquilado" />
-									<comboitem label="Inquilino / sin vivienda" />
-									<comboitem label="Ocupante" />
-									<comboitem label="Otro" />
-								</combobox>
-								<hbox>
-									<label class="etiqueta" value="¿Qué combustible utiliza para cocinar?:" />
-								</hbox>
-								<combobox id="cmb10" autodrop="true" readonly="true"
-									placeholder="Seleccione el combustible con el que se cocina"
-									tooltiptext="Seleccione el combustible con el que se cocina"
-									hflex="1">
-									<comboitem label="Gas" />
-									<comboitem label="Electricidad" />
-									<comboitem label="Kerosene" />
-									<comboitem label="Leña / carbón" />
-								</combobox>
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta"
-										value="¿En qué condiciones estructurales se encuentra la vivienda?:" />
-								</hbox>
-								<vlayout id="condicionesEstructurales">
-									<checkbox id="check4_1" label="En buen estado"
-										checked="En buen estado" />
-									<checkbox id="check4_2"
-										label="Requiere mejoras en piso techo y paredes" checked="Requiere mejoras en piso, techo y paredes" />
-									<checkbox id="check4_3"
-										label="Requiere construcción de nuevos ambientes" checked="Requiere construcción de nuevos ambientes" />
-									<checkbox id="check4_4"
-										label="Requiere Mantenimiento de tuberías o de electricidad"
-										checked="Requiere Mantenimiento de tuberías o de electricidad" />
-									<checkbox id="check4_5" label="Se encuentra deteriorada (inhabitable)"
-										checked="Se encuentra deteriorada (inhabitable)" />
-								</vlayout>
-								<hbox>
-									<label class="etiqueta"
-										value="Contando sala comedor y cuartos ¿Cuántos ambientes posee la vivienda?:" />
-								</hbox>
-								<spinner id="spinner11" value="0" constraint="min 0"
-									tooltiptext="Cantidad de ambientes de la vivienda" />
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="¿Cómo se abastece de agua la vivienda?:" />
-								</hbox>
-								<combobox id="cmb5" autodrop="true" readonly="true"
-									placeholder="Seleccione forma de abastecimiento de agua"
-									tooltiptext="Seleccione la de abastecimiento de agua" hflex="1">
-									<comboitem label="Acueducto tubería" />
-									<comboitem label="Pila pública" />
-									<comboitem label="Camión cisterna" />
-									<comboitem label="Pozo  manantial" />
-									<comboitem label="Otro" />
-								</combobox>
-								<hbox>
-									<label class="etiqueta" value="¿Cuántas personas residen en la vivienda?:" />
-								</hbox>
-								<combobox id="cmb12" autodrop="true" readonly="true"
-									placeholder="Seleccione Cuántas personas residen" tooltiptext="Seleccione Cuántas personas residen"
-									hflex="1">
-									<comboitem label="Una sola persona" />
-									<comboitem label="Dos a cuatro personas" />
-									<comboitem label="de cinco a siete personas" />
-									<comboitem label="Más de siete personas" />
-								</combobox>
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta"
-										value="¿Con qué frecuencia dispone de agua la vivienda?:" />
-								</hbox>
-								<combobox id="cmb6" autodrop="true" readonly="true"
-									placeholder="Seleccione la frecuencia de agua en la vivienda"
-									tooltiptext="Seleccione la frecuencia de agua en la vivienda"
-									hflex="1">
-									<comboitem label="Todos los días" />
-									<comboitem label="Algunos días" />
-									<comboitem label="Algunas horas al día" />
-								</combobox>
-								<hbox>
-									<label class="etiqueta"
-										value="¿Estas personas mantienen gastos separados para comer?:" />
-								</hbox>
-								<radiogroup id="rdg13">
-									<hlayout>
-										<radio id="rdo13_1" label="Si" selected="Si" />
-										<radio id="rdo13_2" label="No" selected="No" />
-									</hlayout>
-								</radiogroup>
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="¿La vivienda posee…:" />
-								</hbox>
-								<combobox id="cmb7" autodrop="true" readonly="true"
-									placeholder="Seleccione lo que la vivienda posee" tooltiptext="Seleccione lo que la vivienda posee"
-									hflex="1">
-									<comboitem label="Acueducto tubería" />
-									<comboitem label="Pila pública" />
-									<comboitem label="Camión cisterna" />
-									<comboitem label="Pozo o manantial" />
-									<comboitem label="Otro" />
-								</combobox>
-								<hbox>
-									<label class="etiqueta"
-										value="¿Cuántos grupos de personas mantienen gastos separados?:" />
-								</hbox>
-								<spinner id="spinner14" value="0" tooltiptext=" grupos de personas mantienen gastos separados"
-									constraint="min 0" />
-							</row>
-						</rows>
-					</grid>
-				</tabpanel>
-				<tabpanel>
-					<grid width="100%">
-						<columns visible="false">
-							<column label="" width="20%" />
-							<column label="" width="30%" />
-							<column label="" width="20%" />
-							<column label="" width="30%" />
-						</columns>
-						<rows>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="Total Miembros del Hogar:" />
-								</hbox>
-								<spinner id="spinner16" value="0" tooltiptext=" Número de personas que habitan este hogar"
-									constraint="min 0" />
-								<hbox>
-									<label class="etiqueta" value="¿Dónde adquiere los alimentos?:" />
-								</hbox>
-								<combobox id="cmb21" autodrop="true" readonly="true"
-									placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-									hflex="1">
-									<comboitem label="Bodega independiente" />
-									<comboitem label="Bodega Mercal" />
-									<comboitem label="Mercal Tipo I y II" />
-									<comboitem label="Super o Mega Mercal" />
-									<comboitem label="Supermecado" />
-									<comboitem label="Mercado Público" />
-									<comboitem label="Camiones en la calle" />
-									<comboitem label="Cooperativa" />
-								</combobox>
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="Para este hogar la vivienda es:" />
-								</hbox>
-								<combobox id="cmb17" autodrop="true" readonly="true"
-									placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-									hflex="1">
-									<comboitem label="Propia pagada" />
-									<comboitem label="Propia Pagándose" />
-									<comboitem label="Alquilada" />
-									<comboitem label="Prestada" />
-									<comboitem label="Invadida" />
-									<comboitem label="Otra forma" />
-								</combobox>
-								<hbox>
-									<label class="etiqueta"
-										value="¿Cuándo algún miembro del hogar tiene problemas de salud dónde acude?:" />
-								</hbox>
-								<combobox id="cmb22" autodrop="true" readonly="true"
-									placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-									hflex="1">
-									<comboitem label="Hospital" />
-									<comboitem label="Ambulatorio" />
-									<comboitem label="Seguro Social" />
-									<comboitem label="Barrio Adentro" />
-									<comboitem label="Dispensarios" />
-									<comboitem label="CDI" />
-									<comboitem label="Centro privado" />
-									<comboitem label="Servicio Médico Dusa" />
-									<comboitem label="Otros" />
-								</combobox>
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta"
-										value="Total de habitaciones que dispone exclusivamente para dormir:" />
-								</hbox>
-								<spinner id="spinner18" value="0" tooltiptext=" habitaciones que dispone exclusivamente para dormir"
-									constraint="min 0" />
-								<hbox>
-									<label class="etiqueta"
-										value="En los últimos seis meses este hogar o alguno de sus miembros ha sido víctima de un hecho delictivo? ¿Contra quién ocurrió?:" />
-								</hbox>
-								<vlayout id="ultimosMesesHogar">
-									<checkbox id="check23_1" label="Contra las personas"
-										checked="Contra las personas" />
-									<checkbox id="check23_2" label="Contra los bienes"
-										checked="Contra los bienes" />
-									<checkbox id="check23_3" label="No ha ocurrido ninguno"
-										checked="No ha ocurrido ninguno" />
-								</vlayout>
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="Este hogar dispone de:" />
-								</hbox>
-								<hbox>
-									<vlayout id="hogarDispone">
-										<checkbox id="check19_1" label="Nevera" checked="Nevera" />
-										<checkbox id="check19_2" label="Ventilador" checked="Ventilador" />
-										<checkbox id="check19_3" label="Cocina a Gas o Eléctrica"
-											checked="Cocina a Gas o Eléctrica" />
-										<checkbox id="check19_4" label="Lavadora" checked="Lavadora" />
-										<checkbox id="check19_5" label="Secadora" checked="Secadora" />
-										<checkbox id="check19_6" label="Microondas" checked="Microondas" />
+<zk>
+	<div id="divSocial" apply="controlador.social.CVisitaSocial">
+		<groupbox width="auto" mold="3d" title="Visita Social">
+			<grid width="auto">
+				<columns>
+					<column label="" width="30%" />
+					<column label="" width="70%" />
+				</columns>
+				<rows>
+						<row>
+							<label class="etiqueta" value="Buscar Trabajador" />
+							<button autodisable="self" id="btnBuscar1" class="btn"
+								label="Buscar" tooltiptext="Catalogo de Trabajadores" image="/public/imagenes/botones/buscar.png" />
+						</row>
+				</rows>
+			</grid>
+			<tabbox id="tb" height="auto" width="auto">
+				<tabs id="tabs">
+					<tab id="buscar" label="DATOS DEL TRABAJADOR" />
+					<tab id="A" label="CARACTERÍSTICAS DE LA VIVIENDA Y SERVICIOS BÁSICOS" />
+					<tab id="B" label="CARACTERISTICA DEL HOGAR" />
+					<tab id="c" label="ALIMENTACIÓN / INGRESOS Y EGRESOS." />
+					<tab id="e" label="COMPOSICION FAMILIAR" />
+					<tab id="d" label="RECREACIÓN Y USO DEL TIEMPO LIBRE" />
+					<tab id="f" label="DIAGNOSTICO" />
+				</tabs>
+				<tabpanels>
+					<tabpanel>
+						<separator />
+						<grid width="auto">
+							<columns>
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Datos Personales del Trabajador"
+												style="font-weight:bold;color:black" />
+										</vlayout>
+									</hbox>
+									<hbox></hbox>
+									<hbox></hbox>
+									<hbox></hbox>
+								</row>
+								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Ficha" />
+											<label id="lblFicha" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Cedula" />
+											<label id="lblCedula" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Nombres y Apellidos" />
+											<label id="lblNombres" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Sexo" />
+											<label id="lblSexo" />
+										</vlayout>
+									</hbox>
+								</row>
+								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Fecha de Nacimiento" />
+											<label id="lblFechaNacimiento" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Edad" />
+											<label id="lblEdad" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Lugar de Nacimiento" />
+											<label id="lblLugarNac" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Estado Civil" />
+											<label id="lblEstadoCivil" />
+										</vlayout>
+									</hbox>
+								</row>
+								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Fecha de Ingreso" />
+											<label id="lblFechaIngreso" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Grado de Instruccion" />
+											<label id="lblGradoInst" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Ocupacion U Oficio" />
+											<label id="lblOcupacion" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Profesion" />
+											<label id="lblProfesion" />
+										</vlayout>
+									</hbox>
+								</row>
+								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Condicion del Trabajador" />
+											<label id="lblCondicion" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="¿Es usted Jefe del hogar?" />
+											<label id="lblJefe" />
+										</vlayout>
+									</hbox>
+									<hbox></hbox>
+									<hbox></hbox>
+								</row>
+								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Direccion del Trabajador"
+												style="font-weight:bold;color:black" />
+										</vlayout>
+									</hbox>
+									<hbox></hbox>
+									<hbox></hbox>
+									<hbox></hbox>
+								</row>
+								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Urb./Barrio" />
+											<label id="lblUrb" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Av./Calle" />
+											<label id="lblCalle" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Sector" />
+											<label id="lblSector" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Nro." />
+											<label id="lblNro" />
+										</vlayout>
+									</hbox>
+								</row>
+								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Punto de Referencia" />
+											<label id="lblPuntoRef" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Ciudad" />
+											<label id="lblCiudad" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Parroquia" />
+											<label id="lblParroquia" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Municipio" />
+											<label id="lblMunicipio" />
+										</vlayout>
+									</hbox>
+								</row>
+								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Telefono Residencial" />
+											<label id="lblTelefono1" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Telefono Celular" />
+											<label id="lblTelefono2" />
+										</vlayout>
+									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta"
+												value="Medio de Transporte Utilizado para ir al trabajo" />
+											<label id="lblTransporte" />
+										</vlayout>
+									</hbox>
+									<hbox></hbox>
+								</row>
+							</rows>
+						</grid>
+					</tabpanel>
+					<tabpanel>
+						<grid width="100%">
+							<columns visible="false">
+								<column label="" width="20%" />
+								<column label="" width="30%" />
+								<column label="" width="20%" />
+								<column label="" width="30%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Tipo de vivienda:" />
+									</hbox>
+									<combobox id="cmb1" autodrop="true" readonly="true"
+										placeholder="Seleccione un tipo de vivienda" tooltiptext="Seleccione un tipo de vivienda"
+										hflex="1">
+										<comboitem label="Quinta" />
+										<comboitem label="Casa" />
+										<comboitem label="Apto. En edificio" />
+										<comboitem label="Apto.  o en casa" />
+										<comboitem label="Casa de vecindad" />
+										<comboitem label="Rancho" />
+										<comboitem label="Otro tipo de vivienda" />
+										<comboitem label="Vivienda colectiva" />
+									</combobox>
+									<hbox>
+										<label class="etiqueta" value="¿La vivienda posee servicio eléctrico?:" />
+									</hbox>
+									<radiogroup id="rdg8">
+										<hlayout>
+											<radio id="rdo8_1" label="Si" selected="Si" />
+											<radio id="rdo8_2" label="No" selected="No" />
+										</hlayout>
+									</radiogroup>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Terreno donde se encuentra la vivienda:" />
+									</hbox>
+									<combobox id="cmb2" autodrop="true" readonly="true"
+										placeholder="Seleccione Terreno donde se encuentra la vivienda"
+										tooltiptext="Seleccione Terreno donde se encuentra la vivienda"
+										hflex="1">
+										<comboitem label="Con título de propiedad" />
+										<comboitem label="Con documento de venta registrado" />
+										<comboitem label="Con título de posesión" />
+										<comboitem label="Ejidos" />
+										<comboitem label="Del estado" />
+										<comboitem label="Privado" />
+										<comboitem label="Arrendado" />
+										<comboitem label="Invadido" />
+									</combobox>
+									<hbox>
+										<label class="etiqueta"
+											value="¿Cómo se elimina la basura en la vivienda?:" />
+									</hbox>
+									<combobox id="cmb9" autodrop="true" readonly="true"
+										placeholder="Seleccione Cómo se elimina la basura en la vivienda"
+										tooltiptext="Seleccione Cómo se elimina la basura en la vivienda"
+										hflex="1">
+										<comboitem label="Aseo urbano domiciliario" />
+										<comboitem label="Contenedor común" />
+										<comboitem label="Se bota en la calle" />
+										<comboitem label="Se quema o se entierra" />
+										<comboitem label="Otro" />
+									</combobox>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta"
+											value="¿En qué condición habita usted esta vivienda?:" />
+									</hbox>
+									<combobox id="cmb3" autodrop="true" readonly="true"
+										placeholder="Seleccione la condición" tooltiptext="Seleccione la condición en la que habita"
+										hflex="1">
+										<comboitem label="Propietario" />
+										<comboitem label="forma parte del grupo familiar" />
+										<comboitem label="Alquilado" />
+										<comboitem label="Inquilino / sin vivienda" />
+										<comboitem label="Ocupante" />
+										<comboitem label="Otro" />
+									</combobox>
+									<hbox>
+										<label class="etiqueta" value="¿Qué combustible utiliza para cocinar?:" />
+									</hbox>
+									<combobox id="cmb10" autodrop="true" readonly="true"
+										placeholder="Seleccione el combustible con el que se cocina"
+										tooltiptext="Seleccione el combustible con el que se cocina"
+										hflex="1">
+										<comboitem label="Gas" />
+										<comboitem label="Electricidad" />
+										<comboitem label="Kerosene" />
+										<comboitem label="Leña / carbón" />
+									</combobox>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta"
+											value="¿En qué condiciones estructurales se encuentra la vivienda?:" />
+									</hbox>
+									<vlayout id="condicionesEstructurales">
+										<checkbox id="check4_1" label="En buen estado"
+											checked="En buen estado" />
+										<checkbox id="check4_2"
+											label="Requiere mejoras en piso techo y paredes" checked="Requiere mejoras en piso, techo y paredes" />
+										<checkbox id="check4_3"
+											label="Requiere construcción de nuevos ambientes" checked="Requiere construcción de nuevos ambientes" />
+										<checkbox id="check4_4"
+											label="Requiere Mantenimiento de tuberías o de electricidad"
+											checked="Requiere Mantenimiento de tuberías o de electricidad" />
+										<checkbox id="check4_5" label="Se encuentra deteriorada (inhabitable)"
+											checked="Se encuentra deteriorada (inhabitable)" />
 									</vlayout>
-									<space />
-									<vlayout id="hogarDispone2">
-										<checkbox id="check19_7" label="Filtro de agua"
-											checked="Filtro de agua" />
-										<checkbox id="check19_8" label="Calentador de agua"
-											checked="Calentador de agua" />
-										<checkbox id="check19_9" label="Aire Acondicionado"
-											checked="Aire Acondicionado" />
-										<checkbox id="check19_10" label="Televisor" checked="Televisor" />
-										<checkbox id="check19_11" label="Equipo de Sonido/ Radio"
-											checked="Equipo de Sonido/ Radio" />
-										<checkbox id="check19_12" label="DVD" checked="DVD" />
-									</vlayout>
-									<space />
-									<vlayout id="hogarDispone3">
-										<checkbox id="check19_13" label="Teléfono Fijo"
-											checked="Teléfono Fijo" />
-										<checkbox id="check19_14" label="Teléfono Móvil"
-											checked="Teléfono Móvil" />
-										<checkbox id="check19_15" label="TV por cable. /  Satelital."
-											checked="TV por cable. /  Satelital." />
-										<checkbox id="check19_16" label="Computador" checked="Computador" />
-										<checkbox id="check19_17" label="Acceso a Internet"
-											checked="Acceso a Internet" />
-										<checkbox id="check19_18" label="Vehículo" checked="Vehículo" />
-									</vlayout>
-								</hbox>
-								<hbox>
-									<label class="etiqueta"
-										value="¿Cuántas jóvenes de 10 a 17 años de edad que vivan en este hogar están embarazadas o tienen hijos?:" />
-								</hbox>
-								<spinner id="spinner24" value="0" tooltiptext="Coloque el número de mujeres"
-									constraint="min 0" />
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta"
-										value="Sumando sueldos, salarios, pensiones, becas ayudas económicas y cualquier otro beneficio ¿Cuál es el ingreso familiar?:" />
-								</hbox>
-								<doublespinner id="doubleSpinner20" value="0"
-									step="1" constraint="min 0" />
-								<hbox>
-									<label class="etiqueta"
-										value="De las personas que conforman este hogar ¿Cuántas tienen problemas de consumo de alcohol o drogas?:" />
-								</hbox>
-								<spinner id="spinner25"  value="0"
-									readonly="true" tooltiptext=" Anote el número de personas"
-									constraint="min 0" />
-							</row>
-						</rows>
-					</grid>
-				</tabpanel>
-				<tabpanel>
-					<tabbox id="tabC" height="auto">
-						<tabs id="tabsC">
-							<tab id="c1" label="Alimentacion" />
-							<tab id="c2" label="Egresos" />
-						</tabs>
-						<tabpanels>
-							<tabpanel>
-							<listbox>
-						        <listhead>
-						            <listheader label="Tipo de Alimentacion" align="center"  width="15%"/>
-						            <listheader label="Frecuencia con que lo consume" align="center"  width="20%"/>
-						            <listheader label="Donde la adquiere" align="center"  width="30%"/>
-						            <listheader label="Como la prepara" align="center"  width="35%"/>
-						        </listhead>
-						            <listitem>
-						                <listcell label="Carne de Res" />
-						                <listcell>
-						                <combobox id="cmbRes" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                <listcell>
-						                    <textbox hflex="1" id="textBoxRes"  maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                <listcell>
-						                <hbox>
-						                    <hlayout id="res">
-												<checkbox id="checkRes_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkRes_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkRes_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkRes_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkRes_5" label="Otras" checked="Otras" />
-											</hlayout>
+									<hbox>
+										<label class="etiqueta"
+											value="Contando sala comedor y cuartos ¿Cuántos ambientes posee la vivienda?:" />
+									</hbox>
+									<spinner id="spinner11" value="0" constraint="min 0"
+										tooltiptext="Cantidad de ambientes de la vivienda" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="¿Cómo se abastece de agua la vivienda?:" />
+									</hbox>
+									<combobox id="cmb5" autodrop="true" readonly="true"
+										placeholder="Seleccione forma de abastecimiento de agua"
+										tooltiptext="Seleccione la de abastecimiento de agua" hflex="1">
+										<comboitem label="Acueducto tubería" />
+										<comboitem label="Pila pública" />
+										<comboitem label="Camión cisterna" />
+										<comboitem label="Pozo  manantial" />
+										<comboitem label="Otro" />
+									</combobox>
+									<hbox>
+										<label class="etiqueta"
+											value="¿Cuántas personas residen en la vivienda?:" />
+									</hbox>
+									<combobox id="cmb12" autodrop="true" readonly="true"
+										placeholder="Seleccione Cuántas personas residen" tooltiptext="Seleccione Cuántas personas residen"
+										hflex="1">
+										<comboitem label="Una sola persona" />
+										<comboitem label="Dos a cuatro personas" />
+										<comboitem label="de cinco a siete personas" />
+										<comboitem label="Más de siete personas" />
+									</combobox>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta"
+											value="¿Con qué frecuencia dispone de agua la vivienda?:" />
+									</hbox>
+									<combobox id="cmb6" autodrop="true" readonly="true"
+										placeholder="Seleccione la frecuencia de agua en la vivienda"
+										tooltiptext="Seleccione la frecuencia de agua en la vivienda"
+										hflex="1">
+										<comboitem label="Todos los días" />
+										<comboitem label="Algunos días" />
+										<comboitem label="Algunas horas al día" />
+									</combobox>
+									<hbox>
+										<label class="etiqueta"
+											value="¿Estas personas mantienen gastos separados para comer?:" />
+									</hbox>
+									<radiogroup id="rdg13">
+										<hlayout>
+											<radio id="rdo13_1" label="Si" selected="Si" />
+											<radio id="rdo13_2" label="No" selected="No" />
+										</hlayout>
+									</radiogroup>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="¿La vivienda posee…:" />
+									</hbox>
+									<combobox id="cmb7" autodrop="true" readonly="true"
+										placeholder="Seleccione lo que la vivienda posee" tooltiptext="Seleccione lo que la vivienda posee"
+										hflex="1">
+										<comboitem label="Acueducto tubería" />
+										<comboitem label="Pila pública" />
+										<comboitem label="Camión cisterna" />
+										<comboitem label="Pozo o manantial" />
+										<comboitem label="Otro" />
+									</combobox>
+									<hbox>
+										<label class="etiqueta"
+											value="¿Cuántos grupos de personas mantienen gastos separados?:" />
+									</hbox>
+									<spinner id="spinner14" value="0"
+										tooltiptext=" grupos de personas mantienen gastos separados"
+										constraint="min 0" />
+								</row>
+							</rows>
+						</grid>
+					</tabpanel>
+					<tabpanel>
+						<grid width="100%">
+							<columns visible="false">
+								<column label="" width="20%" />
+								<column label="" width="30%" />
+								<column label="" width="20%" />
+								<column label="" width="30%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Total Miembros del Hogar:" />
+									</hbox>
+									<spinner id="spinner16" value="0"
+										tooltiptext=" Número de personas que habitan este hogar"
+										constraint="min 0" />
+									<hbox>
+										<label class="etiqueta" value="¿Dónde adquiere los alimentos?:" />
+									</hbox>
+									<combobox id="cmb21" autodrop="true" readonly="true"
+										placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+										hflex="1">
+										<comboitem label="Bodega independiente" />
+										<comboitem label="Bodega Mercal" />
+										<comboitem label="Mercal Tipo I y II" />
+										<comboitem label="Super o Mega Mercal" />
+										<comboitem label="Supermecado" />
+										<comboitem label="Mercado Público" />
+										<comboitem label="Camiones en la calle" />
+										<comboitem label="Cooperativa" />
+									</combobox>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Para este hogar la vivienda es:" />
+									</hbox>
+									<combobox id="cmb17" autodrop="true" readonly="true"
+										placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+										hflex="1">
+										<comboitem label="Propia pagada" />
+										<comboitem label="Propia Pagándose" />
+										<comboitem label="Alquilada" />
+										<comboitem label="Prestada" />
+										<comboitem label="Invadida" />
+										<comboitem label="Otra forma" />
+									</combobox>
+									<hbox>
+										<label class="etiqueta"
+											value="¿Cuándo algún miembro del hogar tiene problemas de salud dónde acude?:" />
+									</hbox>
+									<combobox id="cmb22" autodrop="true" readonly="true"
+										placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+										hflex="1">
+										<comboitem label="Hospital" />
+										<comboitem label="Ambulatorio" />
+										<comboitem label="Seguro Social" />
+										<comboitem label="Barrio Adentro" />
+										<comboitem label="Dispensarios" />
+										<comboitem label="CDI" />
+										<comboitem label="Centro privado" />
+										<comboitem label="Servicio Médico Dusa" />
+										<comboitem label="Otros" />
+									</combobox>
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta"
+											value="Total de habitaciones que dispone exclusivamente para dormir:" />
+									</hbox>
+									<spinner id="spinner18" value="0"
+										tooltiptext=" habitaciones que dispone exclusivamente para dormir"
+										constraint="min 0" />
+									<cell colspan="2">
+										<vbox>
+											<label class="etiqueta"
+												value="En los últimos seis meses este hogar o alguno de sus miembros ha sido víctima de un hecho delictivo? ¿Contra quién ocurrió?:" />
+											<hbox>
+												<checkbox id="check23_1" label="Contra las personas"
+													checked="Contra las personas" />
+												<checkbox id="check23_2" label="Contra los bienes"
+													checked="Contra los bienes" />
+												<checkbox id="check23_3" label="No ha ocurrido ninguno"
+													checked="No ha ocurrido ninguno" />
+											</hbox>
+										</vbox>
+									</cell>
+
+								</row>
+								<row>
+									<cell colspan="4">
+										<hbox>
+											<label class="etiqueta" value="Este hogar dispone de:" />
 										</hbox>
-						                </listcell>
-						            </listitem>
-						            <listitem>
-						                <listcell label="Carne de Pollo" />
-						                 <listcell>
-						                <combobox id="cmbPollo" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                 <listcell>
-						                    <textbox hflex="1" id="textBoxPollo" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                <listcell>
-						                <hbox>
-						                    <hlayout id="pollo">
-												<checkbox id="checkPollo_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkPollo_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkPollo_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkPollo_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkPollo_5" label="Otras" checked="Otras" />
-											</hlayout>
+										<hbox>
+											<vlayout>
+												<checkbox id="check19_1" label="Nevera" checked="Nevera" />
+												<checkbox id="check19_2" label="Ventilador"
+													checked="Ventilador" />
+												<checkbox id="check19_3" label="Cocina a Gas o Eléctrica"
+													checked="Cocina a Gas o Eléctrica" />
+
+											</vlayout>
+											<vlayout>
+												<checkbox id="check19_4" label="Lavadora" checked="Lavadora" />
+												<checkbox id="check19_5" label="Secadora" checked="Secadora" />
+												<checkbox id="check19_6" label="Microondas"
+													checked="Microondas" />
+											</vlayout>
+											<vlayout>
+												<hbox>
+													<vlayout>
+														<checkbox id="check19_7" label="Filtro de agua"
+															checked="Filtro de agua" />
+														<checkbox id="check19_8" label="Calentador de agua"
+															checked="Calentador de agua" />
+														<checkbox id="check19_9" label="Aire Acondicionado"
+															checked="Aire Acondicionado" />
+													</vlayout>
+													<vlayout>
+														<checkbox id="check19_10" label="Televisor"
+															checked="Televisor" />
+														<checkbox id="check19_11" label="Equipo de Sonido/ Radio"
+															checked="Equipo de Sonido/ Radio" />
+														<checkbox id="check19_12" label="DVD" checked="DVD" />
+													</vlayout>
+													<vlayout>
+														<checkbox id="check19_13" label="Teléfono Fijo"
+															checked="Teléfono Fijo" />
+														<checkbox id="check19_14" label="Teléfono Móvil"
+															checked="Teléfono Móvil" />
+														<checkbox id="check19_15" label="TV por cable. /  Satelital."
+															checked="TV por cable. /  Satelital." />
+													</vlayout>
+													<vlayout>
+														<checkbox id="check19_16" label="Computador"
+															checked="Computador" />
+														<checkbox id="check19_17" label="Acceso a Internet"
+															checked="Acceso a Internet" />
+														<checkbox id="check19_18" label="Vehículo"
+															checked="Vehículo" />
+													</vlayout>
+												</hbox>
+											</vlayout>
 										</hbox>
-						                </listcell>
-						            </listitem>
-						            <listitem>
-						                <listcell label="Carne de Cerdo" />
-						                 <listcell>
-						                <combobox id="cmbCerdo" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                 <listcell>
-						                    <textbox hflex="1" id="textBoxCerdo" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                <listcell>
-						                <hbox>
-						                    <hlayout id="cerdo">
-												<checkbox id="checkCerdo_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkCerdo_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkCerdo_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkCerdo_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkCerdo_5" label="Otras" checked="Otras" />
-											</hlayout>
+									</cell>
+								</row>
+								<row>
+									<cell colspan="2">
+										<vbox>
+											<label class="etiqueta"
+												value="¿Cuántas jóvenes de 10 a 17 años de edad que vivan en este hogar están embarazadas o tienen hijos?:" />
+											<spinner id="spinner24" value="0"
+												tooltiptext="Coloque el número de mujeres" constraint="min 0" />
+										</vbox>
+									</cell>
+									<cell colspan="2">
+										<vbox>
+											<label class="etiqueta"
+												value="Sumando sueldos, salarios, pensiones, becas ayudas económicas y cualquier otro beneficio ¿Cuál es el ingreso familiar?:" />
+
+											<doublespinner id="doubleSpinner20" value="0"
+												step="1" constraint="min 0" />
+										</vbox>
+									</cell>
+								</row>
+								<row>
+									<cell colspan="4">
+										<hbox>
+											<label class="etiqueta"
+												value="De las personas que conforman este hogar ¿Cuántas tienen problemas de consumo de alcohol o drogas?:" />
+
+											<spinner id="spinner25" value="0" readonly="true"
+												tooltiptext=" Anote el número de personas" constraint="min 0" />
 										</hbox>
-						                </listcell>
-						            </listitem>
-						            <listitem>
-						                <listcell label="Carne de Pescado" />
-						                 <listcell>
-						                <combobox id="cmbPescado" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                 <listcell>
-						                    <textbox hflex="1" id="textBoxPescado" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                 <listcell>
-						                <hbox>
-						                    <hlayout id="pescado">
-												<checkbox id="checkPescado_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkPescado_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkPescado_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkPescado_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkPescado_5" label="Otras" checked="Otras" />
-											</hlayout>
-										</hbox>
-						                </listcell>
-						            </listitem>
-						            <listitem>
-						                <listcell label="Leche" />
-						                 <listcell>
-						                <combobox id="cmbLeche" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                 <listcell>
-						                    <textbox hflex="1" id="textBoxLeche" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                 <listcell>
-						                <hbox>
-						                    <hlayout id="leche">
-												<checkbox id="checkLeche_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkLeche_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkLeche_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkLeche_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkLeche_5" label="Otras" checked="Otras" />
-											</hlayout>
-										</hbox>
-						                </listcell>
-						            </listitem>
-						            <listitem>
-						                <listcell label="Cereales" />
-						                 <listcell>
-						                <combobox id="cmbCereales" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                 <listcell>
-						                    <textbox hflex="1" id="textBoxCereales" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                 <listcell>
-						                <hbox>
-						                    <hlayout id="cereales">
-												<checkbox id="checkCereales_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkCereales_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkCereales_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkCereales_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkCereales_5" label="Otras" checked="Otras" />
-											</hlayout>
-										</hbox>
-						                </listcell>
-						            </listitem>
-						            <listitem>
-						                <listcell label="Huevos" />
-						                 <listcell>
-						                <combobox id="cmbHuevos" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                 <listcell>
-						                    <textbox hflex="1" id="textBoxHuevos" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                 <listcell>
-						                <hbox>
-						                    <hlayout id="huevos">
-												<checkbox id="checkHuevos_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkHuevos_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkHuevos_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkHuevos_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkHuevos_5" label="Otras" checked="Otras" />
-											</hlayout>
-										</hbox>
-						                </listcell>
-						            </listitem>
-						            <listitem>
-						                <listcell label="Frutas" />
-						                 <listcell>
-						                <combobox id="cmbFrutas" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                 <listcell>
-						                    <textbox hflex="1" id="textBoxFrutas" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                 <listcell>
-						                <hbox>
-						                    <hlayout id="frutas">
-												<checkbox id="checkFrutas_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkFrutas_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkFrutas_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkFrutas_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkFrutas_5" label="Otras" checked="Otras" />
-											</hlayout>
-										</hbox>
-						                </listcell>
-						            </listitem>
-						            <listitem>
-						                <listcell label="Verduras" />
-						                 <listcell>
-						                <combobox id="cmbVerduras" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                 <listcell>
-						                    <textbox hflex="1" id="textBoxVerduras" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                 <listcell>
-						                <hbox>
-						                    <hlayout id="verduras">
-												<checkbox id="checkVerduras_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkVerduras_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkVerduras_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkVerduras_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkVerduras_5" label="Otras" checked="Otras" />
-											</hlayout>
-										</hbox>
-						                </listcell>
-						            </listitem>
-						            <listitem>
-						                <listcell label="Leguminosas (granos)" />
-						                 <listcell>
-						                <combobox id="cmbGranos" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Diario" />
-											<comboitem label="Cada tercer dia" />
-											<comboitem label="Una vez a la semana" />
-											<comboitem label="Una vez al mes" />
-											<comboitem label="Ocacionalmente" />
-										</combobox>
-						                </listcell>
-						                 <listcell>
-						                    <textbox hflex="1" id="textBoxGranos" maxlength="1000" multiline="true" placeholder="Anote sitio que indica" />
-						                </listcell>
-						                 <listcell>
-						                <hbox>
-						                    <hlayout id="granos">
-												<checkbox id="checkGranos_1" label="Hirviendo" checked="Hirviendo" />
-												<checkbox id="checkGranos_2" label="Al vapor" checked="Al vapor" />
-												<checkbox id="checkGranos_3" label="Al horno" checked="Al horno" />
-												<checkbox id="checkGranos_4" label="En aceite" checked="En aceite" />
-												<checkbox id="checkGranos_5" label="Otras" checked="Otras" />
-											</hlayout>
-										</hbox>
-						                </listcell>
-						            </listitem>
-						    </listbox>
-							</tabpanel>
-							<tabpanel>
-								<grid width="auto">
-									<columns>
-										<column label="" width="25%" />
-										<column label="" width="25%" />
-										<column label="" width="25%" />
-										<column label="" width="25%" />
-									</columns>
-									<rows>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="Alimentacion:" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_1" value="0"
-												step="1" constraint="min 0" />
-											<hbox>
-												<label class="etiqueta" value="Educacion" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_9" value="0"
-												step="1" constraint="min 0" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="Gasolina" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_2" value="0"
-												step="1" constraint="min 0" />
-											<hbox>
-												<label class="etiqueta" value="Gastos Medicos" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_10" value="0"
-												step="1" constraint="min 0" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="Alquiler" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_3" value="0"
-												step="1" constraint="min 0" />
-											<hbox>
-												<label class="etiqueta" value="Recreacion" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_11" value="0"
-												step="1" constraint="min 0" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="Agua" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_4" value="0"
-												step="1" constraint="min 0" />
-											<hbox>
-												<label class="etiqueta" value="Creditos" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_12" value="0"
-												step="1" constraint="min 0" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="Electricidad" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_5" value="0"
-												step="1" constraint="min 0" />
-											<hbox>
-												<label class="etiqueta" value="Ropa y Calzado" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_13" value="0"
-												step="1" constraint="min 0" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="Telefono Recidencial" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_6" value="0"
-												step="1" constraint="min 0" />
-											<hbox>
-												<label class="etiqueta" value="Fondos de Ahorro" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_14" value="0"
-												step="1" constraint="min 0" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="Telefono Celular" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_7" value="0"
-												step="1" constraint="min 0" />
-											<hbox>
-												<label class="etiqueta" value="Credito Habitacional" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_15" value="0"
-												step="1" constraint="min 0" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="Transporte" />
-											</hbox>
-											<doublespinner id="doubleSpinner30_8" value="0"
-												step="1" constraint="min 0" />
-											<hbox>
-												<label class="etiqueta" value="Total" />
-											</hbox>
-											<hbox>
-												<label class="etiqueta" id="labelSuma" />
-											</hbox>
-										</row>
-									</rows>
-								</grid>
-							</tabpanel>
-						</tabpanels>
-					</tabbox>
-				</tabpanel>
-				<tabpanel>
-					<grid width="auto">
-						<columns>
-							<column label="" width="25%" />
-							<column label="" width="25%" />
-							<column label="" width="25%" />
-							<column label="" width="25%" />
-						</columns>
-						<rows>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="A qué hora se levanta en la mañana" />
-								</hbox>
-								<textbox id="textBox46_1" maxlength="1500" multiline="true" />
-								<hbox>
-									<label class="etiqueta" value="¿Hora acostumbrada en la que se acuesta?" />
-								</hbox>
-								<textbox id="textBox46_2" maxlength="1500" multiline="true" />
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="¿Qué hace al levantarse?" />
-								</hbox>
-								<textbox id="textBox46_3" maxlength="1500" multiline="true" />
-								<hbox>
-									<label class="etiqueta" value="¿Qué otra actividad realiza?" />
-								</hbox>
-								<textbox id="textBox46_4" maxlength="1500" multiline="true" />
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta" value="¿Por qué ese orden?" />
-								</hbox>
-								<textbox id="textBox46_5" maxlength="1500" multiline="true" />
-								<hbox>
-									<label class="etiqueta" value="¿Y los fines de semana?" />
-								</hbox>
-								<textbox id="textBox46_6" maxlength="1500" multiline="true" />
-							</row>
-							<row>
-								<hbox>
-									<label class="etiqueta"
-										value="¿Cuales son las actividades de rutina que siempre realiza?" />
-								</hbox>
-								<textbox id="textBox46_7" maxlength="1500" multiline="true" />
-								<hbox>
-									<label class="etiqueta" value="¿Con quién comparte estas actividades?" />
-								</hbox>
-								<textbox id="textBox46_8" maxlength="1500" multiline="true" />
-							</row>
-						</rows>
-					</grid>
-					<separator />
-					<tabbox id="tab" height="auto">
-						<tabs id="tabsO">
-							<tab id="dinamica" label="Dinamica Familiar" />
-							<tab id="diagnostico" label="Diagnostico / Observaciones" />
-						</tabs>
-						<tabpanels>
-							<tabpanel>
-								<grid width="auto">
-									<columns>
-										<column label="" width="50%" />
-										<column label="" width="50%" />
-									</columns>
-									<rows>
-										<row>
-											<hbox>
-												<label class="etiqueta"
-													value="¿Qué actividad diaria realiza conjuntamente con el Grupo Familiar? " />
-											</hbox>
-											<textbox id="textBox47_1" maxlength="1500" multiline="true" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta"
-													value="¿Cómo considera usted, es el proceso de comunicación entre los miembros de este grupo familiar?" />
-											</hbox>
-											<textbox id="textBox47_2" maxlength="1500" multiline="true" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta"
-													value="¿Cómo considera usted, se desenvuelven los roles en este grupo familiar? " />
-											</hbox>
-											<textbox id="textBox47_3" maxlength="1500" multiline="true" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta"
-													value="¿En el grupo familiar, ¿Quién toma las decisiones importantes? " />
-											</hbox>
-											<textbox id="textBox47_4" maxlength="1500" multiline="true" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta"
-													value="¿Quién del grupo familiar dicta las pautas y normas para la convivencia? " />
-											</hbox>
-											<textbox id="textBox47_5" maxlength="1500" multiline="true" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta"
-													value="¿Considera usted que ¿el grupo familiar se respeta?" />
-											</hbox>
-											<textbox id="textBox47_6" maxlength="1500" multiline="true" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta"
-													value="¿Cómo expresa usted sus sentimientos de disgusto, alegría e incomodidad? " />
-											</hbox>
-											<textbox id="textBox47_7" maxlength="1500" multiline="true"/>
-										</row>
-									</rows>
-								</grid>
-							</tabpanel>
-							<tabpanel>
-								<grid width="auto">
-									<columns>
-										<column label="" width="50%" />
-										<column label="" width="50%" />
-									</columns>
-									<rows>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="DIAGNOSTICO SOCIAL:" />
-											</hbox>
-											<textbox id="textBox10" maxlength="1500" multiline="true" />
-										</row>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="OBSERVACIONES:" />
-											</hbox>
-											<textbox id="textBox11" maxlength="1500" multiline="true" />
-										</row>
-									</rows>
-								</grid>
-								<grid width="auto">
-									<columns>
-										<column label="" width="33%" />
-										<column label="" width="33%" />
-										<column label="" width="34%" />
-									</columns>
-									<rows>
-										<row>
-											<hbox>
-												<label class="etiqueta" value="Fecha de Aplicación:" />
-												<datebox id="dateBoxAplicacion" format="yyyy/MM/dd"
-													readonly="true" />
-											</hbox>
-											<hbox>
-												<label class="etiqueta" value="Fecha de Procesamiento:" />
-												<datebox id="dateBoxProcesamiento" format="yyyy/MM/dd"
-													readonly="true" />
-											</hbox>
-											<hbox>
-												<label class="etiqueta" value="Fecha de de Informe:" />
-												<datebox id="dateBoxInforme" format="yyyy/MM/dd"
-													readonly="true" />
-											</hbox>
-										</row>
-									</rows>
-								</grid>
-							</tabpanel>
-						</tabpanels>
-					</tabbox>
-				</tabpanel>
-				<tabpanel>
-				<grid width="100%">
+									</cell>
+								</row>
+							</rows>
+						</grid>
+					</tabpanel>
+
+					<tabpanel>
+						<tabbox id="tabC" height="auto">
+							<tabs id="tabsC">
+								<tab id="c1" label="Alimentacion" />
+								<tab id="c2" label="Egresos" />
+							</tabs>
+							<tabpanels>
+								<tabpanel>
+									<listbox>
+										<listhead>
+											<listheader label="Tipo de Alimentacion" align="center"
+												width="15%" />
+											<listheader label="Frecuencia con que lo consume"
+												align="center" width="20%" />
+											<listheader label="Donde la adquiere" align="center"
+												width="30%" />
+											<listheader label="Como la prepara" align="center"
+												width="35%" />
+										</listhead>
+										<listitem>
+											<listcell label="Carne de Res" />
+											<listcell>
+												<combobox id="cmbRes" autodrop="true" readonly="true"
+													placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+													hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxRes" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="res">
+														<checkbox id="checkRes_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkRes_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkRes_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkRes_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkRes_5" label="Otras" checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell label="Carne de Pollo" />
+											<listcell>
+												<combobox id="cmbPollo" autodrop="true" readonly="true"
+													placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+													hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxPollo" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="pollo">
+														<checkbox id="checkPollo_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkPollo_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkPollo_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkPollo_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkPollo_5" label="Otras"
+															checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell label="Carne de Cerdo" />
+											<listcell>
+												<combobox id="cmbCerdo" autodrop="true" readonly="true"
+													placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+													hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxCerdo" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="cerdo">
+														<checkbox id="checkCerdo_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkCerdo_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkCerdo_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkCerdo_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkCerdo_5" label="Otras"
+															checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell label="Carne de Pescado" />
+											<listcell>
+												<combobox id="cmbPescado" autodrop="true" readonly="true"
+													placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+													hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxPescado" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="pescado">
+														<checkbox id="checkPescado_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkPescado_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkPescado_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkPescado_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkPescado_5" label="Otras"
+															checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell label="Leche" />
+											<listcell>
+												<combobox id="cmbLeche" autodrop="true" readonly="true"
+													placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+													hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxLeche" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="leche">
+														<checkbox id="checkLeche_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkLeche_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkLeche_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkLeche_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkLeche_5" label="Otras"
+															checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell label="Cereales" />
+											<listcell>
+												<combobox id="cmbCereales" autodrop="true"
+													readonly="true" placeholder="Seleccione la alternativa"
+													tooltiptext="Seleccione la alternativa" hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxCereales" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="cereales">
+														<checkbox id="checkCereales_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkCereales_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkCereales_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkCereales_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkCereales_5" label="Otras"
+															checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell label="Huevos" />
+											<listcell>
+												<combobox id="cmbHuevos" autodrop="true" readonly="true"
+													placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+													hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxHuevos" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="huevos">
+														<checkbox id="checkHuevos_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkHuevos_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkHuevos_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkHuevos_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkHuevos_5" label="Otras"
+															checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell label="Frutas" />
+											<listcell>
+												<combobox id="cmbFrutas" autodrop="true" readonly="true"
+													placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+													hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxFrutas" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="frutas">
+														<checkbox id="checkFrutas_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkFrutas_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkFrutas_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkFrutas_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkFrutas_5" label="Otras"
+															checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell label="Verduras" />
+											<listcell>
+												<combobox id="cmbVerduras" autodrop="true"
+													readonly="true" placeholder="Seleccione la alternativa"
+													tooltiptext="Seleccione la alternativa" hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxVerduras" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="verduras">
+														<checkbox id="checkVerduras_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkVerduras_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkVerduras_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkVerduras_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkVerduras_5" label="Otras"
+															checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+										<listitem>
+											<listcell label="Leguminosas (granos)" />
+											<listcell>
+												<combobox id="cmbGranos" autodrop="true" readonly="true"
+													placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+													hflex="1">
+													<comboitem label="Diario" />
+													<comboitem label="Cada tercer dia" />
+													<comboitem label="Una vez a la semana" />
+													<comboitem label="Una vez al mes" />
+													<comboitem label="Ocacionalmente" />
+												</combobox>
+											</listcell>
+											<listcell>
+												<textbox hflex="1" id="textBoxGranos" maxlength="1000"
+													multiline="true" placeholder="Anote sitio que indica" />
+											</listcell>
+											<listcell>
+												<hbox>
+													<hlayout id="granos">
+														<checkbox id="checkGranos_1" label="Hirviendo"
+															checked="Hirviendo" />
+														<checkbox id="checkGranos_2" label="Al vapor"
+															checked="Al vapor" />
+														<checkbox id="checkGranos_3" label="Al horno"
+															checked="Al horno" />
+														<checkbox id="checkGranos_4" label="En aceite"
+															checked="En aceite" />
+														<checkbox id="checkGranos_5" label="Otras"
+															checked="Otras" />
+													</hlayout>
+												</hbox>
+											</listcell>
+										</listitem>
+									</listbox>
+								</tabpanel>
+								<tabpanel>
+									<grid width="auto">
+										<columns>
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+											<column label="" width="25%" />
+										</columns>
+										<rows>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="Alimentacion:" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_1" value="0"
+													step="1" constraint="min 0" />
+												<hbox>
+													<label class="etiqueta" value="Educacion" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_9" value="0"
+													step="1" constraint="min 0" />
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="Gasolina" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_2" value="0"
+													step="1" constraint="min 0" />
+												<hbox>
+													<label class="etiqueta" value="Gastos Medicos" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_10" value="0"
+													step="1" constraint="min 0" />
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="Alquiler" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_3" value="0"
+													step="1" constraint="min 0" />
+												<hbox>
+													<label class="etiqueta" value="Recreacion" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_11" value="0"
+													step="1" constraint="min 0" />
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="Agua" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_4" value="0"
+													step="1" constraint="min 0" />
+												<hbox>
+													<label class="etiqueta" value="Creditos" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_12" value="0"
+													step="1" constraint="min 0" />
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="Electricidad" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_5" value="0"
+													step="1" constraint="min 0" />
+												<hbox>
+													<label class="etiqueta" value="Ropa y Calzado" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_13" value="0"
+													step="1" constraint="min 0" />
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="Telefono Recidencial" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_6" value="0"
+													step="1" constraint="min 0" />
+												<hbox>
+													<label class="etiqueta" value="Fondos de Ahorro" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_14" value="0"
+													step="1" constraint="min 0" />
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="Telefono Celular" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_7" value="0"
+													step="1" constraint="min 0" />
+												<hbox>
+													<label class="etiqueta" value="Credito Habitacional" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_15" value="0"
+													step="1" constraint="min 0" />
+											</row>
+											<row>
+												<hbox>
+													<label class="etiqueta" value="Transporte" />
+												</hbox>
+												<doublespinner id="doubleSpinner30_8" value="0"
+													step="1" constraint="min 0" />
+												<hbox>
+													<label class="etiqueta" value="Total" />
+												</hbox>
+												<hbox>
+													<label class="etiqueta" id="labelSuma" />
+												</hbox>
+											</row>
+										</rows>
+									</grid>
+								</tabpanel>
+							</tabpanels>
+						</tabbox>
+					</tabpanel>
+					<tabpanel>
+						<grid width="100%">
 							<columns visible="false">
 								<column label="" width="25%" />
 								<column label="" width="25%" />
@@ -1178,21 +1096,21 @@
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
-									 <combobox id="cmb32" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Jefe del Hogar" />
-											<comboitem label="Cónyuge" />
-											<comboitem label="Hijo (a) Soltero (a)" />
-											<comboitem label="Hijo (a) Casado (a)" />
-											<comboitem label="Hijos (as) del cónyuge" />
-											<comboitem label="Yerno /Nuera" />
-											<comboitem label="Nieto (a)" />
-											<comboitem label="Padre / Madre" />
-											<comboitem label=" Hermano (a)" />
-											<comboitem label="Suegro(a)" />
-											<comboitem label="Otro pariente" />
-											<comboitem label="Servicio doméstico" />
+									<combobox id="cmb32" autodrop="true" readonly="true"
+										placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+										hflex="1">
+										<comboitem label="Jefe del Hogar" />
+										<comboitem label="Cónyuge" />
+										<comboitem label="Hijo (a) Soltero (a)" />
+										<comboitem label="Hijo (a) Casado (a)" />
+										<comboitem label="Hijos (as) del cónyuge" />
+										<comboitem label="Yerno /Nuera" />
+										<comboitem label="Nieto (a)" />
+										<comboitem label="Padre / Madre" />
+										<comboitem label=" Hermano (a)" />
+										<comboitem label="Suegro(a)" />
+										<comboitem label="Otro pariente" />
+										<comboitem label="Servicio doméstico" />
 									</combobox>
 								</row>
 								<row>
@@ -1202,10 +1120,10 @@
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<combobox id="cmb33" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Masculino" />
-											<comboitem label="Feminino" />
+										placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+										hflex="1">
+										<comboitem label="Masculino" />
+										<comboitem label="Feminino" />
 									</combobox>
 									<hbox>
 										<label class="etiqueta" value="Fecha de Nacimiento:" />
@@ -1219,7 +1137,7 @@
 										<label class="etiqueta" value="Edad:" />
 									</hbox>
 									<hbox>
-									<label id="lbl35" />
+										<label id="lbl35" />
 									</hbox>
 									<hbox>
 										<label class="etiqueta" value="Sufre alguna discapacidad ¿cuál?:" />
@@ -1227,64 +1145,77 @@
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<combobox id="cmb36" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Ceguera total" />
-											<comboitem label="Sordera total" />
-											<comboitem label="Retardo mental" />
-											<comboitem label="Mudez" />
-											<comboitem label="Perdida / discapacidad miembros superiores" />
-											<comboitem label="Perdida / discapacidad en miembros inferiores" />
-											<comboitem label="gagos / tartamudos" />
-											<comboitem label="ninguno" />
-											<comboitem label="Otros" />
+										placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+										hflex="1">
+										<comboitem label="Ceguera total" />
+										<comboitem label="Sordera total" />
+										<comboitem label="Retardo mental" />
+										<comboitem label="Mudez" />
+										<comboitem label="Perdida / discapacidad miembros superiores" />
+										<comboitem label="Perdida / discapacidad en miembros inferiores" />
+										<comboitem label="gagos / tartamudos" />
+										<comboitem label="ninguno" />
+										<comboitem label="Otros" />
 									</combobox>
 								</row>
 								<row>
-									<hbox>
-										<label class="etiqueta" value="En los últimos seis meses ha padecido alguna de las siguientes enfermedades o problemas de salud:" />
-									</hbox>
-									<hbox>
-									<vlayout>
-												<checkbox id="check37_1" label="Enfermedad Respiratoria (gripe, tos, asma, bronquitis, bronconeumonía, dolor de oído, otra)" checked="Enfermedad Respiratoria (gripe, tos, asma, bronquitis, bronconeumonía, dolor de oído, otra)" />
-												<checkbox id="check37_2" label="Enfermedades digestiva o intestinal (diarrea, dolor de estómago, gastritis, gastroenteritis, otros)" checked="Enfermedades digestiva o intestinal (diarrea, dolor de estómago, gastritis, gastroenteritis, otros)" />
-												<checkbox id="check37_3" label="Enfermedad del corazón (Tensión alta, infarto, arritmia, marca aso, coronarias, otra)" checked="Enfermedad del corazón (Tensión alta, infarto, arritmia, marca aso, coronarias, otra)" />
-									</vlayout>
-									</hbox>
-									<hbox>
-									<vlayout>
-												<checkbox id="check37_4" label="Enfermedad Renal (calculo renal, infección en orina,)" checked="Enfermedad Renal (calculo renal, infección en orina,)" />
-												<checkbox id="check37_5" label="Infecciones Virales  (lecchina , sarampión, dengue, mononucleosis, hepatitis, otra)" checked="Infecciones Virales  (lecchina , sarampión, dengue, mononucleosis, hepatitis, otra)" />
-												<checkbox id="check37_6" label="Infecciones bacterianas (Piel – Brasa, conjuntivitis, otras)" checked="Infecciones bacterianas (Piel – Brasa, conjuntivitis, otras)" />
-									</vlayout>
-									</hbox>
-									<hbox>
-									<vlayout>
-												
-												<checkbox id="check37_7" label="Diabetes" checked="Diabetes" />
-												<checkbox id="check37_8" label="Cáncer (Útero, Mamas, próstata y otros)" checked="Cáncer (Útero, Mamas, próstata y otros)" />
-												<checkbox id="check37_9" label="Otras" checked="Otras" />
-												<checkbox id="check37_10" label="Ninguna" checked="Ninguna" />
-									</vlayout>
-									</hbox>
+									<cell colspan="4">
+										<label class="etiqueta"
+											value="En los últimos seis meses ha padecido alguna de las siguientes enfermedades o problemas de salud:" />
+									</cell>
 								</row>
 								<row>
-								<hbox>
+									<cell colspan="4">
+										<hbox>
+											<vlayout>
+												<checkbox id="check37_1"
+													label="Enfermedad Respiratoria (gripe, tos, asma, bronquitis, bronconeumonía, dolor de oído, otra)"
+													checked="Enfermedad Respiratoria (gripe, tos, asma, bronquitis, bronconeumonía, dolor de oído, otra)" />
+												<checkbox id="check37_2"
+													label="Enfermedades digestiva o intestinal (diarrea, dolor de estómago, gastritis, gastroenteritis, otros)"
+													checked="Enfermedades digestiva o intestinal (diarrea, dolor de estómago, gastritis, gastroenteritis, otros)" />
+												<checkbox id="check37_3"
+													label="Enfermedad del corazón (Tensión alta, infarto, arritmia, marca aso, coronarias, otra)"
+													checked="Enfermedad del corazón (Tensión alta, infarto, arritmia, marca aso, coronarias, otra)" />
+											</vlayout>
+											<vlayout>
+												<checkbox id="check37_4"
+													label="Enfermedad Renal (calculo renal, infección en orina,)"
+													checked="Enfermedad Renal (calculo renal, infección en orina,)" />
+												<checkbox id="check37_5"
+													label="Infecciones Virales  (lecchina , sarampión, dengue, mononucleosis, hepatitis, otra)"
+													checked="Infecciones Virales  (lecchina , sarampión, dengue, mononucleosis, hepatitis, otra)" />
+												<checkbox id="check37_6"
+													label="Infecciones bacterianas (Piel – Brasa, conjuntivitis, otras)"
+													checked="Infecciones bacterianas (Piel – Brasa, conjuntivitis, otras)" />
+											</vlayout>
+											<vlayout>
+												<checkbox id="check37_7" label="Diabetes" checked="Diabetes" />
+												<checkbox id="check37_8"
+													label="Cáncer (Útero, Mamas, próstata y otros)" checked="Cáncer (Útero, Mamas, próstata y otros)" />
+												<checkbox id="check37_9" label="Otras" checked="Otras" />
+												<checkbox id="check37_10" label="Ninguna" checked="Ninguna" />
+											</vlayout>
+										</hbox>
+									</cell>
+								</row>
+								<row>
+									<hbox>
 										<label class="etiqueta" value="Nivel académico alcanzado:" />
 									</hbox>
 									<combobox id="cmb38" autodrop="true" readonly="true"
-											placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
-											hflex="1">
-											<comboitem label="Analfabeta" />
-											<comboitem label="Maternal" />
-											<comboitem label="Educación Inicial" />
-											<comboitem label="Básica" />
-											<comboitem label="Media" />
-											<comboitem label="Diversificada. / Técnico Medio" />
-											<comboitem label="T.S.U." />
-											<comboitem label="Universitario" />
-											<comboitem label="Educación especial" />
-											<comboitem label="Estudio en Curso" />
+										placeholder="Seleccione la alternativa" tooltiptext="Seleccione la alternativa"
+										hflex="1">
+										<comboitem label="Analfabeta" />
+										<comboitem label="Maternal" />
+										<comboitem label="Educación Inicial" />
+										<comboitem label="Básica" />
+										<comboitem label="Media" />
+										<comboitem label="Diversificada. / Técnico Medio" />
+										<comboitem label="T.S.U." />
+										<comboitem label="Universitario" />
+										<comboitem label="Educación especial" />
+										<comboitem label="Estudio en Curso" />
 									</combobox>
 									<hbox>
 										<label class="etiqueta" value="Último grado académico aprobado:" />
@@ -1299,11 +1230,11 @@
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
 									<radiogroup id="rdg39">
-									<hlayout>
-										<radio id="rdo39_1" label="Si" selected="Si" />
-										<radio id="rdo39_2" label="No" selected="No" />
-									</hlayout>
-								</radiogroup>
+										<hlayout>
+											<radio id="rdo39_1" label="Si" selected="Si" />
+											<radio id="rdo39_2" label="No" selected="No" />
+										</hlayout>
+									</radiogroup>
 									<hbox>
 										<label class="etiqueta" value="Nº de Cédula de Identidad:" />
 									</hbox>
@@ -1317,7 +1248,8 @@
 									<textbox id="txt41" hflex="1" maxlength="1000"
 										tooltiptext="Ingrese a que se dedica actualmente" />
 									<hbox>
-										<label class="etiqueta" value="Si Trabaja ¿Qué  oficio/ocupación realiza en su trabajo? En caso de Desempleado ¿Para cuál oficio esta preparado:" />
+										<label class="etiqueta"
+											value="Si Trabaja ¿Qué  oficio/ocupación realiza en su trabajo? En caso de Desempleado ¿Para cuál oficio esta preparado:" />
 									</hbox>
 									<textbox id="txt42" hflex="1" maxlength="1000"
 										tooltiptext="Ingrese la ocupacion u oficio que realiza en su trabajo actual" />
@@ -1328,8 +1260,8 @@
 									</hbox>
 									<textbox id="txt43" hflex="1" maxlength="1000"
 										tooltiptext="Ingrese el sitio donde trabaja" />
-								<hbox></hbox>
-								<button autodisable="self" id="btnAgregarItems" class="btn"
+									<hbox></hbox>
+									<button autodisable="self" id="btnAgregarItems" class="btn"
 										label="Agregar Familiar" tooltiptext="Agregar items a la Compposicion Familiar"
 										image="/public/imagenes/botones/annadir.png" width="150px" />
 								</row>
@@ -1337,8 +1269,8 @@
 						</grid>
 						<hbox width="100%" widths="87%,13%">
 							<div width="100%">
-								<listbox span="true" rows="10" id="ltbComposicion" width="100%"
-									emptyMessage="No se han asignado Familiares">
+								<listbox span="true" rows="10" id="ltbComposicion"
+									width="100%" emptyMessage="No se han asignado Familiares">
 									<listhead>
 										<listheader label="Nombres y Apellidos" width="30%" />
 										<listheader label="Parentesco" width="30%" />
@@ -1368,12 +1300,176 @@
 									hflex="1" height="32px" class="btn" />
 							</vbox>
 						</hbox>
-				</tabpanel>
-			</tabpanels>
-		</tabbox>
-		<separator />
-		<div id="botoneraSocial" />
-		<div id="divCatalogoVisita" />
-		<div id="divCatalogoPaciente" />
-	</groupbox>
-</div>
+					</tabpanel>
+					<tabpanel>
+						<grid width="auto">
+							<columns>
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+								<column label="" width="25%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="A qué hora se levanta en la mañana" />
+									</hbox>
+									<textbox id="textBox46_1" maxlength="1500" multiline="true" />
+									<hbox>
+										<label class="etiqueta" value="¿Hora acostumbrada en la que se acuesta?" />
+									</hbox>
+									<textbox id="textBox46_2" maxlength="1500" multiline="true" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="¿Qué hace al levantarse?" />
+									</hbox>
+									<textbox id="textBox46_3" maxlength="1500" multiline="true" />
+									<hbox>
+										<label class="etiqueta" value="¿Qué otra actividad realiza?" />
+									</hbox>
+									<textbox id="textBox46_4" maxlength="1500" multiline="true" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="¿Por qué ese orden?" />
+									</hbox>
+									<textbox id="textBox46_5" maxlength="1500" multiline="true" />
+									<hbox>
+										<label class="etiqueta" value="¿Y los fines de semana?" />
+									</hbox>
+									<textbox id="textBox46_6" maxlength="1500" multiline="true" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta"
+											value="¿Cuales son las actividades de rutina que siempre realiza?" />
+									</hbox>
+									<textbox id="textBox46_7" maxlength="1500" multiline="true" />
+									<hbox>
+										<label class="etiqueta" value="¿Con quién comparte estas actividades?" />
+									</hbox>
+									<textbox id="textBox46_8" maxlength="1500" multiline="true" />
+								</row>
+							</rows>
+						</grid>
+						<separator />
+						<groupbox title="Dinamica Familiar">
+							<grid width="auto">
+								<columns>
+									<column label="" width="50%" />
+									<column label="" width="50%" />
+								</columns>
+								<rows>
+									<row>
+										<hbox>
+											<label class="etiqueta"
+												value="¿Qué actividad diaria realiza conjuntamente con el Grupo Familiar? " />
+										</hbox>
+										<textbox id="textBox47_1" maxlength="1500" multiline="true" />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta"
+												value="¿Cómo considera usted, es el proceso de comunicación entre los miembros de este grupo familiar?" />
+										</hbox>
+										<textbox id="textBox47_2" maxlength="1500" multiline="true" />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta"
+												value="¿Cómo considera usted, se desenvuelven los roles en este grupo familiar? " />
+										</hbox>
+										<textbox id="textBox47_3" maxlength="1500" multiline="true" />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta"
+												value="¿En el grupo familiar, ¿Quién toma las decisiones importantes? " />
+										</hbox>
+										<textbox id="textBox47_4" maxlength="1500" multiline="true" />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta"
+												value="¿Quién del grupo familiar dicta las pautas y normas para la convivencia? " />
+										</hbox>
+										<textbox id="textBox47_5" maxlength="1500" multiline="true" />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta"
+												value="¿Considera usted que ¿el grupo familiar se respeta?" />
+										</hbox>
+										<textbox id="textBox47_6" maxlength="1500" multiline="true" />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta"
+												value="¿Cómo expresa usted sus sentimientos de disgusto, alegría e incomodidad? " />
+										</hbox>
+										<textbox id="textBox47_7" maxlength="1500" multiline="true" />
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
+					</tabpanel>
+					<tabpanel>
+						<grid width="auto">
+							<columns>
+								<column label="" width="20%" />
+								<column label="" width="80%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="DIAGNOSTICO SOCIAL:" />
+									</hbox>
+									<textbox id="textBox10" maxlength="1500" multiline="true"
+										class="multilinea" />
+								</row>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="OBSERVACIONES:" />
+									</hbox>
+									<textbox id="textBox11" maxlength="1500" multiline="true"
+										class="multilinea" />
+								</row>
+							</rows>
+						</grid>
+						<grid width="auto">
+							<columns>
+								<column label="" width="33%" />
+								<column label="" width="33%" />
+								<column label="" width="34%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Fecha de Aplicación:" />
+										<datebox id="dateBoxAplicacion" format="yyyy/MM/dd"
+											readonly="true" />
+									</hbox>
+									<hbox>
+										<label class="etiqueta" value="Fecha de Procesamiento:" />
+										<datebox id="dateBoxProcesamiento" format="yyyy/MM/dd"
+											readonly="true" />
+									</hbox>
+									<hbox>
+										<label class="etiqueta" value="Fecha de de Informe:" />
+										<datebox id="dateBoxInforme" format="yyyy/MM/dd"
+											readonly="true" />
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+			<separator />
+			<div id="botoneraSocial" />
+			<div id="divCatalogoVisita" />
+			<div id="divCatalogoPaciente" />
+		</groupbox>
+	</div>
+</zk>

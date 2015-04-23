@@ -208,9 +208,6 @@ public class Paciente implements Serializable {
 	// bi-directional many-to-one association to Cita
 	@OneToMany(mappedBy = "paciente")
 	private Set<Cita> citas;
-
-	@OneToMany(mappedBy = "paciente")
-	private Set<VisitaSocial> visitas;
 	
 	@OneToMany(mappedBy = "paciente")
 	private Set<Orden> ordenes;
@@ -240,6 +237,9 @@ public class Paciente implements Serializable {
 	
 	@OneToOne(mappedBy = "paciente")
 	private Ficha fichaMaestra;
+	
+	@OneToOne(mappedBy = "paciente")
+	private VisitaSocial visita;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cargo")
@@ -1097,13 +1097,6 @@ public class Paciente implements Serializable {
 		this.estadoCivil = estadoCivil;
 	}
 
-	public Set<VisitaSocial> getVisitas() {
-		return visitas;
-	}
-
-	public void setVisitas(Set<VisitaSocial> visitas) {
-		this.visitas = visitas;
-	}
 
 	public boolean isAyuda() {
 		return ayuda;
@@ -1296,6 +1289,14 @@ public class Paciente implements Serializable {
 
 	public void setFichaMaestra(Ficha fichaMaestra) {
 		this.fichaMaestra = fichaMaestra;
+	}
+
+	public VisitaSocial getVisita() {
+		return visita;
+	}
+
+	public void setVisita(VisitaSocial visita) {
+		this.visita = visita;
 	}
 
 }

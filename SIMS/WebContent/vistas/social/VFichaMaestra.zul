@@ -4,13 +4,13 @@
 		<groupbox width="100%" mold="3d" title="Ficha Maestra">
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="12.2%" />
-					<column label="" width="13.2%" />
-					<column label="" width="13.2%" />
-					<column label="" width="16.2%" />
-					<column label="" width="16.2%" />
-					<column label="" width="12.2%" />
-					<column label="" width="16.8%" />
+					<column label="" width="15%" />
+					<column label="" width="15%" />
+					<column label="" width="15%" />
+					<column label="" width="15%" />
+					<column label="" width="15%" />
+					<column label="" width="15%" />
+					<column label="" width="10%" />
 				</columns>
 				<rows>
 					<row>
@@ -21,11 +21,11 @@
 						</hbox>
 						<textbox maxlength="50" id="txtCedula" hflex="1"
 							tooltiptext="Ingrese la Cedula del Paciente" />
-									<cell colspan="2">
-						<button class="btn" autodisable="self" id="btnBuscarPaciente"
-							label="Buscar Paciente" tooltiptext="Catalogo"
-							image="/public/imagenes/botones/buscar.png" width="130px" />
-							</cell>
+						<cell colspan="2">
+							<button class="btn" autodisable="self" id="btnBuscarPaciente"
+								label="Buscar Paciente" tooltiptext="Catalogo"
+								image="/public/imagenes/botones/buscar.png" width="130px" />
+						</cell>
 						<hbox />
 						<hbox />
 						<hbox />
@@ -43,14 +43,14 @@
 					<tabpanel>
 						<grid width="auto">
 							<columns visible="false">
-								<column label="" width="12%" />
-								<column label="" width="15%" />
-								<column label="" width="12%" />
-								<column label="" width="15%" />
-								<column label="" width="13%" />
-								<column label="" width="15%" />
-								<column label="" width="8%" />
 								<column label="" width="10%" />
+								<column label="" width="15%" />
+								<column label="" width="10%" />
+								<column label="" width="15%" />
+								<column label="" width="10%" />
+								<column label="" width="15%" />
+								<column label="" width="10%" />
+								<column label="" width="15%" />
 							</columns>
 							<rows>
 								<row>
@@ -60,7 +60,7 @@
 									<label id="lblFicha" />
 									<hbox />
 									<hbox />
-																		<hbox />
+									<hbox />
 									<hbox />
 								</row>
 								<row>
@@ -101,7 +101,6 @@
 									<label id="lblMano" />
 									<hbox />
 									<hbox />
-
 								</row>
 								<row>
 									<cell colspan="3">
@@ -130,12 +129,21 @@
 										<label id="lblAlergico" />
 										<space />
 										<space />
-										<label class="etiqueta" value="Alergias:" />
+										<label class="etiqueta" value="Alergias:" id="lblEtiquetaAlergias" visible="false" />
 										<space />
 										<space />
-										<label id="lblAlergias" />
+										<label id="lblAlergias"/>
 									</cell>
-
+								</row>
+								<row>
+									<label class="etiqueta" value="Nivel Educativo:" />
+									<label id="lblNivelEducativo" />
+									<label class="etiqueta" value="Oficio:" />
+									<label id="lblOficio" />
+									<label class="etiqueta" value="Carrera de Profesion:" />
+									<label id="lblCarrera" />
+										<label class="etiqueta" value="Area:" />
+									<label id="lblArea" />
 								</row>
 								<row>
 									<cell colspan="8">
@@ -147,7 +155,7 @@
 										<space />
 										<space />
 										<space />
-										<label class="etiqueta" value="Origen:" />
+										<label class="etiqueta" value="Origen:" id="lblEtiquetaOrigen" visible="false"  />
 										<space />
 										<space />
 										<space />
@@ -155,7 +163,7 @@
 										<space />
 										<space />
 										<space />
-										<label class="etiqueta" value="Tipo:" />
+										<label class="etiqueta" value="Tipo:" id="lblEtiquetaTipo" visible="false"  />
 										<space />
 										<space />
 										<space />
@@ -163,7 +171,7 @@
 										<space />
 										<space />
 										<space />
-										<label class="etiqueta" value="Adicionales:" />
+										<label class="etiqueta" value="Adicionales:" id="lblEtiquetaAdicionales" visible="false" />
 										<space />
 										<space />
 										<space />
@@ -193,22 +201,21 @@
 											<column label="" width="10%" />
 										</columns>
 										<rows>
-																	<row>
-																	<cell colspan="10">
-												<label class="etiqueta" value="Direccion" />
-												</cell>
+											<row>
+												<label class="etiqueta" value="Pais" />
+												<label id="lblPais" />
+												<label class="etiqueta" value="Estado:" />
+												<label id="lblEstado" />
+												<label class="etiqueta" value="Ciudad" />
 												<label id="lblCiudad" />
-												<label class="etiqueta" value="Telefono Fijo:" />
-												<label id="lblTelefono1" />
-												<label class="etiqueta" value="Telefono Novil:" />
-												<label id="lblTelefono2" />
-												<label class="etiqueta" value="Email:" />
-												<label id="lblCorreo" />
+												<label class="etiqueta" value="Municipio:" />
+												<label id="lblMunicipio" />
+												<label class="etiqueta" value="Parroquia:" />
+												<label id="lblParroquia" />
 											</row>
 											<row>
 												<label class="etiqueta" value="Direccion:" />
-												<label id="lblCiudad" />
-												<cell colspan="2">
+												<cell colspan="3">
 													<label id="lblDireccion" />
 												</cell>
 												<label class="etiqueta" value="Telefono Fijo:" />
@@ -217,6 +224,9 @@
 												<label id="lblTelefono2" />
 												<label class="etiqueta" value="Email:" />
 												<label id="lblCorreo" />
+											</row>
+											<row>
+
 											</row>
 											<row>
 											</row>
