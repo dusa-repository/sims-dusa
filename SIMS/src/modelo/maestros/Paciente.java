@@ -19,6 +19,7 @@ import modelo.control.ControlConsulta;
 import modelo.control.ControlOrden;
 import modelo.sha.Area;
 import modelo.sha.Informe;
+import modelo.social.Ficha;
 import modelo.social.VisitaSocial;
 import modelo.transacciones.Historia;
 import modelo.transacciones.Orden;
@@ -236,6 +237,9 @@ public class Paciente implements Serializable {
 
 	@OneToOne(mappedBy = "paciente")
 	private Historia historia;
+	
+	@OneToOne(mappedBy = "paciente")
+	private Ficha fichaMaestra;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_cargo")
@@ -1284,6 +1288,14 @@ public class Paciente implements Serializable {
 
 	public void setTransporte(String transporte) {
 		this.transporte = transporte;
+	}
+
+	public Ficha getFichaMaestra() {
+		return fichaMaestra;
+	}
+
+	public void setFichaMaestra(Ficha fichaMaestra) {
+		this.fichaMaestra = fichaMaestra;
 	}
 
 }
