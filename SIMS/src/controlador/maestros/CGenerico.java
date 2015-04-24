@@ -99,6 +99,7 @@ import servicio.sha.SHorasHombre;
 import servicio.sha.SInforme;
 import servicio.sha.SPlanAccion;
 import servicio.social.SComposicionFamiliar;
+import servicio.social.SFicha;
 import servicio.social.SVisitaSocial;
 import servicio.transacciones.SCita;
 import servicio.transacciones.SConsulta;
@@ -279,6 +280,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SNomina servicioNomina;
 	@WireVariable("SGrupoInspectores")
 	protected SGrupoInspectores servicioGrupoInspectores;
+	@WireVariable("SFicha")
+	protected SFicha servicioFicha;
+	
+	
 	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 			"/META-INF/ConfiguracionAplicacion.xml");
 	public Mensaje msj = new Mensaje();

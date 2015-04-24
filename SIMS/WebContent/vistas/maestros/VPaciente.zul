@@ -79,6 +79,27 @@
 									</button>
 								</row>
 								<row>
+									<label class="etiqueta" value="Nro. Pasaporte" />
+									<cell colspan="2">
+										<textbox maxlength="15" id="txtPasaporte" hflex="1"
+											tooltiptext="Ingrese el Numero del pasaporte" />
+									</cell>
+									<hbox>
+										<label class="etiqueta" value="RIF:" />
+										<space />
+										<label value="*" style="font-weight:bold;color:red" />
+									</hbox>
+									<combobox tooltiptext="Seleccione el Rif" placeholder="Seleccione el Rif"
+										id="cmbRif" width="100%" readonly="true">
+										<comboitem label="E-" />
+										<comboitem label="V-" />
+										<comboitem label="J-" />
+										<comboitem label="G-" />
+									</combobox>
+									<textbox maxlength="15" id="txtRifPaciente" hflex="1"
+										tooltiptext="Ingrese el Rif" />
+								</row>
+								<row>
 									<hbox>
 										<label class="etiqueta" value="Primer Nombre:" />
 										<space />
@@ -213,15 +234,44 @@
 									</hbox>
 									<spinner tooltiptext="Indique la Cantidad" id="spnCarga"
 										width="98%" value="0" constraint="min 0 max 100" />
-									<hbox>
-										<label class="etiqueta" value="Profesion:" />
-										<space />
-										<label value="*" style="font-weight:bold;color:red" />
-									</hbox>
-									<textbox maxlength="100" id="txtProfesion"
-										tooltiptext="Ingrese la Profesion del Paciente" />
+									<cell colspan="2">
+										<vlayout>
+											<label class="etiqueta" value="Estudia Actualmente:" />
+											<hbox>
+												<radiogroup id="rdgEstudia">
+													<radio label="Estudia" value="si" id="rdoEstudia" />
+													<radio label="Trabaja" value="no" id="rdoTrabaja" />
+												</radiogroup>
+											</hbox>
+										</vlayout>
+									</cell>
 								</row>
 								<row>
+									<label class="etiqueta" value="Carrera de Estudios Actuales" />
+									<cell colspan="2">
+										<textbox maxlength="500" id="txtCarreraActual"
+											tooltiptext="Ingrese la Carrera que cursa actualmente" />
+									</cell>
+									<label class="etiqueta" value="Periodo de Estudios" />
+									<textbox maxlength="50" id="txtPeriodo"
+										tooltiptext="Ingrese el periodo en el que estudia (semestral, trimestral, anual)" />
+									<label class="etiqueta" value="Lugar de Estudios" />
+									<cell colspan="2">
+										<textbox maxlength="500" id="txtLugarEstudios"
+											tooltiptext="Ingrese el lugar de estudios actual" />
+									</cell>
+								</row>
+								<row>
+									<label class="etiqueta" value="Profesion:" />
+									<cell colspan="2">
+										<textbox maxlength="255" id="txtProfesion"
+											tooltiptext="Ingrese la Carrera de Profesion del Familiar" />
+									</cell>
+									<label class="etiqueta" value="Oficio:" />
+									<cell colspan="2">
+										<textbox id="txtOficio" width="100%" maxlength="500"
+											tooltiptext="Ingrese el Oficio" multiline="true" />
+									</cell>
 									<label class="etiqueta" value="Condicion del Trabajador:" />
 									<combobox tooltiptext="Seleccione la Condicion del Trabajador"
 										placeholder="Seleccione la Condicion del Trabajador" id="cmbCondicionTrabajador"
@@ -230,17 +280,6 @@
 										<comboitem label="NDF" />
 										<comboitem label="NDC" />
 									</combobox>
-									<label class="etiqueta" value="¿Es Jefe del Hogar?" />
-									<radiogroup id="rdgJefe">
-										<radio label="SI" value="jefe" id="rdoJefe" />
-										<radio label="NO" value="no jefe" id="rdoNoJefe" />
-									</radiogroup>
-									<label class="etiqueta" value="Ocupacion u Oficio:" />
-									<cell colspan="2">
-										<textbox id="txtOficio" width="100%" maxlength="500"
-											tooltiptext="Ingrese la Ocupacion u Oficio" multiline="true" />
-									</cell>
-									<hbox />
 								</row>
 								<row>
 									<hbox>
@@ -440,6 +479,11 @@
 									</cell>
 								</row>
 								<row>
+									<label class="etiqueta" value="¿Es Jefe del Hogar?" />
+									<radiogroup id="rdgJefe">
+										<radio label="SI" value="jefe" id="rdoJefe" />
+										<radio label="NO" value="no jefe" id="rdoNoJefe" />
+									</radiogroup>
 									<label class="etiqueta" value="Turno:" />
 									<combobox width="100%" tooltiptext="Seleccione un Turno"
 										placeholder="Seleccione un Turno" id="cmbTurno" readonly="true">
@@ -453,15 +497,20 @@
 										<comboitem label="N/A" />
 									</combobox>
 									<cell colspan="2">
-										<label class="etiqueta" value="N° Registro INPSASEL:" />
+										<vlayout>
+											<label class="etiqueta"
+												value="Inscripcion ante el IVSS (FORMATO 14.02):" />
+											<datebox readonly="true" id="dtbInscripcionIVSS"
+												onCreate="self.value = new Date()" tooltiptext="Indique la Inscripcion ante el IVSS" />
+										</vlayout>
 									</cell>
-									<textbox maxlength="100" id="txtNroInpsasel"
-										tooltiptext="Ingrese el N° Registro INPSASEL" />
 									<cell colspan="2">
-										<label class="etiqueta" value="Inscripcion ante el IVSS (FORMATO 14.02):" />
+										<vlayout>
+											<label class="etiqueta" value="N° Registro INPSASEL:" />
+											<textbox maxlength="100" id="txtNroInpsasel"
+												tooltiptext="Ingrese el N° Registro INPSASEL" />
+										</vlayout>
 									</cell>
-									<datebox readonly="true" id="dtbInscripcionIVSS"
-										onCreate="self.value = new Date()" tooltiptext="Indique la Inscripcion ante el IVSS" />
 									<hbox />
 									<hbox />
 								</row>
@@ -548,10 +597,22 @@
 									</hbox>
 									<textbox id="txtTelefono2" hflex="1" maxlength="50"
 										tooltiptext="Ingrese el Numero de telefono del Paciente (0426-9999999)" />
-									<label class="etiqueta" value="Email:" />
-									<textbox id="txtCorreo" width="180px"
+									<label class="etiqueta" value="Telefono Adicional:" />
+									<textbox id="txtTelefonoAdicional"
+										tooltiptext="Ingrese un Numero de telefono adicional del Paciente (0426-9999999)"
+										maxlength="50" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Correo Personal:" />
+									<textbox id="txtCorreo"
 										tooltiptext="Ingrese el Correo Electronico (ejemplo@ejemplo.com)"
 										maxlength="50" />
+									<label class="etiqueta" value="Correo de la Empresa:" />
+									<textbox id="txtCorreoEmpresa"
+										tooltiptext="Ingrese el Correo Electronico (ejemplo@ejemplo.com)"
+										maxlength="50" />
+									<hbox />
+									<hbox />
 								</row>
 								<row>
 									<cell colspan="6">
@@ -588,19 +649,19 @@
 											tooltiptext="Ingrese el Nro de la Casa del Paciente" />
 									</hbox>
 									<label class="etiqueta" value="Medio de Transporte Utilizado:" />
-											<cell colspan="2">
-										<vlayout>		
-									<hlayout>
-										<checkbox id="chkDusa" label="Transporte Dusa" />
-										<checkbox id="chkPrivado" label="Vehiculo Propio" />
-										<checkbox id="chkMoto" label="Moto" />
-									</hlayout>
-										<hlayout>
-										<checkbox id="chkBicicleta" label="Bicicleta" />
-										<checkbox id="chkPublico" label="Transporte Publico" />
-										<checkbox id="chkOtro" label="Otro" />
-									</hlayout>
-									</vlayout>
+									<cell colspan="2">
+										<vlayout>
+											<hlayout>
+												<checkbox id="chkDusa" label="Transporte Dusa" />
+												<checkbox id="chkPrivado" label="Vehiculo Propio" />
+												<checkbox id="chkMoto" label="Moto" />
+											</hlayout>
+											<hlayout>
+												<checkbox id="chkBicicleta" label="Bicicleta" />
+												<checkbox id="chkPublico" label="Transporte Publico" />
+												<checkbox id="chkOtro" label="Otro" />
+											</hlayout>
+										</vlayout>
 									</cell>
 									<label class="etiqueta" value="Cual:" />
 									<textbox id="txtOtroTransporte" tooltiptext="Especifique el Tipo de Transporte"
@@ -776,7 +837,6 @@
 								image="/public/imagenes/botones/atras.png" tooltiptext="Pestaña Anterior" />
 						</div>
 						<vbox>
-
 							<div width="50%" id="botoneraPaciente" align="left" style="float: left;" />
 						</vbox>
 					</tabpanel>
