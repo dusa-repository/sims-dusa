@@ -209,13 +209,12 @@
 									<hbox />
 								</row>
 								<row>
-
-									<label class="etiqueta" value="Profesion u Oficio:" />
+									<label class="etiqueta" value="Oficio:" />
 									<cell colspan="3">
 										<textbox maxlength="500" id="txtOficio"
 											tooltiptext="Ingrese el oficio del Familiar" />
 									</cell>
-									<label class="etiqueta" value="Carrera de Profesion:" />
+									<label class="etiqueta" value="Profesion:" />
 									<cell colspan="2">
 										<textbox maxlength="100" id="txtProfesion"
 											tooltiptext="Ingrese la Carrera de Profesion del Familiar" />
@@ -229,13 +228,11 @@
 									</vbox>
 								</row>
 								<row>
-
 									<label class="etiqueta" value="Lugar de Trabajo o Estudio:" />
 									<cell colspan="2">
 										<textbox id="txtLugarTrabajo" hflex="1" maxlength="500"
 											tooltiptext="Ingrese el Lugar de Trabajo del Familiar" />
 									</cell>
-
 									<label class="etiqueta" value="Cargo o Carrera en Curso:" />
 									<textbox id="txtCargoOCarrera" hflex="1" maxlength="500"
 										tooltiptext="Ingrese el Cargo o Carrera en Curso del Familiar" />

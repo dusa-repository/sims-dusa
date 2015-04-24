@@ -42,6 +42,9 @@ public class Paciente implements Serializable {
 
 	@Column(length = 50)
 	private String ficha;
+	
+	@Column(name = "periodo_estudios", length = 100)
+	private String periodoEstudios;
 
 	@Column(name = "primer_apellido", length = 100)
 	private String primerApellido;
@@ -145,6 +148,12 @@ public class Paciente implements Serializable {
 
 	@Column(length = 50)
 	private String telefono2;
+	
+	@Column(length = 50)
+	private String emailEmpresa;
+
+	@Column(length = 50)
+	private String telefonoAdicional;
 
 	/* Datos en caso de emergencia */
 
@@ -320,6 +329,9 @@ public class Paciente implements Serializable {
 	
 	@Column
 	private String rif;
+	
+	@Column
+	private String pasaporte;
 	
 	@Column
 	private String oficio;
@@ -1298,5 +1310,38 @@ public class Paciente implements Serializable {
 	public void setVisita(VisitaSocial visita) {
 		this.visita = visita;
 	}
+
+	public String getPasaporte() {
+		return pasaporte;
+	}
+
+	public void setPasaporte(String pasaporte) {
+		this.pasaporte = pasaporte;
+	}
+
+	public String getEmailEmpresa() {
+		return emailEmpresa;
+	}
+
+	public void setEmailEmpresa(String emailEmpresa) {
+		this.emailEmpresa = emailEmpresa;
+	}
+
+	public String getTelefonoAdicional() {
+		return telefonoAdicional;
+	}
+
+	public void setTelefonoAdicional(String telefonoAdicional) {
+		this.telefonoAdicional = telefonoAdicional;
+	}
+
+	public String getPeriodoEstudios() {
+		return periodoEstudios;
+	}
+
+	public void setPeriodoEstudios(String periodoEstudios) {
+		this.periodoEstudios = periodoEstudios;
+	}
+	
 
 }

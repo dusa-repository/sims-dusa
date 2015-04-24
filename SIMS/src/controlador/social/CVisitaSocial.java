@@ -1213,42 +1213,6 @@ public class CVisitaSocial extends CGenerico {
 			return true;
 	}
 
-//	@Listen("onClick =  #btnBuscar2")
-//	public void buscarInforme() {
-//
-//		final List<VisitaSocial> informes = servicioVisitaSocial.buscarTodas();
-//		catalogoVisita = new Catalogo<VisitaSocial>(divCatalogoVisita,
-//				"Catalogo de Visitas", informes, false, "Id","Nombre del Paciente") {
-//
-//			@Override
-//			protected List<VisitaSocial> buscar(String valor, String combo) {
-//
-//				switch (combo) {
-//				case "Id":
-//					return servicioVisitaSocial.filtroId(valor);
-//				case "Nombre del Paciente":
-//					return servicioVisitaSocial.filtroNombrePaciente(valor);
-//				default:
-//					return informes;
-//				}
-//
-//			}
-//
-//			@Override
-//			protected String[] crearRegistros(VisitaSocial objeto) {
-//				String[] registros = new String[2];
-//				registros[0] = String.valueOf(objeto.getIdVisita());
-//				if(objeto.getPaciente()!=null)
-//				registros[1] =objeto.getPaciente().getPrimerNombre();
-//				return registros;
-//			}
-//
-//		};
-//		catalogoVisita.setParent(divCatalogoVisita);
-//		catalogoVisita.doModal();
-//	}
-//
-
 	public void llenarCamposVisita(VisitaSocial visitaSocial) {
 		
 		idVisita = visitaSocial.getIdVisita();
@@ -1909,6 +1873,13 @@ public class CVisitaSocial extends CGenerico {
 		spinner25.getValue();
 	}
 
+	@Listen("onChange = #dateBox35")
+	public void edad() {
+		int edadComposicion= calcularEdad(dateBox35.getValue());
+		lbl35.setValue(String.valueOf(edadComposicion));
+	}
+
+	
 	// DoubleSpinner
 	@Listen("onChange = #doubleSpinner20")
 	public void cantidadBolivares() {

@@ -234,26 +234,28 @@ public class CFamiliar extends CGenerico {
 	private Radio rdoVive;
 	@Wire
 	private Radio rdoNoVive;
-	@Wire
-	private Radiogroup rdgEstudia;
-	@Wire
-	private Radio rdoEstudia;
-	@Wire
-	private Radio rdoTrabaja;
+
 	@Wire
 	private Radiogroup rdgAyuda;
 	@Wire
 	private Radio rdoAyuda;
 	@Wire
 	private Radio rdoNoAyuda;
-	@Wire
-	private Combobox cmbRif;
+
 	@Wire
 	private Combobox cmbCertificado;
+	@Wire
+	private Combobox cmbRif;
 	@Wire
 	private Textbox txtRifPaciente;
 	@Wire
 	private Textbox txtOficio;
+	@Wire
+	private Radiogroup rdgEstudia;
+	@Wire
+	private Radio rdoEstudia;
+	@Wire
+	private Radio rdoTrabaja;
 	@Wire
 	private Textbox txtLugarTrabajo;
 	@Wire
@@ -434,13 +436,14 @@ public class CFamiliar extends CGenerico {
 					if (rdoSiCronico.isChecked())
 						cronico = true;
 
-					rif = txtRifPaciente.getValue();
+				
 					oficio = txtOficio.getValue();
 					lugarTrabajo = txtLugarTrabajo.getValue();
 					cargoOCarrera = txtCargoOCarrera.getValue();
 					nroCertificado = txtNroCertificado.getValue();
 					descripcionAyuda = txtAyuda.getValue();
 					observacion = txtObservaciones.getValue();
+					rif = txtRifPaciente.getValue();
 					tipoRif = cmbRif.getValue();
 					certificado = cmbCertificado.getValue();
 					if (rdoAyuda.isChecked())
@@ -1151,8 +1154,9 @@ public class CFamiliar extends CGenerico {
 			rdoAyuda.setChecked(true);
 		else
 			rdoNoAyuda.setChecked(true);
-		cmbRif.setValue(paciente.getTipoRif());
+	
 		cmbCertificado.setValue(paciente.getCertificado());
+		cmbRif.setValue(paciente.getTipoRif());
 		txtRifPaciente.setValue(paciente.getRif());
 		txtOficio.setValue(paciente.getOficio());
 		txtLugarTrabajo.setValue(paciente.getLugarTrabajo());
@@ -1321,14 +1325,16 @@ public class CFamiliar extends CGenerico {
 
 		rdoVive.setChecked(false);
 		rdoNoVive.setChecked(false);
-		rdoEstudia.setChecked(false);
-		rdoTrabaja.setValue(null);
+	
 		rdoAyuda.setChecked(false);
 		rdoNoAyuda.setChecked(false);
-		cmbRif.setValue("");
+
 		cmbCertificado.setValue("");
+		cmbRif.setValue("");
 		txtRifPaciente.setValue("");
 		txtOficio.setValue("");
+		rdoEstudia.setChecked(false);
+		rdoTrabaja.setValue(null);
 		txtLugarTrabajo.setValue("");
 		txtCargoOCarrera.setValue("");
 		txtNroCertificado.setValue("");

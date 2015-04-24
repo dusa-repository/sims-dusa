@@ -170,10 +170,14 @@ public class CPaciente extends CGenerico {
 	private Textbox txtDireccion;
 	@Wire
 	private Textbox txtTelefono1;
+	 @Wire
+	 private Textbox txtTelefono2;
+	 @Wire
+	 private Textbox txtCorreo;
 	@Wire
-	private Textbox txtTelefono2;
+	private Textbox txtTelefonoAdicional;
 	@Wire
-	private Textbox txtCorreo;
+	private Textbox txtCorreoEmpresa;
 	@Wire
 	private Textbox txtNombresEmergencia;
 	@Wire
@@ -275,6 +279,24 @@ public class CPaciente extends CGenerico {
 	private Checkbox chkMoto;
 	@Wire
 	private Checkbox chkBicicleta;
+	@Wire
+	private Combobox cmbRif;
+	@Wire
+	private Textbox txtRifPaciente;
+	@Wire
+	private Textbox txtPasaporte;
+	@Wire
+	private Radiogroup rdgEstudia;
+	@Wire
+	private Radio rdoEstudia;
+	@Wire
+	private Radio rdoTrabaja;
+	@Wire
+	private Textbox txtLugarEstudios;
+	@Wire
+	private Textbox txtCarreraActual;
+	@Wire
+	private Textbox txtPeriodo;
 
 	Buscar<Medicina> buscarMedicina;
 
@@ -353,7 +375,7 @@ public class CPaciente extends CGenerico {
 
 					String oficio, condicion = "", profesion, nacionalidad, nivelEducativo, turno, retiroIVSS, nroInpsasel, nombre1, apellido1, cedula, nombre2, apellido2, ficha, detalleAlergia, lugarNac, sexo, grupoSanguineo, mano, origen, tipoDiscapacidad, otrasDiscapacidad, direccion, telefono1, telefono2, correo, nombresE, apellidosE, telefono1E, telefono2E, parentescoE, parentescoFamiliar;
 					int edad, carga;
-					boolean alergia = false, discapacidad = false, lentes = false, jefe = false;
+					boolean alergia = false, discapacidad = false, lentes = false, jefe = false, estudia=false;
 					double estatura, peso;
 
 					Timestamp fechaIngreso = null;
@@ -422,6 +444,9 @@ public class CPaciente extends CGenerico {
 					telefono1E = txtTelefono1Emergencia.getValue();
 					telefono2E = txtTelefono2Emergencia.getValue();
 					parentescoE = cmbParentescoEmergencia.getValue();
+
+					String telefonoAdicional = txtTelefonoAdicional.getValue();
+					String correoEmpresa = txtCorreoEmpresa.getValue();
 					String observacionEstatus = txtObservacionEstatus
 							.getValue();
 
@@ -434,8 +459,7 @@ public class CPaciente extends CGenerico {
 					EstadoCivil estadoCivil = null;
 					if (rdoSiAlergico.isChecked())
 						alergia = true;
-					if (cmbEstadoCivil
-							.getSelectedItem() != null) {
+					if (cmbEstadoCivil.getSelectedItem() != null) {
 						if (cmbEstadoCivil.getSelectedItem().getContext() != null) {
 							estadoCivil = servicioEstadoCivil.buscar(Long
 									.parseLong(cmbEstadoCivil.getSelectedItem()
@@ -483,6 +507,14 @@ public class CPaciente extends CGenerico {
 
 					if (rdoJefe.isChecked())
 						jefe = true;
+					
+					if (rdoEstudia.isChecked())
+						estudia = true;
+					
+					String lugarEstudio = txtLugarEstudios.getValue();
+					String carrera = txtCarreraActual.getValue();
+					String periodo = txtPeriodo.getValue();
+					
 
 					Paciente paciente = new Paciente(cedula, ficha, apellido1,
 							nombre1, apellido2, nombre2, true, discapacidad,
@@ -514,6 +546,10 @@ public class CPaciente extends CGenerico {
 					paciente.setJefe(jefe);
 					paciente.setCondicion(condicion);
 					paciente.setOficio(oficio);
+					paciente.setCargoOCarrera(carrera);
+					paciente.setLugarTrabajo(lugarEstudio);
+					paciente.setPeriodoEstudios(periodo);
+					paciente.setEstudia(estudia);
 
 					paciente.setMunicipio(txtMunicipio.getValue());
 					paciente.setParroquia(txtParroquia.getValue());
@@ -521,6 +557,17 @@ public class CPaciente extends CGenerico {
 					paciente.setPuntoReferencia(txtPuntoReferencia.getValue());
 					paciente.setUrb(txtUrb.getValue());
 					paciente.setAvCalle(txtAvCalle.getValue());
+
+					
+					String rif = txtRifPaciente.getValue();
+					String tipoRif = cmbRif.getValue();
+					String pasaporte = txtPasaporte.getValue();
+
+					paciente.setTelefonoAdicional(telefonoAdicional);
+					paciente.setEmailEmpresa(correoEmpresa);
+					paciente.setRif(rif);
+					paciente.setTipoRif(tipoRif);
+					paciente.setPasaporte(pasaporte);
 
 					paciente.setNro(txtNro.getValue());
 					paciente.setOtroTransporte(txtOtroTransporte.getValue());
@@ -762,6 +809,9 @@ public class CPaciente extends CGenerico {
 											.getValue()))
 							|| (txtTelefono1Emergencia.getText().compareTo("") != 0 && !Validador
 									.validarTelefono(txtTelefono1Emergencia
+											.getValue()))
+							|| (txtTelefonoAdicional.getText().compareTo("") != 0 && !Validador
+									.validarTelefono(txtTelefono1Emergencia
 											.getValue()))) {
 						msj.mensajeError(Mensaje.telefonoInvalido);
 						return false;
@@ -792,6 +842,13 @@ public class CPaciente extends CGenerico {
 			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
+	/* Metodo que valida el formmato del telefono ingresado */
+	@Listen("onChange = #txtTelefonoAdicional")
+	public void validarTelefonoAdicional() throws IOException {
+		if (Validador.validarTelefono(txtTelefonoAdicional.getValue()) == false) {
+			msj.mensajeAlerta(Mensaje.telefonoInvalido);
+		}
+	}
 
 	/* Metodo que valida el formmato del telefono ingresado */
 	@Listen("onChange = #txtTelefono1Emergencia")
@@ -816,6 +873,14 @@ public class CPaciente extends CGenerico {
 			msj.mensajeAlerta(Mensaje.correoInvalido);
 		}
 	}
+	
+	@Listen("onChange = #txtCorreoEmpresa")
+	public void validarCorreoEmpresa() throws IOException {
+		if (Validador.validarCorreo(txtCorreoEmpresa.getValue()) == false) {
+			msj.mensajeAlerta(Mensaje.correoInvalido);
+		}
+	}
+
 
 	/* Muestra el catalogo de los Pacientes */
 	@Listen("onClick = #btnBuscarPaciente, #btnVer")
@@ -1019,6 +1084,9 @@ public class CPaciente extends CGenerico {
 	/* LLena los campos del formulario dado un paciente */
 	private void llenarCampos(Paciente paciente) {
 
+		cmbRif.setValue(paciente.getTipoRif());
+		txtRifPaciente.setValue(paciente.getRif());
+		txtPasaporte.setValue(paciente.getPasaporte());
 		txtCedulaPaciente.setValue(paciente.getCedula());
 		txtObservacionEstatus.setValue(paciente.getObservacionEstatus());
 		txtNombre1Paciente.setValue(paciente.getPrimerNombre());
@@ -1043,6 +1111,8 @@ public class CPaciente extends CGenerico {
 		txtTelefono1.setValue(paciente.getTelefono1());
 		txtTelefono2.setValue(paciente.getTelefono2());
 		txtCorreo.setValue(paciente.getEmail());
+		txtTelefonoAdicional.setValue(paciente.getTelefonoAdicional());
+		txtCorreoEmpresa.setValue(paciente.getEmailEmpresa());
 		txtNombresEmergencia.setValue(paciente.getNombresEmergencia());
 		txtApellidosEmergencia.setValue(paciente.getApellidosEmergencia());
 		txtTelefono1Emergencia.setValue(paciente.getTelefono1Emergencia());
@@ -1154,6 +1224,14 @@ public class CPaciente extends CGenerico {
 		txtOtroTransporte.setValue(paciente.getOtroTransporte());
 		lblEstado
 				.setValue(paciente.getCiudadVivienda().getEstado().getNombre());
+		
+		txtLugarEstudios.setValue(paciente.getLugarTrabajo());
+		txtCarreraActual.setValue(paciente.getCargoOCarrera());
+		txtPeriodo.setValue(paciente.getPeriodoEstudios());
+		
+		if (paciente.isEstudia())
+			rdoEstudia.setChecked(true);
+		
 		if (paciente.getTransporte() != null) {
 			if (!paciente.getTransporte().equals("")) {
 				String valores[] = paciente.getTransporte().split(",");
@@ -1291,6 +1369,9 @@ public class CPaciente extends CGenerico {
 
 	public void limpiarCampos() {
 
+		cmbRif.setValue("");
+		txtRifPaciente.setValue("");
+		txtPasaporte.setValue("");
 		txtNro.setValue("");
 		txtOtroTransporte.setValue("");
 		txtUrb.setValue("");
@@ -1342,6 +1423,8 @@ public class CPaciente extends CGenerico {
 		txtTelefono1.setValue("");
 		txtTelefono2.setValue("");
 		txtCorreo.setValue("");
+		txtTelefonoAdicional.setValue("");
+		txtCorreoEmpresa.setValue("");
 		txtNombresEmergencia.setValue("");
 		txtApellidosEmergencia.setValue("");
 		txtTelefono1Emergencia.setValue("");
@@ -1397,6 +1480,12 @@ public class CPaciente extends CGenerico {
 		chkOtro.setChecked(false);
 		chkPrivado.setChecked(false);
 		chkPublico.setChecked(false);
+		
+		rdoEstudia.setChecked(false);
+		rdoTrabaja.setValue(null);
+		txtLugarEstudios.setValue("");
+		txtCarreraActual.setValue("");
+		txtPeriodo.setValue("");
 
 		llenarMedicinas();
 	}
