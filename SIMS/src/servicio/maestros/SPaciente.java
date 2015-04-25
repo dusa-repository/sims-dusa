@@ -546,7 +546,8 @@ public class SPaciente {
 			for (int i = 0; i < periodoPaciente.size(); i++) {
 				ids.add(periodoPaciente.get(i).getPaciente().getCedula());
 			}
-			return pacienteDAO.findByCedulaNotInAndTrabajadorTrueAndEstatusTrue(ids);
+			return pacienteDAO
+					.findByCedulaNotInAndTrabajadorTrueAndEstatusTrue(ids);
 		}
 	}
 
@@ -772,7 +773,8 @@ public class SPaciente {
 	}
 
 	public Paciente buscarPorCedulaYTrabajadorYActivo(String idPaciente) {
-		return pacienteDAO.findByCedulaAndTrabajadorTrueAndEstatusTrue(idPaciente);
+		return pacienteDAO
+				.findByCedulaAndTrabajadorTrueAndEstatusTrue(idPaciente);
 	}
 
 	public List<Paciente> filtroNombre2T(String valor) {
@@ -802,7 +804,8 @@ public class SPaciente {
 	}
 
 	public List<Paciente> filtroApellido2(String valor) {
-		return pacienteDAO.findBySegundoApellidoStartingWithAllIgnoreCase(valor);
+		return pacienteDAO
+				.findBySegundoApellidoStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Paciente> filtroNombre2Activos(String valor) {
@@ -931,12 +934,20 @@ public class SPaciente {
 		Pageable topTen = new PageRequest(0, 10);
 		return pacienteDAO.findByTrabajadorFalse(topTen);
 	}
-	
+
 	public List<Paciente> buscarPostVacacionalPendiente() {
 		return pacienteDAO.findByConsultaPendiente();
 	}
 
 	public Paciente buscarPorCedulaYTrabajador(String value) {
 		return pacienteDAO.findByCedulaAndTrabajadorTrue(value);
+	}
+
+	public Paciente buscarPorCedulaYTrabajadorActivo(String value) {
+		return pacienteDAO.findByCedulaAndTrabajadorTrueAndEstatusTrue(value);
+	}
+
+	public List<Paciente> buscarParientesYEstado(String idPaciente, boolean b) {
+		return pacienteDAO.findByCedulaFamiliarAndEstatus(idPaciente, b);
 	}
 }

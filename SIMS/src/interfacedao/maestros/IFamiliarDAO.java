@@ -25,4 +25,6 @@ public interface IFamiliarDAO extends JpaRepository<Familiar, String> {
 
 	List<Familiar> findByCedulaFamiliar(String value);
 
+	List<Familiar> findByCedulaFamiliarAndEstatus(String idPaciente, boolean b);
+
 }

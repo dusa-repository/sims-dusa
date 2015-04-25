@@ -282,7 +282,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SGrupoInspectores servicioGrupoInspectores;
 	@WireVariable("SFicha")
 	protected SFicha servicioFicha;
-	
+	public String titulo;
 	
 	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 			"/META-INF/ConfiguracionAplicacion.xml");
