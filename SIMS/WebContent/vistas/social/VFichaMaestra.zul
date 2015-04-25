@@ -28,7 +28,8 @@
 						</cell>
 						<label class="etiqueta" value="Fecha Registro de Ficha" />
 						<datebox readonly="true" width="100%" id="dtbFechaFicha"
-							onCreate="self.value = new Date()" tooltiptext="Indique la Fecha en la que se registro la ficha del trabajador"
+							onCreate="self.value = new Date()"
+							tooltiptext="Indique la Fecha en la que se registro la ficha del trabajador"
 							constraint="no empty" />
 						<hbox />
 					</row>
@@ -207,67 +208,60 @@
 							</rows>
 						</grid>
 						<separator />
-						<tabbox height="auto" id="taxOtrosDatos" orient="horizontal">
-							<tabs id="tbsOtrosDatos">
-								<tab label="Datos de Contacto" id="tabDatosContacto" />
-							</tabs>
-							<tabpanels>
-								<tabpanel>
-									<grid width="auto">
-										<columns visible="false">
-											<column label="" width="10%" />
-											<column label="" width="10%" />
-											<column label="" width="10%" />
-											<column label="" width="10%" />
-											<column label="" width="10%" />
-											<column label="" width="10%" />
-											<column label="" width="10%" />
-											<column label="" width="10%" />
-											<column label="" width="10%" />
-											<column label="" width="10%" />
-										</columns>
-										<rows>
-											<row>
-												<label class="etiqueta" value="Pais" />
-												<label id="lblPais" />
-												<label class="etiqueta" value="Estado:" />
-												<label id="lblEstado" />
-												<label class="etiqueta" value="Ciudad" />
-												<label id="lblCiudad" />
-												<label class="etiqueta" value="Municipio:" />
-												<label id="lblMunicipio" />
-												<label class="etiqueta" value="Parroquia:" />
-												<label id="lblParroquia" />
-											</row>
-											<row>
-												<label class="etiqueta" value="Direccion:" />
-												<cell colspan="5">
-													<label id="lblDireccion" />
-												</cell>
-												<label class="etiqueta" value="Telefono Fijo:" />
-												<label id="lblTelefono1" />
-												<label class="etiqueta" value="Telefono Movil:" />
-												<label id="lblTelefono2" />
-											</row>
-											<row>
-												<label class="etiqueta" value="Telefono Adicional:" />
-												<label id="lblTelefonoAdicional" />
-												<label class="etiqueta" value="Correo:" />
-												<label id="lblCorreo" />
-												<label class="etiqueta" value="Correo Empresa:" />
-												<label id="lblCorreoEmpresa" />
-												<hbox />
-												<hbox />
-												<hbox />
-												<hbox />
-											</row>
-											<row>
-											</row>
-										</rows>
-									</grid>
-								</tabpanel>
-							</tabpanels>
-						</tabbox>
+						<groupbox title="Datos de Contacto">
+							<grid width="auto">
+								<columns visible="false">
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+									<column label="" width="10%" />
+								</columns>
+								<rows>
+									<row>
+										<label class="etiqueta" value="Pais" />
+										<label id="lblPais" />
+										<label class="etiqueta" value="Estado:" />
+										<label id="lblEstado" />
+										<label class="etiqueta" value="Ciudad" />
+										<label id="lblCiudad" />
+										<label class="etiqueta" value="Municipio:" />
+										<label id="lblMunicipio" />
+										<label class="etiqueta" value="Parroquia:" />
+										<label id="lblParroquia" />
+									</row>
+									<row>
+										<label class="etiqueta" value="Direccion:" />
+										<cell colspan="5">
+											<label id="lblDireccion" />
+										</cell>
+										<label class="etiqueta" value="Telefono Fijo:" />
+										<label id="lblTelefono1" />
+										<label class="etiqueta" value="Telefono Movil:" />
+										<label id="lblTelefono2" />
+									</row>
+									<row>
+										<label class="etiqueta" value="Telefono Adicional:" />
+										<label id="lblTelefonoAdicional" />
+										<label class="etiqueta" value="Correo:" />
+										<label id="lblCorreo" />
+										<label class="etiqueta" value="Correo Empresa:" />
+										<label id="lblCorreoEmpresa" />
+										<hbox />
+										<hbox />
+										<hbox />
+										<hbox />
+									</row>
+									<row>
+									</row>
+								</rows>
+							</grid>
+						</groupbox>
 					</tabpanel>
 					<tabpanel>
 						<grid width="auto">
@@ -566,6 +560,33 @@
 								</row>
 							</rows>
 						</grid>
+					</tabpanel>
+					<tabpanel>
+						<listbox rows="10" mold="paging" pageSize="10" id="ltbActivos"
+							height="auto" emptyMessage="No existe carga familiar asociada al trabajador">
+							<listhead>
+								<listheader label="Parentesco" width="11%" />
+								<listheader label="Cedula" width="10%" />
+								<listheader label="Nombre y Apellido" width="20%" />
+								<listheader label="Fecha Nac." width="12%" />
+								<listheader label="Edad" width="7%" />
+								<listheader label="Sexo" width="11%" />
+								<listheader label="Vive con el Trabajador" width="14%" />
+								<listheader label=" Aplica a Servicio Medico" width="15%" />
+							</listhead>
+							<template name="model">
+								<listitem>
+									<listcell label="${each.parentesco}" />
+									<listcell label="${each.cedula}" />
+									<listcell label="${each.nombre} ${each.apellido}" />
+									<listcell label="${each.fechaNacimiento}" />
+									<listcell label="${each.edad}" />
+									<listcell label="${each.sexo}" />
+									<listcell label="${each.vive}" />
+									<listcell label="${each.servicioMedico}" />
+								</listitem>
+							</template>
+						</listbox>
 					</tabpanel>
 				</tabpanels>
 			</tabbox>

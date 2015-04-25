@@ -15,6 +15,8 @@ public class Persona {
 	private String trabajador;
 	private String parentesco;
 	private String servicioMedico;
+	private Integer Edad;
+	private String vive;
 
 	public Persona(String cedula, String nombre, String apellido,
 			String fechaNacimiento, String lugarNacimiento, String direccion,
@@ -144,6 +146,22 @@ public class Persona {
 
 	public void setServicioMedico(String servicioMedico) {
 		this.servicioMedico = servicioMedico;
+	}
+
+	public Integer getEdad() {
+		return Edad;
+	}
+
+	public void setEdad(Integer edad) {
+		Edad = edad;
+	}
+
+	public String getVive() {
+		return vive;
+	}
+
+	public void setVive(String vive) {
+		this.vive = vive;
 	}
 
 }

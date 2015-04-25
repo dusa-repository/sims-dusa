@@ -4,15 +4,19 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import modelo.generico.Persona;
+import modelo.maestros.Familiar;
 import modelo.maestros.Paciente;
 import modelo.social.Ficha;
 import modelo.transacciones.Orden;
 
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -23,11 +27,13 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 import componentes.Botonera;
 import componentes.Catalogo;
@@ -273,11 +279,14 @@ public class CFichaMaestra extends CGenerico {
 	private Spinner spnPersonasCarga;
 	@Wire
 	private Datebox dtbFechaFicha;
+	@Wire
+	private Listbox ltbActivos;
 
 	String idPaciente = "";
 	String nombre = "";
 	Long idFicha = (long) 0;
 
+	List<Persona> cargaActiva = new ArrayList<Persona>();
 	Catalogo<Paciente> catalogoPaciente;
 
 	@Override
@@ -310,7 +319,7 @@ public class CFichaMaestra extends CGenerico {
 			public void guardar() {
 
 				if (!idPaciente.equals("")) {
-					String portaArma, nroCarnetMilitar, grado, tipoVehiculo, marcaVehiculo, modelo, color, anno, placa, tipoVivienda, tenenciaVivienda, combustible, servicioAgua, basuraFinal,jefe ;
+					String portaArma, nroCarnetMilitar, grado, tipoVehiculo, marcaVehiculo, modelo, color, anno, placa, tipoVivienda, tenenciaVivienda, combustible, servicioAgua, basuraFinal, jefe;
 
 					Ficha ficha = new Ficha();
 
@@ -364,21 +373,22 @@ public class CFichaMaestra extends CGenerico {
 
 					Timestamp fechaVenciCertificado = new Timestamp(
 							dtbFechaVenciCertificado.getValue().getTime());
-					
-					Timestamp fechaFicha = new Timestamp(
-							dtbFechaFicha.getValue().getTime());
+
+					Timestamp fechaFicha = new Timestamp(dtbFechaFicha
+							.getValue().getTime());
 
 					if (spnCuantosVehiculos.getValue() != null)
 						ficha.setVehiculos(spnCuantosVehiculos.getValue());
 
 					if (spnCuartos.getValue() != null)
 						ficha.setCuartos(spnCuartos.getValue());
-					
+
 					if (spnPersonasCarga.getValue() != null)
 						ficha.setPersonasCarga(spnPersonasCarga.getValue());
-					
+
 					if (spnPersonasVivienda.getValue() != null)
-						ficha.setPersonasVivienda(spnPersonasVivienda.getValue());
+						ficha.setPersonasVivienda(spnPersonasVivienda
+								.getValue());
 
 					portaArma = txtPorteArmas.getValue();
 					nroCarnetMilitar = txtCarnetMilitar.getValue();
@@ -439,22 +449,6 @@ public class CFichaMaestra extends CGenerico {
 		};
 		divBotoneraFicha.appendChild(botonera);
 
-	}
-
-	@Listen("onOK = #txtCedula")
-	public void buscarCedula() {
-		Paciente paciente = new Paciente();
-		paciente = servicioPaciente.buscarPorCedulaYTrabajador(txtCedula
-				.getValue());
-		limpiarCampos();
-		if (paciente != null) {
-			llenarCampos(paciente);
-			llenarCamposFicha(paciente.getFichaMaestra());
-			idPaciente = paciente.getCedula();
-			llenarFamiliares();
-		} else {
-			Mensaje.mensajeError(Mensaje.pacienteNoExiste);
-		}
 	}
 
 	private void llenarCamposFicha(Ficha ficha) {
@@ -566,11 +560,6 @@ public class CFichaMaestra extends CGenerico {
 			if (ficha.getPersonasVivienda() != null)
 				spnPersonasVivienda.setValue(ficha.getPersonasVivienda());
 		}
-	}
-
-	private void llenarFamiliares() {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void llenarCampos(Paciente paciente) {
@@ -765,7 +754,8 @@ public class CFichaMaestra extends CGenerico {
 		cmbJefe.setValue("");
 		cmbBasuraFinal.setValue("");
 		dtbFechaFicha.setValue(fecha);
-
+		cargaActiva.clear();
+		ltbActivos.setModel(new ListModelList<Persona>(cargaActiva));
 	}
 
 	@Listen("onClick =  #btnBuscarPaciente")
@@ -814,10 +804,219 @@ public class CFichaMaestra extends CGenerico {
 
 	@Listen("onSeleccion = #divCatalogoPaciente")
 	public void seleccionPaciente() {
+		limpiarCampos();
 		Paciente paciente = catalogoPaciente.objetoSeleccionadoDelCatalogo();
 		idPaciente = paciente.getCedula();
 		llenarCampos(paciente);
 		llenarCamposFicha(paciente.getFichaMaestra());
+		llenarListas();
 		catalogoPaciente.setParent(null);
 	}
+
+	@Listen("onOK =#txtCedula; onChange =#txtCedula")
+	public void buscarCedula() {
+		Paciente paciente = new Paciente();
+		paciente = servicioPaciente.buscarPorCedulaYTrabajador(txtCedula
+				.getValue());
+		limpiarCampos();
+		if (paciente != null) {
+			llenarCampos(paciente);
+			llenarCamposFicha(paciente.getFichaMaestra());
+			idPaciente = paciente.getCedula();
+			llenarListas();
+		} else {
+			Mensaje.mensajeError("El trabajador no existe");
+		}
+	}
+
+	private void llenarListas() {
+		cargaActiva.clear();
+		if (idPaciente != null) {
+			List<Familiar> cargasActivos = servicioFamiliar
+					.buscarPorTrabajadorYEstado(idPaciente, true);
+			List<Paciente> familiaresActivos = servicioPaciente
+					.buscarParientesYEstado(idPaciente, true);
+			for (int i = 0; i < familiaresActivos.size(); i++) {
+				Paciente objeto = familiaresActivos.get(i);
+				Persona persona = new Persona();
+				persona.setApellido(objeto.getPrimerApellido());
+				persona.setCedula(objeto.getCedula());
+				persona.setFechaNacimiento(formatoFecha.format(objeto
+						.getFechaNacimiento()));
+				persona.setEdad(calcularEdad(objeto.getFechaNacimiento()));
+				persona.setNombre(objeto.getPrimerNombre());
+				persona.setParentesco(objeto.getParentescoFamiliar());
+				persona.setSexo(objeto.getSexo());
+				persona.setTrabajador(idPaciente);
+				persona.setServicioMedico("SI");
+				String vive = "N/A";
+				if (objeto.isVive())
+					vive = "SI";
+				if (!objeto.isVive())
+					vive = "NO";
+				persona.setVive(vive);
+				cargaActiva.add(persona);
+			}
+			for (int i = 0; i < cargasActivos.size(); i++) {
+				Familiar objeto = cargasActivos.get(i);
+				Persona persona = new Persona();
+				persona.setApellido(objeto.getPrimerApellido());
+				persona.setCedula(objeto.getCedula());
+				persona.setFechaNacimiento(formatoFecha.format(objeto
+						.getFechaNacimiento()));
+				persona.setEdad(calcularEdad(objeto.getFechaNacimiento()));
+				persona.setNombre(objeto.getPrimerNombre());
+				persona.setParentesco(objeto.getParentescoFamiliar());
+				persona.setSexo(objeto.getSexo());
+				persona.setTrabajador(idPaciente);
+				persona.setServicioMedico("NO");
+				String vive = "N/A";
+				if (objeto.isVive())
+					vive = "SI";
+				if (!objeto.isVive())
+					vive = "NO";
+				persona.setVive(vive);
+				cargaActiva.add(persona);
+			}
+
+		}
+		ltbActivos.setModel(new ListModelList<Persona>(cargaActiva));
+	}
+
+	@Listen("onDoubleClick = #ltbActivos")
+	public void seleccionFamiliar() {
+
+		if (ltbActivos.getSelectedItem().getValue() != null) {
+			Persona persona = ltbActivos.getSelectedItem().getValue();
+			HashMap<String, Object> map = new HashMap<String, Object>();
+
+			Paciente paciente = new Paciente();
+			Familiar carga = new Familiar();
+			if (persona.getServicioMedico().equals("SI")) {
+				paciente = servicioPaciente
+						.buscarPorCedula(persona.getCedula());
+				if (paciente != null) {
+					map.put("cedula", paciente.getCedula());
+					map.put("nombres", paciente.getPrimerNombre() + "  "
+							+ paciente.getSegundoNombre());
+					map.put("apellidos", paciente.getPrimerApellido() + "  "
+							+ paciente.getSegundoApellido());
+					map.put("rif", paciente.getRif());
+					if (paciente.getFechaNacimiento() != null)
+						map.put("edad", String.valueOf(calcularEdad(paciente
+								.getFechaNacimiento())));
+					map.put("sexo", paciente.getSexo());
+					if (paciente.getEstadoCivil() != null)
+						map.put("estadoCivil", paciente.getEstadoCivil()
+								.getNombre());
+					if (paciente.getFechaNacimiento() != null)
+						map.put("fechaNacimiento", formatoFecha.format(paciente
+								.getFechaNacimiento()));
+					map.put("parentesco", paciente.getParentescoFamiliar());
+					map.put("oficio", paciente.getOficio());
+					map.put("profesion", paciente.getProfesion());
+					if (paciente.isEstudia())
+						map.put("estudia", "Estudia");
+					else if (!paciente.isEstudia())
+						map.put("estudia", "Trabaja");
+
+					map.put("lugarEstudio", paciente.getLugarTrabajo());
+					map.put("cargoCarrera", paciente.getCargoOCarrera());
+					if (paciente.getFechaIngreso() != null)
+						map.put("desde",
+								formatoFecha.format(paciente.getFechaIngreso()));
+					if (paciente.isDiscapacidad())
+						map.put("discapacadidad",
+								"SI," + "    "
+										+ paciente.getOrigenDiscapacidad()
+										+ "   "
+										+ paciente.getTipoDiscapacidad()
+										+ "   "
+										+ paciente.getObservacionDiscapacidad());
+					else
+						map.put("discapacadidad", "NO");
+					map.put("conapdis", paciente.getCertificado());
+					map.put("certificado", paciente.getNroCertificado());
+					if (paciente.isAyuda())
+						map.put("ayuda",
+								"SI, " + "     "
+										+ paciente.getDescripcionAyuda());
+					else if (!paciente.isAyuda())
+						map.put("ayuda", "NO");
+					map.put("direccion", paciente.getDireccion());
+					map.put("telefono", paciente.getTelefono2());
+					map.put("observaciones", paciente.getObservacion());
+					if (paciente.isVive())
+						map.put("vive", "SI");
+					if (!paciente.isVive())
+						map.put("vive", "NO");
+				}
+			}
+
+			else {
+				carga = servicioFamiliar.buscarPorCedula(persona.getCedula());
+				if (carga != null) {
+					map.put("cedula", carga.getCedula());
+					map.put("nombres",
+							carga.getPrimerNombre() + "  "
+									+ carga.getSegundoNombre());
+					map.put("apellidos", carga.getPrimerApellido() + "  "
+							+ carga.getSegundoApellido());
+					map.put("rif", carga.getRif());
+					if (carga.getFechaNacimiento() != null)
+						map.put("edad", String.valueOf(calcularEdad(carga
+								.getFechaNacimiento())));
+					map.put("sexo", carga.getSexo());
+					if (carga.getEstadoCivil() != null)
+						map.put("estadoCivil", carga.getEstadoCivil()
+								.getNombre());
+					if (carga.getFechaNacimiento() != null)
+						map.put("fechaNacimiento",
+								formatoFecha.format(carga.getFechaNacimiento()));
+					map.put("parentesco", carga.getParentescoFamiliar());
+					map.put("oficio", carga.getOficio());
+					map.put("profesion", carga.getProfesion());
+					if (carga.isEstudia())
+						map.put("estudia", "Estudia");
+					else if (!carga.isEstudia())
+						map.put("estudia", "Trabaja");
+
+					map.put("lugarEstudio", carga.getLugarTrabajo());
+					map.put("cargoCarrera", carga.getCargoOCarrera());
+					if (carga.getFechaIngreso() != null)
+						map.put("desde",
+								formatoFecha.format(carga.getFechaIngreso()));
+					if (carga.isDiscapacidad())
+						map.put("discapacadidad",
+								"SI," + "    " + carga.getOrigenDiscapacidad()
+										+ "    " + carga.getTipoDiscapacidad()
+										+ "    "
+										+ carga.getObservacionDiscapacidad());
+					else
+						map.put("discapacadidad", "NO");
+					map.put("conapdis", carga.getCertificado());
+					map.put("certificado", carga.getNroCertificado());
+					if (carga.isAyuda())
+						map.put("ayuda",
+								"SI, " + "    " + carga.getDescripcionAyuda());
+					else if (!carga.isAyuda())
+						map.put("ayuda", "NO");
+					map.put("direccion", carga.getDireccion());
+					map.put("telefono", carga.getTelefono2());
+					map.put("observaciones", carga.getObservacion());
+					if (carga.isVive())
+						map.put("vive", "SI");
+					if (!carga.isVive())
+						map.put("vive", "NO");
+
+				}
+			}
+
+			Sessions.getCurrent().setAttribute("datos", map);
+			Window window = (Window) Executions.createComponents(
+					"/vistas/social/VDatosFamiliar.zul", null, null);
+			window.doModal();
+		}
+	}
+
 }

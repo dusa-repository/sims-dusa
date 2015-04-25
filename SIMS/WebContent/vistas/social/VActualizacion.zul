@@ -222,7 +222,7 @@
 							<vbox>
 								<div align="center">
 									<button class="btn" height="40px" width="70px" label="Desactivar"
-										id="btnDesactivar" image="/public/imagenes/botones/ver.png"
+										id="btnDesactivar" image="/public/imagenes/botones/anular.png"
 										tooltiptext="Seleccione un Registro para ver la Solicitud de orden" />
 									<button class="abrir" id="btnAbrir" label="" width="70px"
 										tooltiptext="Crear nueva Carga" image="/public/imagenes/botones/agregar.png" />
@@ -247,12 +247,12 @@
 									<listheader label="Nombre y Apellido" width="17%" />
 									<listheader label="Fecha. Nac." width="6%" />
 									<listheader label="Lugar Nac." width="12%" />
-									<listheader label="Direccion" width="17%" />
-									<listheader label="Sexo" width="6%" />
+									<listheader label="Direccion" width="16%" />
+									<listheader label="Sexo" width="7%" />
 									<listheader label="Nivel Estudio" width="8%" />
-									<listheader label="Jubilado /Pension" width="6%" />
+									<listheader label="Jubilado /Pension" width="7%" />
 									<listheader label="Verf. RRHH" width="6%" />
-									<listheader label="Servicio Medico" width="6%" />
+									<listheader label="Servicio Medico" width="5%" />
 								</listhead>
 								<template name="model">
 									<listitem>
@@ -273,7 +273,7 @@
 							<vbox>
 								<div align="center">
 									<button class="btn" height="40px" width="70px" label="Activar"
-										id="btnActivar" image="/public/imagenes/botones/ver.png"
+										id="btnActivar" image="/public/imagenes/botones/seleccionar.png"
 										tooltiptext="Seleccione un Registro para ver la Solicitud de orden" />
 								</div>
 							</vbox>

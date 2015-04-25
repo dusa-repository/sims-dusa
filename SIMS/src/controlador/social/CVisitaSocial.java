@@ -1,11 +1,15 @@
 package controlador.social;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import modelo.maestros.Estado;
 import modelo.maestros.EstadoCivil;
@@ -16,10 +20,12 @@ import modelo.sha.PlanAccion;
 import modelo.social.ComposicionFamiliar;
 import modelo.social.VisitaSocial;
 
+import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.CheckEvent;
 import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
@@ -29,6 +35,8 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
+import org.zkoss.zul.Fileupload;
+import org.zkoss.zul.Image;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
@@ -492,15 +500,18 @@ public class CVisitaSocial extends CGenerico {
 	private Radio rdo39_2;
 	@Wire
 	private Textbox txt40;
-
 	@Wire
 	private Textbox txt41;
-
 	@Wire
 	private Textbox txt42;
-
 	@Wire
 	private Textbox txt43;
+	@Wire
+	private Image imagen1;
+	@Wire
+	private Fileupload fudImagen1;
+	@Wire
+	private Media media1;
 	
 	private List<ComposicionFamiliar> listaComposicion = new ArrayList<ComposicionFamiliar>();
 
@@ -732,6 +743,8 @@ public class CVisitaSocial extends CGenerico {
 				checkGranos_4.setChecked(false);
 				checkGranos_5.setChecked(false);
 				ltbComposicion.getItems().clear();
+				org.zkoss.image.Image imagenUsuario1 = null;
+				imagen1.setContent(imagenUsuario1);
 
 			}
 
@@ -1170,6 +1183,13 @@ public class CVisitaSocial extends CGenerico {
 					if (checkGranos_5.isChecked())
 						granosComo = granosComo + "," + checkGranos_5.getLabel();
 					visitaSocial.setGranosComo(granosComo);
+					
+					byte[] imagenUsuario1 = null;
+					if (media1 instanceof org.zkoss.image.Image
+							&& imagen1.getContent() != null) {
+						imagenUsuario1 = imagen1.getContent().getByteData();
+					}
+					visitaSocial.setImagen(imagenUsuario1);
 
 					visitaSocial.setIdVisita(idVisita);
 
@@ -1623,12 +1643,17 @@ public class CVisitaSocial extends CGenerico {
 			ltbComposicion.setCheckmark(true);
 		}
 		
-		Paciente paciente = visitaSocial.getPaciente();
-		if(paciente!=null)
-		{
-		cedula=paciente.getCedula();
-		llenarCamposPaciente(paciente);
+		BufferedImage imag1;
+		if (visitaSocial.getImagen() != null) {
+			try {
+				imag1 = ImageIO.read(new ByteArrayInputStream(visitaSocial
+						.getImagen()));
+				imagen1.setContent(imag1);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
 	}
 
 	// Botones
@@ -2116,5 +2141,28 @@ public class CVisitaSocial extends CGenerico {
 			
 		}
 		servicioComposicionFamiliar.guardarVarios(composicionFamiliar);
+	}
+	@Listen("onUpload = #fudImagen1")
+	public void processMedia1(UploadEvent event) {
+		media1 = event.getMedia();
+		if (media1 != null) {
+			if (media1.getContentType().equals("image/jpeg")
+					|| media1.getContentType().equals("image/png")) {
+				if (media1.getByteData().length >= 512000
+						&& media1.getByteData().length <= 2048000) {
+					imagen1.setContent((org.zkoss.image.Image) media1);
+				} else {
+					msj.mensajeAlerta(Mensaje.tamanioMuyGrande);
+				}
+			} else {
+				msj.mensajeAlerta(Mensaje.noPermitido);
+			}
+		}
+	}
+	
+	@Listen("onClick = #btnRemover1")
+	public void limpiarI1() {
+		org.zkoss.image.Image imagenUsuario1 = null;
+		imagen1.setContent(imagenUsuario1);
 	}
 }
