@@ -7,11 +7,11 @@
 					<column label="" width="70%" />
 				</columns>
 				<rows>
-						<row>
-							<label class="etiqueta" value="Buscar Trabajador" />
-							<button autodisable="self" id="btnBuscar1" class="btn"
-								label="Buscar" tooltiptext="Catalogo de Trabajadores" image="/public/imagenes/botones/buscar.png" />
-						</row>
+					<row>
+						<label class="etiqueta" value="Buscar Trabajador" />
+						<button autodisable="self" id="btnBuscar1" class="btn"
+							label="Buscar" tooltiptext="Catalogo de Trabajadores" image="/public/imagenes/botones/buscar.png" />
+					</row>
 				</rows>
 			</grid>
 			<tabbox id="tb" height="auto" width="auto">
@@ -22,6 +22,7 @@
 					<tab id="c" label="ALIMENTACIÓN / INGRESOS Y EGRESOS." />
 					<tab id="e" label="COMPOSICION FAMILIAR" />
 					<tab id="d" label="RECREACIÓN Y USO DEL TIEMPO LIBRE" />
+					<tab id="g" label="FAMILIOGRAMA" />
 					<tab id="f" label="DIAGNOSTICO" />
 				</tabs>
 				<tabpanels>
@@ -1413,6 +1414,35 @@
 								</rows>
 							</grid>
 						</groupbox>
+					</tabpanel>
+					<tabpanel>
+						<grid width="auto">
+							<columns>
+								<column label="" width="100%" />
+							</columns>
+							<rows>
+								<row>
+									<hbox>
+										<label class="etiqueta" value="Seleccione la imagen del Familiograma" />
+									</hbox>
+								</row>
+							</rows>
+						</grid>
+						<separator/>
+						<vbox>
+							<image
+								tooltiptext="Tamaños permitidos: Minimo 512KB y Maximo 2MB  &#x0d;Formatos permitidos: .png y .jpeg"
+								style="border: 1px outset #A0A0A0;" id="imagen1" width="250px"
+								height="250px" />
+							<space />
+							<fileupload
+								style="	background: #800400;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+								image="/public/imagenes/botones/cargar.png" id="fudImagen1"
+								label="Cargar Imagen">
+							</fileupload>
+							<button id="btnRemover1" label="Remover Imagen" class="btn"
+								tooltiptext="Presione para Remover la Imagen" image="/public/imagenes/botones/anular.png" />
+						</vbox>
 					</tabpanel>
 					<tabpanel>
 						<grid width="auto">

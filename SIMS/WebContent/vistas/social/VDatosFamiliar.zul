@@ -1,0 +1,95 @@
+<zk>
+	<window id="wdwDatos" title="Datos del Familiar" border="normal"
+		width="60%" height="auto" contentStyle="overflow:auto"
+		apply="controlador.social.CDatosFamiliar" closable="true">
+		<grid width="100%">
+			<columns visible="false">
+				<column label="" width="18%" />
+				<column label="" width="32%" />
+				<column label="" width="18%" />
+				<column label="" width="32%" />
+
+			</columns>
+			<rows>
+				<row>
+					<label class="etiqueta" value="Cedula:" />
+					<label id="lblCedula" />
+					<label class="etiqueta" value="¿Vive con el Trabajador?:" />
+					<label id="lblVive" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Nombre:" />
+					<cell colspan="3">
+						<label id="lblNombre" />
+					</cell>
+				</row>
+				<row>
+					<label class="etiqueta" value="Rif:" />
+					<label id="lblRif" />
+					<label class="etiqueta" value="Fecha Nacimiento:" />
+					<label id="lblFechaNacimiento" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Edad:" />
+					<label id="lblEdad" />
+					<label class="etiqueta" value="Sexo:" />
+					<label id="lblSexo" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Estado Civil:" />
+					<label id="lblEstado" />
+					<label class="etiqueta" value="Parentesco:" />
+					<label id="lblParentesco" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Oficio:" />
+					<label id="lblOficio" />
+					<label class="etiqueta" value="Profesion:" />
+					<label id="lblProfesion" />
+				</row>
+				<row>
+					<label class="etiqueta" value="¿Trabaja o Estudia?:" />
+					<label id="lblEstudia" />
+					<label class="etiqueta" value="Lugar de trabajo o estudio:" />
+					<label id="lblLugarEstudio" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Cargo o Carrera:" />
+					<label id="lblCargo" />
+					<label class="etiqueta" value="Desde:" />
+					<label id="lblDesde" />
+				</row>
+				<row>
+					<label class="etiqueta" value="¿Discapacidad?:" />
+					<cell colspan="3">
+						<label id="lblDiscapacidad" />
+					</cell>
+				</row>
+				<row>
+					<label class="etiqueta" value="¿C.O.N.A.P.DIS?:" />
+					<label id="lblConapdis" />
+					<label class="etiqueta" value="Nro. Certificado:" />
+					<label id="lblNroCertificado" />
+				</row>
+				<row>
+					<label class="etiqueta" value="¿Posee ayuda economica?:" />
+					<cell colspan="3">
+						<label id="lblAyuda" />
+					</cell>
+				</row>
+				<row>
+					<label class="etiqueta" value="Direccion:" />
+					<label id="lblDireccion" />
+					<label class="etiqueta" value="Telefono:" />
+					<label id="lblTelefono" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Observacion:" />
+					<cell colspan="3">
+						<label id="lblObservacion" />
+					</cell>
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

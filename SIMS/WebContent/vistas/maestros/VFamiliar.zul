@@ -210,7 +210,7 @@
 								</row>
 								<row>
 									<label class="etiqueta" value="Oficio:" />
-									<cell colspan="3">
+									<cell colspan="2">
 										<textbox maxlength="500" id="txtOficio"
 											tooltiptext="Ingrese el oficio del Familiar" />
 									</cell>
@@ -219,13 +219,14 @@
 										<textbox maxlength="100" id="txtProfesion"
 											tooltiptext="Ingrese la Carrera de Profesion del Familiar" />
 									</cell>
-									<vbox>
+										<cell colspan="2">
+									<hbox>
 										<radiogroup id="rdgEstudia">
 											<radio label="Estudia *" value="si" id="rdoEstudia" />
-											<separator />
 											<radio label="Trabaja *" value="no" id="rdoTrabaja" />
 										</radiogroup>
-									</vbox>
+									</hbox>
+										</cell>
 								</row>
 								<row>
 									<label class="etiqueta" value="Lugar de Trabajo o Estudio:" />
@@ -299,15 +300,19 @@
 									<label class="etiqueta" value="Nro. Certificdo:" />
 									<textbox id="txtNroCertificado" width="100%"
 										tooltiptext="Ingrese Nro. de Certificado" maxlength="15" />
-									<hbox>
-										<label class="etiqueta" value="¿Posee Ayuda Economica?:" />
-										<space />
-										<label value="*" style="font-weight:bold;color:red" />
-									</hbox>
-									<radiogroup id="rdgAyuda">
-										<radio label="SI" value="si" id="rdoAyuda" />
-										<radio label="NO" value="no" id="rdoNoAyuda" />
-									</radiogroup>
+									<cell colspan="2">
+										<vlayout>
+											<hbox>
+												<label class="etiqueta" value="¿Posee Ayuda Economica?:" />
+												<space />
+												<label value="*" style="font-weight:bold;color:red" />
+											</hbox>
+											<radiogroup id="rdgAyuda">
+												<radio label="SI" value="si" id="rdoAyuda" />
+												<radio label="NO" value="no" id="rdoNoAyuda" />
+											</radiogroup>
+										</vlayout>
+									</cell>
 									<label class="etiqueta" value="Indique Cual:" />
 									<textbox id="txtAyuda" width="100%" maxlength="500"
 										tooltiptext="Ingrese Otros Datos de Discapacidad" multiline="true" />

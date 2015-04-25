@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -320,6 +321,10 @@ public class VisitaSocial implements Serializable {
 	
 	@Column(length = 1000, name="verduras_como")
 	private String verdurasComo;
+	
+	@Lob
+	@Column(name = "imagen")
+	private byte[] imagen;
 
 	@OneToMany(mappedBy = "visita")
 	private Set<ComposicionFamiliar> composicion;
@@ -1104,5 +1109,14 @@ public class VisitaSocial implements Serializable {
 	public void setComposicion(Set<ComposicionFamiliar> composicion) {
 		this.composicion = composicion;
 	}
+
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+	}
+	
 	
 }
