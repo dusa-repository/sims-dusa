@@ -224,12 +224,14 @@
 									<button class="btn" height="40px" width="70px" label="Desactivar"
 										id="btnDesactivar" image="/public/imagenes/botones/ver.png"
 										tooltiptext="Seleccione un Registro para ver la Solicitud de orden" />
-									<button class="abrir" id="btnAbrir" label="" width="70px" 
+									<button class="abrir" id="btnAbrir" label="" width="70px"
 										tooltiptext="Crear nueva Carga" image="/public/imagenes/botones/agregar.png" />
-									<button class="abrir" id="btnRefrescar"
-										label=""  width="70px" 
+									<button class="abrir" id="btnRefrescar" label="" width="70px"
 										tooltiptext="Presione para actualizar las listas de Cargas del Paciente"
 										image="/public/imagenes/botones/refresh2.png" />
+									<button class="btn" autodisable="true" id="btnReporte"
+										label="Reporte" tooltiptext="Reporte del Formato de Actualizacion"
+										image="/public/imagenes/botones/generar.png" width="70px" />
 								</div>
 							</vbox>
 						</hbox>

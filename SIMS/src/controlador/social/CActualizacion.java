@@ -6,11 +6,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import modelo.generico.Persona;
+import modelo.maestros.Ciudad;
+import modelo.maestros.EstadoCivil;
+import modelo.maestros.Familiar;
+import modelo.maestros.Paciente;
+import modelo.seguridad.Arbol;
+import modelo.social.Ficha;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
@@ -27,19 +42,11 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
+
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
-import modelo.generico.Persona;
-import modelo.maestros.Ciudad;
-import modelo.maestros.EstadoCivil;
-import modelo.maestros.Familiar;
-import modelo.maestros.Paciente;
-import modelo.maestros.ServicioExterno;
-import modelo.seguridad.Arbol;
-import modelo.social.Ficha;
-import modelo.transacciones.Consulta;
-import modelo.transacciones.ConsultaServicioExterno;
+
 import controlador.maestros.CGenerico;
 
 public class CActualizacion extends CGenerico {
@@ -581,5 +588,132 @@ public class CActualizacion extends CGenerico {
 	@Listen("onClick = #btnRefrescar")
 	public void refrescarServicio() {
 		llenarListas();
+	}
+
+	@Listen("onClick = #btnReporte")
+	public void reporte() {
+		if (idPaciente != null)
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=54&valor3="
+					+ idPaciente
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		else
+			Mensaje.mensajeAlerta("Debe seleccionar un Paciente para observar el formato de Actualizacion");
+	}
+
+	public byte[] jasperFormatoActualizacion(String par3) {
+		byte[] fichero = null;
+		List<Familiar> cargasActivos = getServicioFamiliar()
+				.buscarPorTrabajadorYEstado(par3, true);
+		List<Paciente> familiaresActivos = getServicioPaciente()
+				.buscarParientesYEstado(par3, true);
+		List<Persona> lista = new ArrayList<Persona>();
+		for (int i = 0; i < familiaresActivos.size(); i++) {
+			Paciente objeto = familiaresActivos.get(i);
+			Persona persona = new Persona();
+			persona.setApellido(objeto.getPrimerApellido());
+			persona.setCedula(objeto.getCedula());
+			persona.setDireccion(objeto.getDireccion());
+			persona.setFechaNacimiento(formatoFecha.format(objeto
+					.getFechaNacimiento()));
+			persona.setLugarNacimiento(objeto.getLugarNacimiento());
+			persona.setNivelEducacion(objeto.getNivelEducativo());
+			persona.setNombre(objeto.getPrimerNombre());
+			persona.setParentesco(objeto.getParentescoFamiliar());
+			persona.setSexo(objeto.getSexo());
+			persona.setTrabajador(par3);
+			persona.setServicioMedico("SI");
+			String verificacion = "NO";
+			if (objeto.getRevision() != null)
+				if (objeto.getRevision())
+					verificacion = "SI";
+			persona.setVerificacionRH(verificacion);
+			String jubilado = "NO";
+			if (objeto.getJubilado() != null)
+				if (objeto.getJubilado())
+					jubilado = "SI";
+			persona.setJubilado(jubilado);
+			lista.add(persona);
+		}
+		for (int i = 0; i < cargasActivos.size(); i++) {
+			Familiar objeto = cargasActivos.get(i);
+			Persona persona = new Persona();
+			persona.setApellido(objeto.getPrimerApellido());
+			persona.setCedula(objeto.getCedula());
+			persona.setDireccion(objeto.getDireccion());
+			persona.setFechaNacimiento(formatoFecha.format(objeto
+					.getFechaNacimiento()));
+			persona.setLugarNacimiento(objeto.getLugarNacimiento());
+			persona.setNivelEducacion(objeto.getCargoOCarrera());
+			persona.setNombre(objeto.getPrimerNombre());
+			persona.setParentesco(objeto.getParentescoFamiliar());
+			persona.setSexo(objeto.getSexo());
+			persona.setTrabajador(par3);
+			persona.setServicioMedico("NO");
+			String verificacion = "NO";
+			if (objeto.getRevision() != null)
+				if (objeto.getRevision())
+					verificacion = "SI";
+			persona.setVerificacionRH(verificacion);
+			String jubilado = "NO";
+			if (objeto.getJubilado() != null)
+				if (objeto.getJubilado())
+					jubilado = "SI";
+			persona.setJubilado(jubilado);
+			lista.add(persona);
+		}
+
+		Paciente paciente = getServicioPaciente().buscarPorCedula(par3);
+		Map<String, Object> p = new HashMap<String, Object>();
+		p.put("cedula", paciente.getCedula());
+		p.put("nombre", paciente.getPrimerNombre());
+		p.put("apellido", paciente.getPrimerApellido());
+		p.put("rif", paciente.getRif());
+		p.put("ficha", paciente.getFicha());
+		p.put("nacimiento", formatoFecha.format(paciente.getFechaNacimiento()));
+		p.put("direccion", paciente.getDireccion());
+		p.put("telefono1", paciente.getTelefono1());
+		p.put("telefono2", paciente.getTelefono2());
+		p.put("ciudad", paciente.getCiudadVivienda().getNombre());
+		if (paciente.getEstadoCivil() != null)
+			p.put("civil", paciente.getEstadoCivil().getNombre());
+		else
+			p.put("civil", "N/A");
+		p.put("grupo", paciente.getGrupoSanguineo());
+		if (paciente.getFichaMaestra() != null) {
+			Ficha ficha = paciente.getFichaMaestra();
+			p.put("camisa", ficha.getTallaCamisa());
+			p.put("goma", ficha.getTallaGoma());
+			p.put("pantalon", ficha.getTallaPantalon());
+			p.put("seguridad", ficha.getTallaBotas());
+			if (ficha.isViviendaPropia())
+				p.put("casa", "SI");
+			else
+				p.put("casa", "NO");
+			p.put("tipo", ficha.getTipoVivienda());
+		} else {
+			p.put("camisa", "N/A");
+			p.put("goma", "N/A");
+			p.put("pantalon", "N/A");
+			p.put("seguridad", "N/A");
+			p.put("casa", "N/A");
+			p.put("tipo", "N/A");
+		}
+
+		JasperReport reporte = null;
+		try {
+			reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RFormatoActualizacion.jasper"));
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+		try {
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(lista));
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
+		return fichero;
 	}
 }

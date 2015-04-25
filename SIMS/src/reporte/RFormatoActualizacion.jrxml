@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RFormatoActualizacion" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c6ab235-1c72-4a58-b357-eee3b4c74597">
+	<property name="ireport.zoom" value="1.4641000000000013"/>
+	<property name="ireport.x" value="328"/>
+	<property name="ireport.y" value="19"/>
+	<parameter name="cedula" class="java.lang.String"/>
+	<parameter name="nombre" class="java.lang.String"/>
+	<parameter name="apellido" class="java.lang.String"/>
+	<parameter name="rif" class="java.lang.String"/>
+	<parameter name="ficha" class="java.lang.String"/>
+	<parameter name="nacimiento" class="java.lang.String"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="telefono1" class="java.lang.String"/>
+	<parameter name="telefono2" class="java.lang.String"/>
+	<parameter name="ciudad" class="java.lang.String"/>
+	<parameter name="civil" class="java.lang.String"/>
+	<parameter name="grupo" class="java.lang.String"/>
+	<parameter name="camisa" class="java.lang.String"/>
+	<parameter name="goma" class="java.lang.String"/>
+	<parameter name="pantalon" class="java.lang.String"/>
+	<parameter name="seguridad" class="java.lang.String"/>
+	<parameter name="casa" class="java.lang.String"/>
+	<parameter name="tipo" class="java.lang.String"/>
+	<field name="apellido" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="fechaNacimiento" class="java.lang.String"/>
+	<field name="lugarNacimiento" class="java.lang.String"/>
+	<field name="parentesco" class="java.lang.String"/>
+	<field name="sexo" class="java.lang.String"/>
+	<field name="nivelEducacion" class="java.lang.String"/>
+	<field name="verificacionRH" class="java.lang.String"/>
+	<field name="jubilado" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="170" splitType="Stretch">
+			<staticText>
+				<reportElement x="226" y="37" width="350" height="25" uuid="3a8bfb2c-48a7-4691-bf29-b387603e736d"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACTUALIZACION DATOS PERSONALES]]></text>
+			</staticText>
+			<image>
+				<reportElement x="20" y="10" width="107" height="52" uuid="22dc4aba-6d44-46ca-bf6e-7c0dd23719dc"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="90" width="115" height="18" uuid="c0502fa2-059f-4df7-994d-410245c8ea6d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos y Nombres:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="353" y="90" width="78" height="18" uuid="be79fdb4-6c39-4a69-aae5-7e069d0f3dd3"/>
+				<textFieldExpression><![CDATA[$P{ficha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="532" y="90" width="61" height="18" uuid="c9c017dd-33ee-44e4-a039-4346553c6fa7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Nac.:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="593" y="90" width="71" height="18" uuid="d3006b72-2f4d-44f1-b7cb-7f8ad8ce2d69"/>
+				<textFieldExpression><![CDATA[$P{nacimiento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="116" width="52" height="18" uuid="7491c526-02cc-4b06-ad3d-03f04095a34d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direccion:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="52" y="116" width="327" height="18" uuid="056f5310-6115-4225-8e2f-70a72144e920"/>
+				<textFieldExpression><![CDATA[$P{direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="319" y="90" width="34" height="18" uuid="b53dd820-b6f4-473e-9537-c9539e1da008"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ficha:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="115" y="90" width="201" height="18" uuid="8d8dbcbe-fcbf-4412-a2d8-ca1452c59ae3"/>
+				<textFieldExpression><![CDATA[$P{apellido}+" "+$P{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="666" y="91" width="61" height="17" uuid="f09ae3bc-7fa2-4bd0-8356-4ef99df16fb1"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado Civil]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="727" y="90" width="75" height="18" uuid="361c30b9-6d05-4dbd-baae-0830e30463a9"/>
+				<textFieldExpression><![CDATA[$P{civil}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="433" y="90" width="19" height="18" uuid="598bf297-7bd8-4d1c-88ea-06517a5ebd42"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="452" y="90" width="78" height="18" uuid="64b230ee-1786-4b50-b0d8-9d4c23f4ee91"/>
+				<textFieldExpression><![CDATA[$P{cedula}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="379" y="116" width="41" height="18" uuid="a14f6051-d681-421b-aad2-abb07dc4b23b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ciudad:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="420" y="116" width="112" height="18" uuid="5877c79d-15c4-4512-b621-7c9a5214a103"/>
+				<textFieldExpression><![CDATA[$P{ciudad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="540" y="116" width="53" height="18" uuid="430b1085-3abe-4628-b410-6f0b02e1c982"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefonos]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="595" y="116" width="207" height="18" uuid="cd26f279-fe31-4632-b58c-97082c5d5745"/>
+				<textFieldExpression><![CDATA[$P{telefono1}+" / "+$P{telefono2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="139" width="41" height="18" uuid="68e81eef-d439-4e68-8c23-fd3ae351000e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Camisa:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="42" y="139" width="32" height="18" uuid="1d7d8623-b4ad-4754-8030-d4c23833053e"/>
+				<textFieldExpression><![CDATA[$P{camisa}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="130" y="139" width="32" height="18" uuid="27d38565-308f-4c7c-afac-7ff929d44db4"/>
+				<textFieldExpression><![CDATA[$P{pantalon}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="78" y="139" width="52" height="18" uuid="b6e752cd-6198-42c6-99dc-137af4618621"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pantalon:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="139" width="82" height="18" uuid="8a20ccf9-06e7-4ba2-aafa-63c1c83c7699"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bota Seguridad]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="248" y="139" width="32" height="18" uuid="8df32255-25da-44a3-b1c9-f8863f033ecf"/>
+				<textFieldExpression><![CDATA[$P{seguridad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="285" y="139" width="72" height="18" uuid="c4d37dc0-2059-44b2-821a-5ca942da9857"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zapato Goma]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="357" y="139" width="32" height="18" uuid="e3c27fd0-aec2-4df6-ae2b-31e3b1c419e1"/>
+				<textFieldExpression><![CDATA[$P{goma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="394" y="139" width="60" height="18" uuid="00336170-5dae-44f7-8fa3-a8e04b3deec7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiene Casa]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="454" y="139" width="28" height="18" uuid="faf8daf2-1989-48dd-b5b0-55a891ac7fc4"/>
+				<textFieldExpression><![CDATA[$P{casa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="489" y="139" width="56" height="18" uuid="e36fb7b8-e9b6-497a-a3e0-6c15d62638a7"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Casa:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="545" y="139" width="125" height="18" uuid="d6d9433d-b6b1-4d9c-a0d2-85eb79f69d83"/>
+				<textFieldExpression><![CDATA[$P{tipo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="767" y="139" width="36" height="18" uuid="ac7d1dcc-602b-4a32-8220-05d6ae4d9d2e"/>
+				<textFieldExpression><![CDATA[$P{grupo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="676" y="139" width="91" height="18" uuid="66447001-61b2-427e-a9f4-2b3804833f9b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Grupo Sanguineo]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="41">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="15" backcolor="#DBD7D7" uuid="d1e31d4f-1851-4ca3-9a76-d410d5c9dc63"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="1" y="15" width="802" height="26" backcolor="#EAE9E9" uuid="c7e9620b-4d42-4d47-92cb-ea93d8eaa9cf"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="357" y="0" width="100" height="15" uuid="7753e225-0f9f-4366-8320-cfd69ceec5aa"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARGA FAMILIAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="21" width="152" height="20" uuid="d60e37b6-be41-4dc6-97b5-e0bdfc40d62c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre y Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="21" width="73" height="20" uuid="6c1c2c54-54b9-4a49-8e49-e619c71b2b4d"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parentesco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="21" width="59" height="20" uuid="bc3d0756-b3a2-4e27-84bc-175b88436027"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="21" width="115" height="20" uuid="dc367d6c-4146-4d0e-a5e7-2e92bdf53fcc"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lugar Nacimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="585" y="21" width="51" height="20" uuid="3e7fec6f-ae0a-43e0-8daf-345605c81039"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="636" y="13" width="58" height="28" uuid="a14cba0f-6768-4316-ac9a-f28a45ab0dbd"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nivel Educacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="694" y="21" width="48" height="20" uuid="a9f9c65c-d460-4ea2-9708-508ed28efa8b"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jubilado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="740" y="15" width="63" height="26" uuid="7388edde-879b-4c53-871d-5d97c60af33b"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Verificacion RH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="285" y="21" width="54" height="20" uuid="e31281c4-95a4-4a8b-9252-447b104b9448"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Nac.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="452" y="21" width="133" height="20" uuid="ad709a56-27e3-4abf-a0ed-053f8bdfda15"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direccion]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="74" height="20" uuid="a9a01f5a-0931-42b9-b3fe-01414d2cf1f2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{parentesco}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="74" y="0" width="152" height="20" uuid="c7b051a5-a881-4271-af4e-ecf0cc5471ad"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombre}+" "+$F{apellido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="226" y="0" width="59" height="20" uuid="84b1f61e-4319-4399-873f-84d7adb1684d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="284" y="0" width="55" height="20" uuid="7733edde-7766-4801-ae2c-ea45794b4d7c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fechaNacimiento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="339" y="0" width="113" height="20" uuid="1918a9bf-4097-42f2-8d8d-eb66e9cdc06f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{lugarNacimiento}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="585" y="0" width="51" height="20" uuid="df529450-9ca1-44bf-b459-ce2b9ca541f6"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="636" y="0" width="58" height="20" uuid="e098e8f2-ba1d-4871-b119-e435149c74ad"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nivelEducacion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="694" y="0" width="48" height="20" uuid="59e4e02a-bd6a-4eb0-a13f-e5ea7164b13b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{jubilado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="742" y="0" width="61" height="20" uuid="9fa6ade8-57ee-4b09-84e7-beef134e1ebd"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{verificacionRH}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="452" y="0" width="133" height="20" uuid="59ce2dfb-2a54-4303-8d08-4989fc321c6d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="75">
+			<staticText>
+				<reportElement x="198" y="44" width="121" height="20" uuid="2bf7d27a-04e2-4460-bff2-49e861818007"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma del Trabajador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="44" width="41" height="20" uuid="768bc0f6-9684-4fb3-b143-a0854cde8869"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="532" y="44" width="100" height="20" uuid="2f197eac-9d3e-4d3b-809a-4f00222a40cf"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revisado por R.R.H.H]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="410" y="44" width="72" height="20" uuid="01975118-c92a-4f0b-8e93-a5b5535b7001"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="162" y="38" width="195" height="1" uuid="87fa2f8d-1afa-4b81-b0f9-819e40e289e6"/>
+			</line>
+			<line>
+				<reportElement x="489" y="37" width="195" height="1" uuid="fb09ed52-9330-41ef-b51a-679d3c4f8ad3"/>
+			</line>
+		</band>
+	</lastPageFooter>
+</jasperReport>
