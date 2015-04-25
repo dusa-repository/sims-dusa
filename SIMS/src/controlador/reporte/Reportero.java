@@ -19,6 +19,7 @@ import modelo.transacciones.ConsultaDiagnostico;
 import net.sf.jasperreports.engine.JRException;
 import controlador.control.CControl;
 import controlador.sha.CInforme;
+import controlador.social.CActualizacion;
 import controlador.transacciones.CConsulta;
 import controlador.transacciones.COrden;
 import controlador.transacciones.CResultado;
@@ -60,6 +61,7 @@ public class Reportero extends HttpServlet {
 		COrdenProveedor ordenProveedor = new COrdenProveedor();
 		CReporteOrden reporteOrden = new CReporteOrden();
 		COrdenesConsulta ordenesConsulta = new COrdenesConsulta();
+		CActualizacion cActu = new CActualizacion();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
@@ -280,6 +282,9 @@ public class Reportero extends HttpServlet {
 				break;
 			case "53":
 				fichero = resultado.reporteResultado(part2);
+				break;
+			case "54":
+				fichero = cActu.jasperFormatoActualizacion(par3);
 				break;
 			default:
 				break;
