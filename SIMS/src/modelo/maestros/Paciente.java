@@ -241,10 +241,10 @@ public class Paciente implements Serializable {
 	@OneToMany(mappedBy = "paciente")
 	private Set<PacienteAntecedente> antecedentesPacientes;
 
-	@OneToOne(mappedBy = "paciente")
+	@OneToOne(mappedBy = "paciente", fetch = FetchType.LAZY)
 	private Historia historia;
 	
-	@OneToOne(mappedBy = "paciente")
+	@OneToOne(mappedBy = "paciente", fetch = FetchType.LAZY)
 	private Ficha fichaMaestra;
 	
 	@OneToOne(mappedBy = "paciente")
@@ -390,6 +390,14 @@ public class Paciente implements Serializable {
 	
 	@Column(length = 500)
 	private String transporte;
+
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean jubilado;
+
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean revision;
 
 	public Paciente() {
 	}
@@ -1341,6 +1349,22 @@ public class Paciente implements Serializable {
 
 	public void setPeriodoEstudios(String periodoEstudios) {
 		this.periodoEstudios = periodoEstudios;
+	}
+
+	public Boolean getJubilado() {
+		return jubilado;
+	}
+
+	public void setJubilado(Boolean jubilado) {
+		this.jubilado = jubilado;
+	}
+
+	public Boolean getRevision() {
+		return revision;
+	}
+
+	public void setRevision(Boolean revision) {
+		this.revision = revision;
 	}
 	
 

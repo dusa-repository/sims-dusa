@@ -162,6 +162,14 @@ public class Familiar implements Serializable {
 	
 	@Column(name = "certificado")
 	private String certificado;
+
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean jubilado;
+
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean revision;
 	
 	public Familiar() {
 	}
@@ -580,6 +588,23 @@ public class Familiar implements Serializable {
 	public void setCertificado(String certificado) {
 		this.certificado = certificado;
 	}
+
+	public Boolean getJubilado() {
+		return jubilado;
+	}
+
+	public void setJubilado(Boolean jubilado) {
+		this.jubilado = jubilado;
+	}
+
+	public Boolean getRevision() {
+		return revision;
+	}
+
+	public void setRevision(Boolean revision) {
+		this.revision = revision;
+	}
+
 	
 	
 }

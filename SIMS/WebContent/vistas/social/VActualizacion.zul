@@ -1,0 +1,285 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divVActualizacion" apply="controlador.social.CActualizacion"
+		width="100%">
+		<groupbox id="gxpGeneral" width="100%" mold="3d">
+			<separator />
+			<vbox>
+				<div width="50%" id="botoneraActualizacion" align="left" style="float: left;" />
+			</vbox>
+			<separator />
+			<groupbox width="100%" title="">
+				<caption label="Datos del Paciente"
+					style="color:black; font-size: 12px; font-weight:bold" />
+				<separator />
+				<grid width="100%">
+					<columns visible="false">
+						<column label="" width="13%" />
+						<column label="" width="14%" />
+						<column label="" width="11%" />
+						<column label="" width="14%" />
+						<column label="" width="11%" />
+						<column label="" width="14%" />
+						<column label="" width="9%" />
+						<column label="" width="14%" />
+					</columns>
+					<rows>
+						<row>
+							<label class="etiqueta" value="Buscar Trabajador" />
+							<button autodisable="self" id="btnBuscarPaciente" class="btn"
+								label="Buscar" tooltiptext="Catalogo" image="/public/imagenes/botones/buscar.png" />
+							<label class="etiqueta" value="Cedula:" />
+							<textbox maxlength="15" id="txtCedulaPaciente" hflex="1" />
+							<label class="etiqueta" value="Ficha:" />
+							<label id="lblFichaPaciente" />
+							<label class="etiqueta" value="Rif:" />
+							<label id="lblRifPaciente" />
+						</row>
+						<row>
+							<label class="etiqueta" value="Nombre:" />
+							<label id="lblNombrePaciente" />
+							<label class="etiqueta" value="Apellido:" />
+							<label id="lblApellidoPaciente" />
+							<label class="etiqueta" value="Fecha Nacimiento:" />
+							<datebox readonly="true" width="100%" id="dtbFechaNac"
+								onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Nacimiento"
+								constraint="no future,no empty" />
+							<hbox>
+								<label class="etiqueta" value="Grupo Sanguineo:" />
+								<space />
+								<label value="" style="font-weight:bold;color:red" />
+							</hbox>
+							<combobox tooltiptext="Seleccione el Grupo Sanguineo"
+								placeholder="Seleccione el Grupo" id="cmbGrupoSanguineo" width="100%"
+								readonly="true">
+								<comboitem label="A+" />
+								<comboitem label="A-" />
+								<comboitem label="B-" />
+								<comboitem label="B+" />
+								<comboitem label="AB+" />
+								<comboitem label="AB-" />
+								<comboitem label="O-" />
+								<comboitem label="O+" />
+								<comboitem label="N/A" />
+							</combobox>
+						</row>
+						<row>
+							<hbox>
+								<label class="etiqueta" value="Telefono Fijo:" />
+								<space />
+								<label value="" style="font-weight:bold;color:red" />
+							</hbox>
+							<textbox id="txtTelefono2" hflex="1" maxlength="50"
+								tooltiptext="Ingrese el Numero de telefono del Paciente (0426-9999999)" />
+							<hbox>
+								<label class="etiqueta" value="Telefono Celular:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<textbox id="txtTelefono1" hflex="1" maxlength="50"
+								tooltiptext="Ingrese el Numero de telefono del Paciente (0426-9999999)" />
+							<hbox>
+								<label class="etiqueta" value="Estado Civil:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<combobox tooltiptext="Seleccione un Estado Civil"
+								placeholder="Seleccione un Estado Civil" id="cmbEstadoCivil"
+								readonly="true" width="100%">
+								<template name="model">
+									<comboitem label="${each.nombre}" context="${each.idEstadoCivil}" />
+								</template>
+							</combobox>
+							<button class="abrir" id="btnAbrirEstadoCivil" label=""
+								tooltiptext="Crear un Nuevo Estado Civil" image="/public/imagenes/botones/agregar.png" />
+							<hbox />
+						</row>
+						<row>
+							<hbox>
+								<label class="etiqueta" value="Direccion:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<cell colspan="3">
+								<textbox id="txtDireccion" maxlength="1000"
+									tooltiptext="Ingrese la Direccion Actual" multiline="true" />
+							</cell>
+							<hbox>
+								<label class="etiqueta" value="Ciudad:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<combobox width="100%" tooltiptext="Seleccione una Ciudad"
+								placeholder="Seleccione una Ciudad" id="cmbCiudad" readonly="true">
+								<template name="model">
+									<comboitem label="${each.nombre}" context="${each.idCiudad}" />
+								</template>
+							</combobox>
+							<button class="abrir" id="btnAbrirCiudad" label=""
+								tooltiptext="Crear una Nueva Ciudad" image="/public/imagenes/botones/agregar.png" />
+							<hbox />
+						</row>
+						<row>
+							<hbox>
+								<label class="etiqueta" value="Talla Camisa:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<textbox id="txtTallaCamisa" hflex="1" maxlength="5"
+								tooltiptext="Ingrese la talla de la Camisa del Paciente" />
+							<hbox>
+								<label class="etiqueta" value="Talla Pantalon:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<textbox id="txtTallaPantalon" hflex="1" maxlength="5"
+								tooltiptext="Ingrese la talla del Pantalon del Paciente" />
+							<hbox>
+								<label class="etiqueta" value="Talla Zapato Goma:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<textbox id="txtTallaGoma" hflex="1" maxlength="5"
+								tooltiptext="Ingrese la talla del Zapato de Goma del paciente" />
+							<hbox>
+								<label class="etiqueta" value="Talla Bota Seguridad:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<textbox id="txtTallaSeguridad" hflex="1" maxlength="5"
+								tooltiptext="Ingrese la talla de la Bota de Seguridad del paciente" />
+						</row>
+						<row>
+							<hbox>
+								<label class="etiqueta" value="Posee Vivienda Propia?" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<vbox>
+								<radiogroup id="rdgEstatus">
+									<radio label="Si" value="Activo" id="rdoSi" />
+									<radio label="No" value="Inactivo" id="rdoNo" />
+								</radiogroup>
+							</vbox>
+							<hbox>
+								<label class="etiqueta" value="Tipo de Vivienda:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red" />
+							</hbox>
+							<combobox tooltiptext="Seleccione un Tipo" placeholder="Seleccione un Tipo"
+								id="cmbTipoVivienda" width="100%" readonly="true">
+								<comboitem label="Propia" />
+								<comboitem label="Alquilada" />
+								<comboitem label="De los Padres" />
+								<comboitem label="Otro" />
+							</combobox>
+							<cell colspan="4">
+								<hbox />
+							</cell>
+						</row>
+					</rows>
+				</grid>
+			</groupbox>
+			<tabbox height="auto" orient="horizontal">
+				<tabs id="tbsConsulta" width="auto">
+					<tab label="Carga Activa" id="tabDatos" />
+					<tab label="Carga Inactiva" id="tabDescripcion" />
+				</tabs>
+				<tabpanels>
+					<tabpanel>
+						<hbox>
+							<listbox rows="10" mold="paging" pageSize="10" id="ltbActivos"
+								height="auto" emptyMessage="No existe carga familiar activa asociada al trabajador">
+								<listhead>
+									<listheader label="Parentesco" width="8%" />
+									<listheader label="Cedula" width="8%" />
+									<listheader label="Nombre y Apellido" width="17%" />
+									<listheader label="Fecha. Nac." width="6%" />
+									<listheader label="Lugar Nac." width="12%" />
+									<listheader label="Direccion" width="17%" />
+									<listheader label="Sexo" width="6%" />
+									<listheader label="Nivel Estudio" width="8%" />
+									<listheader label="Jubilado /Pension" width="6%" />
+									<listheader label="Verf. RRHH" width="6%" />
+									<listheader label="Servicio Medico" width="6%" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell label="${each.parentesco}" />
+										<listcell label="${each.cedula}" />
+										<listcell label="${each.nombre} ${each.apellido}" />
+										<listcell label="${each.fechaNacimiento}" />
+										<listcell label="${each.lugarNacimiento}" />
+										<listcell label="${each.direccion}" />
+										<listcell label="${each.sexo}" />
+										<listcell label="${each.nivelEducacion}" />
+										<listcell label="${each.jubilado}" />
+										<listcell label="${each.verificacionRH}" />
+										<listcell label="${each.servicioMedico}" />
+									</listitem>
+								</template>
+							</listbox>
+							<vbox>
+								<div align="center">
+									<button class="btn" height="40px" width="70px" label="Desactivar"
+										id="btnDesactivar" image="/public/imagenes/botones/ver.png"
+										tooltiptext="Seleccione un Registro para ver la Solicitud de orden" />
+									<button class="abrir" id="btnAbrir" label="" width="70px" 
+										tooltiptext="Crear nueva Carga" image="/public/imagenes/botones/agregar.png" />
+									<button class="abrir" id="btnRefrescar"
+										label=""  width="70px" 
+										tooltiptext="Presione para actualizar las listas de Cargas del Paciente"
+										image="/public/imagenes/botones/refresh2.png" />
+								</div>
+							</vbox>
+						</hbox>
+					</tabpanel>
+					<tabpanel>
+						<hbox>
+							<listbox rows="10" mold="paging" pageSize="10" width="auto"
+								id="ltbInactivos" height="auto"
+								emptyMessage="No existe carga familiar inactiva asociada al trabajador">
+								<listhead>
+									<listheader label="Parentesco" width="8%" />
+									<listheader label="Cedula" width="8%" />
+									<listheader label="Nombre y Apellido" width="17%" />
+									<listheader label="Fecha. Nac." width="6%" />
+									<listheader label="Lugar Nac." width="12%" />
+									<listheader label="Direccion" width="17%" />
+									<listheader label="Sexo" width="6%" />
+									<listheader label="Nivel Estudio" width="8%" />
+									<listheader label="Jubilado /Pension" width="6%" />
+									<listheader label="Verf. RRHH" width="6%" />
+									<listheader label="Servicio Medico" width="6%" />
+								</listhead>
+								<template name="model">
+									<listitem>
+										<listcell label="${each.parentesco}" />
+										<listcell label="${each.cedula}" />
+										<listcell label="${each.nombre} ${each.apellido}" />
+										<listcell label="${each.fechaNacimiento}" />
+										<listcell label="${each.lugarNacimiento}" />
+										<listcell label="${each.direccion}" />
+										<listcell label="${each.sexo}" />
+										<listcell label="${each.nivelEducacion}" />
+										<listcell label="${each.jubilado}" />
+										<listcell label="${each.verificacionRH}" />
+										<listcell label="${each.servicioMedico}" />
+									</listitem>
+								</template>
+							</listbox>
+							<vbox>
+								<div align="center">
+									<button class="btn" height="40px" width="70px" label="Activar"
+										id="btnActivar" image="/public/imagenes/botones/ver.png"
+										tooltiptext="Seleccione un Registro para ver la Solicitud de orden" />
+								</div>
+							</vbox>
+						</hbox>
+					</tabpanel>
+				</tabpanels>
+			</tabbox>
+		</groupbox>
+	</div>
+	<div id="divCatalogoPacientes" />
+</zk>

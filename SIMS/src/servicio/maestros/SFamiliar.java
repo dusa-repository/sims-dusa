@@ -4,7 +4,6 @@ import java.util.List;
 
 import interfacedao.maestros.IFamiliarDAO;
 import interfacedao.maestros.IPacienteDAO;
-
 import modelo.maestros.Familiar;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,8 @@ public class SFamiliar {
 	}
 
 	public List<Familiar> filtroApellido2(String valor) {
-		return familiarDAO.findBySegundoApellidoStartingWithAllIgnoreCase(valor);
+		return familiarDAO
+				.findBySegundoApellidoStartingWithAllIgnoreCase(valor);
 	}
 
 	public List<Familiar> filtroCedulaAsociado(String valor) {
@@ -54,5 +54,14 @@ public class SFamiliar {
 
 	public List<Familiar> buscarPorTrabajador(String value) {
 		return familiarDAO.findByCedulaFamiliar(value);
+	}
+
+	public List<Familiar> buscarPorTrabajadorYEstado(String idPaciente,
+			boolean b) {
+		return familiarDAO.findByCedulaFamiliarAndEstatus(idPaciente, b);
+	}
+
+	public void guardarVarios(List<Familiar> familiares) {
+		familiarDAO.save(familiares);
 	}
 }
