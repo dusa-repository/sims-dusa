@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RResumenTrabajadores_NivelEducativo" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cdcf8ba0-7fb0-4ba0-b562-e432ec655198">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="nivelEducativo" class="java.lang.String"/>
+	<variable name="totalNivel" class="java.lang.Integer" resetType="Group" resetGroup="nivel" calculation="Count">
+		<variableExpression><![CDATA[$F{nivelEducativo}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="total" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{nivelEducativo}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="nivel">
+		<groupExpression><![CDATA[$F{nivelEducativo}]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="12" y="0" width="409" height="20" uuid="5fa24296-527a-4757-9647-79ad7b71f93f"/>
+					<box leftPadding="10">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nivelEducativo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="421" y="0" width="111" height="20" uuid="78d9d6e5-9e00-48eb-ad7c-028d56441696"/>
+					<box>
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalNivel}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="125" y="9" width="308" height="20" uuid="73f2bcdc-967a-427d-b6ca-a058844e7c71"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Distribucion por nivel educativo]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="12" y="1" width="520" height="20" backcolor="#DBD7D7" uuid="7140d9c4-411a-456c-b9c0-21ad565f55be"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="12" y="1" width="408" height="20" uuid="282b6737-1975-4f37-b223-ede3b69ee91a"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nivel Educativo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="1" width="112" height="20" uuid="9b25f7e7-7117-47c0-b93f-33c17d43e38c"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Trabajadores]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="420" y="0" width="112" height="20" uuid="63e4409c-551b-4013-b6d9-8cfc74ba585b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="12" y="0" width="408" height="20" uuid="a41d5e84-b8fe-40bf-8e57-d0fe8be8cd86"/>
+				<box rightPadding="10">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Trabajadores]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

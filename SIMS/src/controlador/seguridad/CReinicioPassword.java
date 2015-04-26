@@ -108,12 +108,4 @@ public class CReinicioPassword extends CGenerico {
 			msj.mensajeAlerta(Mensaje.correoInvalido);
 		}
 	}
-
-	/* Valida la cedula */
-	@Listen("onChange = #txtCedulaUsuario")
-	public void validarCedula() {
-		if (!Validador.validarNumero(txtCedulaUsuario.getValue())) {
-			msj.mensajeAlerta(Mensaje.cedulaInvalida);
-		}
-	}
 }

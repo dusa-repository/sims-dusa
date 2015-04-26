@@ -2,6 +2,8 @@ package controlador.reporte;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -90,13 +92,88 @@ public class CResumenTrabajadores extends CGenerico {
 	public byte[] reporteResumen(String tipoReporte) throws JRException {
 		byte[] fichero = null;
 		List<Paciente> pacientes = new ArrayList<Paciente>();
+		List<Paciente> pacientes2 = new ArrayList<Paciente>();
+		List<Paciente> pacientes3 = new ArrayList<Paciente>();
 
-		pacientes = getServicioPaciente().buscarTodosTrabajadores();
+		pacientes = getServicioPaciente()
+				.buscarTodosTrabajadoresOrdenadosNomina();
+		pacientes2 = getServicioPaciente()
+				.buscarTodosTrabajadoresOrdenadosNivel();
+		pacientes3 = getServicioPaciente()
+				.buscarTodosTrabajadoresOrdenadosCiudad();
+
+		int edades = 0;
+		double promedio = 0;
+		if (!pacientes.isEmpty()) {
+			for (int i = 0; i < pacientes.size(); i++) {
+				if (pacientes.get(i).getFechaNacimiento() != null) {
+//					pacientes.get(i)
+//							.setEdad(
+//									calcularEdad(pacientes.get(i)
+//											.getFechaNacimiento()));
+//					getServicioPaciente().guardar(pacientes.get(i));
+					edades = edades + pacientes.get(i).getEdad();
+				}
+
+				promedio = (edades / pacientes.size());
+			}
+		}
+		System.out.println(edades);
 		Map<String, Object> p = new HashMap<String, Object>();
 
-		// p.put("tipoP", tipoPaciente);
-		p.put("data", new JRBeanCollectionDataSource(pacientes));
+		p.put("17M", getServicioPaciente().buscarEdadySexo("Masculino", 0, 17)
+				.size());
+		p.put("17F", getServicioPaciente().buscarEdadySexo("Femenino", 0, 17)
+				.size());
+		p.put("18M", getServicioPaciente().buscarEdadySexo("Masculino", 18, 25)
+				.size());
+		p.put("18F", getServicioPaciente().buscarEdadySexo("Femenino", 18, 25)
+				.size());
+		p.put("26M", getServicioPaciente().buscarEdadySexo("Masculino", 26, 30)
+				.size());
+		p.put("26F", getServicioPaciente().buscarEdadySexo("Femenino", 26, 30)
+				.size());
+		p.put("31M", getServicioPaciente().buscarEdadySexo("Masculino", 31, 35)
+				.size());
+		p.put("31F", getServicioPaciente().buscarEdadySexo("Femenino", 31, 35)
+				.size());
+		p.put("36M", getServicioPaciente().buscarEdadySexo("Masculino", 36, 40)
+				.size());
+		p.put("36F", getServicioPaciente().buscarEdadySexo("Femenino", 36, 40)
+				.size());
+		p.put("41M", getServicioPaciente().buscarEdadySexo("Masculino", 41, 45)
+				.size());
+		p.put("41F", getServicioPaciente().buscarEdadySexo("Femenino", 41, 45)
+				.size());
+		p.put("46M", getServicioPaciente().buscarEdadySexo("Masculino", 46, 50)
+				.size());
+		p.put("46F", getServicioPaciente().buscarEdadySexo("Femenino", 46, 50)
+				.size());
+		p.put("51M", getServicioPaciente().buscarEdadySexo("Masculino", 51, 55)
+				.size());
+		p.put("51F", getServicioPaciente().buscarEdadySexo("Femenino", 51, 55)
+				.size());
+		p.put("56M", getServicioPaciente().buscarEdadySexo("Masculino", 56, 60)
+				.size());
+		p.put("56F", getServicioPaciente().buscarEdadySexo("Femenino", 56, 60)
+				.size());
+		p.put("61M", getServicioPaciente().buscarEdadySexo("Masculino", 61, 65)
+				.size());
+		p.put("61F", getServicioPaciente().buscarEdadySexo("Femenino", 61, 65)
+				.size());
+		p.put("66M", getServicioPaciente()
+				.buscarEdadySexo("Masculino", 66, 150).size());
+		p.put("66F", getServicioPaciente().buscarEdadySexo("Femenino", 66, 150)
+				.size());
 
+		DecimalFormat df = new DecimalFormat("##.##");
+		df.setRoundingMode(RoundingMode.DOWN);
+		p.put("promedio", df.format(promedio));
+		p.put("total", pacientes.size());
+
+		p.put("dataNomina", new JRBeanCollectionDataSource(pacientes));
+		p.put("dataNivelEducativo", new JRBeanCollectionDataSource(pacientes2));
+		p.put("dataCiudad", new JRBeanCollectionDataSource(pacientes3));
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RResumenTrabajadores.jasper"));
@@ -128,5 +205,4 @@ public class CResumenTrabajadores extends CGenerico {
 			return fichero;
 		}
 	}
-
 }

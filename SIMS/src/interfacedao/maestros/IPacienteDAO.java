@@ -224,6 +224,12 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 	Paciente findByCedulaAndTrabajadorTrue(String value);
 
 	List<Paciente> findByCedulaFamiliarAndEstatus(String idPaciente, boolean b);
+
+	List<Paciente> findByTrabajadorTrueAndEstatusTrue(Sort o);
+
+	List<Paciente> findByTrabajadorTrueAndEstatusTrueAndSexoAndEdadBetween(String string,
+			int i, int j);
+
 	
 //@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
 }

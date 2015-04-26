@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RResumenTrabajadores_Nomina" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8d7d82a3-72c2-43db-879d-09f4fd3d2851">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="nomina.nombre" class="java.lang.String"/>
+	<field name="nomina.idNomina" class="java.lang.Long"/>
+	<variable name="totalNomina" class="java.lang.Integer" resetType="Group" resetGroup="nomina" calculation="Count">
+		<variableExpression><![CDATA[$F{nomina.idNomina}]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="total" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{nomina.idNomina}]]></variableExpression>
+	</variable>
+	<group name="nomina">
+		<groupExpression><![CDATA[$F{nomina.idNomina}]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="9" y="0" width="408" height="20" uuid="3c6d718c-ccf1-4808-a562-b821e2a316fb"/>
+					<box leftPadding="8">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{nomina.nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="417" y="0" width="112" height="20" uuid="7a1d88e1-f15c-43e0-af4a-b8f5e8ebf909"/>
+					<box leftPadding="5">
+						<topPen lineWidth="1.0"/>
+						<leftPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+						<rightPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{totalNomina}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="115" y="5" width="308" height="20" uuid="65a9221c-0c02-42f4-85fd-e528c407f32d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Distribucion por tipo de contratacion]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20">
+			<rectangle>
+				<reportElement x="9" y="0" width="520" height="20" backcolor="#DBD7D7" uuid="bd0f0301-f42b-4cb8-a454-5514c5d2cb3b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="9" y="0" width="408" height="20" uuid="4769171b-088c-4426-80d8-72768e2062cf"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Contratacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="0" width="112" height="20" uuid="3fe4aef3-6ffb-4e96-a4e7-7ebb7a609018"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro. Trabajadores]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="21">
+			<staticText>
+				<reportElement x="9" y="1" width="408" height="20" uuid="539468f5-9d54-41ff-b11c-f07f2eb073d1"/>
+				<box rightPadding="15">
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Trabajadores]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="417" y="1" width="112" height="20" uuid="99334286-f0fd-4079-bdf9-66e4d43d5192"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>
