@@ -170,6 +170,7 @@ public class CPacientes extends CGenerico {
 				rdoTodosDiscapacitado.setChecked(false);
 				lblTrabajador.setValue("");
 
+
 			}
 
 			@Override
@@ -851,8 +852,9 @@ public class CPacientes extends CGenerico {
 		pacientes.addAll(servicioPaciente.buscarTodosTrabajadores());
 
 		catalogo = new Catalogo<Paciente>(divCatalogoTrabajador,
-				"Catalogo de Pacientes", pacientes,false, "Cedula", "Ficha",
-				"Primer Nombre", "Segundo Nombre", "Primer Apellido", "Primer Apellido") {
+				"Catalogo de Pacientes", pacientes, false, "Cedula", "Ficha",
+				"Primer Nombre", "Segundo Nombre", "Primer Apellido",
+				"Primer Apellido") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {

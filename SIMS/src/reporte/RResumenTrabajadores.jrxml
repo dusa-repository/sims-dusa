@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RResumenTrabajadores" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dd2b807-f4cf-4d76-bc5d-19b37e821167">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="dc79389d-a924-4fe1-a08e-dc42f907be82">
+		<field name="nomina.nombre" class="java.lang.String"/>
+		<field name="nomina.idNomina" class="java.lang.Long"/>
+		<variable name="porNomina" class="java.lang.Integer" resetType="Group" resetGroup="nomina" calculation="Count">
+			<variableExpression><![CDATA[$F{nomina.idNomina}]]></variableExpression>
+		</variable>
+		<group name="nomina">
+			<groupExpression><![CDATA[$F{nomina.idNomina}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="data" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<field name="nomina.nombre" class="java.lang.String"/>
+	<field name="nomina.idNomina" class="java.lang.Long"/>
+	<variable name="totalNomina" class="java.lang.Integer" resetType="Group" resetGroup="nomina" calculation="Count">
+		<variableExpression><![CDATA[$F{nomina.idNomina}]]></variableExpression>
+	</variable>
+	<group name="nomina">
+		<groupExpression><![CDATA[$F{nomina.idNomina}]]></groupExpression>
+		<groupHeader>
+			<band height="8"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="437" y="0" width="100" height="20" uuid="6ce78edc-812b-417d-ba50-16e80efd12cc"/>
+					<textFieldExpression><![CDATA[$V{totalNomina}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="190" y="0" width="247" height="20" uuid="bec4ffe0-12b5-4dbb-971f-e5f41425508d"/>
+					<textFieldExpression><![CDATA[$F{nomina.nombre}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="72" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="10" width="107" height="52" uuid="d8b155af-bb06-48ec-b6f3-57fd8a1301a6"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="160" y="22" width="215" height="25" uuid="ff9affdf-d06f-4a9a-9717-93c74ca24919"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESUMEN DE TRABAJADORES]]></text>
+			</staticText>
+		</band>
+	</title>
+</jasperReport>
