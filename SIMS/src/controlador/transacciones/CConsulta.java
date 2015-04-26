@@ -5992,28 +5992,6 @@ public class CConsulta extends CGenerico {
 	@Listen("onClick = #btnGenerarOrdenServicios")
 	public void generarServicio() {
 		if (ltbServicioExternoAgregados.getItemCount() != 0) {
-			// for (int i = 0; i < ltbServicioExternoAgregados.getItemCount();
-			// i++) {
-			// Listitem listItem = ltbServicioExternoAgregados
-			// .getItemAtIndex(i);
-			// Integer idSe = ((Spinner) ((listItem.getChildren().get(4)))
-			// .getFirstChild()).getValue();
-			// String idPr = ((Combobox) ((listItem.getChildren().get(2)))
-			// .getFirstChild()).getSelectedItem().getContext();
-			// Long id = idConsulta;
-			// Long idServicio = Long.valueOf(idSe);
-			// Long idProveedor = Long.valueOf(idPr);
-			// Clients.evalJavaScript("window.open('"
-			// + damePath()
-			// + "Reportero?valor=3&valor2="
-			// + id
-			// + "&valor4="
-			// + idServicio
-			// + "&valor5="
-			// + idProveedor
-			// +
-			// "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
-			// }
 			Long id = idConsulta;
 			Consulta consulta = servicioConsulta.buscar(id);
 			List<ConsultaServicioExterno> listaMedicinas = servicioConsultaServicioExterno
@@ -6048,9 +6026,6 @@ public class CConsulta extends CGenerico {
 	public byte[] reporteServicio(Long part2, Long part5) throws JRException {
 		byte[] fichero = null;
 		Consulta consuta = getServicioConsulta().buscar(part2);
-		// ConsultaServicioExterno servicioConsultas =
-		// getServicioConsultaServicioExterno()
-		// .buscarPorConsultaYIdServicio(consuta, part4);
 		List<ConsultaServicioExterno> listaMedicinas = getServicioConsultaServicioExterno()
 				.buscarPorConsultaYProveedor(consuta, part5);
 		String servicio = "";

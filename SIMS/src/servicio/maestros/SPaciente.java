@@ -950,4 +950,29 @@ public class SPaciente {
 	public List<Paciente> buscarParientesYEstado(String idPaciente, boolean b) {
 		return pacienteDAO.findByCedulaFamiliarAndEstatus(idPaciente, b);
 	}
+	public List<Paciente> buscarTodosTrabajadoresOrdenadosNomina() {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("nominaNombre");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByTrabajadorTrueAndEstatusTrue(o);
+	}
+
+	public List<Paciente> buscarTodosTrabajadoresOrdenadosNivel() {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("nivelEducativo");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByTrabajadorTrueAndEstatusTrue(o);
+	}
+
+	public List<Paciente> buscarTodosTrabajadoresOrdenadosCiudad() {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("ciudadViviendaNombre");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return pacienteDAO.findByTrabajadorTrueAndEstatusTrue(o);
+	}
+
+	public List<Paciente> buscarEdadySexo(String string, int i, int j) {
+
+		return 	pacienteDAO.findByTrabajadorTrueAndEstatusTrueAndSexoAndEdadBetween(string,i,j);
+	}
 }
