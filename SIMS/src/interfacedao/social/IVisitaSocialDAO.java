@@ -2,6 +2,7 @@ package interfacedao.social;
 
 import java.util.List;
 
+import modelo.maestros.Paciente;
 import modelo.social.VisitaSocial;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,8 @@ public interface IVisitaSocialDAO  extends JpaRepository<VisitaSocial, Long>{
 	
 	@Query("select coalesce(max(v.idVisita), '0') from VisitaSocial v")
 	long findMaxIdVisita();
+
+	VisitaSocial findByPaciente(Paciente pacienteAModificar);
 
 
 

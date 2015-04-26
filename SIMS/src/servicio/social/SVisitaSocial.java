@@ -3,7 +3,7 @@ package servicio.social;
 import java.util.List;
 
 import interfacedao.social.IVisitaSocialDAO;
-
+import modelo.maestros.Paciente;
 import modelo.social.VisitaSocial;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +40,9 @@ public class SVisitaSocial {
 		if (id != 0)
 			return visitaSocialDAO.findOne(id);
 		return null;
+	}
+
+	public VisitaSocial buscarPorPaciente(Paciente pacienteAModificar) {
+		return visitaSocialDAO.findByPaciente(pacienteAModificar);
 	}
 }
