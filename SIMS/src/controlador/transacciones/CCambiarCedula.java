@@ -13,6 +13,8 @@ import modelo.maestros.Paciente;
 import modelo.maestros.PacienteAntecedente;
 import modelo.maestros.PeriodoPaciente;
 import modelo.sha.Informe;
+import modelo.social.Ficha;
+import modelo.social.VisitaSocial;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.Historia;
 import modelo.transacciones.Orden;
@@ -131,8 +133,7 @@ public class CCambiarCedula extends CGenerico {
 				pacienteAModificar.isAlergia(), pacienteAModificar.isLentes(),
 				pacienteAModificar.getFechaNacimiento(),
 				pacienteAModificar.getLugarNacimiento(),
-				pacienteAModificar.getSexo(),
-				pacienteAModificar.getEdad(),
+				pacienteAModificar.getSexo(), pacienteAModificar.getEdad(),
 				pacienteAModificar.getGrupoSanguineo(),
 				pacienteAModificar.getObservacionAlergias(),
 				pacienteAModificar.getMano(), pacienteAModificar.getEstatura(),
@@ -156,8 +157,7 @@ public class CCambiarCedula extends CGenerico {
 				pacienteAModificar.getEmpresa(),
 				pacienteAModificar.getCiudadVivienda(),
 				pacienteAModificar.getCargoReal(),
-				pacienteAModificar.getArea(),
-				pacienteAModificar.getCronico());
+				pacienteAModificar.getArea(), pacienteAModificar.getCronico());
 
 		pacienteNuevo.setBrigadista(pacienteAModificar.getBrigadista());
 		pacienteNuevo.setNacionalidad(pacienteAModificar.getNacionalidad());
@@ -326,8 +326,8 @@ public class CCambiarCedula extends CGenerico {
 				.buscarPorPaciente(pacienteAModificar);
 		getServicioControlConsulta().limpiar(pacienteAModificar);
 		if (!controlConsulta.isEmpty()) {
-			for (Iterator<ControlConsulta> iterator = controlConsulta.iterator(); iterator
-					.hasNext();) {
+			for (Iterator<ControlConsulta> iterator = controlConsulta
+					.iterator(); iterator.hasNext();) {
 				ControlConsulta periodoPaciente = (ControlConsulta) iterator
 						.next();
 				periodoPaciente.setPaciente(pacienteNuevo);
@@ -341,8 +341,7 @@ public class CCambiarCedula extends CGenerico {
 		if (!controlOrden.isEmpty()) {
 			for (Iterator<ControlOrden> iterator = controlOrden.iterator(); iterator
 					.hasNext();) {
-				ControlOrden periodoPaciente = (ControlOrden) iterator
-						.next();
+				ControlOrden periodoPaciente = (ControlOrden) iterator.next();
 				periodoPaciente.setPaciente(pacienteNuevo);
 			}
 			getServicioControlOrden().guardarVarios(controlOrden);
@@ -401,11 +400,25 @@ public class CCambiarCedula extends CGenerico {
 			}
 			getServicioConsulta().guardarVarias(consultas);
 		}
+
 		Historia historia = getServicioHistoria().buscarPorPaciente(
 				pacienteAModificar);
 		if (historia != null) {
 			historia.setPaciente(pacienteNuevo);
 			getServicioHistoria().guardar(historia);
+		}
+		getServicioPaciente().eliminar(pacienteAModificar);
+
+		Ficha ficha = getServicioFicha().buscarPorPaciente(pacienteAModificar);
+		if (ficha != null) {
+			ficha.setPaciente(pacienteNuevo);
+			getServicioFicha().guardar(ficha);
+		}
+		VisitaSocial visita = getServicioVisita().buscarPorPaciente(
+				pacienteAModificar);
+		if (visita != null) {
+			visita.setPaciente(pacienteNuevo);
+			getServicioVisita().guardar(visita);
 		}
 		getServicioPaciente().eliminar(pacienteAModificar);
 
@@ -429,8 +442,9 @@ public class CCambiarCedula extends CGenerico {
 		List<Paciente> pacientesBuscar = servicioPaciente.buscarTodosActivos();
 		final List<Paciente> pacientes = pacientesBuscar;
 		catalogoPaciente = new Catalogo<Paciente>(divCatalogoPacientes,
-				"Catalogo de Pacientes", pacientes, false,"Cedula", "Ficha",
-				"Primer Nombre","Segundo Nombre", "Primer Apellido", "Segundo Apellido", "Trabajador Asociado") {
+				"Catalogo de Pacientes", pacientes, false, "Cedula", "Ficha",
+				"Primer Nombre", "Segundo Nombre", "Primer Apellido",
+				"Segundo Apellido", "Trabajador Asociado") {
 
 			@Override
 			protected List<Paciente> buscar(String valor, String combo) {

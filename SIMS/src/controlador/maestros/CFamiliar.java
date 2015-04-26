@@ -418,7 +418,6 @@ public class CFamiliar extends CGenerico {
 
 					ficha = "";
 					cedulaFamiliar = cedTrabajador;
-					
 
 					if (rdoSiDiscapacidad.isChecked())
 						discapacidad = true;
@@ -436,7 +435,6 @@ public class CFamiliar extends CGenerico {
 					if (rdoSiCronico.isChecked())
 						cronico = true;
 
-				
 					oficio = txtOficio.getValue();
 					lugarTrabajo = txtLugarTrabajo.getValue();
 					cargoOCarrera = txtCargoOCarrera.getValue();
@@ -462,7 +460,7 @@ public class CFamiliar extends CGenerico {
 							if (!fami.getCedulaFamiliar().equals(cedTrabajador))
 								cambioDeRepresentante = true;
 						}
-						
+
 						Paciente paciente = new Paciente(cedula, ficha,
 								apellido1, nombre1, apellido2, nombre2, false,
 								discapacidad, alergia, lentes, fechaNac,
@@ -504,7 +502,12 @@ public class CFamiliar extends CGenerico {
 
 						servicioPaciente.guardar(paciente);
 						guardarMedicinas(paciente);
-
+						Familiar familiar = servicioFamiliar
+								.buscarPorCedula(cedula);
+						if (familiar != null) {
+							familiar.setEstatus(false);
+							servicioFamiliar.guardar(familiar);
+						}
 						if (cambioDeRepresentante) {
 							String cedulaNueva = paciente.getCedulaFamiliar();
 							String cedulaVieja = paciente.getCedula();
@@ -541,13 +544,13 @@ public class CFamiliar extends CGenerico {
 						}
 					} else {
 
-//						if (!id.equals("")) {
-//							Familiar fami = servicioFamiliar
-//									.buscarPorCedula(id);
-//							if (!fami.getCedulaFamiliar().equals(cedTrabajador))
-//								cambioDeRepresentante = true;
-//						}
-						
+						// if (!id.equals("")) {
+						// Familiar fami = servicioFamiliar
+						// .buscarPorCedula(id);
+						// if (!fami.getCedulaFamiliar().equals(cedTrabajador))
+						// cambioDeRepresentante = true;
+						// }
+
 						Familiar familiar = new Familiar(cedula, apellido1,
 								nombre1, apellido2, nombre2, discapacidad,
 								estatus, muerte, fechaNac, lugarNac,
@@ -562,9 +565,16 @@ public class CFamiliar extends CGenerico {
 								lugarTrabajo, descripcionAyuda, nroCertificado,
 								observacion, tipoRif, certificado);
 
+						// Modificacion de cedula por trabjador nuevo
 						servicioFamiliar.guardar(familiar);
 
-						// Modificacion de cedula por trabjador nuevo
+						Paciente paciente = servicioPaciente
+								.buscarPorCedula(cedula);
+						if (paciente != null) {
+							paciente.setEstatus(false);
+							servicioPaciente.guardar(paciente);
+						}
+
 					}
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
@@ -1154,7 +1164,7 @@ public class CFamiliar extends CGenerico {
 			rdoAyuda.setChecked(true);
 		else
 			rdoNoAyuda.setChecked(true);
-	
+
 		cmbCertificado.setValue(paciente.getCertificado());
 		cmbRif.setValue(paciente.getTipoRif());
 		txtRifPaciente.setValue(paciente.getRif());
@@ -1325,7 +1335,7 @@ public class CFamiliar extends CGenerico {
 
 		rdoVive.setChecked(false);
 		rdoNoVive.setChecked(false);
-	
+
 		rdoAyuda.setChecked(false);
 		rdoNoAyuda.setChecked(false);
 
