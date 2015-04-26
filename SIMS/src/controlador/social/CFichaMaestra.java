@@ -447,6 +447,8 @@ public class CFichaMaestra extends CGenerico {
 
 			}
 		};
+		
+		botonera.getChildren().get(1).setVisible(false);
 		divBotoneraFicha.appendChild(botonera);
 
 	}

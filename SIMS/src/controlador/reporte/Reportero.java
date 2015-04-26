@@ -57,6 +57,7 @@ public class Reportero extends HttpServlet {
 		CPacientes pacientes = new CPacientes();
 		COrden orden = new COrden();
 		CGasto gasto = new CGasto();
+		CResumenTrabajadores resumenTrabajadores = new CResumenTrabajadores();
 		CReporteCertificado certificado = new CReporteCertificado();
 		COrdenProveedor ordenProveedor = new COrdenProveedor();
 		CReporteOrden reporteOrden = new CReporteOrden();
@@ -285,6 +286,8 @@ public class Reportero extends HttpServlet {
 				break;
 			case "54":
 				fichero = cActu.jasperFormatoActualizacion(par3);
+			case "55":
+				fichero =  resumenTrabajadores.reporteResumen(par3);
 				break;
 			default:
 				break;

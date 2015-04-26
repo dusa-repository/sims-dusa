@@ -774,7 +774,6 @@ public class CPaciente extends CGenerico {
 				|| dspEstatura.getValue() == 0
 				|| cmbCiudad.getText().compareTo("") == 0
 				|| txtTelefono2.getText().compareTo("") == 0
-				|| txtProfesion.getText().compareTo("") == 0
 				|| (!rdoSiAlergico.isChecked() && !rdoNoAlergico.isChecked())
 				|| (!rdoE.isChecked() && !rdoV.isChecked())
 				|| (!rdoNoDiscapacidad.isChecked() && !rdoSiDiscapacidad
