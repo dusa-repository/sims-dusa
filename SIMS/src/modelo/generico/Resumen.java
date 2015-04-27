@@ -12,6 +12,7 @@ public class Resumen {
 	private int valor4;
 	private int valor5;
 	private int valor6;
+	private double valor7;
 	
 	public Resumen() {
 		super();
@@ -104,6 +105,14 @@ public class Resumen {
 
 	public void setValor6(int valor6) {
 		this.valor6 = valor6;
+	}
+
+	public double getValor7() {
+		return valor7;
+	}
+
+	public void setValor7(double valor7) {
+		this.valor7 = valor7;
 	}
 	
 }

@@ -118,7 +118,6 @@ public class CResumenTrabajadores extends CGenerico {
 				promedio = (edades / pacientes.size());
 			}
 		}
-		System.out.println(edades);
 		Map<String, Object> p = new HashMap<String, Object>();
 
 		p.put("17M", getServicioPaciente().buscarEdadySexo("Masculino", 0, 17)
@@ -172,6 +171,7 @@ public class CResumenTrabajadores extends CGenerico {
 		p.put("total", pacientes.size());
 
 		p.put("dataNomina", new JRBeanCollectionDataSource(pacientes));
+		p.put("dataNomina2", new JRBeanCollectionDataSource(pacientes));
 		p.put("dataNivelEducativo", new JRBeanCollectionDataSource(pacientes2));
 		p.put("dataCiudad", new JRBeanCollectionDataSource(pacientes3));
 

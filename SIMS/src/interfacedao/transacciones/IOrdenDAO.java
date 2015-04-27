@@ -45,4 +45,7 @@ public interface IOrdenDAO extends JpaRepository<Orden, Long>  {
 	List<Orden> findByFechaOrdenBetweenAndPacienteTrabajadorAndPacienteCedula(
 			Date desde, Date hasta, boolean b, String paciente, Sort o);
 
+	List<Orden> findByFechaOrdenBetweenAndPacienteTrabajadorAndPacienteParentescoFamiliarLike(
+			Date desde, Date hasta, boolean b, String parentesco, Sort o);
+
 }

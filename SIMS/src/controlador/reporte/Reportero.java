@@ -63,6 +63,7 @@ public class Reportero extends HttpServlet {
 		CReporteOrden reporteOrden = new CReporteOrden();
 		COrdenesConsulta ordenesConsulta = new COrdenesConsulta();
 		CActualizacion cActu = new CActualizacion();
+		CGastoCarga gastoCarga = new CGastoCarga();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
@@ -266,20 +267,20 @@ public class Reportero extends HttpServlet {
 				fichero = control.jasperOrden(par6, tipo);
 				break;
 			case "49":
-				fichero = ordenProveedor.reporteProveedorOrden(par6, par7, part2,
-						tipo);
+				fichero = ordenProveedor.reporteProveedorOrden(par6, par7,
+						part2, tipo);
 				break;
 			case "50":
-				fichero = ordenProveedor.reporteEspecialistaOrden(par6, par7, par8,
-						tipo);
+				fichero = ordenProveedor.reporteEspecialistaOrden(par6, par7,
+						par8, tipo);
 				break;
 			case "51":
-				fichero = gasto.reporteGastoPorFamiliarOrden(par6, par7, par8, par9,
-						tipo);
+				fichero = gasto.reporteGastoPorFamiliarOrden(par6, par7, par8,
+						par9, tipo);
 				break;
 			case "52":
-				fichero = gasto.reporteGastoPorTrabajadorOrden(par6, par7, par9,
-						tipo);
+				fichero = gasto.reporteGastoPorTrabajadorOrden(par6, par7,
+						par9, tipo);
 				break;
 			case "53":
 				fichero = resultado.reporteResultado(part2);
@@ -287,7 +288,11 @@ public class Reportero extends HttpServlet {
 			case "54":
 				fichero = cActu.jasperFormatoActualizacion(par3);
 			case "55":
-				fichero =  resumenTrabajadores.reporteResumen(par3);
+				fichero = resumenTrabajadores.reporteResumen(par3);
+				break;
+			case "56":
+				fichero = gastoCarga
+						.reporteResumenGasto(par6, par7, par8, tipo);
 				break;
 			default:
 				break;
