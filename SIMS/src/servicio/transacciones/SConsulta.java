@@ -456,5 +456,15 @@ public class SConsulta {
 	public void guardarVarias(List<Consulta> consultas) {
 		consultaDAO.save(consultas);
 	}
+	
+	public List<Consulta> buscarEntreFechasFamiliaresTodosTrabajadoresYParentescoLike(
+			Date desde, Date hasta, String parentesco) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteParentescoFamiliar");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndPacienteTrabajadorAndPacienteParentescoFamiliarLike(
+						desde, hasta, false, parentesco, o);
+	}
 
 }

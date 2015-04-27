@@ -129,4 +129,14 @@ public class SOrden {
 				.findByFechaOrdenBetweenAndPacienteTrabajadorAndPacienteCedula(
 						desde, hasta, true, paciente, o);
 	}
+
+	public List<Orden> buscarEntreFechasFamiliaresTodosTrabajadoresYParentescoLike(
+			Date desde, Date hasta, String parentesco) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("pacienteParentescoFamiliar");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return ordenDAO
+				.findByFechaOrdenBetweenAndPacienteTrabajadorAndPacienteParentescoFamiliarLike(
+						desde, hasta, false, parentesco, o);
+	}
 }
