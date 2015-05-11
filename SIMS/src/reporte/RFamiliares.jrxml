@@ -5,6 +5,7 @@
 	<property name="ireport.y" value="0"/>
 	<parameter name="de" class="java.lang.String"/>
 	<parameter name="a" class="java.lang.String"/>
+	<parameter name="parentesco" class="java.lang.String"/>
 	<field name="cedulaFamiliar" class="java.lang.String"/>
 	<field name="mano" class="java.lang.String"/>
 	<field name="cedula" class="java.lang.String"/>
@@ -74,7 +75,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="85" splitType="Stretch">
+		<band height="101" splitType="Stretch">
 			<staticText>
 				<reportElement x="132" y="17" width="315" height="25" uuid="abec76f8-6935-492d-b00c-89e374f00501"/>
 				<textElement textAlignment="Center">
@@ -121,6 +122,20 @@
 				<reportElement x="10" y="3" width="107" height="52" uuid="d7e0a67d-3764-4213-952b-eefb3fb7e1e2"/>
 				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="369" y="76" width="76" height="20" uuid="61224485-89d8-4565-8092-68d812d87ecc"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Parentesco:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="447" y="76" width="108" height="20" uuid="2921d9cc-7f44-4b01-8541-423b71cf4ba5"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{parentesco}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>

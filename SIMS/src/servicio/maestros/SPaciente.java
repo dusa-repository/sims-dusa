@@ -173,6 +173,10 @@ public class SPaciente {
 		return pacienteDAO
 				.findByTrabajadorFalseAndPrimerNombreStartingWithAllIgnoreCase(valor);
 	}
+	public List<Paciente> filtroNombre2Pariente(String valor) {
+		return pacienteDAO
+				.findByTrabajadorFalseAndSegundoNombreStartingWithAllIgnoreCase(valor);
+	}
 
 	public List<Paciente> filtroCedulaPariente(String valor) {
 		return pacienteDAO
@@ -184,6 +188,10 @@ public class SPaciente {
 				.findByTrabajadorFalseAndPrimerApellidoStartingWithAllIgnoreCase(valor);
 	}
 
+	public List<Paciente> filtroApellido2Pariente(String valor) {
+		return pacienteDAO
+				.findByTrabajadorFalseAndSegundoApellidoStartingWithAllIgnoreCase(valor);
+	}
 	public List<Paciente> filtroNombre1Activos(String valor) {
 		return pacienteDAO
 				.findByPrimerNombreStartingWithAndEstatusTrueAllIgnoreCase(valor);

@@ -154,8 +154,8 @@ public class CActualizacion extends CGenerico {
 					paciente.setFechaNacimiento(new Timestamp(dtbFechaNac
 							.getValue().getTime()));
 					paciente.setEdad(calcularEdad(dtbFechaNac.getValue()));
-					paciente.setTelefono1(txtTelefono1.getValue());
-					paciente.setTelefono2(txtTelefono2.getValue());
+					paciente.setTelefono2(txtTelefono1.getValue());
+					paciente.setTelefono1(txtTelefono2.getValue());
 					paciente.setCiudadVivienda(servicioCiudad.buscar(Long
 							.valueOf(cmbCiudad.getSelectedItem().getContext())));
 					paciente.setEstadoCivil(servicioEstadoCivil.buscar(Long
@@ -313,8 +313,8 @@ public class CActualizacion extends CGenerico {
 		lblRifPaciente.setValue(paciente.getRif());
 		dtbFechaNac.setValue(paciente.getFechaNacimiento());
 		txtDireccion.setValue(paciente.getDireccion());
-		txtTelefono1.setValue(paciente.getTelefono1());
-		txtTelefono2.setValue(paciente.getTelefono2());
+		txtTelefono2.setValue(paciente.getTelefono1());
+		txtTelefono1.setValue(paciente.getTelefono2());
 		txtCedulaPaciente.setValue(paciente.getCedula());
 		cmbCiudad.setValue(paciente.getCiudadVivienda().getNombre());
 		if (paciente.getEstadoCivil() != null)

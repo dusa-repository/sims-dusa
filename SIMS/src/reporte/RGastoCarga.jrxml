@@ -102,25 +102,32 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="20">
+		<band height="17">
 			<rectangle>
-				<reportElement x="0" y="0" width="555" height="20" backcolor="#DBD7D7" uuid="829b929a-cb89-4be8-b6d6-a78a17f0ebcb"/>
+				<reportElement x="0" y="0" width="555" height="15" backcolor="#DBD7D7" uuid="829b929a-cb89-4be8-b6d6-a78a17f0ebcb"/>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="11" y="0" width="243" height="20" uuid="99babefe-3e01-4eae-a02d-ba671743b96d"/>
+				<reportElement x="11" y="0" width="243" height="17" uuid="99babefe-3e01-4eae-a02d-ba671743b96d"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Parentesco]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="381" y="0" width="174" height="20" uuid="edaa7faf-1c96-475c-a0f8-75aadd2801cd"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="381" y="0" width="174" height="17" uuid="edaa7faf-1c96-475c-a0f8-75aadd2801cd"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Total Bs]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="254" y="0" width="127" height="20" uuid="d510219d-49f8-4144-8eb3-78b1d68ec861"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="254" y="0" width="127" height="17" uuid="d510219d-49f8-4144-8eb3-78b1d68ec861"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Cantidad]]></text>
 			</staticText>
 		</band>

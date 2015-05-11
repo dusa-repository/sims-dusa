@@ -127,7 +127,7 @@ public class CCargo extends CGenerico {
 	@Listen("onClick = #btnBuscarCargo")
 	public void mostrarCatalogo() {
 		final List<Cargo> cargos = servicioCargo.buscarTodos();
-		catalogo = new Catalogo<Cargo>(catalogoCargo, "Catalogo de Areas",
+		catalogo = new Catalogo<Cargo>(catalogoCargo, "Catalogo de Cargos",
 				cargos,false, "Nombre") {
 
 			@Override

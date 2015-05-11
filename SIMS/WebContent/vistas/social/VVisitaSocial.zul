@@ -187,12 +187,6 @@
 									</hbox>
 									<hbox>
 										<vlayout>
-											<label class="etiqueta" value="Ciudad" />
-											<label id="lblCiudad" />
-										</vlayout>
-									</hbox>
-									<hbox>
-										<vlayout>
 											<label class="etiqueta" value="Parroquia" />
 											<label id="lblParroquia" />
 										</vlayout>
@@ -203,8 +197,20 @@
 											<label id="lblMunicipio" />
 										</vlayout>
 									</hbox>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Ciudad" />
+											<label id="lblCiudad" />
+										</vlayout>
+									</hbox>
 								</row>
 								<row>
+									<hbox>
+										<vlayout>
+											<label class="etiqueta" value="Estado" />
+											<label id="lblEstado" />
+										</vlayout>
+									</hbox>
 									<hbox>
 										<vlayout>
 											<label class="etiqueta" value="Telefono Residencial" />
@@ -224,7 +230,7 @@
 											<label id="lblTransporte" />
 										</vlayout>
 									</hbox>
-									<hbox></hbox>
+
 								</row>
 							</rows>
 						</grid>
@@ -1428,7 +1434,7 @@
 								</row>
 							</rows>
 						</grid>
-						<separator/>
+						<separator />
 						<vbox>
 							<image
 								tooltiptext="Tamaños permitidos: Minimo 512KB y Maximo 2MB  &#x0d;Formatos permitidos: .png y .jpeg"

@@ -121,7 +121,7 @@ public class CClasificacionDiagnostico extends CGenerico {
 		List<ClasificacionDiagnostico> unidades = servicioClasificacion
 				.buscarTodas();
 		catalogo = new Catalogo<ClasificacionDiagnostico>(
-				catalogoClasificacionDiagnostico, "Catalogo de Unidades",
+				catalogoClasificacionDiagnostico, "Catalogo de Clasificaciones de Diagnostico",
 				unidades,false, "Nombre") {
 
 			@Override

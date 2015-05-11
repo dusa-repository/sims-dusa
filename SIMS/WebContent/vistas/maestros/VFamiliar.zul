@@ -28,10 +28,10 @@
 											value="Buscar Carga Familiar o Paciente para Editar" />
 									</cell>
 									<button autodisable="self" id="btnBuscarCarga" class="btn"
-										label="Buscar Carga Familiar" tooltiptext="Catalogo"
+										label="Buscar Carga" tooltiptext="Catalogo de Familiares que no aplican a servicios medicos"
 										image="/public/imagenes/botones/buscar.png" width="100%" />
 									<button autodisable="self" id="btnBuscarPaciente" class="btn"
-										label="Buscar Paciente" tooltiptext="Catalogo"
+										label="Buscar Paciente" tooltiptext="Catalogo de Familiares que aplican a servicios medicos (Se consideran pacientes)"
 										image="/public/imagenes/botones/buscar.png" width="100%" />
 									<label class="etiqueta" value="Estatus" />
 									<cell colspan="2">

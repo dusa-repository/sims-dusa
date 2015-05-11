@@ -350,6 +350,7 @@ public class CPacientes extends CGenerico {
 		Map p = new HashMap();
 		p.put("de", de);
 		p.put("a", a);
+		p.put("parentesco", parentesco);
 
 		for (int i = 0; i < pacientes.size(); i++) {
 
