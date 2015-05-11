@@ -108,6 +108,8 @@ public class CVisitaSocial extends CGenerico {
 	@Wire
 	private Label lblCiudad;
 	@Wire
+	private Label lblEstado;
+	@Wire
 	private Label lblParroquia;
 	@Wire
 	private Label lblMunicipio;
@@ -661,6 +663,7 @@ public class CVisitaSocial extends CGenerico {
 				lblNro.setValue("");
 				lblPuntoRef.setValue("");
 				lblCiudad.setValue("");
+				lblEstado.setValue("");
 				lblParroquia.setValue("");
 				lblMunicipio.setValue("");
 				lblTelefono1.setValue("");
@@ -1744,7 +1747,8 @@ public class CVisitaSocial extends CGenerico {
 		lblSector.setValue(paciente.getSector());
 		lblNro.setValue(paciente.getNro());
 		lblPuntoRef.setValue(paciente.getPuntoReferencia());
-		lblCiudad.setValue("Edo: "+paciente.getCiudadVivienda().getEstado().getNombre());
+		lblCiudad.setValue(paciente.getCiudadVivienda().getNombre());
+		lblEstado.setValue(paciente.getCiudadVivienda().getEstado().getNombre());
 		lblParroquia.setValue(paciente.getParroquia());
 		lblMunicipio.setValue(paciente.getMunicipio());
 		lblTelefono1.setValue(paciente.getTelefono1());

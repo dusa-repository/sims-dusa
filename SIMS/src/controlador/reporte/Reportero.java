@@ -287,8 +287,9 @@ public class Reportero extends HttpServlet {
 				break;
 			case "54":
 				fichero = cActu.jasperFormatoActualizacion(par3);
+				break;
 			case "55":
-				fichero = resumenTrabajadores.reporteResumen(par3);
+				fichero = resumenTrabajadores.reporteResumen(tipo);
 				break;
 			case "56":
 				fichero = gastoCarga

@@ -74,7 +74,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tipo de Contratacion]]></text>
+				<text><![CDATA[Nomina]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="417" y="0" width="112" height="20" uuid="3fe4aef3-6ffb-4e96-a4e7-7ebb7a609018"/>

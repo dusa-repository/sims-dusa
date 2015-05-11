@@ -850,17 +850,15 @@ public class CFamiliar extends CGenerico {
 
 				switch (combo) {
 				case "Primer Nombre":
-					return servicioPaciente.filtroNombre1(valor);
+					return servicioPaciente.filtroNombrePariente(valor);
 				case "Segundo Nombre":
-					return servicioPaciente.filtroNombre2(valor);
+					return servicioPaciente.filtroNombre2Pariente(valor);
 				case "Cedula":
-					return servicioPaciente.filtroCedula(valor);
-				case "Ficha":
-					return servicioPaciente.filtroFicha(valor);
+					return servicioPaciente.filtroCedulaPariente(valor);
 				case "Primer Apellido":
-					return servicioPaciente.filtroApellido1(valor);
+					return servicioPaciente.filtroApellidoPariente(valor);
 				case "Segundo Apellido":
-					return servicioPaciente.filtroApellido2(valor);
+					return servicioPaciente.filtroApellido2Pariente(valor);
 				case "Trabajador Asociado":
 					return servicioPaciente.filtroCedulaAsociado(valor);
 				default:

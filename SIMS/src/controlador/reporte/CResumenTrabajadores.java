@@ -73,7 +73,7 @@ public class CResumenTrabajadores extends CGenerico {
 
 				Clients.evalJavaScript("window.open('"
 						+ damePath()
-						+ "Reportero?valor=55&valor3="
+						+ "Reportero?valor=55&valor20="
 						+ cmbTipo.getValue()
 						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
 			}
@@ -107,11 +107,6 @@ public class CResumenTrabajadores extends CGenerico {
 		if (!pacientes.isEmpty()) {
 			for (int i = 0; i < pacientes.size(); i++) {
 				if (pacientes.get(i).getFechaNacimiento() != null) {
-//					pacientes.get(i)
-//							.setEdad(
-//									calcularEdad(pacientes.get(i)
-//											.getFechaNacimiento()));
-//					getServicioPaciente().guardar(pacientes.get(i));
 					edades = edades + pacientes.get(i).getEdad();
 				}
 
@@ -177,6 +172,7 @@ public class CResumenTrabajadores extends CGenerico {
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RResumenTrabajadores.jasper"));
+
 
 		if (tipoReporte.equals("EXCEL")) {
 

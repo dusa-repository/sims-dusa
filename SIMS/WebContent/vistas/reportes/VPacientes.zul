@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divRPacientes" apply="controlador.reporte.CPacientes">
-		<groupbox width="75%" mold="3d" title="Reporte de Pacientes">
+		<groupbox width="75%" mold="3d" title="Reporte de Pacientes y/o Familiares">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="20%" />

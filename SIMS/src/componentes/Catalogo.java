@@ -40,7 +40,7 @@ public abstract class Catalogo<Clase> extends Window {
 		super(titulo, "2", true);
 		this.setId("cmbCatalogo"+titulo);
 		this.setStyle("background-header:#661313; background: #f4f2f2");
-		setWidth("60%");
+		setWidth("80%");
 		crearLista(lista, campos, multiple);
 		lsbCatalogo.addEventListener(Events.ON_SELECT,
 				new EventListener<Event>() {

@@ -211,16 +211,16 @@
 						<groupbox title="Datos de Contacto">
 							<grid width="auto">
 								<columns visible="false">
-									<column label="" width="10%" />
-									<column label="" width="10%" />
-									<column label="" width="10%" />
-									<column label="" width="10%" />
-									<column label="" width="10%" />
-									<column label="" width="10%" />
-									<column label="" width="10%" />
-									<column label="" width="10%" />
-									<column label="" width="10%" />
-									<column label="" width="10%" />
+									<column label="" width="9%" />
+									<column label="" width="11%" />
+									<column label="" width="9%" />
+									<column label="" width="11%" />
+									<column label="" width="9%" />
+									<column label="" width="11%" />
+									<column label="" width="9%" />
+									<column label="" width="11%" />
+									<column label="" width="9%" />
+									<column label="" width="11%" />
 								</columns>
 								<rows>
 									<row>
