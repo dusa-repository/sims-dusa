@@ -55,7 +55,7 @@
 									</hbox>
 									<textbox maxlength="15" id="txtCedulaPaciente" hflex="1"
 										tooltiptext="Ingrese la Cedula del Paciente" />
-									<radiogroup>
+									<radiogroup id="rdgF">
 										<radio label="V" value="Venezolano" id="rdoV" />
 										<radio label="E" value="Extranjero" id="rdoE" />
 									</radiogroup>
@@ -84,11 +84,7 @@
 										<textbox maxlength="15" id="txtPasaporte" hflex="1"
 											tooltiptext="Ingrese el Numero del pasaporte" />
 									</cell>
-									<hbox>
-										<label class="etiqueta" value="RIF:" />
-										<space />
-										<label value="*" style="font-weight:bold;color:red" />
-									</hbox>
+									<label class="etiqueta" value="RIF:" />
 									<combobox tooltiptext="Seleccione el Rif" placeholder="Seleccione el Rif"
 										id="cmbRif" width="100%" readonly="true">
 										<comboitem label="E-" />
@@ -144,11 +140,7 @@
 									<datebox readonly="true" width="100%" id="dtbFechaNac"
 										onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Nacimiento"
 										constraint="no future,no empty" />
-									<hbox>
-										<label class="etiqueta" value="Lugar Nacimiento:" />
-										<space />
-										<label value="*" style="font-weight:bold;color:red" />
-									</hbox>
+									<label class="etiqueta" value="Lugar Nacimiento:" />
 									<cell colspan="3">
 										<vbox>
 											<textbox maxlength="500" id="txtLugarNacimiento"
@@ -207,6 +199,7 @@
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
+
 									<combobox tooltiptext="Seleccione el Nivel Educativo"
 										placeholder="Seleccione el Nivel Educativo" id="cmbNivelEducativo"
 										width="100%" readonly="true">
@@ -309,11 +302,7 @@
 										<radio label="SI" value="alergico" id="rdoSiAlergico" />
 										<radio label="NO" value="no alergico" id="rdoNoAlergico" />
 									</radiogroup>
-									<hbox>
-										<label class="etiqueta" value="Indique:" />
-										<space />
-										<label value="*" style="font-weight:bold;color:red" />
-									</hbox>
+									<label class="etiqueta" value="Indique:" />
 									<cell colspan="3">
 										<textbox id="txtAlergia" width="100%" maxlength="500"
 											tooltiptext="Ingrese las Especificaciones de las Alergias"
@@ -370,11 +359,7 @@
 										<radio label="SI" value="discapacidad" id="rdoSiDiscapacidad" />
 										<radio label="NO" value="no discapacidad" id="rdoNoDiscapacidad" />
 									</radiogroup>
-									<hbox>
-										<label class="etiqueta" value="Origen:" />
-										<space />
-										<label value="*" style="font-weight:bold;color:red" />
-									</hbox>
+									<label class="etiqueta" value="Origen:" />
 									<combobox tooltiptext="Seleccione el Origen de la Discapacidad"
 										placeholder="Seleccione el Origen" id="cmbOrigen" width="100%"
 										readonly="true">
@@ -382,11 +367,7 @@
 										<comboitem label="Adquirida" />
 										<comboitem label="No Aplica" />
 									</combobox>
-									<hbox>
-										<label class="etiqueta" value="Tipo:" />
-										<space />
-										<label value="*" style="font-weight:bold;color:red" />
-									</hbox>
+									<label class="etiqueta" value="Tipo:" />
 									<combobox tooltiptext="Seleccione un Tipo de Discapacidad"
 										placeholder="Seleccione un Tipo" id="cmbTipoDiscapacidad"
 										width="100%" readonly="true">

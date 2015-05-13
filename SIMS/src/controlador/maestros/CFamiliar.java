@@ -268,6 +268,8 @@ public class CFamiliar extends CGenerico {
 	private Textbox txtObservaciones;
 	@Wire
 	private Button btnSiguiente2;
+	@Wire
+	private Radiogroup rdgF;
 
 	Buscar<Medicina> buscarMedicina;
 
@@ -748,8 +750,6 @@ public class CFamiliar extends CGenerico {
 		if (txtApellido1Paciente.getText().compareTo("") == 0
 				|| txtNombre1Paciente.getText().compareTo("") == 0
 				|| txtCedulaPaciente.getText().compareTo("") == 0
-				|| txtRifPaciente.getText().compareTo("") == 0
-				|| cmbRif.getText().compareTo("") == 0
 				|| (!rdoE.isChecked() && !rdoV.isChecked())
 				|| (!rdoVive.isChecked() && !rdoNoVive.isChecked())
 				|| dtbFechaNac.getText().compareTo("") == 0
@@ -767,6 +767,12 @@ public class CFamiliar extends CGenerico {
 						.compareTo("") == 0))
 				|| (!rdoEstudia.isChecked() && !rdoTrabaja.isChecked())) {
 			msj.mensajeError(Mensaje.camposVacios);
+			aplicarColores(rdgF, rdgVive, rdgServiciosMedicos, rdgEstudia, rdgAyuda,
+					rdgAlergia, rdgDiscapacidad, rdgLentes,
+					txtApellido1Paciente, txtNombre1Paciente,
+					txtCedulaPaciente, cmbEstadoCivil, cmbGrupoSanguineo,
+					cmbMano, cmbSexo, dspPeso, dspEstatura, cmbCiudad,
+					txtTelefono2, cmbParentescoFamiliar);
 			return false;
 		} else {
 			if (rdoSiDiscapacidad.isChecked()
@@ -1256,6 +1262,12 @@ public class CFamiliar extends CGenerico {
 	}
 
 	public void limpiarCampos() {
+		limpiarColores(rdgF, rdgVive, rdgServiciosMedicos, rdgEstudia, rdgAyuda,
+				rdgAlergia, rdgDiscapacidad, rdgLentes,
+				txtApellido1Paciente, txtNombre1Paciente,
+				txtCedulaPaciente, cmbEstadoCivil, cmbGrupoSanguineo,
+				cmbMano, cmbSexo, dspPeso, dspEstatura, cmbCiudad,
+				txtTelefono2, cmbParentescoFamiliar);
 		cedTrabajador = "";
 		idBoton = "";
 		txtObservacionEstatus.setValue("");

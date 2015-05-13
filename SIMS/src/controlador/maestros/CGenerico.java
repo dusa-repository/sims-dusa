@@ -37,10 +37,14 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Include;
+import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
+import org.zkoss.zul.impl.InputElement;
+import org.zkoss.zul.impl.XulElement;
 
 import servicio.control.SControlConsulta;
 import servicio.control.SControlOrden;
@@ -723,5 +727,49 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		calendario.setTime(fecha);
 		calendario.add(Calendar.DAY_OF_YEAR, +1);
 		return fecha = calendario.getTime();
+	}
+	
+
+	public void limpiarColores(XulElement... cajas) {
+		for (int i = 0; i < cajas.length; i++) {
+			if (cajas[i] instanceof InputElement
+					|| cajas[i] instanceof Combobox) {
+				cajas[i].setStyle("border: 1px solid default");
+				cajas[i].setWidth("100%");
+			}
+			if (cajas[i] instanceof Radiogroup) {
+				Radiogroup group = (Radiogroup) cajas[i];
+				for (int j = 0; j < group.getItems().size(); j++) {
+					group.getItemAtIndex(j).setStyle(
+							"border: 1px solid default");
+				}
+			}
+
+		}
+	}
+
+	public void aplicarColores(XulElement... cajas) {
+		limpiarColores(cajas);
+		for (int i = 0; i < cajas.length; i++) {
+			if (cajas[i] instanceof InputElement)
+				if (((InputElement) cajas[i]).getText().compareTo("") == 0) {
+					cajas[i].setStyle("border: 1px solid red");
+					cajas[i].setWidth("100%");
+				}
+			if (cajas[i] instanceof Combobox)
+				if (((Combobox) cajas[i]).getSelectedItem() == null) {
+					cajas[i].setStyle("border: 1px solid red");
+					cajas[i].setWidth("100%");
+				}
+			if (cajas[i] instanceof Radiogroup) {
+				if (((Radiogroup) cajas[i]).getSelectedItem() == null) {
+					Radiogroup group = (Radiogroup) cajas[i];
+					for (int j = 0; j < group.getItems().size(); j++) {
+						group.getItemAtIndex(j).setStyle(
+								"border: 1px solid red");
+					}
+				}
+			}
+		}
 	}
 }

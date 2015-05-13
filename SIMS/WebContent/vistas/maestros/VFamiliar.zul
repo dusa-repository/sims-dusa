@@ -69,7 +69,7 @@
 										<space />
 										<label value="*" style="font-weight:bold;color:red" />
 									</hbox>
-									<radiogroup>
+									<radiogroup  id="rdgF">
 										<radio label="V" value="Venezolano" id="rdoV" />
 										<radio label="E" value="Extranjero" id="rdoE" />
 									</radiogroup>
@@ -100,11 +100,7 @@
 										<radio label="SI" value="si" id="rdoVive" />
 										<radio label="NO" value="no" id="rdoNoVive" />
 									</radiogroup>
-									<hbox>
 										<label class="etiqueta" value="RIF:" />
-										<space />
-										<label value="*" style="font-weight:bold;color:red" />
-									</hbox>
 									<combobox tooltiptext="Seleccione el Rif" placeholder="Seleccione el Rif"
 										id="cmbRif" width="100%" readonly="true">
 										<comboitem label="E-" />
