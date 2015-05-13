@@ -407,7 +407,6 @@ public class CCambiarCedula extends CGenerico {
 			historia.setPaciente(pacienteNuevo);
 			getServicioHistoria().guardar(historia);
 		}
-		getServicioPaciente().eliminar(pacienteAModificar);
 
 		Ficha ficha = getServicioFicha().buscarPorPaciente(pacienteAModificar);
 		if (ficha != null) {

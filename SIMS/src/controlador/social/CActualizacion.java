@@ -171,9 +171,8 @@ public class CActualizacion extends CGenerico {
 					if (rdoSi.isChecked())
 						boll = true;
 					String tipo = cmbTipoVivienda.getValue();
-					Ficha ficha = new Ficha();
-					if (paciente.getFichaMaestra() != null) {
-						ficha = paciente.getFichaMaestra();
+					Ficha ficha =servicioFicha.buscarPorPaciente(paciente);
+					if (ficha != null) {
 						ficha.setTallaBotas(seguridad);
 						ficha.setTallaCamisa(camisa);
 						ficha.setTallaGoma(goma);
@@ -189,6 +188,10 @@ public class CActualizacion extends CGenerico {
 						ficha.setTallaPantalon(pantalon);
 						ficha.setViviendaPropia(boll);
 						ficha.setTipoVivienda(tipo);
+						ficha.setFechaCertificado(fechaHora);
+						ficha.setFechaFicha(fechaHora);
+						ficha.setFechaLicencia(fechaHora);
+						ficha.setIdFicha(0);
 					}
 					// GUARDO TODO
 					servicioPaciente.guardar(paciente);
@@ -320,8 +323,8 @@ public class CActualizacion extends CGenerico {
 		if (paciente.getEstadoCivil() != null)
 			cmbEstadoCivil.setValue(paciente.getEstadoCivil().getNombre());
 		cmbGrupoSanguineo.setValue(paciente.getGrupoSanguineo());
-		if (paciente.getFichaMaestra() != null) {
-			Ficha ficha = paciente.getFichaMaestra();
+		Ficha ficha =servicioFicha.buscarPorPaciente(paciente);
+		if (ficha != null) {
 			txtTallaCamisa.setValue(ficha.getTallaCamisa());
 			txtTallaGoma.setValue(ficha.getTallaGoma());
 			txtTallaPantalon.setValue(ficha.getTallaPantalon());
