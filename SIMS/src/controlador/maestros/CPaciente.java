@@ -297,6 +297,8 @@ public class CPaciente extends CGenerico {
 	private Textbox txtCarreraActual;
 	@Wire
 	private Textbox txtPeriodo;
+	@Wire
+	private Radiogroup rdgF;
 
 	Buscar<Medicina> buscarMedicina;
 
@@ -770,8 +772,8 @@ public class CPaciente extends CGenerico {
 				|| cmbMano.getText().compareTo("") == 0
 				|| cmbSexo.getText().compareTo("") == 0
 				|| cmbNivelEducativo.getText().compareTo("") == 0
-				|| dspPeso.getValue() == 0
-				|| dspEstatura.getValue() == 0
+				|| dspPeso.getValue() == null
+				|| dspEstatura.getValue() == null
 				|| cmbCiudad.getText().compareTo("") == 0
 				|| txtTelefono2.getText().compareTo("") == 0
 				|| (!rdoSiAlergico.isChecked() && !rdoNoAlergico.isChecked())
@@ -787,6 +789,12 @@ public class CPaciente extends CGenerico {
 				|| (rdoMuerte.isChecked() && (dtbFechaMuerte.getText()
 						.compareTo("") == 0))) {
 			msj.mensajeError(Mensaje.camposVacios);
+			aplicarColores(rdgF, rdgAlergia, rdgDiscapacidad, rdgLentes,
+					 txtApellido1Paciente, txtNombre1Paciente,
+					txtCedulaPaciente, spnCarga, cmbEstadoCivil,
+					cmbGrupoSanguineo, cmbMano, cmbSexo, dspPeso, dspEstatura,
+					cmbCiudad, cmbCargo, txtTelefono2, cmbEmpresa, cmbArea,
+					cmbNomina, txtFichaPaciente,cmbNivelEducativo,dspPeso,dspEstatura);
 			return false;
 		} else {
 			if (rdoSiAlergico.isChecked()
@@ -1367,6 +1375,12 @@ public class CPaciente extends CGenerico {
 	}
 
 	public void limpiarCampos() {
+		limpiarColores(rdgF, rdgAlergia, rdgDiscapacidad, rdgLentes,
+				 txtApellido1Paciente, txtNombre1Paciente,
+				txtCedulaPaciente, spnCarga, cmbEstadoCivil,
+				cmbGrupoSanguineo, cmbMano, cmbSexo, dspPeso, dspEstatura,
+				cmbCiudad, cmbCargo, txtTelefono2, cmbEmpresa, cmbArea,
+				cmbNomina, txtFichaPaciente,cmbNivelEducativo,dspPeso,dspEstatura);
 
 		cmbRif.setValue("");
 		txtRifPaciente.setValue("");
