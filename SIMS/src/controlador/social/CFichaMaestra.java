@@ -425,12 +425,21 @@ public class CFichaMaestra extends CGenerico {
 					ficha.setJefe(jefe);
 					ficha.setFechaFicha(fechaFicha);
 
-					ficha.setIdFicha(idFicha);
-
 					Paciente paciente = servicioPaciente
 							.buscarPorCedula(idPaciente);
 					if (paciente != null)
 						ficha.setPaciente(paciente);
+					Ficha fichaVieja = servicioFicha
+							.buscarPorPaciente(paciente);
+
+					if (fichaVieja != null) {
+						ficha.setIdFicha(fichaVieja.getIdFicha());
+						ficha.setTallaBotas(fichaVieja.getTallaBotas());
+						ficha.setTallaCamisa(fichaVieja.getTallaCamisa());
+						ficha.setTallaGoma(fichaVieja.getTallaGoma());
+						ficha.setTallaPantalon(fichaVieja.getTallaPantalon());
+					} else
+						ficha.setIdFicha(0);
 
 					servicioFicha.guardar(ficha);
 					limpiarCampos();
@@ -447,7 +456,7 @@ public class CFichaMaestra extends CGenerico {
 
 			}
 		};
-		
+
 		botonera.getChildren().get(1).setVisible(false);
 		divBotoneraFicha.appendChild(botonera);
 
@@ -539,8 +548,18 @@ public class CFichaMaestra extends CGenerico {
 			txtMarcaVehiculo.setValue(ficha.getMarcaVehiculo());
 			cmbTipoVehiculo.setValue(ficha.getTipoVehiculo());
 			cmbGrado.setValue(ficha.getGradoLicencia());
-			dtbFechaVenciLicencia.setValue(ficha.getFechaLicencia());
-			dtbFechaVenciCertificado.setValue(ficha.getFechaCertificado());
+			if (ficha.getFechaLicencia() != null)
+				dtbFechaVenciLicencia.setValue(ficha.getFechaLicencia());
+			else
+				dtbFechaVenciLicencia.setValue(fecha);
+			if (ficha.getFechaCertificado() != null)
+				dtbFechaVenciCertificado.setValue(ficha.getFechaCertificado());
+			else
+				dtbFechaVenciCertificado.setValue(fecha);
+			if (ficha.getFechaFicha() != null)
+				dtbFechaFicha.setValue(ficha.getFechaFicha());
+			else
+				dtbFechaFicha.setValue(fecha);
 			txtModeloVehiculo.setValue(ficha.getModeloVehiculo());
 			txtAnnoVehiculo.setValue(ficha.getAnnoVehiculo());
 			txtColorVehiculo.setValue(ficha.getColorVehiculo());
@@ -551,7 +570,6 @@ public class CFichaMaestra extends CGenerico {
 			cmbServicioAgua.setValue(ficha.getServicioAgua());
 			cmbBasuraFinal.setValue(ficha.getBasuraFinal());
 			cmbJefe.setValue(ficha.getJefe());
-			dtbFechaFicha.setValue(ficha.getFechaFicha());
 
 			if (ficha.getVehiculos() != null)
 				spnCuantosVehiculos.setValue(ficha.getVehiculos());
