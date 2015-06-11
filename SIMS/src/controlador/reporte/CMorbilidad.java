@@ -59,6 +59,7 @@ import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CMorbilidad extends CGenerico {

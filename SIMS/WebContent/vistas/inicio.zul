@@ -1,13 +1,41 @@
 <?page id="mainPage" title="SIMS" contentType="text/html;charset=utf-8"?>
 <zk>
+	<style>
+		.z-tree-icon .z-tree-open {
+		background-image:
+		url('../public/imagenes/generales/carpetaCerrada.png');
+		background-repeat:no-repeat;
+		background-size: cover;
+		width: 100%;
+		}
+
+		.z-tree-icon
+		.z-tree-close {
+		background-image:
+		url('../public/imagenes/generales/carpetaAbierta.png');
+		background-repeat:no-repeat;
+		background-size: cover;
+		width: 100%;
+		}
+		/*remove the font awesome icon*/
+		.z-tree-icon .z-tree-open::before,
+		.z-tree-icon .z-tree-close::before {
+		content: '';
+		}
+
+		span.z-tree-spacer:nth-last-child(2):before {
+		font-family: fontawesome;
+		content: url('../public/imagenes/generales/hoja.png');;
+		}
+	</style>
 	<style src="../public/Estilo.css" />
-	<script src="/public/progress.js" />
+	<script src="../public/progress.js" />
 	<window title="" border="0" height="100%" width="100%" apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
 			<north height="10%" class="banner">
 				<hbox hflex="1">
 					<vbox>
-						<image src="../public/imagenes/generales/LogoInicio.jpg"/>
+						<image src="../public/imagenes/generales/LogoInicio.jpg" />
 					</vbox>
 					<separator />
 					<separator />
@@ -60,7 +88,7 @@
 							<separator />
 							<separator />
 							<separator />
-								<vbox>
+							<vbox>
 								<listbox style="border:none" width="200px" id="ltbRoles">
 									<template name="model">
 										<listitem>
@@ -78,7 +106,7 @@
 			</north>
 			<west title="Menú" id="west" size="19%" splittable="true"
 				collapsible="true" autoscroll="true">
-				<tree id="arbolMenu" width="99%" zclass="z-vfiletree">
+				<tree id="arbolMenu" width="99%">
 					<template name="model">
 						<treeitem context="menupopup">
 							<treerow>
@@ -93,8 +121,8 @@
 					<center hflex="1"
 						style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
 						border="none" autoscroll="true">
-						<tabbox width="auto" id="tabBox" >
-							<tabs  context="editPopup">
+						<tabbox width="auto" id="tabBox">
+							<tabs context="editPopup">
 								<tab visible="false">Tab A</tab>
 								<tab id="tab" label="+" visible="false">
 								</tab>
@@ -114,7 +142,7 @@
 				<div align="center" sclass="footer">
 					<separator></separator>
 					<label style="padding-center:35%;color: white"
-							value="© 2014 Destilería Unidas S.A | RIF: J-30940783-0 | Todos los derechos reservados | Desarrollado por BIZAPPS,C.A">
+						value="© 2014 Destilería Unidas S.A | RIF: J-30940783-0 | Todos los derechos reservados | Desarrollado por BIZAPPS,C.A">
 					</label>
 				</div>
 			</south>

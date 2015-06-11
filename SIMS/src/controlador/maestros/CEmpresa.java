@@ -9,16 +9,9 @@ import java.util.List;
 import modelo.maestros.Consultorio;
 import modelo.maestros.Empresa;
 import modelo.maestros.EmpresaNomina;
-import modelo.maestros.Medicina;
-import modelo.maestros.MedicinaPresentacionUnidad;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
-import modelo.maestros.ParteCuerpo;
-import modelo.maestros.PresentacionMedicina;
-import modelo.seguridad.Arbol;
 import modelo.sha.Informe;
-import modelo.transacciones.ConsultaMedicina;
-import modelo.transacciones.ConsultaParteCuerpo;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -37,6 +30,7 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
+import security.modelo.Arbol;
 import arbol.CArbol;
 
 import componentes.Botonera;

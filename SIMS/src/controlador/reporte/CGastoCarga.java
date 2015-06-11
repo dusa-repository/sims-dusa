@@ -5,15 +5,12 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import modelo.generico.Resumen;
-import modelo.maestros.Paciente;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.Orden;
 import net.sf.jasperreports.engine.JRException;
@@ -37,6 +34,7 @@ import org.zkoss.zul.Tab;
 
 import componentes.Botonera;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CGastoCarga extends CGenerico {

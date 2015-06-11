@@ -1,7 +1,6 @@
 package interfacedao.control;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 import modelo.control.ControlConsulta;

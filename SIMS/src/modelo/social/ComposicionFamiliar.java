@@ -13,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import modelo.maestros.Paciente;
-
 import org.hibernate.annotations.Type;
 
 

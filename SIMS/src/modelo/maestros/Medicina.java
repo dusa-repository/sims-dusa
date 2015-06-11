@@ -15,11 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import controlador.maestros.CGenerico;
 import modelo.inventario.F4101;
 import modelo.transacciones.ConsultaMedicina;
 import modelo.transacciones.OrdenMedicina;
 import modelo.transacciones.PacienteMedicina;
+import controlador.maestros.CGenerico;
 
 /**
  * The persistent class for the medicina database table.

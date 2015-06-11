@@ -7,7 +7,6 @@ import java.util.List;
 
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
-import modelo.maestros.PresentacionMedicina;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;

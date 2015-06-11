@@ -1,12 +1,12 @@
 package servicio.transacciones;
 
+import interfacedao.transacciones.IOrdenServicioExternoDAO;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import interfacedao.transacciones.IOrdenServicioExternoDAO;
 import modelo.maestros.Proveedor;
-import modelo.transacciones.ConsultaServicioExterno;
 import modelo.transacciones.Orden;
 import modelo.transacciones.OrdenServicioExterno;
 

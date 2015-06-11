@@ -5,12 +5,13 @@ import interfacedao.seguridad.IUsuarioDAO;
 import java.util.List;
 
 import modelo.maestros.Especialidad;
-import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import security.modelo.Grupo;
 
 @Service("SUsuario")
 public class SUsuario {
@@ -78,11 +79,7 @@ public class SUsuario {
 		return usuarioDAO
 				.findByEspecialidadDescripcionStartingWithAllIgnoreCase(valor);
 	}
-
-	public List<Usuario> buscarPorGrupo(Grupo grupo) {
-		return usuarioDAO.findByGrupos(grupo);
-	}
-
+	
 	public List<Usuario> buscarDoctores() {
 		return usuarioDAO.findByDoctor(true);
 	}

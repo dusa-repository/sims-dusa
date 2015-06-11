@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import modelo.transacciones.Consulta;
 import modelo.transacciones.ConsultaEspecialista;
 import modelo.transacciones.OrdenEspecialista;
-import modelo.transacciones.OrdenExamen;
 
 @Entity
 @Table(name = "especialista", schema="dusa_sims.dbo")

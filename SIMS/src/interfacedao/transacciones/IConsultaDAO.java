@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Cargo;
-import modelo.maestros.Diagnostico;
 import modelo.maestros.Empresa;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.transacciones.Consulta;
-
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
@@ -16,6 +14,7 @@ import org.zkoss.zul.Tab;
 
 import componentes.Botonera;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CVerificacion extends CGenerico {

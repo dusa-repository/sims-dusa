@@ -40,7 +40,5 @@ http://www.springframework.org/schema/data/jpa http://www.springframework.org/sc
 	<qualifier value="segundo"/>
 		<property name="entityManagerFactory" ref="entityManagerFactory2" />
 	</bean>
-
 	<bean class="org.springframework.orm.hibernate4.HibernateExceptionTranslator" />
-
 </beans>

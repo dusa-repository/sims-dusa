@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Accidente;
-import modelo.maestros.CategoriaDiagnostico;
-import modelo.maestros.ClasificacionDiagnostico;
 import modelo.maestros.Diagnostico;
 import modelo.pk.ConsultaDiagnosticoId;
 import modelo.sha.Area;

@@ -2,7 +2,6 @@ package controlador.reporte;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,9 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import modelo.maestros.Paciente;
-import modelo.sha.Area;
 import modelo.transacciones.Consulta;
-import modelo.transacciones.ConsultaDiagnostico;
 import modelo.transacciones.Orden;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -41,6 +38,7 @@ import org.zkoss.zul.Tab;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CGasto extends CGenerico {

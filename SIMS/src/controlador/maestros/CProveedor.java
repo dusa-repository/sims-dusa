@@ -1,13 +1,6 @@
 package controlador.maestros;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +12,6 @@ import modelo.maestros.Proveedor;
 import modelo.maestros.ProveedorExamen;
 import modelo.maestros.ProveedorServicio;
 import modelo.maestros.ServicioExterno;
-import modelo.seguridad.Arbol;
 import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaServicioExterno;
 
@@ -40,9 +32,6 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listcell;
-import org.zkoss.zul.Listhead;
-import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
@@ -50,9 +39,10 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
-import com.csvreader.CsvReader;
-
+import security.modelo.Arbol;
 import arbol.CArbol;
+
+import com.csvreader.CsvReader;
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;

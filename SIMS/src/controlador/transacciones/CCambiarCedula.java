@@ -1,7 +1,6 @@
 package controlador.transacciones;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +19,6 @@ import modelo.transacciones.Historia;
 import modelo.transacciones.Orden;
 import modelo.transacciones.PacienteMedicina;
 
-import org.springframework.util.SerializationUtils;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -35,6 +33,7 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CCambiarCedula extends CGenerico {

@@ -1,14 +1,13 @@
 package servicio.transacciones;
 
+import interfacedao.transacciones.IOrdenDAO;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import interfacedao.transacciones.IOrdenDAO;
-import modelo.maestros.Cita;
 import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
-import modelo.transacciones.Consulta;
 import modelo.transacciones.Orden;
 
 import org.springframework.beans.factory.annotation.Autowired;

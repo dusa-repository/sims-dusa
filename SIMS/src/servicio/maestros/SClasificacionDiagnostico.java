@@ -1,8 +1,9 @@
 package servicio.maestros;
 
+import interfacedao.maestros.IClasificacionDiagnosticoDAO;
+
 import java.util.List;
 
-import interfacedao.maestros.IClasificacionDiagnosticoDAO;
 import modelo.maestros.ClasificacionDiagnostico;
 
 import org.springframework.beans.factory.annotation.Autowired;

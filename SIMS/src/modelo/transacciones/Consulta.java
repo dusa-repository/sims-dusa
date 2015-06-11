@@ -18,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.maestros.Cargo;
-import modelo.maestros.Especialidad;
 import modelo.maestros.Especialista;
 import modelo.maestros.Paciente;
 import modelo.seguridad.Usuario;

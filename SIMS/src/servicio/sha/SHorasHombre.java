@@ -1,11 +1,9 @@
 package servicio.sha;
 
+import interfacedao.IHorasHombreDAO;
+
 import java.util.List;
 
-import interfacedao.IHorasHombreDAO;
-import interfacedao.sha.IClasificacionAccidenteDAO;
-
-import modelo.sha.ClasificacionAccidente;
 import modelo.sha.HorasHombre;
 
 import org.springframework.beans.factory.annotation.Autowired;

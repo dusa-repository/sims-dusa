@@ -1,8 +1,6 @@
 package servicio.sha;
 
-import interfacedao.sha.IAreaDAO;
 import interfacedao.sha.IGrupoInspectoresDAO;
-
 import modelo.sha.GrupoInspectores;
 
 import org.springframework.beans.factory.annotation.Autowired;

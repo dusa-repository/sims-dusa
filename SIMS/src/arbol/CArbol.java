@@ -11,15 +11,12 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import modelo.seguridad.Arbol;
-import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.image.AImage;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -41,6 +38,11 @@ import org.zkoss.zul.TreeModel;
 import org.zkoss.zul.Treecell;
 import org.zkoss.zul.West;
 
+import security.modelo.Arbol;
+import security.modelo.Grupo;
+import security.modelo.MArbol;
+import security.modelo.Nodos;
+import security.modelo.UsuarioSeguridad;
 import componentes.Validador;
 import controlador.maestros.CGenerico;
 
@@ -80,7 +82,8 @@ public class CArbol extends CGenerico {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 
-		Usuario u = servicioUsuario.buscarUsuarioPorNombre(auth.getName());
+		UsuarioSeguridad u = servicioUsuarioSeguridad.buscarPorLogin(auth
+				.getName());
 
 		List<Grupo> grupos = servicioGrupo.buscarGruposUsuario(u);
 		ltbRoles.setModel(new ListModelList<Grupo>(grupos));

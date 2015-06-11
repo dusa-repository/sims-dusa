@@ -21,6 +21,8 @@ import modelo.transacciones.Consulta;
 
 import org.hibernate.annotations.Type;
 
+import security.modelo.Grupo;
+
 
 /**
  * The persistent class for the usuario database table.
@@ -116,18 +118,6 @@ public class Usuario implements Serializable {
 	
 	@Column(name="unidad", length=50)
 	private String unidad;
-
-	@ManyToMany
-	@JoinTable(
-		name="grupo_usuario", schema="dusa_sims.dbo"
-		, joinColumns={
-			@JoinColumn(name="id_usuario", nullable=false)
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="id_grupo", nullable=false)
-			}
-		)
-	private Set<Grupo> grupos;
 	
 	@OneToMany(mappedBy="usuario")
 	private Set<Consulta> consultas;
@@ -142,7 +132,7 @@ public class Usuario implements Serializable {
 			String licenciaMsds, String login, String nombre, String apellido,String segundoNombre, String segundoApellido,
 			long numeroCitasDiarias, String password, String sexo,
 			String telefono, long tiempoEstimadoEntreCitas,
-			String usuarioAuditoria, Especialidad especialidad, String unidad, Set<Grupo> grupos, boolean doctor) {
+			String usuarioAuditoria, Especialidad especialidad, String unidad, boolean doctor) {
 		super();
 		this.cedula = cedula;
 		this.direccion = direccion;
@@ -169,7 +159,6 @@ public class Usuario implements Serializable {
 		this.usuarioAuditoria = usuarioAuditoria;
 		this.especialidad = especialidad;
 		this.unidad = unidad;
-		this.grupos = grupos;
 		this.doctor = doctor;
 	}
 
@@ -348,14 +337,6 @@ public class Usuario implements Serializable {
 
 	public void setUnidad(String unidad) {
 		this.unidad = unidad;
-	}
-
-	public Set<Grupo> getGrupos() {
-		return grupos;
-	}
-
-	public void setGrupos(Set<Grupo> grupos) {
-		this.grupos = grupos;
 	}
 
 	public String getPrimerApellido() {

@@ -2,7 +2,6 @@ package interfacedaoInventario;
 
 import java.util.List;
 
-
 import modelo.inventario.F00021;
 import modelo.inventario.F00021PK;
 

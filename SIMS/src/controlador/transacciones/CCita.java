@@ -10,9 +10,7 @@ import java.util.List;
 import modelo.maestros.Cita;
 import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
-import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
-import modelo.transacciones.Consulta;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -34,11 +32,14 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 
+import security.modelo.Arbol;
 import arbol.CArbol;
+
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CCita extends CGenerico {

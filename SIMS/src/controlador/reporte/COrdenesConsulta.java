@@ -10,16 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import modelo.maestros.Especialista;
 import modelo.maestros.Examen;
-import modelo.maestros.Proveedor;
 import modelo.transacciones.ConsultaEspecialista;
 import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaServicioExterno;
-import modelo.transacciones.OrdenEspecialista;
-import modelo.transacciones.OrdenExamen;
-import modelo.transacciones.OrdenMedicina;
-import modelo.transacciones.OrdenServicioExterno;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -41,6 +35,7 @@ import org.zkoss.zul.Tab;
 
 import componentes.Botonera;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class COrdenesConsulta extends CGenerico {

@@ -14,7 +14,6 @@ import modelo.generico.Persona;
 import modelo.maestros.Familiar;
 import modelo.maestros.Paciente;
 import modelo.social.Ficha;
-import modelo.transacciones.Orden;
 
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
