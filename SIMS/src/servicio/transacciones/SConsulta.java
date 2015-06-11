@@ -6,11 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javassist.expr.NewArray;
 import modelo.maestros.Cargo;
-import modelo.maestros.CategoriaDiagnostico;
-import modelo.maestros.ClasificacionDiagnostico;
-import modelo.maestros.Diagnostico;
 import modelo.maestros.Empresa;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;

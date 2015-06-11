@@ -1,12 +1,11 @@
 package servicio.transacciones;
 
+import interfacedao.transacciones.IPacienteMedicinaDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import interfacedao.transacciones.IPacienteMedicinaDAO;
-
 import modelo.maestros.Paciente;
-import modelo.transacciones.ConsultaMedicina;
 import modelo.transacciones.PacienteMedicina;
 
 import org.springframework.beans.factory.annotation.Autowired;

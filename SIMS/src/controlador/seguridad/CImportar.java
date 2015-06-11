@@ -1,7 +1,6 @@
 package controlador.seguridad;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -46,7 +45,6 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.A;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
-import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
@@ -56,6 +54,7 @@ import org.zkoss.zul.Tabbox;
 import componentes.Botonera;
 import componentes.Mensaje;
 import componentes.Validador;
+
 import controlador.maestros.CGenerico;
 
 public class CImportar extends CGenerico {

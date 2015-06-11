@@ -14,9 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import modelo.maestros.Accidente;
 import modelo.maestros.Cargo;
-import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
 import modelo.maestros.Empresa;
 import modelo.maestros.Nomina;
@@ -51,7 +49,6 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Row;
-import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
@@ -59,6 +56,7 @@ import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CReposo extends CGenerico {

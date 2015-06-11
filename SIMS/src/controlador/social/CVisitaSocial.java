@@ -11,24 +11,16 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import modelo.maestros.Estado;
-import modelo.maestros.EstadoCivil;
 import modelo.maestros.Paciente;
-import modelo.maestros.Pais;
-import modelo.sha.Informe;
-import modelo.sha.PlanAccion;
 import modelo.social.ComposicionFamiliar;
 import modelo.social.VisitaSocial;
 
 import org.zkoss.util.media.Media;
-import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.CheckEvent;
-import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.UploadEvent;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
@@ -41,7 +33,6 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Spinner;

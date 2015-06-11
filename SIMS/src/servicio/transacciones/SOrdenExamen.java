@@ -1,12 +1,12 @@
 package servicio.transacciones;
 
+import interfacedao.transacciones.IOrdenExamenDAO;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import interfacedao.transacciones.IOrdenExamenDAO;
 import modelo.maestros.Proveedor;
-import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.Orden;
 import modelo.transacciones.OrdenExamen;
 

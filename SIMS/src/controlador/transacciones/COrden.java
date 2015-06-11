@@ -27,7 +27,6 @@ import modelo.maestros.Proveedor;
 import modelo.maestros.ProveedorExamen;
 import modelo.maestros.ProveedorServicio;
 import modelo.maestros.ServicioExterno;
-import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 import modelo.transacciones.Orden;
 import modelo.transacciones.OrdenEspecialista;
@@ -64,11 +63,14 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.West;
 
+import security.modelo.Arbol;
 import arbol.CArbol;
+
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class COrden extends CGenerico {

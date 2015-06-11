@@ -1,13 +1,13 @@
 package servicio.control;
 
+import interfacedao.control.IControlOrdenDAO;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import interfacedao.control.IControlOrdenDAO;
-import modelo.control.ControlConsulta;
 import modelo.control.ControlOrden;
 import modelo.maestros.Paciente;
 

@@ -9,7 +9,6 @@ import modelo.maestros.Consultorio;
 import modelo.maestros.Estado;
 import modelo.maestros.Paciente;
 import modelo.maestros.Proveedor;
-import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
@@ -25,6 +24,7 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
+import security.modelo.Arbol;
 import arbol.CArbol;
 
 import componentes.Botonera;

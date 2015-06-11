@@ -5,7 +5,6 @@ import java.util.List;
 
 import modelo.maestros.Especialista;
 import modelo.pk.OrdenEspecialistaId;
-import modelo.transacciones.ConsultaEspecialista;
 import modelo.transacciones.Orden;
 import modelo.transacciones.OrdenEspecialista;
 

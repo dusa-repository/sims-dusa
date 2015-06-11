@@ -4,13 +4,11 @@ import interfacedaoInventario.IF00021DAO;
 
 import java.util.List;
 
-
 import modelo.inventario.F00021;
 import modelo.inventario.F00021PK;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("SF00021")

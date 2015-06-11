@@ -3,14 +3,10 @@ package servicio.transacciones;
 import interfacedao.transacciones.IConsultaDiagnosticoDAO;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import modelo.maestros.Accidente;
-import modelo.maestros.CategoriaDiagnostico;
-import modelo.maestros.ClasificacionDiagnostico;
 import modelo.maestros.Diagnostico;
 import modelo.sha.Area;
 import modelo.transacciones.Consulta;

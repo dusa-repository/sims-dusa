@@ -3,7 +3,6 @@ package interfacedao.maestros;
 import java.util.List;
 
 import modelo.maestros.Familiar;
-import modelo.maestros.Paciente;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

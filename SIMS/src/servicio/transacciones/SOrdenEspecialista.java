@@ -1,12 +1,12 @@
 package servicio.transacciones;
 
+import interfacedao.transacciones.IOrdenEspecialistaDAO;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import interfacedao.transacciones.IOrdenEspecialistaDAO;
 import modelo.maestros.Especialista;
-import modelo.transacciones.ConsultaEspecialista;
 import modelo.transacciones.Orden;
 import modelo.transacciones.OrdenEspecialista;
 

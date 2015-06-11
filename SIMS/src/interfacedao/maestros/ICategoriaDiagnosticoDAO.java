@@ -3,7 +3,6 @@ package interfacedao.maestros;
 import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
-import modelo.maestros.ClasificacionDiagnostico;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

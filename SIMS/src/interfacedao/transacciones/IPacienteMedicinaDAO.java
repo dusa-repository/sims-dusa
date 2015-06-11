@@ -4,7 +4,6 @@ import java.util.List;
 
 import modelo.maestros.Paciente;
 import modelo.pk.PacienteMedicinaId;
-import modelo.transacciones.ConsultaMedicina;
 import modelo.transacciones.PacienteMedicina;
 
 import org.springframework.data.domain.Sort;

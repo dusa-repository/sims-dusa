@@ -9,7 +9,6 @@ import java.util.List;
 import modelo.maestros.Empresa;
 import modelo.maestros.EmpresaNomina;
 import modelo.maestros.Nomina;
-import modelo.transacciones.ConsultaMedicina;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

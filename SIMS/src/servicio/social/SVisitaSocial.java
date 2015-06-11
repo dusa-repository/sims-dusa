@@ -1,8 +1,9 @@
 package servicio.social;
 
+import interfacedao.social.IVisitaSocialDAO;
+
 import java.util.List;
 
-import interfacedao.social.IVisitaSocialDAO;
 import modelo.maestros.Paciente;
 import modelo.social.VisitaSocial;
 

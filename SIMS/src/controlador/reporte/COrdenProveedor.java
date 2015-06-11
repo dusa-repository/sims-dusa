@@ -13,9 +13,7 @@ import java.util.Map;
 
 import modelo.maestros.Especialista;
 import modelo.maestros.Examen;
-import modelo.maestros.Paciente;
 import modelo.maestros.Proveedor;
-import modelo.seguridad.Usuario;
 import modelo.transacciones.ConsultaEspecialista;
 import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaServicioExterno;
@@ -47,6 +45,7 @@ import org.zkoss.zul.Tab;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class COrdenProveedor extends CGenerico {

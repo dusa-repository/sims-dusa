@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.transacciones.ConsultaServicioExterno;
-import modelo.transacciones.OrdenEspecialista;
 import modelo.transacciones.OrdenServicioExterno;
 
 @Entity

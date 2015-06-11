@@ -1,12 +1,13 @@
 package servicio.maestros;
 
+import interfacedao.maestros.IPacienteDAO;
+import interfacedao.maestros.IPeriodoDAO;
+import interfacedao.maestros.IPeriodoPacienteDAO;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import interfacedao.maestros.IPacienteDAO;
-import interfacedao.maestros.IPeriodoDAO;
-import interfacedao.maestros.IPeriodoPacienteDAO;
 import modelo.maestros.Paciente;
 import modelo.maestros.Periodo;
 import modelo.maestros.PeriodoPaciente;

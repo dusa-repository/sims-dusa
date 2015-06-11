@@ -2,20 +2,13 @@ package controlador.reporte;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import modelo.maestros.Paciente;
 import modelo.maestros.Periodo;
 import modelo.maestros.PeriodoPaciente;
-import modelo.sha.Area;
-import modelo.transacciones.Consulta;
-import modelo.transacciones.ConsultaDiagnostico;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -40,6 +33,7 @@ import org.zkoss.zul.Textbox;
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CReporteCertificado extends CGenerico {

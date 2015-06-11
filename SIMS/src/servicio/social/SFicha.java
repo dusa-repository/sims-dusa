@@ -1,6 +1,5 @@
 package servicio.social;
 
-import interfacedao.social.IComposicionFamiliarDAO;
 import interfacedao.social.IFichaDAO;
 import modelo.maestros.Paciente;
 import modelo.social.Ficha;

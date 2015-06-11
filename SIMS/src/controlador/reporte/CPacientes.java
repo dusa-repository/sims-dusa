@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import modelo.maestros.Paciente;
-import modelo.seguridad.Usuario;
 import modelo.transacciones.PacienteMedicina;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -26,7 +25,6 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Radio;

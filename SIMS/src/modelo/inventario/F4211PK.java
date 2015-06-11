@@ -1,7 +1,9 @@
 package modelo.inventario;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  * The primary key class for the F4211 database table.

@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.mail.Address;
 import javax.mail.Authenticator;
@@ -46,6 +47,11 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.impl.InputElement;
 import org.zkoss.zul.impl.XulElement;
 
+import security.modelo.Grupo;
+import security.modelo.UsuarioSeguridad;
+import security.servicio.SArbol;
+import security.servicio.SGrupo;
+import security.servicio.SUsuarioSeguridad;
 import servicio.control.SControlConsulta;
 import servicio.control.SControlOrden;
 import servicio.inventario.SF00021;
@@ -92,8 +98,6 @@ import servicio.maestros.SRecipe;
 import servicio.maestros.SServicioExterno;
 import servicio.maestros.SUnidadMedicina;
 import servicio.maestros.SVacuna;
-import servicio.seguridad.SArbol;
-import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 import servicio.sha.SArea;
 import servicio.sha.SClasificacionAccidente;
@@ -132,6 +136,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	private static final long serialVersionUID = -2264423023637489596L;
 	@WireVariable("SHorasHombre")
 	protected SHorasHombre servicioHorasHombre;
+	@WireVariable("SUsuarioSeguridad")
+	protected SUsuarioSeguridad servicioUsuarioSeguridad;
 	@WireVariable("SFamiliar")
 	protected SFamiliar servicioFamiliar;
 	@WireVariable("SEstadoCivil")
@@ -770,6 +776,28 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 					}
 				}
 			}
+		}
+	}
+
+	public void guardarDatosSeguridad(Usuario usuarioLogica,
+			Set<Grupo> gruposUsuario) {
+		UsuarioSeguridad usuario = new UsuarioSeguridad(
+				usuarioLogica.getLogin(), usuarioLogica.getEmail(),
+				usuarioLogica.getPassword(), usuarioLogica.getImagen(), true,
+				usuarioLogica.getPrimerNombre(),
+				usuarioLogica.getPrimerApellido(), fechaHora, horaAuditoria,
+				nombreUsuarioSesion(), gruposUsuario);
+		servicioUsuarioSeguridad.guardar(usuario);
+	}
+
+	public void inhabilitarSeguridad(List<Usuario> list) {
+		for (int i = 0; i < list.size(); i++) {
+			UsuarioSeguridad usuario = servicioUsuarioSeguridad
+					.buscarPorLogin(list.get(i).getLogin());
+			usuario.setEstado(false);
+			servicioUsuarioSeguridad.guardar(usuario);
+			list.get(i).setEstado(false);
+			servicioUsuario.guardar(list.get(i));
 		}
 	}
 }

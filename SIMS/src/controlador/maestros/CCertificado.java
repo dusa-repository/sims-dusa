@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import modelo.maestros.Accidente;
 import modelo.maestros.Paciente;
 import modelo.maestros.Periodo;
 import modelo.maestros.PeriodoPaciente;

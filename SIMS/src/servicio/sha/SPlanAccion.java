@@ -1,8 +1,9 @@
 package servicio.sha;
 
+import interfacedao.sha.IPlanAccionDAO;
+
 import java.util.List;
 
-import interfacedao.sha.IPlanAccionDAO;
 import modelo.sha.Informe;
 import modelo.sha.PlanAccion;
 

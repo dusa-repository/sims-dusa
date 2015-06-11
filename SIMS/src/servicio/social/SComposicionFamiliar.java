@@ -1,8 +1,8 @@
 package servicio.social;
 
-import java.util.List;
-
 import interfacedao.social.IComposicionFamiliarDAO;
+
+import java.util.List;
 
 import modelo.social.ComposicionFamiliar;
 import modelo.social.VisitaSocial;

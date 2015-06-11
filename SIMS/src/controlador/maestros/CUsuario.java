@@ -14,8 +14,6 @@ import javax.imageio.ImageIO;
 
 import modelo.maestros.Cita;
 import modelo.maestros.Especialidad;
-import modelo.seguridad.Arbol;
-import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
 import org.zkoss.image.AImage;
@@ -42,8 +40,10 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
+import security.modelo.Arbol;
+import security.modelo.Grupo;
+import security.modelo.UsuarioSeguridad;
 import arbol.CArbol;
-
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;
@@ -281,7 +281,8 @@ public class CUsuario extends CGenerico {
 								login, nombre, apellido, nombre2, apellido2,
 								citas, password, sexo, telefono, tiempo,
 								nombreUsuarioSesion(), especialidad,
-								cmbUnidad.getValue(), gruposUsuario, doctor);
+								cmbUnidad.getValue(), doctor);
+						guardarDatosSeguridad(usuario, gruposUsuario);
 						servicioUsuario.guardar(usuario);
 						limpiar();
 						msj.mensajeInformacion(Mensaje.guardado);
@@ -306,7 +307,11 @@ public class CUsuario extends CGenerico {
 										if (!citas.isEmpty())
 											msj.mensajeError(Mensaje.noEliminar);
 										else {
-											servicioUsuario.eliminar(usuario);
+											List<Usuario> list = new ArrayList<Usuario>();
+											list.add(usuario);
+											inhabilitarSeguridad(list);
+											usuario.setEstado(false);
+											servicioUsuario.guardar(usuario);
 											limpiar();
 											msj.mensajeInformacion(Mensaje.eliminado);
 										}
@@ -414,12 +419,15 @@ public class CUsuario extends CGenerico {
 
 	/* LLena las listas dado un usario */
 	public void llenarListas(Usuario usuario) {
+		UsuarioSeguridad user = null;
+		if (usuario != null)
+			user = servicioUsuarioSeguridad.buscarPorLogin(usuario.getLogin());
 		gruposDisponibles = servicioGrupo.buscarTodos();
 		if (usuario == null) {
 			ltbGruposDisponibles.setModel(new ListModelList<Grupo>(
 					gruposDisponibles));
 		} else {
-			gruposOcupados = servicioGrupo.buscarGruposDelUsuario(usuario);
+			gruposOcupados = servicioGrupo.buscarGruposDelUsuario(user);
 			ltbGruposAgregados
 					.setModel(new ListModelList<Grupo>(gruposOcupados));
 			if (!gruposOcupados.isEmpty()) {
@@ -525,8 +533,8 @@ public class CUsuario extends CGenerico {
 	public void mostrarCatalogo() throws IOException {
 		final List<Usuario> usuarios = servicioUsuario.buscarTodos();
 		catalogo = new Catalogo<Usuario>(catalogoUsuario,
-				"Catalogo de Usuarios", usuarios,false, "Cedula", "Ficha", "Nombre",
-				"Apellido", "Doctor", "Login") {
+				"Catalogo de Usuarios", usuarios, false, "Cedula", "Ficha",
+				"Nombre", "Apellido", "Doctor", "Login") {
 
 			@Override
 			protected List<Usuario> buscar(String valor, String combo) {

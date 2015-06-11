@@ -12,7 +12,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import modelo.maestros.Cargo;
-import modelo.maestros.Cita;
 import modelo.maestros.Ciudad;
 import modelo.maestros.Empresa;
 import modelo.maestros.EstadoCivil;
@@ -20,11 +19,7 @@ import modelo.maestros.Familiar;
 import modelo.maestros.Medicina;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
-import modelo.seguridad.Arbol;
 import modelo.sha.Area;
-import modelo.sha.Informe;
-import modelo.transacciones.Consulta;
-import modelo.transacciones.ConsultaMedicina;
 import modelo.transacciones.PacienteMedicina;
 
 import org.zkoss.image.AImage;
@@ -40,14 +35,12 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
-import org.zkoss.zul.Groupbox;
 import org.zkoss.zul.Image;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
@@ -56,12 +49,15 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
+import security.modelo.Arbol;
 import arbol.CArbol;
+
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
 import componentes.Validador;
+
 import controlador.transacciones.CCambiarCedula;
 
 public class CPaciente extends CGenerico {

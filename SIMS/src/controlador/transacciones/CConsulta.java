@@ -37,7 +37,6 @@ import modelo.maestros.ProveedorServicio;
 import modelo.maestros.Recipe;
 import modelo.maestros.ServicioExterno;
 import modelo.maestros.Vacuna;
-import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
 import modelo.sha.GrupoInspectores;
@@ -71,7 +70,6 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Doublespinner;
@@ -97,14 +95,17 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.West;
 import org.zkoss.zul.Window;
 
+import security.modelo.Arbol;
 import servicio.maestros.SParteCuerpo;
 import servicio.maestros.SVacuna;
 import servicio.transacciones.SHistoriaVacuna;
 import arbol.CArbol;
+
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CConsulta extends CGenerico {

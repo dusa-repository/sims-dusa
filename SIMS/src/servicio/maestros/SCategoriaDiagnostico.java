@@ -5,7 +5,6 @@ import interfacedao.maestros.ICategoriaDiagnosticoDAO;
 import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
-import modelo.maestros.ClasificacionDiagnostico;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
