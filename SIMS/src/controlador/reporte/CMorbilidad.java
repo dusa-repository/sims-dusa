@@ -1249,16 +1249,16 @@ public class CMorbilidad extends CGenerico {
 		p.put("paciente", familiar);
 		p.put("data", new JRBeanCollectionDataSource(consutaDiag));
 
-		// List<Long> consuta = getServicioConsultaDiagnostico()
-		// .cantidadConsultas(consutaDiag);
-		// p.put("total", consuta.size());
-
-		for (int i = 0; i < consutaDiag.size(); i++) {
-			Consulta cons = consutaDiag.get(i).getConsulta();
-			Paciente paciente = cons.getPaciente();
-			paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
-
-		}
+//		// List<Long> consuta = getServicioConsultaDiagnostico()
+//		// .cantidadConsultas(consutaDiag);
+//		// p.put("total", consuta.size());
+//
+//		for (int i = 0; i < consutaDiag.size(); i++) {
+//			Consulta cons = consutaDiag.get(i).getConsulta();
+//			Paciente paciente = cons.getPaciente();
+//			paciente.setEdad(calcularEdad(paciente.getFechaNacimiento()));
+//
+//		}
 
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RMorbilidadPorDiagnostico.jasper"));

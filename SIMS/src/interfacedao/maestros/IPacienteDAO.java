@@ -213,6 +213,7 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 
 	List<Paciente> findByTrabajadorFalse(Pageable topTen);
 
+
 	@Query(value = "select * from paciente p where p.id_paciente in "
 			+ "(select c.id_paciente from consulta c where c.tipo_consulta_secundaria ='Pre-Vacacional' "
 			+ "and c.fecha_post_vacacional < CONVERT(datetime,GETDATE(),103) and not exists "
@@ -236,6 +237,12 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 	List<Paciente> findByTrabajadorFalseAndSegundoApellidoStartingWithAllIgnoreCase(
 			String valor);
 
+	@Query(value = "select * from Paciente p where p.edad between ?1 and ?2 and (select pp.id_empresa from Paciente pp where pp.id_paciente = p.cedulaFamiliar) like ?3 and p.sexo like ?4 "
+			+ " and p.parentescoFamiliar like ?5 and p.trabajador like ?6 and p.estatus = 1 " 
+			+ " order by p.id_empresa asc, p.cedulaFamiliar asc", nativeQuery = true)
+	List<Paciente> buscarPorEdadesEmpresaSexoFamiliares(int dea, int aa,
+			String empresa, String sexo, String parentesco, boolean b);
+	
 	
 //@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
 }
