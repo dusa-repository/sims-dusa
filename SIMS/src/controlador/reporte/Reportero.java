@@ -292,6 +292,9 @@ public class Reportero extends HttpServlet {
 				fichero = gastoCarga
 						.reporteResumenGasto(par6, par7, par8, tipo);
 				break;
+			case "57":
+				fichero = pacientes.reporteEmpresas(par6, par7, par8, par9,par10, tipo);
+				break;
 			default:
 				break;
 			}

@@ -983,4 +983,11 @@ public class SPaciente {
 
 		return 	pacienteDAO.findByTrabajadorTrueAndEstatusTrueAndSexoAndEdadBetween(string,i,j);
 	}
+
+	public List<Paciente> buscarPorEdadesEmpresaSexoParentescoFamiliares(int dea, int aa,
+			String empresa, String sexo, String parentesco, boolean b) {
+		// TODO Auto-generated method stub
+		return pacienteDAO.buscarPorEdadesEmpresaSexoFamiliares(dea,aa,empresa ,sexo,parentesco,b);
+	}
+
 }

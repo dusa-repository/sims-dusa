@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import modelo.maestros.Empresa;
 import modelo.maestros.Paciente;
 import modelo.transacciones.PacienteMedicina;
 import net.sf.jasperreports.engine.JRException;
@@ -27,6 +28,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Row;
@@ -50,9 +52,13 @@ public class CPacientes extends CGenerico {
 	@Wire
 	private Row rowEdad;
 	@Wire
+	private Row rowParentesco;
+	@Wire
 	private Row rowDiscapacitado;
 	@Wire
 	private Row rowFamiliar;
+	@Wire
+	private Row rowEmpresa;
 	@Wire
 	private Button btnBuscarTrabajador;
 	@Wire
@@ -85,6 +91,8 @@ public class CPacientes extends CGenerico {
 	private Radio rdoNo;
 	@Wire
 	private Radio rdoTodosDiscapacitado;
+	@Wire
+	private Combobox cmbEmpresa;
 
 	private String tipo = "";
 	private String titulo = "";
@@ -111,24 +119,46 @@ public class CPacientes extends CGenerico {
 		switch (titulo) {
 		case "Familiares":
 			rowTrabajador.setVisible(true);
+			rowParentesco.setVisible(true);
 			rowEdad.setVisible(true);
 			rowFamiliar.setVisible(false);
 			rowDiscapacitado.setVisible(false);
+			rowEmpresa.setVisible(false);
 			tipo = "1";
 			break;
 		case "Pacientes":
 			rowTrabajador.setVisible(false);
+			rowParentesco.setVisible(false);
 			rowEdad.setVisible(true);
 			rowFamiliar.setVisible(true);
 			rowDiscapacitado.setVisible(true);
 			tipo = "2";
+			rowEmpresa.setVisible(false);
 			break;
 		case "Pacientes Cronicos":
 			rowTrabajador.setVisible(false);
+			rowParentesco.setVisible(false);
 			rowEdad.setVisible(false);
 			rowFamiliar.setVisible(true);
 			rowDiscapacitado.setVisible(false);
+			rowEmpresa.setVisible(false);
 			tipo = "3";
+			break;
+		case "Familiares por Empresa":
+			rowTrabajador.setVisible(false);
+			rowEdad.setVisible(true);
+			rowFamiliar.setVisible(false);
+			rowDiscapacitado.setVisible(false);
+			rowEmpresa.setVisible(true);
+			rowParentesco.setVisible(true);
+			Empresa empresa = new Empresa();
+			empresa.setNombre("TODAS");
+			empresa.setIdEmpresa(0);
+			List<Empresa> empresas = new ArrayList<Empresa>();
+			empresas.add(empresa);
+			empresas.addAll(servicioEmpresa.buscarTodas());
+			cmbEmpresa.setModel(new ListModelList<Empresa>(empresas));
+			tipo = "4";
 			break;
 		}
 		Botonera botonera = new Botonera() {
@@ -147,6 +177,10 @@ public class CPacientes extends CGenerico {
 				case "3":
 					if (validarCronico())
 						reporteCronico();
+					break;
+				case "4":
+					if (validarEmpresa())
+						reporteEmpresa();
 					break;
 				}
 
@@ -167,7 +201,7 @@ public class CPacientes extends CGenerico {
 				rdoNo.setChecked(false);
 				rdoTodosDiscapacitado.setChecked(false);
 				lblTrabajador.setValue("");
-
+				cmbEmpresa.setValue("TODAS");
 
 			}
 
@@ -221,6 +255,17 @@ public class CPacientes extends CGenerico {
 				|| cmbSexo.getText().compareTo("") == 0
 				|| idTrabajador.equals("")) {
 			msj.mensajeError(Mensaje.camposVacios);
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean validarEmpresa() {
+		if (cmbEmpresa.getText().compareTo("") == 0
+				|| spnA.getText().compareTo("") == 0
+				|| spnDe.getText().compareTo("") == 0
+				|| cmbSexo.getText().compareTo("") == 0) {
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		}
 		return true;
@@ -900,6 +945,156 @@ public class CPacientes extends CGenerico {
 		lblTrabajador.setValue(trabajador.getPrimerNombre() + " "
 				+ trabajador.getPrimerApellido());
 		catalogo.setParent(null);
+	}
+
+	private void reporteEmpresa() {
+		String sexo = "";
+		String parentesco = "";
+		int dea = spnDe.getValue();
+		int aa = spnA.getValue();
+		String de = String.valueOf(spnDe.getValue());
+		String a = String.valueOf(spnA.getValue());
+		
+		if (cmbSexo.getValue().equals("TODOS"))
+			sexo="%";
+		else
+			sexo = cmbSexo.getValue();
+		
+		if (cmbParentesco.getValue().equals("TODOS"))
+			parentesco="%";
+		else
+			parentesco = cmbParentesco.getValue();
+		
+		String empresa = "";
+		if (cmbEmpresa.getValue().equals("TODAS"))
+			empresa = "%";
+		else 
+			empresa = cmbEmpresa.getSelectedItem().getContext();
+
+
+		String tipoReporte = cmbTipo.getValue();	
+
+		if (getServicioPaciente().buscarPorEdadesEmpresaSexoParentescoFamiliares(dea, aa,empresa,sexo,parentesco, false)
+				.isEmpty())
+				msj.mensajeAlerta(Mensaje.noHayRegistros);
+			else
+			{
+				if (sexo.equals("%"))
+					sexo = "TODOS";
+				if (empresa.equals("%"))
+					empresa = "TODAS";
+				if (parentesco.equals("%"))
+					parentesco = "TODOS";
+				
+				Clients.evalJavaScript("window.open('"
+						+ damePath()
+						+ "Reportero?valor=57&valor6="
+						+ de
+						+ "&valor7="
+						+ a
+						+ "&valor8="
+						+ sexo
+						+ "&valor9="
+						+ empresa
+						+ "&valor10="
+						+ parentesco
+						+ "&valor20="
+						+ tipoReporte
+						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+		
+			}
+	}
+
+	public byte[] reporteEmpresas(String de, String a, String sexo,
+			String empresa,String parentesco, String tipoReporte)
+			throws JRException {
+		byte[] fichero = null;
+		int dea = Integer.valueOf(de);
+		int aa = Integer.valueOf(a);
+
+
+		if (sexo.equals("TODOS"))
+			sexo = "%";
+		if (empresa.equals("TODAS"))
+			empresa = "%";
+		if (parentesco.equals("TODOS"))
+			parentesco = "%";
+		
+		List<Paciente> pacientes = getServicioPaciente().buscarPorEdadesEmpresaSexoParentescoFamiliares(dea, aa,empresa,sexo, parentesco,false);
+			
+		for (int i = 0; i < pacientes.size(); i++) {
+
+			Paciente paci = pacientes.get(i);
+			Paciente trabaja = getServicioPaciente().buscarPorCedula(
+					paci.getCedulaFamiliar());
+			if (trabaja != null)
+			{
+				paci.setCondicion(trabaja.getPrimerNombre() + " "
+						+ trabaja.getPrimerApellido());
+				paci.setFicha(trabaja.getFicha());
+				if(trabaja.getEmpresa()!=null)
+				paci.setCertificado(trabaja.getEmpresa().getNombre());
+			}
+			else {
+				pacientes.remove(i);
+				i--;
+			}
+		}
+		
+		if (empresa.equals("%"))
+			empresa = "TODAS";
+		else 
+			empresa = getServicioEmpresa().buscar(Long.valueOf(empresa)).getNombre();
+		if (parentesco.equals("%"))
+			parentesco = "TODOS";
+
+		Map p = new HashMap();
+		p.put("de", de);
+		p.put("a", a);
+		p.put("empresa", empresa);
+		p.put("parentesco", parentesco);
+		
+		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+				.getResource("/reporte/RFamiliaresEmpresa.jasper"));
+		if (tipoReporte.equals("EXCEL")) {
+
+			JasperPrint jasperPrint = null;
+			try {
+				jasperPrint = JasperFillManager.fillReport(reporte, p,
+						new JRBeanCollectionDataSource(pacientes));
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ByteArrayOutputStream xlsReport = new ByteArrayOutputStream();
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, xlsReport);
+			try {
+				exporter.exportReport();
+			} catch (JRException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return xlsReport.toByteArray();
+		} else {
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(pacientes));
+			return fichero;
+		}
+
+	}
+
+	/* Llena el combo de Empresas cada vez que se abre */
+	@Listen("onOpen = #cmbEmpresa")
+	public void llenarComboEmpresa() {
+		Empresa empresa = new Empresa();
+		empresa.setNombre("TODAS");
+		empresa.setIdEmpresa(0);
+		List<Empresa> empresas = new ArrayList<Empresa>();
+		empresas.add(empresa);
+		empresas.addAll(servicioEmpresa.buscarTodas());
+		cmbEmpresa.setModel(new ListModelList<Empresa>(empresas));
 	}
 
 }

@@ -1,7 +1,8 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divRPacientes" apply="controlador.reporte.CPacientes">
-		<groupbox width="75%" mold="3d" title="Reporte de Pacientes y/o Familiares">
+		<groupbox width="75%" mold="3d"
+			title="Reporte de Pacientes y/o Familiares">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="20%" />
@@ -27,29 +28,10 @@
 							<button id="btnBuscarTrabajador" label="Buscar" class="btn"
 								image="/public/imagenes/botones/buscar.png" />
 						</cell>
-						<hbox>
-							<label class="etiqueta" value="Parentesco:" />
-							<space />
-							<label value="*" style="font-weight:bold;color:red" />
-						</hbox>
-						<combobox tooltiptext="Seleccione un Parentesco"
-							placeholder="Seleccione un Parentesco" id="cmbParentesco" width="100%"
-							readonly="true" value="TODOS">
-							<comboitem label="TODOS" />
-							<comboitem label="Hermano(a)" />
-							<comboitem label="Conyuge" />
-							<comboitem label="Concubino(a)" />
-							<comboitem label="Hijastro(a)" />
-							<comboitem label="Hijo(a)" />
-							<comboitem label="Padre" />
-							<comboitem label="Madre" />
-							<comboitem label="Nieto(a)" />
-							<comboitem label="Yerno/Nuera" />
-							<comboitem label="Suegro(a)" />
-							<comboitem label="Abuelo(a)" />
-							<comboitem label="Otro" />
-						</combobox>
+						<hbox />
+						<hbox />
 					</row>
+			
 					<row id="rowEdad">
 						<hbox>
 							<label class="etiqueta" value="Grupo Etario:" />
@@ -74,6 +56,36 @@
 							<comboitem label="Femenino" />
 							<comboitem label="Masculino" />
 						</combobox>
+					</row>
+							<row id="rowParentesco">
+						<hbox>
+							<label class="etiqueta" value="Parentesco:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<cell colspan="3">
+							<combobox tooltiptext="Seleccione un Parentesco"
+								placeholder="Seleccione un Parentesco" id="cmbParentesco" width="100%"
+								readonly="true" value="TODOS">
+								<comboitem label="TODOS" />
+								<comboitem label="Hermano(a)" />
+								<comboitem label="Conyuge" />
+								<comboitem label="Concubino(a)" />
+								<comboitem label="Hijastro(a)" />
+								<comboitem label="Hijo(a)" />
+								<comboitem label="Padre" />
+								<comboitem label="Madre" />
+								<comboitem label="Nieto(a)" />
+								<comboitem label="Yerno/Nuera" />
+								<comboitem label="Suegro(a)" />
+								<comboitem label="Abuelo(a)" />
+								<comboitem label="Otro" />
+							</combobox>
+						</cell>
+						<hbox />
+						<hbox />
+						<hbox />
+						<hbox />
 					</row>
 					<row id="rowDiscapacitado">
 						<cell colspan="2">
@@ -122,6 +134,24 @@
 								</radiogroup>
 							</hbox>
 						</cell>
+					</row>
+					<row id="rowEmpresa">
+						<hbox>
+							<label class="etiqueta" value="Empresa:" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<cell colspan="5">
+							<combobox hflex="1" id="cmbEmpresa" value="TODAS"
+								placeholder="Seleccione una Empresa" readonly="true"
+								tooltiptext="Seleccione una Empresa" width="100%">
+								<template name="model">
+									<comboitem label="${each.nombre}" context="${each.idEmpresa}" />
+								</template>
+							</combobox>
+						</cell>
+						<hbox />
+						<hbox />
 					</row>
 					<row>
 						<hbox>
