@@ -18,4 +18,6 @@ public interface IAreaDAO extends JpaRepository<Area, Long> {
 
 	Area findByCodigo(String value);
 
+	List<Area> findByCodigoStartingWithAllIgnoreCase(String valor);
+
 }

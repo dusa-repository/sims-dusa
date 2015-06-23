@@ -183,7 +183,6 @@ public class CDiagnostico extends CGenerico {
 	public boolean validar() {
 		if (txtNombreDiagnostico.getText().compareTo("") == 0
 				|| txtCodigoDiagnostico.getText().compareTo("") == 0
-				|| txtGrupoDiagnostico.getText().compareTo("") == 0
 				|| cmbCategoria.getText().compareTo("") == 0
 				|| (!rdoNoEpi.isChecked() && !rdoSiEpi.isChecked())) {
 			msj.mensajeError(Mensaje.camposVacios);
