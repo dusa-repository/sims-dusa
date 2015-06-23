@@ -46,4 +46,8 @@ public class SArea {
 	public void guardarVarios(List<Area> areas) {
 		areaDAO.save(areas);
 	}
+
+	public List<Area> filtroCodigo(String valor) {
+		return areaDAO.findByCodigoStartingWithAllIgnoreCase(valor);
+	}
 }

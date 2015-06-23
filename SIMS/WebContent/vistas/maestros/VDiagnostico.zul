@@ -32,11 +32,7 @@
 						<hbox />
 					</row>
 					<row>
-						<hbox>
-							<label class="etiqueta" value="Grupo:" />
-							<space />
-							<label value="*" style="font-weight:bold;color:red" />
-						</hbox>
+						<label class="etiqueta" value="Grupo:" />
 						<textbox id="txtGrupoDiagnostico" hflex="1" maxlength="50"
 							tooltiptext="Ingrese el Grupo del Diagnostico" />
 						<hbox />
@@ -66,7 +62,7 @@
 									label="${each.nombre}" />
 							</template>
 						</combobox>
-						<button class="abrir"  id="btnAbrirCategoria" label=""
+						<button class="abrir" id="btnAbrirCategoria" label=""
 							tooltiptext="Crear una Nueva Categoria de Diagnostico" image="/public/imagenes/botones/agregar.png" />
 					</row>
 				</rows>

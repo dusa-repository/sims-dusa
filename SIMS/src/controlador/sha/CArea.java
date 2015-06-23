@@ -146,13 +146,15 @@ public class CArea extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Area> areas = servicioArea.buscarTodos();
 		catalogo = new Catalogo<Area>(catalogoArea, "Catalogo de Areas", areas,false,
-				"Nombre") {
+				"Codigo","Nombre") {
 
 			@Override
 			protected List<Area> buscar(String valor, String combo) {
 				switch (combo) {
 				case "Nombre":
 					return servicioArea.filtroNombre(valor);
+				case "Codigo":
+					return servicioArea.filtroCodigo(valor);
 				default:
 					return areas;
 				}
@@ -160,8 +162,9 @@ public class CArea extends CGenerico {
 
 			@Override
 			protected String[] crearRegistros(Area area) {
-				String[] registros = new String[1];
-				registros[0] = area.getNombre();
+				String[] registros = new String[2];
+				registros[0] = area.getCodigo();
+				registros[1] = area.getNombre();
 				return registros;
 			}
 		};
