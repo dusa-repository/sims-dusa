@@ -11,7 +11,11 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-import modelo.seguridad.Usuario;
+import modelo.seguridad.Arbol;
+import modelo.seguridad.Grupo;
+import modelo.seguridad.MArbol;
+import modelo.seguridad.Nodos;
+import modelo.seguridad.UsuarioSeguridad;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -38,11 +42,6 @@ import org.zkoss.zul.TreeModel;
 import org.zkoss.zul.Treecell;
 import org.zkoss.zul.West;
 
-import security.modelo.Arbol;
-import security.modelo.Grupo;
-import security.modelo.MArbol;
-import security.modelo.Nodos;
-import security.modelo.UsuarioSeguridad;
 import componentes.Validador;
 import controlador.maestros.CGenerico;
 
@@ -204,16 +203,12 @@ public class CArbol extends CGenerico {
 			long item = Long.valueOf(celda.getId());
 			boolean abrir = true;
 			Tab taba = new Tab();
-			// if (arbolMenu.getSelectedItem().getLevel() > 0) {
 			final Arbol arbolItem = servicioArbol.buscarPorId(item);
+			mapGeneral.put("titulo", arbolItem.getNombre());
 			if (!arbolItem.getUrl().equals("inicio")) {
-				mapGeneral.put("titulo", arbolItem.getNombre());
-				if (String.valueOf(arbolMenu.getSelectedItem().getValue())
-						.equals("Consulta")
-						|| String.valueOf(
-								arbolMenu.getSelectedItem().getValue()).equals(
-								"Ordenes"))
-					west.setOpen(false);
+				if (arbolItem.getMenu() != null)
+					if (arbolItem.getMenu())
+						west.setOpen(false);
 				for (int i = 0; i < tabs.size(); i++) {
 					if (tabs.get(i).getLabel().equals(arbolItem.getNombre())) {
 						abrir = false;
@@ -232,11 +227,6 @@ public class CArbol extends CGenerico {
 								@Override
 								public void onEvent(Event arg0)
 										throws Exception {
-									if (arbolItem.getNombre()
-											.equals("Consulta")
-											|| arbolItem.getNombre().equals(
-													"Ordenes"))
-										west.setOpen(true);
 									for (int i = 0; i < tabs.size(); i++) {
 										if (tabs.get(i).getLabel()
 												.equals(arbolItem.getNombre())) {
@@ -245,9 +235,11 @@ public class CArbol extends CGenerico {
 												tabs.get(i - 1).setSelected(
 														true);
 											}
-
 											tabs.get(i).close();
 											tabs.remove(i);
+											if (tabs.isEmpty())
+												if (!west.isOpen())
+													west.setOpen(true);
 										}
 									}
 								}
@@ -259,20 +251,19 @@ public class CArbol extends CGenerico {
 					newTabpanel.setParent(tabBox.getTabpanels());
 					tabs.add(newTab);
 					mapGeneral.put("tabsGenerales", tabs);
-					mapGeneral.put("nombre", arbolItem.getNombre());
+					mapGeneral.put("idArbol", arbolItem.getIdArbol());
 					mapGeneral.put("west", west);
 					Sessions.getCurrent().setAttribute("mapaGeneral",
 							mapGeneral);
-				} else {
+				} else
 					taba.setSelected(true);
-				}
-				// }
 			} else {
 				if (!arbolMenu.getSelectedItem().isOpen())
 					arbolMenu.getSelectedItem().setOpen(true);
 				else
 					arbolMenu.getSelectedItem().setOpen(false);
 			}
+
 		}
 		tabBox2 = tabBox;
 		contenido2 = contenido;

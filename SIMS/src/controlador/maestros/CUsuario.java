@@ -14,7 +14,10 @@ import javax.imageio.ImageIO;
 
 import modelo.maestros.Cita;
 import modelo.maestros.Especialidad;
+import modelo.seguridad.Arbol;
+import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
+import modelo.seguridad.UsuarioSeguridad;
 
 import org.zkoss.image.AImage;
 import org.zkoss.util.media.Media;
@@ -40,10 +43,8 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
-import security.modelo.Arbol;
-import security.modelo.Grupo;
-import security.modelo.UsuarioSeguridad;
 import arbol.CArbol;
+
 import componentes.Botonera;
 import componentes.Catalogo;
 import componentes.Mensaje;

@@ -7,6 +7,7 @@ import java.util.List;
 
 import modelo.maestros.CategoriaDiagnostico;
 import modelo.maestros.Diagnostico;
+import modelo.seguridad.Arbol;
 import modelo.transacciones.ConsultaDiagnostico;
 
 import org.zkoss.zk.ui.Sessions;
@@ -25,7 +26,6 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
-import security.modelo.Arbol;
 import arbol.CArbol;
 
 import componentes.Botonera;

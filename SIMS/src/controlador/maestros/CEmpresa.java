@@ -11,6 +11,7 @@ import modelo.maestros.Empresa;
 import modelo.maestros.EmpresaNomina;
 import modelo.maestros.Nomina;
 import modelo.maestros.Paciente;
+import modelo.seguridad.Arbol;
 import modelo.sha.Informe;
 
 import org.zkoss.zk.ui.Sessions;
@@ -30,7 +31,6 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
-import security.modelo.Arbol;
 import arbol.CArbol;
 
 import componentes.Botonera;

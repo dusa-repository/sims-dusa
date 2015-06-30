@@ -37,6 +37,7 @@ import modelo.maestros.ProveedorServicio;
 import modelo.maestros.Recipe;
 import modelo.maestros.ServicioExterno;
 import modelo.maestros.Vacuna;
+import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 import modelo.sha.Area;
 import modelo.sha.GrupoInspectores;
@@ -95,7 +96,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.West;
 import org.zkoss.zul.Window;
 
-import security.modelo.Arbol;
 import servicio.maestros.SParteCuerpo;
 import servicio.maestros.SVacuna;
 import servicio.transacciones.SHistoriaVacuna;

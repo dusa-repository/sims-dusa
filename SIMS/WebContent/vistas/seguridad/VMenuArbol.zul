@@ -1,6 +1,6 @@
 <zk>
 	<style src="../public/Estilo.css" />
-	<div id="divVMenuArbol" apply="security.controlador.CMenuArbol">
+	<div id="divVMenuArbol" apply="controlador.seguridad.CMenuArbol">
 		<groupbox width="auto" mold="3d" title="Menu Arbol (VMenuArbol)">
 			<div id="botoneraMenuArbol" />
 			<separator />

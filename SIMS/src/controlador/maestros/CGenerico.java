@@ -26,7 +26,9 @@ import javax.mail.internet.MimeMessage;
 import modelo.inventario.F00021;
 import modelo.inventario.F00021PK;
 import modelo.maestros.Paciente;
+import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
+import modelo.seguridad.UsuarioSeguridad;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -44,14 +46,10 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
+import org.zkoss.zul.West;
 import org.zkoss.zul.impl.InputElement;
 import org.zkoss.zul.impl.XulElement;
 
-import security.modelo.Grupo;
-import security.modelo.UsuarioSeguridad;
-import security.servicio.SArbol;
-import security.servicio.SGrupo;
-import security.servicio.SUsuarioSeguridad;
 import servicio.control.SControlConsulta;
 import servicio.control.SControlOrden;
 import servicio.inventario.SF00021;
@@ -98,7 +96,10 @@ import servicio.maestros.SRecipe;
 import servicio.maestros.SServicioExterno;
 import servicio.maestros.SUnidadMedicina;
 import servicio.maestros.SVacuna;
+import servicio.seguridad.SArbol;
+import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
+import servicio.seguridad.SUsuarioSeguridad;
 import servicio.sha.SArea;
 import servicio.sha.SClasificacionAccidente;
 import servicio.sha.SCondicion;
@@ -128,6 +129,7 @@ import servicio.transacciones.SOrdenExamen;
 import servicio.transacciones.SOrdenMedicina;
 import servicio.transacciones.SOrdenServicioExterno;
 import servicio.transacciones.SPacienteMedicina;
+
 import componentes.Mensaje;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -293,7 +295,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	@WireVariable("SFicha")
 	protected SFicha servicioFicha;
 	public String titulo;
-	
+	public West west;
 	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 			"/META-INF/ConfiguracionAplicacion.xml");
 	public Mensaje msj = new Mensaje();
