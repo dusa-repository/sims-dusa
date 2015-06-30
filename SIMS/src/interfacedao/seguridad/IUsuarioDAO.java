@@ -7,8 +7,6 @@ import modelo.seguridad.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import security.modelo.Grupo;
-
 public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 
 	Usuario findByLogin(String nombre);

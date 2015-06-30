@@ -13,6 +13,7 @@ import modelo.maestros.Ciudad;
 import modelo.maestros.EstadoCivil;
 import modelo.maestros.Familiar;
 import modelo.maestros.Paciente;
+import modelo.seguridad.Arbol;
 import modelo.social.Ficha;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperReport;
@@ -40,7 +41,6 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
-import security.modelo.Arbol;
 import arbol.CArbol;
 
 import componentes.Botonera;

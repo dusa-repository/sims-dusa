@@ -1,6 +1,6 @@
 <zk>
 	<style src="/public/Estilo.css" />
-	<div apply="security.controlador.CEditarUsuario" id="divEditarUsuario">
+	<div apply="controlador.seguridad.CEditarUsuario" id="divEditarUsuario">
 		<groupbox width="52%" mold="3d" title="Editar Usuario">
 			<grid width="100%">
 				<columns visible="false">

@@ -12,6 +12,7 @@ import modelo.maestros.Proveedor;
 import modelo.maestros.ProveedorExamen;
 import modelo.maestros.ProveedorServicio;
 import modelo.maestros.ServicioExterno;
+import modelo.seguridad.Arbol;
 import modelo.transacciones.ConsultaExamen;
 import modelo.transacciones.ConsultaServicioExterno;
 
@@ -39,7 +40,6 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
-import security.modelo.Arbol;
 import arbol.CArbol;
 
 import com.csvreader.CsvReader;

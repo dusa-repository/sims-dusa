@@ -13,6 +13,7 @@ import modelo.maestros.MedicinaPresentacionUnidad;
 import modelo.maestros.PresentacionComercial;
 import modelo.maestros.PresentacionMedicina;
 import modelo.maestros.UnidadMedicina;
+import modelo.seguridad.Arbol;
 import modelo.transacciones.ConsultaMedicina;
 
 import org.zkoss.zk.ui.Sessions;
@@ -33,7 +34,6 @@ import org.zkoss.zul.Tab;
 import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 
-import security.modelo.Arbol;
 import arbol.CArbol;
 
 import componentes.Botonera;

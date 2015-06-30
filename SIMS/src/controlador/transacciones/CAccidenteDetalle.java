@@ -10,6 +10,7 @@ import java.util.List;
 import modelo.generico.DetalleAccidente;
 import modelo.maestros.Accidente;
 import modelo.maestros.Diagnostico;
+import modelo.seguridad.Arbol;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -26,7 +27,6 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-import security.modelo.Arbol;
 import arbol.CArbol;
 
 import componentes.Botonera;

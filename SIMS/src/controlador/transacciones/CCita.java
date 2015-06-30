@@ -10,6 +10,7 @@ import java.util.List;
 import modelo.maestros.Cita;
 import modelo.maestros.MotivoCita;
 import modelo.maestros.Paciente;
+import modelo.seguridad.Arbol;
 import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.Sessions;
@@ -32,7 +33,6 @@ import org.zkoss.zul.Tabbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 
-import security.modelo.Arbol;
 import arbol.CArbol;
 
 import componentes.Botonera;
