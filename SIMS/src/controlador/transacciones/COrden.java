@@ -1973,57 +1973,65 @@ public class COrden extends CGenerico {
 		String nombreEmpresa = "DESTILERIAS UNIDAS 	S.A.";
 		String direccionEmpresa = "";
 		String rifEmpresa = "J-30940783-0";
-		if (paciente.getEmpresa() != null) {
-			nombreEmpresa = paciente.getEmpresa().getNombre();
-			direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
-			rifEmpresa = paciente.getEmpresa().getRif();
+		
+		if (paciente!=null)
+		{
+			
+			if (paciente.getEmpresa() != null) {
+				nombreEmpresa = paciente.getEmpresa().getNombre();
+				direccionEmpresa = paciente.getEmpresa().getDireccionCentro();
+				rifEmpresa = paciente.getEmpresa().getRif();
+			}
+
+			p.put("empresaNombre", nombreEmpresa);
+			p.put("empresaDireccion", direccionEmpresa);
+			p.put("empresaRif", rifEmpresa);
+			p.put("pacienteNombre",
+					paciente.getPrimerNombre() + "   "
+							+ paciente.getSegundoNombre());
+			p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
+					+ paciente.getSegundoApellido());
+			p.put("pacienteCedula", paciente.getCedula());
+			p.put("edad",
+					String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
+			p.put("pacienteSexo", paciente.getSexo());
+			p.put("doctorNombre", orden.getDoctor());
+			p.put("doctorApellido", "");
+			p.put("doctorCedula", "");
+			p.put("especialidad", especialistaConsulta.getEspecialista()
+					.getEspecialidad().getDescripcion());
+			p.put("especialistaDireccion", especialistaConsulta.getEspecialista()
+					.getDireccion());
+			p.put("especialistaTelefono", especialistaConsulta.getEspecialista()
+					.getTelefono());
+			p.put("empresaDireccion", direccionEmpresa);
+			p.put("especialistaNombre", especialistaConsulta.getEspecialista()
+					.getNombre());
+			p.put("especialistaApellido", especialistaConsulta.getEspecialista()
+					.getApellido());
+			p.put("enfermedad", especialistaConsulta.getObservacion());
+			p.put("observacion", especialistaConsulta.getObservacion());
+			p.put("prioridad", especialistaConsulta.getPrioridad());
+			p.put("cedula", paciente.getCedula());
+
+			p.put("mostrar", "si");
+			Usuario usuario = new Usuario();
+			String u = "";
+			if (getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria()) != null) {
+				usuario = getServicioUsuario().buscarPorLogin(
+						orden.getUsuarioAuditoria());
+				u = usuario.getPrimerNombre() + "  " + usuario.getPrimerApellido();
+			}
+			p.put("usuario", u);
+
+			JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
+					.getResource("/reporte/RRecipeEspecialista.jasper"));
+			fichero = JasperRunManager.runReportToPdf(reporte, p,
+					new JRBeanCollectionDataSource(lista));
+			
 		}
-
-		p.put("empresaNombre", nombreEmpresa);
-		p.put("empresaDireccion", direccionEmpresa);
-		p.put("empresaRif", rifEmpresa);
-		p.put("pacienteNombre",
-				paciente.getPrimerNombre() + "   "
-						+ paciente.getSegundoNombre());
-		p.put("pacienteApellido", paciente.getPrimerApellido() + "   "
-				+ paciente.getSegundoApellido());
-		p.put("pacienteCedula", paciente.getCedula());
-		p.put("edad",
-				String.valueOf(calcularEdad(paciente.getFechaNacimiento())));
-		p.put("pacienteSexo", paciente.getSexo());
-		p.put("doctorNombre", orden.getDoctor());
-		p.put("doctorApellido", "");
-		p.put("doctorCedula", "");
-		p.put("especialidad", especialistaConsulta.getEspecialista()
-				.getEspecialidad().getDescripcion());
-		p.put("especialistaDireccion", especialistaConsulta.getEspecialista()
-				.getDireccion());
-		p.put("especialistaTelefono", especialistaConsulta.getEspecialista()
-				.getTelefono());
-		p.put("empresaDireccion", direccionEmpresa);
-		p.put("especialistaNombre", especialistaConsulta.getEspecialista()
-				.getNombre());
-		p.put("especialistaApellido", especialistaConsulta.getEspecialista()
-				.getApellido());
-		p.put("enfermedad", especialistaConsulta.getObservacion());
-		p.put("observacion", especialistaConsulta.getObservacion());
-		p.put("prioridad", especialistaConsulta.getPrioridad());
-		p.put("cedula", paciente.getCedula());
-
-		p.put("mostrar", "si");
-		Usuario usuario = new Usuario();
-		String u = "";
-		if (getServicioUsuario().buscarPorLogin(orden.getUsuarioAuditoria()) != null) {
-			usuario = getServicioUsuario().buscarPorLogin(
-					orden.getUsuarioAuditoria());
-			u = usuario.getPrimerNombre() + "  " + usuario.getPrimerApellido();
-		}
-		p.put("usuario", u);
-
-		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
-				.getResource("/reporte/RRecipeEspecialista.jasper"));
-		fichero = JasperRunManager.runReportToPdf(reporte, p,
-				new JRBeanCollectionDataSource(lista));
+		
+	
 		return fichero;
 	}
 
