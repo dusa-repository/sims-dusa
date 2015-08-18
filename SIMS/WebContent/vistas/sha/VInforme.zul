@@ -31,7 +31,7 @@
 					<tab tooltip="seccion" label="Seccion 8" id="tab8" />
 					<tab tooltip="seccion" label="Seccion 9" id="tab9" />
 					<tab tooltip="seccion" label="Plan de Accion" id="tab10" />
-					<tab label="Plan de Accion Inspector Insapsel" id="tab11" />
+					<tab label="Plan de Accion Inspector Inpsasel" id="tab11" />
 					<tab label="Imagenes" id="tab12" />
 				</tabs>
 				<tabpanels>
@@ -169,7 +169,7 @@
 									<cell colspan="8">
 										<hbox>
 											<label class="etiqueta"
-												value="DATOS DE LA EMPRESA PARA LA CUAL LABORA / LABORABA LA/EL TRABAJADORA / TABAJADOR - ACCIDENTADO / ACCIDENTADA " />
+												value="DATOS DE LA EMPRESA PARA LA CUAL LABORA / LABORABA LA/EL TRABAJADORA / TRABAJADOR - ACCIDENTADO / ACCIDENTADA " />
 											<space />
 											<label value="*" style="font-weight:bold;color:red" />
 										</hbox>

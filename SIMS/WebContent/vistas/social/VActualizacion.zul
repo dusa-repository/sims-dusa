@@ -223,7 +223,7 @@
 								<div align="center">
 									<button class="btn" height="40px" width="70px" label="Desactivar"
 										id="btnDesactivar" image="/public/imagenes/botones/anular.png"
-										tooltiptext="Seleccione un Registro para ver la Solicitud de orden" />
+										tooltiptext="Presione para desactivar una carga" />
 									<button class="abrir" id="btnAbrir" label="" width="70px"
 										tooltiptext="Crear nueva Carga" image="/public/imagenes/botones/agregar.png" />
 									<button class="abrir" id="btnRefrescar" label="" width="70px"

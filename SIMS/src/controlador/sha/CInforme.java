@@ -1092,7 +1092,6 @@ public class CInforme extends CGenerico {
 					Informe informe = new Informe();
 					informe.setIdInforme(idInforme);
 					informe.setCodigo(txt1.getValue());
-					informe.setCodigo(txt1.getValue());
 					informe.setFuncionario(txtFuncionario.getValue());
 					informe.setOrdenamientos(txtOrdenamientos.getValue());
 					Date fecha2 = dtbFechaVisita.getValue();
@@ -1728,10 +1727,10 @@ public class CInforme extends CGenerico {
 			protected String[] crearRegistros(Paciente objeto) {
 				String[] registros = new String[5];
 				registros[0] = objeto.getCedula();
-				registros[2] = objeto.getPrimerNombre();
-				registros[3] = objeto.getSegundoNombre();
-				registros[4] = objeto.getPrimerApellido();
-				registros[5] = objeto.getSegundoApellido();
+				registros[1] = objeto.getPrimerNombre();
+				registros[2] = objeto.getSegundoNombre();
+				registros[3] = objeto.getPrimerApellido();
+				registros[4] = objeto.getSegundoApellido();
 				return registros;
 			}
 
