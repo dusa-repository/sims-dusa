@@ -1038,9 +1038,9 @@ public class CInforme extends CGenerico {
 		Integer c2 = servicioInforme.buscarMaxCodigo();
 		String c = String.valueOf(c2);
 		int n = c.length();
-		String nro ="";
+		String nro = "";
 		for (int i = 4; i < n; i++) {
-			nro = nro+c.charAt(i);
+			nro = nro + c.charAt(i);
 		}
 		Integer co = Integer.parseInt(nro);
 		String finaal = String.valueOf(co + 1);
@@ -1059,9 +1059,9 @@ public class CInforme extends CGenerico {
 				Integer c2 = servicioInforme.buscarMaxCodigo();
 				String c = String.valueOf(c2);
 				int n = c.length();
-				String nro ="";
+				String nro = "";
 				for (int i = 4; i < n; i++) {
-					nro = nro+c.charAt(i);
+					nro = nro + c.charAt(i);
 				}
 				Integer co = Integer.parseInt(nro);
 				String finaal = String.valueOf(co + 1);
