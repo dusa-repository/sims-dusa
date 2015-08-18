@@ -1038,8 +1038,10 @@ public class CInforme extends CGenerico {
 		Integer c2 = servicioInforme.buscarMaxCodigo();
 		String c = String.valueOf(c2);
 		int n = c.length();
-		char car = c.charAt(n - 1);
-		String nro = Character.toString(car);
+		String nro ="";
+		for (int i = 4; i < n; i++) {
+			nro = nro+c.charAt(i);
+		}
 		Integer co = Integer.parseInt(nro);
 		String finaal = String.valueOf(co + 1);
 		txt1.setValue(cod + finaal);
@@ -1057,8 +1059,10 @@ public class CInforme extends CGenerico {
 				Integer c2 = servicioInforme.buscarMaxCodigo();
 				String c = String.valueOf(c2);
 				int n = c.length();
-				char car = c.charAt(n - 1);
-				String nro = Character.toString(car);
+				String nro ="";
+				for (int i = 4; i < n; i++) {
+					nro = nro+c.charAt(i);
+				}
 				Integer co = Integer.parseInt(nro);
 				String finaal = String.valueOf(co + 1);
 				txt1.setValue(cod + finaal);
