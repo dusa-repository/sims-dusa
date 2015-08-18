@@ -310,7 +310,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	protected DateFormat formatoImportar = new SimpleDateFormat("yyyy-MM-dd");
 	public java.util.Date fecha = new Date();
-	public String cod = formatoYear.format(fecha);
+	public String cod = formatoYear.format(new Date());
 	public Calendar calendario2 = Calendar.getInstance();
 	public Calendar calendario = Calendar.getInstance();
 	public String horaAuditoria = String.valueOf(calendario

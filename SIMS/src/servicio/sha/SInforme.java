@@ -147,7 +147,7 @@ public class SInforme {
 				.findByFaStartingWithAllIgnoreCase(valor);
 	}
 
-	public String buscarMaxCodigo() {
+	public Integer buscarMaxCodigo() {
 		// TODO Auto-generated method stub
 		return informeDAO.buscarMaxCodigo();
 	}

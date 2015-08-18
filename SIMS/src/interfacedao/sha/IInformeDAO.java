@@ -72,8 +72,9 @@ public interface IInformeDAO extends JpaRepository<Informe, Long> {
 
 	List<Informe> findByFaStartingWithAllIgnoreCase(String valor);
 	
-	@Query("Select max(i.codigo) from Informe i ")
-	String buscarMaxCodigo();
+	@Query(value="SELECT MAX(CAST(codigo AS Int)) FROM informe WHERE codigo NOT LIKE '%[a-z]%' "
+			+ "AND ISNUMERIC(codigo) = 1", nativeQuery = true)
+	Integer buscarMaxCodigo();
 
 	
 

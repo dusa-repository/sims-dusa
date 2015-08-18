@@ -100,12 +100,10 @@ import servicio.maestros.SParteCuerpo;
 import servicio.maestros.SVacuna;
 import servicio.transacciones.SHistoriaVacuna;
 import arbol.CArbol;
-
 import componentes.Botonera;
 import componentes.Buscar;
 import componentes.Catalogo;
 import componentes.Mensaje;
-
 import controlador.maestros.CGenerico;
 
 public class CConsulta extends CGenerico {
@@ -1123,7 +1121,6 @@ public class CConsulta extends CGenerico {
 					guardarExamenFisico(consultaDatos);
 					guardarAntecedentes(paciente);
 					guardarHistoria(paciente);
-					Mensaje.mensajeInformacion("Registro Guardado Exitosamente, Ahora puede Generar las Ordenes Respectivas");
 					idConsulta = consultaDatos.getIdConsulta();
 					tabConsulta.setSelected(true);
 					tabResumen.setSelected(true);
@@ -1155,6 +1152,8 @@ public class CConsulta extends CGenerico {
 									paciente.getEmail(),
 									"Se le recuerda que debe practicarse la consulta Post-Vacacional, "
 											+ "luego de reintegrarse de las vacaciones");
+					Mensaje.mensajeInformacion("Registro Guardado Exitosamente, Ahora puede Generar las Ordenes Respectivas");
+
 				}
 			}
 
@@ -1706,7 +1705,8 @@ public class CConsulta extends CGenerico {
 		}
 		informe.setFgj(reposo);
 		informe.setFgad(consultaDiagnostico.getMotivo());
-		String c = servicioInforme.buscarMaxCodigo();
+		Integer c2 = servicioInforme.buscarMaxCodigo();
+		String c = String.valueOf(c2);
 		int n = c.length();
 		char car = c.charAt(n - 1);
 		String nro = Character.toString(car);
@@ -6673,7 +6673,5 @@ public class CConsulta extends CGenerico {
 		lsita.setEmptyMessage("Utilice el filtro para buscar el paciente que desea buscar");
 		catalogoPaciente2.doModal();
 	}
-	
 
-	
 }

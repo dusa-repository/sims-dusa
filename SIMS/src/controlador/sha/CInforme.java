@@ -1035,7 +1035,8 @@ public class CInforme extends CGenerico {
 		llenarComboCLasificacion();
 		llenarComboArea();
 		txt1.setDisabled(true);
-		String c = servicioInforme.buscarMaxCodigo();
+		Integer c2 = servicioInforme.buscarMaxCodigo();
+		String c = String.valueOf(c2);
 		int n = c.length();
 		char car = c.charAt(n - 1);
 		String nro = Character.toString(car);
@@ -1053,7 +1054,8 @@ public class CInforme extends CGenerico {
 			@Override
 			public void limpiar() {
 				idInforme = 0;
-				String c = servicioInforme.buscarMaxCodigo();
+				Integer c2 = servicioInforme.buscarMaxCodigo();
+				String c = String.valueOf(c2);
 				int n = c.length();
 				char car = c.charAt(n - 1);
 				String nro = Character.toString(car);
@@ -1586,22 +1588,19 @@ public class CInforme extends CGenerico {
 						informe.setIdac(false);
 					informe.setIdad(txt9414.getValue());
 					servicioInforme.guardar(informe);
-					
-					//Guardar planes---------------------------------------------------------------------------
+
+					// Guardar
+					// planes---------------------------------------------------------------------------
+
+					informe = new Informe();
+					if (idInforme != 0)
+						informe = servicioInforme.buscar(idInforme);
+					else
+						informe = servicioInforme.buscarUltimo();
 					if (ltbPlan.getItemCount() != 0) {
-						informe = new Informe();
-						if (idInforme != 0)
-							informe = servicioInforme.buscar(idInforme);
-						else
-							informe = servicioInforme.buscarUltimo();
 						guardarPlanes(informe);
 					}
 					if (ltbPlanVisita.getItemCount() != 0) {
-						informe = new Informe();
-						if (idInforme != 0)
-							informe = servicioInforme.buscar(idInforme);
-						else
-							informe = servicioInforme.buscarUltimo();
 						guardarPlanes2(informe);
 					}
 					guardarImagenes(informe);
@@ -4911,8 +4910,8 @@ public class CInforme extends CGenerico {
 
 	// / EJEMPLO DE AGREGAR
 	// ********************************************************************************************************************************************************************
-	
-	//------------------------------------------------------------------------------------------------------------------
+
+	// ------------------------------------------------------------------------------------------------------------------
 	@Listen("onClick = #btnEditar")
 	public void seleccionarPlan() {
 		if (ltbPlan.getItemCount() != 0) {
@@ -4980,7 +4979,7 @@ public class CInforme extends CGenerico {
 					txtDescripcion.getValue(), txtQuien.getValue(),
 					txtComo.getValue(), txtDonde.getValue(), fechaPlan, null,
 					null, null, null, null, null);
-			
+
 			planes.add(planAccion);
 			ltbPlan.setModel(new ListModelList<PlanAccion>(planes));
 			ltbPlan.setCheckmark(false);
@@ -5039,7 +5038,7 @@ public class CInforme extends CGenerico {
 		servicioPlanAccion.guardarVarios(planesAccion);
 	}
 
-	//-------------------------------------------------------------------------------------------------------------------------
+	// -------------------------------------------------------------------------------------------------------------------------
 	protected void guardarPlanes2(Informe informe) {
 		List<PlanAccion> planesAccion = servicioPlanAccion
 				.buscarPorInformeEstadoyTipo(informe, "Programado", "inspector");
