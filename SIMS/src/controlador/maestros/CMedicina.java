@@ -118,7 +118,7 @@ public class CMedicina extends CGenerico {
 	private boolean consulta = false;
 	private CConsulta cConsulta = new CConsulta();
 	private boolean paciente = false;
-	private CPaciente cPaciente = new CPaciente();
+	private CCronicos cPaciente = new CCronicos();
 	List<Medicina> medicinaConsulta = new ArrayList<Medicina>();
 	Listbox listaConsulta;
 

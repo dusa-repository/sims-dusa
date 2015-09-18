@@ -28,8 +28,8 @@
 					<tab tooltip="seccion" label="Seccion 4" id="tab4" />
 					<tab tooltip="seccion" label="Seccion 5" id="tab5" />
 					<tab tooltip="seccion" label="Seccion 6 y 7" id="tab6y7" />
-					<tab tooltip="seccion" label="Seccion 8" id="tab8" />
-					<tab tooltip="seccion" label="Seccion 9" id="tab9" />
+					<tab  visible ="false" tooltip="seccion" label="Seccion 8" id="tab8" />
+					<tab visible ="false" tooltip="seccion" label="Seccion 9" id="tab9" />
 					<tab tooltip="seccion" label="Plan de Accion" id="tab10" />
 					<tab label="Plan de Accion Inspector Inpsasel" id="tab11" />
 					<tab label="Imagenes" id="tab12" />
@@ -869,7 +869,7 @@
 								<row>
 									<cell colspan="8">
 										<textbox multiline="true" id="txt6714" height="50px"
-											width="99%" tooltiptext="Indique la Descripcion" maxlength="250" />
+											width="99%" tooltiptext="Indique la Descripcion" maxlength="1500" />
 									</cell>
 								</row>
 								<row>
@@ -888,7 +888,19 @@
 								<row>
 									<cell colspan="8">
 										<textbox multiline="true" id="txt711" height="50px"
-											width="99%" tooltiptext="Indique la Descripcion" maxlength="250" />
+											width="99%" tooltiptext="Indique la Descripcion" maxlength="1500" />
+									</cell>
+								</row>
+									<row>
+									<cell colspan="8">
+										<label class="etiqueta"
+											value="Observacion General" />
+									</cell>
+								</row>
+								<row>
+									<cell colspan="8">
+										<textbox multiline="true" id="txtObservacionPrincipal" height="50px"
+											width="99%" tooltiptext="Indique la Observacion" maxlength="1500" />
 									</cell>
 								</row>
 							</rows>

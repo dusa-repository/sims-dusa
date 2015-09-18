@@ -71,8 +71,6 @@ public class CPaciente extends CGenerico {
 	@Wire
 	private Tab tabDatosContacto;
 	@Wire
-	private Tab tabDatosCronico;
-	@Wire
 	private Button btnBuscarPaciente;
 	@Wire
 	private Button fudImagenPaciente;
@@ -226,16 +224,6 @@ public class CPaciente extends CGenerico {
 	@Wire
 	private Radio rdoNoBrigadista;
 	@Wire
-	private Radio rdoSiCronico;
-	@Wire
-	private Radio rdoNoCronico;
-	@Wire
-	private Listbox ltbMedicinas;
-	@Wire
-	private Listbox ltbMedicinasAgregadas;
-	@Wire
-	private Textbox txtBuscadorMedicina;
-	@Wire
 	private Radiogroup rdgJefe;
 	@Wire
 	private Radio rdoJefe;
@@ -296,8 +284,6 @@ public class CPaciente extends CGenerico {
 	@Wire
 	private Radiogroup rdgF;
 
-	Buscar<Medicina> buscarMedicina;
-
 	URL url = getClass().getResource("usuario.png");
 	private CArbol cArbol = new CArbol();
 	CCambiarCedula cambiar = new CCambiarCedula();
@@ -306,8 +292,6 @@ public class CPaciente extends CGenerico {
 	Catalogo<Paciente> catalogo;
 	Catalogo<Paciente> catalogoFamiliar;
 
-	List<Medicina> medicinasDisponibles = new ArrayList<Medicina>();
-	List<PacienteMedicina> medicinasAgregadas = new ArrayList<PacienteMedicina>();
 	Catalogo<Familiar> catalogoModeloFamiliar;
 	private String idBoton = "";
 
@@ -332,13 +316,11 @@ public class CPaciente extends CGenerico {
 				mapa = null;
 			}
 		}
-		buscadorMedicina();
 		llenarComboCiudad();
 		llenarComboEmpresa();
 		llenarComboArea();
 		llenarComboCargo();
 		llenarComboNomina();
-		llenarMedicinas();
 		llenarComboCivil();
 		rdoActivo.setChecked(true);
 		Botonera botonera = new Botonera() {
@@ -495,9 +477,7 @@ public class CPaciente extends CGenerico {
 
 					if (rdoSiBrigadista.isChecked())
 						brigadista = true;
-					Boolean cronico = false;
-					if (rdoSiCronico.isChecked())
-						cronico = true;
+			
 
 					oficio = txtOficio.getValue();
 					if (!cmbCondicionTrabajador.getValue().equals(""))
@@ -523,7 +503,7 @@ public class CPaciente extends CGenerico {
 							imagen, direccion, correo, telefono1, telefono2,
 							nombresE, apellidosE, parentescoE, telefono1E,
 							telefono2E, cedulaFamiliar, "", empresa, ciudad,
-							cargo, area, cronico);
+							cargo, area, false);
 					paciente.setBrigadista(brigadista);
 					paciente.setEstadoCivil(estadoCivil);
 					paciente.setNacionalidad(nacionalidad);
@@ -589,7 +569,6 @@ public class CPaciente extends CGenerico {
 						paciente = servicioPaciente.buscarPorCedula(cedula);
 						inhabilitarTrabajadorYTodosFamiliares(paciente);
 					}
-					guardarMedicinas(paciente);
 
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
@@ -602,158 +581,6 @@ public class CPaciente extends CGenerico {
 		};
 		botonera.getChildren().get(1).setVisible(false);
 		botoneraPaciente.appendChild(botonera);
-	}
-
-	protected void guardarMedicinas(Paciente paciente) {
-		servicioPacienteMedicina.limpiarMedicinas(paciente);
-		List<PacienteMedicina> listaMedicina = new ArrayList<PacienteMedicina>();
-		for (int i = 0; i < ltbMedicinasAgregadas.getItemCount(); i++) {
-			Listitem listItem = ltbMedicinasAgregadas.getItemAtIndex(i);
-			Integer idMedicina = ((Spinner) ((listItem.getChildren().get(2)))
-					.getFirstChild()).getValue();
-			Medicina medicina = servicioMedicina.buscar(idMedicina);
-			String valor = ((Textbox) ((listItem.getChildren().get(1)))
-					.getFirstChild()).getValue();
-			PacienteMedicina consultaMedicina = new PacienteMedicina(paciente,
-					medicina, valor);
-			listaMedicina.add(consultaMedicina);
-		}
-		servicioPacienteMedicina.guardar(listaMedicina);
-	}
-
-	private void llenarMedicinas() {
-		Paciente paciente = servicioPaciente.buscarPorCedula(id);
-		medicinasDisponibles = servicioMedicina
-				.buscarDisponiblesPaciente(paciente);
-		ltbMedicinas
-				.setModel(new ListModelList<Medicina>(medicinasDisponibles));
-
-		medicinasAgregadas = servicioPacienteMedicina
-				.buscarPorPaciente(paciente);
-		ltbMedicinasAgregadas.setModel(new ListModelList<PacienteMedicina>(
-				medicinasAgregadas));
-		listasMultiples();
-	}
-
-	public void recibirMedicina(List<Medicina> lista, Listbox l) {
-		ltbMedicinas = l;
-		medicinasDisponibles = lista;
-		ltbMedicinas
-				.setModel(new ListModelList<Medicina>(medicinasDisponibles));
-		ltbMedicinas.setMultiple(false);
-		ltbMedicinas.setCheckmark(false);
-		ltbMedicinas.setMultiple(true);
-		ltbMedicinas.setCheckmark(true);
-	}
-
-	@Listen("onClick = #btnAbrirMedicina")
-	public void divMedicina() {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("id", "paciente");
-		map.put("lista", medicinasDisponibles);
-		map.put("listbox", ltbMedicinas);
-		Sessions.getCurrent().setAttribute("itemsCatalogo", map);
-		List<Arbol> arboles = servicioArbol.buscarPorNombreArbol("Medicina");
-		if (!arboles.isEmpty()) {
-			Arbol arbolItem = arboles.get(0);
-			cArbol.abrirVentanas(arbolItem, tabBox, contenido, tab, tabs);
-		}
-	}
-
-	private void buscadorMedicina() {
-		buscarMedicina = new Buscar<Medicina>(ltbMedicinas, txtBuscadorMedicina) {
-
-			@Override
-			protected List<Medicina> buscar(String valor) {
-				List<Medicina> medicinasFiltradas = new ArrayList<Medicina>();
-				List<Medicina> medicinas = servicioMedicina.filtroNombre(valor);
-				for (int i = 0; i < medicinasDisponibles.size(); i++) {
-					Medicina medicina = medicinasDisponibles.get(i);
-					for (int j = 0; j < medicinas.size(); j++) {
-						if (medicina.getIdMedicina() == medicinas.get(j)
-								.getIdMedicina())
-							medicinasFiltradas.add(medicina);
-					}
-				}
-				return medicinasFiltradas;
-			}
-		};
-	}
-
-	@Listen("onClick = #pasar1Medicina")
-	public void derechaMedicina() {
-		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
-		List<Listitem> listItem = ltbMedicinas.getItems();
-		if (listItem.size() != 0) {
-			for (int i = 0; i < listItem.size(); i++) {
-				if (listItem.get(i).isSelected()) {
-					Medicina medicina = listItem.get(i).getValue();
-					medicinasDisponibles.remove(medicina);
-					PacienteMedicina pacienteMedicina = new PacienteMedicina();
-					pacienteMedicina.setMedicina(medicina);
-					medicinasAgregadas.clear();
-					for (int j = 0; j < ltbMedicinasAgregadas.getItemCount(); j++) {
-						Listitem listItemj = ltbMedicinasAgregadas
-								.getItemAtIndex(j);
-						Integer idMedicina = ((Spinner) ((listItemj
-								.getChildren().get(2))).getFirstChild())
-								.getValue();
-						Medicina medicinaj = servicioMedicina
-								.buscar(idMedicina);
-						String valor = ((Textbox) ((listItemj.getChildren()
-								.get(1))).getFirstChild()).getValue();
-						PacienteMedicina pacienteMedicinaj = new PacienteMedicina(
-								null, medicinaj, valor);
-						medicinasAgregadas.add(pacienteMedicinaj);
-					}
-					medicinasAgregadas.add(pacienteMedicina);
-					ltbMedicinasAgregadas
-							.setModel(new ListModelList<PacienteMedicina>(
-									medicinasAgregadas));
-					ltbMedicinasAgregadas.renderAll();
-					listitemEliminar.add(listItem.get(i));
-				}
-			}
-		}
-		for (int i = 0; i < listitemEliminar.size(); i++) {
-			ltbMedicinas.removeItemAt(listitemEliminar.get(i).getIndex());
-		}
-		listasMultiples();
-	}
-
-	private void listasMultiples() {
-		ltbMedicinas.setMultiple(false);
-		ltbMedicinas.setCheckmark(false);
-		ltbMedicinas.setMultiple(true);
-		ltbMedicinas.setCheckmark(true);
-		ltbMedicinasAgregadas.setMultiple(false);
-		ltbMedicinasAgregadas.setCheckmark(false);
-		ltbMedicinasAgregadas.setMultiple(true);
-		ltbMedicinasAgregadas.setCheckmark(true);
-	}
-
-	@Listen("onClick = #pasar2Medicina")
-	public void izquierdaMedicina() {
-		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
-		List<Listitem> listItem2 = ltbMedicinasAgregadas.getItems();
-		if (listItem2.size() != 0) {
-			for (int i = 0; i < listItem2.size(); i++) {
-				if (listItem2.get(i).isSelected()) {
-					PacienteMedicina consultaMedicina = listItem2.get(i)
-							.getValue();
-					medicinasAgregadas.remove(consultaMedicina);
-					medicinasDisponibles.add(consultaMedicina.getMedicina());
-					ltbMedicinas.setModel(new ListModelList<Medicina>(
-							medicinasDisponibles));
-					listitemEliminar.add(listItem2.get(i));
-				}
-			}
-		}
-		for (int i = 0; i < listitemEliminar.size(); i++) {
-			ltbMedicinasAgregadas.removeItemAt(listitemEliminar.get(i)
-					.getIndex());
-		}
-		listasMultiples();
 	}
 
 	/* Permite validar que todos los campos esten completos */
@@ -1066,7 +893,6 @@ public class CPaciente extends CGenerico {
 		Paciente paciente = catalogo.objetoSeleccionadoDelCatalogo();
 		if (!idBoton.equals("btnVer")) {
 			llenarCampos(paciente);
-			llenarMedicinas();
 			ficha = paciente.getFicha();
 		}
 		catalogo.setParent(null);
@@ -1079,7 +905,6 @@ public class CPaciente extends CGenerico {
 				.getValue());
 		if (paciente != null) {
 			llenarCampos(paciente);
-			llenarMedicinas();
 			ficha = paciente.getFicha();
 		}
 	}
@@ -1198,16 +1023,6 @@ public class CPaciente extends CGenerico {
 		} else {
 			rdoNoBrigadista.setChecked(false);
 			rdoSiBrigadista.setChecked(false);
-		}
-
-		if (paciente.getCronico() != null) {
-			if (paciente.getCronico())
-				rdoSiCronico.setChecked(true);
-			else
-				rdoNoCronico.setChecked(true);
-		} else {
-			rdoNoCronico.setChecked(false);
-			rdoSiCronico.setChecked(false);
 		}
 
 		if (paciente.isJefe())
@@ -1340,16 +1155,6 @@ public class CPaciente extends CGenerico {
 		tabDatosBasicos.setSelected(true);
 	}
 
-	@Listen("onClick = #btnAnterior2")
-	public void anteriorPestanna2() {
-		tabDatosContacto.setSelected(true);
-	}
-
-	@Listen("onClick = #btnSiguiente2")
-	public void siguientePestanna2() {
-		tabDatosCronico.setSelected(true);
-	}
-
 	/* Busca si existe un diagnostico con el mismo codigo escrito */
 	@Listen("onChange = #dtbFechaNac")
 	public void cambioEdad() {
@@ -1362,7 +1167,6 @@ public class CPaciente extends CGenerico {
 				.getValue());
 		if (paciente != null) {
 			llenarCampos(paciente);
-			llenarMedicinas();
 			ficha = paciente.getFicha();
 		} else {
 			limpiarCampos();
@@ -1460,8 +1264,6 @@ public class CPaciente extends CGenerico {
 		dtbFechaIngreso.setValue(fecha);
 		rdoNoBrigadista.setChecked(false);
 		rdoSiBrigadista.setChecked(false);
-		rdoSiCronico.setChecked(false);
-		rdoNoCronico.setChecked(false);
 		dtbInscripcionIVSS.setValue(fecha);
 		dtbFechaMuerte.setValue(fecha);
 		dtbFechaMuerte.setVisible(false);
@@ -1496,7 +1298,6 @@ public class CPaciente extends CGenerico {
 		txtCarreraActual.setValue("");
 		txtPeriodo.setValue("");
 
-		llenarMedicinas();
 	}
 
 	@Listen("onClick = #btnVerFamiliares")

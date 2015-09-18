@@ -766,7 +766,7 @@ public class CFamiliar extends CGenerico {
 				|| (rdoMuerte.isChecked() && (dtbFechaMuerte.getText()
 						.compareTo("") == 0))) {
 			msj.mensajeError(Mensaje.camposVacios);
-			aplicarColores(rdgF, rdgVive, rdgServiciosMedicos, rdgEstudia, rdgAyuda,
+			aplicarColores(rdgF, rdgVive, rdgServiciosMedicos, rdgAyuda,
 					rdgAlergia, rdgDiscapacidad, rdgLentes,
 					txtApellido1Paciente, txtNombre1Paciente,
 					txtCedulaPaciente, cmbEstadoCivil, cmbGrupoSanguineo,

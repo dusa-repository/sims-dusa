@@ -645,6 +645,9 @@ public class Informe implements Serializable {
 
 	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
+	
+	@Column(name = "observacion_principal", length = 1500)
+	private String observacionPrincipal;
 
 	@OneToMany(mappedBy = "informe")
 	private Set<PlanAccion> planes;
@@ -2430,6 +2433,14 @@ public class Informe implements Serializable {
 
 	public void setSeleccionadaB(String seleccionadaB) {
 		this.seleccionadaB = seleccionadaB;
+	}
+
+	public String getObservacionPrincipal() {
+		return observacionPrincipal;
+	}
+
+	public void setObservacionPrincipal(String observacionPrincipal) {
+		this.observacionPrincipal = observacionPrincipal;
 	}
 
 	

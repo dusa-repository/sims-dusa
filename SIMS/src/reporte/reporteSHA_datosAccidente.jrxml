@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteSHA_datosAccidente" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="99a0b002-3419-413c-87b7-28f557dc8177">
 	<property name="ireport.zoom" value="1.3310000000000035"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="122"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="fa" class="java.sql.Timestamp"/>
 	<parameter name="fgad" class="java.lang.String"/>
 	<parameter name="fgg" class="java.lang.String"/>
@@ -45,8 +45,9 @@
 	<parameter name="fgi2" class="java.lang.String"/>
 	<parameter name="fghSI" class="java.lang.String"/>
 	<parameter name="hae" class="java.lang.String"/>
+	<parameter name="observaciones" class="java.lang.String"/>
 	<title>
-		<band height="630" splitType="Stretch">
+		<band height="802" splitType="Stretch">
 			<staticText>
 				<reportElement x="426" y="20" width="96" height="55" uuid="68281c2e-86ed-4d4b-95fa-5aac1d8565a6"/>
 				<box leftPadding="4">
@@ -178,7 +179,7 @@
 				<text><![CDATA[6.7.2.- AGENTE CAUSAL DEL ACCIDENTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="342" width="521" height="110" uuid="ee8401fc-c133-4fe7-ad4d-3521cdca90e1"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="1" y="342" width="521" height="110" uuid="ee8401fc-c133-4fe7-ad4d-3521cdca90e1"/>
 				<box leftPadding="4">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -342,7 +343,7 @@
 				<text><![CDATA[7.1.1.-  DESCRIPCIÓN ESPECIFICA DE LA FORMA EN QUE SE UTILIZABA LA MATERIA PRIMA AL MOMENTO DE LA  OCURRENCIA DEL ACCIDENTE:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="504" width="521" height="125" uuid="265636d3-9f95-4a33-9212-b0783eec133c"/>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="1" y="504" width="521" height="125" uuid="265636d3-9f95-4a33-9212-b0783eec133c"/>
 				<box leftPadding="4">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -720,12 +721,12 @@
 				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="392" y="316" width="125" height="20" uuid="cdc16cde-8de1-443a-ac60-3889407c2f11"/>
 				<textFieldExpression><![CDATA[$P{fgac}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="4" y="355" width="514" height="90" uuid="74ef67db-9737-4766-9083-b56a6161a651"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="4" y="355" width="514" height="90" uuid="74ef67db-9737-4766-9083-b56a6161a651"/>
 				<textFieldExpression><![CDATA[$P{fgad}]]></textFieldExpression>
 			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="4" y="505" width="514" height="113" uuid="2ec00040-f0aa-4c89-a24d-5cc6426accd0"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="4" y="505" width="514" height="113" uuid="2ec00040-f0aa-4c89-a24d-5cc6426accd0"/>
 				<textFieldExpression><![CDATA[$P{gaa}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -800,6 +801,36 @@
 				<reportElement x="169" y="274" width="6" height="20" uuid="1dc21457-0442-4c12-b5f0-049abf5ae016"/>
 				<textFieldExpression><![CDATA[$P{fghNO}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="1" y="633" width="521" height="27" uuid="c679730e-854c-425e-9b01-8220f26f4d98"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[OBSERVACIONES]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="7" y="663" width="514" height="139" uuid="67a0d022-173f-4850-a7a7-7312a5534d3e"/>
+				<textFieldExpression><![CDATA[$P{observaciones}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="1" y="661" width="521" height="141" uuid="3f90ff33-9e6b-478e-8e77-a2764f4c168e"/>
+				<box leftPadding="4">
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
 		</band>
 	</title>
 </jasperReport>

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RRecipeServicio" language="groovy" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a43ceea8-43e0-4b0f-8687-e6d4cc83e8ee">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="48"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="empresaNombre" class="java.lang.String"/>
 	<parameter name="empresaDireccion" class="java.lang.String"/>
 	<parameter name="empresaRif" class="java.lang.String"/>
@@ -131,7 +131,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="68" y="177" width="503" height="44" uuid="979055a4-ecfd-42f8-8376-9ddb6972ce12"/>
 				<textElement>
-					<font fontName="SansSerif" size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{servicio}]]></textFieldExpression>
 			</textField>
@@ -157,7 +157,7 @@
 				<text><![CDATA[CI:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="425" y="129" width="100" height="20" uuid="b674962d-ac36-4c89-9d67-3b019af5f338"/>
+				<reportElement x="425" y="129" width="119" height="20" uuid="b674962d-ac36-4c89-9d67-3b019af5f338"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
@@ -185,7 +185,7 @@
 				<text><![CDATA[Sexo:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="73" y="343" width="361" height="20" uuid="fb133dc6-b85d-4f78-aa03-2e1933669b63"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="73" y="343" width="432" height="20" uuid="fb133dc6-b85d-4f78-aa03-2e1933669b63"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
@@ -243,7 +243,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="86" y="546" width="472" height="20" uuid="c29d3a00-8e93-4c76-aaa6-95bc883061be"/>
 				<textElement>
-					<font fontName="SansSerif" size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{centro}]]></textFieldExpression>
 			</textField>
@@ -275,7 +275,7 @@
 			<textField isStretchWithOverflow="true">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="79" y="222" width="492" height="20" uuid="f13c9375-b8e7-42e6-9c26-baabc6b7901e"/>
 				<textElement>
-					<font fontName="SansSerif" size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{centro}]]></textFieldExpression>
 			</textField>
@@ -287,7 +287,7 @@
 				<text><![CDATA[Favor Realizar los siguientes Estudios al Paciente]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="289" y="267" width="175" height="20" uuid="5ee6d0ba-5c6a-455d-88d9-b044c4d00811">
+				<reportElement x="289" y="267" width="200" height="20" uuid="5ee6d0ba-5c6a-455d-88d9-b044c4d00811">
 					<printWhenExpression><![CDATA[$P{mostrar}.equals( "si" )]]></printWhenExpression>
 				</reportElement>
 				<textElement>
@@ -314,9 +314,23 @@
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="73" y="244" width="498" height="20" uuid="d4d22270-f37c-45ee-ab16-d39737a252a2"/>
 				<textElement>
-					<font size="11"/>
+					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="397" y="105" width="47" height="20" uuid="b87d4d1e-ee16-4d77-a0a4-b399f2b48d6b"/>
+				<textElement>
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="444" y="105" width="100" height="20" uuid="815639dc-e194-46e2-8b28-8ed4396c0587"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

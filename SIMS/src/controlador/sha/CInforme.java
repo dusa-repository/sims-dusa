@@ -430,6 +430,8 @@ public class CInforme extends CGenerico {
 	@Wire
 	private Textbox txt711;
 	@Wire
+	private Textbox txtObservacionPrincipal;
+	@Wire
 	private Textbox txt811;
 	@Wire
 	private Textbox txt812;
@@ -1267,6 +1269,7 @@ public class CInforme extends CGenerico {
 					informe.setFgab(txt6712.getValue());
 					informe.setFgad(txt6714.getValue());
 					informe.setGaa(txt711.getValue());
+					informe.setObservacionPrincipal(txtObservacionPrincipal.getValue());
 					informe.setHaa(txt811.getValue());
 					informe.setHab(txt812.getValue());
 					informe.setHac(txt813.getValue());
@@ -1701,7 +1704,7 @@ public class CInforme extends CGenerico {
 			boton = (Button) e.getTarget();
 			idBotonPaciente = boton.getId();
 		}
-		final List<Paciente> pacientes = servicioPaciente.buscarTodos();
+		final List<Paciente> pacientes = servicioPaciente.buscarTodosTrabajadores();
 		catalogoP = new Catalogo<Paciente>(catalogoPaciente,
 				"Catalogo de Pacientes", pacientes, false, "Cedula",
 				"Primer Nombre", "Segundo Nombre", "Primer Apellido",
@@ -1712,15 +1715,15 @@ public class CInforme extends CGenerico {
 
 				switch (combo) {
 				case "Primer Nombre":
-					return servicioPaciente.filtroNombre1(valor);
+					return servicioPaciente.filtroNombre1T(valor);
 				case "Segundo Nombre":
-					return servicioPaciente.filtroNombre2(valor);
+					return servicioPaciente.filtroNombre2T(valor);
 				case "Cedula":
-					return servicioPaciente.filtroCedula(valor);
+					return servicioPaciente.filtroCedulaT(valor);
 				case "Primer Apellido":
-					return servicioPaciente.filtroApellido1(valor);
+					return servicioPaciente.filtroApellido1T(valor);
 				case "Segundo Apellido":
-					return servicioPaciente.filtroApellido2(valor);
+					return servicioPaciente.filtroApellido2T(valor);
 				default:
 					return pacientes;
 				}
@@ -2504,7 +2507,7 @@ public class CInforme extends CGenerico {
 			cmb6713.setValue(informe.getArea().getNombre());
 		txt6714.setValue(informe.getFgad());
 		txt711.setValue(informe.getGaa());
-
+		txtObservacionPrincipal.setValue(informe.getObservacionPrincipal());
 		// Seccion 8
 
 		txt811.setValue(informe.getHaa());
@@ -3300,6 +3303,7 @@ public class CInforme extends CGenerico {
 		cmb6713.setValue("");
 		txt6714.setValue("");
 		txt711.setValue("");
+		txtObservacionPrincipal.setValue("");
 		txt811.setValue("");
 		txt812.setValue("");
 		txt813.setValue("");
@@ -4906,6 +4910,7 @@ public class CInforme extends CGenerico {
 		p.put("condicionE", new JRBeanCollectionDataSource(condicionesE));
 		p.put("condicionF", new JRBeanCollectionDataSource(condicionesF));
 
+		p.put("observaciones",informe.getObservacionPrincipal());
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RReporteSHA.jasper"));
 		fichero = JasperRunManager.runReportToPdf(reporte, p);
