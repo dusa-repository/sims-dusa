@@ -178,22 +178,22 @@
 	<group name="orden">
 		<groupExpression><![CDATA[$F{orden.idOrden}]]></groupExpression>
 		<groupHeader>
-			<band height="46">
+			<band height="65">
 				<rectangle>
-					<reportElement x="0" y="4" width="572" height="17" backcolor="#F1EDED" uuid="0fd266f6-6aec-4095-86c5-45334e5da69f"/>
+					<reportElement x="0" y="4" width="572" height="39" backcolor="#F1EDED" uuid="0fd266f6-6aec-4095-86c5-45334e5da69f"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
 				</rectangle>
 				<staticText>
-					<reportElement x="8" y="4" width="56" height="20" uuid="69ed5bbb-cbfe-4e18-a3e6-74637a66dce3"/>
+					<reportElement x="8" y="4" width="56" height="39" uuid="69ed5bbb-cbfe-4e18-a3e6-74637a66dce3"/>
 					<textElement textAlignment="Center">
 						<font size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[> Orden:]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="64" y="4" width="126" height="20" uuid="50c76585-1b3e-4821-b589-fe61406d3273"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="64" y="4" width="121" height="39" uuid="50c76585-1b3e-4821-b589-fe61406d3273"/>
 					<textElement>
 						<font size="11" isBold="false"/>
 					</textElement>
@@ -201,42 +201,42 @@
 new SimpleDateFormat("h:m a").format($F{orden.fechaOrden})]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="12" y="26" width="84" height="20" uuid="de380ffc-ba8c-4a99-ae69-86f473be240b"/>
+					<reportElement x="12" y="44" width="84" height="20" uuid="de380ffc-ba8c-4a99-ae69-86f473be240b"/>
 					<textElement>
 						<font size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Entregada por:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="266" y="26" width="93" height="20" uuid="f05f71ae-87c4-4a9a-80cb-59a24688bbad"/>
+					<reportElement x="266" y="44" width="93" height="20" uuid="f05f71ae-87c4-4a9a-80cb-59a24688bbad"/>
 					<textElement>
 						<font size="11" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Autorizada por:]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="190" y="4" width="280" height="20" uuid="7af372df-856a-43fa-9d45-17c70d62c385"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="184" y="4" width="272" height="39" uuid="7af372df-856a-43fa-9d45-17c70d62c385"/>
 					<textElement>
 						<font size="11" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{orden.paciente.cedula}+"-"+$F{orden.paciente.primerNombre}+" "+$F{orden.paciente.primerApellido}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="469" y="4" width="104" height="20" uuid="1ddb39c8-3e41-4010-ba88-e6c6af4dff4b"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="456" y="4" width="117" height="39" uuid="1ddb39c8-3e41-4010-ba88-e6c6af4dff4b"/>
 					<textElement>
 						<font size="11" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{orden.motivo.descripcion}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="96" y="26" width="160" height="20" uuid="db4042bd-e578-4168-9c57-a4c974299002"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="96" y="44" width="170" height="20" uuid="db4042bd-e578-4168-9c57-a4c974299002"/>
 					<textElement>
 						<font size="11" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{orden.usuarioAuditoria}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="359" y="26" width="210" height="20" uuid="39e33903-dd7f-4700-95b9-76b40225b062"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="359" y="44" width="214" height="20" uuid="39e33903-dd7f-4700-95b9-76b40225b062"/>
 					<textElement>
 						<font size="11" isBold="false"/>
 					</textElement>

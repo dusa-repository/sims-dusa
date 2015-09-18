@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RCostoProveedor" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" uuid="5395e779-b886-443c-953b-c4f983c0bb74">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="191"/>
+	<property name="ireport.y" value="0"/>
 	<subDataset name="d" uuid="61989e1b-f00d-4d44-968d-241bdfecdec7">
 		<field name="proveedor.idProveedor" class="java.lang.Long"/>
 		<field name="resultado" class="java.lang.String"/>
@@ -149,15 +149,15 @@
 	<group name="consulta">
 		<groupExpression><![CDATA[$F{consulta.idConsulta}]]></groupExpression>
 		<groupHeader>
-			<band height="19">
+			<band height="38">
 				<rectangle>
-					<reportElement x="1" y="2" width="572" height="17" backcolor="#F1EDED" uuid="0f5e69f9-4aa0-47b0-b1a9-9a9bcd2433fa"/>
+					<reportElement x="1" y="2" width="572" height="36" backcolor="#F1EDED" uuid="0f5e69f9-4aa0-47b0-b1a9-9a9bcd2433fa"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
 				</rectangle>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="69" y="2" width="108" height="17" uuid="6732fbe6-9199-4832-ac74-1aa5975b2741"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="69" y="2" width="108" height="36" uuid="6732fbe6-9199-4832-ac74-1aa5975b2741"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -168,7 +168,7 @@
 new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="177" y="2" width="80" height="17" uuid="bd7b2820-a273-4108-8b27-d0e2d8342965"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="181" y="2" width="105" height="36" uuid="bd7b2820-a273-4108-8b27-d0e2d8342965"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -178,7 +178,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 					<textFieldExpression><![CDATA[$F{consulta.tipoConsultaSecundaria}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="256" y="2" width="318" height="17" uuid="8feab1f6-2e46-46e0-a983-4bcc695a2322"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="292" y="2" width="282" height="36" uuid="8feab1f6-2e46-46e0-a983-4bcc695a2322"/>
 					<box leftPadding="3">
 						<bottomPen lineWidth="0.0"/>
 					</box>

@@ -764,8 +764,7 @@ public class CFamiliar extends CGenerico {
 				|| (cmbParentescoFamiliar.getText().compareTo("") == 0 || lblNombres
 						.getValue() == "")
 				|| (rdoMuerte.isChecked() && (dtbFechaMuerte.getText()
-						.compareTo("") == 0))
-				|| (!rdoEstudia.isChecked() && !rdoTrabaja.isChecked())) {
+						.compareTo("") == 0))) {
 			msj.mensajeError(Mensaje.camposVacios);
 			aplicarColores(rdgF, rdgVive, rdgServiciosMedicos, rdgEstudia, rdgAyuda,
 					rdgAlergia, rdgDiscapacidad, rdgLentes,
@@ -1048,7 +1047,11 @@ public class CFamiliar extends CGenerico {
 
 	/* LLena los campos del formulario dado un paciente */
 	private void llenarCampos(Paciente paciente) {
-
+		lblNombres.setValue("");
+		lblApellidos.setValue("");
+		lblFicha.setValue("");
+		lblCedula.setValue("");
+		
 		rdoAplica.setChecked(true);
 		rdoAplica.setDisabled(false);
 		rdoNoAplica.setDisabled(false);
@@ -1507,9 +1510,9 @@ public class CFamiliar extends CGenerico {
 				.getCedulaFamiliar());
 		if (familiarTrabajador != null) {
 			lblNombres.setValue(familiarTrabajador.getPrimerNombre() + " "
-					+ familiar.getSegundoNombre());
+					+ familiarTrabajador.getSegundoNombre());
 			lblApellidos.setValue(familiarTrabajador.getPrimerApellido() + " "
-					+ familiar.getSegundoApellido());
+					+ familiarTrabajador.getSegundoApellido());
 			lblFicha.setValue(familiarTrabajador.getFicha());
 			lblCedula.setValue(familiarTrabajador.getCedula());
 			cedTrabajador = familiarTrabajador.getCedula();

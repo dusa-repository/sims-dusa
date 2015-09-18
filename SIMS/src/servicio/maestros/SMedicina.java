@@ -87,19 +87,6 @@ public class SMedicina {
 			return null;
 	}
 
-	public List<Medicina> buscarDisponibles(Consulta consulta) {
-		List<ConsultaMedicina> consultasMedicina = consultaMedicinaDAO
-				.findByConsulta(consulta);
-		List<Long> ids = new ArrayList<Long>();
-		if (consultasMedicina.isEmpty())
-			return medicinaDAO.findAll();
-		else {
-			for (int i = 0; i < consultasMedicina.size(); i++) {
-				ids.add(consultasMedicina.get(i).getMedicina().getIdMedicina());
-			}
-			return medicinaDAO.findByIdMedicinaNotIn(ids);
-		}
-	}
 
 	public void guardarVarios(List<Medicina> medicinas) {
 		medicinaDAO.save(medicinas);
@@ -132,26 +119,35 @@ public class SMedicina {
 			return medicinaDAO.findByIdMedicinaNotIn(ids);
 		}
 	}
+	
+
+	public List<Medicina> buscarDisponibles(Consulta consulta) {
+		List<ConsultaMedicina> consultasMedicina = consultaMedicinaDAO
+				.findByConsulta(consulta);
+		List<Long> ids = new ArrayList<Long>();
+		if (consultasMedicina.isEmpty())
+			return medicinaDAO.findAll();
+		else {
+			for (int i = 0; i < consultasMedicina.size(); i++) {
+				ids.add(consultasMedicina.get(i).getMedicina().getIdMedicina());
+			}
+			return medicinaDAO.findByIdMedicinaNotIn(ids);
+		}
+	}
 
 	public List<Medicina> buscarDisponiblesOrden(Orden orden, Paciente paciente) {
 		List<OrdenMedicina> consultasMedicina = ordenMedicinaDAO
 				.findByOrden(orden);
-		List<PacienteMedicina> medicinas = new ArrayList<PacienteMedicina>();
 		List<Long> ids = new ArrayList<Long>();
-		List<Medicina> med = new ArrayList<Medicina>();
 		if (consultasMedicina.isEmpty()) {
-			medicinas = pacienteMedicinaDAO.findByPaciente(paciente);
+			return medicinaDAO.findAll();
 		} else {
 			for (int i = 0; i < consultasMedicina.size(); i++) {
 				ids.add(consultasMedicina.get(i).getMedicina().getIdMedicina());
 			}
-			medicinas = pacienteMedicinaDAO
-					.findByMedicinaIdMedicinaNotInAndPaciente(ids, paciente);
+			return medicinaDAO.findByIdMedicinaNotIn(ids);
 		}
 
-		for (int i = 0; i < medicinas.size(); i++) {
-			med.add(medicinas.get(i).getMedicina());
-		}
-		return med;
+	
 	}
 }

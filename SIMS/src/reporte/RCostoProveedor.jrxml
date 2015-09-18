@@ -134,15 +134,15 @@
 	<group name="consulta">
 		<groupExpression><![CDATA[$F{consulta.idConsulta}]]></groupExpression>
 		<groupHeader>
-			<band height="19">
+			<band height="39">
 				<rectangle>
-					<reportElement x="1" y="2" width="572" height="17" backcolor="#F1EDED" uuid="0f5e69f9-4aa0-47b0-b1a9-9a9bcd2433fa"/>
+					<reportElement x="1" y="2" width="572" height="37" backcolor="#F1EDED" uuid="0f5e69f9-4aa0-47b0-b1a9-9a9bcd2433fa"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
 				</rectangle>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="67" y="2" width="111" height="17" uuid="6732fbe6-9199-4832-ac74-1aa5975b2741"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="67" y="2" width="111" height="37" uuid="6732fbe6-9199-4832-ac74-1aa5975b2741"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -153,7 +153,7 @@
 new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="178" y="2" width="80" height="17" uuid="bd7b2820-a273-4108-8b27-d0e2d8342965"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="184" y="2" width="114" height="37" uuid="bd7b2820-a273-4108-8b27-d0e2d8342965"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -163,7 +163,7 @@ new SimpleDateFormat("h:m a").format($F{consulta.fechaConsulta})]]></textFieldEx
 					<textFieldExpression><![CDATA[$F{consulta.tipoConsultaSecundaria}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="258" y="2" width="318" height="17" uuid="8feab1f6-2e46-46e0-a983-4bcc695a2322"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="307" y="2" width="269" height="37" uuid="8feab1f6-2e46-46e0-a983-4bcc695a2322"/>
 					<box leftPadding="3">
 						<bottomPen lineWidth="0.0"/>
 					</box>

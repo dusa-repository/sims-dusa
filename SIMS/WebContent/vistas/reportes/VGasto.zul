@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divGasto" apply="controlador.reporte.CGasto">
-		<groupbox width="75%" mold="3d" title="Gastos por Consulta">
+		<groupbox width="75%" mold="3d" title="Gastos">
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="15%" />

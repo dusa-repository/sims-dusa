@@ -218,8 +218,8 @@
 										<cell colspan="2">
 									<hbox>
 										<radiogroup id="rdgEstudia">
-											<radio label="Estudia *" value="si" id="rdoEstudia" />
-											<radio label="Trabaja *" value="no" id="rdoTrabaja" />
+											<radio label="Estudia" value="si" id="rdoEstudia" />
+											<radio label="Trabaja" value="no" id="rdoTrabaja" />
 										</radiogroup>
 									</hbox>
 										</cell>
