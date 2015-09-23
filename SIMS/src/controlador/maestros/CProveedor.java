@@ -247,9 +247,9 @@ public class CProveedor extends CGenerico {
 							guardarPrecios(proveedor);
 						}
 						limpiar();
-						msj.mensajeInformacion(Mensaje.guardado);
+						Mensaje.mensajeInformacion(Mensaje.guardado);
 					} else
-						msj.mensajeError(Mensaje.listaVacia);
+						Mensaje.mensajeError(Mensaje.listaVacia);
 				}
 			}
 
@@ -271,18 +271,18 @@ public class CProveedor extends CGenerico {
 												.buscarPorProveedor(proveedor);
 										if (!consultas1.isEmpty()
 												|| !consultas2.isEmpty())
-											msj.mensajeError(Mensaje.noEliminar);
+											Mensaje.mensajeError(Mensaje.noEliminar);
 										else {
 											servicioProveedor
 													.eliminar(proveedor);
 											limpiar();
-											msj.mensajeInformacion(Mensaje.eliminado);
+											Mensaje.mensajeInformacion(Mensaje.eliminado);
 										}
 									}
 								}
 							});
 				} else
-					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
+					Mensaje.mensajeAlerta(Mensaje.noSeleccionoRegistro);
 			}
 		};
 		botoneraProveedor.appendChild(botonera);
@@ -296,7 +296,7 @@ public class CProveedor extends CGenerico {
 					.buscarEstudiosUsados(proveedor);
 			List<ProveedorExamen> listaExamen = servicioProveedorExamen
 					.buscarExamenesUsados(proveedor);
-			if (!listaEstudios.isEmpty() && !listaExamen.isEmpty()) {
+			if (!listaEstudios.isEmpty() || !listaExamen.isEmpty()) {
 				String s = ";";
 				final StringBuffer sb = new StringBuffer();
 				sb.append("Tipo;Id;ServicioOfrecido;Precio" + "\n");
@@ -350,10 +350,10 @@ public class CProveedor extends CGenerico {
 							}
 						});
 			} else
-				msj.mensajeAlerta(Mensaje.noHayRegistros);
+				Mensaje.mensajeAlerta(Mensaje.noHayRegistros);
 
 		} else
-			msj.mensajeAlerta("Debe seleccionar un Proveedor previamente");
+			Mensaje.mensajeAlerta("Debe seleccionar un Proveedor previamente");
 
 	}
 
@@ -374,7 +374,7 @@ public class CProveedor extends CGenerico {
 					});
 			rowSubir.appendChild(rm);
 		} else
-			msj.mensajeError(Mensaje.archivoExcel);
+			Mensaje.mensajeError(Mensaje.archivoExcel);
 	}
 
 	protected void guardarPrecios(Proveedor proveedor) {
@@ -464,12 +464,12 @@ public class CProveedor extends CGenerico {
 							servicioProveedorServicio.eliminar(estudios);
 						servicioProveedorExamen.guardar(listaExamen);
 						servicioProveedorServicio.guardar(listaEstudios);
-						msj.mensajeInformacion("Archivo importado con exito"
+						Mensaje.mensajeInformacion("Archivo importado con exito"
 								+ "\n" + "Cantidad de Filas evaluadas:"
 								+ (row - 1) + "\n"
 								+ "Cantidad de Filas insertadas:" + (row - 1));
 					} else
-						msj.mensajeError("El archivo no ha podido ser importado, causas:"
+						Mensaje.mensajeError("El archivo no ha podido ser importado, causas:"
 								+ "\n"
 								+ mostrarError
 								+ "\n"
@@ -477,7 +477,7 @@ public class CProveedor extends CGenerico {
 								+ (row - 1)
 								+ "\n" + "Cantidad de Filas insertadas: 0");
 				} else
-					msj.mensajeError("Archivo vacio o con errores de formato");
+					Mensaje.mensajeError("Archivo vacio o con errores de formato");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -508,11 +508,11 @@ public class CProveedor extends CGenerico {
 				|| txtNombreProveedor.getText().compareTo("") == 0
 				|| txtTelefonoProveedor.getText().compareTo("") == 0
 				|| cmbCiudadProveedor.getText().compareTo("") == 0) {
-			msj.mensajeError(Mensaje.camposVacios);
+			Mensaje.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
 			if (!Validador.validarTelefono(txtTelefonoProveedor.getValue())) {
-				msj.mensajeError(Mensaje.telefonoInvalido);
+				Mensaje.mensajeError(Mensaje.telefonoInvalido);
 				return false;
 			} else
 				return true;
@@ -562,7 +562,7 @@ public class CProveedor extends CGenerico {
 	@Listen("onChange = #txtTelefonoProveedor")
 	public void validarTelefono() {
 		if (!Validador.validarTelefono(txtTelefonoProveedor.getValue())) {
-			msj.mensajeAlerta(Mensaje.telefonoInvalido);
+			Mensaje.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
 

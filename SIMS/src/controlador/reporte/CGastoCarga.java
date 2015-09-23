@@ -242,7 +242,7 @@ public class CGastoCarga extends CGenerico {
 		for (int i = 0; i < consultas.size(); i++) {
 			double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
 			costoMedicinas = getServicioF4111().sumarPorOrden(
-					consultas.get(i).getIdConsulta());
+					consultas.get(i).getIdConsulta(), "MK");
 			costoExamenes = getServicioConsultaExamen().sumPorConsulta(
 					consultas.get(i));
 			costoEspecialistas = getServicioConsultaEspecialista()
@@ -266,7 +266,7 @@ public class CGastoCarga extends CGenerico {
 			double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
 			// Suma lo que ha entregado
 			costoMedicinas = getServicioF4111().sumarPorOrden(
-					ordenes.get(i).getIdOrden());
+					ordenes.get(i).getIdOrden(), "MC");
 			costoExamenes = getServicioOrdenExamen()
 					.sumPorOrden(ordenes.get(i));
 			costoEspecialistas = getServicioOrdenEspecialista().sumPorOrden(

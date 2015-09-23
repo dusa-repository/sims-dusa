@@ -47,6 +47,6 @@ public interface IF4111DAO extends JpaRepository<F4111, Double> {
 	F4111 findByIldocAndIldctAndIlitm(Double claveDoc, String string,
 			Double double1);
 
-	@Query("select coalesce((SUM(f.ilpaid)),'0') from F4111 f where f.ildoc=?1")
-	double sumByDoc(Double codigoConsulta);
+	@Query("select coalesce((SUM(f.ilpaid)),'0') from F4111 f where f.iltrno=?1 and f.ildct=?2")
+	double sumByDoc(Double codigoConsulta, String tipo);
 }

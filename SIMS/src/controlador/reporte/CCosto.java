@@ -223,7 +223,7 @@ public class CCosto extends CGenerico {
 				Consulta consulta = consultas.get(i).getConsulta();
 				double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
 				costoMedicinas = getServicioF4111().sumarPorOrden(
-						codigoConsulta);
+						codigoConsulta, "MK");
 				costoExamenes = getServicioConsultaExamen().sumPorConsulta(
 						consulta);
 				costoEspecialistas = getServicioConsultaEspecialista()
@@ -243,7 +243,7 @@ public class CCosto extends CGenerico {
 				Consulta consulta = consultas.get(i).getConsulta();
 				double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
 				costoMedicinas = getServicioF4111().sumarPorOrden(
-						codigoConsulta);
+						codigoConsulta, "MK");
 				costoExamenes = getServicioConsultaExamen().sumPorConsulta(
 						consulta);
 				costoEspecialistas = getServicioConsultaEspecialista()

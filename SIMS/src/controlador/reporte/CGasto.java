@@ -406,7 +406,7 @@ public class CGasto extends CGenerico {
 				double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
 				// Suma lo que ha entregado
 				costoMedicinas = getServicioF4111().sumarPorOrden(
-						consultas.get(i).getIdConsulta());
+						consultas.get(i).getIdConsulta(), "MK");
 				costoExamenes = getServicioConsultaExamen().sumPorConsulta(
 						consultas.get(i));
 				costoEspecialistas = getServicioConsultaEspecialista()
@@ -518,7 +518,7 @@ public class CGasto extends CGenerico {
 			double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
 			// Suma lo que ha entregado
 			costoMedicinas = getServicioF4111().sumarPorOrden(
-					consulta.getIdConsulta());
+					consulta.getIdConsulta(), "MK");
 			costoExamenes = getServicioConsultaExamen()
 					.sumPorConsulta(consulta);
 			costoEspecialistas = getServicioConsultaEspecialista()
@@ -642,7 +642,7 @@ public class CGasto extends CGenerico {
 				double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
 				// Suma lo que ha entregado
 				costoMedicinas = getServicioF4111().sumarPorOrden(
-						ordenes.get(i).getIdOrden());
+						ordenes.get(i).getIdOrden(), "MC");
 				costoExamenes = getServicioOrdenExamen().sumPorOrden(
 						ordenes.get(i));
 				costoEspecialistas = getServicioOrdenEspecialista()
@@ -756,7 +756,7 @@ public class CGasto extends CGenerico {
 			double costoMedicinas, costoExamenes, costoEspecialistas, costoEstudios, costoConsultas;
 			// Suma lo que ha entregado
 			costoMedicinas = getServicioF4111().sumarPorOrden(
-					orden.getIdOrden());
+					orden.getIdOrden(), "MC");
 			costoExamenes = getServicioOrdenExamen()
 					.sumPorOrden(orden);
 			costoEspecialistas = getServicioOrdenEspecialista()

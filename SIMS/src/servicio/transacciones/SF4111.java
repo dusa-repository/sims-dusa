@@ -92,8 +92,9 @@ public class SF4111 {
 		return iF4111DAO.findByIldocAndIldctAndIlitm(claveDoc, string, double1);
 	}
 
-	public double sumarPorOrden(long codigoConsulta) {
+	public double sumarPorOrden(long codigoConsulta, String dct) {
 		Long codigo = codigoConsulta;
-		return iF4111DAO.sumByDoc(codigo.doubleValue());
+		System.out.println(codigo.doubleValue());
+		return iF4111DAO.sumByDoc(codigo.doubleValue(), dct);
 	}
 }

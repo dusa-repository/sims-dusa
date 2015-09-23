@@ -1594,13 +1594,13 @@ public class CConsulta extends CGenerico {
 	}
 
 	public void guardarEspecialistas(Consulta consultaDatos) {
+		ltbEspecialistasAgregados.renderAll();
 		List<ConsultaEspecialista> listaConsultaEspecialista = new ArrayList<ConsultaEspecialista>();
 		for (int i = 0; i < ltbEspecialistasAgregados.getItemCount(); i++) {
 			Listitem listItem = ltbEspecialistasAgregados.getItemAtIndex(i);
-			Integer id = ((Spinner) ((listItem.getChildren().get(4)))
+			String id = ((Textbox) ((listItem.getChildren().get(4)))
 					.getFirstChild()).getValue();
-			Especialista especialista = servicioEspecialista.buscar(String
-					.valueOf(id));
+			Especialista especialista = servicioEspecialista.buscar(id);
 			double valor = ((Doublespinner) ((listItem.getChildren().get(3)))
 					.getFirstChild()).getValue();
 			String observacion = ((Textbox) ((listItem.getChildren().get(2)))
@@ -5912,10 +5912,10 @@ public class CConsulta extends CGenerico {
 		if (ltbEspecialistasAgregados.getItemCount() != 0) {
 			for (int i = 0; i < ltbEspecialistasAgregados.getItemCount(); i++) {
 				Listitem listItem = ltbEspecialistasAgregados.getItemAtIndex(i);
-				Integer idEs = ((Spinner) ((listItem.getChildren().get(4)))
+				String idEs = ((Textbox) ((listItem.getChildren().get(4)))
 						.getFirstChild()).getValue();
 				Long id = idConsulta;
-				String idEspecialista = String.valueOf(idEs);
+				String idEspecialista = idEs;
 				Clients.evalJavaScript("window.open('"
 						+ damePath()
 						+ "Reportero?valor=2&valor2="

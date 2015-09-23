@@ -483,14 +483,14 @@ public class COrden extends CGenerico {
 	}
 
 	protected void guardarEspecialistas(Orden orden) {
+		ltbEspecialistasAgregados.renderAll();
 		List<OrdenEspecialista> listaConsultaEspecialista = new ArrayList<OrdenEspecialista>();
 		String prioridad = cmbPrioridadEspecialista.getValue();
 		for (int i = 0; i < ltbEspecialistasAgregados.getItemCount(); i++) {
 			Listitem listItem = ltbEspecialistasAgregados.getItemAtIndex(i);
-			Integer id = ((Spinner) ((listItem.getChildren().get(4)))
+			String id2 = ((Textbox) ((listItem.getChildren().get(4)))
 					.getFirstChild()).getValue();
-			Especialista especialista = servicioEspecialista.buscar(String
-					.valueOf(id));
+			Especialista especialista = servicioEspecialista.buscar(id2);
 			double valor = ((Doublespinner) ((listItem.getChildren().get(3)))
 					.getFirstChild()).getValue();
 			String observacion = ((Textbox) ((listItem.getChildren().get(2)))
@@ -1943,10 +1943,10 @@ public class COrden extends CGenerico {
 		if (ltbEspecialistasAgregados.getItemCount() != 0) {
 			for (int i = 0; i < ltbEspecialistasAgregados.getItemCount(); i++) {
 				Listitem listItem = ltbEspecialistasAgregados.getItemAtIndex(i);
-				Integer idEs = ((Spinner) ((listItem.getChildren().get(4)))
+				String idEs = ((Textbox) ((listItem.getChildren().get(4)))
 						.getFirstChild()).getValue();
 				Long id = idOrden;
-				String idEspecialista = String.valueOf(idEs);
+				String idEspecialista = idEs;
 				Clients.evalJavaScript("window.open('"
 						+ damePath()
 						+ "Reportero?valor=21&valor2="

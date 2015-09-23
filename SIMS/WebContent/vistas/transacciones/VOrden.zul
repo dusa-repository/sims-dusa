@@ -636,7 +636,7 @@
 												width="98%" readonly="true" />
 										</listcell>
 										<listcell>
-											<spinner inplace="true" width="98%" value="${each.cedula}"
+											<textbox inplace="true" width="98%" value="${each.cedula}"
 												visible="false" disabled="true" />
 										</listcell>
 									</listitem>
@@ -675,7 +675,7 @@
 												width="98%" />
 										</listcell>
 										<listcell>
-											<spinner value="${each.especialista.cedula}" width="98%"
+											<textbox value="${each.especialista.cedula}" width="98%"
 												visible="false" disabled="true" />
 										</listcell>
 									</listitem>
