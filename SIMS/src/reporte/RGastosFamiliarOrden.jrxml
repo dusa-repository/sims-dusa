@@ -107,7 +107,7 @@
 					</textElement>
 					<text><![CDATA[Total Trabajador:]]></text>
 				</staticText>
-				<textField>
+				<textField pattern="###0.00;-###0.00">
 					<reportElement x="185" y="1" width="68" height="17" uuid="6072eb78-2ca7-4d6d-a989-062261dfa066"/>
 					<textElement textAlignment="Center">
 						<font isBold="true"/>
@@ -135,7 +135,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{est_trabajador}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="###0.00;-###0.00">
 					<reportElement x="485" y="1" width="88" height="17" uuid="1853b0a5-7887-431b-b251-011619d55b9a"/>
 					<box>
 						<topPen lineWidth="0.5"/>
@@ -211,7 +211,7 @@
 					</textElement>
 					<text><![CDATA[Total Familiar:]]></text>
 				</staticText>
-				<textField>
+				<textField pattern="###0.00;-###0.00">
 					<reportElement x="185" y="1" width="68" height="17" uuid="32794f78-65a0-4751-8546-d53df2ae7abf"/>
 					<textElement textAlignment="Center">
 						<font isBold="true"/>
@@ -239,7 +239,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$V{est_familiar}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField pattern="###0.00;-###0.00">
 					<reportElement x="485" y="1" width="88" height="17" uuid="6916b39d-68f0-4431-95b4-efd703385919"/>
 					<box>
 						<topPen lineWidth="0.5"/>
@@ -419,7 +419,7 @@ new SimpleDateFormat("h:m a").format($F{fechaOrden})]]></textFieldExpression>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{motivo.descripcion}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="185" y="0" width="68" height="20" uuid="70f4adff-6cdc-4d4f-a0ca-2051e590b17e"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{costoA}]]></textFieldExpression>
@@ -439,7 +439,7 @@ new SimpleDateFormat("h:m a").format($F{fechaOrden})]]></textFieldExpression>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{costoD}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
+			<textField isStretchWithOverflow="true" pattern="###0.00;-###0.00">
 				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="485" y="0" width="87" height="20" uuid="e772e284-4d5c-487e-b628-ee4b40c66112"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{costoE}]]></textFieldExpression>
@@ -483,7 +483,7 @@ new SimpleDateFormat("h:m a").format($F{fechaOrden})]]></textFieldExpression>
 				</textElement>
 				<text><![CDATA[Total Gastos por Familiares:]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="185" y="0" width="68" height="20" uuid="85ef5d7a-0c84-403a-a337-869a0c0d36a7"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
@@ -511,7 +511,7 @@ new SimpleDateFormat("h:m a").format($F{fechaOrden})]]></textFieldExpression>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{est_total}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="###0.00;-###0.00">
 				<reportElement x="485" y="0" width="88" height="20" uuid="cf3f0c60-839f-42b9-a648-a586a7d55db6"/>
 				<box>
 					<topPen lineWidth="0.5"/>

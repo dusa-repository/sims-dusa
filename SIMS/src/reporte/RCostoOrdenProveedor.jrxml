@@ -134,15 +134,15 @@
 	<group name="consulta">
 		<groupExpression><![CDATA[$F{orden.idOrden}]]></groupExpression>
 		<groupHeader>
-			<band height="37">
+			<band height="18">
 				<rectangle>
-					<reportElement x="0" y="2" width="573" height="35" backcolor="#F1EDED" uuid="0f5e69f9-4aa0-47b0-b1a9-9a9bcd2433fa"/>
+					<reportElement x="0" y="2" width="573" height="16" backcolor="#F1EDED" uuid="0f5e69f9-4aa0-47b0-b1a9-9a9bcd2433fa"/>
 					<graphicElement>
 						<pen lineWidth="0.0"/>
 					</graphicElement>
 				</rectangle>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="67" y="1" width="111" height="36" uuid="6732fbe6-9199-4832-ac74-1aa5975b2741"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="50" y="1" width="128" height="17" uuid="6732fbe6-9199-4832-ac74-1aa5975b2741"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -153,7 +153,7 @@
 new SimpleDateFormat("h:m a").format($F{orden.fechaOrden})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="178" y="1" width="103" height="36" uuid="bd7b2820-a273-4108-8b27-d0e2d8342965"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="178" y="1" width="114" height="17" uuid="bd7b2820-a273-4108-8b27-d0e2d8342965"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -163,7 +163,7 @@ new SimpleDateFormat("h:m a").format($F{orden.fechaOrden})]]></textFieldExpressi
 					<textFieldExpression><![CDATA[$F{orden.motivo.descripcion}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="292" y="1" width="284" height="36" uuid="8feab1f6-2e46-46e0-a983-4bcc695a2322"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="292" y="1" width="292" height="17" uuid="8feab1f6-2e46-46e0-a983-4bcc695a2322"/>
 					<box leftPadding="3">
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -173,7 +173,7 @@ new SimpleDateFormat("h:m a").format($F{orden.fechaOrden})]]></textFieldExpressi
 					<textFieldExpression><![CDATA[$F{orden.paciente.cedula}+" "+$F{orden.paciente.primerNombre}+" "+$F{orden.paciente.primerApellido}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="14" y="1" width="53" height="17" uuid="b96e9006-fc97-4b9d-bc6a-2197e897941d"/>
+					<reportElement x="11" y="1" width="39" height="17" uuid="b96e9006-fc97-4b9d-bc6a-2197e897941d"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -183,7 +183,7 @@ new SimpleDateFormat("h:m a").format($F{orden.fechaOrden})]]></textFieldExpressi
 					<text><![CDATA[Orden:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="2" y="2" width="12" height="17" uuid="faec1fb1-e36e-4595-9ded-22ece082cc51"/>
+					<reportElement x="-1" y="0" width="12" height="17" uuid="faec1fb1-e36e-4595-9ded-22ece082cc51"/>
 					<box>
 						<bottomPen lineWidth="0.0"/>
 					</box>
@@ -289,14 +289,14 @@ new SimpleDateFormat("h:m a").format($F{orden.fechaOrden})]]></textFieldExpressi
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="40" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="94" y="22" width="384" height="17" uuid="6237ae26-0d31-4818-9b1e-807f8cb33189"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="94" y="6" width="384" height="17" uuid="6237ae26-0d31-4818-9b1e-807f8cb33189"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{examen.nombre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="478" y="22" width="95" height="17" uuid="9e660f36-ae6f-41bc-adce-c57a1f543ff7"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="478" y="6" width="95" height="17" uuid="9e660f36-ae6f-41bc-adce-c57a1f543ff7"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{costo}]]></textFieldExpression>
 			</textField>
