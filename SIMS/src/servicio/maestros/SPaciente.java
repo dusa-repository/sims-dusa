@@ -990,4 +990,17 @@ public class SPaciente {
 		return pacienteDAO.buscarPorEdadesEmpresaSexoFamiliares(dea,aa,empresa ,sexo,parentesco,b);
 	}
 
+	public List<Paciente> buscarPorParentesco(String string) {
+		// TODO Auto-generated method stub
+		return pacienteDAO.findByTrabajadorFalseAndEstatusTrueAndParentescoFamiliar(string);
+	}
+
+	public List<Paciente> buscarEntreFechasDecesos(Date fecha1, Date fecha2) {
+		return pacienteDAO.findByMuerteTrueAndFechaMuerteBetween(fecha1,fecha2);
+	}
+
+	public List<Paciente> buscarEntreFechasAfiliaciones(Date desde, Date hasta) {
+		return pacienteDAO.findByFechaAfiliacionBetween(desde,hasta);
+	}
+
 }

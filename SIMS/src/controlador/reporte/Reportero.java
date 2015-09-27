@@ -54,13 +54,16 @@ public class Reportero extends HttpServlet {
 		CPacientes pacientes = new CPacientes();
 		COrden orden = new COrden();
 		CGasto gasto = new CGasto();
+		CAfiliaciones cAfiliacion = new CAfiliaciones();
 		CResumenTrabajadores resumenTrabajadores = new CResumenTrabajadores();
 		CReporteCertificado certificado = new CReporteCertificado();
 		COrdenProveedor ordenProveedor = new COrdenProveedor();
 		CReporteOrden reporteOrden = new CReporteOrden();
 		COrdenesConsulta ordenesConsulta = new COrdenesConsulta();
 		CActualizacion cActu = new CActualizacion();
+		CResumenParentesco cParen = new CResumenParentesco();
 		CGastoCarga gastoCarga = new CGastoCarga();
+		CDecesos cDe = new CDecesos();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
@@ -294,6 +297,15 @@ public class Reportero extends HttpServlet {
 				break;
 			case "57":
 				fichero = pacientes.reporteEmpresas(par6, par7, par8, par9,par10, tipo);
+				break;
+			case "58":
+				fichero = cParen.reporteResumen(tipo);
+				break;
+			case "59":
+				fichero = cDe.reporteResumen(par6, par7,tipo);
+				break;
+			case "60":
+				fichero = cAfiliacion.reporteResumen(par6, par7,tipo);
 				break;
 			default:
 				break;

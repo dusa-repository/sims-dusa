@@ -202,6 +202,9 @@ public class Paciente implements Serializable {
 	@Column(name = "fecha_muerte")
 	private Timestamp fechaMuerte;
 
+	@Column(name = "fecha_afiliacion")
+	private Timestamp fechaAfiliacion;
+	
 	@Column(name = "fecha_ingreso")
 	private Timestamp fechaIngreso;
 
@@ -1365,6 +1368,14 @@ public class Paciente implements Serializable {
 
 	public void setRevision(Boolean revision) {
 		this.revision = revision;
+	}
+
+	public Timestamp getFechaAfiliacion() {
+		return fechaAfiliacion;
+	}
+
+	public void setFechaAfiliacion(Timestamp fechaAfiliacion) {
+		this.fechaAfiliacion = fechaAfiliacion;
 	}
 	
 

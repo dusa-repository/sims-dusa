@@ -733,7 +733,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public Date agregarDia(Date fecha) {
 		Calendar calendario = Calendar.getInstance();
 		calendario.setTime(fecha);
-		calendario.add(Calendar.DAY_OF_YEAR, +1);
+		calendario.add(Calendar.DAY_OF_YEAR, +2);
 		return fecha = calendario.getTime();
 	}
 	

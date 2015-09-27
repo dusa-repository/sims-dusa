@@ -43,7 +43,7 @@
 							value="0" width="100%" />
 						<label class="etiqueta" value="A:" width="100%" />
 						<spinner width="100%" value="100" id="spnA" step="1"
-							constraint="min 0 max 100" />
+							constraint="min 0 max 200" />
 						<label class="etiqueta" value="Años" width="100%" />
 						<hbox>
 							<label class="etiqueta" value="Sexo:" />

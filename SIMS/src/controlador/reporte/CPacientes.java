@@ -115,7 +115,7 @@ public class CPacientes extends CGenerico {
 				mapa = null;
 			}
 		}
-
+	
 		switch (titulo) {
 		case "Familiares":
 			rowTrabajador.setVisible(true);
@@ -954,64 +954,62 @@ public class CPacientes extends CGenerico {
 		int aa = spnA.getValue();
 		String de = String.valueOf(spnDe.getValue());
 		String a = String.valueOf(spnA.getValue());
-		
+
 		if (cmbSexo.getValue().equals("TODOS"))
-			sexo="%";
+			sexo = "%";
 		else
 			sexo = cmbSexo.getValue();
-		
+
 		if (cmbParentesco.getValue().equals("TODOS"))
-			parentesco="%";
+			parentesco = "%";
 		else
 			parentesco = cmbParentesco.getValue();
-		
+
 		String empresa = "";
 		if (cmbEmpresa.getValue().equals("TODAS"))
 			empresa = "%";
-		else 
+		else
 			empresa = cmbEmpresa.getSelectedItem().getContext();
 
+		String tipoReporte = cmbTipo.getValue();
 
-		String tipoReporte = cmbTipo.getValue();	
+		if (getServicioPaciente()
+				.buscarPorEdadesEmpresaSexoParentescoFamiliares(dea, aa,
+						empresa, sexo, parentesco, false).isEmpty())
+			msj.mensajeAlerta(Mensaje.noHayRegistros);
+		else {
+			if (sexo.equals("%"))
+				sexo = "TODOS";
+			if (empresa.equals("%"))
+				empresa = "TODAS";
+			if (parentesco.equals("%"))
+				parentesco = "TODOS";
 
-		if (getServicioPaciente().buscarPorEdadesEmpresaSexoParentescoFamiliares(dea, aa,empresa,sexo,parentesco, false)
-				.isEmpty())
-				msj.mensajeAlerta(Mensaje.noHayRegistros);
-			else
-			{
-				if (sexo.equals("%"))
-					sexo = "TODOS";
-				if (empresa.equals("%"))
-					empresa = "TODAS";
-				if (parentesco.equals("%"))
-					parentesco = "TODOS";
-				
-				Clients.evalJavaScript("window.open('"
-						+ damePath()
-						+ "Reportero?valor=57&valor6="
-						+ de
-						+ "&valor7="
-						+ a
-						+ "&valor8="
-						+ sexo
-						+ "&valor9="
-						+ empresa
-						+ "&valor10="
-						+ parentesco
-						+ "&valor20="
-						+ tipoReporte
-						+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
-		
-			}
+			Clients.evalJavaScript("window.open('"
+					+ damePath()
+					+ "Reportero?valor=57&valor6="
+					+ de
+					+ "&valor7="
+					+ a
+					+ "&valor8="
+					+ sexo
+					+ "&valor9="
+					+ empresa
+					+ "&valor10="
+					+ parentesco
+					+ "&valor20="
+					+ tipoReporte
+					+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+
+		}
 	}
 
 	public byte[] reporteEmpresas(String de, String a, String sexo,
-			String empresa,String parentesco, String tipoReporte)
+			String empresa, String parentesco, String tipoReporte)
 			throws JRException {
 		byte[] fichero = null;
 		int dea = Integer.valueOf(de);
 		int aa = Integer.valueOf(a);
-
 
 		if (sexo.equals("TODOS"))
 			sexo = "%";
@@ -1019,32 +1017,33 @@ public class CPacientes extends CGenerico {
 			empresa = "%";
 		if (parentesco.equals("TODOS"))
 			parentesco = "%";
-		
-		List<Paciente> pacientes = getServicioPaciente().buscarPorEdadesEmpresaSexoParentescoFamiliares(dea, aa,empresa,sexo, parentesco,false);
-			
+
+		List<Paciente> pacientes = getServicioPaciente()
+				.buscarPorEdadesEmpresaSexoParentescoFamiliares(dea, aa,
+						empresa, sexo, parentesco, false);
+
 		for (int i = 0; i < pacientes.size(); i++) {
 
 			Paciente paci = pacientes.get(i);
 			Paciente trabaja = getServicioPaciente().buscarPorCedula(
 					paci.getCedulaFamiliar());
-			if (trabaja != null)
-			{
+			if (trabaja != null) {
 				paci.setCondicion(trabaja.getPrimerNombre() + " "
 						+ trabaja.getPrimerApellido());
 				paci.setFicha(trabaja.getFicha());
-				if(trabaja.getEmpresa()!=null)
-				paci.setCertificado(trabaja.getEmpresa().getNombre());
-			}
-			else {
+				if (trabaja.getEmpresa() != null)
+					paci.setCertificado(trabaja.getEmpresa().getNombre());
+			} else {
 				pacientes.remove(i);
 				i--;
 			}
 		}
-		
+
 		if (empresa.equals("%"))
 			empresa = "TODAS";
-		else 
-			empresa = getServicioEmpresa().buscar(Long.valueOf(empresa)).getNombre();
+		else
+			empresa = getServicioEmpresa().buscar(Long.valueOf(empresa))
+					.getNombre();
 		if (parentesco.equals("%"))
 			parentesco = "TODOS";
 
@@ -1053,7 +1052,7 @@ public class CPacientes extends CGenerico {
 		p.put("a", a);
 		p.put("empresa", empresa);
 		p.put("parentesco", parentesco);
-		
+
 		JasperReport reporte = (JasperReport) JRLoader.loadObject(getClass()
 				.getResource("/reporte/RFamiliaresEmpresa.jasper"));
 		if (tipoReporte.equals("EXCEL")) {

@@ -316,6 +316,7 @@ public class CPaciente extends CGenerico {
 				mapa = null;
 			}
 		}
+		msj.mensajeAlerta("Antes de guardar un nuevo paciente, recuerde verificar si estuvo registrado con anterioridad en el sistema, en ese caso dirigirse a la pantalla cambiar cedula");
 		llenarComboCiudad();
 		llenarComboEmpresa();
 		llenarComboArea();
@@ -493,7 +494,19 @@ public class CPaciente extends CGenerico {
 					String carrera = txtCarreraActual.getValue();
 					String periodo = txtPeriodo.getValue();
 					
-
+					Timestamp fechaAfiliacion = null;
+					Boolean cronico = false;
+					Paciente pa = servicioPaciente.buscarPorCedula(txtCedulaPaciente
+							.getValue());
+					if (pa!= null) {
+						if (pa.getCronico()!=null && pa.getCronico()) {
+							cronico = true;
+						}
+					}
+					else {
+						fechaAfiliacion = fechaHora;
+					}
+					
 					Paciente paciente = new Paciente(cedula, ficha, apellido1,
 							nombre1, apellido2, nombre2, true, discapacidad,
 							alergia, lentes, fechaNac, lugarNac, sexo, edad,
@@ -503,7 +516,10 @@ public class CPaciente extends CGenerico {
 							imagen, direccion, correo, telefono1, telefono2,
 							nombresE, apellidosE, parentescoE, telefono1E,
 							telefono2E, cedulaFamiliar, "", empresa, ciudad,
-							cargo, area, false);
+							cargo, area, cronico);
+					
+					paciente.setFechaAfiliacion(fechaAfiliacion);
+					
 					paciente.setBrigadista(brigadista);
 					paciente.setEstadoCivil(estadoCivil);
 					paciente.setNacionalidad(nacionalidad);

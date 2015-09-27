@@ -1,5 +1,6 @@
 package interfacedao.maestros;
 
+import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Cargo;
@@ -242,6 +243,15 @@ public interface IPacienteDAO extends JpaRepository<Paciente, String> {
 			+ " order by p.id_empresa asc, p.cedulaFamiliar asc", nativeQuery = true)
 	List<Paciente> buscarPorEdadesEmpresaSexoFamiliares(int dea, int aa,
 			String empresa, String sexo, String parentesco, boolean b);
+
+
+	List<Paciente> findByTrabajadorFalseAndEstatusTrueAndParentescoFamiliar(
+			String string);
+
+	List<Paciente> findByMuerteTrueAndFechaMuerteBetween(Date fecha1,
+			Date fecha2);
+
+	List<Paciente> findByFechaAfiliacionBetween(Date desde, Date hasta);
 	
 	
 //@Query("select p from Paciente p where p.edad between ?1 and ?2 and p.trabajador= ?3 and p.cedulaFamiliar=?4 and p.sexo=?5 order by p.cedulaFamiliar asc, p.cedula asc")
