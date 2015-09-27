@@ -64,6 +64,7 @@ public class Reportero extends HttpServlet {
 		CResumenParentesco cParen = new CResumenParentesco();
 		CGastoCarga gastoCarga = new CGastoCarga();
 		CDecesos cDe = new CDecesos();
+		CDiasHorasReposo cDiasReposos = new CDiasHorasReposo();
 		ServletOutputStream out;
 		Long part2 = (long) 0;
 		String par1 = request.getParameter("valor");
@@ -306,6 +307,9 @@ public class Reportero extends HttpServlet {
 				break;
 			case "60":
 				fichero = cAfiliacion.reporteResumen(par6, par7,tipo);
+				break;
+			case "61":
+				fichero = cDiasReposos.reporteResumen(par6, par7,tipo);
 				break;
 			default:
 				break;

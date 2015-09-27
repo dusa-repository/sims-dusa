@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RAfiliaciones" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b398c360-2bd1-4024-a6d3-7eff82a4fe8d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="desde" class="java.lang.String"/>
+	<parameter name="hasta" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="primerNombre" class="java.lang.String"/>
+	<field name="primerApellido" class="java.lang.String"/>
+	<field name="fechaAfiliacion" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="119" splitType="Stretch">
+			<textField>
+				<reportElement x="332" y="85" width="94" height="20" uuid="cf8e11ae-f2ff-4985-a7d0-f3ae57b60205"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hasta}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="40" y="19" width="106" height="52" uuid="46242771-a44d-481e-906b-5e7ee321e5ea"/>
+				<imageExpression><![CDATA["/reporte/LogoDusa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="294" y="85" width="39" height="20" uuid="44633a78-df55-436f-adbf-a7d93c363b89"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="85" width="44" height="20" uuid="ae352346-8f74-4884-b410-b7010ee52d38"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="30" width="347" height="20" uuid="352557ec-db8a-4912-aded-eb5dcd5a7df0"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AFILIACIONES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="85" width="86" height="20" uuid="4744e799-46a4-48fc-a329-c265022eba21"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{desde}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="19" splitType="Stretch">
+			<rectangle>
+				<reportElement x="2" y="6" width="555" height="13" backcolor="#CCCCCC" uuid="01b7cd0d-3db1-499c-bf5c-1f8b863b814a"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="444" y="6" width="111" height="13" backcolor="#CCCCCC" uuid="04c11cd2-e8fd-45be-abbe-b70593574f81"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Afiliacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="6" width="67" height="13" backcolor="#CCCCCC" uuid="7b0ef72a-fbdb-4bff-9b46-95c24181392f"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="69" y="6" width="375" height="13" backcolor="#CCCCCC" uuid="47163e58-7848-4af8-a922-607a54d8aa59"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="2" width="67" height="20" uuid="05269322-398d-424a-93cb-bee3d78ac27e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="68" y="2" width="375" height="20" uuid="d31eb5bb-aa85-41c9-be47-6e48f3075f79"/>
+				<box leftPadding="2" rightPadding="2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{primerNombre}+" "+$F{primerApellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="2" width="111" height="20" uuid="f3f49a94-f064-46e1-bb67-62ef87b9bc6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{fechaAfiliacion})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="481" y="12" width="30" height="20" uuid="19eec8fb-e237-4032-b5e6-dd64a0b7ddb4"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="12" width="41" height="20" uuid="6b73e9c7-08b7-4e0b-b5a8-3d915a9ecd0d"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="407" y="12" width="66" height="20" uuid="41b36ba7-0f73-4faa-87d8-c4f5eb51c731"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="234" y="12" width="100" height="20" uuid="0b552f63-6abb-450d-87f8-804224ce4608"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="206" y="12" width="28" height="20" uuid="0c29537b-a10b-454b-9314-b4601db25f4c"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Pag.]]></text>
+			</staticText>
+			<textField pattern="h.mm a">
+				<reportElement x="511" y="12" width="45" height="20" uuid="1ad92afe-d665-4a40-b6b9-77ce4a7d0e0f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

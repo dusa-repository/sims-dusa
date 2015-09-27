@@ -58,6 +58,9 @@ public class CCambiarCedula extends CGenerico {
 	private String idPaciente = null;
 	Catalogo<Paciente> catalogoPaciente;
 	private String nombre;
+	private boolean nuevoFamiliar = false;
+	private boolean nuevoTrabajador = false;
+	private String cedFamiliar = "";
 
 	@Override
 	public void inicializar() throws IOException {
@@ -96,6 +99,14 @@ public class CCambiarCedula extends CGenerico {
 							.buscarPorCedula(nuevaCedula);
 					if (paciente == null) {
 						paciente = servicioPaciente.buscarPorCedula(idPaciente);
+						if (nuevoFamiliar) {
+							paciente.setTrabajador(false);
+							paciente.setCedulaFamiliar(cedFamiliar);
+						}
+						if (nuevoTrabajador)
+							paciente.setTrabajador(true);
+						
+						servicioPaciente.guardar(paciente);
 						modificarHistoriaPaciente(paciente, nuevaCedula);
 						limpiarCampos();
 						Mensaje.mensajeInformacion("Cedula Modificada Correctamente");
@@ -430,8 +441,34 @@ public class CCambiarCedula extends CGenerico {
 			if (txtCedulaPaciente2.getText().compareTo("") == 0) {
 				Mensaje.mensajeError("Debe llenar el campo de la Nueva Cedula");
 				return false;
-			} else
+			} else {
+				if (txtCedulaPaciente2.getValue().contains("-")
+						&& !idPaciente.contains("-")) {
+					System.out.println("contiene - y el otro no");
+					String ced = "";
+					int cont=0;
+					String cedulaNueva =txtCedulaPaciente2.getValue();
+					while(!String.valueOf(cedulaNueva.charAt(cont)).equalsIgnoreCase("-"))
+					{
+						ced = ced +String.valueOf(cedulaNueva.charAt(cont));
+						cont=cont+1;
+					}
+					if (servicioPaciente.buscarPorCedula(ced) != null) {
+						nuevoFamiliar = true;
+						cedFamiliar = ced;
+					} else {
+						msj.mensajeError("El cambio de trabajador a familiar no se puede realizar debido a que no existe trabajador con cedula"
+								+ "  :" + ced);
+						return false;
+					}
+				}
+				if (!txtCedulaPaciente2.getValue().contains("-")
+						&& idPaciente.contains("-")) {
+					nuevoTrabajador = true;
+					System.out.println(" no contiene - y el otro si");
+				}
 				return true;
+			}
 		}
 	}
 

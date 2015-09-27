@@ -288,7 +288,7 @@ public class CFamiliar extends CGenerico {
 			}
 		}
 		
-		msj.mensajeAlerta("Antes de guardar un nuevo paciente, recuerde verificar si estuvo registrado con anterioridad en el sistema, en ese caso dirigirse a la pantalla cambiar cedula");
+		msj.mensajeAlerta("Antes de guardar un nuevo paciente, recuerde verificar si estuvo registrado con anterioridad en el sistema, en ese caso dirigirse a la pantalla modificar cedula");
 		
 		llenarComboCiudad();
 		llenarComboCivil();
