@@ -1,10 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RDiasReposo" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="603ed21d-ee22-4f74-a88a-eefe5f94a12a">
-	<property name="ireport.zoom" value="1.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RDiasReposo" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isSummaryNewPage="true" isFloatColumnFooter="true" uuid="603ed21d-ee22-4f74-a88a-eefe5f94a12a">
+	<property name="ireport.zoom" value="1.100000000000001"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="desde" class="java.lang.String"/>
 	<parameter name="hasta" class="java.lang.String"/>
+	<field name="fechaReposo" class="java.sql.Timestamp"/>
+	<field name="tipoReposo" class="java.lang.String"/>
+	<field name="diasReposo" class="java.lang.Integer"/>
+	<variable name="variable1" class="java.lang.Integer" resetType="Group" resetGroup="Fecha" calculation="Sum">
+		<variableExpression><![CDATA[$F{tipoReposo}.equals("Dias") ? $F{diasReposo} : 0]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.lang.Integer" resetType="Group" resetGroup="Fecha" calculation="Sum">
+		<variableExpression><![CDATA[$F{tipoReposo}.equals("Horas") ? $F{diasReposo} : 0]]></variableExpression>
+	</variable>
+	<variable name="variable3" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{tipoReposo}.equals("Dias") ? $F{diasReposo} : 0]]></variableExpression>
+	</variable>
+	<variable name="variable4" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{tipoReposo}.equals("Horas") ? $F{diasReposo} : 0]]></variableExpression>
+	</variable>
+	<variable name="variable5" class="java.lang.Integer" resetType="Group" resetGroup="Fecha" calculation="Count">
+		<variableExpression><![CDATA[$F{tipoReposo}.equals("Dias")]]></variableExpression>
+	</variable>
+	<variable name="variable6" class="java.lang.Integer" resetType="Group" resetGroup="Fecha" calculation="Count">
+		<variableExpression><![CDATA[$F{tipoReposo}.equals("Horas") ? 1 : 0]]></variableExpression>
+	</variable>
+	<variable name="variable7" class="java.lang.Integer" resetType="Group" resetGroup="Fecha" calculation="Count">
+		<variableExpression><![CDATA[$F{tipoReposo}]]></variableExpression>
+	</variable>
+	<variable name="variable8" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{tipoReposo}.equals("Dias") ? 1 : 0]]></variableExpression>
+	</variable>
+	<variable name="variable9" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{tipoReposo}.equals("Horas") ? 1 : 0]]></variableExpression>
+	</variable>
+	<variable name="variable10" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{tipoReposo}]]></variableExpression>
+	</variable>
+	<group name="Fecha">
+		<groupExpression><![CDATA[new SimpleDateFormat("MMM").format($F{fechaReposo})]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="126" y="0" width="65" height="20" uuid="ae1a9f52-2eb0-42af-af6f-1cf9057e6783"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[new SimpleDateFormat("MMM").format($F{fechaReposo})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="265" y="0" width="83" height="20" uuid="83e52bcb-81d6-47b6-a9af-25392fde4ed2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="347" y="0" width="83" height="20" uuid="f14a9197-44a4-4717-a797-18de946ed6b4"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="191" y="0" width="75" height="20" uuid="2b5bf3e5-d811-4715-82c6-c0193f41668f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable7}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -52,8 +112,72 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="126" y="0" width="65" height="30" uuid="b1d86be1-2e65-43d2-9b80-52fbcf7d230e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="191" y="0" width="75" height="30" uuid="6d460e32-bfdb-47a5-b42f-164014d422c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cant. Reposos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="0" width="83" height="30" uuid="c11009aa-f08a-4d08-b77c-445bdd42a9dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Dias Reposo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="347" y="0" width="83" height="30" uuid="c8c96856-4282-43ee-9389-a2178eee6c4e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Horas Reposo]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
+	<detail>
+		<band/>
+	</detail>
+	<columnFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="265" y="0" width="83" height="20" uuid="2bb74678-d58f-4a83-95a6-2bfa04343516"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="347" y="0" width="83" height="20" uuid="7944967c-ba30-46c2-ae83-9ce94fb6f7fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable4}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="126" y="0" width="65" height="20" uuid="83e66265-fd82-4b89-86ee-9a9629d0b952"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="191" y="0" width="75" height="20" uuid="3def0f61-4d2c-475d-987e-4af5d26db617"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable10}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
 	<pageFooter>
 		<band height="27" splitType="Stretch">
 			<textField pattern="dd/MM/yyyy">
@@ -92,6 +216,79 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="582" splitType="Stretch">
+			<barChart>
+				<chart isShowLegend="false">
+					<reportElement x="0" y="54" width="555" height="206" uuid="0823f49c-c43f-41d4-82e7-465d06a48ee1"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Dias de Reposo"]]></seriesExpression>
+						<categoryExpression><![CDATA[new SimpleDateFormat("MMM").format($F{fechaReposo})]]></categoryExpression>
+						<valueExpression><![CDATA[$V{variable1}]]></valueExpression>
+						<labelExpression><![CDATA[$V{variable1}.toString()]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot orientation="Horizontal">
+						<seriesColor seriesOrder="0" color="#3366FF"/>
+					</plot>
+					<itemLabel color="#000000"/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="199" y="21" width="134" height="20" uuid="cb9b22a2-8825-48e4-bf12-11a6fb73d7d8"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Dias de Reposo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="282" width="134" height="20" uuid="611a36be-7c6d-4872-8d11-06868d4c55f3"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Horas de Reposo]]></text>
+			</staticText>
+			<barChart>
+				<chart isShowLegend="false">
+					<reportElement x="-1" y="313" width="556" height="209" uuid="e605f34f-a643-4f26-bb66-6d538b732bf1"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Horas de Reposo"]]></seriesExpression>
+						<categoryExpression><![CDATA[new SimpleDateFormat("MMM").format($F{fechaReposo})]]></categoryExpression>
+						<valueExpression><![CDATA[$V{variable2}]]></valueExpression>
+						<labelExpression><![CDATA[$V{variable2}.toString()]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot orientation="Horizontal">
+						<seriesColor seriesOrder="0" color="#33FF33"/>
+					</plot>
+					<itemLabel color="#000000"/>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
 	</summary>
 </jasperReport>

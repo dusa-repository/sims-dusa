@@ -129,7 +129,7 @@ public class CDiasHorasReposo extends CGenerico {
 		}
 		fecha2 = agregarDia(fecha2);
 
-		List<Consulta> reposos= getServicioConsulta().buscarEntreFechasReposoyTrabajadores(fecha1, fecha2);
+		List<Consulta> reposos= getServicioConsulta().buscarEntreFechasReposoyTrabajadoresOrdenadoPorFecha(fecha1, fecha2);
 
 		Map<String, Object> p = new HashMap<String, Object>();
 		p.put("desde", par6);

@@ -216,6 +216,17 @@ public class SConsulta {
 						fecha1, fecha2, true, true, o);
 	}
 
+	public List<Consulta> buscarEntreFechasReposoyTrabajadoresOrdenadoPorFecha(Date fecha1,
+			Date fecha2) {
+		List<String> ordenar = new ArrayList<String>();
+		ordenar.add("fechaReposo");
+		Sort o = new Sort(Sort.Direction.ASC, ordenar);
+		return consultaDAO
+				.findByFechaConsultaBetweenAndReposoAndPacienteTrabajador(
+						fecha1, fecha2, true, true, o);
+	}
+
+
 
 
 	public List<Consulta> buscarEntreFechasOrdenadasPorUnidadReposoyTrabajadores(
