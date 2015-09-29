@@ -152,4 +152,8 @@ public class SInforme {
 		return informeDAO.buscarMaxCodigo();
 	}
 
+	public List<Informe> buscarTodosActivos() {
+		return informeDAO.findByEstatusTrue();
+	}
+
 }

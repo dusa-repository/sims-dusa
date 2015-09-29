@@ -201,6 +201,10 @@ public class Informe implements Serializable {
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private Boolean fgga;
+	
+	@Column
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private Boolean estatus;
 
 	@Column
 	@Type(type = "org.hibernate.type.NumericBooleanType")
@@ -2441,6 +2445,14 @@ public class Informe implements Serializable {
 
 	public void setObservacionPrincipal(String observacionPrincipal) {
 		this.observacionPrincipal = observacionPrincipal;
+	}
+
+	public Boolean getEstatus() {
+		return estatus;
+	}
+
+	public void setEstatus(Boolean estatus) {
+		this.estatus = estatus;
 	}
 
 	

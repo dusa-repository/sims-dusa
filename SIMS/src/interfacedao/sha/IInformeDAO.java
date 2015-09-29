@@ -76,6 +76,8 @@ public interface IInformeDAO extends JpaRepository<Informe, Long> {
 			+ "AND ISNUMERIC(codigo) = 1", nativeQuery = true)
 	Integer buscarMaxCodigo();
 
+	List<Informe> findByEstatusTrue();
+
 	
 
 }

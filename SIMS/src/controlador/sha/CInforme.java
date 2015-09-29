@@ -22,6 +22,7 @@ import modelo.sha.ClasificacionAccidente;
 import modelo.sha.Condicion;
 import modelo.sha.Informe;
 import modelo.sha.PlanAccion;
+import modelo.transacciones.Consulta;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
@@ -47,6 +48,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Tab;
@@ -1594,6 +1596,7 @@ public class CInforme extends CGenerico {
 					else
 						informe.setIdac(false);
 					informe.setIdad(txt9414.getValue());
+					informe.setEstatus(true);
 					servicioInforme.guardar(informe);
 
 					// Guardar
@@ -1620,12 +1623,38 @@ public class CInforme extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				// TODO Auto-generated method stub
+				if (idInforme != 0) {
+					Messagebox.show("¿Esta Seguro de Eliminar el Accidente?",
+							"Alerta", Messagebox.OK | Messagebox.CANCEL,
+							Messagebox.QUESTION,
+							new org.zkoss.zk.ui.event.EventListener<Event>() {
+								public void onEvent(Event evt)
+										throws InterruptedException {
+									if (evt.getName().equals("onOK")) {
+						
+										Informe infor = servicioInforme.buscar(idInforme);
+										if(infor!=null)
+										{
+											infor.setEstatus(false);
+											servicioInforme.guardar(infor);
+											limpiar();
+											msj.mensajeInformacion(Mensaje.eliminado);
+										}
+										else
+											msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
+										}
+									
+								}
+				
+							});
+			}
+				else {
+					msj.mensajeAlerta(Mensaje.noSeleccionoRegistro);
+				}
 
 			}
 		};
 
-		botonera.getChildren().get(1).setVisible(false);
 		botoneraInforme.appendChild(botonera);
 	}
 
@@ -2162,7 +2191,7 @@ public class CInforme extends CGenerico {
 	@Listen("onClick =  #btnBuscar1")
 	public void buscarInforme(Event e) {
 
-		final List<Informe> informes = servicioInforme.buscarTodos();
+		final List<Informe> informes = servicioInforme.buscarTodosActivos();
 		catalogoI = new Catalogo<Informe>(catalogoInforme,
 				"Catalogo de Informes", informes, false, "Fecha", "Codigo",
 				"Nombre Trabajador", "Apellido Trabajador", "Empresa") {
